@@ -407,6 +407,32 @@
           "style": "scss"
         }
       }
+    },
+    "writer-web-shell": {
+      "projectType": "library",
+      "root": "features/writer-web/shell",
+      "sourceRoot": "features/writer-web/shell/src",
+      "prefix": "awread",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["features/writer-web/shell/src/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "features/writer-web/shell/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      }
     }
   },
   "cli": {

@@ -26,7 +26,8 @@
       ],
       "@awread/writer-web/my-works": [
         "features/writer-web/my-works/src/index.ts"
-      ]
+      ],
+      "@awread/writer-web/shell": ["features/writer-web/shell/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

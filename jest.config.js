@@ -8,5 +8,6 @@ module.exports = {
     '<rootDir>/features/writer-web/setting',
     '<rootDir>/features/writer-web/dashboard',
     '<rootDir>/features/writer-web/my-works',
+    '<rootDir>/features/writer-web/shell',
   ],
 };

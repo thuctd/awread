@@ -59,8 +59,8 @@
     "writer-web-dashboard": {
       "tags": ["scope:dashboard", "scope:shared", "type:feature"]
     },
-    "writer-web-my-works": {
-      "tags": ["scope:my-works", "scope:shared", "type:feature"]
+    "writer-web-shell": {
+      "tags": ["scope:shell", "scope:shared", "type:feature"]
     }
   }
 }
