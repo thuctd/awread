@@ -3,6 +3,10 @@
   "affected": {
     "defaultBase": "master"
   },
+  "workspaceLayout": {
+    "appsDir": "apps",
+    "libsDir": "features"
+  },
   "implicitDependencies": {
     "angular.json": "*",
     "package.json": {
