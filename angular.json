@@ -329,6 +329,264 @@
           "style": "scss"
         }
       }
+    },
+    "reader-web": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/reader/web",
+      "sourceRoot": "apps/reader/web/src",
+      "prefix": "awread",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/reader/web",
+            "index": "apps/reader/web/src/index.html",
+            "main": "apps/reader/web/src/main.ts",
+            "polyfills": "apps/reader/web/src/polyfills.ts",
+            "tsConfig": "apps/reader/web/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "apps/reader/web/src/favicon.ico",
+              "apps/reader/web/src/assets"
+            ],
+            "styles": ["apps/reader/web/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/reader/web/src/environments/environment.ts",
+                  "with": "apps/reader/web/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "reader-web:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "reader-web:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "reader-web:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/reader/web/src/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/reader/web/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "reader-web-e2e": {
+      "root": "apps/reader/web-e2e",
+      "sourceRoot": "apps/reader/web-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/reader/web-e2e/cypress.json",
+            "tsConfig": "apps/reader/web-e2e/tsconfig.e2e.json",
+            "devServerTarget": "reader-web:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "reader-web:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/reader/web-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    },
+    "reader-mobile": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/reader/mobile",
+      "sourceRoot": "apps/reader/mobile/src",
+      "prefix": "awread",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/reader/mobile",
+            "index": "apps/reader/mobile/src/index.html",
+            "main": "apps/reader/mobile/src/main.ts",
+            "polyfills": "apps/reader/mobile/src/polyfills.ts",
+            "tsConfig": "apps/reader/mobile/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "apps/reader/mobile/src/favicon.ico",
+              "apps/reader/mobile/src/assets"
+            ],
+            "styles": ["apps/reader/mobile/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/reader/mobile/src/environments/environment.ts",
+                  "with": "apps/reader/mobile/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "reader-mobile:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "reader-mobile:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "reader-mobile:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/reader/mobile/src/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/reader/mobile/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "reader-mobile-e2e": {
+      "root": "apps/reader/mobile-e2e",
+      "sourceRoot": "apps/reader/mobile-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/reader/mobile-e2e/cypress.json",
+            "tsConfig": "apps/reader/mobile-e2e/tsconfig.e2e.json",
+            "devServerTarget": "reader-mobile:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "reader-mobile:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/reader/mobile-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    },
+    "reader-web-shell": {
+      "projectType": "library",
+      "root": "libs/reader/web/shell",
+      "sourceRoot": "libs/reader/web/shell/src",
+      "prefix": "awread",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/reader/web/shell/src/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/reader/web/shell/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      }
     }
   },
   "cli": {

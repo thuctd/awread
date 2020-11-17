@@ -52,6 +52,23 @@
     },
     "writer-web-shell": {
       "tags": ["scope:shell", "scope:shared", "type:lib", "platform:web"]
+    },
+    "reader-web": {
+      "tags": ["scope:shared", "type:app"]
+    },
+    "reader-web-e2e": {
+      "tags": [],
+      "implicitDependencies": ["reader-web"]
+    },
+    "reader-mobile": {
+      "tags": ["scope:shared", "type:app"]
+    },
+    "reader-mobile-e2e": {
+      "tags": [],
+      "implicitDependencies": ["reader-mobile"]
+    },
+    "reader-web-shell": {
+      "tags": ["scope:shell", "scope:shared", "type:lib"]
     }
   }
 }
