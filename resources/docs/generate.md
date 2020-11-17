@@ -61,3 +61,14 @@ nx g lib my-works --directory=writer/web --stype-scss --style=scss --tags=scope:
 - setting
 - dashboard
 - my-works
+
+
+
+
+
+
+nx g lib shell --directory=writer-web --tags=scope:shell,scope:shared,type:feature --style=scss
+nx g lib auth --directory=writer-web --tags=scope:auth,scope:shared,type:feature --style=scss
+nx g lib setting --directory=writer-web --tags=scope:setting,scope:shared,type:feature --style=scss
+nx g lib dashboard --directory=writer-web --tags=scope:dashboard,scope:shared,type:feature --style=scss
+nx g lib my-works --directory=writer-web --tags=scope:my-works,scope:shared,type:feature --style=scss
