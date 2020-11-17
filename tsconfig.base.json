@@ -17,8 +17,12 @@
     "baseUrl": ".",
     "paths": {
       "@awread/api-interfaces": ["libs/api-interfaces/src/index.ts"],
-      "@awread/writer/web/shell": ["libs/writer/web/shell/src/index.ts"],
-      "@awread/reader/web/shell": ["libs/reader/web/shell/src/index.ts"],
+      "@awread/writer/web/feature-shell": [
+        "libs/writer/web/feature-shell/src/index.ts"
+      ],
+      "@awread/reader/web/feature-shell": [
+        "libs/reader/web/feature-shell/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]
