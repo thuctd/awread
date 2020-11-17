@@ -1,37 +1,13 @@
-import { chain, externalSchematic, Rule, SchematicContext, Tree, SchematicsException } from '@angular-devkit/schematics';
+import { chain, externalSchematic, Rule, SchematicContext, Tree, SchematicsException, noop } from '@angular-devkit/schematics';
 import * as path from 'path';
-import * as fs from 'fs';
-import { workspace } from '@angular-devkit/core/src/experimental';
+import { createDefaultPath } from '@schematics/angular/utility/workspace';
 
-
-function getProject(schema: any, tree: Tree, context: SchematicContext) {
-  // Read `angular.json` as buffer
-  const workspaceConfigBuffer = tree.read('angular.json');
-  if (!workspaceConfigBuffer) {
-    throw new SchematicsException('Could not find an Angular workspace configuration');
-  }
-  // parse config only when not null
-  const workspaceConfig: workspace.WorkspaceSchema = JSON.parse(workspaceConfigBuffer.toString());
-  // if project is not passed (--project), use default project name
-  if (!schema.project && workspaceConfig.defaultProject) {
-    schema.project = workspaceConfig.defaultProject;
-  }
-  const projectName = schema.project as string;
-  // elect project from projects array in `angular.json` file
-  const project: workspace.WorkspaceProject = workspaceConfig.projects[projectName];
-  if (!project) {
-    throw new SchematicsException(`Project ${projectName} is not defined in this workspace.`);
-  }
-  return project;
-}
-
-function emptySectionFolder(schema: any, CUSTOMPATH) {
+function emptySectionFolder(projectPath: string, folderName: string) {
   return (tree: Tree, context: SchematicContext) => {
-    const project = getProject(schema, tree, context);
+
     const filePath = path.join(
-      project.sourceRoot,
-      'lib',
-      CUSTOMPATH,
+      projectPath,
+      folderName,
       'sections',
       '.gitkeep'
     );
@@ -40,24 +16,28 @@ function emptySectionFolder(schema: any, CUSTOMPATH) {
   }
 }
 
+function checkFileExist(projectPath: string, routingModuleName: string, tree: Tree) {
+  const routingPath = path.join(projectPath, `${routingModuleName}.module.ts`);
+  console.log('routing exist?', tree.exists(routingPath), projectPath, `${routingModuleName}.module.ts`)
+  return tree.exists(routingPath);
+}
+
 export default function (schema: any): Rule {
-  return (tree: Tree, context: SchematicContext) => {
-    // const project = getProject(schema, tree, context)
-    // console.log('libPath', project.sourceRoot);
-    // const libPath = project.sourceRoot; // process.cwd()
-    const CUSTOMPATH = 'ui/pages';
+  return async (tree: Tree, context: SchematicContext) => {
+    // const CUSTOMPATH = 'ui/pages';
+    const CUSTOMPATH = 'pages';
     const PREFIX = 'page-';
-    if (!schema.name.startsWith('page-') && (schema.name != 'page')) {
+    if (!schema.name.startsWith(`${PREFIX}`) && (schema.name != PREFIX.substring(0, PREFIX.length - 1))) {
       // custom libraries managing state must have name conventions: 'state' or 'state-<name>'
-      schema.name = PREFIX + schema.name;
+      schema.name = `${PREFIX}${schema.name}`;
     };
     const name = schema.name.substring(PREFIX.length);
     const routingModuleName = `${schema.project}-page`;
     const moduleName = `${CUSTOMPATH}/page-${name}`;
-    // console.log("moduleName, componentName", moduleName, name)
-    // console.log("schema.name, name, schema", schema.name, name, schema)
+    const defaultPath = await createDefaultPath(tree, schema.project);
+    const fullCustomPath = path.join(defaultPath, CUSTOMPATH);
     return chain([
-      externalSchematic('@schematics/angular', 'module', {
+      checkFileExist(fullCustomPath, routingModuleName, tree) ? noop() : externalSchematic('@schematics/angular', 'module', {
         project: schema.project,
         name: `${CUSTOMPATH}/${routingModuleName}`,
         routing: true,
@@ -70,7 +50,7 @@ export default function (schema: any): Rule {
         module: routingModuleName,
         route: name
       }),
-      emptySectionFolder(schema, moduleName),
+      emptySectionFolder(fullCustomPath, schema.name),
     ])
   }
 }

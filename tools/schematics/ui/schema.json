@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "id": "ui",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Page name",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      }
+    },
+    "directory": {
+      "type": "string",
+      "description": "Project location"
+    },
+    "pages": {
+      "type": "string",
+      "description": "pages list"
+    }
+  },
+  "required": [
+    "name"
+  ]
+}
