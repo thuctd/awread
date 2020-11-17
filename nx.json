@@ -49,6 +49,9 @@
     "writer-mobile-e2e": {
       "tags": [],
       "implicitDependencies": ["writer-mobile"]
+    },
+    "writer-web-shell": {
+      "tags": ["scope:shell", "scope:shared", "type:lib", "platform:web"]
     }
   }
 }

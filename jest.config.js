@@ -3,6 +3,7 @@ module.exports = {
     '<rootDir>/apps/api',
     '<rootDir>/libs/api-interfaces',
     '<rootDir>/apps/writer/web',
-    '<rootDir>/apps/writer/mobile'
+    '<rootDir>/apps/writer/mobile',
+    '<rootDir>/libs/writer/web/shell',
   ],
 };
