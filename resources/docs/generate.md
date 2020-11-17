@@ -84,3 +84,5 @@ nx g lib my-works --directory=writer-web --tags=scope:my-works,scope:shared,type
 
 nx g lib feature-shell --directory=writer/web --tags=scope:shell,scope:shared,type:feature --style=scss
 nx g lib feature-auth --directory=writer/web --tags=scope:feature-auth,scope:shared,type:feature --style=scss
+
+nx g m --project=writer-web-feature-auth ui/pages/login

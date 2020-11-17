@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "id": "module",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Page name",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      }
+    },
+    "project": {
+      "type": "string",
+      "description": "Project name to add the page to"
+    }
+  },
+  "required": [
+    "name",
+    "project"
+  ]
+}
