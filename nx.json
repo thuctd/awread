@@ -49,21 +49,6 @@
     "writer-mobile-e2e": {
       "tags": [],
       "implicitDependencies": ["writer-mobile"]
-    },
-    "writer-web-auth": {
-      "tags": ["scope:auth", "scope:shared", "type:feature"]
-    },
-    "writer-web-setting": {
-      "tags": ["scope:setting", "scope:shared", "type:feature"]
-    },
-    "writer-web-dashboard": {
-      "tags": ["scope:dashboard", "scope:shared", "type:feature"]
-    },
-    "writer-web-my-works": {
-      "tags": ["scope:my-work", "scope:shared", "type:feature"]
-    },
-    "writer-web-shell": {
-      "tags": ["scope:shell", "scope:shared", "type:feature"]
     }
   }
 }

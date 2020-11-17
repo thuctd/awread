@@ -16,18 +16,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@awread/api-interfaces": ["libs/api-interfaces/src/index.ts"],
-      "@awread/writer-web/auth": ["features/writer-web/auth/src/index.ts"],
-      "@awread/writer-web/setting": [
-        "features/writer-web/setting/src/index.ts"
-      ],
-      "@awread/writer-web/dashboard": [
-        "features/writer-web/dashboard/src/index.ts"
-      ],
-      "@awread/writer-web/my-works": [
-        "features/writer-web/my-works/src/index.ts"
-      ],
-      "@awread/writer-web/shell": ["features/writer-web/shell/src/index.ts"]
+      "@awread/api-interfaces": ["libs/api-interfaces/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
