@@ -1720,6 +1720,18 @@
     "tar" "5.0.5"
     "uuid" "^3.3.3"
 
+"@nrwl/storybook@^10.4.1":
+  "integrity" "sha512-0xHfn6bdNq78BCI+kuP+a9YGiv9ZR7q1iP5tUb797fhoNyCKqrEdYavMBa5MSY7ENyO86ZgTBVEadUic174j9w=="
+  "resolved" "https://registry.npmjs.org/@nrwl/storybook/-/storybook-10.4.1.tgz"
+  "version" "10.4.1"
+  dependencies:
+    "@nrwl/cypress" "10.4.1"
+    "core-js" "^3.6.5"
+    "tree-kill" "1.2.2"
+    "ts-loader" "5.4.5"
+    "tsconfig-paths-webpack-plugin" "3.2.0"
+    "webpack-node-externals" "1.7.2"
+
 "@nrwl/tao@10.3.3":
   "integrity" "sha512-glCJgXpJpNi8Q6tK5o/bZI5NWDjjF+skQ0GlZ8xBdk1G3YeWu1gNR65FoD9COlDMcu//4nKy7q75K3xCTCsrDA=="
   "resolved" "https://registry.npmjs.org/@nrwl/tao/-/tao-10.3.3.tgz"
@@ -3968,6 +3980,11 @@
   dependencies:
     "browserslist" "^4.14.6"
     "semver" "7.0.0"
+
+"core-js@^3.6.5":
+  "integrity" "sha512-NwS7fI5M5B85EwpWuIwJN4i/fbisQUwLwiSNUWeXlkAZ0sbBjLEvLvFLf1uzAUV66PcEPt4xCGCmOZSxVf3xzA=="
+  "resolved" "https://registry.npmjs.org/core-js/-/core-js-3.7.0.tgz"
+  "version" "3.7.0"
 
 "core-js@3.6.4":
   "integrity" "sha512-4paDGScNgZP2IXXilaffL9X7968RuvwlkK3xWtZRVqgd8SYNiVKRJvkFd1aqqEuPfN7E68ZHEp9hDj6lHj4Hyw=="
