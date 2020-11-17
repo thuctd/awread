@@ -82,4 +82,5 @@ nx g lib dashboard --directory=writer-web --tags=scope:dashboard,scope:shared,ty
 nx g lib my-works --directory=writer-web --tags=scope:my-works,scope:shared,type:ui --style=scss
 
 
-nx g lib shell --directory=writer/web --tags=scope:shell,scope:shared,type:lib --style=scss
+nx g lib feature-shell --directory=writer/web --tags=scope:shell,scope:shared,type:feature --style=scss
+nx g lib feature-auth --directory=writer/web --tags=scope:feature-auth,scope:shared,type:feature --style=scss

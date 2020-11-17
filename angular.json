@@ -304,32 +304,6 @@
         }
       }
     },
-    "writer-web-shell": {
-      "projectType": "library",
-      "root": "libs/writer/web/shell",
-      "sourceRoot": "libs/writer/web/shell/src",
-      "prefix": "awread",
-      "architect": {
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["libs/writer/web/shell/src/**/*.ts"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/writer/web/shell/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      },
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        }
-      }
-    },
     "reader-web": {
       "projectType": "application",
       "schematics": {
@@ -562,22 +536,48 @@
         }
       }
     },
-    "reader-web-shell": {
+    "writer-web-feature-shell": {
       "projectType": "library",
-      "root": "libs/reader/web/shell",
-      "sourceRoot": "libs/reader/web/shell/src",
+      "root": "libs/writer/web/feature-shell",
+      "sourceRoot": "libs/writer/web/feature-shell/src",
       "prefix": "awread",
       "architect": {
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/reader/web/shell/src/**/*.ts"]
+            "lintFilePatterns": ["libs/writer/web/feature-shell/src/**/*.ts"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/reader/web/shell/jest.config.js",
+            "jestConfig": "libs/writer/web/feature-shell/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      }
+    },
+    "reader-web-feature-shell": {
+      "projectType": "library",
+      "root": "libs/reader/web/feature-shell",
+      "sourceRoot": "libs/reader/web/feature-shell/src",
+      "prefix": "awread",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/reader/web/feature-shell/src/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/reader/web/feature-shell/jest.config.js",
             "passWithNoTests": true
           }
         }

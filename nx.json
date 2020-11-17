@@ -50,9 +50,6 @@
       "tags": [],
       "implicitDependencies": ["writer-mobile"]
     },
-    "writer-web-shell": {
-      "tags": ["scope:shell", "scope:shared", "type:lib", "platform:web"]
-    },
     "reader-web": {
       "tags": ["scope:shared", "type:app"]
     },
@@ -67,8 +64,11 @@
       "tags": [],
       "implicitDependencies": ["reader-mobile"]
     },
-    "reader-web-shell": {
-      "tags": ["scope:shell", "scope:shared", "type:lib"]
+    "writer-web-feature-shell": {
+      "tags": ["scope:shell", "scope:shared", "type:feature"]
+    },
+    "reader-web-feature-shell": {
+      "tags": ["scope:shell", "scope:shared", "type:feature"]
     }
   }
 }

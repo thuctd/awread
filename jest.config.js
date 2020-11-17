@@ -4,9 +4,9 @@ module.exports = {
     '<rootDir>/libs/api-interfaces',
     '<rootDir>/apps/writer/web',
     '<rootDir>/apps/writer/mobile',
-    '<rootDir>/libs/writer/web/shell',
     '<rootDir>/apps/reader/web',
     '<rootDir>/apps/reader/mobile',
-    '<rootDir>/libs/reader/web/shell',
+    '<rootDir>/libs/writer/web/feature-shell',
+    '<rootDir>/libs/reader/web/feature-shell',
   ],
 };
