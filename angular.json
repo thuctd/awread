@@ -14,9 +14,7 @@
             "outputPath": "dist/apps/api",
             "main": "apps/api/src/main.ts",
             "tsConfig": "apps/api/tsconfig.app.json",
-            "assets": [
-              "apps/api/src/assets"
-            ]
+            "assets": ["apps/api/src/assets"]
           },
           "configurations": {
             "production": {
@@ -41,9 +39,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "apps/api/**/*.ts"
-            ]
+            "lintFilePatterns": ["apps/api/**/*.ts"]
           }
         },
         "test": {
@@ -64,9 +60,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/api-interfaces/**/*.ts"
-            ]
+            "lintFilePatterns": ["libs/api-interfaces/**/*.ts"]
           }
         },
         "test": {
@@ -102,9 +96,7 @@
               "apps/writer/web/src/favicon.ico",
               "apps/writer/web/src/assets"
             ],
-            "styles": [
-              "apps/writer/web/src/styles.scss"
-            ],
+            "styles": ["apps/writer/web/src/styles.scss"],
             "scripts": []
           },
           "configurations": {
@@ -158,9 +150,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "apps/writer/web/src/**/*.ts"
-            ]
+            "lintFilePatterns": ["apps/writer/web/src/**/*.ts"]
           }
         },
         "test": {
@@ -223,9 +213,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "apps/writer/web-e2e/**/*.{js,ts}"
-            ]
+            "lintFilePatterns": ["apps/writer/web-e2e/**/*.{js,ts}"]
           }
         }
       }
@@ -254,9 +242,7 @@
               "apps/writer/mobile/src/favicon.ico",
               "apps/writer/mobile/src/assets"
             ],
-            "styles": [
-              "apps/writer/mobile/src/styles.scss"
-            ],
+            "styles": ["apps/writer/mobile/src/styles.scss"],
             "scripts": []
           },
           "configurations": {
@@ -310,9 +296,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "apps/writer/mobile/src/**/*.ts"
-            ]
+            "lintFilePatterns": ["apps/writer/mobile/src/**/*.ts"]
           }
         },
         "test": {
@@ -345,9 +329,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "apps/writer/mobile-e2e/**/*.{js,ts}"
-            ]
+            "lintFilePatterns": ["apps/writer/mobile-e2e/**/*.{js,ts}"]
           }
         }
       }
@@ -376,9 +358,7 @@
               "apps/reader/web/src/favicon.ico",
               "apps/reader/web/src/assets"
             ],
-            "styles": [
-              "apps/reader/web/src/styles.scss"
-            ],
+            "styles": ["apps/reader/web/src/styles.scss"],
             "scripts": []
           },
           "configurations": {
@@ -432,9 +412,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "apps/reader/web/src/**/*.ts"
-            ]
+            "lintFilePatterns": ["apps/reader/web/src/**/*.ts"]
           }
         },
         "test": {
@@ -497,9 +475,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "apps/reader/web-e2e/**/*.{js,ts}"
-            ]
+            "lintFilePatterns": ["apps/reader/web-e2e/**/*.{js,ts}"]
           }
         }
       }
@@ -528,9 +504,7 @@
               "apps/reader/mobile/src/favicon.ico",
               "apps/reader/mobile/src/assets"
             ],
-            "styles": [
-              "apps/reader/mobile/src/styles.scss"
-            ],
+            "styles": ["apps/reader/mobile/src/styles.scss"],
             "scripts": []
           },
           "configurations": {
@@ -584,9 +558,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "apps/reader/mobile/src/**/*.ts"
-            ]
+            "lintFilePatterns": ["apps/reader/mobile/src/**/*.ts"]
           }
         },
         "test": {
@@ -619,9 +591,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "apps/reader/mobile-e2e/**/*.{js,ts}"
-            ]
+            "lintFilePatterns": ["apps/reader/mobile-e2e/**/*.{js,ts}"]
           }
         }
       }
@@ -635,9 +605,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/writer/web/feature-shell/src/**/*.ts"
-            ]
+            "lintFilePatterns": ["libs/writer/web/feature-shell/src/**/*.ts"]
           }
         },
         "test": {
@@ -663,15 +631,39 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/reader/web/feature-shell/src/**/*.ts"
-            ]
+            "lintFilePatterns": ["libs/reader/web/feature-shell/src/**/*.ts"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "libs/reader/web/feature-shell/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      }
+    },
+    "writer-web-feature-auth": {
+      "projectType": "library",
+      "root": "libs/writer/web/feature-auth",
+      "sourceRoot": "libs/writer/web/feature-auth/src",
+      "prefix": "awread",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/writer/web/feature-auth/src/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/writer/web/feature-auth/jest.config.js",
             "passWithNoTests": true
           }
         }

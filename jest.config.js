@@ -8,5 +8,6 @@ module.exports = {
     '<rootDir>/apps/reader/mobile',
     '<rootDir>/libs/writer/web/feature-shell',
     '<rootDir>/libs/reader/web/feature-shell',
+    '<rootDir>/libs/writer/web/feature-auth',
   ],
 };
