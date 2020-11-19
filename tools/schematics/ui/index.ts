@@ -1,8 +1,9 @@
 import {
   chain, externalSchematic, Rule, SchematicContext, Tree, schematic, noop, apply, url, template,
-  branchAndMerge, mergeWith,
+  branchAndMerge, mergeWith, move
 } from '@angular-devkit/schematics';
 import { createDefaultPath } from '@schematics/angular/utility/workspace';
+import { addDeclarationToAppModule } from '../../utility/add-import-module';
 
 export default function (schema: any): Rule {
   return async (tree: Tree, context: SchematicContext) => {
@@ -26,17 +27,9 @@ export default function (schema: any): Rule {
       }),
       ...addPage(schema, projectName),
       addDeclarationToAppModule(schema, projectName, featureShellPath, featureShellName),
-      mergeComponentToPageInModule(schema)
     ])
   }
 }
-
-import { SchematicsException } from '@angular-devkit/schematics';
-import { normalize } from '@angular-devkit/core';
-import * as ts from 'typescript';
-import { insert, readJsonFile, toFileName } from '@nrwl/workspace';
-import { Change, insertImport } from '@nrwl/workspace/src/utils/ast-utils';
-import { addImportToModule } from '@nrwl/angular/src/utils/ast-utils';
 
 export function addPage(schema, projectName): Rule[] {
   console.log('project name', projectName, schema.pages);
@@ -44,59 +37,4 @@ export function addPage(schema, projectName): Rule[] {
   const pages: Rule[] = schema.pages && schema.pages.length ?
     schema.pages.split(',').map((page: string) => schematic('page', { project: projectName, name: page.trim() })) : [];
   return !pages.length ? [] : pages;
-}
-
-export function addDeclarationToAppModule(schema, targetLibName: string, featureShellPath: string, featureShellName: string): Rule {
-  return (host: Tree) => {
-    if (!targetLibName) {
-      return host;
-    }
-    // Part I: Construct path and read file
-    const writeToModulePath = normalize(`${featureShellPath}/${featureShellName}.module.ts`);
-    const text = host.read(writeToModulePath);
-    if (text === null) {
-      throw new SchematicsException(`${writeToModulePath} does not exist.`);
-    }
-    const sourceText = text.toString('utf-8');
-    const source = ts.createSourceFile(writeToModulePath, sourceText, ts.ScriptTarget.Latest, true);
-
-    // PART II: targetModule name
-    const targetModuleClassify = `${classify(targetLibName)}Module`;
-
-    const addImport = (
-      symbolName: string,
-      fileName: string,
-      isDefault = false
-    ): Change => {
-      return insertImport(source, writeToModulePath, symbolName, fileName, isDefault);
-    };
-
-    const dir = `${toFileName(schema.directory)}`;
-    const pathPrefix = `${dir}/${toFileName(schema.name)}`;
-    const workspaceName = readJsonFile('package.json').name;
-    const moduleImportPath = `@${workspaceName}/${pathPrefix}`;
-    const syntaxImports = `{ ${targetModuleClassify} }`;
-    insert(host, writeToModulePath, [
-      addImport(syntaxImports, moduleImportPath, true),
-      ...addImportToModule(source, writeToModulePath, targetModuleClassify),
-    ]);
-
-    return host;
-  };
-}
-
-import { classify, dasherize, camelize, underscore } from '@angular-devkit/core/src/utils/strings';
-
-export function mergeComponentToPageInModule(schema): Rule {
-  const stringUtils = { classify, dasherize, camelize, underscore };
-
-  const templateSource = apply(url('./files'), [
-    template({
-      ...stringUtils,
-      ...schema,
-    }),
-  ]);
-  return branchAndMerge(chain([
-    mergeWith(templateSource),
-  ]))
 }

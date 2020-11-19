@@ -1,4 +1,4 @@
-import { chain, externalSchematic, Rule, SchematicContext, Tree, SchematicsException, noop } from '@angular-devkit/schematics';
+import { chain, externalSchematic, Rule, SchematicContext, Tree, schematic, noop } from '@angular-devkit/schematics';
 import * as path from 'path';
 import { createDefaultPath } from '@schematics/angular/utility/workspace';
 
@@ -16,9 +16,9 @@ function emptySectionFolder(projectPath: string, folderName: string) {
   }
 }
 
-function checkFileExist(projectPath: string, routingModuleName: string, tree: Tree) {
-  const routingPath = path.join(projectPath, `${routingModuleName}.module.ts`);
-  console.log('routing exist?', tree.exists(routingPath), projectPath, `${routingModuleName}.module.ts`)
+function checkRoutingFileExist(projectPath: string, routingModuleName: string, tree: Tree) {
+  const routingPath = path.join(projectPath, `${routingModuleName}-routing.module.ts`);
+  console.log('routing exist?', tree.exists(routingPath), projectPath, `${routingModuleName}-routing.module.ts`)
   return tree.exists(routingPath);
 }
 
@@ -32,27 +32,39 @@ export default function (schema: any): Rule {
       schema.name = `${PREFIX}${schema.name}`;
     };
     const name = schema.name.substring(PREFIX.length);
-    const routingModuleName = `${schema.project}-page`;
     const moduleName = `${CUSTOMPATH}/${name}`;
     const defaultPath = await createDefaultPath(tree, schema.project);
-    const fullCustomPath = path.join(defaultPath, CUSTOMPATH);
+    const folderNameDesktop = `${moduleName}-desktop`;
+    const folderNameMobile = `${moduleName}-mobile`;
     return chain([
-      checkFileExist(fullCustomPath, routingModuleName, tree) ? noop() : externalSchematic('@schematics/angular', 'module', {
+      checkRoutingFileExist(defaultPath, schema.project, tree) ? noop() : schematic('module', {
         project: schema.project,
-        name: `${CUSTOMPATH}/${routingModuleName}`,
+        name: schema.project,
         routing: true,
+        routingOnly: true,
         flat: true,
         module: schema.project
       }),
-      externalSchematic('@schematics/angular', 'module', {
+      schematic('module', {
         project: schema.project,
         name: moduleName,
-        module: routingModuleName,
+        mode: 'desktop',
+        module: schema.project,
         route: name,
         type: 'page',
         prefix: 'page'
       }),
-      emptySectionFolder(fullCustomPath, schema.name),
+      emptySectionFolder(defaultPath, folderNameDesktop),
+      schematic('module', {
+        project: schema.project,
+        name: moduleName,
+        mode: 'mobile',
+        module: schema.project,
+        route: name,
+        type: 'page',
+        prefix: 'page'
+      }),
+      emptySectionFolder(defaultPath, folderNameMobile),
     ])
   }
 }
