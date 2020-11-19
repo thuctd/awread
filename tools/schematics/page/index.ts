@@ -33,7 +33,7 @@ export default function (schema: any): Rule {
     };
     const name = schema.name.substring(PREFIX.length);
     const routingModuleName = `${schema.project}-page`;
-    const moduleName = `${CUSTOMPATH}/page-${name}`;
+    const moduleName = `${CUSTOMPATH}/${name}`;
     const defaultPath = await createDefaultPath(tree, schema.project);
     const fullCustomPath = path.join(defaultPath, CUSTOMPATH);
     return chain([
@@ -48,7 +48,9 @@ export default function (schema: any): Rule {
         project: schema.project,
         name: moduleName,
         module: routingModuleName,
-        route: name
+        route: name,
+        type: 'page',
+        prefix: 'page'
       }),
       emptySectionFolder(fullCustomPath, schema.name),
     ])

@@ -1,4 +1,7 @@
-import { chain, externalSchematic, Rule, SchematicContext, Tree, schematic, noop } from '@angular-devkit/schematics';
+import {
+  chain, externalSchematic, Rule, SchematicContext, Tree, schematic, noop, apply, url, template,
+  branchAndMerge, mergeWith,
+} from '@angular-devkit/schematics';
 import { createDefaultPath } from '@schematics/angular/utility/workspace';
 
 export default function (schema: any): Rule {
@@ -15,15 +18,16 @@ export default function (schema: any): Rule {
     const featureShellName = schema.project ?? directory + '-feature-shell';
     const featureShellPath = await createDefaultPath(tree, featureShellName);
     return chain([
-        externalSchematic('@nrwl/angular', 'lib', {
-          name: schema.name,
-          directory: schema.directory ?? './',
-          tags: `scope:ui-${name},scope:shared,type:ui`,
-          style: 'scss'
-        }),
-        ...addPage(schema, projectName),
-        addDeclarationToAppModule(schema, projectName, featureShellPath, featureShellName)
-      ])
+      externalSchematic('@nrwl/angular', 'lib', {
+        name: schema.name,
+        directory: schema.directory ?? './',
+        tags: `scope:ui-${name},scope:shared,type:ui`,
+        style: 'scss'
+      }),
+      ...addPage(schema, projectName),
+      addDeclarationToAppModule(schema, projectName, featureShellPath, featureShellName),
+      mergeComponentToPageInModule(schema)
+    ])
   }
 }
 
@@ -33,7 +37,6 @@ import * as ts from 'typescript';
 import { insert, readJsonFile, toFileName } from '@nrwl/workspace';
 import { Change, insertImport } from '@nrwl/workspace/src/utils/ast-utils';
 import { addImportToModule } from '@nrwl/angular/src/utils/ast-utils';
-import { classify } from '@nrwl/workspace/src/utils/strings';
 
 export function addPage(schema, projectName): Rule[] {
   console.log('project name', projectName, schema.pages);
@@ -53,7 +56,7 @@ export function addDeclarationToAppModule(schema, targetLibName: string, feature
     const text = host.read(writeToModulePath);
     if (text === null) {
       throw new SchematicsException(`${writeToModulePath} does not exist.`);
-      }
+    }
     const sourceText = text.toString('utf-8');
     const source = ts.createSourceFile(writeToModulePath, sourceText, ts.ScriptTarget.Latest, true);
 
@@ -80,4 +83,20 @@ export function addDeclarationToAppModule(schema, targetLibName: string, feature
 
     return host;
   };
+}
+
+import { classify, dasherize, camelize, underscore } from '@angular-devkit/core/src/utils/strings';
+
+export function mergeComponentToPageInModule(schema): Rule {
+  const stringUtils = { classify, dasherize, camelize, underscore };
+
+  const templateSource = apply(url('./files'), [
+    template({
+      ...stringUtils,
+      ...schema,
+    }),
+  ]);
+  return branchAndMerge(chain([
+    mergeWith(templateSource),
+  ]))
 }
