@@ -22,10 +22,10 @@ export default function (schema: any): Rule {
     const targetLibName = `${featureShellName}-routing`
     // adding template
     const parsedPath = parseName(directoryLibsPath, schema.fullName);
-    schema.name = parsedPath.name;
     schema.path = parsedPath.path;
     schema.directoryNoSlash = directoryNoSlash;
     schema.type = 'page';
+    schema.featureShellName = featureShellName;
     const templateSource = apply(url('./files'), [
       applyTemplates({
         ...schema,
@@ -42,12 +42,13 @@ export default function (schema: any): Rule {
         style: 'scss'
       }),
       externalSchematic('@nrwl/angular', 'component', {
-        name: schema.fullName,
+        name: schema.name,
         type: schema.type,
-        module: featureShellName
+        module: featureShellName,
+        project: featureShellName
       }),
       mergeWith(templateSource, MergeStrategy.AllowCreationConflict),
-      addDeclarationToAppModule(schema, targetLibName, featureShellPath, featureShellName),
+      addDeclarationToAppModule(schema, targetLibName, featureShellPath, featureShellName, `./${featureShellName}-routing.module`),
     ])
   }
 }

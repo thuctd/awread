@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { <%= classify(name) %><%= capitalize(type) %> } from './<%= name %>/<%= dasherize(name) %>.<%= type %>';<% } %>
+import { <%= classify(name) %><%= capitalize(type) %> } from './<%= name %>/<%= dasherize(name) %>.<%= type %>';
 
 const routes: Routes = [
   {
@@ -24,4 +24,4 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
   ],
 })
-export class <%= classify(fullName) %>RoutingModule { }
+export class <%= classify(featureShellName) %>RoutingModule { }
