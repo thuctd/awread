@@ -3,7 +3,8 @@ import {
   branchAndMerge, mergeWith, move, MergeStrategy, applyTemplates
 } from '@angular-devkit/schematics';
 import { createDefaultPath } from '@schematics/angular/utility/workspace';
-import { addDeclarationToAppModule } from '../../utility/add-import-module';
+import { addImportDeclarationToAppModule } from '../../utility/add-import-module';
+import { addExportDeclarationToAppModule } from '../../utility/add-export-module';
 import { parseName } from '@schematics/angular/utility/parse-name';
 import { Path, normalize, strings } from '@angular-devkit/core';
 
@@ -44,11 +45,13 @@ export default function (schema: any): Rule {
       externalSchematic('@nrwl/angular', 'component', {
         name: schema.name,
         type: schema.type,
+        style: 'scss',
         module: featureShellName,
         project: featureShellName
       }),
       mergeWith(templateSource, MergeStrategy.AllowCreationConflict),
-      addDeclarationToAppModule(schema, targetLibName, featureShellPath, featureShellName, `./${featureShellName}-routing.module`),
+      addImportDeclarationToAppModule(schema, targetLibName, featureShellPath, featureShellName, `./${featureShellName}-routing.module`),
+      addExportDeclarationToAppModule(schema, targetLibName, featureShellPath, featureShellName, `./${featureShellName}-routing.module`),
     ])
   }
 }

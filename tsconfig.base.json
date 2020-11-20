@@ -22,9 +22,6 @@
       ],
       "@awread/writer/web/feature-auth": [
         "libs/writer/web/feature-auth/src/index.ts"
-      ],
-      "@awread/writer/web/feature-shell": [
-        "libs/writer/web/feature-shell/src/index.ts"
       ]
     }
   },

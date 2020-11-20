@@ -4,7 +4,7 @@ import { normalize } from '@angular-devkit/core';
 import * as ts from 'typescript';
 import { insert, readJsonFile, toFileName } from '@nrwl/workspace';
 import { Change, insertImport } from '@nrwl/workspace/src/utils/ast-utils';
-import { addImportToModule } from '@nrwl/angular/src/utils/ast-utils';
+import { addExportToModule } from '../utility/ast-utils';
 import {
   chain, externalSchematic, Rule, SchematicContext, Tree, schematic, noop, apply, url, template,
   branchAndMerge, mergeWith, move
@@ -13,7 +13,7 @@ import {
 
 import { classify, dasherize, camelize, underscore } from '@angular-devkit/core/src/utils/strings';
 
-export function addImportDeclarationToAppModule(schema, targetLibName: string, featureShellPath: string, featureShellName: string, moduleImportPath?: string): Rule {
+export function addExportDeclarationToAppModule(schema, targetLibName: string, featureShellPath: string, featureShellName: string, moduleImportPath?: string): Rule {
   return (host: Tree) => {
     if (!targetLibName) {
       return host;
@@ -48,7 +48,7 @@ export function addImportDeclarationToAppModule(schema, targetLibName: string, f
 
     insert(host, writeToModulePath, [
       addImport(syntaxImports, moduleImportPath, true),
-      ...addImportToModule(source, writeToModulePath, targetModuleClassify),
+      ...addExportToModule(source, writeToModulePath, targetModuleClassify),
     ]);
 
     return host;
