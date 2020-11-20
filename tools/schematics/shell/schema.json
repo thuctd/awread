@@ -1,11 +1,16 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "id": "page",
+  "id": "shell",
   "type": "object",
   "properties": {
     "name": {
       "type": "string",
-      "description": "Page name",
+      "description": "generate feature-shell",
+      "default": "shell"
+    },
+    "directory": {
+      "type": "string",
+      "description": "Directory name",
       "$default": {
         "$source": "argv",
         "index": 0
@@ -14,10 +19,15 @@
     "project": {
       "type": "string",
       "description": "Project name to add the page to"
+    },
+    "type": {
+      "type": "string",
+      "description": "type value in routing",
+      "default": "page"
     }
   },
   "required": [
-    "name",
+    "directory",
     "project"
   ]
 }

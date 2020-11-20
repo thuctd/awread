@@ -17,9 +17,6 @@
     "baseUrl": ".",
     "paths": {
       "@awread/api-interfaces": ["libs/api-interfaces/src/index.ts"],
-      "@awread/writer/web/feature-shell": [
-        "libs/writer/web/feature-shell/src/index.ts"
-      ],
       "@awread/reader/web/feature-shell": [
         "libs/reader/web/feature-shell/src/index.ts"
       ],

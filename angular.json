@@ -596,32 +596,6 @@
         }
       }
     },
-    "writer-web-feature-shell": {
-      "projectType": "library",
-      "root": "libs/writer/web/feature-shell",
-      "sourceRoot": "libs/writer/web/feature-shell/src",
-      "prefix": "awread",
-      "architect": {
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["libs/writer/web/feature-shell/src/**/*.ts"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/writer/web/feature-shell/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      },
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        }
-      }
-    },
     "reader-web-feature-shell": {
       "projectType": "library",
       "root": "libs/reader/web/feature-shell",

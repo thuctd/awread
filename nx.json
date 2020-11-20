@@ -64,9 +64,6 @@
       "tags": [],
       "implicitDependencies": ["reader-mobile"]
     },
-    "writer-web-feature-shell": {
-      "tags": ["scope:shell", "scope:shared", "type:feature"]
-    },
     "reader-web-feature-shell": {
       "tags": ["scope:shell", "scope:shared", "type:feature"]
     },

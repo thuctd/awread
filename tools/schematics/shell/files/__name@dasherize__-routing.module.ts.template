@@ -1,0 +1,27 @@
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+
+import { <%= classify(name) %><%= capitalize(type) %> } from './<%= name %>/<%= dasherize(name) %>.<%= type %>';<% } %>
+
+const routes: Routes = [
+  {
+    path: '',
+    component: <%= classify(name) %><%= capitalize(type) %>,
+    children: [
+      {
+        path: '',
+        // pathMatch: 'full',
+        // redirectTo: 'app-home-page,
+      },
+    ],
+  },
+];
+
+@NgModule({
+  declarations: [<%= classify(name) %><%= capitalize(type) %>],
+  exports: [RouterModule],
+  imports: [
+    RouterModule.forRoot(routes),
+  ],
+})
+export class <%= classify(fullName) %>RoutingModule { }

@@ -133,58 +133,58 @@ function buildRoute(options: any, modulePath: string) {
   return `{ path: '${options.route}', loadChildren: ${loadChildren} }`;
 }
 
-export default function (options: any): Rule {
+export default function (schema: any): Rule {
   return async (host: Tree) => {
-    if (options.path === undefined) {
-      options.path = await createDefaultPath(host, options.project as string);
+    if (schema.path === undefined) {
+      schema.path = await createDefaultPath(host, schema.project as string);
     }
 
-    if (options.module) {
-      options.module = findModuleFromOptions(host, options);
+    if (schema.module) {
+      schema.module = findModuleFromOptions(host, schema);
     }
 
     let routingModulePath: Path | undefined;
-    const isLazyLoadedModuleGen = !!(options.route && options.module);
+    const isLazyLoadedModuleGen = !!(schema.route && schema.module);
     if (isLazyLoadedModuleGen) {
-      options.routingScope = "Child" // or "Root"
-      routingModulePath = getRoutingModulePath(host, options.module as string);
+      schema.routingScope = "Child" // or "Root"
+      routingModulePath = getRoutingModulePath(host, schema.module as string);
     }
 
-    options.nameOnly = options.name.split('/').pop();
-    const parsedPath = parseName(options.path, options.mode ? `${options.name}-${options.mode}` : options.name);
-    options.name = parsedPath.name;
-    options.path = parsedPath.path;
+    schema.nameOnly = schema.name.split('/').pop();
+    const parsedPath = parseName(schema.path, schema.mode ? `${schema.name}-${schema.mode}` : schema.name);
+    schema.name = parsedPath.name;
+    schema.path = parsedPath.path;
 
     const templateSource = apply(url('./files'), [
-      options.routing || (isLazyLoadedModuleGen && routingModulePath)
-        ? options.routingOnly ? filter(path => !path.endsWith('__.module.ts.template')) : noop()
+      schema.routing || (isLazyLoadedModuleGen && routingModulePath)
+        ? schema.routingOnly ? filter(path => !path.endsWith('__.module.ts.template')) : noop()
         : filter(path => !path.endsWith('-routing.module.ts.template')),
       applyTemplates({
         ...strings,
-        'if-flat': (s: string) => options.flat ? '' : s,
+        'if-flat': (s: string) => schema.flat ? '' : s,
         lazyRoute: isLazyLoadedModuleGen,
         lazyRouteWithoutRouteModule: isLazyLoadedModuleGen && !routingModulePath,
         lazyRouteWithRouteModule: isLazyLoadedModuleGen && !!routingModulePath,
-        ...options,
+        ...schema,
       }),
       move(parsedPath.path),
     ]);
-    const moduleDasherized = strings.dasherize(options.name);
+    const moduleDasherized = strings.dasherize(schema.name);
     const modulePath =
-      `${!options.flat ? moduleDasherized + '/' : ''}${moduleDasherized}.module.ts`;
-    const relativePath = buildRelativeModulePath(options, options.module);
+      `${!schema.flat ? moduleDasherized + '/' : ''}${moduleDasherized}.module.ts`;
+    const relativePath = buildRelativeModulePath(schema, schema.module);
     return chain([
-      !isLazyLoadedModuleGen ? addDeclarationToNgModule(options) : noop(),
-      addRouteDeclarationToNgModule(options, routingModulePath),
+      !isLazyLoadedModuleGen ? addDeclarationToNgModule(schema) : noop(),
+      addRouteDeclarationToNgModule(schema, routingModulePath),
       mergeWith(templateSource, MergeStrategy.AllowCreationConflict),
       isLazyLoadedModuleGen
         ? externalSchematic('@schematics/angular', 'component', {
-          ...options,
+          ...schema,
           module: modulePath,
         })
         : noop(),
-      options.routingOnly ? addDeclarationToAppModule(options, `${options.project}-routing`, options.path, options.project, relativePath) : noop(),
-      options.lintFix ? applyLintFix(options.path) : noop(),
+      schema.routingOnly ? addDeclarationToAppModule(schema, `${schema.project}-routing`, schema.path, schema.project, relativePath) : noop(),
+      schema.lintFix ? applyLintFix(schema.path) : noop(),
     ]);
   };
 }
