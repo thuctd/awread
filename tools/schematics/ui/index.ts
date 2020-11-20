@@ -3,7 +3,7 @@ import {
   branchAndMerge, mergeWith, move
 } from '@angular-devkit/schematics';
 import { createDefaultPath } from '@schematics/angular/utility/workspace';
-import { addDeclarationToAppModule } from '../../utility/add-import-module';
+import { addImportDeclarationToAppModule } from '../../utility/add-import-module';
 
 export default function (schema: any): Rule {
   return async (tree: Tree, context: SchematicContext) => {
@@ -26,7 +26,7 @@ export default function (schema: any): Rule {
         style: 'scss'
       }),
       ...addPage(schema, projectName),
-      addDeclarationToAppModule(schema, projectName, featureShellPath, featureShellName),
+      addImportDeclarationToAppModule(schema, projectName, featureShellPath, featureShellName),
     ])
   }
 }

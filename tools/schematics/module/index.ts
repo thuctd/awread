@@ -22,7 +22,7 @@ import { applyLintFix }  from '@schematics/angular/utility/lint-fix';
 import { parseName }  from '@schematics/angular/utility/parse-name';
 import { createDefaultPath }  from '@schematics/angular/utility/workspace';
 import { InsertChange } from '@nrwl/workspace';
-import { addDeclarationToAppModule } from '../../utility/add-import-module';
+import { addImportDeclarationToAppModule } from '../../utility/add-import-module';
 
 function buildRelativeModulePath(options: any, modulePath: string, deviceName?: string): string {
   const device = options.mode && deviceName ? '-' + deviceName : '';
@@ -183,7 +183,7 @@ export default function (schema: any): Rule {
           module: modulePath,
         })
         : noop(),
-      schema.routingOnly ? addDeclarationToAppModule(schema, `${schema.project}-routing`, schema.path, schema.project, relativePath) : noop(),
+      schema.routingOnly ? addImportDeclarationToAppModule(schema, `${schema.project}-routing`, schema.path, schema.project, relativePath) : noop(),
       schema.lintFix ? applyLintFix(schema.path) : noop(),
     ]);
   };

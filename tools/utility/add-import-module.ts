@@ -44,8 +44,8 @@ export function addImportDeclarationToAppModule(schema, targetLibName: string, f
       const workspaceName = readJsonFile('package.json').name;
       moduleImportPath = `@${workspaceName}/${pathPrefix}`;
     }
-    const syntaxImports = `{ ${targetModuleClassify} }`;
-
+    const hasTargetModule = sourceText.includes(targetModuleClassify);
+    const syntaxImports = !hasTargetModule ? `{ ${targetModuleClassify} }` : targetModuleClassify;
     insert(host, writeToModulePath, [
       addImport(syntaxImports, moduleImportPath, true),
       ...addImportToModule(source, writeToModulePath, targetModuleClassify),
