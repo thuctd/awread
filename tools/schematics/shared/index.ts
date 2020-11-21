@@ -13,7 +13,7 @@ function addRouterOutlet(tree: Tree, schema: any) {
     const path = `${schema.path}/shared/src/lib/layouts/shell/shell.layout.html`;
     let sharedLayout = tree.read(path);
     if (sharedLayout != null) {
-      let newData = `${sharedLayout.toString()}\n <router-outlet></router-outlet>`;
+      let newData = `${sharedLayout.toString()}\n<router-outlet></router-outlet>`;
       tree.overwrite(path, newData);
     }
     return tree;
