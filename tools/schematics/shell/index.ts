@@ -25,7 +25,6 @@ export default function (schema: any): Rule {
     const parsedPath = parseName(directoryLibsPath, schema.fullName);
     schema.path = parsedPath.path;
     schema.directoryNoSlash = directoryNoSlash;
-    schema.type = 'page';
     schema.featureShellName = featureShellName;
     const templateSource = apply(url('./files'), [
       applyTemplates({
@@ -43,9 +42,10 @@ export default function (schema: any): Rule {
         style: 'scss'
       }),
       externalSchematic('@nrwl/angular', 'component', {
-        name: schema.name,
+        name: `${schema.type}/${schema.name}`,
         type: schema.type,
         style: 'scss',
+        flat: true,
         module: featureShellName,
         project: featureShellName
       }),

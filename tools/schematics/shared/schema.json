@@ -1,12 +1,12 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "id": "shell",
+  "id": "shared",
   "type": "object",
   "properties": {
     "name": {
       "type": "string",
-      "description": "generate feature-shell",
-      "default": "shell"
+      "description": "generate shared",
+      "default": "shared"
     },
     "directory": {
       "type": "string",
@@ -16,10 +16,6 @@
         "index": 0
       }
     },
-    "project": {
-      "type": "string",
-      "description": "Project name to add the page to"
-    },
     "type": {
       "type": "string",
       "description": "type value in routing",
@@ -27,7 +23,6 @@
     }
   },
   "required": [
-    "directory",
-    "project"
+    "directory"
   ]
 }
