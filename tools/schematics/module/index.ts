@@ -16,7 +16,8 @@ import {
   url,
 } from '@angular-devkit/schematics';
 import * as ts from 'typescript';
-import { addImportToModule, addRouteDeclarationToModule } from '@schematics/angular/utility/ast-utils';
+import { addImportToModule, getRouterModuleDeclaration,findNodes } from '@schematics/angular/utility/ast-utils';
+import { Change } from '@schematics/angular/utility/change';
 import { MODULE_EXT, ROUTING_MODULE_EXT, buildRelativePath, findModuleFromOptions }  from '@schematics/angular/utility/find-module';
 import { applyLintFix }  from '@schematics/angular/utility/lint-fix';
 import { parseName }  from '@schematics/angular/utility/parse-name';
@@ -69,6 +70,77 @@ function addDeclarationToNgModule(options: any): Rule {
   };
 }
 
+function addRouteDeclarationToModule(source, fileToAdd, routeLiteral, schema) {
+  const routerModuleExpr = getRouterModuleDeclaration(source);
+  if (!routerModuleExpr) {
+    throw new Error(`Couldn't find a route declaration in ${fileToAdd}.`);
+  }
+  const scopeConfigMethodArgs = (routerModuleExpr as any).arguments;
+  if (!scopeConfigMethodArgs.length) {
+    const { line } = source.getLineAndCharacterOfPosition(routerModuleExpr.getStart());
+    throw new Error(`The router module method doesn't have arguments ` +
+      `at line ${line} in ${fileToAdd}`);
+  }
+  let routesArr;
+  const routesArg = scopeConfigMethodArgs[0];
+  // Check if the route declarations array is
+  // an inlined argument of RouterModule or a standalone variable
+  if (ts.isArrayLiteralExpression(routesArg)) {
+    routesArr = routesArg;
+  }
+  else {
+    const routesVarName = routesArg.getText();
+    let routesVar;
+    if (routesArg.kind === ts.SyntaxKind.Identifier) {
+      routesVar = source.statements
+        .filter(ts.isVariableStatement)
+        .find((v) => {
+          return v.declarationList.declarations[0].name.getText() === routesVarName;
+        });
+    }
+    if (!routesVar) {
+      const { line } = source.getLineAndCharacterOfPosition(routesArg.getStart());
+      throw new Error(`No route declaration array was found that corresponds ` +
+        `to router module at line ${line} in ${fileToAdd}`);
+    }
+    routesArr = findNodes(routesVar, ts.SyntaxKind.ArrayLiteralExpression, 1)[0];
+  }
+  const occurrencesCount = routesArr.elements.length;
+  const text = routesArr.getFullText(source);
+  let route = routeLiteral;
+  let insertPos = routesArr.elements.pos;
+  if (occurrencesCount > 0) {
+    const lastRouteLiteral = [...routesArr.elements].pop();
+    const lastRouteIsWildcard = ts.isObjectLiteralExpression(lastRouteLiteral)
+      && lastRouteLiteral
+        .properties
+        .some(n => (ts.isPropertyAssignment(n)
+          && ts.isIdentifier(n.name)
+          && n.name.text === 'path'
+          && ts.isStringLiteral(n.initializer)
+          && n.initializer.text === '**'));
+    const indentation = text.match(/\r?\n(\r?)\s*/) || [];
+    const routeText = `${indentation[0] || ' '}${routeLiteral}`;
+    // Add the new route before the wildcard route
+    // otherwise we'll always redirect to the wildcard route
+    if (lastRouteIsWildcard) {
+      insertPos = lastRouteLiteral.pos;
+      route = `${routeText},`;
+    }
+    else {
+      const firstRoute = routesArr.elements[0];
+      const routeChildren = firstRoute.properties[2];
+      const arrayElements = routeChildren.initializer.elements;
+      const firstFeatureRoute = [...arrayElements].pop();
+      const firstFeatureRouteChildren = [...firstFeatureRoute.properties].pop();
+      const featureArrayElements = firstFeatureRouteChildren.initializer.elements;
+      insertPos = schema.prefix === 'page' ? featureArrayElements.pos :  lastRouteLiteral.end;
+      route = `,${routeText}`;
+    }
+  }
+  return new InsertChange(fileToAdd, insertPos, route);
+}
+
 function addRouteDeclarationToNgModule(
   options: any,
   routingModulePath: Path | undefined,
@@ -98,6 +170,7 @@ function addRouteDeclarationToNgModule(
       ts.createSourceFile(path, sourceText, ts.ScriptTarget.Latest, true),
       path,
       buildRoute(options, options.module),
+      options
     ) as InsertChange;
 
     const recorder = host.beginUpdate(path);

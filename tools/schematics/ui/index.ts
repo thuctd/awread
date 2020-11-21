@@ -14,10 +14,10 @@ export default function (schema: any): Rule {
     };
     const name = schema.name.substring(PREFIX.length);
     const directory: string = schema.directory.replace(/\//g, '-').trim();
-    const projectName = directory + '-' + schema.name.trim();
+    const pageName = directory + '-' + schema.name.trim();
 
-    const featureShellName = schema.project ?? directory + '-feature-shell';
-    const featureShellPath = await createDefaultPath(tree, featureShellName);
+    const projectName = schema.project ?? directory + '-feature-shell';
+    const projectPath = await createDefaultPath(tree, projectName);
     return chain([
       externalSchematic('@nrwl/angular', 'lib', {
         name: schema.name,
@@ -25,8 +25,8 @@ export default function (schema: any): Rule {
         tags: `scope:ui-${name},scope:shared,type:ui`,
         style: 'scss'
       }),
-      ...addPage(schema, projectName),
-      addImportDeclarationToAppModule(schema, projectName, featureShellPath, featureShellName),
+      ...addPage(schema, pageName),
+      addImportDeclarationToAppModule(schema, pageName, projectPath, projectName),
     ])
   }
 }

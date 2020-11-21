@@ -18,6 +18,10 @@
     "pages": {
       "type": "string",
       "description": "pages list"
+    },
+    "project": {
+      "type": "string",
+      "description": "Project name"
     }
   },
   "required": [

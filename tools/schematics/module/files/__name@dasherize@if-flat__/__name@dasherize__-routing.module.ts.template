@@ -5,7 +5,22 @@ import { <%= classify(name) %><%= capitalize(type) %> } from './<%= dasherize(na
 
 declare const global: any;
 
-const routes: Routes = [<% if (lazyRoute) { %>{ path: '', component: <%= classify(name) %><%= capitalize(type) %> }<% } %>];
+const routes: Routes = [
+  <% if (lazyRoute) { %>{ path: '', component: <%= classify(name) %><%= capitalize(type) %> }<% } %>
+  <% if (routingOnly) { %>{
+    path: '',
+    component: SharedLayout,
+    children: [
+      {
+        path: '',
+        component: <%= classify(name) %>Layout,
+        children: [
+
+        ]
+      }
+    ]
+  }<% } %>
+];
 
 @NgModule({
   imports: [RouterModule.for<%= routingScope %>(routes)],
