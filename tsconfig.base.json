@@ -22,7 +22,8 @@
       ],
       "@awread/writer/web/feature-auth": [
         "libs/writer/web/feature-auth/src/index.ts"
-      ]
+      ],
+      "@awread/writer/web/shared": ["libs/writer/web/shared/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
