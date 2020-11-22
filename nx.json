@@ -63,12 +63,6 @@
     "reader-mobile-e2e": {
       "tags": [],
       "implicitDependencies": ["reader-mobile"]
-    },
-    "reader-web-feature-shell": {
-      "tags": ["scope:shell", "scope:shared", "type:feature"]
-    },
-    "writer-web-shared": {
-      "tags": ["scope:shared"]
     }
   }
 }

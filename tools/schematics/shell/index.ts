@@ -17,22 +17,22 @@ export default function (schema: any): Rule {
     };
     const name = schema.fullName.substring(PREFIX.length);
     const directoryNoSlash: string = schema.directory.replace(/\//g, '-').trim();
-    const directoryLibsPath = normalize(`libs/${schema.directory}`)
     const featureShellName = directoryNoSlash + '-' + schema.fullName.trim();
-    const featureShellPath = normalize(`${directoryLibsPath}/${schema.fullName}/src/lib`);
-    const targetLibName = `${featureShellName}-routing`
-    // adding template
-    const parsedPath = parseName(directoryLibsPath, schema.fullName);
-    schema.path = parsedPath.path;
-    schema.directoryNoSlash = directoryNoSlash;
-    schema.featureShellName = featureShellName;
-    const templateSource = apply(url('./files'), [
-      applyTemplates({
-        ...schema,
-        ...strings
-      }),
-      move(featureShellPath),
-    ]);
+    // const directoryLibsPath = normalize(`libs/${schema.directory}`)
+    // const featureShellPath = normalize(`${directoryLibsPath}/${schema.fullName}/src/lib`);
+    // const targetLibName = `${featureShellName}-routing`
+    // // adding template
+    // const parsedPath = parseName(directoryLibsPath, schema.fullName);
+    // schema.path = parsedPath.path;
+    // schema.directoryNoSlash = directoryNoSlash;
+    // schema.featureShellName = featureShellName;
+    // const templateSource = apply(url('./files'), [
+    //   applyTemplates({
+    //     ...schema,
+    //     ...strings
+    //   }),
+    //   move(featureShellPath),
+    // ]);
 
     return chain([
       externalSchematic('@nrwl/angular', 'lib', {
@@ -41,17 +41,9 @@ export default function (schema: any): Rule {
         tags: `scope:shell,scope:shared,type:feature`,
         style: 'scss'
       }),
-      externalSchematic('@nrwl/angular', 'component', {
-        name: `${schema.type}/${schema.name}`,
-        type: schema.type,
-        style: 'scss',
-        flat: true,
-        module: featureShellName,
-        project: featureShellName
-      }),
-      mergeWith(templateSource, MergeStrategy.AllowCreationConflict),
-      addImportDeclarationToAppModule(schema, targetLibName, featureShellPath, featureShellName, `./${featureShellName}-routing.module`),
-      addExportDeclarationToAppModule(schema, targetLibName, featureShellPath, featureShellName, `./${featureShellName}-routing.module`),
+      // mergeWith(templateSource, MergeStrategy.AllowCreationConflict),
+      // addImportDeclarationToAppModule(schema, targetLibName, featureShellPath, featureShellName, `./${featureShellName}-routing.module`),
+      // addExportDeclarationToAppModule(schema, targetLibName, featureShellPath, featureShellName, `./${featureShellName}-routing.module`),
     ])
   }
 }

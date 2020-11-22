@@ -8,9 +8,9 @@ import { addExportDeclarationToAppModule } from '../../utility/add-export-module
 import { parseName } from '@schematics/angular/utility/parse-name';
 import { Path, normalize, strings } from '@angular-devkit/core';
 
-function addRouterOutlet(tree: Tree, schema: any) {
+function addRouterOutlet(tree: Tree, schema: any, target) {
   return (tree: Tree, context: SchematicContext) => {
-    const path = `${schema.path}/shared/src/lib/layouts/shell/shell.layout.html`;
+    const path = `${schema.path}/shared/src/lib/layouts/${target}/${target}.layout.html`;
     let sharedLayout = tree.read(path);
     if (sharedLayout != null) {
       let newData = `${sharedLayout.toString()}\n<router-outlet></router-outlet>`;
@@ -32,13 +32,6 @@ export default function (schema: any): Rule {
     schema.path = parsedPath.path;
     schema.directoryNoSlash = directoryNoSlash;
     schema.featureShellName = currentModuleName;
-    const templateSource = apply(url('./files'), [
-      applyTemplates({
-        ...schema,
-        ...strings
-      }),
-      move(currentModulePath),
-    ]);
 
     return chain([
       externalSchematic('@nrwl/angular', 'lib', {
@@ -48,13 +41,23 @@ export default function (schema: any): Rule {
         style: 'scss'
       }),
       externalSchematic('@nrwl/angular', 'component', {
-        name: `layouts/shell`,
+        name: `layouts/shell-desktop`,
         type: 'layout',
         style: 'scss',
         module: currentModuleName,
         project: currentModuleName,
         export: true
       }),
+      addRouterOutlet(tree, schema, 'shell-desktop'),
+      externalSchematic('@nrwl/angular', 'component', {
+        name: `layouts/shell-mobile`,
+        type: 'layout',
+        style: 'scss',
+        module: currentModuleName,
+        project: currentModuleName,
+        export: true
+      }),
+      addRouterOutlet(tree, schema, 'shell-mobile'),
       externalSchematic('@nrwl/angular', 'component', {
         name: `parts/navbar`,
         type: 'part',
@@ -78,8 +81,7 @@ export default function (schema: any): Rule {
         module: currentModuleName,
         project: currentModuleName,
         export: true
-      }),
-      addRouterOutlet(tree, schema)
+      })
     ])
   }
 }

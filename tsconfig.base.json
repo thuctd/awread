@@ -16,11 +16,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@awread/api-interfaces": ["libs/api-interfaces/src/index.ts"],
-      "@awread/reader/web/feature-shell": [
-        "libs/reader/web/feature-shell/src/index.ts"
-      ],
-      "@awread/writer/web/shared": ["libs/writer/web/shared/src/index.ts"]
+      "@awread/api-interfaces": ["libs/api-interfaces/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

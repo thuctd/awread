@@ -7,4 +7,4 @@ Always add shared first, then shell, then ui
 
 nx workspace-schematic shared --directory=writer/web
 nx workspace-schematic shell --directory=writer/web --project=writer-web 
-nx workspace-schematic ui auth --directory=writer/web --pages=login,register,forgot
+nx workspace-schematic ui auth --directory=writer/web --pages=login,register
