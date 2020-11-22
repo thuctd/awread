@@ -595,6 +595,69 @@
           }
         }
       }
+    },
+    "writer-web-shared": {
+      "projectType": "library",
+      "root": "libs/writer/web/shared",
+      "sourceRoot": "libs/writer/web/shared/src",
+      "prefix": "awread",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/writer/web/shared/tsconfig.lib.json",
+              "libs/writer/web/shared/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/writer/web/shared/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/writer/web/shared/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      }
+    },
+    "writer-web-feature-shell": {
+      "projectType": "library",
+      "root": "libs/writer/web/feature-shell",
+      "sourceRoot": "libs/writer/web/feature-shell/src",
+      "prefix": "awread",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/writer/web/feature-shell/tsconfig.lib.json",
+              "libs/writer/web/feature-shell/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/writer/web/feature-shell/**/*"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/writer/web/feature-shell/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      }
     }
   },
   "cli": {

@@ -17,7 +17,14 @@ export default function (schema: any): Rule {
     const pageName = directory + '-' + schema.name.trim();
 
     const addImportProjectName = schema.declareProject ?? directory + '-feature-shell';
-    const addImportProjectPath = await createDefaultPath(tree, addImportProjectName);
+
+    let addImportProjectPath;
+    try {
+      addImportProjectPath = await createDefaultPath(tree, addImportProjectName);
+    } catch (error) {
+      throw new Error(`Couldn't find the project ${addImportProjectName} to create defaultPath`);
+    }
+
     return chain([
       externalSchematic('@nrwl/angular', 'lib', {
         name: schema.name,

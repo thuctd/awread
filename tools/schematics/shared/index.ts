@@ -7,7 +7,8 @@ import { addImportDeclarationToModule } from '../../utility/add-import-module';
 import { addExportDeclarationToAppModule } from '../../utility/add-export-module';
 import { parseName } from '@schematics/angular/utility/parse-name';
 import { Path, normalize, strings } from '@angular-devkit/core';
-
+import * as ts from 'typescript';
+import { addGlobal, insert, RemoveChange } from '@nrwl/workspace';
 function addRouterOutlet(schema: any, target) {
   return (tree: Tree, context: SchematicContext) => {
     const path = `${schema.path}/shared/src/lib/layouts/${target}/${target}.layout.html`;
@@ -39,9 +40,10 @@ export default function (schema: any): Rule {
     const directoryLibsPath = normalize(`libs/${schema.directory}`)
     const currentModuleName = directoryNoSlash + '-' + schema.name.trim();
     const currentModulePath = normalize(`${directoryLibsPath}/${schema.name}/src/lib`);
-    // adding template
+    // adding template;
     const parsedPath = parseName(directoryLibsPath, schema.name);
     schema.path = parsedPath.path;
+    schema.projectRoot = `${schema.path}/${schema.name}`;
     schema.directoryNoSlash = directoryNoSlash;
     schema.featureShellName = currentModuleName;
 
@@ -94,7 +96,36 @@ export default function (schema: any): Rule {
         project: currentModuleName,
         export: true
       }),
-      addPartsContent(schema, 'header')
+      addPartsContent(schema, 'header'),
+      exportLayout(tree, schema)
     ])
   }
+}
+
+export function exportLayout(tree, schema) {
+  return (tree: Tree) => {
+    const indexFilePath = `${schema.projectRoot}/src/index.ts`;
+    const buffer = tree.read(indexFilePath);
+    const indexSource = buffer!.toString('utf-8');
+    const indexSourceFile = ts.createSourceFile(
+      indexFilePath,
+      indexSource,
+      ts.ScriptTarget.Latest,
+      true
+    );
+
+    insert(tree, indexFilePath, [
+      ...addGlobal(
+        indexSourceFile,
+        indexFilePath,
+        `export * from './lib/layouts/shell-desktop/shell-desktop.layout';`
+      ),
+      ...addGlobal(
+        indexSourceFile,
+        indexFilePath,
+        `export * from './lib/layouts/shell-mobile/shell-mobile.layout';`
+      ),
+    ]);
+    return tree;
+ }
 }

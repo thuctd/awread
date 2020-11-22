@@ -6,5 +6,7 @@ module.exports = {
     '<rootDir>/apps/writer/mobile',
     '<rootDir>/apps/reader/web',
     '<rootDir>/apps/reader/mobile',
+    '<rootDir>/libs/writer/web/shared',
+    '<rootDir>/libs/writer/web/feature-shell',
   ],
 };
