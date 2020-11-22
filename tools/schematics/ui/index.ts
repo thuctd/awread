@@ -16,8 +16,8 @@ export default function (schema: any): Rule {
     const directory: string = schema.directory.replace(/\//g, '-').trim();
     const pageName = directory + '-' + schema.name.trim();
 
-    const projectName = schema.project ?? directory + '-feature-shell';
-    const projectPath = await createDefaultPath(tree, projectName);
+    const addImportProjectName = schema.declareProject ?? directory + '-feature-shell';
+    const addImportProjectPath = await createDefaultPath(tree, addImportProjectName);
     return chain([
       externalSchematic('@nrwl/angular', 'lib', {
         name: schema.name,
@@ -26,7 +26,7 @@ export default function (schema: any): Rule {
         style: 'scss'
       }),
       ...addPage(schema, pageName),
-      addImportDeclarationToAppModule(schema, pageName, projectPath, projectName),
+      addImportDeclarationToAppModule(schema, pageName, addImportProjectPath, addImportProjectName),
     ])
   }
 }

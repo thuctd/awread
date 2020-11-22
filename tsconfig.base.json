@@ -20,9 +20,6 @@
       "@awread/reader/web/feature-shell": [
         "libs/reader/web/feature-shell/src/index.ts"
       ],
-      "@awread/writer/web/feature-auth": [
-        "libs/writer/web/feature-auth/src/index.ts"
-      ],
       "@awread/writer/web/shared": ["libs/writer/web/shared/src/index.ts"]
     }
   },

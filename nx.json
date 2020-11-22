@@ -67,9 +67,6 @@
     "reader-web-feature-shell": {
       "tags": ["scope:shell", "scope:shared", "type:feature"]
     },
-    "writer-web-feature-auth": {
-      "tags": ["scope:feature-auth", "scope:shared", "type:feature"]
-    },
     "writer-web-shared": {
       "tags": ["scope:shared"]
     }

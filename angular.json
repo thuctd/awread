@@ -622,32 +622,6 @@
         }
       }
     },
-    "writer-web-feature-auth": {
-      "projectType": "library",
-      "root": "libs/writer/web/feature-auth",
-      "sourceRoot": "libs/writer/web/feature-auth/src",
-      "prefix": "awread",
-      "architect": {
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["libs/writer/web/feature-auth/src/**/*.ts"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/writer/web/feature-auth/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      },
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        }
-      }
-    },
     "writer-web-shared": {
       "projectType": "library",
       "root": "libs/writer/web/shared",
