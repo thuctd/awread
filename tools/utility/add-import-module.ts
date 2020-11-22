@@ -13,7 +13,7 @@ import {
 
 import { classify, dasherize, camelize, underscore } from '@angular-devkit/core/src/utils/strings';
 
-export function addImportPathToModule(schema, whatYouWantToImport: string, destinationPath: string, destinationName: string, customImportSyntax?: string, fileNameYouWantToImport?): Rule {
+export function addImportPathToModule(schema, whatYouWantToImport: string, destinationPath: string, destinationName: string, customImportSyntax?: string, fileNameYouWantToImport?, isDefault = false): Rule {
   return (host: Tree) => {
     if (!whatYouWantToImport) {
       return host;
@@ -28,7 +28,7 @@ export function addImportPathToModule(schema, whatYouWantToImport: string, desti
     const source = ts.createSourceFile(writeToModulePath, sourceText, ts.ScriptTarget.Latest, true);
 
     // PART II: targetModule name
-    const targetModuleClassify = `${classify(whatYouWantToImport)}Module`;
+    const targetModuleClassify = `${classify(whatYouWantToImport)}`;
 
     const addImport = (
       symbolName: string,
@@ -44,11 +44,10 @@ export function addImportPathToModule(schema, whatYouWantToImport: string, desti
       const workspaceName = readJsonFile('package.json').name;
       customImportSyntax = `@${workspaceName}/${pathPrefix}`;
     }
-    const hasTargetModule = sourceText.includes(targetModuleClassify);
-    const syntaxImports = !hasTargetModule ? `{ ${targetModuleClassify} }` : targetModuleClassify;
+    const syntaxImports = isDefault ? `{ ${targetModuleClassify} }` : targetModuleClassify;
 
     insert(host, writeToModulePath, [
-      addImport(syntaxImports, customImportSyntax, true),
+      addImport(syntaxImports, customImportSyntax, isDefault),
     ]);
 
     return host;

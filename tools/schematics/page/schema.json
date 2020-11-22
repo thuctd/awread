@@ -14,10 +14,20 @@
     "project": {
       "type": "string",
       "description": "Project name to add the page to"
+    },
+    "directory": {
+      "type": "string",
+      "description": "directory name to add the page to"
+    },
+    "featureName": {
+      "type": "string",
+      "description": "feature name, writer-web-feature-auth, have name is auth"
     }
   },
   "required": [
     "name",
-    "project"
+    "project",
+    "directory",
+    "featureName"
   ]
 }

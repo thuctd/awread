@@ -67,6 +67,11 @@
       "description": "Auto generate Desktop and Mobile",
       "alias": "mode"
     },
+    "featureName": {
+      "type": "string",
+      "description": "Auto generate Desktop and Mobile",
+      "alias": "featureName"
+    },
     "routingOnly": {
       "type": "boolean",
       "description": "Not generate new file",

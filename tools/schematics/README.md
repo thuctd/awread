@@ -8,3 +8,9 @@ Always add shared or shell first, then ui
 nx workspace-schematic shared --directory=writer/web
 nx workspace-schematic shell --directory=writer/web --project=writer-web 
 nx workspace-schematic ui auth --directory=writer/web --pages=login,register
+
+
+
+console.log('main is late');
+declare const window: any;
+window.haveMobile = true;

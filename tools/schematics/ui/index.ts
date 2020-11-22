@@ -42,6 +42,11 @@ export function addPage(schema, pageName): Rule[] {
   console.log('page name', pageName, schema.pages);
   schema.pages = schema.pages ?? [];
   const pages: Rule[] = schema.pages && schema.pages.length ?
-    schema.pages.split(',').map((page: string) => schematic('page', { project: pageName, name: page.trim() })) : [];
+    schema.pages.split(',').map((page: string) => schematic('page', {
+      project: pageName,
+      name: page.trim(),
+      directory: schema.directory,
+      featureName: schema.name
+    })) : [];
   return !pages.length ? [] : pages;
 }

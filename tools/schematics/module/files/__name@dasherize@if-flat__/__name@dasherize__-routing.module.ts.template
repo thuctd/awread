@@ -9,11 +9,11 @@ const routes: Routes = [
   <% if (lazyRoute) { %>{ path: '', component: <%= classify(name) %><%= capitalize(type) %> }<% } %>
   <% if (routingOnly) { %>{
     path: '',
-    component: window.innerWidth <= 768 && global?.haveMobile ? MobileSharedLayout : DesktopSharedLayout,
+    component: window.innerWidth <= 768 && global?.haveMobile ? ShellMobileLayout : ShellDesktopLayout,
     children: [
       {
         path: '',
-        component: <%= classify(name) %>Layout,
+        component: <%= classify(featureName) %>Layout,
         children: [
 
         ]

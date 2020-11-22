@@ -25,6 +25,7 @@ export default function (schema: any): Rule {
 
     return chain([
       ...addFeatureRoutingModule(schema, tree, routingPath),
+
       schematic('module', {
         project: schema.project,
         name: moduleName,
@@ -50,19 +51,40 @@ export default function (schema: any): Rule {
 }
 
 function addFeatureRoutingModule(schema, tree, routingPath) {
-  const rule1 = checkRoutingFileExist(tree, routingPath) ? noop() : schematic('module', {
-    project: schema.project,
-    name: schema.project,
-    routing: true,
-    routingOnly: true,
-    flat: true,
-    module: schema.project
-  });
+  let rule1;
+  let mixRules;
+  if (checkRoutingFileExist(tree, routingPath)) {
+    rule1 = noop();
+    mixRules = [rule1];
+  } else {
+    rule1 = schematic('module', {
+      project: schema.project,
+      name: schema.project,
+      routing: true,
+      routingOnly: true,
+      featureName: schema.featureName,
+      flat: true,
+      module: schema.project
+    });
 
-  const rule2 = addImportPathToModule(schema, classify('desktop-shell-layout'), schema.defaultPath, `${schema.project}-routing`, null, 'shared');
-  const rule3 = addImportPathToModule(schema, classify('mobile-shell-layout'), schema.defaultPath, `${schema.project}-routing`, null, 'shared');
-  const mixRule = schema.routingOnly ? [rule2, rule3] : [];
-  return [rule1, ...mixRule];
+    const rule2 = addImportPathToModule(schema, classify('shell-desktop-layout'), schema.defaultPath, `${schema.project}-routing`, null, 'shared', true);
+    const rule3 = addImportPathToModule(schema, classify('shell-mobile-layout'), schema.defaultPath, `${schema.project}-routing`, null, 'shared');
+    mixRules = [
+      rule1,
+      rule2,
+      rule3,
+      externalSchematic('@nrwl/angular', 'component', {
+        name: `layouts/${schema.featureName}`,
+        type: 'layout',
+        style: 'scss',
+        module: schema.project,
+        project: schema.project,
+        export: true
+      }),
+      addImportPathToModule(schema, classify(`${schema.featureName}-layout`), schema.defaultPath, `${schema.project}-routing`, `./layouts/${schema.featureName}/${schema.featureName}.layout`, null, true),
+    ];
+  }
+  return mixRules;
 }
 
 
