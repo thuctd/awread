@@ -3,7 +3,7 @@ node --inspect-brk ./node_modules/nx/bin/nx.js workspace-schematic
 
 
 
-Always add shared first, then shell, then ui
+Always add shared or shell first, then ui
 
 nx workspace-schematic shared --directory=writer/web
 nx workspace-schematic shell --directory=writer/web --project=writer-web 

@@ -3,7 +3,7 @@ import {
   branchAndMerge, mergeWith, move, MergeStrategy, applyTemplates
 } from '@angular-devkit/schematics';
 import { createDefaultPath } from '@schematics/angular/utility/workspace';
-import { addImportDeclarationToAppModule } from '../../utility/add-import-module';
+import { addImportDeclarationToModule } from '../../utility/add-import-module';
 import { addExportDeclarationToAppModule } from '../../utility/add-export-module';
 import { parseName } from '@schematics/angular/utility/parse-name';
 import { Path, normalize, strings } from '@angular-devkit/core';

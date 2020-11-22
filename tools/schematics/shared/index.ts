@@ -3,22 +3,34 @@ import {
   branchAndMerge, mergeWith, move, MergeStrategy, applyTemplates
 } from '@angular-devkit/schematics';
 import { createDefaultPath } from '@schematics/angular/utility/workspace';
-import { addImportDeclarationToAppModule } from '../../utility/add-import-module';
+import { addImportDeclarationToModule } from '../../utility/add-import-module';
 import { addExportDeclarationToAppModule } from '../../utility/add-export-module';
 import { parseName } from '@schematics/angular/utility/parse-name';
 import { Path, normalize, strings } from '@angular-devkit/core';
 
-function addRouterOutlet(tree: Tree, schema: any, target) {
+function addRouterOutlet(schema: any, target) {
   return (tree: Tree, context: SchematicContext) => {
     const path = `${schema.path}/shared/src/lib/layouts/${target}/${target}.layout.html`;
     let sharedLayout = tree.read(path);
     if (sharedLayout != null) {
-      let newData = `${sharedLayout.toString()}\n<router-outlet></router-outlet>`;
+      let newData = `${sharedLayout.toString()}\n<awread-header></awread-header>\n<router-outlet></router-outlet>\n<awread-footer></awread-footer>`;
       tree.overwrite(path, newData);
     }
     return tree;
   }
+}
 
+function addPartsContent(schema: any, target) {
+  return (tree: Tree, context: SchematicContext) => {
+    const prefix = 'part';
+    const path = `${schema.path}/shared/src/lib/${prefix}s/${target}/${target}.${prefix}.html`;
+    let sharedLayout = tree.read(path);
+    if (sharedLayout != null) {
+      let newData = `${sharedLayout.toString()}\n<awread-navbar></awread-navbar>`;
+      tree.overwrite(path, newData);
+    }
+    return tree;
+  }
 }
 
 export default function (schema: any): Rule {
@@ -48,7 +60,7 @@ export default function (schema: any): Rule {
         project: currentModuleName,
         export: true
       }),
-      addRouterOutlet(tree, schema, 'shell-desktop'),
+      addRouterOutlet(schema, 'shell-desktop'),
       externalSchematic('@nrwl/angular', 'component', {
         name: `layouts/shell-mobile`,
         type: 'layout',
@@ -57,7 +69,7 @@ export default function (schema: any): Rule {
         project: currentModuleName,
         export: true
       }),
-      addRouterOutlet(tree, schema, 'shell-mobile'),
+      addRouterOutlet(schema, 'shell-mobile'),
       externalSchematic('@nrwl/angular', 'component', {
         name: `parts/navbar`,
         type: 'part',
@@ -81,7 +93,8 @@ export default function (schema: any): Rule {
         module: currentModuleName,
         project: currentModuleName,
         export: true
-      })
+      }),
+      addPartsContent(schema, 'header')
     ])
   }
 }

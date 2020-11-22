@@ -3,7 +3,7 @@ import {
   branchAndMerge, mergeWith, move
 } from '@angular-devkit/schematics';
 import { createDefaultPath } from '@schematics/angular/utility/workspace';
-import { addImportDeclarationToAppModule } from '../../utility/add-import-module';
+import { addImportDeclarationToModule } from '../../utility/add-import-module';
 
 export default function (schema: any): Rule {
   return async (tree: Tree, context: SchematicContext) => {
@@ -26,15 +26,15 @@ export default function (schema: any): Rule {
         style: 'scss'
       }),
       ...addPage(schema, pageName),
-      addImportDeclarationToAppModule(schema, pageName, addImportProjectPath, addImportProjectName),
+      addImportDeclarationToModule(schema, pageName, addImportProjectPath, addImportProjectName),
     ])
   }
 }
 
-export function addPage(schema, projectName): Rule[] {
-  console.log('project name', projectName, schema.pages);
+export function addPage(schema, pageName): Rule[] {
+  console.log('page name', pageName, schema.pages);
   schema.pages = schema.pages ?? [];
   const pages: Rule[] = schema.pages && schema.pages.length ?
-    schema.pages.split(',').map((page: string) => schematic('page', { project: projectName, name: page.trim() })) : [];
+    schema.pages.split(',').map((page: string) => schematic('page', { project: pageName, name: page.trim() })) : [];
   return !pages.length ? [] : pages;
 }

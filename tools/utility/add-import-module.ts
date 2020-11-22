@@ -13,9 +13,51 @@ import {
 
 import { classify, dasherize, camelize, underscore } from '@angular-devkit/core/src/utils/strings';
 
-export function addImportDeclarationToAppModule(schema, targetLibName: string, featureShellPath: string, featureShellName: string, moduleImportPath?: string): Rule {
+export function addImportPathToModule(schema, whatYouWantToImport: string, destinationPath: string, destinationName: string, customImportSyntax?: string, fileNameYouWantToImport?): Rule {
   return (host: Tree) => {
-    if (!targetLibName) {
+    if (!whatYouWantToImport) {
+      return host;
+    }
+    // Part I: Construct path and read file
+    const writeToModulePath = normalize(`${destinationPath}/${destinationName}.module.ts`);
+    const text = host.read(writeToModulePath);
+    if (text === null) {
+      throw new SchematicsException(`File ${writeToModulePath} does not exist.`);
+    }
+    const sourceText = text.toString('utf-8');
+    const source = ts.createSourceFile(writeToModulePath, sourceText, ts.ScriptTarget.Latest, true);
+
+    // PART II: targetModule name
+    const targetModuleClassify = `${classify(whatYouWantToImport)}Module`;
+
+    const addImport = (
+      symbolName: string,
+      fileName: string,
+      isDefault = false
+    ): Change => {
+      return insertImport(source, writeToModulePath, symbolName, fileName, isDefault);
+    };
+
+    if (!customImportSyntax) {
+      const dir = `${toFileName(schema.directory)}`;
+      const pathPrefix = `${dir}/${toFileName(fileNameYouWantToImport ?? schema.name)}`;
+      const workspaceName = readJsonFile('package.json').name;
+      customImportSyntax = `@${workspaceName}/${pathPrefix}`;
+    }
+    const hasTargetModule = sourceText.includes(targetModuleClassify);
+    const syntaxImports = !hasTargetModule ? `{ ${targetModuleClassify} }` : targetModuleClassify;
+
+    insert(host, writeToModulePath, [
+      addImport(syntaxImports, customImportSyntax, true),
+    ]);
+
+    return host;
+  }
+}
+
+export function addImportDeclarationToModule(schema, whatYouWantToImport: string, featureShellPath: string, featureShellName: string, moduleImportPath?: string): Rule {
+  return (host: Tree) => {
+    if (!whatYouWantToImport) {
       return host;
     }
     // Part I: Construct path and read file
@@ -28,7 +70,7 @@ export function addImportDeclarationToAppModule(schema, targetLibName: string, f
     const source = ts.createSourceFile(writeToModulePath, sourceText, ts.ScriptTarget.Latest, true);
 
     // PART II: targetModule name
-    const targetModuleClassify = `${classify(targetLibName)}Module`;
+    const targetModuleClassify = `${classify(whatYouWantToImport)}Module`;
 
     const addImport = (
       symbolName: string,

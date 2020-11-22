@@ -1,19 +1,5 @@
 import { Path, normalize, strings } from '@angular-devkit/core';
-import {
-  Rule,
-  SchematicsException,
-  Tree,
-  apply,
-  applyTemplates,
-  chain,
-  filter,
-  mergeWith,
-  move,
-  noop,
-  schematic,
-  externalSchematic,
-  MergeStrategy,
-  url,
+import {Rule,SchematicsException,Tree,apply,applyTemplates,chain,filter,mergeWith,move,noop,schematic,externalSchematic,MergeStrategy,url,
 } from '@angular-devkit/schematics';
 import * as ts from 'typescript';
 import { addImportToModule, getRouterModuleDeclaration,findNodes } from '@schematics/angular/utility/ast-utils';
@@ -23,7 +9,64 @@ import { applyLintFix }  from '@schematics/angular/utility/lint-fix';
 import { parseName }  from '@schematics/angular/utility/parse-name';
 import { createDefaultPath }  from '@schematics/angular/utility/workspace';
 import { InsertChange } from '@nrwl/workspace';
-import { addImportDeclarationToAppModule } from '../../utility/add-import-module';
+import { addImportDeclarationToModule } from '../../utility/add-import-module';
+
+export default function (schema: any): Rule {
+  return async (host: Tree) => {
+    if (schema.path === undefined) {
+      schema.path = await createDefaultPath(host, schema.project as string);
+    }
+
+    if (schema.module) {
+      schema.module = findModuleFromOptions(host, schema);
+    }
+
+    let routingModulePath: Path | undefined;
+    const isLazyLoadedModuleGen = !!(schema.route && schema.module);
+    if (isLazyLoadedModuleGen) {
+      schema.routingScope = "Child" // or "Root"
+      routingModulePath = getRoutingModulePath(host, schema.module as string);
+    }
+
+    schema.nameOnly = schema.name.split('/').pop();
+    const parsedPath = parseName(schema.path, schema.mode ? `${schema.name}-${schema.mode}` : schema.name);
+    schema.name = parsedPath.name;
+    schema.path = parsedPath.path;
+
+    const templateSource = apply(url('./files'), [
+      schema.routing || (isLazyLoadedModuleGen && routingModulePath)
+        ? schema.routingOnly ? filter(path => !path.endsWith('__.module.ts.template')) : noop()
+        : filter(path => !path.endsWith('-routing.module.ts.template')),
+      applyTemplates({
+        ...strings,
+        'if-flat': (s: string) => schema.flat ? '' : s,
+        lazyRoute: isLazyLoadedModuleGen,
+        lazyRouteWithoutRouteModule: isLazyLoadedModuleGen && !routingModulePath,
+        lazyRouteWithRouteModule: isLazyLoadedModuleGen && !!routingModulePath,
+        ...schema,
+      }),
+      move(parsedPath.path),
+    ]);
+    const moduleDasherized = strings.dasherize(schema.name);
+    const modulePath =
+      `${!schema.flat ? moduleDasherized + '/' : ''}${moduleDasherized}.module.ts`;
+    const relativePath = buildRelativeModulePath(schema, schema.module);
+    return chain([
+      !isLazyLoadedModuleGen ? addDeclarationToNgModule(schema) : noop(),
+      addRouteDeclarationToNgModule(schema, routingModulePath),
+      mergeWith(templateSource, MergeStrategy.AllowCreationConflict),
+      isLazyLoadedModuleGen
+        ? externalSchematic('@schematics/angular', 'component', {
+          ...schema,
+          module: modulePath,
+        })
+        : noop(),
+      schema.routingOnly ? addImportDeclarationToModule(schema, `${schema.project}-routing`, schema.path, schema.project, relativePath) : noop(),
+      schema.lintFix ? applyLintFix(schema.path) : noop(),
+    ]);
+  };
+}
+
 
 function buildRelativeModulePath(options: any, modulePath: string, deviceName?: string): string {
   const device = options.mode && deviceName ? '-' + deviceName : '';
@@ -206,58 +249,3 @@ function buildRoute(options: any, modulePath: string) {
   return `{ path: '${options.route}', loadChildren: ${loadChildren} }`;
 }
 
-export default function (schema: any): Rule {
-  return async (host: Tree) => {
-    if (schema.path === undefined) {
-      schema.path = await createDefaultPath(host, schema.project as string);
-    }
-
-    if (schema.module) {
-      schema.module = findModuleFromOptions(host, schema);
-    }
-
-    let routingModulePath: Path | undefined;
-    const isLazyLoadedModuleGen = !!(schema.route && schema.module);
-    if (isLazyLoadedModuleGen) {
-      schema.routingScope = "Child" // or "Root"
-      routingModulePath = getRoutingModulePath(host, schema.module as string);
-    }
-
-    schema.nameOnly = schema.name.split('/').pop();
-    const parsedPath = parseName(schema.path, schema.mode ? `${schema.name}-${schema.mode}` : schema.name);
-    schema.name = parsedPath.name;
-    schema.path = parsedPath.path;
-
-    const templateSource = apply(url('./files'), [
-      schema.routing || (isLazyLoadedModuleGen && routingModulePath)
-        ? schema.routingOnly ? filter(path => !path.endsWith('__.module.ts.template')) : noop()
-        : filter(path => !path.endsWith('-routing.module.ts.template')),
-      applyTemplates({
-        ...strings,
-        'if-flat': (s: string) => schema.flat ? '' : s,
-        lazyRoute: isLazyLoadedModuleGen,
-        lazyRouteWithoutRouteModule: isLazyLoadedModuleGen && !routingModulePath,
-        lazyRouteWithRouteModule: isLazyLoadedModuleGen && !!routingModulePath,
-        ...schema,
-      }),
-      move(parsedPath.path),
-    ]);
-    const moduleDasherized = strings.dasherize(schema.name);
-    const modulePath =
-      `${!schema.flat ? moduleDasherized + '/' : ''}${moduleDasherized}.module.ts`;
-    const relativePath = buildRelativeModulePath(schema, schema.module);
-    return chain([
-      !isLazyLoadedModuleGen ? addDeclarationToNgModule(schema) : noop(),
-      addRouteDeclarationToNgModule(schema, routingModulePath),
-      mergeWith(templateSource, MergeStrategy.AllowCreationConflict),
-      isLazyLoadedModuleGen
-        ? externalSchematic('@schematics/angular', 'component', {
-          ...schema,
-          module: modulePath,
-        })
-        : noop(),
-      schema.routingOnly ? addImportDeclarationToAppModule(schema, `${schema.project}-routing`, schema.path, schema.project, relativePath) : noop(),
-      schema.lintFix ? applyLintFix(schema.path) : noop(),
-    ]);
-  };
-}

@@ -13,13 +13,13 @@ import {
 
 import { classify, dasherize, camelize, underscore } from '@angular-devkit/core/src/utils/strings';
 
-export function addExportDeclarationToAppModule(schema, targetLibName: string, featureShellPath: string, featureShellName: string, moduleImportPath?: string): Rule {
+export function addExportDeclarationToAppModule(schema, whatYouWantToImport: string, destinationPath: string, destinationName: string, customImportSyntax?: string): Rule {
   return (host: Tree) => {
-    if (!targetLibName) {
+    if (!whatYouWantToImport) {
       return host;
     }
     // Part I: Construct path and read file
-    const writeToModulePath = normalize(`${featureShellPath}/${featureShellName}.module.ts`);
+    const writeToModulePath = normalize(`${destinationPath}/${destinationName}.module.ts`);
     const text = host.read(writeToModulePath);
     if (text === null) {
       throw new SchematicsException(`File ${writeToModulePath} does not exist.`);
@@ -28,7 +28,7 @@ export function addExportDeclarationToAppModule(schema, targetLibName: string, f
     const source = ts.createSourceFile(writeToModulePath, sourceText, ts.ScriptTarget.Latest, true);
 
     // PART II: targetModule name
-    const targetModuleClassify = `${classify(targetLibName)}Module`;
+    const targetModuleClassify = `${classify(whatYouWantToImport)}Module`;
 
     const addImport = (
       symbolName: string,
@@ -38,17 +38,17 @@ export function addExportDeclarationToAppModule(schema, targetLibName: string, f
       return insertImport(source, writeToModulePath, symbolName, fileName, isDefault);
     };
 
-    if (!moduleImportPath) {
+    if (!customImportSyntax) {
       const dir = `${toFileName(schema.directory)}`;
       const pathPrefix = `${dir}/${toFileName(schema.name)}`;
       const workspaceName = readJsonFile('package.json').name;
-      moduleImportPath = `@${workspaceName}/${pathPrefix}`;
+      customImportSyntax = `@${workspaceName}/${pathPrefix}`;
     }
     const hasTargetModule = sourceText.includes(targetModuleClassify);
     const syntaxImports = !hasTargetModule ? `{ ${targetModuleClassify} }` : targetModuleClassify;
 
     insert(host, writeToModulePath, [
-      addImport(syntaxImports, moduleImportPath, true),
+      addImport(syntaxImports, customImportSyntax, true),
       ...addExportToModule(source, writeToModulePath, targetModuleClassify),
     ]);
 

@@ -1,26 +1,8 @@
 import { chain, externalSchematic, Rule, SchematicContext, Tree, schematic, noop } from '@angular-devkit/schematics';
 import * as path from 'path';
 import { createDefaultPath } from '@schematics/angular/utility/workspace';
-
-function emptySectionFolder(projectPath: string, folderName: string) {
-  return (tree: Tree, context: SchematicContext) => {
-
-    const filePath = path.join(
-      projectPath,
-      folderName,
-      'sections',
-      '.gitkeep'
-    );
-    tree.create(filePath, ``);
-    return tree;
-  }
-}
-
-function checkRoutingFileExist(projectPath: string, routingModuleName: string, tree: Tree) {
-  const routingPath = path.join(projectPath, `${routingModuleName}-routing.module.ts`);
-  console.log('routing exist?', tree.exists(routingPath), projectPath, `${routingModuleName}-routing.module.ts`)
-  return tree.exists(routingPath);
-}
+import { addImportDeclarationToModule, addImportPathToModule } from '../../utility/add-import-module';
+import { classify } from '@nrwl/workspace/src/utils/strings';
 
 export default function (schema: any): Rule {
   return async (tree: Tree, context: SchematicContext) => {
@@ -34,17 +16,15 @@ export default function (schema: any): Rule {
     const name = schema.name.substring(PREFIX.length);
     const moduleName = `${CUSTOMPATH}/${name}`;
     const defaultPath = await createDefaultPath(tree, schema.project);
+    schema.defaultPath = defaultPath;
     const folderNameDesktop = `${moduleName}-desktop`;
     const folderNameMobile = `${moduleName}-mobile`;
+
+    const routingPath = path.join(defaultPath, `${schema.project}-routing.module.ts`);
+    console.log('routing exist?', tree.exists(routingPath), defaultPath, `${schema.project}-routing.module.ts`)
+
     return chain([
-      checkRoutingFileExist(defaultPath, schema.project, tree) ? noop() : schematic('module', {
-        project: schema.project,
-        name: schema.project,
-        routing: true,
-        routingOnly: true,
-        flat: true,
-        module: schema.project
-      }),
+      ...addFeatureRoutingModule(schema, tree, routingPath),
       schematic('module', {
         project: schema.project,
         name: moduleName,
@@ -69,3 +49,37 @@ export default function (schema: any): Rule {
   }
 }
 
+function addFeatureRoutingModule(schema, tree, routingPath) {
+  const rule1 = checkRoutingFileExist(tree, routingPath) ? noop() : schematic('module', {
+    project: schema.project,
+    name: schema.project,
+    routing: true,
+    routingOnly: true,
+    flat: true,
+    module: schema.project
+  });
+
+  const rule2 = addImportPathToModule(schema, classify('desktop-shell-layout'), schema.defaultPath, `${schema.project}-routing`, null, 'shared');
+  const rule3 = addImportPathToModule(schema, classify('mobile-shell-layout'), schema.defaultPath, `${schema.project}-routing`, null, 'shared');
+  const mixRule = schema.routingOnly ? [rule2, rule3] : [];
+  return [rule1, ...mixRule];
+}
+
+
+function emptySectionFolder(projectPath: string, folderName: string) {
+  return (tree: Tree, context: SchematicContext) => {
+
+    const filePath = path.join(
+      projectPath,
+      folderName,
+      'sections',
+      '.gitkeep'
+    );
+    tree.create(filePath, ``);
+    return tree;
+  }
+}
+
+function checkRoutingFileExist(tree: Tree, routingPath: string) {
+  return tree.exists(routingPath);
+}
