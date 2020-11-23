@@ -245,7 +245,7 @@ function buildRoute(options: any, modulePath: string) {
   const moduleMobileName = `${strings.classify(options.nameOnly)}MobileModule`;
   const moduleDesktopName = `${strings.classify(options.nameOnly)}DesktopModule`;
   const loadChildren = options.mode ? `
-  () => window.innerWidth <= 768 && global?.haveMobile ?
+  () => window.innerWidth <= 768 && window?.haveMobile ?
   import('${relativeModulePathMobile}').then(m => m.${moduleMobileName}):
     import('${relativeModulePathDesktop}').then(m => m.${moduleDesktopName})`:
     `() => import('${relativeModulePath}').then(m => m.${moduleName})`
