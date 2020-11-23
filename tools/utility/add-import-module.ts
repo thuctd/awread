@@ -54,13 +54,13 @@ export function addImportPathToModule(schema, whatYouWantToImport: string, desti
   }
 }
 
-export function addImportDeclarationToModule(schema, whatYouWantToImport: string, featureShellPath: string, featureShellName: string, moduleImportPath?: string): Rule {
+export function addImportDeclarationToModule(schema, whatYouWantToImport: string, featureShellPath: string, targetLibName: string, moduleImportPath?: string): Rule {
   return (host: Tree) => {
     if (!whatYouWantToImport) {
       return host;
     }
     // Part I: Construct path and read file
-    const writeToModulePath = normalize(`${featureShellPath}/${featureShellName}.module.ts`);
+    const writeToModulePath = normalize(`${featureShellPath}/${targetLibName}.module.ts`);
     const text = host.read(writeToModulePath);
     if (text === null) {
       throw new SchematicsException(`File ${writeToModulePath} does not exist.`);

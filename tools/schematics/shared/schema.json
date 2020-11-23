@@ -20,6 +20,11 @@
       "type": "string",
       "description": "type value in routing",
       "default": "layout"
+    },
+    "haveMobile": {
+      "type": "boolean",
+      "description": "declare window.haveMobile value",
+      "default": true
     }
   },
   "required": [

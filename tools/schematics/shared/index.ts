@@ -46,7 +46,7 @@ export default function (schema: any): Rule {
     schema.path = parsedPath.path;
     schema.projectRoot = `${schema.path}/${schema.name}`;
     schema.directoryNoSlash = directoryNoSlash;
-    schema.featureShellName = currentModuleName;
+    schema.targetLibName = currentModuleName;
 
     return chain([
       externalSchematic('@nrwl/angular', 'lib', {
@@ -55,7 +55,7 @@ export default function (schema: any): Rule {
         tags: `scope:shared`,
         style: 'scss'
       }),
-      insertDeclare(schema.path, currentModuleName, null),
+      insertDeclare(`${schema.projectRoot}/src/lib`, currentModuleName, schema, null),
       externalSchematic('@nrwl/angular', 'component', {
         name: `layouts/shell-desktop`,
         type: 'layout',

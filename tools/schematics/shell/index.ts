@@ -17,15 +17,15 @@ export default function (schema: any): Rule {
     };
     const name = schema.fullName.substring(PREFIX.length);
     const directoryNoSlash: string = schema.directory.replace(/\//g, '-').trim();
-    const featureShellName = directoryNoSlash + '-' + schema.fullName.trim();
+    const targetLibName = directoryNoSlash + '-' + schema.fullName.trim();
     // const directoryLibsPath = normalize(`libs/${schema.directory}`)
     // const featureShellPath = normalize(`${directoryLibsPath}/${schema.fullName}/src/lib`);
-    // const targetLibName = `${featureShellName}-routing`
+    // const targetLibName = `${targetLibName}-routing`
     // // adding template
     // const parsedPath = parseName(directoryLibsPath, schema.fullName);
     // schema.path = parsedPath.path;
     // schema.directoryNoSlash = directoryNoSlash;
-    // schema.featureShellName = featureShellName;
+    // schema.targetLibName = targetLibName;
     // const templateSource = apply(url('./files'), [
     //   applyTemplates({
     //     ...schema,
@@ -42,8 +42,8 @@ export default function (schema: any): Rule {
         style: 'scss'
       }),
       // mergeWith(templateSource, MergeStrategy.AllowCreationConflict),
-      // addImportDeclarationToAppModule(schema, targetLibName, featureShellPath, featureShellName, `./${featureShellName}-routing.module`),
-      // addExportDeclarationToAppModule(schema, targetLibName, featureShellPath, featureShellName, `./${featureShellName}-routing.module`),
+      // addImportDeclarationToAppModule(schema, targetLibName, featureShellPath, targetLibName, `./${targetLibName}-routing.module`),
+      // addExportDeclarationToAppModule(schema, targetLibName, featureShellPath, targetLibName, `./${targetLibName}-routing.module`),
     ])
   }
 }

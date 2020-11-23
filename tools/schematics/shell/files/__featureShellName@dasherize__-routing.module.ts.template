@@ -24,4 +24,4 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
   ],
 })
-export class <%= classify(featureShellName) %>RoutingModule { }
+export class <%= classify(targetLibName) %>RoutingModule { }

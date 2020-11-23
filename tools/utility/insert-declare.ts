@@ -14,9 +14,10 @@ import {
 
 import { classify, dasherize, camelize, underscore } from '@angular-devkit/core/src/utils/strings';
 
-export function insertDeclare(destinationPath: string, destinationName: string, whatYouWantToImport: string): Rule {
+export function insertDeclare(destinationPath: string, destinationName: string, schema: any, whatYouWantToImport: string): Rule {
   return (tree: Tree, schema:any, ) => {
     // Part I: Construct path and read file
+
     const writeToModulePath = normalize(`${destinationPath}/${destinationName}.module.ts`);
     const text = tree.read(writeToModulePath);
     if (text === null) {
@@ -26,15 +27,21 @@ export function insertDeclare(destinationPath: string, destinationName: string, 
     const source = ts.createSourceFile(writeToModulePath, sourceText, ts.ScriptTarget.Latest, true);
 
     // PART II: targetModule name
-    const postionToImport = 16;
-    whatYouWantToImport = whatYouWantToImport ?? '\nconst b = \'bar\';';
+    const target = source.statements[2];
+    const postionToImport = target.pos;
+    whatYouWantToImport = whatYouWantToImport ?? `
+    declare const window: any;
+window = window ?? {};
+window.haveMobile = ${schema.haveMobile}`;
     // insert a new change
     const insertChange = new InsertChange(writeToModulePath, postionToImport, whatYouWantToImport);
     const exportRecorder = tree.beginUpdate(writeToModulePath);
     exportRecorder.insertLeft(insertChange.pos, insertChange.toAdd);
     tree.commitUpdate(exportRecorder);
+    // PART III: console.log to see the changes
     const afterInsertContent = tree.get(writeToModulePath)?.content.toString();
-    console.log(afterInsertContent)
+    const beautiful = JSON.stringify(afterInsertContent);
+    console.log(beautiful)
     // const a = 'foo';
     // const b = 'bar';
 
