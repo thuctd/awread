@@ -13,7 +13,7 @@ import {
 
 import { classify, dasherize, camelize, underscore } from '@angular-devkit/core/src/utils/strings';
 
-export function addExportDeclarationToAppModule(schema, whatYouWantToImport: string, destinationPath: string, destinationName: string, customImportSyntax?: string): Rule {
+export function addExportDeclarationToModule(schema, whatYouWantToImport: string, destinationPath: string, destinationName: string, customImportSyntax?: string): Rule {
   return (host: Tree) => {
     if (!whatYouWantToImport) {
       return host;
@@ -28,7 +28,7 @@ export function addExportDeclarationToAppModule(schema, whatYouWantToImport: str
     const source = ts.createSourceFile(writeToModulePath, sourceText, ts.ScriptTarget.Latest, true);
 
     // PART II: targetModule name
-    const targetModuleClassify = `${classify(whatYouWantToImport)}Module`;
+    const targetModuleClassify = `${classify(whatYouWantToImport)}`;
 
     const addImport = (
       symbolName: string,

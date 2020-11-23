@@ -4,7 +4,7 @@ import {
 } from '@angular-devkit/schematics';
 import { createDefaultPath } from '@schematics/angular/utility/workspace';
 import { addImportDeclarationToModule } from '../../utility/add-import-module';
-import { addExportDeclarationToAppModule } from '../../utility/add-export-module';
+import { addExportDeclarationToModule } from '../../utility/add-export-module';
 import { parseName } from '@schematics/angular/utility/parse-name';
 import { Path, normalize, strings } from '@angular-devkit/core';
 

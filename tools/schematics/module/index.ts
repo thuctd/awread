@@ -61,7 +61,7 @@ export default function (schema: any): Rule {
           module: modulePath,
         })
         : noop(),
-      schema.routingOnly ? addImportDeclarationToModule(schema, `${schema.project}-routing`, schema.path, schema.project, relativePath) : noop(),
+      schema.routingOnly ? addImportDeclarationToModule(schema, `${schema.project}-routing-module`, schema.path, schema.project, relativePath) : noop(),
       schema.lintFix ? applyLintFix(schema.path) : noop(),
     ]);
   };

@@ -33,7 +33,7 @@ export default function (schema: any): Rule {
         style: 'scss'
       }),
       ...addPage(schema, pageName),
-      addImportDeclarationToModule(schema, pageName, addImportProjectPath, addImportProjectName),
+      addImportDeclarationToModule(schema, `${pageName}-module`, addImportProjectPath, addImportProjectName),
     ])
   }
 }

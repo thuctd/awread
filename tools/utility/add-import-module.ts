@@ -54,13 +54,13 @@ export function addImportPathToModule(schema, whatYouWantToImport: string, desti
   }
 }
 
-export function addImportDeclarationToModule(schema, whatYouWantToImport: string, featureShellPath: string, targetLibName: string, moduleImportPath?: string): Rule {
+export function addImportDeclarationToModule(schema, whatYouWantToImport: string, writeToModuleRoot: string, targetLibName: string, moduleImportPath?: string): Rule {
   return (host: Tree) => {
     if (!whatYouWantToImport) {
       return host;
     }
     // Part I: Construct path and read file
-    const writeToModulePath = normalize(`${featureShellPath}/${targetLibName}.module.ts`);
+    const writeToModulePath = normalize(`${writeToModuleRoot}/${targetLibName}.module.ts`);
     const text = host.read(writeToModulePath);
     if (text === null) {
       throw new SchematicsException(`File ${writeToModulePath} does not exist.`);
@@ -69,7 +69,7 @@ export function addImportDeclarationToModule(schema, whatYouWantToImport: string
     const source = ts.createSourceFile(writeToModulePath, sourceText, ts.ScriptTarget.Latest, true);
 
     // PART II: targetModule name
-    const targetModuleClassify = `${classify(whatYouWantToImport)}Module`;
+    const targetModuleClassify = `${classify(whatYouWantToImport)}`;
 
     const addImport = (
       symbolName: string,

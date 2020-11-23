@@ -4,7 +4,7 @@ import {
 } from '@angular-devkit/schematics';
 import { createDefaultPath } from '@schematics/angular/utility/workspace';
 import { addImportDeclarationToModule } from '../../utility/add-import-module';
-import { addExportDeclarationToAppModule } from '../../utility/add-export-module';
+import { addExportDeclarationToModule } from '../../utility/add-export-module';
 import { parseName } from '@schematics/angular/utility/parse-name';
 import { Path, normalize, strings } from '@angular-devkit/core';
 import * as ts from 'typescript';
@@ -47,7 +47,6 @@ export default function (schema: any): Rule {
     schema.projectRoot = `${schema.path}/${schema.name}`;
     schema.directoryNoSlash = directoryNoSlash;
     schema.targetLibName = currentModuleName;
-
     return chain([
       externalSchematic('@nrwl/angular', 'lib', {
         name: schema.name,
@@ -55,7 +54,9 @@ export default function (schema: any): Rule {
         tags: `scope:shared`,
         style: 'scss'
       }),
-      insertDeclare(`${schema.projectRoot}/src/lib`, currentModuleName, schema, null),
+      insertDeclare(currentModulePath, currentModuleName, schema, null),
+      addImportDeclarationToModule(schema, 'RouterModule', currentModulePath, currentModuleName, '@angular/router'),
+      addExportDeclarationToModule(schema, 'RouterModule', currentModulePath, currentModuleName, '@angular/router'),
       externalSchematic('@nrwl/angular', 'component', {
         name: `layouts/shell-desktop`,
         type: 'layout',
