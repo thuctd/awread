@@ -8,6 +8,11 @@ const routes: Routes = [
   { path: '', component: <%= classify(name) %>Component }
 ];<% } %>
 
+<% if (sharedModule) { %>
+declare const window: any;
+window = window ?? {};
+window.haveMobile = <%= haveMobile %>;<% } %>
+
 @NgModule({
   declarations: [],
   imports: [<% if (commonModule) { %>

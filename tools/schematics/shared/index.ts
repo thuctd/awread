@@ -9,6 +9,7 @@ import { parseName } from '@schematics/angular/utility/parse-name';
 import { Path, normalize, strings } from '@angular-devkit/core';
 import * as ts from 'typescript';
 import { addGlobal, insert, RemoveChange } from '@nrwl/workspace';
+import { insertDeclare } from '../../utility/insert-declare';
 function addRouterOutlet(schema: any, target) {
   return (tree: Tree, context: SchematicContext) => {
     const path = `${schema.path}/shared/src/lib/layouts/${target}/${target}.layout.html`;
@@ -54,6 +55,7 @@ export default function (schema: any): Rule {
         tags: `scope:shared`,
         style: 'scss'
       }),
+      insertDeclare(schema.path, currentModuleName, null),
       externalSchematic('@nrwl/angular', 'component', {
         name: `layouts/shell-desktop`,
         type: 'layout',

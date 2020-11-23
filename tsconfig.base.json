@@ -17,10 +17,7 @@
     "baseUrl": ".",
     "paths": {
       "@awread/api-interfaces": ["libs/api-interfaces/src/index.ts"],
-      "@awread/writer/web/shared": ["libs/writer/web/shared/src/index.ts"],
-      "@awread/writer/web/feature-shell": [
-        "libs/writer/web/feature-shell/src/index.ts"
-      ]
+
     }
   },
   "exclude": ["node_modules", "tmp"]
