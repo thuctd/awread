@@ -10,17 +10,8 @@ import { Path, normalize, strings } from '@angular-devkit/core';
 import * as ts from 'typescript';
 import { addGlobal, insert, RemoveChange } from '@nrwl/workspace';
 import { insertDeclare } from '../../utility/insert-declare';
-function addRouterOutlet(schema: any, target) {
-  return (tree: Tree, context: SchematicContext) => {
-    const path = `${schema.path}/shared/src/lib/layouts/${target}/${target}.layout.html`;
-    let sharedLayout = tree.read(path);
-    if (sharedLayout != null) {
-      let newData = `${sharedLayout.toString()}\n<awread-header></awread-header>\n<router-outlet></router-outlet>\n<awread-footer></awread-footer>`;
-      tree.overwrite(path, newData);
-    }
-    return tree;
-  }
-}
+import { addRouterOutlet } from '../../utility/add-router-outlet';
+
 
 function addPartsContent(schema: any, target) {
   return (tree: Tree, context: SchematicContext) => {
@@ -47,6 +38,7 @@ export default function (schema: any): Rule {
     schema.projectRoot = `${schema.path}/${schema.name}`;
     schema.directoryNoSlash = directoryNoSlash;
     schema.targetLibName = currentModuleName;
+    const customCode = `\n<awread-header></awread-header>\n<router-outlet></router-outlet>\n<awread-footer></awread-footer>`;
     return chain([
       externalSchematic('@nrwl/angular', 'lib', {
         name: schema.name,
@@ -65,7 +57,7 @@ export default function (schema: any): Rule {
         project: currentModuleName,
         export: true
       }),
-      addRouterOutlet(schema, 'shell-desktop'),
+      addRouterOutlet(true, currentModulePath, 'shell-desktop', customCode),
       externalSchematic('@nrwl/angular', 'component', {
         name: `layouts/shell-mobile`,
         type: 'layout',
@@ -74,7 +66,7 @@ export default function (schema: any): Rule {
         project: currentModuleName,
         export: true
       }),
-      addRouterOutlet(schema, 'shell-mobile'),
+      addRouterOutlet(true, currentModulePath, 'shell-mobile', customCode),
       externalSchematic('@nrwl/angular', 'component', {
         name: `parts/navbar`,
         type: 'part',

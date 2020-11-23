@@ -85,7 +85,7 @@ export function addImportDeclarationToModule(schema, whatYouWantToImport: string
 
     if (!moduleImportPath) {
       const dir = `${toFileName(schema.directory)}`;
-      const pathPrefix = `${dir}/${toFileName(schema.name)}`;
+      const pathPrefix = `${dir}/${toFileName(schema.fullName ?? schema.name)}`;
       const workspaceName = readJsonFile('package.json').name;
       moduleImportPath = `@${workspaceName}/${pathPrefix}`;
     }

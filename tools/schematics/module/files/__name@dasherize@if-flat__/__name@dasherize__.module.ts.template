@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';<% if (commonModule) { %>
-import { CommonModule } from '@angular/common';<% } %><% if (lazyRouteWithoutRouteModules || emptyRootRouter) { %>
+import { CommonModule } from '@angular/common';<% } %><% if (lazyRouteWithoutRouteModule || emptyRootRouter) { %>
 import { Routes, RouterModule } from '@angular/router';<% } %>
 <% if (routing || lazyRouteWithRouteModule) { %>
 import { <%= classify(name) %>RoutingModule } from './<%= dasherize(name) %>-routing.module';<% } %>

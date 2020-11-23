@@ -177,8 +177,14 @@ function addRouteDeclarationToModule(source, fileToAdd, routeLiteral, schema) {
       const firstFeatureRoute = [...arrayElements].pop();
       const firstFeatureRouteChildren = [...firstFeatureRoute.properties].pop();
       const featureArrayElements = firstFeatureRouteChildren.initializer.elements;
-      insertPos = schema.prefix === 'page' ? featureArrayElements.pos :  lastRouteLiteral.end;
-      route = `,${routeText}`;
+      const isPageMode = schema.prefix === 'page';
+      if (isPageMode) {
+        insertPos = featureArrayElements.pos;
+        route = `${featureArrayElements.length ? ',': ''}${routeText}`;
+      } else {
+        insertPos = lastRouteLiteral.end;
+        route = `,${routeText}`;
+      }
     }
   }
   return new InsertChange(fileToAdd, insertPos, route);
@@ -219,6 +225,11 @@ function addRouteDeclarationToNgModule(
     const recorder = host.beginUpdate(path);
     recorder.insertLeft(addDeclaration.pos, addDeclaration.toAdd);
     host.commitUpdate(recorder);
+
+
+    // PART III: console.log to see the changes
+    const afterInsertContent = host.get(routingModulePath)?.content.toString();
+    // console.log('change result:', afterInsertContent);
 
     return host;
   };

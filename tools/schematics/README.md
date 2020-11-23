@@ -7,7 +7,8 @@ Always add shared or shell first, then ui
 nx workspace-schematic shared --directory=writer/web
 nx workspace-schematic shell --directory=writer/web --project=writer-web 
 nx workspace-schematic ui auth --directory=writer/web --pages=login,register
-
+nx workspace-schematic page forgot --directory=writer/web --project=wri
+ter-web-ui-auth --featureName=auth
 
 
 declare const window: any;

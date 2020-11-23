@@ -29,7 +29,7 @@ export function insertDeclare(destinationPath: string, destinationName: string, 
     // PART II: targetModule name
     const target = source.statements[2];
     const postionToImport = target.pos;
-    whatYouWantToImport = whatYouWantToImport ?? `declare const window: any;\nwindow.haveMobile = ${schema.haveMobile};`;
+    whatYouWantToImport = whatYouWantToImport ?? `\ndeclare const window: any;\nwindow.haveMobile = ${schema.haveMobile};`;
     // insert a new change
     const insertChange = new InsertChange(writeToModulePath, postionToImport, whatYouWantToImport);
     const exportRecorder = tree.beginUpdate(writeToModulePath);

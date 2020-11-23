@@ -7,6 +7,7 @@ import { addImportDeclarationToModule } from '../../utility/add-import-module';
 import { addExportDeclarationToModule } from '../../utility/add-export-module';
 import { parseName } from '@schematics/angular/utility/parse-name';
 import { Path, normalize, strings } from '@angular-devkit/core';
+import { addRouterOutlet } from '../../utility/add-router-outlet';
 
 export default function (schema: any): Rule {
   return async (tree: Tree, context: SchematicContext) => {
@@ -19,22 +20,6 @@ export default function (schema: any): Rule {
     const directoryNoSlash: string = schema.directory.replace(/\//g, '-').trim();
     const currentModuleName = directoryNoSlash + '-' + schema.fullName.trim();
     const currentModulePath = normalize(`libs/${schema.directory}/${schema.fullName}/src/lib`);
-    // const directoryLibsPath = normalize(`libs/${schema.directory}`)
-    // const featureShellPath = normalize(`${directoryLibsPath}/${schema.fullName}/src/lib`);
-    // const targetLibName = `${targetLibName}-routing`
-    // // adding template
-    // const parsedPath = parseName(directoryLibsPath, schema.fullName);
-    // schema.path = parsedPath.path;
-    // schema.directoryNoSlash = directoryNoSlash;
-    // schema.targetLibName = targetLibName;
-    // const templateSource = apply(url('./files'), [
-    //   applyTemplates({
-    //     ...schema,
-    //     ...strings
-    //   }),
-    //   move(featureShellPath),
-    // ]);
-
     const appPath = await createDefaultPath(tree, schema.project);
 
     return chain([
@@ -47,6 +32,7 @@ export default function (schema: any): Rule {
       addImportDeclarationToModule(schema, 'RouterModule', currentModulePath, currentModuleName, '@angular/router', 'RouterModule.forRoot([])'),
       addExportDeclarationToModule(schema, 'RouterModule', currentModulePath, currentModuleName, '@angular/router'),
       addImportDeclarationToModule(schema, `${currentModuleName}-module`, appPath, `app`),
+      addRouterOutlet(false, appPath, `app.component`)
       // mergeWith(templateSource, MergeStrategy.AllowCreationConflict),
       // addImportDeclarationToAppModule(schema, targetLibName, featureShellPath, targetLibName, `./${targetLibName}-routing.module`),
       // addExportDeclarationToAppModule(schema, targetLibName, featureShellPath, targetLibName, `./${targetLibName}-routing.module`),
