@@ -10,6 +10,7 @@ import { parseName }  from '@schematics/angular/utility/parse-name';
 import { createDefaultPath }  from '@schematics/angular/utility/workspace';
 import { InsertChange } from '@nrwl/workspace';
 import { addImportDeclarationToModule } from '../../utility/add-import-module';
+import { classify } from '@nrwl/workspace/src/utils/strings';
 
 export default function (schema: any): Rule {
   return async (host: Tree) => {
@@ -125,6 +126,7 @@ function addRouteDeclarationToModule(source, fileToAdd, routeLiteral, schema) {
       `at line ${line} in ${fileToAdd}`);
   }
   let routesArr;
+  const isPageMode = schema.prefix === 'page';
   const routesArg = scopeConfigMethodArgs[0];
   // Check if the route declarations array is
   // an inlined argument of RouterModule or a standalone variable
@@ -146,10 +148,14 @@ function addRouteDeclarationToModule(source, fileToAdd, routeLiteral, schema) {
       throw new Error(`No route declaration array was found that corresponds ` +
         `to router module at line ${line} in ${fileToAdd}`);
     }
-    routesArr = findNodes(routesVar, ts.SyntaxKind.ArrayLiteralExpression, 1)[0];
+    const routesArrFindingResults = findNodes(routesVar, ts.SyntaxKind.ArrayLiteralExpression, 3, true);
+    routesArr = routesArrFindingResults[isPageMode ? routesArrFindingResults.length - 1: 0];
   }
   const occurrencesCount = routesArr.elements.length;
   const text = routesArr.getFullText(source);
+  if (text.includes(classify(schema.name))) {
+    return new InsertChange(fileToAdd, 0, '');
+  }
   let route = routeLiteral;
   let insertPos = routesArr.elements.pos;
   if (occurrencesCount > 0) {
@@ -169,22 +175,9 @@ function addRouteDeclarationToModule(source, fileToAdd, routeLiteral, schema) {
     if (lastRouteIsWildcard) {
       insertPos = lastRouteLiteral.pos;
       route = `${routeText},`;
-    }
-    else {
-      const firstRoute = routesArr.elements[0];
-      const routeChildren = firstRoute.properties[2];
-      const arrayElements = routeChildren.initializer.elements;
-      const firstFeatureRoute = [...arrayElements].pop();
-      const firstFeatureRouteChildren = [...firstFeatureRoute.properties].pop();
-      const featureArrayElements = firstFeatureRouteChildren.initializer.elements;
-      const isPageMode = schema.prefix === 'page';
-      if (isPageMode) {
-        insertPos = featureArrayElements.pos;
-        route = `${featureArrayElements.length ? ',': ''}${routeText}`;
-      } else {
-        insertPos = lastRouteLiteral.end;
-        route = `,${routeText}`;
-      }
+    } else {
+      insertPos = lastRouteLiteral.end;
+      route = `,${routeText}`;
     }
   }
   return new InsertChange(fileToAdd, insertPos, route);
