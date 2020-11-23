@@ -17,7 +17,8 @@ export default function (schema: any): Rule {
     };
     const name = schema.fullName.substring(PREFIX.length);
     const directoryNoSlash: string = schema.directory.replace(/\//g, '-').trim();
-    const targetLibName = directoryNoSlash + '-' + schema.fullName.trim();
+    const currentModuleName = directoryNoSlash + '-' + schema.fullName.trim();
+    const currentModulePath = normalize(`libs/${schema.directory}/${schema.fullName}/src/lib`);
     // const directoryLibsPath = normalize(`libs/${schema.directory}`)
     // const featureShellPath = normalize(`${directoryLibsPath}/${schema.fullName}/src/lib`);
     // const targetLibName = `${targetLibName}-routing`
@@ -34,6 +35,8 @@ export default function (schema: any): Rule {
     //   move(featureShellPath),
     // ]);
 
+    const appPath = await createDefaultPath(tree, schema.project);
+
     return chain([
       externalSchematic('@nrwl/angular', 'lib', {
         name: schema.fullName,
@@ -41,6 +44,9 @@ export default function (schema: any): Rule {
         tags: `scope:shell,scope:shared,type:feature`,
         style: 'scss'
       }),
+      addImportDeclarationToModule(schema, 'RouterModule', currentModulePath, currentModuleName, '@angular/router', 'RouterModule.forRoot([])'),
+      addExportDeclarationToModule(schema, 'RouterModule', currentModulePath, currentModuleName, '@angular/router'),
+      addImportDeclarationToModule(schema, `${currentModuleName}-module`, appPath, `app`),
       // mergeWith(templateSource, MergeStrategy.AllowCreationConflict),
       // addImportDeclarationToAppModule(schema, targetLibName, featureShellPath, targetLibName, `./${targetLibName}-routing.module`),
       // addExportDeclarationToAppModule(schema, targetLibName, featureShellPath, targetLibName, `./${targetLibName}-routing.module`),

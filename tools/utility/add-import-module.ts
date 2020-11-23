@@ -50,11 +50,15 @@ export function addImportPathToModule(schema, whatYouWantToImport: string, desti
       addImport(syntaxImports, customImportSyntax, isDefault),
     ]);
 
+    // PART III: console.log to see the changes
+    const afterInsertContent = host.get(writeToModulePath)?.content.toString();
+    // console.log('change result:', afterInsertContent);
+
     return host;
   }
 }
 
-export function addImportDeclarationToModule(schema, whatYouWantToImport: string, writeToModuleRoot: string, targetLibName: string, moduleImportPath?: string): Rule {
+export function addImportDeclarationToModule(schema, whatYouWantToImport: string, writeToModuleRoot: string, targetLibName: string, moduleImportPath?: string, symbolName?: string): Rule {
   return (host: Tree) => {
     if (!whatYouWantToImport) {
       return host;
@@ -89,8 +93,12 @@ export function addImportDeclarationToModule(schema, whatYouWantToImport: string
     const syntaxImports = !hasTargetModule ? `{ ${targetModuleClassify} }` : targetModuleClassify;
     insert(host, writeToModulePath, [
       addImport(syntaxImports, moduleImportPath, true),
-      ...addImportToModule(source, writeToModulePath, targetModuleClassify),
+      ...addImportToModule(source, writeToModulePath, symbolName ?? targetModuleClassify),
     ]);
+
+    // PART III: console.log to see the changes
+    const afterInsertContent = host.get(writeToModulePath)?.content.toString();
+    // console.log('change result:', afterInsertContent);
 
     return host;
   };

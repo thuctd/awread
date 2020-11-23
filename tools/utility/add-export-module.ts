@@ -51,6 +51,9 @@ export function addExportDeclarationToModule(schema, whatYouWantToImport: string
       addImport(syntaxImports, customImportSyntax, true),
       ...addExportToModule(source, writeToModulePath, targetModuleClassify),
     ]);
+    // PART III: console.log to see the changes
+    const afterInsertContent = host.get(writeToModulePath)?.content.toString();
+    // console.log('change result:', afterInsertContent);
 
     return host;
   };

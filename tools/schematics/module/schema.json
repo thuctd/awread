@@ -75,7 +75,11 @@
     "routingOnly": {
       "type": "boolean",
       "description": "Not generate new file",
-      "alias": "o",
+      "default": false
+    },
+    "emptyRootRouter": {
+      "type": "boolean",
+      "description": "Not generate new file",
       "default": false
     },
     "lintFix": {

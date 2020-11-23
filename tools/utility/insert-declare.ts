@@ -37,8 +37,7 @@ export function insertDeclare(destinationPath: string, destinationName: string, 
     tree.commitUpdate(exportRecorder);
     // PART III: console.log to see the changes
     const afterInsertContent = tree.get(writeToModulePath)?.content.toString();
-    const beautiful = JSON.stringify(afterInsertContent);
-    console.log(beautiful)
+    console.log('change result:', afterInsertContent);
     // const a = 'foo';
     // const b = 'bar';
 
