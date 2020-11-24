@@ -1,16 +1,19 @@
 import { Path, normalize, strings } from '@angular-devkit/core';
-import {Rule,SchematicsException,Tree,apply,applyTemplates,chain,filter,mergeWith,move,noop,schematic,externalSchematic,MergeStrategy,url,
+import {
+  Rule, SchematicsException, Tree, apply, applyTemplates, chain, filter, mergeWith, move, noop, schematic, externalSchematic, MergeStrategy, url,
 } from '@angular-devkit/schematics';
 import * as ts from 'typescript';
-import { addImportToModule, getRouterModuleDeclaration,findNodes } from '@schematics/angular/utility/ast-utils';
+import { addImportToModule, getRouterModuleDeclaration, findNodes } from '@schematics/angular/utility/ast-utils';
 import { Change } from '@schematics/angular/utility/change';
-import { MODULE_EXT, ROUTING_MODULE_EXT, buildRelativePath, findModuleFromOptions }  from '@schematics/angular/utility/find-module';
-import { applyLintFix }  from '@schematics/angular/utility/lint-fix';
-import { parseName }  from '@schematics/angular/utility/parse-name';
-import { createDefaultPath }  from '@schematics/angular/utility/workspace';
+import { MODULE_EXT, ROUTING_MODULE_EXT, buildRelativePath, findModuleFromOptions } from '@schematics/angular/utility/find-module';
+import { applyLintFix } from '@schematics/angular/utility/lint-fix';
+import { parseName } from '@schematics/angular/utility/parse-name';
+import { createDefaultPath } from '@schematics/angular/utility/workspace';
 import { InsertChange } from '@nrwl/workspace';
 import { addImportDeclarationToModule } from '../../utility/add-import-module';
-import { classify } from '@nrwl/workspace/src/utils/strings';
+import { camelize, classify } from '@nrwl/workspace/src/utils/strings';
+import { getSourceNodes, insertImport, RemoveChange, ReplaceChange } from '@nrwl/workspace/src/utils/ast-utils';
+import { write } from 'fs';
 
 export default function (schema: any): Rule {
   return async (host: Tree) => {
@@ -30,7 +33,7 @@ export default function (schema: any): Rule {
     }
 
     schema.nameOnly = schema.name.split('/').pop();
-    const parsedPath = parseName(schema.path, schema.mode ? `${schema.name}-${schema.mode}` : schema.name);
+    const parsedPath = parseName(schema.mode ? `${schema.path}/${schema.nameOnly}` : schema.path, schema.mode ? `${schema.name}-${schema.mode}` : schema.name);
     schema.name = parsedPath.name;
     schema.path = parsedPath.path;
 
@@ -59,15 +62,132 @@ export default function (schema: any): Rule {
       isLazyLoadedModuleGen
         ? externalSchematic('@schematics/angular', 'component', {
           ...schema,
+          style: 'scss',
           module: modulePath,
         })
         : noop(),
-      schema.routingOnly ? addImportDeclarationToModule(schema, `${schema.project}-routing-module`, schema.path, schema.project, relativePath) : noop(),
+      ...routingOnlyActions(schema, relativePath),
+      ...addPageService(schema),
       schema.lintFix ? applyLintFix(schema.path) : noop(),
     ]);
   };
 }
 
+function routingOnlyActions(schema, relativePath) {
+  return schema.routingOnly ? [
+    addImportDeclarationToModule(schema, `${schema.project}-routing-module`, schema.path, schema.project, relativePath),
+
+  ] : [noop()]
+}
+
+function addPageService(schema) {
+
+  const templateSource = apply(url('./service-page'), [
+    applyTemplates({
+      ...schema,
+      ...strings
+    }),
+    move(schema.path),
+  ]);
+
+  return schema.type === 'page' ? [
+    mergeWith(templateSource, MergeStrategy.AllowCreationConflict),
+    updateDesktopAndMobilePage(schema),
+  ] : [noop()]
+}
+
+function updateDesktopAndMobilePage(schema) {
+  return (host: Tree) => {
+    if (!schema.module) {
+      return host;
+    }
+    // /libs/writer/web/ui-auth/src/lib/register/pages/register-desktop/register-desktop.page.ts
+    const writeToPath = `${schema.path}/${schema.name}/${schema.name}.${schema.type}.ts`;
+    const implementFilePath = `${schema.path}/${schema.nameOnly}.${schema.type}.ts`;
+    console.log('is that module is exist', writeToPath, host.exists(writeToPath));
+    const text = host.read(writeToPath);
+    if (text === null) {
+      throw new SchematicsException(`File ${writeToPath} does not exist.`);
+    }
+    const sourceText = text.toString();
+    const source = ts.createSourceFile(writeToPath, sourceText, ts.ScriptTarget.Latest, true);
+    let nodes = getSourceNodes(source);
+    const relativePath = buildRelativePath(writeToPath, implementFilePath);
+    const insertImportSymbol = insertImport(source,
+      writeToPath,
+      strings.classify(`${schema.nameOnly}-${schema.type}`),
+      relativePath);
+
+    const renewClass = replaceConstructorForInjection(nodes, classify(`${schema.name}-${schema.type}`), writeToPath, classify(`${schema.nameOnly}-${schema.type}`));
+    const changes = [insertImportSymbol, renewClass];
+
+    const recorder = host.beginUpdate(writeToPath);
+    for (const change of changes) {
+      if (change instanceof InsertChange) {
+        recorder.insertLeft(change.pos, change.toAdd);
+      } else if (change instanceof RemoveChange) {
+        recorder.remove(change.pos, change.toRemove.length);
+      } else if (change instanceof ReplaceChange) {
+        recorder.remove(change.pos, change.oldText.length);
+        recorder.insertLeft(change.pos, change.newText);
+      }
+    }
+    host.commitUpdate(recorder);
+
+    // PART III: console.log to see the changes
+    const afterInsertContent = host.get(writeToPath)?.content.toString();
+
+    return host;
+  };
+}
+
+function replaceConstructorForInjection(nodes: ts.Node[], writeToName: string, writeToPath: string, symbolName: string): Change {
+  let classNode = nodes.find(n => n.kind === ts.SyntaxKind.ClassKeyword);
+
+  if (!classNode) {
+    throw new SchematicsException(`expected class in <span class="hljs-subst" > ${writeToPath} < /span>`);
+  }
+
+  if (!classNode.parent) {
+    throw new SchematicsException(`expected constructor in <span class="hljs-subst" > ${writeToPath} < /span> to have a parent node`);
+  }
+
+  let siblings = classNode.parent.getChildren();
+  let classIndex = siblings.indexOf(classNode);
+
+  siblings = siblings.slice(classIndex);
+
+  let classIdentifierNode = siblings.find(n => n.kind === ts.SyntaxKind.Identifier);
+
+  if (!classIdentifierNode) {
+    throw new SchematicsException(`expected class in <span class="hljs-subst" > ${writeToPath} < /span> to have an identifier`);
+  }
+
+  if (classIdentifierNode.getText() !== writeToName) {
+    throw new SchematicsException(`expected first class in <span class="hljs-subst" > ${writeToPath} < /span> to have the name ${writeToName}`);
+  }
+
+  // Find opening cury braces (FirstPunctuation means '{' here).
+  let curlyNodeIndex = siblings.findIndex(n => n.kind === ts.SyntaxKind.FirstPunctuation);
+  let pageNameSymbol = siblings.find(n => n.kind === ts.SyntaxKind.Identifier);
+  const oldText = classNode.parent.getText().split(pageNameSymbol.getText())[1];
+
+  let listNode = siblings.find(n => n.kind === ts.SyntaxKind.SyntaxList);
+
+  if (!listNode) {
+    throw new SchematicsException(`expected first class in <span class="hljs-subst" > ${writeToPath} < /span> to have a body`);
+  }
+
+  let toAdd = `${pageNameSymbol.getText()} extends ${symbolName} {}`;
+  // return new ReplaceChange(writeToPath, classNode.parent.pos, beforeText, toAdd);
+  return new ReplaceChange(writeToPath, pageNameSymbol.end, oldText, toAdd);
+}
+
+function printAllChildren(node: ts.Node, depth = 0) {
+  console.log(new Array(depth + 1).join('----'), ts.SyntaxKind[node.kind], node.pos, node.end);
+  depth++;
+  node.getChildren().forEach(c => printAllChildren(c, depth));
+}
 
 function buildRelativeModulePath(options: any, modulePath: string, deviceName?: string): string {
   const device = options.mode && deviceName ? '-' + deviceName : '';
@@ -96,7 +216,7 @@ function addDeclarationToNgModule(options: any): Rule {
     const sourceText = text.toString();
     const source = ts.createSourceFile(writeToModulePath, sourceText, ts.ScriptTarget.Latest, true);
 
-    const relativePath = buildRelativeModulePath(options,writeToModulePath);
+    const relativePath = buildRelativeModulePath(options, writeToModulePath);
     const changes = addImportToModule(source,
       writeToModulePath,
       strings.classify(`${options.name}RoutingModule`),
@@ -149,7 +269,7 @@ function addRouteDeclarationToModule(source, fileToAdd, routeLiteral, schema) {
         `to router module at line ${line} in ${fileToAdd}`);
     }
     const routesArrFindingResults = findNodes(routesVar, ts.SyntaxKind.ArrayLiteralExpression, 3, true);
-    routesArr = routesArrFindingResults[isPageMode ? routesArrFindingResults.length - 1: 0];
+    routesArr = routesArrFindingResults[isPageMode ? routesArrFindingResults.length - 1 : 0];
   }
   const occurrencesCount = routesArr.elements.length;
   const text = routesArr.getFullText(source);
@@ -247,7 +367,7 @@ function buildRoute(options: any, modulePath: string) {
   const loadChildren = options.mode ? `
   () => window.innerWidth <= 768 && window?.haveMobile ?
   import('${relativeModulePathMobile}').then(m => m.${moduleMobileName}):
-    import('${relativeModulePathDesktop}').then(m => m.${moduleDesktopName})`:
+    import('${relativeModulePathDesktop}').then(m => m.${moduleDesktopName})` :
     `() => import('${relativeModulePath}').then(m => m.${moduleName})`
 
   return `{ path: '${options.route}', loadChildren: ${loadChildren} }`;

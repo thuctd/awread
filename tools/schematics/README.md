@@ -9,7 +9,4 @@ nx workspace-schematic shell --directory=writer/web --project=writer-web
 nx workspace-schematic ui auth --directory=writer/web --pages=login,register
 nx workspace-schematic page forgot --directory=writer/web --project=writer-web-ui-auth --featureName=auth
 
-
-declare const window: any;
-window = window ?? {};
-window.haveMobile = true;
+nx g lib global 
