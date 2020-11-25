@@ -62,7 +62,7 @@ function addFeatureRoutingModule(schema, tree, routingPath) {
       name: schema.project,
       routing: true,
       routingOnly: true,
-      featureName: schema.featureName,
+      ui: schema.ui,
       flat: true,
       module: schema.project
     });
@@ -74,14 +74,14 @@ function addFeatureRoutingModule(schema, tree, routingPath) {
       rule2,
       rule3,
       externalSchematic('@nrwl/angular', 'component', {
-        name: `layouts/${schema.featureName}`,
+        name: `layouts/${schema.ui}`,
         type: 'layout',
         style: 'scss',
         module: schema.project,
         project: schema.project,
         export: true
       }),
-      addImportPathToModule(schema, classify(`${schema.featureName}-layout`), schema.defaultPath, `${schema.project}-routing`, `./layouts/${schema.featureName}/${schema.featureName}.layout`, null, true),
+      addImportPathToModule(schema, classify(`${schema.ui}-layout`), schema.defaultPath, `${schema.project}-routing`, `./layouts/${schema.ui}/${schema.ui}.layout`, null, true),
     ];
   }
   return mixRules;

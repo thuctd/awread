@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "id": "service",
+  "title": "Angular Module Options Schema",
+  "type": "object",
+  "description": "Creates a new generic service  definition in the given or default project.",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the service .",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "What name would you like to use for the service ?"
+    },
+    "project": {
+      "type": "string",
+      "description": "The name of the project.",
+      "$default": {
+        "$source": "projectName"
+      }
+    },
+    "type": {
+      "type": "string",
+      "description": "type of service",
+      "default": "service"
+    },
+    "indexPath": {
+      "type": "string",
+      "description": "update index file path, it will create file if not exist index",
+      "default": "./"
+    }
+  },
+  "required": [
+    "name"
+  ]
+}

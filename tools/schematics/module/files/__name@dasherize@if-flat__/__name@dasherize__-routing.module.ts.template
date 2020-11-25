@@ -13,7 +13,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: <%= classify(featureName) %>Layout,
+        component: <%= classify(ui) %>Layout,
         children: [
 
         ]

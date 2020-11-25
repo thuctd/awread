@@ -67,10 +67,10 @@
       "description": "Auto generate Desktop and Mobile",
       "alias": "mode"
     },
-    "featureName": {
+    "ui": {
       "type": "string",
-      "description": "Auto generate Desktop and Mobile",
-      "alias": "featureName"
+      "description": "UI Lib name",
+      "alias": "ui"
     },
     "routingOnly": {
       "type": "boolean",

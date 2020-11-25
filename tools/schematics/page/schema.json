@@ -3,31 +3,31 @@
   "id": "page",
   "type": "object",
   "properties": {
-    "name": {
-      "type": "string",
-      "description": "Page name",
-      "$default": {
-        "$source": "argv",
-        "index": 0
-      }
-    },
-    "project": {
-      "type": "string",
-      "description": "Project name to add the page to"
-    },
-    "directory": {
-      "type": "string",
-      "description": "directory name to add the page to"
-    },
-    "featureName": {
-      "type": "string",
-      "description": "feature name, writer-web-feature-auth, have name is auth"
+  "name": {
+    "type": "string",
+    "description": "ui page name, like ui, example: register or login",
+    "$default": {
+      "$source": "argv",
+      "index": 0
     }
+  },
+  "project": {
+    "type": "string",
+    "description": "Project name to add the page to, example: --project=writer-web-ui-auth"
+  },
+  "directory": {
+    "type": "string",
+    "description": "directory name to add the page to, example: --directory=writer/web"
+  },
+  "ui": {
+    "type": "string",
+    "description": "ui name to add the page to, example: --ui=auth"
+  }
   },
   "required": [
     "name",
     "project",
     "directory",
-    "featureName"
+    "ui"
   ]
 }
