@@ -60,7 +60,7 @@ export function addImportPathToModule(schema, whatYouWantToImport: string, desti
 
 export function addImportDeclarationToModule(schema, whatYouWantToImport: string, writeToModuleRoot: string, targetLibName: string, moduleImportPath?: string, symbolName?: string): Rule {
   return (host: Tree) => {
-    if (!whatYouWantToImport) {
+    if (!whatYouWantToImport || !writeToModuleRoot) {
       return host;
     }
     // Part I: Construct path and read file

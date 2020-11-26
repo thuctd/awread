@@ -14,7 +14,7 @@ import {
 
 import { classify, dasherize, camelize, underscore } from '@angular-devkit/core/src/utils/strings';
 
-export function insertDeclare(destinationPath: string, destinationName: string, schema: any, whatYouWantToImport: string): Rule {
+export function insertCustomCode(destinationPath: string, destinationName: string, whatYouWantToImport: string): Rule {
   return (tree: Tree) => {
     // Part I: Construct path and read file
 
@@ -29,7 +29,7 @@ export function insertDeclare(destinationPath: string, destinationName: string, 
     // PART II: targetModule name
     const target = source.statements[2];
     const postionToImport = target.pos;
-    whatYouWantToImport = whatYouWantToImport ?? `\ndeclare const window: any;\nwindow.haveMobile = ${schema.haveMobile};`;
+    whatYouWantToImport = whatYouWantToImport;
     // insert a new change
     const insertChange = new InsertChange(writeToModulePath, postionToImport, whatYouWantToImport);
     const exportRecorder = tree.beginUpdate(writeToModulePath);

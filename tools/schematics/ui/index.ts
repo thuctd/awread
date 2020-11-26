@@ -7,6 +7,7 @@ import { createDefaultPath } from '@schematics/angular/utility/workspace';
 import { normalize } from 'path';
 import { addImportDeclarationToModule } from '../../utility/add-import-module';
 import { addRouterOutlet } from '../../utility/add-router-outlet';
+import { getShellModuleData } from '../../utility/import-to-shell-module';
 
 export default function (schema: any): Rule {
   return async (tree: Tree, context: SchematicContext) => {
@@ -17,17 +18,8 @@ export default function (schema: any): Rule {
     };
     const name = schema.name.substring(PREFIX.length);
     const directoryNoSlash: string = schema.directory.replace(/\//g, '-').trim();
-    const uiName = directoryNoSlash + '-' + schema.name.trim();
-
-    const addImportProjectName = schema.declareProject ?? directoryNoSlash + '-feature-shell';
-
-    let addImportProjectPath;
-    try {
-      addImportProjectPath = await createDefaultPath(tree, addImportProjectName);
-    } catch (error) {
-      throw new Error(`Couldn't find the project ${addImportProjectName} to create defaultPath`);
-    }
-
+    const libName = directoryNoSlash + '-' + schema.name.trim();
+    const shellModule = await getShellModuleData(tree, directoryNoSlash, schema.declareProject);
     const currentProjectPath = `/libs/${schema.directory}/${schema.name}/src/lib`;
 
     return chain([
@@ -37,9 +29,14 @@ export default function (schema: any): Rule {
         tags: `scope:${PREFIX}-${name},scope:shared,type:${PREFIX}`,
         style: 'scss'
       }),
-      ...addPage(schema, uiName),
-      addImportDeclarationToModule(schema, `${uiName}-module`, addImportProjectPath, addImportProjectName),
+      ...addPage(schema, libName),
+      addImportDeclarationToModule(schema, `${libName}-module`, shellModule.path, shellModule.name),
       addRouterOutlet(true, currentProjectPath, schema.name),
+      schematic('feature', {
+        name: name,
+        directory: schema.directory,
+        pages: schema.pages
+      }),
     ])
   }
 }

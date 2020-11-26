@@ -3,14 +3,19 @@ import {
   branchAndMerge, mergeWith, move, MergeStrategy, applyTemplates
 } from '@angular-devkit/schematics';
 import { createDefaultPath } from '@schematics/angular/utility/workspace';
-import { addImportDeclarationToModule } from '../../utility/add-import-module';
+import { addImportDeclarationToModule, addImportPathToModule } from '../../utility/add-import-module';
 import { addExportDeclarationToModule } from '../../utility/add-export-module';
 import { parseName } from '@schematics/angular/utility/parse-name';
 import { Path, normalize, strings } from '@angular-devkit/core';
 import * as ts from 'typescript';
 import { addGlobal, insert, RemoveChange } from '@nrwl/workspace';
-import { insertDeclare } from '../../utility/insert-declare';
+import { insertCustomCode } from '../../utility/insert-custom-code';
 import { addRouterOutlet } from '../../utility/add-router-outlet';
+import { getShellModuleData } from '../../utility/import-to-shell-module';
+import { insertImport } from '@nrwl/workspace/src/utils/ast-utils';
+import { classify } from '@nrwl/workspace/src/utils/strings';
+import { exportToLibIndex } from '../../utility/export-to-index';
+import { createPageLazy } from '../../utility/create-page-lazy';
 
 
 function addPartsContent(schema: any, target) {
@@ -38,6 +43,7 @@ export default function (schema: any): Rule {
     schema.projectRoot = `${schema.path}/${schema.name}`;
     schema.directoryNoSlash = directoryNoSlash;
     schema.targetLibName = currentModuleName;
+    const shellModule = await getShellModuleData(tree, directoryNoSlash);
     const customCode = `\n<awread-header></awread-header>\n<router-outlet></router-outlet>\n<awread-footer></awread-footer>`;
     return chain([
       externalSchematic('@nrwl/angular', 'lib', {
@@ -46,7 +52,7 @@ export default function (schema: any): Rule {
         tags: `scope:shared`,
         style: 'scss'
       }),
-      insertDeclare(currentModulePath, currentModuleName, schema, null),
+      insertCustomCode(currentModulePath, currentModuleName, `\ndeclare const window: any;\nwindow.haveMobile = ${schema.haveMobile};`),
       addImportDeclarationToModule(schema, 'RouterModule', currentModulePath, currentModuleName, '@angular/router'),
       addExportDeclarationToModule(schema, 'RouterModule', currentModulePath, currentModuleName, '@angular/router'),
       externalSchematic('@nrwl/angular', 'component', {
@@ -92,12 +98,45 @@ export default function (schema: any): Rule {
         export: true
       }),
       addPartsContent(schema, 'header'),
-      exportLayout(tree, schema)
+      exportToLibIndex(schema.projectRoot, `export * from './lib/layouts/shell-desktop/shell-desktop.layout';`),
+      exportToLibIndex(schema.projectRoot, `export * from './lib/layouts/shell-desktop/shell-desktop.layout';`),
+      ...createNotFoundPage(schema, currentModuleName),
+      ...insertNotFound(schema, shellModule, currentModulePath, currentModuleName)
     ])
   }
 }
 
-export function exportLayout(tree, schema) {
+
+
+export function createNotFoundPage(currentModulePath, currentModuleName) {
+  return createPageLazy('not-found', currentModuleName, currentModulePath, 'not-found', 'not-found');
+}
+
+export function insertNotFound(schema, shellModule, currentModulePath, currentModuleName) {
+  const notFoundAbsolutePath = '';
+  const NotFoundModuleName = 'NotFound';
+  const routes = `const routes: Routes = [
+  {
+    path: '',
+    component: window.innerWidth <= 768 && window?.haveMobile ? ShellMobileLayout : ShellDesktopLayout,
+    children: [
+      {
+        path: 'not-found', loadChildren: () => import('${notFoundAbsolutePath}').then(m => m.${NotFoundModuleName}Module)
+      }
+    ]
+  }
+];`;
+  const rule2 = addImportPathToModule(schema, classify('shell-desktop-layout'), shellModule.path, shellModule.name, null, 'shared', true);
+  const rule3 = addImportPathToModule(schema, classify('shell-mobile-layout'), shellModule.path, shellModule.name, null, 'shared');
+  return [
+    addImportDeclarationToModule(schema, `${currentModuleName}-module`, shellModule.path, shellModule.name),
+    insertCustomCode(shellModule.path, shellModule.name, routes),
+    rule2,
+    rule3
+  ]
+}
+
+export function exportLayout(schema) {
   return (tree: Tree) => {
     const indexFilePath = `${schema.projectRoot}/src/index.ts`;
     const buffer = tree.read(indexFilePath);

@@ -3,6 +3,7 @@ import * as path from 'path';
 import { createDefaultPath } from '@schematics/angular/utility/workspace';
 import { addImportDeclarationToModule, addImportPathToModule } from '../../utility/add-import-module';
 import { classify } from '@nrwl/workspace/src/utils/strings';
+import { createEmptySection } from '../../utility/create-empty-section';
 
 export default function (schema: any): Rule {
   return async (tree: Tree, context: SchematicContext) => {
@@ -35,7 +36,7 @@ export default function (schema: any): Rule {
         type: 'page',
         prefix: 'page'
       }),
-      emptySectionFolder(defaultPath, folderNameDesktop),
+      createEmptySection(defaultPath, folderNameDesktop),
       schematic('module', {
         project: schema.project,
         name: moduleName,
@@ -45,7 +46,7 @@ export default function (schema: any): Rule {
         type: 'page',
         prefix: 'page'
       }),
-      emptySectionFolder(defaultPath, folderNameMobile),
+      createEmptySection(defaultPath, folderNameMobile),
     ])
   }
 }
@@ -53,7 +54,7 @@ export default function (schema: any): Rule {
 function addFeatureRoutingModule(schema, tree, routingPath) {
   let rule1;
   let mixRules;
-  if (checkRoutingFileExist(tree, routingPath)) {
+  if (tree.exists(routingPath)) {
     rule1 = noop();
     mixRules = [rule1];
   } else {
@@ -85,23 +86,4 @@ function addFeatureRoutingModule(schema, tree, routingPath) {
     ];
   }
   return mixRules;
-}
-
-
-function emptySectionFolder(projectPath: string, folderName: string) {
-  return (tree: Tree, context: SchematicContext) => {
-
-    const filePath = path.join(
-      projectPath,
-      folderName,
-      'sections',
-      '.gitkeep'
-    );
-    tree.create(filePath, ``);
-    return tree;
-  }
-}
-
-function checkRoutingFileExist(tree: Tree, routingPath: string) {
-  return tree.exists(routingPath);
 }
