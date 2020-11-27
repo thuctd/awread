@@ -14,11 +14,11 @@ import {
 
 import { classify, dasherize, camelize, underscore } from '@angular-devkit/core/src/utils/strings';
 
-export function insertCustomCode(destinationPath: string, destinationName: string, whatYouWantToImport: string): Rule {
+export function insertCustomCode(destinationPath: string, whatYouWantToImport: string): Rule {
   return (tree: Tree) => {
     // Part I: Construct path and read file
 
-    const writeToModulePath = normalize(`${destinationPath}/${destinationName}.module.ts`);
+    const writeToModulePath = normalize(`${destinationPath}.ts`);
     const text = tree.read(writeToModulePath);
     if (text === null) {
       throw new SchematicsException(`File ${writeToModulePath} does not exist.`);
@@ -27,7 +27,7 @@ export function insertCustomCode(destinationPath: string, destinationName: strin
     const source = ts.createSourceFile(writeToModulePath, sourceText, ts.ScriptTarget.Latest, true);
 
     // PART II: targetModule name
-    const target = source.statements[2];
+    const target = source.statements[source.statements.length - 1];
     const postionToImport = target.pos;
     whatYouWantToImport = whatYouWantToImport;
     // insert a new change

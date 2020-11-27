@@ -16,6 +16,9 @@ import { insertImport } from '@nrwl/workspace/src/utils/ast-utils';
 import { classify } from '@nrwl/workspace/src/utils/strings';
 import { exportToLibIndex } from '../../utility/export-to-index';
 import { createPageLazy } from '../../utility/create-page-lazy';
+import { getProjectPath } from '../../utility/get-project-path';
+import { FileModule } from '../../utility/file-module.type';
+import { insertRoutes } from '../../utility/insert-routes';
 
 
 function addPartsContent(schema: any, target) {
@@ -36,13 +39,16 @@ export default function (schema: any): Rule {
     const directoryNoSlash: string = schema.directory.replace(/\//g, '-').trim();
     const directoryLibsPath = normalize(`libs/${schema.directory}`)
     const currentModuleName = directoryNoSlash + '-' + schema.name.trim();
-    const currentModulePath = normalize(`${directoryLibsPath}/${schema.name}/src/lib`);
+    const currentModule = {
+      name: currentModuleName,
+      filePath: normalize(`${directoryLibsPath}/${schema.name}/src/lib/${currentModuleName}.module`),
+      folderPath: normalize(`${directoryLibsPath}/${schema.name}/src/lib`)
+    }
     // adding template;
     const parsedPath = parseName(directoryLibsPath, schema.name);
     schema.path = parsedPath.path;
-    schema.projectRoot = `${schema.path}/${schema.name}`;
     schema.directoryNoSlash = directoryNoSlash;
-    schema.targetLibName = currentModuleName;
+    schema.targetLibName = currentModule.name;
     const shellModule = await getShellModuleData(tree, directoryNoSlash);
     const customCode = `\n<awread-header></awread-header>\n<router-outlet></router-outlet>\n<awread-footer></awread-footer>`;
     return chain([
@@ -52,9 +58,9 @@ export default function (schema: any): Rule {
         tags: `scope:shared`,
         style: 'scss'
       }),
-      insertCustomCode(currentModulePath, currentModuleName, `\ndeclare const window: any;\nwindow.haveMobile = ${schema.haveMobile};`),
-      addImportDeclarationToModule(schema, 'RouterModule', currentModulePath, currentModuleName, '@angular/router'),
-      addExportDeclarationToModule(schema, 'RouterModule', currentModulePath, currentModuleName, '@angular/router'),
+      insertCustomCode(currentModule.filePath, `\ndeclare const window: any;\nwindow.haveMobile = ${schema.haveMobile};`),
+      addImportDeclarationToModule(schema, 'RouterModule', currentModule.filePath, '@angular/router'),
+      addExportDeclarationToModule(schema, 'RouterModule', currentModule.filePath, '@angular/router'),
       externalSchematic('@nrwl/angular', 'component', {
         name: `layouts/shell-desktop`,
         type: 'layout',
@@ -63,7 +69,7 @@ export default function (schema: any): Rule {
         project: currentModuleName,
         export: true
       }),
-      addRouterOutlet(true, currentModulePath, 'shell-desktop', customCode),
+      addRouterOutlet(true, currentModule.folderPath, 'shell-desktop', customCode),
       externalSchematic('@nrwl/angular', 'component', {
         name: `layouts/shell-mobile`,
         type: 'layout',
@@ -72,7 +78,7 @@ export default function (schema: any): Rule {
         project: currentModuleName,
         export: true
       }),
-      addRouterOutlet(true, currentModulePath, 'shell-mobile', customCode),
+      addRouterOutlet(true, currentModule.folderPath, 'shell-mobile', customCode),
       externalSchematic('@nrwl/angular', 'component', {
         name: `parts/navbar`,
         type: 'part',
@@ -98,68 +104,44 @@ export default function (schema: any): Rule {
         export: true
       }),
       addPartsContent(schema, 'header'),
-      exportToLibIndex(schema.projectRoot, `export * from './lib/layouts/shell-desktop/shell-desktop.layout';`),
-      exportToLibIndex(schema.projectRoot, `export * from './lib/layouts/shell-desktop/shell-desktop.layout';`),
-      ...createNotFoundPage(schema, currentModuleName),
-      ...insertNotFound(schema, shellModule, currentModulePath, currentModuleName)
+      exportToLibIndex(currentModule.folderPath, `export * from './lib/layouts/shell-desktop/shell-desktop.layout';`),
+      exportToLibIndex(currentModule.folderPath, `export * from './lib/layouts/shell-mobile/shell-mobile.layout';`),
+      ...createNotFoundPage(schema, currentModule),
+      ...insertNotFound(schema, shellModule, currentModule.name)
     ])
   }
 }
 
 
 
-export function createNotFoundPage(currentModulePath, currentModuleName) {
-  return createPageLazy('not-found', currentModuleName, currentModulePath, 'not-found', 'not-found');
+export function createNotFoundPage(schema, currentModule: {name: string, filePath: string, folderPath: string}) {
+  return createPageLazy(schema, 'not-found', currentModule);
 }
 
-export function insertNotFound(schema, shellModule, currentModulePath, currentModuleName) {
-  const notFoundAbsolutePath = '';
+export function insertNotFound(schema, shellModule: FileModule, currentModuleName) {
+  const notFoundAbsolutePath = getProjectPath(schema.directory, 'shared');
   const NotFoundModuleName = 'NotFound';
-  const routes = `const routes: Routes = [
-  {
-    path: '',
-    component: window.innerWidth <= 768 && window?.haveMobile ? ShellMobileLayout : ShellDesktopLayout,
-    children: [
-      {
-        path: 'not-found', loadChildren: () => import('${notFoundAbsolutePath}').then(m => m.${NotFoundModuleName}Module)
-      }
-    ]
-  }
-];`;
-  const rule2 = addImportPathToModule(schema, classify('shell-desktop-layout'), shellModule.path, shellModule.name, null, 'shared', true);
-  const rule3 = addImportPathToModule(schema, classify('shell-mobile-layout'), shellModule.path, shellModule.name, null, 'shared');
-  return [
-    addImportDeclarationToModule(schema, `${currentModuleName}-module`, shellModule.path, shellModule.name),
-    insertCustomCode(shellModule.path, shellModule.name, routes),
-    rule2,
-    rule3
+  const routes = `
+declare var window: any;
+window.haveMobile = true;
+const routes: Routes = [
+{
+  path: '',
+  component: window.innerWidth <= 768 && window?.haveMobile ? ShellMobileLayout : ShellDesktopLayout,
+  children: [
+    {
+      path: 'not-found', loadChildren: () => import('${notFoundAbsolutePath}').then(m => m.${NotFoundModuleName}Module)
+    },
+    { path: '**', pathMatch: 'full', redirectTo: 'not-found'}
   ]
 }
-
-export function exportLayout(schema) {
-  return (tree: Tree) => {
-    const indexFilePath = `${schema.projectRoot}/src/index.ts`;
-    const buffer = tree.read(indexFilePath);
-    const indexSource = buffer!.toString('utf-8');
-    const indexSourceFile = ts.createSourceFile(
-      indexFilePath,
-      indexSource,
-      ts.ScriptTarget.Latest,
-      true
-    );
-
-    insert(tree, indexFilePath, [
-      ...addGlobal(
-        indexSourceFile,
-        indexFilePath,
-        `export * from './lib/layouts/shell-desktop/shell-desktop.layout';`
-      ),
-      ...addGlobal(
-        indexSourceFile,
-        indexFilePath,
-        `export * from './lib/layouts/shell-mobile/shell-mobile.layout';`
-      ),
-    ]);
-    return tree;
- }
+];`;
+  const addDesktopImport = addImportPathToModule(schema, classify('shell-desktop-layout'), shellModule.filePath, null, 'shared', true);
+  const addMobileImport = addImportPathToModule(schema, classify('shell-mobile-layout'), shellModule.filePath, null, 'shared');
+  return [
+    addImportDeclarationToModule(schema, `${currentModuleName}-module`, shellModule.filePath, notFoundAbsolutePath),
+    addDesktopImport,
+    addMobileImport,
+    ...insertRoutes(schema, shellModule, routes),
+  ]
 }

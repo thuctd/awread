@@ -11,11 +11,10 @@ import { classify } from '@nrwl/workspace/src/utils/strings';
 import { createDefaultPath } from '@schematics/angular/utility/workspace';
 
 
-export function createEmptySection(projectPath: string, folderName: string) {
+export function createEmptySection(projectPath: string) {
     return (tree: Tree, context: SchematicContext) => {
       const filePath = path.join(
         projectPath,
-        folderName,
         'sections',
         '.gitkeep'
       );

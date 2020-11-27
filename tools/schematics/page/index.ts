@@ -36,7 +36,7 @@ export default function (schema: any): Rule {
         type: 'page',
         prefix: 'page'
       }),
-      createEmptySection(defaultPath, folderNameDesktop),
+      createEmptySection(`${defaultPath}/${folderNameDesktop}`),
       schematic('module', {
         project: schema.project,
         name: moduleName,
@@ -46,7 +46,7 @@ export default function (schema: any): Rule {
         type: 'page',
         prefix: 'page'
       }),
-      createEmptySection(defaultPath, folderNameMobile),
+      createEmptySection(`${defaultPath}/${folderNameMobile}`),
     ])
   }
 }
@@ -68,8 +68,10 @@ function addFeatureRoutingModule(schema, tree, routingPath) {
       module: schema.project
     });
 
-    const rule2 = addImportPathToModule(schema, classify('shell-desktop-layout'), schema.defaultPath, `${schema.project}-routing`, null, 'shared', true);
-    const rule3 = addImportPathToModule(schema, classify('shell-mobile-layout'), schema.defaultPath, `${schema.project}-routing`, null, 'shared');
+    const routingPath = `${schema.defaultPath}/${schema.project}-routing.module`;
+
+    const rule2 = addImportPathToModule(schema, classify('shell-desktop-layout'), routingPath, null, 'shared', true);
+    const rule3 = addImportPathToModule(schema, classify('shell-mobile-layout'), routingPath, null, 'shared');
     mixRules = [
       rule1,
       rule2,
@@ -82,7 +84,7 @@ function addFeatureRoutingModule(schema, tree, routingPath) {
         project: schema.project,
         export: true
       }),
-      addImportPathToModule(schema, classify(`${schema.ui}-layout`), schema.defaultPath, `${schema.project}-routing`, `./layouts/${schema.ui}/${schema.ui}.layout`, null, true),
+      addImportPathToModule(schema, classify(`${schema.ui}-layout`), routingPath, `./layouts/${schema.ui}/${schema.ui}.layout`, null, true),
     ];
   }
   return mixRules;

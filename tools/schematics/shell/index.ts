@@ -19,7 +19,10 @@ export default function (schema: any): Rule {
     const name = schema.fullName.substring(PREFIX.length);
     const directoryNoSlash: string = schema.directory.replace(/\//g, '-').trim();
     const currentModuleName = directoryNoSlash + '-' + schema.fullName.trim();
-    const currentModulePath = normalize(`libs/${schema.directory}/${schema.fullName}/src/lib`);
+    const currentModule = {
+      name: currentModuleName,
+      path: normalize(`libs/${schema.directory}/${schema.fullName}/src/lib/${currentModuleName}.module`)
+    }
     const appPath = await createDefaultPath(tree, schema.project);
 
     return chain([
@@ -29,8 +32,8 @@ export default function (schema: any): Rule {
         tags: `scope:shell,scope:shared,type:feature`,
         style: 'scss'
       }),
-      addImportDeclarationToModule(schema, 'RouterModule', currentModulePath, currentModuleName, '@angular/router', 'RouterModule.forRoot([])'),
-      addExportDeclarationToModule(schema, 'RouterModule', currentModulePath, currentModuleName, '@angular/router'),
+      addImportDeclarationToModule(schema, 'RouterModule', currentModule.path, '@angular/router', 'RouterModule.forRoot([])'),
+      addExportDeclarationToModule(schema, 'RouterModule', currentModule.path, '@angular/router'),
       addImportDeclarationToModule(schema, `${currentModuleName}-module`, appPath, `app`),
       addRouterOutlet(false, appPath, `app.component`)
       // mergeWith(templateSource, MergeStrategy.AllowCreationConflict),

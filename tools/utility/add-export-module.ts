@@ -12,14 +12,15 @@ import {
 
 
 import { classify, dasherize, camelize, underscore } from '@angular-devkit/core/src/utils/strings';
+import { getProjectPath } from './get-project-path';
 
-export function addExportDeclarationToModule(schema, whatYouWantToImport: string, destinationPath: string, destinationName: string, customImportSyntax?: string): Rule {
+export function addExportDeclarationToModule(schema, whatYouWantToImport: string, writeToFilePath: string, customImportSyntax?: string): Rule {
   return (host: Tree) => {
-    if (!whatYouWantToImport) {
+    if (!whatYouWantToImport || !writeToFilePath) {
       return host;
     }
     // Part I: Construct path and read file
-    const writeToModulePath = normalize(`${destinationPath}/${destinationName}.module.ts`);
+    const writeToModulePath = normalize(`${writeToFilePath}.ts`);
     const text = host.read(writeToModulePath);
     if (text === null) {
       throw new SchematicsException(`File ${writeToModulePath} does not exist.`);
@@ -39,10 +40,7 @@ export function addExportDeclarationToModule(schema, whatYouWantToImport: string
     };
 
     if (!customImportSyntax) {
-      const dir = `${toFileName(schema.directory)}`;
-      const pathPrefix = `${dir}/${toFileName(schema.name)}`;
-      const workspaceName = readJsonFile('package.json').name;
-      customImportSyntax = `@${workspaceName}/${pathPrefix}`;
+      customImportSyntax = getProjectPath(schema.directory, schema.name);
     }
     const hasTargetModule = sourceText.includes(targetModuleClassify);
     const syntaxImports = !hasTargetModule ? `{ ${targetModuleClassify} }` : targetModuleClassify;

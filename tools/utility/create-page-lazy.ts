@@ -12,17 +12,18 @@ import { createDefaultPath } from '@schematics/angular/utility/workspace';
 import { createEmptySection } from './create-empty-section';
 import { exportToLibIndex } from './export-to-index';
 import { insertCustomCode } from './insert-custom-code';
-import { addImportDeclarationToModule } from './add-import-module';
+import { addImportDeclarationToModule, addImportPathToModule } from './add-import-module';
 
-export function createPageLazy(schema, pageName, projectName, projectPath, moduleName, type = 'page') {
+export function createPageLazy(schema, pageName, currentModule: { name: string, filePath: string, folderPath: string }, type = 'page') {
   const nameWithPath = `pages/${pageName}`;
-  const module = {
+  const page = {
     name: `${pageName}`,
-    path: path.join(projectPath, `${nameWithPath}/${pageName}.module.ts`)
+    filePath: normalize(`${currentModule.folderPath}/${nameWithPath}/${pageName}.module`),
+    folderPath: normalize(`${currentModule.folderPath}/${nameWithPath}`),
   }
   return [
     schematic('module', {
-      project: projectName,
+      project: currentModule.name,
       name: nameWithPath,
       type: type,
     }),
@@ -30,18 +31,19 @@ export function createPageLazy(schema, pageName, projectName, projectPath, modul
       name: nameWithPath,
       type,
       style: 'scss',
-      module: `${pageName}-module`,
-      project: projectName,
+      module: `${nameWithPath}/${pageName}.module`,
+      project: currentModule.name,
       export: true
     }),
-    ...addRoutesOfLazy(schema, pageName, type, module),
-    createEmptySection(projectPath, moduleName),
-    exportToLibIndex(projectPath, `export * from './lib/pages/${name}/${name}.${type}';`),
+    ...addRoutesOfLazy(schema, pageName, type, page),
+    createEmptySection(page.folderPath),
+    exportToLibIndex(currentModule.folderPath, `export * from './lib/pages/${pageName}/${pageName}.${type}';`),
+    exportToLibIndex(currentModule.folderPath, `export * from './lib/pages/${pageName}/${pageName}.module';`),
   ]
 }
 
 
-export function addRoutesOfLazy(schema, pageName, type, module: {name: string, path: string}) {
+export function addRoutesOfLazy(schema, pageName, type, module: {name: string, filePath: string, folderPath: string}) {
   const routes = `const routes: Routes = [
   {
     path: '', component: ${classify(pageName) + classify(type)}
@@ -49,7 +51,8 @@ export function addRoutesOfLazy(schema, pageName, type, module: {name: string, p
 ];`;
   const symbolName = `RouterModule.forChild(routes)`;
   return [
-    insertCustomCode(module.path, module.name, routes),
-    addImportDeclarationToModule(schema, 'RouterModule', schema.path, module.name, '@angular/router', symbolName)
+    insertCustomCode(module.filePath, routes),
+    addImportDeclarationToModule(schema, 'RouterModule', module.filePath, '@angular/router', symbolName),
+    addImportPathToModule(schema, 'Routes', module.filePath, '@angular/router', null, false)
   ];
 }

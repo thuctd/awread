@@ -7,12 +7,14 @@ export async function getShellModuleData(tree, directoryNoSlash, declareProject?
     addImportProjectPath = await createDefaultPath(tree, addImportProjectName);
     return {
       name: addImportProjectName,
-      path: addImportProjectPath,
+      folderPath: addImportProjectPath,
+      filePath: `${addImportProjectPath}/${addImportProjectName}.module`,
     }
   } catch (error) {
     return {
       name: null,
-      path: null
+      folderPath: null,
+      filePath: null,
     }
   }
 

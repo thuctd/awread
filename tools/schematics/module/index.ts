@@ -74,7 +74,7 @@ export default function (schema: any): Rule {
 }
 
 function routingOnlyActions(schema, relativePath) {
-  return schema.routingOnly ? [
+  return schema.routingOnly && relativePath ? [
     addImportDeclarationToModule(schema, `${schema.project}-routing-module`, schema.path, schema.project, relativePath),
 
   ] : [noop()]
@@ -190,6 +190,7 @@ function printAllChildren(node: ts.Node, depth = 0) {
 }
 
 function buildRelativeModulePath(options: any, modulePath: string, deviceName?: string): string {
+  if (!modulePath) return '';
   const device = options.mode && deviceName ? '-' + deviceName : '';
   const importModulePath = normalize(
     `/${options.path}/`

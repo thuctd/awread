@@ -1,7 +1,6 @@
 import { chain, externalSchematic, Rule, SchematicContext, Tree, schematic, noop } from '@angular-devkit/schematics';
 import * as path from 'path';
 import { createDefaultPath } from '@schematics/angular/utility/workspace';
-import { addImportDeclarationToModule, addImportPathToModule } from '../../utility/add-import-module';
 import { classify } from '@nrwl/workspace/src/utils/strings';
 import { createFile } from '../../utility/create-file';
 
