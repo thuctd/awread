@@ -13,4 +13,6 @@ nx workspace-schematic page forgot --directory=writer/web --project=writer-web-u
 nx workspace-schematic feature test --directory=writer/web --pages=one
 $ nx workspace-schematic feature-page two --directory=writer/web --project=writer-web-feature-test --feature=auth
 
-nx g lib global 
+nx generate library assets --directory=shared --tags="scope:shared,type:assets" --style=scss
+
+

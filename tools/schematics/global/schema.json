@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "id": "global",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "name of global folder",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      }
+    }
+  },
+  "required": [
+    "name"
+  ]
+}
