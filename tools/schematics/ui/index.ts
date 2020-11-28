@@ -30,7 +30,7 @@ export default function (schema: any): Rule {
         style: 'scss'
       }),
       ...addPage(schema, libName),
-      addImportDeclarationToModule(schema, `${libName}-module`, shellModule.filePath, shellModule.name),
+      addImportDeclarationToModule(schema, `${libName}-module`, shellModule.filePath),
       addRouterOutlet(true, currentProjectPath, schema.name),
       schematic('feature', {
         name: name,

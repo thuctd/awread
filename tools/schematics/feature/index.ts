@@ -25,6 +25,7 @@ export default function (schema: any): Rule {
     if (uiLibExist) {
       try {
         addImportProjectPath = await createDefaultPath(tree, addImportProjectName);
+        schema.writeToFilePath = `${addImportProjectPath}/${addImportProjectName}.module`;
       } catch (error) {
         throw new Error(`Couldn't find the project ${addImportProjectName} to create defaultPath`);
       }
@@ -40,7 +41,7 @@ export default function (schema: any): Rule {
         style: 'scss'
       }),
       ...addPage(schema, libName),
-      addImportProjectPath ? addImportDeclarationToModule(schema, `${libName}-module`, addImportProjectPath, addImportProjectName) : noop(),
+      schema.writeToFilePath ? addImportDeclarationToModule(schema, `${libName}-module`, schema.writeToFilePath, addImportProjectName) : noop(),
     ])
   }
 }

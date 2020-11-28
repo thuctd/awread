@@ -130,7 +130,7 @@ const routes: Routes = [
   component: window.innerWidth <= 768 && window?.haveMobile ? ShellMobileLayout : ShellDesktopLayout,
   children: [
     {
-      path: 'not-found', loadChildren: () => import('${notFoundAbsolutePath}').then(m => m.${NotFoundModuleName}Module)
+      path: 'not-found', component: ${NotFoundModuleName}Page
     },
     { path: '**', pathMatch: 'full', redirectTo: 'not-found'}
   ]
@@ -138,10 +138,12 @@ const routes: Routes = [
 ];`;
   const addDesktopImport = addImportPathToModule(schema, classify('shell-desktop-layout'), shellModule.filePath, null, 'shared', true);
   const addMobileImport = addImportPathToModule(schema, classify('shell-mobile-layout'), shellModule.filePath, null, 'shared');
+  const addNotFoundImport = addImportPathToModule(schema, classify(`${NotFoundModuleName}-page`), shellModule.filePath, null, 'shared');
   return [
     addImportDeclarationToModule(schema, `${currentModuleName}-module`, shellModule.filePath, notFoundAbsolutePath),
     addDesktopImport,
     addMobileImport,
+    addNotFoundImport,
     ...insertRoutes(schema, shellModule, routes),
   ]
 }

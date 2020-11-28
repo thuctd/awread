@@ -13,7 +13,7 @@ import { InsertChange } from '@nrwl/workspace';
 import { addImportDeclarationToModule } from '../../utility/add-import-module';
 import { camelize, classify } from '@nrwl/workspace/src/utils/strings';
 import { getSourceNodes, insertImport, RemoveChange, ReplaceChange } from '@nrwl/workspace/src/utils/ast-utils';
-import { write } from 'fs';
+import * as path from 'path';
 
 export default function (schema: any): Rule {
   return async (host: Tree) => {
@@ -67,15 +67,17 @@ export default function (schema: any): Rule {
         })
         : noop(),
       ...routingOnlyActions(schema, relativePath),
-      ...addPageService(schema),
+      ...(schema.mode ? [...addPageService(schema)] : [noop()]),
       schema.lintFix ? applyLintFix(schema.path) : noop(),
     ]);
   };
 }
 
 function routingOnlyActions(schema, relativePath) {
+  const routingPath = path.join(schema.path, relativePath);
+  const name = `${schema.project}-routing-module`;
   return schema.routingOnly && relativePath ? [
-    addImportDeclarationToModule(schema, `${schema.project}-routing-module`, schema.path, schema.project, relativePath),
+    addImportDeclarationToModule(schema, name, routingPath, schema.project, classify(name)),
 
   ] : [noop()]
 }

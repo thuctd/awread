@@ -104,7 +104,7 @@ function resetArchitect(targets) {
 }
 
 function updateAsset(p, projectName) {
-  const libRoot = `/libs/global/assets/src`;
+  const libRoot = `libs/global/assets/src`;
   const projectPath = `${libRoot}/${projectName}`;
   // p.architect.build.options.assets = [];
   p.architect.build.options.assets.push({
