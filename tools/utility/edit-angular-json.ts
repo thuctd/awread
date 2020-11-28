@@ -20,9 +20,9 @@ export function updateFiles() {
 
     host.getDir(`libs/global/assets`).visit(path => host.delete(path));
     host.create(`libs/global/assets/README.md`, '# Assets');
-    host.create(`libs/global/assets/src/assets/fonts/.gitkeep`, ``);
-    host.create(`libs/global/assets/src/assets/icons/.gitkeep`, ``);
-    host.create(`libs/global/assets/src/assets/images/.gitkeep`, ``);
+    host.create(`libs/global/assets/src/global-assets/fonts/.gitkeep`, ``);
+    host.create(`libs/global/assets/src/global-assets/icons/.gitkeep`, ``);
+    host.create(`libs/global/assets/src/global-assets/images/.gitkeep`, ``);
 
     host.overwrite(`libs/global/environments/README.md`, '# Enviroments');
     host.getDir(`libs/global/environments/src/lib`).visit(path => host.delete(path));
@@ -38,20 +38,23 @@ export function updateFiles() {
 
     let angularApps: Array<Record<string, any>> = [];
     angularApps = Object.keys(angularFile.projects)
-      .map(name => angularFile.projects[name])
-      .filter(p => {
-      const isApplication = p['projectType'] === "application";
-      const isAngular = p.architect.build?.builder.includes('angular');
-      return isApplication && isAngular;
-    })
+      .map(name => ({ name, project: angularFile.projects[name] }))
+      .filter(({ name, project }) => {
+        const isApplication = project['projectType'] === "application";
+        const isAngular = project.architect.build?.builder.includes('angular');
+        return isApplication && isAngular;
+      })
 
-    angularApps.forEach(p => updateEnviromentFile(host, p))
+    angularApps.forEach(({ name, project }) => {
+      updateEnviromentFile(host, name, project);
+      addProjectAssetsFolder(host, name);
+    })
 
     return updateWorkspace(workspace);
   };
 }
 
-export function updateEnviromentFile(host: Tree, project) {
+export function updateEnviromentFile(host: Tree, name: string, project: any) {
   const path = `${project.sourceRoot}/main.ts`;
   const workspaceName = readJsonFile('package.json').name;
   const appEnvironmentPath = `@${workspaceName}/global/environments`;
@@ -60,6 +63,11 @@ export function updateEnviromentFile(host: Tree, project) {
   host.overwrite(path, mainContent);
 }
 
+export function addProjectAssetsFolder(host, projectName) {
+  host.create(`libs/global/assets/src/projects/${projectName}/assets/fonts/.gitkeep`, ``);
+  host.create(`libs/global/assets/src/projects/${projectName}/assets/icons/.gitkeep`, ``);
+  host.create(`libs/global/assets/src/projects/${projectName}/assets/images/.gitkeep`, ``);
+}
 
 export function createSharedLibrary() {
   return updateWorkspaceInTree((config, context, host: Tree) => {
@@ -105,7 +113,7 @@ function resetArchitect(targets) {
 
 function updateAsset(p, projectName) {
   const libRoot = `libs/global/assets/src`;
-  const projectPath = `${libRoot}/${projectName}`;
+  const projectPath = `${libRoot}/projects/${projectName}`;
   // p.architect.build.options.assets = [];
   p.architect.build.options.assets.push({
     "glob": "**/*",
