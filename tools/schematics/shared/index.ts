@@ -123,7 +123,6 @@ export function insertNotFound(schema, shellModule: FileModule, currentModuleNam
   const NotFoundModuleName = 'NotFound';
   const routes = `
 declare var window: any;
-window.haveMobile = true;
 const routes: Routes = [
 {
   path: '',
