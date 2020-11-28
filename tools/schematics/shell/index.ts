@@ -24,7 +24,6 @@ export default function (schema: any): Rule {
       path: normalize(`libs/${schema.directory}/${schema.fullName}/src/lib/${currentModuleName}.module`)
     }
     const appPath = await createDefaultPath(tree, schema.project);
-    const appPathFile = normalize(appPath + '/app.component');
     return chain([
       externalSchematic('@nrwl/angular', 'lib', {
         name: schema.fullName,
@@ -34,11 +33,16 @@ export default function (schema: any): Rule {
       }),
       addImportDeclarationToModule(schema, 'RouterModule', currentModule.path, '@angular/router', 'RouterModule.forRoot([])'),
       addExportDeclarationToModule(schema, 'RouterModule', currentModule.path, '@angular/router'),
-      addImportDeclarationToModule(schema, `${currentModuleName}-module`, appPathFile, `app`),
+      importShellToAppModule(schema, currentModuleName, appPath),
       addRouterOutlet(false, appPath, `app.component`)
       // mergeWith(templateSource, MergeStrategy.AllowCreationConflict),
       // addImportDeclarationToAppModule(schema, targetLibName, featureShellPath, targetLibName, `./${targetLibName}-routing.module`),
       // addExportDeclarationToAppModule(schema, targetLibName, featureShellPath, targetLibName, `./${targetLibName}-routing.module`),
     ])
   }
+}
+
+export function importShellToAppModule(schema, currentModuleName, appPath) {
+  const appPathFile = normalize(appPath + '/app.module');
+  return addImportDeclarationToModule(schema, `${currentModuleName}-module`, appPathFile);
 }
