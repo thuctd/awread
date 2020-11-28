@@ -11,7 +11,7 @@ import * as ts from 'typescript';
 import { addGlobal, insert, RemoveChange } from '@nrwl/workspace';
 import { insertCustomCode } from '../../utility/insert-custom-code';
 import { addRouterOutlet } from '../../utility/add-router-outlet';
-import { getShellModuleData } from '../../utility/import-to-shell-module';
+import { getModuleData } from '../../utility/import-to-shell-module';
 import { insertImport } from '@nrwl/workspace/src/utils/ast-utils';
 import { classify } from '@nrwl/workspace/src/utils/strings';
 import { exportToLibIndex } from '../../utility/export-to-index';
@@ -49,7 +49,7 @@ export default function (schema: any): Rule {
     schema.path = parsedPath.path;
     schema.directoryNoSlash = directoryNoSlash;
     schema.targetLibName = currentModule.name;
-    const shellModule = await getShellModuleData(tree, directoryNoSlash);
+    const shellModule = await getModuleData(tree, directoryNoSlash);
     const customCode = `\n<awread-header></awread-header>\n<router-outlet></router-outlet>\n<awread-footer></awread-footer>`;
     return chain([
       externalSchematic('@nrwl/angular', 'lib', {

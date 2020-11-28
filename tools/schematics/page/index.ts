@@ -4,6 +4,7 @@ import { createDefaultPath } from '@schematics/angular/utility/workspace';
 import { addImportDeclarationToModule, addImportPathToModule } from '../../utility/add-import-module';
 import { classify } from '@nrwl/workspace/src/utils/strings';
 import { createEmptySection } from '../../utility/create-empty-section';
+import { addExportDeclarationToModule } from '../../utility/add-export-module';
 
 export default function (schema: any): Rule {
   return async (tree: Tree, context: SchematicContext) => {
@@ -52,27 +53,29 @@ export default function (schema: any): Rule {
 }
 
 function addFeatureRoutingModule(schema, tree, routingPath) {
-  let rule1;
+  let rule0;
   let mixRules;
   if (tree.exists(routingPath)) {
-    rule1 = noop();
-    mixRules = [rule1];
+    rule0 = noop();
+    mixRules = [rule0];
   } else {
-    rule1 = schematic('module', {
+    rule0 = schematic('module', {
       project: schema.project,
       name: schema.project,
       routing: true,
       routingOnly: true,
       ui: schema.ui,
-      flat: true,
-      module: schema.project
+      flat: true
     });
 
     const routingPath = `${schema.defaultPath}/${schema.project}-routing.module`;
+    const rootModule = `${schema.defaultPath}/${schema.project}.module`;
 
+    const rule1 = addImportDeclarationToModule(schema, `${schema.project}-routing-module`, rootModule, `./${schema.project}-routing.module`);
     const rule2 = addImportPathToModule(schema, classify('shell-desktop-layout'), routingPath, null, 'shared', true);
     const rule3 = addImportPathToModule(schema, classify('shell-mobile-layout'), routingPath, null, 'shared');
     mixRules = [
+      rule0,
       rule1,
       rule2,
       rule3,

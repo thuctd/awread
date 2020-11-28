@@ -7,7 +7,7 @@ import { createDefaultPath } from '@schematics/angular/utility/workspace';
 import { normalize } from 'path';
 import { addImportDeclarationToModule } from '../../utility/add-import-module';
 import { addRouterOutlet } from '../../utility/add-router-outlet';
-import { getShellModuleData } from '../../utility/import-to-shell-module';
+import { getModuleData } from '../../utility/import-to-shell-module';
 
 export default function (schema: any): Rule {
   return async (tree: Tree, context: SchematicContext) => {
@@ -19,7 +19,7 @@ export default function (schema: any): Rule {
     const name = schema.name.substring(PREFIX.length);
     const directoryNoSlash: string = schema.directory.replace(/\//g, '-').trim();
     const libName = directoryNoSlash + '-' + schema.name.trim();
-    const shellModule = await getShellModuleData(tree, directoryNoSlash, schema.declareProject);
+    const shellModule = await getModuleData(tree, directoryNoSlash, schema.declareProject);
     const currentProjectPath = `/libs/${schema.directory}/${schema.name}/src/lib`;
 
     return chain([

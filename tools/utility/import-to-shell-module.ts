@@ -1,6 +1,6 @@
 import { createDefaultPath } from '@schematics/angular/utility/workspace';
 
-export async function getShellModuleData(tree, directoryNoSlash, declareProject?) {
+export async function getModuleData(tree, directoryNoSlash, declareProject?) {
   const addImportProjectName = declareProject ?? directoryNoSlash + '-feature-shell';
   let addImportProjectPath;
   try {

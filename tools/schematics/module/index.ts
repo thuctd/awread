@@ -105,7 +105,7 @@ function updateDesktopAndMobilePage(schema) {
     }
     // /libs/writer/web/ui-auth/src/lib/register/pages/register-desktop/register-desktop.page.ts
     const writeToPath = `${schema.path}/${schema.name}/${schema.name}.${schema.type}.ts`;
-    const implementFilePath = `${schema.path}/${schema.nameOnly}.${schema.type}.ts`;
+    const implementFilePath = `${schema.path}/${schema.nameOnly}.${schema.type}`;
     console.log('is that module is exist', writeToPath, host.exists(writeToPath));
     const text = host.read(writeToPath);
     if (text === null) {
@@ -180,7 +180,7 @@ function replaceConstructorForInjection(nodes: ts.Node[], writeToName: string, w
     throw new SchematicsException(`expected first class in <span class="hljs-subst" > ${writeToPath} < /span> to have a body`);
   }
 
-  let toAdd = `${pageNameSymbol.getText()} extends ${symbolName} {}`;
+  let toAdd = ` extends ${symbolName} {}`;
   // return new ReplaceChange(writeToPath, classNode.parent.pos, beforeText, toAdd);
   return new ReplaceChange(writeToPath, pageNameSymbol.end, oldText, toAdd);
 }

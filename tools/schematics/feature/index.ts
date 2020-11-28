@@ -41,7 +41,7 @@ export default function (schema: any): Rule {
         style: 'scss'
       }),
       ...addPage(schema, libName),
-      schema.writeToFilePath ? addImportDeclarationToModule(schema, `${libName}-module`, schema.writeToFilePath, addImportProjectName) : noop(),
+      schema.writeToFilePath ? addImportDeclarationToModule(schema, `${libName}-module`, schema.writeToFilePath) : noop(),
     ])
   }
 }
