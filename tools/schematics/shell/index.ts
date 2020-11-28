@@ -14,19 +14,19 @@ export default function (schema: any): Rule {
     const PREFIX = 'feature-';
     if (!schema.name.startsWith(`${PREFIX}`) && (schema.name != PREFIX.substring(0, PREFIX.length - 1))) {
       // custom libraries managing state must have name conventions: 'state' or 'state-<name>'
-      schema.fullName = `${PREFIX}${schema.name}`;
+      schema.name = `${PREFIX}${schema.name}`;
     };
-    const name = schema.fullName.substring(PREFIX.length);
+    const name = schema.name.substring(PREFIX.length);
     const directoryNoSlash: string = schema.directory.replace(/\//g, '-').trim();
-    const currentModuleName = directoryNoSlash + '-' + schema.fullName.trim();
+    const currentModuleName = directoryNoSlash + '-' + schema.name.trim();
     const currentModule = {
       name: currentModuleName,
-      path: normalize(`libs/${schema.directory}/${schema.fullName}/src/lib/${currentModuleName}.module`)
+      path: normalize(`libs/${schema.directory}/${schema.name}/src/lib/${currentModuleName}.module`)
     }
     const appPath = await createDefaultPath(tree, schema.project);
     return chain([
       externalSchematic('@nrwl/angular', 'lib', {
-        name: schema.fullName,
+        name: schema.name,
         directory: schema.directory ?? './',
         tags: `scope:shell,scope:shared,type:feature`,
         style: 'scss'
