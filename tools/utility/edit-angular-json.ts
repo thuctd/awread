@@ -125,7 +125,7 @@ function updateAsset(p, projectName) {
 }
 
 function updateStyle(p, projectName) {
-  const libRoot = `/libs/global/styles/src`;
+  const libRoot = `libs/global/styles/src`;
   const projectPath = `${libRoot}/${projectName}`;
   const options = p.architect.build.options;
   // p.architect.build.options.styles = [];
@@ -133,7 +133,7 @@ function updateStyle(p, projectName) {
 }
 
 function updateEnviroment(p, projectName) {
-  const libRoot = `/libs/global/environments/src`;
+  const libRoot = `libs/global/environments/src`;
   const projectPath = `${libRoot}/${projectName}`;
   p.architect.build.configurations.production.fileReplacements = [];
   p.architect.build.configurations.production.fileReplacements.push({
