@@ -101,6 +101,12 @@ export function createSharedLibrary() {
         }
       });
 
+    config.schematics['@schematics/angular:component'] = {
+      "style": "scss",
+      "displayBlock": true,
+      "changeDetection": "OnPush"
+    }
+
     return config;
   })
 }
