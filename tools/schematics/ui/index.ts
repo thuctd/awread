@@ -31,7 +31,7 @@ export default function (schema: any): Rule {
       }),
       ...addPage(schema, originName),
       addImportDeclarationToModule(schema, `${libName}-module`, shellModule.filePath),
-      addRouterOutlet(true, currentProjectPath, schema.name),
+      addRouterOutlet(true, currentProjectPath, originName),
       schematic('feature', {
         name: originName,
         directory: schema.directory,
