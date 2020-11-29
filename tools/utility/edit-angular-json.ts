@@ -1,4 +1,4 @@
-import { getWorkspace, getWorkspacePath, NxJson, readJsonFile, updateJsonInTree, updateWorkspace, updateWorkspaceInTree } from "@nrwl/workspace";
+import { getNpmScope, getWorkspace, getWorkspacePath, NxJson, readJsonFile, updateJsonInTree, updateWorkspace, updateWorkspaceInTree } from "@nrwl/workspace";
 import { Rule, Tree, SchematicContext, SchematicsException } from '@angular-devkit/schematics';
 import { workspaces } from '@angular-devkit/core';
 import { normalize } from "path";
@@ -80,6 +80,7 @@ export function updateFiles() {
 export function addProjectPrefix() {
   return updateJsonInTree('tslint.json', (json) => {
     const workspaceName = readJsonFile('package.json').name;
+    // const npmScope = getNpmScope();
     json.rules["directive-selector"] = json.rules["directive-selector"].map((item) => item == "app" ? [workspaceName, "page"] : item)
     json.rules["component-selector"] = json.rules["component-selector"].map((item) => item == "app" ? [workspaceName, "page"] : item)
     return json;

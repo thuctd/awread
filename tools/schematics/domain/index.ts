@@ -71,7 +71,7 @@ export default function (schema: any): Rule {
       schematic('global', {
         name: 'global',
       }),
-      addProjectPrefix(),
+      // addProjectPrefix(),
     ]);
   }
 }
