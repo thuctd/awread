@@ -75,9 +75,9 @@ export default function (schema: any): Rule {
   }
 }
 
-function addProxy(options: any): Rule {
+function addProxy(frontendProjectName: string): Rule {
   return (host: Tree, context: SchematicContext) => {
-    const projectConfig = getProjectConfig(host, options.frontendProject);
+    const projectConfig = getProjectConfig(host, frontendProjectName);
     if (projectConfig.architect && projectConfig.architect.serve) {
       const pathToProxyFile = `${projectConfig.root}/proxy.conf.json`;
       host.create(
@@ -96,7 +96,7 @@ function addProxy(options: any): Rule {
 
       updateWorkspaceInTree((json) => {
         projectConfig.architect.serve.options.proxyConfig = pathToProxyFile;
-        json.projects[options.frontendProject] = projectConfig;
+        json.projects[frontendProjectName] = projectConfig;
         return json;
       })(host, context);
     }
