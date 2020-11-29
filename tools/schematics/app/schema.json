@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "id": "app",
+  "type": "object",
+  "properties": {
+    "directory": {
+      "type": "string",
+      "description": "name of global folder",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      }
+    },
+    "app": {
+      "type": "string",
+      "description": "app name"
+    }
+  },
+  "required": [
+    "directory"
+  ]
+}

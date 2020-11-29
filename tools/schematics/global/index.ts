@@ -12,6 +12,9 @@ import { createSharedLibrary, updateFiles } from '../../utility/edit-angular-jso
 
 export default function (schema: any): Rule {
   return async (tree: Tree, context: SchematicContext) => {
+    const haveGlobal = tree.exists(`libs/global`);
+    if (haveGlobal) return chain([]);
+
     return chain([
       externalSchematic('@nrwl/angular', 'lib', {
         name: 'assets',

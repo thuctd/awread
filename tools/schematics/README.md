@@ -1,14 +1,22 @@
 node --inspect-brk ./node_modules/nx/bin/nx.js workspace-schematic my-schematic mylib --dry-run
 node --inspect-brk ./node_modules/nx/bin/nx.js
 
-
-Always add shared first, then shell, and ui
+# Generate order
+Follow to this order
 
 1) generate application
 2) generate global
 3) generate share
 4) generate shell
 5) generate ui and feature
+
+
+## Generate application
+nx g app web --directory=writer --style=scss --routing=false --strict --tags=scope:shared,type:app
+
+nx g app phone --directory=writer --style=scss --routing=false --strict --tags=scope:shared,type:app
+nx g app web --directory=reader --style=scss --routing=false --strict --tags=scope:shared,type:app
+nx g app phone --directory=reader --style=scss --routing=false --strict --tags=scope:shared,type:app
 
 ##  Generate global 
 nx workspace-schematic global global
