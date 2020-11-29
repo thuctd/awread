@@ -10,10 +10,6 @@
         "$source": "argv",
         "index": 0
       }
-    },
-    "app": {
-      "type": "string",
-      "description": "app name"
     }
   },
   "required": [
