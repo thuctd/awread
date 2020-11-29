@@ -58,7 +58,7 @@ export default function (schema: any): Rule {
         tags: `scope:shared`,
         style: 'scss'
       }),
-      // insertCustomCode(currentModule.filePath, `\ndeclare const window: any;\nwindow.haveMobile = ${schema.haveMobile};`),
+      insertCustomCode(currentModule.filePath, `\ndeclare const window: any;\nwindow.haveMobile = ${schema.haveMobile};`),
       addImportDeclarationToModule(schema, 'RouterModule', currentModule.filePath, '@angular/router'),
       addExportDeclarationToModule(schema, 'RouterModule', currentModule.filePath, '@angular/router'),
       externalSchematic('@nrwl/angular', 'component', {
@@ -121,8 +121,9 @@ export function createNotFoundPage(schema, currentModule: {name: string, filePat
 export function insertNotFound(schema, shellModule: FileModule, currentModuleName) {
   const notFoundAbsolutePath = getProjectPath(schema.directory, 'shared');
   const NotFoundModuleName = 'NotFound';
+  // this line can enable in below
+  // \ndeclare const window: any;\nwindow.haveMobile = ${schema.haveMobile};
   const routes = `
-\ndeclare const window: any;\nwindow.haveMobile = ${schema.haveMobile};
 const routes: Routes = [
 {
   path: '',

@@ -66,6 +66,17 @@ export function updateFiles() {
   };
 }
 
+export function addProjectPrefix(): Rule {
+  return (host: Tree, context: SchematicContext) => {
+    const tslint = readJsonFile('tslint.json');
+    const workspaceName = readJsonFile('package.json').name;
+    tslint.rules["directive-selector"] = [...tslint.rules["directive-selector"], workspaceName];
+    tslint.rules["component-selector"] = [...tslint.rules["component-selector"], workspaceName];
+    host.overwrite('tslint.json', tslint);
+    return host;
+  };
+}
+
 export function updateEnviromentFile(host: Tree, name: string, project: any) {
   const path = `${project.sourceRoot}/main.ts`;
   const workspaceName = readJsonFile('package.json').name;
