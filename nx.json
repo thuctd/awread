@@ -3,10 +3,6 @@
   "affected": {
     "defaultBase": "master"
   },
-  "workspaceLayout": {
-    "appsDir": "apps",
-    "libsDir": "libs"
-  },
   "implicitDependencies": {
     "angular.json": "*",
     "package.json": {
@@ -22,14 +18,28 @@
     "default": {
       "runner": "@nrwl/nx-cloud",
       "options": {
-        "accessToken": "NWY1ZTc3NzgtNmNiYy00YjBlLTg1NjktNzdiZGI5MjQ3ZTkwfHJlYWQtd3JpdGU=",
-        "cacheableOperations": ["build", "test", "lint", "e2e"],
+        "accessToken": "N2NlYmY4ZGQtYjJmNS00OTM4LWFjNDctZGMyNWI2ZmUxMjJifHJlYWQtd3JpdGU=",
+        "cacheableOperations": [
+          "build",
+          "test",
+          "lint",
+          "e2e"
+        ],
         "canTrackAnalytics": false,
         "showUsageWarnings": true
       }
     }
   },
   "projects": {
+    "awread": {
+      "tags": []
+    },
+    "awread-e2e": {
+      "tags": [],
+      "implicitDependencies": [
+        "awread"
+      ]
+    },
     "api": {
       "tags": []
     },

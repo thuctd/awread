@@ -75,7 +75,7 @@
   },
   "cli": {
     "defaultCollection": "@nrwl/angular",
-    "analytics": "fcd2e8ed-f162-4e5f-b24a-dbee26739300"
+    "analytics": false
   },
   "schematics": {
     "@nrwl/angular": {
@@ -91,12 +91,11 @@
     },
     "@nrwl/angular:application": {
       "unitTestRunner": "jest",
-      "e2eTestRunner": "cypress",
-      "strict": true
+      "e2eTestRunner": "cypress"
     },
     "@nrwl/angular:library": {
       "unitTestRunner": "jest"
     }
   },
-  "defaultProject": "api"
+  "defaultProject": "awread"
 }
