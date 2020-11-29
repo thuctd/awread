@@ -36,6 +36,16 @@ export function updateFiles() {
   production: true,
 };
 `);
+    host.create(`libs/global/environments/src/lib/environment.stage.ts`, `export const environment = {
+  production: true,
+  stage: true,
+};
+`);
+    host.create(`libs/global/environments/src/lib/environment.test.ts`, `export const environment = {
+  production: true,
+  test: true,
+};
+`);
     host.overwrite(`libs/global/environments/src/index.ts`, `export * from './lib/environment';`);
 
     let angularApps: Array<Record<string, any>> = [];
@@ -154,6 +164,14 @@ function updateEnviroment(p, projectName) {
   p.architect.build.configurations.production.fileReplacements.push({
     "replace": libRoot + "/lib/environment.ts",
     "with": libRoot + "/lib/environment.prod.ts"
+  });
+  p.architect.build.configurations.stage.fileReplacements.push({
+    "replace": libRoot + "/lib/environment.ts",
+    "with": libRoot + "/lib/environment.stage.ts"
+  });
+  p.architect.build.configurations.test.fileReplacements.push({
+    "replace": libRoot + "/lib/environment.ts",
+    "with": libRoot + "/lib/environment.test.ts"
   });
 }
 

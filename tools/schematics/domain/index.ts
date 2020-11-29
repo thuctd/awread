@@ -10,6 +10,7 @@ import { Path, normalize, strings } from '@angular-devkit/core';
 import { addRouterOutlet } from '../../utility/add-router-outlet';
 import { createSharedLibrary, updateFiles } from '../../utility/edit-angular-json';
 import { dasherize } from '@nrwl/workspace/src/utils/strings';
+import { getProjectConfig, updateWorkspaceInTree } from '@nrwl/workspace';
 
 export default function (schema: any): Rule {
   return async (tree: Tree, context: SchematicContext) => {
@@ -31,6 +32,7 @@ export default function (schema: any): Rule {
         strict: true,
         tags: `scope:shared,type:app`,
       }),
+      schema.proxy ? addProxy(webName) : noop(),
       schematic('shell', {
         project: webName,
         directory: webDir,
@@ -53,6 +55,7 @@ export default function (schema: any): Rule {
         strict: true,
         tags: `scope:shared,type:app`,
       }),
+      schema.proxy ? addProxy(phoneName) : noop(),
       schematic('shell', {
         project: phoneName,
         directory: phoneDir,
@@ -71,3 +74,52 @@ export default function (schema: any): Rule {
     ]);
   }
 }
+
+function addProxy(options: any): Rule {
+  return (host: Tree, context: SchematicContext) => {
+    const projectConfig = getProjectConfig(host, options.frontendProject);
+    if (projectConfig.architect && projectConfig.architect.serve) {
+      const pathToProxyFile = `${projectConfig.root}/proxy.conf.json`;
+      host.create(
+        pathToProxyFile,
+        JSON.stringify(
+          {
+            '/api': {
+              target: 'http://localhost:3333',
+              secure: false,
+            },
+          },
+          null,
+          2
+        )
+      );
+
+      updateWorkspaceInTree((json) => {
+        projectConfig.architect.serve.options.proxyConfig = pathToProxyFile;
+        json.projects[options.frontendProject] = projectConfig;
+        return json;
+      })(host, context);
+    }
+  };
+}
+
+// function addStaging(options: any): Rule {
+//   return (host: Tree, context: SchematicContext) => {
+//     const projectConfig = getProjectConfig(host, options.frontendProject);
+//     if (projectConfig.architect && projectConfig.architect.build) {
+//       const stage = {
+//         "fileReplacements": [
+//           {
+//             "replace": "src/environments/environment.ts",
+//             "with": "src/environments/environment.stage.ts"
+//           }
+//         ]
+//       }
+//       updateWorkspaceInTree((json) => {
+//         projectConfig.architect.serve.options.proxyConfig = pathToProxyFile;
+//         json.projects[options.frontendProject] = projectConfig;
+//         return json;
+//       })(host, context);
+//     }
+//   };
+// }
