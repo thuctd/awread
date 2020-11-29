@@ -66,12 +66,12 @@ export default function (schema: any): Rule {
     ]
 
     return chain([
-      addProjectPrefix(),
       ...chainWeb,
       ...chainPhone,
-        schematic('global', {
-          name: 'global',
-        }),
+      schematic('global', {
+        name: 'global',
+      }),
+      addProjectPrefix(),
     ]);
   }
 }

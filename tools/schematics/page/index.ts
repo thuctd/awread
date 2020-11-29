@@ -31,7 +31,7 @@ export default function (schema: any): Rule {
     const folderNameMobile = `${moduleName}-mobile`;
 
     const routingPath = path.join(defaultPath, `${schema.project}-routing.module.ts`);
-    console.log('routing exist?', tree.exists(routingPath), defaultPath, `${schema.project}-routing.module.ts`)
+    // console.log('routing exist?', tree.exists(routingPath), defaultPath, `${schema.project}-routing.module.ts`)
 
     return chain([
       ...addFeatureRoutingModule(schema, tree, routingPath),

@@ -106,7 +106,7 @@ function updateDesktopAndMobilePage(schema) {
     // /libs/writer/web/ui-auth/src/lib/register/pages/register-desktop/register-desktop.page.ts
     const writeToPath = `${schema.path}/${schema.name}/${schema.name}.${schema.type}.ts`;
     const implementFilePath = `${schema.path}/${schema.originName}.${schema.type}`;
-    console.log('is that module is exist', writeToPath, host.exists(writeToPath));
+    // console.log('is that module is exist', writeToPath, host.exists(writeToPath));
     const text = host.read(writeToPath);
     if (text === null) {
       throw new SchematicsException(`File ${writeToPath} does not exist.`);
@@ -211,7 +211,7 @@ function addDeclarationToNgModule(options: any): Rule {
     }
 
     const writeToModulePath = options.module;
-    console.log('is that module is exist', writeToModulePath, host.exists(writeToModulePath));
+    // console.log('is that module is exist', writeToModulePath, host.exists(writeToModulePath));
     const text = host.read(writeToModulePath);
     if (text === null) {
       throw new SchematicsException(`File ${writeToModulePath} does not exist.`);

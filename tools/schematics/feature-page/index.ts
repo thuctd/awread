@@ -28,7 +28,7 @@ export default function (schema: any): Rule {
     schema.defaultPath = defaultPath;
 
     const routingPath = path.join(defaultPath, `${schema.project}-routing.module.ts`);
-    console.log('routing exist?', tree.exists(routingPath), defaultPath, `${schema.project}-routing.module.ts`)
+    // console.log('routing exist?', tree.exists(routingPath), defaultPath, `${schema.project}-routing.module.ts`)
 
     return chain([
       schematic('service', {
