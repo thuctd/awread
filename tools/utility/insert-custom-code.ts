@@ -37,7 +37,7 @@ export function insertCustomCode(destinationPath: string, whatYouWantToImport: s
     tree.commitUpdate(exportRecorder);
     // PART III: console.log to see the changes
     const afterInsertContent = tree.get(writeToModulePath)?.content.toString();
-    console.log('change result:', afterInsertContent);
+    // console.log('change result:', afterInsertContent);
     // const a = 'foo';
     // const b = 'bar';
 

@@ -165,14 +165,22 @@ function updateEnviroment(p, projectName) {
     "replace": libRoot + "/lib/environment.ts",
     "with": libRoot + "/lib/environment.prod.ts"
   });
-  p.architect.build.configurations.stage.fileReplacements.push({
-    "replace": libRoot + "/lib/environment.ts",
-    "with": libRoot + "/lib/environment.stage.ts"
-  });
-  p.architect.build.configurations.test.fileReplacements.push({
-    "replace": libRoot + "/lib/environment.ts",
-    "with": libRoot + "/lib/environment.test.ts"
-  });
+  p.architect.build.configurations.stage = {
+    fileReplacements: [
+      {
+        "replace": libRoot + "/lib/environment.ts",
+        "with": libRoot + "/lib/environment.stage.ts"
+      }
+    ]
+  };
+  p.architect.build.configurations.test = {
+    fileReplacements: [
+      {
+        "replace": libRoot + "/lib/environment.ts",
+        "with": libRoot + "/lib/environment.test.ts"
+      }
+    ]
+  };
 }
 
 function updateImplicit(projectName) {
