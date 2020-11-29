@@ -10,10 +10,13 @@ Follow to this order
 4) generate shell
 5) generate ui and feature
 
+or we can using domain:
+1) generate domain
+2) generate ui and feature
 
 ## Generate application
 nx g app web --directory=writer --style=scss --routing=false --strict --tags=scope:shared,type:app
-
+other example:
 nx g app phone --directory=writer --style=scss --routing=false --strict --tags=scope:shared,type:app
 nx g app web --directory=reader --style=scss --routing=false --strict --tags=scope:shared,type:app
 nx g app phone --directory=reader --style=scss --routing=false --strict --tags=scope:shared,type:app
@@ -26,6 +29,9 @@ nx workspace-schematic shell --directory=writer/web --project=writer-web
 
 ## Generate Shared
 nx workspace-schematic shared --directory=writer/web
+
+## Generate domain skip 4 step above
+nx workspace-schematic domain writer
 
 ## Generate ui
 nx workspace-schematic ui auth --directory=writer/web --pages=login,register
