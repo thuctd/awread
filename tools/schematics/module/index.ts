@@ -32,8 +32,8 @@ export default function (schema: any): Rule {
       routingModulePath = getRoutingModulePath(host, schema.module as string);
     }
 
-    schema.nameOnly = schema.name.split('/').pop();
-    const parsedPath = parseName(schema.mode ? `${schema.path}/${schema.nameOnly}` : schema.path, schema.mode ? `${schema.name}-${schema.mode}` : schema.name);
+    schema.originName = schema.name.split('/').pop();
+    const parsedPath = parseName(schema.mode ? `${schema.path}/${schema.originName}` : schema.path, schema.mode ? `${schema.name}-${schema.mode}` : schema.name);
     schema.name = parsedPath.name;
     schema.path = parsedPath.path;
 
@@ -105,7 +105,7 @@ function updateDesktopAndMobilePage(schema) {
     }
     // /libs/writer/web/ui-auth/src/lib/register/pages/register-desktop/register-desktop.page.ts
     const writeToPath = `${schema.path}/${schema.name}/${schema.name}.${schema.type}.ts`;
-    const implementFilePath = `${schema.path}/${schema.nameOnly}.${schema.type}`;
+    const implementFilePath = `${schema.path}/${schema.originName}.${schema.type}`;
     console.log('is that module is exist', writeToPath, host.exists(writeToPath));
     const text = host.read(writeToPath);
     if (text === null) {
@@ -117,10 +117,10 @@ function updateDesktopAndMobilePage(schema) {
     const relativePath = buildRelativePath(writeToPath, implementFilePath);
     const insertImportSymbol = insertImport(source,
       writeToPath,
-      strings.classify(`${schema.nameOnly}-${schema.type}`),
+      strings.classify(`${schema.originName}-${schema.type}`),
       relativePath);
 
-    const renewClass = replaceConstructorForInjection(nodes, classify(`${schema.name}-${schema.type}`), writeToPath, classify(`${schema.nameOnly}-${schema.type}`));
+    const renewClass = replaceConstructorForInjection(nodes, classify(`${schema.name}-${schema.type}`), writeToPath, classify(`${schema.originName}-${schema.type}`));
     const changes = [insertImportSymbol, renewClass];
 
     const recorder = host.beginUpdate(writeToPath);
@@ -196,8 +196,8 @@ function buildRelativeModulePath(options: any, modulePath: string, deviceName?: 
   const device = options.mode && deviceName ? '-' + deviceName : '';
   const importModulePath = normalize(
     `/${options.path}/`
-    + (options.flat ? '' : strings.dasherize(options.nameOnly) + device + '/')
-    + strings.dasherize(options.nameOnly) + device
+    + (options.flat ? '' : strings.dasherize(options.originName) + device + '/')
+    + strings.dasherize(options.originName) + device
     + (options.routingOnly ? '-routing.module' : '.module'),
   );
 
@@ -365,8 +365,8 @@ function buildRoute(options: any, modulePath: string) {
   const relativeModulePath = buildRelativeModulePath(options, modulePath);
   const relativeModulePathMobile = buildRelativeModulePath(options, modulePath, 'mobile');
   const relativeModulePathDesktop = buildRelativeModulePath(options, modulePath, 'desktop');
-  const moduleMobileName = `${strings.classify(options.nameOnly)}MobileModule`;
-  const moduleDesktopName = `${strings.classify(options.nameOnly)}DesktopModule`;
+  const moduleMobileName = `${strings.classify(options.originName)}MobileModule`;
+  const moduleDesktopName = `${strings.classify(options.originName)}DesktopModule`;
   const loadChildren = options.mode ? `
   () => window.innerWidth <= 768 && window?.haveMobile ?
   import('${relativeModulePathMobile}').then(m => m.${moduleMobileName}):

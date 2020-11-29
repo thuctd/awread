@@ -17,8 +17,8 @@ export default function (schema: any): Rule {
     };
     const directoryNoSlash: string = schema.directory.replace(/\//g, '-').trim();
     schema.project = directoryNoSlash + '-ui-' + schema.ui.trim();
-    const name = schema.name.substring(PREFIX.length);
-    const moduleName = `${CUSTOMPATH}/${name}`;
+    const originName = schema.name.substring(PREFIX.length);
+    const moduleName = `${CUSTOMPATH}/${originName}`;
     let defaultPath;
     try {
       defaultPath = await createDefaultPath(tree, schema.project);
@@ -41,7 +41,7 @@ export default function (schema: any): Rule {
         name: moduleName,
         mode: 'desktop',
         module: schema.project,
-        route: name,
+        route: originName,
         type: 'page',
         prefix: 'page'
       }),
@@ -51,7 +51,7 @@ export default function (schema: any): Rule {
         name: moduleName,
         mode: 'mobile',
         module: schema.project,
-        route: name,
+        route: originName,
         type: 'page',
         prefix: 'page'
       }),

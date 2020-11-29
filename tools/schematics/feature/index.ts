@@ -15,11 +15,11 @@ export default function (schema: any): Rule {
       // custom libraries managing state must have name conventions: 'state' or 'state-<name>'
       schema.name = `${PREFIX}${schema.name}`;
     };
-    const name = schema.name.substring(PREFIX.length);
+    const originName = schema.name.substring(PREFIX.length);
     const directoryNoSlash: string = schema.directory.replace(/\//g, '-').trim();
     const libName = `${directoryNoSlash}-${schema.name}`
-    const addImportProjectName = schema.declareProject ?? `${directoryNoSlash}-ui-${name}`;
-    const uiLibPath = `/libs/${schema.directory}/ui-${name}/src/index.ts`;
+    const addImportProjectName = schema.declareProject ?? `${directoryNoSlash}-ui-${originName}`;
+    const uiLibPath = `/libs/${schema.directory}/ui-${originName}/src/index.ts`;
     const uiLibExist = tree.exists(uiLibPath);
     let addImportProjectPath;
     if (uiLibExist) {
@@ -37,10 +37,10 @@ export default function (schema: any): Rule {
       externalSchematic('@nrwl/angular', 'lib', {
         name: schema.name,
         directory: schema.directory ?? './',
-        tags: `scope:${PREFIX}-${name},scope:shared,type:${PREFIX}`,
+        tags: `scope:${PREFIX}-${originName},scope:shared,type:${PREFIX}`,
         style: 'scss'
       }),
-      ...addPage(schema, libName),
+      ...addPage(schema, originName),
       schema.writeToFilePath ? addImportDeclarationToModule(schema, `${libName}-module`, schema.writeToFilePath) : noop(),
     ])
   }
@@ -50,17 +50,16 @@ export function addImportDeclare() {
 
 }
 
-export function addPage(schema, libName): Rule[] {
-  console.log('page name', libName, schema.pages);
+export function addPage(schema, originName): Rule[] {
+  console.log('page name', originName, schema.pages);
   schema.pages = schema.pages ?? [];
   schema.pages = schema.pages ?? [];
   const pages: Rule[] = schema.pages && schema.pages.length ?
     schema.pages.split(',').map((page: string) =>
       schematic('feature-page', {
-        project: libName,
         name: page.trim(),
         directory: schema.directory,
-        feature: schema.name,
+        feature: originName,
       })) : [];
   return !pages.length ? [] : pages;
 }

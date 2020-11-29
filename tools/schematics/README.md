@@ -24,12 +24,12 @@ nx workspace-schematic ui auth --directory=writer/web --pages=login,register
 nx workspace-schematic ui auth --directory=writer/web --pages=login,register
 
 ## Generate ui page
-nx workspace-schematic page forgot --directory=writer/web --project=writer-web-ui-auth --ui=auth
+nx workspace-schematic page --directory=writer/web --ui=auth forgot
 
 ## Generate feature
-nx workspace-schematic feature test --directory=writer/web --pages=one
+nx workspace-schematic feature cleaner --directory=writer/web --pages=one
 
-## Generate feature page
-nx workspace-schematic feature-page two --directory=writer/web --project=writer-web-feature-test --feature=auth
+## Add feature page
+nx workspace-schematic feature-page --directory=writer/web --feature=cleaner two
 
 

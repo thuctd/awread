@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root',
 })
-export class <%= classify(nameOnly) + classify(type) %> {
+export class <%= classify(originName) + classify(type) %> {
 
   constructor() { }
 

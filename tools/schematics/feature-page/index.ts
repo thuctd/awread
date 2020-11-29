@@ -13,12 +13,12 @@ export default function (schema: any): Rule {
       // custom libraries managing state must have name conventions: 'state' or 'state-<name>'
       schema.name = `${PREFIX}${schema.name}`;
     };
-    const nameOnly = schema.name.substring(PREFIX.length);
-    schema.nameOnly = nameOnly;
+    const originName = schema.name.substring(PREFIX.length);
+    schema.originName = originName;
 
     const directoryNoSlash: string = schema.directory.replace(/\//g, '-').trim();
     schema.project = directoryNoSlash + '-feature-' + schema.feature.trim();
-    const nameWithDirectory = `${CUSTOMPATH}/${nameOnly}`;
+    const nameWithDirectory = `${CUSTOMPATH}/${originName}`;
     let defaultPath;
     try {
       defaultPath = await createDefaultPath(tree, schema.project);
