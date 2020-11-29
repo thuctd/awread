@@ -11,10 +11,6 @@
       "index": 0
     }
   },
-  "project": {
-    "type": "string",
-    "description": "Project name to add the page to, example: --project=writer-web-ui-auth"
-  },
   "directory": {
     "type": "string",
     "description": "directory name to add the page to, example: --directory=writer/web"
@@ -26,7 +22,6 @@
   },
   "required": [
     "name",
-    "project",
     "directory",
     "ui"
   ]

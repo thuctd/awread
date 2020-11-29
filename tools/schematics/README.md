@@ -10,13 +10,26 @@ Always add shared first, then shell, and ui
 4) generate shell
 5) generate ui and feature
 
+##  Generate global 
 nx workspace-schematic global global
+
+## Generate shell
 nx workspace-schematic shell --directory=writer/web --project=writer-web 
+
+## Generate Shared
 nx workspace-schematic shared --directory=writer/web
+
+## Generate ui
 nx workspace-schematic ui auth --directory=writer/web --pages=login,register
+nx workspace-schematic ui auth --directory=writer/web --pages=login,register
+
+## Generate ui page
 nx workspace-schematic page forgot --directory=writer/web --project=writer-web-ui-auth --ui=auth
 
+## Generate feature
 nx workspace-schematic feature test --directory=writer/web --pages=one
+
+## Generate feature page
 nx workspace-schematic feature-page two --directory=writer/web --project=writer-web-feature-test --feature=auth
 
 
