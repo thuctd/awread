@@ -17,7 +17,7 @@ export default function (schema: any): Rule {
     schema.nameOnly = nameOnly;
 
     const directoryNoSlash: string = schema.directory.replace(/\//g, '-').trim();
-    schema.project = directoryNoSlash + '-feature-' + schema.ui.trim();
+    schema.project = directoryNoSlash + '-feature-' + schema.feature.trim();
     const nameWithDirectory = `${CUSTOMPATH}/${nameOnly}`;
     let defaultPath;
     try {
