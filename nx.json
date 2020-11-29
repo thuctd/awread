@@ -31,15 +31,6 @@
     }
   },
   "projects": {
-    "awread": {
-      "tags": []
-    },
-    "awread-e2e": {
-      "tags": [],
-      "implicitDependencies": [
-        "awread"
-      ]
-    },
     "api": {
       "tags": []
     },
