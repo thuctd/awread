@@ -98,7 +98,6 @@ export function createSharedLibrary() {
         if (p.architect.build?.configurations) {
           updateEnviroment(p, projectName);
         }
-        updateImplicit(p, projectName);
       });
 
     return config;
@@ -150,7 +149,7 @@ function updateEnviroment(p, projectName) {
   });
 }
 
-function updateImplicit(p, projectName) {
+function updateImplicit(projectName) {
   return updateJsonInTree<NxJson>('nx.json', (json) => {
     Object.keys(json.projects).forEach((name) => {
       const project = json.projects[name];
