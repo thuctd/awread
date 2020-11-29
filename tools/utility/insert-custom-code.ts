@@ -29,7 +29,7 @@ export function insertCustomCode(destinationPath: string, whatYouWantToImport: s
     // PART II: targetModule name
     const target = source.statements[source.statements.length - 1];
     const postionToImport = target.pos;
-    whatYouWantToImport = whatYouWantToImport;
+    whatYouWantToImport = '\n' + whatYouWantToImport;
     // insert a new change
     const insertChange = new InsertChange(writeToModulePath, postionToImport, whatYouWantToImport);
     const exportRecorder = tree.beginUpdate(writeToModulePath);

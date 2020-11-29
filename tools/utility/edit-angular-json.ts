@@ -9,6 +9,7 @@ import { normalize } from "path";
 
 export function updateFiles() {
   return async (host: Tree) => {
+    host.create(`libs/global/README.md`, '# Global have libs work with all workspace');
     const workspace = await getWorkspace(host, getWorkspacePath(host));
     const angularFile = readJsonFile('angular.json');
     host.getDir(`libs/global/styles`).visit(path => host.delete(path));

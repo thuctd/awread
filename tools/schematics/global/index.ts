@@ -12,7 +12,7 @@ import { createSharedLibrary, updateFiles } from '../../utility/edit-angular-jso
 
 export default function (schema: any): Rule {
   return async (tree: Tree, context: SchematicContext) => {
-    const haveGlobal = tree.exists(`libs/global`);
+    const haveGlobal = tree.exists(`libs/global/README.md`);
     if (haveGlobal) return chain([]);
 
     return chain([

@@ -44,7 +44,8 @@ export function createPageLazy(schema, pageName, currentModule: { name: string, 
 
 
 export function addRoutesOfLazy(schema, pageName, type, module: {name: string, filePath: string, folderPath: string}) {
-  const routes = `const routes: Routes = [
+  const routes = `
+const routes: Routes = [
   {
     path: '', component: ${classify(pageName) + classify(type)}
   }

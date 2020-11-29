@@ -31,9 +31,6 @@ export default function (schema: any): Rule {
         strict: true,
         tags: `scope:shared,type:app`,
       }),
-      schematic('global', {
-        name: 'global',
-      }),
       schematic('shell', {
         project: webName,
         directory: webDir,
@@ -56,9 +53,6 @@ export default function (schema: any): Rule {
         strict: true,
         tags: `scope:shared,type:app`,
       }),
-      schematic('global', {
-        name: 'global',
-      }),
       schematic('shell', {
         project: phoneName,
         directory: phoneDir,
@@ -68,6 +62,12 @@ export default function (schema: any): Rule {
       })
     ]
 
-    return chain([...chainWeb, ...chainPhone]);
+    return chain([
+      ...chainWeb,
+      ...chainPhone,
+        schematic('global', {
+          name: 'global',
+        }),
+    ]);
   }
 }
