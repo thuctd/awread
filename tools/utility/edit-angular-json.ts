@@ -16,7 +16,8 @@ export function updateFiles() {
     host.create(`libs/global/styles/src/lib/_global.scss`, ``);
     host.create(`libs/global/styles/src/lib/_variable.scss`, ``);
     host.create(`libs/global/styles/src/lib/_theme.scss`, ``);
-    host.create(`libs/global/styles/src/index.scss`, `@import './lib/global';\n@import './lib/variable';\n@import './lib/theme';`);
+    host.create(`libs/global/styles/src/lib/_vendors.scss`, ``);
+    host.create(`libs/global/styles/src/index.scss`, `@import './lib/global';\n@import './lib/variable';\n@import './lib/theme';\n@import './lib/vendors';`);
 
     host.getDir(`libs/global/assets`).visit(path => host.delete(path));
     host.create(`libs/global/assets/README.md`, '# Assets');
