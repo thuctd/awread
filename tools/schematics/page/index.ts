@@ -1,4 +1,4 @@
-import { chain, externalSchematic, Rule, SchematicContext, Tree, schematic, noop } from '@angular-devkit/schematics';
+import { chain, externalSchematic, Rule, SchematicContext, Tree, schematic, noop, SchematicsException } from '@angular-devkit/schematics';
 import * as path from 'path';
 import { createDefaultPath } from '@schematics/angular/utility/workspace';
 import { addImportDeclarationToModule, addImportPathToModule } from '../../utility/add-import-module';
@@ -15,9 +15,17 @@ export default function (schema: any): Rule {
       // custom libraries managing state must have name conventions: 'state' or 'state-<name>'
       schema.name = `${PREFIX}${schema.name}`;
     };
+    const directoryNoSlash: string = schema.directory.replace(/\//g, '-').trim();
+    schema.project = directoryNoSlash + '-ui-' + schema.ui.trim();
     const name = schema.name.substring(PREFIX.length);
     const moduleName = `${CUSTOMPATH}/${name}`;
-    const defaultPath = await createDefaultPath(tree, schema.project);
+    let defaultPath;
+    try {
+      defaultPath = await createDefaultPath(tree, schema.project);
+    } catch (error) {
+      throw new SchematicsException(`project not found ${schema.project}`);
+    }
+
     schema.defaultPath = defaultPath;
     const folderNameDesktop = `${moduleName}-desktop`;
     const folderNameMobile = `${moduleName}-mobile`;
