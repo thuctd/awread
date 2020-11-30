@@ -125,6 +125,8 @@ export function insertNotFound(schema, shellModule: FileModule, currentModuleNam
   // this line can enable in below
   // \ndeclare const window: any;\nwindow.haveMobile = ${schema.haveMobile};
   const routes = `
+declare const window: Window & {haveMobile: boolean};
+
 const routes: Routes = [
 {
   path: '',
