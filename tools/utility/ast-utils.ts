@@ -7,6 +7,7 @@ import {
   getSourceNodes,
   InsertChange,
   RemoveChange,
+  NoopChange,
 } from '@nrwl/workspace/src/utils/ast-utils';
 import {
   Tree,
@@ -306,6 +307,51 @@ export function removeFromNgModule(
   } else {
     return [];
   }
+}
+
+function getAllImportNodes(source) {
+  const angularImports: ts.Node[] = findNodes(
+    source,
+    ts.SyntaxKind.ImportDeclaration
+  )
+  return angularImports;
+}
+
+export function removeImport(
+  source: ts.SourceFile,
+  modulePath: string,
+  property: string
+): Change {
+  const allImports = getAllImportNodes(source);
+  // get nodes that map to import statements from the file fileName
+  const relevantImports = allImports.map(node => {
+    // StringLiteral of the ImportDeclaration is the import file (fileName in this case).
+    const importSyntaxList = findNodes(node, ts.SyntaxKind.SyntaxList)[0].getChildren();
+    const onInit = findNodes(node, ts.SyntaxKind.ImportSpecifier).find(file => file.getText() === 'OnInit');
+    const onInitIndex = importSyntaxList.indexOf(onInit);
+    const previousToken = importSyntaxList.slice(null, onInitIndex).pop();
+    const isComma = previousToken.kind === ts.SyntaxKind.CommaToken;
+    const result = isComma ? [previousToken, onInit] : [onInit];
+    return result;
+  });
+
+  let nodes = relevantImports[0]; // tslint:disable-line:no-any
+  const removeText = nodes.map(n => n.getFullText()).join('');
+  // Find the decorator declaration.
+  if (!nodes) {
+    return new NoopChange();
+  }
+  return new RemoveChange(
+    modulePath,
+    nodes[0].getStart(source),
+    removeText
+  );
+}
+
+function printAllChildren(node: ts.Node, depth = 0) {
+  console.log(new Array(depth + 1).join('----'), ts.SyntaxKind[node.kind], node.pos, node.end);
+  depth++;
+  node.getChildren().forEach(c => printAllChildren(c, depth));
 }
 
 export function addImportToModule(

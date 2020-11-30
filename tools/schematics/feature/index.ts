@@ -35,6 +35,7 @@ export default function (schema: any): Rule {
 
     return chain([
       externalSchematic('@nrwl/angular', 'lib', {
+        linter: "eslint",
         name: schema.name,
         directory: schema.directory ?? './',
         tags: `scope:${PREFIX}-${originName},scope:shared,type:${PREFIX}`,

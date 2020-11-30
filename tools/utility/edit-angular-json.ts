@@ -9,7 +9,7 @@ import { normalize } from "path";
 
 export function updateFiles() {
   return async (host: Tree) => {
-    host.create(`libs/global/README.md`, '# Global have libs work with all workspace');
+    // host.create(`libs/global/README.md`, '# Global have libs work with all workspace');
     const workspace = await getWorkspace(host, getWorkspacePath(host));
     const angularFile = readJsonFile('angular.json');
     host.getDir(`libs/global/styles`).visit(path => host.delete(path));
@@ -77,12 +77,20 @@ export function updateFiles() {
 //   };
 // }
 
-export function addProjectPrefix() {
-  return updateJsonInTree('tslint.json', (json) => {
+export function modifyEslint() {
+  return updateJsonInTree('.eslintrc.json', (json) => {
     const workspaceName = readJsonFile('package.json').name;
     // const npmScope = getNpmScope();
-    json.rules["directive-selector"] = json.rules["directive-selector"].map((item) => item == "app" ? [workspaceName, "page"] : item)
-    json.rules["component-selector"] = json.rules["component-selector"].map((item) => item == "app" ? [workspaceName, "page"] : item)
+    json.overrides[0].rules["no-empty-function"] = "off"
+    json.overrides[0].rules["@typescript-eslint/no-empty-function"] = [
+          "warn",
+          {
+            "allow": [
+              "methods",
+              "constructors"
+            ]
+          }
+        ]
     return json;
   });
 }

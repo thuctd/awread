@@ -3,7 +3,9 @@ import { Routes, RouterModule } from '@angular/router';<% if (lazyRoute) { %>
 
 import { <%= classify(name) %><%= capitalize(type) %> } from './<%= dasherize(name) %>.<%= type %>';<% } %>
 
-declare const window: any;
+<% if (routingOnly) { %>
+declare const window: Window & {haveMobile: boolean};
+<% } %>
 
 const routes: Routes = [
   <% if (lazyRoute) { %>{ path: '', component: <%= classify(name) %><%= capitalize(type) %> }<% } %>

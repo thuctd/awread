@@ -12,7 +12,7 @@ export function insertRoutes(schema: any, writeToModule: FileModule, routes: str
     addRoutesTypeImport,
     updateRoutesVariable(writeToModule),
     insertRoutes,
-    applyLintFix(writeToModule.filePath)
+    // applyLintFix(writeToModule.filePath)
   ];
 }
 

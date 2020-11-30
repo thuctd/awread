@@ -26,6 +26,7 @@ export default function (schema: any): Rule {
     const appPath = await createDefaultPath(tree, schema.project);
     return chain([
       externalSchematic('@nrwl/angular', 'lib', {
+        linter: "eslint",
         name: schema.name,
         directory: schema.directory ?? './',
         tags: `scope:shell,scope:shared,type:feature`,

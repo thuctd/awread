@@ -14,6 +14,7 @@ import { addImportDeclarationToModule } from '../../utility/add-import-module';
 import { camelize, classify } from '@nrwl/workspace/src/utils/strings';
 import { getSourceNodes, insertImport, RemoveChange, ReplaceChange } from '@nrwl/workspace/src/utils/ast-utils';
 import * as path from 'path';
+import { removeImport } from '../../utility/ast-utils';
 
 export default function (schema: any): Rule {
   return async (host: Tree) => {
@@ -60,7 +61,7 @@ export default function (schema: any): Rule {
       addRouteDeclarationToNgModule(schema, routingModulePath),
       mergeWith(templateSource, MergeStrategy.AllowCreationConflict),
       isLazyLoadedModuleGen
-        ? externalSchematic('@schematics/angular', 'component', {
+        ? externalSchematic('@nrwl/angular', 'component', {
           ...schema,
           style: 'scss',
           module: modulePath,
@@ -68,7 +69,7 @@ export default function (schema: any): Rule {
         : noop(),
       ...routingOnlyActions(schema, relativePath),
       ...(schema.mode ? [...addPageService(schema)] : [noop()]),
-      schema.lintFix ? applyLintFix(schema.path) : noop(),
+      // schema.lintFix ? applyLintFix(schema.path) : noop(),
     ]);
   };
 }
@@ -121,7 +122,8 @@ function updateDesktopAndMobilePage(schema) {
       relativePath);
 
     const renewClass = replaceConstructorForInjection(nodes, classify(`${schema.name}-${schema.type}`), writeToPath, classify(`${schema.originName}-${schema.type}`));
-    const changes = [insertImportSymbol, renewClass];
+    const removeImportOnInit = removeImport(source, writeToPath, classify('OnInit'));
+    const changes = [insertImportSymbol, renewClass, removeImportOnInit];
 
     const recorder = host.beginUpdate(writeToPath);
     for (const change of changes) {

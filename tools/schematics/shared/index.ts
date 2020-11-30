@@ -53,12 +53,13 @@ export default function (schema: any): Rule {
     const customCode = `\n<awread-header></awread-header>\n<router-outlet></router-outlet>\n<awread-footer></awread-footer>`;
     return chain([
       externalSchematic('@nrwl/angular', 'lib', {
+        linter: "eslint",
         name: schema.name,
         directory: schema.directory ?? './',
         tags: `scope:shared`,
         style: 'scss'
       }),
-      insertCustomCode(currentModule.filePath, `\ndeclare const window: any;\nwindow.haveMobile = ${schema.haveMobile};`),
+      insertCustomCode(currentModule.filePath, `\ndeclare const window: Window & {haveMobile: boolean};\nwindow.haveMobile = ${schema.haveMobile};`),
       addImportDeclarationToModule(schema, 'RouterModule', currentModule.filePath, '@angular/router'),
       addExportDeclarationToModule(schema, 'RouterModule', currentModule.filePath, '@angular/router'),
       externalSchematic('@nrwl/angular', 'component', {

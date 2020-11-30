@@ -24,7 +24,7 @@ export default function (schema: any): Rule {
       ...addPageService(schema),
       addPageIndexIfPossible(schema),
       addLibIndexIfPossible(schema),
-      schema.lintFix ? applyLintFix(schema.path) : noop(),
+      // schema.lintFix ? applyLintFix(schema.path) : noop(),
     ]);
   };
 }
