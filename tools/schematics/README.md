@@ -46,4 +46,5 @@ nx workspace-schematic feature cleaner --directory=writer/web --pages=one
 ## Add feature page
 nx workspace-schematic feature-page --directory=writer/web --feature=cleaner two
 
-
+## Combo example command:
+nx workspace-schematic domain writer && nx workspace-schematic ui auth --directory=writer/web --pages=login,register
