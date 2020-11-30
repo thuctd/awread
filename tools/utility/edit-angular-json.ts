@@ -195,6 +195,7 @@ function updateEnviroment(p, projectName) {
     "with": libRoot + "/lib/environment.prod.ts"
   });
   p.architect.build.configurations.stage = {
+    ...p.architect.build.configurations.production,
     fileReplacements: [
       {
         "replace": libRoot + "/lib/environment.ts",
@@ -203,6 +204,7 @@ function updateEnviroment(p, projectName) {
     ]
   };
   p.architect.build.configurations.test = {
+    ...p.architect.build.configurations.production,
     fileReplacements: [
       {
         "replace": libRoot + "/lib/environment.ts",
@@ -210,6 +212,11 @@ function updateEnviroment(p, projectName) {
       }
     ]
   };
+  const buildPrefix = p.architect.serve.configurations.production.browserTarget.split(":");
+  buildPrefix.pop();
+
+  p.architect.serve.configurations.stage.browserTarget = `${buildPrefix.join(':')}:stage`;
+  p.architect.serve.configurations.test.browserTarget = `${buildPrefix.join(':')}:test`;
 }
 
 function updateImplicit(projectName) {
