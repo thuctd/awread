@@ -212,11 +212,20 @@ function updateEnviroment(p, projectName) {
       }
     ]
   };
-  const buildPrefix = p.architect.serve.configurations.production.browserTarget.split(":");
-  buildPrefix.pop();
-
-  p.architect.serve.configurations.stage.browserTarget = `${buildPrefix.join(':')}:stage`;
-  p.architect.serve.configurations.test.browserTarget = `${buildPrefix.join(':')}:test`;
+  if (p.architect.serve.configurations?.production) {
+    const buildPrefix = p.architect.serve.configurations.production.browserTarget.split(":");
+    buildPrefix.pop();
+    const stageData = p.architect.serve.configurations['stage'] ?? {};
+    p.architect.serve.configurations['stage'] = {
+      ...stageData,
+      browserTarget: `${buildPrefix.join(':')}:stage`
+    }
+    const testData = p.architect.serve.configurations['stage'] ?? {};
+    p.architect.serve.configurations['test'] = {
+      ...testData,
+      browserTarget: `${buildPrefix.join(':')}:test`
+    }
+  }
 }
 
 function updateImplicit(projectName) {
