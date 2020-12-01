@@ -1,6 +1,9 @@
 node --inspect-brk ./node_modules/nx/bin/nx.js workspace-schematic my-schematic mylib --dry-run
 node --inspect-brk ./node_modules/nx/bin/nx.js
 
+## Generate Server
+nx g @nrwl/nest:app api --directory=backend
+nx g lib api-interfaces --directory=backend
 # Generate order
 Follow to this order
 
@@ -14,9 +17,6 @@ or we can using domain:
 1) generate domain
 2) generate ui and feature
 
-## Generate Server
-nx g @nrwl/nest:app api --directory=backend
-nx g lib api-interfaces --directory=backend
 ## Generate application
 nx g app web --directory=writer --style=scss --routing=false --strict --tags=scope:shared,type:app
 other example:
