@@ -1,6 +1,82 @@
 {
   "version": 1,
   "projects": {
+    "backend-api": {
+      "root": "apps/backend/api",
+      "sourceRoot": "apps/backend/api/src",
+      "projectType": "application",
+      "prefix": "backend-api",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/backend/api",
+            "main": "apps/backend/api/src/main.ts",
+            "tsConfig": "apps/backend/api/tsconfig.app.json",
+            "assets": ["apps/backend/api/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/backend/api/src/environments/environment.ts",
+                  "with": "apps/backend/api/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "backend-api:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/backend/api/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/backend/api/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "backend-api-interfaces": {
+      "projectType": "library",
+      "root": "libs/backend/api-interfaces",
+      "sourceRoot": "libs/backend/api-interfaces/src",
+      "prefix": "awread",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/backend/api-interfaces/src/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/backend/api-interfaces/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      }
+    }
   },
   "cli": {
     "defaultCollection": "@nrwl/angular",

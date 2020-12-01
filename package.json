@@ -58,7 +58,7 @@
     "@nrwl/eslint-plugin-nx": "10.4.4",
     "@nrwl/jest": "10.4.4",
     "@nrwl/nest": "10.4.4",
-    "@nrwl/node": "10.4.4",
+    "@nrwl/node": "10.4.1",
     "@nrwl/nx-cloud": "latest",
     "@nrwl/tao": "10.4.4",
     "@nrwl/workspace": "10.4.4",
