@@ -9,8 +9,8 @@ Follow to this order
 
 1) generate application
 2) generate global
-3) generate share
-4) generate shell
+3) generate shell
+4) generate share
 5) generate ui and feature
 
 or we can using domain:

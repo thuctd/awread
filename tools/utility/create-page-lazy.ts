@@ -43,7 +43,7 @@ export function createPageLazy(schema, pageName, currentModule: { name: string, 
 }
 
 
-export function addRoutesOfLazy(schema, pageName, type, module: {name: string, filePath: string, folderPath: string}) {
+export function addRoutesOfLazy(schema, pageName, type, page: {name: string, filePath: string, folderPath: string}) {
   const routes = `
 const routes: Routes = [
   {
@@ -52,8 +52,8 @@ const routes: Routes = [
 ];`;
   const symbolName = `RouterModule.forChild(routes)`;
   return [
-    insertCustomCode(module.filePath, routes),
-    addImportDeclarationToModule(schema, 'RouterModule', module.filePath, '@angular/router', symbolName),
-    addImportPathToModule(schema, 'Routes', module.filePath, '@angular/router', null, false)
+    insertCustomCode(page.filePath, routes),
+    addImportDeclarationToModule(schema, 'RouterModule', page.filePath, '@angular/router', symbolName),
+    addImportPathToModule(schema, 'Routes', page.filePath, '@angular/router', null, false)
   ];
 }
