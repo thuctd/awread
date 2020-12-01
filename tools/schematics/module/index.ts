@@ -110,27 +110,30 @@ function updateDesktopAndMobilePage(schema) {
       return host;
     }
     // /libs/writer/web/ui-auth/src/lib/register/pages/register-desktop/register-desktop.page.ts
-    const writeToPath = `${schema.path}/${schema.originName}-${schema.mode}/${schema.originName}-${schema.mode}.${schema.type}.ts`;
-    const implementFilePath = `${schema.path}/${schema.originName}/${schema.originName}.${schema.type}.ts`;
+    const writeToFilePath = `${schema.path}/${schema.originName}-${schema.mode}/${schema.originName}-${schema.mode}.${schema.type}.ts`;
+    // /libs/writer/web/ui-auth/src/lib/register/pages/register/register.page
+    // do not have .ts to get relative path
+    const implementPath = `${schema.path}/${schema.originName}/${schema.originName}.${schema.type}`;
+    const relativePath = buildRelativePath(writeToFilePath, implementPath);
     // console.log('is that module is exist', writeToPath, host.exists(writeToPath));
-    const text = host.read(writeToPath);
+    const text = host.read(writeToFilePath);
     if (text === null) {
-      throw new SchematicsException(`File ${writeToPath} does not exist.`);
+      throw new SchematicsException(`File ${writeToFilePath} does not exist.`);
     }
     const sourceText = text.toString();
-    const source = ts.createSourceFile(writeToPath, sourceText, ts.ScriptTarget.Latest, true);
+    const source = ts.createSourceFile(writeToFilePath, sourceText, ts.ScriptTarget.Latest, true);
     let nodes = getSourceNodes(source);
-    const relativePath = buildRelativePath(writeToPath, implementFilePath);
+
     const insertImportSymbol = insertImport(source,
-      writeToPath,
+      writeToFilePath,
       strings.classify(`${schema.originName}-${schema.type}`),
       relativePath);
 
-    const renewClass = replaceConstructorForInjection(nodes, classify(`${schema.originName}-${schema.mode}-${schema.type}`), writeToPath, classify(`${schema.originName}-${schema.type}`));
-    const removeImportOnInit = removeImport(source, writeToPath, classify('OnInit'));
+    const renewClass = replaceConstructorForInjection(nodes, classify(`${schema.originName}-${schema.mode}-${schema.type}`), writeToFilePath, classify(`${schema.originName}-${schema.type}`));
+    const removeImportOnInit = removeImport(source, writeToFilePath, classify('OnInit'));
     const changes = [insertImportSymbol, renewClass, removeImportOnInit];
 
-    const recorder = host.beginUpdate(writeToPath);
+    const recorder = host.beginUpdate(writeToFilePath);
     for (const change of changes) {
       if (change instanceof InsertChange) {
         recorder.insertLeft(change.pos, change.toAdd);
@@ -144,7 +147,7 @@ function updateDesktopAndMobilePage(schema) {
     host.commitUpdate(recorder);
 
     // PART III: console.log to see the changes
-    const afterInsertContent = host.get(writeToPath)?.content.toString();
+    const afterInsertContent = host.get(writeToFilePath)?.content.toString();
 
     return host;
   };
