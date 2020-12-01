@@ -8,12 +8,17 @@ import { addExportDeclarationToModule } from '../../utility/add-export-module';
 import { parseName } from '@schematics/angular/utility/parse-name';
 import { Path, normalize, strings } from '@angular-devkit/core';
 import { addRouterOutlet } from '../../utility/add-router-outlet';
-import { createSharedLibrary, updateFiles } from '../../utility/edit-angular-json';
+import { createSharedLibrary, createFiles, updateFiles } from '../../utility/edit-angular-json';
 
 export default function (schema: any): Rule {
   return async (tree: Tree, context: SchematicContext) => {
-    const haveGlobal = tree.exists(`libs/global/environments/src/index.ts`);
-    if (haveGlobal) return chain([]);
+    const assetExist = tree.exists(`libs/global/assets/README.md`);
+    const styleExist = tree.exists(`libs/global/styles/README.md`);
+    const environmentsExist = tree.exists(`libs/global/environments/src/index.ts`);
+    if (environmentsExist || schema.name === 'update') return chain([
+      createSharedLibrary(),
+      updateFiles()
+    ]);
 
     return chain([
       externalSchematic('@nrwl/angular', 'lib', {
@@ -38,7 +43,7 @@ export default function (schema: any): Rule {
         style: 'scss'
       }),
       createSharedLibrary(),
-      updateFiles(),
+      createFiles(),
     ])
   }
 }

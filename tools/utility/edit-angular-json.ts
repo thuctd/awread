@@ -7,7 +7,46 @@ import { normalize } from "path";
 // base on: https://indepth.dev/tiny-angular-application-projects-in-nx-workspaces
 
 
+function updateFilesAction(angularFile, host) {
+  let angularApps: Array<Record<string, any>> = [];
+  angularApps = Object.keys(angularFile.projects)
+    .map(name => ({ name, project: angularFile.projects[name] }))
+    .filter(({ name, project }) => {
+      const isApplication = project['projectType'] === "application";
+      const isAngular = project.architect.build?.builder.includes('angular');
+      return isApplication && isAngular;
+    })
+
+  angularApps.forEach(({ name, project }) => {
+    try {
+      addProjectStylesFolder(host, name);
+    } catch (error) {
+      console.warn('asset maybe exist', error);
+    }
+    try {
+      addProjectAssetsFolder(host, name);
+    } catch (error) {
+      console.warn('asset maybe exist', error);
+    }
+    try {
+      updateEnviromentFile(host, name, project);
+    } catch (error) {
+      console.warn('enviroment maybe exist', error);
+    }
+  })
+}
+
 export function updateFiles() {
+  return async (host: Tree) => {
+    // host.create(`libs/global/README.md`, '# Global have libs work with all workspace');
+    const workspace = await getWorkspace(host, getWorkspacePath(host));
+    const angularFile = readJsonFile('angular.json');
+    updateFilesAction(angularFile, host);
+    return updateWorkspace(workspace);
+  }
+};
+
+export function createFiles() {
   return async (host: Tree) => {
     // host.create(`libs/global/README.md`, '# Global have libs work with all workspace');
     const workspace = await getWorkspace(host, getWorkspacePath(host));
@@ -54,19 +93,7 @@ export function updateFiles() {
 `);
     host.overwrite(`libs/global/environments/src/index.ts`, `export * from './lib/environment';`);
 
-    let angularApps: Array<Record<string, any>> = [];
-    angularApps = Object.keys(angularFile.projects)
-      .map(name => ({ name, project: angularFile.projects[name] }))
-      .filter(({ name, project }) => {
-        const isApplication = project['projectType'] === "application";
-        const isAngular = project.architect.build?.builder.includes('angular');
-        return isApplication && isAngular;
-      })
-
-    angularApps.forEach(({ name, project }) => {
-      updateEnviromentFile(host, name, project);
-      addProjectAssetsFolder(host, name);
-    })
+    updateFilesAction(angularFile, host);
 
     return updateWorkspace(workspace);
   };
@@ -89,14 +116,14 @@ export function modifyEslint() {
     // const npmScope = getNpmScope();
     json.overrides[0].rules["no-empty-function"] = "off"
     json.overrides[0].rules["@typescript-eslint/no-empty-function"] = [
-          "warn",
-          {
-            "allow": [
-              "methods",
-              "constructors"
-            ]
-          }
+      "warn",
+      {
+        "allow": [
+          "methods",
+          "constructors"
         ]
+      }
+    ]
     return json;
   });
 }
@@ -114,6 +141,22 @@ export function addProjectAssetsFolder(host, projectName) {
   host.create(`libs/global/assets/src/projects/${projectName}/assets/fonts/.gitkeep`, ``);
   host.create(`libs/global/assets/src/projects/${projectName}/assets/icons/.gitkeep`, ``);
   host.create(`libs/global/assets/src/projects/${projectName}/assets/images/.gitkeep`, ``);
+}
+
+export function addProjectStylesFolder(host, projectName) {
+  const path = `libs/global/styles/src/projects/${projectName}`;
+  host.create(`${path}/lib/_${projectName}-vendors.scss`, ``);
+  host.create(`${path}/lib/_${projectName}-fonts.scss`, ``);
+  host.create(`${path}/lib/_${projectName}-variable.scss`, ``);
+  host.create(`${path}/lib/_${projectName}-theme.scss`, ``);
+  host.create(`${path}/lib/_${projectName}-global.scss`, ``);
+  host.create(`${path}/${projectName}.scss`, `
+@import './lib/${projectName}-vendors';
+@import './lib/${projectName}-fonts';
+@import './lib/${projectName}-variable';
+@import './lib/${projectName}-theme';
+@import './lib/${projectName}-global';
+    `);
 }
 
 export function createSharedLibrary() {
@@ -138,11 +181,13 @@ export function createSharedLibrary() {
       .filter(name => config.projects[name].projectType === "application")
       .forEach((projectName) => {
         const p = config.projects[projectName];
-        if (p.architect.build?.builder.includes('angular')) {
+        const isAngular = p.architect.build?.builder.includes('angular');
+        const isHaveBuildConfiguration = p.architect.build?.configurations;
+        if (isAngular) {
           updateAsset(p, projectName);
           updateStyle(p, projectName);
         }
-        if (p.architect.build?.configurations) {
+        if (isHaveBuildConfiguration) {
           updateEnviroment(p, projectName);
         }
       });
@@ -166,30 +211,42 @@ function resetArchitect(targets) {
 function updateAsset(p, projectName) {
   const libRoot = `libs/global/assets/src`;
   const projectPath = `${libRoot}/projects/${projectName}`;
-  // p.architect.build.options.assets = [];
-  p.architect.build.options.assets.push({
-    "glob": "**/*",
-    "input": libRoot + "/global-assets",
-    "output": "global-assets"
-  });
-  p.architect.build.options.assets.push({
-    "glob": "favicon.ico",
-    "input": projectPath,
-    "output": ""
-  });
-  p.architect.build.options.assets.push({
-    "glob": "**/*",
-    "input": projectPath + "/assets",
-    "output": "assets"
-  });
+  const assets: Array<Record<string, any>> = p.architect.build.options.assets;
+  const globalAsset = assets.find(a => a.output === 'global-assets');
+  if (!globalAsset) {
+    p.architect.build.options.assets.push({
+      "glob": "**/*",
+      "input": libRoot + "/global-assets",
+      "output": "global-assets"
+    });
+  }
+
+  const projectAssets = assets.find(a => a.output === 'assets');
+  if (!projectAssets) {
+    p.architect.build.options.assets.push({
+      "glob": "**/*",
+      "input": projectPath + "/assets",
+      "output": "assets"
+    });
+  }
 }
 
 function updateStyle(p, projectName) {
   const libRoot = `libs/global/styles/src`;
-  const projectPath = `${libRoot}/${projectName}`;
-  const options = p.architect.build.options;
-  // p.architect.build.options.styles = [];
-  p.architect.build.options.styles.push(`${libRoot}/index.scss`);
+  const projectPath = `${libRoot}/projects/${projectName}`;
+  const styles = p.architect.build.options.styles;
+
+  const globalIndex = `${libRoot}/index.scss`;
+  const globalFile = styles.find(s => s === globalIndex);
+  if (!globalFile) {
+    p.architect.build.options.styles.push(globalIndex);
+  }
+
+  const projectIndex = `${projectPath}/${projectName}.scss`;
+  const projectFile = styles.find(s => s === projectIndex);
+  if (!projectFile) {
+    p.architect.build.options.styles.push(projectIndex);
+  }
 }
 
 function updateEnviroment(p, projectName) {
