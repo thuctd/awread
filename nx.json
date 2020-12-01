@@ -31,11 +31,5 @@
     }
   },
   "projects": {
-    "api": {
-      "tags": []
-    },
-    "api-interfaces": {
-      "tags": []
-    }
   }
 }
