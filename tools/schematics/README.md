@@ -14,6 +14,9 @@ or we can using domain:
 1) generate domain
 2) generate ui and feature
 
+## Generate Server
+nx g @nrwl/nest:app api --directory=backend
+
 ## Generate application
 nx g app web --directory=writer --style=scss --routing=false --strict --tags=scope:shared,type:app
 other example:
