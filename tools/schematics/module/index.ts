@@ -34,8 +34,8 @@ export default function (schema: any): Rule {
     }
 
     schema.originName = schema.name.split('/').pop();
-    const parsedPath = parseName(schema.mode ? `${schema.path}/${schema.originName}` : schema.path, schema.mode ? `${schema.name}-${schema.mode}` : schema.name);
-    schema.name = parsedPath.name;
+    const parsedPath = parseName(schema.path, schema.name);
+    schema.name = schema.type && schema.mode ? `${parsedPath.name}-${schema.mode}` : parsedPath.name;
     schema.path = parsedPath.path;
 
     const templateSource = apply(url('./files'), [
@@ -68,8 +68,7 @@ export default function (schema: any): Rule {
         })
         : noop(),
       ...routingOnlyActions(schema, relativePath),
-      ...(schema.mode ? [...addPageService(schema)] : [noop()]),
-      // schema.lintFix ? applyLintFix(schema.path) : noop(),
+      ...(schema.mode ? [...addPageService(host, schema)] : [noop()]),
     ]);
   };
 }
@@ -79,22 +78,28 @@ function routingOnlyActions(schema, relativePath) {
   const name = `${schema.project}-routing-module`;
   return schema.routingOnly && relativePath ? [
     addImportDeclarationToModule(schema, name, routingPath, schema.project, classify(name)),
-
   ] : [noop()]
 }
 
-function addPageService(schema) {
+function addPageService(tree: Tree, schema) {
+  const path = `${schema.path}/${schema.originName}/${schema.originName}.${schema.type}.ts`;
+  if (schema.type === 'page' && schema.mode && !tree.exists(path)) {
 
-  const templateSource = apply(url('./service-page'), [
-    applyTemplates({
-      ...schema,
-      ...strings
-    }),
-    move(schema.path),
-  ]);
+    tree.create(path, `import { Injectable, OnInit } from '@angular/core';
 
-  return schema.type === 'page' ? [
-    mergeWith(templateSource, MergeStrategy.AllowCreationConflict),
+@Injectable({
+  providedIn: 'root',
+})
+export class ${classify(schema.originName) + classify(schema.type)} implements OnInit {
+
+  constructor() { }
+
+  ngOnInit(): void { }
+
+}`)
+  }
+
+  return schema.type === 'page' && schema.mode ? [
     updateDesktopAndMobilePage(schema),
   ] : [noop()]
 }
@@ -105,8 +110,8 @@ function updateDesktopAndMobilePage(schema) {
       return host;
     }
     // /libs/writer/web/ui-auth/src/lib/register/pages/register-desktop/register-desktop.page.ts
-    const writeToPath = `${schema.path}/${schema.name}/${schema.name}.${schema.type}.ts`;
-    const implementFilePath = `${schema.path}/${schema.originName}.${schema.type}`;
+    const writeToPath = `${schema.path}/${schema.originName}-${schema.mode}/${schema.originName}-${schema.mode}.${schema.type}.ts`;
+    const implementFilePath = `${schema.path}/${schema.originName}/${schema.originName}.${schema.type}.ts`;
     // console.log('is that module is exist', writeToPath, host.exists(writeToPath));
     const text = host.read(writeToPath);
     if (text === null) {
@@ -121,7 +126,7 @@ function updateDesktopAndMobilePage(schema) {
       strings.classify(`${schema.originName}-${schema.type}`),
       relativePath);
 
-    const renewClass = replaceConstructorForInjection(nodes, classify(`${schema.name}-${schema.type}`), writeToPath, classify(`${schema.originName}-${schema.type}`));
+    const renewClass = replaceConstructorForInjection(nodes, classify(`${schema.originName}-${schema.mode}-${schema.type}`), writeToPath, classify(`${schema.originName}-${schema.type}`));
     const removeImportOnInit = removeImport(source, writeToPath, classify('OnInit'));
     const changes = [insertImportSymbol, renewClass, removeImportOnInit];
 

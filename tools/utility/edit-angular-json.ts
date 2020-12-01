@@ -14,11 +14,17 @@ export function updateFiles() {
     const angularFile = readJsonFile('angular.json');
     host.getDir(`libs/global/styles`).visit(path => host.delete(path));
     host.create(`libs/global/styles/README.md`, '# Styles');
-    host.create(`libs/global/styles/src/lib/_global.scss`, ``);
+    host.create(`libs/global/styles/src/lib/_vendors.scss`, ``);
+    host.create(`libs/global/styles/src/lib/_fonts.scss`, ``);
     host.create(`libs/global/styles/src/lib/_variable.scss`, ``);
     host.create(`libs/global/styles/src/lib/_theme.scss`, ``);
-    host.create(`libs/global/styles/src/lib/_vendors.scss`, ``);
-    host.create(`libs/global/styles/src/index.scss`, `@import './lib/global';\n@import './lib/variable';\n@import './lib/theme';\n@import './lib/vendors';`);
+    host.create(`libs/global/styles/src/lib/_global.scss`, ``);
+    host.create(`libs/global/styles/src/index.scss`, `@import './lib/vendors';
+    @import './lib/fonts';
+    @import './lib/variable';
+    @import './lib/theme';
+    @import './lib/global';
+    `);
 
     host.getDir(`libs/global/assets`).visit(path => host.delete(path));
     host.create(`libs/global/assets/README.md`, '# Assets');

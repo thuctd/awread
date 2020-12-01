@@ -43,7 +43,7 @@ export default function (schema: any): Rule {
         module: schema.project,
         route: originName,
         type: 'page',
-        prefix: 'page'
+        prefix: 'page',
       }),
       createEmptySection(`${defaultPath}/${folderNameDesktop}`),
       schematic('module', {
@@ -53,7 +53,7 @@ export default function (schema: any): Rule {
         module: schema.project,
         route: originName,
         type: 'page',
-        prefix: 'page'
+        prefix: 'page',
       }),
       createEmptySection(`${defaultPath}/${folderNameMobile}`),
     ])
