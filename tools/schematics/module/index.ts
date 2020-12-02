@@ -61,7 +61,7 @@ export default function (schema: any): Rule {
       addRouteDeclarationToNgModule(schema, routingModulePath),
       mergeWith(templateSource, MergeStrategy.AllowCreationConflict),
       isLazyLoadedModuleGen
-        ? externalSchematic('@nrwl/angular', 'component', {
+        ? externalSchematic('@schematics/angular', 'component', {
           ...schema,
           style: 'scss',
           module: modulePath,

@@ -62,7 +62,7 @@ export default function (schema: any): Rule {
       insertCustomCode(currentModule.filePath, `\ndeclare const window: Window & {haveMobile: boolean};\nwindow.haveMobile = ${schema.haveMobile};`),
       addImportDeclarationToModule(schema, 'RouterModule', currentModule.filePath, '@angular/router'),
       addExportDeclarationToModule(schema, 'RouterModule', currentModule.filePath, '@angular/router'),
-      externalSchematic('@nrwl/angular', 'component', {
+      externalSchematic('@schematics/angular', 'component', {
         name: `layouts/shell-desktop`,
         type: 'layout',
         style: 'scss',
@@ -71,7 +71,7 @@ export default function (schema: any): Rule {
         export: true
       }),
       addRouterOutlet(true, currentModule.folderPath, 'shell-desktop', customCode),
-      externalSchematic('@nrwl/angular', 'component', {
+      externalSchematic('@schematics/angular', 'component', {
         name: `layouts/shell-mobile`,
         type: 'layout',
         style: 'scss',
@@ -80,7 +80,7 @@ export default function (schema: any): Rule {
         export: true
       }),
       addRouterOutlet(true, currentModule.folderPath, 'shell-mobile', customCode),
-      externalSchematic('@nrwl/angular', 'component', {
+      externalSchematic('@schematics/angular', 'component', {
         name: `parts/navbar`,
         type: 'part',
         style: 'scss',
@@ -88,7 +88,7 @@ export default function (schema: any): Rule {
         project: currentModuleName,
         export: true
       }),
-      externalSchematic('@nrwl/angular', 'component', {
+      externalSchematic('@schematics/angular', 'component', {
         name: `parts/header`,
         type: 'part',
         style: 'scss',
@@ -96,7 +96,7 @@ export default function (schema: any): Rule {
         project: currentModuleName,
         export: true
       }),
-      externalSchematic('@nrwl/angular', 'component', {
+      externalSchematic('@schematics/angular', 'component', {
         name: `parts/footer`,
         type: 'part',
         style: 'scss',

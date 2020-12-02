@@ -27,7 +27,7 @@ export function createPageLazy(schema, pageName, currentModule: { name: string, 
       name: nameWithPath,
       type: type,
     }),
-    externalSchematic('@nrwl/angular', 'component', {
+    externalSchematic('@schematics/angular', 'component', {
       name: nameWithPath,
       type,
       style: 'scss',

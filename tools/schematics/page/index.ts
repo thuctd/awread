@@ -87,7 +87,7 @@ function addFeatureRoutingModule(schema, tree, routingPath) {
       rule1,
       rule2,
       rule3,
-      externalSchematic('@nrwl/angular', 'component', {
+      externalSchematic('@schematics/angular', 'component', {
         name: `layouts/${schema.ui}`,
         type: 'layout',
         style: 'scss',
