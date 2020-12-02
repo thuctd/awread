@@ -1,740 +1,110 @@
 {
   "version": 1,
   "projects": {
-    "backend-api": {
-      "root": "apps/backend/api",
-      "sourceRoot": "apps/backend/api/src",
-      "projectType": "application",
-      "prefix": "backend-api",
-      "schematics": {},
-      "architect": {
-        "build": {
-          "builder": "@nrwl/node:build",
-          "options": {
-            "outputPath": "dist/apps/backend/api",
-            "main": "apps/backend/api/src/main.ts",
-            "tsConfig": "apps/backend/api/tsconfig.app.json",
-            "assets": [
-              "apps/backend/api/src/assets"
-            ]
-          },
-          "configurations": {
-            "production": {
-              "optimization": true,
-              "extractLicenses": true,
-              "inspect": false,
-              "fileReplacements": [
-                {
-                  "replace": "libs/global/environments/src/lib/environment.ts",
-                  "with": "libs/global/environments/src/lib/environment.prod.ts"
-                }
+      "backend-api": {
+        "root": "apps/backend/api",
+        "sourceRoot": "apps/backend/api/src",
+        "projectType": "application",
+        "prefix": "backend-api",
+        "schematics": {},
+        "architect": {
+          "build": {
+            "builder": "@nrwl/node:build",
+            "options": {
+              "outputPath": "dist/apps/backend/api",
+              "main": "apps/backend/api/src/main.ts",
+              "tsConfig": "apps/backend/api/tsconfig.app.json",
+              "assets": [
+                "apps/backend/api/src/assets"
               ]
             },
-            "stage": {
-              "optimization": true,
-              "extractLicenses": true,
-              "inspect": false,
-              "fileReplacements": [
-                {
-                  "replace": "libs/global/environments/src/lib/environment.ts",
-                  "with": "libs/global/environments/src/lib/environment.stage.ts"
-                }
-              ]
-            },
-            "test": {
-              "optimization": true,
-              "extractLicenses": true,
-              "inspect": false,
-              "fileReplacements": [
-                {
-                  "replace": "libs/global/environments/src/lib/environment.ts",
-                  "with": "libs/global/environments/src/lib/environment.test.ts"
-                }
-              ]
-            }
-          }
-        },
-        "serve": {
-          "builder": "@nrwl/node:execute",
-          "options": {
-            "buildTarget": "backend-api:build"
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "apps/backend/api/**/*.ts"
-            ]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "apps/backend/api/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
-    "backend-api-interfaces": {
-      "projectType": "library",
-      "root": "libs/backend/api-interfaces",
-      "sourceRoot": "libs/backend/api-interfaces/src",
-      "prefix": "awread",
-      "architect": {
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/backend/api-interfaces/src/**/*.ts"
-            ]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/backend/api-interfaces/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      },
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        }
-      }
-    },
-    "writer-web": {
-      "projectType": "application",
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        }
-      },
-      "root": "apps/writer/web",
-      "sourceRoot": "apps/writer/web/src",
-      "prefix": "awread",
-      "architect": {
-        "build": {
-          "builder": "@angular-builders/custom-webpack:browser",
-          "options": {
-            "customWebpackConfig": {
-              "path": "webpack.config.js"
-            },
-            "outputPath": "dist/apps/writer/web",
-            "index": "apps/writer/web/src/index.html",
-            "main": "apps/writer/web/src/main.ts",
-            "polyfills": "apps/writer/web/src/polyfills.ts",
-            "tsConfig": "apps/writer/web/tsconfig.app.json",
-            "aot": true,
-            "assets": [
-              "apps/writer/web/src/favicon.ico",
-              "apps/writer/web/src/assets",
-              {
-                "glob": "**/*",
-                "input": "libs/global/assets/src/global-assets",
-                "output": "global-assets"
+            "configurations": {
+              "production": {
+                "optimization": true,
+                "extractLicenses": true,
+                "inspect": false,
+                "fileReplacements": [
+                  {
+                    "replace": "libs/global/environments/src/lib/environment.ts",
+                    "with": "libs/global/environments/src/lib/environment.prod.ts"
+                  }
+                ]
               },
-              {
-                "glob": "favicon.ico",
-                "input": "libs/global/assets/src/projects/writer-web",
-                "output": ""
+              "stage": {
+                "optimization": true,
+                "extractLicenses": true,
+                "inspect": false,
+                "fileReplacements": [
+                  {
+                    "replace": "libs/global/environments/src/lib/environment.ts",
+                    "with": "libs/global/environments/src/lib/environment.stage.ts"
+                  }
+                ]
               },
-              {
-                "glob": "**/*",
-                "input": "libs/global/assets/src/projects/writer-web/assets",
-                "output": "assets"
+              "test": {
+                "optimization": true,
+                "extractLicenses": true,
+                "inspect": false,
+                "fileReplacements": [
+                  {
+                    "replace": "libs/global/environments/src/lib/environment.ts",
+                    "with": "libs/global/environments/src/lib/environment.test.ts"
+                  }
+                ]
               }
-            ],
-            "styles": [
-              "apps/writer/web/src/styles.scss",
-              "libs/global/styles/src/index.scss",
-              "libs/global/styles/src/projects/writer-web/writer-web.scss"
-            ],
-            "scripts": []
+            }
           },
-          "configurations": {
-            "production": {
-              "fileReplacements": [
-                {
-                  "replace": "libs/global/environments/src/lib/environment.ts",
-                  "with": "libs/global/environments/src/lib/environment.prod.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb",
-                  "maximumError": "10kb"
-                }
+          "serve": {
+            "builder": "@nrwl/node:execute",
+            "options": {
+              "buildTarget": "backend-api:build"
+            }
+          },
+          "lint": {
+            "builder": "@nrwl/linter:eslint",
+            "options": {
+              "lintFilePatterns": [
+                "apps/backend/api/**/*.ts"
               ]
-            },
-            "stage": {
-              "fileReplacements": [
-                {
-                  "replace": "libs/global/environments/src/lib/environment.ts",
-                  "with": "libs/global/environments/src/lib/environment.stage.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb",
-                  "maximumError": "10kb"
-                }
+            }
+          },
+          "test": {
+            "builder": "@nrwl/jest:jest",
+            "options": {
+              "jestConfig": "apps/backend/api/jest.config.js",
+              "passWithNoTests": true
+            }
+          }
+        }
+      },
+      "backend-api-interfaces": {
+        "projectType": "library",
+        "root": "libs/backend/api-interfaces",
+        "sourceRoot": "libs/backend/api-interfaces/src",
+        "prefix": "awread",
+        "architect": {
+          "lint": {
+            "builder": "@nrwl/linter:eslint",
+            "options": {
+              "lintFilePatterns": [
+                "libs/backend/api-interfaces/src/**/*.ts"
               ]
-            },
-            "test": {
-              "fileReplacements": [
-                {
-                  "replace": "libs/global/environments/src/lib/environment.ts",
-                  "with": "libs/global/environments/src/lib/environment.test.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb",
-                  "maximumError": "10kb"
-                }
-              ]
+            }
+          },
+          "test": {
+            "builder": "@nrwl/jest:jest",
+            "options": {
+              "jestConfig": "libs/backend/api-interfaces/jest.config.js",
+              "passWithNoTests": true
             }
           }
         },
-        "serve": {
-          "builder": "@angular-builders/custom-webpack:dev-server",
-          "options": {
-            "browserTarget": "writer-web:build",
-            "proxyConfig": "apps/writer/web/proxy.conf.json"
-          },
-          "configurations": {
-            "production": {
-              "browserTarget": "writer-web:build:production"
-            },
-            "stage": {
-              "browserTarget": "writer-web:build:stage"
-            },
-            "test": {
-              "browserTarget": "writer-web:build:test"
-            }
-          }
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "browserTarget": "writer-web:build"
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "apps/writer/web/src/**/*.ts"
-            ]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "apps/writer/web/jest.config.js",
-            "passWithNoTests": true
+        "schematics": {
+          "@schematics/angular:component": {
+            "style": "scss"
           }
         }
       }
-    },
-    "writer-web-e2e": {
-      "root": "apps/writer/web-e2e",
-      "sourceRoot": "apps/writer/web-e2e/src",
-      "projectType": "application",
-      "architect": {
-        "e2e": {
-          "builder": "@nrwl/cypress:cypress",
-          "options": {
-            "cypressConfig": "apps/writer/web-e2e/cypress.json",
-            "tsConfig": "apps/writer/web-e2e/tsconfig.e2e.json",
-            "devServerTarget": "writer-web:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "writer-web:serve:production"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "apps/writer/web-e2e/**/*.{js,ts}"
-            ]
-          }
-        }
-      }
-    },
-    "writer-web-feature-shell": {
-      "projectType": "library",
-      "root": "libs/writer/web/feature-shell",
-      "sourceRoot": "libs/writer/web/feature-shell/src",
-      "prefix": "awread",
-      "architect": {
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/writer/web/feature-shell/src/**/*.ts"
-            ]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/writer/web/feature-shell/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      },
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        }
-      }
-    },
-    "writer-web-shared": {
-      "projectType": "library",
-      "root": "libs/writer/web/shared",
-      "sourceRoot": "libs/writer/web/shared/src",
-      "prefix": "awread",
-      "architect": {
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/writer/web/shared/src/**/*.ts"
-            ]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/writer/web/shared/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      },
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        }
-      }
-    },
-    "writer-phone": {
-      "projectType": "application",
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        }
-      },
-      "root": "apps/writer/phone",
-      "sourceRoot": "apps/writer/phone/src",
-      "prefix": "awread",
-      "architect": {
-        "build": {
-          "builder": "@angular-builders/custom-webpack:browser",
-          "options": {
-            "customWebpackConfig": {
-              "path": "webpack.config.js"
-            },
-            "outputPath": "dist/apps/writer/phone",
-            "index": "apps/writer/phone/src/index.html",
-            "main": "apps/writer/phone/src/main.ts",
-            "polyfills": "apps/writer/phone/src/polyfills.ts",
-            "tsConfig": "apps/writer/phone/tsconfig.app.json",
-            "aot": true,
-            "assets": [
-              "apps/writer/phone/src/favicon.ico",
-              "apps/writer/phone/src/assets",
-              {
-                "glob": "**/*",
-                "input": "libs/global/assets/src/global-assets",
-                "output": "global-assets"
-              },
-              {
-                "glob": "favicon.ico",
-                "input": "libs/global/assets/src/projects/writer-phone",
-                "output": ""
-              },
-              {
-                "glob": "**/*",
-                "input": "libs/global/assets/src/projects/writer-phone/assets",
-                "output": "assets"
-              }
-            ],
-            "styles": [
-              "apps/writer/phone/src/styles.scss",
-              "libs/global/styles/src/index.scss",
-              "libs/global/styles/src/projects/writer-phone/writer-phone.scss"
-            ],
-            "scripts": []
-          },
-          "configurations": {
-            "production": {
-              "fileReplacements": [
-                {
-                  "replace": "libs/global/environments/src/lib/environment.ts",
-                  "with": "libs/global/environments/src/lib/environment.prod.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb",
-                  "maximumError": "10kb"
-                }
-              ]
-            },
-            "stage": {
-              "fileReplacements": [
-                {
-                  "replace": "libs/global/environments/src/lib/environment.ts",
-                  "with": "libs/global/environments/src/lib/environment.stage.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb",
-                  "maximumError": "10kb"
-                }
-              ]
-            },
-            "test": {
-              "fileReplacements": [
-                {
-                  "replace": "libs/global/environments/src/lib/environment.ts",
-                  "with": "libs/global/environments/src/lib/environment.test.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb",
-                  "maximumError": "10kb"
-                }
-              ]
-            }
-          }
-        },
-        "serve": {
-          "builder": "@angular-builders/custom-webpack:dev-server",
-          "options": {
-            "browserTarget": "writer-phone:build",
-            "proxyConfig": "apps/writer/phone/proxy.conf.json"
-          },
-          "configurations": {
-            "production": {
-              "browserTarget": "writer-phone:build:production"
-            },
-            "stage": {
-              "browserTarget": "writer-phone:build:stage"
-            },
-            "test": {
-              "browserTarget": "writer-phone:build:test"
-            }
-          }
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "browserTarget": "writer-phone:build"
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "apps/writer/phone/src/**/*.ts"
-            ]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "apps/writer/phone/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
-    "writer-phone-e2e": {
-      "root": "apps/writer/phone-e2e",
-      "sourceRoot": "apps/writer/phone-e2e/src",
-      "projectType": "application",
-      "architect": {
-        "e2e": {
-          "builder": "@nrwl/cypress:cypress",
-          "options": {
-            "cypressConfig": "apps/writer/phone-e2e/cypress.json",
-            "tsConfig": "apps/writer/phone-e2e/tsconfig.e2e.json",
-            "devServerTarget": "writer-phone:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "writer-phone:serve:production"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "apps/writer/phone-e2e/**/*.{js,ts}"
-            ]
-          }
-        }
-      }
-    },
-    "writer-phone-feature-shell": {
-      "projectType": "library",
-      "root": "libs/writer/phone/feature-shell",
-      "sourceRoot": "libs/writer/phone/feature-shell/src",
-      "prefix": "awread",
-      "architect": {
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/writer/phone/feature-shell/src/**/*.ts"
-            ]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/writer/phone/feature-shell/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      },
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        }
-      }
-    },
-    "writer-phone-shared": {
-      "projectType": "library",
-      "root": "libs/writer/phone/shared",
-      "sourceRoot": "libs/writer/phone/shared/src",
-      "prefix": "awread",
-      "architect": {
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/writer/phone/shared/src/**/*.ts"
-            ]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/writer/phone/shared/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      },
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        }
-      }
-    },
-    "global-assets": {
-      "projectType": "library",
-      "root": "libs/global/assets",
-      "sourceRoot": "libs/global/assets/src",
-      "prefix": "awread",
-      "architect": {},
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        }
-      }
-    },
-    "global-styles": {
-      "projectType": "library",
-      "root": "libs/global/styles",
-      "sourceRoot": "libs/global/styles/src",
-      "prefix": "awread",
-      "architect": {},
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        }
-      }
-    },
-    "global-environments": {
-      "projectType": "library",
-      "root": "libs/global/environments",
-      "sourceRoot": "libs/global/environments/src",
-      "prefix": "awread",
-      "architect": {
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/global/environments/src/**/*.ts"
-            ]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/global/environments/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      },
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        }
-      }
-    },
-    "writer-web-ui-auth": {
-      "projectType": "library",
-      "root": "libs/writer/web/ui-auth",
-      "sourceRoot": "libs/writer/web/ui-auth/src",
-      "prefix": "awread",
-      "architect": {
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/writer/web/ui-auth/src/**/*.ts"
-            ]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/writer/web/ui-auth/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      },
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        }
-      }
-    },
-    "writer-web-feature-auth": {
-      "projectType": "library",
-      "root": "libs/writer/web/feature-auth",
-      "sourceRoot": "libs/writer/web/feature-auth/src",
-      "prefix": "awread",
-      "architect": {
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/writer/web/feature-auth/src/**/*.ts"
-            ]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/writer/web/feature-auth/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      },
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        }
-      }
-    }
   },
   "cli": {
     "defaultCollection": "@nrwl/angular",
@@ -759,12 +129,7 @@
     },
     "@nrwl/angular:library": {
       "unitTestRunner": "jest"
-    },
-    "@schematics/angular:component": {
-      "style": "scss",
-      "displayBlock": true,
-      "changeDetection": "OnPush"
     }
   },
-  "defaultProject": "awread"
+  "defaultProject": "writer-web"
 }
