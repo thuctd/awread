@@ -10,6 +10,7 @@ import {
 import { WriterWebUiAuthModule } from '@awread/writer/web/ui-auth';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faCircle, faCoffee, faHeart } from '@fortawesome/free-solid-svg-icons';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 declare const window: Window & { haveMobile: boolean };
 
@@ -36,7 +37,8 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     WriterWebSharedModule,
     WriterWebUiAuthModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    BrowserAnimationsModule
   ],
   exports: [RouterModule, FontAwesomeModule],
 })
