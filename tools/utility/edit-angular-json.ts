@@ -178,12 +178,14 @@ export function addProjectStylesFolder(host, projectName, path = `libs/global/st
   host.create(`${path}/lib/${projectName}theme.scss`, ``);
   host.create(`${path}/lib/${projectName}global.scss`, ``);
   host.create(`${path}/${projectName ? projectName : 'index'}.scss`, `
-@import './lib/${projectName}vendors.scss';
-@import './lib/${projectName}fonts.scss';
-@import './lib/${projectName}variable.scss';
-@import './lib/${projectName}theme.scss';
-@import './lib/${projectName}global.scss';
-    `);
+  @import './lib/${projectName}vendors.scss';
+  @import './lib/${projectName}fonts.scss';
+  @import './lib/${projectName}variable.scss';
+  @import './lib/${projectName}theme.scss';
+  @import './lib/${projectName}global.scss';
+  `);
+  host.create(`${path}/${projectName}material.scss`, ``);
+  host.create(`${path}/${projectName}tailwind.scss`, ``);
 }
 
 export function updateGenerator() {
@@ -288,6 +290,18 @@ function updateStyle(p, projectName) {
   const globalFile = styles.find(s => s === globalIndex);
   if (!globalFile) {
     p.architect.build.options.styles.push(globalIndex);
+  }
+
+  const globalMaterial = `${libRoot}/material.scss`;
+  const materialFile = styles.find(s => s === globalMaterial);
+  if (!materialFile) {
+    p.architect.build.options.styles.push(globalMaterial);
+  }
+
+  const globalTailwind = `${libRoot}/tailwind.scss`;
+  const tailwindFile = styles.find(s => s === globalTailwind);
+  if (!tailwindFile) {
+    p.architect.build.options.styles.push(globalTailwind);
   }
 
   const projectIndex = `${projectPath}/${projectName}.scss`;

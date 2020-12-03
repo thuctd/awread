@@ -117,7 +117,7 @@
       "prefix": "awread",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-builders/custom-webpack:browser",
           "options": {
             "outputPath": "dist/apps/writer/web",
             "index": "apps/writer/web/src/index.html",
@@ -141,10 +141,15 @@
             ],
             "styles": [
               "apps/writer/web/src/styles.scss",
+              "libs/global/styles/src/material.scss",
+              "libs/global/styles/src/tailwind.scss",
               "libs/global/styles/src/index.scss",
               "libs/global/styles/src/projects/writer-web/writer-web.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "customWebpackConfig": {
+              "path": "webpack.config.js"
+            }
           },
           "configurations": {
             "production": {
@@ -234,7 +239,7 @@
           }
         },
         "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
+          "builder": "@angular-builders/custom-webpack:dev-server",
           "options": {
             "browserTarget": "writer-web:build",
             "proxyConfig": "apps/writer/web/proxy.conf.json"
@@ -370,7 +375,7 @@
       "prefix": "awread",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-builders/custom-webpack:browser",
           "options": {
             "outputPath": "dist/apps/writer/phone",
             "index": "apps/writer/phone/src/index.html",
@@ -394,10 +399,15 @@
             ],
             "styles": [
               "apps/writer/phone/src/styles.scss",
+              "libs/global/styles/src/material.scss",
+              "libs/global/styles/src/tailwind.scss",
               "libs/global/styles/src/index.scss",
               "libs/global/styles/src/projects/writer-phone/writer-phone.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "customWebpackConfig": {
+              "path": "webpack.config.js"
+            }
           },
           "configurations": {
             "production": {
@@ -487,7 +497,7 @@
           }
         },
         "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
+          "builder": "@angular-builders/custom-webpack:dev-server",
           "options": {
             "browserTarget": "writer-phone:build",
             "proxyConfig": "apps/writer/phone/proxy.conf.json"
