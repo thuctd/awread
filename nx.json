@@ -31,6 +31,44 @@
     },
     "backend-api-interfaces": {
       "tags": []
+    },
+    "writer-web": {
+      "tags": ["scope:shared", "type:app"]
+    },
+    "writer-web-e2e": {
+      "tags": [],
+      "implicitDependencies": ["writer-web"]
+    },
+    "writer-web-feature-shell": {
+      "tags": ["scope:shell", "scope:shared", "type:feature"]
+    },
+    "writer-web-shared": {
+      "tags": ["scope:shared"]
+    },
+    "writer-phone": {
+      "tags": ["scope:shared", "type:app"]
+    },
+    "writer-phone-e2e": {
+      "tags": [],
+      "implicitDependencies": ["writer-phone"]
+    },
+    "writer-phone-feature-shell": {
+      "tags": ["scope:shell", "scope:shared", "type:feature"]
+    },
+    "writer-phone-shared": {
+      "tags": ["scope:shared"]
+    },
+    "global-assets": {
+      "tags": ["scope:shared", "type:assets"]
+    },
+    "global-styles": {
+      "tags": ["scope:shared", "type:styles"]
+    },
+    "global-environments": {
+      "tags": ["scope:shared", "type:environments"]
+    },
+    "global-core": {
+      "tags": ["scope:shared", "type:core"]
     }
   }
 }

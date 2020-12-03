@@ -18,7 +18,19 @@
     "paths": {
       "@awread/backend/api-interfaces": [
         "libs/backend/api-interfaces/src/index.ts"
-      ]
+      ],
+      "@awread/writer/web/feature-shell": [
+        "libs/writer/web/feature-shell/src/index.ts"
+      ],
+      "@awread/writer/web/shared": ["libs/writer/web/shared/src/index.ts"],
+      "@awread/writer/phone/feature-shell": [
+        "libs/writer/phone/feature-shell/src/index.ts"
+      ],
+      "@awread/writer/phone/shared": ["libs/writer/phone/shared/src/index.ts"],
+      "@awread/global/assets": ["libs/global/assets/src/index.ts"],
+      "@awread/global/styles": ["libs/global/styles/src/index.ts"],
+      "@awread/global/environments": ["libs/global/environments/src/index.ts"],
+      "@awread/global/core": ["libs/global/core/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
