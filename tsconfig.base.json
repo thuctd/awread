@@ -30,7 +30,23 @@
       "@awread/global/assets": ["libs/global/assets/src/index.ts"],
       "@awread/global/styles": ["libs/global/styles/src/index.ts"],
       "@awread/global/environments": ["libs/global/environments/src/index.ts"],
-      "@awread/global/core": ["libs/global/core/src/index.ts"]
+      "@awread/global/core": ["libs/global/core/src/index.ts"],
+      "@awread/writer/web/ui-auth": ["libs/writer/web/ui-auth/src/index.ts"],
+      "@awread/writer/web/feature-auth": [
+        "libs/writer/web/feature-auth/src/index.ts"
+      ],
+      "@awread/writer/web/ui-single": [
+        "libs/writer/web/ui-single/src/index.ts"
+      ],
+      "@awread/writer/web/feature-single": [
+        "libs/writer/web/feature-single/src/index.ts"
+      ],
+      "@awread/writer/web/ui-creations": [
+        "libs/writer/web/ui-creations/src/index.ts"
+      ],
+      "@awread/writer/web/feature-creations": [
+        "libs/writer/web/feature-creations/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]

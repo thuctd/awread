@@ -14,9 +14,7 @@
             "outputPath": "dist/apps/backend/api",
             "main": "apps/backend/api/src/main.ts",
             "tsConfig": "apps/backend/api/tsconfig.app.json",
-            "assets": [
-              "apps/backend/api/src/assets"
-            ]
+            "assets": ["apps/backend/api/src/assets"]
           },
           "configurations": {
             "production": {
@@ -63,9 +61,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "apps/backend/api/**/*.ts"
-            ]
+            "lintFilePatterns": ["apps/backend/api/**/*.ts"]
           }
         },
         "test": {
@@ -86,9 +82,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/backend/api-interfaces/src/**/*.ts"
-            ]
+            "lintFilePatterns": ["libs/backend/api-interfaces/src/**/*.ts"]
           }
         },
         "test": {
@@ -265,9 +259,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "apps/writer/web/src/**/*.ts"
-            ]
+            "lintFilePatterns": ["apps/writer/web/src/**/*.ts"]
           }
         },
         "test": {
@@ -300,9 +292,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "apps/writer/web-e2e/**/*.{js,ts}"
-            ]
+            "lintFilePatterns": ["apps/writer/web-e2e/**/*.{js,ts}"]
           }
         }
       }
@@ -316,9 +306,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/writer/web/feature-shell/src/**/*.ts"
-            ]
+            "lintFilePatterns": ["libs/writer/web/feature-shell/src/**/*.ts"]
           }
         },
         "test": {
@@ -344,9 +332,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/writer/web/shared/src/**/*.ts"
-            ]
+            "lintFilePatterns": ["libs/writer/web/shared/src/**/*.ts"]
           }
         },
         "test": {
@@ -523,9 +509,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "apps/writer/phone/src/**/*.ts"
-            ]
+            "lintFilePatterns": ["apps/writer/phone/src/**/*.ts"]
           }
         },
         "test": {
@@ -558,9 +542,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "apps/writer/phone-e2e/**/*.{js,ts}"
-            ]
+            "lintFilePatterns": ["apps/writer/phone-e2e/**/*.{js,ts}"]
           }
         }
       }
@@ -574,9 +556,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/writer/phone/feature-shell/src/**/*.ts"
-            ]
+            "lintFilePatterns": ["libs/writer/phone/feature-shell/src/**/*.ts"]
           }
         },
         "test": {
@@ -602,9 +582,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/writer/phone/shared/src/**/*.ts"
-            ]
+            "lintFilePatterns": ["libs/writer/phone/shared/src/**/*.ts"]
           }
         },
         "test": {
@@ -654,9 +632,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/global/environments/src/**/*.ts"
-            ]
+            "lintFilePatterns": ["libs/global/environments/src/**/*.ts"]
           }
         },
         "test": {
@@ -682,15 +658,171 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/global/core/src/**/*.ts"
-            ]
+            "lintFilePatterns": ["libs/global/core/src/**/*.ts"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "libs/global/core/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      }
+    },
+    "writer-web-ui-auth": {
+      "projectType": "library",
+      "root": "libs/writer/web/ui-auth",
+      "sourceRoot": "libs/writer/web/ui-auth/src",
+      "prefix": "awread",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/writer/web/ui-auth/src/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/writer/web/ui-auth/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      }
+    },
+    "writer-web-feature-auth": {
+      "projectType": "library",
+      "root": "libs/writer/web/feature-auth",
+      "sourceRoot": "libs/writer/web/feature-auth/src",
+      "prefix": "awread",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/writer/web/feature-auth/src/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/writer/web/feature-auth/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      }
+    },
+    "writer-web-ui-single": {
+      "projectType": "library",
+      "root": "libs/writer/web/ui-single",
+      "sourceRoot": "libs/writer/web/ui-single/src",
+      "prefix": "awread",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/writer/web/ui-single/src/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/writer/web/ui-single/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      }
+    },
+    "writer-web-feature-single": {
+      "projectType": "library",
+      "root": "libs/writer/web/feature-single",
+      "sourceRoot": "libs/writer/web/feature-single/src",
+      "prefix": "awread",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/writer/web/feature-single/src/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/writer/web/feature-single/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      }
+    },
+    "writer-web-ui-creations": {
+      "projectType": "library",
+      "root": "libs/writer/web/ui-creations",
+      "sourceRoot": "libs/writer/web/ui-creations/src",
+      "prefix": "awread",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/writer/web/ui-creations/src/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/writer/web/ui-creations/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      }
+    },
+    "writer-web-feature-creations": {
+      "projectType": "library",
+      "root": "libs/writer/web/feature-creations",
+      "sourceRoot": "libs/writer/web/feature-creations/src",
+      "prefix": "awread",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/writer/web/feature-creations/src/**/*.ts"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/writer/web/feature-creations/jest.config.js",
             "passWithNoTests": true
           }
         }

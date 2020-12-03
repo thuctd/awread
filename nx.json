@@ -69,6 +69,24 @@
     },
     "global-core": {
       "tags": ["scope:shared", "type:core"]
+    },
+    "writer-web-ui-auth": {
+      "tags": ["scope:ui-auth", "scope:shared", "type:ui-"]
+    },
+    "writer-web-feature-auth": {
+      "tags": ["scope:feature--auth", "scope:shared", "type:feature-"]
+    },
+    "writer-web-ui-single": {
+      "tags": ["scope:ui-single", "scope:shared", "type:ui-"]
+    },
+    "writer-web-feature-single": {
+      "tags": ["scope:feature--single", "scope:shared", "type:feature-"]
+    },
+    "writer-web-ui-creations": {
+      "tags": ["scope:ui-creations", "scope:shared", "type:ui-"]
+    },
+    "writer-web-feature-creations": {
+      "tags": ["scope:feature--creations", "scope:shared", "type:feature-"]
     }
   }
 }

@@ -8,6 +8,9 @@ import {
   ShellMobileLayout,
   NotFoundPage,
 } from '@awread/writer/web/shared';
+import { WriterWebUiAuthModule } from '@awread/writer/web/ui-auth';
+import { WriterWebUiSingleModule } from '@awread/writer/web/ui-single';
+import { WriterWebUiCreationsModule } from '@awread/writer/web/ui-creations';
 
 declare const window: Window & { haveMobile: boolean };
 
@@ -34,6 +37,9 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     GlobalCoreModule,
     WriterWebSharedModule,
+    WriterWebUiAuthModule,
+    WriterWebUiSingleModule,
+    WriterWebUiCreationsModule,
   ],
   exports: [RouterModule, GlobalCoreModule],
 })
