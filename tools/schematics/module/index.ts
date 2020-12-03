@@ -16,6 +16,7 @@ import { getSourceNodes, insertImport, RemoveChange, ReplaceChange } from '@nrwl
 import * as path from 'path';
 import { removeImport } from '../../utility/ast-utils';
 import { addPageService } from '../../utility/page-service';
+import { componentSetting } from '../../utility/edit-angular-json';
 
 export default function (schema: any): Rule {
   return async (host: Tree) => {
@@ -63,8 +64,8 @@ export default function (schema: any): Rule {
       mergeWith(templateSource, MergeStrategy.AllowCreationConflict),
       isLazyLoadedModuleGen
         ? externalSchematic('@schematics/angular', 'component', {
+          ...componentSetting,
           ...schema,
-          style: 'scss',
           module: modulePath,
         })
         : noop(),

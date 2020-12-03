@@ -5,6 +5,7 @@ import { addImportDeclarationToModule, addImportPathToModule } from '../../utili
 import { classify } from '@nrwl/workspace/src/utils/strings';
 import { createEmptySection } from '../../utility/create-empty-section';
 import { addExportDeclarationToModule } from '../../utility/add-export-module';
+import { componentSetting } from '../../utility/edit-angular-json';
 
 export default function (schema: any): Rule {
   return async (tree: Tree, context: SchematicContext) => {
@@ -88,9 +89,9 @@ function addFeatureRoutingModule(schema, tree, routingPath) {
       rule2,
       rule3,
       externalSchematic('@schematics/angular', 'component', {
+        ...componentSetting,
         name: `layouts/${schema.ui}`,
         type: 'layout',
-        style: 'scss',
         module: schema.project,
         project: schema.project,
         export: true

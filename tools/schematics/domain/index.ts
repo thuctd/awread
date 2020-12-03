@@ -68,10 +68,10 @@ export default function (schema: any): Rule {
     return chain([
       ...chainWeb,
       ...chainPhone,
+      modifyEslint(),
       schematic('global', {
         name: 'global',
       }),
-      modifyEslint(),
     ]);
   }
 }

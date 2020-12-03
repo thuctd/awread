@@ -51,7 +51,7 @@ export function updateFiles() {
   return async (host: Tree) => {
     // host.create(`libs/global/README.md`, '# Global have libs work with all workspace');
     const workspace = await getWorkspace(host, getWorkspacePath(host));
-    const angularFile = readJsonFile('angular.json');
+    const angularFile = JSON.parse(host.read('angular.json').toString('utf-8'))
     updateFilesAction(angularFile, host);
     return updateWorkspace(workspace);
   }
@@ -61,20 +61,9 @@ export function createFiles() {
   return async (host: Tree) => {
     // host.create(`libs/global/README.md`, '# Global have libs work with all workspace');
     const workspace = await getWorkspace(host, getWorkspacePath(host));
-    const angularFile = readJsonFile('angular.json');
+    const angularFile = JSON.parse(host.read('angular.json').toString('utf-8'))
     host.getDir(`libs/global/styles`).visit(path => host.delete(path));
-    host.create(`libs/global/styles/README.md`, '# Styles');
-    host.create(`libs/global/styles/src/lib/_vendors.scss`, ``);
-    host.create(`libs/global/styles/src/lib/_fonts.scss`, ``);
-    host.create(`libs/global/styles/src/lib/_variable.scss`, ``);
-    host.create(`libs/global/styles/src/lib/_theme.scss`, ``);
-    host.create(`libs/global/styles/src/lib/_global.scss`, ``);
-    host.create(`libs/global/styles/src/index.scss`, `@import './lib/vendors';
-    @import './lib/fonts';
-    @import './lib/variable';
-    @import './lib/theme';
-    @import './lib/global';
-    `);
+    addProjectStylesFolder(host, '', `libs/global/styles/src`)
 
     host.getDir(`libs/global/assets`).visit(path => host.delete(path));
     host.create(`libs/global/assets/README.md`, '# Assets');
@@ -110,17 +99,6 @@ export function createFiles() {
   };
 }
 
-// export function addProjectPrefix(): Rule {
-//   return (host: Tree, context: SchematicContext) => {
-//     const tslint = readJsonFile('tslint.json');
-//     const workspaceName = readJsonFile('package.json').name;
-//     tslint.rules["directive-selector"] = [...tslint.rules["directive-selector"], workspaceName];
-//     tslint.rules["component-selector"] = [...tslint.rules["component-selector"], workspaceName];
-//     host.overwrite('tslint.json', tslint);
-//     return host;
-//   };
-// }
-
 export function modifyEslint() {
   return updateJsonInTree('.eslintrc.json', (json) => {
     const workspaceName = readJsonFile('package.json').name;
@@ -154,19 +132,19 @@ export function addProjectAssetsFolder(host, projectName) {
   host.create(`libs/global/assets/src/projects/${projectName}/assets/images/.gitkeep`, ``);
 }
 
-export function addProjectStylesFolder(host, projectName) {
-  const path = `libs/global/styles/src/projects/${projectName}`;
-  host.create(`${path}/lib/${projectName}-vendors.scss`, ``);
-  host.create(`${path}/lib/${projectName}-fonts.scss`, ``);
-  host.create(`${path}/lib/${projectName}-variable.scss`, ``);
-  host.create(`${path}/lib/${projectName}-theme.scss`, ``);
-  host.create(`${path}/lib/${projectName}-global.scss`, ``);
-  host.create(`${path}/${projectName}.scss`, `
-@import './lib/${projectName}-vendors.scss';
-@import './lib/${projectName}-fonts.scss';
-@import './lib/${projectName}-variable.scss';
-@import './lib/${projectName}-theme.scss';
-@import './lib/${projectName}-global.scss';
+export function addProjectStylesFolder(host, projectName, path = `libs/global/styles/src/projects/${projectName}`) {
+  const prefix = projectName.length ? `${projectName}-` : '';
+  host.create(`${path}/lib/${projectName}vendors.scss`, ``);
+  host.create(`${path}/lib/${projectName}fonts.scss`, ``);
+  host.create(`${path}/lib/${projectName}variable.scss`, ``);
+  host.create(`${path}/lib/${projectName}theme.scss`, ``);
+  host.create(`${path}/lib/${projectName}global.scss`, ``);
+  host.create(`${path}/${projectName ? projectName : 'index'}.scss`, `
+@import './lib/${projectName}vendors.scss';
+@import './lib/${projectName}fonts.scss';
+@import './lib/${projectName}variable.scss';
+@import './lib/${projectName}theme.scss';
+@import './lib/${projectName}global.scss';
     `);
 }
 

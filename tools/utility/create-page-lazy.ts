@@ -1,3 +1,4 @@
+import { componentSetting } from './edit-angular-json';
 import {
   chain, externalSchematic, Rule, SchematicContext, Tree, schematic, noop, apply, url, template,
   branchAndMerge, mergeWith, move, MergeStrategy, applyTemplates, SchematicsException
@@ -32,9 +33,9 @@ export function createPageLazy(schema, pageName, currentModule: { name: string, 
       type: type,
     }),
     externalSchematic('@schematics/angular', 'component', {
+      ...componentSetting,
       name: nameWithPath,
       type,
-      style: 'scss',
       module: `${nameWithPath}/${pageName}.module`,
       project: currentModule.name,
       export: true
