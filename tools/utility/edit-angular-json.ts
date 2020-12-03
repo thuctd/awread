@@ -145,17 +145,17 @@ export function addProjectAssetsFolder(host, projectName) {
 
 export function addProjectStylesFolder(host, projectName) {
   const path = `libs/global/styles/src/projects/${projectName}`;
-  host.create(`${path}/lib/_${projectName}-vendors.scss`, ``);
-  host.create(`${path}/lib/_${projectName}-fonts.scss`, ``);
-  host.create(`${path}/lib/_${projectName}-variable.scss`, ``);
-  host.create(`${path}/lib/_${projectName}-theme.scss`, ``);
-  host.create(`${path}/lib/_${projectName}-global.scss`, ``);
+  host.create(`${path}/lib/${projectName}-vendors.scss`, ``);
+  host.create(`${path}/lib/${projectName}-fonts.scss`, ``);
+  host.create(`${path}/lib/${projectName}-variable.scss`, ``);
+  host.create(`${path}/lib/${projectName}-theme.scss`, ``);
+  host.create(`${path}/lib/${projectName}-global.scss`, ``);
   host.create(`${path}/${projectName}.scss`, `
-@import './lib/${projectName}-vendors';
-@import './lib/${projectName}-fonts';
-@import './lib/${projectName}-variable';
-@import './lib/${projectName}-theme';
-@import './lib/${projectName}-global';
+@import './lib/${projectName}-vendors.scss';
+@import './lib/${projectName}-fonts.scss';
+@import './lib/${projectName}-variable.scss';
+@import './lib/${projectName}-theme.scss';
+@import './lib/${projectName}-global.scss';
     `);
 }
 
@@ -192,11 +192,34 @@ export function createSharedLibrary() {
         }
       });
 
-    config.schematics['@schematics/angular:component'] = {
+
+    const appConfig = config.schematics['@nrwl/angular']['application'] ?? {};
+    config.schematics['@nrwl/angular']['application'] = {
+      ...appConfig,
+      "style": "scss",
+    };
+
+    const libConfig = config.schematics['@nrwl/angular']['library'] ?? {};
+    config.schematics['@nrwl/angular']['library'] = {
+      ...libConfig,
+      "style": "scss",
+    };
+
+    const componentConfig = config.schematics['@nrwl/angular']['component'] ?? {};
+    config.schematics['@nrwl/angular']['component'] = {
+      ...componentConfig,
       "style": "scss",
       "displayBlock": true,
       "changeDetection": "OnPush"
-    }
+    };
+
+    const angularComponentConfig = config.schematics['@schematics/angular']['component'] ?? {};
+    config.schematics['@schematics/angular']['component'] = {
+      ...angularComponentConfig,
+      "style": "scss",
+      "displayBlock": true,
+      "changeDetection": "OnPush"
+    };
 
     return config;
   })
