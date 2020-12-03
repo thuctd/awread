@@ -14,7 +14,7 @@ import {
 import { classify, dasherize, camelize, underscore } from '@angular-devkit/core/src/utils/strings';
 import { getProjectPath } from './get-project-path';
 
-export function addImportPathToModule(schema, whatYouWantToImport: string, writeToFilePath: string, customImportSyntax?: string, fileNameYouWantToImport?, isDefault = false): Rule {
+export function addImportPathToModule(schema, whatYouWantToImport: string, writeToFilePath: string, customImportSyntax?: string, fileNameYouWantToImport?, isDefault = false, usingClassify = true): Rule {
   return (host: Tree) => {
     if (!whatYouWantToImport || !writeToFilePath) {
       return host;
@@ -29,7 +29,7 @@ export function addImportPathToModule(schema, whatYouWantToImport: string, write
     const source = ts.createSourceFile(writeToModulePath, sourceText, ts.ScriptTarget.Latest, true);
 
     // PART II: targetModule name
-    const targetModuleClassify = `${classify(whatYouWantToImport)}`;
+    const targetModuleClassify = usingClassify ? `${classify(whatYouWantToImport)}` : whatYouWantToImport;
 
     const addImport = (
       symbolName: string,

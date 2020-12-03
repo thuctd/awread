@@ -1,7 +1,9 @@
 import { getNpmScope, getWorkspace, getWorkspacePath, NxJson, readJsonFile, updateJsonInTree, updateWorkspace, updateWorkspaceInTree } from "@nrwl/workspace";
-import { Rule, Tree, SchematicContext, SchematicsException } from '@angular-devkit/schematics';
+import { Rule, Tree, SchematicContext, SchematicsException, noop, chain } from '@angular-devkit/schematics';
 import { workspaces } from '@angular-devkit/core';
 import { normalize } from "path";
+import { insertCustomCode } from "./insert-custom-code";
+import { addImportPathToModule } from "./add-import-module";
 
 // base on: https://github.com/LayZeeDK/nx-tiny-app-project
 // base on: https://indepth.dev/tiny-angular-application-projects-in-nx-workspaces
@@ -20,6 +22,7 @@ export const appAndLibSetting = {
 
 function updateFilesAction(angularFile, host) {
   let angularApps: Array<Record<string, any>> = [];
+  let rules: any[] = [];
   angularApps = Object.keys(angularFile.projects)
     .map(name => ({ name, project: angularFile.projects[name] }))
     .filter(({ name, project }) => {
@@ -44,7 +47,14 @@ function updateFilesAction(angularFile, host) {
     } catch (error) {
       console.warn('enviroment maybe exist', error);
     }
+    try {
+      rules.push(...updateMainFile(host, name, project));
+    } catch (error) {
+      console.warn('enviroment maybe exist', error);
+    }
+
   })
+  return rules;
 }
 
 export function updateFiles() {
@@ -52,14 +62,18 @@ export function updateFiles() {
     // host.create(`libs/global/README.md`, '# Global have libs work with all workspace');
     const workspace = await getWorkspace(host, getWorkspacePath(host));
     const angularFile = JSON.parse(host.read('angular.json').toString('utf-8'))
-    updateFilesAction(angularFile, host);
-    return updateWorkspace(workspace);
+    const rules = updateFilesAction(angularFile, host);
+    return chain([
+      updateWorkspace(workspace),
+      ...rules,
+    ])
   }
 };
 
 export function createFiles() {
   return async (host: Tree) => {
     // host.create(`libs/global/README.md`, '# Global have libs work with all workspace');
+    const workspaceName = getNpmScope(host);
     const workspace = await getWorkspace(host, getWorkspacePath(host));
     const angularFile = JSON.parse(host.read('angular.json').toString('utf-8'))
     host.getDir(`libs/global/styles`).visit(path => host.delete(path));
@@ -93,9 +107,21 @@ export function createFiles() {
 `);
     host.overwrite(`libs/global/environments/src/index.ts`, `export * from './lib/environment';`);
 
-    updateFilesAction(angularFile, host);
+    // handle main
+    host.create(`libs/global/core/src/lib/main.global.ts`, `import { environment } from '@${workspaceName}/global/environments';
 
-    return updateWorkspace(workspace);
+export function customMain() {
+  return environment;
+}`);
+    host.overwrite(`libs/global/core/src/index.ts`,
+      host.read(`libs/global/core/src/index.ts`).toString('utf-8') + `\nexport * from './lib/main.global';`
+    );
+
+    const rules = updateFilesAction(angularFile, host);
+    return chain([
+      updateWorkspace(workspace),
+      ...rules,
+    ])
   };
 }
 
@@ -115,6 +141,18 @@ export function modifyEslint() {
     ]
     return json;
   });
+}
+
+export function updateMainFile(host: Tree, name: string, project: any): Rule[] {
+  const mainPath = `${project.sourceRoot}/main`;
+  if (!mainPath) return [noop()];
+  const workspaceName = readJsonFile('package.json').name;
+  return [
+    insertCustomCode(mainPath, `
+customMain();
+    `),
+    addImportPathToModule(host, 'customMain', mainPath, `@${workspaceName}/global/core`, null, true, false)
+  ]
 }
 
 export function updateEnviromentFile(host: Tree, name: string, project: any) {
@@ -199,6 +237,9 @@ export function createSharedLibrary() {
         if (isAngular) {
           updateAsset(p, projectName);
           updateStyle(p, projectName);
+        }
+        if (isHaveBuildConfiguration) {
+          updateEnviroment(p, projectName);
         }
         if (isHaveBuildConfiguration) {
           updateEnviroment(p, projectName);

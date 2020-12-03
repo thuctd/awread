@@ -1,3 +1,4 @@
+import { getNpmScope } from '@nrwl/workspace';
 import {
   chain, externalSchematic, Rule, SchematicContext, Tree, schematic, noop, apply, url, template,
   branchAndMerge, mergeWith, move, MergeStrategy, applyTemplates
@@ -25,6 +26,9 @@ export default function (schema: any): Rule {
       path: normalize(`libs/${schema.directory}/${schema.name}/src/lib/${currentModuleName}.module`)
     }
     const appPath = await createDefaultPath(tree, schema.project);
+
+    const workspaceName = getNpmScope(tree);
+
     return chain([
       externalSchematic('@nrwl/angular', 'lib', {
         ...appAndLibSetting,
@@ -34,6 +38,8 @@ export default function (schema: any): Rule {
       }),
       addImportDeclarationToModule(schema, 'RouterModule', currentModule.path, '@angular/router', 'RouterModule.forRoot([])'),
       addExportDeclarationToModule(schema, 'RouterModule', currentModule.path, '@angular/router'),
+      addImportDeclarationToModule(schema, 'GlobalCoreModule', currentModule.path, `@${workspaceName}/global/core`),
+      addExportDeclarationToModule(schema, 'GlobalCoreModule', currentModule.path, `@${workspaceName}/global/core`),
       importShellToAppModule(schema, currentModuleName, appPath),
       addRouterOutlet(false, appPath, `app.component`)
       // mergeWith(templateSource, MergeStrategy.AllowCreationConflict),

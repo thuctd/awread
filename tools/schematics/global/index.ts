@@ -39,6 +39,12 @@ export default function (schema: any): Rule {
         directory: schema.name,
         tags: `scope:shared,type:environments`,
       }),
+      externalSchematic('@nrwl/angular', 'lib', {
+        ...appAndLibSetting,
+        name: 'core',
+        directory: schema.name,
+        tags: `scope:shared,type:core`,
+      }),
       createSharedLibrary(),
       createFiles(),
     ])
