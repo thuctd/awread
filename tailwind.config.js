@@ -1,12 +1,20 @@
 module.exports = (isProd) => ({
-  prefix: '',
-  future: {
-    removeDeprecatedGapUtilities: true,
-    purgeLayersByDefault: true
-  },
-  purge: {
-    enabled: isProd,
-    content: ['**/*.html', '**/*.ts']
-  },
-  theme: {}
+    prefix: '',
+    purge: {
+      enabled: isProd,
+      content: [
+        './apps/**/*.html',
+        './apps/**/*.ts',
+        './libs/**/*.html',
+        './libs/**/*.ts',
+      ]
+    },
+    darkMode: false, // or 'media' or 'class'
+    theme: {
+      extend: {},
+    },
+    variants: {
+      extend: {},
+    },
+    plugins: [],
 });

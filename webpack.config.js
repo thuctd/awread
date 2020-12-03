@@ -1,9 +1,10 @@
-// const merge = require('webpack-merge');
-const { merge } = require('webpack-merge'); // new version webpack-merge
+const webpackMerge = require('webpack-merge');
 
 module.exports = (config) => {
+  const merge = webpackMerge && webpackMerge.merge ? webpackMerge.merge : webpackMerge;
   const isProd = config.mode === "production";
   const tailwindConfig = require("./tailwind.config.js")(isProd);
+
   return merge(config, {
     module: {
       rules: [
