@@ -8,7 +8,7 @@ import { addExportDeclarationToModule } from '../../utility/add-export-module';
 import { parseName } from '@schematics/angular/utility/parse-name';
 import { Path, normalize, strings } from '@angular-devkit/core';
 import { addRouterOutlet } from '../../utility/add-router-outlet';
-import { createSharedLibrary, createFiles, updateFiles } from '../../utility/edit-angular-json';
+import { createSharedLibrary, createFiles, updateFiles, appAndLibSetting } from '../../utility/edit-angular-json';
 
 export default function (schema: any): Rule {
   return async (tree: Tree, context: SchematicContext) => {
@@ -22,25 +22,22 @@ export default function (schema: any): Rule {
 
     return chain([
       externalSchematic('@nrwl/angular', 'lib', {
-        linter: "eslint",
+        ...appAndLibSetting,
         name: 'assets',
         directory: schema.name,
         tags: `scope:shared,type:assets`,
-        style: 'scss'
       }),
       externalSchematic('@nrwl/angular', 'lib', {
-        linter: "eslint",
+        ...appAndLibSetting,
         name: 'styles',
         directory: schema.name,
         tags: `scope:shared,type:styles`,
-        style: 'scss'
       }),
       externalSchematic('@nrwl/angular', 'lib', {
-        linter: "eslint",
+        ...appAndLibSetting,
         name: 'environments',
         directory: schema.name,
         tags: `scope:shared,type:environments`,
-        style: 'scss'
       }),
       createSharedLibrary(),
       createFiles(),

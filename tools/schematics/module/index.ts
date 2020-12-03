@@ -15,6 +15,7 @@ import { camelize, classify } from '@nrwl/workspace/src/utils/strings';
 import { getSourceNodes, insertImport, RemoveChange, ReplaceChange } from '@nrwl/workspace/src/utils/ast-utils';
 import * as path from 'path';
 import { removeImport } from '../../utility/ast-utils';
+import { addPageService } from '../../utility/page-service';
 
 export default function (schema: any): Rule {
   return async (host: Tree) => {
@@ -79,78 +80,6 @@ function routingOnlyActions(schema, relativePath) {
   return schema.routingOnly && relativePath ? [
     addImportDeclarationToModule(schema, name, routingPath, schema.project, classify(name)),
   ] : [noop()]
-}
-
-function addPageService(tree: Tree, schema) {
-  const path = `${schema.path}/${schema.originName}/${schema.originName}.${schema.type}.ts`;
-  if (schema.type === 'page' && schema.mode && !tree.exists(path)) {
-
-    tree.create(path, `import { Injectable, OnInit } from '@angular/core';
-
-@Injectable({
-  providedIn: 'root',
-})
-export class ${classify(schema.originName) + classify(schema.type)} implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void { }
-
-}`)
-  }
-
-  return schema.type === 'page' && schema.mode ? [
-    updateDesktopAndMobilePage(schema),
-  ] : [noop()]
-}
-
-function updateDesktopAndMobilePage(schema) {
-  return (host: Tree) => {
-    if (!schema.module) {
-      return host;
-    }
-    // /libs/writer/web/ui-auth/src/lib/register/pages/register-desktop/register-desktop.page.ts
-    const writeToFilePath = `${schema.path}/${schema.originName}-${schema.mode}/${schema.originName}-${schema.mode}.${schema.type}.ts`;
-    // /libs/writer/web/ui-auth/src/lib/register/pages/register/register.page
-    // do not have .ts to get relative path
-    const implementPath = `${schema.path}/${schema.originName}/${schema.originName}.${schema.type}`;
-    const relativePath = buildRelativePath(writeToFilePath, implementPath);
-    // console.log('is that module is exist', writeToPath, host.exists(writeToPath));
-    const text = host.read(writeToFilePath);
-    if (text === null) {
-      throw new SchematicsException(`File ${writeToFilePath} does not exist.`);
-    }
-    const sourceText = text.toString();
-    const source = ts.createSourceFile(writeToFilePath, sourceText, ts.ScriptTarget.Latest, true);
-    let nodes = getSourceNodes(source);
-
-    const insertImportSymbol = insertImport(source,
-      writeToFilePath,
-      strings.classify(`${schema.originName}-${schema.type}`),
-      relativePath);
-
-    const renewClass = replaceConstructorForInjection(nodes, classify(`${schema.originName}-${schema.mode}-${schema.type}`), writeToFilePath, classify(`${schema.originName}-${schema.type}`));
-    const removeImportOnInit = removeImport(source, writeToFilePath, classify('OnInit'));
-    const changes = [insertImportSymbol, renewClass, removeImportOnInit];
-
-    const recorder = host.beginUpdate(writeToFilePath);
-    for (const change of changes) {
-      if (change instanceof InsertChange) {
-        recorder.insertLeft(change.pos, change.toAdd);
-      } else if (change instanceof RemoveChange) {
-        recorder.remove(change.pos, change.toRemove.length);
-      } else if (change instanceof ReplaceChange) {
-        recorder.remove(change.pos, change.oldText.length);
-        recorder.insertLeft(change.pos, change.newText);
-      }
-    }
-    host.commitUpdate(recorder);
-
-    // PART III: console.log to see the changes
-    const afterInsertContent = host.get(writeToFilePath)?.content.toString();
-
-    return host;
-  };
 }
 
 function replaceConstructorForInjection(nodes: ts.Node[], writeToName: string, writeToPath: string, symbolName: string): Change {

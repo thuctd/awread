@@ -7,6 +7,8 @@ nx g lib api-interfaces --directory=backend
 # Generate order
 Follow to this order
 
+nx workspace-schematic generator
+
 1) generate application
 2) generate global
 3) generate shell

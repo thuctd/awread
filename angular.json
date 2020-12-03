@@ -1,110 +1,110 @@
 {
   "version": 1,
   "projects": {
-      "backend-api": {
-        "root": "apps/backend/api",
-        "sourceRoot": "apps/backend/api/src",
-        "projectType": "application",
-        "prefix": "backend-api",
-        "schematics": {},
-        "architect": {
-          "build": {
-            "builder": "@nrwl/node:build",
-            "options": {
-              "outputPath": "dist/apps/backend/api",
-              "main": "apps/backend/api/src/main.ts",
-              "tsConfig": "apps/backend/api/tsconfig.app.json",
-              "assets": [
-                "apps/backend/api/src/assets"
+    "backend-api": {
+      "root": "apps/backend/api",
+      "sourceRoot": "apps/backend/api/src",
+      "projectType": "application",
+      "prefix": "backend-api",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/backend/api",
+            "main": "apps/backend/api/src/main.ts",
+            "tsConfig": "apps/backend/api/tsconfig.app.json",
+            "assets": [
+              "apps/backend/api/src/assets"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "libs/global/environments/src/lib/environment.ts",
+                  "with": "libs/global/environments/src/lib/environment.prod.ts"
+                }
               ]
             },
-            "configurations": {
-              "production": {
-                "optimization": true,
-                "extractLicenses": true,
-                "inspect": false,
-                "fileReplacements": [
-                  {
-                    "replace": "libs/global/environments/src/lib/environment.ts",
-                    "with": "libs/global/environments/src/lib/environment.prod.ts"
-                  }
-                ]
-              },
-              "stage": {
-                "optimization": true,
-                "extractLicenses": true,
-                "inspect": false,
-                "fileReplacements": [
-                  {
-                    "replace": "libs/global/environments/src/lib/environment.ts",
-                    "with": "libs/global/environments/src/lib/environment.stage.ts"
-                  }
-                ]
-              },
-              "test": {
-                "optimization": true,
-                "extractLicenses": true,
-                "inspect": false,
-                "fileReplacements": [
-                  {
-                    "replace": "libs/global/environments/src/lib/environment.ts",
-                    "with": "libs/global/environments/src/lib/environment.test.ts"
-                  }
-                ]
-              }
-            }
-          },
-          "serve": {
-            "builder": "@nrwl/node:execute",
-            "options": {
-              "buildTarget": "backend-api:build"
-            }
-          },
-          "lint": {
-            "builder": "@nrwl/linter:eslint",
-            "options": {
-              "lintFilePatterns": [
-                "apps/backend/api/**/*.ts"
+            "stage": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "libs/global/environments/src/lib/environment.ts",
+                  "with": "libs/global/environments/src/lib/environment.stage.ts"
+                }
               ]
-            }
-          },
-          "test": {
-            "builder": "@nrwl/jest:jest",
-            "options": {
-              "jestConfig": "apps/backend/api/jest.config.js",
-              "passWithNoTests": true
-            }
-          }
-        }
-      },
-      "backend-api-interfaces": {
-        "projectType": "library",
-        "root": "libs/backend/api-interfaces",
-        "sourceRoot": "libs/backend/api-interfaces/src",
-        "prefix": "awread",
-        "architect": {
-          "lint": {
-            "builder": "@nrwl/linter:eslint",
-            "options": {
-              "lintFilePatterns": [
-                "libs/backend/api-interfaces/src/**/*.ts"
+            },
+            "test": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "libs/global/environments/src/lib/environment.ts",
+                  "with": "libs/global/environments/src/lib/environment.test.ts"
+                }
               ]
-            }
-          },
-          "test": {
-            "builder": "@nrwl/jest:jest",
-            "options": {
-              "jestConfig": "libs/backend/api-interfaces/jest.config.js",
-              "passWithNoTests": true
             }
           }
         },
-        "schematics": {
-          "@schematics/angular:component": {
-            "style": "scss"
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "backend-api:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/backend/api/**/*.ts"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/backend/api/jest.config.js",
+            "passWithNoTests": true
           }
         }
       }
+    },
+    "backend-api-interfaces": {
+      "projectType": "library",
+      "root": "libs/backend/api-interfaces",
+      "sourceRoot": "libs/backend/api-interfaces/src",
+      "prefix": "awread",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/backend/api-interfaces/src/**/*.ts"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/backend/api-interfaces/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      }
+    }
   },
   "cli": {
     "defaultCollection": "@nrwl/angular",
@@ -129,6 +129,19 @@
     },
     "@nrwl/angular:library": {
       "unitTestRunner": "jest"
+    },
+    "@schematics/angular:application": {
+      "style": "scss",
+      "linter": "eslint"
+    },
+    "@schematics/angular:library": {
+      "style": "scss",
+      "linter": "eslint"
+    },
+    "@schematics/angular:component": {
+      "style": "scss",
+      "displayBlock": true,
+      "changeDetection": "OnPush"
     }
   },
   "defaultProject": "writer-web"

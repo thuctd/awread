@@ -1,18 +1,22 @@
 import {
   chain, externalSchematic, Rule, SchematicContext, Tree, schematic, noop, apply, url, template,
-  branchAndMerge, mergeWith, move, MergeStrategy, applyTemplates
+  branchAndMerge, mergeWith, move, MergeStrategy, applyTemplates, SchematicsException
 } from '@angular-devkit/schematics';
+import { MODULE_EXT, ROUTING_MODULE_EXT, buildRelativePath, findModuleFromOptions } from '@schematics/angular/utility/find-module';
+
 import { Path, normalize, strings } from '@angular-devkit/core';
 import * as ts from 'typescript';
 import * as path from 'path';
 import { addGlobal, insert, RemoveChange } from '@nrwl/workspace';
-import { insertImport } from '@nrwl/workspace/src/utils/ast-utils';
+import { getSourceNodes, InsertChange, insertImport, ReplaceChange } from '@nrwl/workspace/src/utils/ast-utils';
 import { classify } from '@nrwl/workspace/src/utils/strings';
 import { createDefaultPath } from '@schematics/angular/utility/workspace';
 import { createEmptySection } from './create-empty-section';
 import { exportToLibIndex } from './export-to-index';
 import { insertCustomCode } from './insert-custom-code';
 import { addImportDeclarationToModule, addImportPathToModule } from './add-import-module';
+import { removeImport } from './ast-utils';
+import { Change } from '@nrwl/workspace/src/core/file-utils';
 
 export function createPageLazy(schema, pageName, currentModule: { name: string, filePath: string, folderPath: string }, type = 'page') {
   const nameWithPath = `pages/${pageName}`;

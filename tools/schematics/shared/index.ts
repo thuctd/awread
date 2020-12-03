@@ -15,10 +15,12 @@ import { getModuleData } from '../../utility/import-to-shell-module';
 import { insertImport } from '@nrwl/workspace/src/utils/ast-utils';
 import { classify } from '@nrwl/workspace/src/utils/strings';
 import { exportToLibIndex } from '../../utility/export-to-index';
-import { createPageLazy } from '../../utility/create-page-lazy';
+import { addPageService } from '../../utility/page-service';
 import { getProjectPath } from '../../utility/get-project-path';
 import { FileModule } from '../../utility/file-module.type';
 import { insertRoutes } from '../../utility/insert-routes';
+import { appAndLibSetting, componentSetting } from '../../utility/edit-angular-json';
+import { createPageLazy } from '../../utility/create-page-lazy';
 
 
 function addPartsContent(schema: any, target) {
@@ -53,53 +55,54 @@ export default function (schema: any): Rule {
     const customCode = `\n<awread-header></awread-header>\n<router-outlet></router-outlet>\n<awread-footer></awread-footer>`;
     return chain([
       externalSchematic('@nrwl/angular', 'lib', {
-        linter: "eslint",
+        ...appAndLibSetting,
         name: schema.name,
         directory: schema.directory ?? './',
         tags: `scope:shared`,
-        style: 'scss'
       }),
       insertCustomCode(currentModule.filePath, `\ndeclare const window: Window & {haveMobile: boolean};\nwindow.haveMobile = ${schema.haveMobile};`),
       addImportDeclarationToModule(schema, 'RouterModule', currentModule.filePath, '@angular/router'),
       addExportDeclarationToModule(schema, 'RouterModule', currentModule.filePath, '@angular/router'),
-      externalSchematic('@schematics/angular', 'component', {
+      externalSchematic('@nrwl/angular', 'component', {
+        ...componentSetting,
         name: `layouts/shell-desktop`,
         type: 'layout',
-        style: 'scss',
         module: currentModuleName,
         project: currentModuleName,
         export: true
       }),
       addRouterOutlet(true, currentModule.folderPath, 'shell-desktop', customCode),
-      externalSchematic('@schematics/angular', 'component', {
+      ...addPageService(tree, { ...schema, originName: 'shell', path: '/' + currentModule.folderPath + '/layouts', mode: 'desktop'}),
+      externalSchematic('@nrwl/angular', 'component', {
+        ...componentSetting,
         name: `layouts/shell-mobile`,
         type: 'layout',
-        style: 'scss',
         module: currentModuleName,
         project: currentModuleName,
         export: true
       }),
       addRouterOutlet(true, currentModule.folderPath, 'shell-mobile', customCode),
-      externalSchematic('@schematics/angular', 'component', {
+      ...addPageService(tree, { ...schema, originName: 'shell', path: '/' + currentModule.folderPath + '/layouts', mode: 'mobile'}),
+      externalSchematic('@nrwl/angular', 'component', {
+        ...componentSetting,
         name: `parts/navbar`,
         type: 'part',
-        style: 'scss',
         module: currentModuleName,
         project: currentModuleName,
         export: true
       }),
-      externalSchematic('@schematics/angular', 'component', {
+      externalSchematic('@nrwl/angular', 'component', {
+        ...componentSetting,
         name: `parts/header`,
         type: 'part',
-        style: 'scss',
         module: currentModuleName,
         project: currentModuleName,
         export: true
       }),
-      externalSchematic('@schematics/angular', 'component', {
+      externalSchematic('@nrwl/angular', 'component', {
+        ...componentSetting,
         name: `parts/footer`,
         type: 'part',
-        style: 'scss',
         module: currentModuleName,
         project: currentModuleName,
         export: true

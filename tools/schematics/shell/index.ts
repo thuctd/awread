@@ -8,6 +8,7 @@ import { addExportDeclarationToModule } from '../../utility/add-export-module';
 import { parseName } from '@schematics/angular/utility/parse-name';
 import { Path, normalize, strings } from '@angular-devkit/core';
 import { addRouterOutlet } from '../../utility/add-router-outlet';
+import { appAndLibSetting } from '../../utility/edit-angular-json';
 
 export default function (schema: any): Rule {
   return async (tree: Tree, context: SchematicContext) => {
@@ -26,11 +27,10 @@ export default function (schema: any): Rule {
     const appPath = await createDefaultPath(tree, schema.project);
     return chain([
       externalSchematic('@nrwl/angular', 'lib', {
-        linter: "eslint",
+        ...appAndLibSetting,
         name: schema.name,
         directory: schema.directory ?? './',
         tags: `scope:shell,scope:shared,type:feature`,
-        style: 'scss'
       }),
       addImportDeclarationToModule(schema, 'RouterModule', currentModule.path, '@angular/router', 'RouterModule.forRoot([])'),
       addExportDeclarationToModule(schema, 'RouterModule', currentModule.path, '@angular/router'),

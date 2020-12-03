@@ -6,6 +6,17 @@ import { normalize } from "path";
 // base on: https://github.com/LayZeeDK/nx-tiny-app-project
 // base on: https://indepth.dev/tiny-angular-application-projects-in-nx-workspaces
 
+export const componentSetting = {
+  "style": "scss",
+  "displayBlock": true,
+  "changeDetection": "OnPush"
+}
+
+export const appAndLibSetting = {
+  "style": "scss",
+  "linter": "eslint"
+}
+
 
 function updateFilesAction(angularFile, host) {
   let angularApps: Array<Record<string, any>> = [];
@@ -159,6 +170,30 @@ export function addProjectStylesFolder(host, projectName) {
     `);
 }
 
+export function updateGenerator() {
+  return updateWorkspaceInTree((config, context, host: Tree) => {
+
+    const appConfig = config.schematics['@schematics/angular:application'] ?? {};
+    config.schematics['@schematics/angular:application'] = {
+      ...appConfig,
+      ...appAndLibSetting
+    };
+    const libConfig = config.schematics['@schematics/angular:library'] ?? {};
+    config.schematics['@schematics/angular:library'] = {
+      ...libConfig,
+      ...appAndLibSetting
+    };
+
+    const angularComponent = config.schematics['@schematics/angular:component'] ?? {};
+    config.schematics['@schematics/angular:component'] = {
+      ...angularComponent,
+      ...componentSetting
+    };
+
+    return config;
+  })
+}
+
 export function createSharedLibrary() {
   return updateWorkspaceInTree((config, context, host: Tree) => {
     const libNames = ['global-assets', 'global-styles'];
@@ -191,35 +226,6 @@ export function createSharedLibrary() {
           updateEnviroment(p, projectName);
         }
       });
-
-
-    const appConfig = config.schematics['@nrwl/angular']['application'] ?? {};
-    config.schematics['@nrwl/angular']['application'] = {
-      ...appConfig,
-      "style": "scss",
-    };
-
-    const libConfig = config.schematics['@nrwl/angular']['library'] ?? {};
-    config.schematics['@nrwl/angular']['library'] = {
-      ...libConfig,
-      "style": "scss",
-    };
-
-    const componentConfig = config.schematics['@nrwl/angular']['component'] ?? {};
-    config.schematics['@nrwl/angular']['component'] = {
-      ...componentConfig,
-      "style": "scss",
-      "displayBlock": true,
-      "changeDetection": "OnPush"
-    };
-
-    const angularComponentConfig = config.schematics['@schematics/angular']['component'] ?? {};
-    config.schematics['@schematics/angular']['component'] = {
-      ...angularComponentConfig,
-      "style": "scss",
-      "displayBlock": true,
-      "changeDetection": "OnPush"
-    };
 
     return config;
   })

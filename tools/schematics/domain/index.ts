@@ -8,7 +8,7 @@ import { addExportDeclarationToModule } from '../../utility/add-export-module';
 import { parseName } from '@schematics/angular/utility/parse-name';
 import { Path, normalize, strings } from '@angular-devkit/core';
 import { addRouterOutlet } from '../../utility/add-router-outlet';
-import { modifyEslint, createSharedLibrary, updateFiles } from '../../utility/edit-angular-json';
+import { modifyEslint, createSharedLibrary, updateFiles, updateGenerator, appAndLibSetting } from '../../utility/edit-angular-json';
 import { dasherize } from '@nrwl/workspace/src/utils/strings';
 import { getProjectConfig, updateWorkspaceInTree } from '@nrwl/workspace';
 
@@ -25,10 +25,9 @@ export default function (schema: any): Rule {
 
     const chainWeb = [
       externalSchematic('@nrwl/angular', 'app', {
-        linter: "eslint",
+        ...appAndLibSetting,
         name: web,
         directory: schema.directory,
-        style: 'scss',
         routing: false,
         strict: true,
         tags: `scope:shared,type:app`,
@@ -49,10 +48,9 @@ export default function (schema: any): Rule {
 
     const chainPhone = [
       externalSchematic('@nrwl/angular', 'app', {
-        linter: "eslint",
+        ...appAndLibSetting,
         name: phone,
         directory: schema.directory,
-        style: 'scss',
         routing: false,
         strict: true,
         tags: `scope:shared,type:app`,
