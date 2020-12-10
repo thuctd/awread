@@ -4,6 +4,7 @@ import { Injectable, OnInit } from '@angular/core';
   providedIn: 'root',
 })
 export class ProfilePage implements OnInit {
+
   constructor() {}
 
   ngOnInit(): void {}
