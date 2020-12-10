@@ -184,7 +184,7 @@ export function addProjectStylesFolder(host, projectName, path = `libs/global/st
   @import './lib/${projectName}theme.scss';
   @import './lib/${projectName}global.scss';
   `);
-  host.create(`${path}/${projectName}material.scss`, ``);
+  // host.create(`${path}/${projectName}material.scss`, ``);
   host.create(`${path}/${projectName}tailwind.scss`, ``);
 }
 
@@ -292,11 +292,11 @@ function updateStyle(p, projectName) {
     p.architect.build.options.styles.push(globalIndex);
   }
 
-  const globalMaterial = `${libRoot}/material.scss`;
-  const materialFile = styles.find(s => s === globalMaterial);
-  if (!materialFile) {
-    p.architect.build.options.styles.push(globalMaterial);
-  }
+  // const globalMaterial = `${libRoot}/material.scss`;
+  // const materialFile = styles.find(s => s === globalMaterial);
+  // if (!materialFile) {
+  //   p.architect.build.options.styles.push(globalMaterial);
+  // }
 
   const globalTailwind = `${libRoot}/tailwind.scss`;
   const tailwindFile = styles.find(s => s === globalTailwind);
