@@ -7,7 +7,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { TopNavSection } from './layouts/single/top-nav/top-nav.section';
 import { LeftNavSection } from './layouts/single/left-nav/left-nav.section';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import { faSearch, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 
 @NgModule({
   imports: [
@@ -21,4 +22,11 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   declarations: [SingleLayout, TopNavSection, LeftNavSection],
   exports: [SingleLayout],
 })
-export class WriterWebUiSingleModule {}
+export class WriterWebUiSingleModule {
+
+  constructor(library: FaIconLibrary) {
+    library.addIcons(faSearch, faSignOutAlt);
+  }
+}
+
+

@@ -9,7 +9,7 @@ import {
   NotFoundPage,
 } from '@awread/writer/web/shared';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { } from '@fortawesome/free-solid-svg-icons';
+import { faBookmark, faCoffee, faHeart, faSearch, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { WriterWebUiAuthModule } from '@awread/writer/web/ui-auth';
 import { WriterWebUiSingleModule } from '@awread/writer/web/ui-single';
