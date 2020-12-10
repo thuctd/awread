@@ -1,3 +1,43 @@
 :host {
   display: block;
 }
+.overflow-visible-i {
+  overflow: visible!important;
+}
+.rounded-r-4xl{
+  border-top-right-radius: 2.5rem;
+  border-bottom-right-radius: 2.5rem;
+}
+.active {
+  // filter: brightness(120%);
+  opacity: 1;
+  // background-color: #ABF0D1;
+  .white-block {
+    display: block;
+    height: 8rem;
+  }
+}
+.activee{
+  background-color: red;
+}
+.height-below {
+  height: calc(100vh - 64px);
+}
+::ng-deep{
+  .mat-drawer-content, .mat-sidenav-content{
+    margin-left: 0rem !important;
+  }
+}
+
+@media only screen and (max-width: 1280px){
+  ::ng-deep{
+    .mat-drawer-content, .mat-sidenav-content{
+      margin-left: -8.5rem !important;
+    }
+    .mat-drawer.mat-drawer-push {
+      background-color: white;
+    }
+  }
+
+}
+

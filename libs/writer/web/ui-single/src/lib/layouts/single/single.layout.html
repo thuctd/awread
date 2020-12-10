@@ -1,3 +1,34 @@
-<p>single works!</p>
+<mat-sidenav-container class="relative h-full" [hasBackdrop]="hasBackdrop">
+  <mat-sidenav class="overflow-visible-i rounded-r-4xl bg-white h-full mt-16" opened #sidenav disableClose [mode]="mode">
+    <awread-left-nav class="h-full block" [itemTemplate]="customItemTemplate" [data]="navData"></awread-left-nav>
+  </mat-sidenav>
 
-<router-outlet></router-outlet>
+  <mat-sidenav-content class="">
+    <awread-top-nav [lefNavOpened]="sidenav.opened" (toggleSide)="sidenav.toggle()"></awread-top-nav>
+    <div class="p-4 bg-gray-100 overflow-i height-below flex child-full">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+<ng-template #customItemTemplate let-item>
+  <div class="h-16 flex items-center justify-center flex-row dim grow py-16"
+    routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+    <div class="bg-green-500 hidden h-20 white-block w-1 absolute left-0 rounded-r-lg"></div>
+    <a *ngIf="!item.children;else groupNav" class="text-base py-4 text-black no-underline o-50"
+    [routerLink]="item.link"
+      routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      <div class="flex justify-center items-center flex-col px-4">
+        <img src="{{item.icon}}" alt="">
+      </div>
+    </a>
+    <ng-template #groupNav>
+      <a class="text-base py-4 text-black no-underline o-50">
+        <div class="flex justify-center items-center flex-col px-4">
+          <img src="{{item.icon}}" alt="">
+        </div>
+      </a>
+    </ng-template>
+  </div>
+</ng-template>
+

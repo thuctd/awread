@@ -1,0 +1,40 @@
+<nav class="w-full border-b bg-white border-gray-400 flex items-center flex-row lg:pr-24 pl-4 py-2 h-16 shadow">
+  <div class="flex justify-start items-center w-2/6 xl:ml-0 ml-32">
+    <div class="ml-10 xl:ml-6"><img src="assets/icons/newlogo.png" class="w-16" alt="Awread"></div>
+  </div>
+  <div class="flex justify-end items-center w-4/6">
+    <div class="flex justify-start items-center mr-10">
+      <input
+        class="text-xs lg:text-sm border-0 border-none bg-green-100 text-gray-800 p-2 sm:p-2 leading-none w-64 rounded-lg rounded-r-none focus:outline-none"
+        placeholder="" type="text" name="email-address" value="" id="email-address">
+      <button
+        class="float-left text-center border-0 border-none bg-green-400 hover:bg-green-600 text-white cursor-pointer sm:px-2 py-1 rounded-lg rounded-l-none focus:outline-none"
+        type="submit">
+        <fa-icon icon="search" class="text-xl"></fa-icon>
+      </button>
+    </div>
+    <div>
+      <a (click)="toggleMenu($event)" class="cursor-pointer">
+        <img src="http://tachyons.io/img/logo.jpg" class="rounded-full h-8 w-8 inline-block"
+          alt="avatar">
+      </a>
+      <div *ngIf="isMenuOpen" class="flex flex-col absolute right-32 lg:right-24 top-16 z-50">
+        <div id="frist_div" class="w-64 mh-8 bg-green-500 rounded-b-none rounded-lg"></div>
+        <div class="w-64 mh-8 bg-white border-gray-300 border-b">
+          <div class="w-2/6">
+            <img src="http://tachyons.io/img/logo.jpg"
+              class="border-green-500 border-4 top-3 left-4 rounded-full h-10 w-10 inline-block absolute" alt="IMG_User">
+          </div>
+        </div>
+        <div class="w-64 mh-8 bg-white rounded-t-none rounded-lg">
+          <div class="py-2 flex pl-8">
+            <fa-icon icon="sign-out-alt" class="text-2xl"></fa-icon>
+            <a href="#0" (click)="signout.emit()"
+              class="text-xs sm:text-sm block link dim font-medium black ml-6 mt-1">Sign Out</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
