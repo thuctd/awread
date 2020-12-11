@@ -11,6 +11,7 @@ import {
 import { WriterWebUiAuthModule } from '@awread/writer/web/ui-auth';
 import { WriterWebUiSingleModule } from '@awread/writer/web/ui-single';
 import { WriterWebUiCreationsModule } from '@awread/writer/web/ui-creations';
+import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 
 declare const window: Window & { haveMobile: boolean };
 
@@ -43,4 +44,10 @@ const routes: Routes = [
   ],
   exports: [RouterModule, GlobalCoreModule],
 })
-export class WriterWebFeatureShellModule {}
+
+export class WriterWebFeatureShellModule {
+  constructor(library: FaIconLibrary) {
+    // Add an icon to the library for convenient access in other components
+    library.addIcons();
+  }
+}
