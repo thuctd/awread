@@ -1,0 +1,26 @@
+{
+    "$schema": "http://json-schema.org/schema",
+    "id": "atomic",
+    "type": "object",
+    "properties": {
+        "list": {
+            "type": "string",
+            "description": "list of atomics",
+            "$default": {
+                "$source": "argv",
+                "index": 0
+            }
+        },
+        "type": {
+            "type": "string",
+            "description": "atoms, groups, sections"
+        },
+        "project": {
+            "type": "string",
+            "description": "project name"
+        }
+    },
+    "required": [
+        "list"
+    ]
+}
