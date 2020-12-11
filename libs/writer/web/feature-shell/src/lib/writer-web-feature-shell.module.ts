@@ -14,6 +14,7 @@ import { WriterWebUiAuthModule } from '@awread/writer/web/ui-auth';
 import { WriterWebUiSingleModule } from '@awread/writer/web/ui-single';
 import { WriterWebUiCreationsModule } from '@awread/writer/web/ui-creations';
 
+
 declare const window: Window & { haveMobile: boolean };
 
 const routes: Routes = [
@@ -38,18 +39,14 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forRoot(routes),
     GlobalCoreModule,
-    FontAwesomeModule,
     WriterWebSharedModule,
     WriterWebUiAuthModule,
     WriterWebUiSingleModule,
     WriterWebUiCreationsModule,
   ],
-  exports: [
-    RouterModule, 
-    GlobalCoreModule,
-    FontAwesomeModule
-  ],
+  exports: [RouterModule, GlobalCoreModule],
 })
+
 export class WriterWebFeatureShellModule {
   constructor(library: FaIconLibrary) {
     // Add an icon to the library for convenient access in other components
