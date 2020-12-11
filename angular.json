@@ -135,7 +135,6 @@
             ],
             "styles": [
               "apps/writer/web/src/styles.scss",
-              "libs/global/styles/src/material.scss",
               "libs/global/styles/src/tailwind.scss",
               "libs/global/styles/src/index.scss",
               "libs/global/styles/src/projects/writer-web/writer-web.scss"
@@ -385,7 +384,6 @@
             ],
             "styles": [
               "apps/writer/phone/src/styles.scss",
-              "libs/global/styles/src/material.scss",
               "libs/global/styles/src/tailwind.scss",
               "libs/global/styles/src/index.scss",
               "libs/global/styles/src/projects/writer-phone/writer-phone.scss"

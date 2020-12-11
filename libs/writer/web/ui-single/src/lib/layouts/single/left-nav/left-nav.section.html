@@ -1,7 +1,0 @@
-<div class="h-full w-32 flex items-center justify-center flex-col">
-  <div class="w-full grow-1 flex items-center justify-center flex-col">
-    <div class="w-full" *ngFor="let item of data">
-      <ng-container [ngTemplateOutlet]="itemTemplate" [ngTemplateOutletContext]="{ $implicit: item }"></ng-container>
-    </div>
-  </div>
-</div>
