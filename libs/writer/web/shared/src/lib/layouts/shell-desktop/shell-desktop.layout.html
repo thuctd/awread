@@ -1,5 +1,5 @@
-<p>shell-desktop works!</p>
+<!-- <p>shell-desktop works!</p> -->
 
-<awread-header></awread-header>
+<awread-header *ngIf="!isLogin"></awread-header>
 <router-outlet></router-outlet>
-<awread-footer></awread-footer>
+<awread-footer *ngIf="!isLogin"></awread-footer>

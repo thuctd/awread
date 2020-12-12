@@ -1,7 +1,6 @@
 ## Development Environment setup
 ```
 npm i -g nx
-
 ```
 ```
 npm i
@@ -47,9 +46,4 @@ Examples: `feature/BK-1308-dashboard`, `feature/bk-1306`, `fix/BK-1062-remove-ph
 
 ## VS Code plugin
 - tailwind itellisense (read more)[https://tailwindcss.com/docs/intellisense] (download)[vscode:extension/bradlc.vscode-tailwindcss]
-- Angular Language Service
-- Bracket Pair Colorizer
-- Eslint
-- GitLens
-- Nx Console
-- Prettier
+

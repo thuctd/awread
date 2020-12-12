@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NotFoundPage } from './not-found.page';
 import { RouterModule, Routes } from '@angular/router';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 const routes: Routes = [
   {
     path: '',
@@ -17,7 +17,6 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     MatSlideToggleModule,
-    FontAwesomeModule
   ],
   exports: [NotFoundPage],
 })
