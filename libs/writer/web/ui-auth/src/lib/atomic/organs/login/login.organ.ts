@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Validators, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'login',
@@ -7,8 +8,13 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginOrgan implements OnInit {
-
-  constructor() { }
+  formDangNhap = this.fb.group({
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', Validators.required]
+  })
+  constructor(
+    private fb: FormBuilder,
+  ) { }
 
   ngOnInit(): void {
   }

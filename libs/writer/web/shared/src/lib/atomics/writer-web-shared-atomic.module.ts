@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StorybookSupportModule } from '@awread/global/design-system';
-import { NavbarLinkMolec } from './molecs/navbar-link/navbar-link.molec';
+import { GlobalDesignSystemAtomicModule, StorybookSupportModule } from '@awread/global/design-system';
+import { NavbarLinkGroupMolec } from './molecs/navbar-link-group/navbar-link-group.molec';
 
 @NgModule({
-    imports: [CommonModule, StorybookSupportModule],
-  exports: [CommonModule, NavbarLinkMolec],
-  declarations: [NavbarLinkMolec]
+  imports: [CommonModule, StorybookSupportModule, GlobalDesignSystemAtomicModule],
+  exports: [CommonModule, NavbarLinkGroupMolec],
+  declarations: [NavbarLinkGroupMolec]
 })
-export class WriterWebSharedAtomicModule {}
+export class WriterWebSharedAtomicModule { }

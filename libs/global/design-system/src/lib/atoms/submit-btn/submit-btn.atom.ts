@@ -7,7 +7,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter, Input
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SubmitBtnAtom implements OnInit {
-  @Output() btnClicked = new EventEmitter();
+  @Output() onBtnClicked = new EventEmitter();
   @Input() submitText = 'login';
   @Input() active = false;
   constructor() { }

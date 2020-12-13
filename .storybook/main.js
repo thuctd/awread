@@ -7,7 +7,7 @@ module.exports = {
     '@awread/global/design-system/src/lib/**/*.stories.mdx',
     '@awread/global/design-system/src/lib/**/*.stories.@(js|jsx|ts|tsx)'
   ],
-  addons: ['@storybook/addon-knobs/register'],
+  addons: ['@storybook/addon-knobs', '@storybook/addon-actions'],
   // your Storybook configuration
   // refs: {
   //   'design-system': {

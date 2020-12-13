@@ -1,15 +1,15 @@
-import { NavbarLinkMolec } from './navbar-link.molec';
+import { NavbarLinkGroupMolec } from './navbar-link-group.molec';
 import { WriterWebSharedAtomicModule } from '../../writer-web-shared-atomic.module';
 
 export default {
-  title: 'shared/molecs/navbar link'
+  title: 'Shared/Molecs/Navbar Link Group'
 }
 
 export const primary = () => ({
   moduleMetadata: {
     imports: [WriterWebSharedAtomicModule]
   },
-  component: NavbarLinkMolec,
+  component: NavbarLinkGroupMolec,
   props: {
 
   }

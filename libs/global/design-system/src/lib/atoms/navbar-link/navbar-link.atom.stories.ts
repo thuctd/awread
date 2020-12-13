@@ -3,7 +3,7 @@ import { GlobalDesignSystemAtomicModule } from '../../global-design-system-atomi
 import { text } from '@storybook/addon-knobs';
 
 export default {
-  title: 'design system/atoms/navbar link'
+  title: 'Design System/Atoms/navbar link'
 }
 
 export const primary = () => ({

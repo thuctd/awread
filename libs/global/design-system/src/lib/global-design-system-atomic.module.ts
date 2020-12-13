@@ -11,10 +11,11 @@ import { TabBtnAtom } from './atoms/tab-btn/tab-btn.atom';
 import { StorybookSupportModule } from './storybook-support.module';
 import { NavbarLinkAtom } from './atoms/navbar-link/navbar-link.atom';
 import { NavbarIconAtom } from './atoms/navbar-icon/navbar-icon.atom';
+import { TestMolec } from './molecs/test/test.molec';
 
 @NgModule({
   imports: [CommonModule, StorybookSupportModule],
-  exports: [TabBtnAtom, LogoAtom, InputFormAtom, CheckBtnAtom, LinkBtnAtom, SubmitBtnAtom, SocialBtnAtom, AuthBgAtom, NavbarLinkAtom, NavbarIconAtom],
-  declarations: [TabBtnAtom, LogoAtom, InputFormAtom, CheckBtnAtom, LinkBtnAtom, SubmitBtnAtom, SocialBtnAtom, AuthBgAtom, NavbarLinkAtom, NavbarIconAtom],
+  exports: [TabBtnAtom, LogoAtom, InputFormAtom, CheckBtnAtom, LinkBtnAtom, SubmitBtnAtom, SocialBtnAtom, AuthBgAtom, NavbarLinkAtom, NavbarIconAtom, TestMolec],
+  declarations: [TabBtnAtom, LogoAtom, InputFormAtom, CheckBtnAtom, LinkBtnAtom, SubmitBtnAtom, SocialBtnAtom, AuthBgAtom, NavbarLinkAtom, NavbarIconAtom, TestMolec],
 })
 export class GlobalDesignSystemAtomicModule { }
