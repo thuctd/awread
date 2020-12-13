@@ -1,5 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-
+import { FormBuilder } from '@angular/forms';
+import { faLock, faEnvelope, faUser } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'signup-form',
   templateUrl: './signup-form.group.html',
@@ -7,8 +8,16 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SignupFormGroup implements OnInit {
-
-  constructor() { }
+  icons = { faLock, faEnvelope, faUser };
+  form = this.fb.group({
+    fullname: '',
+    email: '',
+    password: '',
+    confirmpassword: ''
+  })
+  constructor(
+    private fb: FormBuilder,
+  ) { }
 
   ngOnInit(): void {
   }

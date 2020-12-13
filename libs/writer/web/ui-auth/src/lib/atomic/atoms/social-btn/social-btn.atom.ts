@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter, Input } from '@angular/core';
 
 @Component({
   selector: 'social-btn',
@@ -7,7 +7,8 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SocialBtnAtom implements OnInit {
-
+  @Output() socialBtn = new EventEmitter();
+  @Input() provider = 'facebook';
   constructor() { }
 
   ngOnInit(): void {

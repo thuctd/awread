@@ -46,7 +46,8 @@
       ],
       "@awread/writer/web/feature-creations": [
         "libs/writer/web/feature-creations/src/index.ts"
-      ]
+      ],
+      "@awread/global/design-system": ["libs/global/design-system/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

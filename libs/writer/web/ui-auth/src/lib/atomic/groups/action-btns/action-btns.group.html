@@ -1,5 +1,14 @@
-<p>action-btns works!</p>
-<forgot-btn class="bg-blue-600 rounded"></forgot-btn>
-<submit-btn class="bg-green-500"></submit-btn>
-<check-btn class="bg-yellow-500"></check-btn>
-<img src="/global-assets/images/halo.jpg" alt="">
+<submit-btn></submit-btn>
+
+<div class="flex items-center mb-4  mt-4">
+    <div class="w-full block relative">
+        <div class="flex justify-center mt-2">
+            <span class="cursor-pointer text-green-500 md:text-xs lg:text-sm xl:text-base font-medium">Login
+                with</span>
+        </div>
+        <div class="flex justify-center mt-2 absolute right-0 top-0">
+            <social-btn class="mr-5" [provider]="'facebook'"></social-btn>
+            <social-btn [provider]="'google'"></social-btn>
+        </div>
+    </div>
+</div>

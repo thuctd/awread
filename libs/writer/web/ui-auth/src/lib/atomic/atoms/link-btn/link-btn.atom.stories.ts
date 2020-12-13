@@ -1,4 +1,4 @@
-import { ForgotBtnAtom } from './forgot-btn.atom';
+import { LinkBtnAtom } from './link-btn.atom';
 import { WriterWebUiAuthAtomicModule } from '../../writer-web-ui-auth-atomic.module';
 
 export default {
@@ -9,7 +9,7 @@ export const primary = () => ({
   moduleMetadata: {
     imports: [WriterWebUiAuthAtomicModule]
   },
-  component: ForgotBtnAtom,
+  component: LinkBtnAtom,
   props: {
 
   }

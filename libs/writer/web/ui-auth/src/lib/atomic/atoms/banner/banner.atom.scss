@@ -1,3 +1,59 @@
 :host {
   display: block;
 }
+.header {
+  .header__bg__1 {
+    clip-path: circle(42.5% at 0 50%);
+    background-color: #5dc69d;
+  }
+
+  .header__bg__2 {
+    clip-path: circle(54.5% at 0 53%);
+    background-color: #7dd8b5;
+  }
+
+  .header__bg__3 {
+    clip-path: circle(66.5% at 0 53%);
+    background-color: #abf0d1;
+  }
+}
+
+@media (min-width: 980px) and (max-width: 1025px) {
+  .h-128 {
+    height: 42.5rem;
+  }
+
+  .header {
+    .header__bg__1 {
+      clip-path: ellipse(34% 48% at 0% 30%);
+    }
+
+    .header__bg__2 {
+      clip-path: ellipse(44% 58% at 0% 30%);
+    }
+
+    .header__bg__3 {
+      clip-path: ellipse(54% 68% at 0% 30%);
+    }
+  }
+}
+
+@media (min-width: 768px) and (max-width: 980px) {
+  .h-128 {
+    height: 35.5rem;
+  }
+
+  .header {
+    .header__bg__1 {
+      clip-path: ellipse(34% 48% at 0% 30%);
+    }
+
+    .header__bg__2 {
+      clip-path: ellipse(44% 58% at 0% 30%);
+    }
+
+    .header__bg__3 {
+      clip-path: ellipse(54% 68% at 0% 30%);
+    }
+  }
+}

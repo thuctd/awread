@@ -1,1 +1,4 @@
-<p>remember-forgot works!</p>
+<div class="w-full flex items-center justify-between">
+    <check-btn [text]="'remember me' | titlecase"></check-btn>
+    <link-btn [text]="'forgot your password?' | titlecase" [routerLink]="'/forgot'"></link-btn>
+</div>

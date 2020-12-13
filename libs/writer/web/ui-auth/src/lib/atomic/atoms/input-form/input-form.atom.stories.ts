@@ -1,15 +1,15 @@
-import { InputAtom } from './input.atom';
+import { InputFormAtom } from './input-form.atom';
 import { WriterWebUiAuthAtomicModule } from '../../writer-web-ui-auth-atomic.module';
 
 export default {
-  title: 'Auth/Atoms/Input'
+  title: 'Auth/Atoms/InputForm'
 }
 
 export const primary = () => ({
   moduleMetadata: {
     imports: [WriterWebUiAuthAtomicModule]
   },
-  component: InputAtom,
+  component: InputFormAtom,
   props: {
 
   }

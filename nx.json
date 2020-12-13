@@ -150,6 +150,9 @@
         "scope:shared",
         "type:feature-"
       ]
+    },
+    "global-design-system": {
+      "tags": []
     }
   }
 }

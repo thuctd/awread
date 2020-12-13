@@ -1,1 +1,8 @@
-<p>tab-btn works!</p>
+<div class="w-100 pl-8">
+    <div class="text-center border-b border-teal-400">
+        <a (click)="tabClicked.emit()" [ngClass]="active ? 'text-green-400' : 'text-gray-400'"
+            class="inline-block font-bold pb-2 cursor-pointer md:text-sm lg:text-base xl:text-base">
+            {{ tabName | titlecase }}
+        </a>
+    </div>
+</div>

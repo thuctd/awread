@@ -5,12 +5,21 @@ export default {
   title: 'Auth/Atoms/SocialBtn'
 }
 
-export const primary = () => ({
+export const facebook = () => ({
   moduleMetadata: {
     imports: [WriterWebUiAuthAtomicModule]
   },
   component: SocialBtnAtom,
   props: {
 
+  }
+})
+export const google = () => ({
+  moduleMetadata: {
+    imports: [WriterWebUiAuthAtomicModule]
+  },
+  component: SocialBtnAtom,
+  props: {
+    provider: 'google'
   }
 })

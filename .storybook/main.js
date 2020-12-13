@@ -3,6 +3,13 @@ const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
 module.exports = {
   stories: [],
   addons: ['@storybook/addon-knobs/register'],
+  // your Storybook configuration
+  refs: {
+    'design-system': {
+      title: 'Design System',
+      url: 'http://localhost:4495',
+    },
+  },
   webpackFinal: (config, { configType }) => {
     const tailwindConfig = require("../tailwind.config.js")(configType === 'PRODUCTION');
     // `configType` has a value of 'DEVELOPMENT' or 'PRODUCTION'
