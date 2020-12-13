@@ -23,7 +23,7 @@ export default function (schema: any): Rule {
                 ...componentSetting,
                 type: schema.type,
                 name: `${schema.type}s/${name}`,
-                export: true,
+                // export: true,
                 path: generatePath,
                 skipTests: true
             }));
