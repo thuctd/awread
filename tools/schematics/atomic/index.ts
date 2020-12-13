@@ -9,22 +9,29 @@ import * as path from 'path';
 import { applyWithSkipExisting } from '@nrwl/workspace/src/utils/ast-utils';
 import { classify } from '@nrwl/workspace/src/utils/strings';
 import { Path, normalize, strings } from '@angular-devkit/core';
+import { readJsonFile } from '@nrwl/workspace';
 const resolve = require('path').resolve;
+
+export function spacerize(text) {
+    return text.replace(/-/g, ' ');
+}
 
 export default function (schema: any): Rule {
     return async (tree: Tree, context: SchematicContext) => {
         const parts = schema.list.length ? schema.list.split(',') : [];
         const projectName = await getProjectName(schema, tree);
         schema.project = projectName;
-        const storyTitle = schema.project.includes('-ui-') ? schema.project.split('-ui-')[1] : schema.project;
+        const storyTitle = readStoryTitle(projectName);
         const generatePath = await getGeneratePath(schema, tree, projectName);
+        const atomicModule = `${projectName}-atomic`;
         const generateActions = parts.map(name =>
             externalSchematic('@schematics/angular', 'component', {
                 ...componentSetting,
                 type: schema.type,
                 name: `${schema.type}s/${name}`,
-                // export: true,
+                export: schema.export,
                 path: generatePath,
+                module: atomicModule,
                 skipTests: true
             }));
         const componentStories = parts.map(name =>
@@ -33,8 +40,8 @@ export default function (schema: any): Rule {
                     ...strings,
                     componentFileName: `${name}.${schema.type}`,
                     componentName: classify(`${name}-${schema.type}`),
-                    title: `${classify(storyTitle)}/${classify(schema.type)}s/${classify(name)}`,
-                    atomicModule: `${projectName}-atomic`,
+                    title: `${spacerize(storyTitle)}/${spacerize(schema.type)}s/${spacerize(name)}`,
+                    atomicModule: atomicModule,
                     tmpl: '',
                 }),
                 move(generatePath + '/' + `${schema.type}s/${name}`),
@@ -47,16 +54,35 @@ export default function (schema: any): Rule {
     }
 }
 
+export function readStoryTitle(projectName) {
+    let title;
+    switch (true) {
+        case projectName.includes('global'):
+            title = projectName.split('global-')[1];
+            break;
+        case projectName.includes('-ui-'):
+            title = projectName.split('-ui-')[1];
+            break;
+        default:
+            title = projectName;
+            break;
+    }
+    return title;
+}
+
 export function addParentModule(generatePath: string, projectName: string) {
     return (tree) => {
         const atomicModulePath = `${generatePath}/${projectName}-atomic.module.ts`;
         const atomicModuleExist = tree.exists(atomicModulePath);
+        const workspaceName = readJsonFile('package.json').name;
+        console.log('atomicModuleExist', atomicModuleExist, atomicModulePath)
         if (!atomicModuleExist) {
             tree.create(atomicModulePath, `import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { StorybookSupportModule } from '@${workspaceName}/global/design-system;
 
 @NgModule({
-    imports: [CommonModule],
+    imports: [CommonModule, StorybookSupportModule],
   exports: [CommonModule]
 })
 export class ${classify(projectName)}AtomicModule {}

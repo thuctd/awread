@@ -1,0 +1,8 @@
+<form [formGroup]="form">
+    <input-form [inputControl]="form.get('email')" [placeholder]="'email address' | titlecase"
+        [faIcon]="icons.faEnvelope"></input-form>
+    <input-form [inputControl]="form.get('password')" [placeholder]="'password' | titlecase" [faIcon]="icons.faLock">
+    </input-form>
+</form>
+
+<!-- <pre> {{ form.value | json }} </pre> -->

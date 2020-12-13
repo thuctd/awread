@@ -15,6 +15,11 @@
             "type": "string",
             "description": "atoms, groups, sections"
         },
+        "export": {
+            "type": "boolean",
+            "description": "export in module",
+            "default": true
+        },
         "project": {
             "type": "string",
             "description": "project name"

@@ -7,7 +7,7 @@ module.exports = {
   refs: {
     'design-system': {
       title: 'Design System',
-      url: 'http://localhost:4495',
+      url: 'http://localhost:4400',
     },
   },
   webpackFinal: (config, { configType }) => {

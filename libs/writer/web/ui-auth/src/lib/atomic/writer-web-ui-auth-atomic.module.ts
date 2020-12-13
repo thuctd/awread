@@ -1,23 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TabHeadGroup } from './groups/tab-head/tab-head.group';
-import { LoginFormGroup } from './groups/login-form/login-form.group';
-import { SignupFormGroup } from './groups/signup-form/signup-form.group';
-import { RememberForgotGroup } from './groups/remember-forgot/remember-forgot.group';
-import { ActionBtnsGroup } from './groups/action-btns/action-btns.group';
-import { BannerAtom } from './atoms/banner/banner.atom';
-import { TabBtnAtom } from './atoms/tab-btn/tab-btn.atom';
-import { LogoAtom } from './atoms/logo/logo.atom';
-import { InputFormAtom } from './atoms/input-form/input-form.atom';
-import { CheckBtnAtom } from './atoms/check-btn/check-btn.atom';
-import { LinkBtnAtom } from './atoms/link-btn/link-btn.atom';
-import { SubmitBtnAtom } from './atoms/submit-btn/submit-btn.atom';
-import { SocialBtnAtom } from './atoms/social-btn/social-btn.atom';
-import { GlobalDesignSystemModule, StorybookSupportModule } from '@awread/global/design-system';
-
+import { GlobalDesignSystemAtomicModule, StorybookSupportModule } from '@awread/global/design-system';
+import { TabHeadMolec } from './molecs/tab-head/tab-head.molec';
+import { LoginFormMolec } from './molecs/login-form/login-form.molec';
+import { RegisterFormMolec } from './molecs/register-form/register-form.molec';
+import { RememberForgotMolec } from './molecs/remember-forgot/remember-forgot.molec';
+import { ActionBtnsMolec } from './molecs/action-btns/action-btns.molec';
+import { LoginOrgan } from './organs/login/login.organ';
+import { RegisterOrgan } from './organs/register/register.organ';
+import { LoginRegisterTemplate } from './templates/login-register/login-register.template';
 @NgModule({
-  imports: [CommonModule,GlobalDesignSystemModule, StorybookSupportModule],
+  imports: [CommonModule, GlobalDesignSystemAtomicModule, StorybookSupportModule],
   exports: [CommonModule],
-  declarations: [TabHeadGroup, LoginFormGroup, SignupFormGroup, RememberForgotGroup, ActionBtnsGroup, BannerAtom, TabBtnAtom, LogoAtom, InputFormAtom, CheckBtnAtom, LinkBtnAtom, SubmitBtnAtom, SocialBtnAtom]
+  declarations: [TabHeadMolec, LoginFormMolec, RegisterFormMolec, RememberForgotMolec, ActionBtnsMolec, LoginOrgan, RegisterOrgan, LoginRegisterTemplate]
 })
-export class WriterWebUiAuthAtomicModule {}
+export class WriterWebUiAuthAtomicModule { }
