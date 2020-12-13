@@ -16,8 +16,6 @@ module.exports = {
     '<rootDir>/libs/writer/web/feature-auth',
     '<rootDir>/libs/writer/web/ui-single',
     '<rootDir>/libs/writer/web/feature-single',
-    '<rootDir>/libs/writer/web/ui-creations',
-    '<rootDir>/libs/writer/web/feature-creations',
     '<rootDir>/libs/global/design-system',
   ],
 };

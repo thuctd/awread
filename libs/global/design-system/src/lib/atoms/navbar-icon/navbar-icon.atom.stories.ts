@@ -1,15 +1,15 @@
-import { InputFormAtom } from './input-form.atom';
+import { NavbarIconAtom } from './navbar-icon.atom';
 import { GlobalDesignSystemAtomicModule } from '../../global-design-system-atomic.module';
 
 export default {
-  title: 'Design System/Atoms/InputForm'
+  title: 'design system/atoms/navbar icon'
 }
 
 export const primary = () => ({
   moduleMetadata: {
     imports: [GlobalDesignSystemAtomicModule]
   },
-  component: InputFormAtom,
+  component: NavbarIconAtom,
   props: {
 
   }

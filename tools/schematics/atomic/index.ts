@@ -9,7 +9,7 @@ import * as path from 'path';
 import { applyWithSkipExisting } from '@nrwl/workspace/src/utils/ast-utils';
 import { classify } from '@nrwl/workspace/src/utils/strings';
 import { Path, normalize, strings } from '@angular-devkit/core';
-import { readJsonFile } from '@nrwl/workspace';
+import { getNpmScope, readJsonFile } from '@nrwl/workspace';
 const resolve = require('path').resolve;
 
 export function spacerize(text) {
@@ -63,6 +63,9 @@ export function readStoryTitle(projectName) {
         case projectName.includes('-ui-'):
             title = projectName.split('-ui-')[1];
             break;
+        case projectName.includes('shared'):
+            title = 'shared';
+            break;
         default:
             title = projectName;
             break;
@@ -74,12 +77,12 @@ export function addParentModule(generatePath: string, projectName: string) {
     return (tree) => {
         const atomicModulePath = `${generatePath}/${projectName}-atomic.module.ts`;
         const atomicModuleExist = tree.exists(atomicModulePath);
-        const workspaceName = readJsonFile('package.json').name;
-        console.log('atomicModuleExist', atomicModuleExist, atomicModulePath)
+        const workspaceName = getNpmScope(tree);
+        console.log('atomicModuleExist', atomicModuleExist, atomicModulePath, workspaceName)
         if (!atomicModuleExist) {
             tree.create(atomicModulePath, `import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StorybookSupportModule } from '@${workspaceName}/global/design-system;
+import { StorybookSupportModule } from '@${workspaceName}/global/design-system';
 
 @NgModule({
     imports: [CommonModule, StorybookSupportModule],

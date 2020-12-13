@@ -137,20 +137,6 @@
         "type:feature-"
       ]
     },
-    "writer-web-ui-creations": {
-      "tags": [
-        "scope:ui-creations",
-        "scope:shared",
-        "type:ui-"
-      ]
-    },
-    "writer-web-feature-creations": {
-      "tags": [
-        "scope:feature--creations",
-        "scope:shared",
-        "type:feature-"
-      ]
-    },
     "global-design-system": {
       "tags": []
     }

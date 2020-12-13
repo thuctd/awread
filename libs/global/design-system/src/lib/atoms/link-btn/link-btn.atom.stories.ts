@@ -1,5 +1,5 @@
 import { LinkBtnAtom } from './link-btn.atom';
-import { GlobalDesignSystemModule } from '../../global-design-system.module';
+import { GlobalDesignSystemAtomicModule } from '../../global-design-system-atomic.module';
 
 export default {
   title: 'Design System/Atoms/ForgotBtn'
@@ -7,7 +7,7 @@ export default {
 
 export const primary = () => ({
   moduleMetadata: {
-    imports: [GlobalDesignSystemModule]
+    imports: [GlobalDesignSystemAtomicModule]
   },
   component: LinkBtnAtom,
   props: {

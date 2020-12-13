@@ -1,5 +1,5 @@
 import { SocialBtnAtom } from './social-btn.atom';
-import { GlobalDesignSystemModule } from '../../global-design-system.module';
+import { GlobalDesignSystemAtomicModule } from '../../global-design-system-atomic.module';
 
 export default {
   title: 'Design System/Atoms/Social Btn'
@@ -7,7 +7,7 @@ export default {
 
 export const facebook = () => ({
   moduleMetadata: {
-    imports: [GlobalDesignSystemModule]
+    imports: [GlobalDesignSystemAtomicModule]
   },
   component: SocialBtnAtom,
   props: {
@@ -16,7 +16,7 @@ export const facebook = () => ({
 })
 export const google = () => ({
   moduleMetadata: {
-    imports: [GlobalDesignSystemModule]
+    imports: [GlobalDesignSystemAtomicModule]
   },
   component: SocialBtnAtom,
   props: {

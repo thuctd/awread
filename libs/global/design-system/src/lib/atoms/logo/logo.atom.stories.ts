@@ -1,12 +1,12 @@
 import { LogoAtom } from './logo.atom';
-import { GlobalDesignSystemModule } from '../../global-design-system.module';
+import { GlobalDesignSystemAtomicModule } from '../../global-design-system-atomic.module';
 export default {
   title: 'Design System/Atoms/Logo'
 }
 
 export const primary = () => ({
   moduleMetadata: {
-    imports: [GlobalDesignSystemModule ]
+    imports: [GlobalDesignSystemAtomicModule]
   },
   component: LogoAtom,
   props: {
