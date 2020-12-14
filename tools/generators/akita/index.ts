@@ -3,19 +3,26 @@ import {
 } from '@angular-devkit/schematics';
 import { Path, normalize, strings } from '@angular-devkit/core';
 import * as pluralize from 'pluralize';
+import { getProjectName, getGeneratePath } from '../../utility/guess-workspace';
+import { readStoryTitle } from '../atomic';
 
 export default function (schema: any): Rule {
-    const templateSource = apply(url(schema.entity ? './entity-files' : './files'),
-        [
-            applyTemplates({
-                ...strings,
-                singular: pluralize.singular,
-                ...schema,
-            }),
-            move(normalize(process.cwd() + '/' + strings.dasherize(schema.name))),
-        ]);
-
     return async (tree: Tree, context) => {
+        const projectName = await getProjectName(schema, tree);
+        schema.project = projectName;
+        const storyTitle = readStoryTitle(projectName);
+        const generatePath = await getGeneratePath(schema, tree, projectName);
+
+        const templateSource = apply(url(schema.entity ? './entity-files' : './files'),
+            [
+                applyTemplates({
+                    ...strings,
+                    singular: pluralize.singular,
+                    ...schema,
+                }),
+                move(normalize(generatePath + '/' + strings.dasherize(schema.name))),
+            ]);
+
         console.log('what context look like?', context);
         return chain([
             mergeWith(templateSource, MergeStrategy.AllowCreationConflict),
