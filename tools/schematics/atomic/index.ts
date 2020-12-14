@@ -80,10 +80,9 @@ export function addParentModule(generatePath: string, projectName: string) {
             console.log('adding new atomic module');
             tree.create(atomicModulePath, `import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StorybookSupportModule } from '@${workspaceName}/global/design-system';
-
+import { StorybookSupportModule, GlobalDesignSystemAtomicModule } from '@${workspaceName}/global/design-system';
 @NgModule({
-    imports: [CommonModule, StorybookSupportModule],
+    imports: [CommonModule, StorybookSupportModule, GlobalDesignSystemAtomicModule],
   exports: [CommonModule]
 })
 export class ${classify(projectName)}AtomicModule {}
@@ -107,7 +106,10 @@ export async function getProjectName(schema, tree) {
 export async function getGeneratePath(schema, tree, projectName) {
     const cwd = process.cwd();
     const isInAppsOrLibs = cwd.includes('libs') ?? cwd.includes('apps');
-    if (isInAppsOrLibs) {
+    if (schema.project === "global-design-system") {
+        schema.path = `/libs/global/design-system/src/lib`;
+        return schema.path;
+    } else if (isInAppsOrLibs) {
         const folderPath = cwd.includes('libs') ? path.join('libs', cwd.split('libs')[1]) : path.join('apps', cwd.split('apps')[1]);
         schema.path = folderPath;
     } else {
@@ -124,7 +126,7 @@ export async function guessProject(tree) {
     const workspace = await getWorkspace(tree);
     const entries = Object.fromEntries(workspace.projects.entries());
     for (const [name, project] of Object.entries(entries)) {
-        console.log('name,project', name);
+        // console.log('name,project', name);
         if (project.sourceRoot && cwdNormalize.includes(project.sourceRoot)) {
             projectName = name;
         }
