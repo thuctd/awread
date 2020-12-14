@@ -10,11 +10,9 @@ import { applyWithSkipExisting } from '@nrwl/workspace/src/utils/ast-utils';
 import { classify } from '@nrwl/workspace/src/utils/strings';
 import { Path, normalize, strings } from '@angular-devkit/core';
 import { getNpmScope, readJsonFile } from '@nrwl/workspace';
+import { spacerize } from '../../utility/text-utility';
 const resolve = require('path').resolve;
 
-export function spacerize(text) {
-    return toTitleCase(text ? text : '').replace(/-/g, ' ');
-}
 
 export default function (schema: any): Rule {
     return async (tree: Tree, context: SchematicContext) => {
@@ -54,31 +52,6 @@ export default function (schema: any): Rule {
     }
 }
 
-export function toTitleCase(str) {
-    var i, j, str, lowers, uppers;
-    str = str.replace(/([^\W_]+[^\s-]*) */g, function (txt) {
-        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-    });
-
-    // Certain minor words should be left lowercase unless 
-    // they are the first or last words in the string
-    lowers = ['A', 'An', 'The', 'And', 'But', 'Or', 'For', 'Nor', 'As', 'At',
-        'By', 'For', 'From', 'In', 'Into', 'Near', 'Of', 'On', 'Onto', 'To', 'With'];
-    for (i = 0, j = lowers.length; i < j; i++)
-        str = str.replace(new RegExp('\\s' + lowers[i] + '\\s', 'g'),
-            function (txt) {
-                return txt.toLowerCase();
-            });
-
-    // Certain words such as initialisms or acronyms should be left uppercase
-    uppers = ['Id', 'Tv'];
-    for (i = 0, j = uppers.length; i < j; i++)
-        str = str.replace(new RegExp('\\b' + uppers[i] + '\\b', 'g'),
-            uppers[i].toUpperCase());
-
-    return str;
-}
-
 export function readStoryTitle(projectName) {
     let title;
     switch (true) {
@@ -103,8 +76,8 @@ export function addParentModule(generatePath: string, projectName: string) {
         const atomicModulePath = `${generatePath}/${projectName}-atomic.module.ts`;
         const atomicModuleExist = tree.exists(atomicModulePath);
         const workspaceName = getNpmScope(tree);
-        console.log('atomicModuleExist', atomicModuleExist, atomicModulePath, workspaceName)
         if (!atomicModuleExist) {
+            console.log('adding new atomic module');
             tree.create(atomicModulePath, `import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StorybookSupportModule } from '@${workspaceName}/global/design-system';
@@ -151,7 +124,8 @@ export async function guessProject(tree) {
     const workspace = await getWorkspace(tree);
     const entries = Object.fromEntries(workspace.projects.entries());
     for (const [name, project] of Object.entries(entries)) {
-        if (cwdNormalize.includes(project.sourceRoot)) {
+        console.log('name,project', name);
+        if (project.sourceRoot && cwdNormalize.includes(project.sourceRoot)) {
             projectName = name;
         }
     }
@@ -163,8 +137,8 @@ async function getDefaultProjectName(tree) {
     return angularFile.defaultProject;
 }
 
-async function getDefaultProjectPath(projectName, tree) {
+async function getDefaultProjectPath(schema, tree) {
     const workspace = await getWorkspace(tree);
-    const project = workspace.projects.get(projectName);
+    const project = workspace.projects.get(schema.project);
     return buildDefaultPath(project);
 }

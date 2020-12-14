@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/schema",
-    "id": "atomic",
+    "id": "ds",
     "type": "object",
     "properties": {
         "list": {
@@ -10,10 +10,6 @@
                 "$source": "argv",
                 "index": 0
             }
-        },
-        "project": {
-            "type": "string",
-            "description": "project name having this"
         },
         "type": {
             "type": "string",
