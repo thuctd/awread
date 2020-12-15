@@ -11,10 +11,10 @@ declare const window: Window & { haveMobile: boolean };
 const routes: Routes = [
   {
     path: '',
-    component:
-      window.innerWidth <= 768 && window?.haveMobile
-        ? ShellMobileLayout
-        : ShellDesktopLayout,
+    // component:
+    //   window.innerWidth <= 768 && window?.haveMobile
+    //     ? ShellMobileLayout
+    //     : ShellDesktopLayout,
     children: [
       {
         path: '',
