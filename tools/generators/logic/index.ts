@@ -41,6 +41,24 @@ export function addFile(filePath: string, name: string, type: string) {
             tree.create(filePath, ` export interface ${strings.classify(name)} {}`);
             return tree;
         }
+        if (type === 'api') {
+            tree.create(filePath, `import { Injectable } from '@angular/core';
+import { Apollo, gql } from 'apollo-angular';
+
+@Injectable({ providedIn: 'root' })
+export class ${strings.classify(name)}${strings.classify(type)} {
+
+  constructor(
+    private apollo: Apollo
+  ) { }
+
+  get() {
+  }
+
+}
+`)
+            return tree;
+        }
         if (!fileExist) {
             tree.create(filePath, `import { Injectable } from '@angular/core';
 
