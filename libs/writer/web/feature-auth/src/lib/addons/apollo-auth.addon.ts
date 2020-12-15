@@ -10,7 +10,7 @@ export class ApolloAuthAddon {
   }
 
   async logout() {
-    return await this.apollo.client.cache.reset();
+    return await this.apollo.client.clearStore();
   }
 
 }
