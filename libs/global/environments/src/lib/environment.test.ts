@@ -1,6 +1,7 @@
 export const environment = {
   production: true,
   test: true,
+  uri: 'https://o5x5jzoo7z.sse.codesandbox.io/graphql',
   firebase: {
     apiKey: "AIzaSyBYIoCiXcDM4lRoLAVUK4WGAwC9hORR0ow",
     authDomain: "awready-beta.firebaseapp.com",

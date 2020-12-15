@@ -9,9 +9,12 @@ import { environment } from '@awread/global/environments';
 
 import { APOLLO_OPTIONS } from 'apollo-angular';
 import { HttpLink } from 'apollo-angular/http';
-import { InMemoryCache } from '@apollo/client/core';
 
 import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
+import { createApollo } from './apollo.config';
+
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ApolloInterceptor } from './apollo.interceptor';
 
 @NgModule({
   imports: [
@@ -23,16 +26,10 @@ import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
   ],
   exports: [],
   providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: ApolloInterceptor, multi: true },
     {
       provide: APOLLO_OPTIONS,
-      useFactory: (httpLink: HttpLink) => {
-        return {
-          cache: new InMemoryCache(),
-          link: httpLink.create({
-            uri: 'https://48p1r2roz4.sse.codesandbox.io',
-          }),
-        };
-      },
+      useFactory: createApollo,
       deps: [HttpLink],
     },
   ]
