@@ -1,0 +1,16 @@
+import { <%=componentName%> } from './<%=componentFileName%>';
+import { <%=classify(atomicModule)%>Module } from '../../<%=atomicModule%>.module';
+
+export default {
+  title: '<%=title%>'
+}
+
+export const primary = () => ({
+  moduleMetadata: {
+    imports: [<%=classify(atomicModule)%>Module]
+  },
+  component: <%=componentName%>,
+  props: {
+
+  }
+})

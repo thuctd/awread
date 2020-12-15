@@ -1,7 +1,6 @@
 ## Development Environment setup
 ```
 npm i -g nx
-
 ```
 ```
 npm i

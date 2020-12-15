@@ -11,7 +11,7 @@
     "target": "es2015",
     "module": "esnext",
     "typeRoots": ["node_modules/@types"],
-    "lib": ["es2017", "dom"],
+    "lib": ["es2017", "dom", "esnext"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
@@ -41,11 +41,14 @@
       "@awread/writer/web/feature-single": [
         "libs/writer/web/feature-single/src/index.ts"
       ],
-      "@awread/writer/web/ui-creations": [
-        "libs/writer/web/ui-creations/src/index.ts"
+      "@awread/global/design-system": [
+        "libs/global/design-system/src/index.ts"
       ],
-      "@awread/writer/web/feature-creations": [
-        "libs/writer/web/feature-creations/src/index.ts"
+      "@awread/writer/web/ui-creation": [
+        "libs/writer/web/ui-creation/src/index.ts"
+      ],
+      "@awread/writer/web/feature-creation": [
+        "libs/writer/web/feature-creation/src/index.ts"
       ]
     }
   },

@@ -20,7 +20,7 @@ import {
   forEach,
 } from '@angular-devkit/schematics';
 import * as path from 'path';
-import { toFileName } from '@nrwl/workspace/src/utils/name-utils';
+import { toFileName } from '@nrwl/workspace';
 
 function _angularImportsFromNode(
   node: ts.ImportDeclaration,
@@ -188,9 +188,8 @@ function _addSymbolToNgModuleMetadata(
       // Get the indentation of the last element, if any.
       const text = node.getFullText(source);
       if (text.match('^\r?\r?\n')) {
-        toInsert = `,${
-          text.match(/^\r?\n\s+/)[0]
-        }${metadataField}: [${expression}]`;
+        toInsert = `,${text.match(/^\r?\n\s+/)[0]
+          }${metadataField}: [${expression}]`;
       } else {
         toInsert = `, ${metadataField}: [${expression}]`;
       }
@@ -252,9 +251,8 @@ function _addSymbolToNgModuleMetadata(
       // Get the indentation of the last element, if any.
       const text = node.getFullText(source);
       if (text.match('^\r?\r?\n')) {
-        toInsert = `,${
-          text.match(/^\r?\n\s+/)[0]
-        }${metadataField}: [${expression}]`;
+        toInsert = `,${text.match(/^\r?\n\s+/)[0]
+          }${metadataField}: [${expression}]`;
       } else {
         toInsert = `, ${metadataField}: [${expression}]`;
       }
