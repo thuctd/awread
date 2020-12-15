@@ -999,12 +999,16 @@
           "builder": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": [
-              "libs/writer/web/ui-creation/src/**/*.ts"
+              "libs/writer/web/ui-creation/src/**/*.ts",
+              "libs/writer/web/ui-creation/src/**/*.html"
             ]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/writer/web/ui-creation"
+          ],
           "options": {
             "jestConfig": "libs/writer/web/ui-creation/jest.config.js",
             "passWithNoTests": true
@@ -1040,11 +1044,6 @@
             }
           }
         }
-      },
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        }
       }
     },
     "writer-web-feature-creation": {
@@ -1057,21 +1056,20 @@
           "builder": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": [
-              "libs/writer/web/feature-creation/src/**/*.ts"
+              "libs/writer/web/feature-creation/src/**/*.ts",
+              "libs/writer/web/feature-creation/src/**/*.html"
             ]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/writer/web/feature-creation"
+          ],
           "options": {
             "jestConfig": "libs/writer/web/feature-creation/jest.config.js",
             "passWithNoTests": true
           }
-        }
-      },
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
         }
       }
     }

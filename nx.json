@@ -144,14 +144,14 @@
       "tags": [
         "scope:ui-creation",
         "scope:shared",
-        "type:ui"
+        "type:ui-"
       ]
     },
     "writer-web-feature-creation": {
       "tags": [
-        "scope:feature-creation",
+        "scope:feature--creation",
         "scope:shared",
-        "type:feature"
+        "type:feature-"
       ]
     }
   }

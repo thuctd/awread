@@ -1,12 +1,12 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
-  selector: 'molec-test',
-  templateUrl: './molec-test.molec.html',
-  styleUrls: ['./molec-test.molec.scss'],
+  selector: 'register',
+  templateUrl: './register.organ.html',
+  styleUrls: ['./register.organ.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MolecTestMolec implements OnInit {
+export class RegisterOrgan implements OnInit {
 
   constructor() { }
 
