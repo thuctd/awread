@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { LoginGear, LogoutGear, RegisterGear } from '../gears';
+import { BasicCredential, EmailLoginCredential, ProviderType } from '../models';
 import { CurrentUserQuery } from '../states/current-user';
 
 @Injectable({ providedIn: 'root' })
@@ -22,20 +23,20 @@ export class AuthFacade {
     this.logoutGear.logout();
   }
 
-  loginEmail() {
-
+  loginEmail(credential: EmailLoginCredential) {
+    this.loginGear.loginEmail(credential);
   }
 
-  loginSocial() {
-
+  loginSocial(providerType: ProviderType) {
+    this.loginGear.loginSocial(providerType);
   }
 
-  registerEmail() {
-
+  registerEmail(basicCredential: BasicCredential) {
+    this.registerGear.registerEmail(basicCredential);
   }
 
-  registerSocial() {
-
+  registerSocial(providerType: ProviderType) {
+    this.registerGear.registerSocial(providerType);
   }
 
 }

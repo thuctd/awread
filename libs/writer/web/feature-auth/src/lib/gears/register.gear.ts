@@ -30,13 +30,13 @@ export class RegisterGear {
     // routing to somewhere to enter email and password for social login
   }
 
-  private createAccountOnServer(credential: BasicCredential) {
+  createAccountOnServer(credential: BasicCredential) {
     // send data to server
     this.actionAfterCreateAccountSuccess();
   }
 
   private actionAfterCreateAccountSuccess() {
-
+    // routing to dashboard
   }
 
 }
