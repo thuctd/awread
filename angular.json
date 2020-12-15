@@ -14,7 +14,9 @@
             "outputPath": "dist/apps/backend/api",
             "main": "apps/backend/api/src/main.ts",
             "tsConfig": "apps/backend/api/tsconfig.app.json",
-            "assets": ["apps/backend/api/src/assets"]
+            "assets": [
+              "apps/backend/api/src/assets"
+            ]
           },
           "configurations": {
             "production": {
@@ -61,7 +63,9 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/backend/api/**/*.ts"]
+            "lintFilePatterns": [
+              "apps/backend/api/**/*.ts"
+            ]
           }
         },
         "test": {
@@ -82,7 +86,9 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/backend/api-interfaces/src/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/backend/api-interfaces/src/**/*.ts"
+            ]
           }
         },
         "test": {
@@ -258,7 +264,9 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/writer/web/src/**/*.ts"]
+            "lintFilePatterns": [
+              "apps/writer/web/src/**/*.ts"
+            ]
           }
         },
         "test": {
@@ -266,6 +274,36 @@
           "options": {
             "jestConfig": "apps/writer/web/jest.config.js",
             "passWithNoTests": true
+          }
+        },
+        "storybook": {
+          "builder": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "port": 4400,
+            "config": {
+              "configFolder": "apps/writer/web/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "builder": "@nrwl/storybook:build",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "outputPath": "dist/storybook/writer-web",
+            "config": {
+              "configFolder": "apps/writer/web/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
           }
         }
       }
@@ -291,7 +329,9 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/writer/web-e2e/**/*.{js,ts}"]
+            "lintFilePatterns": [
+              "apps/writer/web-e2e/**/*.{js,ts}"
+            ]
           }
         }
       }
@@ -305,7 +345,9 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/writer/web/feature-shell/src/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/writer/web/feature-shell/src/**/*.ts"
+            ]
           }
         },
         "test": {
@@ -331,7 +373,9 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/writer/web/shared/src/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/writer/web/shared/src/**/*.ts"
+            ]
           }
         },
         "test": {
@@ -339,6 +383,36 @@
           "options": {
             "jestConfig": "libs/writer/web/shared/jest.config.js",
             "passWithNoTests": true
+          }
+        },
+        "storybook": {
+          "builder": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "port": 4400,
+            "config": {
+              "configFolder": "libs/writer/web/shared/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "builder": "@nrwl/storybook:build",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "outputPath": "dist/storybook/writer-web-shared",
+            "config": {
+              "configFolder": "libs/writer/web/shared/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
           }
         }
       },
@@ -507,7 +581,9 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/writer/phone/src/**/*.ts"]
+            "lintFilePatterns": [
+              "apps/writer/phone/src/**/*.ts"
+            ]
           }
         },
         "test": {
@@ -540,7 +616,9 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/writer/phone-e2e/**/*.{js,ts}"]
+            "lintFilePatterns": [
+              "apps/writer/phone-e2e/**/*.{js,ts}"
+            ]
           }
         }
       }
@@ -554,7 +632,9 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/writer/phone/feature-shell/src/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/writer/phone/feature-shell/src/**/*.ts"
+            ]
           }
         },
         "test": {
@@ -580,7 +660,9 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/writer/phone/shared/src/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/writer/phone/shared/src/**/*.ts"
+            ]
           }
         },
         "test": {
@@ -630,7 +712,9 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/global/environments/src/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/global/environments/src/**/*.ts"
+            ]
           }
         },
         "test": {
@@ -656,7 +740,9 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/global/core/src/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/global/core/src/**/*.ts"
+            ]
           }
         },
         "test": {
@@ -682,7 +768,9 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/writer/web/ui-auth/src/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/writer/web/ui-auth/src/**/*.ts"
+            ]
           }
         },
         "test": {
@@ -690,6 +778,36 @@
           "options": {
             "jestConfig": "libs/writer/web/ui-auth/jest.config.js",
             "passWithNoTests": true
+          }
+        },
+        "storybook": {
+          "builder": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "port": 4400,
+            "config": {
+              "configFolder": "libs/writer/web/ui-auth/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "builder": "@nrwl/storybook:build",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "outputPath": "dist/storybook/writer-web-ui-auth",
+            "config": {
+              "configFolder": "libs/writer/web/ui-auth/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
           }
         }
       },
@@ -708,7 +826,9 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/writer/web/feature-auth/src/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/writer/web/feature-auth/src/**/*.ts"
+            ]
           }
         },
         "test": {
@@ -734,7 +854,9 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/writer/web/ui-single/src/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/writer/web/ui-single/src/**/*.ts"
+            ]
           }
         },
         "test": {
@@ -742,6 +864,36 @@
           "options": {
             "jestConfig": "libs/writer/web/ui-single/jest.config.js",
             "passWithNoTests": true
+          }
+        },
+        "storybook": {
+          "builder": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "port": 4400,
+            "config": {
+              "configFolder": "libs/writer/web/ui-single/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "builder": "@nrwl/storybook:build",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "outputPath": "dist/storybook/writer-web-ui-single",
+            "config": {
+              "configFolder": "libs/writer/web/ui-single/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
           }
         }
       },
@@ -760,7 +912,9 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/writer/web/feature-single/src/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/writer/web/feature-single/src/**/*.ts"
+            ]
           }
         },
         "test": {
@@ -777,23 +931,55 @@
         }
       }
     },
-    "writer-web-ui-creations": {
+    "global-design-system": {
       "projectType": "library",
-      "root": "libs/writer/web/ui-creations",
-      "sourceRoot": "libs/writer/web/ui-creations/src",
+      "root": "libs/global/design-system",
+      "sourceRoot": "libs/global/design-system/src",
       "prefix": "awread",
       "architect": {
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/writer/web/ui-creations/src/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/global/design-system/src/**/*.ts"
+            ]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/writer/web/ui-creations/jest.config.js",
+            "jestConfig": "libs/global/design-system/jest.config.js",
             "passWithNoTests": true
+          }
+        },
+        "storybook": {
+          "builder": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "port": 4400,
+            "config": {
+              "configFolder": "libs/global/design-system/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "builder": "@nrwl/storybook:build",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "outputPath": "dist/storybook/global-design-system",
+            "config": {
+              "configFolder": "libs/global/design-system/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
           }
         }
       },
@@ -803,24 +989,82 @@
         }
       }
     },
-    "writer-web-feature-creations": {
+    "writer-web-ui-creation": {
       "projectType": "library",
-      "root": "libs/writer/web/feature-creations",
-      "sourceRoot": "libs/writer/web/feature-creations/src",
+      "root": "libs/writer/web/ui-creation",
+      "sourceRoot": "libs/writer/web/ui-creation/src",
       "prefix": "awread",
       "architect": {
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": [
-              "libs/writer/web/feature-creations/src/**/*.ts"
+              "libs/writer/web/ui-creation/src/**/*.ts"
             ]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/writer/web/feature-creations/jest.config.js",
+            "jestConfig": "libs/writer/web/ui-creation/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "storybook": {
+          "builder": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "port": 4400,
+            "config": {
+              "configFolder": "libs/writer/web/ui-creation/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "builder": "@nrwl/storybook:build",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "outputPath": "dist/storybook/writer-web-ui-creation",
+            "config": {
+              "configFolder": "libs/writer/web/ui-creation/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        }
+      },
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      }
+    },
+    "writer-web-feature-creation": {
+      "projectType": "library",
+      "root": "libs/writer/web/feature-creation",
+      "sourceRoot": "libs/writer/web/feature-creation/src",
+      "prefix": "awread",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/writer/web/feature-creation/src/**/*.ts"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/writer/web/feature-creation/jest.config.js",
             "passWithNoTests": true
           }
         }

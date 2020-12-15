@@ -1,0 +1,12 @@
+<div [formGroup]="form">
+    <input-form [inputControl]="form.get('fullname')" [placeholder]="'full name' | titlecase" [faIcon]="icons.faUser">
+    </input-form>
+    <input-form [inputControl]="form.get('email')" [placeholder]="'email address' | titlecase"
+        [faIcon]="icons.faEnvelope"></input-form>
+    <input-form [inputControl]="form.get('password')" [placeholder]="'password' | titlecase" [faIcon]="icons.faLock">
+    </input-form>
+    <input-form [inputControl]="form.get('confirmpassword')" [placeholder]="'confirm password' | titlecase"
+        [faIcon]="icons.faLock"></input-form>
+</div>
+
+<!-- <pre> {{ form.value | json }} </pre> -->
