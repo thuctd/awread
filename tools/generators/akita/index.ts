@@ -10,8 +10,7 @@ export default function (schema: any): Rule {
     return async (tree: Tree, context) => {
         const projectName = await getProjectName(schema, tree);
         schema.project = projectName;
-        const storyTitle = readStoryTitle(projectName);
-        const generatePath = await getGeneratePath(schema, tree, projectName);
+        const generatePath = await getGeneratePath(schema, tree);
 
         const templateSource = apply(url(schema.entity ? './entity-files' : './files'),
             [

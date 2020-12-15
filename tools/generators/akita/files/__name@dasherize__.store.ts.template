@@ -12,7 +12,7 @@ export function createInitialState(): <%= classify(name) %>State {
 }
 
 @Injectable({ providedIn: 'root' })
-@StoreConfig({ name: '{{name}}' })
+@StoreConfig({ name: 'dasherize(name)', resetable: true })
 export class <%= classify(name) %>Store extends Store<<%= classify(name) %>State> {
 
   constructor() {
