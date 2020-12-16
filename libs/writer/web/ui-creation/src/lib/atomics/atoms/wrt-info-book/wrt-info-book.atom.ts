@@ -1,12 +1,12 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
-  selector: 'register',
-  templateUrl: './register.organ.html',
-  styleUrls: ['./register.organ.scss'],
+  selector: 'wrt-info-book',
+  templateUrl: './wrt-info-book.atom.html',
+  styleUrls: ['./wrt-info-book.atom.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RegisterOrgan implements OnInit {
+export class WrtInfoBookAtom implements OnInit {
 
   constructor() { }
 

@@ -1,15 +1,15 @@
-import { LoginOrgan } from './login.organ';
+import { WritingOrgan } from './writing.organ';
 import { WriterWebUiCreationAtomicModule } from '../../writer-web-ui-creation-atomic.module';
 
 export default {
-  title: 'Creation/Organs/Login'
+  title: 'Creation/Organs/Writing'
 }
 
 export const primary = () => ({
   moduleMetadata: {
     imports: [WriterWebUiCreationAtomicModule]
   },
-  component: LoginOrgan,
+  component: WritingOrgan,
   props: {
 
   }

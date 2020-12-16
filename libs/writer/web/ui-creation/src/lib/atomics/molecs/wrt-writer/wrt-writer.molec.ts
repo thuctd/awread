@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'wrt-writer',
@@ -7,6 +8,11 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WrtWriterMolec implements OnInit {
+  form: FormGroup;
+
+  get formValue() {
+    return this.form.value;
+  }
 
   constructor() { }
 
