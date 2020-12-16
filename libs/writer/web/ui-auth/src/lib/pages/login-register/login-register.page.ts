@@ -1,6 +1,6 @@
-import { AuthFacade } from "./../../../../../feature-auth/src/lib/facades/auth.facade";
 import { Directive, Injectable, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { AuthFacade } from "libs/writer/web/feature-auth/src/lib/facades/auth.facade";
 
 @Injectable({
   providedIn: "root",

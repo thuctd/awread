@@ -1,4 +1,3 @@
-import { GlobalCoreModule } from "./../../../../../../../global/core/src/lib/global-core.module";
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 
