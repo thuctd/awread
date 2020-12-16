@@ -1,12 +1,20 @@
-<div class="grid grid-cols-10 gap-2">
-    <div class="col-span-6 md:col-span-6 lg:col-span-6 xl:col-span-6 ">
-        <auth-bg></auth-bg>
+<div class="relative lg:h-screen w-full mx-auto">
+    <div class="bg-white">
+        <div class="grid grid-cols-10 gap-2">
+            <div class="col-span-6 md:col-span-6 lg:col-span-6 xl:col-span-6 ">
+                <auth-bg></auth-bg>
+            </div>
+            <div class="col-span-4 md:col-span-4 lg:col-span-4 xl:col-span-4 z-30">
+                <div class="pt-10 mr-10">
+                    <div class="sm:px-0 md:px-6 lg:px-8 xl:px-8">
+                        <logo></logo>
+                        <tab-head #tabHead [tabs]="tabs"></tab-head>
+                        <login *ngIf="tabHead.currentTab.name === 'login'"></login>
+                        <register *ngIf="tabHead.currentTab.name === 'register'"></register>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="col-span-4 md:col-span-4 lg:col-span-4 xl:col-span-4 z-30">
-        <tab-head #tabHead [tabs]="tabs"></tab-head>
-        <login *ngIf="tabHead.currentTab.name === 'login'"></login>
-        <register *ngIf="tabHead.currentTab.name === 'register'"></register>
-    </div>
-</div>
 
-<!-- <pre> {{ tabHead.currentTab | json }} </pre> -->
+    <!-- <pre> {{ tabHead.currentTab | json }} </pre> -->
