@@ -1,3 +1,11 @@
-<awread-signin-desktop [template]="template" [activeTemplate]="activeTemplate" [form]="form" [mode]="mode"
-    (swapMode)="swapMode($event)" (auth)="auth($event)">
+<h1>Current user: {{currentUser$ | async | json}}</h1>
+<button (click)="logout()">Loutout</button>
+<awread-signin-desktop
+  [template]="template"
+  [activeTemplate]="activeTemplate"
+  [form]="form"
+  [mode]="mode"
+  (swapMode)="swapMode($event)"
+  (auth)="auth($event)"
+>
 </awread-signin-desktop>

@@ -1,1 +1,9 @@
-<p>login-register-desktop works!</p>
+<div>
+  <form [formGroup]="registerForm">
+    <input type="email" placeholder="Email" formControlName="email" /> <br />
+    <input type="text" placeholder="Password" formControlName="password" />
+  </form>
+  <button mat-button (click)="loginWithEmailPassword()">
+    Login with email
+  </button>
+</div>

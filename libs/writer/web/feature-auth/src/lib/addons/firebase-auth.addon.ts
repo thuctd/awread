@@ -1,22 +1,22 @@
-import { Injectable } from '@angular/core';
-import firebase from 'firebase/app';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { ProviderType } from '../models';
+import { Injectable } from "@angular/core";
+import firebase from "firebase/app";
+import { AngularFireAuth } from "@angular/fire/auth";
+import { ProviderType } from "../models";
 
-@Injectable({ providedIn: 'root' })
+@Injectable({ providedIn: "root" })
 export class FirebaseAuthAddon {
   idToken$ = this.afAuth.idToken;
   idTokenResult$ = this.afAuth.idTokenResult;
   idToken = null;
 
-  constructor(
-    public afAuth: AngularFireAuth,
-  ) {
-    this.idToken$.subscribe(idToken => this.idToken = idToken);
+  constructor(public afAuth: AngularFireAuth) {
+    this.idToken$.subscribe((idToken) => (this.idToken = idToken));
   }
 
   async checkMail(email: string) {
-    const result = await this.afAuth.fetchSignInMethodsForEmail(email) as ProviderType[];
+    const result = (await this.afAuth.fetchSignInMethodsForEmail(
+      email
+    )) as ProviderType[];
     return result[0];
   }
 
@@ -32,8 +32,8 @@ export class FirebaseAuthAddon {
     const windowRef: any = window;
     try {
       if (windowRef.recaptchaVerifier) {
-        const ele = document.getElementById('firebase-captcha');
-        console.log('recapcha already have', windowRef.recaptchaVerifier, ele);
+        const ele = document.getElementById("firebase-captcha");
+        console.log("recapcha already have", windowRef.recaptchaVerifier, ele);
         await windowRef.recaptchaVerifier.clear();
         if (ele) {
           // ele.innerHTML = '';
@@ -42,25 +42,37 @@ export class FirebaseAuthAddon {
           this.addElement();
         }
       } else {
-        console.log('recapcha new');
+        console.log("recapcha new");
       }
-      windowRef.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('firebase-captcha', {
-        size: 'invisible'
-      });
+      windowRef.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
+        "firebase-captcha",
+        {
+          size: "invisible",
+        }
+      );
     } catch (error) {
       console.warn(error);
       throw error;
     }
-    const confirmationResult = await this.afAuth.signInWithPhoneNumber(phone, windowRef.recaptchaVerifier);
+    const confirmationResult = await this.afAuth.signInWithPhoneNumber(
+      phone,
+      windowRef.recaptchaVerifier
+    );
     return confirmationResult;
   }
 
   async loginWithEmail(credential) {
-    return await this.afAuth.signInWithEmailAndPassword(credential.email, credential.password);
+    return await this.afAuth.signInWithEmailAndPassword(
+      credential.email,
+      credential.password
+    );
   }
 
   async registerWithEmail(credential) {
-    return await this.afAuth.createUserWithEmailAndPassword(credential.email, credential.password);
+    return await this.afAuth.createUserWithEmailAndPassword(
+      credential.email,
+      credential.password
+    );
   }
 
   async logout() {
@@ -80,7 +92,7 @@ export class FirebaseAuthAddon {
 
   loginWithFacebook() {
     const provider = new firebase.auth.FacebookAuthProvider();
-    provider.addScope('public_profile,email');
+    provider.addScope("public_profile,email");
     return this.oAuthLogin(provider);
   }
 
@@ -90,9 +102,9 @@ export class FirebaseAuthAddon {
   }
 
   loginWithApple() {
-    const provider = new firebase.auth.OAuthProvider('apple.com');
-    provider.addScope('email');
-    provider.addScope('name');
+    const provider = new firebase.auth.OAuthProvider("apple.com");
+    provider.addScope("email");
+    provider.addScope("name");
     return this.oAuthLogin(provider);
   }
 
@@ -107,5 +119,4 @@ export class FirebaseAuthAddon {
   async resetEmail(email) {
     return await this.afAuth.sendPasswordResetEmail(email);
   }
-
 }

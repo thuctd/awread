@@ -1,15 +1,19 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { GlobalCoreModule } from "./../../../../../../../global/core/src/lib/global-core.module";
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
 
-import { LoginRegisterDesktopRoutingModule } from './login-register-desktop-routing.module';
-import { LoginRegisterDesktopPage } from './login-register-desktop.page';
-
+import { LoginRegisterDesktopRoutingModule } from "./login-register-desktop-routing.module";
+import { LoginRegisterDesktopPage } from "./login-register-desktop.page";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
   declarations: [LoginRegisterDesktopPage],
   imports: [
     CommonModule,
-    LoginRegisterDesktopRoutingModule
-  ]
+    LoginRegisterDesktopRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
+  exports: [LoginRegisterDesktopPage],
 })
-export class LoginRegisterDesktopModule { }
+export class LoginRegisterDesktopModule {}
