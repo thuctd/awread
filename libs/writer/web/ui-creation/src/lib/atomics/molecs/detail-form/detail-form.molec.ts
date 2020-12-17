@@ -1,12 +1,12 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
-  selector: 'template-writing',
-  templateUrl: './writing.template.html',
-  styleUrls: ['./writing.template.scss'],
+  selector: 'detail-form',
+  templateUrl: './detail-form.molec.html',
+  styleUrls: ['./detail-form.molec.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class WritingTemplate implements OnInit {
+export class DetailFormMolec implements OnInit {
 
   constructor() { }
 

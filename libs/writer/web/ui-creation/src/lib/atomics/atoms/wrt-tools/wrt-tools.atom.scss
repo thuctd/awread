@@ -1,3 +1,22 @@
 :host {
   display: block;
 }
+
+:host ::ng-deep {
+  .ql-container,
+  .ql-snow {
+    border: 0;
+  }
+
+  .ql-toolbar,
+  .ql-snow {
+    outline: 0;
+    border-width: 0 0 2px;
+    border-color: rgba(0, 0, 0, 0.2);
+  }
+
+  .qe-mh,
+  .ql-editor {
+    min-height: 70vh !important;
+  }
+}

@@ -1,12 +1,12 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
-  selector: 'template-writing',
-  templateUrl: './writing.template.html',
-  styleUrls: ['./writing.template.scss'],
+  selector: 'detail-upload-img',
+  templateUrl: './detail-upload-img.atom.html',
+  styleUrls: ['./detail-upload-img.atom.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class WritingTemplate implements OnInit {
+export class DetailUploadImgAtom implements OnInit {
 
   constructor() { }
 

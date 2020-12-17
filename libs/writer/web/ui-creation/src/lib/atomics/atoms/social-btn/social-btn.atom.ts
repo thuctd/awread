@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, EventEmitter, Input, Output } from '@angular/core';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'cr-social-btn',
@@ -9,6 +10,7 @@ import { Component, OnInit, ChangeDetectionStrategy, EventEmitter, Input, Output
 export class SocialBtnAtom implements OnInit {
   @Output() socialBtn = new EventEmitter();
   @Input() provider = 'facebook';
+  @Input() faIcon = faPlus;
 
   constructor() { }
 

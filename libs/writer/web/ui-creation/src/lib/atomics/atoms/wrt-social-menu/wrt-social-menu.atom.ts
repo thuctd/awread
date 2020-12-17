@@ -1,12 +1,12 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
-  selector: 'template-writing',
-  templateUrl: './writing.template.html',
-  styleUrls: ['./writing.template.scss'],
+  selector: 'wrt-social-menu',
+  templateUrl: './wrt-social-menu.atom.html',
+  styleUrls: ['./wrt-social-menu.atom.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class WritingTemplate implements OnInit {
+export class WrtSocialMenuAtom implements OnInit {
 
   constructor() { }
 
