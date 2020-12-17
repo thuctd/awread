@@ -100,7 +100,7 @@
     "postcss-loader": "^4.1.0",
     "postcss-scss": "^3.0.4",
     "prettier": "2.1.2",
-    "tailwindcss": "^2.0.1",
+    "tailwindcss": "^2.0.2",
     "ts-jest": "26.4.0",
     "ts-node": "~7.0.0",
     "tslint": "~6.1.3",
