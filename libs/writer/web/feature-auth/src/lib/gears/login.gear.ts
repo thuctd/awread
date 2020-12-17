@@ -24,22 +24,19 @@ export class LoginGear {
   }
 
   async loginEmail(credential: EmailLoginCredential) {
-    return this.firebaseAuthAddon
-      .loginWithEmail(credential)
-      .then((res) => {
-        const userCredential = res;
-        console.log("userCredential", userCredential.user);
-        // this.getCurrentUser();
-        return res;
-      })
-      .catch((err) => {
-        console.log("err", err);
-        if (err.code === "auth/user-not-found") {
-          alert("Tài khoản không tồn tại!");
-        } else if (err.code === "auth/wrong-password") {
-          alert("Mật khẩu không chính xác!");
-        }
-      });
+    try {
+      const userCredential = await this.firebaseAuthAddon.loginWithEmail(
+        credential
+      );
+      return userCredential;
+    } catch (err) {
+      console.log("err", err);
+      if (err.code === "auth/user-not-found") {
+        alert("Tài khoản không tồn tại!");
+      } else if (err.code === "auth/wrong-password") {
+        alert("Mật khẩu không chính xác!");
+      }
+    }
   }
 
   async loginSocial(providerType: ProviderType) {

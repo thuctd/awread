@@ -16,43 +16,40 @@ export class RegisterGear {
     private authApi: AuthApi
   ) {}
 
-  registerEmail(basicCredential: BasicCredential) {
-    this.firebaseAuthAddon
-      .registerWithEmail(basicCredential)
-      .then((res) => {
-        // this.userCredential = res;
-        const user = {
-          ...res.user,
-          displayName: basicCredential.fullname,
-          password: basicCredential.password,
-        };
-        this.createAccountOnServer(user);
-      })
-      .catch((err) => {
-        console.log("err", err);
-        if (err.code === "auth/email-already-in-use") {
-          alert("Email đã tồn tại");
-        }
-      });
+  async registerEmail(basicCredential: BasicCredential) {
+    try {
+      const userCredential = await this.firebaseAuthAddon.registerWithEmail(
+        basicCredential
+      );
+      const user = {
+        ...userCredential.user,
+        displayName: basicCredential.fullname,
+        password: basicCredential.password,
+      };
+      this.createAccountOnServer(user);
+    } catch (err) {
+      if (err.code === "auth/email-already-in-use") {
+        alert("Email đã tồn tại");
+      }
+    }
   }
 
   async registerSocial(providerType: ProviderType) {
-    this.firebaseAuthSocialAddon
-      .loginWithProvider(providerType)
-      .then((res) => {
-        // this.userCredential = res;
-        const user = {
-          ...res.user,
-          password: "123456",
-        };
-        this.createAccountOnServer(user);
-      })
-      .catch((err) => {
-        console.log("err", err);
-        if (err.code === "auth/email-already-in-use") {
-          alert("Email đã tồn tại");
-        }
-      });
+    try {
+      const userCredential = await this.firebaseAuthSocialAddon.loginWithProvider(
+        providerType
+      );
+      const user = {
+        ...userCredential.user,
+        password: "123456",
+      };
+      this.createAccountOnServer(user);
+    } catch (err) {
+      if (err.code === "auth/email-already-in-use") {
+        alert("Email đã tồn tại");
+      }
+    }
+
     this.routingToPersonalInfoPageIfSocial();
   }
 
