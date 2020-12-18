@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
 import { QuillModule } from 'ngx-quill';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
-    imports: [CommonModule, RouterModule.forRoot([], { useHash: true }),QuillModule.forRoot()],
-    exports: [RouterModule, ReactiveFormsModule, FontAwesomeModule, QuillModule],
+    imports: [CommonModule, RouterTestingModule,QuillModule.forRoot()],
+    exports: [RouterTestingModule, ReactiveFormsModule, FontAwesomeModule, QuillModule],
     declarations: [],
     providers: [],
 })

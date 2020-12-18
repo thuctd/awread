@@ -1,4 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'detail-book-form',
@@ -7,8 +8,19 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DetailBookFormMolec implements OnInit {
+  @Input() form = this.fb.group({
+    title: ['', [Validators.required]],
+    description: ['', [Validators.required]],
+    tag: [''],
+    genres: [''],
+    target: [''],
+    language: [''],
+    completed: ['']
+  })
 
-  constructor() { }
+  constructor(
+    private fb: FormBuilder,
+  ) { }
 
   ngOnInit(): void {
   }

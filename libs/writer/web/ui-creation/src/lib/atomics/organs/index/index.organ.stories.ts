@@ -1,15 +1,15 @@
-import { WrtToolsAtom } from './wrt-tools.atom';
+import { IndexOrgan } from './index.organ';
 import { WriterWebUiCreationAtomicModule } from '../../writer-web-ui-creation-atomic.module';
 
 export default {
-  title: 'Creation/Atoms/Wrt Tools'
+  title: 'Creation/Organs/Index'
 }
 
 export const primary = () => ({
   moduleMetadata: {
     imports: [WriterWebUiCreationAtomicModule]
   },
-  component: WrtToolsAtom,
+  component: IndexOrgan,
   props: {
 
   }

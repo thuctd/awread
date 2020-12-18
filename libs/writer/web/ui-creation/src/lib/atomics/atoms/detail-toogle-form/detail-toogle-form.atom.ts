@@ -1,4 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'detail-toogle-form',
@@ -7,6 +8,9 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DetailToogleFormAtom implements OnInit {
+  @Input() inputControl = new FormControl('');
+  @Input() titleLabel = 'Awread';
+  @Input() detailToogle = 'Complete?';
 
   constructor() { }
 

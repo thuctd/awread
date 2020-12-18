@@ -1,1 +1,19 @@
-<p>detail-book-form works!</p>
+<form [formGroup]="form" class="bg-white" autocomplete="off">
+  <detail-input-form [inputControl]="form.get('title')" [placeholder]="'Title' | titlecase"></detail-input-form>
+  <detail-textarea-form [inputControl]="form.get('description')" [placeholder]="'Description'"></detail-textarea-form>
+  <detail-input-form [inputControl]="form.get('tag')" [placeholder]="'Add a tag +' | titlecase"></detail-input-form>
+  <div class="md:flex mb-6">
+    <div class="md:w-1/3">
+      <label class="block text-gray-500 md:mt-2 font-bold md:text-left mb-1 md:mb-0" for="inline-full-name">
+        {{ 'Genres' | titlecase }}
+      </label>
+    </div>
+    <div class="md:w-2/3">
+      <app-genres mode="object" formControlName="genres"
+      [placeholder]="'Genres' | titlecase"></app-genres>
+    </div>
+  </div>
+  <detail-cmb-form [inputControl]="form.get('target')" ></detail-cmb-form>
+  <detail-cmb-form [inputControl]="form.get('language')" ></detail-cmb-form>
+  <detail-toogle-form [inputControl]="form.get('completed')" ></detail-toogle-form>
+</form>

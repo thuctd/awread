@@ -1,5 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'wrt-writer',
@@ -8,13 +8,13 @@ import { FormGroup } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WrtWriterMolec implements OnInit {
-  form: FormGroup;
-
-  get formValue() {
-    return this.form.value;
-  }
-
-  constructor() { }
+  @Input() form = this.fb.group({
+    title: ['', [Validators.required]],
+    content: ['', Validators.required]
+  })
+  constructor(
+    private fb: FormBuilder,
+  ) { }
 
   ngOnInit(): void {
   }
