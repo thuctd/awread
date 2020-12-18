@@ -21,7 +21,7 @@ export default function (schema: any): Rule {
         const projectName = await getProjectName(schema, tree);
         schema.project = projectName;
         const storyTitle = readStoryTitle(projectName);
-        const generatePath = await getGeneratePath(schema, tree, projectName);
+        const generatePath = await getGeneratePath(schema, tree);
         const atomicModule = `${projectName}-atomic`;
         const generateActions = parts.map(name =>
             externalSchematic('@schematics/angular', 'component', {

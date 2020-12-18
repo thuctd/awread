@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { EntityState, EntityStore, StoreConfig } from '@datorama/akita';
+import { Injectable } from "@angular/core";
+import { EntityState, EntityStore, StoreConfig } from "@datorama/akita";
 
 export enum VISIBILITY_FILTER {
-    SHOW_ALL = 'SHOW_ALL'
+    SHOW_ALL = "SHOW_ALL"
 }
 
 export interface <%= classify(name) %>State extends EntityState<<%= singular(classify(name)) %>> {
@@ -21,8 +21,8 @@ const initialState = {
 // export interface <%= classify(name) %>UIState extends EntityState<<%= singular(classify(name)) %>UI> {}
 
 
-@Injectable({ providedIn: 'root' })
-@StoreConfig({ name: '{{name}}', resetable: true })
+@Injectable({ providedIn: "root" })
+@StoreConfig({ name: "dasherize(name)", resetable: true })
 export class <%= classify(name) %>Store extends EntityStore<<%= classify(name) %>State> {
   // ui: EntityUIStore<<%= singular(classify(name)) %>UIState>;
   constructor() {

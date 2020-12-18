@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { Store, StoreConfig } from '@datorama/akita';
+import { Injectable } from "@angular/core";
+import { Store, StoreConfig } from "@datorama/akita";
 
 export interface <%= classify(name) %>State {
   key: string;
@@ -7,12 +7,12 @@ export interface <%= classify(name) %>State {
 
 export function createInitialState(): <%= classify(name) %>State {
   return {
-    key: ''
+    key: ""
   };
 }
 
-@Injectable({ providedIn: 'root' })
-@StoreConfig({ name: '{{name}}' })
+@Injectable({ providedIn: "root" })
+@StoreConfig({ name: "dasherize(name)", resetable: true })
 export class <%= classify(name) %>Store extends Store<<%= classify(name) %>State> {
 
   constructor() {

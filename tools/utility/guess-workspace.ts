@@ -24,7 +24,7 @@ export async function getProjectName(schema, tree) {
     return projectName;
 }
 
-export async function getGeneratePath(schema, tree, projectName) {
+export async function getGeneratePath(schema, tree) {
     const cwd = process.cwd();
     const isInAppsOrLibs = cwd.includes('libs') ?? cwd.includes('apps');
     if (schema.project === "global-design-system") {
@@ -32,7 +32,11 @@ export async function getGeneratePath(schema, tree, projectName) {
         return schema.path;
     } else if (isInAppsOrLibs) {
         const folderPath = cwd.includes('libs') ? path.join('libs', cwd.split('libs')[1]) : path.join('apps', cwd.split('apps')[1]);
-        schema.path = folderPath;
+        schema.path = normalize(folderPath);
+        const isGenerateFolderIsType = schema.path.split('/').pop() === schema.type + 's';
+        if (isGenerateFolderIsType) {
+            schema.path = schema.path.split('/').slice(0, -1).join('/');
+        }
     } else {
         schema.path = await getDefaultProjectPath(schema, tree);
     }
@@ -46,7 +50,7 @@ export async function guessProject(tree) {
     const cwdNormalize = normalize(cwd);
     const workspace = await getWorkspace(tree);
     const entries = Object.fromEntries(workspace.projects.entries());
-    for (const [name, project] of Object.entries(entries)) {
+    for (const [name, project] of Object.entries<any>(entries)) {
         // console.log('name,project', name);
         if (project.sourceRoot && cwdNormalize.includes(project.sourceRoot)) {
             projectName = name;

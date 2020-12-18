@@ -15,4 +15,7 @@ export class CurrentUserService {
     return of({}).pipe(tap(entities => this.currentUserStore.update(entities)));
   }
 
+  logout() {
+    this.currentUserStore.reset();
+  }
 }

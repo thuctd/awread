@@ -53,6 +53,10 @@ const routes: Routes = [
                     (m) => m.ForgotDesktopModule
                   ),
           },
+          { path: 'login-register', loadChildren: 
+  () => window.innerWidth <= 768 && window?.haveMobile ?
+  import('./pages/login-register-mobile/login-register-mobile.module').then(m => m.LoginRegisterMobileModule):
+    import('./pages/login-register-desktop/login-register-desktop.module').then(m => m.LoginRegisterDesktopModule) },
         ],
       },
     ],
