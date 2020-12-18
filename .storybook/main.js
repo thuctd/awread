@@ -4,8 +4,8 @@ const path = require('path');
 module.exports = {
   stories: [
     // this stories coming from libs/wrirter/web/ui-auth
-    '@awread/global/design-system/src/lib/**/*.stories.mdx',
-    '@awread/global/design-system/src/lib/**/*.stories.@(js|jsx|ts|tsx)'
+    '@libs/global/design-system/src/lib/**/*.stories.mdx',
+    '@libs/global/design-system/src/lib/**/*.stories.@(js|jsx|ts|tsx)'
   ],
   addons: ['@storybook/addon-knobs', '@storybook/addon-actions'],
   // your Storybook configuration
@@ -45,20 +45,11 @@ module.exports = {
       })
     );
 
-    // Add absolute path.resolve so storybook can handle absolute import (eg. @src/resources/...)
-
-    // console.log('path resolver', path.resolve(__dirname, "./"));
-    // console.log('path resolver', path.resolve(__dirname, "../libs/writer/web"));
-
     config.resolve.alias = {
       ...config.resolve.alias,
-      "@awread/global": path.resolve(__dirname, "../libs/global"),
-      "@awread/writer/web": path.resolve(__dirname, "../libs/writer/web"),
+      "@libs": path.resolve(__dirname, "../libs"),
     };
 
-    // config.resolve.plugins = [new TsconfigPathsPlugin({
-    //   configFile: '../tsconfig.base.json'
-    // })];
 
     return config;
 

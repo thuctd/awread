@@ -11,6 +11,7 @@ import { classify } from '@nrwl/workspace/src/utils/strings';
 import { Path, normalize, strings } from '@angular-devkit/core';
 import { getNpmScope, readJsonFile } from '@nrwl/workspace';
 import { spacerize } from '../../utility/text-utility';
+import { getProjectName, getGeneratePath } from '../../utility/guess-workspace';
 const resolve = require('path').resolve;
 
 
@@ -20,7 +21,7 @@ export default function (schema: any): Rule {
         const projectName = await getProjectName(schema, tree);
         schema.project = projectName;
         const storyTitle = readStoryTitle(projectName);
-        const generatePath = await getGeneratePath(schema, tree, projectName);
+        const generatePath = await getGeneratePath(schema, tree);
         const atomicModule = `${projectName}-atomic`;
         const generateActions = parts.map(name =>
             externalSchematic('@schematics/angular', 'component', {
@@ -80,65 +81,13 @@ export function addParentModule(generatePath: string, projectName: string) {
             console.log('adding new atomic module');
             tree.create(atomicModulePath, `import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StorybookSupportModule } from '@${workspaceName}/global/design-system';
-
+import { StorybookSupportModule, GlobalDesignSystemAtomicModule } from '@${workspaceName}/global/design-system';
 @NgModule({
-    imports: [CommonModule, StorybookSupportModule],
+    imports: [CommonModule, StorybookSupportModule, GlobalDesignSystemAtomicModule],
   exports: [CommonModule]
 })
 export class ${classify(projectName)}AtomicModule {}
 `)
         }
     }
-}
-
-export async function getProjectName(schema, tree) {
-    const cwd = process.cwd();
-    const isInAppsOrLibs = cwd.includes('libs') ?? cwd.includes('apps');
-    let projectName = schema.project;
-    if (!projectName && isInAppsOrLibs) {
-        projectName = await guessProject(tree);
-    } else {
-        projectName = projectName ?? await getDefaultProjectName(tree);
-    }
-    return projectName;
-}
-
-export async function getGeneratePath(schema, tree, projectName) {
-    const cwd = process.cwd();
-    const isInAppsOrLibs = cwd.includes('libs') ?? cwd.includes('apps');
-    if (isInAppsOrLibs) {
-        const folderPath = cwd.includes('libs') ? path.join('libs', cwd.split('libs')[1]) : path.join('apps', cwd.split('apps')[1]);
-        schema.path = folderPath;
-    } else {
-        schema.path = await getDefaultProjectPath(schema, tree);
-    }
-    schema.path = normalize(schema.path);
-    return schema.path;
-}
-
-export async function guessProject(tree) {
-    let projectName;
-    const cwd = process.cwd();
-    const cwdNormalize = normalize(cwd);
-    const workspace = await getWorkspace(tree);
-    const entries = Object.fromEntries(workspace.projects.entries());
-    for (const [name, project] of Object.entries(entries)) {
-        console.log('name,project', name);
-        if (project.sourceRoot && cwdNormalize.includes(project.sourceRoot)) {
-            projectName = name;
-        }
-    }
-    return projectName;
-}
-
-async function getDefaultProjectName(tree) {
-    const angularFile = JSON.parse(tree.read('angular.json').toString('utf-8'));
-    return angularFile.defaultProject;
-}
-
-async function getDefaultProjectPath(schema, tree) {
-    const workspace = await getWorkspace(tree);
-    const project = workspace.projects.get(schema.project);
-    return buildDefaultPath(project);
 }

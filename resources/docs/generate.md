@@ -86,3 +86,5 @@ nx g lib ui-creation --directory=writer/web --tags=scope:ui-creation,scope:share
 nx g lib feature-creation --directory=writer/web --tags=scope:feature-creation,scope:shared,type:feature --style=scss
 
 nx g m --project=writer-web-feature-auth ui/pages/login
+
+nx workspace-schematic page --project=writer-web-ui-auth login-register --directory=writer/web --ui=auth

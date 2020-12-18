@@ -19,5 +19,6 @@ module.exports = {
     "<rootDir>/libs/global/design-system",
     "<rootDir>/libs/writer/web/ui-creation",
     "<rootDir>/libs/writer/web/feature-creation",
+    "<rootDir>/libs/global/packages",
   ],
 };
