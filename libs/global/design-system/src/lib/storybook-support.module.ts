@@ -1,12 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-
+import { RouterTestingModule } from '@angular/router/testing';
 @NgModule({
-    imports: [CommonModule, RouterModule.forRoot([], { useHash: true })],
-    exports: [RouterModule, ReactiveFormsModule, FontAwesomeModule],
+    imports: [CommonModule, RouterTestingModule],
+    exports: [RouterTestingModule, ReactiveFormsModule, FontAwesomeModule],
     declarations: [],
     providers: [],
 })
