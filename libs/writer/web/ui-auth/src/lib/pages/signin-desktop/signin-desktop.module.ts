@@ -9,6 +9,7 @@ import { SigninDesktopBannerSection } from "./sections/signin-desktop-banner/sig
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { SigninDesktopSection } from "./sections/signin-desktop/signin-desktop.section";
 import { SigninDesktopFormSection } from "./sections/signin-desktop-form/signin-desktop-form.section";
+import { MatDialogModule } from "@angular/material/dialog";
 @NgModule({
   declarations: [
     SigninDesktopPage,
@@ -23,6 +24,7 @@ import { SigninDesktopFormSection } from "./sections/signin-desktop-form/signin-
     ReactiveFormsModule,
     MatCheckboxModule,
     FontAwesomeModule,
+    MatDialogModule,
   ],
 })
 export class SigninDesktopModule {}

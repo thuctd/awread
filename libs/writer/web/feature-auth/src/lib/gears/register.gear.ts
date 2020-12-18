@@ -1,8 +1,10 @@
+import { Router } from "@angular/router";
 import { AuthApi } from "./../apis/auth.api";
 import { Injectable } from "@angular/core";
 import { FirebaseAuthAddon, FirebaseAuthSocialAddon } from "../addons";
 import { BasicCredential, ProviderType } from "../models";
 import firebase from "firebase/app";
+import { MatDialog } from "@angular/material/dialog";
 // userCredential.additionalUserInfo.isNewUser;
 // userCredential.credential.providerId;
 // userCredential.user.getIdToken();
@@ -13,25 +15,13 @@ export class RegisterGear {
   constructor(
     private firebaseAuthAddon: FirebaseAuthAddon,
     private firebaseAuthSocialAddon: FirebaseAuthSocialAddon,
-    private authApi: AuthApi
+    private authApi: AuthApi,
+    private dialog: MatDialog,
+    private router: Router
   ) {}
 
   async registerEmail(basicCredential: BasicCredential) {
-    try {
-      const userCredential = await this.firebaseAuthAddon.registerWithEmail(
-        basicCredential
-      );
-      const user = {
-        ...userCredential.user,
-        displayName: basicCredential.fullname,
-        password: basicCredential.password,
-      };
-      this.createAccountOnServer(user);
-    } catch (err) {
-      if (err.code === "auth/email-already-in-use") {
-        alert("Email đã tồn tại");
-      }
-    }
+    return this.firebaseAuthSocialAddon.registerWithEmail(basicCredential);
   }
 
   async registerSocial(providerType: ProviderType) {
@@ -39,11 +29,7 @@ export class RegisterGear {
       const userCredential = await this.firebaseAuthSocialAddon.loginWithProvider(
         providerType
       );
-      const user = {
-        ...userCredential.user,
-        password: "123456",
-      };
-      this.createAccountOnServer(user);
+      console.log("userCredential", userCredential);
     } catch (err) {
       if (err.code === "auth/email-already-in-use") {
         alert("Email đã tồn tại");
@@ -57,15 +43,19 @@ export class RegisterGear {
     // routing to somewhere to enter email and password for social login
   }
 
-  createAccountOnServer(user: any) {
-    // send data to server
-    this.authApi.createNewUser(user).subscribe((mes) => {
-      console.log("mes", mes);
-      // this.actionAfterCreateAccountSuccess();
-    });
-  }
-
   private actionAfterCreateAccountSuccess() {
     // routing to dashboard
   }
+}
+
+import { Component, OnInit } from "@angular/core";
+
+@Component({
+  selector: "user-info",
+  template: ` <div>Hello</div> `,
+})
+export class InfoUserComponent implements OnInit {
+  constructor() {}
+
+  ngOnInit() {}
 }

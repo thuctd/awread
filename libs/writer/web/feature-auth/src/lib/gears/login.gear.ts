@@ -14,6 +14,10 @@ export class LoginGear {
     private router: Router
   ) {}
 
+  loginNormal(user) {
+    this.authApi.signin(user);
+  }
+
   loginWithRoleAdmin(credential: EmailLoginCredential) {
     this.loginEmail(credential)
       .then(async (res: any) => {
@@ -28,6 +32,7 @@ export class LoginGear {
       const userCredential = await this.firebaseAuthAddon.loginWithEmail(
         credential
       );
+      console.log("userCredential", userCredential);
       return userCredential;
     } catch (err) {
       console.log("err", err);
@@ -40,9 +45,36 @@ export class LoginGear {
   }
 
   async loginSocial(providerType: ProviderType) {
-    const userCredential: firebase.auth.UserCredential = await this.firebaseAuthSocialAddon.loginWithProvider(
-      providerType
-    );
+    try {
+      const userCredential: firebase.auth.UserCredential = await this.firebaseAuthSocialAddon.loginWithProvider(
+        providerType
+      );
+      console.log("userCredential", userCredential);
+    } catch (err) {
+      console.log("err", err);
+      if (
+        err.email &&
+        err.credential &&
+        err.code === "auth/account-exists-with-different-credential"
+      ) {
+        const providers = await firebase
+          .auth()
+          .fetchSignInMethodsForEmail(err.email);
+        console.log("providers", providers);
+        // const firstPopupProviderMethod = providers.find(p => supportedPopupSignInMethods.includes(p));
+
+        // // Test: Could this happen with email link then trying social provider?
+        // if (!firstPopupProviderMethod) {
+        //   throw new Error(`Your account is linked to a provider that isn't supported.`);
+        // }
+
+        // const linkedProvider = getProvider(firstPopupProviderMethod);
+        // linkedProvider.setCustomParameters({ login_hint: err.email });
+
+        // const result = await firebase.auth().signInWithPopup(linkedProvider);
+        // result.user.linkWithCredential(err.credential);
+      }
+    }
     // this.getCurrentUser();
   }
 

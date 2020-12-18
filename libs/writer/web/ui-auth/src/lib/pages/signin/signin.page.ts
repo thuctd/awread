@@ -2,6 +2,7 @@ import { Directive, Injectable, OnInit } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
 import { AuthFacade } from "libs/writer/web/feature-auth/src/lib/facades/auth.facade";
 import { ProviderType } from "libs/writer/web/feature-auth/src/lib/models";
+import { AngularFireAuth } from "@angular/fire/auth";
 
 @Injectable({
   providedIn: "root",
@@ -41,9 +42,12 @@ export class SigninPage implements OnInit {
   hasValueUs: boolean;
   hasValuePw: boolean;
   hasValueCfpw: boolean;
+  currentUser$ = this.authFacade.currentUser$;
   constructor(
     private fb: FormBuilder,
-    private authFacade: AuthFacade // private loginForm: LoginForm, // private authFacade: AuthFacade
+    private authFacade: AuthFacade, // private loginForm: LoginForm, // private authFacade: AuthFacade
+
+    private afAuth: AngularFireAuth
   ) {}
 
   ngOnInit(): void {
@@ -52,7 +56,7 @@ export class SigninPage implements OnInit {
 
   generate() {
     return this.fb.group({
-      fullname: [""],
+      displayName: [""],
       email: [""],
       password: [""],
       confirmPassword: [""],
@@ -81,7 +85,11 @@ export class SigninPage implements OnInit {
       // this.authFacade.signin(provider, this.form.value);
       switch (provider) {
         case "email":
-          console.log("form value", this.form.value);
+          // console.log("form value", this.form.value);
+          // this.authFacade.loginNormal({
+          //   ...this.form.value,
+          //   provider: "signin/email_password",
+          // });
           this.authFacade.loginEmail(this.form.value);
           break;
         case "facebook":
@@ -97,6 +105,11 @@ export class SigninPage implements OnInit {
       // this.authFacade.signup(provider, this.form.value)
       switch (provider) {
         case "email":
+          // console.log("form value", this.form.value);
+          // this.authFacade.loginNormal({
+          //   ...this.form.value,
+          //   provider: "signup/email_password",
+          // });
           this.authFacade.registerEmail(this.form.value);
           break;
         case "facebook":
@@ -109,7 +122,20 @@ export class SigninPage implements OnInit {
     }
   }
 
-  currentUser$ = this.authFacade.currentUser$;
+  resetPassword(email: string) {
+    console.log("email", email);
+    // TODO:  check email nay da ton tai trong database chua thi moi gui link
+    this.afAuth.sendPasswordResetEmail(email).then(
+      (res) => {
+        // success, show some message
+        console.log("res", res);
+        window.localStorage.setItem("email", email);
+      },
+      (err) => {
+        // handle errors
+      }
+    );
+  }
   logout() {
     this.authFacade.logout();
   }

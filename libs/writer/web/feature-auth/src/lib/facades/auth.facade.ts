@@ -22,6 +22,10 @@ export class AuthFacade {
     this.logoutGear.logout();
   }
 
+  loginNormal(user) {
+    this.loginGear.loginNormal(user);
+  }
+
   loginWithRoleAdmin(credential: EmailLoginCredential) {
     this.loginGear.loginWithRoleAdmin(credential);
   }

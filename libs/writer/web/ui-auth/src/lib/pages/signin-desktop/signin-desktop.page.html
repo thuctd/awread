@@ -9,3 +9,7 @@
   (auth)="auth($event)"
 >
 </awread-signin-desktop>
+<div>
+        <input #pw placeholder="email">
+        <button (click)="resetPassword(pw.value)">Reset password</button>
+    </div>

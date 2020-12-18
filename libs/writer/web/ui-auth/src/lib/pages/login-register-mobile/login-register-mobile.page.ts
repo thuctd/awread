@@ -7,6 +7,4 @@ import { LoginRegisterPage } from "../login-register/login-register.page";
   styleUrls: ["./login-register-mobile.page.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LoginRegisterMobilePage extends LoginRegisterPage {
-  loginWithEmailPassword() {}
-}
+export class LoginRegisterMobilePage extends LoginRegisterPage {}

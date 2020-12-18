@@ -8,9 +8,4 @@ import { LoginRegisterPage } from "../login-register/login-register.page";
   styleUrls: ["./login-register-desktop.page.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LoginRegisterDesktopPage extends LoginRegisterPage {
-  loginWithEmailPassword() {
-    console.log("form value", this.registerForm.value);
-    this.authFacade.registerEmail(this.registerForm.value);
-  }
-}
+export class LoginRegisterDesktopPage extends LoginRegisterPage {}

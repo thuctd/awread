@@ -34,6 +34,14 @@ export class ApolloInterceptor implements HttpInterceptor {
       );
     }
     // If it's not a graphql request, just give it to the next handler.
+    // const token = localStorage.getItem("token");
+    // if (!!token) {
+    //   req = req.clone({
+    //     setHeaders: {
+    //       Authorization: `Bearer ${token}`,
+    //     },
+    //   });
+    // }
     return next.handle(req);
   }
 }
