@@ -2,12 +2,13 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 
 @Component({
   selector: 'auth-header',
-  templateUrl: './auth-header.atom.html',
-  styleUrls: ['./auth-header.atom.scss'],
+  templateUrl: './auth-header.molec.html',
+  styleUrls: ['./auth-header.molec.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AuthHeaderAtom implements OnInit {
+export class AuthHeaderMolec implements OnInit {
   @Input() title;
+  @Input() description;
   constructor() { }
 
   ngOnInit(): void {
