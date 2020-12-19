@@ -1,17 +1,16 @@
-import { RegisterOrgan } from './register.organ';
+import { AuthBackgroundTemplate } from './auth-background.template';
 import { WriterWebUiAuthAtomicModule } from '../../writer-web-ui-auth-atomic.module';
-import { action } from '@storybook/addon-actions';
 
 export default {
-  title: 'Auth/Organs/Register'
+  title: 'Auth/Templates/Auth Background'
 }
 
 export const primary = () => ({
   moduleMetadata: {
     imports: [WriterWebUiAuthAtomicModule]
   },
-  component: RegisterOrgan,
+  component: AuthBackgroundTemplate,
   props: {
-    submitEvent: action('user da an nut')
+
   }
 })
