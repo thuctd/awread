@@ -8,8 +8,6 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SocialBtnAtom implements OnInit {
-  @Output() socialBtn = new EventEmitter();
-  @Input() provider = 'facebook';
   @Input() faIcon = faPlus;
 
   constructor() { }

@@ -7,6 +7,10 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DetailIndexTemplate implements OnInit {
+  tabs = [
+    { name: 'Tables of Contents', isActive: true },
+    { name: 'Story Details'}
+  ]
 
   constructor() { }
 

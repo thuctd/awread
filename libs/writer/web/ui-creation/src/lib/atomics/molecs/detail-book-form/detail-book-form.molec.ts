@@ -8,9 +8,51 @@ import { FormBuilder, Validators } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DetailBookFormMolec implements OnInit {
+  @Input() formInformation = {
+    title: {
+      display: 'title',
+      placeholder: `Story's name`
+    },
+    description: {
+      display: 'description',
+      placeholder: `Story's detail`
+    },
+    genres: {
+      display: 'genres',
+      placeholder: 'genres'
+    },
+    tags: {
+      display: 'tags',
+      placeholder: 'tags'
+    },
+    category: {
+      display: 'category',
+      placeholder: 'category'
+    },
+    target: {
+      display: 'Target Audience'
+    },
+    language : {
+      display: 'Language'
+    },
+    completed: {
+      display: 'completed',
+      placeholder: 'completed'
+    },
+    adult: {
+      display: 'adult',
+      placeholder: 'adult'
+    },
+    chapter0: {
+      display: 'use prologue',
+      placeholder: 'If you use have prologue chapter'
+    },
+  }
+
+
   @Input() form = this.fb.group({
-    title: ['', [Validators.required]],
-    description: ['', [Validators.required]],
+    title: [''],
+    description: [''],
     tag: [''],
     genres: [''],
     target: [''],

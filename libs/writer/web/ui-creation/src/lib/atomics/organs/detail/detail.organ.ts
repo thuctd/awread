@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'detail',
@@ -7,8 +8,23 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DetailOrgan implements OnInit {
+  formBook = this.fb.group({
+    title: [''],
+    description: [''],
+    tag: [''],
+    genres: [''],
+    target: [''],
+    language: [''],
+    completed: ['']
+  })
 
-  constructor() { }
+  formImg = this.fb.group({
+    srcImg: ['']
+  })
+
+  constructor(
+    private fb: FormBuilder,
+  ) { }
 
   ngOnInit(): void {
   }

@@ -1,1 +1,6 @@
-<p>detail-upload-form works!</p>
+<div class="">
+  <form [formGroup]="form" class="bg-white" autocomplete="off">
+    <detail-upload-img></detail-upload-img>
+    <submit-btn [active]="btn.isActive" [submitText]="btn.submitText"></submit-btn>
+  </form>
+</div>

@@ -28,10 +28,29 @@ import { IndexOrgan } from './organs/index/index.organ';
 import { DetailIndexTemplate } from './templates/detail-index/detail-index.template';
 import { DetailTextareaFormAtom } from './atoms/detail-textarea-form/detail-textarea-form.atom';
 import { GenresFieldModule } from '@awread/global/packages';
+import { DetailLinkBtnsMolec } from './molecs/detail-link-btns/detail-link-btns.molec';
+import { DetailRatingAtom } from './atoms/detail-rating/detail-rating.atom';
+import { DetailInfoBookAtom } from './atoms/detail-info-book/detail-info-book.atom';
+import { SocialMenuAtom } from './atoms/social-menu/social-menu.atom';
+import { ListHeadMolec } from './molecs/list-head/list-head.molec';
+import { ListTitleColAtom } from './atoms/list-title-col/list-title-col.atom';
+import { ListImgBookAtom } from './atoms/list-img-book/list-img-book.atom';
+import { ListReviewBookAtom } from './atoms/list-review-book/list-review-book.atom';
+import { ListTypeBookAtom } from './atoms/list-type-book/list-type-book.atom';
+import { ListRatingBookAtom } from './atoms/list-rating-book/list-rating-book.atom';
+import { ListChapterBookAtom } from './atoms/list-chapter-book/list-chapter-book.atom';
+import { ListUdBookAtom } from './atoms/list-ud-book/list-ud-book.atom';
+import { ListSocialMenuAtom } from './atoms/list-social-menu/list-social-menu.atom';
+import { ListSocialBtnAtom } from './atoms/list-social-btn/list-social-btn.atom';
+import { ListActMolec } from './molecs/list-act/list-act.molec';
+import { ListChapterMolec } from './molecs/list-chapter/list-chapter.molec';
+import { ListStoriesMolec } from './molecs/list-stories/list-stories.molec';
+import { ListTemplate } from './templates/list/list.template';
+import { ListOrgan } from './organs/list/list.organ';
 
 @NgModule({
     imports: [CommonModule, StorybookSupportModule, GlobalDesignSystemAtomicModule, GenresFieldModule],
-  exports: [CommonModule, SocialBtnAtom, WrtBgAtom, WrtMenuBtnAtom, WrtBookImgAtom, WrtTitleAtom, WrtHeadMolec, WrtWriterMolec, WrtInfoBookAtom, SubmitBtnAtom, WritingOrgan, WritingTemplate, WrtSocialMenuAtom, DetailTabHeadMolec, DetailActionBtnsMolec, DetailInputFormAtom, DetailToogleFormAtom, DetailUploadImgAtom, DetailFormMolec, DetailUploadFormMolec, DetailBookFormMolec, WrtEditerAtom, DetailCmbFormAtom, DetailOrgan, IndexOrgan, DetailIndexTemplate, DetailTextareaFormAtom, GenresFieldModule],
-  declarations: [SocialBtnAtom, WrtBgAtom, WrtMenuBtnAtom, WrtBookImgAtom, WrtTitleAtom, WrtHeadMolec, WrtWriterMolec, WrtInfoBookAtom, SubmitBtnAtom, WritingOrgan, WritingTemplate, WrtSocialMenuAtom, DetailTabHeadMolec, DetailActionBtnsMolec, DetailInputFormAtom, DetailToogleFormAtom, DetailUploadImgAtom, DetailFormMolec, DetailUploadFormMolec, DetailBookFormMolec, WrtEditerAtom, DetailCmbFormAtom, DetailOrgan, IndexOrgan, DetailIndexTemplate, DetailTextareaFormAtom]
+  exports: [CommonModule, SocialBtnAtom, WrtBgAtom, WrtMenuBtnAtom, WrtBookImgAtom, WrtTitleAtom, WrtHeadMolec, WrtWriterMolec, WrtInfoBookAtom, SubmitBtnAtom, WritingOrgan, WritingTemplate, WrtSocialMenuAtom, DetailTabHeadMolec, DetailActionBtnsMolec, DetailInputFormAtom, DetailToogleFormAtom, DetailUploadImgAtom, DetailFormMolec, DetailUploadFormMolec, DetailBookFormMolec, WrtEditerAtom, DetailCmbFormAtom, DetailOrgan, IndexOrgan, DetailIndexTemplate, DetailTextareaFormAtom, GenresFieldModule, DetailLinkBtnsMolec, DetailRatingAtom, DetailInfoBookAtom, SocialMenuAtom, ListHeadMolec, ListTitleColAtom, ListImgBookAtom, ListReviewBookAtom, ListTypeBookAtom, ListRatingBookAtom, ListChapterBookAtom, ListUdBookAtom, ListSocialMenuAtom, ListSocialBtnAtom, ListActMolec, ListChapterMolec, ListStoriesMolec, ListTemplate, ListOrgan],
+  declarations: [SocialBtnAtom, WrtBgAtom, WrtMenuBtnAtom, WrtBookImgAtom, WrtTitleAtom, WrtHeadMolec, WrtWriterMolec, WrtInfoBookAtom, SubmitBtnAtom, WritingOrgan, WritingTemplate, WrtSocialMenuAtom, DetailTabHeadMolec, DetailActionBtnsMolec, DetailInputFormAtom, DetailToogleFormAtom, DetailUploadImgAtom, DetailFormMolec, DetailUploadFormMolec, DetailBookFormMolec, WrtEditerAtom, DetailCmbFormAtom, DetailOrgan, IndexOrgan, DetailIndexTemplate, DetailTextareaFormAtom, DetailLinkBtnsMolec, DetailRatingAtom, DetailInfoBookAtom, SocialMenuAtom, ListHeadMolec, ListTitleColAtom, ListImgBookAtom, ListReviewBookAtom, ListTypeBookAtom, ListRatingBookAtom, ListChapterBookAtom, ListUdBookAtom, ListSocialMenuAtom, ListSocialBtnAtom, ListActMolec, ListChapterMolec, ListStoriesMolec, ListTemplate, ListOrgan]
 })
 export class WriterWebUiCreationAtomicModule {}

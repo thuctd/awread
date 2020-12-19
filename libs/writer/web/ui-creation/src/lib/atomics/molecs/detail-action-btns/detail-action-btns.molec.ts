@@ -11,7 +11,7 @@ export class DetailActionBtnsMolec implements OnInit {
     {
       submitText: 'Draft',
       isActive: false,
-    }    ,{
+    },{
     submitText: 'Publish',
     isActive: true,
   }];
