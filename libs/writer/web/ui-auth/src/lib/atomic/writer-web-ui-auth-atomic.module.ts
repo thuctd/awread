@@ -19,9 +19,12 @@ import { ForgotSentOrgan } from './organs/forgot-sent/forgot-sent.organ';
 import { AccountCompleteTemplate } from './templates/account-complete/account-complete.template';
 import { AuthHeaderMolec } from './molecs/auth-header/auth-header.molec';
 import { AccountCompleteOrganOrgan } from './organs/account-complete-organ/account-complete-organ.organ';
+import { NewPasswordTemplate } from './templates/new-password/new-password.template';
+import { NewPasswordOrganOrgan } from './organs/new-password-organ/new-password-organ.organ';
+import { NewPasswordFormMolec } from './molecs/new-password-form/new-password-form.molec';
 @NgModule({
   imports: [CommonModule, GlobalDesignSystemAtomicModule, StorybookSupportModule],
-  exports: [CommonModule, ForgotPasswordTemplate, AuthBackgroundTemplate, AuthHeaderMolec, ForgotFormMolec, ForgotOrgan, ForgotActionsMolec, ForgotOptionsMolec, ForgotSentOrgan, AccountCompleteTemplate, AccountCompleteOrganOrgan],
-  declarations: [TabHeadMolec, LoginFormMolec, RegisterFormMolec, RememberForgotMolec, ActionBtnsMolec, LoginOrgan, RegisterOrgan, LoginRegisterTemplate, ForgotPasswordTemplate, AuthBackgroundTemplate, AuthHeaderMolec, ForgotFormMolec, ForgotOrgan, ForgotActionsMolec, ForgotOptionsMolec, ForgotSentOrgan, AccountCompleteTemplate, AccountCompleteOrganOrgan]
+  exports: [CommonModule, ForgotPasswordTemplate, AuthBackgroundTemplate, AuthHeaderMolec, ForgotFormMolec, ForgotOrgan, ForgotActionsMolec, ForgotOptionsMolec, ForgotSentOrgan, AccountCompleteTemplate, AccountCompleteOrganOrgan, NewPasswordTemplate,  NewPasswordOrganOrgan, NewPasswordFormMolec],
+  declarations: [TabHeadMolec, LoginFormMolec, RegisterFormMolec, RememberForgotMolec, ActionBtnsMolec, LoginOrgan, RegisterOrgan, LoginRegisterTemplate, ForgotPasswordTemplate, AuthBackgroundTemplate, AuthHeaderMolec, ForgotFormMolec, ForgotOrgan, ForgotActionsMolec, ForgotOptionsMolec, ForgotSentOrgan, AccountCompleteTemplate, AccountCompleteOrganOrgan, NewPasswordTemplate,  NewPasswordOrganOrgan, NewPasswordFormMolec]
 })
 export class WriterWebUiAuthAtomicModule { }
