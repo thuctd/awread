@@ -14,10 +14,11 @@ import { NavbarIconAtom } from './atoms/navbar-icon/navbar-icon.atom';
 
 import { AuthHeaderAtom } from './atoms/auth-header/auth-header.atom';
 import { AuthDescriptionAtom } from './atoms/auth-description/auth-description.atom';
+import { OptionLinkAtom } from './atoms/option-link/option-link.atom';
 
 @NgModule({
   imports: [CommonModule, StorybookSupportModule],
-  exports: [TabBtnAtom, LogoAtom, InputFormAtom, CheckBtnAtom, LinkBtnAtom, SubmitBtnAtom, SocialBtnAtom, AuthBgAtom, NavbarLinkAtom, NavbarIconAtom,  AuthHeaderAtom, AuthDescriptionAtom],
-  declarations: [TabBtnAtom, LogoAtom, InputFormAtom, CheckBtnAtom, LinkBtnAtom, SubmitBtnAtom, SocialBtnAtom, AuthBgAtom, NavbarLinkAtom, NavbarIconAtom,  AuthHeaderAtom, AuthDescriptionAtom],
+  exports: [TabBtnAtom, LogoAtom, InputFormAtom, CheckBtnAtom, LinkBtnAtom, SubmitBtnAtom, SocialBtnAtom, AuthBgAtom, NavbarLinkAtom, NavbarIconAtom,  AuthHeaderAtom, AuthDescriptionAtom, OptionLinkAtom],
+  declarations: [TabBtnAtom, LogoAtom, InputFormAtom, CheckBtnAtom, LinkBtnAtom, SubmitBtnAtom, SocialBtnAtom, AuthBgAtom, NavbarLinkAtom, NavbarIconAtom,  AuthHeaderAtom, AuthDescriptionAtom, OptionLinkAtom],
 })
 export class GlobalDesignSystemAtomicModule { }

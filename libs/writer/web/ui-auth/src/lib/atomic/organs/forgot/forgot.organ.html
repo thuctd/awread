@@ -1,0 +1,7 @@
+<forgot-header [title]="title" [description]="description">
+</forgot-header>
+<forgot-form [formForget]="formForgotPassword"></forgot-form>
+<forgot-actions [title]="'Gửi email hướng dẫn'" [active]="formForgotPassword.valid"
+    (submitEvent)="submitEvent.emit($event)"></forgot-actions>
+<option-link [suggestText]="'Bạn đã nhớ thông tin đăng nhập?'" [title]="'Đăng nhập'" [link]="'/signin'"></option-link>
+<option-link [suggestText]="'Chưa có tài khoản?'" [title]="'Đăng ký'" [link]="'/signin'"></option-link>

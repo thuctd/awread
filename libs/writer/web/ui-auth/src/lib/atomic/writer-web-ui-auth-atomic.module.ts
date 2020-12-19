@@ -11,9 +11,15 @@ import { RegisterOrgan } from './organs/register/register.organ';
 import { LoginRegisterTemplate } from './templates/login-register/login-register.template';
 import { ForgotPasswordTemplate } from './templates/forgot-password/forgot-password.template';
 import { AuthBackgroundTemplate } from './templates/auth-background/auth-background.template';
+import { ForgotHeaderMolec } from './molecs/forgot-header/forgot-header.molec';
+import { ForgotFormMolec } from './molecs/forgot-form/forgot-form.molec';
+import { ForgotOrgan } from './organs/forgot/forgot.organ';
+import { ForgotActionsMolec } from './molecs/forgot-actions/forgot-actions.molec';
+import { ForgotOptionsMolec } from './molecs/forgot-options/forgot-options.molec';
+import { ForgotSentOrgan } from './organs/forgot-sent/forgot-sent.organ';
 @NgModule({
   imports: [CommonModule, GlobalDesignSystemAtomicModule, StorybookSupportModule],
-  exports: [CommonModule, ForgotPasswordTemplate, AuthBackgroundTemplate],
-  declarations: [TabHeadMolec, LoginFormMolec, RegisterFormMolec, RememberForgotMolec, ActionBtnsMolec, LoginOrgan, RegisterOrgan, LoginRegisterTemplate, ForgotPasswordTemplate, AuthBackgroundTemplate]
+  exports: [CommonModule, ForgotPasswordTemplate, AuthBackgroundTemplate, ForgotHeaderMolec, ForgotFormMolec, ForgotOrgan, ForgotActionsMolec, ForgotOptionsMolec, ForgotSentOrgan],
+  declarations: [TabHeadMolec, LoginFormMolec, RegisterFormMolec, RememberForgotMolec, ActionBtnsMolec, LoginOrgan, RegisterOrgan, LoginRegisterTemplate, ForgotPasswordTemplate, AuthBackgroundTemplate, ForgotHeaderMolec, ForgotFormMolec, ForgotOrgan, ForgotActionsMolec, ForgotOptionsMolec, ForgotSentOrgan]
 })
 export class WriterWebUiAuthAtomicModule { }
