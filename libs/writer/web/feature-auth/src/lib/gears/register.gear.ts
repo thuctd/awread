@@ -1,27 +1,40 @@
-import { Router } from "@angular/router";
 import { AuthApi } from "./../apis/auth.api";
 import { Injectable } from "@angular/core";
 import { FirebaseAuthAddon, FirebaseAuthSocialAddon } from "../addons";
 import { BasicCredential, ProviderType } from "../models";
 import firebase from "firebase/app";
-import { MatDialog } from "@angular/material/dialog";
 // userCredential.additionalUserInfo.isNewUser;
 // userCredential.credential.providerId;
 // userCredential.user.getIdToken();
-
 @Injectable({ providedIn: "root" })
 export class RegisterGear {
   userCredential: firebase.auth.UserCredential | null = null;
   constructor(
     private firebaseAuthAddon: FirebaseAuthAddon,
     private firebaseAuthSocialAddon: FirebaseAuthSocialAddon,
-    private authApi: AuthApi,
-    private dialog: MatDialog,
-    private router: Router
+    private authApi: AuthApi
   ) {}
 
-  async registerEmail(basicCredential: BasicCredential) {
-    return this.firebaseAuthSocialAddon.registerWithEmail(basicCredential);
+  async registerEmail(credential: BasicCredential) {
+    try {
+      const userCredential = await this.firebaseAuthAddon.registerWithEmail(
+        credential
+      );
+      const user = {
+        ...userCredential.user,
+        displayName: credential.displayName,
+        password: credential.password,
+        provider: "email/password",
+      };
+      this.firebaseAuthSocialAddon.createAccountOnServer(user);
+    } catch (err) {
+      console.log("login with email/pw error: ", err);
+      if (err.code === "auth/email-already-in-use") {
+        // TH tạo email đã tồn tại, thì link email này tới provider google hoặc facebook đã tạo trước đó
+        // Link xong là có thể đăng nhập với email/pass vừa mới link
+        this.firebaseAuthSocialAddon.linkToProviderGoogleorFacebook(credential);
+      }
+    }
   }
 
   async registerSocial(providerType: ProviderType) {

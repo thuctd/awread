@@ -45,35 +45,42 @@ export class LoginGear {
   }
 
   async loginSocial(providerType: ProviderType) {
-    try {
-      const userCredential: firebase.auth.UserCredential = await this.firebaseAuthSocialAddon.loginWithProvider(
-        providerType
-      );
-      console.log("userCredential", userCredential);
-    } catch (err) {
-      console.log("err", err);
-      if (
-        err.email &&
-        err.credential &&
-        err.code === "auth/account-exists-with-different-credential"
-      ) {
-        const providers = await firebase
-          .auth()
-          .fetchSignInMethodsForEmail(err.email);
-        console.log("providers", providers);
-        // const firstPopupProviderMethod = providers.find(p => supportedPopupSignInMethods.includes(p));
-
-        // // Test: Could this happen with email link then trying social provider?
-        // if (!firstPopupProviderMethod) {
-        //   throw new Error(`Your account is linked to a provider that isn't supported.`);
-        // }
-
-        // const linkedProvider = getProvider(firstPopupProviderMethod);
-        // linkedProvider.setCustomParameters({ login_hint: err.email });
-
-        // const result = await firebase.auth().signInWithPopup(linkedProvider);
-        // result.user.linkWithCredential(err.credential);
-      }
+    switch (providerType) {
+      case ProviderType.apple:
+        return await this.firebaseAuthAddon.loginWithApple();
+      case ProviderType.facebook:
+        try {
+          const userCredential = await this.firebaseAuthAddon.loginWithFacebook();
+          this.firebaseAuthSocialAddon.createAccountOnServer({
+            ...userCredential.user,
+            provider: "facebook",
+          });
+        } catch (err) {
+          this.firebaseAuthSocialAddon.linkAccountWithProviderFacebook(err);
+        }
+        break;
+      case ProviderType.google:
+        try {
+          const userCredential = await this.firebaseAuthAddon.loginWithGoogle();
+          this.firebaseAuthSocialAddon.createAccountOnServer({
+            ...userCredential.user,
+            provider: "google",
+          });
+          // vì google ghi đè lên tất cả tài khoản cùng email đã tạo trước đó,
+          // nên phải check lại TH đã tạo email/password trước đó rồi mà bị ghì đè,
+          // nếu đúng thì link lại với account google
+          this.firebaseAuthSocialAddon.shouldLinkProviderPassword(
+            userCredential.user.email,
+            firebase.auth().currentUser
+          );
+          return userCredential;
+        } catch (err) {
+          // this.linkAccount(err);
+          console.log("google login error: ", err);
+        }
+        break;
+      default:
+        return null;
     }
     // this.getCurrentUser();
   }

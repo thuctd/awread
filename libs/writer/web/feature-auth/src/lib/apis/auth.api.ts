@@ -131,7 +131,7 @@ export class AuthApi {
           }
         }
       `,
-      variables: { email: "thaothe377@gmail.com" },
+      variables: { email: email },
     });
   }
 
