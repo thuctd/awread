@@ -1,0 +1,35 @@
+{
+    "$schema": "http://json-schema.org/schema",
+    "id": "logic",
+    "type": "object",
+    "properties": {
+        "list": {
+            "type": "string",
+            "description": "list of name, separate by comma (,) for example: submit-btn,input-form",
+            "$default": {
+                "$source": "argv",
+                "index": 0
+            }
+        },
+        "type": {
+            "type": "string",
+            "description": "atomic design kind of component",
+            "enum": [
+                "gear",
+                "addon",
+                "api",
+                "facade",
+                "model"
+            ],
+            "default": "gear"
+        },
+        "export": {
+            "type": "boolean",
+            "description": "export in the module to reuse other place",
+            "default": true
+        }
+    },
+    "required": [
+        "list"
+    ]
+}

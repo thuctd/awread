@@ -24,21 +24,21 @@ case 1: generate the atomic design system
 
 ```
 - open terminal from everywhere
-- nx workspace-schematic ds --type=[atom,molec,organ default value is atom] [your list component name here]
+- nx workspace-generator ds --type=[atom,molec,organ default value is atom] [your list component name here]
 ```
 
 case 2: generate the atomic design system
 
 ```
 - open terminal on atomic parent folder
-- nx workspace-schematic ds --type=[atom,molec,organ default value is atom] [your list component name here]
+- nx workspace-generator ds --type=[atom,molec,organ default value is atom] [your list component name here]
 ```
 
 # EXAMPLE
 
 ## generate in feature folder:
 
-nx workspace-schematic atomic --type=[atom,molec,organ] [your list component name here]
+nx workspace-generator atomic --type=[atom,molec,organ] [your list component name here]
 if you dont using --type, default value is atom
 
 for example:
@@ -46,32 +46,32 @@ for example:
 ### generate without --type
 
 ```
-nx workspace-schematic atomic auth-bg,tab-btn,logo,input,check-btn,forgot-btn,submit-btn,social-btn
+nx workspace-generator atomic auth-bg,tab-btn,logo,input,check-btn,forgot-btn,submit-btn,social-btn
 ```
 
 ### generate with --type
 
 ```
-nx workspace-schematic atomic --type=atom auth-bg,tab-btn,logo,input,check-btn,forgot-btn,submit-btn,social-btn
-nx workspace-schematic atomic --type=molec tab-head,login-form,register-form,remember-forgot,action-btns
-nx workspace-schematic atomic --type=organ login,register
-nx workspace-schematic atomic --type=template login-register
+nx workspace-generator atomic --type=atom auth-bg,tab-btn,logo,input,check-btn,forgot-btn,submit-btn,social-btn
+nx workspace-generator atomic --type=molec tab-head,login-form,register-form,remember-forgot,action-btns
+nx workspace-generator atomic --type=organ login,register
+nx workspace-generator atomic --type=template login-register
 ```
 
 ## generate design system folder:
 
-nx workspace-schematic ds --type=[atom,molec,organ] [your list component name here]
+nx workspace-generator ds --type=[atom,molec,organ] [your list component name here]
 if you dont using --type, default value is atom
 
 ```
-nx workspace-schematic ds auth-bg,tab-btn,logo,input,check-btn,forgot-btn,submit-btn,social-btn
+nx workspace-generator ds auth-bg,tab-btn,logo,input,check-btn,forgot-btn,submit-btn,social-btn
 ```
 
 ### generate with --type
 
 ```
-nx workspace-schematic ds --type=atom auth-bg,tab-btn,logo,input,check-btn,forgot-btn,submit-btn,social-btn
-nx workspace-schematic ds --type=molec tab-head,login-form,register-form,remember-forgot,action-btns
-nx workspace-schematic ds --type=organ login,register
-nx workspace-schematic ds --type=template login-register
+nx workspace-generator ds --type=atom auth-bg,tab-btn,logo,input,check-btn,forgot-btn,submit-btn,social-btn
+nx workspace-generator ds --type=molec tab-head,login-form,register-form,remember-forgot,action-btns
+nx workspace-generator ds --type=organ login,register
+nx workspace-generator ds --type=template login-register
 ```

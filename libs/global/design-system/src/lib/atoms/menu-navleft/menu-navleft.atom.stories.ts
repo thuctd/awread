@@ -1,0 +1,24 @@
+import { MenuNavleftAtom } from "./menu-navleft.atom";
+import { GlobalDesignSystemAtomicModule } from "../../global-design-system-atomic.module";
+
+export default {
+  title: "Design System/Atoms/Menu Navleft",
+};
+
+export const Basic = () => ({
+  moduleMetadata: {
+    imports: [GlobalDesignSystemAtomicModule],
+  },
+  component: MenuNavleftAtom,
+  props: {},
+});
+
+export const MenuOpen = () => ({
+  moduleMetadata: {
+    imports: [GlobalDesignSystemAtomicModule],
+  },
+  component: MenuNavleftAtom,
+  props: {
+    isMenuOpen: true,
+  },
+});
