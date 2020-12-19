@@ -1,15 +1,15 @@
-import { ProfileFormMolec } from './profile-form.molec';
+import { InfoFormMolec } from './info-form.molec';
 import { WriterWebUiSingleAtomicModule } from '../../writer-web-ui-single-atomic.module';
 
 export default {
-  title: 'single/molecs/profile form'
+  title: 'Single/Molecs/Info Form'
 }
 
 export const primary = () => ({
   moduleMetadata: {
     imports: [WriterWebUiSingleAtomicModule]
   },
-  component: ProfileFormMolec,
+  component: InfoFormMolec,
   props: {
 
   }

@@ -12,10 +12,58 @@ import { StorybookSupportModule } from './storybook-support.module';
 import { NavbarLinkAtom } from './atoms/navbar-link/navbar-link.atom';
 import { NavbarIconAtom } from './atoms/navbar-icon/navbar-icon.atom';
 import { TestMolec } from './molecs/test/test.molec';
+import { searchNavtopAtom } from './atoms/search-navtop/search-navtop.atom';
+import { MenuNavtopAtom } from './atoms/menu-navtop/menu-navtop.atom';
+import { MenuNavleftAtom } from './atoms/menu-navleft/menu-navleft.atom';
+import { InputFormProfileAtom } from './atoms/input-form-profile/input-form-profile.atom';
+import { TitleFormProfileAtom } from './atoms/title-form-profile/title-form-profile.atom';
+import { BigimgProfileAtom } from './atoms/bigimg-profile/bigimg-profile.atom';
+import { SmailimgProfileAtom } from './atoms/smailimg-profile/smailimg-profile.atom';
+import { ChangephotoProfileAtom } from './atoms/changephoto-profile/changephoto-profile.atom';
 
 @NgModule({
   imports: [CommonModule, StorybookSupportModule],
-  exports: [TabBtnAtom, LogoAtom, InputFormAtom, CheckBtnAtom, LinkBtnAtom, SubmitBtnAtom, SocialBtnAtom, AuthBgAtom, NavbarLinkAtom, NavbarIconAtom, TestMolec],
-  declarations: [TabBtnAtom, LogoAtom, InputFormAtom, CheckBtnAtom, LinkBtnAtom, SubmitBtnAtom, SocialBtnAtom, AuthBgAtom, NavbarLinkAtom, NavbarIconAtom, TestMolec],
+  exports: [
+    TabBtnAtom,
+    LogoAtom,
+    InputFormAtom,
+    CheckBtnAtom,
+    LinkBtnAtom,
+    SubmitBtnAtom,
+    SocialBtnAtom,
+    AuthBgAtom,
+    NavbarLinkAtom,
+    NavbarIconAtom,
+    TestMolec,
+    searchNavtopAtom,
+    MenuNavtopAtom,
+    MenuNavleftAtom,
+    InputFormProfileAtom,
+    TitleFormProfileAtom,
+    BigimgProfileAtom,
+    SmailimgProfileAtom,
+    ChangephotoProfileAtom,
+  ],
+  declarations: [
+    TabBtnAtom,
+    LogoAtom,
+    InputFormAtom,
+    CheckBtnAtom,
+    LinkBtnAtom,
+    SubmitBtnAtom,
+    SocialBtnAtom,
+    AuthBgAtom,
+    NavbarLinkAtom,
+    NavbarIconAtom,
+    TestMolec,
+    searchNavtopAtom,
+    MenuNavtopAtom,
+    MenuNavleftAtom,
+    InputFormProfileAtom,
+    TitleFormProfileAtom,
+    BigimgProfileAtom,
+    SmailimgProfileAtom,
+    ChangephotoProfileAtom,
+  ],
 })
-export class GlobalDesignSystemAtomicModule { }
+export class GlobalDesignSystemAtomicModule {}
