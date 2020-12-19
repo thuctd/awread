@@ -1,4 +1,4 @@
-import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import {
   Component,
   OnInit,
@@ -6,19 +6,19 @@ import {
   Input,
   Output,
   EventEmitter,
-} from "@angular/core";
+} from '@angular/core';
 
 @Component({
-  selector: "menu-navtop",
-  templateUrl: "./menu-navtop.atom.html",
-  styleUrls: ["./menu-navtop.atom.scss"],
+  selector: 'menu-navtop',
+  templateUrl: './menu-navtop.atom.html',
+  styleUrls: ['./menu-navtop.atom.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MenuNavtopAtom implements OnInit {
   @Input() faIcon = faSignOutAlt;
   @Input() isMenuOpen = false;
-  @Input() avatarUrl = "http://tachyons.io/img/logo.jpg";
-  @Input() name = "Tran Quang Hiep";
+  @Input() avatarUrl = 'http://tachyons.io/img/logo.jpg';
+  @Input() name = 'Hà Thanh Tùng';
   @Output() signoutEvent = new EventEmitter();
   constructor() {}
 

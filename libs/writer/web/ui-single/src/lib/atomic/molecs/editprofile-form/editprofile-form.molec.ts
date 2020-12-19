@@ -7,7 +7,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EditprofileFormMolec implements OnInit {
-  items = [{ key: 'Name' }, { key: 'Username' }, { key: 'Website' }];
+  items = [{ key: 'Tên' }, { key: 'Tên tài khoản' }, { key: 'Trang mạng' }];
 
   constructor() {}
 

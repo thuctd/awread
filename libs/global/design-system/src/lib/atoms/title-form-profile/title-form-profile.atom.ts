@@ -14,7 +14,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TitleFormProfileAtom implements OnInit {
-  @Input() title = "Edit Profile";
+  @Input() title = "Chỉnh sửa hồ sơ";
 
   constructor() {}
 

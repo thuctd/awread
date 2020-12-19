@@ -12,7 +12,7 @@ export class InfoFormMolec implements OnInit {
       key: 'Email',
     },
     {
-      key: 'Phone number',
+      key: 'Số điện thoại',
     },
   ];
 

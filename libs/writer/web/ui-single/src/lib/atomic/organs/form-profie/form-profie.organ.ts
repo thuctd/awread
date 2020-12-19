@@ -14,7 +14,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormProfieOrgan implements OnInit {
-  @Input() submitText = 'Save';
+  @Input() submitText = 'Lưu';
 
   constructor() {}
 
