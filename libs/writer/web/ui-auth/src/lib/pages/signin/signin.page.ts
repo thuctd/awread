@@ -78,7 +78,7 @@ export class SigninPage implements OnInit {
     this.activeTemplate = this.template[this.mode];
   }
 
-  auth(provider: "email" | "facebook" | "google") {
+  auth(provider: "email" | "facebook" | "google" | "apple") {
     // debugger
     console.log(provider, this.form.value);
     if (this.mode === "signin") {
@@ -92,11 +92,15 @@ export class SigninPage implements OnInit {
           // });
           this.authFacade.loginEmail(this.form.value);
           break;
+
+        case "apple":
+          this.authFacade.loginSocials(ProviderType.apple);
+          break;
         case "facebook":
-          this.authFacade.registerSocial(ProviderType.facebook);
+          this.authFacade.loginSocials(ProviderType.facebook);
           break;
         case "google":
-          this.authFacade.registerSocial(ProviderType.google);
+          this.authFacade.loginSocials(ProviderType.google);
           break;
         default:
           break;

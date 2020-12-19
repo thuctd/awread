@@ -34,7 +34,7 @@ export class AuthFacade {
     this.loginGear.loginEmail(credential);
   }
 
-  loginSocial(providerType: ProviderType) {
+  loginSocials(providerType: ProviderType) {
     this.loginGear.loginSocial(providerType);
   }
 

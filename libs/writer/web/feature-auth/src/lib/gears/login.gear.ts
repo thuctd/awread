@@ -47,7 +47,13 @@ export class LoginGear {
   async loginSocial(providerType: ProviderType) {
     switch (providerType) {
       case ProviderType.apple:
-        return await this.firebaseAuthAddon.loginWithApple();
+        try {
+          const userCredential = await this.firebaseAuthAddon.loginWithApple();
+          console.log("userCredential apple", userCredential);
+        } catch (error) {
+          console.log("error", error);
+        }
+        break;
       case ProviderType.facebook:
         try {
           const userCredential = await this.firebaseAuthAddon.loginWithFacebook();

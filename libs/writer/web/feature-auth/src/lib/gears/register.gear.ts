@@ -38,17 +38,6 @@ export class RegisterGear {
   }
 
   async registerSocial(providerType: ProviderType) {
-    try {
-      const userCredential = await this.firebaseAuthSocialAddon.loginWithProvider(
-        providerType
-      );
-      console.log("userCredential", userCredential);
-    } catch (err) {
-      if (err.code === "auth/email-already-in-use") {
-        alert("Email đã tồn tại");
-      }
-    }
-
     this.routingToPersonalInfoPageIfSocial();
   }
 

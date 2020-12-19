@@ -28,26 +28,11 @@ export class FirebaseAuthSocialAddon {
   async loginWithProvider(providerType: ProviderType) {
     switch (providerType) {
       case ProviderType.apple:
-        try {
-          return await this.firebaseAuthAddon.loginWithApple();
-        } catch (error) {
-          throw error;
-        }
+        return await this.firebaseAuthAddon.loginWithApple();
       case ProviderType.facebook:
-        try {
-          return await this.firebaseAuthAddon.loginWithFacebook();
-        } catch (err) {
-          throw err;
-        }
-        break;
+        return await this.firebaseAuthAddon.loginWithFacebook();
       case ProviderType.google:
-        try {
-          return await this.firebaseAuthAddon.loginWithGoogle();
-        } catch (err) {
-          // this.linkAccount(err);
-          throw err;
-        }
-        break;
+        return await this.firebaseAuthAddon.loginWithGoogle();
       default:
         return null;
     }
