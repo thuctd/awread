@@ -5,6 +5,6 @@ import { Injectable } from "@angular/core";
 export class ForgotPasswordGear {
   constructor(private authApi: AuthApi) {}
   updatePassword(newPassword: string) {
-    this.authApi.updateNewPassword(newPassword);
+    this.authApi.updatePassword("", newPassword, "forgot");
   }
 }

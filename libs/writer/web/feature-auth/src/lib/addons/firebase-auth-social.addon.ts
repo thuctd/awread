@@ -147,13 +147,21 @@ export class FirebaseAuthSocialAddon {
       const providers = await firebase
         .auth()
         .fetchSignInMethodsForEmail(user.email);
-      if (providers[0] === "password") {
+      if (providers.includes("password")) {
+        alert("Tài khoản đã tồn tại!");
         return;
       }
       const linkedProvider: any = this.getProvider(providers[0]);
       linkedProvider.setCustomParameters({ login_hint: user.email });
       const result = await firebase.auth().signInWithPopup(linkedProvider);
-      result.user.linkWithCredential(credential);
+      const linkWithCredential = await result.user.linkWithCredential(
+        credential
+      );
+      if (linkWithCredential.user) {
+        // update password when account Googleor/FB exists.
+        this.authApi.updatePassword(user.email, user.password, "update-new");
+      }
+      console.log("linkWithCredential", linkWithCredential);
     } catch (error) {
       console.log("link with gg/fb error: ", error);
     }

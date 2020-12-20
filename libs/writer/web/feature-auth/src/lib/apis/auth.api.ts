@@ -12,17 +12,19 @@ export class AuthApi {
     private firestore: AngularFirestore
   ) {}
 
-  updateNewPassword(newPassword: string) {
+  updatePassword(email: string, newPassword: string, type = "forgot") {
     this.apollo
       .mutate({
         mutation: gql`
-          mutation resetpw($account: String, $pw: String) {
-            fnUpdateNewPassword(input: { account: $account, pw: $pw }) {
+          mutation resetpw($email: String, $pw: String, $type: String) {
+            fnUpdateNewPassword(
+              input: { email: $email, pw: $pw, type: $type }
+            ) {
               status
             }
           }
         `,
-        variables: { account: localStorage.getItem("email"), pw: newPassword },
+        variables: { email, pw: newPassword, type },
       })
       .subscribe((res) => {
         console.log("result", res);

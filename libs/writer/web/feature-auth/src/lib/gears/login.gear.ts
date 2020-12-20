@@ -73,7 +73,7 @@ export class LoginGear {
             provider: "google",
           });
           // vì google ghi đè lên tất cả tài khoản cùng email đã tạo trước đó,
-          // nên phải check lại TH đã tạo email/password trước đó rồi mà bị ghì đè,
+          // nên phải check lại TH đã tạo email/password trước đó,
           // nếu đúng thì link lại với account google
           this.firebaseAuthSocialAddon.shouldLinkProviderPassword(
             userCredential.user.email,
