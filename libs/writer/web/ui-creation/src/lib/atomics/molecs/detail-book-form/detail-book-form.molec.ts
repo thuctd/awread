@@ -8,6 +8,7 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DetailBookFormMolec implements OnInit {
+  @Input() genres;
   @Input() formInformation = {
     title: {
       display: 'title',
