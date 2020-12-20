@@ -26,7 +26,8 @@
     "workspace-schematic": "nx workspace-schematic",
     "dep-graph": "nx dep-graph",
     "help": "nx help",
-    "design-story": "nx run global-design-system:storybook"
+    "design-story": "nx run global-design-system:storybook",
+    "fb-emu": "firebase emulators:start"
   },
   "private": true,
   "dependencies": {
