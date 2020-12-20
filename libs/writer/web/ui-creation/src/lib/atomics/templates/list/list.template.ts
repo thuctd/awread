@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
-  selector: 'list',
+  selector: 'template-list',
   templateUrl: './list.template.html',
   styleUrls: ['./list.template.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

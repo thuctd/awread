@@ -1,4 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { faChartLine, faPlusCircle, faPlusSquare, faShareAlt, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'list-act',
@@ -7,6 +8,14 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ListActMolec implements OnInit {
+
+  @Input() btns = [{
+    titleButton: 'Publish',
+    faIcon: faChartLine,
+  }, {
+    titleButton: 'Draft',
+    faIcon: faShareAlt,
+  }];
 
   constructor() { }
 

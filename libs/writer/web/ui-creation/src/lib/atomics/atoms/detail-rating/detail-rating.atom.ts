@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
-import { faEye, faComments } from '@fortawesome/free-solid-svg-icons';
+import { faEye, faComments, faStar } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'detail-rating',
@@ -9,6 +9,7 @@ import { faEye, faComments } from '@fortawesome/free-solid-svg-icons';
 })
 export class DetailRatingAtom implements OnInit {
   @Input() faIconEye = faEye;
+  @Input() faIconStar = faStar;
   @Input() faIconComments = faComments;
   @Input() chapterCountView = '696969k';
   @Input() chapterCountComments = '2020-12-16';

@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 
 @Component({
   selector: 'list-chapter',
@@ -7,6 +7,8 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ListChapterMolec implements OnInit {
+  @Input() countTotal = 1000;
+  @Input() countPublished = 50;
 
   constructor() { }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 
 @Component({
   selector: 'list-title-col',
@@ -7,6 +7,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ListTitleColAtom implements OnInit {
+  @Input() titleBoook = 'Cô gái chúng ta cùng theo đuổi năm nào!'
 
   constructor() { }
 

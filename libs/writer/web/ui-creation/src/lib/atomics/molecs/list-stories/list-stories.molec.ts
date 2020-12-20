@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 
 @Component({
   selector: 'list-stories',
@@ -7,6 +7,9 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ListStoriesMolec implements OnInit {
+  @Input() countView = '696969k';
+  @Input() countPositive = 35;
+  @Input() countNegative = 69;
 
   constructor() { }
 
