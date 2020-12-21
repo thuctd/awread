@@ -13,7 +13,7 @@ import { faEllipsisH } from '@fortawesome/free-solid-svg-icons';
 export class SocialMenuAtom implements OnInit {
   @Input() faIconComments = faEllipsisH;
 
-  isMenuOpen = true;
+  isMenuOpen = false;
   constructor() {
   }
   toggleMenu($event) {

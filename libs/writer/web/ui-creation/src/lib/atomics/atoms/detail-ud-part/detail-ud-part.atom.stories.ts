@@ -1,15 +1,15 @@
-import { DetailFormMolec } from './detail-form.molec';
+import { DetailUdPartAtom } from './detail-ud-part.atom';
 import { WriterWebUiCreationAtomicModule } from '../../writer-web-ui-creation-atomic.module';
 
 export default {
-  title: 'Creation/Molecs/Detail Form'
+  title: 'Creation/Atoms/Detail Ud Part'
 }
 
 export const primary = () => ({
   moduleMetadata: {
     imports: [WriterWebUiCreationAtomicModule]
   },
-  component: DetailFormMolec,
+  component: DetailUdPartAtom,
   props: {
 
   }
