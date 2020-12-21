@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'action-btns',
@@ -8,6 +8,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 })
 export class ActionBtnsMolec implements OnInit {
   @Input() formActiveStatus = false;
+  @Output() submitEvent = new EventEmitter();
   constructor() { }
 
   ngOnInit(): void {

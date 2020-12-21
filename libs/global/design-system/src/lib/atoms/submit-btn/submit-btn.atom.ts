@@ -8,7 +8,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter, Input
 })
 export class SubmitBtnAtom implements OnInit {
   @Output() onBtnClicked = new EventEmitter();
-  @Input() submitText = 'login';
+  @Input() name = 'login';
   @Input() active = false;
   constructor() { }
 
