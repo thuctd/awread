@@ -1,12 +1,12 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
-  selector: 'test',
-  templateUrl: './test.molec.html',
-  styleUrls: ['./test.molec.scss'],
+  selector: 'auth-background',
+  templateUrl: './auth-background.template.html',
+  styleUrls: ['./auth-background.template.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TestMolec implements OnInit {
+export class AuthBackgroundTemplate implements OnInit {
 
   constructor() { }
 

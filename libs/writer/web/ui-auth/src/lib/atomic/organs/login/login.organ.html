@@ -1,3 +1,4 @@
 <login-form #loginForm [form]="formDangNhap"></login-form>
 <remember-forgot></remember-forgot>
-<action-btns [formActiveStatus]="loginForm.form.valid"></action-btns>
+<action-btns (submitEvent)="submitEvent.emit(loginForm.form.value)" [formActiveStatus]="loginForm.form.valid">
+</action-btns>

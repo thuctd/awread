@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'login-register',
@@ -11,6 +11,7 @@ export class LoginRegisterTemplate implements OnInit {
     { name: 'login', isActive: true },
     {name: 'register'}
   ]
+  @Output() submitEvent = new EventEmitter();
   constructor() { }
 
   ngOnInit(): void {
