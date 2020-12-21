@@ -1,4 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import { faEllipsisH } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'wrt-menu-btn',
@@ -7,8 +8,25 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WrtMenuBtnAtom implements OnInit {
+  @Input() faIconComments = faEllipsisH;
+  @Output() copyToClipboard = new EventEmitter();
+  @Input() awreadLink = 'abcxyz';
+  @Input() btn = {
+    submitText: 'Copy',
+    isActive: false,
+  };
 
-  constructor() { }
+  isMenuOpen = false;
+  constructor() {
+  }
+  toggleMenu($event) {
+    $event.stopPropagation();
+    this.isMenuOpen = !this.isMenuOpen;
+  }
+
+  onClick() {
+    this.isMenuOpen = false;
+  }
 
   ngOnInit(): void {
   }

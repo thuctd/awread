@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { faEllipsisH } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -12,6 +12,11 @@ import { faEllipsisH } from '@fortawesome/free-solid-svg-icons';
 })
 export class SocialMenuAtom implements OnInit {
   @Input() faIconComments = faEllipsisH;
+  @Output() copyToClipboard = new EventEmitter();
+  @Input() btn = {
+    submitText: 'Copy',
+    isActive: false,
+  };
 
   isMenuOpen = false;
   constructor() {
