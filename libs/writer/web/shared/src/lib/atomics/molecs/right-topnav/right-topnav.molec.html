@@ -1,0 +1,4 @@
+<section class="flex">
+  <search-navtop (searchEvent)="searchEvent.emit($event)" class="-mr-20"></search-navtop>
+  <menu-navtop [avatarUrl]="avatarUrl" (signoutEvent)="signoutEvent($event)" [name]="name"></menu-navtop>
+</section>
