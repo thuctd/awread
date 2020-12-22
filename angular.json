@@ -271,7 +271,7 @@
           "builder": "@angular-builders/custom-webpack:dev-server",
           "options": {
             "browserTarget": "writer-web:build",
-            "proxyConfig": "apps/writer/web/proxy.conf.json"
+            "proxyConfig": "libs/global/core/src/configs/proxy.conf.json"
           },
           "configurations": {
             "production": {
@@ -588,7 +588,7 @@
           "builder": "@angular-builders/custom-webpack:dev-server",
           "options": {
             "browserTarget": "writer-phone:build",
-            "proxyConfig": "apps/writer/phone/proxy.conf.json"
+            "proxyConfig": "libs/global/core/src/configs/proxy.conf.json"
           },
           "configurations": {
             "production": {
