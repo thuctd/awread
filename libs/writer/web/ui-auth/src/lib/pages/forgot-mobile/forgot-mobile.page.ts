@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { ForgotPage } from '../forgot/forgot.page';
+import { ForgotPage } from '@awread/writer/web/feature-auth';
 
 @Component({
   selector: 'page-forgot-mobile',
@@ -7,4 +7,4 @@ import { ForgotPage } from '../forgot/forgot.page';
   styleUrls: ['./forgot-mobile.page.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ForgotMobilePage extends ForgotPage {}
+export class ForgotMobilePage extends ForgotPage { }
