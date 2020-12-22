@@ -1,16 +1,20 @@
-import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 
 @Component({
-  selector: 'new-password',
+  selector: 'new-passwordd',
   templateUrl: './new-password.template.html',
   styleUrls: ['./new-password.template.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NewPasswordTemplate implements OnInit {
-@Output() submitEvent = new EventEmitter();
-  constructor() { }
+  @Output() submitEvent = new EventEmitter();
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }
