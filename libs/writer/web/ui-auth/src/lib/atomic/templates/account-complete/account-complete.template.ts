@@ -7,14 +7,14 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'account-completee',
+  selector: 'template-account-complete',
   templateUrl: './account-complete.template.html',
   styleUrls: ['./account-complete.template.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AccountCompleteTemplate implements OnInit {
   @Output() submitEvent = new EventEmitter();
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

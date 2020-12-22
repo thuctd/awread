@@ -19,7 +19,12 @@
       "runner": "@nrwl/nx-cloud",
       "options": {
         "accessToken": "N2NlYmY4ZGQtYjJmNS00OTM4LWFjNDctZGMyNWI2ZmUxMjJifHJlYWQtd3JpdGU=",
-        "cacheableOperations": ["build", "test", "lint", "e2e"],
+        "cacheableOperations": [
+          "build",
+          "test",
+          "lint",
+          "e2e"
+        ],
         "canTrackAnalytics": false,
         "showUsageWarnings": true
       }
@@ -33,65 +38,126 @@
       "tags": []
     },
     "writer-web": {
-      "tags": ["scope:shared", "type:app"]
+      "tags": [
+        "scope:shared",
+        "type:app"
+      ]
     },
     "writer-web-e2e": {
       "tags": [],
-      "implicitDependencies": ["writer-web"]
+      "implicitDependencies": [
+        "writer-web"
+      ]
     },
     "writer-web-feature-shell": {
-      "tags": ["scope:shell", "scope:shared", "type:feature"]
+      "tags": [
+        "scope:shell",
+        "scope:shared",
+        "type:feature"
+      ]
     },
     "writer-web-shared": {
-      "tags": ["scope:shared"]
+      "tags": [
+        "scope:shared"
+      ]
     },
     "writer-phone": {
-      "tags": ["scope:shared", "type:app"]
+      "tags": [
+        "scope:shared",
+        "type:app"
+      ]
     },
     "writer-phone-e2e": {
       "tags": [],
-      "implicitDependencies": ["writer-phone"]
+      "implicitDependencies": [
+        "writer-phone"
+      ]
     },
     "writer-phone-feature-shell": {
-      "tags": ["scope:shell", "scope:shared", "type:feature"]
+      "tags": [
+        "scope:shell",
+        "scope:shared",
+        "type:feature"
+      ]
     },
     "writer-phone-shared": {
-      "tags": ["scope:shared"]
+      "tags": [
+        "scope:shared"
+      ]
     },
     "global-assets": {
-      "tags": ["scope:shared", "type:assets"]
+      "tags": [
+        "scope:shared",
+        "type:assets"
+      ]
     },
     "global-styles": {
-      "tags": ["scope:shared", "type:styles"]
+      "tags": [
+        "scope:shared",
+        "type:styles"
+      ]
     },
     "global-environments": {
-      "tags": ["scope:shared", "type:environments"]
+      "tags": [
+        "scope:shared",
+        "type:environments"
+      ]
     },
     "global-core": {
-      "tags": ["scope:shared", "type:core"]
+      "tags": [
+        "scope:shared",
+        "type:core"
+      ]
     },
     "writer-web-ui-auth": {
-      "tags": ["scope:ui-auth", "scope:shared", "type:ui-"]
+      "tags": [
+        "scope:ui-auth",
+        "scope:shared",
+        "type:ui-"
+      ]
     },
     "writer-web-feature-auth": {
-      "tags": ["scope:feature--auth", "scope:shared", "type:feature-"]
+      "tags": [
+        "scope:feature--auth",
+        "scope:shared",
+        "type:feature-"
+      ]
     },
     "writer-web-ui-single": {
-      "tags": ["scope:ui-single", "scope:shared", "type:ui-"]
+      "tags": [
+        "scope:ui-single",
+        "scope:shared",
+        "type:ui-"
+      ]
     },
     "writer-web-feature-single": {
-      "tags": ["scope:feature--single", "scope:shared", "type:feature-"]
+      "tags": [
+        "scope:feature--single",
+        "scope:shared",
+        "type:feature-"
+      ]
     },
     "global-design-system": {
       "tags": []
     },
     "writer-web-ui-creation": {
-      "tags": ["scope:ui-creation", "scope:shared", "type:ui-"]
+      "tags": [
+        "scope:ui-creation",
+        "scope:shared",
+        "type:ui-"
+      ]
     },
     "writer-web-feature-creation": {
-      "tags": ["scope:feature--creation", "scope:shared", "type:feature-"]
+      "tags": [
+        "scope:feature--creation",
+        "scope:shared",
+        "type:feature-"
+      ]
     },
     "global-packages": {
+      "tags": []
+    },
+    "backend-graphql": {
       "tags": []
     }
   }

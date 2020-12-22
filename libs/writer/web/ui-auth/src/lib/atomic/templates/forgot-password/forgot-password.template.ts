@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'forgot-password',
+  selector: 'template-forgot-password',
   templateUrl: './forgot-password.template.html',
   styleUrls: ['./forgot-password.template.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -13,8 +13,8 @@ export class ForgotPasswordTemplate implements OnInit {
 
   ngOnInit(): void {
   }
-  submitEvent(){}
-  forgotSubmitEvent(){
+  submitEvent() { }
+  forgotSubmitEvent() {
     this.isSentEmail = true;
   }
 

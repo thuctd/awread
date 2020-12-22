@@ -3,6 +3,9 @@
 
 name: Deploy to Firebase Hosting on merge
 'on':
+  # push:
+  #   tags:
+  #     - release-production-*
   push:
     branches:
       - deploy
