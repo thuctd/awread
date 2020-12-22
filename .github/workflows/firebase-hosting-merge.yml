@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: npm install, build, and test
-      - uses: mansagroup/nrwl-nx-action@v1
+        uses: mansagroup/nrwl-nx-action@v1
         with:
           targets: build-storybook
           projects: writer-web
