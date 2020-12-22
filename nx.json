@@ -93,6 +93,9 @@
     },
     "global-packages": {
       "tags": []
+    },
+    "database": {
+      "tags": []
     }
   }
 }
