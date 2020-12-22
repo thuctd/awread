@@ -8,10 +8,13 @@ import { LogoAtom } from './atoms/logo/logo.atom';
 import { SocialBtnAtom } from './atoms/social-btn/social-btn.atom';
 import { SubmitBtnAtom } from './atoms/submit-btn/submit-btn.atom';
 import { TabBtnAtom } from './atoms/tab-btn/tab-btn.atom';
+import { AuthTitleAtom } from './atoms/auth-title/auth-title.atom';
+import { AuthDescriptionAtom } from './atoms/auth-description/auth-description.atom';
+import { OptionLinkAtom } from './atoms/option-link/option-link.atom';
+
 import { StorybookSupportModule } from './storybook-support.module';
 import { NavbarLinkAtom } from './atoms/navbar-link/navbar-link.atom';
 import { NavbarIconAtom } from './atoms/navbar-icon/navbar-icon.atom';
-import { TestMolec } from './molecs/test/test.molec';
 import { searchNavtopAtom } from './atoms/search-navtop/search-navtop.atom';
 import { MenuNavtopAtom } from './atoms/menu-navtop/menu-navtop.atom';
 import { MenuNavleftAtom } from './atoms/menu-navleft/menu-navleft.atom';
@@ -32,9 +35,12 @@ import { ChangephotoProfileAtom } from './atoms/changephoto-profile/changephoto-
     SubmitBtnAtom,
     SocialBtnAtom,
     AuthBgAtom,
+    AuthTitleAtom,
+    AuthDescriptionAtom,
+    OptionLinkAtom,
+
     NavbarLinkAtom,
     NavbarIconAtom,
-    TestMolec,
     searchNavtopAtom,
     MenuNavtopAtom,
     MenuNavleftAtom,
@@ -53,9 +59,12 @@ import { ChangephotoProfileAtom } from './atoms/changephoto-profile/changephoto-
     SubmitBtnAtom,
     SocialBtnAtom,
     AuthBgAtom,
+    AuthTitleAtom,
+    AuthDescriptionAtom,
+    OptionLinkAtom,
+
     NavbarLinkAtom,
     NavbarIconAtom,
-    TestMolec,
     searchNavtopAtom,
     MenuNavtopAtom,
     MenuNavleftAtom,

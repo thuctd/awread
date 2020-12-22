@@ -1,9 +1,12 @@
-import { Directive, Injectable, OnInit } from "@angular/core";
+import { Directive, Injectable, OnInit } from '@angular/core';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 @Directive()
 export class ShellLayout implements OnInit {
+  isLogin: boolean;
+  constructor() {}
+
   ngOnInit(): void {}
 }

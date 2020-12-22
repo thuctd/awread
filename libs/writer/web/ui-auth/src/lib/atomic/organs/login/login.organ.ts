@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, EventEmitter, Output } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 
 @Component({
@@ -12,6 +12,7 @@ export class LoginOrgan implements OnInit {
     email: ['', [Validators.required, Validators.email]],
     password: ['', Validators.required]
   })
+  @Output() submitEvent = new EventEmitter();
   constructor(
     private fb: FormBuilder,
   ) { }

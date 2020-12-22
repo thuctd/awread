@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { faLock, faEnvelope, faUser } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'register-form',
@@ -10,10 +10,10 @@ import { faLock, faEnvelope, faUser } from '@fortawesome/free-solid-svg-icons';
 export class RegisterFormMolec implements OnInit {
   icons = { faLock, faEnvelope, faUser };
   form = this.fb.group({
-    fullname: '',
-    email: '',
-    password: '',
-    confirmpassword: ''
+    fullname: ['', [Validators.required]],
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required]],
+    confirmpassword: ['', [Validators.required]]
   })
   constructor(
     private fb: FormBuilder,
