@@ -1,6 +1,6 @@
 <auth-background>
     <tab-head #tabHead [tabs]="tabs"></tab-head>
-    <login (submitEvent)="submitEvent.emit($event)" *ngIf="tabHead.currentTab.name === 'login'"></login>
-    <register (submitEvent)="submitEvent.emit($event)" *ngIf="tabHead.currentTab.name === 'register'"></register>
+    <login (submitEvent)="submitEvent.emit($event)" *ngIf="tabHead.currentTab.name === 'Đăng nhập'"></login>
+    <register (submitEvent)="submitEvent.emit($event)" *ngIf="tabHead.currentTab.name === 'Đăng ký'"></register>
 </auth-background>
 <!-- <pre> {{ tabHead.currentTab | json }} </pre> -->

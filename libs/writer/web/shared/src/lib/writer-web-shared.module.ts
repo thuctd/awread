@@ -6,12 +6,13 @@ import { ShellMobileLayout } from "./layouts/shell-mobile/shell-mobile.layout";
 import { NavbarPart } from "./parts/navbar/navbar.part";
 import { HeaderPart } from "./parts/header/header.part";
 import { FooterPart } from "./parts/footer/footer.part";
+import { WriterWebSharedAtomicModule } from "./atomics/writer-web-shared-atomic.module";
 
 declare const window: Window & { haveMobile: boolean };
 window.haveMobile = true;
 
 @NgModule({
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, WriterWebSharedAtomicModule],
   exports: [
     RouterModule,
     ShellDesktopLayout,

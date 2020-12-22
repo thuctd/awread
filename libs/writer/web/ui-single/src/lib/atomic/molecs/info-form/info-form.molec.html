@@ -1,0 +1,14 @@
+<section class="flex flex-col">
+  <title-form-profile [title]="'Thông tin cá nhân'" class="mb-4"></title-form-profile>
+  <input-form-profile *ngFor="let item of items" [key]="item.key" class="mb-4"></input-form-profile>
+  <div class="mb-4">
+    <label class="text-gray-400 float-left">Năm sinh</label>
+    <div class="float-right"><input class="border rounded-full border-gray-400 focus:outline-none px-2 w-44 mr-28" ></div>
+    <div class="clear-both"></div>
+  </div>
+  <div>
+    <label class="text-gray-400 float-left">Giới tính</label>
+    <div class="float-right"><input class="border rounded-full border-gray-400 focus:outline-none px-2 w-28 mr-44" ></div>
+    <div class="clear-both"></div>
+  </div>
+</section>

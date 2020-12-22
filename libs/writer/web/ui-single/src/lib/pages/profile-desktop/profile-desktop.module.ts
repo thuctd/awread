@@ -1,3 +1,4 @@
+import { WriterWebUiSingleAtomicModule } from './../../atomic/writer-web-ui-single-atomic.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -6,6 +7,10 @@ import { ProfileDesktopPage } from './profile-desktop.page';
 
 @NgModule({
   declarations: [ProfileDesktopPage],
-  imports: [CommonModule, ProfileDesktopRoutingModule],
+  imports: [
+    CommonModule,
+    ProfileDesktopRoutingModule,
+    WriterWebUiSingleAtomicModule,
+  ],
 })
 export class ProfileDesktopModule {}

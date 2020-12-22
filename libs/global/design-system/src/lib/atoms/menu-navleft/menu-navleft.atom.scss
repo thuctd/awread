@@ -1,0 +1,15 @@
+:host {
+  display: block;
+}
+#frist_div:before {
+  content: "";
+  display: block;
+  width: 0;
+  height: 0;
+  border-right: 1rem solid rgba(110, 231, 183, var(--tw-bg-opacity));
+  border-top: 0.5rem solid transparent;
+  border-bottom: 0.5rem solid transparent;
+  position: absolute;
+  margin-left: -1rem;
+  top: 2.1rem;
+}
