@@ -3,12 +3,12 @@
 
 name: Deploy to Firebase Hosting on merge
 'on':
-  push:
-    tags:
-      - release-writer-web-story
   # push:
-  #   branches:
-  #     - deploy
+  #   tags:
+  #     - release-writer-web-story-*
+  push:
+    branches:
+      - deploy
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
