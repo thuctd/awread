@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
-  selector: 'auth-background',
+  selector: 'template-auth-background',
   templateUrl: './auth-background.template.html',
   styleUrls: ['./auth-background.template.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

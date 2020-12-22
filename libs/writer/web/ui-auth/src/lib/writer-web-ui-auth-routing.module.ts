@@ -18,37 +18,22 @@ const routes: Routes = [
         component: AuthLayout,
         children: [
           {
-            path: 'signin',
-            loadChildren: () =>
-              window.innerWidth <= 768 && window?.haveMobile
-                ? import('./pages/signin-mobile/signin-mobile.module').then(
-                  (m) => m.SigninMobileModule
-                )
-                : import('./pages/signin-desktop/signin-desktop.module').then(
-                  (m) => m.SigninDesktopModule
-                ),
+            path: 'forgot', loadChildren: () =>
+              window.innerWidth <= 768 && window?.haveMobile ?
+                import('./pages/forgot-mobile/forgot-mobile.module').then((m) => m.ForgotMobileModule) :
+                import('./pages/forgot-desktop/forgot-desktop.module').then((m) => m.ForgotDesktopModule),
           },
           {
-            path: 'signup',
-            loadChildren: () =>
-              window.innerWidth <= 768 && window?.haveMobile
-                ? import('./pages/signup-mobile/signup-mobile.module').then(
-                  (m) => m.SignupMobileModule
-                )
-                : import('./pages/signup-desktop/signup-desktop.module').then(
-                  (m) => m.SignupDesktopModule
-                ),
+            path: 'register-complete', loadChildren:
+              () => window.innerWidth <= 768 && window?.haveMobile ?
+                import('./pages/register-complete-mobile/register-complete-mobile.module').then(m => m.RegisterCompleteMobileModule) :
+                import('./pages/register-complete-desktop/register-complete-desktop.module').then(m => m.RegisterCompleteDesktopModule)
           },
           {
-            path: 'forgot',
-            loadChildren: () =>
-              window.innerWidth <= 768 && window?.haveMobile
-                ? import('./pages/forgot-mobile/forgot-mobile.module').then(
-                  (m) => m.ForgotMobileModule
-                )
-                : import('./pages/forgot-desktop/forgot-desktop.module').then(
-                  (m) => m.ForgotDesktopModule
-                ),
+            path: 'new-password', loadChildren:
+              () => window.innerWidth <= 768 && window?.haveMobile ?
+                import('./pages/new-password-mobile/new-password-mobile.module').then(m => m.NewPasswordMobileModule) :
+                import('./pages/new-password-desktop/new-password-desktop.module').then(m => m.NewPasswordDesktopModule)
           },
           {
             path: 'login-register', loadChildren:

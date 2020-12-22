@@ -7,14 +7,14 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'new-passwordd',
+  selector: 'template-new-password',
   templateUrl: './new-password.template.html',
   styleUrls: ['./new-password.template.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NewPasswordTemplate implements OnInit {
   @Output() submitEvent = new EventEmitter();
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

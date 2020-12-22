@@ -1,5 +1,6 @@
 module.exports = {
   projects: [
+    '<rootDir>/apps/backend/graphql',
     '<rootDir>/apps/backend/api',
     '<rootDir>/libs/backend/api-interfaces',
     '<rootDir>/apps/writer/web',
@@ -20,6 +21,6 @@ module.exports = {
     '<rootDir>/libs/writer/web/ui-creation',
     '<rootDir>/libs/writer/web/feature-creation',
     '<rootDir>/libs/global/packages',
-    '<rootDir>/apps/database',
+
   ],
 };

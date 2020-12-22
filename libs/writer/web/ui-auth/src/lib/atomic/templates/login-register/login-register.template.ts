@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'login-register',
+  selector: 'template-login-register',
   templateUrl: './login-register.template.html',
   styleUrls: ['./login-register.template.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -15,7 +15,7 @@ import {
 export class LoginRegisterTemplate implements OnInit {
   tabs = [{ name: 'Đăng nhập', isActive: true }, { name: 'Đăng ký' }];
   @Output() submitEvent = new EventEmitter();
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }
