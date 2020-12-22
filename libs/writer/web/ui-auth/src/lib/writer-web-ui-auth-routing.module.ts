@@ -14,7 +14,7 @@ const routes: Routes = [
     //     : ShellDesktopLayout,
     children: [
       {
-        path: '',
+        path: "",
         component: AuthLayout,
         children: [
           {
