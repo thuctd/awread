@@ -36,7 +36,17 @@ const routes: Routes = [
                 import('./pages/new-password-desktop/new-password-desktop.module').then(m => m.NewPasswordDesktopModule)
           },
           {
-            path: 'login-register', loadChildren:
+            path: 'login',
+            data: { mode: 'login' },
+            loadChildren:
+              () => window.innerWidth <= 768 && window?.haveMobile ?
+                import('./pages/login-register-mobile/login-register-mobile.module').then(m => m.LoginRegisterMobileModule) :
+                import('./pages/login-register-desktop/login-register-desktop.module').then(m => m.LoginRegisterDesktopModule)
+          },
+          {
+            path: 'register',
+            data: { mode: 'register' },
+            loadChildren:
               () => window.innerWidth <= 768 && window?.haveMobile ?
                 import('./pages/login-register-mobile/login-register-mobile.module').then(m => m.LoginRegisterMobileModule) :
                 import('./pages/login-register-desktop/login-register-desktop.module').then(m => m.LoginRegisterDesktopModule)
