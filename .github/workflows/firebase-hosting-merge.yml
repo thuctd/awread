@@ -19,9 +19,9 @@ jobs:
         # with:
         #   targets: build-storybook
         #   projects: writer-web
-      run: |
-        npm ci
-        npx nx build-storybook writer-web
+        run: |
+          npm ci
+          npx nx build-storybook writer-web
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
