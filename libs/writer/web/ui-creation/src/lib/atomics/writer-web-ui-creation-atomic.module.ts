@@ -26,7 +26,7 @@ import { DetailOrgan } from './organs/detail/detail.organ';
 import { IndexOrgan } from './organs/index/index.organ';
 import { DetailIndexTemplate } from './templates/detail-index/detail-index.template';
 import { DetailTextareaFormAtom } from './atoms/detail-textarea-form/detail-textarea-form.atom';
-import { GenresFieldModule } from '@awread/global/packages';
+import { GenresFieldModule, GlobalPackagesModule } from '@awread/global/packages';
 import { DetailLinkBtnsMolec } from './molecs/detail-link-btns/detail-link-btns.molec';
 import { SocialMenuAtom } from './atoms/social-menu/social-menu.atom';
 import { ListHeadMolec } from './molecs/list-head/list-head.molec';
@@ -54,7 +54,7 @@ import { DetailSocialMenuAtom } from './atoms/detail-social-menu/detail-social-m
 import { WrtIconMenuAtom } from './atoms/wrt-icon-menu/wrt-icon-menu.atom';
 
 @NgModule({
-    imports: [CommonModule, StorybookSupportModule, GlobalDesignSystemAtomicModule, GenresFieldModule],
+    imports: [CommonModule, StorybookSupportModule, GlobalDesignSystemAtomicModule, GenresFieldModule, GlobalPackagesModule],
   exports: [CommonModule, SocialBtnAtom, WrtBgAtom, WrtMenuBtnAtom, WrtBookImgAtom, WrtTitleAtom, WrtHeadMolec, WrtWriterMolec, WrtInfoBookAtom, SubmitBtnAtom, WritingOrgan, WritingTemplate, WrtSocialMenuAtom, DetailTabHeadMolec, DetailActionBtnsMolec, DetailInputFormAtom, DetailToogleFormAtom, DetailUploadImgAtom, DetailUploadFormMolec, DetailBookFormMolec, WrtEditerAtom, DetailCmbFormAtom, DetailOrgan, IndexOrgan, DetailIndexTemplate, DetailTextareaFormAtom, GenresFieldModule, DetailLinkBtnsMolec, SocialMenuAtom, ListHeadMolec, ListTitleBookAtom, ListImgBookAtom, ListReviewBookAtom, ListTypeBookAtom, ListRatingBookAtom, ListChapterBookAtom, ListUdBookAtom, ListSocialMenuAtom, ListSocialBtnAtom, ListActMolec, ListChapterMolec, ListStoriesMolec, ListTemplate, ListOrgan, DetailTitlePartAtom, DetailUdPartAtom, DetailReviewPartAtom, DetailActMolec, DetailPartMolec, DetailReviewMolec, DetailSocialMenuAtom, WrtIconMenuAtom],
   declarations: [SocialBtnAtom, WrtBgAtom, WrtMenuBtnAtom, WrtBookImgAtom, WrtTitleAtom, WrtHeadMolec, WrtWriterMolec, WrtInfoBookAtom, SubmitBtnAtom, WritingOrgan, WritingTemplate, WrtSocialMenuAtom, DetailTabHeadMolec, DetailActionBtnsMolec, DetailInputFormAtom, DetailToogleFormAtom, DetailUploadImgAtom, DetailUploadFormMolec, DetailBookFormMolec, WrtEditerAtom, DetailCmbFormAtom, DetailOrgan, IndexOrgan, DetailIndexTemplate, DetailTextareaFormAtom, DetailLinkBtnsMolec, SocialMenuAtom, ListHeadMolec, ListTitleBookAtom, ListImgBookAtom, ListReviewBookAtom, ListTypeBookAtom, ListRatingBookAtom, ListChapterBookAtom, ListUdBookAtom, ListSocialMenuAtom, ListSocialBtnAtom, ListActMolec, ListChapterMolec, ListStoriesMolec, ListTemplate, ListOrgan, DetailTitlePartAtom, DetailUdPartAtom, DetailReviewPartAtom, DetailActMolec, DetailPartMolec, DetailReviewMolec, DetailSocialMenuAtom, WrtIconMenuAtom]
 })

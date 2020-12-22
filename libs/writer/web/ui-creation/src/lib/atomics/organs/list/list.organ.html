@@ -2,15 +2,17 @@
   <div class="mb-2">
     <list-head></list-head>
   </div>
-  <div class="grid grid-cols-12 gap-4">
-    <div class="col-span-2 md:col-span-4">
-      <list-stories></list-stories>
+  <infinite-scroll #infiniteScroll (scrolled)="moreEvent.next()">
+    <div *ngFor='let loop3 of counter(20) ;' class="grid grid-cols-12 gap-6">
+      <div class="col-span-2 md:col-span-4">
+        <list-stories></list-stories>
+      </div>
+      <div class="col-span-2 md:col-span-4 text-center">
+        <list-chapter></list-chapter>
+      </div>
+      <div class="col-span-2 md:col-span-4">
+        <list-act></list-act>
+      </div>
     </div>
-    <div class="col-span-2 md:col-span-4 text-center">
-      <list-chapter></list-chapter>
-    </div>
-    <div class="col-span-2 md:col-span-4">
-      <list-act></list-act>
-    </div>
-  </div>
+  </infinite-scroll>
 </div>
