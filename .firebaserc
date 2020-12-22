@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "awready-beta"
+  },
+  "targets": {
+    "awready-beta": {
+      "hosting": {
+        "writer-web-story": [
+          "writer-web-storybook-awread"
+        ]
+      }
+    }
   }
 }
