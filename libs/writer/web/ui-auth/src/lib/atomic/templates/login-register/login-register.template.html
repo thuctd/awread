@@ -1,12 +1,6 @@
-<div class="grid grid-cols-10 gap-2">
-    <div class="col-span-6 md:col-span-6 lg:col-span-6 xl:col-span-6 ">
-        <auth-bg></auth-bg>
-    </div>
-    <div class="col-span-4 md:col-span-4 lg:col-span-4 xl:col-span-4 z-30">
-        <tab-head #tabHead [tabs]="tabs"></tab-head>
-        <login *ngIf="tabHead.currentTab.name === 'login'"></login>
-        <register *ngIf="tabHead.currentTab.name === 'register'"></register>
-    </div>
-</div>
-
+<auth-background>
+    <tab-head #tabHead [tabs]="tabs"></tab-head>
+    <login (submitEvent)="submitEvent.emit($event)" *ngIf="tabHead.currentTab.name === 'login'"></login>
+    <register (submitEvent)="submitEvent.emit($event)" *ngIf="tabHead.currentTab.name === 'register'"></register>
+</auth-background>
 <!-- <pre> {{ tabHead.currentTab | json }} </pre> -->

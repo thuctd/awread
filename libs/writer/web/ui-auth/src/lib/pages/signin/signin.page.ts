@@ -1,7 +1,7 @@
 import { Directive, Injectable, OnInit } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
-import { AuthFacade } from "libs/writer/web/feature-auth/src/lib/facades/auth.facade";
-import { ProviderType } from "libs/writer/web/feature-auth/src/lib/models";
+import { AuthFacade } from "@awread/writer/web/feature-auth";
+import { ProviderType } from "@awread/writer/web/feature-auth";
 import { AngularFireAuth } from "@angular/fire/auth";
 
 @Injectable({
@@ -48,7 +48,7 @@ export class SigninPage implements OnInit {
     private authFacade: AuthFacade, // private loginForm: LoginForm, // private authFacade: AuthFacade
 
     private afAuth: AngularFireAuth
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.form = this.generate();

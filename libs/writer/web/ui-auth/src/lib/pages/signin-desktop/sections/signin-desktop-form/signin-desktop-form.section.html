@@ -1,14 +1,9 @@
 <form [formGroup]="form" action="#" class="md:px-6 lg:px-6 xl:px-8">
   <div class="form-field form-field--icon form-field--email mb-5">
     <div [hidden]="mode === 'signin'" class="w-full relative">
-      <input
-        formControlName="displayName"
-        type="text"
-        placeholder="Full Name"
-        (keyup)="onKeyUpName($event)"
+      <input formControlName="displayName" type="text" placeholder="Full Name" (keyup)="onKeyUpName($event)"
         class="appearance-none border border-green-400 test-xs md:text-xs lg:text-sm xl:text-sm rounded-2xl w-full py-2 pl-12 text-gray-500 leading-tight focus:outline-none shadow_input"
-        id="inline-full-name"
-      />
+        id="inline-full-name" />
       <span class="absolute left-0 mt-2 ml-4 text-gray-400">
         <fa-icon icon="user"></fa-icon>
       </span>
@@ -16,15 +11,9 @@
   </div>
   <div class="form-field form-field--icon form-field--email mb-5">
     <div class="w-full relative">
-      <input
-        type="text"
-        formControlName="email"
-        (keyup)="onKeyUpUsername($event)"
-        placeholder="Email Address"
+      <input type="text" formControlName="email" (keyup)="onKeyUpUsername($event)" placeholder="Email Address"
         class="appearance-none border border-green-400 test-xs md:text-xs lg:text-sm xl:text-sm rounded-2xl w-full py-2 pl-12 text-gray-500 text-xs leading-tight focus:outline-none shadow_input"
-        id="inline-full-name"
-        id="inline-password"
-      />
+        id="inline-full-name" id="inline-password" />
       <span class="absolute left-0 mt-2 ml-4 text-gray-400">
         <fa-icon icon="envelope"></fa-icon>
       </span>
@@ -32,15 +21,9 @@
   </div>
   <div class="form-field form-field--icon form-field--email mb-5">
     <div class="w-full relative">
-      <input
-        type="password"
-        formControlName="password"
-        (keyup)="onKeyUpPassWord($event)"
-        placeholder="Password"
+      <input type="password" formControlName="password" (keyup)="onKeyUpPassWord($event)" placeholder="Password"
         class="appearance-none border border-green-400 test-xs md:text-xs lg:text-sm xl:text-sm rounded-2xl w-full py-2 pl-12 text-gray-500 text-xs leading-tight focus:outline-none shadow_input"
-        id="inline-full-name"
-        id="inline-password"
-      />
+        id="inline-full-name" id="inline-password" />
       <span class="absolute left-0 mt-2 ml-4 text-gray-400">
         <fa-icon icon="lock"></fa-icon>
       </span>
@@ -48,43 +31,34 @@
   </div>
   <div class="form-field form-field--icon form-field--email mb-5">
     <div [hidden]="mode === 'signin'" class="w-full relative">
-      <input
-        type="password"
-        formControlName="confirmPassword"
-        placeholder="Confirm Password"
+      <input type="password" formControlName="confirmPassword" placeholder="Confirm Password"
         (keyup)="onKeyUpConfirmPassWord($event)"
         class="appearance-none border border-green-400 test-xs md:text-xs lg:text-sm xl:text-sm rounded-2xl w-full py-2 pl-12 text-gray-500 text-xs leading-tight focus:outline-none shadow_input"
-        id="inline-full-name"
-        id="inline-password"
-      />
+        id="inline-full-name" id="inline-password" />
       <span class="absolute left-0 mt-2 ml-4 text-gray-400">
         <fa-icon icon="lock"></fa-icon>
       </span>
     </div>
-  </div>
-  <div *ngIf="mode === 'signin'" class="flex items-center mb-4">
-    <div
-      class="w-full flex items-center justify-between text-gray-light test-xs md:text-xs lg:text-xs xl:text-xs relative"
-    >
-      <mat-checkbox class="example-margin">
-        {{ template.rememberme.title | titlecase }}
-      </mat-checkbox>
-      <span
-        ><a class="text-blue-600" [routerLink]="['/forgotpassword']">
-          {{ template.forgotpassword.changeButton | titlecase }}
-        </a>
-      </span>
+    <div *ngIf="mode === 'signin'" class="flex items-center mb-4">
+      <div
+        class="w-full flex items-center justify-between  text-gray-light test-xs md:text-xs lg:text-xs xl:text-xs relative">
+        <div class="flex items-center"><input type="checkbox" class="example-margin remember-checkbox">
+          <span class="ml-2">{{ template.rememberme.title | titlecase }}</span>
+        </div>
+        <span><a class="text-blue-600" [routerLink]="['/forgotpassword']">
+            {{ template.forgotpassword.changeButton | titlecase }}
+          </a>
+        </span>
+      </div>
     </div>
   </div>
   <div class="flex items-center mb-6">
     <div class="w-full block">
-      <button
-        (click)="auth.emit('email')"
+      <button (click)="auth.emit('email')"
         [ngClass]=" (mode === 'signin') && (hasValueUs && hasValuePw) ? 'bg-green-400 shadow_input' : 'bg-gray-400'"
         [ngClass]=" (mode === 'signup') && (hasValueUs && hasValuePw && hasValueCfpw && hasValueName) ? 'bg-green-400 shadow_input' : 'bg-gray-400'"
         class="text-sm md:text-xs lg:text-base xl:text-base w-full text-white cursor-pointer rounded-full border-green-400 focus:shadow-outline focus:outline-none py-2 px-4"
-        type="button"
-      >
+        type="button">
         {{ activeTemplate.mainButton | titlecase }}
       </button>
     </div>
@@ -92,42 +66,22 @@
   <div class="flex items-center mb-4">
     <div class="w-full block relative">
       <div class="flex justify-center mt-2">
-        <span
-          class="cursor-pointer text-green-500 md:text-xs lg:text-sm xl:text-base font-medium"
-          >Login with</span
-        >
+        <span class="cursor-pointer text-green-500 md:text-xs lg:text-sm xl:text-base font-medium">Login with</span>
       </div>
       <div class="absolute right-0 top-0">
         <span class="mr-5">
-          <a
-            (click)="auth.emit('apple')"
-            class="inline-block cursor-pointer text-4xl"
-          >
+          <a (click)="auth.emit('apple')" class="inline-block cursor-pointer text-4xl">
             Apple
           </a>
         </span>
         <span class="mr-5">
-          <a
-            (click)="auth.emit('facebook')"
-            class="inline-block cursor-pointer text-4xl"
-          >
-            <img
-              src="global-assets/images/facebook.png"
-              alt="Facebook"
-              width="40px"
-            />
+          <a (click)="auth.emit('facebook')" class="inline-block cursor-pointer text-4xl">
+            <img src="global-assets/images/facebook.png" alt="Facebook" width="40px" />
           </a>
         </span>
         <span class="">
-          <a
-            (click)="auth.emit('google')"
-            class="inline-block cursor-pointer text-4xl"
-          >
-            <img
-              src="global-assets/images/google.png"
-              alt="Google"
-              width="40px"
-            />
+          <a (click)="auth.emit('google')" class="inline-block cursor-pointer text-4xl">
+            <img src="global-assets/images/google.png" alt="Google" width="40px" />
           </a>
         </span>
       </div>

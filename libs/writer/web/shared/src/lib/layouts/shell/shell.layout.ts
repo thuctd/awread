@@ -7,17 +7,7 @@ import { NavigationEnd, Router } from '@angular/router';
 @Directive()
 export class ShellLayout implements OnInit {
   isLogin :boolean;
-  constructor (private zone: NgZone, private router: Router) {
-    this.router.events.subscribe((event: any) => {
-      if (event instanceof NavigationEnd) {
-        if (event.url === '/signin') {
-          this.isLogin= true;
-        } else {
-          this.isLogin= false;
-        }
-      }
-    });
-  }
+  constructor () {}
 
   ngOnInit(): void {}
 }
