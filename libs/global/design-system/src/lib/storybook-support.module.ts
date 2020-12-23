@@ -4,20 +4,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RouterTestingModule } from '@angular/router/testing';
 import { RouterModule } from '@angular/router';
-import { environment } from '@awread/global/environments';
-
-console.log('environment??', environment);
+declare const __ISSTORYBOOK__: string;
+// console.log('is storybook?', __ISSTORYBOOK__);
 @NgModule({
-  imports: [
-    CommonModule,
-    // RouterTestingModule,
-    // phan nay cu dung router di, de anh nghien cuu cach khac phuc
-    RouterModule,
-  ],
+  imports: [CommonModule, __ISSTORYBOOK__ ? RouterTestingModule : RouterModule],
   exports: [
-    // RouterTestingModule,
-    // phan nay cu dung router di, de anh nghien cuu cach khac phuc
-    RouterModule,
+    __ISSTORYBOOK__ ? RouterTestingModule : RouterModule,
     ReactiveFormsModule,
     FontAwesomeModule,
   ],
