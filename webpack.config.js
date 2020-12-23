@@ -1,4 +1,5 @@
 const webpackMerge = require('webpack-merge');
+const webpack = require('webpack');
 
 module.exports = (config) => {
   const merge = webpackMerge && webpackMerge.merge ? webpackMerge.merge : webpackMerge;
@@ -6,6 +7,11 @@ module.exports = (config) => {
   const tailwindConfig = require("./tailwind.config.js")(isProd);
   // console.log('tailwind config?', config);
   return merge(config, {
+    plugins: [
+      new webpack.DefinePlugin({
+        __ISSTORYBOOK__: true
+      })
+    ],
     module: {
       rules: [
         {
@@ -18,7 +24,7 @@ module.exports = (config) => {
               plugins: [
                 require('postcss-import'),
                 require('tailwindcss')(tailwindConfig),
-                require('autoprefixer'),
+                require('autoprefixer')
               ]
             }
           }
