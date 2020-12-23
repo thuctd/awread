@@ -1,6 +1,7 @@
 const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const path = require('path');
+const webpack = require('webpack');
 module.exports = {
   stories: [
     // this stories coming from libs/wrirter/web/ui-auth
@@ -42,6 +43,9 @@ module.exports = {
     config.plugins.push(
       new FilterWarningsPlugin({
         exclude: /postcss-import/
+      }),
+      new webpack.DefinePlugin({
+        __ISSTORYBOOK__: true
       })
     );
 
