@@ -41,31 +41,29 @@ export class LoginRegisterPage {
   }
 
   login(provider: 'email' | 'facebook' | 'google' | 'apple') {
-    this.router.navigate(['profile']);
-
     // debugger
-    // console.log('provider', provider);
-    // console.log('form Value', this.authForm.value);
-    // if (this.selectedTab === 'login') {
-    //   // this.authFacade.signin(provider, this.form.value);
-    //   switch (provider) {
-    //     case 'email':
-    //       this.authFacade.loginEmail(this.authForm.value);
-    //       break;
+    console.log('provider', provider);
+    console.log('form Value', this.authForm.value);
+    if (this.selectedTab === 'login') {
+      // this.authFacade.signin(provider, this.form.value);
+      switch (provider) {
+        case 'email':
+          this.authFacade.loginEmail(this.authForm.value);
+          break;
 
-    //     case 'apple':
-    //       this.authFacade.loginSocials(ProviderType.apple);
-    //       break;
-    //     case 'facebook':
-    //       this.authFacade.loginSocials(ProviderType.facebook);
-    //       break;
-    //     case 'google':
-    //       this.authFacade.loginSocials(ProviderType.google);
-    //       break;
-    //     default:
-    //       break;
-    //   }
-    // }
+        case 'apple':
+          this.authFacade.loginSocials(ProviderType.apple);
+          break;
+        case 'facebook':
+          this.authFacade.loginSocials(ProviderType.facebook);
+          break;
+        case 'google':
+          this.authFacade.loginSocials(ProviderType.google);
+          break;
+        default:
+          break;
+      }
+    }
   }
 
   forgotPassword() {

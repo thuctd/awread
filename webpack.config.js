@@ -1,9 +1,11 @@
+const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
 
 module.exports = (config) => {
-  const merge = webpackMerge && webpackMerge.merge ? webpackMerge.merge : webpackMerge;
-  const isProd = config.mode === "production";
-  const tailwindConfig = require("./tailwind.config.js")(isProd);
+  const merge =
+    webpackMerge && webpackMerge.merge ? webpackMerge.merge : webpackMerge;
+  const isProd = config.mode === 'production';
+  const tailwindConfig = require('./tailwind.config.js')(isProd);
   // console.log('tailwind config?', config);
   return merge(config, {
     module: {
@@ -19,11 +21,11 @@ module.exports = (config) => {
                 require('postcss-import'),
                 require('tailwindcss')(tailwindConfig),
                 require('autoprefixer'),
-              ]
-            }
-          }
-        }
-      ]
-    }
+              ],
+            },
+          },
+        },
+      ],
+    },
   });
 };

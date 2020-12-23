@@ -1,11 +1,12 @@
-import { AuthApi } from "./../apis/auth.api";
-import { Injectable } from "@angular/core";
-import firebase from "firebase/app";
-import "firebase/auth";
-import { ProviderType } from "../models";
-import { FirebaseAuthAddon } from "./firebase-auth.addon";
+import { Router } from '@angular/router';
+import { AuthApi } from './../apis/auth.api';
+import { Injectable } from '@angular/core';
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import { ProviderType } from '../models';
+import { FirebaseAuthAddon } from './firebase-auth.addon';
 
-@Injectable({ providedIn: "root" })
+@Injectable({ providedIn: 'root' })
 export class FirebaseAuthSocialAddon {
   supportedPopupSignInMethods = [
     firebase.auth.GoogleAuthProvider.PROVIDER_ID,
@@ -14,7 +15,8 @@ export class FirebaseAuthSocialAddon {
   ];
   constructor(
     private firebaseAuthAddon: FirebaseAuthAddon,
-    private authApi: AuthApi
+    private authApi: AuthApi,
+    private router: Router
   ) {}
 
   async registerWithEmail(credential) {
@@ -38,35 +40,40 @@ export class FirebaseAuthSocialAddon {
     }
   }
 
-  shouldLinkProviderPassword(email: string, currentUser: firebase.User) {
-    return this.authApi.getUserBaseEmail(email).subscribe(async (res) => {
-      console.log("curent user logged", res);
-      if (
-        res.data &&
-        res.data["getUserBaseEmail"] &&
-        res.data["getUserBaseEmail"]["results"].length
-      ) {
-        const user = res.data["getUserBaseEmail"]["results"][0];
-        if (user.provider === "email/password") {
-          const credential = firebase.auth.EmailAuthProvider.credential(
-            user.email,
-            user.password
-          );
-          try {
-            const link = await currentUser.linkWithCredential(credential);
-            console.log("Account linking success", link);
-          } catch (error) {
-            console.log("Account linking error", error);
+  shouldLinkProviderPassword(userAccount: any, currentUser: firebase.User) {
+    return this.authApi
+      .getUserBaseEmail(userAccount.email)
+      .subscribe(async (res) => {
+        console.log('curent user logged', res);
+        if (
+          res.data &&
+          res.data['getUserBaseEmail'] &&
+          res.data['getUserBaseEmail']['results'].length
+        ) {
+          this.router.navigate(['profile']);
+          const user = res.data['getUserBaseEmail']['results'][0];
+          if (user.provider === 'email/password') {
+            const credential = firebase.auth.EmailAuthProvider.credential(
+              user.email,
+              user.password
+            );
+            try {
+              const link = await currentUser.linkWithCredential(credential);
+              console.log('Account linking success', link);
+            } catch (error) {
+              console.log('Account linking error', error);
+            }
           }
+        } else {
+          this.router.navigate(['register-complete', userAccount]);
         }
-      }
-    });
+      });
   }
 
   createAccountOnServer(user: any) {
     // send data to server
-    this.authApi.createNewUser(user).subscribe((status) => {
-      console.log("status new user", status);
+    this.authApi.createAccountOnServer(user).subscribe((status) => {
+      console.log('status new user', status);
       // this.actionAfterCreateAccountSuccess();
     });
   }
@@ -75,12 +82,12 @@ export class FirebaseAuthSocialAddon {
     if (
       err.email &&
       err.credential &&
-      err.code === "auth/account-exists-with-different-credential"
+      err.code === 'auth/account-exists-with-different-credential'
     ) {
       const providers = await firebase
         .auth()
         .fetchSignInMethodsForEmail(err.email);
-      console.log("providers", providers);
+      console.log('providers', providers);
       const firstPopupProviderMethod = providers.find((p) =>
         this.supportedPopupSignInMethods.includes(p)
       );
@@ -90,7 +97,7 @@ export class FirebaseAuthSocialAddon {
           `Your account is linked to a provider that isn't supported.`
         );
       }
-      if (providers.includes("google.com")) {
+      if (providers.includes('google.com')) {
         this.linkAccountFacebookToProviderGoogle(err, firstPopupProviderMethod);
       } else {
         // là provider email/password
@@ -107,7 +114,7 @@ export class FirebaseAuthSocialAddon {
     linkedProvider.setCustomParameters({ login_hint: err.email });
 
     const result = await firebase.auth().signInWithPopup(linkedProvider);
-    console.log("result", result);
+    console.log('result', result);
     try {
       await result.user.linkWithCredential(err.credential);
       // check trường hợp google/facebook ghi đè account thì phải link lại provider password (account email/pw)
@@ -117,22 +124,22 @@ export class FirebaseAuthSocialAddon {
 
   linkAccountFacebookToProviderPassword(err) {
     return this.authApi.getUserBaseEmail(err.email).subscribe(async (res) => {
-      console.log("curent user logged", res);
+      console.log('curent user logged', res);
       if (
         res.data &&
-        res.data["getUserBaseEmail"] &&
-        res.data["getUserBaseEmail"]["results"].length
+        res.data['getUserBaseEmail'] &&
+        res.data['getUserBaseEmail']['results'].length
       ) {
-        const user = res.data["getUserBaseEmail"]["results"][0];
-        if (user.provider === "email/password") {
+        const user = res.data['getUserBaseEmail']['results'][0];
+        if (user.provider === 'email/password') {
           try {
             const usercred = await firebase
               .auth()
               .signInWithEmailAndPassword(user.email, user.password);
             const link = await usercred.user.linkWithCredential(err.credential);
-            console.log("Account linking success", link);
+            console.log('Account linking success', link);
           } catch (error) {
-            console.log("Account linking error", error);
+            console.log('Account linking error', error);
           }
         }
       }
@@ -147,8 +154,8 @@ export class FirebaseAuthSocialAddon {
       const providers = await firebase
         .auth()
         .fetchSignInMethodsForEmail(user.email);
-      if (providers.includes("password")) {
-        alert("Tài khoản đã tồn tại!");
+      if (providers.includes('password')) {
+        alert('Tài khoản đã tồn tại!');
         return;
       }
       const linkedProvider: any = this.getProvider(providers[0]);
@@ -159,11 +166,11 @@ export class FirebaseAuthSocialAddon {
       );
       if (linkWithCredential.user) {
         // update password when account Googleor/FB exists.
-        this.authApi.updatePassword(user.email, user.password, "update-new");
+        this.authApi.updatePassword(user.email, user.password, 'update-new');
       }
-      console.log("linkWithCredential", linkWithCredential);
+      console.log('linkWithCredential', linkWithCredential);
     } catch (error) {
-      console.log("link with gg/fb error: ", error);
+      console.log('link with gg/fb error: ', error);
     }
   }
 

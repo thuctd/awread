@@ -2,8 +2,8 @@
 const { merge } = require('webpack-merge'); // new version webpack-merge
 
 module.exports = (config) => {
-  const isProd = config.mode === "production";
-  const tailwindConfig = require("./tailwind.config.js")(isProd);
+  const isProd = config.mode === 'production';
+  const tailwindConfig = require('./tailwind.config.js')(isProd);
   return merge(config, {
     module: {
       rules: [
@@ -18,11 +18,15 @@ module.exports = (config) => {
                 require('postcss-import'),
                 require('tailwindcss')(tailwindConfig),
                 require('autoprefixer'),
-              ]
-            }
-          }
-        }
-      ]
-    }
+                ,
+                new webpack.DefinePlugin({
+                  __ISSTORYBOOK__: false,
+                }),
+              ],
+            },
+          },
+        },
+      ],
+    },
   });
 };

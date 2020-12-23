@@ -1,4 +1,8 @@
 <auth-header [title]="title" [description]="description"></auth-header>
 <login-form [form]="formComplete"></login-form>
-<submit-btn (onBtnClicked)="submitEvent.emit()" [name]="'Cập nhật'" [active]="formComplete.valid"></submit-btn>
+<submit-btn
+  (onBtnClicked)="completeEvent.emit()"
+  [name]="'Cập nhật'"
+  [active]="formComplete.valid"
+></submit-btn>
 <!-- <pre>{{formComplete.value | json}}</pre> -->

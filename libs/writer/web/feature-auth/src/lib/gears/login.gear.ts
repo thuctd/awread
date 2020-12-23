@@ -14,10 +14,6 @@ export class LoginGear {
     private router: Router
   ) {}
 
-  loginNormal(user) {
-    this.authApi.signin(user);
-  }
-
   loginWithRoleAdmin(credential: EmailLoginCredential) {
     this.loginEmail(credential)
       .then(async (res: any) => {
@@ -58,6 +54,22 @@ export class LoginGear {
       case ProviderType.facebook:
         try {
           const userCredential = await this.firebaseAuthAddon.loginWithFacebook();
+          const user = this.createUserObject({
+            ...userCredential.user,
+            provider: 'facebook',
+          });
+          this.authApi
+            .checkEmailExistInDatabase(userCredential.user.email)
+            .subscribe((res) => {
+              if (
+                res['data']['getUserBaseEmail'] &&
+                res['data']['getUserBaseEmail'].results.length
+              ) {
+                this.router.navigate(['profile']);
+              } else {
+                this.router.navigate(['register-complete', user]);
+              }
+            });
           this.firebaseAuthSocialAddon.createAccountOnServer({
             ...userCredential.user,
             provider: 'facebook',
@@ -69,7 +81,7 @@ export class LoginGear {
       case ProviderType.google:
         try {
           const userCredential = await this.firebaseAuthAddon.loginWithGoogle();
-          this.firebaseAuthSocialAddon.createAccountOnServer({
+          const user = this.createUserObject({
             ...userCredential.user,
             provider: 'google',
           });
@@ -77,7 +89,7 @@ export class LoginGear {
           // nên phải check lại TH đã tạo email/password trước đó,
           // nếu đúng thì link lại với account google
           this.firebaseAuthSocialAddon.shouldLinkProviderPassword(
-            userCredential.user.email,
+            user,
             firebase.auth().currentUser
           );
           return userCredential;
@@ -95,5 +107,16 @@ export class LoginGear {
   getCurrentUser() {
     this.authApi.getAllBooks();
     return this.authApi.getCurrentUser();
+  }
+
+  private createUserObject(user) {
+    return {
+      displayname: user.displayName,
+      email: user.email,
+      emailVerified: user.emailVerified.toString(),
+      photoUrl: user.photoURL,
+      uid: user.uid,
+      provider: user.provider,
+    };
   }
 }
