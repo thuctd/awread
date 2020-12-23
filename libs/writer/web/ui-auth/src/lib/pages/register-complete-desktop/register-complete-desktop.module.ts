@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { WriterWebUiAuthAtomicModule } from './../../atomic/writer-web-ui-auth-atomic.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -7,6 +7,10 @@ import { RegisterCompleteDesktopPage } from './register-complete-desktop.page';
 
 @NgModule({
   declarations: [RegisterCompleteDesktopPage],
-  imports: [BrowserModule, CommonModule, RegisterCompleteDesktopRoutingModule],
+  imports: [
+    CommonModule,
+    RegisterCompleteDesktopRoutingModule,
+    WriterWebUiAuthAtomicModule,
+  ],
 })
 export class RegisterCompleteDesktopModule {}

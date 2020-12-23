@@ -7,9 +7,13 @@ import { RouterModule } from '@angular/router';
 declare const __ISSTORYBOOK__: string;
 // console.log('is storybook?', __ISSTORYBOOK__);
 @NgModule({
-    imports: [CommonModule, __ISSTORYBOOK__ ? RouterTestingModule : RouterModule],
-    exports: [__ISSTORYBOOK__ ? RouterTestingModule : RouterModule, ReactiveFormsModule, FontAwesomeModule],
-    declarations: [],
-    providers: [],
+  imports: [CommonModule, __ISSTORYBOOK__ ? RouterTestingModule : RouterModule],
+  exports: [
+    __ISSTORYBOOK__ ? RouterTestingModule : RouterModule,
+    ReactiveFormsModule,
+    FontAwesomeModule,
+  ],
+  declarations: [],
+  providers: [],
 })
-export class StorybookSupportModule { }
+export class StorybookSupportModule {}

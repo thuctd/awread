@@ -4,8 +4,12 @@ import { CommonModule } from '@angular/common';
 import { ForgotMobileRoutingModule } from './forgot-mobile-routing.module';
 import { ForgotMobilePage } from './forgot-mobile.page';
 
+
 @NgModule({
   declarations: [ForgotMobilePage],
-  imports: [CommonModule, ForgotMobileRoutingModule],
+  imports: [
+    CommonModule,
+    ForgotMobileRoutingModule
+  ]
 })
-export class ForgotMobileModule {}
+export class ForgotMobileModule { }

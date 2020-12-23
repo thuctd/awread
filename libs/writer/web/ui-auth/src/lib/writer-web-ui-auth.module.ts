@@ -7,7 +7,7 @@ import { WriterWebFeatureAuthModule } from '@awread/writer/web/feature-auth';
   imports: [
     CommonModule,
     WriterWebUiAuthRoutingModule,
-    WriterWebFeatureAuthModule,
+    // WriterWebFeatureAuthModule,
   ],
   declarations: [AuthLayout],
   exports: [AuthLayout],

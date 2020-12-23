@@ -7,7 +7,7 @@ import {
   EventEmitter,
   Input,
 } from '@angular/core';
-import { Tab } from '../../../pages/login-register-desktop/interface/tabs';
+import { TabHead } from '../../../interface/tabs';
 
 @Component({
   selector: 'template-login-register',
@@ -17,7 +17,7 @@ import { Tab } from '../../../pages/login-register-desktop/interface/tabs';
 })
 export class LoginRegisterTemplate implements OnInit {
   @Input() authForm: FormGroup;
-  @Input() tabs: Tab[];
+  @Input() tabs: TabHead[];
   @Input() selectedTab: string;
   @Output() regiterEvent = new EventEmitter();
   @Output() auth = new EventEmitter();

@@ -1,17 +1,12 @@
-import { Directive, Injectable, OnInit } from "@angular/core";
-import { ForgotPasswordFacade } from "@awread/writer/web/feature-auth";
+import { Injectable, OnInit } from '@angular/core';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
-@Directive()
 export class ForgotPage implements OnInit {
-  constructor(private forgotFacade: ForgotPasswordFacade) { }
+
+  constructor() { }
 
   ngOnInit(): void { }
 
-  updatePassword(newPassword: string) {
-    console.log("newPassword", newPassword);
-    this.forgotFacade.updatePassword(newPassword);
-  }
 }
