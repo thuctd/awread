@@ -166,7 +166,9 @@ export class FirebaseAuthSocialAddon {
       );
       if (linkWithCredential.user) {
         // update password when account Googleor/FB exists.
-        this.authApi.updatePassword(user.email, user.password, 'update-new');
+        this.authApi
+          .updatePassword(user.email, user.password, 'update-new')
+          .subscribe();
       }
       console.log('linkWithCredential', linkWithCredential);
     } catch (error) {

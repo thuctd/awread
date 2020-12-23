@@ -1,6 +1,17 @@
-<auth-header [title]="title" [description]="description">
-</auth-header>
-<forgot-actions [title]="'Đóng'" [active]="'true'" (submitEvent)="submitEvent.emit($event)"></forgot-actions>
-<option-link [suggestText]="'Bạn chưa nhận được email?'" [title]="'Gửi lại'" [link]="'/signin'"></option-link>
-<option-link [suggestText]="'Bạn đã nhớ thông tin đăng nhập?'" [title]="'Đăng nhập'" [link]="'/signin'">
+<auth-header [title]="title" [description]="description"> </auth-header>
+<forgot-actions
+  [title]="'Đóng'"
+  [active]="'true'"
+  (submitEvent)="submitEvent.emit($event)"
+></forgot-actions>
+<option-link
+  [suggestText]="'Bạn chưa nhận được email?'"
+  [title]="'Gửi lại'"
+  [link]="'/signin'"
+></option-link>
+<option-link
+  [suggestText]="'Bạn đã nhớ thông tin đăng nhập?'"
+  [title]="'Đăng nhập'"
+  [link]="'/signin'"
+>
 </option-link>

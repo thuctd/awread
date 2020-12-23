@@ -13,22 +13,16 @@ export class AuthApi {
   ) {}
 
   updatePassword(email: string, newPassword: string, type = 'forgot') {
-    this.apollo
-      .mutate({
-        mutation: gql`
-          mutation resetpw($email: String, $pw: String, $type: String) {
-            fnUpdateNewPassword(
-              input: { email: $email, pw: $pw, type: $type }
-            ) {
-              status
-            }
+    return this.apollo.mutate({
+      mutation: gql`
+        mutation resetpw($email: String, $pw: String, $type: String) {
+          fnUpdateNewPassword(input: { email: $email, pw: $pw, type: $type }) {
+            status
           }
-        `,
-        variables: { email, pw: newPassword, type },
-      })
-      .subscribe((res) => {
-        console.log('result', res);
-      });
+        }
+      `,
+      variables: { email, pw: newPassword, type },
+    });
   }
 
   setCustomClaimsToken(token: string) {

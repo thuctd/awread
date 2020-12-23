@@ -1,3 +1,4 @@
+import { ForgotPasswordGear } from './../gears/forgot-password.gear';
 import { Injectable } from '@angular/core';
 import { LoginGear, LogoutGear, RegisterGear } from '../gears';
 import { BasicCredential, EmailLoginCredential, ProviderType } from '../models';
@@ -15,6 +16,7 @@ export class AuthFacade {
     private logoutGear: LogoutGear,
     private loginGear: LoginGear,
     private registerGear: RegisterGear,
+    private forgotPasswordGear: ForgotPasswordGear,
     private currentUserQuery: CurrentUserQuery
   ) {}
 

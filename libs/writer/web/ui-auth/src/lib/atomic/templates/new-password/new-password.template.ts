@@ -13,8 +13,8 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NewPasswordTemplate implements OnInit {
-  @Output() submitEvent = new EventEmitter();
-  constructor() { }
+  @Output() updateNewPassword = new EventEmitter();
+  constructor() {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }
