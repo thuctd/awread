@@ -1,4 +1,7 @@
-<login-form #loginForm [form]="formDangNhap"></login-form>
+<login-form #loginForm [form]="authForm"></login-form>
 <remember-forgot></remember-forgot>
-<action-btns (submitEvent)="submitEvent.emit(loginForm.form.value)" [formActiveStatus]="loginForm.form.valid">
-</action-btns>
+<submit-btn
+  (onBtnClicked)="auth.emit('email')"
+  [active]="loginForm.form.valid"
+></submit-btn>
+<action-btns (auth)="auth.emit($event)"> </action-btns>

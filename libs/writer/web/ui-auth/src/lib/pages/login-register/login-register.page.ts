@@ -1,10 +1,10 @@
-import { Directive, Injectable, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { ActivatedRoute } from "@angular/router";
-import { AuthFacade } from "@awread/writer/web/feature-auth";
+import { Directive, Injectable, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { AuthFacade } from '@awread/writer/web/feature-auth';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 @Directive()
 export class LoginRegisterPage implements OnInit {
@@ -14,18 +14,18 @@ export class LoginRegisterPage implements OnInit {
     public fb: FormBuilder,
     public authFacade: AuthFacade,
     private activatedRoute: ActivatedRoute
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.registerForm = this.fb.group({
-      email: [""],
-      password: [""],
+      email: [''],
+      password: [''],
     });
 
     this.activatedRoute.paramMap.subscribe((params) => {
       console.log(params);
-      this.user = JSON.parse(params.get("user"));
-      console.log("user", this.user);
+      this.user = JSON.parse(params.get('user'));
+      console.log('user', this.user);
       this.registerForm.patchValue({
         email: this.user.email
           ? this.user.email
@@ -33,10 +33,13 @@ export class LoginRegisterPage implements OnInit {
       });
     });
   }
+
+  submitEvent(event) {}
+
   loginWithEmailPassword() {
     const formValue = this.registerForm.value;
-    const user = { ...this.user, ...formValue, provider: "signin/social" };
-    console.log("formValue", formValue);
+    const user = { ...this.user, ...formValue, provider: 'signin/social' };
+    console.log('formValue', formValue);
     this.authFacade.loginNormal(user);
   }
 }

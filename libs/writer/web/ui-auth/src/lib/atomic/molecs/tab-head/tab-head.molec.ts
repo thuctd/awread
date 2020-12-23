@@ -1,4 +1,13 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Tab } from './../../../pages/login-register-desktop/interface/tabs';
+import { Router } from '@angular/router';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  Input,
+  EventEmitter,
+  Output,
+} from '@angular/core';
 
 interface TabHead {
   name: string;
@@ -10,34 +19,27 @@ interface TabHead {
   selector: 'tab-head',
   templateUrl: './tab-head.molec.html',
   styleUrls: ['./tab-head.molec.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-
-
-
 export class TabHeadMolec implements OnInit {
-  @Input() tabs = [{
-    name: 'login',
-    isActive: true,
-  }, {
-    name: 'register',
-    isActive: false,
-  }];
-  currentTab = { name: null, isActive: false };
-  constructor() { }
+  @Input() tabs: Tab[];
+  @Input() selectedTab: string;
+  @Output() toggleTab = new EventEmitter();
+  // currentTab = { name: null, isActive: false };
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
-    this.currentTab = this.tabs.find(tab => tab.isActive);
+    // this.currentTab = this.tabs.find(tab => tab.isActive);
   }
 
   toggleTabs(currentTab: TabHead) {
-    this.currentTab = currentTab;
-    this.tabs.forEach(tab => {
-      tab.isActive = false;
-      if (tab.name === currentTab.name) {
-        tab.isActive = true;
-      }
-    })
+    // this.currentTab = currentTab;
+    // this.tabs.forEach((tab) => {
+    //   tab.isActive = false;
+    //   if (tab.name === currentTab.name) {
+    //     tab.isActive = true;
+    //   }
+    // });
+    this.toggleTab.emit();
   }
-
 }
