@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
+const webpack = require('webpack');
 
 module.exports = (config) => {
   const merge =
@@ -8,6 +9,11 @@ module.exports = (config) => {
   const tailwindConfig = require('./tailwind.config.js')(isProd);
   // console.log('tailwind config?', config);
   return merge(config, {
+    plugins: [
+      new webpack.DefinePlugin({
+        __ISSTORYBOOK__: false,
+      }),
+    ],
     module: {
       rules: [
         {
