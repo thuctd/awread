@@ -9,7 +9,7 @@ module.exports = (config) => {
   return merge(config, {
     plugins: [
       new webpack.DefinePlugin({
-        __ISSTORYBOOK__: true
+        __ISSTORYBOOK__: false
       })
     ],
     module: {
