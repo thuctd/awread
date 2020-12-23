@@ -18,10 +18,6 @@ module.exports = (config) => {
                 require('postcss-import'),
                 require('tailwindcss')(tailwindConfig),
                 require('autoprefixer'),
-                ,
-                new webpack.DefinePlugin({
-                  __ISSTORYBOOK__: false,
-                }),
               ],
             },
           },
