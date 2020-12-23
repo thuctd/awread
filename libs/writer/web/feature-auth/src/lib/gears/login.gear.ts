@@ -1,11 +1,11 @@
-import { Router } from "@angular/router";
-import { Injectable } from "@angular/core";
-import { FirebaseAuthAddon, FirebaseAuthSocialAddon } from "../addons";
-import { EmailLoginCredential, ProviderType } from "../models";
-import firebase from "firebase/app";
-import { AuthApi } from "../apis";
+import { Router } from '@angular/router';
+import { Injectable } from '@angular/core';
+import { FirebaseAuthAddon, FirebaseAuthSocialAddon } from '../addons';
+import { EmailLoginCredential, ProviderType } from '../models';
+import firebase from 'firebase/app';
+import { AuthApi } from '../apis';
 
-@Injectable({ providedIn: "root" })
+@Injectable({ providedIn: 'root' })
 export class LoginGear {
   constructor(
     private firebaseAuthAddon: FirebaseAuthAddon,
@@ -21,7 +21,7 @@ export class LoginGear {
   loginWithRoleAdmin(credential: EmailLoginCredential) {
     this.loginEmail(credential)
       .then(async (res: any) => {
-        console.log("user", res.user);
+        console.log('user', res.user);
         this.authApi.setCustomClaimsToken(await res.user.getIdToken());
       })
       .catch((err) => console.log(err));
@@ -32,14 +32,15 @@ export class LoginGear {
       const userCredential = await this.firebaseAuthAddon.loginWithEmail(
         credential
       );
-      console.log("userCredential", userCredential);
+      this.router.navigate(['profile']);
+      console.log('userCredential', userCredential);
       return userCredential;
     } catch (err) {
-      console.log("err", err);
-      if (err.code === "auth/user-not-found") {
-        alert("Tài khoản không tồn tại!");
-      } else if (err.code === "auth/wrong-password") {
-        alert("Mật khẩu không chính xác!");
+      console.log('err', err);
+      if (err.code === 'auth/user-not-found') {
+        alert('Tài khoản không tồn tại!');
+      } else if (err.code === 'auth/wrong-password') {
+        alert('Mật khẩu không chính xác!');
       }
     }
   }
@@ -49,9 +50,9 @@ export class LoginGear {
       case ProviderType.apple:
         try {
           const userCredential = await this.firebaseAuthAddon.loginWithApple();
-          console.log("userCredential apple", userCredential);
+          console.log('userCredential apple', userCredential);
         } catch (error) {
-          console.log("error", error);
+          console.log('error', error);
         }
         break;
       case ProviderType.facebook:
@@ -59,7 +60,7 @@ export class LoginGear {
           const userCredential = await this.firebaseAuthAddon.loginWithFacebook();
           this.firebaseAuthSocialAddon.createAccountOnServer({
             ...userCredential.user,
-            provider: "facebook",
+            provider: 'facebook',
           });
         } catch (err) {
           this.firebaseAuthSocialAddon.linkAccountWithProviderFacebook(err);
@@ -70,7 +71,7 @@ export class LoginGear {
           const userCredential = await this.firebaseAuthAddon.loginWithGoogle();
           this.firebaseAuthSocialAddon.createAccountOnServer({
             ...userCredential.user,
-            provider: "google",
+            provider: 'google',
           });
           // vì google ghi đè lên tất cả tài khoản cùng email đã tạo trước đó,
           // nên phải check lại TH đã tạo email/password trước đó,
@@ -82,7 +83,7 @@ export class LoginGear {
           return userCredential;
         } catch (err) {
           // this.linkAccount(err);
-          console.log("google login error: ", err);
+          console.log('google login error: ', err);
         }
         break;
       default:

@@ -1,4 +1,3 @@
-import { Tab } from './../../../pages/login-register-desktop/interface/tabs';
 import { Router } from '@angular/router';
 import {
   Component,
@@ -8,12 +7,7 @@ import {
   EventEmitter,
   Output,
 } from '@angular/core';
-
-interface TabHead {
-  name: string;
-  isActive: boolean;
-  default: boolean;
-}
+import { TabHead } from '../../../interface/tabs';
 
 @Component({
   selector: 'tab-head',
@@ -22,7 +16,7 @@ interface TabHead {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TabHeadMolec implements OnInit {
-  @Input() tabs: Tab[];
+  @Input() tabs: TabHead[];
   @Input() selectedTab: string;
   @Output() toggleTab = new EventEmitter();
   // currentTab = { name: null, isActive: false };
@@ -32,7 +26,7 @@ export class TabHeadMolec implements OnInit {
     // this.currentTab = this.tabs.find(tab => tab.isActive);
   }
 
-  toggleTabs(currentTab: TabHead) {
+  toggleTabs() {
     // this.currentTab = currentTab;
     // this.tabs.forEach((tab) => {
     //   tab.isActive = false;

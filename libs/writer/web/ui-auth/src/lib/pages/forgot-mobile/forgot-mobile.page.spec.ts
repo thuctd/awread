@@ -8,8 +8,9 @@ describe('ForgotMobilePage', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ForgotMobilePage],
-    }).compileComponents();
+      declarations: [ ForgotMobilePage ]
+    })
+    .compileComponents();
   });
 
   beforeEach(() => {

@@ -21,7 +21,8 @@ export class LoginRegisterPage {
   constructor(
     private authFacade: AuthFacade,
     private activatedRoute: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -32,6 +33,7 @@ export class LoginRegisterPage {
         this.selectedTab = params.tab;
       }
     });
+    // this.router.navigate(['register']);
   }
 
   register() {
@@ -39,29 +41,38 @@ export class LoginRegisterPage {
   }
 
   login(provider: 'email' | 'facebook' | 'google' | 'apple') {
-    // debugger
-    console.log('provider', provider);
-    console.log('form Value', this.authForm.value);
-    if (this.selectedTab === 'login') {
-      // this.authFacade.signin(provider, this.form.value);
-      switch (provider) {
-        case 'email':
-          this.authFacade.loginEmail(this.authForm.value);
-          break;
+    this.router.navigate(['profile']);
 
-        case 'apple':
-          this.authFacade.loginSocials(ProviderType.apple);
-          break;
-        case 'facebook':
-          this.authFacade.loginSocials(ProviderType.facebook);
-          break;
-        case 'google':
-          this.authFacade.loginSocials(ProviderType.google);
-          break;
-        default:
-          break;
-      }
-    }
+    // debugger
+    // console.log('provider', provider);
+    // console.log('form Value', this.authForm.value);
+    // if (this.selectedTab === 'login') {
+    //   // this.authFacade.signin(provider, this.form.value);
+    //   switch (provider) {
+    //     case 'email':
+    //       this.authFacade.loginEmail(this.authForm.value);
+    //       break;
+
+    //     case 'apple':
+    //       this.authFacade.loginSocials(ProviderType.apple);
+    //       break;
+    //     case 'facebook':
+    //       this.authFacade.loginSocials(ProviderType.facebook);
+    //       break;
+    //     case 'google':
+    //       this.authFacade.loginSocials(ProviderType.google);
+    //       break;
+    //     default:
+    //       break;
+    //   }
+    // }
+  }
+
+  forgotPassword() {
+    // this.router.navigate(['forgot']);
+    this.router.navigate(['forgot'], {
+      // relativeTo: this.activatedRoute,
+    });
   }
 
   logout() {
