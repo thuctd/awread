@@ -1,6 +1,5 @@
-import { FormBuilder } from "@angular/forms";
 import { Component, ChangeDetectionStrategy } from "@angular/core";
-import { LoginRegisterPage } from "../login-register/login-register.page";
+import { LoginRegisterPage } from "@awread/writer/web/feature-auth";
 
 @Component({
   selector: "page-login-register-desktop",
@@ -8,4 +7,4 @@ import { LoginRegisterPage } from "../login-register/login-register.page";
   styleUrls: ["./login-register-desktop.page.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LoginRegisterDesktopPage extends LoginRegisterPage {}
+export class LoginRegisterDesktopPage extends LoginRegisterPage { }

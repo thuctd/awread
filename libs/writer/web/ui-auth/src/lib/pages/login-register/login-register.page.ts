@@ -1,7 +1,7 @@
 import { Directive, Injectable, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
-import { AuthFacade } from "libs/writer/web/feature-auth/src/lib/facades/auth.facade";
+import { AuthFacade } from "@awread/writer/web/feature-auth";
 
 @Injectable({
   providedIn: "root",
@@ -14,7 +14,7 @@ export class LoginRegisterPage implements OnInit {
     public fb: FormBuilder,
     public authFacade: AuthFacade,
     private activatedRoute: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.registerForm = this.fb.group({

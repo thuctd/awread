@@ -1,16 +1,17 @@
-import { NavbarIconAtom } from './navbar-icon.atom';
-import { GlobalDesignSystemAtomicModule } from '../../global-design-system-atomic.module';
+import { NavbarIconAtom } from "./navbar-icon.atom";
+import { GlobalDesignSystemAtomicModule } from "../../global-design-system-atomic.module";
 
 export default {
-  title: 'Design System/Atoms/navbar icon'
-}
+  title: "Design System/Atoms/navbar icon",
+};
 
-export const primary = () => ({
+export const basic = () => ({
   moduleMetadata: {
-    imports: [GlobalDesignSystemAtomicModule]
+    imports: [GlobalDesignSystemAtomicModule],
   },
   component: NavbarIconAtom,
   props: {
-
-  }
-})
+    name: "",
+    active: "",
+  },
+});
