@@ -42,10 +42,10 @@ export function addFile(filePath: string, name: string, type: string) {
             return tree;
         }
         if (type === 'api') {
-            tree.create(filePath, `import { Injectable } from '@angular/core';
-import { Apollo, gql } from 'apollo-angular';
+            tree.create(filePath, `import { Injectable } from "@angular/core";
+import { Apollo, gql } from "apollo-angular";
 
-@Injectable({ providedIn: 'root' })
+@Injectable({ providedIn: "root" })
 export class ${strings.classify(name)}${strings.classify(type)} {
 
   constructor(
@@ -60,9 +60,9 @@ export class ${strings.classify(name)}${strings.classify(type)} {
             return tree;
         }
         if (!fileExist) {
-            tree.create(filePath, `import { Injectable } from '@angular/core';
+            tree.create(filePath, `import { Injectable } from "@angular/core";
 
-@Injectable({ providedIn: 'root' })
+@Injectable({ providedIn: "root" })
 export class ${strings.classify(name)}${strings.classify(type)} {
 
   constructor(
