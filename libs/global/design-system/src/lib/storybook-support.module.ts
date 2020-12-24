@@ -6,14 +6,13 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RouterTestingModule } from '@angular/router/testing';
 import { RouterModule } from '@angular/router';
 declare const __ISSTORYBOOK__: boolean;
-// console.log('is storybook?', __ISSTORYBOOK__);
+console.log('is storybook?', __ISSTORYBOOK__);
+
+const customRouterModule = __ISSTORYBOOK__ ? RouterTestingModule : RouterModule;
+
 @NgModule({
-  imports: [CommonModule, __ISSTORYBOOK__ ? RouterTestingModule : RouterModule],
-  exports: [
-    __ISSTORYBOOK__ ? RouterModule : RouterModule,
-    ReactiveFormsModule,
-    FontAwesomeModule,
-  ],
+  imports: [CommonModule, customRouterModule],
+  exports: [customRouterModule, ReactiveFormsModule, FontAwesomeModule],
   declarations: [],
   providers: [],
 })
