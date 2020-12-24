@@ -10,8 +10,8 @@ module.exports = (config) => {
   return merge(config, {
     plugins: [
       new webpack.DefinePlugin({
-        __ISSTORYBOOK__: false,
-      }),
+        __ISSTORYBOOK__: false
+      })
     ],
     module: {
       rules: [
@@ -25,12 +25,12 @@ module.exports = (config) => {
               plugins: [
                 require('postcss-import'),
                 require('tailwindcss')(tailwindConfig),
-                require('autoprefixer'),
-              ],
-            },
-          },
-        },
-      ],
-    },
+                require('autoprefixer')
+              ]
+            }
+          }
+        }
+      ]
+    }
   });
 };

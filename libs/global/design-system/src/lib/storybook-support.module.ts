@@ -12,7 +12,7 @@ const customRouterModule = __ISSTORYBOOK__ ? RouterTestingModule : RouterModule;
 
 @NgModule({
   imports: [CommonModule, customRouterModule],
-  exports: [customRouterModule, ReactiveFormsModule, FontAwesomeModule, FormsModule],
+  exports: [customRouterModule, ReactiveFormsModule, FontAwesomeModule],
   declarations: [],
   providers: [],
 })
