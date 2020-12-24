@@ -13,7 +13,7 @@ export class DetailUploadFormMolec implements OnInit {
   })
 
   @Input() btn = {
-    submitText: 'Edit your cover',
+    name: 'Edit your cover',
     isActive: true,
   };
 

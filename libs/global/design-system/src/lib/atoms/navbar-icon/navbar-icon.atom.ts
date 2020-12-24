@@ -1,16 +1,25 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  Input,
+  Output,
+  EventEmitter,
+} from "@angular/core";
 
 @Component({
-  selector: 'navbar-icon',
-  templateUrl: './navbar-icon.atom.html',
-  styleUrls: ['./navbar-icon.atom.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  selector: "navbar-icon",
+  templateUrl: "./navbar-icon.atom.html",
+  styleUrls: ["./navbar-icon.atom.scss"],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavbarIconAtom implements OnInit {
+  @Input() active = "active";
+  @Input() linkName = "dashboard";
+  @Input() linkTo = "dashboard";
+  @Input() iconUrl = "/global-assets/images/Dashboard.png";
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

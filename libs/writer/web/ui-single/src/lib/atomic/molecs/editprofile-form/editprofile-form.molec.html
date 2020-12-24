@@ -1,0 +1,9 @@
+<section class="flex flex-col">
+  <title-form-profile class="mb-4"></title-form-profile>
+  <input-form-profile *ngFor="let item of items" [key]="item.key" class="mb-4"></input-form-profile>
+  <div>
+    <label class="text-gray-400 float-left">Tiểu sử</label>
+    <div class=""><textarea class="border rounded-xl border-gray-400 focus:outline-none px-2 h-20 float-right w-72"></textarea></div>
+  </div>
+  <div class="clear-both"></div>
+</section>

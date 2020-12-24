@@ -7,7 +7,6 @@ import { WriterWebUiCreationAtomicModule } from "../../atomics/writer-web-ui-cre
 
 @NgModule({
   declarations: [WritingDesktopPage],
-  imports: [CommonModule, WritingDesktopRoutingModule, WriterWebUiCreationAtomicModule],
-  exports: [WriterWebUiCreationAtomicModule]
+  imports: [CommonModule, WritingDesktopRoutingModule, WriterWebUiCreationAtomicModule]
 })
 export class WritingDesktopModule {}
