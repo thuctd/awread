@@ -3,13 +3,14 @@ import { CommonModule } from '@angular/common';
 
 import { NewPasswordDesktopRoutingModule } from './new-password-desktop-routing.module';
 import { NewPasswordDesktopPage } from './new-password-desktop.page';
-
+import { WriterWebUiAuthAtomicModule } from '../../atomic/writer-web-ui-auth-atomic.module';
 
 @NgModule({
   declarations: [NewPasswordDesktopPage],
   imports: [
     CommonModule,
-    NewPasswordDesktopRoutingModule
-  ]
+    NewPasswordDesktopRoutingModule,
+    WriterWebUiAuthAtomicModule,
+  ],
 })
-export class NewPasswordDesktopModule { }
+export class NewPasswordDesktopModule {}

@@ -1,16 +1,58 @@
-import { Injectable } from "@angular/core";
-import firebase from "firebase/app";
-import { AngularFireAuth } from "@angular/fire/auth";
-import { ProviderType } from "../models";
+import { Router } from '@angular/router';
+import { catchError, retry } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
+import { AuthApi } from './../apis/auth.api';
+import { Injectable } from '@angular/core';
+import firebase from 'firebase/app';
+import '@firebase/auth';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { ProviderType } from '../models';
+import { forkJoin, of } from 'rxjs';
 
-@Injectable({ providedIn: "root" })
+@Injectable({ providedIn: 'root' })
 export class FirebaseAuthAddon {
   idToken$ = this.afAuth.idToken;
   idTokenResult$ = this.afAuth.idTokenResult;
   idToken = null;
 
-  constructor(public afAuth: AngularFireAuth) {
+  constructor(
+    public afAuth: AngularFireAuth,
+    private authApi: AuthApi,
+    private router: Router
+  ) {
     this.idToken$.subscribe((idToken) => (this.idToken = idToken));
+  }
+
+  async confirmPasswordReset(code: string, password: string) {
+    try {
+      const email = window.localStorage.getItem('email_reset_password');
+      forkJoin([
+        this.afAuth.confirmPasswordReset(code, password),
+        this.authApi.updatePassword(email, password),
+      ])
+        .pipe(
+          tap(() => {
+            window.localStorage.removeItem('email_reset_password');
+            this.router.navigate(['login']);
+          }),
+          catchError((err) => of(err)),
+          retry(2)
+        )
+        .subscribe();
+      // const result = await this.afAuth.confirmPasswordReset(code, password);
+      // console.log('change password result: ', result);
+    } catch (error) {
+      console.log('change password error: ', error);
+    }
+  }
+
+  async sendLinkResetPassword(email: string) {
+    try {
+      const result = await this.afAuth.sendPasswordResetEmail(email);
+      console.log('reset password result: ', result);
+    } catch (error) {
+      console.log('error reset pw: ', error);
+    }
   }
 
   async checkMail(email: string) {
@@ -21,9 +63,9 @@ export class FirebaseAuthAddon {
   }
 
   addElement() {
-    const node = document.createElement("div");
-    node.setAttribute("id", "firebase-captcha");
-    node.setAttribute("style", "visibility: hidden");
+    const node = document.createElement('div');
+    node.setAttribute('id', 'firebase-captcha');
+    node.setAttribute('style', 'visibility: hidden');
     document.body.appendChild(node);
   }
 
@@ -32,8 +74,8 @@ export class FirebaseAuthAddon {
     const windowRef: any = window;
     try {
       if (windowRef.recaptchaVerifier) {
-        const ele = document.getElementById("firebase-captcha");
-        console.log("recapcha already have", windowRef.recaptchaVerifier, ele);
+        const ele = document.getElementById('firebase-captcha');
+        console.log('recapcha already have', windowRef.recaptchaVerifier, ele);
         await windowRef.recaptchaVerifier.clear();
         if (ele) {
           // ele.innerHTML = '';
@@ -42,12 +84,12 @@ export class FirebaseAuthAddon {
           this.addElement();
         }
       } else {
-        console.log("recapcha new");
+        console.log('recapcha new');
       }
       windowRef.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
-        "firebase-captcha",
+        'firebase-captcha',
         {
-          size: "invisible",
+          size: 'invisible',
         }
       );
     } catch (error) {
@@ -92,7 +134,7 @@ export class FirebaseAuthAddon {
 
   loginWithFacebook() {
     const provider = new firebase.auth.FacebookAuthProvider();
-    provider.addScope("public_profile,email");
+    provider.addScope('public_profile,email');
     return this.oAuthLogin(provider);
   }
 
@@ -102,9 +144,9 @@ export class FirebaseAuthAddon {
   }
 
   loginWithApple() {
-    const provider = new firebase.auth.OAuthProvider("apple.com");
-    provider.addScope("email");
-    provider.addScope("name");
+    const provider = new firebase.auth.OAuthProvider('apple.com');
+    provider.addScope('email');
+    provider.addScope('name');
     return this.oAuthLogin(provider);
   }
 

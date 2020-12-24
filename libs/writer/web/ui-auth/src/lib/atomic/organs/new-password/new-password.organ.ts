@@ -15,10 +15,17 @@ import { FormBuilder, Validators } from '@angular/forms';
 })
 export class NewPasswordOrgan implements OnInit {
   form = this.fb.group({
-    password: ['', [Validators.required]],
-    confirmpassword: ['', [Validators.required]],
+    password: ['', [Validators.required, Validators.minLength(6)]],
+    confirmpassword: ['', [Validators.required, Validators.minLength(6)]],
   });
   @Output() submitEvent = new EventEmitter();
   constructor(private fb: FormBuilder) {}
   ngOnInit(): void {}
+  updatePassworEvent() {
+    const formValue = this.form.value;
+    if (formValue.password !== formValue.confirmpassword) {
+      return;
+    }
+    this.submitEvent.emit(formValue.password);
+  }
 }

@@ -1,11 +1,15 @@
-import { Injectable } from "@angular/core";
-import { ForgotPasswordGear } from "../gears/forgot-password.gear";
+import { Injectable } from '@angular/core';
+import { ForgotPasswordGear } from '../gears/forgot-password.gear';
 
-@Injectable({ providedIn: "root" })
+@Injectable({ providedIn: 'root' })
 export class ForgotPasswordFacade {
   constructor(private forgotPasswordGear: ForgotPasswordGear) {}
 
-  updatePassword(newPassword: string) {
-    this.forgotPasswordGear.updatePassword(newPassword);
+  confirmPasswordReset(code: string, password: string) {
+    this.forgotPasswordGear.confirmPasswordReset(code, password);
+  }
+
+  sendLinkResetPassword(email: string) {
+    this.forgotPasswordGear.sendLinkResetPassword(email);
   }
 }

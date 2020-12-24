@@ -1,16 +1,12 @@
-import { Injectable } from '@angular/core';
+import { Directive, Injectable } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 @Injectable({
-    providedIn: 'root',
+  providedIn: 'root',
 })
+@Directive()
 export class ForgotPage {
+  constructor(private activatedRoute: ActivatedRoute) {}
 
-    constructor(
-        private activatedRoute: ActivatedRoute
-    ) { }
-
-    ngOnInit() {
-    }
-
+  ngOnInit() {}
 }

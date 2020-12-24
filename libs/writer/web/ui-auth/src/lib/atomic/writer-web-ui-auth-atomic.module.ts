@@ -46,6 +46,7 @@ import { NewPasswordOrgan } from './organs/new-password/new-password.organ';
     NewPasswordFormMolec,
     AccountCompleteOrgan,
     NewPasswordOrgan,
+    LoginRegisterTemplate,
   ],
   declarations: [
     TabHeadMolec,

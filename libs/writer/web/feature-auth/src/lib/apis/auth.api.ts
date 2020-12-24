@@ -1,10 +1,10 @@
-import { AngularFirestore } from "@angular/fire/firestore";
-import { Injectable } from "@angular/core";
-import { Apollo, gql } from "apollo-angular";
-import { of } from "rxjs";
-import { catchError, tap } from "rxjs/operators";
-import { HttpClient } from "@angular/common/http";
-@Injectable({ providedIn: "root" })
+import { AngularFirestore } from '@angular/fire/firestore';
+import { Injectable } from '@angular/core';
+import { Apollo, gql } from 'apollo-angular';
+import { of } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+@Injectable({ providedIn: 'root' })
 export class AuthApi {
   constructor(
     private apollo: Apollo,
@@ -12,91 +12,24 @@ export class AuthApi {
     private firestore: AngularFirestore
   ) {}
 
-  updatePassword(email: string, newPassword: string, type = "forgot") {
-    this.apollo
-      .mutate({
-        mutation: gql`
-          mutation resetpw($email: String, $pw: String, $type: String) {
-            fnUpdateNewPassword(
-              input: { email: $email, pw: $pw, type: $type }
-            ) {
-              status
-            }
+  updatePassword(email: string, newPassword: string, type = 'forgot') {
+    return this.apollo.mutate({
+      mutation: gql`
+        mutation resetpw($email: String, $pw: String, $type: String) {
+          fnUpdateNewPassword(input: { email: $email, pw: $pw, type: $type }) {
+            status
           }
-        `,
-        variables: { email, pw: newPassword, type },
-      })
-      .subscribe((res) => {
-        console.log("result", res);
-      });
-  }
-
-  signin(user) {
-    this.apollo
-      .mutate({
-        mutation: gql`
-          mutation signup(
-            $userid: String
-            $fullname: String
-            $accountname: String
-            $password: String
-            $img: String
-            $emailverified: Boolean
-            $provider: String
-          ) {
-            signup(
-              input: {
-                userid: $userid
-                fullname: $fullname
-                accountname: $accountname
-                password: $password
-                img: $img
-                emailverified: $emailverified
-                provider: $provider
-              }
-            ) {
-              jwtToken
-            }
-          }
-        `,
-        variables: {
-          userid: user.uid ?? this.firestore.createId(),
-          fullname: user.displayName ?? null,
-          accountname: user.email ?? null,
-          password: user.password,
-          img: user.photoUrl ?? null,
-          emailverified: user.emailverified ?? false,
-          provider: user.provider,
-        },
-      })
-      .pipe(
-        tap((res) => {
-          if (
-            res &&
-            res.data &&
-            res.data["signup"] &&
-            res.data["signup"]["jwtToken"]
-          ) {
-            window.localStorage.setItem(
-              "token",
-              res.data["signup"]["jwtToken"]
-            );
-          }
-        }),
-        catchError((err) => {
-          return of(err);
-        })
-      )
-      .subscribe((res) => {
-        console.log("result login: ", res);
-      });
+        }
+      `,
+      variables: { email, pw: newPassword, type },
+    });
   }
 
   setCustomClaimsToken(token: string) {
     this.http
-      .post("http://localhost:4000/setCustomClaims", { idToken: token })
+      .post('http://localhost:4000/setCustomClaims', { idToken: token })
       .subscribe((res: any) => {
-        console.log("result", res);
+        console.log('result', res);
         if (res.status) {
         }
       });
@@ -114,9 +47,24 @@ export class AuthApi {
       })
       .valueChanges.pipe(
         tap((res) => {
-          console.log("currentUser", res);
+          console.log('currentUser', res);
         })
       );
+  }
+
+  checkEmailExistInDatabase(email: string) {
+    return this.apollo.mutate({
+      mutation: gql`
+        mutation getUserBaseEmail($email: String) {
+          getUserBaseEmail(input: { mail: $email }) {
+            results {
+              email
+            }
+          }
+        }
+      `,
+      variables: { email: email },
+    });
   }
 
   getUserBaseEmail(email: string) {
@@ -151,18 +99,18 @@ export class AuthApi {
         `,
       })
       .valueChanges.subscribe((result: any) => {
-        console.log("allBooks", result);
+        console.log('allBooks', result);
       });
   }
 
-  createNewUser(user) {
-    console.log("new user", user);
+  createAccountOnServer(user) {
+    console.log('new user', user);
     return this.apollo
       .mutate({
         mutation: gql`
           mutation signup(
             $fullname: String
-            $emailVerified: Boolean
+            $emailVerified: String
             $img: String
             $password: String
             $userid: String
@@ -187,16 +135,16 @@ export class AuthApi {
         variables: {
           email: user.email ?? null,
           fullname: user.displayName ?? null,
-          emailVerified: user.emailVerified ?? false,
+          emailVerified: user.emailVerified ?? 'false',
           img: user.photoURL ?? null,
-          password: user.password ?? "",
+          password: user.password ?? '',
           userid: user.uid,
           provider: user.provider,
         },
       })
       .pipe(
         catchError((err) => {
-          console.log("error", err);
+          console.log('error', err);
           return of(err);
         })
       );

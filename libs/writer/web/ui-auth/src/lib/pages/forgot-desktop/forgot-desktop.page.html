@@ -1,6 +1,4 @@
-<div>
-    <h3>Reset your password</h3>
-    <input #pw placeholder="password" /> <br />
-    <input #cfpw placeholder="cfpassword" /> <br />
-    <button (click)="updatePassword(pw.value)">Update password</button>
-</div>
+<template-forgot-password
+  (forgotSubmit)="forgotSubmitEvent($event)"
+  (closeEvent)="closeEvent()"
+></template-forgot-password>

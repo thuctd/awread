@@ -1,9 +1,9 @@
-import { Injectable } from "@angular/core";
-import { tap } from "rxjs/operators";
-import { of } from "rxjs";
-import { <%= classify(name) %>Store } from "./<%= dasherize(name) %>.store";
+import { Injectable } from '@angular/core';
+import { tap } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { <%= classify(name) %>Store } from './<%= dasherize(name) %>.store';
 
-@Injectable({ providedIn: "root" })
+@Injectable({ providedIn: 'root' })
 export class <%= classify(name) %>Service {
 
   constructor(

@@ -1,13 +1,11 @@
-<!-- <div>
-  <form [formGroup]="registerForm">
-    <input type="email" placeholder="Email" formControlName="email" /> <br />
-    <input type="text" placeholder="Password" formControlName="password" />
-  </form>
-  <button mat-button (click)="loginWithEmailPassword()">
-    Login with email
-  </button>
-</div> -->
+<!-- <h1>Current user: {{currentUser$ | async | json}}</h1>
+<button (click)="logout()">Loutout</button> -->
+<template-login-register
+  [tabs]="tabs"
+  [selectedTab]="selectedTab"
+  [authForm]="authForm"
+  (auth)="login($event)"
+  (regiterEvent)="register()"
+></template-login-register>
 
-
-MODE LA SIGNIN HAY REGISTER ??
-<pre> {{ mode | json }} </pre>
+<!-- <pre> {{ mode | json }} </pre> -->
