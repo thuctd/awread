@@ -15,12 +15,13 @@ import { Validators, FormBuilder } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginOrgan implements OnInit {
+  @Input() forgotLink = '/forgot';
   @Input() authForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', Validators.required],
   });
   @Output() auth = new EventEmitter();
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }
