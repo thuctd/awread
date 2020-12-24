@@ -5,12 +5,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RouterTestingModule } from '@angular/router/testing';
 import { RouterModule } from '@angular/router';
-// declare const __ISSTORYBOOK__: boolean;
-// console.log('__ISSTORYBOOK__', __ISSTORYBOOK__);
+declare const __ISSTORYBOOK__: boolean;
 // console.log('is storybook?', __ISSTORYBOOK__);
 @NgModule({
-  imports: [CommonModule, RouterModule],
-  exports: [RouterModule, ReactiveFormsModule, FontAwesomeModule, FormsModule],
+  imports: [CommonModule, __ISSTORYBOOK__ ? RouterTestingModule : RouterModule],
+  exports: [
+    __ISSTORYBOOK__ ? RouterModule : RouterModule,
+    ReactiveFormsModule,
+    FontAwesomeModule,
+  ],
   declarations: [],
   providers: [],
 })
