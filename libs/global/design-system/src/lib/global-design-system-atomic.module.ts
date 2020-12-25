@@ -23,9 +23,39 @@ import { TitleFormProfileAtom } from './atoms/title-form-profile/title-form-prof
 import { BigimgProfileAtom } from './atoms/bigimg-profile/bigimg-profile.atom';
 import { SmailimgProfileAtom } from './atoms/smailimg-profile/smailimg-profile.atom';
 import { ChangephotoProfileAtom } from './atoms/changephoto-profile/changephoto-profile.atom';
+import { WrtBgAtom } from './atoms/wrt-bg/wrt-bg.atom';
+import { WrtMenuBtnAtom } from './atoms/wrt-menu-btn/wrt-menu-btn.atom';
+import { WrtBookImgAtom } from './atoms/wrt-book-img/wrt-book-img.atom';
+import { WrtTitleAtom } from './atoms/wrt-title/wrt-title.atom';
+import { WrtInfoBookAtom } from './atoms/wrt-info-book/wrt-info-book.atom';
+import { DetailInputFormAtom } from './atoms/detail-input-form/detail-input-form.atom';
+import { DetailToogleFormAtom } from './atoms/detail-toogle-form/detail-toogle-form.atom';
+import { DetailUploadImgAtom } from './atoms/detail-upload-img/detail-upload-img.atom';
+import { DetailCmbFormAtom } from './atoms/detail-cmb-form/detail-cmb-form.atom';
+import { DetailTextareaFormAtom } from './atoms/detail-textarea-form/detail-textarea-form.atom';
+import { ListTitleBookAtom } from './atoms/list-title-book/list-title-book.atom';
+import { ListImgBookAtom } from './atoms/list-img-book/list-img-book.atom';
+import { ListReviewBookAtom } from './atoms/list-review-book/list-review-book.atom';
+import { ListTypeBookAtom } from './atoms/list-type-book/list-type-book.atom';
+import { ListRatingBookAtom } from './atoms/list-rating-book/list-rating-book.atom';
+import { ListChapterBookAtom } from './atoms/list-chapter-book/list-chapter-book.atom';
+import { ListUdBookAtom } from './atoms/list-ud-book/list-ud-book.atom';
+import { ListSocialMenuAtom } from './atoms/list-social-menu/list-social-menu.atom';
+import { ListSocialBtnAtom } from './atoms/list-social-btn/list-social-btn.atom';
+import { SocialMenuAtom } from './atoms/social-menu/social-menu.atom';
+import { DetailTitlePartAtom } from './atoms/detail-title-part/detail-title-part.atom';
+import { DetailUdPartAtom } from './atoms/detail-ud-part/detail-ud-part.atom';
+import { DetailReviewPartAtom } from './atoms/detail-review-part/detail-review-part.atom';
+import { DetailSocialMenuAtom } from './atoms/detail-social-menu/detail-social-menu.atom';
+import { WrtIconMenuAtom } from './atoms/wrt-icon-menu/wrt-icon-menu.atom';
+import { WrtSocialMenuAtom } from './atoms/wrt-social-menu/wrt-social-menu.atom';
+import { CreationSubmitBtnAtom } from './atoms/creation-submit-btn/creation-submit-btn.atom';
+import { CreationSocialBtnAtom } from './atoms/creation-social-btn/creation-social-btn.atom';
+import { QuillModule } from 'ngx-quill';
+import { WrtEditerAtom } from './atoms/wrt-editer/wrt-editer.atom';
 
 @NgModule({
-  imports: [CommonModule, StorybookSupportModule],
+  imports: [CommonModule, StorybookSupportModule, QuillModule.forRoot()],
   exports: [
     TabBtnAtom,
     LogoAtom,
@@ -38,7 +68,6 @@ import { ChangephotoProfileAtom } from './atoms/changephoto-profile/changephoto-
     AuthTitleAtom,
     AuthDescriptionAtom,
     OptionLinkAtom,
-
     NavbarLinkAtom,
     NavbarIconAtom,
     searchNavtopAtom,
@@ -49,6 +78,36 @@ import { ChangephotoProfileAtom } from './atoms/changephoto-profile/changephoto-
     BigimgProfileAtom,
     SmailimgProfileAtom,
     ChangephotoProfileAtom,
+    WrtBgAtom,
+    WrtMenuBtnAtom,
+    WrtBookImgAtom,
+    WrtTitleAtom,
+    WrtInfoBookAtom,
+    WrtIconMenuAtom,
+    WrtSocialMenuAtom,
+    WrtEditerAtom,
+    DetailInputFormAtom,
+    DetailToogleFormAtom,
+    DetailUploadImgAtom,
+    DetailCmbFormAtom,
+    DetailTextareaFormAtom,
+    DetailTitlePartAtom,
+    DetailUdPartAtom,
+    DetailReviewPartAtom,
+    ListTitleBookAtom,
+    ListImgBookAtom,
+    ListReviewBookAtom,
+    ListTypeBookAtom,
+    ListRatingBookAtom,
+    ListChapterBookAtom,
+    ListUdBookAtom,
+    ListSocialMenuAtom,
+    ListSocialBtnAtom,
+    SocialMenuAtom,
+    DetailSocialMenuAtom,
+    CreationSubmitBtnAtom,
+    CreationSocialBtnAtom,
+    QuillModule
   ],
   declarations: [
     TabBtnAtom,
@@ -62,7 +121,6 @@ import { ChangephotoProfileAtom } from './atoms/changephoto-profile/changephoto-
     AuthTitleAtom,
     AuthDescriptionAtom,
     OptionLinkAtom,
-
     NavbarLinkAtom,
     NavbarIconAtom,
     searchNavtopAtom,
@@ -73,6 +131,40 @@ import { ChangephotoProfileAtom } from './atoms/changephoto-profile/changephoto-
     BigimgProfileAtom,
     SmailimgProfileAtom,
     ChangephotoProfileAtom,
+    InputFormProfileAtom,
+    TitleFormProfileAtom,
+    BigimgProfileAtom,
+    SmailimgProfileAtom,
+    ChangephotoProfileAtom,
+    WrtBgAtom,
+    WrtMenuBtnAtom,
+    WrtBookImgAtom,
+    WrtTitleAtom,
+    WrtInfoBookAtom,
+    WrtIconMenuAtom,
+    WrtSocialMenuAtom,
+    WrtEditerAtom,
+    DetailInputFormAtom,
+    DetailToogleFormAtom,
+    DetailUploadImgAtom,
+    DetailCmbFormAtom,
+    DetailTextareaFormAtom,
+    DetailTitlePartAtom,
+    DetailUdPartAtom,
+    DetailReviewPartAtom,
+    ListTitleBookAtom,
+    ListImgBookAtom,
+    ListReviewBookAtom,
+    ListTypeBookAtom,
+    ListRatingBookAtom,
+    ListChapterBookAtom,
+    ListUdBookAtom,
+    ListSocialMenuAtom,
+    ListSocialBtnAtom,
+    SocialMenuAtom,
+    DetailSocialMenuAtom,
+    CreationSubmitBtnAtom,
+    CreationSocialBtnAtom
   ],
 })
 export class GlobalDesignSystemAtomicModule {}

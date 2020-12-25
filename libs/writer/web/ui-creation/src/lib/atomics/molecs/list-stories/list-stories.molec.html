@@ -1,0 +1,15 @@
+<div class="grid grid-cols-10 gap-2">
+  <div class="col-span-3">
+    <list-img-book></list-img-book>
+  </div>
+  <div class="col-span-7">
+    <div class="self-start">
+      <list-title-book></list-title-book>
+      <list-type-book></list-type-book>
+      <list-rating-book></list-rating-book>
+    </div>
+    <div class="self-start mt-2">
+      <list-review-book [countView] = "countView" [countPositive] = "countPositive" [countNegative] = "countNegative"></list-review-book>
+    </div>
+  </div>
+</div>
