@@ -1,8 +1,7 @@
-import { ForgotPasswordFacade } from './../../../../../feature-auth/src/lib/facades/forgot-password.facade';
-import { AuthFacade } from 'libs/writer/web/feature-auth/src/lib/facades/auth.facade';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { ActivatedRoute } from '@angular/router';
 import { Directive, Injectable, OnInit } from '@angular/core';
+import { ForgotPasswordFacade } from '@awread/writer/web/feature-auth';
 
 @Injectable({
   providedIn: 'root',

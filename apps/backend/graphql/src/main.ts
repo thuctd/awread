@@ -3,7 +3,8 @@
  * This is only a minimal backend to get started.
  */
 
-const express = require('express');
+// const express = require('express');
+import express from 'express';
 
 const app = express();
 
@@ -11,10 +12,16 @@ app.get('/api', (req, res) => {
   res.send({ message: 'Welcome to graphql!' });
 });
 
-const { postgraphile } = require('postgraphile');
-const cors = require('cors');
-const bodyParser = require('body-parser');
-const admin = require('firebase-admin');
+// const { postgraphile } = require('postgraphile');
+// const cors = require('cors');
+// const bodyParser = require('body-parser');
+// const admin = require('firebase-admin');
+import { postgraphile } from 'postgraphile';
+import cors from 'cors';
+import bodyParser from 'body-parser';
+import admin from 'firebase-admin';
+
+
 app.use(cors());
 // Enable the use of request body parsing middleware
 app.use(bodyParser.json());
@@ -24,10 +31,11 @@ app.use(
   })
 );
 
-const firebaseConfig = require('./adminsdk.json');
-
+// const firebaseConfig = require('./adminsdk.json');
+import firebaseConfig from './adminsdk.json';
+import { IncomingMessage } from 'http';
 admin.initializeApp({
-  credential: admin.credential.cert(firebaseConfig),
+  credential: admin.credential.cert(firebaseConfig as admin.ServiceAccount),
   databaseURL: 'https://awready-beta.firebaseio.com',
 });
 
@@ -64,7 +72,7 @@ app.use(
       // jwtPgTypeIdentifier: 'public.jwt_token',
       // jwtSecret: 'cc',
       // pgDefaultRole: 'anonymous',
-      pgSettings: async (req) => {
+      pgSettings: async (req: IncomingMessage & { user: any }) => {
         console.log('req.user', req.user);
         return checkRole(req);
       },
