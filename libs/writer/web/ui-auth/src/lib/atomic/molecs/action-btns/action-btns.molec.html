@@ -1,20 +1,11 @@
 <div class="flex items-center mb-4 mt-4">
   <div class="w-full block relative">
     <div class="flex justify-center mt-2">
-      <span
-        class="cursor-pointer text-green-500 md:text-xs lg:text-sm xl:text-base font-medium"
-        >Login with</span
-      >
+      <span class="cursor-pointer text-green-500 md:text-xs lg:text-sm xl:text-base font-medium">Login with</span>
     </div>
     <div class="absolute right-0 top-0 flex items-center">
-      <social-btn
-        (auth)="auth.emit('facebook')"
-        [provider]="'facebook'"
-      ></social-btn>
-      <social-btn
-        (auth)="auth.emit('google')"
-        [provider]="'google'"
-      ></social-btn>
+      <social-btn (socialBtn)="auth.emit('facebook')" [provider]="'facebook'"></social-btn>
+      <social-btn (socialBtn)="auth.emit('google')" [provider]="'google'"></social-btn>
     </div>
   </div>
 </div>
