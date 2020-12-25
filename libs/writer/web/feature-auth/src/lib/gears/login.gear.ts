@@ -28,6 +28,7 @@ export class LoginGear {
       const userCredential = await this.firebaseAuthAddon.loginWithEmail(
         credential
       );
+      alert('Login thành công');
       this.router.navigate(['profile']);
       console.log('userCredential', userCredential);
       return userCredential;

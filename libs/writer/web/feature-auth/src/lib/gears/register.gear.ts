@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { AuthApi } from './../apis/auth.api';
 import { Injectable } from '@angular/core';
 import { FirebaseAuthAddon, FirebaseAuthSocialAddon } from '../addons';
@@ -12,7 +13,8 @@ export class RegisterGear {
   constructor(
     private firebaseAuthAddon: FirebaseAuthAddon,
     private firebaseAuthSocialAddon: FirebaseAuthSocialAddon,
-    private authApi: AuthApi
+    private authApi: AuthApi,
+    private router: Router
   ) {}
 
   async registerEmail(credential: BasicCredential) {
@@ -25,6 +27,7 @@ export class RegisterGear {
         provider: 'email/password',
       });
       this.createAccountOnServer(user);
+      this.router.navigate(['login']);
     } catch (err) {
       console.log('login with email/pw error: ', err);
       if (err.code === 'auth/email-already-in-use') {

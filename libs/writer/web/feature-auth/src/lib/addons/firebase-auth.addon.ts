@@ -33,9 +33,13 @@ export class FirebaseAuthAddon {
         .pipe(
           tap(() => {
             window.localStorage.removeItem('email_reset_password');
+            alert('Reset password thành công');
             this.router.navigate(['login']);
           }),
-          catchError((err) => of(err)),
+          catchError((err) => {
+            alert('Reset password lỗi');
+            return of(err);
+          }),
           retry(2)
         )
         .subscribe();
