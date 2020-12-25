@@ -1,22 +1,22 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  Input,
+} from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'forgot-form',
   templateUrl: './forgot-form.molec.html',
   styleUrls: ['./forgot-form.molec.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ForgotFormMolec implements OnInit {
   icons = { faEnvelope };
-  @Input() formForget = this.fb.group({
-    email: ['', [Validators.required, Validators.email]]
-  })
-  constructor(
-    private fb: FormBuilder,
-  ) { }
+  @Input() emailFormControl: FormControl;
+  constructor(private fb: FormBuilder) {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

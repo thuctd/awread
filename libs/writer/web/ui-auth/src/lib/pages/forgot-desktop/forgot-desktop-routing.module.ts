@@ -3,10 +3,15 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { ForgotDesktopPage } from './forgot-desktop.page';
 
-const routes: Routes = [{ path: '', component: ForgotDesktopPage }];
+
+
+const routes: Routes = [
+  { path: '', component: ForgotDesktopPage }
+  
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
-export class ForgotDesktopRoutingModule {}
+export class ForgotDesktopRoutingModule { }

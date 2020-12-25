@@ -1,12 +1,12 @@
-import { AuthApi } from "./../apis/auth.api";
-import { Injectable } from "@angular/core";
-import { FirebaseAuthAddon, FirebaseAuthSocialAddon } from "../addons";
-import { BasicCredential, ProviderType } from "../models";
-import firebase from "firebase/app";
+import { AuthApi } from './../apis/auth.api';
+import { Injectable } from '@angular/core';
+import { FirebaseAuthAddon, FirebaseAuthSocialAddon } from '../addons';
+import { BasicCredential, ProviderType } from '../models';
+import firebase from 'firebase/app';
 // userCredential.additionalUserInfo.isNewUser;
 // userCredential.credential.providerId;
 // userCredential.user.getIdToken();
-@Injectable({ providedIn: "root" })
+@Injectable({ providedIn: 'root' })
 export class RegisterGear {
   userCredential: firebase.auth.UserCredential | null = null;
   constructor(
@@ -24,12 +24,12 @@ export class RegisterGear {
         ...userCredential.user,
         displayName: credential.displayName,
         password: credential.password,
-        provider: "email/password",
+        provider: 'email/password',
       };
       this.firebaseAuthSocialAddon.createAccountOnServer(user);
     } catch (err) {
-      console.log("login with email/pw error: ", err);
-      if (err.code === "auth/email-already-in-use") {
+      console.log('login with email/pw error: ', err);
+      if (err.code === 'auth/email-already-in-use') {
         // TH tạo email đã tồn tại, thì link email này tới provider google hoặc facebook đã tạo trước đó
         // Link xong là có thể đăng nhập với email/pass vừa mới link
         this.firebaseAuthSocialAddon.linkToProviderGoogleorFacebook(credential);
@@ -37,9 +37,13 @@ export class RegisterGear {
     }
   }
 
-  async registerSocial(providerType: ProviderType) {
-    this.routingToPersonalInfoPageIfSocial();
+  createAccountOnServer(user) {
+    return this.authApi.createAccountOnServer(user);
   }
+
+  // async registerSocial(providerType: ProviderType) {
+  //   this.routingToPersonalInfoPageIfSocial();
+  // }
 
   private routingToPersonalInfoPageIfSocial() {
     // routing to somewhere to enter email and password for social login
@@ -50,10 +54,10 @@ export class RegisterGear {
   }
 }
 
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: "user-info",
+  selector: 'user-info',
   template: ` <div>Hello</div> `,
 })
 export class InfoUserComponent implements OnInit {

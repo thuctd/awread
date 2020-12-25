@@ -8,8 +8,9 @@ describe('ForgotDesktopPage', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ForgotDesktopPage],
-    }).compileComponents();
+      declarations: [ ForgotDesktopPage ]
+    })
+    .compileComponents();
   });
 
   beforeEach(() => {

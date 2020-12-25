@@ -1,5 +1,8 @@
-<register-form #registerForm></register-form>
-<submit-btn [active]="registerForm.form.valid" [name]="'Đăng ký'"
-    (onBtnClicked)="submitEvent.emit(registerForm.form.value)"></submit-btn>
+<register-form [form]="authForm"></register-form>
+<submit-btn
+  [active]="authForm.valid"
+  [name]="'Đăng ký'"
+  (onBtnClicked)="regiterEvent.emit()"
+></submit-btn>
 
 <!-- <pre> {{ registerForm.form.value | json }} </pre> -->

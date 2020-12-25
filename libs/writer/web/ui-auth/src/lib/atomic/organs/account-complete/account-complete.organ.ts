@@ -1,9 +1,11 @@
+import { FormGroup } from '@angular/forms';
 import {
   Component,
   OnInit,
   ChangeDetectionStrategy,
   Output,
   EventEmitter,
+  Input,
 } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 
@@ -14,11 +16,8 @@ import { FormBuilder, Validators } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AccountCompleteOrgan implements OnInit {
-  @Output() submitEvent = new EventEmitter();
-  formComplete = this.fb.group({
-    email: ['', [Validators.email]],
-    password: [''],
-  });
+  @Output() completeEvent = new EventEmitter();
+  @Input() formComplete: FormGroup;
   title = 'Hoàn tất thông tin';
   description = 'Cập nhật email của bạn để dễ dàng lấy lại tài khoản khi cần';
   constructor(private fb: FormBuilder) {}
