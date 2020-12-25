@@ -254,6 +254,26 @@
               "quiet": true
             }
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "buildTarget": "writer-web:build",
+            "firebaseProject": "awready-beta"
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "writer-web:build",
+              "firebaseProject": "awread-2020"
+            },
+            "storybook": {
+              "buildTarget": "writer-web:build-storybook",
+              "firebaseProject": "awready-beta",
+              "target": {
+                "project": "writer-web-story"
+              }
+            }
+          }
         }
       }
     },
