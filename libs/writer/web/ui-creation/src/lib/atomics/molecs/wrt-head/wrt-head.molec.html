@@ -1,0 +1,19 @@
+<div class="w-full justify-around flex bg-white rounded-lg pt-1 pb-2 px-2 relative">
+  <div class="justify-start flex w-4/6 w-50-ns pl-1">
+    <div class="dtc-ns v-mid text-gray-500 pl-8">
+      <wrt-social-menu></wrt-social-menu>
+      <wrt-info-book></wrt-info-book>
+    </div>
+    <wrt-book-img></wrt-book-img>
+  </div>
+  <div class="justify-end flex w-50-ns mr-6">
+    <div class="justify-end flex w-50-ns mr-6">
+      <div class="py-6 flex">
+        <div class="flex mr-10">
+          <cr-submit-btn *ngFor="let btn of btns" [active]="btn.isActive" [submitText]="btn.submitText" class="ml-2"></cr-submit-btn>
+        </div>
+        <wrt-menu-btn class="mt-1"></wrt-menu-btn>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,5 @@
+<button mat-flat-button (click)="onBtnClicked.emit()" [ngClass]=" active ? 'bg-green-400 shadow_input' : 'bg-gray-400'"
+    class="text-sm md:text-xs lg:text-base xl:text-base w-full text-white ml-6 block cursor-pointer rounded-sm border-green-400 focus:shadow-outline focus:outline-none p-2"
+    type="button">
+    {{ submitText | titlecase }}
+</button>

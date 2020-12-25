@@ -4,6 +4,7 @@ import {
   ShellDesktopLayout,
   ShellMobileLayout,
 } from '@awread/writer/web/shared';
+import { LoginGuard } from './guards/login.guard';
 import { SingleLayout } from './layouts/single/single.layout';
 
 declare const window: Window & { haveMobile: boolean };
@@ -15,6 +16,7 @@ const routes: Routes = [
       window.innerWidth <= 768 && window?.haveMobile
         ? ShellMobileLayout
         : ShellDesktopLayout,
+    canActivate: [LoginGuard],
     children: [
       {
         path: '',

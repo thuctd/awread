@@ -1,0 +1,36 @@
+<div class="relative inline-block text-left">
+  <div>
+    <button #toggleButton (click)="toggleMenu($event)" type="button" class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-1 outline-none bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:border-green-400" id="options-menu" aria-haspopup="true" aria-expanded="true">
+      <fa-icon [icon]="faIconComments" class="text-gray-700"></fa-icon>
+    </button>
+  </div>
+
+  <div *ngIf="isMenuOpen" class="z-50 origin-top-right absolute right-0 mt-2 w-72 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+    <div class="py-3">
+      <div class="flex">
+        <div class="">
+          <a [routerLink]="['/routePath']" class="block px-4 py-1 text-sm text-gray-700" role="menuitem">External link
+          </a>
+        </div>
+        <div class="ml-24">
+          <button (click)="copyToClipboard.emit()" class="text-sm md:text-xs text-white bg-gray-400  inline-block text-right cursor-pointer rounded-sm border-green-400 focus:shadow-outline focus:outline-none px-2 py-1 hover:bg-green-400"
+          type="button">
+          Copy
+      </button>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="py-1">
+      <label class="block px-4 py-2 text-sm text-gray-700" role="menuitem">Revisions
+        <button (click)="copyToClipboard.emit()" class="text-sm md:text-xs text-white bg-gray-400 float-right inline-block text-right cursor-pointer rounded-sm border-green-400 focus:shadow-outline focus:outline-none px-2 py-1 hover:bg-green-400"
+            type="button">
+            Copy
+        </button>
+      </label>
+      <span href="#" class="block px-4 py-2 text-xs text-gray-500" role="menuitem">Restor a previous version of this story part</span>
+    </div> -->
+    <div class="py-1">
+      <a href="#" class="block px-4 py-2 text-xs text-center text-green-400 hover:bg-gray-100 hover:text-gray-900" role="menuitem">Delete this part</a>
+    </div>
+  </div>
+</div>

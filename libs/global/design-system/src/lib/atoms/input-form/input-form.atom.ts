@@ -14,10 +14,10 @@ import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 })
 export class InputFormAtom implements OnInit {
   @Input() placeholder = 'Email Address';
-  @Input() inputControl: FormControl;
+  @Input() inputControl: FormControl = new FormControl('');
   @Input() faIcon = faEnvelope;
   @Input() id = this.placeholder.replace(/\s/g, '-') + Math.random();
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

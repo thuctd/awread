@@ -1,20 +1,8 @@
 <template-auth-background>
-  <tab-head
-    #tabHead
-    [tabs]="tabs"
-    [selectedTab]="selectedTab"
-    (toggleTab)="toggleTab($event)"
-  ></tab-head>
-  <login
-    (auth)="auth.emit($event)"
-    *ngIf="selectedTab === 'login'"
-    [authForm]="authForm"
-  ></login>
-  <register
-    (regiterEvent)="regiterEvent.emit()"
-    [authForm]="authForm"
-    *ngIf="selectedTab === 'register'"
-  ></register>
+  <tab-head #tabHead [tabs]="tabs" [selectedTab]="selectedTab" (toggleTab)="toggleTab($event)"></tab-head>
+  <login (auth)="auth.emit($event)" *ngIf="selectedTab === 'login'" [authForm]="authForm" [forgotLink]="'/forgot'">
+  </login>
+  <register (regiterEvent)="regiterEvent.emit()" [authForm]="authForm" *ngIf="selectedTab === 'register'"></register>
 </template-auth-background>
 <!-- <pre> {{ tabHead.currentTab | json }} </pre> -->
 <!--  -->

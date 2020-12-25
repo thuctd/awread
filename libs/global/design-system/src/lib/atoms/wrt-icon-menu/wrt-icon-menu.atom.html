@@ -1,0 +1,16 @@
+<label class="text-sm rounded-sm text-white inline-block relative px-4 py-1 font-normal measure bg-green-400"> Continue Writing
+  <button #toggleButton (click)="toggleMenu($event)" class="text-sm text-white outline-none font-semibold p-1 rounded-full inline-flex items-center ml-1 focus:outline-none transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110">
+    <fa-icon [icon]="faIcon"></fa-icon>
+  </button>
+  <div *ngIf="isMenuOpen" class="origin-top-right absolute right-0 mt-2 w-44 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+    <div class="py-1 text-left">
+      <div *ngFor="let action of actions" class="">
+        <a href="#" class="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 hover:text-gray-900">
+          <span class="text-sm text-gray-500 mr-2">
+            <fa-icon [icon]="action.icon"></fa-icon>
+          </span>
+          {{action.name | titlecase}}</a>
+      </div>
+    </div>
+  </div>
+</label>
