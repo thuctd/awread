@@ -23,10 +23,11 @@ import { ListOrgan } from './organs/list/list.organ';
 import { DetailActMolec } from './molecs/detail-act/detail-act.molec';
 import { DetailPartMolec } from './molecs/detail-part/detail-part.molec';
 import { DetailReviewMolec } from './molecs/detail-review/detail-review.molec';
+import { WriterWebSharedAtomicModule } from '@awread/writer/web/shared';
 
 @NgModule({
-    imports: [CommonModule, StorybookSupportModule, GlobalDesignSystemAtomicModule, GenresFieldModule, InfiniteScrollModule],
+  imports: [CommonModule, StorybookSupportModule, GlobalDesignSystemAtomicModule, GenresFieldModule, InfiniteScrollModule, WriterWebSharedAtomicModule],
   exports: [CommonModule, WrtHeadMolec, WrtWriterMolec, WritingOrgan, WritingTemplate, DetailTabHeadMolec, DetailActionBtnsMolec, DetailUploadFormMolec, DetailBookFormMolec, DetailOrgan, IndexOrgan, DetailIndexTemplate, GenresFieldModule, DetailLinkBtnsMolec, ListHeadMolec, ListActMolec, ListChapterMolec, ListStoriesMolec, ListTemplate, ListOrgan, DetailActMolec, DetailPartMolec, DetailReviewMolec],
-  declarations: [WrtHeadMolec, WrtWriterMolec, WritingOrgan, WritingTemplate, DetailTabHeadMolec, DetailActionBtnsMolec, DetailUploadFormMolec, DetailBookFormMolec, DetailOrgan, IndexOrgan, DetailIndexTemplate, DetailLinkBtnsMolec, ListHeadMolec, ListActMolec, ListChapterMolec, ListStoriesMolec, ListTemplate, ListOrgan, DetailActMolec, DetailPartMolec, DetailReviewMolec, ]
+  declarations: [WrtHeadMolec, WrtWriterMolec, WritingOrgan, WritingTemplate, DetailTabHeadMolec, DetailActionBtnsMolec, DetailUploadFormMolec, DetailBookFormMolec, DetailOrgan, IndexOrgan, DetailIndexTemplate, DetailLinkBtnsMolec, ListHeadMolec, ListActMolec, ListChapterMolec, ListStoriesMolec, ListTemplate, ListOrgan, DetailActMolec, DetailPartMolec, DetailReviewMolec,]
 })
-export class WriterWebUiCreationAtomicModule {}
+export class WriterWebUiCreationAtomicModule { }
