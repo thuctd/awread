@@ -15,10 +15,10 @@ interface TabHead {
 export class DetailTabHeadMolec implements OnInit {
 
   @Input() tabs = [{
-    name: 'Tables of Contents',
+    name: 'Story Details',
     isActive: true,
   }, {
-    name: 'Story Details',
+    name: 'Tables of Contents',
     isActive: false,
   }];
 

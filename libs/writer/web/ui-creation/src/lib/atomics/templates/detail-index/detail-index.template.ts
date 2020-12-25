@@ -8,8 +8,8 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 })
 export class DetailIndexTemplate implements OnInit {
   tabs = [
-    { name: 'Tables of Contents', isActive: true },
-    { name: 'Story Details'}
+    { name: 'Story Details', isActive: true },
+    { name: 'Tables of Contents'}
   ]
 
   constructor() { }
