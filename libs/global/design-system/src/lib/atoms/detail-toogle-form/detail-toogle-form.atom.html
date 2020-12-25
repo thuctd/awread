@@ -1,0 +1,19 @@
+<div class="md:flex mb-6">
+  <div class="md:w-1/3">
+    <label class="block text-gray-500 md:mt-2 font-bold md:text-left md:mb-0 pr-4" for="inline-full-name">
+      {{titleLabel | titlecase }}
+    </label>
+  </div>
+  <div class="md:w-2/3">
+    <label for="toogleA" class="flex items-center cursor-pointer md:mt-2">
+      <div class="mr-4 text-gray-500 text-xs">
+        {{detailToogle | titlecase }}
+      </div>
+      <div class="relative">
+        <input [formControl]="inputControl" id="toogleA" type="checkbox" class="hidden" />
+        <div class="toggle__line w-10 h-4 bg-gray-400 rounded-full shadow-inner"></div>
+        <div class="toggle__dot absolute w-6 h-6 bg-white rounded-full shadow inset-y-0 left-0"></div>
+      </div>
+    </label>
+  </div>
+</div>
