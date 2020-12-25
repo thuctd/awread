@@ -118,7 +118,8 @@ export class FirebaseAuthSocialAddon {
     try {
       await result.user.linkWithCredential(err.credential);
       // check trường hợp google/facebook ghi đè account thì phải link lại provider password (account email/pw)
-      this.shouldLinkProviderPassword(result.user.email, result.user);
+      const user = this.firebaseAuthAddon.createUserObject(result.user);
+      this.shouldLinkProviderPassword(user, result.user);
     } catch (error) {}
   }
 
@@ -164,12 +165,15 @@ export class FirebaseAuthSocialAddon {
       const linkWithCredential = await result.user.linkWithCredential(
         credential
       );
-      if (linkWithCredential.user) {
-        // update password when account Googleor/FB exists.
-        this.authApi
-          .updatePassword(user.email, user.password, 'update-new')
-          .subscribe();
+      if (linkWithCredential) {
+        this.router.navigate(['profile']);
       }
+      // if (linkWithCredential.user) {
+      //   // update password when account Googleor/FB exists.
+      //   this.authApi
+      //     .updatePassword(user.email, user.password, 'update-new')
+      //     .subscribe();
+      // }
       console.log('linkWithCredential', linkWithCredential);
     } catch (error) {
       console.log('link with gg/fb error: ', error);

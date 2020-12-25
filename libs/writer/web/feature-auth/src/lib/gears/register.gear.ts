@@ -20,21 +20,23 @@ export class RegisterGear {
       const userCredential = await this.firebaseAuthAddon.registerWithEmail(
         credential
       );
-      const user = {
+      const user = this.firebaseAuthAddon.createUserObject({
         ...userCredential.user,
-        displayName: credential.displayName,
-        password: credential.password,
         provider: 'email/password',
-      };
-      this.firebaseAuthSocialAddon.createAccountOnServer(user);
+      });
+      this.createAccountOnServer(user);
     } catch (err) {
       console.log('login with email/pw error: ', err);
       if (err.code === 'auth/email-already-in-use') {
         // TH tạo email đã tồn tại, thì link email này tới provider google hoặc facebook đã tạo trước đó
         // Link xong là có thể đăng nhập với email/pass vừa mới link
-        this.firebaseAuthSocialAddon.linkToProviderGoogleorFacebook(credential);
+        this.linkToProviderGoogleorFacebook(credential);
       }
     }
+  }
+
+  linkToProviderGoogleorFacebook(user) {
+    this.firebaseAuthSocialAddon.linkToProviderGoogleorFacebook(user);
   }
 
   createAccountOnServer(user) {

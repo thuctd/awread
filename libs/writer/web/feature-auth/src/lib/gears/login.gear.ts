@@ -54,26 +54,11 @@ export class LoginGear {
       case ProviderType.facebook:
         try {
           const userCredential = await this.firebaseAuthAddon.loginWithFacebook();
-          const user = this.createUserObject({
+          const user = this.firebaseAuthAddon.createUserObject({
             ...userCredential.user,
             provider: 'facebook',
           });
-          this.authApi
-            .checkEmailExistInDatabase(userCredential.user.email)
-            .subscribe((res) => {
-              if (
-                res['data']['getUserBaseEmail'] &&
-                res['data']['getUserBaseEmail'].results.length
-              ) {
-                this.router.navigate(['profile']);
-              } else {
-                this.router.navigate(['register-complete', user]);
-              }
-            });
-          this.firebaseAuthSocialAddon.createAccountOnServer({
-            ...userCredential.user,
-            provider: 'facebook',
-          });
+          this.checkMustNewUserWhenLoginFaceBook(user);
         } catch (err) {
           this.firebaseAuthSocialAddon.linkAccountWithProviderFacebook(err);
         }
@@ -81,7 +66,7 @@ export class LoginGear {
       case ProviderType.google:
         try {
           const userCredential = await this.firebaseAuthAddon.loginWithGoogle();
-          const user = this.createUserObject({
+          const user = this.firebaseAuthAddon.createUserObject({
             ...userCredential.user,
             provider: 'google',
           });
@@ -109,14 +94,16 @@ export class LoginGear {
     return this.authApi.getCurrentUser();
   }
 
-  private createUserObject(user) {
-    return {
-      displayname: user.displayName,
-      email: user.email,
-      emailVerified: user.emailVerified.toString(),
-      photoUrl: user.photoURL,
-      uid: user.uid,
-      provider: user.provider,
-    };
+  private checkMustNewUserWhenLoginFaceBook(user) {
+    this.authApi.checkEmailExistInDatabase(user.email).subscribe((res) => {
+      if (
+        res['data']['getUserBaseEmail'] &&
+        res['data']['getUserBaseEmail'].results.length
+      ) {
+        this.router.navigate(['profile']);
+      } else {
+        this.router.navigate(['register-complete', user]);
+      }
+    });
   }
 }
