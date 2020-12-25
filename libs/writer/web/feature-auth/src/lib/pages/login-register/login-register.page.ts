@@ -23,7 +23,7 @@ export class LoginRegisterPage {
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.initForm();
@@ -68,7 +68,7 @@ export class LoginRegisterPage {
 
   forgotPassword() {
     // this.router.navigate(['forgot']);
-    this.router.navigate(['forgot'], {
+    this.router.navigate(['profile'], {
       // relativeTo: this.activatedRoute,
     });
   }

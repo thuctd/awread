@@ -1,7 +1,4 @@
 <login-form #loginForm [form]="authForm"></login-form>
-<remember-forgot></remember-forgot>
-<submit-btn
-  (onBtnClicked)="auth.emit('email')"
-  [active]="loginForm.form.valid"
-></submit-btn>
+<remember-forgot [link]="forgotLink"></remember-forgot>
+<submit-btn (onBtnClicked)="auth.emit('email')" [active]="loginForm.form.valid"></submit-btn>
 <action-btns (auth)="auth.emit($event)"> </action-btns>
