@@ -1,7 +1,7 @@
-<div class="w-full max-w-screen-xl mx-auto">
+<section class="w-full max-w-screen-xl mx-auto">
   <div class="w-full lg:4/5">
     <detail-tab-head #tabHead [tabs]="tabs"></detail-tab-head>
-    <detail *ngIf="tabHead.currentTab.name === 'Tables of Contents'"></detail>
-    <index *ngIf="tabHead.currentTab.name === 'Story Details'"></index>
+    <index *ngIf="tabHead.currentTab.name === 'Tables of Contents'"></index>
+    <detail *ngIf="tabHead.currentTab.name === 'Story Details'"></detail>
   </div>
-</div>
+</section>
