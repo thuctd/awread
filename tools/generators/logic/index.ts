@@ -4,13 +4,13 @@ import {
 } from '@angular-devkit/schematics';
 import { strings } from '@angular-devkit/core';
 import { exportToFileIndex } from '../../utility/export-to-index';
-import { getProjectName, getGeneratePath } from '../../utility/guess-workspace';
+import { guessProject, getGeneratePath } from '../../utility/guess-workspace';
 const resolve = require('path').resolve;
 
 
 export default function (schema: any): Rule {
     return async (tree: Tree, context: SchematicContext) => {
-        const projectName = await getProjectName(schema, tree);
+        const { projectName, projectRoot } = await guessProject(tree);
         schema.project = projectName;
         const generatePath = await getGeneratePath(schema, tree);
         const parts = schema.list.length ? schema.list.split(',') : [];

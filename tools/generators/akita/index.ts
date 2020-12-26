@@ -1,16 +1,16 @@
 import {
-    Rule, SchematicsException, Tree, apply, applyTemplates, chain, filter, mergeWith, move, noop, schematic, externalSchematic, MergeStrategy, url,
+    Rule, SchematicContext, SchematicsException, Tree, apply, applyTemplates, chain, filter, mergeWith, move, noop, schematic, externalSchematic, MergeStrategy, url,
 } from '@angular-devkit/schematics';
 import { Path, normalize, strings } from '@angular-devkit/core';
 import * as pluralize from 'pluralize';
-import { getProjectName, getGeneratePath } from '../../utility/guess-workspace';
+import { guessProject, getGeneratePath } from '../../utility/guess-workspace';
 import { readStoryTitle } from '../atomic';
 
 export default function (schema: any): Rule {
-    return async (tree: Tree, context) => {
-        const projectName = await getProjectName(schema, tree);
+    return async (tree: Tree, context: SchematicContext) => {
+        const { projectName, projectRoot } = await guessProject(tree);
         schema.project = projectName;
-        const generatePath = await getGeneratePath(schema, tree);
+        const generatePath = `${projectRoot}/lib/states`
 
         const templateSource = apply(url(schema.entity ? './entity-files' : './files'),
             [
@@ -22,7 +22,6 @@ export default function (schema: any): Rule {
                 move(normalize(generatePath + '/' + strings.dasherize(schema.name))),
             ]);
 
-        console.log('what context look like?', context);
         return chain([
             mergeWith(templateSource, MergeStrategy.AllowCreationConflict),
         ])

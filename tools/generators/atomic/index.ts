@@ -11,14 +11,14 @@ import { classify } from '@nrwl/workspace/src/utils/strings';
 import { Path, normalize, strings } from '@angular-devkit/core';
 import { getNpmScope, readJsonFile } from '@nrwl/workspace';
 import { spacerize } from '../../utility/text-utility';
-import { getProjectName, getGeneratePath } from '../../utility/guess-workspace';
+import { guessProject, getGeneratePath } from '../../utility/guess-workspace';
 const resolve = require('path').resolve;
 
 
 export default function (schema: any): Rule {
     return async (tree: Tree, context: SchematicContext) => {
         const parts = schema.list.length ? schema.list.split(',') : [];
-        const projectName = await getProjectName(schema, tree);
+        const { projectName, projectRoot } = await guessProject(tree);
         schema.project = projectName;
         const storyTitle = readStoryTitle(projectName);
         const generatePath = await getGeneratePath(schema, tree);

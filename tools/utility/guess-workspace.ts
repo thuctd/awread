@@ -12,25 +12,24 @@ import { getNpmScope, readJsonFile } from '@nrwl/workspace';
 
 const resolve = require('path').resolve;
 
-export async function getProjectName(schema, tree) {
-    const cwd = process.cwd();
-    const isInAppsOrLibs = cwd.includes('libs') ?? cwd.includes('apps');
-    let projectName = schema.project;
-    if (!projectName && isInAppsOrLibs) {
-        projectName = await guessProject(tree);
-    } else {
-        projectName = projectName ?? await getDefaultProjectName(tree);
-    }
-    return projectName;
+export async function getProjectRoot(schema, tree) {
+
 }
 
 export async function getGeneratePath(schema, tree) {
     const cwd = process.cwd();
+    switch (true) {
+        case schema.project === "global-design-system":
+            schema.path = `/libs/global/design-system/src/lib`;
+            return schema.path;
+        default:
+            return getAbsolutePathFromProjectRoot(cwd, schema, tree);
+    }
+}
+
+export async function getAbsolutePathFromProjectRoot(cwd, schema, tree) {
     const isInAppsOrLibs = cwd.includes('libs') ?? cwd.includes('apps');
-    if (schema.project === "global-design-system") {
-        schema.path = `/libs/global/design-system/src/lib`;
-        return schema.path;
-    } else if (isInAppsOrLibs) {
+    if (isInAppsOrLibs) {
         const folderPath = cwd.includes('libs') ? path.join('libs', cwd.split('libs')[1]) : path.join('apps', cwd.split('apps')[1]);
         schema.path = normalize(folderPath);
         const isGenerateFolderIsType = schema.path.split('/').pop() === schema.type + 's';
@@ -46,17 +45,24 @@ export async function getGeneratePath(schema, tree) {
 
 export async function guessProject(tree) {
     let projectName;
+    let projectRoot;
     const cwd = process.cwd();
     const cwdNormalize = normalize(cwd);
+    const cwdDashrize = cwdNormalize.replace(/\//g, '-').trim();
     const workspace = await getWorkspace(tree);
     const entries = Object.fromEntries(workspace.projects.entries());
     for (const [name, project] of Object.entries<any>(entries)) {
-        // console.log('name,project', name);
-        if (project.sourceRoot && cwdNormalize.includes(project.sourceRoot)) {
+        // console.log('name,project', name, cwdDashrize, cwdDashrize.includes(name));
+        if (project.sourceRoot && cwdDashrize.includes(name)) {
             projectName = name;
+            projectRoot = entries[projectName].sourceRoot;
         }
     }
-    return projectName;
+    if (!projectName) {
+        projectName = await getDefaultProjectName(tree);
+        projectRoot = entries[projectName].sourceRoot;
+    }
+    return { projectName, projectRoot };
 }
 
 async function getDefaultProjectName(tree) {

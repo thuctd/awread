@@ -8,26 +8,31 @@ import { normalize } from 'path';
 import { addImportDeclarationToModule } from '../../utility/add-import-module';
 import { addRouterOutlet } from '../../utility/add-router-outlet';
 import { getModuleData } from '../../utility/import-to-shell-module';
+import { prepareData } from '../../utility/prepare-data';
 
 export default function (schema: any): Rule {
   return async (tree: Tree, context: SchematicContext) => {
-    const PREFIX = 'ui-';
-    if (!schema.name.startsWith(`${PREFIX}`) && (schema.name != PREFIX.substring(0, PREFIX.length - 1))) {
-      // custom libraries managing state must have name conventions: 'state' or 'state-<name>'
-      schema.name = `${PREFIX}${schema.name}`;
-    };
-    const originName = schema.name.substring(PREFIX.length);
-    const directoryNoSlash: string = schema.directory.replace(/\//g, '-').trim();
-    const libName = directoryNoSlash + '-' + schema.name.trim();
-    const shellModule = await getModuleData(tree, directoryNoSlash, schema.declareProject);
-    const currentProjectPath = `/libs/${schema.directory}/${schema.name}/src/lib`;
+    const kind = 'ui';
+    const {
+      originName,
+      directoryNoSlash,
+      libName,
+      addImportProjectName,
+      addImportProjectPath,
+      uiLibExist,
+      uiLibPath,
+      currentProjectPath,
+      editedSchema,
+      shellModule
+    } = await prepareData(schema, tree, context, kind);
+
 
     return chain([
       externalSchematic('@nrwl/angular', 'lib', {
         linter: "eslint",
         name: schema.name,
         directory: schema.directory ?? './',
-        tags: `scope:${PREFIX}${originName},scope:shared,type:${PREFIX}`,
+        tags: `scope:${kind}${originName},scope:shared,type:${kind}`,
         style: 'scss'
       }),
       ...addPage(schema, originName),

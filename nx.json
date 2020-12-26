@@ -118,9 +118,9 @@
     },
     "writer-web-feature-auth": {
       "tags": [
-        "scope:feature--auth",
+        "scope:feature-auth",
         "scope:shared",
-        "type:feature-"
+        "type:feature"
       ]
     },
     "writer-web-ui-single": {
@@ -132,9 +132,9 @@
     },
     "writer-web-feature-single": {
       "tags": [
-        "scope:feature--single",
+        "scope:feature-single",
         "scope:shared",
-        "type:feature-"
+        "type:feature"
       ]
     },
     "global-design-system": {
@@ -149,9 +149,9 @@
     },
     "writer-web-feature-creation": {
       "tags": [
-        "scope:feature--creation",
+        "scope:feature-creation",
         "scope:shared",
-        "type:feature-"
+        "type:feature"
       ]
     },
     "global-packages": {
