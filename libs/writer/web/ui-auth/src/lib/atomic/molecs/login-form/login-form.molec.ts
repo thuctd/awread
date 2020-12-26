@@ -14,6 +14,7 @@ import { faLock, faEnvelope } from '@fortawesome/free-solid-svg-icons';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginFormMolec implements OnInit {
+  @Input() type = 'password';
   icons = { faLock, faEnvelope };
   @Input() form: FormGroup;
   constructor(private fb: FormBuilder) {}
