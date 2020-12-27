@@ -1,4 +1,4 @@
-import { WriterWebUiSingleAtomicModule } from './../../atomic/writer-web-ui-single-atomic.module';
+import { WriterWebUiSingleAtomicModule } from './../../atomics/writer-web-ui-single-atomic.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -13,4 +13,4 @@ import { ProfileDesktopPage } from './profile-desktop.page';
     WriterWebUiSingleAtomicModule,
   ],
 })
-export class ProfileDesktopModule {}
+export class ProfileDesktopModule { }
