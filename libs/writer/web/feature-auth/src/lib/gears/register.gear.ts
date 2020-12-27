@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { AuthApi } from './../apis/auth.api';
 import { Injectable } from '@angular/core';
 import { FirebaseAuthAddon, FirebaseAuthSocialAddon } from '../addons';
@@ -12,7 +13,8 @@ export class RegisterGear {
   constructor(
     private firebaseAuthAddon: FirebaseAuthAddon,
     private firebaseAuthSocialAddon: FirebaseAuthSocialAddon,
-    private authApi: AuthApi
+    private authApi: AuthApi,
+    private router: Router
   ) {}
 
   async registerEmail(credential: BasicCredential) {
@@ -20,21 +22,24 @@ export class RegisterGear {
       const userCredential = await this.firebaseAuthAddon.registerWithEmail(
         credential
       );
-      const user = {
+      const user = this.firebaseAuthAddon.createUserObject({
         ...userCredential.user,
-        displayName: credential.displayName,
-        password: credential.password,
         provider: 'email/password',
-      };
-      this.firebaseAuthSocialAddon.createAccountOnServer(user);
+      });
+      this.createAccountOnServer(user);
+      this.router.navigate(['login']);
     } catch (err) {
       console.log('login with email/pw error: ', err);
       if (err.code === 'auth/email-already-in-use') {
         // TH tạo email đã tồn tại, thì link email này tới provider google hoặc facebook đã tạo trước đó
         // Link xong là có thể đăng nhập với email/pass vừa mới link
-        this.firebaseAuthSocialAddon.linkToProviderGoogleorFacebook(credential);
+        this.linkToProviderGoogleorFacebook(credential);
       }
     }
+  }
+
+  linkToProviderGoogleorFacebook(user) {
+    this.firebaseAuthSocialAddon.linkToProviderGoogleorFacebook(user);
   }
 
   createAccountOnServer(user) {

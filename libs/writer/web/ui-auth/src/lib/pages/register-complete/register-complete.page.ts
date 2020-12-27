@@ -32,13 +32,16 @@ export class RegisterCompletePage implements OnInit {
     const user = {
       ...this.user,
       password: this.formComplete.get('password').value,
+      provider: 'email/password',
     };
+
+    // link o day nha
     // console.log('create user: ', user);
     this.authFacade
       .createAccountOnServer(user)
       .pipe(
         tap(() => {
-          this.router.navigate(['/profile']);
+          this.authFacade.linkToProviderGoogleorFacebook(user);
         }),
         catchError((err) => {
           alert('Đã xảy ra lỗi. Vui lòng thử lại!');
