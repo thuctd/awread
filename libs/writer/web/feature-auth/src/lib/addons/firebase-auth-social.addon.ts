@@ -50,7 +50,7 @@ export class FirebaseAuthSocialAddon {
           res.data['getUserBaseEmail'] &&
           res.data['getUserBaseEmail']['results'].length
         ) {
-          this.router.navigate(['profile']);
+          this.navigateTo('profile');
           const user = res.data['getUserBaseEmail']['results'][0];
           if (user.provider === 'email/password') {
             const credential = firebase.auth.EmailAuthProvider.credential(
@@ -166,7 +166,7 @@ export class FirebaseAuthSocialAddon {
         credential
       );
       if (linkWithCredential) {
-        this.router.navigate(['profile']);
+        this.navigateTo('profile');
       }
       // if (linkWithCredential.user) {
       //   // update password when account Googleor/FB exists.
@@ -191,5 +191,9 @@ export class FirebaseAuthSocialAddon {
       default:
         throw new Error(`No provider implemented for ${providerId}`);
     }
+  }
+
+  navigateTo(route: string) {
+    this.router.navigate([route]);
   }
 }

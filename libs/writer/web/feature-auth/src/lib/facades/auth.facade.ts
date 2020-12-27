@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { ForgotPasswordGear } from './../gears/forgot-password.gear';
 import { Injectable } from '@angular/core';
 import { LoginGear, LogoutGear, RegisterGear } from '../gears';
@@ -16,7 +17,8 @@ export class AuthFacade {
     private logoutGear: LogoutGear,
     private loginGear: LoginGear,
     private registerGear: RegisterGear,
-    private currentUserQuery: CurrentUserQuery
+    private currentUserQuery: CurrentUserQuery,
+    private router: Router
   ) {}
 
   logout() {

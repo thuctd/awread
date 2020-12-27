@@ -29,7 +29,7 @@ export class LoginGear {
         credential
       );
       alert('Login thành công');
-      this.router.navigate(['profile']);
+      this.firebaseAuthSocialAddon.navigateTo('profile');
       console.log('userCredential', userCredential);
       return userCredential;
     } catch (err) {
@@ -101,7 +101,7 @@ export class LoginGear {
         res['data']['getUserBaseEmail'] &&
         res['data']['getUserBaseEmail'].results.length
       ) {
-        this.router.navigate(['profile']);
+        this.firebaseAuthSocialAddon.navigateTo('profile');
       } else {
         this.router.navigate(['register-complete', user]);
       }
