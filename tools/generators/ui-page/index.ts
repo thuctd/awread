@@ -3,14 +3,24 @@ import * as path from 'path';
 import { createDefaultPath } from '@schematics/angular/utility/workspace';
 import { addImportDeclarationToModule, addImportPathToModule } from '../../utility/add-import-module';
 import { classify } from '@nrwl/workspace/src/utils/strings';
-import { createEmptySection } from '../../utility/create-empty-section';
-import { addExportDeclarationToModule } from '../../utility/add-export-module';
 import { componentSetting } from '../../utility/edit-angular-json';
-import { guessProject, guessProjectToSchema } from '../../utility/guess-workspace';
+import { guessProjectToSchema } from '../../utility/guess-workspace';
 
 export default function (schema: any): Rule {
   return async (tree: Tree, context: SchematicContext) => {
     schema = await guessProjectToSchema(tree, schema, context);
+    return async (tree: Tree, context: SchematicContext) => {
+      const actions = schema.list.split(',').map(name => singleAction(schema, context, name))
+      return chain([
+        ...actions
+      ])
+    }
+  }
+}
+
+function singleAction(schema, context, name) {
+  schema.name = name;
+  return async (tree) => {
     const routingModulePath = path.join(schema.projectRoot, `${schema.project}-routing.module.ts`);
 
     return chain([
@@ -51,7 +61,6 @@ function addFeatureRoutingModule(schema, tree, routingPath) {
     });
 
     const rootModule = `${schema.projectRoot}/${schema.project}.module`;
-
     const rule1 = addImportDeclarationToModule(schema, `${schema.project}-routing-module`, rootModule, `./${schema.project}-routing.module`);
     const rule2 = addImportPathToModule(schema, classify('shell-desktop-layout'), routingPath, null, 'shared', true);
     const rule3 = addImportPathToModule(schema, classify('shell-mobile-layout'), routingPath, null, 'shared');

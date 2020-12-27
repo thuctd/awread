@@ -3,10 +3,8 @@ import {
     branchAndMerge, mergeWith, move, MergeStrategy, applyTemplates
 } from '@angular-devkit/schematics';
 import { strings } from '@angular-devkit/core';
-import { exportToFileIndex } from '../../utility/export-to-index';
+import { exportToFileIndex, exportToLibIndex } from '../../utility/export-to-index';
 import { guessProject, guessProjectToSchema } from '../../utility/guess-workspace';
-const resolve = require('path').resolve;
-
 
 export default function (schema: any): Rule {
     return async (tree: Tree, context: SchematicContext) => {
@@ -16,7 +14,8 @@ export default function (schema: any): Rule {
         const generateActions = parts.map(name => fileAction(strings.dasherize(schema.type), strings.dasherize(name), generatePath))
 
         return chain([
-            ...generateActions
+            ...generateActions,
+            ['model', 'facade', 'interface'].includes(schema.type) ? exportToLibIndex(schema.projectRoot, `export * from './lib/${schema.type}s/index'`) : noop()
         ])
     }
 }

@@ -1,14 +1,15 @@
 import { createDefaultPath } from '@schematics/angular/utility/workspace';
 
-export async function getModuleData(tree, directoryNoSlash, declareProject?) {
-  const addImportProjectName = declareProject ?? directoryNoSlash + '-feature-shell';
-  let addImportProjectPath;
+export async function getShellModuleData(tree, schema, declareProject?) {
+  const directoryNoSlash: string = schema.directory.replace(/\//g, '-').trim();
+  const name = directoryNoSlash + '-feature-shell';
+  let projectRoot;
   try {
-    addImportProjectPath = await createDefaultPath(tree, addImportProjectName);
+    projectRoot = await createDefaultPath(tree, name);
     return {
-      name: addImportProjectName,
-      folderPath: addImportProjectPath,
-      filePath: `${addImportProjectPath}/${addImportProjectName}.module`,
+      name: name,
+      folderPath: projectRoot,
+      filePath: `${projectRoot}/${name}.module`,
     }
   } catch (error) {
     return {
@@ -17,6 +18,4 @@ export async function getModuleData(tree, directoryNoSlash, declareProject?) {
       filePath: null,
     }
   }
-
-
 }

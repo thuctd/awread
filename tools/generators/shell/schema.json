@@ -16,18 +16,23 @@
         "index": 0
       }
     },
-    "project": {
+    "application": {
       "type": "string",
-      "description": "Project name to add the page to"
+      "description": "application name to add the shell lib to"
     },
     "type": {
       "type": "string",
       "description": "type value in routing",
       "default": "layout"
+    },
+    "kind": {
+      "type": "string",
+      "description": "kind ui or feature",
+      "default": "feature"
     }
   },
   "required": [
     "directory",
-    "project"
+    "application"
   ]
 }

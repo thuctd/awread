@@ -1,52 +1,15 @@
-import { getNpmScope } from '@nrwl/workspace';
-import { createDefaultPath } from '@schematics/angular/utility/workspace';
-import { getModuleData } from './import-to-shell-module';
-
-export async function prepareData(schema, tree, context, kind) {
-    const PREFIX = `${kind}-`;
-    if (!schema.name.startsWith(`${PREFIX}`) && (schema.name != PREFIX.substring(0, PREFIX.length - 1))) {
-        // custom libraries managing state must have name conventions: 'state' or 'state-<name>'
-        schema.name = `${PREFIX}${schema.name}`;
-    };
-    const originName = schema.name.substring(PREFIX.length);
+export function prepareCurrentModule(schema) {
     const directoryNoSlash: string = schema.directory.replace(/\//g, '-').trim();
-    const libName = `${directoryNoSlash}-${schema.name}`
-    const addImportProjectName = schema.declareProject ?? `${directoryNoSlash}-ui-${originName}`;
-    const uiLibPath = `/libs/${schema.directory}/ui-${originName}/src/index.ts`;
-    const uiLibExist = tree.exists(uiLibPath);
-    let addImportProjectPath;
-    if (uiLibExist) {
-        try {
-            addImportProjectPath = await createDefaultPath(tree, addImportProjectName);
-            schema.writeToFilePath = `${addImportProjectPath}/${addImportProjectName}.module`;
-        } catch (error) {
-            throw new Error(`Couldn't find the project ${addImportProjectName} to create defaultPath`);
-        }
-    }
+    const currentModuleName = `${directoryNoSlash}-${schema.kind}-${schema.name}`;
+    const projectRoot = `/libs/${directoryNoSlash}/${schema.name}`;
+    const project = currentModuleName;
 
-    const currentProjectPath = `/libs/${schema.directory}/${schema.name}/src/lib`;
-    const editedSchema = schema;
-    const shellModule = await getModuleData(tree, directoryNoSlash, schema.declareProject);
-    const currentModuleName = directoryNoSlash + '-' + schema.name.trim();
+    schema.project = project;
+    schema.projectRoot = projectRoot;
+
     const currentModule = {
         name: currentModuleName,
-        path: `${currentProjectPath}/${currentModuleName}.module`
+        path: `${projectRoot}/lib/${currentModuleName}.module`
     }
-    const workspaceName = getNpmScope(tree);
-    const appDefaultPath = await createDefaultPath(tree, schema.project);
-    return {
-        originName,
-        directoryNoSlash,
-        libName,
-        addImportProjectName,
-        addImportProjectPath,
-        uiLibExist,
-        uiLibPath,
-        currentProjectPath,
-        editedSchema,
-        shellModule,
-        currentModule,
-        workspaceName,
-        appDefaultPath
-    }
+    return currentModule;
 }

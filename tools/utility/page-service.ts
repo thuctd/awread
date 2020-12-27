@@ -10,11 +10,6 @@ import * as path from 'path';
 import { addGlobal, getNpmScope, insert, RemoveChange } from '@nrwl/workspace';
 import { getSourceNodes, InsertChange, insertImport, ReplaceChange } from '@nrwl/workspace/src/utils/ast-utils';
 import { classify } from '@nrwl/workspace/src/utils/strings';
-import { createDefaultPath } from '@schematics/angular/utility/workspace';
-import { createEmptySection } from './create-empty-section';
-import { exportToLibIndex } from './export-to-index';
-import { insertCustomCode } from './insert-custom-code';
-import { addImportDeclarationToModule, addImportPathToModule } from './add-import-module';
 import { removeImport } from './ast-utils';
 import { Change } from '@nrwl/workspace/src/core/file-utils';
 

@@ -12,8 +12,6 @@ import { Path, normalize, strings } from '@angular-devkit/core';
 import { getNpmScope, readJsonFile } from '@nrwl/workspace';
 import { spacerize } from '../../utility/text-utility';
 import { guessProject, guessProjectToSchema } from '../../utility/guess-workspace';
-const resolve = require('path').resolve;
-
 
 export default function (schema: any): Rule {
     return async (tree: Tree, context: SchematicContext) => {

@@ -1,11 +1,11 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "id": "feature-page",
+  "id": "ui-page",
   "type": "object",
   "properties": {
     "list": {
       "type": "string",
-      "description": "feature page name, like ui, example: register or login",
+      "description": "ui page name, like ui, example: register,login",
       "$default": {
         "$source": "argv",
         "index": 0
@@ -15,14 +15,14 @@
       "type": "string",
       "description": "directory name to add the page to, example: --directory=writer/web"
     },
-    "feature": {
+    "ui": {
       "type": "string",
-      "description": "feature name to add the page to, example: --feature=auth"
+      "description": "ui name to add the page to, example: --ui=auth"
     }
   },
   "required": [
     "list",
     "directory",
-    "feature"
+    "ui"
   ]
 }

@@ -1,25 +1,58 @@
 import { SchematicsException } from '@angular-devkit/schematics';
 import { getWorkspace, buildDefaultPath } from '@schematics/angular/utility/workspace';
 import { Path, normalize, strings } from '@angular-devkit/core';
+import { getNpmScope } from '@nrwl/workspace';
+
+export async function getWorkspaceName(tree) {
+    return getNpmScope(tree);
+}
 
 export async function guessProjectToSchema(tree, schema, context) {
     const { projectName, projectRoot } = await guessProject(tree, schema);
+    const { application, applicationRoot } = await guessApplication(tree, projectName);
     return {
         ...schema,
-        kind: context.schematic.description.name,
+        kind: schema.kind ?? context.schematic.description.name,
         project: projectName,
-        projectRoot
+        projectRoot,
+        application,
+        applicationRoot
     }
 }
 
+export async function guessApplicationToSchema(schema, tree) {
+    const { application, applicationRoot } = await guessApplication(tree, schema.application);
+    tree.application = application;
+    tree.applicationRoot = applicationRoot;
+}
+
+export async function guessApplication(tree, projectName) {
+    const projectEntries = await getProjectsEntries(tree);
+    let application;
+    let applicationRoot;
+    for (const [name, project] of projectEntries) {
+        if (projectName.includes(name)) {
+            application = name;
+            applicationRoot = project.sourceRoot;
+        }
+    }
+    return { application, applicationRoot };
+}
+
 export async function guessProject(tree, schema) {
-    let projectName = tree.project;
-    let projectRoot = await guessProjectRoot(tree, projectName);
+    let projectName = schema.project;
+    let projectRoot = schema.projectRoot ?? await guessProjectRoot(tree, projectName);
     if (projectRoot) {
         return { projectName, projectRoot };
     }
     return await guessProjectByPath(tree, schema);
 
+}
+
+async function getProjectsEntries(tree) {
+    const workspace = await getWorkspace(tree);
+    const entries = Object.fromEntries(workspace.projects.entries());
+    return Object.entries<any>(entries);
 }
 
 async function guessProjectByPath(tree, schema) {
@@ -28,13 +61,12 @@ async function guessProjectByPath(tree, schema) {
     const cwd = process.cwd();
     const cwdNormalize = normalize(cwd);
     const cwdDashrize = cwdNormalize.replace(/\//g, '-').trim();
-    const workspace = await getWorkspace(tree);
-    const entries = Object.fromEntries(workspace.projects.entries());
+    const projectEntries = await getProjectsEntries(tree);
 
-    for (const [name, project] of Object.entries<any>(entries)) {
+    for (const [name, project] of projectEntries) {
         if (project.sourceRoot && cwdDashrize.includes(name)) {
             projectName = name;
-            projectRoot = entries[projectName].sourceRoot;
+            projectRoot = project.sourceRoot;
         }
     }
     if (projectName) {
@@ -51,12 +83,11 @@ async function guessDefaultProject(tree, schema) {
 
 async function guessProjectRoot(tree, projectName) {
     if (!projectName) return;
-    const workspace = await getWorkspace(tree);
-    const entries = Object.fromEntries(workspace.projects.entries());
+    const projectEntries = await this.getProjectsEntries(tree);
     let projectRoot;
-    for (const [name, project] of Object.entries<any>(entries)) {
+    for (const [name, project] of projectEntries) {
         try {
-            projectRoot = entries[projectName].sourceRoot;
+            projectRoot = projectEntries.sourceRoot;
         } catch (error) {
             throw new SchematicsException(`cannot detect sourceRoot of project: ${projectName}`)
         }

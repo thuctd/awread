@@ -11,20 +11,17 @@ import * as path from 'path';
 import { addGlobal, insert, RemoveChange } from '@nrwl/workspace';
 import { getSourceNodes, InsertChange, insertImport, ReplaceChange } from '@nrwl/workspace/src/utils/ast-utils';
 import { classify } from '@nrwl/workspace/src/utils/strings';
-import { createDefaultPath } from '@schematics/angular/utility/workspace';
 import { createEmptySection } from './create-empty-section';
 import { exportToLibIndex } from './export-to-index';
 import { insertCustomCode } from './insert-custom-code';
 import { addImportDeclarationToModule, addImportPathToModule } from './add-import-module';
-import { removeImport } from './ast-utils';
-import { Change } from '@nrwl/workspace/src/core/file-utils';
 
-export function createPageLazy(schema, pageName, currentModule: { name: string, filePath: string, folderPath: string }, type = 'page') {
+export function createPageLazy(schema, pageName, currentModule: { name: string, path: string }, type = 'page') {
   const nameWithPath = `pages/${pageName}`;
   const page = {
     name: `${pageName}`,
-    filePath: normalize(`${currentModule.folderPath}/${nameWithPath}/${pageName}.module`),
-    folderPath: normalize(`${currentModule.folderPath}/${nameWithPath}`),
+    filePath: normalize(`${schema.projectRoot}/${nameWithPath}/${pageName}.module`),
+    folderPath: normalize(`${schema.projectRoot}/${nameWithPath}`),
   }
   return [
     schematic('module', {
@@ -42,13 +39,13 @@ export function createPageLazy(schema, pageName, currentModule: { name: string, 
     }),
     ...addRoutesOfLazy(schema, pageName, type, page),
     createEmptySection(page.folderPath),
-    exportToLibIndex(currentModule.folderPath, `export * from './lib/pages/${pageName}/${pageName}.${type}';`),
-    exportToLibIndex(currentModule.folderPath, `export * from './lib/pages/${pageName}/${pageName}.module';`),
+    exportToLibIndex(schema.projectRoot, `export * from './lib/pages/${pageName}/${pageName}.${type}';`),
+    exportToLibIndex(schema.projectRoot, `export * from './lib/pages/${pageName}/${pageName}.module';`),
   ]
 }
 
 
-export function addRoutesOfLazy(schema, pageName, type, page: {name: string, filePath: string, folderPath: string}) {
+export function addRoutesOfLazy(schema, pageName, type, page: { name: string, filePath: string, folderPath: string }) {
   const routes = `
 const routes: Routes = [
   {

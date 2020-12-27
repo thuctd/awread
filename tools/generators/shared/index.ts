@@ -1,14 +1,11 @@
 import {
-  chain, externalSchematic, Rule, SchematicContext, Tree, schematic, noop, apply, url, template,
-  branchAndMerge, mergeWith, move, MergeStrategy, applyTemplates
+  chain, externalSchematic, Rule, SchematicContext, Tree
 } from '@angular-devkit/schematics';
 import { addImportDeclarationToModule, addImportPathToModule } from '../../utility/add-import-module';
 import { addExportDeclarationToModule } from '../../utility/add-export-module';
-import { parseName } from '@schematics/angular/utility/parse-name';
-import { Path, normalize, strings } from '@angular-devkit/core';
 import { insertCustomCode } from '../../utility/insert-custom-code';
 import { addRouterOutlet } from '../../utility/add-router-outlet';
-import { getModuleData } from '../../utility/import-to-shell-module';
+import { getShellModuleData } from '../../utility/import-to-shell-module';
 import { classify } from '@nrwl/workspace/src/utils/strings';
 import { exportToLibIndex } from '../../utility/export-to-index';
 import { addPageService } from '../../utility/page-service';
@@ -17,24 +14,15 @@ import { FileModule } from '../../utility/file-module.type';
 import { insertRoutes } from '../../utility/insert-routes';
 import { appAndLibSetting, componentSetting } from '../../utility/edit-angular-json';
 import { createPageLazy } from '../../utility/create-page-lazy';
+import { guessProjectToSchema, getWorkspaceName } from '../../utility/guess-workspace';
+import { prepareCurrentModule } from '../../utility/prepare-data';
 
 
 export default function (schema: any): Rule {
   return async (tree: Tree, context: SchematicContext) => {
-    const directoryNoSlash: string = schema.directory.replace(/\//g, '-').trim();
-    const directoryLibsPath = normalize(`libs/${schema.directory}`)
-    const currentModuleName = directoryNoSlash + '-' + schema.name.trim();
-    const currentModule = {
-      name: currentModuleName,
-      filePath: normalize(`${directoryLibsPath}/${schema.name}/src/lib/${currentModuleName}.module`),
-      folderPath: normalize(`${directoryLibsPath}/${schema.name}/src/lib`)
-    }
-    // adding template;
-    const parsedPath = parseName(directoryLibsPath, schema.name);
-    schema.path = parsedPath.path;
-    schema.directoryNoSlash = directoryNoSlash;
-    schema.targetLibName = currentModule.name;
-    const shellModule = await getModuleData(tree, directoryNoSlash);
+    const workspaceName = getWorkspaceName(tree);
+    const currentModule = prepareCurrentModule(schema);
+    const shellModule = await getShellModuleData(tree, schema);
 
     return chain([
       externalSchematic('@nrwl/angular', 'lib', {
@@ -43,31 +31,31 @@ export default function (schema: any): Rule {
         directory: schema.directory ?? './',
         tags: `scope:shared`,
       }),
-      insertCustomCode(currentModule.filePath, `\ndeclare const window: Window & {haveMobile: boolean};\nwindow.haveMobile = ${schema.haveMobile};`),
-      addImportDeclarationToModule(schema, 'RouterModule', currentModule.filePath, '@angular/router'),
-      addExportDeclarationToModule(schema, 'RouterModule', currentModule.filePath, '@angular/router'),
+      insertCustomCode(currentModule.path, `\ndeclare const window: Window & {haveMobile: boolean};\nwindow.haveMobile = ${schema.haveMobile};`),
+      addImportDeclarationToModule(schema, 'RouterModule', currentModule.path, '@angular/router'),
+      addExportDeclarationToModule(schema, 'RouterModule', currentModule.path, '@angular/router'),
       externalSchematic('@nrwl/angular', 'component', {
         ...componentSetting,
         name: `layouts/shell-desktop`,
         type: 'layout',
-        module: currentModuleName,
-        project: currentModuleName,
+        module: schema.project,
+        project: schema.project,
         export: true
       }),
-      addRouterOutlet(true, currentModule.folderPath, 'shell-desktop'),
-      ...addPageService(tree, { ...schema, originName: 'shell', path: '/' + currentModule.folderPath + '/layouts', mode: 'desktop' }),
+      addRouterOutlet(true, schema.projectRoot, 'shell-desktop'),
+      ...addPageService(tree, { ...schema, originName: 'shell', path: `${schema.projectRoot}/layouts`, mode: 'desktop' }),
       externalSchematic('@nrwl/angular', 'component', {
         ...componentSetting,
         name: `layouts/shell-mobile`,
         type: 'layout',
-        module: currentModuleName,
-        project: currentModuleName,
+        module: schema.project,
+        project: schema.project,
         export: true
       }),
-      addRouterOutlet(true, currentModule.folderPath, 'shell-mobile'),
-      ...addPageService(tree, { ...schema, originName: 'shell', path: '/' + currentModule.folderPath + '/layouts', mode: 'mobile' }),
-      exportToLibIndex(currentModule.folderPath, `export * from './lib/layouts/shell-desktop/shell-desktop.layout';`),
-      exportToLibIndex(currentModule.folderPath, `export * from './lib/layouts/shell-mobile/shell-mobile.layout';`),
+      addRouterOutlet(true, schema.projectRoot, 'shell-mobile'),
+      ...addPageService(tree, { ...schema, originName: 'shell', path: `${schema.projectRoot}/layouts`, mode: 'mobile' }),
+      exportToLibIndex(schema.projectRoot, `export * from './lib/layouts/shell-desktop/shell-desktop.layout';`),
+      exportToLibIndex(schema.projectRoot, `export * from './lib/layouts/shell-mobile/shell-mobile.layout';`),
       ...createNotFoundPage(schema, currentModule),
       ...insertNotFound(schema, shellModule, currentModule.name)
     ])
@@ -76,7 +64,7 @@ export default function (schema: any): Rule {
 
 
 
-export function createNotFoundPage(schema, currentModule: { name: string, filePath: string, folderPath: string }) {
+export function createNotFoundPage(schema, currentModule: { name: string, path: string }) {
   return createPageLazy(schema, 'not-found', currentModule);
 }
 

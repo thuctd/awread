@@ -1,45 +1,29 @@
 import {
-  chain, externalSchematic, Rule, SchematicContext, Tree, schematic, noop, apply, url, template,
-  branchAndMerge, mergeWith, move
+  chain, externalSchematic, Rule, SchematicContext, Tree, schematic
 } from '@angular-devkit/schematics';
-import { dasherize } from '@nrwl/workspace/src/utils/strings';
-import { createDefaultPath } from '@schematics/angular/utility/workspace';
-import { normalize } from 'path';
 import { addImportDeclarationToModule } from '../../utility/add-import-module';
 import { addRouterOutlet } from '../../utility/add-router-outlet';
-import { getModuleData } from '../../utility/import-to-shell-module';
-import { prepareData } from '../../utility/prepare-data';
+import { guessProjectToSchema } from '../../utility/guess-workspace';
 
 export default function (schema: any): Rule {
   return async (tree: Tree, context: SchematicContext) => {
-    const kind = 'ui';
-    const {
-      originName,
-      directoryNoSlash,
-      libName,
-      addImportProjectName,
-      addImportProjectPath,
-      uiLibExist,
-      uiLibPath,
-      currentProjectPath,
-      editedSchema,
-      shellModule
-    } = await prepareData(schema, tree, context, kind);
-
+    schema = await guessProjectToSchema(tree, schema, context);
+    schema.directory = schema.directory != '.' && schema.directory !== './' ? schema.directory : '';
+    const shellModuleFile = `libs/${schema.directory}/feature-shell/src/lib/${schema.directory.replace(/\//g, '-')}-feature-shell.module.ts`;
 
     return chain([
       externalSchematic('@nrwl/angular', 'lib', {
         linter: "eslint",
         name: schema.name,
         directory: schema.directory ?? './',
-        tags: `scope:${kind}${originName},scope:shared,type:${kind}`,
+        tags: `scope:${schema.kind}${schema.name},scope:shared,type:${schema.kind}`,
         style: 'scss'
       }),
-      ...addPage(schema, originName),
-      addImportDeclarationToModule(schema, `${libName}-module`, shellModule.filePath),
-      addRouterOutlet(true, currentProjectPath, originName),
+      ...addPage(schema, schema.name),
+      addImportDeclarationToModule(schema, `${schema.project}-module`, shellModuleFile),
+      addRouterOutlet(true, schema.projectRoot, schema.name),
       schematic('feature', {
-        name: originName,
+        name: schema.name,
         directory: schema.directory,
         pages: schema.pages
       }),
@@ -47,15 +31,13 @@ export default function (schema: any): Rule {
   }
 }
 
-export function addPage(schema, originName): Rule[] {
-  console.log('page name', originName, schema.pages);
+export function addPage(schema, featureName): Rule[] {
   schema.pages = schema.pages ?? [];
   const pages: Rule[] = schema.pages && schema.pages.length ?
     schema.pages.split(',').map((page: string) =>
-      schematic('page', {
+      schematic('ui-page', {
         name: page.trim(),
-        directory: schema.directory,
-        ui: originName
+        ui: featureName
       })) : [];
   return !pages.length ? [] : pages;
 }
