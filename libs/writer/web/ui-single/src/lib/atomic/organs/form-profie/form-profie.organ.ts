@@ -14,6 +14,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormProfieOrgan implements OnInit {
+  @Input() link = '/forgot';
   @Input() submitText = 'Lưu';
 
   constructor() {}
