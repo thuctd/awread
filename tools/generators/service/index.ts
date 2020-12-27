@@ -21,7 +21,7 @@ export default function (schema: any): Rule {
     schema.originName = schema.name.split('/').pop();
     schema.path = await createDefaultPath(host, schema.project as string);
     return chain([
-      ...addPageService(schema),
+      ...addPageFileAsService(schema),
       addPageIndexIfPossible(schema),
       addLibIndexIfPossible(schema),
       // schema.lintFix ? applyLintFix(schema.path) : noop(),
@@ -94,7 +94,7 @@ function addLibIndexIfPossible(schema) {
   }
 }
 
-function addPageService(schema) {
+function addPageFileAsService(schema) {
   const pathFile = path.join(schema.path, schema.name);
   const templateSource = apply(url('./files'), [
     filter(path => path.endsWith('type@dasherize__.ts.template')),

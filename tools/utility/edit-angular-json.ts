@@ -4,7 +4,7 @@ import { workspaces } from '@angular-devkit/core';
 import { normalize } from "path";
 import { insertCustomCode } from "./insert-custom-code";
 import { addImportPathToModule } from "./add-import-module";
-
+import myProjectConfig from '../my-project-config.json';
 // base on: https://github.com/LayZeeDK/nx-tiny-app-project
 // base on: https://indepth.dev/tiny-angular-application-projects-in-nx-workspaces
 
@@ -50,7 +50,15 @@ function updateFilesAction(angularFile, host) {
     try {
       rules.push(...updateMainFile(host, name, project));
     } catch (error) {
-      console.warn('enviroment maybe exist', error);
+      console.warn('main file maybe exist', error);
+    }
+    try {
+      const isHaveBuildConfiguration = project.architect.build?.configurations;
+      if (isHaveBuildConfiguration) {
+        updateEnviroment(project, name);
+      }
+    } catch (error) {
+      console.warn('main file maybe exist', error);
     }
 
   })
@@ -243,9 +251,6 @@ export function createSharedLibrary() {
         if (isHaveBuildConfiguration) {
           updateEnviroment(p, projectName);
         }
-        if (isHaveBuildConfiguration) {
-          updateEnviroment(p, projectName);
-        }
       });
 
     return config;
@@ -350,6 +355,79 @@ function updateEnviroment(p, projectName) {
       ...testData,
       browserTarget: `${buildPrefix.join(':')}:test`
     }
+  }
+}
+
+
+function updateApplicationArchitect(p, projectName) {
+  if (p.architect?.build && p.architect?.build.includes('angular')) {
+    // using custom webpack for tailwind
+    const buildTarget = p.architect['build'];
+    const serveTarget = p.architect['serve'];
+    serveTarget.builder = '@angular-builders/custom-webpack:dev-server';
+    buildTarget.builder = '@angular-builders/custom-webpack:browser';
+    buildTarget.options.customWebpackConfig = {
+      path: 'webpack.config.js',
+    };
+    // add storybook
+    let storybookTarget = p.architect['storybook'];
+    if (!storybookTarget) {
+      p.architect['storybook'] = {
+        "builder": "@nrwl/storybook:storybook",
+        "options": {
+          "uiFramework": "@storybook/angular",
+          "port": 4400,
+          "config": {
+            "configFolder": p.root + "/.storybook"
+          }
+        },
+        "configurations": {
+          "ci": {
+            "quiet": true
+          }
+        }
+      };
+    }
+    // add build-storybook
+    let buildStorybookTarget = p.architect['storybook'];
+    if (!buildStorybookTarget) {
+      p.architect['storybook'] = {
+        "builder": "@nrwl/storybook:build",
+        "options": {
+          "uiFramework": "@storybook/angular",
+          "outputPath": "dist/storybook/" + projectName,
+          "config": {
+            "configFolder": p.root + "/.storybook"
+          }
+        },
+        "configurations": {
+          "ci": {
+            "quiet": true
+          }
+        }
+      };
+    }
+    // set deploy
+    let deployTarget = p.architect['deploy'];
+    p.architect['storybook'] = {
+      "builder": "@angular/fire:deploy",
+      "options": {
+        "buildTarget": projectName + ":build",
+        "firebaseProject": myProjectConfig.firebase.developmentProject
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": projectName + ":build",
+          "firebaseProject": myProjectConfig.firebase.productionProject
+        },
+        "storybook": {
+          "buildTarget": projectName + ":build-storybook",
+          "firebaseProject": myProjectConfig.firebase.developmentProject,
+          "siteTarget": projectName + "-story"
+        }
+      }
+    };
+
   }
 }
 

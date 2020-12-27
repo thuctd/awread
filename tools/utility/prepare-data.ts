@@ -1,3 +1,4 @@
+import { getNpmScope } from '@nrwl/workspace';
 import { createDefaultPath } from '@schematics/angular/utility/workspace';
 import { getModuleData } from './import-to-shell-module';
 
@@ -26,6 +27,13 @@ export async function prepareData(schema, tree, context, kind) {
     const currentProjectPath = `/libs/${schema.directory}/${schema.name}/src/lib`;
     const editedSchema = schema;
     const shellModule = await getModuleData(tree, directoryNoSlash, schema.declareProject);
+    const currentModuleName = directoryNoSlash + '-' + schema.name.trim();
+    const currentModule = {
+        name: currentModuleName,
+        path: `${currentProjectPath}/${currentModuleName}.module`
+    }
+    const workspaceName = getNpmScope(tree);
+    const appDefaultPath = await createDefaultPath(tree, schema.project);
     return {
         originName,
         directoryNoSlash,
@@ -36,6 +44,9 @@ export async function prepareData(schema, tree, context, kind) {
         uiLibPath,
         currentProjectPath,
         editedSchema,
-        shellModule
+        shellModule,
+        currentModule,
+        workspaceName,
+        appDefaultPath
     }
 }

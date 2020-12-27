@@ -2,12 +2,12 @@ import {
   chain, externalSchematic, Rule, SchematicContext, Tree, schematic, noop, apply, url, template,
   branchAndMerge, mergeWith, move, MergeStrategy, applyTemplates, SchematicsException
 } from '@angular-devkit/schematics';
-import { MODULE_EXT, ROUTING_MODULE_EXT, buildRelativePath, findModuleFromOptions } from '@schematics/angular/utility/find-module';
+
 
 import { Path, normalize, strings } from '@angular-devkit/core';
 import * as ts from 'typescript';
 import * as path from 'path';
-import { addGlobal, insert, RemoveChange } from '@nrwl/workspace';
+import { addGlobal, getNpmScope, insert, RemoveChange } from '@nrwl/workspace';
 import { getSourceNodes, InsertChange, insertImport, ReplaceChange } from '@nrwl/workspace/src/utils/ast-utils';
 import { classify } from '@nrwl/workspace/src/utils/strings';
 import { createDefaultPath } from '@schematics/angular/utility/workspace';
@@ -37,24 +37,19 @@ export class ${classify(schema.originName) + classify(schema.type)} implements O
   }
 
   return schema.type && schema.mode ? [
-    updateDesktopAndMobilePage(schema),
+    updateDesktopAndMobilePage(tree, schema),
   ] : [noop()]
 }
 
-function updateDesktopAndMobilePage(schema) {
+
+function updateDesktopAndMobilePage(tree, schema) {
   return (host: Tree) => {
     if (!schema.mode) {
       return host;
     }
-    // /libs/writer/web/ui-auth/src/lib/register/pages/register-desktop/register-desktop.page.ts
+    const workspaceName = getNpmScope(tree);
     const writeToFilePath = `${schema.path}/${schema.originName}-${schema.mode}/${schema.originName}-${schema.mode}.${schema.type}.ts`;
-    // /libs/writer/web/ui-auth/src/lib/register/pages/register/register.page
-    // do not have .ts to get relative path
-    const implementPath = `${schema.path}/${schema.originName}/${schema.originName}.${schema.type}`;
-    // libs/writer/web/shared/src/lib/layouts/shell-desktop/shell-desktop.layout.ts
-    // libs/writer/web/shared/src/lib/layouts/shell/shell.layout
-    const relativePath = buildRelativePath(writeToFilePath, implementPath);
-    // console.log('is that module is exist', writeToPath, host.exists(writeToPath));
+    const relativePath = `@${workspaceName}`;
     const text = host.read(writeToFilePath);
     if (text === null) {
       throw new SchematicsException(`File ${writeToFilePath} does not exist.`);
@@ -133,3 +128,5 @@ function replaceConstructorForInjection(nodes: ts.Node[], writeToName: string, w
   // return new ReplaceChange(writeToPath, classNode.parent.pos, beforeText, toAdd);
   return new ReplaceChange(writeToPath, pageNameSymbol.end, oldText, toAdd);
 }
+
+

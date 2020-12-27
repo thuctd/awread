@@ -10,24 +10,26 @@ import { parseName } from '@schematics/angular/utility/parse-name';
 import { Path, normalize, strings } from '@angular-devkit/core';
 import { addRouterOutlet } from '../../utility/add-router-outlet';
 import { appAndLibSetting } from '../../utility/edit-angular-json';
+import { prepareData } from '../../utility/prepare-data';
 
 export default function (schema: any): Rule {
   return async (tree: Tree, context: SchematicContext) => {
-    const PREFIX = 'feature-';
-    if (!schema.name.startsWith(`${PREFIX}`) && (schema.name != PREFIX.substring(0, PREFIX.length - 1))) {
-      // custom libraries managing state must have name conventions: 'state' or 'state-<name>'
-      schema.name = `${PREFIX}${schema.name}`;
-    };
-    const name = schema.name.substring(PREFIX.length);
-    const directoryNoSlash: string = schema.directory.replace(/\//g, '-').trim();
-    const currentModuleName = directoryNoSlash + '-' + schema.name.trim();
-    const currentModule = {
-      name: currentModuleName,
-      path: normalize(`libs/${schema.directory}/${schema.name}/src/lib/${currentModuleName}.module`)
-    }
-    const appPath = await createDefaultPath(tree, schema.project);
-
-    const workspaceName = getNpmScope(tree);
+    const kind = 'feature';
+    const {
+      originName,
+      directoryNoSlash,
+      libName,
+      addImportProjectName,
+      addImportProjectPath,
+      uiLibExist,
+      uiLibPath,
+      currentProjectPath,
+      editedSchema,
+      shellModule,
+      currentModule,
+      workspaceName,
+      appDefaultPath
+    } = await prepareData(schema, tree, context, kind);
 
     return chain([
       externalSchematic('@nrwl/angular', 'lib', {
@@ -40,11 +42,8 @@ export default function (schema: any): Rule {
       addExportDeclarationToModule(schema, 'RouterModule', currentModule.path, '@angular/router'),
       addImportDeclarationToModule(schema, 'GlobalCoreModule', currentModule.path, `@${workspaceName}/global/core`),
       addExportDeclarationToModule(schema, 'GlobalCoreModule', currentModule.path, `@${workspaceName}/global/core`),
-      importShellToAppModule(schema, currentModuleName, appPath),
-      addRouterOutlet(false, appPath, `app.component`)
-      // mergeWith(templateSource, MergeStrategy.AllowCreationConflict),
-      // addImportDeclarationToAppModule(schema, targetLibName, featureShellPath, targetLibName, `./${targetLibName}-routing.module`),
-      // addExportDeclarationToAppModule(schema, targetLibName, featureShellPath, targetLibName, `./${targetLibName}-routing.module`),
+      importShellToAppModule(schema, currentModule.name, appDefaultPath),
+      addRouterOutlet(false, appDefaultPath, `app.component`)
     ])
   }
 }

@@ -6,68 +6,41 @@ import { classify } from '@nrwl/workspace/src/utils/strings';
 import { createEmptySection } from '../../utility/create-empty-section';
 import { addExportDeclarationToModule } from '../../utility/add-export-module';
 import { componentSetting } from '../../utility/edit-angular-json';
+import { guessProject, guessProjectToSchema } from '../../utility/guess-workspace';
 
 export default function (schema: any): Rule {
   return async (tree: Tree, context: SchematicContext) => {
-    // const CUSTOMPATH = 'ui/pages';
-    const CUSTOMPATH = 'pages';
-    const PREFIX = 'page-';
-    if (!schema.name.startsWith(`${PREFIX}`) && (schema.name != PREFIX.substring(0, PREFIX.length - 1))) {
-      // custom libraries managing state must have name conventions: 'state' or 'state-<name>'
-      schema.name = `${PREFIX}${schema.name}`;
-    };
-    const directoryNoSlash: string = schema.directory.replace(/\//g, '-').trim();
-    schema.project = directoryNoSlash + '-ui-' + schema.ui.trim();
-    const originName = schema.name.substring(PREFIX.length);
-    const moduleName = `${CUSTOMPATH}/${originName}`;
-    let defaultPath;
-    try {
-      defaultPath = await createDefaultPath(tree, schema.project);
-    } catch (error) {
-      throw new SchematicsException(`project not found ${schema.project}`);
-    }
-
-    schema.defaultPath = defaultPath;
-    const folderNameDesktop = `${moduleName}-desktop`;
-    const folderNameMobile = `${moduleName}-mobile`;
-
-    const routingPath = path.join(defaultPath, `${schema.project}-routing.module.ts`);
-    // console.log('routing exist?', tree.exists(routingPath), defaultPath, `${schema.project}-routing.module.ts`)
+    schema = await guessProjectToSchema(tree, schema, context);
+    const routingModulePath = path.join(schema.projectRoot, `${schema.project}-routing.module.ts`);
 
     return chain([
-      ...addFeatureRoutingModule(schema, tree, routingPath),
-
+      ...addFeatureRoutingModule(schema, tree, routingModulePath),
       schematic('module', {
         project: schema.project,
-        name: moduleName,
+        name: `${schema.kind}s/${schema.name}`,
         mode: 'desktop',
         module: schema.project,
-        route: originName,
-        type: 'page',
-        prefix: 'page',
+        route: schema.name,
+        type: schema.kind,
+        prefix: schema.kind,
       }),
-      createEmptySection(`${defaultPath}/${folderNameDesktop}`),
       schematic('module', {
         project: schema.project,
-        name: moduleName,
+        name: `${schema.kind}s/${schema.name}`,
         mode: 'mobile',
         module: schema.project,
-        route: originName,
-        type: 'page',
-        prefix: 'page',
+        route: schema.name,
+        type: schema.kind,
+        prefix: schema.kind,
       }),
-      createEmptySection(`${defaultPath}/${folderNameMobile}`),
     ])
   }
 }
 
 function addFeatureRoutingModule(schema, tree, routingPath) {
   let rule0;
-  let mixRules;
-  if (tree.exists(routingPath)) {
-    rule0 = noop();
-    mixRules = [rule0];
-  } else {
+  let mixRules = [];
+  if (!tree.exists(routingPath)) {
     rule0 = schematic('module', {
       project: schema.project,
       name: schema.project,
@@ -77,8 +50,7 @@ function addFeatureRoutingModule(schema, tree, routingPath) {
       flat: true
     });
 
-    const routingPath = `${schema.defaultPath}/${schema.project}-routing.module`;
-    const rootModule = `${schema.defaultPath}/${schema.project}.module`;
+    const rootModule = `${schema.projectRoot}/${schema.project}.module`;
 
     const rule1 = addImportDeclarationToModule(schema, `${schema.project}-routing-module`, rootModule, `./${schema.project}-routing.module`);
     const rule2 = addImportPathToModule(schema, classify('shell-desktop-layout'), routingPath, null, 'shared', true);

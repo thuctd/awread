@@ -11,18 +11,17 @@ import { classify } from '@nrwl/workspace/src/utils/strings';
 import { Path, normalize, strings } from '@angular-devkit/core';
 import { getNpmScope, readJsonFile } from '@nrwl/workspace';
 import { spacerize } from '../../utility/text-utility';
-import { guessProject, getGeneratePath } from '../../utility/guess-workspace';
+import { guessProject, guessProjectToSchema } from '../../utility/guess-workspace';
 const resolve = require('path').resolve;
 
 
 export default function (schema: any): Rule {
     return async (tree: Tree, context: SchematicContext) => {
         const parts = schema.list.length ? schema.list.split(',') : [];
-        const { projectName, projectRoot } = await guessProject(tree);
-        schema.project = projectName;
-        const storyTitle = readStoryTitle(projectName);
-        const generatePath = await getGeneratePath(schema, tree);
-        const atomicModule = `${projectName}-atomic`;
+        schema = await guessProjectToSchema(tree, schema, context);
+        const storyTitle = readStoryTitle(schema.project);
+        const generatePath = `${schema.projectRoot}/lib/atomics`;
+        const atomicModule = `${schema.project}-atomic`;
         const generateActions = parts.map(name =>
             externalSchematic('@schematics/angular', 'component', {
                 ...componentSetting,
@@ -47,7 +46,7 @@ export default function (schema: any): Rule {
                 move(generatePath + '/' + `${schema.type}s/${name}`),
             ]))
         return chain([
-            addParentModule(generatePath, projectName),
+            addParentModule(generatePath, schema.project),
             ...generateActions,
             ...componentStories
         ])

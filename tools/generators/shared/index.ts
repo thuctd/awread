@@ -2,17 +2,13 @@ import {
   chain, externalSchematic, Rule, SchematicContext, Tree, schematic, noop, apply, url, template,
   branchAndMerge, mergeWith, move, MergeStrategy, applyTemplates
 } from '@angular-devkit/schematics';
-import { createDefaultPath } from '@schematics/angular/utility/workspace';
 import { addImportDeclarationToModule, addImportPathToModule } from '../../utility/add-import-module';
 import { addExportDeclarationToModule } from '../../utility/add-export-module';
 import { parseName } from '@schematics/angular/utility/parse-name';
 import { Path, normalize, strings } from '@angular-devkit/core';
-import * as ts from 'typescript';
-import { addGlobal, insert, RemoveChange } from '@nrwl/workspace';
 import { insertCustomCode } from '../../utility/insert-custom-code';
 import { addRouterOutlet } from '../../utility/add-router-outlet';
 import { getModuleData } from '../../utility/import-to-shell-module';
-import { insertImport } from '@nrwl/workspace/src/utils/ast-utils';
 import { classify } from '@nrwl/workspace/src/utils/strings';
 import { exportToLibIndex } from '../../utility/export-to-index';
 import { addPageService } from '../../utility/page-service';
@@ -22,19 +18,6 @@ import { insertRoutes } from '../../utility/insert-routes';
 import { appAndLibSetting, componentSetting } from '../../utility/edit-angular-json';
 import { createPageLazy } from '../../utility/create-page-lazy';
 
-
-function addPartsContent(schema: any, target) {
-  return (tree: Tree, context: SchematicContext) => {
-    const prefix = 'part';
-    const path = `${schema.path}/shared/src/lib/${prefix}s/${target}/${target}.${prefix}.html`;
-    let sharedLayout = tree.read(path);
-    if (sharedLayout != null) {
-      let newData = `${sharedLayout.toString()}\n<awread-navbar></awread-navbar>`;
-      tree.overwrite(path, newData);
-    }
-    return tree;
-  }
-}
 
 export default function (schema: any): Rule {
   return async (tree: Tree, context: SchematicContext) => {
@@ -52,7 +35,7 @@ export default function (schema: any): Rule {
     schema.directoryNoSlash = directoryNoSlash;
     schema.targetLibName = currentModule.name;
     const shellModule = await getModuleData(tree, directoryNoSlash);
-    const customCode = `\n<awread-header></awread-header>\n<router-outlet></router-outlet>\n<awread-footer></awread-footer>`;
+
     return chain([
       externalSchematic('@nrwl/angular', 'lib', {
         ...appAndLibSetting,
@@ -71,8 +54,8 @@ export default function (schema: any): Rule {
         project: currentModuleName,
         export: true
       }),
-      addRouterOutlet(true, currentModule.folderPath, 'shell-desktop', customCode),
-      ...addPageService(tree, { ...schema, originName: 'shell', path: '/' + currentModule.folderPath + '/layouts', mode: 'desktop'}),
+      addRouterOutlet(true, currentModule.folderPath, 'shell-desktop'),
+      ...addPageService(tree, { ...schema, originName: 'shell', path: '/' + currentModule.folderPath + '/layouts', mode: 'desktop' }),
       externalSchematic('@nrwl/angular', 'component', {
         ...componentSetting,
         name: `layouts/shell-mobile`,
@@ -81,33 +64,8 @@ export default function (schema: any): Rule {
         project: currentModuleName,
         export: true
       }),
-      addRouterOutlet(true, currentModule.folderPath, 'shell-mobile', customCode),
-      ...addPageService(tree, { ...schema, originName: 'shell', path: '/' + currentModule.folderPath + '/layouts', mode: 'mobile'}),
-      externalSchematic('@nrwl/angular', 'component', {
-        ...componentSetting,
-        name: `parts/navbar`,
-        type: 'part',
-        module: currentModuleName,
-        project: currentModuleName,
-        export: true
-      }),
-      externalSchematic('@nrwl/angular', 'component', {
-        ...componentSetting,
-        name: `parts/header`,
-        type: 'part',
-        module: currentModuleName,
-        project: currentModuleName,
-        export: true
-      }),
-      externalSchematic('@nrwl/angular', 'component', {
-        ...componentSetting,
-        name: `parts/footer`,
-        type: 'part',
-        module: currentModuleName,
-        project: currentModuleName,
-        export: true
-      }),
-      addPartsContent(schema, 'header'),
+      addRouterOutlet(true, currentModule.folderPath, 'shell-mobile'),
+      ...addPageService(tree, { ...schema, originName: 'shell', path: '/' + currentModule.folderPath + '/layouts', mode: 'mobile' }),
       exportToLibIndex(currentModule.folderPath, `export * from './lib/layouts/shell-desktop/shell-desktop.layout';`),
       exportToLibIndex(currentModule.folderPath, `export * from './lib/layouts/shell-mobile/shell-mobile.layout';`),
       ...createNotFoundPage(schema, currentModule),
@@ -118,7 +76,7 @@ export default function (schema: any): Rule {
 
 
 
-export function createNotFoundPage(schema, currentModule: {name: string, filePath: string, folderPath: string}) {
+export function createNotFoundPage(schema, currentModule: { name: string, filePath: string, folderPath: string }) {
   return createPageLazy(schema, 'not-found', currentModule);
 }
 

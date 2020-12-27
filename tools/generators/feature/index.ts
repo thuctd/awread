@@ -33,17 +33,17 @@ export default function (schema: any): Rule {
         style: 'scss'
       }),
       ...addPage(schema, originName),
-      schema.writeToFilePath ? addImportDeclarationToModule(schema, `${libName}-module`, schema.writeToFilePath) : noop(),
+      addFeatureToUi(schema, libName),
     ])
   }
 }
 
-export function addImportDeclare() {
-
+function addFeatureToUi(schema, libName) {
+  return schema.writeToFilePath ? addImportDeclarationToModule(schema, `${libName}-module`, schema.writeToFilePath) : noop()
 }
 
 export function addPage(schema, originName): Rule[] {
-  console.log('page name', originName, schema.pages);
+  // console.log('page name', originName, schema.pages);
   schema.pages = schema.pages ?? [];
   schema.pages = schema.pages ?? [];
   const pages: Rule[] = schema.pages && schema.pages.length ?

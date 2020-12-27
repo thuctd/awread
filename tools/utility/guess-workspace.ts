@@ -1,49 +1,28 @@
-import {
-    chain, externalSchematic, Rule, SchematicContext, Tree, schematic, noop, apply, url, template,
-    branchAndMerge, mergeWith, move, MergeStrategy, applyTemplates
-} from '@angular-devkit/schematics';
-
+import { SchematicsException } from '@angular-devkit/schematics';
 import { getWorkspace, buildDefaultPath } from '@schematics/angular/utility/workspace';
-import * as path from 'path';
-import { applyWithSkipExisting } from '@nrwl/workspace/src/utils/ast-utils';
-import { classify } from '@nrwl/workspace/src/utils/strings';
 import { Path, normalize, strings } from '@angular-devkit/core';
-import { getNpmScope, readJsonFile } from '@nrwl/workspace';
 
-const resolve = require('path').resolve;
-
-export async function getProjectRoot(schema, tree) {
-
-}
-
-export async function getGeneratePath(schema, tree) {
-    const cwd = process.cwd();
-    switch (true) {
-        case schema.project === "global-design-system":
-            schema.path = `/libs/global/design-system/src/lib`;
-            return schema.path;
-        default:
-            return getAbsolutePathFromProjectRoot(cwd, schema, tree);
+export async function guessProjectToSchema(tree, schema, context) {
+    const { projectName, projectRoot } = await guessProject(tree, schema);
+    return {
+        ...schema,
+        kind: context.schematic.description.name,
+        project: projectName,
+        projectRoot
     }
 }
 
-export async function getAbsolutePathFromProjectRoot(cwd, schema, tree) {
-    const isInAppsOrLibs = cwd.includes('libs') ?? cwd.includes('apps');
-    if (isInAppsOrLibs) {
-        const folderPath = cwd.includes('libs') ? path.join('libs', cwd.split('libs')[1]) : path.join('apps', cwd.split('apps')[1]);
-        schema.path = normalize(folderPath);
-        const isGenerateFolderIsType = schema.path.split('/').pop() === schema.type + 's';
-        if (isGenerateFolderIsType) {
-            schema.path = schema.path.split('/').slice(0, -1).join('/');
-        }
-    } else {
-        schema.path = await getDefaultProjectPath(schema, tree);
+export async function guessProject(tree, schema) {
+    let projectName = tree.project;
+    let projectRoot = await guessProjectRoot(tree, projectName);
+    if (projectRoot) {
+        return { projectName, projectRoot };
     }
-    schema.path = normalize(schema.path);
-    return schema.path;
+    return await guessProjectByPath(tree, schema);
+
 }
 
-export async function guessProject(tree) {
+async function guessProjectByPath(tree, schema) {
     let projectName;
     let projectRoot;
     const cwd = process.cwd();
@@ -51,18 +30,38 @@ export async function guessProject(tree) {
     const cwdDashrize = cwdNormalize.replace(/\//g, '-').trim();
     const workspace = await getWorkspace(tree);
     const entries = Object.fromEntries(workspace.projects.entries());
+
     for (const [name, project] of Object.entries<any>(entries)) {
-        // console.log('name,project', name, cwdDashrize, cwdDashrize.includes(name));
         if (project.sourceRoot && cwdDashrize.includes(name)) {
             projectName = name;
             projectRoot = entries[projectName].sourceRoot;
         }
     }
-    if (!projectName) {
-        projectName = await getDefaultProjectName(tree);
-        projectRoot = entries[projectName].sourceRoot;
+    if (projectName) {
+        return { projectName, projectRoot };
     }
+    return guessDefaultProject(tree, schema);
+}
+
+async function guessDefaultProject(tree, schema) {
+    const projectName = await getDefaultProjectName(tree);
+    const projectRoot = await getDefaultProjectRoot(tree, schema);
     return { projectName, projectRoot };
+}
+
+async function guessProjectRoot(tree, projectName) {
+    if (!projectName) return;
+    const workspace = await getWorkspace(tree);
+    const entries = Object.fromEntries(workspace.projects.entries());
+    let projectRoot;
+    for (const [name, project] of Object.entries<any>(entries)) {
+        try {
+            projectRoot = entries[projectName].sourceRoot;
+        } catch (error) {
+            throw new SchematicsException(`cannot detect sourceRoot of project: ${projectName}`)
+        }
+    }
+    return projectRoot
 }
 
 async function getDefaultProjectName(tree) {
@@ -70,7 +69,13 @@ async function getDefaultProjectName(tree) {
     return angularFile.defaultProject;
 }
 
-async function getDefaultProjectPath(schema, tree) {
+async function getDefaultProjectRoot(tree, schema) {
+    const workspace = await getWorkspace(tree);
+    const project = workspace.projects.get(schema.project);
+    return project.sourceRoot;
+}
+
+export async function getDefaultProjectPath(schema, tree) {
     const workspace = await getWorkspace(tree);
     const project = workspace.projects.get(schema.project);
     return buildDefaultPath(project);
