@@ -33,9 +33,13 @@ export class FirebaseAuthAddon {
         .pipe(
           tap(() => {
             window.localStorage.removeItem('email_reset_password');
+            alert('Reset password thành công');
             this.router.navigate(['login']);
           }),
-          catchError((err) => of(err)),
+          catchError((err) => {
+            alert('Reset password lỗi');
+            return of(err);
+          }),
           retry(2)
         )
         .subscribe();
@@ -160,5 +164,16 @@ export class FirebaseAuthAddon {
 
   async resetEmail(email) {
     return await this.afAuth.sendPasswordResetEmail(email);
+  }
+
+  createUserObject(user) {
+    return {
+      displayname: user.displayName ?? '',
+      email: user.email ?? '',
+      emailVerified: user?.emailVerified.toString() ?? 'false',
+      photoUrl: user.photoURL ?? '',
+      uid: user.uid,
+      provider: user.provider ?? 'email/password',
+    };
   }
 }

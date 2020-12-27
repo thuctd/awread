@@ -19,6 +19,7 @@ export class MenuNavtopAtom implements OnInit {
   @Input() isMenuOpen = false;
   @Input() avatarUrl = 'http://tachyons.io/img/logo.jpg';
   @Input() name = 'Hà Thanh Tùng';
+  @Input() email = 'thanhtung@gmail.com';
   @Output() signoutEvent = new EventEmitter();
   constructor() {}
 

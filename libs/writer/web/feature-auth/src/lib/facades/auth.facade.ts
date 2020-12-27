@@ -16,7 +16,6 @@ export class AuthFacade {
     private logoutGear: LogoutGear,
     private loginGear: LoginGear,
     private registerGear: RegisterGear,
-    private forgotPasswordGear: ForgotPasswordGear,
     private currentUserQuery: CurrentUserQuery
   ) {}
 
@@ -26,6 +25,10 @@ export class AuthFacade {
 
   createAccountOnServer(user) {
     return this.registerGear.createAccountOnServer(user);
+  }
+
+  linkToProviderGoogleorFacebook(user) {
+    this.registerGear.linkToProviderGoogleorFacebook(user);
   }
 
   loginWithRoleAdmin(credential: EmailLoginCredential) {

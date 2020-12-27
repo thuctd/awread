@@ -13,8 +13,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RightTopnavMolec implements OnInit {
-  avatarUrl =
-    'https://miro.medium.com/fit/c/56/56/2*asXocQG0PtjFUwEjFYKwgg.jpeg';
+  avatarUrl = 'http://tachyons.io/img/logo.jpg';
   name = 'Hà Thanh Tùng';
   @Output() searchEvent = new EventEmitter();
   constructor() {}
