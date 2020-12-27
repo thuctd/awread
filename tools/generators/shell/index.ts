@@ -11,14 +11,14 @@ import { prepareCurrentModule } from '../../utility/prepare-data';
 
 export default function (schema: any): Rule {
   return async (tree: Tree, context: SchematicContext) => {
-    guessApplicationToSchema(schema, tree);
+    schema = await guessApplicationToSchema(schema, tree);
     const workspaceName = getWorkspaceName(tree);
     const currentModule = prepareCurrentModule(schema);
 
     return chain([
       externalSchematic('@nrwl/angular', 'lib', {
         ...appAndLibSetting,
-        name: schema.name,
+        name: `${schema.kind}-${schema.name}`,
         directory: schema.directory ?? './',
         tags: `scope:shell,scope:shared,type:feature`,
       }),
@@ -33,6 +33,6 @@ export default function (schema: any): Rule {
 }
 
 export function importShellToAppModule(schema, currentModuleName, applicationRoot) {
-  const appPathFile = normalize(applicationRoot + '/app.module');
+  const appPathFile = normalize(`${applicationRoot}/app/app.module`);
   return addImportDeclarationToModule(schema, `${currentModuleName}-module`, appPathFile);
 }

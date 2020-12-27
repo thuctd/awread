@@ -22,8 +22,9 @@ export async function guessProjectToSchema(tree, schema, context) {
 
 export async function guessApplicationToSchema(schema, tree) {
     const { application, applicationRoot } = await guessApplication(tree, schema.application);
-    tree.application = application;
-    tree.applicationRoot = applicationRoot;
+    schema.application = application;
+    schema.applicationRoot = applicationRoot;
+    return schema;
 }
 
 export async function guessApplication(tree, projectName) {
