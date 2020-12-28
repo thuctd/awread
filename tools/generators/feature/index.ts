@@ -38,7 +38,6 @@ function addFeatureToUi(schema, featureProject) {
 }
 
 export function addPage(schema, featureName): Rule[] {
-  // console.log('page name', originName, schema.pages);
   schema.pages = schema.pages ?? [];
   schema.pages = schema.pages ?? [];
   const pages: Rule[] = schema.pages && schema.pages.length ?

@@ -18,7 +18,7 @@ import * as path from 'path';
 
 export default function (schema: any): Rule {
   return async (host: Tree) => {
-    schema.originName = schema.name.split('/').pop();
+    schema.name = schema.name.split('/').pop();
     schema.path = await createDefaultPath(host, schema.project as string);
     return chain([
       ...addPageFileAsService(schema),
@@ -36,7 +36,7 @@ function addPageIndexIfPossible(schema) {
   return (tree: Tree, context: SchematicContext) => {
     const filePath = path.join(schema.path, schema.name, schema.indexPath, 'index.ts');
     const existIndex = tree.exists(filePath);
-    const exportString = `export * from './${schema.originName}.${schema.type}';`;
+    const exportString = `export * from './${schema.name}.${schema.type}';`;
     if (existIndex) {
       const buffer = tree.read(filePath);
       const indexSource = buffer!.toString('utf-8');

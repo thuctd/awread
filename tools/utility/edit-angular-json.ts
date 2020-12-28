@@ -60,6 +60,14 @@ function updateFilesAction(angularFile, host) {
     } catch (error) {
       console.warn(error.message);
     }
+    try {
+      const isHaveBuildConfiguration = project.architect.build?.configurations;
+      if (isHaveBuildConfiguration) {
+        updateApplicationArchitect(project, name);
+      }
+    } catch (error) {
+      console.warn(error.message);
+    }
 
   })
   return rules;
@@ -361,7 +369,10 @@ function updateEnviroment(p, projectName) {
 
 
 function updateApplicationArchitect(p, projectName) {
-  if (p.architect?.build && p.architect?.build.includes('angular')) {
+  const isApplication = p.projectType === 'application';
+  const notTest = !projectName.includes('e2e');
+  const isAngular = p.architect?.build && p.architect?.build?.builder?.includes('angular')
+  if (isApplication && notTest && isAngular) {
     // using custom webpack for tailwind
     const buildTarget = p.architect['build'];
     const serveTarget = p.architect['serve'];
@@ -409,6 +420,7 @@ function updateApplicationArchitect(p, projectName) {
       };
     }
     // set deploy
+    console.log('myProjectConfig', myProjectConfig);
     let deployTarget = p.architect['deploy'];
     p.architect['storybook'] = {
       "builder": "@angular/fire:deploy",

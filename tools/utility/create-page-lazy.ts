@@ -7,31 +7,30 @@ import { exportToLibIndex } from './export-to-index';
 import { insertCustomCode } from './insert-custom-code';
 import { addImportDeclarationToModule, addImportPathToModule } from './add-import-module';
 
-export function createPageLazy(schema, pageName, currentModule: { name: string, path: string }, type = 'page') {
-  const nameWithPath = `pages/${pageName}`;
+export function createPageLazy(schema, pageName, type = 'page') {
   const page = {
     name: `${pageName}`,
-    filePath: normalize(`${schema.projectRoot}/lib/${nameWithPath}/${pageName}.module`),
-    folderPath: normalize(`${schema.projectRoot}/lib/${nameWithPath}`),
+    filePath: normalize(`${schema.projectRoot}/lib/pages/${pageName}/${pageName}.module`),
+    folderPath: normalize(`${schema.projectRoot}/lib/pages/${pageName}`),
   }
   return [
     schematic('module', {
-      project: currentModule.name,
-      name: nameWithPath,
+      project: schema.project,
+      name: `pages/${pageName}`,
       type: type,
     }),
-    externalSchematic('@schematics/angular', 'component', {
-      ...componentSetting,
-      name: nameWithPath,
-      type,
-      module: `${nameWithPath}/${pageName}.module`,
-      project: currentModule.name,
-      export: true
-    }),
-    ...addRoutesOfLazy(schema, pageName, type, page),
-    createEmptySection(page.folderPath),
-    exportToLibIndex(schema.projectRoot, `export * from './lib/pages/${pageName}/${pageName}.${type}';`),
-    exportToLibIndex(schema.projectRoot, `export * from './lib/pages/${pageName}/${pageName}.module';`),
+    // externalSchematic('@schematics/angular', 'component', {
+    //   ...componentSetting,
+    //   name: `pages/${pageName}`,
+    //   type,
+    //   module: `pages/${pageName}/${pageName}.module`,
+    //   project: currentModule.name,
+    //   export: true
+    // }),
+    // ...addRoutesOfLazy(schema, pageName, type, page),
+    // createEmptySection(page.folderPath),
+    // exportToLibIndex(schema.projectRoot, `export * from './lib/pages/${pageName}/${pageName}.${type}';`),
+    // exportToLibIndex(schema.projectRoot, `export * from './lib/pages/${pageName}/${pageName}.module';`),
   ]
 }
 
