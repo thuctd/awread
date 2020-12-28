@@ -43,7 +43,7 @@ export default function (schema: any): Rule {
         export: true
       }),
       addRouterOutlet(true, schema.projectRoot, 'shell-desktop'),
-      ...addPageService(tree, { ...schema, originName: 'shell', path: `${schema.projectRoot}/layouts`, mode: 'desktop' }),
+      ...addPageService(tree, { ...schema, originName: 'shell', path: `${schema.projectRoot}/lib/layouts`, mode: 'desktop' }),
       externalSchematic('@nrwl/angular', 'component', {
         ...componentSetting,
         name: `layouts/shell-mobile`,
@@ -53,7 +53,7 @@ export default function (schema: any): Rule {
         export: true
       }),
       addRouterOutlet(true, schema.projectRoot, 'shell-mobile'),
-      ...addPageService(tree, { ...schema, originName: 'shell', path: `${schema.projectRoot}/layouts`, mode: 'mobile' }),
+      ...addPageService(tree, { ...schema, originName: 'shell', path: `${schema.projectRoot}/lib/layouts`, mode: 'mobile' }),
       exportToLibIndex(schema.projectRoot, `export * from './lib/layouts/shell-desktop/shell-desktop.layout';`),
       exportToLibIndex(schema.projectRoot, `export * from './lib/layouts/shell-mobile/shell-mobile.layout';`),
       ...createNotFoundPage(schema, currentModule),

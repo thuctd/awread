@@ -35,22 +35,22 @@ function updateFilesAction(angularFile, host) {
     try {
       addProjectStylesFolder(host, name);
     } catch (error) {
-      console.warn('asset maybe exist', error);
+      console.warn(error.message);
     }
     try {
       addProjectAssetsFolder(host, name);
     } catch (error) {
-      console.warn('asset maybe exist', error);
+      console.warn(error.message);
     }
     try {
       updateEnviromentFile(host, name, project);
     } catch (error) {
-      console.warn('enviroment maybe exist', error);
+      console.warn(error.message);
     }
     try {
       rules.push(...updateMainFile(host, name, project));
     } catch (error) {
-      console.warn('main file maybe exist', error);
+      console.warn(error.message);
     }
     try {
       const isHaveBuildConfiguration = project.architect.build?.configurations;
@@ -58,7 +58,7 @@ function updateFilesAction(angularFile, host) {
         updateEnviroment(project, name);
       }
     } catch (error) {
-      console.warn('main file maybe exist', error);
+      console.warn(error.message);
     }
 
   })
@@ -180,20 +180,21 @@ export function addProjectAssetsFolder(host, projectName) {
 
 export function addProjectStylesFolder(host, projectName, path = `libs/global/styles/src/projects/${projectName}`) {
   const prefix = projectName.length ? `${projectName}-` : '';
-  host.create(`${path}/lib/${projectName}vendors.scss`, ``);
-  host.create(`${path}/lib/${projectName}fonts.scss`, ``);
-  host.create(`${path}/lib/${projectName}variable.scss`, ``);
-  host.create(`${path}/lib/${projectName}theme.scss`, ``);
-  host.create(`${path}/lib/${projectName}global.scss`, ``);
-  host.create(`${path}/${projectName ? projectName : 'index'}.scss`, `
-  @import './lib/${projectName}vendors.scss';
-  @import './lib/${projectName}fonts.scss';
-  @import './lib/${projectName}variable.scss';
-  @import './lib/${projectName}theme.scss';
-  @import './lib/${projectName}global.scss';
-  `);
+  host.create(`${path}/index.scss`, ``);
+  // host.create(`${path}/lib/${projectName}vendors.scss`, ``);
+  // host.create(`${path}/lib/${projectName}fonts.scss`, ``);
+  // host.create(`${path}/lib/${projectName}variable.scss`, ``);
+  // host.create(`${path}/lib/${projectName}theme.scss`, ``);
+  // host.create(`${path}/lib/${projectName}global.scss`, ``);
+  // host.create(`${path}/${projectName ? projectName : 'index'}.scss`, `
+  // @import './lib/${projectName}vendors.scss';
+  // @import './lib/${projectName}fonts.scss';
+  // @import './lib/${projectName}variable.scss';
+  // @import './lib/${projectName}theme.scss';
+  // @import './lib/${projectName}global.scss';
+  // `);
   // host.create(`${path}/${projectName}material.scss`, ``);
-  host.create(`${path}/${projectName}tailwind.scss`, ``);
+  // host.create(`${path}/${projectName}tailwind.scss`, ``);
 }
 
 export function updateGenerator() {

@@ -1,15 +1,6 @@
 import { componentSetting } from './edit-angular-json';
-import {
-  chain, externalSchematic, Rule, SchematicContext, Tree, schematic, noop, apply, url, template,
-  branchAndMerge, mergeWith, move, MergeStrategy, applyTemplates, SchematicsException
-} from '@angular-devkit/schematics';
-import { MODULE_EXT, ROUTING_MODULE_EXT, buildRelativePath, findModuleFromOptions } from '@schematics/angular/utility/find-module';
-
+import { schematic, externalSchematic } from '@angular-devkit/schematics';
 import { Path, normalize, strings } from '@angular-devkit/core';
-import * as ts from 'typescript';
-import * as path from 'path';
-import { addGlobal, insert, RemoveChange } from '@nrwl/workspace';
-import { getSourceNodes, InsertChange, insertImport, ReplaceChange } from '@nrwl/workspace/src/utils/ast-utils';
 import { classify } from '@nrwl/workspace/src/utils/strings';
 import { createEmptySection } from './create-empty-section';
 import { exportToLibIndex } from './export-to-index';
@@ -20,8 +11,8 @@ export function createPageLazy(schema, pageName, currentModule: { name: string, 
   const nameWithPath = `pages/${pageName}`;
   const page = {
     name: `${pageName}`,
-    filePath: normalize(`${schema.projectRoot}/${nameWithPath}/${pageName}.module`),
-    folderPath: normalize(`${schema.projectRoot}/${nameWithPath}`),
+    filePath: normalize(`${schema.projectRoot}/lib/${nameWithPath}/${pageName}.module`),
+    folderPath: normalize(`${schema.projectRoot}/lib/${nameWithPath}`),
   }
   return [
     schematic('module', {
