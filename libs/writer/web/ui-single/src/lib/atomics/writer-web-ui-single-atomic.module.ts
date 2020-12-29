@@ -11,14 +11,12 @@ import { FormProfieOrgan } from './organs/form-profie/form-profie.organ';
 import { ImageProfileOrgan } from './organs/image-profile/image-profile.organ';
 import { ChangePhotoMolec } from './molecs/change-photo/change-photo.molec';
 import { ProfileTemplate } from './templates/profile/profile.template';
-import { WriterWebSharedAtomicModule } from '@awread/writer/web/shared';
 
 @NgModule({
   imports: [
     CommonModule,
     StorybookSupportModule,
     GlobalDesignSystemAtomicModule,
-    WriterWebSharedAtomicModule,
   ],
   exports: [
     CommonModule,
@@ -40,4 +38,4 @@ import { WriterWebSharedAtomicModule } from '@awread/writer/web/shared';
     ProfileTemplate,
   ],
 })
-export class WriterWebUiSingleAtomicModule {}
+export class WriterWebUiSingleAtomicModule { }
