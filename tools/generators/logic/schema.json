@@ -11,7 +11,8 @@
                 "addon",
                 "api",
                 "facade",
-                "model"
+                "model",
+                "interface"
             ],
             "default": "gear",
             "$default": {

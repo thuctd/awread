@@ -4,7 +4,7 @@ export interface CurrentUser {
   id: ID;
 }
 
-export function createCurrentUser(params: Partial<CurrentUser>) {
+export function CurrentUser(params: Partial<CurrentUser>) {
   return {
 
   } as CurrentUser;

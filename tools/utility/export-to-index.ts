@@ -5,6 +5,9 @@ import { addGlobal, insert, RemoveChange } from '@nrwl/workspace';
 
 
 export function exportToLibIndex(projectRoot, exportContent) {
+  if (!exportContent.includes(';')) {
+    exportContent = exportContent + ';';
+  }
   return (tree: Tree) => {
     const indexFilePath = path.join(projectRoot, 'index.ts');
     const buffer = tree.read(indexFilePath);
@@ -32,6 +35,9 @@ export function exportToLibIndex(projectRoot, exportContent) {
 
 
 export function exportToFileIndex(indexPath, exportContent) {
+  if (!exportContent.includes(';')) {
+    exportContent = exportContent + ';';
+  }
   return (tree: Tree) => {
     const indexFilePath = path.join(indexPath);
     if (tree.exists(indexFilePath)) {

@@ -1,7 +1,5 @@
-import {
-    Rule, SchematicContext, SchematicsException, Tree, apply, applyTemplates, chain, filter, mergeWith, move, noop, schematic, externalSchematic, MergeStrategy, url,
-} from '@angular-devkit/schematics';
-import { Path, normalize, strings } from '@angular-devkit/core';
+import { Rule, SchematicContext, Tree, apply, applyTemplates, chain, schematic, mergeWith, move, MergeStrategy, url } from '@angular-devkit/schematics';
+import { normalize, strings } from '@angular-devkit/core';
 import * as pluralize from 'pluralize';
 import { guessProjectToSchema } from '../../utility/guess-workspace';
 import { exportToLibIndex } from '../../utility/export-to-index';
@@ -34,8 +32,13 @@ function singleAction(schema, context, name) {
 
         return chain([
             mergeWith(templateSource, MergeStrategy.AllowCreationConflict),
-            exportToLibIndex(schema.projectRoot, `
-            export * from './lib/states/${strings.dasherize(schema.name)}/${strings.dasherize(schema.name)}.model';`)
+            // exportToLibIndex(schema.projectRoot, `
+            // export * from './lib/states/${strings.dasherize(schema.name)}/${strings.dasherize(schema.name)}.model';`)
+            schematic('logic', {
+                ...schema,
+                list: pluralize.singular(strings.dasherize(name)),
+                type: 'model',
+            })
         ])
     }
 }

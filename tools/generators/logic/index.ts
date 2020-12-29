@@ -1,8 +1,6 @@
-import {
-    chain, externalSchematic, Rule, SchematicContext, Tree, schematic, noop, apply, url, template,
-    branchAndMerge, mergeWith, move, MergeStrategy, applyTemplates
-} from '@angular-devkit/schematics';
+import { chain, noop, Rule, SchematicContext, Tree, schematic } from '@angular-devkit/schematics';
 import { strings } from '@angular-devkit/core';
+import * as pluralize from 'pluralize';
 import { exportToFileIndex, exportToLibIndex } from '../../utility/export-to-index';
 import { guessProject, guessProjectToSchema } from '../../utility/guess-workspace';
 
@@ -36,7 +34,15 @@ export function addFile(filePath: string, name: string, type: string) {
     return (tree) => {
         const fileExist = tree.exists(filePath);
         if (type === 'model') {
-            tree.create(filePath, ` export interface ${strings.classify(name)} {}`);
+            tree.create(filePath, `export interface ${pluralize.singular(strings.classify(name))} {
+  id: string;
+}
+
+export function ${pluralize.singular(strings.classify(name))}(params: Partial<${pluralize.singular(strings.classify(name))}>) {
+  return {
+
+  } as ${pluralize.singular(strings.classify(name))};
+}`);
             return tree;
         }
         if (type === 'api') {
