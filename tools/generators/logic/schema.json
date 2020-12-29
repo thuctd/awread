@@ -3,14 +3,6 @@
     "id": "logic",
     "type": "object",
     "properties": {
-        "list": {
-            "type": "string",
-            "description": "list of name, separate by comma (,) for example: submit-btn,input-form",
-            "$default": {
-                "$source": "argv",
-                "index": 0
-            }
-        },
         "type": {
             "type": "string",
             "description": "atomic design kind of component",
@@ -21,7 +13,19 @@
                 "facade",
                 "model"
             ],
-            "default": "gear"
+            "default": "gear",
+            "$default": {
+                "$source": "argv",
+                "index": 0
+            }
+        },
+        "list": {
+            "type": "string",
+            "description": "list of name, separate by comma (,) for example: login,register",
+            "$default": {
+                "$source": "argv",
+                "index": 1
+            }
         },
         "export": {
             "type": "boolean",

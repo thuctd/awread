@@ -12,9 +12,8 @@ import { createDefaultPath } from '@schematics/angular/utility/workspace';
 import { InsertChange } from '@nrwl/workspace';
 import { addImportDeclarationToModule } from '../../utility/add-import-module';
 import { camelize, classify } from '@nrwl/workspace/src/utils/strings';
-import { getSourceNodes, insertImport, RemoveChange, ReplaceChange } from '@nrwl/workspace/src/utils/ast-utils';
+import { ReplaceChange } from '@nrwl/workspace/src/utils/ast-utils';
 import * as path from 'path';
-import { removeImport } from '../../utility/ast-utils';
 import { addPageService } from '../../utility/page-service';
 import { componentSetting } from '../../utility/edit-angular-json';
 
@@ -34,10 +33,14 @@ export default function (schema: any): Rule {
       schema.routingScope = "Child" // or "Root"
       routingModulePath = getRoutingModulePath(host, schema.module as string);
     }
-
-    schema.originName = schema.name.split('/').pop();
     const parsedPath = parseName(schema.path, schema.name);
-    schema.name = schema.type && schema.mode ? `${parsedPath.name}-${schema.mode}` : parsedPath.name;
+
+    const dualDeviceMode = schema.type && schema.mode;
+    if (dualDeviceMode) {
+      schema.name = `${parsedPath.name}-${schema.mode}`;
+    } else {
+      schema.name = parsedPath.name;
+    }
     schema.path = parsedPath.path;
 
     const templateSource = apply(url('./files'), [
@@ -136,8 +139,8 @@ function buildRelativeModulePath(options: any, modulePath: string, deviceName?: 
   const device = options.mode && deviceName ? '-' + deviceName : '';
   const importModulePath = normalize(
     `/${options.path}/`
-    + (options.flat ? '' : strings.dasherize(options.originName) + device + '/')
-    + strings.dasherize(options.originName) + device
+    + (options.flat ? '' : strings.dasherize(options.name) + device + '/')
+    + strings.dasherize(options.name) + device
     + (options.routingOnly ? '-routing.module' : '.module'),
   );
 
@@ -305,8 +308,8 @@ function buildRoute(options: any, modulePath: string) {
   const relativeModulePath = buildRelativeModulePath(options, modulePath);
   const relativeModulePathMobile = buildRelativeModulePath(options, modulePath, 'mobile');
   const relativeModulePathDesktop = buildRelativeModulePath(options, modulePath, 'desktop');
-  const moduleMobileName = `${strings.classify(options.originName)}MobileModule`;
-  const moduleDesktopName = `${strings.classify(options.originName)}DesktopModule`;
+  const moduleMobileName = `${strings.classify(options.name)}MobileModule`;
+  const moduleDesktopName = `${strings.classify(options.name)}DesktopModule`;
   const loadChildren = options.mode ? `
   () => window.innerWidth <= 768 && window?.haveMobile ?
   import('${relativeModulePathMobile}').then(m => m.${moduleMobileName}):

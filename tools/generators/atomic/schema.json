@@ -3,18 +3,6 @@
     "id": "atomic",
     "type": "object",
     "properties": {
-        "list": {
-            "type": "string",
-            "description": "list of name, separate by comma (,) for example: submit-btn,input-form",
-            "$default": {
-                "$source": "argv",
-                "index": 0
-            }
-        },
-        "project": {
-            "type": "string",
-            "description": "project name having this"
-        },
         "type": {
             "type": "string",
             "description": "atomic design kind of component",
@@ -24,7 +12,23 @@
                 "organ",
                 "template"
             ],
-            "default": "atom"
+            "default": "atom",
+            "$default": {
+                "$source": "argv",
+                "index": 0
+            }
+        },
+        "list": {
+            "type": "string",
+            "description": "list of name, separate by comma (,) for example: submit-btn,input-form",
+            "$default": {
+                "$source": "argv",
+                "index": 1
+            }
+        },
+        "project": {
+            "type": "string",
+            "description": "project name having this"
         },
         "export": {
             "type": "boolean",

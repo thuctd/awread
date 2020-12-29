@@ -1,16 +1,26 @@
 import {
-    Rule, SchematicsException, Tree, apply, applyTemplates, chain, filter, mergeWith, move, noop, schematic, externalSchematic, MergeStrategy, url,
+    Rule, SchematicContext, SchematicsException, Tree, apply, applyTemplates, chain, filter, mergeWith, move, noop, schematic, externalSchematic, MergeStrategy, url,
 } from '@angular-devkit/schematics';
 import { Path, normalize, strings } from '@angular-devkit/core';
 import * as pluralize from 'pluralize';
-import { getProjectName, getGeneratePath } from '../../utility/guess-workspace';
-import { readStoryTitle } from '../atomic';
+import { guessProjectToSchema } from '../../utility/guess-workspace';
+import { exportToLibIndex } from '../../utility/export-to-index';
 
 export default function (schema: any): Rule {
-    return async (tree: Tree, context) => {
-        const projectName = await getProjectName(schema, tree);
-        schema.project = projectName;
-        const generatePath = await getGeneratePath(schema, tree);
+    return async (tree: Tree, context: SchematicContext) => {
+        const actions = schema.list.split(',').map(name => singleAction(schema, context, name))
+        return chain([
+            ...actions
+        ])
+    }
+}
+
+function singleAction(schema, context, name) {
+    schema.name = name;
+    return async (tree) => {
+        schema = await guessProjectToSchema(tree, schema, context);
+        // console.log('context', schema);
+        const generatePath = `${schema.projectRoot}/lib/states`
 
         const templateSource = apply(url(schema.entity ? './entity-files' : './files'),
             [
@@ -22,9 +32,10 @@ export default function (schema: any): Rule {
                 move(normalize(generatePath + '/' + strings.dasherize(schema.name))),
             ]);
 
-        console.log('what context look like?', context);
         return chain([
             mergeWith(templateSource, MergeStrategy.AllowCreationConflict),
+            exportToLibIndex(schema.projectRoot, `
+            export * from './lib/states/${strings.dasherize(schema.name)}/${strings.dasherize(schema.name)}.model';`)
         ])
     }
 }

@@ -4,7 +4,7 @@ import { workspaces } from '@angular-devkit/core';
 import { normalize } from "path";
 import { insertCustomCode } from "./insert-custom-code";
 import { addImportPathToModule } from "./add-import-module";
-
+import myProjectConfig from '../my-project-config.json';
 // base on: https://github.com/LayZeeDK/nx-tiny-app-project
 // base on: https://indepth.dev/tiny-angular-application-projects-in-nx-workspaces
 
@@ -35,22 +35,38 @@ function updateFilesAction(angularFile, host) {
     try {
       addProjectStylesFolder(host, name);
     } catch (error) {
-      console.warn('asset maybe exist', error);
+      console.warn(error.message);
     }
     try {
       addProjectAssetsFolder(host, name);
     } catch (error) {
-      console.warn('asset maybe exist', error);
+      console.warn(error.message);
     }
     try {
       updateEnviromentFile(host, name, project);
     } catch (error) {
-      console.warn('enviroment maybe exist', error);
+      console.warn(error.message);
     }
     try {
       rules.push(...updateMainFile(host, name, project));
     } catch (error) {
-      console.warn('enviroment maybe exist', error);
+      console.warn(error.message);
+    }
+    try {
+      const isHaveBuildConfiguration = project.architect.build?.configurations;
+      if (isHaveBuildConfiguration) {
+        updateEnviroment(project, name);
+      }
+    } catch (error) {
+      console.warn(error.message);
+    }
+    try {
+      const isHaveBuildConfiguration = project.architect.build?.configurations;
+      if (isHaveBuildConfiguration) {
+        updateApplicationArchitect(project, name);
+      }
+    } catch (error) {
+      console.warn(error.message);
     }
 
   })
@@ -172,20 +188,21 @@ export function addProjectAssetsFolder(host, projectName) {
 
 export function addProjectStylesFolder(host, projectName, path = `libs/global/styles/src/projects/${projectName}`) {
   const prefix = projectName.length ? `${projectName}-` : '';
-  host.create(`${path}/lib/${projectName}vendors.scss`, ``);
-  host.create(`${path}/lib/${projectName}fonts.scss`, ``);
-  host.create(`${path}/lib/${projectName}variable.scss`, ``);
-  host.create(`${path}/lib/${projectName}theme.scss`, ``);
-  host.create(`${path}/lib/${projectName}global.scss`, ``);
-  host.create(`${path}/${projectName ? projectName : 'index'}.scss`, `
-  @import './lib/${projectName}vendors.scss';
-  @import './lib/${projectName}fonts.scss';
-  @import './lib/${projectName}variable.scss';
-  @import './lib/${projectName}theme.scss';
-  @import './lib/${projectName}global.scss';
-  `);
+  host.create(`${path}/index.scss`, ``);
+  // host.create(`${path}/lib/${projectName}vendors.scss`, ``);
+  // host.create(`${path}/lib/${projectName}fonts.scss`, ``);
+  // host.create(`${path}/lib/${projectName}variable.scss`, ``);
+  // host.create(`${path}/lib/${projectName}theme.scss`, ``);
+  // host.create(`${path}/lib/${projectName}global.scss`, ``);
+  // host.create(`${path}/${projectName ? projectName : 'index'}.scss`, `
+  // @import './lib/${projectName}vendors.scss';
+  // @import './lib/${projectName}fonts.scss';
+  // @import './lib/${projectName}variable.scss';
+  // @import './lib/${projectName}theme.scss';
+  // @import './lib/${projectName}global.scss';
+  // `);
   // host.create(`${path}/${projectName}material.scss`, ``);
-  host.create(`${path}/${projectName}tailwind.scss`, ``);
+  // host.create(`${path}/${projectName}tailwind.scss`, ``);
 }
 
 export function updateGenerator() {
@@ -239,9 +256,6 @@ export function createSharedLibrary() {
         if (isAngular) {
           updateAsset(p, projectName);
           updateStyle(p, projectName);
-        }
-        if (isHaveBuildConfiguration) {
-          updateEnviroment(p, projectName);
         }
         if (isHaveBuildConfiguration) {
           updateEnviroment(p, projectName);
@@ -350,6 +364,83 @@ function updateEnviroment(p, projectName) {
       ...testData,
       browserTarget: `${buildPrefix.join(':')}:test`
     }
+  }
+}
+
+
+function updateApplicationArchitect(p, projectName) {
+  const isApplication = p.projectType === 'application';
+  const notTest = !projectName.includes('e2e');
+  const isAngular = p.architect?.build && p.architect?.build?.builder?.includes('angular')
+  if (isApplication && notTest && isAngular) {
+    // using custom webpack for tailwind
+    const buildTarget = p.architect['build'];
+    const serveTarget = p.architect['serve'];
+    serveTarget.builder = '@angular-builders/custom-webpack:dev-server';
+    buildTarget.builder = '@angular-builders/custom-webpack:browser';
+    buildTarget.options.customWebpackConfig = {
+      path: 'webpack.config.js',
+    };
+    // add storybook
+    let storybookTarget = p.architect['storybook'];
+    if (!storybookTarget) {
+      p.architect['storybook'] = {
+        "builder": "@nrwl/storybook:storybook",
+        "options": {
+          "uiFramework": "@storybook/angular",
+          "port": 4400,
+          "config": {
+            "configFolder": p.root + "/.storybook"
+          }
+        },
+        "configurations": {
+          "ci": {
+            "quiet": true
+          }
+        }
+      };
+    }
+    // add build-storybook
+    let buildStorybookTarget = p.architect['storybook'];
+    if (!buildStorybookTarget) {
+      p.architect['storybook'] = {
+        "builder": "@nrwl/storybook:build",
+        "options": {
+          "uiFramework": "@storybook/angular",
+          "outputPath": "dist/storybook/" + projectName,
+          "config": {
+            "configFolder": p.root + "/.storybook"
+          }
+        },
+        "configurations": {
+          "ci": {
+            "quiet": true
+          }
+        }
+      };
+    }
+    // set deploy
+    console.log('myProjectConfig', myProjectConfig);
+    let deployTarget = p.architect['deploy'];
+    p.architect['storybook'] = {
+      "builder": "@angular/fire:deploy",
+      "options": {
+        "buildTarget": projectName + ":build",
+        "firebaseProject": myProjectConfig.firebase.developmentProject
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": projectName + ":build",
+          "firebaseProject": myProjectConfig.firebase.productionProject
+        },
+        "storybook": {
+          "buildTarget": projectName + ":build-storybook",
+          "firebaseProject": myProjectConfig.firebase.developmentProject,
+          "siteTarget": projectName + "-story"
+        }
+      }
+    };
+
   }
 }
 

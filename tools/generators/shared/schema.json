@@ -25,6 +25,11 @@
       "type": "boolean",
       "description": "declare window.haveMobile value",
       "default": true
+    },
+    "kind": {
+      "type": "string",
+      "description": "kind ui or feature, shared will be empty",
+      "default": ""
     }
   },
   "required": [

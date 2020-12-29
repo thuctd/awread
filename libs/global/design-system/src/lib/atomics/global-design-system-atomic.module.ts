@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { StorybookSupportModule } from '../storybook-support.module';
+
 import { AuthBgAtom } from './atoms/auth-bg/auth-bg.atom';
 import { CheckBtnAtom } from './atoms/check-btn/check-btn.atom';
 import { InputFormAtom } from './atoms/input-form/input-form.atom';
@@ -11,8 +13,6 @@ import { TabBtnAtom } from './atoms/tab-btn/tab-btn.atom';
 import { AuthTitleAtom } from './atoms/auth-title/auth-title.atom';
 import { AuthDescriptionAtom } from './atoms/auth-description/auth-description.atom';
 import { OptionLinkAtom } from './atoms/option-link/option-link.atom';
-
-import { StorybookSupportModule } from './storybook-support.module';
 import { NavbarLinkAtom } from './atoms/navbar-link/navbar-link.atom';
 import { NavbarIconAtom } from './atoms/navbar-icon/navbar-icon.atom';
 import { searchNavtopAtom } from './atoms/search-navtop/search-navtop.atom';
@@ -167,4 +167,4 @@ import { WrtEditerAtom } from './atoms/wrt-editer/wrt-editer.atom';
     CreationSocialBtnAtom
   ],
 })
-export class GlobalDesignSystemAtomicModule {}
+export class GlobalDesignSystemAtomicModule { }

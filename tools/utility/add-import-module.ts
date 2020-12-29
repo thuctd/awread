@@ -68,7 +68,8 @@ export function addImportDeclarationToModule(schema, whatYouWantToImport: string
     const writeToModulePath = normalize(`${writeToFilePath}.ts`);
     const text = host.read(writeToModulePath);
     if (text === null) {
-      throw new SchematicsException(`File ${writeToModulePath} does not exist.`);
+      console.log('schema', schema);
+      throw new SchematicsException(`trying to import ${whatYouWantToImport} but File ${writeToModulePath} does not exist.`);
     }
     const sourceText = text.toString('utf-8');
     const source = ts.createSourceFile(writeToModulePath, sourceText, ts.ScriptTarget.Latest, true);
@@ -84,7 +85,7 @@ export function addImportDeclarationToModule(schema, whatYouWantToImport: string
       return insertImport(source, writeToModulePath, symbolName, fileName, isDefault);
     };
 
-     if (!customImportSyntax) {
+    if (!customImportSyntax) {
       customImportSyntax = getProjectPath(schema.directory, schema.name);
     }
     const hasTargetModule = sourceText.includes(targetModuleClassify);
