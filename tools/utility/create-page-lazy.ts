@@ -19,18 +19,18 @@ export function createPageLazy(schema, pageName, type = 'page') {
       name: `pages/${pageName}`,
       type: type,
     }),
-    // externalSchematic('@schematics/angular', 'component', {
-    //   ...componentSetting,
-    //   name: `pages/${pageName}`,
-    //   type,
-    //   module: `pages/${pageName}/${pageName}.module`,
-    //   project: currentModule.name,
-    //   export: true
-    // }),
-    // ...addRoutesOfLazy(schema, pageName, type, page),
-    // createEmptySection(page.folderPath),
-    // exportToLibIndex(schema.projectRoot, `export * from './lib/pages/${pageName}/${pageName}.${type}';`),
-    // exportToLibIndex(schema.projectRoot, `export * from './lib/pages/${pageName}/${pageName}.module';`),
+    externalSchematic('@schematics/angular', 'component', {
+      ...componentSetting,
+      name: `pages/${pageName}`,
+      type,
+      module: `pages/${pageName}/${pageName}.module`,
+      project: schema.project,
+      export: true
+    }),
+    ...addRoutesOfLazy(schema, pageName, type, page),
+    createEmptySection(page.folderPath),
+    exportToLibIndex(schema.projectRoot, `export * from './lib/pages/${pageName}/${pageName}.${type}';`),
+    exportToLibIndex(schema.projectRoot, `export * from './lib/pages/${pageName}/${pageName}.module';`),
   ]
 }
 

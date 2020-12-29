@@ -35,10 +35,10 @@ export class ${classify(schema.name) + classify(schema.type)} implements OnInit 
 
 function buildPathRelative(schema) {
   // /libs/writer/web/ui-auth/src/lib/register/pages/register-desktop/register-desktop.page.ts
-  const writeToFilePath = `${schema.projectRoot}/lib/${schema.name}-${schema.mode}/${schema.name}-${schema.mode}.${schema.type}.ts`;
+  const writeToFilePath = `/${schema.projectRoot}/lib/${schema.name}-${schema.mode}/${schema.name}-${schema.mode}.${schema.type}.ts`;
   // /libs/writer/web/ui-auth/src/lib/register/pages/register/register.page
   // do not have .ts to get relative path
-  const implementPath = `${schema.projectRoot}/lib/${schema.name}/${schema.name}.${schema.type}`;
+  const implementPath = `/${schema.projectRoot}/lib/${schema.name}/${schema.name}.${schema.type}`;
   // libs/writer/web/shared/src/lib/layouts/shell-desktop/shell-desktop.layout.ts
   // libs/writer/web/shared/src/lib/layouts/shell/shell.layout
   const relativePath = buildRelativePath(writeToFilePath, implementPath);

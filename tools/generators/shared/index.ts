@@ -6,12 +6,13 @@ import { addRouterOutlet } from '../../utility/add-router-outlet';
 import { getShellModuleData } from '../../utility/import-to-shell-module';
 import { classify } from '@nrwl/workspace/src/utils/strings';
 import { addPageService } from '../../utility/page-service';
-import { getProjectPath } from '../../utility/get-project-path';
 import { FileModule } from '../../utility/file-module.type';
 import { insertRoutes } from '../../utility/insert-routes';
 import { appAndLibSetting, componentSetting } from '../../utility/edit-angular-json';
 import { createPageLazy } from '../../utility/create-page-lazy';
 import { prepareCurrentModule } from '../../utility/prepare-data';
+import { buildAliasFromProjectRoot } from '../../utility/build-alias-from-project-root';
+import { exportToLibIndex } from '../../utility/export-to-index';
 
 export default function (schema: any): Rule {
   return async (tree: Tree, context: SchematicContext) => {
@@ -30,8 +31,9 @@ export default function (schema: any): Rule {
       addExportDeclarationToModule(schema, 'RouterModule', currentModule.path, '@angular/router'),
       createSharedDeviceVersion(schema, 'desktop'),
       createSharedDeviceVersion(schema, 'mobile'),
-      ...createNotFoundPage(schema),
-      ...insertNotFound(schema, shellModule, currentModule.name)
+      createNotFoundPage(schema),
+      ...insertNotFound(tree, schema, shellModule, currentModule.name),
+
     ])
   }
 }
@@ -49,16 +51,19 @@ function createSharedDeviceVersion(schema, deviceVersion: 'desktop' | 'mobile') 
       }),
       addRouterOutlet(true, schema.projectRoot, `shared-${deviceVersion}`),
       ...addPageService(tree, { ...schema, importPageAbsolute: false, path: `${schema.projectRoot}/lib/layouts`, mode: deviceVersion }),
+      exportToLibIndex(schema.projectRoot, `export * from './lib/layouts/shared-${deviceVersion}/shared-${deviceVersion}.layout'`)
     ])
   }
 }
 
 export function createNotFoundPage(schema) {
-  return createPageLazy(schema, 'not-found');
+  return chain([
+    ...createPageLazy(schema, 'not-found'),
+  ]);
 }
 
-export function insertNotFound(schema, shellModule: FileModule, currentModuleName) {
-  const notFoundAbsolutePath = getProjectPath(schema.directory, 'shared');
+export function insertNotFound(tree, schema, shellModule: FileModule, currentModuleName) {
+  const notFoundAbsolutePath = buildAliasFromProjectRoot(schema, tree);
   const NotFoundModuleName = 'NotFound';
   // this line can enable in below
   // \ndeclare const window: any;\nwindow.haveMobile = ${schema.haveMobile};

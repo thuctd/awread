@@ -5,5 +5,6 @@ export function buildAliasFromProjectRoot(schema, tree) {
     const projectRoot = schema.projectRoot.split('/');
     projectRoot.pop();
     projectRoot.shift();
+    // console.log('alias', projectRoot, schema.projectRoot);
     return `@${workspaceName}/${projectRoot.join('/')}`
 }   

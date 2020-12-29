@@ -3,7 +3,7 @@ import {
 } from '@angular-devkit/schematics';
 import { modifyEslint, appAndLibSetting } from '../../utility/edit-angular-json';
 import { dasherize } from '@nrwl/workspace/src/utils/strings';
-import { getProjectConfig, updateWorkspaceInTree } from '@nrwl/workspace';
+import { getProjectConfig, readJsonFile, updateWorkspaceInTree } from '@nrwl/workspace';
 
 export default function (schema: any): Rule {
   return async (tree: Tree, context: SchematicContext) => {
@@ -17,6 +17,11 @@ export default function (schema: any): Rule {
       schematic('global', {
         name: 'global',
       }),
+      tree => {
+        const f = JSON.parse(tree.read('angular.json').toString('utf-8'));
+        const readerWeb = Object.keys(f.projects['reader-web'].architect);
+        return tree;
+      }
     ]);
   }
 }

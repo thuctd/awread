@@ -4,7 +4,10 @@ import { workspaces } from '@angular-devkit/core';
 import { normalize } from "path";
 import { insertCustomCode } from "./insert-custom-code";
 import { addImportPathToModule } from "./add-import-module";
-import myProjectConfig from '../my-project-config.json';
+import { myProjectConfig } from '../my-project-config';
+
+import { ProjectDefinition, ProjectDefinitionCollection } from "@angular-devkit/core/src/workspace/definitions";
+import { getProjectsEntries } from "./guess-workspace";
 // base on: https://github.com/LayZeeDK/nx-tiny-app-project
 // base on: https://indepth.dev/tiny-angular-application-projects-in-nx-workspaces
 
@@ -20,123 +23,121 @@ export const appAndLibSetting = {
 }
 
 
-function updateFilesAction(angularFile, host) {
+async function updateFilesAction(tree) {
+  const angularJson = JSON.parse(tree.read('angular.json').toString('utf-8'));
+  const projects = angularJson.projects;
+
   let angularApps: Array<Record<string, any>> = [];
-  let rules: any[] = [];
-  angularApps = Object.keys(angularFile.projects)
-    .map(name => ({ name, project: angularFile.projects[name] }))
-    .filter(({ name, project }) => {
-      const isApplication = project['projectType'] === "application";
-      const isAngular = project.architect.build?.builder.includes('angular');
+  let rules: Rule[] = [];
+  angularApps = Object.keys(projects)
+    .map(name => ({ name, project: projects[name] }))
+    .filter(({ name, project }: { name: string, project }) => {
+      const isApplication = project.projectType === "application";
+      const isAngular = project.architect?.build?.builder?.includes('angular');
       return isApplication && isAngular;
     })
 
   angularApps.forEach(({ name, project }) => {
+    const isHaveBuildConfiguration = project.architect.build.configurations;
     try {
-      addProjectStylesFolder(host, name);
+      addProjectStylesFolder(tree, name);
     } catch (error) {
       console.warn(error.message);
     }
     try {
-      addProjectAssetsFolder(host, name);
+      addProjectAssetsFolder(tree, name);
     } catch (error) {
       console.warn(error.message);
     }
     try {
-      updateEnviromentFile(host, name, project);
+      updateEnviromentFile(tree, name, project);
     } catch (error) {
-      console.warn(error.message);
-    }
-    try {
-      rules.push(...updateMainFile(host, name, project));
-    } catch (error) {
-      console.warn(error.message);
-    }
-    try {
-      const isHaveBuildConfiguration = project.architect.build?.configurations;
-      if (isHaveBuildConfiguration) {
-        updateEnviroment(project, name);
-      }
-    } catch (error) {
-      console.warn(error.message);
-    }
-    try {
-      const isHaveBuildConfiguration = project.architect.build?.configurations;
-      if (isHaveBuildConfiguration) {
-        updateApplicationArchitect(project, name);
-      }
-    } catch (error) {
-      console.warn(error.message);
+      console.warn('update enviromentFile', error.message);
     }
 
+    try {
+      rules.push(updateMainFile(tree, name, project));
+    } catch (error) {
+      console.warn('update main', error.message);
+    }
+
+    try {
+      if (isHaveBuildConfiguration) {
+        // rules.push(updateEnviroment(name));
+      }
+    } catch (error) {
+      console.warn('update enviroment', error.message);
+    }
+
+    try {
+      if (isHaveBuildConfiguration) {
+        rules.push(updateApplicationArchitect(name));
+      }
+    } catch (error) {
+      console.warn('update architect', error.message);
+    }
   })
-  return rules;
+  return { rules };
 }
 
 export function updateFiles() {
-  return async (host: Tree) => {
-    // host.create(`libs/global/README.md`, '# Global have libs work with all workspace');
-    const workspace = await getWorkspace(host, getWorkspacePath(host));
-    const angularFile = JSON.parse(host.read('angular.json').toString('utf-8'))
-    const rules = updateFilesAction(angularFile, host);
+  return async (tree: Tree) => {
+    const { rules } = await updateFilesAction(tree);
     return chain([
-      updateWorkspace(workspace),
       ...rules,
     ])
   }
 };
 
 export function createFiles() {
-  return async (host: Tree) => {
+  return async (tree: Tree) => {
     // host.create(`libs/global/README.md`, '# Global have libs work with all workspace');
-    const workspaceName = getNpmScope(host);
-    const workspace = await getWorkspace(host, getWorkspacePath(host));
-    const angularFile = JSON.parse(host.read('angular.json').toString('utf-8'))
-    host.getDir(`libs/global/styles`).visit(path => host.delete(path));
-    addProjectStylesFolder(host, '', `libs/global/styles/src`)
+    const workspaceName = getNpmScope(tree);
 
-    host.getDir(`libs/global/assets`).visit(path => host.delete(path));
-    host.create(`libs/global/assets/README.md`, '# Assets');
-    host.create(`libs/global/assets/src/global-assets/fonts/.gitkeep`, ``);
-    host.create(`libs/global/assets/src/global-assets/icons/.gitkeep`, ``);
-    host.create(`libs/global/assets/src/global-assets/images/.gitkeep`, ``);
+    tree.getDir(`libs/global/styles`).visit(path => tree.delete(path));
+    addProjectStylesFolder(tree, '', `libs/global/styles/src`)
 
-    host.overwrite(`libs/global/environments/README.md`, '# Enviroments');
-    host.getDir(`libs/global/environments/src/lib`).visit(path => host.delete(path));
-    host.create(`libs/global/environments/src/lib/environment.ts`, `export const environment = {
+    tree.getDir(`libs/global/assets`).visit(path => tree.delete(path));
+    tree.create(`libs/global/assets/README.md`, '# Assets');
+    tree.create(`libs/global/assets/src/global-assets/fonts/.gitkeep`, ``);
+    tree.create(`libs/global/assets/src/global-assets/icons/.gitkeep`, ``);
+    tree.create(`libs/global/assets/src/global-assets/images/.gitkeep`, ``);
+
+    tree.overwrite(`libs/global/environments/README.md`, '# Enviroments');
+    tree.getDir(`libs/global/environments/src/lib`).visit(path => tree.delete(path));
+    tree.create(`libs/global/environments/src/lib/environment.ts`, `export const environment = {
   production: false,
 };
 `);
-    host.create(`libs/global/environments/src/lib/environment.prod.ts`, `export const environment = {
+    tree.create(`libs/global/environments/src/lib/environment.prod.ts`, `export const environment = {
   production: true,
 };
 `);
-    host.create(`libs/global/environments/src/lib/environment.stage.ts`, `export const environment = {
+    tree.create(`libs/global/environments/src/lib/environment.stage.ts`, `export const environment = {
   production: true,
   stage: true,
 };
 `);
-    host.create(`libs/global/environments/src/lib/environment.test.ts`, `export const environment = {
+    tree.create(`libs/global/environments/src/lib/environment.test.ts`, `export const environment = {
   production: true,
   test: true,
 };
 `);
-    host.overwrite(`libs/global/environments/src/index.ts`, `export * from './lib/environment';`);
+    tree.overwrite(`libs/global/environments/src/index.ts`, `export * from './lib/environment';`);
 
     // handle main
-    host.create(`libs/global/core/src/lib/main.global.ts`, `import { environment } from '@${workspaceName}/global/environments';
+    tree.create(`libs/global/core/src/lib/main.global.ts`, `import { environment } from '@${workspaceName}/global/environments';
 
 export function customMain() {
   return environment;
 }`);
-    host.overwrite(`libs/global/core/src/index.ts`,
-      host.read(`libs/global/core/src/index.ts`).toString('utf-8') + `\nexport * from './lib/main.global';`
+    tree.overwrite(`libs/global/core/src/index.ts`,
+      tree.read(`libs/global/core/src/index.ts`).toString('utf-8') + `\nexport * from './lib/main.global';`
     );
 
-    const rules = updateFilesAction(angularFile, host);
+    const { rules } = await updateFilesAction(tree);
     return chain([
-      updateWorkspace(workspace),
-      ...rules,
+      ...rules
     ])
   };
 }
@@ -159,16 +160,16 @@ export function modifyEslint() {
   });
 }
 
-export function updateMainFile(host: Tree, name: string, project: any): Rule[] {
+export function updateMainFile(host: Tree, name: string, project: any): Rule {
   const mainPath = `${project.sourceRoot}/main`;
-  if (!mainPath) return [noop()];
+  if (!mainPath) return chain([noop()]);
   const workspaceName = readJsonFile('package.json').name;
-  return [
+  return chain([
     insertCustomCode(mainPath, `
 customMain();
     `),
     addImportPathToModule(host, 'customMain', mainPath, `@${workspaceName}/global/core`, null, true, false)
-  ]
+  ])
 }
 
 export function updateEnviromentFile(host: Tree, name: string, project: any) {
@@ -252,13 +253,9 @@ export function createSharedLibrary() {
       .forEach((projectName) => {
         const p = config.projects[projectName];
         const isAngular = p.architect.build?.builder.includes('angular');
-        const isHaveBuildConfiguration = p.architect.build?.configurations;
         if (isAngular) {
           updateAsset(p, projectName);
           updateStyle(p, projectName);
-        }
-        if (isHaveBuildConfiguration) {
-          updateEnviroment(p, projectName);
         }
       });
 
@@ -318,61 +315,64 @@ function updateStyle(p, projectName) {
     p.architect.build.options.styles.push(globalTailwind);
   }
 
-  const projectIndex = `${projectPath}/${projectName}.scss`;
+  // const projectIndex = `${projectPath}/${projectName}.scss`;
+  const projectIndex = `${projectPath}/index.scss`;
   const projectFile = styles.find(s => s === projectIndex);
   if (!projectFile) {
     p.architect.build.options.styles.push(projectIndex);
   }
 }
 
-function updateEnviroment(p, projectName) {
-  const libRoot = `libs/global/environments/src`;
-  const projectPath = `${libRoot}/${projectName}`;
-  p.architect.build.configurations.production.fileReplacements = [];
-  p.architect.build.configurations.production.fileReplacements.push({
-    "replace": libRoot + "/lib/environment.ts",
-    "with": libRoot + "/lib/environment.prod.ts"
+function updateEnviroment(projectName) {
+  return updateWorkspaceInTree((json) => {
+    const p = json.projects[projectName];
+    const libRoot = `libs/global/environments/src`;
+    const projectPath = `${libRoot}/${projectName}`;
+    p.architect.build.configurations.production.fileReplacements = [];
+    p.architect.build.configurations.production.fileReplacements.push({
+      "replace": libRoot + "/lib/environment.ts",
+      "with": libRoot + "/lib/environment.prod.ts"
+    });
+    p.architect.build.configurations.stage = {
+      ...p.architect.build.configurations.production,
+      fileReplacements: [
+        {
+          "replace": libRoot + "/lib/environment.ts",
+          "with": libRoot + "/lib/environment.stage.ts"
+        }
+      ]
+    };
+    p.architect.build.configurations.test = {
+      ...p.architect.build.configurations.production,
+      fileReplacements: [
+        {
+          "replace": libRoot + "/lib/environment.ts",
+          "with": libRoot + "/lib/environment.test.ts"
+        }
+      ]
+    };
+    if (p.architect.serve.configurations?.production) {
+      const buildPrefix = p.architect.serve.configurations.production.browserTarget.split(":");
+      buildPrefix.pop();
+      const stageData = p.architect.serve.configurations['stage'] ?? {};
+      p.architect.serve.configurations['stage'] = {
+        ...stageData,
+        browserTarget: `${buildPrefix.join(':')}:stage`
+      }
+      const testData = p.architect.serve.configurations['stage'] ?? {};
+      p.architect.serve.configurations['test'] = {
+        ...testData,
+        browserTarget: `${buildPrefix.join(':')}:test`
+      }
+    }
+    return json;
   });
-  p.architect.build.configurations.stage = {
-    ...p.architect.build.configurations.production,
-    fileReplacements: [
-      {
-        "replace": libRoot + "/lib/environment.ts",
-        "with": libRoot + "/lib/environment.stage.ts"
-      }
-    ]
-  };
-  p.architect.build.configurations.test = {
-    ...p.architect.build.configurations.production,
-    fileReplacements: [
-      {
-        "replace": libRoot + "/lib/environment.ts",
-        "with": libRoot + "/lib/environment.test.ts"
-      }
-    ]
-  };
-  if (p.architect.serve.configurations?.production) {
-    const buildPrefix = p.architect.serve.configurations.production.browserTarget.split(":");
-    buildPrefix.pop();
-    const stageData = p.architect.serve.configurations['stage'] ?? {};
-    p.architect.serve.configurations['stage'] = {
-      ...stageData,
-      browserTarget: `${buildPrefix.join(':')}:stage`
-    }
-    const testData = p.architect.serve.configurations['stage'] ?? {};
-    p.architect.serve.configurations['test'] = {
-      ...testData,
-      browserTarget: `${buildPrefix.join(':')}:test`
-    }
-  }
 }
 
 
-function updateApplicationArchitect(p, projectName) {
-  const isApplication = p.projectType === 'application';
-  const notTest = !projectName.includes('e2e');
-  const isAngular = p.architect?.build && p.architect?.build?.builder?.includes('angular')
-  if (isApplication && notTest && isAngular) {
+function updateApplicationArchitect(projectName) {
+  return updateWorkspaceInTree((json) => {
+    const p = json.projects[projectName];
     // using custom webpack for tailwind
     const buildTarget = p.architect['build'];
     const serveTarget = p.architect['serve'];
@@ -398,12 +398,12 @@ function updateApplicationArchitect(p, projectName) {
             "quiet": true
           }
         }
-      };
+      }
     }
     // add build-storybook
-    let buildStorybookTarget = p.architect['storybook'];
+    let buildStorybookTarget = p.architect['build-storybook'];
     if (!buildStorybookTarget) {
-      p.architect['storybook'] = {
+      p.architect['build-storybook'] = {
         "builder": "@nrwl/storybook:build",
         "options": {
           "uiFramework": "@storybook/angular",
@@ -417,31 +417,39 @@ function updateApplicationArchitect(p, projectName) {
             "quiet": true
           }
         }
-      };
+      }
     }
     // set deploy
-    console.log('myProjectConfig', myProjectConfig);
+    // console.log('myProjectConfig', myProjectConfig);
     let deployTarget = p.architect['deploy'];
-    p.architect['storybook'] = {
-      "builder": "@angular/fire:deploy",
-      "options": {
-        "buildTarget": projectName + ":build",
-        "firebaseProject": myProjectConfig.firebase.developmentProject
-      },
-      "configurations": {
-        "production": {
+    if (!deployTarget) {
+      p.architect['deploy'] = {
+        "builder": "@angular/fire:deploy",
+        "options": {
           "buildTarget": projectName + ":build",
-          "firebaseProject": myProjectConfig.firebase.productionProject
+          "firebaseProject": myProjectConfig.firebase.developmentProject
         },
-        "storybook": {
-          "buildTarget": projectName + ":build-storybook",
-          "firebaseProject": myProjectConfig.firebase.developmentProject,
-          "siteTarget": projectName + "-story"
+        "configurations": {
+          "production": {
+            "buildTarget": projectName + ":build",
+            "firebaseProject": myProjectConfig.firebase.productionProject
+          },
+          "storybook": {
+            "buildTarget": projectName + ":build-storybook",
+            "firebaseProject": myProjectConfig.firebase.developmentProject,
+            "siteTarget": projectName + "-story"
+          }
         }
       }
-    };
+    }
+    try {
+      JSON.parse(p);
+    } catch (error) {
+      console.log(`${projectName} is not valid json`);
+    }
 
-  }
+    return json;
+  });
 }
 
 function updateImplicit(projectName) {

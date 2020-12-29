@@ -50,7 +50,7 @@ export async function guessProject(tree, schema) {
 
 }
 
-async function getProjectsEntries(tree) {
+export async function getProjectsEntries(tree) {
     const workspace = await getWorkspace(tree);
     const entries = Object.fromEntries(workspace.projects.entries());
     return Object.entries<any>(entries);
