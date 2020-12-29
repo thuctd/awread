@@ -1,5 +1,4 @@
 const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
-const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const path = require('path');
 const webpack = require('webpack');
 module.exports = {

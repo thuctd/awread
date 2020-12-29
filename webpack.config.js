@@ -29,6 +29,8 @@ function patchPostCSS(webpackConfig, tailwindConfig, components = false) {
   }
 }
 
+const webpack = require('webpack');
+
 module.exports = (config) => {
   const isProd = config.mode === "production";
   const tailwindConfig = require("./tailwind.config.js")(isProd);
