@@ -78,7 +78,7 @@ async function guessProjectByPath(tree, schema) {
 
 async function guessDefaultProject(tree, schema) {
     const projectName = await getDefaultProjectName(tree);
-    const projectRoot = await getDefaultProjectRoot(tree, schema);
+    const projectRoot = await getDefaultProjectRoot(tree, projectName);
     return { projectName, projectRoot };
 }
 
@@ -101,9 +101,9 @@ async function getDefaultProjectName(tree) {
     return angularFile.defaultProject;
 }
 
-async function getDefaultProjectRoot(tree, schema) {
+async function getDefaultProjectRoot(tree, projectName) {
     const workspace = await getWorkspace(tree);
-    const project = workspace.projects.get(schema.project);
+    const project = workspace.projects.get(projectName);
     return project.sourceRoot;
 }
 
