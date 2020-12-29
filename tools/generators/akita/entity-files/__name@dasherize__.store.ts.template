@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { EntityState, EntityStore, StoreConfig, ActiveState } from '@datorama/akita';
-import { <%= singular(classify(name)) %> } from '../models/<%= singular(dasherize(name)) %>.model';
+import { <%= singular(classify(name)) %> } from '../models';
 
 export enum VISIBILITY_FILTER {
     SHOW_ALL = 'SHOW_ALL'
