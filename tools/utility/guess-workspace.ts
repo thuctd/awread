@@ -3,7 +3,7 @@ import { getWorkspace, buildDefaultPath } from '@schematics/angular/utility/work
 import { Path, normalize, strings } from '@angular-devkit/core';
 import { getNpmScope } from '@nrwl/workspace';
 
-export async function getWorkspaceName(tree) {
+export function getWorkspaceName(tree) {
     return getNpmScope(tree);
 }
 

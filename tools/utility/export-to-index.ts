@@ -1,7 +1,4 @@
-import {
-  chain, externalSchematic, Rule, SchematicContext, Tree, schematic, noop, apply, url, template,
-  branchAndMerge, mergeWith, move, MergeStrategy, applyTemplates
-} from '@angular-devkit/schematics';
+import { Tree } from '@angular-devkit/schematics';
 import * as ts from 'typescript';
 import * as path from 'path';
 import { addGlobal, insert, RemoveChange } from '@nrwl/workspace';
