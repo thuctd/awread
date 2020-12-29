@@ -39,6 +39,13 @@ async function updateFilesAction(tree) {
 
   angularApps.forEach(({ name, project }) => {
     const isHaveBuildConfiguration = project.architect.build.configurations;
+
+    try {
+      addStorybookFile(tree, name, project);
+    } catch (error) {
+      console.warn(error.message);
+    }
+
     try {
       addProjectStylesFolder(tree, name);
     } catch (error) {
@@ -185,6 +192,42 @@ export function addProjectAssetsFolder(host, projectName) {
   host.create(`libs/global/assets/src/projects/${projectName}/assets/fonts/.gitkeep`, ``);
   host.create(`libs/global/assets/src/projects/${projectName}/assets/icons/.gitkeep`, ``);
   host.create(`libs/global/assets/src/projects/${projectName}/assets/images/.gitkeep`, ``);
+}
+
+export function addStorybookFile(tree: Tree, projectName, project) {
+  const mainPath = `${project.root}/.storybook/main.js`;
+  const tsconfigStorybook = `${project.root}/.storybook/tsconfig.json`;
+  const directoryRoot = project.root.split('/');
+  directoryRoot.pop();
+  const isApplication = project.projectType === 'application';
+  const isLib = project.projectType === 'library' && projectName.includes('ui');
+  const isStorybookExist = tree.exists(mainPath);
+  if (!isStorybookExist && (isApplication || isLib)) {
+    tree.create(mainPath, `const rootMain = require('../../../../.storybook/main');
+rootMain.stories.push(...[
+    '${isApplication ? '@libs/' + directoryRoot.join('/') : '../src/lib'}/**/*.stories.mdx',
+    '${isApplication ? '@libs/' + directoryRoot.join('/') : '../src/lib'}/**/*.stories.@(js|jsx|ts|tsx)'
+])
+
+module.exports = rootMain;`);
+    tree.create(tsconfigStorybook, `{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "emitDecoratorMetadata": true
+  },
+  "exclude": ["../**/*.spec.ts" ],
+  "include": ["../src/**/*"]
+}
+`);
+  }
+
+  const rules = [];
+  rules.push(updateJsonInTree(`${project.root}/tsconfig.json`, (json) => {
+    json.references.push({
+      "path": "./.storybook/tsconfig.json"
+    })
+  }));
+  return rules;
 }
 
 export function addProjectStylesFolder(host, projectName, path = `libs/global/styles/src/projects/${projectName}`) {
@@ -442,12 +485,6 @@ function updateApplicationArchitect(projectName) {
         }
       }
     }
-    try {
-      JSON.parse(p);
-    } catch (error) {
-      console.log(`${projectName} is not valid json`);
-    }
-
     return json;
   });
 }
@@ -469,92 +506,3 @@ function updateImplicit(projectName) {
     return json;
   });
 }
-
-
-
-// function updateFile() {
-//   return async (host: Tree) => {
-//     const workspace = await getWorkspace(host, getWorkspacePath(host));
-//     for (const [projectName, projectDefinition] of workspace.projects) {
-//       const architects = projectDefinition.targets;
-//       for (const [targetName, targetDefination] of architects) {
-//         if (targetDefination.builder !== '@nrwl/nx-plugin:e2e') {
-//           continue;
-//         }
-//         const updatedOptions = { ...targetDefination.options };
-//         delete updatedOptions.tsSpecConfig;
-//         targetDefination.options = updatedOptions;
-//       }
-//     }
-//     return updateWorkspace(workspace);
-//   };
-// }
-
-
-
-
-// function updateAngularJsonOptions(host, options) {
-//   var projectDir = (options.directory || options.name) + '/';
-//   var configPath = projectDir + 'angular.json';
-//   var workspace = getWorkspace(host, projectDir);
-
-//   if (host.exists(configPath)) {
-//     var currentAngularJson = host.read(configPath)!.toString('utf-8');
-//     var json = JSON.parse(currentAngularJson);
-//     var optionsJson = json['projects'][options.name]['architect']['build']['options'];
-//     optionsJson['assets'].push("src/custom1.scss");
-//     optionsJson['assets'].push("src/custom2.scss");
-//     json['projects'][options.name]['architect']['build']['options'] = optionsJson;
-//     host.overwrite(configPath, JSON.stringify(json, null, 2));
-//   } else {
-//     throw new SchematicsException('angular.json not found at ' + configPath);
-//   }
-//   return host;
-// }
-
-// function removeDeprecatedJestBuilderOptions() {
-//   return async (host: Tree) => {
-//     const workspace = await getWorkspace(host, getWorkspacePath(host));
-//     for (const [, projectDefinition] of workspace.projects) {
-//       for (const [, testTarget] of projectDefinition.targets) {
-//         if (testTarget.builder !== '@nrwl/nx-plugin:e2e') {
-//           continue;
-//         }
-//         const updatedOptions = { ...testTarget.options };
-//         delete updatedOptions.tsSpecConfig;
-//         testTarget.options = updatedOptions;
-//       }
-//     }
-//     return updateWorkspace(workspace);
-//   };
-// }
-
-// function createSharedItem(projectName: string) {
-//   return updateWorkspaceInTree((config) => {
-//     const filteredProjects: Array<Record<string, any>> = [];
-//     Object.keys(config.projects).forEach((name) => {
-//       if (
-//         config.projects[name].architect &&
-//         config.projects[name].architect.e2e &&
-//         config.projects[name].architect.e2e.builder ===
-//         '@nrwl/cypress:cypress' &&
-//         config.projects[name].architect.e2e.options.devServerTarget.endsWith(
-//           ':storybook'
-//         )
-//       ) {
-//         filteredProjects.push(config.projects[name]);
-//       }
-//     });
-//     filteredProjects.forEach((p) => {
-//       delete p.architect.e2e.options.headless;
-//       delete p.architect.e2e.options.watch;
-//       delete p.architect.e2e.configurations;
-//     });
-//     return config;
-//   })
-// }
-
-
-// export default function update(): Rule {
-//   return chain([removeDeprecatedJestBuilderOptions(), formatFiles()]);
-// }
