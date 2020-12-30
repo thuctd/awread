@@ -21,6 +21,11 @@ module.exports = {
     '<rootDir>/libs/writer/web/ui-creation',
     '<rootDir>/libs/writer/web/feature-creation',
     '<rootDir>/libs/global/packages',
-
+    '<rootDir>/apps/reader/web',
+    '<rootDir>/libs/reader/web/feature-shell',
+    '<rootDir>/libs/reader/web/shared',
+    '<rootDir>/apps/reader/phone',
+    '<rootDir>/libs/reader/phone/feature-shell',
+    '<rootDir>/libs/reader/phone/shared',
   ],
 };

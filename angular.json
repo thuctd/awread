@@ -143,7 +143,8 @@
               "apps/writer/web/src/styles.scss",
               "libs/global/styles/src/tailwind.scss",
               "libs/global/styles/src/index.scss",
-              "libs/global/styles/src/projects/writer-web/writer-web.scss"
+              "libs/global/styles/src/projects/writer-web/writer-web.scss",
+              "libs/global/styles/src/projects/writer-web/index.scss"
             ],
             "scripts": [],
             "customWebpackConfig": {
@@ -431,7 +432,8 @@
               "apps/writer/phone/src/styles.scss",
               "libs/global/styles/src/tailwind.scss",
               "libs/global/styles/src/index.scss",
-              "libs/global/styles/src/projects/writer-phone/writer-phone.scss"
+              "libs/global/styles/src/projects/writer-phone/writer-phone.scss",
+              "libs/global/styles/src/projects/writer-phone/index.scss"
             ],
             "scripts": [],
             "customWebpackConfig": {
@@ -562,6 +564,54 @@
           "options": {
             "jestConfig": "apps/writer/phone/jest.config.js",
             "passWithNoTests": true
+          }
+        },
+        "storybook": {
+          "builder": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "port": 4400,
+            "config": {
+              "configFolder": "apps/writer/phone/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "builder": "@nrwl/storybook:build",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "outputPath": "dist/storybook/writer-phone",
+            "config": {
+              "configFolder": "apps/writer/phone/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "buildTarget": "writer-phone:build",
+            "firebaseProject": "awready-beta"
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "writer-phone:build",
+              "firebaseProject": "awread-2020"
+            },
+            "storybook": {
+              "buildTarget": "writer-phone:build-storybook",
+              "firebaseProject": "awready-beta",
+              "siteTarget": "writer-phone-story"
+            }
           }
         }
       }
@@ -1155,6 +1205,484 @@
           }
         }
       }
+    },
+    "reader-web": {
+      "projectType": "application",
+      "root": "apps/reader/web",
+      "sourceRoot": "apps/reader/web/src",
+      "prefix": "awread",
+      "architect": {
+        "build": {
+          "builder": "@angular-builders/custom-webpack:browser",
+          "options": {
+            "outputPath": "dist/apps/reader/web",
+            "index": "apps/reader/web/src/index.html",
+            "main": "apps/reader/web/src/main.ts",
+            "polyfills": "apps/reader/web/src/polyfills.ts",
+            "tsConfig": "apps/reader/web/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "apps/reader/web/src/favicon.ico",
+              "apps/reader/web/src/assets",
+              {
+                "glob": "**/*",
+                "input": "libs/global/assets/src/global-assets",
+                "output": "global-assets"
+              },
+              {
+                "glob": "**/*",
+                "input": "libs/global/assets/src/projects/reader-web/assets",
+                "output": "assets"
+              }
+            ],
+            "styles": [
+              "apps/reader/web/src/styles.scss",
+              "libs/global/styles/src/index.scss",
+              "libs/global/styles/src/tailwind.scss",
+              "libs/global/styles/src/projects/reader-web/index.scss"
+            ],
+            "scripts": [],
+            "customWebpackConfig": {
+              "path": "webpack.config.js"
+            }
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/reader/web/src/environments/environment.ts",
+                  "with": "apps/reader/web/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-builders/custom-webpack:dev-server",
+          "options": {
+            "browserTarget": "reader-web:build",
+            "proxyConfig": "apps/reader/web/proxy.conf.json"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "reader-web:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "reader-web:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/reader/web/src/**/*.ts",
+              "apps/reader/web/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/apps/reader/web"
+          ],
+          "options": {
+            "jestConfig": "apps/reader/web/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "storybook": {
+          "builder": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "port": 4400,
+            "config": {
+              "configFolder": "apps/reader/web/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "builder": "@nrwl/storybook:build",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "outputPath": "dist/storybook/reader-web",
+            "config": {
+              "configFolder": "apps/reader/web/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "buildTarget": "reader-web:build",
+            "firebaseProject": "awready-beta"
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "reader-web:build",
+              "firebaseProject": "awread-2020"
+            },
+            "storybook": {
+              "buildTarget": "reader-web:build-storybook",
+              "firebaseProject": "awready-beta",
+              "siteTarget": "reader-web-story"
+            }
+          }
+        }
+      }
+    },
+    "reader-web-e2e": {
+      "root": "apps/reader/web-e2e",
+      "sourceRoot": "apps/reader/web-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/reader/web-e2e/cypress.json",
+            "tsConfig": "apps/reader/web-e2e/tsconfig.e2e.json",
+            "devServerTarget": "reader-web:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "reader-web:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/reader/web-e2e/**/*.{js,ts}"
+            ]
+          }
+        }
+      }
+    },
+    "reader-web-feature-shell": {
+      "projectType": "library",
+      "root": "libs/reader/web/feature-shell",
+      "sourceRoot": "libs/reader/web/feature-shell/src",
+      "prefix": "awread",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/reader/web/feature-shell/src/**/*.ts",
+              "libs/reader/web/feature-shell/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/reader/web/feature-shell"
+          ],
+          "options": {
+            "jestConfig": "libs/reader/web/feature-shell/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "reader-web-shared": {
+      "projectType": "library",
+      "root": "libs/reader/web/shared",
+      "sourceRoot": "libs/reader/web/shared/src",
+      "prefix": "awread",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/reader/web/shared/src/**/*.ts",
+              "libs/reader/web/shared/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/reader/web/shared"
+          ],
+          "options": {
+            "jestConfig": "libs/reader/web/shared/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "reader-phone": {
+      "projectType": "application",
+      "root": "apps/reader/phone",
+      "sourceRoot": "apps/reader/phone/src",
+      "prefix": "awread",
+      "architect": {
+        "build": {
+          "builder": "@angular-builders/custom-webpack:browser",
+          "options": {
+            "outputPath": "dist/apps/reader/phone",
+            "index": "apps/reader/phone/src/index.html",
+            "main": "apps/reader/phone/src/main.ts",
+            "polyfills": "apps/reader/phone/src/polyfills.ts",
+            "tsConfig": "apps/reader/phone/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "apps/reader/phone/src/favicon.ico",
+              "apps/reader/phone/src/assets",
+              {
+                "glob": "**/*",
+                "input": "libs/global/assets/src/global-assets",
+                "output": "global-assets"
+              },
+              {
+                "glob": "**/*",
+                "input": "libs/global/assets/src/projects/reader-phone/assets",
+                "output": "assets"
+              }
+            ],
+            "styles": [
+              "apps/reader/phone/src/styles.scss",
+              "libs/global/styles/src/index.scss",
+              "libs/global/styles/src/tailwind.scss",
+              "libs/global/styles/src/projects/reader-phone/index.scss"
+            ],
+            "scripts": [],
+            "customWebpackConfig": {
+              "path": "webpack.config.js"
+            }
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/reader/phone/src/environments/environment.ts",
+                  "with": "apps/reader/phone/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-builders/custom-webpack:dev-server",
+          "options": {
+            "browserTarget": "reader-phone:build",
+            "proxyConfig": "apps/reader/phone/proxy.conf.json"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "reader-phone:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "reader-phone:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/reader/phone/src/**/*.ts",
+              "apps/reader/phone/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/apps/reader/phone"
+          ],
+          "options": {
+            "jestConfig": "apps/reader/phone/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "storybook": {
+          "builder": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "port": 4400,
+            "config": {
+              "configFolder": "apps/reader/phone/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "builder": "@nrwl/storybook:build",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "outputPath": "dist/storybook/reader-phone",
+            "config": {
+              "configFolder": "apps/reader/phone/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "buildTarget": "reader-phone:build",
+            "firebaseProject": "awready-beta"
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "reader-phone:build",
+              "firebaseProject": "awread-2020"
+            },
+            "storybook": {
+              "buildTarget": "reader-phone:build-storybook",
+              "firebaseProject": "awready-beta",
+              "siteTarget": "reader-phone-story"
+            }
+          }
+        }
+      }
+    },
+    "reader-phone-e2e": {
+      "root": "apps/reader/phone-e2e",
+      "sourceRoot": "apps/reader/phone-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/reader/phone-e2e/cypress.json",
+            "tsConfig": "apps/reader/phone-e2e/tsconfig.e2e.json",
+            "devServerTarget": "reader-phone:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "reader-phone:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/reader/phone-e2e/**/*.{js,ts}"
+            ]
+          }
+        }
+      }
+    },
+    "reader-phone-feature-shell": {
+      "projectType": "library",
+      "root": "libs/reader/phone/feature-shell",
+      "sourceRoot": "libs/reader/phone/feature-shell/src",
+      "prefix": "awread",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/reader/phone/feature-shell/src/**/*.ts",
+              "libs/reader/phone/feature-shell/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/reader/phone/feature-shell"
+          ],
+          "options": {
+            "jestConfig": "libs/reader/phone/feature-shell/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "reader-phone-shared": {
+      "projectType": "library",
+      "root": "libs/reader/phone/shared",
+      "sourceRoot": "libs/reader/phone/shared/src",
+      "prefix": "awread",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/reader/phone/shared/src/**/*.ts",
+              "libs/reader/phone/shared/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/reader/phone/shared"
+          ],
+          "options": {
+            "jestConfig": "libs/reader/phone/shared/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   },
   "cli": {
@@ -1193,6 +1721,9 @@
       "style": "scss",
       "displayBlock": true,
       "changeDetection": "OnPush"
+    },
+    "@nrwl/angular:component": {
+      "style": "scss"
     }
   },
   "defaultProject": "writer-web"
