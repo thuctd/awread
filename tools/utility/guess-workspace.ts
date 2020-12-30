@@ -84,13 +84,15 @@ async function guessDefaultProject(tree, schema) {
 
 async function guessProjectRoot(tree, projectName) {
     if (!projectName) return;
-    const projectEntries = await this.getProjectsEntries(tree);
+    const projectEntries = await getProjectsEntries(tree);
     let projectRoot;
     for (const [name, project] of projectEntries) {
-        try {
-            projectRoot = projectEntries.sourceRoot;
-        } catch (error) {
-            throw new SchematicsException(`cannot detect sourceRoot of project: ${projectName}`)
+        if (name === projectName) {
+            try {
+                projectRoot = project.sourceRoot;
+            } catch (error) {
+                throw new SchematicsException(`cannot detect sourceRoot of project: ${projectName}`)
+            }
         }
     }
     return projectRoot
