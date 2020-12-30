@@ -1,4 +1,6 @@
-export function prepareCurrentModule(schema) {
+export function prepareCurrentModule(schema, context) {
+    const kind = schema.kind ?? context.schematic.description.name;
+    schema.kind = kind;
     const directoryNoSlash: string = schema.directory.replace(/\//g, '-').trim();
     const currentModuleName = `${directoryNoSlash}-${schema.kind ? schema.kind + '-' : ''}${schema.name}`;
     const projectRoot = `libs/${schema.directory}/${schema.kind ? schema.kind + '-' : ''}${schema.name}/src`;

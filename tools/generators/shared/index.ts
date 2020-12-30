@@ -16,7 +16,7 @@ import { exportToLibIndex } from '../../utility/export-to-index';
 
 export default function (schema: any): Rule {
   return async (tree: Tree, context: SchematicContext) => {
-    const currentModule = prepareCurrentModule(schema);
+    const currentModule = prepareCurrentModule(schema, context);
     const shellModule = await getShellModuleData(tree, schema);
 
     return chain([

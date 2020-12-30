@@ -13,7 +13,7 @@ export default function (schema: any): Rule {
   return async (tree: Tree, context: SchematicContext) => {
     schema = await guessApplicationToSchema(schema, tree);
     const workspaceName = getWorkspaceName(tree);
-    const currentModule = prepareCurrentModule(schema);
+    const currentModule = prepareCurrentModule(schema, context);
 
     return chain([
       externalSchematic('@nrwl/angular', 'lib', {
