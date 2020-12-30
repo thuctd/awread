@@ -64,6 +64,12 @@
       "@awread/reader/web/ui-auth": ["libs/reader/web/ui-auth/src/index.ts"],
       "@awread/reader/web/feature-auth": [
         "libs/reader/web/feature-auth/src/index.ts"
+      ],
+      "@awread/reader/web/ui-author": [
+        "libs/reader/web/ui-author/src/index.ts"
+      ],
+      "@awread/reader/web/feature-author": [
+        "libs/reader/web/feature-author/src/index.ts"
       ]
     }
   },

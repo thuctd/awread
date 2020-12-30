@@ -9,6 +9,7 @@ import {
   NotFoundPage,
 } from '@awread/reader/web/shared';
 import { ReaderWebUiAuthModule } from '@awread/reader/web/ui-auth';
+import { ReaderWebUiAuthorModule } from '@awread/reader/web/ui-author';
 
 declare const window: Window & { haveMobile: boolean };
 
@@ -36,6 +37,7 @@ const routes: Routes = [
     GlobalCoreModule,
     ReaderWebSharedModule,
     ReaderWebUiAuthModule,
+    ReaderWebUiAuthorModule,
   ],
   exports: [RouterModule, GlobalCoreModule],
 })

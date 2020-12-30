@@ -1694,6 +1694,86 @@
           }
         }
       }
+    },
+    "reader-web-ui-author": {
+      "projectType": "library",
+      "root": "libs/reader/web/ui-author",
+      "sourceRoot": "libs/reader/web/ui-author/src",
+      "prefix": "awread",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/reader/web/ui-author/src/**/*.ts",
+              "libs/reader/web/ui-author/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/reader/web/ui-author"],
+          "options": {
+            "jestConfig": "libs/reader/web/ui-author/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "storybook": {
+          "builder": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "port": 4400,
+            "config": {
+              "configFolder": "libs/reader/web/ui-author/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "builder": "@nrwl/storybook:build",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "outputPath": "dist/storybook/reader-web-ui-author",
+            "config": {
+              "configFolder": "libs/reader/web/ui-author/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        }
+      }
+    },
+    "reader-web-feature-author": {
+      "projectType": "library",
+      "root": "libs/reader/web/feature-author",
+      "sourceRoot": "libs/reader/web/feature-author/src",
+      "prefix": "awread",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/reader/web/feature-author/src/**/*.ts",
+              "libs/reader/web/feature-author/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/reader/web/feature-author"],
+          "options": {
+            "jestConfig": "libs/reader/web/feature-author/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   },
   "cli": {
