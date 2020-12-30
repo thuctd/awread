@@ -27,5 +27,7 @@ module.exports = {
     '<rootDir>/apps/reader/phone',
     '<rootDir>/libs/reader/phone/feature-shell',
     '<rootDir>/libs/reader/phone/shared',
+    '<rootDir>/libs/reader/web/ui-auth',
+    '<rootDir>/libs/reader/web/feature-auth',
   ],
 };

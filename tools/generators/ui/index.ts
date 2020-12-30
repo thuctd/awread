@@ -3,7 +3,9 @@ import {
 } from '@angular-devkit/schematics';
 import { addImportDeclarationToModule } from '../../utility/add-import-module';
 import { addRouterOutlet } from '../../utility/add-router-outlet';
-import { guessProjectToSchema } from '../../utility/guess-workspace';
+import { addStorybookFile } from '../../utility/edit-angular-json';
+import { editArchitectStorybookLibrary } from '../../utility/edit-architect-angular-json';
+import { getProject } from '../../utility/guess-workspace';
 import { getShellModuleData } from '../../utility/import-to-shell-module';
 import { prepareCurrentModule } from '../../utility/prepare-data';
 
@@ -20,9 +22,11 @@ export default function (schema: any): Rule {
         tags: `scope:${schema.kind}-${schema.name},scope:shared,type:${schema.kind}`,
         style: 'scss'
       }),
+      addStorybookFileToUi(schema),
+      editArchitectStorybookLibrary(schema.project),
       ...addPage(schema, schema.name),
       addImportDeclarationToModule(schema, `${schema.project}-module`, shellModule.filePath),
-      addRouterOutlet(true, schema.projectRoot, schema.name),
+      addRouterOutlet(true, schema, schema.name),
       schematic('feature', {
         name: schema.name,
         directory: schema.directory,
@@ -40,4 +44,14 @@ export function addPage(schema, featureName): Rule[] {
         ui: featureName
       })) : [];
   return !pages.length ? [] : pages;
+}
+
+export function addStorybookFileToUi(schema) {
+  return async (tree) => {
+    const projectName = schema.project;
+    const project = await getProject(tree, projectName);
+    return chain([
+      addStorybookFile(tree, projectName, project)
+    ])
+  }
 }

@@ -3,9 +3,9 @@ import {
   branchAndMerge, mergeWith, move
 } from '@angular-devkit/schematics';
 
-export function addRouterOutlet(usingLayout: boolean, projectRoot, targetName, customContent = '\n<router-outlet></router-outlet>') {
+export function addRouterOutlet(usingLayout: boolean, schema, targetName, customContent = '\n<router-outlet></router-outlet>') {
   return (tree: Tree) => {
-    const path = usingLayout ? `${projectRoot}/lib/layouts/${targetName}/${targetName}.layout.html` : `${projectRoot}/lib/${targetName}.html`;
+    const path = usingLayout ? `${schema.projectRoot}/lib/layouts/${targetName}/${targetName}.layout.html` : `${schema.projectRoot}/${schema.projectType === 'application' ? 'app' : 'lib'}/${targetName}.html`;
     let sharedLayout = tree.read(path);
     if (sharedLayout != null) {
       let newData = sharedLayout.toString() + customContent;

@@ -122,6 +122,12 @@
     },
     "reader-phone-shared": {
       "tags": ["scope:shared"]
+    },
+    "reader-web-ui-auth": {
+      "tags": ["scope:ui-auth", "scope:shared", "type:ui"]
+    },
+    "reader-web-feature-auth": {
+      "tags": ["scope:feature-auth", "scope:shared", "type:feature"]
     }
   }
 }

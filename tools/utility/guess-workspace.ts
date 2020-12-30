@@ -112,7 +112,7 @@ async function getDefaultProjectName(tree) {
     return angularFile.defaultProject;
 }
 
-async function getProject(tree, projectName) {
+export async function getProject(tree, projectName) {
     const angularFile = JSON.parse(tree.read('angular.json').toString('utf-8'));
     return angularFile.projects[projectName];
 }

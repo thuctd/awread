@@ -27,7 +27,7 @@ export default function (schema: any): Rule {
       addImportDeclarationToModule(schema, 'GlobalCoreModule', currentModule.path, `@${workspaceName}/global/core`),
       addExportDeclarationToModule(schema, 'GlobalCoreModule', currentModule.path, `@${workspaceName}/global/core`),
       importShellToAppModule(schema, currentModule.name, schema.applicationRoot),
-      addRouterOutlet(false, schema.applicationRoot, `app.component`)
+      addRouterOutlet(false, schema, `app.component`)
     ])
   }
 }

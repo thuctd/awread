@@ -41,7 +41,7 @@ async function updateFilesAction(tree) {
     const isHaveBuildConfiguration = project.architect.build.configurations;
 
     try {
-      addStorybookFile(tree, name, project);
+      rules.push(addStorybookFile(tree, name, project));
     } catch (error) {
       console.warn(error.message);
     }
@@ -202,8 +202,9 @@ export function addStorybookFile(tree: Tree, projectName, project) {
   const isApplication = project.projectType === 'application';
   const isLib = project.projectType === 'library' && projectName.includes('ui');
   const isStorybookExist = tree.exists(mainPath);
+  const relativeFolderNumber = project.root.split('/').length;
   if (!isStorybookExist && (isApplication || isLib)) {
-    tree.create(mainPath, `const rootMain = require('../../../../.storybook/main');
+    tree.create(mainPath, `const rootMain = require('${`../`.repeat(relativeFolderNumber + 1)}.storybook/main');
 rootMain.stories.push(...[
     '${isApplication ? '@libs/' + directoryRoot.join('/') : '../src/lib'}/**/*.stories.mdx',
     '${isApplication ? '@libs/' + directoryRoot.join('/') : '../src/lib'}/**/*.stories.@(js|jsx|ts|tsx)'
@@ -223,11 +224,15 @@ module.exports = rootMain;`);
 
   const rules = [];
   rules.push(updateJsonInTree(`${project.root}/tsconfig.json`, (json) => {
-    json.references.push({
-      "path": "./.storybook/tsconfig.json"
-    })
+    const tsconfigStorybookRefs = json.references.find(ref => ref.path.includes('storybook'));
+    if (!tsconfigStorybookRefs) {
+      json.references.push({
+        "path": "./.storybook/tsconfig.json"
+      })
+    }
+    return json;
   }));
-  return rules;
+  return chain(rules);
 }
 
 export function addProjectStylesFolder(host, projectName, path = `libs/global/styles/src/projects/${projectName}`) {

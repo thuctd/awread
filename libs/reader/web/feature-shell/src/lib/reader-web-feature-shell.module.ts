@@ -8,6 +8,7 @@ import {
   SharedMobileLayout,
   NotFoundPage,
 } from '@awread/reader/web/shared';
+import { ReaderWebUiAuthModule } from '@awread/reader/web/ui-auth';
 
 declare const window: Window & { haveMobile: boolean };
 
@@ -34,6 +35,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     GlobalCoreModule,
     ReaderWebSharedModule,
+    ReaderWebUiAuthModule,
   ],
   exports: [RouterModule, GlobalCoreModule],
 })

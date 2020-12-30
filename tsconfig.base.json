@@ -60,7 +60,11 @@
       "@awread/reader/phone/feature-shell": [
         "libs/reader/phone/feature-shell/src/index.ts"
       ],
-      "@awread/reader/phone/shared": ["libs/reader/phone/shared/src/index.ts"]
+      "@awread/reader/phone/shared": ["libs/reader/phone/shared/src/index.ts"],
+      "@awread/reader/web/ui-auth": ["libs/reader/web/ui-auth/src/index.ts"],
+      "@awread/reader/web/feature-auth": [
+        "libs/reader/web/feature-auth/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]
