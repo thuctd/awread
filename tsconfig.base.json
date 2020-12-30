@@ -76,6 +76,12 @@
       ],
       "@awread/reader/web/feature-single": [
         "libs/reader/web/feature-single/src/index.ts"
+      ],
+      "@awread/reader/web/ui-market": [
+        "libs/reader/web/ui-market/src/index.ts"
+      ],
+      "@awread/reader/web/feature-market": [
+        "libs/reader/web/feature-market/src/index.ts"
       ]
     }
   },

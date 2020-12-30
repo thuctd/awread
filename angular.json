@@ -14,9 +14,7 @@
             "outputPath": "dist/apps/backend/api",
             "main": "apps/backend/api/src/main.ts",
             "tsConfig": "apps/backend/api/tsconfig.app.json",
-            "assets": [
-              "apps/backend/api/src/assets"
-            ]
+            "assets": ["apps/backend/api/src/assets"]
           },
           "configurations": {
             "production": {
@@ -63,9 +61,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "apps/backend/api/**/*.ts"
-            ]
+            "lintFilePatterns": ["apps/backend/api/**/*.ts"]
           }
         },
         "test": {
@@ -86,9 +82,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/backend/api-interfaces/src/**/*.ts"
-            ]
+            "lintFilePatterns": ["libs/backend/api-interfaces/src/**/*.ts"]
           }
         },
         "test": {
@@ -217,9 +211,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "apps/writer/web/src/**/*.ts"
-            ]
+            "lintFilePatterns": ["apps/writer/web/src/**/*.ts"]
           }
         },
         "test": {
@@ -301,9 +293,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "apps/writer/web-e2e/**/*.{js,ts}"
-            ]
+            "lintFilePatterns": ["apps/writer/web-e2e/**/*.{js,ts}"]
           }
         }
       }
@@ -317,9 +307,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/writer/web/feature-shell/src/**/*.ts"
-            ]
+            "lintFilePatterns": ["libs/writer/web/feature-shell/src/**/*.ts"]
           }
         },
         "test": {
@@ -345,9 +333,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/writer/web/shared/src/**/*.ts"
-            ]
+            "lintFilePatterns": ["libs/writer/web/shared/src/**/*.ts"]
           }
         },
         "test": {
@@ -554,9 +540,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "apps/writer/phone/src/**/*.ts"
-            ]
+            "lintFilePatterns": ["apps/writer/phone/src/**/*.ts"]
           }
         },
         "test": {
@@ -637,9 +621,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "apps/writer/phone-e2e/**/*.{js,ts}"
-            ]
+            "lintFilePatterns": ["apps/writer/phone-e2e/**/*.{js,ts}"]
           }
         }
       }
@@ -653,9 +635,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/writer/phone/feature-shell/src/**/*.ts"
-            ]
+            "lintFilePatterns": ["libs/writer/phone/feature-shell/src/**/*.ts"]
           }
         },
         "test": {
@@ -681,9 +661,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/writer/phone/shared/src/**/*.ts"
-            ]
+            "lintFilePatterns": ["libs/writer/phone/shared/src/**/*.ts"]
           }
         },
         "test": {
@@ -763,9 +741,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/global/environments/src/**/*.ts"
-            ]
+            "lintFilePatterns": ["libs/global/environments/src/**/*.ts"]
           }
         },
         "test": {
@@ -791,9 +767,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/global/core/src/**/*.ts"
-            ]
+            "lintFilePatterns": ["libs/global/core/src/**/*.ts"]
           }
         },
         "test": {
@@ -819,9 +793,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/writer/web/ui-auth/src/**/*.ts"
-            ]
+            "lintFilePatterns": ["libs/writer/web/ui-auth/src/**/*.ts"]
           }
         },
         "test": {
@@ -877,9 +849,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/writer/web/feature-auth/src/**/*.ts"
-            ]
+            "lintFilePatterns": ["libs/writer/web/feature-auth/src/**/*.ts"]
           }
         },
         "test": {
@@ -905,9 +875,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/writer/web/ui-single/src/**/*.ts"
-            ]
+            "lintFilePatterns": ["libs/writer/web/ui-single/src/**/*.ts"]
           }
         },
         "test": {
@@ -963,9 +931,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/writer/web/feature-single/src/**/*.ts"
-            ]
+            "lintFilePatterns": ["libs/writer/web/feature-single/src/**/*.ts"]
           }
         },
         "test": {
@@ -991,9 +957,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/global/design-system/src/**/*.ts"
-            ]
+            "lintFilePatterns": ["libs/global/design-system/src/**/*.ts"]
           }
         },
         "test": {
@@ -1057,9 +1021,7 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/writer/web/ui-creation"
-          ],
+          "outputs": ["coverage/libs/writer/web/ui-creation"],
           "options": {
             "jestConfig": "libs/writer/web/ui-creation/jest.config.js",
             "passWithNoTests": true
@@ -1114,9 +1076,7 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/writer/web/feature-creation"
-          ],
+          "outputs": ["coverage/libs/writer/web/feature-creation"],
           "options": {
             "jestConfig": "libs/writer/web/feature-creation/jest.config.js",
             "passWithNoTests": true
@@ -1137,17 +1097,12 @@
               "libs/global/packages/tsconfig.lib.json",
               "libs/global/packages/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/global/packages/**/*"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/global/packages/**/*"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/global/packages"
-          ],
+          "outputs": ["coverage/libs/global/packages"],
           "options": {
             "jestConfig": "libs/global/packages/jest.config.js",
             "passWithNoTests": true
@@ -1163,16 +1118,12 @@
       "architect": {
         "build": {
           "builder": "@nrwl/node:build",
-          "outputs": [
-            "{options.outputPath}"
-          ],
+          "outputs": ["{options.outputPath}"],
           "options": {
             "outputPath": "dist/apps/backend/graphql",
             "main": "apps/backend/graphql/src/main.ts",
             "tsConfig": "apps/backend/graphql/tsconfig.app.json",
-            "assets": [
-              "apps/backend/graphql/src/assets"
-            ]
+            "assets": ["apps/backend/graphql/src/assets"]
           },
           "configurations": {
             "production": {
@@ -1219,16 +1170,12 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "apps/backend/graphql/**/*.ts"
-            ]
+            "lintFilePatterns": ["apps/backend/graphql/**/*.ts"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/apps/backend/graphql"
-          ],
+          "outputs": ["coverage/apps/backend/graphql"],
           "options": {
             "jestConfig": "apps/backend/graphql/jest.config.js",
             "passWithNoTests": true
@@ -1335,9 +1282,7 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/apps/reader/web"
-          ],
+          "outputs": ["coverage/apps/reader/web"],
           "options": {
             "jestConfig": "apps/reader/web/jest.config.js",
             "passWithNoTests": true
@@ -1414,9 +1359,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "apps/reader/web-e2e/**/*.{js,ts}"
-            ]
+            "lintFilePatterns": ["apps/reader/web-e2e/**/*.{js,ts}"]
           }
         }
       }
@@ -1438,9 +1381,7 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/reader/web/feature-shell"
-          ],
+          "outputs": ["coverage/libs/reader/web/feature-shell"],
           "options": {
             "jestConfig": "libs/reader/web/feature-shell/jest.config.js",
             "passWithNoTests": true
@@ -1465,9 +1406,7 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/reader/web/shared"
-          ],
+          "outputs": ["coverage/libs/reader/web/shared"],
           "options": {
             "jestConfig": "libs/reader/web/shared/jest.config.js",
             "passWithNoTests": true
@@ -1604,9 +1543,7 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/apps/reader/phone"
-          ],
+          "outputs": ["coverage/apps/reader/phone"],
           "options": {
             "jestConfig": "apps/reader/phone/jest.config.js",
             "passWithNoTests": true
@@ -1683,9 +1620,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "apps/reader/phone-e2e/**/*.{js,ts}"
-            ]
+            "lintFilePatterns": ["apps/reader/phone-e2e/**/*.{js,ts}"]
           }
         }
       }
@@ -1707,9 +1642,7 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/reader/phone/feature-shell"
-          ],
+          "outputs": ["coverage/libs/reader/phone/feature-shell"],
           "options": {
             "jestConfig": "libs/reader/phone/feature-shell/jest.config.js",
             "passWithNoTests": true
@@ -1734,9 +1667,7 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/reader/phone/shared"
-          ],
+          "outputs": ["coverage/libs/reader/phone/shared"],
           "options": {
             "jestConfig": "libs/reader/phone/shared/jest.config.js",
             "passWithNoTests": true
@@ -1791,9 +1722,7 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/reader/web/ui-auth"
-          ],
+          "outputs": ["coverage/libs/reader/web/ui-auth"],
           "options": {
             "jestConfig": "libs/reader/web/ui-auth/jest.config.js",
             "passWithNoTests": true
@@ -1848,9 +1777,7 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/reader/web/feature-auth"
-          ],
+          "outputs": ["coverage/libs/reader/web/feature-auth"],
           "options": {
             "jestConfig": "libs/reader/web/feature-auth/jest.config.js",
             "passWithNoTests": true
@@ -1875,9 +1802,7 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/reader/web/ui-author"
-          ],
+          "outputs": ["coverage/libs/reader/web/ui-author"],
           "options": {
             "jestConfig": "libs/reader/web/ui-author/jest.config.js",
             "passWithNoTests": true
@@ -1932,9 +1857,7 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/reader/web/feature-author"
-          ],
+          "outputs": ["coverage/libs/reader/web/feature-author"],
           "options": {
             "jestConfig": "libs/reader/web/feature-author/jest.config.js",
             "passWithNoTests": true
@@ -1959,9 +1882,7 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/reader/web/ui-single"
-          ],
+          "outputs": ["coverage/libs/reader/web/ui-single"],
           "options": {
             "jestConfig": "libs/reader/web/ui-single/jest.config.js",
             "passWithNoTests": true
@@ -2016,11 +1937,89 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/reader/web/feature-single"
-          ],
+          "outputs": ["coverage/libs/reader/web/feature-single"],
           "options": {
             "jestConfig": "libs/reader/web/feature-single/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "reader-web-ui-market": {
+      "projectType": "library",
+      "root": "libs/reader/web/ui-market",
+      "sourceRoot": "libs/reader/web/ui-market/src",
+      "prefix": "awread",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/reader/web/ui-market/src/**/*.ts",
+              "libs/reader/web/ui-market/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/reader/web/ui-market"],
+          "options": {
+            "jestConfig": "libs/reader/web/ui-market/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "storybook": {
+          "builder": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "port": 4400,
+            "config": {
+              "configFolder": "libs/reader/web/ui-market/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "builder": "@nrwl/storybook:build",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "outputPath": "dist/storybook/reader-web-ui-market",
+            "config": {
+              "configFolder": "libs/reader/web/ui-market/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        }
+      }
+    },
+    "reader-web-feature-market": {
+      "projectType": "library",
+      "root": "libs/reader/web/feature-market",
+      "sourceRoot": "libs/reader/web/feature-market/src",
+      "prefix": "awread",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/reader/web/feature-market/src/**/*.ts",
+              "libs/reader/web/feature-market/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/reader/web/feature-market"],
+          "options": {
+            "jestConfig": "libs/reader/web/feature-market/jest.config.js",
             "passWithNoTests": true
           }
         }

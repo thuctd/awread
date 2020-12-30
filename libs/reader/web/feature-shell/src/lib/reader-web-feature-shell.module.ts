@@ -11,6 +11,7 @@ import {
 import { ReaderWebUiAuthModule } from '@awread/reader/web/ui-auth';
 import { ReaderWebUiAuthorModule } from '@awread/reader/web/ui-author';
 import { ReaderWebUiSingleModule } from '@awread/reader/web/ui-single';
+import { ReaderWebUiMarketModule } from '@awread/reader/web/ui-market';
 
 declare const window: Window & { haveMobile: boolean };
 
@@ -40,6 +41,7 @@ const routes: Routes = [
     ReaderWebUiAuthModule,
     ReaderWebUiAuthorModule,
     ReaderWebUiSingleModule,
+    ReaderWebUiMarketModule,
   ],
   exports: [RouterModule, GlobalCoreModule],
 })

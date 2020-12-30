@@ -140,6 +140,12 @@
     },
     "reader-web-feature-single": {
       "tags": ["scope:feature-single", "scope:shared", "type:feature"]
+    },
+    "reader-web-ui-market": {
+      "tags": ["scope:ui-market", "scope:shared", "type:ui"]
+    },
+    "reader-web-feature-market": {
+      "tags": ["scope:feature-market", "scope:shared", "type:feature"]
     }
   }
 }
