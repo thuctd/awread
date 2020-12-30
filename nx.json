@@ -134,6 +134,12 @@
     },
     "reader-web-feature-author": {
       "tags": ["scope:feature-author", "scope:shared", "type:feature"]
+    },
+    "reader-web-ui-single": {
+      "tags": ["scope:ui-single", "scope:shared", "type:ui"]
+    },
+    "reader-web-feature-single": {
+      "tags": ["scope:feature-single", "scope:shared", "type:feature"]
     }
   }
 }

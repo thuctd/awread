@@ -31,5 +31,7 @@ module.exports = {
     '<rootDir>/libs/reader/web/feature-auth',
     '<rootDir>/libs/reader/web/ui-author',
     '<rootDir>/libs/reader/web/feature-author',
+    '<rootDir>/libs/reader/web/ui-single',
+    '<rootDir>/libs/reader/web/feature-single',
   ],
 };

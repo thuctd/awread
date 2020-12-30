@@ -70,6 +70,12 @@
       ],
       "@awread/reader/web/feature-author": [
         "libs/reader/web/feature-author/src/index.ts"
+      ],
+      "@awread/reader/web/ui-single": [
+        "libs/reader/web/ui-single/src/index.ts"
+      ],
+      "@awread/reader/web/feature-single": [
+        "libs/reader/web/feature-single/src/index.ts"
       ]
     }
   },

@@ -13,6 +13,7 @@ import { createPageLazy } from '../../utility/create-page-lazy';
 import { prepareCurrentModule } from '../../utility/prepare-data';
 import { buildAliasFromProjectRoot } from '../../utility/build-alias-from-project-root';
 import { exportToLibIndex } from '../../utility/export-to-index';
+import { addStoryBook } from '../../utility/add-storybook';
 
 export default function (schema: any): Rule {
   return async (tree: Tree, context: SchematicContext) => {
@@ -26,6 +27,7 @@ export default function (schema: any): Rule {
         directory: schema.directory ?? './',
         tags: `scope:shared`,
       }),
+      addStoryBook(schema),
       insertCustomCode(currentModule.path, `\ndeclare const window: Window & {haveMobile: boolean};\nwindow.haveMobile = ${schema.haveMobile};`),
       addImportDeclarationToModule(schema, 'RouterModule', currentModule.path, '@angular/router'),
       addExportDeclarationToModule(schema, 'RouterModule', currentModule.path, '@angular/router'),

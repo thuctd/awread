@@ -10,6 +10,7 @@ import {
 } from '@awread/reader/web/shared';
 import { ReaderWebUiAuthModule } from '@awread/reader/web/ui-auth';
 import { ReaderWebUiAuthorModule } from '@awread/reader/web/ui-author';
+import { ReaderWebUiSingleModule } from '@awread/reader/web/ui-single';
 
 declare const window: Window & { haveMobile: boolean };
 
@@ -38,6 +39,7 @@ const routes: Routes = [
     ReaderWebSharedModule,
     ReaderWebUiAuthModule,
     ReaderWebUiAuthorModule,
+    ReaderWebUiSingleModule,
   ],
   exports: [RouterModule, GlobalCoreModule],
 })
