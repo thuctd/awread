@@ -51,7 +51,7 @@ function createSharedDeviceVersion(schema, deviceVersion: 'desktop' | 'mobile') 
       }),
       addRouterOutlet(true, schema.projectRoot, `shared-${deviceVersion}`),
       ...addPageService(tree, { ...schema, importPageAbsolute: false, path: `${schema.projectRoot}/lib/layouts`, mode: deviceVersion }),
-      exportToLibIndex(schema.projectRoot, `export * from './lib/layouts/shared-${deviceVersion}/shared-${deviceVersion}.layout'`)
+      exportToLibIndex(schema.projectType, schema.projectRoot, `export * from './lib/layouts/shared-${deviceVersion}/shared-${deviceVersion}.layout'`)
     ])
   }
 }

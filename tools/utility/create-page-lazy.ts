@@ -29,8 +29,8 @@ export function createPageLazy(schema, pageName, type = 'page') {
     }),
     ...addRoutesOfLazy(schema, pageName, type, page),
     createEmptySection(page.folderPath),
-    exportToLibIndex(schema.projectRoot, `export * from './lib/pages/${pageName}/${pageName}.${type}';`),
-    exportToLibIndex(schema.projectRoot, `export * from './lib/pages/${pageName}/${pageName}.module';`),
+    exportToLibIndex(schema.projectType, schema.projectRoot, `export * from './lib/pages/${pageName}/${pageName}.${type}';`),
+    exportToLibIndex(schema.projectType, schema.projectRoot, `export * from './lib/pages/${pageName}/${pageName}.module';`),
   ]
 }
 

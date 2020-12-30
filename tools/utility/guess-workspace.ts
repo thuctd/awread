@@ -8,7 +8,7 @@ export function getWorkspaceName(tree) {
 }
 
 export async function guessProjectToSchema(tree, schema, context) {
-    const { projectName, projectRoot } = await guessProject(tree, schema);
+    const { projectName, projectRoot, projectType } = await guessProject(tree, schema);
     const { application, applicationRoot } = await guessApplication(tree, projectName);
     return {
         ...schema,
@@ -16,7 +16,8 @@ export async function guessProjectToSchema(tree, schema, context) {
         project: projectName,
         projectRoot,
         application,
-        applicationRoot
+        applicationRoot,
+        projectType
     }
 }
 
@@ -28,7 +29,7 @@ export async function guessApplicationToSchema(schema, tree) {
 }
 
 export async function guessApplication(tree, projectName) {
-    const projectEntries = await getProjectsEntries(tree);
+    const projectEntries = getProjectsEntries(tree);
     let application;
     let applicationRoot;
     for (const [name, project] of projectEntries) {
@@ -42,60 +43,67 @@ export async function guessApplication(tree, projectName) {
 
 export async function guessProject(tree, schema) {
     let projectName = schema.project;
-    let projectRoot = schema.projectRoot ?? await guessProjectRoot(tree, projectName);
+    let { projectRoot, projectType } = await guessProjectRoot(tree, projectName);
+    projectRoot = schema.projectRoot ?? projectRoot;
+    projectType = schema.projectType ?? projectType;
     if (projectRoot) {
-        return { projectName, projectRoot };
+        return { projectName, projectRoot, projectType };
     }
     return await guessProjectByPath(tree, schema);
 
 }
 
-export async function getProjectsEntries(tree) {
-    const workspace = await getWorkspace(tree);
-    const entries = Object.fromEntries(workspace.projects.entries());
-    return Object.entries<any>(entries);
+export function getProjectsEntries(tree) {
+    const angularFile = JSON.parse(tree.read('angular.json').toString('utf-8'));
+    return Object.entries<any>(angularFile.projects);
 }
 
 async function guessProjectByPath(tree, schema) {
     let projectName;
     let projectRoot;
+    let projectType;
     const cwd = process.cwd();
     const cwdNormalize = normalize(cwd);
     const cwdDashrize = cwdNormalize.replace(/\//g, '-').trim();
-    const projectEntries = await getProjectsEntries(tree);
+    const projectEntries = getProjectsEntries(tree);
 
     for (const [name, project] of projectEntries) {
         if (project.sourceRoot && cwdDashrize.includes(name)) {
             projectName = name;
             projectRoot = project.sourceRoot;
+            projectType = project.projectType;
         }
     }
     if (projectName) {
-        return { projectName, projectRoot };
+        return { projectName, projectRoot, projectType };
     }
     return guessDefaultProject(tree, schema);
 }
 
 async function guessDefaultProject(tree, schema) {
     const projectName = await getDefaultProjectName(tree);
-    const projectRoot = await getDefaultProjectRoot(tree, projectName);
-    return { projectName, projectRoot };
+    const defaultProject = await getProject(tree, projectName);
+    const projectRoot = defaultProject.sourceRoot;
+    const projectType = defaultProject.projectType;
+    return { projectName, projectRoot, projectType };
 }
 
 async function guessProjectRoot(tree, projectName) {
-    if (!projectName) return;
-    const projectEntries = await getProjectsEntries(tree);
     let projectRoot;
+    let projectType;
+    if (!projectName) return { projectRoot, projectType };
+    const projectEntries = getProjectsEntries(tree);
     for (const [name, project] of projectEntries) {
         if (name === projectName) {
             try {
                 projectRoot = project.sourceRoot;
+                projectType = project.projectType;
             } catch (error) {
                 throw new SchematicsException(`cannot detect sourceRoot of project: ${projectName}`)
             }
         }
     }
-    return projectRoot
+    return { projectRoot, projectType };
 }
 
 async function getDefaultProjectName(tree) {
@@ -103,10 +111,9 @@ async function getDefaultProjectName(tree) {
     return angularFile.defaultProject;
 }
 
-async function getDefaultProjectRoot(tree, projectName) {
-    const workspace = await getWorkspace(tree);
-    const project = workspace.projects.get(projectName);
-    return project.sourceRoot;
+async function getProject(tree, projectName) {
+    const angularFile = JSON.parse(tree.read('angular.json').toString('utf-8'));
+    return angularFile.projects[projectName];
 }
 
 export async function getDefaultProjectPath(schema, tree) {

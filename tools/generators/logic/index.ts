@@ -13,7 +13,7 @@ export default function (schema: any): Rule {
 
         return chain([
             ...generateActions,
-            ['model', 'facade', 'interface'].includes(schema.type) ? exportToLibIndex(schema.projectRoot, `export * from './lib/${schema.type}s/index'`) : noop()
+            ['model', 'facade', 'interface'].includes(schema.type) ? exportToLibIndex(schema.projectType, schema.projectRoot, `export * from './lib/${schema.type}s/index'`) : noop()
         ])
     }
 }

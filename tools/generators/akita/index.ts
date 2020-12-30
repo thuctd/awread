@@ -6,6 +6,7 @@ import { exportToLibIndex } from '../../utility/export-to-index';
 
 export default function (schema: any): Rule {
     return async (tree: Tree, context: SchematicContext) => {
+        schema = await guessProjectToSchema(tree, schema, context);
         const actions = schema.list.split(',').map(name => singleAction(schema, context, name))
         return chain([
             ...actions
@@ -14,11 +15,11 @@ export default function (schema: any): Rule {
 }
 
 function singleAction(schema, context, name) {
-    schema.name = name;
     return async (tree) => {
-        schema = await guessProjectToSchema(tree, schema, context);
-        // console.log('context', schema);
-        const generatePath = `${schema.projectRoot}/lib/states`
+        schema.name = name;
+        const generatePath = `${schema.projectRoot}/lib/states`;
+        const updatePath = generatePath + '/' + strings.dasherize(schema.name);
+        // console.log('name', name, schema.name, updatePath);
 
         const templateSource = apply(url(schema.entity ? './entity-files' : './files'),
             [
@@ -27,7 +28,7 @@ function singleAction(schema, context, name) {
                     singular: pluralize.singular,
                     ...schema,
                 }),
-                move(normalize(generatePath + '/' + strings.dasherize(schema.name))),
+                move(normalize(updatePath)),
             ]);
 
         return chain([

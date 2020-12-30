@@ -4,7 +4,11 @@ import * as path from 'path';
 import { addGlobal, insert, RemoveChange } from '@nrwl/workspace';
 
 
-export function exportToLibIndex(projectRoot, exportContent) {
+export function exportToLibIndex(projectType, projectRoot, exportContent) {
+  if (projectType === 'application') {
+    console.warn('this is an application, not a library, so we will not export to index.ts file');
+    return (tree) => tree;
+  }
   if (!exportContent.includes(';')) {
     exportContent = exportContent + ';';
   }
