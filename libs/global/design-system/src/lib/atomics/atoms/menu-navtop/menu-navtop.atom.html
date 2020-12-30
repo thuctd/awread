@@ -1,0 +1,23 @@
+<section>
+  <a (click)="toggleMenu($event)" class="cursor-pointer ml-56">
+    <img [src]="avatarUrl" class="rounded-full h-8 w-8 inline-block"
+      alt="avatar">
+  </a>
+  <div *ngIf="isMenuOpen" class="flex flex-col z-50 top-20 absolute">
+    <div id="frist_div" class="w-64 mh-8 bg-green-500 rounded-b-none rounded-lg shadow"></div>
+    <div class="w-64 mh-8 bg-white border-gray-300 border-b shadow">
+      <div class="w-full">
+        <img [src]="avatarUrl"
+          class="border-green-500 border-4 left-5 top-2 rounded-full h-10 w-10 inline-block absolute" alt="IMG_User">
+        <div class="text-sm pl-16 text-gray-700">{{ name }}</div>
+        <div class="text-xs pl-16 text-gray-400">{{ email }}</div>
+      </div>
+    </div>
+    <div class="w-64 mh-8 bg-white rounded-t-none rounded-lg shadow">
+      <div class="py-2 flex pl-8">
+        <fa-icon [icon]="faIcon" class="text-2xl cursor-pointer"></fa-icon>
+        <a (click)="signoutEvent.emit('userId'); isMenuOpen = false" class="text-xs text-gray-700 sm:text-sm block link dim font-medium black ml-6 mt-1 cursor-pointer">Đăng xuất</a>
+      </div>
+    </div>
+  </div>
+</section>

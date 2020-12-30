@@ -1,13 +1,6 @@
 import {
-  chain, externalSchematic, Rule, SchematicContext, Tree, schematic, noop, apply, url, template,
-  branchAndMerge, mergeWith, move, MergeStrategy, applyTemplates
+  chain, externalSchematic, Rule, SchematicContext, Tree
 } from '@angular-devkit/schematics';
-import { createDefaultPath } from '@schematics/angular/utility/workspace';
-import { addImportDeclarationToModule } from '../../utility/add-import-module';
-import { addExportDeclarationToModule } from '../../utility/add-export-module';
-import { parseName } from '@schematics/angular/utility/parse-name';
-import { Path, normalize, strings } from '@angular-devkit/core';
-import { addRouterOutlet } from '../../utility/add-router-outlet';
 import { createSharedLibrary, createFiles, updateFiles, appAndLibSetting } from '../../utility/edit-angular-json';
 
 export default function (schema: any): Rule {

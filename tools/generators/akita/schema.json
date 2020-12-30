@@ -3,7 +3,7 @@
     "id": "akita",
     "type": "object",
     "properties": {
-        "name": {
+        "list": {
             "type": "string",
             "description": "name of state",
             "$default": {
@@ -18,6 +18,6 @@
         }
     },
     "required": [
-        "name"
+        "list"
     ]
 }

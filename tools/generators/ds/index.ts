@@ -1,9 +1,4 @@
-import {
-    chain, externalSchematic, Rule, SchematicContext, Tree, schematic, noop, apply, url, template,
-    branchAndMerge, mergeWith, move, MergeStrategy, applyTemplates
-} from '@angular-devkit/schematics';
-
-const resolve = require('path').resolve;
+import { chain, Rule, SchematicContext, Tree, schematic } from '@angular-devkit/schematics';
 
 
 export default function (schema: any): Rule {

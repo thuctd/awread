@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "id": "ui-page",
+  "type": "object",
+  "properties": {
+    "list": {
+      "type": "string",
+      "description": "ui page name, like ui, example: register,login",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      }
+    },
+    "directory": {
+      "type": "string",
+      "description": "directory name to add the page to, example: --directory=writer/web"
+    },
+    "ui": {
+      "type": "string",
+      "description": "ui name to add the page to, example: --ui=auth"
+    }
+  },
+  "required": [
+    "list",
+    "directory",
+    "ui"
+  ]
+}

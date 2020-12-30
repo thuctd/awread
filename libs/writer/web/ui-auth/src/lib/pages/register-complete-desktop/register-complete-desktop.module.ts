@@ -1,4 +1,4 @@
-import { WriterWebUiAuthAtomicModule } from './../../atomic/writer-web-ui-auth-atomic.module';
+import { WriterWebUiAuthAtomicModule } from './../../atomics/writer-web-ui-auth-atomic.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -13,4 +13,4 @@ import { RegisterCompleteDesktopPage } from './register-complete-desktop.page';
     WriterWebUiAuthAtomicModule,
   ],
 })
-export class RegisterCompleteDesktopModule {}
+export class RegisterCompleteDesktopModule { }

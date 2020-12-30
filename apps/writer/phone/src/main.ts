@@ -10,6 +10,9 @@ if (environment.production) {
 }
 
 customMain();
+
+customMain();
+    
     
 
 platformBrowserDynamic()

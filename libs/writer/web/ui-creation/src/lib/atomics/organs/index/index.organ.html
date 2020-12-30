@@ -1,21 +1,17 @@
 <div class="grid grid-cols-12 gap-10">
-  <div class="col-span-2 md:col-span-3">
-    <detail-upload-form #imgForm [form]="formImg"></detail-upload-form>
-    <detail-link-btns></detail-link-btns>
-  </div>
-  <div class="col-span-2 md:col-span-9">
+  <div class="col-span-2 md:col-span-12">
     <div class="py-4">
       <div class="w-36 mb-4">
         <cr-social-btn></cr-social-btn>
       </div>
       <div class="grid grid-cols-12 gap-2 pl-2 py-4 border-b border-gray-200">
-        <div class="col-span-4">
+        <div class="col-span-2 md:col-span-4">
           <detail-part></detail-part>
         </div>
-        <div class="col-span-4">
+        <div class="col-span-2 md:col-span-4 justify-self-center">
           <detail-review></detail-review>
         </div>
-        <div class="col-span-4">
+        <div class="col-span-2 md:col-span-4 justify-self-center">
           <detail-act></detail-act>
         </div>
       </div>

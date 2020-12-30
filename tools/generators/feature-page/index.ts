@@ -1,46 +1,28 @@
-import { chain, externalSchematic, SchematicsException, Rule, SchematicContext, Tree, schematic, noop } from '@angular-devkit/schematics';
-import * as path from 'path';
-import { createDefaultPath } from '@schematics/angular/utility/workspace';
-import { classify } from '@nrwl/workspace/src/utils/strings';
-import { createFile } from '../../utility/create-file';
+import { chain, Rule, SchematicContext, Tree, schematic } from '@angular-devkit/schematics';
+import { guessProjectToSchema } from '../../utility/guess-workspace';
 
 export default function (schema: any): Rule {
   return async (tree: Tree, context: SchematicContext) => {
-    // const CUSTOMPATH = 'ui/pages';
-    const CUSTOMPATH = 'pages';
-    const PREFIX = 'page-';
-    if (!schema.name.startsWith(`${PREFIX}`) && (schema.name != PREFIX.substring(0, PREFIX.length - 1))) {
-      // custom libraries managing state must have name conventions: 'state' or 'state-<name>'
-      schema.name = `${PREFIX}${schema.name}`;
-    };
-    const originName = schema.name.substring(PREFIX.length);
-    schema.originName = originName;
-
-    const directoryNoSlash: string = schema.directory.replace(/\//g, '-').trim();
-    schema.project = directoryNoSlash + '-feature-' + schema.feature.trim();
-    const nameWithDirectory = `${CUSTOMPATH}/${originName}`;
-    let defaultPath;
-    try {
-      defaultPath = await createDefaultPath(tree, schema.project);
-    } catch (error) {
-      throw new SchematicsException(`project not found ${schema.project}`);
+    schema = await guessProjectToSchema(tree, schema, context);
+    return async (tree: Tree, context: SchematicContext) => {
+      const actions = schema.list.split(',').map(name => singleAction(schema, context, name))
+      return chain([
+        ...actions
+      ])
     }
-    schema.defaultPath = defaultPath;
-
-    const routingPath = path.join(defaultPath, `${schema.project}-routing.module.ts`);
-    // console.log('routing exist?', tree.exists(routingPath), defaultPath, `${schema.project}-routing.module.ts`)
-
-    return chain([
-      schematic('service', {
-        name: nameWithDirectory,
-        type: 'power',
-        project: schema.project,
-      }),
-      createEmptyFolder(defaultPath, nameWithDirectory, 'spells'),
-    ])
   }
 }
 
-function createEmptyFolder(projectPath: string, folderName: string, kindName: string) {
-  return createFile(projectPath, folderName, kindName);
+function singleAction(schema, context, name) {
+  schema.name = name;
+  return async (tree) => {
+    schema = await guessProjectToSchema(tree, schema, context);
+    return chain([
+      schematic('service', {
+        name: `${schema.kind}s/${schema.name}`,
+        type: schema.kind,
+        project: schema.project,
+      }),
+    ])
+  }
 }

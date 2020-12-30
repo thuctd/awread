@@ -12,16 +12,16 @@ import {
 
 
 import { classify, dasherize, camelize, underscore } from '@angular-devkit/core/src/utils/strings';
-import { getProjectPath } from './get-project-path';
+import { buildAliasFromProjectRoot } from './build-alias-from-project-root';
 
 export function addExportDeclarationToModule(schema, whatYouWantToImport: string, writeToFilePath: string, customImportSyntax?: string): Rule {
-  return (host: Tree) => {
+  return (tree: Tree) => {
     if (!whatYouWantToImport || !writeToFilePath) {
-      return host;
+      return tree;
     }
     // Part I: Construct path and read file
     const writeToModulePath = normalize(`${writeToFilePath}.ts`);
-    const text = host.read(writeToModulePath);
+    const text = tree.read(writeToModulePath);
     if (text === null) {
       throw new SchematicsException(`File ${writeToModulePath} does not exist.`);
     }
@@ -40,19 +40,19 @@ export function addExportDeclarationToModule(schema, whatYouWantToImport: string
     };
 
     if (!customImportSyntax) {
-      customImportSyntax = getProjectPath(schema.directory, schema.name);
+      customImportSyntax = buildAliasFromProjectRoot(schema, tree);
     }
     const hasTargetModule = sourceText.includes(targetModuleClassify);
     const syntaxImports = !hasTargetModule ? `{ ${targetModuleClassify} }` : targetModuleClassify;
 
-    insert(host, writeToModulePath, [
+    insert(tree, writeToModulePath, [
       addImport(syntaxImports, customImportSyntax, true),
       ...addExportToModule(source, writeToModulePath, targetModuleClassify),
     ]);
     // PART III: console.log to see the changes
-    const afterInsertContent = host.get(writeToModulePath)?.content.toString();
+    const afterInsertContent = tree.get(writeToModulePath)?.content.toString();
     // console.log('change result:', afterInsertContent);
 
-    return host;
+    return tree;
   };
 }

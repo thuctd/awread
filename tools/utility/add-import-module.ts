@@ -10,9 +10,8 @@ import {
   branchAndMerge, mergeWith, move
 } from '@angular-devkit/schematics';
 
-
 import { classify, dasherize, camelize, underscore } from '@angular-devkit/core/src/utils/strings';
-import { getProjectPath } from './get-project-path';
+import { buildAliasFromProjectRoot } from './build-alias-from-project-root';
 
 export function addImportPathToModule(schema, whatYouWantToImport: string, writeToFilePath: string, customImportSyntax?: string, fileNameYouWantToImport?, isDefault = false, usingClassify = true): Rule {
   return (host: Tree) => {
@@ -60,15 +59,16 @@ export function addImportPathToModule(schema, whatYouWantToImport: string, write
 }
 
 export function addImportDeclarationToModule(schema, whatYouWantToImport: string, writeToFilePath: string, customImportSyntax?: string, symbolName?: string): Rule {
-  return (host: Tree) => {
+  return (tree: Tree) => {
     if (!whatYouWantToImport || !writeToFilePath) {
-      return host;
+      return tree;
     }
     // Part I: Construct path and read file
     const writeToModulePath = normalize(`${writeToFilePath}.ts`);
-    const text = host.read(writeToModulePath);
+    const text = tree.read(writeToModulePath);
     if (text === null) {
-      throw new SchematicsException(`File ${writeToModulePath} does not exist.`);
+      console.log('schema', schema);
+      throw new SchematicsException(`trying to import ${whatYouWantToImport} but File ${writeToModulePath} does not exist.`);
     }
     const sourceText = text.toString('utf-8');
     const source = ts.createSourceFile(writeToModulePath, sourceText, ts.ScriptTarget.Latest, true);
@@ -84,20 +84,20 @@ export function addImportDeclarationToModule(schema, whatYouWantToImport: string
       return insertImport(source, writeToModulePath, symbolName, fileName, isDefault);
     };
 
-     if (!customImportSyntax) {
-      customImportSyntax = getProjectPath(schema.directory, schema.name);
+    if (!customImportSyntax) {
+      customImportSyntax = buildAliasFromProjectRoot(schema, tree);
     }
     const hasTargetModule = sourceText.includes(targetModuleClassify);
     const syntaxImports = !hasTargetModule ? `{ ${targetModuleClassify} }` : targetModuleClassify;
-    insert(host, writeToModulePath, [
+    insert(tree, writeToModulePath, [
       addImport(syntaxImports, customImportSyntax, true),
       ...addImportToModule(source, writeToModulePath, symbolName ?? targetModuleClassify),
     ]);
 
     // PART III: console.log to see the changes
-    const afterInsertContent = host.get(writeToModulePath)?.content.toString();
+    const afterInsertContent = tree.get(writeToModulePath)?.content.toString();
     // console.log('change result:', afterInsertContent);
 
-    return host;
+    return tree;
   };
 }

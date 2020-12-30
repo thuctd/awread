@@ -1,33 +1,25 @@
-import {
-  chain, externalSchematic, Rule, SchematicContext, Tree, schematic, noop, apply, url, template,
-  branchAndMerge, mergeWith, move, MergeStrategy, applyTemplates, SchematicsException
-} from '@angular-devkit/schematics';
-import { MODULE_EXT, ROUTING_MODULE_EXT, buildRelativePath, findModuleFromOptions } from '@schematics/angular/utility/find-module';
-
+import { Tree, noop, SchematicsException } from '@angular-devkit/schematics';
+import { buildRelativePath } from '@schematics/angular/utility/find-module';
 import { Path, normalize, strings } from '@angular-devkit/core';
 import * as ts from 'typescript';
-import * as path from 'path';
-import { addGlobal, insert, RemoveChange } from '@nrwl/workspace';
+import { addGlobal, getNpmScope, insert, RemoveChange } from '@nrwl/workspace';
 import { getSourceNodes, InsertChange, insertImport, ReplaceChange } from '@nrwl/workspace/src/utils/ast-utils';
 import { classify } from '@nrwl/workspace/src/utils/strings';
-import { createDefaultPath } from '@schematics/angular/utility/workspace';
-import { createEmptySection } from './create-empty-section';
-import { exportToLibIndex } from './export-to-index';
-import { insertCustomCode } from './insert-custom-code';
-import { addImportDeclarationToModule, addImportPathToModule } from './add-import-module';
 import { removeImport } from './ast-utils';
 import { Change } from '@nrwl/workspace/src/core/file-utils';
+import { buildAliasFromProjectRoot } from './build-alias-from-project-root';
 
 export function addPageService(tree: Tree, schema) {
-  const path = `${schema.path}/${schema.originName}/${schema.originName}.${schema.type}.ts`;
-  if (schema.type && schema.mode && !tree.exists(path)) {
+  const path = `${schema.path}/${schema.name}/${schema.name}.${schema.type}.ts`;
+  const pagePathNotExistYet = !tree.exists(path);
+  if (schema.type && schema.mode && pagePathNotExistYet) {
 
     tree.create(path, `import { Injectable, OnInit } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ${classify(schema.originName) + classify(schema.type)} implements OnInit {
+export class ${classify(schema.name) + classify(schema.type)} implements OnInit {
 
   constructor() { }
 
@@ -37,27 +29,37 @@ export class ${classify(schema.originName) + classify(schema.type)} implements O
   }
 
   return schema.type && schema.mode ? [
-    updateDesktopAndMobilePage(schema),
+    updateDesktopAndMobilePage(tree, schema),
   ] : [noop()]
 }
 
-function updateDesktopAndMobilePage(schema) {
+function buildPathRelative(schema) {
+  // /libs/writer/web/ui-auth/src/lib/register/pages/register-desktop/register-desktop.page.ts
+  const writeToFilePath = `/${schema.projectRoot}/lib/${schema.name}-${schema.mode}/${schema.name}-${schema.mode}.${schema.type}.ts`;
+  // /libs/writer/web/ui-auth/src/lib/register/pages/register/register.page
+  // do not have .ts to get relative path
+  const implementPath = `/${schema.projectRoot}/lib/${schema.name}/${schema.name}.${schema.type}`;
+  // libs/writer/web/shared/src/lib/layouts/shell-desktop/shell-desktop.layout.ts
+  // libs/writer/web/shared/src/lib/layouts/shell/shell.layout
+  const relativePath = buildRelativePath(writeToFilePath, implementPath);
+  // console.log('is that module is exist', writeToPath, host.exists(writeToPath));
+  return relativePath;
+}
+
+
+function updateDesktopAndMobilePage(tree, schema) {
   return (host: Tree) => {
     if (!schema.mode) {
       return host;
     }
-    // /libs/writer/web/ui-auth/src/lib/register/pages/register-desktop/register-desktop.page.ts
-    const writeToFilePath = `${schema.path}/${schema.originName}-${schema.mode}/${schema.originName}-${schema.mode}.${schema.type}.ts`;
-    // /libs/writer/web/ui-auth/src/lib/register/pages/register/register.page
-    // do not have .ts to get relative path
-    const implementPath = `${schema.path}/${schema.originName}/${schema.originName}.${schema.type}`;
-    // libs/writer/web/shared/src/lib/layouts/shell-desktop/shell-desktop.layout.ts
-    // libs/writer/web/shared/src/lib/layouts/shell/shell.layout
-    const relativePath = buildRelativePath(writeToFilePath, implementPath);
-    // console.log('is that module is exist', writeToPath, host.exists(writeToPath));
+
+    const writeToFilePath = `${schema.path}/${schema.name}-${schema.mode}/${schema.name}-${schema.mode}.${schema.type}.ts`;
+    const relativePath = schema.importPageAbsolute ? buildAliasFromProjectRoot(schema, tree) : buildPathRelative(schema);
     const text = host.read(writeToFilePath);
     if (text === null) {
-      throw new SchematicsException(`File ${writeToFilePath} does not exist.`);
+      // throw new SchematicsException(`File ${writeToFilePath} does not exist.`);
+      console.warn(`File ${writeToFilePath} does not exist.`);
+      return tree;
     }
     const sourceText = text.toString();
     const source = ts.createSourceFile(writeToFilePath, sourceText, ts.ScriptTarget.Latest, true);
@@ -65,10 +67,10 @@ function updateDesktopAndMobilePage(schema) {
 
     const insertImportSymbol = insertImport(source,
       writeToFilePath,
-      strings.classify(`${schema.originName}-${schema.type}`),
+      strings.classify(`${schema.name}-${schema.type}`),
       relativePath);
 
-    const renewClass = replaceConstructorForInjection(nodes, classify(`${schema.originName}-${schema.mode}-${schema.type}`), writeToFilePath, classify(`${schema.originName}-${schema.type}`));
+    const renewClass = replaceConstructorForInjection(nodes, classify(`${schema.name}-${schema.mode}-${schema.type}`), writeToFilePath, classify(`${schema.name}-${schema.type}`));
     const removeImportOnInit = removeImport(source, writeToFilePath, classify('OnInit'));
     const changes = [insertImportSymbol, renewClass, removeImportOnInit];
 
@@ -133,3 +135,5 @@ function replaceConstructorForInjection(nodes: ts.Node[], writeToName: string, w
   // return new ReplaceChange(writeToPath, classNode.parent.pos, beforeText, toAdd);
   return new ReplaceChange(writeToPath, pageNameSymbol.end, oldText, toAdd);
 }
+
+

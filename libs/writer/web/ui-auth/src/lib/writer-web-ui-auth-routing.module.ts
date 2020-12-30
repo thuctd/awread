@@ -1,5 +1,3 @@
-import { ShellDesktopLayout } from './../../../shared/src/lib/layouts/shell-desktop/shell-desktop.layout';
-import { ShellMobileLayout } from './../../../shared/src/lib/layouts/shell-mobile/shell-mobile.layout';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 // import { ShellDesktopLayout, ShellMobileLayout } from '@awread/writer/web/shared';
@@ -17,22 +15,22 @@ const routes: Routes = [
         loadChildren: () =>
           window.innerWidth <= 768 && window?.haveMobile
             ? import(
-                './pages/register-complete-mobile/register-complete-mobile.module'
-              ).then((m) => m.RegisterCompleteMobileModule)
+              './pages/register-complete-mobile/register-complete-mobile.module'
+            ).then((m) => m.RegisterCompleteMobileModule)
             : import(
-                './pages/register-complete-desktop/register-complete-desktop.module'
-              ).then((m) => m.RegisterCompleteDesktopModule),
+              './pages/register-complete-desktop/register-complete-desktop.module'
+            ).then((m) => m.RegisterCompleteDesktopModule),
       },
       {
         path: 'new-password',
         loadChildren: () =>
           window.innerWidth <= 768 && window?.haveMobile
             ? import(
-                './pages/new-password-mobile/new-password-mobile.module'
-              ).then((m) => m.NewPasswordMobileModule)
+              './pages/new-password-mobile/new-password-mobile.module'
+            ).then((m) => m.NewPasswordMobileModule)
             : import(
-                './pages/new-password-desktop/new-password-desktop.module'
-              ).then((m) => m.NewPasswordDesktopModule),
+              './pages/new-password-desktop/new-password-desktop.module'
+            ).then((m) => m.NewPasswordDesktopModule),
       },
       {
         path: 'login',
@@ -40,11 +38,11 @@ const routes: Routes = [
         loadChildren: () =>
           window.innerWidth <= 768 && window?.haveMobile
             ? import(
-                './pages/login-register-mobile/login-register-mobile.module'
-              ).then((m) => m.LoginRegisterMobileModule)
+              './pages/login-register-mobile/login-register-mobile.module'
+            ).then((m) => m.LoginRegisterMobileModule)
             : import(
-                './pages/login-register-desktop/login-register-desktop.module'
-              ).then((m) => m.LoginRegisterDesktopModule),
+              './pages/login-register-desktop/login-register-desktop.module'
+            ).then((m) => m.LoginRegisterDesktopModule),
       },
       {
         path: 'register',
@@ -52,22 +50,22 @@ const routes: Routes = [
         loadChildren: () =>
           window.innerWidth <= 768 && window?.haveMobile
             ? import(
-                './pages/login-register-mobile/login-register-mobile.module'
-              ).then((m) => m.LoginRegisterMobileModule)
+              './pages/login-register-mobile/login-register-mobile.module'
+            ).then((m) => m.LoginRegisterMobileModule)
             : import(
-                './pages/login-register-desktop/login-register-desktop.module'
-              ).then((m) => m.LoginRegisterDesktopModule),
+              './pages/login-register-desktop/login-register-desktop.module'
+            ).then((m) => m.LoginRegisterDesktopModule),
       },
       {
         path: 'forgot',
         loadChildren: () =>
           window.innerWidth <= 768 && window?.haveMobile
             ? import('./pages/forgot-mobile/forgot-mobile.module').then(
-                (m) => m.ForgotMobileModule
-              )
+              (m) => m.ForgotMobileModule
+            )
             : import('./pages/forgot-desktop/forgot-desktop.module').then(
-                (m) => m.ForgotDesktopModule
-              ),
+              (m) => m.ForgotDesktopModule
+            ),
       },
       {
         path: '',
@@ -82,4 +80,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class WriterWebUiAuthRoutingModule {}
+export class WriterWebUiAuthRoutingModule { }

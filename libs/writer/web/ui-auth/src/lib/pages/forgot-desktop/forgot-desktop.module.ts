@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { ForgotDesktopRoutingModule } from './forgot-desktop-routing.module';
 import { ForgotDesktopPage } from './forgot-desktop.page';
-import { WriterWebUiAuthAtomicModule } from '../../atomic/writer-web-ui-auth-atomic.module';
+import { WriterWebUiAuthAtomicModule } from '../../atomics/writer-web-ui-auth-atomic.module';
 
 @NgModule({
   declarations: [ForgotDesktopPage],
@@ -13,4 +13,4 @@ import { WriterWebUiAuthAtomicModule } from '../../atomic/writer-web-ui-auth-ato
     WriterWebUiAuthAtomicModule,
   ],
 })
-export class ForgotDesktopModule {}
+export class ForgotDesktopModule { }

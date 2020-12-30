@@ -12,14 +12,8 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
-    "typeRoots": [
-      "node_modules/@types"
-    ],
-    "lib": [
-      "es2017",
-      "dom",
-      "esnext"
-    ],
+    "typeRoots": ["node_modules/@types"],
+    "lib": ["es2017", "dom", "esnext"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
@@ -30,30 +24,16 @@
       "@awread/writer/web/feature-shell": [
         "libs/writer/web/feature-shell/src/index.ts"
       ],
-      "@awread/writer/web/shared": [
-        "libs/writer/web/shared/src/index.ts"
-      ],
+      "@awread/writer/web/shared": ["libs/writer/web/shared/src/index.ts"],
       "@awread/writer/phone/feature-shell": [
         "libs/writer/phone/feature-shell/src/index.ts"
       ],
-      "@awread/writer/phone/shared": [
-        "libs/writer/phone/shared/src/index.ts"
-      ],
-      "@awread/global/assets": [
-        "libs/global/assets/src/index.ts"
-      ],
-      "@awread/global/styles": [
-        "libs/global/styles/src/index.ts"
-      ],
-      "@awread/global/environments": [
-        "libs/global/environments/src/index.ts"
-      ],
-      "@awread/global/core": [
-        "libs/global/core/src/index.ts"
-      ],
-      "@awread/writer/web/ui-auth": [
-        "libs/writer/web/ui-auth/src/index.ts"
-      ],
+      "@awread/writer/phone/shared": ["libs/writer/phone/shared/src/index.ts"],
+      "@awread/global/assets": ["libs/global/assets/src/index.ts"],
+      "@awread/global/styles": ["libs/global/styles/src/index.ts"],
+      "@awread/global/environments": ["libs/global/environments/src/index.ts"],
+      "@awread/global/core": ["libs/global/core/src/index.ts"],
+      "@awread/writer/web/ui-auth": ["libs/writer/web/ui-auth/src/index.ts"],
       "@awread/writer/web/feature-auth": [
         "libs/writer/web/feature-auth/src/index.ts"
       ],
@@ -72,13 +52,16 @@
       "@awread/writer/web/feature-creation": [
         "libs/writer/web/feature-creation/src/index.ts"
       ],
-      "@awread/global/packages": [
-        "libs/global/packages/src/index.ts"
-      ]
+      "@awread/global/packages": ["libs/global/packages/src/index.ts"],
+      "@awread/reader/web/feature-shell": [
+        "libs/reader/web/feature-shell/src/index.ts"
+      ],
+      "@awread/reader/web/shared": ["libs/reader/web/shared/src/index.ts"],
+      "@awread/reader/phone/feature-shell": [
+        "libs/reader/phone/feature-shell/src/index.ts"
+      ],
+      "@awread/reader/phone/shared": ["libs/reader/phone/shared/src/index.ts"]
     }
   },
-  "exclude": [
-    "node_modules",
-    "tmp"
-  ]
+  "exclude": ["node_modules", "tmp"]
 }

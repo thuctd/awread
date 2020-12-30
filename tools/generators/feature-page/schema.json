@@ -3,7 +3,7 @@
   "id": "feature-page",
   "type": "object",
   "properties": {
-    "name": {
+    "list": {
       "type": "string",
       "description": "feature page name, like ui, example: register or login",
       "$default": {
@@ -21,7 +21,7 @@
     }
   },
   "required": [
-    "name",
+    "list",
     "directory",
     "feature"
   ]

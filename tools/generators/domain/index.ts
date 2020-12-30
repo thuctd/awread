@@ -1,77 +1,27 @@
 import {
-  chain, externalSchematic, Rule, SchematicContext, Tree, SchematicsException, schematic, noop, apply, url, template,
-  branchAndMerge, mergeWith, move, MergeStrategy, applyTemplates
+  chain, externalSchematic, Rule, SchematicContext, Tree, SchematicsException, schematic, noop
 } from '@angular-devkit/schematics';
-import { createDefaultPath } from '@schematics/angular/utility/workspace';
-import { addImportDeclarationToModule } from '../../utility/add-import-module';
-import { addExportDeclarationToModule } from '../../utility/add-export-module';
-import { parseName } from '@schematics/angular/utility/parse-name';
-import { Path, normalize, strings } from '@angular-devkit/core';
-import { addRouterOutlet } from '../../utility/add-router-outlet';
-import { modifyEslint, createSharedLibrary, updateFiles, updateGenerator, appAndLibSetting } from '../../utility/edit-angular-json';
+import { modifyEslint, appAndLibSetting } from '../../utility/edit-angular-json';
 import { dasherize } from '@nrwl/workspace/src/utils/strings';
-import { getProjectConfig, updateWorkspaceInTree } from '@nrwl/workspace';
+import { getProjectConfig, readJsonFile, updateWorkspaceInTree } from '@nrwl/workspace';
 
 export default function (schema: any): Rule {
   return async (tree: Tree, context: SchematicContext) => {
     if (!schema.directory?.length) {
       throw new SchematicsException(`directory (${schema.directory}) is not valid, it must have length`);
     }
-
-    const web = 'web';
-    const directoryNoSlash: string = schema.directory.replace(/\//g, '-').trim();
-    const webName = dasherize(directoryNoSlash + '-' + web);
-    const webDir = schema.directory + '/' + web;
-
-    const chainWeb = [
-      externalSchematic('@nrwl/angular', 'app', {
-        ...appAndLibSetting,
-        name: web,
-        directory: schema.directory,
-        routing: false,
-        strict: true,
-        tags: `scope:shared,type:app`,
-      }),
-      schema.proxy ? addProxy(webName) : noop(),
-      schematic('shell', {
-        project: webName,
-        directory: webDir,
-      }),
-      schematic('shared', {
-        directory: webDir,
-      })
-    ];
-
-    const phone = 'phone';
-    const phoneName = dasherize(directoryNoSlash + '-' + phone);
-    const phoneDir = schema.directory + '/' + phone;
-
-    const chainPhone = [
-      externalSchematic('@nrwl/angular', 'app', {
-        ...appAndLibSetting,
-        name: phone,
-        directory: schema.directory,
-        routing: false,
-        strict: true,
-        tags: `scope:shared,type:app`,
-      }),
-      schema.proxy ? addProxy(phoneName) : noop(),
-      schematic('shell', {
-        project: phoneName,
-        directory: phoneDir,
-      }),
-      schematic('shared', {
-        directory: phoneDir,
-      })
-    ]
-
     return chain([
-      ...chainWeb,
-      ...chainPhone,
+      ...domainDeviceVersion(schema, 'web'),
+      ...domainDeviceVersion(schema, 'phone'),
       modifyEslint(),
       schematic('global', {
         name: 'global',
       }),
+      tree => {
+        const f = JSON.parse(tree.read('angular.json').toString('utf-8'));
+        const readerWeb = Object.keys(f.projects['reader-web'].architect);
+        return tree;
+      }
     ]);
   }
 }
@@ -104,23 +54,28 @@ function addProxy(frontendProjectName: string): Rule {
   };
 }
 
-// function addStaging(options: any): Rule {
-//   return (host: Tree, context: SchematicContext) => {
-//     const projectConfig = getProjectConfig(host, options.frontendProject);
-//     if (projectConfig.architect && projectConfig.architect.build) {
-//       const stage = {
-//         "fileReplacements": [
-//           {
-//             "replace": "src/environments/environment.ts",
-//             "with": "src/environments/environment.stage.ts"
-//           }
-//         ]
-//       }
-//       updateWorkspaceInTree((json) => {
-//         projectConfig.architect.serve.options.proxyConfig = pathToProxyFile;
-//         json.projects[options.frontendProject] = projectConfig;
-//         return json;
-//       })(host, context);
-//     }
-//   };
-// }
+function domainDeviceVersion(schema, deviceVersion: 'web' | 'phone') {
+  const directoryNoSlash: string = schema.directory.replace(/\//g, '-').trim();
+  const domainName = dasherize(directoryNoSlash + '-' + deviceVersion);
+  const directory = schema.directory + '/' + deviceVersion;
+
+  const chain = [
+    externalSchematic('@nrwl/angular', 'app', {
+      ...appAndLibSetting,
+      name: deviceVersion,
+      directory: schema.directory,
+      routing: false,
+      strict: true,
+      tags: `scope:shared,type:app`,
+    }),
+    schema.proxy ? addProxy(domainName) : noop(),
+    schematic('shell', {
+      application: domainName,
+      directory,
+    }),
+    schematic('shared', {
+      directory,
+    })
+  ];
+  return chain;
+}

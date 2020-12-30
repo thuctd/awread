@@ -12,7 +12,7 @@
   </mat-chip>
   <input [formControl]="typingForm" #genreInput [placeholder]="placeholder | titlecase" [matAutocomplete]="auto"
     [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-    (matChipInputTokenEnd)="add($event)" class="rounded border border-solid b--black-10 w-full py-2 px-2" />
+    (matChipInputTokenEnd)="add($event)" class="rounded border border-solid b--black-10 w-full py-2 px-2 focus:outline-none focus:border-green-400" />
 </mat-chip-list>
 <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
   <mat-option *ngFor="let genre of filteredGenres$ | async" [value]="genre">
