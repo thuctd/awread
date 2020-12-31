@@ -8,11 +8,12 @@ export function getWorkspaceName(tree) {
 }
 
 export async function guessProjectToSchema(tree, schema, context) {
+    const kind = schema.kind ?? context.schematic.description.name;
     const { projectName, projectRoot, projectType } = await guessProject(tree, schema);
     const { application, applicationRoot } = await guessApplication(tree, projectName);
     return {
         ...schema,
-        kind: schema.kind ?? context.schematic.description.name,
+        kind,
         project: projectName,
         projectRoot,
         application,
@@ -111,7 +112,7 @@ async function getDefaultProjectName(tree) {
     return angularFile.defaultProject;
 }
 
-async function getProject(tree, projectName) {
+export async function getProject(tree, projectName) {
     const angularFile = JSON.parse(tree.read('angular.json').toString('utf-8'));
     return angularFile.projects[projectName];
 }

@@ -19,8 +19,8 @@ export default function (schema: any): Rule {
 }
 
 function singleAction(schema, context, name) {
-  schema.name = name;
   return async (tree) => {
+    schema.name = name;
     const routingModulePath = path.join(schema.projectRoot, `${schema.project}-routing.module.ts`);
 
     return chain([

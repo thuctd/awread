@@ -17,10 +17,12 @@
     },
     "pages": {
       "type": "string",
-      "description": "pages list, example: --pages=login,register"
+      "description": "pages list, example: --pages=login,register",
+      "default": ""
     }
   },
   "required": [
-    "name","directory"
+    "name",
+    "directory"
   ]
 }

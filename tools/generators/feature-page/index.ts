@@ -14,8 +14,8 @@ export default function (schema: any): Rule {
 }
 
 function singleAction(schema, context, name) {
-  schema.name = name;
   return async (tree) => {
+    schema.name = name;
     schema = await guessProjectToSchema(tree, schema, context);
     return chain([
       schematic('service', {

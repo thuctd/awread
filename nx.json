@@ -122,6 +122,30 @@
     },
     "reader-phone-shared": {
       "tags": ["scope:shared"]
+    },
+    "reader-web-ui-auth": {
+      "tags": ["scope:ui-auth", "scope:shared", "type:ui"]
+    },
+    "reader-web-feature-auth": {
+      "tags": ["scope:feature-auth", "scope:shared", "type:feature"]
+    },
+    "reader-web-ui-author": {
+      "tags": ["scope:ui-author", "scope:shared", "type:ui"]
+    },
+    "reader-web-feature-author": {
+      "tags": ["scope:feature-author", "scope:shared", "type:feature"]
+    },
+    "reader-web-ui-single": {
+      "tags": ["scope:ui-single", "scope:shared", "type:ui"]
+    },
+    "reader-web-feature-single": {
+      "tags": ["scope:feature-single", "scope:shared", "type:feature"]
+    },
+    "reader-web-ui-market": {
+      "tags": ["scope:ui-market", "scope:shared", "type:ui"]
+    },
+    "reader-web-feature-market": {
+      "tags": ["scope:feature-market", "scope:shared", "type:feature"]
     }
   }
 }

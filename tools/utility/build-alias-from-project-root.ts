@@ -4,10 +4,11 @@ export function buildAliasFromProjectRoot(schema, tree) {
     const workspaceName = getNpmScope(tree);
     const projectRoot = schema.projectRoot.split('/');
     projectRoot.pop();
-    if (projectRoot[0] === 'apps' || projectRoot[0] === 'libs') {
-        projectRoot.pop();
-    }
     projectRoot.shift();
-    // console.log('alias', projectRoot, schema.projectRoot);
-    return `@${workspaceName}/${projectRoot.join('/')}`
+    if (projectRoot[0] === 'apps' || projectRoot[0] === 'libs') {
+        projectRoot.shift();
+    }
+    const result = `@${workspaceName}/${projectRoot.join('/')}`;
+    // console.log('alias', projectRoot, schema.projectRoot, result);
+    return result;
 }   
