@@ -4,6 +4,7 @@ import { FirebaseAuthAddon, FirebaseAuthSocialAddon } from '../addons';
 import { EmailLoginCredential, ProviderType } from '../models';
 import firebase from 'firebase/app';
 import { AuthApi } from '../apis';
+import { AuthRoutingGear } from './auth-routing.gear';
 
 @Injectable({ providedIn: 'root' })
 export class LoginGear {
@@ -11,8 +12,9 @@ export class LoginGear {
     private firebaseAuthAddon: FirebaseAuthAddon,
     private firebaseAuthSocialAddon: FirebaseAuthSocialAddon,
     private authApi: AuthApi,
-    private router: Router
-  ) {}
+    private router: Router,
+    private authRoutingGear: AuthRoutingGear,
+  ) { }
 
   loginWithRoleAdmin(credential: EmailLoginCredential) {
     this.loginEmail(credential)
@@ -29,7 +31,7 @@ export class LoginGear {
         credential
       );
       alert('Login thành công');
-      this.firebaseAuthSocialAddon.navigateTo('profile');
+      this.authRoutingGear.navigateAfterLoginComplete();
       console.log('userCredential', userCredential);
       return userCredential;
     } catch (err) {
@@ -101,9 +103,9 @@ export class LoginGear {
         res['data']['getUserBaseEmail'] &&
         res['data']['getUserBaseEmail'].results.length
       ) {
-        this.firebaseAuthSocialAddon.navigateTo('profile');
+        this.authRoutingGear.navigateAfterLoginComplete();
       } else {
-        this.router.navigate(['register-complete', user]);
+        this.router.navigate(['register-complete', user]); // TODO: sau khi refacor code liên quan xuống gear, thì gọi đến authRoutingGear để điều hướng bằng hàm navigateAfterRegisterComplete
       }
     });
   }

@@ -9,8 +9,8 @@ export class AuthApi {
   constructor(
     private apollo: Apollo,
     private http: HttpClient,
-    private firestore: AngularFirestore
-  ) {}
+    private firestore: AngularFirestore // TODO: ko sài thì xóa đi 
+  ) { }
 
   updatePassword(email: string, newPassword: string, type = 'forgot') {
     return this.apollo.mutate({

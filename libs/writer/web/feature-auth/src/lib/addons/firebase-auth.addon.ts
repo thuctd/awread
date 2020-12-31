@@ -17,7 +17,7 @@ export class FirebaseAuthAddon {
 
   constructor(
     public afAuth: AngularFireAuth,
-    private authApi: AuthApi,
+    private authApi: AuthApi, // TODO: chuyển code liên quan trong phần addon này xuống phần gear, code của addon và api là ngang hàng ko dc import lẫn nhau
     private router: Router
   ) {
     this.idToken$.subscribe((idToken) => (this.idToken = idToken));

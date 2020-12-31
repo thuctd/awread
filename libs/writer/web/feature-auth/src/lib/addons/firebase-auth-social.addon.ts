@@ -15,9 +15,9 @@ export class FirebaseAuthSocialAddon {
   ];
   constructor(
     private firebaseAuthAddon: FirebaseAuthAddon,
-    private authApi: AuthApi,
+    private authApi: AuthApi, // TODO: chuyển code liên quan trong phần addon này xuống phần gear, code của addon và api là ngang hàng ko dc import lẫn nhau
     private router: Router
-  ) {}
+  ) { }
 
   async registerWithEmail(credential) {
     try {
@@ -50,7 +50,7 @@ export class FirebaseAuthSocialAddon {
           res.data['getUserBaseEmail'] &&
           res.data['getUserBaseEmail']['results'].length
         ) {
-          this.navigateTo('profile');
+          this.navigateTo('profile'); // TODO: sau khi refacor code liên quan xuống gear, thì gọi đến authRoutingGear để điều hướng bằng hàm navigateAfterLoginComplete
           const user = res.data['getUserBaseEmail']['results'][0];
           if (user.provider === 'email/password') {
             const credential = firebase.auth.EmailAuthProvider.credential(
@@ -65,7 +65,7 @@ export class FirebaseAuthSocialAddon {
             }
           }
         } else {
-          this.router.navigate(['register-complete', userAccount]);
+          this.router.navigate(['register-complete', userAccount]); // TODO: sau khi refacor code liên quan xuống gear, thì gọi đến authRoutingGear để điều hướng bằng hàm navigateAfterRegisterComplete
         }
       });
   }
@@ -120,7 +120,9 @@ export class FirebaseAuthSocialAddon {
       // check trường hợp google/facebook ghi đè account thì phải link lại provider password (account email/pw)
       const user = this.firebaseAuthAddon.createUserObject(result.user);
       this.shouldLinkProviderPassword(user, result.user);
-    } catch (error) {}
+    } catch (error) {
+      //TODO: thiếu bắt lỗi hoặc đẩy lỗi ở đây 
+    }
   }
 
   linkAccountFacebookToProviderPassword(err) {
@@ -166,7 +168,7 @@ export class FirebaseAuthSocialAddon {
         credential
       );
       if (linkWithCredential) {
-        this.navigateTo('profile');
+        this.navigateTo('profile'); // TODO: sau khi refacor code liên quan xuống gear, thì gọi đến authRoutingGear để điều hướng bằng hàm navigateAfterLoginComplete
       }
       // if (linkWithCredential.user) {
       //   // update password when account Googleor/FB exists.
