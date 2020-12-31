@@ -1,4 +1,3 @@
-import { AngularFirestore } from '@angular/fire/firestore';
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
 import { of } from 'rxjs';
@@ -6,11 +5,7 @@ import { catchError, tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 @Injectable({ providedIn: 'root' })
 export class AuthApi {
-  constructor(
-    private apollo: Apollo,
-    private http: HttpClient,
-    private firestore: AngularFirestore // TODO: ko sài thì xóa đi 
-  ) { }
+  constructor(private apollo: Apollo, private http: HttpClient) {}
 
   updatePassword(email: string, newPassword: string, type = 'forgot') {
     return this.apollo.mutate({
@@ -28,10 +23,9 @@ export class AuthApi {
   setCustomClaimsToken(token: string) {
     this.http
       .post('http://localhost:4000/setCustomClaims', { idToken: token })
-      .subscribe((res: any) => {
+      .subscribe((res) => {
         console.log('result', res);
-        if (res.status) {
-        }
+        // if (res.status) {}
       });
   }
 
@@ -98,7 +92,7 @@ export class AuthApi {
           }
         `,
       })
-      .valueChanges.subscribe((result: any) => {
+      .valueChanges.subscribe((result) => {
         console.log('allBooks', result);
       });
   }

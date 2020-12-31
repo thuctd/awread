@@ -1,3 +1,4 @@
+export * from './firebase-auth.gear';
 export * from './auth-routing.gear';
 export * from './current-user.gear'
 export * from './logout.gear'

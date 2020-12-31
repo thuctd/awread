@@ -1,9 +1,14 @@
 import { Injectable } from '@angular/core';
 import { CurrentUserGear } from '../gears/current-user.gear';
+import { CurrentUserQuery } from '../states/current-user';
 
 @Injectable({ providedIn: 'root' })
 export class CurrentUserFacade {
-  constructor(private currentUserGear: CurrentUserGear) {}
+  currentUser$ = this.currentUserQuery.currentUser$;
+  constructor(
+    private currentUserGear: CurrentUserGear,
+    private currentUserQuery: CurrentUserQuery
+  ) {}
 
   getCurrentUser() {
     return this.currentUserGear.getCurrentUser();
@@ -11,5 +16,9 @@ export class CurrentUserFacade {
 
   updateCurrentUser(user) {
     return this.currentUserGear.update(user);
+  }
+
+  getUserId() {
+    return this.currentUserQuery.getUserId();
   }
 }

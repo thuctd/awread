@@ -1,3 +1,4 @@
+import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { AuthApi } from './../apis/auth.api';
 import { Injectable } from '@angular/core';
@@ -15,16 +16,35 @@ export class FirebaseAuthSocialAddon {
   ];
   constructor(
     private firebaseAuthAddon: FirebaseAuthAddon,
-    private authApi: AuthApi, // TODO: chuyển code liên quan trong phần addon này xuống phần gear, code của addon và api là ngang hàng ko dc import lẫn nhau
-    private router: Router
-  ) { }
+    private authApi: AuthApi,
+    private router: Router,
+    private afAuth: AngularFireAuth
+  ) {}
+
+  loginWithEmail(credential) {
+    return this.firebaseAuthAddon.loginWithEmail(credential);
+  }
 
   async registerWithEmail(credential) {
     try {
-      return await this.firebaseAuthAddon.registerWithEmail(credential);
+      const cre = await this.firebaseAuthAddon.registerWithEmail(credential);
+      return cre;
     } catch (err) {
-      throw err;
+      throw new Error(err);
     }
+  }
+
+  createUserObject(user) {
+    return {
+      displayName: user.displayName ?? '',
+      email: user.email ?? '',
+      emailVerified: user?.emailVerified.toString() ?? 'false',
+      photoUrl: user.photoURL ?? '',
+      uid: user.uid,
+      provider: user.provider ?? 'email/password',
+      address: user.address ?? '',
+      phone: user.phone ?? '',
+    };
   }
 
   async loginWithProvider(providerType: ProviderType) {
@@ -40,148 +60,6 @@ export class FirebaseAuthSocialAddon {
     }
   }
 
-  shouldLinkProviderPassword(userAccount: any, currentUser: firebase.User) {
-    return this.authApi
-      .getUserBaseEmail(userAccount.email)
-      .subscribe(async (res) => {
-        console.log('curent user logged', res);
-        if (
-          res.data &&
-          res.data['getUserBaseEmail'] &&
-          res.data['getUserBaseEmail']['results'].length
-        ) {
-          this.navigateTo('profile'); // TODO: sau khi refacor code liên quan xuống gear, thì gọi đến authRoutingGear để điều hướng bằng hàm navigateAfterLoginComplete
-          const user = res.data['getUserBaseEmail']['results'][0];
-          if (user.provider === 'email/password') {
-            const credential = firebase.auth.EmailAuthProvider.credential(
-              user.email,
-              user.password
-            );
-            try {
-              const link = await currentUser.linkWithCredential(credential);
-              console.log('Account linking success', link);
-            } catch (error) {
-              console.log('Account linking error', error);
-            }
-          }
-        } else {
-          this.router.navigate(['register-complete', userAccount]); // TODO: sau khi refacor code liên quan xuống gear, thì gọi đến authRoutingGear để điều hướng bằng hàm navigateAfterRegisterComplete
-        }
-      });
-  }
-
-  createAccountOnServer(user: any) {
-    // send data to server
-    this.authApi.createAccountOnServer(user).subscribe((status) => {
-      console.log('status new user', status);
-      // this.actionAfterCreateAccountSuccess();
-    });
-  }
-
-  async linkAccountWithProviderFacebook(err) {
-    if (
-      err.email &&
-      err.credential &&
-      err.code === 'auth/account-exists-with-different-credential'
-    ) {
-      const providers = await firebase
-        .auth()
-        .fetchSignInMethodsForEmail(err.email);
-      console.log('providers', providers);
-      const firstPopupProviderMethod = providers.find((p) =>
-        this.supportedPopupSignInMethods.includes(p)
-      );
-      // Test: Could this happen with email link then trying social provider?
-      if (!firstPopupProviderMethod) {
-        throw new Error(
-          `Your account is linked to a provider that isn't supported.`
-        );
-      }
-      if (providers.includes('google.com')) {
-        this.linkAccountFacebookToProviderGoogle(err, firstPopupProviderMethod);
-      } else {
-        // là provider email/password
-        this.linkAccountFacebookToProviderPassword(err);
-      }
-    }
-
-    // Handle errors...
-    // toast.error(err.message || err.toString());
-  }
-
-  async linkAccountFacebookToProviderGoogle(err, provider) {
-    const linkedProvider: any = this.getProvider(provider);
-    linkedProvider.setCustomParameters({ login_hint: err.email });
-
-    const result = await firebase.auth().signInWithPopup(linkedProvider);
-    console.log('result', result);
-    try {
-      await result.user.linkWithCredential(err.credential);
-      // check trường hợp google/facebook ghi đè account thì phải link lại provider password (account email/pw)
-      const user = this.firebaseAuthAddon.createUserObject(result.user);
-      this.shouldLinkProviderPassword(user, result.user);
-    } catch (error) {
-      //TODO: thiếu bắt lỗi hoặc đẩy lỗi ở đây 
-    }
-  }
-
-  linkAccountFacebookToProviderPassword(err) {
-    return this.authApi.getUserBaseEmail(err.email).subscribe(async (res) => {
-      console.log('curent user logged', res);
-      if (
-        res.data &&
-        res.data['getUserBaseEmail'] &&
-        res.data['getUserBaseEmail']['results'].length
-      ) {
-        const user = res.data['getUserBaseEmail']['results'][0];
-        if (user.provider === 'email/password') {
-          try {
-            const usercred = await firebase
-              .auth()
-              .signInWithEmailAndPassword(user.email, user.password);
-            const link = await usercred.user.linkWithCredential(err.credential);
-            console.log('Account linking success', link);
-          } catch (error) {
-            console.log('Account linking error', error);
-          }
-        }
-      }
-    });
-  }
-  async linkToProviderGoogleorFacebook(user) {
-    try {
-      const credential = firebase.auth.EmailAuthProvider.credential(
-        user.email,
-        user.password
-      );
-      const providers = await firebase
-        .auth()
-        .fetchSignInMethodsForEmail(user.email);
-      if (providers.includes('password')) {
-        alert('Tài khoản đã tồn tại!');
-        return;
-      }
-      const linkedProvider: any = this.getProvider(providers[0]);
-      linkedProvider.setCustomParameters({ login_hint: user.email });
-      const result = await firebase.auth().signInWithPopup(linkedProvider);
-      const linkWithCredential = await result.user.linkWithCredential(
-        credential
-      );
-      if (linkWithCredential) {
-        this.navigateTo('profile'); // TODO: sau khi refacor code liên quan xuống gear, thì gọi đến authRoutingGear để điều hướng bằng hàm navigateAfterLoginComplete
-      }
-      // if (linkWithCredential.user) {
-      //   // update password when account Googleor/FB exists.
-      //   this.authApi
-      //     .updatePassword(user.email, user.password, 'update-new')
-      //     .subscribe();
-      // }
-      console.log('linkWithCredential', linkWithCredential);
-    } catch (error) {
-      console.log('link with gg/fb error: ', error);
-    }
-  }
-
   getProvider(providerId) {
     switch (providerId) {
       case firebase.auth.GoogleAuthProvider.PROVIDER_ID:
@@ -193,9 +71,5 @@ export class FirebaseAuthSocialAddon {
       default:
         throw new Error(`No provider implemented for ${providerId}`);
     }
-  }
-
-  navigateTo(route: string) {
-    this.router.navigate([route]);
   }
 }

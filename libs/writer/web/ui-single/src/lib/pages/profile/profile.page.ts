@@ -1,19 +1,17 @@
-import { CurrentUserQuery } from './../../../../../feature-auth/src/lib/states/current-user/current-user.query';
-import { CurrentUserFacade } from './../../../../../feature-auth/src/lib/facades/current-user.facade';
 import { Directive, Injectable, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { CurrentUserFacade } from '@awread/writer/web/feature-auth';
 
 @Injectable({
   providedIn: 'root',
 })
 @Directive()
 export class ProfilePage implements OnInit {
-  currentUser$ = this.currentUserQuery.currentUser$;
   profileForm: FormGroup;
+  currentUser$ = this.currentUserFacade.currentUser$;
   constructor(
     private currentUserFacade: CurrentUserFacade,
-    private fb: FormBuilder,
-    private currentUserQuery: CurrentUserQuery
+    private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
@@ -26,7 +24,7 @@ export class ProfilePage implements OnInit {
   updateProfile() {
     const user = {
       ...this.profileForm.value,
-      userid: this.currentUserQuery.getUserId(),
+      userid: this.currentUserFacade.getUserId(),
     };
     this.currentUserFacade
       .updateCurrentUser(user)

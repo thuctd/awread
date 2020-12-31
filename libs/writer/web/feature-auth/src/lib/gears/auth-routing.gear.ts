@@ -6,17 +6,17 @@ export class AuthRoutingGear {
   // NOTE: Tại sao lại đẻ ra file này? đẻ ra file này để về sau reuse cả feature luôn, muốn sài gì thì chỉ import mỗi facade là xong
   loginCompleteRoute = '/profile';
   registerCompleteRoute = '/profile';
-  constructor(
-    private router: Router
-  ) {
+  constructor(private router: Router) {}
+
+  navigateAfterRegisterComplete(router: string) {
+    this.router.navigateByUrl(router);
   }
 
-  navigateAfterLoginComplete() {
-    this.router.navigateByUrl(this.loginCompleteRoute);
+  navigateAfterLoginComplete(router: string, params?) {
+    if (params) {
+      this.router.navigate([router], params);
+    } else {
+      this.router.navigate([router]);
+    }
   }
-
-  navigateAfterRegisterComplete() {
-    this.router.navigateByUrl(this.registerCompleteRoute);
-  }
-
 }
