@@ -1134,8 +1134,8 @@
           "builder": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": [
-              "libs/writer/web/feature-creation/src/**/*.ts",
-              "libs/writer/web/feature-creation/src/**/*.html"
+              "libs/global/packages/src/**/*.ts",
+              "libs/global/packages/src/**/*.html"
             ]
           }
         },
