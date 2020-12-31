@@ -35,8 +35,8 @@ dependencies:
   tslib: 2.0.3
   zone.js: 0.11.3
 devDependencies:
-  '@angular-builders/custom-webpack': 11.0.0_0854878552b90edc7e30ab06f56b9b51
-  '@angular-devkit/build-angular': 0.1100.5_0854878552b90edc7e30ab06f56b9b51
+  '@angular-builders/custom-webpack': 11.0.0_b6760f87550c5a261d51b191cbb74e5e
+  '@angular-devkit/build-angular': 0.1100.5_b6760f87550c5a261d51b191cbb74e5e
   '@angular/cli': 11.0.5
   '@angular/compiler-cli': 11.0.5_ae04eea250591f41b901d33a8893b81f
   '@angular/language-service': 11.0.5
@@ -63,7 +63,7 @@ devDependencies:
   '@typescript-eslint/eslint-plugin': 4.11.1_1b0bf84bc6c1d40d00bb35c03427a8b1
   '@typescript-eslint/parser': 4.11.1_eslint@7.16.0+typescript@4.0.5
   autoprefixer: 10.1.0_postcss@8.2.2
-  codelyzer: 6.0.1_tslint@6.1.3
+  codelyzer: 6.0.1
   cypress: 6.2.0
   dotenv: 8.2.0
   eslint: 7.16.0
@@ -82,15 +82,14 @@ devDependencies:
   tailwindcss: 2.0.2_af0f84ec51438f8ab9d26470b52a2535
   ts-jest: 26.4.4_jest@26.6.3+typescript@4.0.5
   ts-node: 9.1.1_typescript@4.0.5
-  tslint: 6.1.3_typescript@4.0.5
   typescript: 4.0.5
   webpack-filter-warnings-plugin: 1.2.1
 lockfileVersion: 5.2
 packages:
-  /@angular-builders/custom-webpack/11.0.0_0854878552b90edc7e30ab06f56b9b51:
+  /@angular-builders/custom-webpack/11.0.0_b6760f87550c5a261d51b191cbb74e5e:
     dependencies:
       '@angular-devkit/architect': 0.1100.5
-      '@angular-devkit/build-angular': 0.1100.5_0854878552b90edc7e30ab06f56b9b51
+      '@angular-devkit/build-angular': 0.1100.5_b6760f87550c5a261d51b191cbb74e5e
       '@angular-devkit/core': 11.0.5
       lodash: 4.17.20
       ts-node: 9.1.1_typescript@4.0.5
@@ -100,7 +99,6 @@ packages:
       node: '>=10.13.0'
     peerDependencies:
       '@angular/compiler-cli': '*'
-      tslint: '*'
       typescript: '*'
     resolution:
       integrity: sha512-9TDGeQZQuTQzNS4uYEtD+k1fV7xG348P8Isaoz+m6EByv1qgAGBoclVJZj+VAjtp6l8SkVG8WPOUgZeJwPgQ+g==
@@ -114,7 +112,7 @@ packages:
       yarn: '>= 1.13.0'
     resolution:
       integrity: sha512-yOYfucNouc1doTbcGbCNMXGMSc36+j97XpdNoeGyzFQ7GwezLAro0a9gxc5PdOxndfelkND7J1JuOjxdW5O17A==
-  /@angular-devkit/build-angular/0.1100.5_0854878552b90edc7e30ab06f56b9b51:
+  /@angular-devkit/build-angular/0.1100.5_b6760f87550c5a261d51b191cbb74e5e:
     dependencies:
       '@angular-devkit/architect': 0.1100.5
       '@angular-devkit/build-optimizer': 0.1100.5
@@ -179,7 +177,6 @@ packages:
       terser-webpack-plugin: 4.2.3_webpack@4.44.2
       text-table: 0.2.0
       tree-kill: 1.2.2
-      tslint: 6.1.3_typescript@4.0.5
       typescript: 4.0.5
       webpack: 4.44.2
       webpack-dev-middleware: 3.7.2_webpack@4.44.2
@@ -4005,7 +4002,7 @@ packages:
       integrity: sha512-OZXsdmn60dVe482l9zWxzOqqJApD2jggk/8QJKn3/Ub9posmqdqg712bW6v71BBe0UXXG/QfkZA7gcyiyEENbw==
   /@storybook/angular/6.1.11_53098d0859c3a2d01505a72234b1595d:
     dependencies:
-      '@angular-devkit/build-angular': 0.1100.5_0854878552b90edc7e30ab06f56b9b51
+      '@angular-devkit/build-angular': 0.1100.5_b6760f87550c5a261d51b191cbb74e5e
       '@angular/common': 11.0.5_@angular+core@11.0.5+rxjs@6.6.3
       '@angular/compiler': 11.0.5
       '@angular/compiler-cli': 11.0.5_ae04eea250591f41b901d33a8893b81f
@@ -6622,12 +6619,6 @@ packages:
       node: '>=0.2.0'
     resolution:
       integrity: sha1-skV5w77U1tOWru5tmorn9Ugqt7s=
-  /builtin-modules/1.1.1:
-    dev: true
-    engines:
-      node: '>=0.10.0'
-    resolution:
-      integrity: sha1-Jw8HbFpywC9bZaR9+Uxf46J4iS8=
   /builtin-status-codes/3.0.0:
     dev: true
     resolution:
@@ -7212,7 +7203,7 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-DQcLTQQ6W+ozovGkDi7bPZpMz3c=
-  /codelyzer/6.0.1_tslint@6.1.3:
+  /codelyzer/6.0.1:
     dependencies:
       '@angular/compiler': 9.0.0_tslib@1.14.1
       '@angular/core': 9.0.0_6320156b710540144dcff46bc6ec0c0a
@@ -7227,7 +7218,6 @@ packages:
       source-map: 0.5.7
       sprintf-js: 1.1.2
       tslib: 1.14.1
-      tslint: 6.1.3_typescript@4.0.5
       zone.js: 0.10.3
     dev: true
     peerDependencies:
@@ -18399,40 +18389,6 @@ packages:
   /tslib/2.0.3:
     resolution:
       integrity: sha512-uZtkfKblCEQtZKBF6EBXVZeQNl82yqtDQdv+eck8u7tdPxjLu2/lp5/uPW+um2tpuxINHWy3GhiccY7QgEaVHQ==
-  /tslint/6.1.3_typescript@4.0.5:
-    dependencies:
-      '@babel/code-frame': 7.12.11
-      builtin-modules: 1.1.1
-      chalk: 2.4.2
-      commander: 2.20.3
-      diff: 4.0.2
-      glob: 7.1.6
-      js-yaml: 3.14.1
-      minimatch: 3.0.4
-      mkdirp: 0.5.5
-      resolve: 1.19.0
-      semver: 5.7.1
-      tslib: 1.14.1
-      tsutils: 2.29.0_typescript@4.0.5
-      typescript: 4.0.5
-    deprecated: 'TSLint has been deprecated in favor of ESLint. Please see https://github.com/palantir/tslint/issues/4534 for more information.'
-    dev: true
-    engines:
-      node: '>=4.8.0'
-    hasBin: true
-    peerDependencies:
-      typescript: '>=2.3.0-dev || >=2.4.0-dev || >=2.5.0-dev || >=2.6.0-dev || >=2.7.0-dev || >=2.8.0-dev || >=2.9.0-dev || >=3.0.0-dev || >= 3.1.0-dev || >= 3.2.0-dev || >= 4.0.0-dev'
-    resolution:
-      integrity: sha512-IbR4nkT96EQOvKE2PW/djGz8iGNeJ4rF2mBfiYaR/nvUWYKJhLwimoJKgjIFEIDibBtOevj7BqCRL4oHeWWUCg==
-  /tsutils/2.29.0_typescript@4.0.5:
-    dependencies:
-      tslib: 1.14.1
-      typescript: 4.0.5
-    dev: true
-    peerDependencies:
-      typescript: '>=2.1.0 || >=2.1.0-dev || >=2.2.0-dev || >=2.3.0-dev || >=2.4.0-dev || >=2.5.0-dev || >=2.6.0-dev || >=2.7.0-dev || >=2.8.0-dev || >=2.9.0-dev || >= 3.0.0-dev || >= 3.1.0-dev'
-    resolution:
-      integrity: sha512-g5JVHCIJwzfISaXpXE1qvNalca5Jwob6FjI4AoPlqMusJ6ftFE7IkkFoMhVLRgK+4Kx3gkzb8UZK5t5yTTvEmA==
   /tsutils/3.17.1_typescript@4.0.5:
     dependencies:
       tslib: 1.14.1
@@ -19762,7 +19718,6 @@ specifiers:
   ts-jest: 26.4.4
   ts-node: 9.1.1
   tslib: ^2.0.3
-  tslint: 6.1.3
   typescript: ~4.0.3
   webpack-filter-warnings-plugin: ^1.2.1
   zone.js: ^0.11.3
