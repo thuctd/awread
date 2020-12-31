@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ListDesktopPage } from "./list-desktop.page";
+import { ListDesktopPage } from './list-desktop.page';
 
-describe("ListDesktopPage", () => {
+describe('ListDesktopPage', () => {
   let component: ListDesktopPage;
   let fixture: ComponentFixture<ListDesktopPage>;
 
@@ -18,7 +18,7 @@ describe("ListDesktopPage", () => {
     fixture.detectChanges();
   });
 
-  it("should create", () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 });

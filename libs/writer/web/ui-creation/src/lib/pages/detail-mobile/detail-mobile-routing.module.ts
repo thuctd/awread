@@ -1,9 +1,9 @@
-import { NgModule } from "@angular/core";
-import { Routes, RouterModule } from "@angular/router";
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
 
-import { DetailMobilePage } from "./detail-mobile.page";
+import { DetailMobilePage } from './detail-mobile.page';
 
-const routes: Routes = [{ path: "", component: DetailMobilePage }];
+const routes: Routes = [{ path: '', component: DetailMobilePage }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

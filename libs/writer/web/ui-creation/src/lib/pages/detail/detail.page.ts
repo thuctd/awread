@@ -1,7 +1,7 @@
-import { Injectable, OnInit } from "@angular/core";
+import { Injectable, OnInit } from '@angular/core';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class DetailPage implements OnInit {
   constructor() {}
