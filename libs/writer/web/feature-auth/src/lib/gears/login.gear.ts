@@ -92,7 +92,7 @@ export class LoginGear {
 
   getCurrentUser() {
     this.authApi.getAllBooks();
-    return this.authApi.getCurrentUser();
+    return this.authApi.getCurrentUserIdAndRole();
   }
 
   private checkMustNewUserWhenLoginFaceBook(user) {

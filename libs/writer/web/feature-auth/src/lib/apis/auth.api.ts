@@ -35,7 +35,7 @@ export class AuthApi {
       });
   }
 
-  getCurrentUser() {
+  getCurrentUserIdAndRole() {
     return this.apollo
       .watchQuery({
         query: gql`
@@ -111,7 +111,7 @@ export class AuthApi {
           mutation signup(
             $fullname: String
             $emailVerified: String
-            $img: String
+            $photourl: String
             $password: String
             $userid: String
             $email: String
@@ -121,7 +121,7 @@ export class AuthApi {
               input: {
                 fullname: $fullname
                 emailverified: $emailVerified
-                img: $img
+                photourl: $photourl
                 password: $password
                 userid: $userid
                 email: $email
@@ -136,10 +136,12 @@ export class AuthApi {
           email: user.email ?? null,
           fullname: user.displayName ?? null,
           emailVerified: user.emailVerified ?? 'false',
-          img: user.photoURL ?? null,
+          photourl: user.photoURL ?? null,
           password: user.password ?? '',
           userid: user.uid,
-          provider: user.provider,
+          provider: user.provider ?? 'email/password',
+          address: user.address ?? '',
+          phone: user.phone ?? '',
         },
       })
       .pipe(

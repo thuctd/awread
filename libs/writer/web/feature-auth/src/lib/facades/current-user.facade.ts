@@ -3,18 +3,13 @@ import { CurrentUserGear } from '../gears/current-user.gear';
 
 @Injectable({ providedIn: 'root' })
 export class CurrentUserFacade {
-
-  constructor(
-    private currentUserGear: CurrentUserGear,
-  ) {
-  }
+  constructor(private currentUserGear: CurrentUserGear) {}
 
   getCurrentUser() {
-    this.currentUserGear.get();
+    return this.currentUserGear.getCurrentUser();
   }
 
-  updateCurrentUser() {
-    this.currentUserGear.update();
+  updateCurrentUser(user) {
+    return this.currentUserGear.update(user);
   }
-
 }

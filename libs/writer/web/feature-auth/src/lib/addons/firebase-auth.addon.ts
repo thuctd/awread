@@ -168,12 +168,14 @@ export class FirebaseAuthAddon {
 
   createUserObject(user) {
     return {
-      displayname: user.displayName ?? '',
+      displayName: user.displayName ?? '',
       email: user.email ?? '',
       emailVerified: user?.emailVerified.toString() ?? 'false',
       photoUrl: user.photoURL ?? '',
       uid: user.uid,
       provider: user.provider ?? 'email/password',
+      address: user.address ?? '',
+      phone: user.phone ?? '',
     };
   }
 }
