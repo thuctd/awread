@@ -1,13 +1,8 @@
-import { Router } from '@angular/router';
-import { catchError, retry } from 'rxjs/operators';
-import { tap } from 'rxjs/operators';
-import { AuthApi } from './../apis/auth.api';
 import { Injectable } from '@angular/core';
 import firebase from 'firebase/app';
 import '@firebase/auth';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { ProviderType } from '../models';
-import { forkJoin, of } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class FirebaseAuthAddon {
@@ -15,48 +10,8 @@ export class FirebaseAuthAddon {
   idTokenResult$ = this.afAuth.idTokenResult;
   idToken = null;
 
-  constructor(
-    public afAuth: AngularFireAuth,
-    private authApi: AuthApi,
-    private router: Router
-  ) {
+  constructor(public afAuth: AngularFireAuth) {
     this.idToken$.subscribe((idToken) => (this.idToken = idToken));
-  }
-
-  async confirmPasswordReset(code: string, password: string) {
-    try {
-      const email = window.localStorage.getItem('email_reset_password');
-      forkJoin([
-        this.afAuth.confirmPasswordReset(code, password),
-        this.authApi.updatePassword(email, password),
-      ])
-        .pipe(
-          tap(() => {
-            window.localStorage.removeItem('email_reset_password');
-            alert('Reset password thành công');
-            this.router.navigate(['login']);
-          }),
-          catchError((err) => {
-            alert('Reset password lỗi');
-            return of(err);
-          }),
-          retry(2)
-        )
-        .subscribe();
-      // const result = await this.afAuth.confirmPasswordReset(code, password);
-      // console.log('change password result: ', result);
-    } catch (error) {
-      console.log('change password error: ', error);
-    }
-  }
-
-  async sendLinkResetPassword(email: string) {
-    try {
-      const result = await this.afAuth.sendPasswordResetEmail(email);
-      console.log('reset password result: ', result);
-    } catch (error) {
-      console.log('error reset pw: ', error);
-    }
   }
 
   async checkMail(email: string) {
@@ -164,16 +119,5 @@ export class FirebaseAuthAddon {
 
   async resetEmail(email) {
     return await this.afAuth.sendPasswordResetEmail(email);
-  }
-
-  createUserObject(user) {
-    return {
-      displayname: user.displayName ?? '',
-      email: user.email ?? '',
-      emailVerified: user?.emailVerified.toString() ?? 'false',
-      photoUrl: user.photoURL ?? '',
-      uid: user.uid,
-      provider: user.provider ?? 'email/password',
-    };
   }
 }

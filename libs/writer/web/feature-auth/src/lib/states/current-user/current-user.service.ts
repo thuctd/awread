@@ -5,14 +5,16 @@ import { CurrentUserStore } from './current-user.store';
 
 @Injectable({ providedIn: 'root' })
 export class CurrentUserService {
+  constructor(private currentUserStore: CurrentUserStore) {}
 
-  constructor(
-    private currentUserStore: CurrentUserStore,
-  ) {
+  setCurrentUserToStore(user) {
+    this.currentUserStore.update(user);
   }
 
   get() {
-    return of({}).pipe(tap(entities => this.currentUserStore.update(entities)));
+    return of({}).pipe(
+      tap((entities) => this.currentUserStore.update(entities))
+    );
   }
 
   logout() {

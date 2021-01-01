@@ -1,4 +1,4 @@
-import { FirebaseAuthAddon } from './../addons/firebase-auth.addon';
+import { FirebaseAuthGear } from './firebase-auth.gear';
 import { AuthApi } from './../apis/auth.api';
 import { Injectable } from '@angular/core';
 
@@ -6,14 +6,14 @@ import { Injectable } from '@angular/core';
 export class ForgotPasswordGear {
   constructor(
     private authApi: AuthApi,
-    private firebaseAuthAddon: FirebaseAuthAddon
+    private firebaseAuthGear: FirebaseAuthGear
   ) {}
 
   confirmPasswordReset(code: string, password: string) {
-    this.firebaseAuthAddon.confirmPasswordReset(code, password);
+    this.firebaseAuthGear.confirmPasswordReset(code, password);
   }
 
   sendLinkResetPassword(email: string) {
-    this.firebaseAuthAddon.sendLinkResetPassword(email);
+    this.firebaseAuthGear.sendLinkResetPassword(email);
   }
 }

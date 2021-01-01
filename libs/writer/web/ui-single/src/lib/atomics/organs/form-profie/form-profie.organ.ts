@@ -1,3 +1,4 @@
+import { FormGroup } from '@angular/forms';
 import {
   Component,
   OnInit,
@@ -16,7 +17,8 @@ import {
 export class FormProfieOrgan implements OnInit {
   @Input() link = '/forgot';
   @Input() submitText = 'Lưu';
-
+  @Input() profileForm: FormGroup;
+  @Output() updateProfileEvent = new EventEmitter();
   constructor() {}
 
   ngOnInit(): void {}

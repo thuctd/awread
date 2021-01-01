@@ -1,4 +1,10 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  Input,
+} from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'info-form',
@@ -7,6 +13,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InfoFormMolec implements OnInit {
+  @Input() profileForm: FormGroup;
   items = [
     {
       key: 'Email',

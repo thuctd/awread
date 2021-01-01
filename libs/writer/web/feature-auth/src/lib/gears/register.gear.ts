@@ -1,8 +1,10 @@
+import { AuthRoutingGear } from './auth-routing.gear';
+import { FirebaseAuthGear } from './firebase-auth.gear';
 import { Router } from '@angular/router';
 import { AuthApi } from './../apis/auth.api';
 import { Injectable } from '@angular/core';
 import { FirebaseAuthAddon, FirebaseAuthSocialAddon } from '../addons';
-import { BasicCredential, ProviderType } from '../models';
+import { BasicCredential } from '../models';
 import firebase from 'firebase/app';
 // userCredential.additionalUserInfo.isNewUser;
 // userCredential.credential.providerId;
@@ -14,7 +16,9 @@ export class RegisterGear {
     private firebaseAuthAddon: FirebaseAuthAddon,
     private firebaseAuthSocialAddon: FirebaseAuthSocialAddon,
     private authApi: AuthApi,
-    private router: Router
+    private router: Router,
+    private firebaseAuthGear: FirebaseAuthGear,
+    private authRoutingGear: AuthRoutingGear
   ) {}
 
   async registerEmail(credential: BasicCredential) {
@@ -22,12 +26,12 @@ export class RegisterGear {
       const userCredential = await this.firebaseAuthAddon.registerWithEmail(
         credential
       );
-      const user = this.firebaseAuthAddon.createUserObject({
+      const user = this.firebaseAuthSocialAddon.createUserObject({
         ...userCredential.user,
         provider: 'email/password',
       });
       this.createAccountOnServer(user);
-      this.router.navigate(['login']);
+      this.authRoutingGear.navigateAfterRegisterComplete('login');
     } catch (err) {
       console.log('login with email/pw error: ', err);
       if (err.code === 'auth/email-already-in-use') {
@@ -39,7 +43,7 @@ export class RegisterGear {
   }
 
   linkToProviderGoogleorFacebook(user) {
-    this.firebaseAuthSocialAddon.linkToProviderGoogleorFacebook(user);
+    this.firebaseAuthGear.linkToProviderGoogleorFacebook(user);
   }
 
   createAccountOnServer(user) {
