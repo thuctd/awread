@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DetailMobilePage } from "./detail-mobile.page";
+import { DetailMobilePage } from './detail-mobile.page';
 
-describe("DetailMobilePage", () => {
+describe('DetailMobilePage', () => {
   let component: DetailMobilePage;
   let fixture: ComponentFixture<DetailMobilePage>;
 
@@ -18,7 +18,7 @@ describe("DetailMobilePage", () => {
     fixture.detectChanges();
   });
 
-  it("should create", () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 });

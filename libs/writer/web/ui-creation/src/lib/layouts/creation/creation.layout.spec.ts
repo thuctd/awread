@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CreationLayout } from "./creation.layout";
+import { CreationLayout } from './creation.layout';
 
-describe("CreationLayout", () => {
+describe('CreationLayout', () => {
   let component: CreationLayout;
   let fixture: ComponentFixture<CreationLayout>;
 
@@ -18,7 +18,7 @@ describe("CreationLayout", () => {
     fixture.detectChanges();
   });
 
-  it("should create", () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 });

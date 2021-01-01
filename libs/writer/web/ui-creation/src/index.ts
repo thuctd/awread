@@ -1,1 +1,1 @@
-export * from "./lib/writer-web-ui-creation.module";
+export * from './lib/writer-web-ui-creation.module';

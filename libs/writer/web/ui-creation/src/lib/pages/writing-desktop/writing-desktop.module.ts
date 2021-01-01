@@ -1,9 +1,9 @@
-import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
-import { WritingDesktopRoutingModule } from "./writing-desktop-routing.module";
-import { WritingDesktopPage } from "./writing-desktop.page";
-import { WriterWebUiCreationAtomicModule } from "../../atomics/writer-web-ui-creation-atomic.module";
+import { WritingDesktopRoutingModule } from './writing-desktop-routing.module';
+import { WritingDesktopPage } from './writing-desktop.page';
+import { WriterWebUiCreationAtomicModule } from '../../atomics/writer-web-ui-creation-atomic.module';
 
 @NgModule({
   declarations: [WritingDesktopPage],
