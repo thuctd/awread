@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 
 @Component({
   selector: 'template-detail',
@@ -7,6 +7,15 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DetailIndexTemplate implements OnInit {
+  @Input() btns = [
+    {
+      submitText: 'Draft',
+      isActive: false,
+    },{
+    submitText: 'Publish',
+    isActive: true,
+  }];
+
   tabs = [
     { name: 'Tables of Contents', isActive: true },
     { name: 'Story Details'}
