@@ -24,54 +24,42 @@ case 1: generate the atomic design system
 
 ```
 - open terminal from everywhere
-- nx workspace-generator ds --type=[atom,molec,organ default value is atom] [your list component name here]
+- nx workspace-generator ds [atom,molec,organ default value is atom] [your list component name here]
 ```
 
 case 2: generate the atomic design system
 
 ```
 - open terminal on atomic parent folder
-- nx workspace-generator ds --type=[atom,molec,organ default value is atom] [your list component name here]
+- nx workspace-generator ds [atom,molec,organ default value is atom] [your list component name here]
 ```
 
 # EXAMPLE
 
 ## generate in feature folder:
 
-nx workspace-generator atomic --type=[atom,molec,organ] [your list component name here]
-if you dont using --type, default value is atom
+nx workspace-generator atomic [atom,molec,organ] [your list component name here]
 
 for example:
 
-### generate without --type
+### generate
 
 ```
-nx workspace-generator atomic auth-bg,tab-btn,logo,input,check-btn,forgot-btn,submit-btn,social-btn
-```
-
-### generate with --type
-
-```
-nx workspace-generator atomic --type=atom auth-bg,tab-btn,logo,input,check-btn,forgot-btn,submit-btn,social-btn
-nx workspace-generator atomic --type=molec tab-head,login-form,register-form,remember-forgot,action-btns
-nx workspace-generator atomic --type=organ login,register
-nx workspace-generator atomic --type=template login-register
+nx workspace-generator atomic atom auth-bg,tab-btn,logo,input,check-btn,forgot-btn,submit-btn,social-btn
+nx workspace-generator atomic molec tab-head,login-form,register-form,remember-forgot,action-btns
+nx workspace-generator atomic organ login,register
+nx workspace-generator atomic template login-register
 ```
 
 ## generate design system folder:
 
-nx workspace-generator ds --type=[atom,molec,organ] [your list component name here]
-if you dont using --type, default value is atom
+nx workspace-generator ds [atom,molec,organ] [your list component name here]
+
+### generate
 
 ```
-nx workspace-generator ds auth-bg,tab-btn,logo,input,check-btn,forgot-btn,submit-btn,social-btn
-```
-
-### generate with --type
-
-```
-nx workspace-generator ds --type=atom auth-bg,tab-btn,logo,input,check-btn,forgot-btn,submit-btn,social-btn
-nx workspace-generator ds --type=molec tab-head,login-form,register-form,remember-forgot,action-btns
-nx workspace-generator ds --type=organ login,register
-nx workspace-generator ds --type=template login-register
+nx workspace-generator ds atom auth-bg,tab-btn,logo,input,check-btn,forgot-btn,submit-btn,social-btn
+nx workspace-generator ds molec tab-head,login-form,register-form,remember-forgot,action-btns
+nx workspace-generator ds organ login,register
+nx workspace-generator ds template login-register
 ```
