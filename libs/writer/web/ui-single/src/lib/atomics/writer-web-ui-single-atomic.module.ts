@@ -1,3 +1,4 @@
+import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
@@ -17,6 +18,7 @@ import { ProfileTemplate } from './templates/profile/profile.template';
     CommonModule,
     StorybookSupportModule,
     GlobalDesignSystemAtomicModule,
+    ReactiveFormsModule,
   ],
   exports: [
     CommonModule,
@@ -38,4 +40,4 @@ import { ProfileTemplate } from './templates/profile/profile.template';
     ProfileTemplate,
   ],
 })
-export class WriterWebUiSingleAtomicModule { }
+export class WriterWebUiSingleAtomicModule {}

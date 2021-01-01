@@ -1,9 +1,48 @@
-<section class="flex flex-col">
+<section class="flex flex-col" [formGroup]="profileForm">
   <title-form-profile class="mb-4"></title-form-profile>
-  <input-form-profile *ngFor="let item of items" [key]="item.key" class="mb-4"></input-form-profile>
-  <div>
+  <!-- <input-form-profile *ngFor="let item of items" [key]="item.key" class="mb-4"></input-form-profile> -->
+
+  <div class="mb-4">
+    <label class="text-gray-400 float-left">Tên</label>
+    <div class="float-right">
+      <input
+        formControlName="fullname"
+        class="border rounded-full border-gray-400 focus:outline-none px-2 w-72"
+      />
+    </div>
+    <div class="clear-both"></div>
+  </div>
+
+  <div class="mb-4">
+    <label class="text-gray-400 float-left">Tên tài khoản</label>
+    <div class="float-right">
+      <input
+        formControlName="username"
+        class="border rounded-full border-gray-400 focus:outline-none px-2 w-72"
+      />
+    </div>
+    <div class="clear-both"></div>
+  </div>
+
+  <div class="mb-4">
+    <label class="text-gray-400 float-left">Liên kết</label>
+    <div class="float-right">
+      <input
+        formControlName="website"
+        class="border rounded-full border-gray-400 focus:outline-none px-2 w-72"
+      />
+    </div>
+    <div class="clear-both"></div>
+  </div>
+
+  <div class="mb-4">
     <label class="text-gray-400 float-left">Tiểu sử</label>
-    <div class=""><textarea class="border rounded-xl border-gray-400 focus:outline-none px-2 h-20 float-right w-72"></textarea></div>
+    <div class="">
+      <textarea
+        formControlName="introduce"
+        class="border rounded-xl border-gray-400 focus:outline-none px-2 h-20 float-right w-72"
+      ></textarea>
+    </div>
   </div>
   <div class="clear-both"></div>
 </section>

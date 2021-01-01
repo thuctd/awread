@@ -7,15 +7,13 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'editprofile-form',
-  templateUrl: './editprofile-form.molec.html',
-  styleUrls: ['./editprofile-form.molec.scss'],
+  selector: 'profile',
+  templateUrl: './profile.template.html',
+  styleUrls: ['./profile.template.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class EditprofileFormMolec implements OnInit {
+export class ProfileTemplate implements OnInit {
   @Input() profileForm: FormGroup;
-  items = [{ key: 'Tên' }, { key: 'Tên tài khoản' }, { key: 'Liên kết' }];
-
   constructor() {}
 
   ngOnInit(): void {}

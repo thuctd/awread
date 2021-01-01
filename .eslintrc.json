@@ -4,7 +4,8 @@
     "**/*"
   ],
   "plugins": [
-    "@nrwl/nx"
+    "@nrwl/nx",
+    "@angular-eslint"
   ],
   "overrides": [
     {
@@ -64,6 +65,18 @@
         "plugin:@nrwl/nx/javascript"
       ],
       "rules": {}
+    },
+    {
+      "files": [
+        "*.ts"
+      ],
+      "extends": [
+        "plugin:@angular-eslint"
+      ],
+      "rules": {
+        "@angular-eslint/no-empty-lifecycle-method": "warning",
+        "@angular-eslint/component-class-suffix": "warning"
+      }
     }
   ]
 }
