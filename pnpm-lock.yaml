@@ -13,6 +13,7 @@ dependencies:
   '@apollo/client': 3.3.6_graphql@15.4.0
   '@datorama/akita': 5.3.0_rxjs@6.6.3+tslib@2.0.3
   '@datorama/akita-ngdevtools': 5.0.3_5c269d92c41a9d719cfa2e2bfbc5fc11
+  '@firebase/auth': 0.16.1
   '@fortawesome/angular-fontawesome': 0.8.1_fdd5b6ccbd0f77fbee969032fbd55394
   '@fortawesome/fontawesome-svg-core': 1.2.32
   '@fortawesome/free-solid-svg-icons': 5.15.1
@@ -36,6 +37,8 @@ dependencies:
 devDependencies:
   '@angular-builders/custom-webpack': 11.0.0_b6760f87550c5a261d51b191cbb74e5e
   '@angular-devkit/build-angular': 0.1100.5_b6760f87550c5a261d51b191cbb74e5e
+  '@angular-devkit/core': 11.0.5
+  '@angular-devkit/schematics': 11.0.5
   '@angular-eslint/eslint-plugin': 0.8.0-beta.7_eslint@7.16.0+typescript@4.0.5
   '@angular-eslint/eslint-plugin-template': 0.8.0-beta.7_a42020ab6769570ab2fc0a270dd16412
   '@angular-eslint/template-parser': 0.8.0-beta.7_8ef00a7675bb14916c4abb1a890aeeec
@@ -44,21 +47,22 @@ devDependencies:
   '@angular/language-service': 11.0.5
   '@nestjs/schematics': 7.2.6_typescript@4.0.5
   '@nestjs/testing': 7.6.4_390b88005b617b606ec544479f6f1d75
-  '@nrwl/angular': 11.0.2_be1144637f20a0f6801dea8792fef600
+  '@nrwl/angular': 11.0.2_c8be4a2989bfa533c125b25e6422700a
   '@nrwl/cli': 11.0.2
-  '@nrwl/cypress': 11.0.2_de082c9c256e44ef573c9df4d8d262ed
+  '@nrwl/cypress': 11.0.2_c166e20b9bbdf12f11dfb1e38b4b4b82
   '@nrwl/eslint-plugin-nx': 11.0.2_44347d63f6fca6869f0f6fde9a7cc346
   '@nrwl/express': 11.0.2_068eee078ab885be25aafa8e8772767e
   '@nrwl/jest': 11.0.2_@nrwl+workspace@11.0.2
   '@nrwl/nest': 11.0.2_068eee078ab885be25aafa8e8772767e
   '@nrwl/node': 11.0.2_068eee078ab885be25aafa8e8772767e
   '@nrwl/nx-cloud': 10.1.9
-  '@nrwl/storybook': 11.0.2_de082c9c256e44ef573c9df4d8d262ed
+  '@nrwl/storybook': 11.0.2_c166e20b9bbdf12f11dfb1e38b4b4b82
   '@nrwl/tao': 11.0.2
   '@nrwl/workspace': 11.0.2_prettier@2.2.1
+  '@schematics/angular': 11.0.5
   '@storybook/addon-actions': 6.1.11
   '@storybook/addon-knobs': 6.1.11
-  '@storybook/angular': 6.1.11_53098d0859c3a2d01505a72234b1595d
+  '@storybook/angular': 6.1.11_941033bc2f8e290cc04f97f4ef6b2c81
   '@types/express': 4.17.9
   '@types/jest': 26.0.19
   '@types/node': 14.14.16
@@ -79,14 +83,15 @@ devDependencies:
   pluralize: 8.0.0
   postcss: 8.2.2
   postcss-import: 14.0.0_postcss@8.2.2
-  postcss-loader: 4.1.0_postcss@8.2.2
+  postcss-loader: 4.1.0_postcss@8.2.2+webpack@4.44.2
   postcss-scss: 3.0.4
   prettier: 2.2.1
   tailwindcss: 2.0.2_af0f84ec51438f8ab9d26470b52a2535
   ts-jest: 26.4.4_jest@26.6.3+typescript@4.0.5
   ts-node: 9.1.1_typescript@4.0.5
   typescript: 4.0.5
-  webpack-filter-warnings-plugin: 1.2.1
+  webpack: 4.44.2
+  webpack-filter-warnings-plugin: 1.2.1_webpack@4.44.2
 lockfileVersion: 5.2
 packages:
   /@angular-builders/custom-webpack/11.0.0_b6760f87550c5a261d51b191cbb74e5e:
@@ -2497,15 +2502,16 @@ packages:
       node: '>= 6'
     resolution:
       integrity: sha512-TzEC1XMi1hJkywWpRfD2clreTa/Z+lOrXDCxxBTBPEcY5azdPi56A6Xw+O4tWJnaJH3iIE7G5aDXZC6JgRZLcA==
-  /@cypress/webpack-preprocessor/4.1.5:
+  /@cypress/webpack-preprocessor/4.1.5_webpack@4.44.2:
     dependencies:
       bluebird: 3.7.1
       debug: 4.1.1
+      webpack: 4.44.2
     dev: true
     optionalDependencies:
       '@babel/core': 7.12.10
       '@babel/preset-env': 7.12.11_@babel+core@7.12.10
-      babel-loader: 8.2.2_@babel+core@7.12.10
+      babel-loader: 8.2.2_cb0b35cdd86d43ae111e54bfa48070d7
     peerDependencies:
       webpack: ^4.18.1
     resolution:
@@ -2757,6 +2763,13 @@ packages:
       '@firebase/util': 0.x
     resolution:
       integrity: sha512-88h74TMQ6wXChPA6h9Q3E1Jg6TkTHep2+k63OWg3s0ozyGVMeY+TTOti7PFPzq5RhszQPQOoCi59es4MaRvgCw==
+  /@firebase/auth-types/0.10.1:
+    dev: false
+    peerDependencies:
+      '@firebase/app-types': 0.x
+      '@firebase/util': 0.x
+    resolution:
+      integrity: sha512-/+gBHb1O9x/YlG7inXfxff/6X3BPZt4zgBv4kql6HEmdzNQCodIRlEYnI+/da+lN+dha7PjaFH7C7ewMmfV7rw==
   /@firebase/auth-types/0.10.1_8006a2fb9a52d513340846aa4b6cf75b:
     dependencies:
       '@firebase/app-types': 0.6.1
@@ -2767,6 +2780,14 @@ packages:
       '@firebase/util': 0.x
     resolution:
       integrity: sha512-/+gBHb1O9x/YlG7inXfxff/6X3BPZt4zgBv4kql6HEmdzNQCodIRlEYnI+/da+lN+dha7PjaFH7C7ewMmfV7rw==
+  /@firebase/auth/0.16.1:
+    dependencies:
+      '@firebase/auth-types': 0.10.1
+    dev: false
+    peerDependencies:
+      '@firebase/app': 0.x
+    resolution:
+      integrity: sha512-7juD7D/kaxNti/xa5G+ZGJJs+bdJUWOW0MlNBtXwiG+TjMh69EDmwJnQmmc9h/32QVvXt1qo1OGWOoMMpF/2Gg==
   /@firebase/auth/0.16.1_0dc33727bf3acedf92caf621e2889e7e:
     dependencies:
       '@firebase/app': 0.6.13
@@ -3594,10 +3615,10 @@ packages:
       node: '>=10'
     resolution:
       integrity: sha512-Uv6h1sT+0DrblvIrolFtbvM1FgWm+/sy4B3pvLp67Zys+thcukzS5ekn7HsZFGpWP4Q3fYJCljbWQE/XivMRLw==
-  /@nrwl/angular/11.0.2_be1144637f20a0f6801dea8792fef600:
+  /@nrwl/angular/11.0.2_c8be4a2989bfa533c125b25e6422700a:
     dependencies:
       '@angular-devkit/schematics': 11.0.5
-      '@nrwl/cypress': 11.0.2_de082c9c256e44ef573c9df4d8d262ed
+      '@nrwl/cypress': 11.0.2_c166e20b9bbdf12f11dfb1e38b4b4b82
       '@nrwl/devkit': 11.0.2
       '@nrwl/jest': 11.0.2_@nrwl+workspace@11.0.2
       '@nrwl/linter': 11.0.2_@nrwl+workspace@11.0.2
@@ -3611,6 +3632,7 @@ packages:
       cypress: '*'
       rxjs: '*'
       typescript: '*'
+      webpack: '*'
     resolution:
       integrity: sha512-p4TbSIp+WWBkyi1ugpD34iFqhWkLHK83wNjiP+R+U7vFsKUBy10Pzra4k+xA4fdg3xxxd5XHs2GvhGZG00unVA==
   /@nrwl/cli/11.0.2:
@@ -3624,12 +3646,12 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-bjELE45kKr5jqqKr1D7PSimrOxRVaD7eFpDSNvpx7mYY7Iz2vgdnJipGpMNlb21XzyOtsyqTstimbedUL/1ntg==
-  /@nrwl/cypress/11.0.2_de082c9c256e44ef573c9df4d8d262ed:
+  /@nrwl/cypress/11.0.2_c166e20b9bbdf12f11dfb1e38b4b4b82:
     dependencies:
       '@angular-devkit/architect': 0.1100.5
       '@angular-devkit/core': 11.0.5
       '@angular-devkit/schematics': 11.0.5
-      '@cypress/webpack-preprocessor': 4.1.5
+      '@cypress/webpack-preprocessor': 4.1.5_webpack@4.44.2
       '@nrwl/devkit': 11.0.2
       '@nrwl/workspace': 11.0.2_prettier@2.2.1
       cypress: 6.2.0
@@ -3647,6 +3669,7 @@ packages:
       '@nrwl/workspace': 11.0.2
       cypress: '>= 3 < 6'
       typescript: '*'
+      webpack: '*'
     resolution:
       integrity: sha512-P4fxk2eUqig5uTs4w2lHp90Y2hJoa1KFVABs5lGLvzx9NS1igyvqDkUULTFPEovfm+2O8QEIAXHtroTfq8QAcw==
   /@nrwl/devkit/11.0.2:
@@ -3772,9 +3795,9 @@ packages:
     dev: true
     resolution:
       integrity: sha512-4Zi1GzOzn1mYoHplS/nFglFPoGYcaz6mgtLyT+u96uSvxSLSoq2SpcdcJ8Z5iEy1MmyCbcH6PdiVicZoKbVofg==
-  /@nrwl/storybook/11.0.2_de082c9c256e44ef573c9df4d8d262ed:
+  /@nrwl/storybook/11.0.2_c166e20b9bbdf12f11dfb1e38b4b4b82:
     dependencies:
-      '@nrwl/cypress': 11.0.2_de082c9c256e44ef573c9df4d8d262ed
+      '@nrwl/cypress': 11.0.2_c166e20b9bbdf12f11dfb1e38b4b4b82
       '@nrwl/devkit': 11.0.2
       '@nrwl/workspace': 11.0.2_prettier@2.2.1
       core-js: 3.8.1
@@ -3787,6 +3810,7 @@ packages:
       '@nrwl/workspace': 11.0.2
       cypress: '*'
       typescript: '*'
+      webpack: '*'
     resolution:
       integrity: sha512-tbQJ0SfZse3wVDBEfHI4CdA/WqCZGPF+JaDC+L+N77Efcnn568A4I0LIEH2mFIdVp/BkSwCtkWhy9DB8dU7NzQ==
   /@nrwl/tao/11.0.2:
@@ -4129,9 +4153,10 @@ packages:
       react-dom: ^16.8.0 || ^17.0.0
     resolution:
       integrity: sha512-OZXsdmn60dVe482l9zWxzOqqJApD2jggk/8QJKn3/Ub9posmqdqg712bW6v71BBe0UXXG/QfkZA7gcyiyEENbw==
-  /@storybook/angular/6.1.11_53098d0859c3a2d01505a72234b1595d:
+  /@storybook/angular/6.1.11_941033bc2f8e290cc04f97f4ef6b2c81:
     dependencies:
       '@angular-devkit/build-angular': 0.1100.5_b6760f87550c5a261d51b191cbb74e5e
+      '@angular-devkit/core': 11.0.5
       '@angular/common': 11.0.5_@angular+core@11.0.5+rxjs@6.6.3
       '@angular/compiler': 11.0.5
       '@angular/compiler-cli': 11.0.5_ae04eea250591f41b901d33a8893b81f
@@ -6229,22 +6254,6 @@ packages:
       webpack: '>=2'
     resolution:
       integrity: sha512-7q7nC1tYOrqvUrN3LQK4GwSk/TQorZSOlO9C+RZDZpODgyN4ZlCqE5q9cDsyWOliN+aU9B4JX01xK9eJXowJLw==
-  /babel-loader/8.2.2_@babel+core@7.12.10:
-    dependencies:
-      '@babel/core': 7.12.10
-      find-cache-dir: 3.3.1
-      loader-utils: 1.4.0
-      make-dir: 3.1.0
-      schema-utils: 2.7.1
-    dev: true
-    engines:
-      node: '>= 8.9'
-    optional: true
-    peerDependencies:
-      '@babel/core': ^7.0.0
-      webpack: '>=2'
-    resolution:
-      integrity: sha512-JvTd0/D889PQBtUXJ2PXaKU/pjZDMtHA9V2ecm+eNRmmBCMR09a+fmpGTNwnJtFmFl5Ei7Vy47LjBb+L0wQ99g==
   /babel-loader/8.2.2_cb0b35cdd86d43ae111e54bfa48070d7:
     dependencies:
       '@babel/core': 7.12.10
@@ -6880,7 +6889,7 @@ packages:
       bluebird: 3.7.2
       chownr: 1.1.4
       figgy-pudding: 3.5.2
-      glob: 7.1.4
+      glob: 7.1.6
       graceful-fs: 4.2.4
       infer-owner: 1.0.4
       lru-cache: 5.1.1
@@ -15280,7 +15289,7 @@ packages:
       webpack: ^4.0.0 || ^5.0.0
     resolution:
       integrity: sha512-pntA9zIR14drQo84yGTjQJg1m7T0DkXR4vXYHBngiRZdJtEeCrojL6lOpqUanMzG375lIJbT4Yug85zC/AJWGw==
-  /postcss-loader/4.1.0_postcss@8.2.2:
+  /postcss-loader/4.1.0_postcss@8.2.2+webpack@4.44.2:
     dependencies:
       cosmiconfig: 7.0.0
       klona: 2.0.4
@@ -15288,6 +15297,7 @@ packages:
       postcss: 8.2.2
       schema-utils: 3.0.0
       semver: 7.3.4
+      webpack: 4.44.2
     dev: true
     engines:
       node: '>= 10.13.0'
@@ -16881,7 +16891,7 @@ packages:
       integrity: sha1-QzdOLiyglosO8VI0YLfXMP8i7rM=
   /rimraf/2.7.1:
     dependencies:
-      glob: 7.1.4
+      glob: 7.1.6
     dev: true
     hasBin: true
     resolution:
@@ -18371,7 +18381,7 @@ packages:
     dependencies:
       commander: 2.20.3
       source-map: 0.6.1
-      source-map-support: 0.5.16
+      source-map-support: 0.5.19
     dev: true
     engines:
       node: '>=6.0.0'
@@ -19432,14 +19442,6 @@ packages:
         optional: true
     resolution:
       integrity: sha512-PUxZ+oSTxogFQgkTtFndEtJIPNmml7ExwufBZ9L2/Xyyd5PnOL5UreWe5ZT7IU25DSdykL9p1MLQzmLh2ljSeg==
-  /webpack-filter-warnings-plugin/1.2.1:
-    dev: true
-    engines:
-      node: '>= 4.3 < 5.0.0 || >= 5.10'
-    peerDependencies:
-      webpack: ^2.0.0 || ^3.0.0 || ^4.0.0
-    resolution:
-      integrity: sha512-Ez6ytc9IseDMLPo0qCuNNYzgtUl8NovOqjIq4uAU8LTD4uoa1w1KpZyyzFtLTEMZpkkOkLfL9eN+KGYdk1Qtwg==
   /webpack-filter-warnings-plugin/1.2.1_webpack@4.44.2:
     dependencies:
       webpack: 4.44.2
@@ -19990,6 +19992,8 @@ packages:
 specifiers:
   '@angular-builders/custom-webpack': ^11.0.0
   '@angular-devkit/build-angular': 0.1100.5
+  '@angular-devkit/core': ^11.0.5
+  '@angular-devkit/schematics': ^11.0.5
   '@angular-eslint/eslint-plugin': ^0.8.0-beta.7
   '@angular-eslint/eslint-plugin-template': ^0.8.0-beta.7
   '@angular-eslint/template-parser': ^0.8.0-beta.7
@@ -20010,6 +20014,7 @@ specifiers:
   '@apollo/client': ^3.3.6
   '@datorama/akita': ^5.3.0
   '@datorama/akita-ngdevtools': ^5.0.3
+  '@firebase/auth': ^0.16.1
   '@fortawesome/angular-fontawesome': ^0.8.1
   '@fortawesome/fontawesome-svg-core': ^1.2.32
   '@fortawesome/free-solid-svg-icons': ^5.15.1
@@ -20030,6 +20035,7 @@ specifiers:
   '@nrwl/storybook': ^11.0.2
   '@nrwl/tao': 11.0.2
   '@nrwl/workspace': 11.0.2
+  '@schematics/angular': ^11.0.5
   '@storybook/addon-actions': ^6.1.11
   '@storybook/addon-knobs': ^6.1.11
   '@storybook/angular': ^6.1.11
@@ -20073,5 +20079,6 @@ specifiers:
   ts-node: 9.1.1
   tslib: ^2.0.3
   typescript: ~4.0.3
+  webpack: '4'
   webpack-filter-warnings-plugin: ^1.2.1
   zone.js: ^0.11.3
