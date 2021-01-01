@@ -1,2 +1,9 @@
-<profile class="bg-gray-100 h-screen w-full"></profile>
-
+<h3>Profile: {{currentUser$ | async | json}}</h3>
+<h3>form value: {{profileForm.value | json}}</h3>
+<div>
+  <profile
+    [profileForm]="profileForm"
+    (updateProfileEvent)="updateProfile()"
+    class="bg-gray-100 h-screen w-full"
+  ></profile>
+</div>

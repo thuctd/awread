@@ -4,6 +4,8 @@ import { FirebaseAuthAddon, FirebaseAuthSocialAddon } from '../addons';
 import { EmailLoginCredential, ProviderType } from '../models';
 import firebase from 'firebase/app';
 import { AuthApi } from '../apis';
+import { AuthRoutingGear } from './auth-routing.gear';
+import { FirebaseAuthGear } from './firebase-auth.gear';
 
 @Injectable({ providedIn: 'root' })
 export class LoginGear {
@@ -11,12 +13,14 @@ export class LoginGear {
     private firebaseAuthAddon: FirebaseAuthAddon,
     private firebaseAuthSocialAddon: FirebaseAuthSocialAddon,
     private authApi: AuthApi,
-    private router: Router
+    private router: Router,
+    private authRoutingGear: AuthRoutingGear,
+    private firebaseAuthGear: FirebaseAuthGear
   ) {}
 
   loginWithRoleAdmin(credential: EmailLoginCredential) {
     this.loginEmail(credential)
-      .then(async (res: any) => {
+      .then(async (res) => {
         console.log('user', res.user);
         this.authApi.setCustomClaimsToken(await res.user.getIdToken());
       })
@@ -29,7 +33,7 @@ export class LoginGear {
         credential
       );
       alert('Login thành công');
-      this.firebaseAuthSocialAddon.navigateTo('profile');
+      this.authRoutingGear.navigateAfterLoginComplete('profile');
       console.log('userCredential', userCredential);
       return userCredential;
     } catch (err) {
@@ -55,26 +59,26 @@ export class LoginGear {
       case ProviderType.facebook:
         try {
           const userCredential = await this.firebaseAuthAddon.loginWithFacebook();
-          const user = this.firebaseAuthAddon.createUserObject({
+          const user = this.firebaseAuthSocialAddon.createUserObject({
             ...userCredential.user,
             provider: 'facebook',
           });
           this.checkMustNewUserWhenLoginFaceBook(user);
         } catch (err) {
-          this.firebaseAuthSocialAddon.linkAccountWithProviderFacebook(err);
+          this.firebaseAuthGear.linkAccountWithProviderFacebook(err);
         }
         break;
       case ProviderType.google:
         try {
           const userCredential = await this.firebaseAuthAddon.loginWithGoogle();
-          const user = this.firebaseAuthAddon.createUserObject({
+          const user = this.firebaseAuthSocialAddon.createUserObject({
             ...userCredential.user,
             provider: 'google',
           });
           // vì google ghi đè lên tất cả tài khoản cùng email đã tạo trước đó,
           // nên phải check lại TH đã tạo email/password trước đó,
           // nếu đúng thì link lại với account google
-          this.firebaseAuthSocialAddon.shouldLinkProviderPassword(
+          this.firebaseAuthGear.shouldLinkProviderPassword(
             user,
             firebase.auth().currentUser
           );
@@ -92,7 +96,7 @@ export class LoginGear {
 
   getCurrentUser() {
     this.authApi.getAllBooks();
-    return this.authApi.getCurrentUser();
+    return this.authApi.getCurrentUserIdAndRole();
   }
 
   private checkMustNewUserWhenLoginFaceBook(user) {
@@ -101,9 +105,12 @@ export class LoginGear {
         res['data']['getUserBaseEmail'] &&
         res['data']['getUserBaseEmail'].results.length
       ) {
-        this.firebaseAuthSocialAddon.navigateTo('profile');
+        this.authRoutingGear.navigateAfterLoginComplete('profile');
       } else {
-        this.router.navigate(['register-complete', user]);
+        this.authRoutingGear.navigateAfterLoginComplete(
+          'register-complete',
+          user
+        );
       }
     });
   }

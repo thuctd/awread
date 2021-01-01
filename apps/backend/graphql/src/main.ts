@@ -21,7 +21,6 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import admin from 'firebase-admin';
 
-
 app.use(cors());
 // Enable the use of request body parsing middleware
 app.use(bodyParser.json());
@@ -101,7 +100,7 @@ function checkRole(req) {
     // role null will be using default role of Postgraphile
     return {
       role: 'anonymous',
-      'jwt.claims.user_id': 'null',
+      'jwt.claims.user_id': '3fc5d98a-4961-48bb-9abf-a212f1783d60',
     };
   }
 }

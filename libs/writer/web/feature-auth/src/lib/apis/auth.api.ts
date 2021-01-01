@@ -1,4 +1,3 @@
-import { AngularFirestore } from '@angular/fire/firestore';
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
 import { of } from 'rxjs';
@@ -6,11 +5,7 @@ import { catchError, tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 @Injectable({ providedIn: 'root' })
 export class AuthApi {
-  constructor(
-    private apollo: Apollo,
-    private http: HttpClient,
-    private firestore: AngularFirestore
-  ) {}
+  constructor(private apollo: Apollo, private http: HttpClient) {}
 
   updatePassword(email: string, newPassword: string, type = 'forgot') {
     return this.apollo.mutate({
@@ -28,14 +23,13 @@ export class AuthApi {
   setCustomClaimsToken(token: string) {
     this.http
       .post('http://localhost:4000/setCustomClaims', { idToken: token })
-      .subscribe((res: any) => {
+      .subscribe((res) => {
         console.log('result', res);
-        if (res.status) {
-        }
+        // if (res.status) {}
       });
   }
 
-  getCurrentUser() {
+  getCurrentUserIdAndRole() {
     return this.apollo
       .watchQuery({
         query: gql`
@@ -98,7 +92,7 @@ export class AuthApi {
           }
         `,
       })
-      .valueChanges.subscribe((result: any) => {
+      .valueChanges.subscribe((result) => {
         console.log('allBooks', result);
       });
   }
@@ -111,7 +105,7 @@ export class AuthApi {
           mutation signup(
             $fullname: String
             $emailVerified: String
-            $img: String
+            $photourl: String
             $password: String
             $userid: String
             $email: String
@@ -121,7 +115,7 @@ export class AuthApi {
               input: {
                 fullname: $fullname
                 emailverified: $emailVerified
-                img: $img
+                photourl: $photourl
                 password: $password
                 userid: $userid
                 email: $email
@@ -136,10 +130,12 @@ export class AuthApi {
           email: user.email ?? null,
           fullname: user.displayName ?? null,
           emailVerified: user.emailVerified ?? 'false',
-          img: user.photoURL ?? null,
+          photourl: user.photoURL ?? null,
           password: user.password ?? '',
           userid: user.uid,
-          provider: user.provider,
+          provider: user.provider ?? 'email/password',
+          address: user.address ?? '',
+          phone: user.phone ?? '',
         },
       })
       .pipe(
