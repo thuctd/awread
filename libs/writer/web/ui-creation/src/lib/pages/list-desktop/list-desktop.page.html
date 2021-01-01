@@ -1,1 +1,7 @@
-<template-list></template-list>
+<template-list
+  [books]="bookList$ | async"
+  (updateBookStatusEvent)="updateBookStatus($event)"
+  (addChapterEvent)="addChapter()"
+  (editBookEvent)="editBook($event)"
+  (removeBookEvent)="removeBook($event)"
+></template-list>

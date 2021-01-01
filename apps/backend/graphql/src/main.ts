@@ -92,15 +92,15 @@ function checkRole(req) {
     console.log('role is writer');
     return {
       role: 'writer',
-      'jwt.claims.user_id': req.user.uid,
+      'jwt.claims.user_id': '10f62cca-d75d-4b7c-8869-9ee319819431',
       // req.user.uid,
     };
   } else {
     console.warn('failed to authenticate, using role default (anonymous)');
     // role null will be using default role of Postgraphile
     return {
-      role: 'anonymous',
-      'jwt.claims.user_id': '3fc5d98a-4961-48bb-9abf-a212f1783d60',
+      role: 'writer',
+      'jwt.claims.user_id': '10f62cca-d75d-4b7c-8869-9ee319819431',
     };
   }
 }

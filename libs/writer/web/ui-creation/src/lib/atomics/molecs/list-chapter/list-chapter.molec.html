@@ -1,4 +1,16 @@
 <div class="self-start mt-4">
-  <list-chapter-book [countTotal]='countTotal' [countPublished]='countPublished'></list-chapter-book>
-  <list-ud-book></list-ud-book>
+  <div class="font-medium mb-2 text-xs sm:text-sm">
+    {{ book.chaptersByBookid.totalCountPublished }}/{{
+    book.chaptersByBookid.totalCount }} - {{ book.chaptersByBookid.totalCount -
+    book.chaptersByBookid.totalCountPublished }} Drafts
+  </div>
+
+  <div class="">
+    <p class="mb-1 font-normal text-xs sm:text-sm text-gray-600">
+      Updated {{book.updatedat ? (book.updatedat | date : 'yyyy-mm-dd') :
+      'Unknown Date'}}
+    </p>
+  </div>
+  <!-- <list-chapter-book [countTotal]='countTotal' [countPublished]='countPublished'></list-chapter-book> -->
+  <!-- <list-ud-book></list-ud-book> -->
 </div>

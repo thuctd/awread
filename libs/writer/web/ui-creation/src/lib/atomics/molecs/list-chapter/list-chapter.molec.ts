@@ -1,18 +1,22 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  Input,
+} from '@angular/core';
 
 @Component({
   selector: 'list-chapter',
   templateUrl: './list-chapter.molec.html',
   styleUrls: ['./list-chapter.molec.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListChapterMolec implements OnInit {
+  @Input() book;
   @Input() countTotal = 1000;
   @Input() countPublished = 50;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }
