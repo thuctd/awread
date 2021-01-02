@@ -10,11 +10,6 @@
                 "$source": "argv",
                 "index": 0
             }
-        },
-        "inline": {
-            "type": "boolean",
-            "description": "inline code activate",
-            "default": false
         }
     },
     "required": [

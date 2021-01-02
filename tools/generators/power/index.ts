@@ -21,22 +21,37 @@ function singleAction(schema, context, name) {
         schema.name = name;
         schema = await guessProjectToSchema(tree, schema, context);
         return chain([
-            externalSchematic('@schematics/angular', 'module', {
-                name,
+            schematic('logic', {
+                list: `${name}`,
                 project: schema.project,
+                directory: name,
+                type: 'facade',
             }),
-            externalSchematic('@schematics/angular', 'component', {
-                ...componentSetting,
-                name,
-                module: name,
+            schematic('logic', {
+                list: `${name}`,
                 project: schema.project,
-                export: true,
-                inlineStyle: schema.inline,
-                inlineTemplate: schema.inline,
-                skipTests: true,
-                viewEncapsulation: 'None'
+                directory: name,
+                type: 'gear',
             }),
-            exportToLibIndex(schema.projectType, schema.projectRoot, `export * from './lib/${name}/${name}.module'`),
+            schematic('logic', {
+                list: `${name}`,
+                project: schema.project,
+                directory: name,
+                type: 'api',
+            }),
+            schematic('logic', {
+                list: `${name}`,
+                project: schema.project,
+                directory: name,
+                type: 'addon',
+            }),
+            schematic('logic', {
+                list: `${name}`,
+                project: schema.project,
+                directory: name,
+                type: 'model',
+            }),
+            exportToLibIndex(schema.projectType, schema.projectRoot, `export * from './lib/${name}/index'`, true),
         ])
     }
 }
