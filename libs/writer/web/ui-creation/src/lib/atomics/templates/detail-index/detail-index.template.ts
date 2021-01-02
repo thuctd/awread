@@ -11,14 +11,14 @@ export class DetailIndexTemplate implements OnInit {
     {
       submitText: 'Draft',
       isActive: false,
-    },{
-    submitText: 'Publish',
-    isActive: true,
-  }];
+    }, {
+      submitText: 'Publish',
+      isActive: true,
+    }];
 
   tabs = [
     { name: 'Tables of Contents', isActive: true },
-    { name: 'Story Details'}
+    { name: 'Story Details' }
   ]
 
   constructor() { }

@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter, Input } from '@angular/core';
 
 @Component({
   selector: 'list',
@@ -8,8 +8,12 @@ import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter } from
 })
 export class ListOrgan implements OnInit {
   @Output() moreEvent = new EventEmitter();
+  @Input() btn = {
+    submitText: 'Đăng truyện',
+    isActive: true,
+  };
 
-  demoNumber = 10 ;
+  demoNumber = 10;
 
   counter = Array;
 
@@ -18,7 +22,7 @@ export class ListOrgan implements OnInit {
   ngOnInit(): void {
   }
 
-  numberReturn(length){
+  numberReturn(length) {
     return new Array(length);
   }
 
