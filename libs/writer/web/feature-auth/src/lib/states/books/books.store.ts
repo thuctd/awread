@@ -34,4 +34,17 @@ export class BooksStore extends EntityStore<BooksState> {
     super();
     // this.createUIStore().setInitialEntityState();
   }
+
+  updateBookById(id: string, book) {
+    return this.update(id, (e) => {
+      return {
+        ...e,
+        ...book,
+      };
+    });
+  }
+
+  addBook(book) {
+    return this.add(book);
+  }
 }

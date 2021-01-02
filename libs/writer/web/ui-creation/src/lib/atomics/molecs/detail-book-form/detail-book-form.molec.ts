@@ -1,71 +1,71 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  Input,
+  Output,
+  EventEmitter,
+} from '@angular/core';
+import {
+  FormBuilder,
+  FormControl,
+  Validators,
+  FormGroup,
+} from '@angular/forms';
 
 @Component({
   selector: 'detail-book-form',
   templateUrl: './detail-book-form.molec.html',
   styleUrls: ['./detail-book-form.molec.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DetailBookFormMolec implements OnInit {
   @Input() genres;
+  @Input() bookForm: FormGroup;
   @Input() formInformation = {
     title: {
       display: 'title',
-      placeholder: `Story's name`
+      placeholder: `Story's name`,
     },
     description: {
       display: 'description',
-      placeholder: `Story's detail`
+      placeholder: `Story's detail`,
     },
     genres: {
       display: 'genres',
-      placeholder: 'genres'
+      placeholder: 'genres',
     },
     tags: {
       display: 'tags',
-      placeholder: 'tags'
+      placeholder: 'tags',
     },
     category: {
       display: 'category',
-      placeholder: 'category'
+      placeholder: 'category',
     },
     target: {
-      display: 'Target Audience'
+      display: 'Target Audience',
     },
-    language : {
-      display: 'Language'
+    language: {
+      display: 'Language',
     },
     completed: {
       display: 'completed',
-      placeholder: 'completed'
+      placeholder: 'completed',
     },
     adult: {
       display: 'adult',
-      placeholder: 'adult'
+      placeholder: 'adult',
     },
     chapter0: {
       display: 'use prologue',
-      placeholder: 'If you use have prologue chapter'
+      placeholder: 'If you use have prologue chapter',
     },
-  }
+  };
 
+  @Output() btnSubmitEvent = new EventEmitter();
 
-  @Input() form = this.fb.group({
-    title: [''],
-    description: [''],
-    tag: [''],
-    genres: [''],
-    target: [''],
-    language: [''],
-    completed: ['']
-  })
+  constructor(private fb: FormBuilder) {}
 
-  constructor(
-    private fb: FormBuilder,
-  ) { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

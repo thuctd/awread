@@ -1,32 +1,24 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  Input,
+  EventEmitter,
+  Output,
+} from '@angular/core';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'detail',
   templateUrl: './detail.organ.html',
   styleUrls: ['./detail.organ.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DetailOrgan implements OnInit {
-  formBook = this.fb.group({
-    title: [''],
-    description: [''],
-    tag: [''],
-    genres: [''],
-    target: [''],
-    language: [''],
-    completed: ['']
-  })
+  @Input() bookForm: FormGroup;
+  @Output() bookSubmitEvent = new EventEmitter();
 
-  formImg = this.fb.group({
-    srcImg: ['']
-  })
+  constructor(private fb: FormBuilder) {}
 
-  constructor(
-    private fb: FormBuilder,
-  ) { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

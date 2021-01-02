@@ -1,1 +1,6 @@
-<template-writing></template-writing>
+<template-writing [chapterForm]="chapterForm"></template-writing>
+<div>
+  <button (click)="chapterAction()">
+    {{(chapterId ? 'cập nhật' : 'thêm chương') | titlecase}}
+  </button>
+</div>

@@ -12,13 +12,14 @@ export class BooksApi {
       .query({
         query: gql`
           query getAllBooks {
-            allBooks {
+            allBooks(condition: { isdeleted: false }) {
               nodes {
                 bookid
                 title
                 img
                 description
                 completed
+                status
                 publishedat
                 updatedat
                 categoryByCategoryid {
@@ -28,7 +29,12 @@ export class BooksApi {
                 chaptersByBookid {
                   totalCount
                   nodes {
+                    chapterid
+                    title
+                    content
                     status
+                    updatedat
+                    publishedat
                   }
                 }
               }
@@ -45,28 +51,116 @@ export class BooksApi {
       );
   }
 
-  addBook(book) {
+  // createUserBook(userid: string, bookid: string) {
+  //   return this.apollo.mutate({
+  //     mutation: gql`
+  //       mutation createUserBook(
+  //         $userid: String!
+  //         $bookid: String!
+  //         $publishedat: Datetime
+  //       ) {
+  //         createUserBook(
+  //           input: {
+  //             userBook: {
+  //               userid: $userid
+  //               bookid: $bookid
+  //               publishedat: $publishedat
+  //             }
+  //           }
+  //         ) {
+  //           userBook {
+  //             bookid
+  //           }
+  //         }
+  //       }
+  //     `,
+  //     variables: { userid, bookid },
+  //   });
+  // }
+
+  createBook(book) {
+    console.log('create book: ', book);
     return this.apollo
       .mutate({
         mutation: gql`
-      mutation createBook($bookid: String, $title: String, $description: String, $tags: String, $status: String, $completed: Boolean) {
-        createBook(
-          input: {book: {{bookid: $bookId, title: $title, description: $description, tags: $tags, status: $status, completed: $completed, categoryid: "2f5187d5-ca67-47a8-aba8-f34e9d07d08a"}}
-        ) {
-          book {
-            bookid
+          mutation createBook(
+            $bookid: String!
+            $userid: String!
+            $title: String!
+            $description: String
+            $tags: [String]
+            $status: BookStatus
+            $completed: Boolean
+            $updatedat: Datetime
+            $publishedat: Datetime
+          ) {
+            createBook(
+              input: {
+                book: {
+                  bookid: $bookid
+                  userid: $userid
+                  title: $title
+                  description: $description
+                  tags: $tags
+                  status: $status
+                  completed: $completed
+                  updatedat: $updatedat
+                  publishedat: $publishedat
+                  categoryid: "2f5187d5-ca67-47a8-aba8-f34e9d07d08a"
+                }
+              }
+            ) {
+              book {
+                bookid
+                title
+                img
+                description
+                completed
+                status
+                publishedat
+                updatedat
+                categoryByCategoryid {
+                  categoryid
+                  name
+                }
+                chaptersByBookid {
+                  totalCount
+                  nodes {
+                    chapterid
+                    title
+                    status
+                    updatedat
+                    publishedat
+                  }
+                }
+              }
+            }
+
+            createUserBook(
+              input: {
+                userBook: {
+                  userid: $userid
+                  bookid: $bookid
+                  publishedat: $publishedat
+                }
+              }
+            ) {
+              userBook {
+                bookid
+              }
+            }
           }
-        }
-      }
-    
-    `,
+        `,
         variables: {
           bookid: book.bookid,
+          userid: book.userid,
           title: book.title ?? '',
           description: book.description ?? '',
           tags: book.tags ?? [],
           completed: book.completed ?? false,
           status: book.status ?? 'DRAFT',
+          updatedat: new Date(),
+          publishedat: new Date(),
         },
       })
       .pipe(
@@ -83,12 +177,13 @@ export class BooksApi {
       .mutate({
         mutation: gql`
           mutation updateBook(
-            $bookid: String
+            $bookid: String!
             $title: String
             $description: String
-            $tags: String
-            $status: String
+            $tags: [String]
+            $status: BookStatus
             $completed: Boolean
+            $updatedat: Datetime
           ) {
             updateBookByBookid(
               input: {
@@ -98,6 +193,7 @@ export class BooksApi {
                   tags: $tags
                   status: $status
                   completed: $completed
+                  updatedat: $updatedat
                 }
                 bookid: $bookid
               }
@@ -113,8 +209,9 @@ export class BooksApi {
           title: book.title ?? '',
           description: book.description ?? '',
           tags: book.tags ?? [],
-          completed: book.completed ?? false,
           status: book.status ?? 'DRAFT',
+          completed: book.completed ?? false,
+          updatedat: new Date(),
         },
       })
       .pipe(
@@ -130,7 +227,7 @@ export class BooksApi {
     return this.apollo
       .mutate({
         mutation: gql`
-          mutation removeBook($bookId: String, $status: String) {
+          mutation removeBook($bookId: String!, $status: BookStatus) {
             updateBookByBookid(
               input: { bookPatch: { status: $status }, bookid: $bookId }
             ) {
@@ -158,7 +255,7 @@ export class BooksApi {
     return this.apollo
       .mutate({
         mutation: gql`
-          mutation removeBook($bookId: String) {
+          mutation removeBook($bookId: String!) {
             updateBookByBookid(
               input: { bookPatch: { isdeleted: true }, bookid: $bookId }
             ) {

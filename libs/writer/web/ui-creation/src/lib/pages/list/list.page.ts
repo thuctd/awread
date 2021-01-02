@@ -1,5 +1,5 @@
 import { Router } from '@angular/router';
-import { BooksFacade } from './../../../../../feature-auth/src/lib/facades/books.facade';
+import { BooksFacade } from '@awread/writer/web/feature-auth';
 import { Directive, Injectable, OnInit } from '@angular/core';
 
 @Injectable({
@@ -15,18 +15,21 @@ export class ListPage implements OnInit {
   }
 
   updateBookStatus(book) {
-    return this.booksFacade.updateBookStatus(book.bookid, book.status);
+    return this.booksFacade
+      .updateBookStatus(book.bookid, book.status)
+      .subscribe();
   }
 
   addChapter(bookId: string) {
-    this.router.navigate(['writing', bookId]);
+    this.router.navigate(['writing', { bookId: bookId }]);
   }
 
   editBook(bookId: string) {
-    this.router.navigate(['detail', bookId]);
+    this.booksFacade.setBookIdActive(bookId);
+    this.router.navigate(['detail', { bookId: bookId }]);
   }
 
   removeBook(bookId: string) {
-    return this.booksFacade.removeBook(bookId);
+    return this.booksFacade.removeBook(bookId).subscribe();
   }
 }
