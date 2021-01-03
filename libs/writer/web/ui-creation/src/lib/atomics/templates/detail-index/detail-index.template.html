@@ -5,6 +5,7 @@
       *ngIf="tabHead.currentTab.name === 'Tables of Contents'"
       [chapters]="chapters"
       (chapterActionEvent)="chapterActionEvent.emit($event)"
+      (createNewChapterEvent)="createNewChapterEvent.emit()"
     ></index>
     <detail
       *ngIf="tabHead.currentTab.name === 'Story Details'"
@@ -17,7 +18,7 @@
     >
       <cr-submit-btn
         *ngFor="let btn of btns"
-        [active]="labelStatusSelected === btn.status"
+        [active]="selectedBookStatus === btn.status"
         (click)="selectBookStatus(btn.status)"
         [submitText]="btn.submitText"
         class="ml-2"

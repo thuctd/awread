@@ -5,6 +5,6 @@ import { WritingPage } from '../writing/writing.page';
   selector: 'page-writing-desktop',
   templateUrl: './writing-desktop.page.html',
   styleUrls: ['./writing-desktop.page.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WritingDesktopPage extends WritingPage {}

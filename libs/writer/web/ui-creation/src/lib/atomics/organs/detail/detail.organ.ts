@@ -12,7 +12,7 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
   selector: 'detail',
   templateUrl: './detail.organ.html',
   styleUrls: ['./detail.organ.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DetailOrgan implements OnInit {
   @Input() bookForm: FormGroup;

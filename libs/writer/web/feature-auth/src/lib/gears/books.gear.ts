@@ -13,6 +13,10 @@ export class BooksGear {
     return this.booksApi.getAllBooks();
   }
 
+  getDetailBook(bookId: string) {
+    return this.booksApi.getDetailBook(bookId);
+  }
+
   addBook(book) {
     const bookid = this.firebaseFirestoreAddon.createId();
     return this.booksApi.createBook({ ...book, bookid });

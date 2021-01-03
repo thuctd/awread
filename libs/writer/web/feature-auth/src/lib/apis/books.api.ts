@@ -8,47 +8,76 @@ export class BooksApi {
   constructor(private apollo: Apollo) {}
 
   getAllBooks() {
-    return this.apollo
-      .query({
-        query: gql`
-          query getAllBooks {
-            allBooks(condition: { isdeleted: false }) {
-              nodes {
-                bookid
-                title
-                img
-                description
-                completed
-                status
-                publishedat
-                updatedat
-                categoryByCategoryid {
-                  categoryid
-                  name
-                }
-                chaptersByBookid {
-                  totalCount
-                  nodes {
-                    chapterid
-                    title
-                    content
-                    status
-                    updatedat
-                    publishedat
-                  }
+    return this.apollo.watchQuery({
+      query: gql`
+        query getAllBooks {
+          allBooks(condition: { isdeleted: false }) {
+            nodes {
+              bookid
+              title
+              img
+              description
+              completed
+              status
+              publishedat
+              updatedat
+              categoryByCategoryid {
+                categoryid
+                name
+              }
+              chaptersByBookid(orderBy: CREATEDAT_DESC) {
+                totalCount
+                nodes {
+                  chapterid
+                  title
+                  content
+                  status
+                  updatedat
+                  publishedat
                 }
               }
             }
           }
-        `,
-      })
-      .pipe(
-        tap((res) => console.log('all books: ', res)),
-        catchError((err) => {
-          console.error('An error occurred:', err);
-          return of(err);
-        })
-      );
+        }
+      `,
+    });
+  }
+
+  getDetailBook(bookid: string) {
+    return this.apollo.query({
+      query: gql`
+        query getAllBooks($bookid: String) {
+          allBooks(condition: { bookid: $bookid, isdeleted: false }) {
+            nodes {
+              bookid
+              title
+              img
+              description
+              completed
+              status
+              publishedat
+              updatedat
+              categoryByCategoryid {
+                categoryid
+                name
+              }
+              chaptersByBookid(orderBy: CREATEDAT_ASC) {
+                totalCount
+                nodes {
+                  chapterid
+                  title
+                  content
+                  status
+                  updatedat
+                  publishedat
+                }
+              }
+            }
+          }
+        }
+      `,
+      variables: { bookid },
+    });
   }
 
   // createUserBook(userid: string, bookid: string) {

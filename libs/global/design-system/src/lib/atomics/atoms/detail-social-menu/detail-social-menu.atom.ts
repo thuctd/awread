@@ -21,7 +21,7 @@ import {
   host: {
     '(window:click)': 'onClick()',
   },
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DetailSocialMenuAtom implements OnInit {
   @Input() faIconComments = faEllipsisH;

@@ -1,6 +1,11 @@
 export interface Book {
-  id: string;
+  bookid: string;
+  title: string;
+  description: string;
+  status: string;
   isdeleted: boolean;
+  completed: boolean;
+  tags: string[];
 }
 
 export function Book(params: Partial<Book>) {

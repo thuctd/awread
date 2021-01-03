@@ -1,5 +1,5 @@
 import { BooksQuery } from './../states/books/books.query';
-import { tap, catchError } from 'rxjs/operators';
+import { tap, catchError, map } from 'rxjs/operators';
 import { BooksStore } from './../states/books/books.store';
 import { BooksGear } from './../gears/books.gear';
 import { Injectable } from '@angular/core';
@@ -30,12 +30,20 @@ export class BooksFacade {
     return this.booksQuery.getBookById(id);
   }
 
+  selectEntityBook(id: string) {
+    return this.booksQuery.selectEntity(id);
+  }
+
   updateBookByIdStore(id: string, book) {
     return this.booksStore.updateBookById(id, book);
   }
 
   getAllBooks() {
-    return this.booksGear.getAllBooks().pipe(
+    return this.booksGear.getAllBooks();
+  }
+
+  setBooksToStore() {
+    return this.getAllBooks().valueChanges.pipe(
       tap((res) => {
         if (
           res['data'] &&
@@ -48,6 +56,10 @@ export class BooksFacade {
         }
       })
     );
+  }
+
+  getDetailBook(bookId: string) {
+    return this.booksGear.getDetailBook(bookId);
   }
 
   addBook(book) {
@@ -104,15 +116,19 @@ export class BooksFacade {
     );
   }
 
-  private tranformBookData(book) {
+  tranformBookData(book) {
     const totalCountPublished =
       book.chaptersByBookid['nodes'].filter(
         (item) => item.status === 'PUBLISHED'
       ).length ?? 0;
+    const chapters = book.chaptersByBookid['nodes'].map((item, index) => ({
+      ...item,
+      chapterNumber: index + 1,
+    }));
     return {
       ...book,
       chaptersByBookid: {
-        data: book.chaptersByBookid['nodes'] ?? [],
+        data: chapters ?? [],
         totalCount: book.chaptersByBookid.totalCount,
         totalCountPublished,
       },

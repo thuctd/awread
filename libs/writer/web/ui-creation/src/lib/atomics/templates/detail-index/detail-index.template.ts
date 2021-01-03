@@ -12,7 +12,7 @@ import {
   selector: 'template-detail',
   templateUrl: './detail-index.template.html',
   styleUrls: ['./detail-index.template.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DetailIndexTemplate implements OnInit {
   @Input() btns = [
@@ -34,7 +34,8 @@ export class DetailIndexTemplate implements OnInit {
   @Output() selectedStatusEvent = new EventEmitter();
   @Output() bookSubmitEvent = new EventEmitter();
   @Output() chapterActionEvent = new EventEmitter();
-  labelStatusSelected: string;
+  @Output() createNewChapterEvent = new EventEmitter();
+  selectedBookStatus: string;
   tabs = [
     { name: 'Tables of Contents', isActive: true },
     { name: 'Story Details' },
@@ -43,12 +44,12 @@ export class DetailIndexTemplate implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    this.labelStatusSelected = this.bookForm.get('status').value;
+    this.selectedBookStatus = this.bookForm.get('status').value;
     console.log('chapters: ', this.chapters);
   }
 
   selectBookStatus(status: string) {
-    this.labelStatusSelected = status;
+    this.selectedBookStatus = status;
     this.selectedStatusEvent.emit(status);
   }
 }

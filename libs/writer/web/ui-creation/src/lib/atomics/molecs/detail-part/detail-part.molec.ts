@@ -9,7 +9,6 @@ import {
   selector: 'detail-part',
   templateUrl: './detail-part.molec.html',
   styleUrls: ['./detail-part.molec.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DetailPartMolec implements OnInit {
   @Input() chapter;

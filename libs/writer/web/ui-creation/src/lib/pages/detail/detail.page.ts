@@ -1,9 +1,16 @@
+import { switchMap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { ChaptersFacade } from '@awread/writer/web/feature-auth';
 import { CurrentUserFacade } from '@awread/writer/web/feature-auth';
 import { BooksFacade } from '@awread/writer/web/feature-auth';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Directive, Injectable, OnInit } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Directive,
+  Injectable,
+  OnInit,
+} from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
@@ -13,36 +20,51 @@ export class DetailPage implements OnInit {
   bookForm: FormGroup;
   bookId: string;
   chapterEntity$: any;
+  chapterList = [];
   constructor(
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
     private booksFacade: BooksFacade,
     private currentUserFacade: CurrentUserFacade,
     private chaptersFacade: ChaptersFacade,
-    private router: Router
+    private router: Router,
+    private cd: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
     this.bookId = this.activatedRoute.snapshot.params['bookId'];
-    this.chapterEntity$ = this.booksFacade.selectEntityChapterBookById(
-      this.bookId
-    );
     this.initForm();
     this.updateForm();
+    this.booksFacade
+      .selectEntityChapterBookById(this.bookId)
+      .subscribe((chapters) => {
+        if (chapters && chapters.length) {
+          this.chapterList = chapters;
+        } else {
+          this.chapterList = [];
+        }
+        this.cd.detectChanges();
+      });
   }
 
-  chapterActionEvent(data: { type: string; chapterid: string }) {
+  createNewChapterEvent() {
+    this.router.navigate(['writing', { bookId: this.bookId }]);
+  }
+
+  chapterActionEvent(data: {
+    type: string;
+    chapterid: string;
+    chapterNumber: number;
+  }) {
     switch (data.type) {
       case 'new-chapter':
-        this.router.navigate['writing'];
+        this.router.navigate(['writing', { bookId: this.bookId }]);
         return;
       case 'edit':
-        this.router.navigate(['writing', { chapterId: data.chapterid }]);
+        this.editChapter(data);
         return;
       case 'delete':
-        this.chaptersFacade
-          .removeChapter(data.chapterid)
-          .subscribe((res) => console.log('remove chapter res: ', res));
+        this.removeChapter(data);
         return;
     }
   }
@@ -63,15 +85,51 @@ export class DetailPage implements OnInit {
     this.bookForm.patchValue({ status });
   }
 
+  private editChapter(chapter) {
+    this.router.navigate([
+      'writing',
+      {
+        chapterId: chapter.chapterid,
+        bookId: this.bookId,
+        chapterNumber: chapter.chapterNumber,
+      },
+    ]);
+  }
+
+  private removeChapter(chapter) {
+    this.chaptersFacade
+      .removeChapter(chapter.chapterid)
+      .pipe(
+        tap((res) => {
+          if (res['data']) {
+            this.refreshChapterAfterRemove(chapter);
+          }
+        })
+      )
+      .subscribe((res) => {
+        console.log('remove chapter res: ', res);
+      });
+  }
+
+  private refreshChapterAfterRemove(chapter) {
+    this.chapterList = this.chapterList.filter(
+      (item) => item.chapterid !== chapter.chapterid
+    );
+    this.cd.detectChanges();
+  }
+
   private updateForm() {
     if (this.bookId) {
-      const book: any = this.booksFacade.getBookByIdStore(this.bookId);
-      this.bookForm.patchValue({
-        title: book.title,
-        description: book.description ?? '',
-        tags: book.tags ?? [],
-        completed: book.completed ?? false,
-        status: book.status ?? 'DRAFT',
+      this.booksFacade.selectEntityBook(this.bookId).subscribe((book) => {
+        if (book) {
+          this.bookForm.patchValue({
+            title: book.title,
+            description: book.description ?? '',
+            tags: book.tags ?? [],
+            completed: book.completed ?? false,
+            status: book.status ?? 'DRAFT',
+          });
+        }
       });
     }
   }

@@ -6,7 +6,7 @@ export class ChaptersApi {
   constructor(private apollo: Apollo) {}
 
   getChapterDetail(chapterid: string, bookid: string) {
-    return this.apollo.query({
+    return this.apollo.watchQuery({
       query: gql`
         query getChapterDetail($chapterid: String!, $bookid: String!) {
           allChapters(condition: { chapterid: $chapterid, bookid: $bookid }) {
@@ -16,6 +16,11 @@ export class ChaptersApi {
               title
               status
               updatedat
+              createdat
+              bookByBookid {
+                bookid
+                title
+              }
             }
           }
         }

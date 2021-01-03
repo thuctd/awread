@@ -11,7 +11,7 @@ export class ListPage implements OnInit {
   constructor(private booksFacade: BooksFacade, private router: Router) {}
 
   ngOnInit(): void {
-    this.booksFacade.getAllBooks().subscribe();
+    // this.booksFacade.setBooksToStore().subscribe();
   }
 
   updateBookStatus(book) {
@@ -25,7 +25,7 @@ export class ListPage implements OnInit {
   }
 
   editBook(bookId: string) {
-    this.booksFacade.setBookIdActive(bookId);
+    // this.booksFacade.setBookIdActive(bookId);
     this.router.navigate(['detail', { bookId: bookId }]);
   }
 
