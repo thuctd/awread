@@ -1,1 +1,10 @@
-<p>default-cover works!</p>
+<div class="w-full lg:w-1/5 float-none lg:float-left border-box px-4 lg:px-0 mb-4 lg:mr-10">
+    <!-- <img *ngIf="imgPath" [src]="imgPath | filePath" #generatedImage alt="" class="w-full rounded-lg shadow mb-4" /> -->
+    <div class="default-cover">
+        <div class="hidden">
+            <canvas #canvas id="idCanvas" width="518" height="740"> </canvas>
+        </div>
+        <img *ngIf="customCoverImage" [src]="customCoverImage" #generatedImage alt=""
+            class="w-full rounded-lg shadow mb-4" />
+    </div>
+</div>
