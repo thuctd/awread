@@ -62,7 +62,6 @@ import { RdHomeTabCategoryAtom } from './atoms/rd-home-tab-category/rd-home-tab-
 import { RdListPublicationDateAtom } from './atoms/rd-list-publication-date/rd-list-publication-date.atom';
 import { RdListContentNovelAtom } from './atoms/rd-list-content-novel/rd-list-content-novel.atom';
 import { ImgMAtom } from './atoms/img-m/img-m.atom';
-import { ImgSAtom } from './atoms/img-s/img-s.atom';
 import { CommentAtom } from './atoms/comment/comment.atom';
 import { BaseBtnAtom } from './atoms/base-btn/base-btn.atom';
 import { BaseLinkAtom } from './atoms/base-link/base-link.atom';
@@ -130,7 +129,6 @@ import { BaseLinkAtom } from './atoms/base-link/base-link.atom';
     RdListPublicationDateAtom,
     RdListContentNovelAtom,
     ImgMAtom,
-    ImgSAtom,
     CommentAtom,
     BaseBtnAtom,
     BaseLinkAtom
@@ -200,7 +198,6 @@ import { BaseLinkAtom } from './atoms/base-link/base-link.atom';
     RdListPublicationDateAtom,
     RdListContentNovelAtom,
     ImgMAtom,
-    ImgSAtom,
     CommentAtom,
     BaseBtnAtom,
     BaseLinkAtom
