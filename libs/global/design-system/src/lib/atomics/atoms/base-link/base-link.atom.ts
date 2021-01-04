@@ -1,12 +1,13 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'atom-base-link',
+  selector: 'base-link',
   templateUrl: './base-link.atom.html',
   styleUrls: ['./base-link.atom.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BaseLinkAtom implements OnInit {
+  @Output() onBtnClicked = new EventEmitter();
   @Input() linkTitle = "Xêm thêm...";
   @Input() isSize = true;
 

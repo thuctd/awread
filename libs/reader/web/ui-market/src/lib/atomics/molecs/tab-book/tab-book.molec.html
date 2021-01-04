@@ -1,0 +1,6 @@
+<div class="flex mb-6 mt-12">
+  <div class="w-full flex">
+      <rd-home-tab-book *ngFor="let tab of tabBooks" [titleBook]="tab.title" [srcImg]="tab.srcImg || 'https://via.placeholder.com/260x370.png'" [active]="tab.isActive">
+      </rd-home-tab-book>
+  </div>
+</div>

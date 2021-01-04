@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy, Output, Input, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'atom-base-btn',
+  selector: 'base-btn',
   templateUrl: './base-btn.atom.html',
   styleUrls: ['./base-btn.atom.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

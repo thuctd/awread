@@ -65,6 +65,8 @@ import { ImgMAtom } from './atoms/img-m/img-m.atom';
 import { CommentAtom } from './atoms/comment/comment.atom';
 import { BaseBtnAtom } from './atoms/base-btn/base-btn.atom';
 import { BaseLinkAtom } from './atoms/base-link/base-link.atom';
+import { RdListTabPageAtom } from './atoms/rd-list-tab-page/rd-list-tab-page.atom';
+import { AuthorAtom } from './atoms/author/author.atom';
 
 @NgModule({
   imports: [CommonModule, StorybookSupportModule, QuillModule.forRoot()],
@@ -128,10 +130,12 @@ import { BaseLinkAtom } from './atoms/base-link/base-link.atom';
     RdHomeTabCategoryAtom,
     RdListPublicationDateAtom,
     RdListContentNovelAtom,
+    RdListTabPageAtom,
     ImgMAtom,
     CommentAtom,
     BaseBtnAtom,
-    BaseLinkAtom
+    BaseLinkAtom,
+    AuthorAtom
   ],
   declarations: [
     TabBtnAtom,
@@ -196,11 +200,13 @@ import { BaseLinkAtom } from './atoms/base-link/base-link.atom';
     RdHomeTabBookAtom,
     RdHomeTabCategoryAtom,
     RdListPublicationDateAtom,
+    RdListTabPageAtom,
     RdListContentNovelAtom,
     ImgMAtom,
     CommentAtom,
     BaseBtnAtom,
-    BaseLinkAtom
+    BaseLinkAtom,
+    AuthorAtom,
   ],
 })
 export class GlobalDesignSystemAtomicModule { }

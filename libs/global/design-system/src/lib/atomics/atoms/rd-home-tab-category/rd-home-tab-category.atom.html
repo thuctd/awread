@@ -1,7 +1,7 @@
-<div class="w-full pr-8">
+<div class="w-full pr-4">
   <div class="text-left">
-      <span (click)="tabClicked.emit()"
-       class="delay-50 duration-200 ease-in-out cursor-pointer bg-green-300 border border-solid text-xs sm:text-sm no-underline rounded-full px-4 py-1 sm:px-8 sm:py-2 text-gray-500 hover:bg-green-400 hover:text-white">
+      <span (click)="tabClicked.emit()" [ngClass]="active ? 'bg-green-400 text-white' : 'text-gray-400'"
+       class="delay-50 duration-200 ease-in-out cursor-pointer bg-green-300 border border-solid text-xs sm:text-sm no-underline rounded-full px-4 py-1 sm:px-8 sm:py-2 hover:bg-green-400 hover:text-white">
       {{ tabName | titlecase }}</span>
   </div>
 </div>

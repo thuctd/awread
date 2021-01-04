@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 
 @Component({
-  selector: 'atom-rd-list-publication-date',
+  selector: 'rd-list-publication-date',
   templateUrl: './rd-list-publication-date.atom.html',
   styleUrls: ['./rd-list-publication-date.atom.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

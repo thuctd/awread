@@ -1,0 +1,11 @@
+<section class="w-full max-w-screen-xl mx-auto">
+  <div class="grid grid-cols-12 gap-6">
+    <div class="col-span-2 md:col-span-8">
+      <tab-page #tabHead [tabs]="tabs" class="mb-4"></tab-page>
+      <list-detail-long-book *ngIf="tabHead.currentTab.name === 'Truyện dài'"></list-detail-long-book>
+      <list-detail-short-book *ngIf="tabHead.currentTab.name === 'Truyện ngắn'"></list-detail-short-book>
+      <list-detail-prose *ngIf="tabHead.currentTab.name === 'Tiểu thuyết'"></list-detail-prose>
+    </div>
+    <div class="col-span-2 md:col-span-4"></div>
+  </div>
+</section>

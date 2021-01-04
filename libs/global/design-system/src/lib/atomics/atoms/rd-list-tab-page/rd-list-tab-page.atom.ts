@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy, Output, Input, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'atom-rd-list-tab-page',
+  selector: 'rd-list-tab-page',
   templateUrl: './rd-list-tab-page.atom.html',
   styleUrls: ['./rd-list-tab-page.atom.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

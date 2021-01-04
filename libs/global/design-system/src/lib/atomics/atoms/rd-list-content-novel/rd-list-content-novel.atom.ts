@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 
 @Component({
-  selector: 'atom-rd-list-content-novel',
+  selector: 'rd-list-content-novel',
   templateUrl: './rd-list-content-novel.atom.html',
   styleUrls: ['./rd-list-content-novel.atom.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
