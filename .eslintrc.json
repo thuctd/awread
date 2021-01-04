@@ -70,12 +70,9 @@
       "files": [
         "*.ts"
       ],
-      "extends": [
-        "plugin:@angular-eslint"
-      ],
       "rules": {
-        "@angular-eslint/no-empty-lifecycle-method": "warning",
-        "@angular-eslint/component-class-suffix": "warning"
+        "@angular-eslint/no-empty-lifecycle-method": "warn",
+        "@angular-eslint/component-class-suffix": "warn"
       }
     }
   ]
