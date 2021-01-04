@@ -10,7 +10,6 @@ if (environment.production) {
 }
 
 customMain();
-    
 
 platformBrowserDynamic()
   .bootstrapModule(AppModule)
