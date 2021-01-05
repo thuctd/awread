@@ -12,5 +12,5 @@ if (environment.production) {
 customMain();
 
 platformBrowserDynamic()
-  .bootstrapModule(AppModule)
+  .bootstrapModule(AppModule, { ngZoneEventCoalescing: true })
   .catch((err) => console.error(err));
