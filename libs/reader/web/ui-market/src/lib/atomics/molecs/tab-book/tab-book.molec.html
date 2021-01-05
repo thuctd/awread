@@ -1,6 +1,4 @@
-<div class="flex mb-6 mt-12">
-  <div class="w-full flex">
-      <rd-home-tab-book *ngFor="let tab of tabBooks" [titleBook]="tab.title" [srcImg]="tab.srcImg || 'https://via.placeholder.com/260x370.png'" [active]="tab.isActive">
-      </rd-home-tab-book>
-  </div>
+<div class="carousel-items flex justify-center" style="width: fit-content; animation: carouselAnim 10s infinite alternate linear;">
+  <rd-home-tab-book class="carousel-focus flex items-center relative flex-col" *ngFor="let tab of tabBooks" [titleBook]="tab.title" [srcImg]="tab.srcImg || 'https://via.placeholder.com/260x370.png'" [active]="tab.isActive">
+  </rd-home-tab-book>
 </div>

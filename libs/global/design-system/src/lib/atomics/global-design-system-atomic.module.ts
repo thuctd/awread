@@ -140,7 +140,7 @@ import { DefaultCoverModule } from '@awread/global/packages';
     CommentAtom,
     BaseBtnAtom,
     BaseLinkAtom,
-    AuthorAtom
+    AuthorAtom,
     DefaultCoverAtom
 
   ],
