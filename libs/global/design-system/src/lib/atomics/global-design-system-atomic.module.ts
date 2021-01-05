@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StorybookSupportModule } from '../storybook-support.module';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { AuthBgAtom } from './atoms/auth-bg/auth-bg.atom';
 import { CheckBtnAtom } from './atoms/check-btn/check-btn.atom';
@@ -53,9 +54,21 @@ import { CreationSubmitBtnAtom } from './atoms/creation-submit-btn/creation-subm
 import { CreationSocialBtnAtom } from './atoms/creation-social-btn/creation-social-btn.atom';
 import { QuillModule } from 'ngx-quill';
 import { WrtEditerAtom } from './atoms/wrt-editer/wrt-editer.atom';
+import { SelectAtom } from './atoms/select/select.atom';
+import { SearchNavbarAtom } from './atoms/search-navbar/search-navbar.atom';
+import { SearchBookAtom } from './atoms/search-book/search-book.atom';
+import { LogoNolinkAtom } from './atoms/logo-nolink/logo-nolink.atom';
+import { AuthBgMobileAtom } from './atoms/auth-bg-mobile/auth-bg-mobile.atom';
+import { BarSeperateAtom } from './atoms/bar-seperate/bar-seperate.atom';
+import { ExampleDialogAtom } from './atoms/example-dialog/example-dialog.atom';
 
 @NgModule({
-  imports: [CommonModule, StorybookSupportModule, QuillModule.forRoot()],
+  imports: [
+    CommonModule,
+    StorybookSupportModule,
+    MatDialogModule,
+    QuillModule.forRoot(),
+  ],
   exports: [
     TabBtnAtom,
     LogoAtom,
@@ -107,7 +120,14 @@ import { WrtEditerAtom } from './atoms/wrt-editer/wrt-editer.atom';
     DetailSocialMenuAtom,
     CreationSubmitBtnAtom,
     CreationSocialBtnAtom,
-    QuillModule
+    QuillModule,
+    SelectAtom,
+    SearchNavbarAtom,
+    SearchBookAtom,
+    LogoNolinkAtom,
+    AuthBgMobileAtom,
+    BarSeperateAtom,
+    ExampleDialogAtom,
   ],
   declarations: [
     TabBtnAtom,
@@ -164,7 +184,14 @@ import { WrtEditerAtom } from './atoms/wrt-editer/wrt-editer.atom';
     SocialMenuAtom,
     DetailSocialMenuAtom,
     CreationSubmitBtnAtom,
-    CreationSocialBtnAtom
+    CreationSocialBtnAtom,
+    SelectAtom,
+    SearchNavbarAtom,
+    SearchBookAtom,
+    LogoNolinkAtom,
+    AuthBgMobileAtom,
+    BarSeperateAtom,
+    ExampleDialogAtom,
   ],
 })
-export class GlobalDesignSystemAtomicModule { }
+export class GlobalDesignSystemAtomicModule {}
