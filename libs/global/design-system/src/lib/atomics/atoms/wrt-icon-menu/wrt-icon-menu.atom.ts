@@ -15,9 +15,6 @@ import {
   selector: 'wrt-icon-menu',
   templateUrl: './wrt-icon-menu.atom.html',
   styleUrls: ['./wrt-icon-menu.atom.scss'],
-  // host: {
-  //   "(window:click)": "onClick()"
-  // },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WrtIconMenuAtom implements OnInit {
