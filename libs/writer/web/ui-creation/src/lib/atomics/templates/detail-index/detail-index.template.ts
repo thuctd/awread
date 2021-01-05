@@ -12,7 +12,7 @@ import {
   selector: 'template-detail',
   templateUrl: './detail-index.template.html',
   styleUrls: ['./detail-index.template.scss'],
-  // changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DetailIndexTemplate implements OnInit {
   @Input() btns = [

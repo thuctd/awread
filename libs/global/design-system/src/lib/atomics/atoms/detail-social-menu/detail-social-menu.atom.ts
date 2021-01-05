@@ -18,10 +18,7 @@ import {
   selector: 'detail-social-menu',
   templateUrl: './detail-social-menu.atom.html',
   styleUrls: ['./detail-social-menu.atom.scss'],
-  host: {
-    '(window:click)': 'onClick()',
-  },
-  // changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DetailSocialMenuAtom implements OnInit {
   @Input() faIconComments = faEllipsisH;
@@ -51,9 +48,9 @@ export class DetailSocialMenuAtom implements OnInit {
     this.isMenuOpen = !this.isMenuOpen;
   }
 
-  onClick() {
-    this.isMenuOpen = false;
-  }
+  // onClick() {
+  //   this.isMenuOpen = false;
+  // }
 
   ngOnInit(): void {}
 }

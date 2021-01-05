@@ -14,7 +14,7 @@ import {
   // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CreationSubmitBtnAtom implements OnInit {
-  @Output() onBtnClicked = new EventEmitter();
+  @Output() btnClicked = new EventEmitter();
   @Input() submitText = 'Publish';
   @Input() active = true;
 

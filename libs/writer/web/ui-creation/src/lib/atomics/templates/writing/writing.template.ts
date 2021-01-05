@@ -12,7 +12,7 @@ import {
   selector: 'template-writing',
   templateUrl: './writing.template.html',
   styleUrls: ['./writing.template.scss'],
-  // changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WritingTemplate implements OnInit {
   @Input() chapterForm: FormGroup;

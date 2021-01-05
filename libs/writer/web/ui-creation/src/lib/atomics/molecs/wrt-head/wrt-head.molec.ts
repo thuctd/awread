@@ -12,17 +12,16 @@ import {
   selector: 'wrt-head',
   templateUrl: './wrt-head.molec.html',
   styleUrls: ['./wrt-head.molec.scss'],
-  // changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WrtHeadMolec implements OnInit {
-  _chapterStatus: string;
   @Input() formActiveStatus = false;
   @Output() chapterStatusEvent = new EventEmitter();
   @Input() set chapterStatus(value) {
     console.log('status: ', value);
     if (value) {
       this.selectedChapterStatus = value;
-      this._chapterStatus = value;
+      this.chapterStatus = value;
     }
   }
   @Input() chapterForm: FormGroup;
@@ -37,9 +36,6 @@ export class WrtHeadMolec implements OnInit {
   //   return this._chapterForm;
   // }
 
-  get chapterStatus() {
-    return this._chapterStatus;
-  }
   btns = [
     {
       submitText: 'Publish',

@@ -12,7 +12,7 @@ import {
   selector: 'writing',
   templateUrl: './writing.organ.html',
   styleUrls: ['./writing.organ.scss'],
-  // changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WritingOrgan implements OnInit {
   @Input() chapterForm: FormGroup;
