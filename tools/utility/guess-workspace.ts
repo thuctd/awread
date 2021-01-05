@@ -59,6 +59,12 @@ export function getProjectsEntries(tree) {
     return Object.entries<any>(angularFile.projects);
 }
 
+export function getLastFolder() {
+    const cwd = process.cwd();
+    const cwdNormalize = normalize(cwd);
+    return cwdNormalize.split('/').pop();
+}
+
 async function guessProjectByPath(tree, schema) {
     let projectName;
     let projectRoot;

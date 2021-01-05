@@ -35,5 +35,6 @@ module.exports = {
     '<rootDir>/libs/reader/web/feature-single',
     '<rootDir>/libs/reader/web/ui-market',
     '<rootDir>/libs/reader/web/feature-market',
+    '<rootDir>/libs/global/powers',
   ],
 };

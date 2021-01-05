@@ -53,6 +53,7 @@ import { CreationSubmitBtnAtom } from './atoms/creation-submit-btn/creation-subm
 import { CreationSocialBtnAtom } from './atoms/creation-social-btn/creation-social-btn.atom';
 import { QuillModule } from 'ngx-quill';
 import { WrtEditerAtom } from './atoms/wrt-editer/wrt-editer.atom';
+
 import { PaginationAtom } from './atoms/pagination/pagination.atom';
 import { RatingAtom } from './atoms/rating/rating.atom';
 import { TitleItemAtom } from './atoms/title-item/title-item.atom';
@@ -68,8 +69,12 @@ import { BaseLinkAtom } from './atoms/base-link/base-link.atom';
 import { RdListTabPageAtom } from './atoms/rd-list-tab-page/rd-list-tab-page.atom';
 import { AuthorAtom } from './atoms/author/author.atom';
 
+import { DefaultCoverAtom } from './atoms/default-cover/default-cover.atom';
+import { DefaultCoverModule } from '@awread/global/packages';
+
+
 @NgModule({
-  imports: [CommonModule, StorybookSupportModule, QuillModule.forRoot()],
+  imports: [CommonModule, StorybookSupportModule, QuillModule.forRoot(), DefaultCoverModule],
   exports: [
     TabBtnAtom,
     LogoAtom,
@@ -136,6 +141,8 @@ import { AuthorAtom } from './atoms/author/author.atom';
     BaseBtnAtom,
     BaseLinkAtom,
     AuthorAtom
+    DefaultCoverAtom
+
   ],
   declarations: [
     TabBtnAtom,
@@ -207,6 +214,7 @@ import { AuthorAtom } from './atoms/author/author.atom';
     BaseBtnAtom,
     BaseLinkAtom,
     AuthorAtom,
+    DefaultCoverAtom
   ],
 })
 export class GlobalDesignSystemAtomicModule { }

@@ -4,7 +4,7 @@ import * as path from 'path';
 import { addGlobal, insert, RemoveChange } from '@nrwl/workspace';
 
 
-export function exportToLibIndex(projectType, projectRoot, exportContent) {
+export function exportToLibIndex(projectType, projectRoot, exportContent, createIndexIfPossile = false, customFolder = '') {
   if (projectType === 'application') {
     console.warn('this is an application, not a library, so we will not export to index.ts file');
     return (tree) => tree;
@@ -13,7 +13,10 @@ export function exportToLibIndex(projectType, projectRoot, exportContent) {
     exportContent = exportContent + ';';
   }
   return (tree: Tree) => {
-    const indexFilePath = path.join(projectRoot, 'index.ts');
+    const indexFilePath = path.join(projectRoot, customFolder, 'index.ts');
+    if (createIndexIfPossile && !tree.read(indexFilePath)) {
+      tree.create(indexFilePath, '');
+    }
     const buffer = tree.read(indexFilePath);
     const indexSource = buffer!.toString('utf-8');
     if (indexSource.includes(exportContent)) {
