@@ -1,0 +1,11 @@
+<li class="block p-1 text-sm border-b border-gray-500 mt-1">
+    <ng-container *ngIf="!data.href else nomarlMenu">
+        <div class="flex-col flex border-b b--black-30 pt-2 pl-2">
+            {{data.title}}
+        </div>
+        <atom-dropdown-link *ngFor="let item of menu" [title]="item.title" [href]="item.href"></atom-dropdown-link>
+    </ng-container>
+    <ng-template #nomarlMenu>
+        <atom-dropdown-link [title]="data.title" [href]="data.href"></atom-dropdown-link>
+    </ng-template>
+</li>

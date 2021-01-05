@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 
 @Component({
   selector: 'atom-dropdown-link',
@@ -7,7 +7,8 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DropdownLinkAtom implements OnInit {
-
+  @Input() title = '';
+  @Input() href = '';
   constructor() { }
 
   ngOnInit(): void {

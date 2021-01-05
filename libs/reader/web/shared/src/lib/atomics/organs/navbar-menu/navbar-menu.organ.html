@@ -1,0 +1,8 @@
+<ul class="list-reset flex flex-no-wrap whitespace-no-wrap lg:pl-2 xl:pl-6">
+    <ng-container *ngFor="let item of menu">
+        <li class="inline-block w-100 w-auto-ns" [ngClass]="{'dropdown relative': item.dropdown}">
+            <atom-nav-link [title]="item.title" [href]="item.href"></atom-nav-link>
+            <molec-rd-dropdown-menu *ngIf="item.dropdown" [dropdownData]="item.dropdown"></molec-rd-dropdown-menu>
+        </li>
+    </ng-container>
+</ul>
