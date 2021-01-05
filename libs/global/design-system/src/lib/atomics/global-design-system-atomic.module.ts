@@ -58,6 +58,9 @@ import {
   DefaultCoverModule,
   CloseOnOutsideModule,
 } from '@awread/global/packages';
+import { NavLinkAtom } from './atoms/nav-link/nav-link.atom';
+import { DropdownLinkAtom } from './atoms/dropdown-link/dropdown-link.atom';
+import { OutlineButtonAtom } from './atoms/outline-button/outline-button.atom';
 
 @NgModule({
   imports: [
@@ -121,6 +124,9 @@ import {
     CreationSocialBtnAtom,
     QuillModule,
     DefaultCoverAtom,
+    NavLinkAtom,
+    DropdownLinkAtom,
+    OutlineButtonAtom,
   ],
   declarations: [
     TabBtnAtom,
@@ -179,6 +185,9 @@ import {
     CreationSubmitBtnAtom,
     CreationSocialBtnAtom,
     DefaultCoverAtom,
+    NavLinkAtom,
+    DropdownLinkAtom,
+    OutlineButtonAtom,
   ],
 })
 export class GlobalDesignSystemAtomicModule {}
