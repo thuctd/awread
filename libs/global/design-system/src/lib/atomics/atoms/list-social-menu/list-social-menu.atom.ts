@@ -17,9 +17,6 @@ import {
   selector: 'list-social-menu',
   templateUrl: './list-social-menu.atom.html',
   styleUrls: ['./list-social-menu.atom.scss'],
-  // host: {
-  //   '(window:click)': 'onClick()',
-  // },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListSocialMenuAtom implements OnInit {

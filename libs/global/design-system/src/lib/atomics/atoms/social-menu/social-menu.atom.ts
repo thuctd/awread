@@ -12,9 +12,6 @@ import { faEllipsisH } from '@fortawesome/free-solid-svg-icons';
   selector: 'social-menu',
   templateUrl: './social-menu.atom.html',
   styleUrls: ['./social-menu.atom.scss'],
-  // host: {
-  //   "(window:click)": "onClick()"
-  // },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SocialMenuAtom implements OnInit {

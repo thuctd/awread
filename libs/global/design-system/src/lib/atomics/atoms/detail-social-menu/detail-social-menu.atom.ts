@@ -48,9 +48,9 @@ export class DetailSocialMenuAtom implements OnInit {
     this.isMenuOpen = !this.isMenuOpen;
   }
 
-  // onClick() {
-  //   this.isMenuOpen = false;
-  // }
+  onClick() {
+    this.isMenuOpen = false;
+  }
 
   ngOnInit(): void {}
 }

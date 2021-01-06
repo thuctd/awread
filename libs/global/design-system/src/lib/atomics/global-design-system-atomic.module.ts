@@ -54,11 +54,21 @@ import { CreationSocialBtnAtom } from './atoms/creation-social-btn/creation-soci
 import { QuillModule } from 'ngx-quill';
 import { WrtEditerAtom } from './atoms/wrt-editer/wrt-editer.atom';
 import { DefaultCoverAtom } from './atoms/default-cover/default-cover.atom';
-import { DefaultCoverModule } from '@awread/global/packages';
+import {
+  DefaultCoverModule,
+  CloseOnOutsideModule,
+} from '@awread/global/packages';
 
 @NgModule({
-  imports: [CommonModule, StorybookSupportModule, QuillModule.forRoot(), DefaultCoverModule],
+  imports: [
+    CommonModule,
+    StorybookSupportModule,
+    QuillModule.forRoot(),
+    DefaultCoverModule,
+    CloseOnOutsideModule,
+  ],
   exports: [
+    CloseOnOutsideModule,
     TabBtnAtom,
     LogoAtom,
     InputFormAtom,
@@ -110,7 +120,7 @@ import { DefaultCoverModule } from '@awread/global/packages';
     CreationSubmitBtnAtom,
     CreationSocialBtnAtom,
     QuillModule,
-    DefaultCoverAtom
+    DefaultCoverAtom,
   ],
   declarations: [
     TabBtnAtom,
@@ -168,7 +178,7 @@ import { DefaultCoverModule } from '@awread/global/packages';
     DetailSocialMenuAtom,
     CreationSubmitBtnAtom,
     CreationSocialBtnAtom,
-    DefaultCoverAtom
+    DefaultCoverAtom,
   ],
 })
-export class GlobalDesignSystemAtomicModule { }
+export class GlobalDesignSystemAtomicModule {}
