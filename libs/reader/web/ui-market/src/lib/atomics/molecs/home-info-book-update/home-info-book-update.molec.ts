@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'molec-home-info-book-update',
@@ -7,6 +7,20 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomeInfoBookUpdateMolec implements OnInit {
+  @Input() book = {
+    title: 'Cô gái chúng ta cùng theo đuổi năm nào',
+    isSize: true,
+  };
+
+  @Input() btns = [
+    {
+      chapter: 'Chương 1',
+      isSize: true,
+    }, {
+      chapter: 'Chương 2',
+      isSize: true,
+    }];
+  @Output() submitEvent = new EventEmitter();
 
   constructor() { }
 

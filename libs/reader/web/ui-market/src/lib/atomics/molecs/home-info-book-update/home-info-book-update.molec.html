@@ -1,1 +1,8 @@
-<p>home-info-book-update works!</p>
+<div class="pt-2">
+    <div class="mb-2">
+        <list-title-book [titleBoook]="book.title" [isSize]="book.isSize"></list-title-book>
+    </div>
+    <div *ngFor="let btn of btns" class="flex">
+        <base-btn (onBtnClicked)="submitEvent.emit($event)" [isSize]="btn.isSize" [chapter]="btn.chapter"></base-btn>
+    </div>
+</div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 
 @Component({
   selector: 'organ-home-detail-book-update',
@@ -7,6 +7,9 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomeDetailBookUpdateOrgan implements OnInit {
+  @Input() isSize = 0;
+  @Input() titlePage = 'Truyện mới cập nhật';
+  counter = Array;
 
   constructor() { }
 
