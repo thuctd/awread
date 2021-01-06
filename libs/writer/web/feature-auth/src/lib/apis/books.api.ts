@@ -8,7 +8,7 @@ export class BooksApi {
   constructor(private apollo: Apollo) {}
 
   getAllBooks() {
-    return this.apollo.watchQuery({
+    return this.apollo.query({
       query: gql`
         query getAllBooks {
           allBooks(condition: { isdeleted: false }) {

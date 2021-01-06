@@ -1,3 +1,4 @@
+export * from './chapter-detail.model';
 export * from './chapter.model';
 export * from './book.model';
 export * from './basic-credential.model';

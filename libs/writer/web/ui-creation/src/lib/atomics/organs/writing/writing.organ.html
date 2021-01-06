@@ -1,7 +1,7 @@
 <div class="pt-12 pl-24">
   <wrt-head
     [chapterStatus]="chapterStatus"
-    (chapterStatusEvent)="chapterStatusEvent.emit($event)"
+    (changeChapterStatusEvent)="changeChapterStatusEvent.emit($event)"
     [chapterForm]="chapterForm"
   ></wrt-head>
   <wrt-writer [chapterForm]="chapterForm"></wrt-writer>

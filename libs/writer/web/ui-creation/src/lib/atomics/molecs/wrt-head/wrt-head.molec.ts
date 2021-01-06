@@ -15,26 +15,21 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WrtHeadMolec implements OnInit {
+  _chapterStatus: string;
   @Input() formActiveStatus = false;
-  @Output() chapterStatusEvent = new EventEmitter();
+  @Output() changeChapterStatusEvent = new EventEmitter();
   @Input() set chapterStatus(value) {
     console.log('status: ', value);
     if (value) {
       this.selectedChapterStatus = value;
-      this.chapterStatus = value;
+      this._chapterStatus = value;
     }
   }
+
+  get chapterStatus() {
+    return this._chapterStatus;
+  }
   @Input() chapterForm: FormGroup;
-
-  // _chapterForm: FormGroup;
-  // @Input() set chapterForm(form) {
-  //   this.selectedChapterStatus = form.get('status').value ?? 'DRAFT';
-  //   this._chapterForm = form;
-  // }
-
-  // get chapterForm() {
-  //   return this._chapterForm;
-  // }
 
   btns = [
     {
@@ -57,4 +52,10 @@ export class WrtHeadMolec implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+  changeChapterStatus(status: string) {
+    if (status === 'PREVIEW') {
+      return;
+    }
+    this.changeChapterStatusEvent.emit(status);
+  }
 }

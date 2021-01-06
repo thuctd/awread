@@ -1,9 +1,8 @@
 export interface Chapter {
-  id: string;
+  chapterid: string;
+  chapterNumber: number;
 }
 
 export function Chapter(params: Partial<Chapter>) {
-  return {
-
-  } as Chapter;
+  return {} as Chapter;
 }

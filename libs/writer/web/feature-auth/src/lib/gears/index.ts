@@ -1,3 +1,4 @@
+export * from './firestore.gear';
 export * from './chapters.gear';
 export * from './books.gear';
 export * from './firebase-auth.gear';

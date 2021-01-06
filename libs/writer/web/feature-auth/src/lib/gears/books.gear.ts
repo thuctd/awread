@@ -18,8 +18,7 @@ export class BooksGear {
   }
 
   addBook(book) {
-    const bookid = this.firebaseFirestoreAddon.createId();
-    return this.booksApi.createBook({ ...book, bookid });
+    return this.booksApi.createBook(book);
   }
 
   editBook(book) {

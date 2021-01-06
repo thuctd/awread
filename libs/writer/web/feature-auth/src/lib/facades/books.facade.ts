@@ -1,3 +1,4 @@
+import { FirestoreGear } from './../gears/firestore.gear';
 import { BooksQuery } from './../states/books/books.query';
 import { tap, catchError, map } from 'rxjs/operators';
 import { BooksStore } from './../states/books/books.store';
@@ -11,22 +12,23 @@ export class BooksFacade {
   constructor(
     private booksGear: BooksGear,
     private booksStore: BooksStore,
-    private booksQuery: BooksQuery
+    private booksQuery: BooksQuery,
+    private firestoreGear: FirestoreGear
   ) {}
 
-  setBookIdActive(bookid: string) {
+  setBookIdActiveAkita(bookid: string) {
     return this.booksStore.setActive(bookid);
   }
 
-  getBookIdActive() {
+  getBookIdActiveAkita() {
     return this.booksQuery.getActiveId();
   }
 
-  selectEntityChapterBookById(id: string): any {
-    return this.booksQuery.selectEnityChapterBookById(id);
-  }
+  // selectEntityChapterBookById(id: string): any {
+  //   return this.booksQuery.selectEnityChapterBookById(id);
+  // }
 
-  getBookByIdStore(id: string) {
+  getBookByIdInAkita(id: string) {
     return this.booksQuery.getBookById(id);
   }
 
@@ -34,7 +36,7 @@ export class BooksFacade {
     return this.booksQuery.selectEntity(id);
   }
 
-  updateBookByIdStore(id: string, book) {
+  updateBookByIdInAkita(id: string, book) {
     return this.booksStore.updateBookById(id, book);
   }
 
@@ -42,8 +44,8 @@ export class BooksFacade {
     return this.booksGear.getAllBooks();
   }
 
-  setBooksToStore() {
-    return this.getAllBooks().valueChanges.pipe(
+  setBooksInAkita() {
+    return this.getAllBooks().pipe(
       tap((res) => {
         if (
           res['data'] &&
@@ -63,14 +65,16 @@ export class BooksFacade {
   }
 
   addBook(book) {
-    return this.booksGear.addBook(book).pipe(
+    const bookid = this.firestoreGear.createId();
+    const bookDetail = { ...book, bookid };
+    return this.booksGear.addBook(bookDetail).pipe(
       tap((res) => {
         console.log('add book res: ', res);
         if (res['data'] && res['data']['createBook']['book']) {
-          const bookEntity = this.tranformBookData(
-            res['data']['createBook']['book']
-          );
-          this.booksStore.addBook(bookEntity);
+          // const bookEntity = this.tranformBookData(
+          //   res['data']['createBook']['book']
+          // );
+          this.booksStore.addBook(bookDetail);
         }
       }),
       catchError((err) => {
@@ -88,7 +92,7 @@ export class BooksFacade {
           res['data'] &&
           res['data']['updateBookByBookid']['book']['bookid']
         ) {
-          this.updateBookByIdStore(book.bookid, book);
+          this.updateBookByIdInAkita(book.bookid, book);
         }
       }),
       catchError((err) => {
