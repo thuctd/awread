@@ -4,7 +4,7 @@ import { RdDropdownMenuMolec } from './molecs/rd-dropdown-menu/rd-dropdown-menu.
 import {
   GlobalDesignSystemAtomicModule,
   StorybookSupportModule,
-} from "@awread/global/design-system";
+} from '@awread/global/design-system';
 import { RdDropdownMenuItemMolec } from './molecs/rd-dropdown-menu-item/rd-dropdown-menu-item.molec';
 import { NavbarMenuOrgan } from './organs/navbar-menu/navbar-menu.organ';
 
@@ -13,7 +13,8 @@ import { NavbarMenuOrgan } from './organs/navbar-menu/navbar-menu.organ';
   declarations: [RdDropdownMenuMolec, RdDropdownMenuItemMolec, NavbarMenuOrgan],
   imports: [
     CommonModule,
-    GlobalDesignSystemAtomicModule
+    GlobalDesignSystemAtomicModule,
+    StorybookSupportModule
   ],
   exports: [RdDropdownMenuMolec, RdDropdownMenuItemMolec, NavbarMenuOrgan]
 })

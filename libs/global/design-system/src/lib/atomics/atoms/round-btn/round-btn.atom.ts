@@ -1,0 +1,17 @@
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+
+@Component({
+  selector: 'atom-round-btn',
+  templateUrl: './round-btn.atom.html',
+  styleUrls: ['./round-btn.atom.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class RoundBtnAtom implements OnInit {
+  @Input() title = 'Đọc chương đầu';
+  @Input() href = '/';
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
+}

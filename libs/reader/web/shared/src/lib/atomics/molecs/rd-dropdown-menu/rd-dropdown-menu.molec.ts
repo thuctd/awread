@@ -7,38 +7,40 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RdDropdownMenuMolec implements OnInit {
+  
+  @Input() hidden = true;
   @Input() dropdownData = [
     {
-      "title": "Truyện tự sáng tác",
-      "menu":[
+      title: 'Truyện tự sáng tác',
+      menu:[
         {
-          "href": "/",
-          "title":"Truyện dài"
+          href: '/',
+          title:'Truyện dài'
         },
         {
-          "href": "/",
-          "title":"Truyện ngắn"
+          href: '/',
+          title:'Truyện ngắn'
         },
         {
-          "href": "/",
-          "title":"Truyện tản văn"
+          href: '/',
+          title:'Truyện tản văn'
         },
       ] 
     },
     {
-      "title": "Truyện sưu tầm",
-      "menu":[
+      title: 'Truyện sưu tầm',
+      menu:[
         {
-          "href": "/",
-          "title":"Truyện dài"
+          href: '/',
+          title:'Truyện dài'
         },
         {
-          "href": "/",
-          "title":"Truyện ngắn"
+          href: '/',
+          title:'Truyện ngắn'
         },
         {
-          "href": "/",
-          "title":"Truyện tản văn"
+          href: '/',
+          title:'Truyện tản văn'
         },
       ] 
     }

@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { faAngleDown, faArrowDown } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'organ-navbar-menu',
@@ -7,71 +8,72 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NavbarMenuOrgan implements OnInit {
+  icon = faAngleDown;
   menu = [
     {
-      "title": "Trang chủ",
-      "href": "/home"
+      title: 'Trang chủ',
+      href: '/home'
     },
     {
-      "title": "Truyện",
-      "href": "/market",
-      "dropdown": [
+      title: 'Truyện',
+      href: '/market',
+      dropdown: [
           {
-            "title": "Truyện tự sáng tác",
-            "menu":[
+            title: 'Truyện tự sáng tác',
+            menu:[
               {
-                "href": "/",
-                "title":"Truyện dài"
+                href: '/',
+                title:'Truyện dài'
               },
               {
-                "href": "/",
-                "title":"Truyện ngắn"
+                href: '/',
+                title:'Truyện ngắn'
               },
               {
-                "href": "/",
-                "title":"Truyện tản văn"
+                href: '/',
+                title:'Truyện tản văn'
               },
             ] 
           },
           {
-            "title": "Truyện sưu tầm",
-            "menu":[
+            title: 'Truyện sưu tầm',
+            menu:[
               {
-                "href": "/",
-                "title":"Truyện dài"
+                href: '/',
+                title:'Truyện dài'
               },
               {
-                "href": "/",
-                "title":"Truyện ngắn"
+                href: '/',
+                title:'Truyện ngắn'
               },
               {
-                "href": "/",
-                "title":"Truyện tản văn"
+                href: '/',
+                title:'Truyện tản văn'
               },
             ] 
           }
         ]
     },
     {
-      "title": "Đăng truyện",
-      "href": "/home"
+      title: 'Đăng truyện',
+      href: '/home'
     },
     {
-      "title": "Cộng đồng",
-      "href": "/market",
-      "dropdown": [
+      title: 'Cộng đồng',
+      href: '/market',
+      dropdown: [
           {
-            "href": "/",
-            "title":"Về chúng tôi"
+            href: '/',
+            title:'Về chúng tôi'
           },
           {
-            "href": "/",
-            "title":"Tham gia với chúng tôi"
+            href: '/',
+            title:'Tham gia với chúng tôi'
           },
           {
-            "href": "/",
-            "title":"Tin tức",
-            "tag": "New"
+            href: '/',
+            title:'Tin tức',
+            tag: 'New'
           },
 
         ]

@@ -14,3 +14,12 @@ export const primary = () => ({
 
   }
 })
+export const show = () => ({
+  moduleMetadata: {
+    imports: [ReaderWebSharedAtomicModule]
+  },
+  component: RdDropdownMenuMolec,
+  props: {
+    hidden: false
+  }
+})

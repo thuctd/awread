@@ -7,8 +7,21 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RdDropdownMenuItemMolec implements OnInit {
-  @Input() data;
-  @Input() menu = [];
+  @Input() data = {title: 'Truyện sưu tầm', href: ''};
+  @Input() menu = [
+        {
+          href: '/',
+          title:'Truyện dài'
+        },
+        {
+          href: '/',
+          title:'Truyện ngắn'
+        },
+        {
+          href: '/',
+          title:'Truyện tản văn'
+        }
+     ];
   constructor() { }
   ngOnInit(): void {
   }

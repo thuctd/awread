@@ -61,6 +61,20 @@ import {
 import { NavLinkAtom } from './atoms/nav-link/nav-link.atom';
 import { DropdownLinkAtom } from './atoms/dropdown-link/dropdown-link.atom';
 import { OutlineButtonAtom } from './atoms/outline-button/outline-button.atom';
+import { BreadcrumbTextAtom } from './atoms/breadcrumb-text/breadcrumb-text.atom';
+import { BreadcrumbLinkAtom } from './atoms/breadcrumb-link/breadcrumb-link.atom';
+import { IconTextAtom } from './atoms/icon-text/icon-text.atom';
+import { DetailInfoLineAtom } from './atoms/detail-info-line/detail-info-line.atom';
+import { RoundBtnAtom } from './atoms/round-btn/round-btn.atom';
+import { DetailTitleAtom } from './atoms/detail-title/detail-title.atom';
+import { DetailImageAtom } from './atoms/detail-image/detail-image.atom';
+import { IconTextButtonAtom } from './atoms/icon-text-button/icon-text-button.atom';
+import { LabelUnderlineAtom } from './atoms/label-underline/label-underline.atom';
+import { ChapterItemAtom } from './atoms/chapter-item/chapter-item.atom';
+import { IconBtnAtom } from './atoms/icon-btn/icon-btn.atom';
+import { ReviewActionAtom } from './atoms/review-action/review-action.atom';
+import { ReviewInputAtom } from './atoms/review-input/review-input.atom';
+import { SearchBtnAtom } from './atoms/search-btn/search-btn.atom';
 
 @NgModule({
   imports: [
@@ -127,6 +141,21 @@ import { OutlineButtonAtom } from './atoms/outline-button/outline-button.atom';
     NavLinkAtom,
     DropdownLinkAtom,
     OutlineButtonAtom,
+    BreadcrumbTextAtom,
+    BreadcrumbLinkAtom,
+    IconTextAtom,
+    DetailInfoLineAtom,
+    RoundBtnAtom,
+    DetailTitleAtom,
+    DetailImageAtom,
+    IconTextButtonAtom,
+    LabelUnderlineAtom,
+    ChapterItemAtom,
+    IconBtnAtom,
+    ReviewActionAtom,
+    ReviewInputAtom,
+    SearchBtnAtom,
+    
   ],
   declarations: [
     TabBtnAtom,
@@ -188,6 +217,20 @@ import { OutlineButtonAtom } from './atoms/outline-button/outline-button.atom';
     NavLinkAtom,
     DropdownLinkAtom,
     OutlineButtonAtom,
+    BreadcrumbTextAtom,
+    BreadcrumbLinkAtom,
+    IconTextAtom,
+    DetailInfoLineAtom,
+    RoundBtnAtom,
+    DetailTitleAtom,
+    DetailImageAtom,
+    IconTextButtonAtom,
+    LabelUnderlineAtom,
+    ChapterItemAtom,
+    IconBtnAtom,
+    ReviewActionAtom,
+    ReviewInputAtom,
+    SearchBtnAtom,
   ],
 })
 export class GlobalDesignSystemAtomicModule {}
