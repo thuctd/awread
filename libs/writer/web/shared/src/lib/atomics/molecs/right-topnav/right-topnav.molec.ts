@@ -4,7 +4,9 @@ import {
   ChangeDetectionStrategy,
   EventEmitter,
   Output,
+  Input,
 } from '@angular/core';
+import { User } from '@awread/writer/web/feature-auth';
 
 @Component({
   selector: 'right-topnav',
@@ -13,8 +15,9 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RightTopnavMolec implements OnInit {
-  avatarUrl = 'http://tachyons.io/img/logo.jpg';
-  name = 'Hà Thanh Tùng';
+  // avatarUrl = 'http://tachyons.io/img/logo.jpg';
+  // name = 'Hà Thanh Tùng';
+  @Input() user: User;
   @Output() searchEvent = new EventEmitter();
   constructor() {}
 

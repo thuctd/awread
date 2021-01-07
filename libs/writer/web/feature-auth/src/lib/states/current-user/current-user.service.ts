@@ -7,7 +7,7 @@ import { CurrentUserStore } from './current-user.store';
 export class CurrentUserService {
   constructor(private currentUserStore: CurrentUserStore) {}
 
-  setCurrentUserToStore(user) {
+  setCurrentUserAkita(user) {
     this.currentUserStore.update(user);
   }
 

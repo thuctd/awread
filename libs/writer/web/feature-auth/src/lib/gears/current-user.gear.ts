@@ -1,3 +1,5 @@
+import { User } from './../models/current-user.model';
+import { CurrentUserStore } from './../states/current-user/current-user.store';
 import { CurrentUserService } from './../states/current-user/current-user.service';
 import { tap, catchError, retry } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
@@ -8,7 +10,8 @@ import { of, throwError } from 'rxjs';
 export class CurrentUserGear {
   constructor(
     private currentUserApi: CurrentUserApi,
-    private currentUserService: CurrentUserService
+    private currentUserService: CurrentUserService,
+    private currentUserStore: CurrentUserStore
   ) {}
 
   getCurrentUser() {
@@ -17,18 +20,20 @@ export class CurrentUserGear {
         console.log('current user: ', res);
         if (res && res.data && res.data['allGetCurrentUsers']['nodes'].length) {
           const user = res.data['allGetCurrentUsers']['nodes'][0];
-          this.currentUserService.setCurrentUserToStore(user);
+          this.currentUserService.setCurrentUserAkita(user);
         }
       }),
       catchError((err) => of(err))
     );
   }
 
-  update(user) {
+  update(user: User) {
     return this.currentUserApi.update(user).pipe(
       tap((res) => {
         if (res && res['data']) {
-          alert('Update thanh cong roi nhe babe!');
+          // alert('Update thanh cong roi nhe babe!');
+          console.log('user update akita: ', user);
+          this.currentUserStore.updateCurrentUserAkita(user);
         }
       }),
       catchError((err) => {

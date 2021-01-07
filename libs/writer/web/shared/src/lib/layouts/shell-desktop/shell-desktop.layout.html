@@ -1,3 +1,3 @@
-<navbar>
-    <router-outlet></router-outlet>
+<navbar [user]="currentUser$ | async">
+  <router-outlet></router-outlet>
 </navbar>

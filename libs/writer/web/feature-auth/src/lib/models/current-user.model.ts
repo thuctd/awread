@@ -14,6 +14,7 @@ export interface User {
   createdat: Date;
   username: string;
   website: string;
+  email: string;
 }
 
 export interface UserInputMutation {
