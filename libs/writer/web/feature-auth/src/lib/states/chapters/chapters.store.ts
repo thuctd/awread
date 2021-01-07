@@ -16,11 +16,11 @@ export interface ChaptersState extends EntityState<Chapter>, ActiveState {
     filter: VISIBILITY_FILTER;
   };
 }
-// const initialState = {
-//   ui: {
-//     filter: VISIBILITY_FILTER.SHOW_ALL;
-//    }
-// };
+const initialState = {
+  ui: {
+    filter: VISIBILITY_FILTER.SHOW_ALL,
+  },
+};
 
 // export interface ChapterUI {}
 
@@ -34,7 +34,6 @@ export class ChaptersStore extends EntityStore<ChaptersState> {
     super();
     // this.createUIStore().setInitialEntityState();
   }
-
   updateChapterById(id: string, chapter) {
     return this.update(id, (e) => {
       return {

@@ -53,6 +53,22 @@ import { CreationSubmitBtnAtom } from './atoms/creation-submit-btn/creation-subm
 import { CreationSocialBtnAtom } from './atoms/creation-social-btn/creation-social-btn.atom';
 import { QuillModule } from 'ngx-quill';
 import { WrtEditerAtom } from './atoms/wrt-editer/wrt-editer.atom';
+
+import { PaginationAtom } from './atoms/pagination/pagination.atom';
+import { RatingAtom } from './atoms/rating/rating.atom';
+import { TitleItemAtom } from './atoms/title-item/title-item.atom';
+import { RdHomeIconRatingAtom } from './atoms/rd-home-icon-rating/rd-home-icon-rating.atom';
+import { RdHomeTabBookAtom } from './atoms/rd-home-tab-book/rd-home-tab-book.atom';
+import { RdHomeTabCategoryAtom } from './atoms/rd-home-tab-category/rd-home-tab-category.atom';
+import { RdListPublicationDateAtom } from './atoms/rd-list-publication-date/rd-list-publication-date.atom';
+import { RdListContentNovelAtom } from './atoms/rd-list-content-novel/rd-list-content-novel.atom';
+import { ImgMAtom } from './atoms/img-m/img-m.atom';
+import { CommentAtom } from './atoms/comment/comment.atom';
+import { BaseBtnAtom } from './atoms/base-btn/base-btn.atom';
+import { BaseLinkAtom } from './atoms/base-link/base-link.atom';
+import { RdListTabPageAtom } from './atoms/rd-list-tab-page/rd-list-tab-page.atom';
+import { AuthorAtom } from './atoms/author/author.atom';
+
 import { DefaultCoverAtom } from './atoms/default-cover/default-cover.atom';
 import {
   DefaultCoverModule,
@@ -120,6 +136,20 @@ import {
     CreationSubmitBtnAtom,
     CreationSocialBtnAtom,
     QuillModule,
+    PaginationAtom,
+    RatingAtom,
+    TitleItemAtom,
+    RdHomeIconRatingAtom,
+    RdHomeTabBookAtom,
+    RdHomeTabCategoryAtom,
+    RdListPublicationDateAtom,
+    RdListContentNovelAtom,
+    RdListTabPageAtom,
+    ImgMAtom,
+    CommentAtom,
+    BaseBtnAtom,
+    BaseLinkAtom,
+    AuthorAtom,
     DefaultCoverAtom,
   ],
   declarations: [
@@ -178,6 +208,20 @@ import {
     DetailSocialMenuAtom,
     CreationSubmitBtnAtom,
     CreationSocialBtnAtom,
+    PaginationAtom,
+    RatingAtom,
+    TitleItemAtom,
+    RdHomeIconRatingAtom,
+    RdHomeTabBookAtom,
+    RdHomeTabCategoryAtom,
+    RdListPublicationDateAtom,
+    RdListTabPageAtom,
+    RdListContentNovelAtom,
+    ImgMAtom,
+    CommentAtom,
+    BaseBtnAtom,
+    BaseLinkAtom,
+    AuthorAtom,
     DefaultCoverAtom,
   ],
 })

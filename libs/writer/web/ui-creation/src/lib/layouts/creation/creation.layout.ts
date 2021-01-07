@@ -1,5 +1,7 @@
-import { BooksFacade } from './../../../../../feature-auth/src/lib/facades/books.facade';
-import { CurrentUserFacade } from './../../../../../feature-auth/src/lib/facades/current-user.facade';
+import {
+  BooksFacade,
+  CurrentUserFacade,
+} from '@awread/writer/web/feature-auth';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
