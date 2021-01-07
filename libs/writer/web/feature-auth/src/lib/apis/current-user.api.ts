@@ -1,8 +1,9 @@
+import { CurrentUser } from './../models/current-user.model';
 import { catchError, retry, tap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
-import { of } from 'rxjs';
-
+import { of, throwError } from 'rxjs';
+import { ApolloQueryResult } from '@apollo/client';
 @Injectable({ providedIn: 'root' })
 export class CurrentUserApi {
   constructor(private apollo: Apollo) {}
@@ -31,71 +32,59 @@ export class CurrentUserApi {
     });
   }
 
-  update(user) {
-    return this.apollo
-      .mutate({
-        mutation: gql`
-          mutation updateUser(
-            $address: String
-            $dob: String
-            $fullname: String
-            $gender: String
-            $introduce: String
-            $phone: String
-            $photourl: String
-            $updatedat: Datetime
-            $username: String
-            $website: String
-            $userid: String!
+  update(user: CurrentUser) {
+    return this.apollo.mutate({
+      mutation: gql`
+        mutation updateUser(
+          $address: String
+          $dob: String
+          $fullname: String
+          $gender: String
+          $introduce: String
+          $phone: String
+          $photourl: String
+          $updatedat: Datetime
+          $username: String
+          $website: String
+          $userid: String!
+        ) {
+          updateUserByUserid(
+            input: {
+              userPatch: {
+                address: $address
+                dob: $dob
+                fullname: $fullname
+                gender: $gender
+                introduce: $introduce
+                phone: $phone
+                photourl: $photourl
+                updatedat: $updatedat
+                username: $username
+                website: $website
+              }
+              userid: $userid
+            }
           ) {
-            updateUserByUserid(
-              input: {
-                userPatch: {
-                  address: $address
-                  dob: $dob
-                  fullname: $fullname
-                  gender: $gender
-                  introduce: $introduce
-                  phone: $phone
-                  photourl: $photourl
-                  updatedat: $updatedat
-                  username: $username
-                  website: $website
-                }
-                userid: $userid
-              }
-            ) {
-              user {
-                userid
-              }
+            user {
+              userid
             }
           }
-        `,
-        variables: {
-          userid: user.userid,
-          address: user.address ?? '',
-          dob: user.dob ?? '',
-          fullname: user.fullname ?? '',
-          gender: user.gender ?? '',
-          introduce: user.introduce ?? '',
-          phone: user.phone ?? '',
-          photourl: user.photourl ?? '',
-          updatedat: new Date(),
-          username: user.username ?? '',
-          website: user.website ?? '',
-        },
-      })
-      .pipe(
-        tap((res) => {
-          if (res && res['data']) {
-            alert('Update thanh cong roi nhe babe!');
-          }
-        }),
-        catchError((err) => {
-          alert('Update loi nhe!');
-          return of(err);
-        }),
-        retry(2)
-      );
+        }
+      `,
+      // TODO: dung User(User) trong ../model de tao user moi thay vi khoi tao object nay
+      variables: {
+        userid: user.userid,
+        address: user.address ?? '',
+        dob: user.dob ?? '',
+        fullname: user.fullname ?? '',
+        gender: user.gender ?? '',
+        introduce: user.introduce ?? '',
+        phone: user.phone ?? '',
+        photourl: user.photourl ?? '',
+        updatedat: new Date(),
+        username: user.username ?? '',
+        website: user.website ?? '',
+      },
+    });
   }
 }

@@ -1,8 +1,8 @@
 import { CurrentUserService } from './../states/current-user/current-user.service';
-import { tap, catchError } from 'rxjs/operators';
+import { tap, catchError, retry } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { CurrentUserApi } from '../apis/current-user.api';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class CurrentUserGear {
@@ -25,6 +25,17 @@ export class CurrentUserGear {
   }
 
   update(user) {
-    return this.currentUserApi.update(user);
+    return this.currentUserApi.update(user).pipe(
+      tap((res) => {
+        if (res && res['data']) {
+          alert('Update thanh cong roi nhe babe!');
+        }
+      }),
+      catchError((err) => {
+        alert('Update loi nhe!');
+        return throwError(err);
+      }),
+      retry(2)
+    );
   }
 }

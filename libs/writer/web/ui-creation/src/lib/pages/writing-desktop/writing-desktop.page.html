@@ -1,6 +1,6 @@
 <h3>Chapter form value: {{chapterForm.value | json}}</h3>
 <template-writing
-  (chapterStatusEvent)="chapterStatusEvent($event)"
+  (changeChapterStatusEvent)="changeChapterStatusEvent($event)"
   [chapterForm]="chapterForm"
   [chapterStatus]="chapterStatus"
 ></template-writing>

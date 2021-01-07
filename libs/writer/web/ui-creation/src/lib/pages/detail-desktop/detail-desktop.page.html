@@ -1,7 +1,7 @@
 <div>Form value: {{bookForm.value | json}}</div>
 <template-detail
   [bookForm]="bookForm"
-  [chapters]="chapterList"
+  [chapters]="chapterListByBookId$ | async"
   (selectedStatusEvent)="selectedStatusEvent($event)"
   (chapterActionEvent)="chapterActionEvent($event)"
   (createNewChapterEvent)="createNewChapterEvent()"

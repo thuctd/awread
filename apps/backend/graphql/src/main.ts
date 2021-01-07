@@ -38,27 +38,27 @@ admin.initializeApp({
   databaseURL: 'https://awready-beta.firebaseio.com',
 });
 
-const asyncMiddleware = (fn) => (req, res, next) => {
-  Promise.resolve(fn(req, res, next)).catch(next);
-};
+// const asyncMiddleware = (fn) => (req, res, next) => {
+//   Promise.resolve(fn(req, res, next)).catch(next);
+// };
 
-const checkJwt = async (req, res, next) => {
-  try {
-    const token = req.headers.authorization?.split('Bearer ')[1];
-    if (!token) {
-      console.log('no token found');
-      next();
-    } else {
-      const decodedToken = await admin.auth().verifyIdToken(token);
-      req['user'] = decodedToken;
-      next();
-    }
-  } catch (error) {
-    res.status(401).send(error);
-  }
-};
+// const checkJwt = async (req, res, next) => {
+//   try {
+//     const token = req.headers.authorization?.split('Bearer ')[1];
+//     if (!token) {
+//       console.log('no token found');
+//       next();
+//     } else {
+//       const decodedToken = await admin.auth().verifyIdToken(token);
+//       req['user'] = decodedToken;
+//       next();
+//     }
+//   } catch (error) {
+//     res.status(401).send(error);
+//   }
+// };
 
-app.use('/graphql', asyncMiddleware(checkJwt));
+// app.use('/graphql', asyncMiddleware(checkJwt));
 
 app.use(
   postgraphile(

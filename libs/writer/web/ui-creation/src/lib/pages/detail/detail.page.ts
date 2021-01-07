@@ -11,6 +11,7 @@ import {
   Injectable,
   OnInit,
 } from '@angular/core';
+import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +21,7 @@ export class DetailPage implements OnInit {
   bookForm: FormGroup;
   bookId: string;
   chapterEntity$: any;
-  chapterList = [];
+  chapterListByBookId$ = this.chaptersFacade.chapterListByBookId$;
   constructor(
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
@@ -33,22 +34,19 @@ export class DetailPage implements OnInit {
 
   ngOnInit(): void {
     this.bookId = this.activatedRoute.snapshot.params['bookId'];
+    this.getAllChapters();
     this.initForm();
     this.updateForm();
-    this.booksFacade
-      .selectEntityChapterBookById(this.bookId)
-      .subscribe((chapters) => {
-        if (chapters && chapters.length) {
-          this.chapterList = chapters;
-        } else {
-          this.chapterList = [];
-        }
-        this.cd.detectChanges();
-      });
   }
 
   createNewChapterEvent() {
-    this.router.navigate(['writing', { bookId: this.bookId }]);
+    this.router.navigate([
+      'writing',
+      {
+        bookId: this.bookId,
+        chapterNumber: this.chaptersFacade.getChapterCountAkita() + 1 ?? 1,
+      },
+    ]);
   }
 
   chapterActionEvent(data: {
@@ -58,7 +56,7 @@ export class DetailPage implements OnInit {
   }) {
     switch (data.type) {
       case 'new-chapter':
-        this.router.navigate(['writing', { bookId: this.bookId }]);
+        this.createChapter();
         return;
       case 'edit':
         this.editChapter(data);
@@ -85,6 +83,36 @@ export class DetailPage implements OnInit {
     this.bookForm.patchValue({ status });
   }
 
+  private createChapter() {
+    this.router.navigate([
+      'writing',
+      {
+        bookId: this.bookId,
+        chapterNumber: this.chaptersFacade.getChapterCountAkita() + 1 ?? 1,
+      },
+    ]);
+  }
+
+  private getAllChapters() {
+    return this.activatedRoute.paramMap
+      .pipe(
+        switchMap((params) => {
+          const bookId = params.get('bookId');
+          const chapters = this.chaptersFacade.getAllAkita();
+          if (bookId && chapters.length) {
+            return this.chaptersFacade.selectAllChapterAkita();
+          }
+          if (bookId) {
+            return this.chaptersFacade.getAllChapters(bookId);
+          }
+          return of([]);
+        })
+      )
+      .subscribe((res) => {
+        console.log('all chapters res: ', res);
+      });
+  }
+
   private editChapter(chapter) {
     this.router.navigate([
       'writing',
@@ -99,23 +127,10 @@ export class DetailPage implements OnInit {
   private removeChapter(chapter) {
     this.chaptersFacade
       .removeChapter(chapter.chapterid)
-      .pipe(
-        tap((res) => {
-          if (res['data']) {
-            this.refreshChapterAfterRemove(chapter);
-          }
-        })
-      )
+      .pipe(tap((res) => {}))
       .subscribe((res) => {
         console.log('remove chapter res: ', res);
       });
-  }
-
-  private refreshChapterAfterRemove(chapter) {
-    this.chapterList = this.chapterList.filter(
-      (item) => item.chapterid !== chapter.chapterid
-    );
-    this.cd.detectChanges();
   }
 
   private updateForm() {
