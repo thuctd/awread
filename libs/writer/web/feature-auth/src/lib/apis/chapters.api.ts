@@ -90,6 +90,7 @@ export class ChaptersApi {
           }
         }
       `,
+      // TODO: dung Chapter(chapter) trong ../model de tao chapter moi thay vi khoi tao object nay
       variables: {
         chapterid: chapter.chapterid,
         bookid: chapter.bookid,
@@ -99,6 +100,7 @@ export class ChaptersApi {
         updatedat: chapter.updatedat ?? new Date(),
         status: chapter.status ?? 'DRAFT',
       },
+      // TODO: end
     });
   }
 
@@ -129,6 +131,7 @@ export class ChaptersApi {
           }
         }
       `,
+      // TODO: dung Chapter(chapter) trong ../model de tao chapter moi thay vi khoi tao object nay
       variables: {
         chapterid: chapter.chapterid,
         content: chapter.content ?? '',

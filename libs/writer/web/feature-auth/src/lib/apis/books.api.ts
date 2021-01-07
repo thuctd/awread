@@ -178,6 +178,7 @@ export class BooksApi {
           }
         }
       `,
+      // TODO: dung Book(Book) trong ../model de tao book moi thay vi khoi tao object nay
       variables: {
         bookid: book.bookid,
         userid: book.userid,
@@ -223,6 +224,7 @@ export class BooksApi {
           }
         }
       `,
+      // TODO: dung Book(Book) trong ../model de tao book moi thay vi khoi tao object nay
       variables: {
         bookid: book.bookid,
         title: book.title ?? '',

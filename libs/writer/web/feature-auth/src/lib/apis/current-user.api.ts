@@ -71,6 +71,7 @@ export class CurrentUserApi {
           }
         }
       `,
+      // TODO: dung User(User) trong ../model de tao user moi thay vi khoi tao object nay
       variables: {
         userid: user.userid,
         address: user.address ?? '',
