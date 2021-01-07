@@ -47,80 +47,19 @@ export class ChaptersFacade {
     return this.chaptersQuery.selectEntity(id);
   }
 
-  //TODO: facade không xử lý logic code cho phần này vào gear
   getAllChapters(bookid: string) {
-    return this.chaptersGear.getAllChapters(bookid).pipe(
-      tap((res) => {
-        if (
-          res['data'] &&
-          res['data']['allChapters'] &&
-          res['data']['allChapters']['nodes'].length
-        ) {
-          this.chaptersStore.set(res['data']['allChapters']['nodes']);
-        } else {
-          this.chaptersStore.set([]);
-        }
-      })
-    );
+    return this.chaptersGear.getAllChapters(bookid).pipe();
   }
-  //TODO: facade không xử lý logic code, cho phần này vào gear
   getChapterDetail(chapterid: string, bookid: string) {
-    return this.chaptersGear.getChapterDetail(chapterid, bookid).pipe(
-      map((res) => {
-        if (
-          res['data'] &&
-          res['data']['allChapters'] &&
-          res['data']['allChapters']['nodes'].length
-        ) {
-          const chapter = res['data']['allChapters']['nodes'];
-          console.log('chapter: ', chapter);
-          // this.chaptersStore.updateChapterById(chapterid, chapter[0]);
-          return chapter;
-        }
-        return [];
-      })
-    );
+    return this.chaptersGear.getChapterDetail(chapterid, bookid).pipe();
   }
-  //TODO: facade không xử lý logic code, cho phần này vào gear
   createChapter(chapter) {
-    const chapterid = this.firestoreGear.createId();
-    const chapterDetail = { ...chapter, chapterid };
-    return this.chaptersGear.createChapter(chapterDetail).pipe(
-      tap((res) => {
-        console.log('createChapter res: ', res);
-        if (res['data'] && res['data']['createChapter']['chapter']) {
-          this.chaptersStore.add(chapterDetail, { prepend: true });
-        }
-        this.router.navigate(['detail', { bookId: chapterDetail.bookid }]);
-      }),
-      //TODO: không catch error ở đây mà catch ở gear để còn alert hoặc ném toast
-      //TODO: return throwError(err) chứ không phải return of (err) mình cần throw ra để xử lý tiếp
-      catchError((err) => of(err))
-    );
+    return this.chaptersGear.createChapter(chapter).pipe();
   }
-  //TODO: facade không xử lý logic code, cho phần này vào gear
   updateChapter(chapter) {
-    return this.chaptersGear.updateChapter(chapter).pipe(
-      tap((res) => {
-        console.log('updateChapter res: ', res);
-        if (res['data']) {
-          this.chaptersStore.updateChapterById(chapter.chapterid, chapter);
-        }
-        this.router.navigate(['detail', { bookId: chapter.bookid }]);
-      }),
-      //TODO: không catch error ở đây mà catch ở gear để còn alert hoặc ném toast
-      //TODO: return throwError(err) chứ không phải return of (err) mình cần throw ra để xử lý tiếp
-      catchError((err) => of(err))
-    );
+    return this.chaptersGear.updateChapter(chapter).pipe();
   }
-  //TODO: facade không xử lý logic code, cho phần này vào gear
   removeChapter(chapterid: string) {
-    return this.chaptersGear.removeChapter(chapterid).pipe(
-      tap((res) => {
-        if (res['data']) {
-          this.chaptersStore.remove(chapterid);
-        }
-      })
-    );
+    return this.chaptersGear.removeChapter(chapterid).pipe();
   }
 }

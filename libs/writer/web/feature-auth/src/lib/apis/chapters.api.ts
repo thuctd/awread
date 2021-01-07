@@ -1,3 +1,4 @@
+import { Chapter } from './../models/chapter.model';
 import { tap, retry } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
@@ -28,7 +29,7 @@ export class ChaptersApi {
         `,
         variables: { bookid },
       })
-      .pipe(tap(), retry(2));
+      .pipe(retry(2));
   }
 
   getChapterDetail(chapterid: string, bookid: string) {
@@ -58,7 +59,7 @@ export class ChaptersApi {
     });
   }
 
-  createChapter(chapter) {
+  createChapter(chapter: Chapter) {
     return this.apollo.mutate({
       mutation: gql`
         mutation createChapter(
@@ -98,11 +99,10 @@ export class ChaptersApi {
         updatedat: chapter.updatedat ?? new Date(),
         status: chapter.status ?? 'DRAFT',
       },
-      //TODO: dung Chapter(chapter) import tu '../model
     });
   }
 
-  updateChapter(chapter) {
+  updateChapter(chapter: Chapter) {
     return this.apollo.mutate({
       mutation: gql`
         mutation updateChapter(
@@ -133,10 +133,9 @@ export class ChaptersApi {
         chapterid: chapter.chapterid,
         content: chapter.content ?? '',
         title: chapter.title ?? '',
-        updatedat: chapter.chapter ?? new Date(),
+        updatedat: chapter.updatedat ?? new Date(),
         status: chapter.status ?? 'DRAFT',
       },
-      //TODO: dung Chapter(chapter) import tu '../model
     });
   }
 

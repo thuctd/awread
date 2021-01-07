@@ -1,7 +1,6 @@
-import { tap, retry, catchError } from 'rxjs/operators';
+import { Book } from './../models/book.model';
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
-import { of } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class BooksApi {
@@ -107,213 +106,171 @@ export class BooksApi {
   //   });
   // }
 
-  createBook(book) {
+  createBook(book: Book) {
     console.log('create book: ', book);
-    return this.apollo
-      .mutate({
-        mutation: gql`
-          mutation createBook(
-            $bookid: String!
-            $userid: String!
-            $title: String!
-            $description: String
-            $tags: [String]
-            $status: BookStatus
-            $completed: Boolean
-            $updatedat: Datetime
-            $publishedat: Datetime
-          ) {
-            createBook(
-              input: {
-                book: {
-                  bookid: $bookid
-                  userid: $userid
-                  title: $title
-                  description: $description
-                  tags: $tags
-                  status: $status
-                  completed: $completed
-                  updatedat: $updatedat
-                  publishedat: $publishedat
-                  categoryid: "2f5187d5-ca67-47a8-aba8-f34e9d07d08a"
-                }
-              }
-            ) {
-              book {
-                bookid
-                title
-                img
-                description
-                completed
-                status
-                publishedat
-                updatedat
-                categoryByCategoryid {
-                  categoryid
-                  name
-                }
-                chaptersByBookid {
-                  totalCount
-                  nodes {
-                    chapterid
-                    title
-                    status
-                    updatedat
-                    publishedat
-                  }
-                }
+    return this.apollo.mutate({
+      mutation: gql`
+        mutation createBook(
+          $bookid: String!
+          $userid: String!
+          $title: String!
+          $description: String
+          $tags: [String]
+          $status: BookStatus
+          $completed: Boolean
+          $updatedat: Datetime
+          $publishedat: Datetime
+        ) {
+          createBook(
+            input: {
+              book: {
+                bookid: $bookid
+                userid: $userid
+                title: $title
+                description: $description
+                tags: $tags
+                status: $status
+                completed: $completed
+                updatedat: $updatedat
+                publishedat: $publishedat
+                categoryid: "2f5187d5-ca67-47a8-aba8-f34e9d07d08a"
               }
             }
-
-            createUserBook(
-              input: {
-                userBook: {
-                  userid: $userid
-                  bookid: $bookid
-                  publishedat: $publishedat
-                }
+          ) {
+            book {
+              bookid
+              title
+              img
+              description
+              completed
+              status
+              publishedat
+              updatedat
+              categoryByCategoryid {
+                categoryid
+                name
               }
-            ) {
-              userBook {
-                bookid
+              chaptersByBookid {
+                totalCount
+                nodes {
+                  chapterid
+                  title
+                  status
+                  updatedat
+                  publishedat
+                }
               }
             }
           }
-        `,
-        variables: {
-          bookid: book.bookid,
-          userid: book.userid,
-          title: book.title ?? '',
-          description: book.description ?? '',
-          tags: book.tags ?? [],
-          completed: book.completed ?? false,
-          status: book.status ?? 'DRAFT',
-          updatedat: new Date(),
-          publishedat: new Date(),
-        },
-        //TODO: dung Book(book) import tu '../model
-      })
-      .pipe(
-        tap((res) => console.log('add books: ', res)),
-        //TODO: không catch error ở đây mà catch ở gear để còn alert hoặc ném toast
-        catchError((err) => {
-          console.error('An error occurred:', err);
-          //TODO: return throwError(err) chứ không phải return of (err) mình cần throw ra để xử lý tiếp
-          return of(err);
-        })
-      );
+
+          createUserBook(
+            input: {
+              userBook: {
+                userid: $userid
+                bookid: $bookid
+                publishedat: $publishedat
+              }
+            }
+          ) {
+            userBook {
+              bookid
+            }
+          }
+        }
+      `,
+      variables: {
+        bookid: book.bookid,
+        userid: book.userid,
+        title: book.title ?? '',
+        description: book.description ?? '',
+        tags: book.tags ?? [],
+        completed: book.completed ?? false,
+        status: book.status ?? 'DRAFT',
+        updatedat: new Date(),
+        publishedat: new Date(),
+      },
+    });
   }
 
-  editBook(book) {
-    return this.apollo
-      .mutate({
-        mutation: gql`
-          mutation updateBook(
-            $bookid: String!
-            $title: String
-            $description: String
-            $tags: [String]
-            $status: BookStatus
-            $completed: Boolean
-            $updatedat: Datetime
+  editBook(book: Book) {
+    return this.apollo.mutate({
+      mutation: gql`
+        mutation updateBook(
+          $bookid: String!
+          $title: String
+          $description: String
+          $tags: [String]
+          $status: BookStatus
+          $completed: Boolean
+          $updatedat: Datetime
+        ) {
+          updateBookByBookid(
+            input: {
+              bookPatch: {
+                title: $title
+                description: $description
+                tags: $tags
+                status: $status
+                completed: $completed
+                updatedat: $updatedat
+              }
+              bookid: $bookid
+            }
           ) {
-            updateBookByBookid(
-              input: {
-                bookPatch: {
-                  title: $title
-                  description: $description
-                  tags: $tags
-                  status: $status
-                  completed: $completed
-                  updatedat: $updatedat
-                }
-                bookid: $bookid
-              }
-            ) {
-              book {
-                bookid
-              }
+            book {
+              bookid
             }
           }
-        `,
-        variables: {
-          bookid: book.bookid,
-          title: book.title ?? '',
-          description: book.description ?? '',
-          tags: book.tags ?? [],
-          status: book.status ?? 'DRAFT',
-          completed: book.completed ?? false,
-          updatedat: new Date(),
-        },
-        //TODO: dung Book(book) import tu '../model
-      })
-      .pipe(
-        tap((res) => console.log('update books: ', res)),
-        //TODO: không catch error ở đây mà catch ở gear để còn alert hoặc ném toast
-        catchError((err) => {
-          console.error('An error occurred:', err);
-          //TODO: return throwError(err) chứ không phải return of (err) mình cần throw ra để xử lý tiếp
-          return of(err);
-        })
-      );
+        }
+      `,
+      variables: {
+        bookid: book.bookid,
+        title: book.title ?? '',
+        description: book.description ?? '',
+        tags: book.tags ?? [],
+        status: book.status ?? 'DRAFT',
+        completed: book.completed ?? false,
+        updatedat: new Date(),
+      },
+    });
   }
 
   updateBookStatus(bookId: string, status: string) {
-    return this.apollo
-      .mutate({
-        mutation: gql`
-          mutation removeBook($bookId: String!, $status: BookStatus) {
-            updateBookByBookid(
-              input: { bookPatch: { status: $status }, bookid: $bookId }
-            ) {
-              book {
-                bookid
-              }
+    return this.apollo.mutate({
+      mutation: gql`
+        mutation removeBook($bookId: String!, $status: BookStatus) {
+          updateBookByBookid(
+            input: { bookPatch: { status: $status }, bookid: $bookId }
+          ) {
+            book {
+              bookid
             }
           }
-        `,
-        variables: {
-          bookId,
-          status,
-        },
-      })
-      .pipe(
-        tap((res) => console.log('update status books: ', res)),
-        //TODO: không catch error ở đây mà catch ở gear để còn alert hoặc ném toast
-        catchError((err) => {
-          console.error('An error occurred:', err);
-          //TODO: return throwError(err) chứ không phải return of (err) mình cần throw ra để xử lý tiếp
-          return of(err);
-        })
-      );
+        }
+      `,
+      variables: {
+        bookId,
+        status,
+      },
+    });
   }
 
   removeBook(bookId: string) {
-    return this.apollo
-      .mutate({
-        mutation: gql`
-          mutation removeBook($bookId: String!) {
-            updateBookByBookid(
-              input: { bookPatch: { isdeleted: true }, bookid: $bookId }
-            ) {
-              book {
-                bookid
-              }
+    return this.apollo.mutate({
+      mutation: gql`
+        mutation removeBook($bookId: String!) {
+          updateBookByBookid(
+            input: { bookPatch: { isdeleted: true }, bookid: $bookId }
+          ) {
+            book {
+              bookid
             }
           }
-        `,
-        variables: {
-          bookId,
-        },
-      })
-      .pipe(
-        tap((res) => console.log('remove books: ', res)),
-        //TODO: không catch error ở đây mà catch ở gear để còn alert hoặc ném toast
-        catchError((err) => {
-          console.error('An error occurred:', err);
-          //TODO: return throwError(err) chứ không phải return of (err) mình cần throw ra để xử lý tiếp
-          return of(err);
-        })
-      );
+        }
+      `,
+      variables: {
+        bookId,
+      },
+    });
   }
 }

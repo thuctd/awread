@@ -16,6 +16,6 @@ export class CreationLayout implements OnInit {
 
   ngOnInit(): void {
     this.currentUserFacade.getCurrentUser().subscribe();
-    this.booksFacade.setBooksInAkita().subscribe();
+    this.booksFacade.getAllBooks().subscribe();
   }
 }

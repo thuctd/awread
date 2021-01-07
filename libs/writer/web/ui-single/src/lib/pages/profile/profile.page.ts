@@ -16,9 +16,7 @@ export class ProfilePage implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
-    // this.profileForm.setValue({ username: 'ahihi' });
-    this.profileForm.updateValueAndValidity();
-    this.updateForm();
+    this.getCurrentUser();
   }
 
   updateProfile() {
@@ -31,27 +29,22 @@ export class ProfilePage implements OnInit {
       .subscribe((res) => console.log('update cureent user result: ', res));
   }
 
-  private updateForm() {
-    //TODO: ko goi o day
-    this.currentUserFacade.getCurrentUser().subscribe((res) => {
-      const user = res['data']['allGetCurrentUsers']['nodes'];
-      console.log('update form with: ', user);
+  private updateProfileForm(user) {
+    this.profileForm.patchValue({
+      fullname: user.fullname ?? '',
+      username: user.username ?? '',
+      website: user.website ?? '',
+      introduce: user.introduce ?? '',
+      email: user.email ?? '',
+      phone: user.phone ?? '',
+      dob: user.dob ?? '',
+      gender: user.gender ?? '',
+    });
+  }
+  private getCurrentUser() {
+    this.currentUserFacade.getCurrentUser().subscribe((user) => {
       if (user && user.length) {
-        // this.profileForm.updateValueAndValidity();
-        this.profileForm.patchValue(
-          {
-            fullname: user[0].fullname ?? 'cc',
-            username: user[0].username ?? '',
-            website: user[0].website ?? '',
-            introduce: user[0].introduce ?? '',
-            email: user[0].email ?? '',
-            phone: user[0].phone ?? '',
-            dob: user[0].dob ?? '',
-            gender: user[0].gender ?? '',
-          },
-          { emitEvent: true, onlySelf: true }
-        );
-        // this.cd.detectChanges();
+        this.updateProfileForm(user[0]);
       }
     });
   }

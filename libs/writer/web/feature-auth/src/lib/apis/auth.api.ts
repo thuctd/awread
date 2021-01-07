@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
+import { UserInputMutation } from '../..';
 @Injectable({ providedIn: 'root' })
 export class AuthApi {
   constructor(private apollo: Apollo, private http: HttpClient) {}
@@ -97,55 +98,45 @@ export class AuthApi {
       });
   }
 
-  createAccountOnServer(user) {
-    console.log('new user', user);
-    return this.apollo
-      .mutate({
-        mutation: gql`
-          mutation signup(
-            $fullname: String
-            $emailVerified: String
-            $photourl: String
-            $password: String
-            $userid: String
-            $email: String
-            $provider: String
-          ) {
-            signup(
-              input: {
-                fullname: $fullname
-                emailverified: $emailVerified
-                photourl: $photourl
-                password: $password
-                userid: $userid
-                email: $email
-                provider: $provider
-              }
-            ) {
-              string
+  createAccountOnServer(user: UserInputMutation) {
+    return this.apollo.mutate({
+      mutation: gql`
+        mutation signup(
+          $fullname: String
+          $emailVerified: String
+          $photourl: String
+          $password: String
+          $userid: String
+          $email: String
+          $provider: String
+        ) {
+          signup(
+            input: {
+              fullname: $fullname
+              emailverified: $emailVerified
+              photourl: $photourl
+              password: $password
+              userid: $userid
+              email: $email
+              provider: $provider
             }
+          ) {
+            string
           }
-        `,
-        variables: {
-          email: user.email ?? null,
-          fullname: user.displayName ?? null,
-          emailVerified: user.emailVerified ?? 'false',
-          photourl: user.photoURL ?? null,
-          password: user.password ?? '',
-          userid: user.uid,
-          provider: user.provider ?? 'email/password',
-          address: user.address ?? '',
-          phone: user.phone ?? '',
-        },
-        //TODO: dung CurrentUser(user) import tu '../model
-      })
-      .pipe(
-        //TODO: không catch error ở đây mà catch ở gear để còn alert hoặc ném toast
-        catchError((err) => {
-          console.log('error', err);
-          //TODO: return throwError(err) chứ không phải return of (err) mình cần throw ra để xử lý tiếp
-          return of(err);
-        })
-      );
+        }
+      `,
+      variables: {
+        email: user.email ?? null,
+        fullname: user.displayName ?? null,
+        emailVerified: user.emailVerified ?? 'false',
+        photourl: user.photoURL ?? null,
+        password: user.password ?? '',
+        userid: user.uid,
+        provider: user.provider ?? 'email/password',
+        address: user.address ?? '',
+        phone: user.phone ?? '',
+        createdat: user.createdat ?? new Date(),
+      },
+    });
   }
 }
