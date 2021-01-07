@@ -191,11 +191,14 @@ export class BooksApi {
           updatedat: new Date(),
           publishedat: new Date(),
         },
+        //TODO: dung Book(book) import tu '../model
       })
       .pipe(
         tap((res) => console.log('add books: ', res)),
+        //TODO: không catch error ở đây mà catch ở gear để còn alert hoặc ném toast
         catchError((err) => {
           console.error('An error occurred:', err);
+          //TODO: return throwError(err) chứ không phải return of (err) mình cần throw ra để xử lý tiếp
           return of(err);
         })
       );
@@ -242,11 +245,14 @@ export class BooksApi {
           completed: book.completed ?? false,
           updatedat: new Date(),
         },
+        //TODO: dung Book(book) import tu '../model
       })
       .pipe(
         tap((res) => console.log('update books: ', res)),
+        //TODO: không catch error ở đây mà catch ở gear để còn alert hoặc ném toast
         catchError((err) => {
           console.error('An error occurred:', err);
+          //TODO: return throwError(err) chứ không phải return of (err) mình cần throw ra để xử lý tiếp
           return of(err);
         })
       );
@@ -273,8 +279,10 @@ export class BooksApi {
       })
       .pipe(
         tap((res) => console.log('update status books: ', res)),
+        //TODO: không catch error ở đây mà catch ở gear để còn alert hoặc ném toast
         catchError((err) => {
           console.error('An error occurred:', err);
+          //TODO: return throwError(err) chứ không phải return of (err) mình cần throw ra để xử lý tiếp
           return of(err);
         })
       );
@@ -300,8 +308,10 @@ export class BooksApi {
       })
       .pipe(
         tap((res) => console.log('remove books: ', res)),
+        //TODO: không catch error ở đây mà catch ở gear để còn alert hoặc ném toast
         catchError((err) => {
           console.error('An error occurred:', err);
+          //TODO: return throwError(err) chứ không phải return of (err) mình cần throw ra để xử lý tiếp
           return of(err);
         })
       );

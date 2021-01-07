@@ -32,7 +32,7 @@ export class ProfilePage implements OnInit {
   }
 
   private updateForm() {
-    // TODO: ko goi o day
+    //TODO: ko goi o day
     this.currentUserFacade.getCurrentUser().subscribe((res) => {
       const user = res['data']['allGetCurrentUsers']['nodes'];
       console.log('update form with: ', user);

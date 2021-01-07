@@ -98,6 +98,7 @@ export class ChaptersApi {
         updatedat: chapter.updatedat ?? new Date(),
         status: chapter.status ?? 'DRAFT',
       },
+      //TODO: dung Chapter(chapter) import tu '../model
     });
   }
 
@@ -135,6 +136,7 @@ export class ChaptersApi {
         updatedat: chapter.chapter ?? new Date(),
         status: chapter.status ?? 'DRAFT',
       },
+      //TODO: dung Chapter(chapter) import tu '../model
     });
   }
 

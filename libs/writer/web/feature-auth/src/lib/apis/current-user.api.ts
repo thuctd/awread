@@ -1,7 +1,7 @@
 import { catchError, retry, tap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 import { ApolloQueryResult } from '@apollo/client';
 @Injectable({ providedIn: 'root' })
 export class CurrentUserApi {
@@ -84,6 +84,7 @@ export class CurrentUserApi {
           username: user.username ?? '',
           website: user.website ?? '',
         },
+        //TODO: dung User(user) import tu '../model
       })
       .pipe(
         tap((res) => {
@@ -91,9 +92,10 @@ export class CurrentUserApi {
             alert('Update thanh cong roi nhe babe!');
           }
         }),
+        //TODO: không catch error ở đây mà catch ở gear để còn alert hoặc ném toast
         catchError((err) => {
           alert('Update loi nhe!');
-          return of(err);
+          return throwError(err);
         }),
         retry(2)
       );

@@ -37,7 +37,6 @@ export class ChaptersFacade {
   deleteChapterInAkita(chapterid: string) {}
 
   updateChapterInAkita(chapterid: string, chapter) {
-    console.log('update chapter akita after edit: ', chapter);
     return this.chaptersStore.updateChapterById(chapterid, chapter);
   }
 
@@ -48,6 +47,7 @@ export class ChaptersFacade {
     return this.chaptersQuery.selectEntity(id);
   }
 
+  //TODO: facade không xử lý logic code cho phần này vào gear
   getAllChapters(bookid: string) {
     return this.chaptersGear.getAllChapters(bookid).pipe(
       tap((res) => {
@@ -63,7 +63,7 @@ export class ChaptersFacade {
       })
     );
   }
-
+  //TODO: facade không xử lý logic code, cho phần này vào gear
   getChapterDetail(chapterid: string, bookid: string) {
     return this.chaptersGear.getChapterDetail(chapterid, bookid).pipe(
       map((res) => {
@@ -81,7 +81,7 @@ export class ChaptersFacade {
       })
     );
   }
-
+  //TODO: facade không xử lý logic code, cho phần này vào gear
   createChapter(chapter) {
     const chapterid = this.firestoreGear.createId();
     const chapterDetail = { ...chapter, chapterid };
@@ -93,10 +93,12 @@ export class ChaptersFacade {
         }
         this.router.navigate(['detail', { bookId: chapterDetail.bookid }]);
       }),
+      //TODO: không catch error ở đây mà catch ở gear để còn alert hoặc ném toast
+      //TODO: return throwError(err) chứ không phải return of (err) mình cần throw ra để xử lý tiếp
       catchError((err) => of(err))
     );
   }
-
+  //TODO: facade không xử lý logic code, cho phần này vào gear
   updateChapter(chapter) {
     return this.chaptersGear.updateChapter(chapter).pipe(
       tap((res) => {
@@ -106,10 +108,12 @@ export class ChaptersFacade {
         }
         this.router.navigate(['detail', { bookId: chapter.bookid }]);
       }),
+      //TODO: không catch error ở đây mà catch ở gear để còn alert hoặc ném toast
+      //TODO: return throwError(err) chứ không phải return of (err) mình cần throw ra để xử lý tiếp
       catchError((err) => of(err))
     );
   }
-
+  //TODO: facade không xử lý logic code, cho phần này vào gear
   removeChapter(chapterid: string) {
     return this.chaptersGear.removeChapter(chapterid).pipe(
       tap((res) => {

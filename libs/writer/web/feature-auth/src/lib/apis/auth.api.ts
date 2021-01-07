@@ -137,10 +137,13 @@ export class AuthApi {
           address: user.address ?? '',
           phone: user.phone ?? '',
         },
+        //TODO: dung CurrentUser(user) import tu '../model
       })
       .pipe(
+        //TODO: không catch error ở đây mà catch ở gear để còn alert hoặc ném toast
         catchError((err) => {
           console.log('error', err);
+          //TODO: return throwError(err) chứ không phải return of (err) mình cần throw ra để xử lý tiếp
           return of(err);
         })
       );
