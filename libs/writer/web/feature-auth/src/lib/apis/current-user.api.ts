@@ -80,7 +80,7 @@ export class CurrentUserApi {
           introduce: user.introduce ?? '',
           phone: user.phone ?? '',
           photourl: user.photourl ?? '',
-          updatedat: new Date().toISOString(),
+          updatedat: new Date(),
           username: user.username ?? '',
           website: user.website ?? '',
         },

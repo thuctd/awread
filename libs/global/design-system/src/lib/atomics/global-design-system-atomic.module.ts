@@ -70,12 +70,21 @@ import { RdListTabPageAtom } from './atoms/rd-list-tab-page/rd-list-tab-page.ato
 import { AuthorAtom } from './atoms/author/author.atom';
 
 import { DefaultCoverAtom } from './atoms/default-cover/default-cover.atom';
-import { DefaultCoverModule } from '@awread/global/packages';
-
+import {
+  DefaultCoverModule,
+  CloseOnOutsideModule,
+} from '@awread/global/packages';
 
 @NgModule({
-  imports: [CommonModule, StorybookSupportModule, QuillModule.forRoot(), DefaultCoverModule],
+  imports: [
+    CommonModule,
+    StorybookSupportModule,
+    QuillModule.forRoot(),
+    DefaultCoverModule,
+    CloseOnOutsideModule,
+  ],
   exports: [
+    CloseOnOutsideModule,
     TabBtnAtom,
     LogoAtom,
     InputFormAtom,
@@ -141,8 +150,7 @@ import { DefaultCoverModule } from '@awread/global/packages';
     BaseBtnAtom,
     BaseLinkAtom,
     AuthorAtom,
-    DefaultCoverAtom
-
+    DefaultCoverAtom,
   ],
   declarations: [
     TabBtnAtom,
@@ -214,7 +222,7 @@ import { DefaultCoverModule } from '@awread/global/packages';
     BaseBtnAtom,
     BaseLinkAtom,
     AuthorAtom,
-    DefaultCoverAtom
+    DefaultCoverAtom,
   ],
 })
-export class GlobalDesignSystemAtomicModule { }
+export class GlobalDesignSystemAtomicModule {}

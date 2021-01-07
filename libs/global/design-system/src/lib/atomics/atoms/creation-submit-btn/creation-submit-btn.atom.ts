@@ -1,19 +1,24 @@
-import { Component, OnInit, ChangeDetectionStrategy, EventEmitter, Output, Input } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  EventEmitter,
+  Output,
+  Input,
+} from '@angular/core';
 
 @Component({
   selector: 'cr-submit-btn',
   templateUrl: './creation-submit-btn.atom.html',
   styleUrls: ['./creation-submit-btn.atom.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CreationSubmitBtnAtom implements OnInit {
-  @Output() onBtnClicked = new EventEmitter();
+  @Output() btnClicked = new EventEmitter();
   @Input() submitText = 'Publish';
   @Input() active = true;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

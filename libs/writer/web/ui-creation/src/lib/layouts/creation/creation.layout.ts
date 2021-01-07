@@ -1,3 +1,7 @@
+import {
+  BooksFacade,
+  CurrentUserFacade,
+} from '@awread/writer/web/feature-auth';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
@@ -7,7 +11,13 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreationLayout implements OnInit {
-  constructor() {}
+  constructor(
+    private currentUserFacade: CurrentUserFacade,
+    private booksFacade: BooksFacade
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.currentUserFacade.getCurrentUser().subscribe();
+    this.booksFacade.setBooksToStore().subscribe();
+  }
 }

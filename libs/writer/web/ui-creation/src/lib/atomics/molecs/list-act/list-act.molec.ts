@@ -1,25 +1,63 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
-import { faChartLine, faPlusCircle, faPlusSquare, faShareAlt, faTrash } from '@fortawesome/free-solid-svg-icons';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  Input,
+  Output,
+  EventEmitter,
+} from '@angular/core';
+import {
+  faChartLine,
+  faPlusCircle,
+  faPlusSquare,
+  faShareAlt,
+  faTrash,
+} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'list-act',
   templateUrl: './list-act.molec.html',
   styleUrls: ['./list-act.molec.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListActMolec implements OnInit {
+  @Output() addChapterEvent = new EventEmitter();
+  @Output() removeBookEvent = new EventEmitter();
+  @Output() editBookEvent = new EventEmitter();
+  @Output() updateBookStatusEvent = new EventEmitter();
+  @Input() bookId: string;
+  @Input() btns = [
+    {
+      titleButton: 'Publish',
+      faIcon: faChartLine,
+      type: 'PUSHLISHED',
+    },
+    {
+      titleButton: 'Draft',
+      faIcon: faShareAlt,
+      type: 'DRAFT',
+    },
+  ];
 
-  @Input() btns = [{
-    titleButton: 'Publish',
-    faIcon: faChartLine,
-  }, {
-    titleButton: 'Draft',
-    faIcon: faShareAlt,
-  }];
+  constructor() {}
 
-  constructor() { }
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
+  updateBookStatus(status: string) {
+    this.updateBookStatusEvent.emit({ bookId: this.bookId, type: status });
   }
 
+  bookActionEvent(type: string) {
+    switch (type) {
+      case 'new-chapter':
+        this.addChapterEvent.emit(this.bookId);
+        break;
+      case 'edit':
+        this.editBookEvent.emit(this.bookId);
+        break;
+      case 'delete':
+        this.removeBookEvent.emit(this.bookId);
+        break;
+    }
+  }
 }

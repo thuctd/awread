@@ -2,17 +2,31 @@
   <div class="col-span-2 md:col-span-12">
     <div class="py-4">
       <div class="w-36 mb-4">
-        <cr-social-btn></cr-social-btn>
+        <!-- <cr-social-btn></cr-social-btn> -->
+        <button
+          (click)="createNewChapterEvent.emit()"
+          class="text-sm md:text-xs lg:text-base xl:text-base w-full bg-green-400 text-white block cursor-pointer rounded-md focus:shadow-outline focus:outline-none p-2"
+        >
+          <span class="ml-2 text-xs text-white">
+            <fa-icon [icon]="faIcon"></fa-icon>
+          </span>
+          Thêm chương mới
+        </button>
       </div>
-      <div class="grid grid-cols-12 gap-2 pl-2 py-4 border-b border-gray-200">
+      <div
+        class="grid grid-cols-12 gap-2 pl-2 py-4 border-b border-gray-200"
+        *ngFor="let chapter of chapters"
+      >
         <div class="col-span-2 md:col-span-4">
-          <detail-part></detail-part>
+          <detail-part [chapter]="chapter"></detail-part>
         </div>
         <div class="col-span-2 md:col-span-4 justify-self-center">
           <detail-review></detail-review>
         </div>
         <div class="col-span-2 md:col-span-4 justify-self-center">
-          <detail-act></detail-act>
+          <detail-act
+            (chapterActionEvent)="chapterAction($event, chapter)"
+          ></detail-act>
         </div>
       </div>
     </div>

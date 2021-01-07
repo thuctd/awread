@@ -1,1 +1,11 @@
-<template-writing></template-writing>
+<h3>Chapter form value: {{chapterForm.value | json}}</h3>
+<template-writing
+  (chapterStatusEvent)="chapterStatusEvent($event)"
+  [chapterForm]="chapterForm"
+  [chapterStatus]="chapterStatus"
+></template-writing>
+<div>
+  <button (click)="chapterAction()">
+    {{(chapterId ? 'cập nhật' : 'thêm chương') | titlecase}}
+  </button>
+</div>

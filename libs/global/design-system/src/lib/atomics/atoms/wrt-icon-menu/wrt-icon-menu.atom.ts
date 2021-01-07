@@ -1,14 +1,21 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
-import { faAngleDown, faPlusCircle, faPlusSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  Input,
+} from '@angular/core';
+import {
+  faAngleDown,
+  faPlusCircle,
+  faPlusSquare,
+  faTrash,
+} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'wrt-icon-menu',
   templateUrl: './wrt-icon-menu.atom.html',
   styleUrls: ['./wrt-icon-menu.atom.scss'],
-  host: {
-    "(window:click)": "onClick()"
-  },
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WrtIconMenuAtom implements OnInit {
   @Input() faIcon = faAngleDown;
@@ -17,23 +24,22 @@ export class WrtIconMenuAtom implements OnInit {
     {
       name: 'new chapter',
       type: 'new-chapter',
-      icon: faPlusCircle
+      icon: faPlusCircle,
     },
     {
       name: 'edit',
       type: 'edit',
-      icon: faPlusSquare
+      icon: faPlusSquare,
     },
     {
       name: 'delete',
       type: 'delete',
-      icon: faTrash
-    }
+      icon: faTrash,
+    },
   ];
 
   isMenuOpen = false;
-  constructor() {
-  }
+  constructor() {}
   toggleMenu($event) {
     $event.stopPropagation();
     this.isMenuOpen = !this.isMenuOpen;
@@ -43,7 +49,5 @@ export class WrtIconMenuAtom implements OnInit {
     this.isMenuOpen = false;
   }
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

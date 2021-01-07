@@ -1,6 +1,16 @@
 <div class="mb-2 text-right">
-  <list-social-menu></list-social-menu>
+  <list-social-menu
+    (bookActionEvent)="bookActionEvent($event)"
+  ></list-social-menu>
 </div>
 <div class="flex justify-items-end justify-end">
-  <list-social-btn *ngFor="let btn of btns" [faIcon]="btn.faIcon" [titleButton]="btn.titleButton"></list-social-btn>
+  <!-- <list-social-btn *ngFor="let btn of btns" [faIcon]="btn.faIcon" [titleButton]="btn.titleButton"></list-social-btn> -->
+  <button
+    *ngFor="let btn of btns"
+    (click)="updateBookStatus(btn.type)"
+    class="text-sm ml-2 inline-block border border-solid border-gray-500 bg-white px-2 py-1 text-gray-700 rounded font-medium"
+  >
+    <fa-icon [icon]="btn.faIcon" class="mr-2"></fa-icon>
+    <span>{{btn.titleButton}}</span>
+  </button>
 </div>

@@ -30,16 +30,6 @@
               }
             ]
           }
-        ],
-        "no-empty-function": "off",
-        "@typescript-eslint/no-empty-function": [
-          "warn",
-          {
-            "allow": [
-              "methods",
-              "constructors"
-            ]
-          }
         ]
       }
     },
@@ -54,7 +44,11 @@
       "parserOptions": {
         "project": "./tsconfig.*?.json"
       },
-      "rules": {}
+      "rules": {
+        "@typescript-eslint/no-unused-vars": "off",
+        "@typescript-eslint/no-empty-function": "off",
+        "@typescript-eslint/no-explicit-any": "off"
+      }
     },
     {
       "files": [
@@ -71,12 +65,30 @@
         "*.ts"
       ],
       "extends": [
-        "plugin:@angular-eslint"
+        "plugin:@nrwl/nx/angular",
+        "plugin:@angular-eslint/template/process-inline-templates",
+        "plugin:@angular-eslint/recommended"
       ],
       "rules": {
-        "@angular-eslint/no-empty-lifecycle-method": "warning",
-        "@angular-eslint/component-class-suffix": "warning"
+        "@angular-eslint/directive-class-suffix": "off",
+        "@angular-eslint/contextual-lifecycle": "off",
+        "@angular-eslint/component-class-suffix": "off",
+        "@angular-eslint/directive-selector": "off",
+        "@angular-eslint/component-selector": "off",
+        "@angular-eslint/no-empty-lifecycle-method": "off"
+      },
+      "parserOptions": {
+        "project": "./tsconfig.*?.json"
       }
+    },
+    {
+      "files": [
+        "*.html"
+      ],
+      "extends": [
+        "plugin:@nrwl/nx/angular-template"
+      ],
+      "rules": {}
     }
   ]
 }

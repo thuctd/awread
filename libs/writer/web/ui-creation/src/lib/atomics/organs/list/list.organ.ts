@@ -1,29 +1,35 @@
-import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter, Input } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  Output,
+  EventEmitter,
+  Input,
+} from '@angular/core';
 
 @Component({
   selector: 'list',
   templateUrl: './list.organ.html',
   styleUrls: ['./list.organ.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListOrgan implements OnInit {
+  @Input() books;
   @Output() moreEvent = new EventEmitter();
-  @Input() btn = {
-    submitText: 'Đăng truyện',
-    isActive: true,
-  };
+  @Output() addChapterEvent = new EventEmitter();
+  @Output() removeBookEvent = new EventEmitter();
+  @Output() editBookEvent = new EventEmitter();
+  @Output() updateBookStatusEvent = new EventEmitter();
 
   demoNumber = 10;
 
   counter = Array;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   numberReturn(length) {
     return new Array(length);
   }
-
 }

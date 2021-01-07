@@ -1,6 +1,21 @@
 <div class="inline-block self-start">
-  <detail-title-part></detail-title-part>
+  <div class="text-base font-bold mb-1 text-gray-700">
+    {{ chapter.title | titlecase }}
+  </div>
+
+  <!-- <detail-title-part></detail-title-part> -->
   <div class="mb-1 whitespace-normal">
-    <detail-ud-part></detail-ud-part>
+    <div class="mb-1 whitespace-normal">
+      <span class="text-xs text-green-400">
+        {{ chapter.status | titlecase }}
+      </span>
+      -
+      <span class="pr-16 flex-no-wrap text-xs text-gray-700"
+        >Updated At {{ chapter.updatedat ? (chapter.updatedat | date:
+        'yyyy-MM-dd') : 'Unknown Date'}}
+      </span>
+    </div>
+
+    <!-- <detail-ud-part></detail-ud-part> -->
   </div>
 </div>
