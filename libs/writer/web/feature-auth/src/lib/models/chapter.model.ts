@@ -15,6 +15,16 @@ export interface Chapter {
   chapterNumber: number;
 }
 
-export function Chapter(params: Partial<Chapter>) {
-  return {} as Chapter;
+export function createChapterObject(params: Partial<Chapter>) {
+  return {
+    chapterid: params.chapterid,
+    bookid: params.bookid,
+    content: params.content ?? '',
+    title: params.title ?? '',
+    status: params.status ?? 'DRAFT',
+    createdat: params.createdat ?? new Date(),
+    updatedat: params.updatedat ?? new Date(),
+    publishedat: params.publishedat ?? new Date(),
+    chapterNumber: params.chapterNumber ?? 0,
+  } as Chapter;
 }

@@ -1,4 +1,4 @@
-import { Chapter } from './../models/chapter.model';
+import { Chapter, createChapterObject } from './../models/chapter.model';
 import { tap, retry } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
@@ -90,17 +90,7 @@ export class ChaptersApi {
           }
         }
       `,
-      // TODO: dung Chapter(chapter) trong ../model de tao chapter moi thay vi khoi tao object nay
-      variables: {
-        chapterid: chapter.chapterid,
-        bookid: chapter.bookid,
-        content: chapter.content ?? '',
-        title: chapter.title ?? '',
-        createdat: chapter.createdat ?? new Date(),
-        updatedat: chapter.updatedat ?? new Date(),
-        status: chapter.status ?? 'DRAFT',
-      },
-      // TODO: end
+      variables: createChapterObject(chapter),
     });
   }
 
@@ -132,13 +122,7 @@ export class ChaptersApi {
         }
       `,
       // TODO: dung Chapter(chapter) trong ../model de tao chapter moi thay vi khoi tao object nay
-      variables: {
-        chapterid: chapter.chapterid,
-        content: chapter.content ?? '',
-        title: chapter.title ?? '',
-        updatedat: chapter.updatedat ?? new Date(),
-        status: chapter.status ?? 'DRAFT',
-      },
+      variables: createChapterObject(chapter),
     });
   }
 

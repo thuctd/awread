@@ -54,7 +54,7 @@ export class ChaptersGear {
   createChapter(chapter) {
     const chapterid = this.firebaseFirestoreAddon.createId();
     const chapterDetail = { ...chapter, chapterid };
-    return this.chaptersApi.createChapter(chapter).pipe(
+    return this.chaptersApi.createChapter(chapterDetail).pipe(
       tap((res) => {
         console.log('createChapter res: ', res);
         if (res['data'] && res['data']['createChapter']['chapter']) {

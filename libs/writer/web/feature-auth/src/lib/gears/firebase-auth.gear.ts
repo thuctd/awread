@@ -7,6 +7,7 @@ import firebase from 'firebase';
 import { AuthApi } from '../apis';
 import { forkJoin, of } from 'rxjs';
 import { tap, catchError, retry } from 'rxjs/operators';
+import { createUserFirebase, FirebaseUser } from '../models';
 
 @Injectable({ providedIn: 'root' })
 export class FirebaseAuthGear {
@@ -78,13 +79,13 @@ export class FirebaseAuthGear {
     }
   }
 
-  createAccountOnServer(user) {
-    // send data to server
-    this.authApi.createAccountOnServer(user).subscribe((status) => {
-      console.log('status new user', status);
-      // this.actionAfterCreateAccountSuccess();
-    });
-  }
+  // createAccountOnServer(user) {
+  //   // send data to server
+  //   this.authApi.createAccountOnServer(user).subscribe((status) => {
+  //     console.log('status new user', status);
+  //     // this.actionAfterCreateAccountSuccess();
+  //   });
+  // }
 
   async linkAccountWithProviderFacebook(err) {
     if (
@@ -147,12 +148,13 @@ export class FirebaseAuthGear {
     );
     linkedProvider.setCustomParameters({ login_hint: err.email });
 
-    const result = await firebase.auth().signInWithPopup(linkedProvider);
+    const result: any = await firebase.auth().signInWithPopup(linkedProvider);
     console.log('result', result);
     try {
       await result.user.linkWithCredential(err.credential);
+      const newUser: Partial<FirebaseUser> = result.user;
       // check trường hợp google/facebook ghi đè account thì phải link lại provider password (account email/pw)
-      const user = this.firebaseAuthSocialAddon.createUserObject(result.user);
+      const user = createUserFirebase(newUser);
       this.shouldLinkProviderPassword(user, result.user);
     } catch (error) {
       alert('Login với facebook bị lỗi!');

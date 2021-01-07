@@ -19,6 +19,19 @@ export interface Book {
   updatedat: Date;
 }
 
-export function Book(params: Partial<Book>) {
-  return {} as Book;
+export function createBookObject(params: Partial<Book>) {
+  return {
+    bookid: params.bookid,
+    userid: params.userid,
+    title: params.title ?? '',
+    img: params.img ?? '',
+    description: params.description ?? '',
+    completed: params.completed ?? '',
+    status: params.status ?? 'DRAFT',
+    isdeleted: params.isdeleted ?? false,
+    tags: params.tags ?? '',
+    createdat: params.createdat ?? new Date(),
+    publishedat: params.publishedat ?? new Date(),
+    updatedat: params.updatedat ?? new Date(),
+  } as Book;
 }

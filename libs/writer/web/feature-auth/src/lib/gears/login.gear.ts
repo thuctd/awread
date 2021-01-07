@@ -1,7 +1,12 @@
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { FirebaseAuthAddon, FirebaseAuthSocialAddon } from '../addons';
-import { EmailLoginCredential, ProviderType } from '../models';
+import {
+  createUserFirebase,
+  EmailLoginCredential,
+  FirebaseUser,
+  ProviderType,
+} from '../models';
 import firebase from 'firebase/app';
 import { AuthApi } from '../apis';
 import { AuthRoutingGear } from './auth-routing.gear';
@@ -58,11 +63,13 @@ export class LoginGear {
         break;
       case ProviderType.facebook:
         try {
-          const userCredential = await this.firebaseAuthAddon.loginWithFacebook();
-          const user = this.firebaseAuthSocialAddon.createUserObject({
+          const userCredential: any = await this.firebaseAuthAddon.loginWithFacebook();
+          const newUser: Partial<FirebaseUser> = {
             ...userCredential.user,
             provider: 'facebook',
-          });
+          };
+          // check trường hợp google/facebook ghi đè account thì phải link lại provider password (account email/pw)
+          const user = createUserFirebase(newUser);
           this.checkMustNewUserWhenLoginFaceBook(user);
         } catch (err) {
           this.firebaseAuthGear.linkAccountWithProviderFacebook(err);
@@ -70,11 +77,12 @@ export class LoginGear {
         break;
       case ProviderType.google:
         try {
-          const userCredential = await this.firebaseAuthAddon.loginWithGoogle();
-          const user = this.firebaseAuthSocialAddon.createUserObject({
+          const userCredential: any = await this.firebaseAuthAddon.loginWithGoogle();
+          const newUser: Partial<FirebaseUser> = {
             ...userCredential.user,
             provider: 'google',
-          });
+          };
+          const user = createUserFirebase(newUser);
           // vì google ghi đè lên tất cả tài khoản cùng email đã tạo trước đó,
           // nên phải check lại TH đã tạo email/password trước đó,
           // nếu đúng thì link lại với account google
