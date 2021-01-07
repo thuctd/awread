@@ -1,1 +1,14 @@
-<p>home-detail-book-featured works!</p>
+<section>
+    <div class="mb-4">
+        <title-item [title]='titlePage'></title-item>
+    </div>
+    <div class="grid grid-cols-12 gap-4 place-items-center mb-4">
+        <div *ngFor='let loop3 of counter(6);' class="col-span-2 md:col-span-4">
+            <atom-img-m [isSize]='size'></atom-img-m>
+            <home-info-book-featured></home-info-book-featured>
+        </div>
+    </div>
+    <div class="flex justify-center items-center">
+        <pagination></pagination>
+    </div>
+</section>

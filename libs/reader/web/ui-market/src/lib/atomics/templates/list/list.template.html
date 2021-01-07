@@ -6,6 +6,9 @@
       <list-detail-short-book *ngIf="tabHead.currentTab.name === 'Truyện ngắn'"></list-detail-short-book>
       <list-detail-prose *ngIf="tabHead.currentTab.name === 'Tiểu thuyết'"></list-detail-prose>
     </div>
-    <div class="col-span-2 md:col-span-4"></div>
+    <div class="col-span-2 md:col-span-4">
+      <list-detail-top-book [ngClass]="(tabHead.currentTab.name === 'Tiểu thuyết')?'pt-8':'pt-36'">
+      </list-detail-top-book>
+    </div>
   </div>
 </section>

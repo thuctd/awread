@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'molec-list-info-top-book',
+  selector: 'list-info-top-book',
   templateUrl: './list-info-top-book.molec.html',
   styleUrls: ['./list-info-top-book.molec.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
