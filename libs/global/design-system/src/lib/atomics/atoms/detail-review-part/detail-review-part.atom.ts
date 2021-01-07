@@ -1,11 +1,16 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  Input,
+} from '@angular/core';
 import { faEye, faComments, faStar } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'detail-review-part',
   templateUrl: './detail-review-part.atom.html',
   styleUrls: ['./detail-review-part.atom.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DetailReviewPartAtom implements OnInit {
   @Input() faIconEye = faEye;
@@ -14,9 +19,7 @@ export class DetailReviewPartAtom implements OnInit {
   @Input() chapterCountView = '696969k';
   @Input() chapterCountComments = '2020-12-16';
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

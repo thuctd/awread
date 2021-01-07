@@ -82,7 +82,8 @@
       ],
       "@awread/reader/web/feature-market": [
         "libs/reader/web/feature-market/src/index.ts"
-      ]
+      ],
+      "@awread/global/powers": ["libs/global/powers/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

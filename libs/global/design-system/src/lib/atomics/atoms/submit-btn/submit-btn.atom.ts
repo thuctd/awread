@@ -14,7 +14,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SubmitBtnAtom implements OnInit {
-  @Output() onBtnClicked = new EventEmitter();
+  @Output() btnClicked = new EventEmitter();
   @Input() name = 'Đăng nhập';
   @Input() active = false;
   constructor() {}

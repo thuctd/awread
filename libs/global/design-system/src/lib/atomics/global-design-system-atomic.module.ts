@@ -61,6 +61,11 @@ import { LogoNolinkAtom } from './atoms/logo-nolink/logo-nolink.atom';
 import { AuthBgMobileAtom } from './atoms/auth-bg-mobile/auth-bg-mobile.atom';
 import { BarSeperateAtom } from './atoms/bar-seperate/bar-seperate.atom';
 import { ExampleDialogAtom } from './atoms/example-dialog/example-dialog.atom';
+import { DefaultCoverAtom } from './atoms/default-cover/default-cover.atom';
+import {
+  DefaultCoverModule,
+  CloseOnOutsideModule,
+} from '@awread/global/packages';
 
 @NgModule({
   imports: [
@@ -68,8 +73,11 @@ import { ExampleDialogAtom } from './atoms/example-dialog/example-dialog.atom';
     StorybookSupportModule,
     MatDialogModule,
     QuillModule.forRoot(),
+    DefaultCoverModule,
+    CloseOnOutsideModule,
   ],
   exports: [
+    CloseOnOutsideModule,
     TabBtnAtom,
     LogoAtom,
     InputFormAtom,
@@ -128,6 +136,7 @@ import { ExampleDialogAtom } from './atoms/example-dialog/example-dialog.atom';
     AuthBgMobileAtom,
     BarSeperateAtom,
     ExampleDialogAtom,
+    DefaultCoverAtom,
   ],
   declarations: [
     TabBtnAtom,
@@ -192,6 +201,7 @@ import { ExampleDialogAtom } from './atoms/example-dialog/example-dialog.atom';
     AuthBgMobileAtom,
     BarSeperateAtom,
     ExampleDialogAtom,
+    DefaultCoverAtom,
   ],
 })
 export class GlobalDesignSystemAtomicModule {}

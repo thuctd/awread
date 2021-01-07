@@ -2105,6 +2105,33 @@
           }
         }
       }
+    },
+    "global-powers": {
+      "projectType": "library",
+      "root": "libs/global/powers",
+      "sourceRoot": "libs/global/powers/src",
+      "prefix": "awread",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/global/powers/src/**/*.ts",
+              "libs/global/powers/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/global/powers"
+          ],
+          "options": {
+            "jestConfig": "libs/global/powers/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   },
   "cli": {

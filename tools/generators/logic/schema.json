@@ -28,10 +28,9 @@
                 "index": 1
             }
         },
-        "export": {
-            "type": "boolean",
-            "description": "export in the module to reuse other place",
-            "default": true
+        "directory": {
+            "type": "string",
+            "description": "parent folder name"
         }
     },
     "required": [

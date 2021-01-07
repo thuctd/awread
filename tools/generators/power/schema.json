@@ -1,0 +1,18 @@
+{
+    "$schema": "http://json-schema.org/schema",
+    "id": "power",
+    "type": "object",
+    "properties": {
+        "list": {
+            "type": "string",
+            "description": "list of name, separate by comma (,) for example: submit-btn,input-form",
+            "$default": {
+                "$source": "argv",
+                "index": 0
+            }
+        }
+    },
+    "required": [
+        "list"
+    ]
+}

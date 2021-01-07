@@ -3,14 +3,14 @@ import { GlobalDesignSystemAtomicModule } from '../../global-design-system-atomi
 import { action } from '@storybook/addon-actions';
 export default {
   title: 'Design System/Atoms/Submit Btn',
-}
+};
 
 export const primary = () => ({
   moduleMetadata: {
-    imports: [GlobalDesignSystemAtomicModule]
+    imports: [GlobalDesignSystemAtomicModule],
   },
   component: SubmitBtnAtom,
   props: {
-    onBtnClicked: action('submitEvent')
-  }
-})
+    btnClicked: action('submitEvent'),
+  },
+});

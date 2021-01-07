@@ -1,17 +1,28 @@
 <div class="pt-12">
+  <div class="text-center">
+    <a [routerLink]="['/detail']" routerLinkActive="router-link-active"
+      >Đăng truyện</a
+    >
+  </div>
   <div class="mb-2">
     <list-head></list-head>
   </div>
   <infinite-scroll #infiniteScroll (scrolled)="moreEvent.next()">
-    <div *ngFor='let loop3 of counter(20) ;' class="grid grid-cols-12 gap-6">
+    <div *ngFor="let book of books ;" class="grid grid-cols-12 gap-6">
       <div class="col-span-2 md:col-span-4">
-        <list-stories></list-stories>
+        <list-stories [book]="book"></list-stories>
       </div>
       <div class="col-span-2 md:col-span-4 text-center">
-        <list-chapter></list-chapter>
+        <list-chapter [book]="book"></list-chapter>
       </div>
       <div class="col-span-2 md:col-span-4">
-        <list-act></list-act>
+        <list-act
+          [bookId]="book.bookid"
+          (updateBookStatusEvent)="updateBookStatusEvent.emit($event)"
+          (addChapterEvent)="addChapterEvent.emit($event)"
+          (editBookEvent)="editBookEvent.emit($event)"
+          (removeBookEvent)="removeBookEvent.emit($event)"
+        ></list-act>
       </div>
     </div>
   </infinite-scroll>

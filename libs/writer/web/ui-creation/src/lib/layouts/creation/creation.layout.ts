@@ -1,3 +1,5 @@
+import { BooksFacade } from './../../../../../feature-auth/src/lib/facades/books.facade';
+import { CurrentUserFacade } from './../../../../../feature-auth/src/lib/facades/current-user.facade';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
@@ -7,7 +9,13 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreationLayout implements OnInit {
-  constructor() {}
+  constructor(
+    private currentUserFacade: CurrentUserFacade,
+    private booksFacade: BooksFacade
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.currentUserFacade.getCurrentUser().subscribe();
+    this.booksFacade.setBooksToStore().subscribe();
+  }
 }

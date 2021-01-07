@@ -1,3 +1,5 @@
+export * from './chapters.gear';
+export * from './books.gear';
 export * from './firebase-auth.gear';
 export * from './auth-routing.gear';
 export * from './current-user.gear'

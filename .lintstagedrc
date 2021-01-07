@@ -1,0 +1,7 @@
+{
+  "./{apps,libs}/**/*.{ts,html,scss}": [
+      "npx prettier --write",
+      "npx eslint",
+      "git add"
+    ]
+}

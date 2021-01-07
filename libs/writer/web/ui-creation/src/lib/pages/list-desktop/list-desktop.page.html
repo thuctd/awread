@@ -1,1 +1,10 @@
-<template-list></template-list>
+<div>
+  <a [routerLink]="['/detail']" routerLinkActive="router-link-active"></a>
+</div>
+<template-list
+  [books]="bookList$ | async"
+  (updateBookStatusEvent)="updateBookStatus($event)"
+  (addChapterEvent)="addChapter($event)"
+  (editBookEvent)="editBook($event)"
+  (removeBookEvent)="removeBook($event)"
+></template-list>

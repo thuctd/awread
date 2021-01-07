@@ -2,20 +2,42 @@ import { chain, noop, Rule, SchematicContext, Tree, schematic } from '@angular-d
 import { strings } from '@angular-devkit/core';
 import * as pluralize from 'pluralize';
 import { exportToFileIndex, exportToLibIndex } from '../../utility/export-to-index';
-import { guessProject, guessProjectToSchema } from '../../utility/guess-workspace';
+import { getLastFolder, guessProject, guessProjectToSchema } from '../../utility/guess-workspace';
 
 export default function (schema: any): Rule {
     return async (tree: Tree, context: SchematicContext) => {
         schema = await guessProjectToSchema(tree, schema, context);
-        const generatePath = `${schema.projectRoot}/lib`;
+        const generatePath = getGeneratePath(schema);
         const parts = schema.list.length ? schema.list.split(',') : [];
         const generateActions = parts.map(name => fileAction(strings.dasherize(schema.type), strings.dasherize(name), generatePath))
 
         return chain([
             ...generateActions,
-            ['model', 'facade', 'interface'].includes(schema.type) ? exportToLibIndex(schema.projectType, schema.projectRoot, `export * from './lib/${schema.type}s/index'`) : noop()
+            exportToParentIndex(schema)
         ])
     }
+}
+
+function getGeneratePath(schema) {
+    if (schema.project === 'global-powers') {
+        if (!schema.directory) {
+            schema.directory = getLastFolder();
+        }
+        return `${schema.projectRoot}/lib/${schema.directory}`;
+    }
+    return `${schema.projectRoot}/lib`;
+}
+
+function exportToParentIndex(schema) {
+    let exportString = `export * from './lib/${schema.type}s/index'`;
+    let exportTo = schema.projectRoot;
+    if (schema.directory) {
+        exportString = `export * from './${schema.type}s/index'`;
+        exportTo = schema.projectRoot + `/lib/${schema.directory}`;
+    }
+    return ['model', 'facade', 'interface'].includes(schema.type) ?
+        exportToLibIndex(schema.projectType, exportTo, exportString, true) :
+        noop()
 }
 
 export function fileAction(type, name, generatePath) {

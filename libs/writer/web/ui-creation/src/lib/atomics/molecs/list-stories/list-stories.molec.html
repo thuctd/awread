@@ -4,12 +4,36 @@
   </div>
   <div class="col-span-7">
     <div class="self-start">
-      <list-title-book></list-title-book>
-      <list-type-book></list-type-book>
-      <list-rating-book></list-rating-book>
+      <div class="text-sm md:text-base font-bold mb-1 truncate text-gray-600">
+        {{ book.title }}
+      </div>
+      <div
+        *ngIf="book.categoryByCategoryid.name;else noCategory"
+        class="text-xs font-medium text-green-500"
+      >
+        {{ book.categoryByCategoryid.name | titlecase }}
+      </div>
+      <ng-template #noCategory>
+        <div class="text-xs font-medium text-green-500">-</div>
+      </ng-template>
+      <div class="text-green-400">
+        <fa-icon [icon]="faIcon" class="mr-1"></fa-icon>
+        <fa-icon [icon]="faIcon" class="mr-1"></fa-icon>
+        <fa-icon [icon]="faIcon" class="mr-1"></fa-icon>
+        <fa-icon [icon]="faIcon" class="mr-1"></fa-icon>
+        <fa-icon [icon]="faIcon" class="mr-1"></fa-icon>
+      </div>
+
+      <!-- <list-title-book></list-title-book> -->
+      <!-- <list-type-book></list-type-book> -->
+      <!-- <list-rating-book></list-rating-book> -->
     </div>
     <div class="self-start mt-2">
-      <list-review-book [countView] = "countView" [countPositive] = "countPositive" [countNegative] = "countNegative"></list-review-book>
+      <list-review-book
+        [countView]="countView"
+        [countPositive]="countPositive"
+        [countNegative]="countNegative"
+      ></list-review-book>
     </div>
   </div>
 </div>
