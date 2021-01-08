@@ -4,7 +4,6 @@
             <atom-nav-link class="px-2" [title]="item.title" [href]="item.href">
                 <fa-icon *ngIf="item.dropdown" class="text-grey-300 text-xs ml-1" [icon]="icon"></fa-icon>
             </atom-nav-link>
-
             <molec-rd-dropdown-menu *ngIf="item.dropdown" [dropdownData]="item.dropdown"></molec-rd-dropdown-menu>
         </li>
     </ng-container>

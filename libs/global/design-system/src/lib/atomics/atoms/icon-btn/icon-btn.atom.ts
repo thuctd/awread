@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'atom-icon-btn',
@@ -7,8 +8,8 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class IconBtnAtom implements OnInit {
-  @Input() icon;
-  @Input() value;
+  @Input() icon = faThumbsUp;
+  @Input() value = '999';
   @Output() submitEvent = new EventEmitter();
   constructor() { }
 

@@ -21,6 +21,8 @@ import { HomeInfoBookUpdateMolec } from './molecs/home-info-book-update/home-inf
 import { HomeDetailBookFeaturedOrgan } from './organs/home-detail-book-featured/home-detail-book-featured.organ';
 import { HomeDetailBookReviewOrgan } from './organs/home-detail-book-review/home-detail-book-review.organ';
 import { HomeDetailBookUpdateOrgan } from './organs/home-detail-book-update/home-detail-book-update.organ';
+import { ReviewItemMolec } from './molecs/review-item/review-item.molec';
+import { ChapterItemMolec } from './molecs/chapter-item/chapter-item.molec';
 
 @NgModule({
   imports: [CommonModule, StorybookSupportModule, GlobalDesignSystemAtomicModule],
@@ -44,7 +46,9 @@ import { HomeDetailBookUpdateOrgan } from './organs/home-detail-book-update/home
     HomeInfoBookUpdateMolec, 
     HomeDetailBookFeaturedOrgan, 
     HomeDetailBookReviewOrgan, 
-    HomeDetailBookUpdateOrgan],
+    ReviewItemMolec,
+    HomeDetailBookUpdateOrgan,
+    ChapterItemMolec],
   declarations: [
     TabCategoryMolec, 
     TabBookMolec, 
@@ -65,7 +69,9 @@ import { HomeDetailBookUpdateOrgan } from './organs/home-detail-book-update/home
     HomeInfoBookUpdateMolec, 
     HomeDetailBookFeaturedOrgan, 
     HomeDetailBookReviewOrgan, 
-    HomeDetailBookUpdateOrgan
+    HomeDetailBookUpdateOrgan,
+    ReviewItemMolec,
+    ChapterItemMolec
   ]
 })
 export class ReaderWebUiMarketAtomicModule { }

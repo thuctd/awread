@@ -92,11 +92,12 @@ import { DetailTitleAtom } from './atoms/detail-title/detail-title.atom';
 import { DetailImageAtom } from './atoms/detail-image/detail-image.atom';
 import { IconTextButtonAtom } from './atoms/icon-text-button/icon-text-button.atom';
 import { LabelUnderlineAtom } from './atoms/label-underline/label-underline.atom';
-import { ChapterItemAtom } from './atoms/chapter-item/chapter-item.atom';
 import { IconBtnAtom } from './atoms/icon-btn/icon-btn.atom';
 import { ReviewActionAtom } from './atoms/review-action/review-action.atom';
 import { ReviewInputAtom } from './atoms/review-input/review-input.atom';
 import { SearchBtnAtom } from './atoms/search-btn/search-btn.atom';
+import { ChapterTitleAtom } from './atoms/chapter-title/chapter-title.atom';
+import { ChapterPriceAtom } from './atoms/chapter-price/chapter-price.atom';
 
 @NgModule({
   imports: [
@@ -194,11 +195,12 @@ import { SearchBtnAtom } from './atoms/search-btn/search-btn.atom';
     DetailImageAtom,
     IconTextButtonAtom,
     LabelUnderlineAtom,
-    ChapterItemAtom,
     IconBtnAtom,
     ReviewActionAtom,
     ReviewInputAtom,
     SearchBtnAtom,
+    ChapterTitleAtom,
+    ChapterPriceAtom,
     
   ],
   declarations: [
@@ -291,11 +293,12 @@ import { SearchBtnAtom } from './atoms/search-btn/search-btn.atom';
     DetailImageAtom,
     IconTextButtonAtom,
     LabelUnderlineAtom,
-    ChapterItemAtom,
     IconBtnAtom,
     ReviewActionAtom,
     ReviewInputAtom,
     SearchBtnAtom,
+    ChapterTitleAtom,
+    ChapterPriceAtom,
   ],
 })
 export class GlobalDesignSystemAtomicModule {}
