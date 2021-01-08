@@ -121,7 +121,6 @@ export class ChaptersApi {
           }
         }
       `,
-      // TODO: dung Chapter(chapter) trong ../model de tao chapter moi thay vi khoi tao object nay
       variables: createChapterObject(chapter),
     });
   }

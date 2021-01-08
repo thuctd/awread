@@ -125,6 +125,7 @@ export class AuthApi {
           }
         }
       `,
+      // TODO: không gán trực tiếp trong variable như này, refactor sử dụng function ở current-user model (ví dụ hàm newUser )
       variables: {
         email: user.email ?? null,
         fullname: user.displayName ?? null,

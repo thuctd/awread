@@ -178,7 +178,6 @@ export class BooksApi {
           }
         }
       `,
-      // TODO: dung Book(Book) trong ../model de tao book moi thay vi khoi tao object nay
       variables: createBookObject(book),
     });
   }
@@ -214,7 +213,6 @@ export class BooksApi {
           }
         }
       `,
-      // TODO: dung Book(Book) trong ../model de tao book moi thay vi khoi tao object nay
       variables: createBookObject(book),
     });
   }
