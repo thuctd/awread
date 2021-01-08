@@ -1,5 +1,5 @@
 <section>
-  <input (keyup.enter)="searchEvent.emit(control.value)" class="text-xs lg:text-sm border-0 border-none bg-green-100 text-gray-800 p-2 sm:p-2 leading-none w-64 rounded-lg rounded-r-none focus:outline-none relative" type="text" name="email-address"  [id]="id" type="text" [formControl]="control" [placeholder]="placeholder">
+  <input (keyup.enter)="searchEvent.emit(control.value)" class="text-xs lg:text-sm border-0 border-none bg-green-100 text-gray-800 p-2 sm:p-2 leading-none w-64 rounded-lg rounded-r-none focus:outline-none relative" type="text" [id]="id" type="text" [formControl]="control" [placeholder]="placeholder">
   <button class="text-center border-0 border-none bg-green-400 hover:bg-green-600 text-white cursor-pointer sm:px-2 py-1 rounded-lg rounded-l-none focus:outline-none absolute" type="submit" (click)="searchEvent.emit(control.value)">
     <fa-icon [icon]="faIcon" class="text-xl"></fa-icon>
   </button>

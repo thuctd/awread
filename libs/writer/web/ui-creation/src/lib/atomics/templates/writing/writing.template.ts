@@ -17,7 +17,7 @@ import {
 export class WritingTemplate implements OnInit {
   @Input() chapterForm: FormGroup;
   @Input() chapterStatus: string;
-  @Output() chapterStatusEvent = new EventEmitter();
+  @Output() changeChapterStatusEvent = new EventEmitter();
   constructor() {}
 
   ngOnInit(): void {}

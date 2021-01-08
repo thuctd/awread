@@ -16,7 +16,12 @@ import { faLock, faEnvelope, faUser } from '@fortawesome/free-solid-svg-icons';
 export class RegisterFormMolec implements OnInit {
   @Input() type = 'password';
   icons = { faLock, faEnvelope, faUser };
-  @Input() form: FormGroup;
+  @Input() form: FormGroup = this.fb.group({
+    displayName: ['', [Validators.required]],
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required]],
+    confirmPassword: ['', [Validators.required]],
+  });
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {}

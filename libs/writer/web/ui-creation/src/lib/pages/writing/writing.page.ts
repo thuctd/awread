@@ -1,4 +1,4 @@
-import { tap } from 'rxjs/operators';
+import { tap, switchMap } from 'rxjs/operators';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ChaptersFacade, BooksFacade } from '@awread/writer/web/feature-auth';
 import { ActivatedRoute } from '@angular/router';
@@ -18,6 +18,7 @@ export class WritingPage implements OnInit {
   chapterForm: FormGroup;
   bookId: string;
   chapterStatus = 'DRAFT';
+  chapterNumber: any;
   constructor(
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
@@ -29,6 +30,7 @@ export class WritingPage implements OnInit {
   ngOnInit(): void {
     this.chapterId = this.activatedRoute.snapshot.params['chapterId'];
     this.bookId = this.activatedRoute.snapshot.params['bookId'];
+    this.chapterNumber = this.activatedRoute.snapshot.params['chapterNumber'];
     this.initForm();
     this.updateForm();
   }
@@ -47,6 +49,7 @@ export class WritingPage implements OnInit {
         ...this.chapterForm.value,
         chapterid: this.chapterId,
         bookid: this.bookId,
+        updatedat: new Date(),
       })
       .subscribe();
   }
@@ -54,14 +57,19 @@ export class WritingPage implements OnInit {
   private createChapter() {
     if (this.bookId) {
       this.chaptersFacade
-        .createChapter({ ...this.chapterForm.value, bookid: this.bookId })
+        .createChapter({
+          ...this.chapterForm.value,
+          bookid: this.bookId,
+          createdat: new Date(),
+          updatedat: new Date(),
+        })
         .subscribe();
     } else {
       alert('create chapter loi nhe babe, chon sach di!');
     }
   }
 
-  chapterStatusEvent(type: string) {
+  changeChapterStatusEvent(type: string) {
     this.chapterForm.patchValue({ status: type });
   }
 
@@ -78,34 +86,40 @@ export class WritingPage implements OnInit {
 
   private updateForm() {
     if (this.chapterId) {
-      console.log('bookid active: ', this.bookId);
-      this.chaptersFacade
-        .getChapterDetail(this.chapterId, this.bookId)
-        .valueChanges.pipe(
-          tap((res) => {
-            console.log('get chapter detail result: ', res);
-            if (res['data'] && res['data']['allChapters']['nodes'].length) {
-              const chapter = res['data']['allChapters']['nodes'][0];
-              this.patchValueForm(chapter);
-            }
-          })
-        )
-        .subscribe();
+      // edit chapter
+      this.updateFormChapterDetail();
     } else {
-      this.booksFacade.selectEntityBook(this.bookId).subscribe((book) => {
-        if (book) {
-          this.chapterForm.patchValue({
-            bookTitle: book.title ?? '',
-            chapterNumber: book['chaptersByBookid']?.totalCount + 1 ?? '',
-          });
-          this.cd.detectChanges();
-        }
-      });
+      // adđ chapter
+      this.updateFormChapterCreate();
     }
   }
 
-  private patchValueForm(chapter) {
-    const chapterNumber = this.activatedRoute.snapshot.params['chapterNumber'];
+  private updateFormChapterCreate() {
+    this.booksFacade.selectEntityBook(this.bookId).subscribe((book) => {
+      if (book) {
+        this.chapterForm.patchValue({
+          bookTitle: book.title ?? '',
+          chapterNumber: this.chapterNumber ?? '',
+        });
+      }
+    });
+  }
+  private updateFormChapterDetail() {
+    this.activatedRoute.paramMap
+      .pipe(
+        switchMap((params) => {
+          return this.chaptersFacade.getChapterDetail(
+            params.get('chapterId'),
+            params.get('bookId')
+          );
+        })
+      )
+      .subscribe((chapters) => {
+        this.patchValueFormChapter(chapters[0]);
+      });
+  }
+
+  private patchValueFormChapter(chapter) {
     this.chapterStatus = chapter.status ?? 'DRAFT';
     this.chapterForm.patchValue({
       title: chapter.title ?? '',
@@ -113,7 +127,7 @@ export class WritingPage implements OnInit {
       status: chapter.status ?? 'DRAFT',
       bookTitle: chapter['bookByBookid']['title'] ?? '',
       // bookId: chapter['bookByBookid']['bookid'] ?? '',
-      chapterNumber: chapterNumber ?? '',
+      chapterNumber: this.chapterNumber ?? '',
     });
     this.cd.detectChanges();
   }

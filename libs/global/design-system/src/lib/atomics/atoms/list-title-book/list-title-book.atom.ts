@@ -8,6 +8,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 })
 export class ListTitleBookAtom implements OnInit {
   @Input() titleBoook = 'Cô gái chúng ta cùng theo đuổi năm nào!'
+  @Input() isSize = true;
 
   constructor() { }
 
