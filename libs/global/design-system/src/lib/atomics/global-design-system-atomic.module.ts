@@ -82,7 +82,6 @@ import {
 } from '@awread/global/packages';
 import { NavLinkAtom } from './atoms/nav-link/nav-link.atom';
 import { DropdownLinkAtom } from './atoms/dropdown-link/dropdown-link.atom';
-import { OutlineButtonAtom } from './atoms/outline-button/outline-button.atom';
 import { BreadcrumbTextAtom } from './atoms/breadcrumb-text/breadcrumb-text.atom';
 import { BreadcrumbLinkAtom } from './atoms/breadcrumb-link/breadcrumb-link.atom';
 import { IconTextAtom } from './atoms/icon-text/icon-text.atom';
@@ -98,6 +97,9 @@ import { ReviewInputAtom } from './atoms/review-input/review-input.atom';
 import { SearchBtnAtom } from './atoms/search-btn/search-btn.atom';
 import { ChapterTitleAtom } from './atoms/chapter-title/chapter-title.atom';
 import { ChapterPriceAtom } from './atoms/chapter-price/chapter-price.atom';
+import { NavbarAuthBtnAtom } from './atoms/navbar-auth-btn/navbar-auth-btn.atom';
+import { NavbarBtnLoggedAtom } from './atoms/navbar-btn-logged/navbar-btn-logged.atom';
+import { CircleImageAtom } from './atoms/circle-image/circle-image.atom';
 
 @NgModule({
   imports: [
@@ -185,7 +187,6 @@ import { ChapterPriceAtom } from './atoms/chapter-price/chapter-price.atom';
     DefaultCoverAtom,
     NavLinkAtom,
     DropdownLinkAtom,
-    OutlineButtonAtom,
     BreadcrumbTextAtom,
     BreadcrumbLinkAtom,
     IconTextAtom,
@@ -201,6 +202,9 @@ import { ChapterPriceAtom } from './atoms/chapter-price/chapter-price.atom';
     SearchBtnAtom,
     ChapterTitleAtom,
     ChapterPriceAtom,
+    NavbarAuthBtnAtom,
+    NavbarBtnLoggedAtom,
+    CircleImageAtom,
     
   ],
   declarations: [
@@ -283,7 +287,6 @@ import { ChapterPriceAtom } from './atoms/chapter-price/chapter-price.atom';
     DefaultCoverAtom,
     NavLinkAtom,
     DropdownLinkAtom,
-    OutlineButtonAtom,
     BreadcrumbTextAtom,
     BreadcrumbLinkAtom,
     IconTextAtom,
@@ -299,6 +302,9 @@ import { ChapterPriceAtom } from './atoms/chapter-price/chapter-price.atom';
     SearchBtnAtom,
     ChapterTitleAtom,
     ChapterPriceAtom,
+    NavbarAuthBtnAtom,
+    NavbarBtnLoggedAtom,
+    CircleImageAtom,
   ],
 })
 export class GlobalDesignSystemAtomicModule {}
