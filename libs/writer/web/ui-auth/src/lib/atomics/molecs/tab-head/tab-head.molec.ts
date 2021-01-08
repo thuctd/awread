@@ -19,7 +19,7 @@ export class TabHeadMolec implements OnInit {
   @Input() tabs: TabHead[];
   @Input() selectedTab: string;
   @Output() toggleTab = new EventEmitter();
-  // currentTab = { name: null, isActive: false };
+  currentTab = { name: null, isActive: false };
   constructor(private router: Router) {}
 
   ngOnInit(): void {

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StorybookSupportModule } from '../storybook-support.module';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { AuthBgAtom } from './atoms/auth-bg/auth-bg.atom';
 import { CheckBtnAtom } from './atoms/check-btn/check-btn.atom';
@@ -53,7 +54,13 @@ import { CreationSubmitBtnAtom } from './atoms/creation-submit-btn/creation-subm
 import { CreationSocialBtnAtom } from './atoms/creation-social-btn/creation-social-btn.atom';
 import { QuillModule } from 'ngx-quill';
 import { WrtEditerAtom } from './atoms/wrt-editer/wrt-editer.atom';
-
+import { SelectAtom } from './atoms/select/select.atom';
+import { SearchNavbarAtom } from './atoms/search-navbar/search-navbar.atom';
+import { SearchBookAtom } from './atoms/search-book/search-book.atom';
+import { LogoNolinkAtom } from './atoms/logo-nolink/logo-nolink.atom';
+import { AuthBgMobileAtom } from './atoms/auth-bg-mobile/auth-bg-mobile.atom';
+import { BarSeperateAtom } from './atoms/bar-seperate/bar-seperate.atom';
+import { ExampleDialogAtom } from './atoms/example-dialog/example-dialog.atom';
 import { PaginationAtom } from './atoms/pagination/pagination.atom';
 import { RatingAtom } from './atoms/rating/rating.atom';
 import { TitleItemAtom } from './atoms/title-item/title-item.atom';
@@ -68,7 +75,6 @@ import { BaseBtnAtom } from './atoms/base-btn/base-btn.atom';
 import { BaseLinkAtom } from './atoms/base-link/base-link.atom';
 import { RdListTabPageAtom } from './atoms/rd-list-tab-page/rd-list-tab-page.atom';
 import { AuthorAtom } from './atoms/author/author.atom';
-
 import { DefaultCoverAtom } from './atoms/default-cover/default-cover.atom';
 import {
   DefaultCoverModule,
@@ -79,6 +85,7 @@ import {
   imports: [
     CommonModule,
     StorybookSupportModule,
+    MatDialogModule,
     QuillModule.forRoot(),
     DefaultCoverModule,
     CloseOnOutsideModule,
@@ -136,6 +143,13 @@ import {
     CreationSubmitBtnAtom,
     CreationSocialBtnAtom,
     QuillModule,
+    SelectAtom,
+    SearchNavbarAtom,
+    SearchBookAtom,
+    LogoNolinkAtom,
+    AuthBgMobileAtom,
+    BarSeperateAtom,
+    ExampleDialogAtom,
     PaginationAtom,
     RatingAtom,
     TitleItemAtom,
@@ -208,6 +222,13 @@ import {
     DetailSocialMenuAtom,
     CreationSubmitBtnAtom,
     CreationSocialBtnAtom,
+    SelectAtom,
+    SearchNavbarAtom,
+    SearchBookAtom,
+    LogoNolinkAtom,
+    AuthBgMobileAtom,
+    BarSeperateAtom,
+    ExampleDialogAtom,
     PaginationAtom,
     RatingAtom,
     TitleItemAtom,
