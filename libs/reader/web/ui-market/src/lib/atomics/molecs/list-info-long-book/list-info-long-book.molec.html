@@ -1,0 +1,9 @@
+<div class="mt-2 md:mt-4">
+  <list-title-book [titleBoook]="book.title" [isSize]="book.isSize"></list-title-book>
+</div>
+<div class="pt-2">
+  <div *ngFor="let btn of btns" class="flex">
+    <base-btn (onBtnClicked)="submitEvent.emit($event)" [isSize]="btn.isSize" [chapter]="btn.chapter"></base-btn>
+    <rd-list-publication-date></rd-list-publication-date>
+  </div>
+</div>

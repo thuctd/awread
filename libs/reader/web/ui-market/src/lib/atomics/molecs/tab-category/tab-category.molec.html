@@ -1,0 +1,7 @@
+<div class="flex mb-6">
+  <div class="w-full flex">
+    <rd-home-tab-category *ngFor="let tab of tabs" [tabName]="tab.name" [active]="tab.isActive"
+      (tabClicked)="toggleTabs(tab)">
+    </rd-home-tab-category>
+  </div>
+</div>

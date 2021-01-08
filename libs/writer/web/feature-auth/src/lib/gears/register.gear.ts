@@ -6,6 +6,8 @@ import { Injectable } from '@angular/core';
 import { FirebaseAuthAddon, FirebaseAuthSocialAddon } from '../addons';
 import { BasicCredential } from '../models';
 import firebase from 'firebase/app';
+import { catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 // userCredential.additionalUserInfo.isNewUser;
 // userCredential.credential.providerId;
 // userCredential.user.getIdToken();
@@ -47,7 +49,12 @@ export class RegisterGear {
   }
 
   createAccountOnServer(user) {
-    return this.authApi.createAccountOnServer(user);
+    return this.authApi.createAccountOnServer(user).pipe(
+      catchError((err) => {
+        console.log('error', err);
+        return throwError(err);
+      })
+    );
   }
 
   // async registerSocial(providerType: ProviderType) {
@@ -61,16 +68,4 @@ export class RegisterGear {
   private actionAfterCreateAccountSuccess() {
     // routing to dashboard
   }
-}
-
-import { Component, OnInit } from '@angular/core';
-
-@Component({
-  selector: 'user-info',
-  template: ` <div>Hello</div> `,
-})
-export class InfoUserComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit() {}
 }

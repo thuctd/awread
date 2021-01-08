@@ -6,7 +6,13 @@
     <div class="dtc-ns v-mid text-gray-500 pl-8">
       <!-- <wrt-social-menu></wrt-social-menu> -->
       <span class="text-xs font-normal measure">
-        {{chapterForm.get('bookTitle').value | titlecase}}
+        <!-- {{chapterForm.get('bookTitle').value | titlecase}} -->
+        <input
+          class="text-xs capitalize bg-white"
+          type="text"
+          formControlName="bookTitle"
+          disabled
+        />
         <button
           class="bg-white hover:bg-gray-300 text-gray-700 font-semibold p-2 rounded-full inline-flex items-center outline-none focus:outline-none"
         >
@@ -24,7 +30,13 @@
 
       <div>
         <span class="text-sm f5-ns block font-medium mt-0"
-          >Chương {{chapterForm.get('chapterNumber').value}}
+          >Chương
+          <input
+            class="capitalize bg-white"
+            type="text"
+            formControlName="chapterNumber"
+            disabled
+          />
         </span>
         <span
           class="text-xs f6-ns font-normal text-gray-500 measure lh-copy my-0"
@@ -43,7 +55,7 @@
         <div class="flex mr-10">
           <cr-submit-btn
             *ngFor="let btn of btns"
-            (click)="selectedChapterStatus = btn.type;chapterStatusEvent.emit(btn.type)"
+            (click)="selectedChapterStatus = btn.type;changeChapterStatus(btn.type)"
             [active]="selectedChapterStatus === btn.type"
             [submitText]="btn.submitText"
             class="ml-2"

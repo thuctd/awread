@@ -61,6 +61,20 @@ import { LogoNolinkAtom } from './atoms/logo-nolink/logo-nolink.atom';
 import { AuthBgMobileAtom } from './atoms/auth-bg-mobile/auth-bg-mobile.atom';
 import { BarSeperateAtom } from './atoms/bar-seperate/bar-seperate.atom';
 import { ExampleDialogAtom } from './atoms/example-dialog/example-dialog.atom';
+import { PaginationAtom } from './atoms/pagination/pagination.atom';
+import { RatingAtom } from './atoms/rating/rating.atom';
+import { TitleItemAtom } from './atoms/title-item/title-item.atom';
+import { RdHomeIconRatingAtom } from './atoms/rd-home-icon-rating/rd-home-icon-rating.atom';
+import { RdHomeTabBookAtom } from './atoms/rd-home-tab-book/rd-home-tab-book.atom';
+import { RdHomeTabCategoryAtom } from './atoms/rd-home-tab-category/rd-home-tab-category.atom';
+import { RdListPublicationDateAtom } from './atoms/rd-list-publication-date/rd-list-publication-date.atom';
+import { RdListContentNovelAtom } from './atoms/rd-list-content-novel/rd-list-content-novel.atom';
+import { ImgMAtom } from './atoms/img-m/img-m.atom';
+import { CommentAtom } from './atoms/comment/comment.atom';
+import { BaseBtnAtom } from './atoms/base-btn/base-btn.atom';
+import { BaseLinkAtom } from './atoms/base-link/base-link.atom';
+import { RdListTabPageAtom } from './atoms/rd-list-tab-page/rd-list-tab-page.atom';
+import { AuthorAtom } from './atoms/author/author.atom';
 import { DefaultCoverAtom } from './atoms/default-cover/default-cover.atom';
 import {
   DefaultCoverModule,
@@ -136,6 +150,20 @@ import {
     AuthBgMobileAtom,
     BarSeperateAtom,
     ExampleDialogAtom,
+    PaginationAtom,
+    RatingAtom,
+    TitleItemAtom,
+    RdHomeIconRatingAtom,
+    RdHomeTabBookAtom,
+    RdHomeTabCategoryAtom,
+    RdListPublicationDateAtom,
+    RdListContentNovelAtom,
+    RdListTabPageAtom,
+    ImgMAtom,
+    CommentAtom,
+    BaseBtnAtom,
+    BaseLinkAtom,
+    AuthorAtom,
     DefaultCoverAtom,
   ],
   declarations: [
@@ -201,6 +229,20 @@ import {
     AuthBgMobileAtom,
     BarSeperateAtom,
     ExampleDialogAtom,
+    PaginationAtom,
+    RatingAtom,
+    TitleItemAtom,
+    RdHomeIconRatingAtom,
+    RdHomeTabBookAtom,
+    RdHomeTabCategoryAtom,
+    RdListPublicationDateAtom,
+    RdListTabPageAtom,
+    RdListContentNovelAtom,
+    ImgMAtom,
+    CommentAtom,
+    BaseBtnAtom,
+    BaseLinkAtom,
+    AuthorAtom,
     DefaultCoverAtom,
   ],
 })

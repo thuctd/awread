@@ -5,14 +5,9 @@ import { ChaptersStore } from './chapters.store';
 
 @Injectable({ providedIn: 'root' })
 export class ChaptersService {
-
-  constructor(
-    private chaptersStore: ChaptersStore,
-  ) {
-  }
+  constructor(private chaptersStore: ChaptersStore) {}
 
   get() {
-    return of([]).pipe(tap(entities => this.chaptersStore.update(entities)));
+    return of([]).pipe(tap((entities) => this.chaptersStore.update(entities)));
   }
-
 }

@@ -1,0 +1,11 @@
+<section>
+    <div class="mb-4">
+        <title-item [title]='titlePage'></title-item>
+    </div>
+    <div class="grid grid-cols-10 gap-2">
+        <div *ngFor='let loop3 of counter(10);' class="col-span-2 md:col-span-2">
+            <atom-img-m [isSize]='isSize'></atom-img-m>
+            <home-info-book-featured></home-info-book-featured>
+        </div>
+    </div>
+</section>

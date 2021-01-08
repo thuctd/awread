@@ -1,3 +1,5 @@
+import { Chapter } from './../models/chapter.model';
+import { tap, retry } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
 
@@ -5,8 +7,33 @@ import { Apollo, gql } from 'apollo-angular';
 export class ChaptersApi {
   constructor(private apollo: Apollo) {}
 
+  getAllChapters(bookid: string) {
+    return this.apollo
+      .query({
+        query: gql`
+          query allChapters($bookid: String) {
+            allChapters(
+              condition: { bookid: $bookid }
+              orderBy: CREATEDAT_ASC
+            ) {
+              nodes {
+                chapterid
+                title
+                status
+                updatedat
+                publishedat
+                createdat
+              }
+            }
+          }
+        `,
+        variables: { bookid },
+      })
+      .pipe(retry(2));
+  }
+
   getChapterDetail(chapterid: string, bookid: string) {
-    return this.apollo.watchQuery({
+    return this.apollo.query({
       query: gql`
         query getChapterDetail($chapterid: String!, $bookid: String!) {
           allChapters(condition: { chapterid: $chapterid, bookid: $bookid }) {
@@ -32,7 +59,7 @@ export class ChaptersApi {
     });
   }
 
-  createChapter(chapter) {
+  createChapter(chapter: Chapter) {
     return this.apollo.mutate({
       mutation: gql`
         mutation createChapter(
@@ -63,19 +90,21 @@ export class ChaptersApi {
           }
         }
       `,
+      // TODO: dung Chapter(chapter) trong ../model de tao chapter moi thay vi khoi tao object nay
       variables: {
         chapterid: chapter.chapterid,
         bookid: chapter.bookid,
         content: chapter.content ?? '',
         title: chapter.title ?? '',
-        createdat: new Date(),
-        updatedat: new Date(),
+        createdat: chapter.createdat ?? new Date(),
+        updatedat: chapter.updatedat ?? new Date(),
         status: chapter.status ?? 'DRAFT',
       },
+      // TODO: end
     });
   }
 
-  updateChapter(chapter) {
+  updateChapter(chapter: Chapter) {
     return this.apollo.mutate({
       mutation: gql`
         mutation updateChapter(
@@ -102,11 +131,12 @@ export class ChaptersApi {
           }
         }
       `,
+      // TODO: dung Chapter(chapter) trong ../model de tao chapter moi thay vi khoi tao object nay
       variables: {
         chapterid: chapter.chapterid,
         content: chapter.content ?? '',
         title: chapter.title ?? '',
-        updatedat: new Date(),
+        updatedat: chapter.updatedat ?? new Date(),
         status: chapter.status ?? 'DRAFT',
       },
     });
