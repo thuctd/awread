@@ -7,7 +7,7 @@ import firebase from 'firebase';
 import { AuthApi } from '../apis';
 import { forkJoin, of } from 'rxjs';
 import { tap, catchError, retry } from 'rxjs/operators';
-import { createUserFirebase, FirebaseUser } from '../models';
+import { createUserFromFirebase, FirebaseUser } from '../models';
 
 @Injectable({ providedIn: 'root' })
 export class FirebaseAuthGear {
@@ -154,7 +154,7 @@ export class FirebaseAuthGear {
       await result.user.linkWithCredential(err.credential);
       const newUser: Partial<FirebaseUser> = result.user;
       // check trường hợp google/facebook ghi đè account thì phải link lại provider password (account email/pw)
-      const user = createUserFirebase(newUser);
+      const user = createUserFromFirebase(newUser);
       this.shouldLinkProviderPassword(user, result.user);
     } catch (error) {
       alert('Login với facebook bị lỗi!');

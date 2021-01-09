@@ -2,7 +2,7 @@ import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { FirebaseAuthAddon, FirebaseAuthSocialAddon } from '../addons';
 import {
-  createUserFirebase,
+  createUserFromFirebase,
   EmailLoginCredential,
   FirebaseUser,
   ProviderType,
@@ -69,7 +69,7 @@ export class LoginGear {
             provider: 'facebook',
           };
           // check trường hợp google/facebook ghi đè account thì phải link lại provider password (account email/pw)
-          const user = createUserFirebase(newUser);
+          const user = createUserFromFirebase(newUser);
           this.checkMustNewUserWhenLoginFaceBook(user);
         } catch (err) {
           this.firebaseAuthGear.linkAccountWithProviderFacebook(err);
@@ -82,7 +82,7 @@ export class LoginGear {
             ...userCredential.user,
             provider: 'google',
           };
-          const user = createUserFirebase(newUser);
+          const user = createUserFromFirebase(newUser);
           // vì google ghi đè lên tất cả tài khoản cùng email đã tạo trước đó,
           // nên phải check lại TH đã tạo email/password trước đó,
           // nếu đúng thì link lại với account google

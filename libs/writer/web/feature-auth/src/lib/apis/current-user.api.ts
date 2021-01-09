@@ -42,10 +42,11 @@ export class CurrentUserApi {
           $gender: String
           $introduce: String
           $phone: String
-          $photourl: String
+          $photoUrl: String
           $updatedat: Datetime
           $username: String
           $website: String
+          $email: String
           $userid: String!
         ) {
           updateUserByUserid(
@@ -57,10 +58,11 @@ export class CurrentUserApi {
                 gender: $gender
                 introduce: $introduce
                 phone: $phone
-                photourl: $photourl
+                photourl: $photoUrl
                 updatedat: $updatedat
                 username: $username
                 website: $website
+                email: $email
               }
               userid: $userid
             }

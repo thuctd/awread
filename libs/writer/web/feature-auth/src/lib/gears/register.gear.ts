@@ -4,7 +4,11 @@ import { Router } from '@angular/router';
 import { AuthApi } from './../apis/auth.api';
 import { Injectable } from '@angular/core';
 import { FirebaseAuthAddon, FirebaseAuthSocialAddon } from '../addons';
-import { BasicCredential, createUserFirebase, FirebaseUser } from '../models';
+import {
+  BasicCredential,
+  createUserFromFirebase,
+  FirebaseUser,
+} from '../models';
 import firebase from 'firebase/app';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
@@ -32,7 +36,7 @@ export class RegisterGear {
         ...userCredential.user,
         provider: 'email/password',
       };
-      const user = createUserFirebase(newUser);
+      const user = createUserFromFirebase(newUser);
       this.createAccountOnServer(user);
       this.authRoutingGear.navigateAfterRegisterComplete('login');
     } catch (err) {

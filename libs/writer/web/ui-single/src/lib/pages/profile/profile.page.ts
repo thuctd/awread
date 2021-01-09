@@ -59,6 +59,7 @@ export class ProfilePage implements OnInit {
       phone: [''],
       dob: [''],
       gender: [''],
+      photoUrl: [''],
     });
   }
 }

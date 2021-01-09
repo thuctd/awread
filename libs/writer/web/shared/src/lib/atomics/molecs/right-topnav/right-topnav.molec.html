@@ -4,7 +4,7 @@
     class="-mr-20"
   ></search-navtop>
   <menu-navtop
-    [user]="user"
-    (signoutEvent)="signoutEvent($event)"
+    [curentUser]="user"
+    (signoutEvent)="signoutEvent.emit()"
   ></menu-navtop>
 </section>

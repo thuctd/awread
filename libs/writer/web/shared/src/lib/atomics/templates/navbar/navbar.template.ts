@@ -17,6 +17,7 @@ import { User } from '@awread/writer/web/feature-auth';
 export class NavbarTemplate implements OnInit {
   @Input() user: User;
   @Output() searchEvent = new EventEmitter();
+  @Output() signoutEvent = new EventEmitter();
   constructor() {}
 
   ngOnInit(): void {}

@@ -19,11 +19,8 @@ export class RightTopnavMolec implements OnInit {
   // name = 'Hà Thanh Tùng';
   @Input() user: User;
   @Output() searchEvent = new EventEmitter();
+  @Output() signoutEvent = new EventEmitter();
   constructor() {}
 
   ngOnInit(): void {}
-
-  signoutEvent(data?) {
-    console.log('some one is signout, routing to home page', data);
-  }
 }

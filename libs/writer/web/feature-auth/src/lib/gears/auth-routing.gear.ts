@@ -13,7 +13,8 @@ export class AuthRoutingGear {
 
   navigateAfterLoginComplete(router: string, params?) {
     if (params) {
-      this.router.navigate([router], params);
+      // pass object len url thi moi gia tri deu la string, emailVerified se nhan string la 'true'
+      this.router.navigate([router, params]);
     } else {
       this.router.navigate([router]);
     }

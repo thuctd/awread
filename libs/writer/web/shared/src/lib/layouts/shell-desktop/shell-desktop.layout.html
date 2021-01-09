@@ -1,3 +1,7 @@
-<navbar [user]="currentUser$ | async">
+<navbar
+  [user]="currentUser$ | async"
+  (signoutEvent)="logout()"
+  (searchEvent)="searchEvent($event)"
+>
   <router-outlet></router-outlet>
 </navbar>

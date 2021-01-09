@@ -1,3 +1,7 @@
+import {
+  createUserFromFirebase,
+  FirebaseUser,
+} from './../models/current-user.model';
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
 import { of, throwError } from 'rxjs';
@@ -98,25 +102,25 @@ export class AuthApi {
       });
   }
 
-  createAccountOnServer(user: UserInputMutation) {
+  createAccountOnServer(user: FirebaseUser) {
     return this.apollo.mutate({
       mutation: gql`
         mutation signup(
-          $fullname: String
-          $emailVerified: String
-          $photourl: String
+          $displayName: String
+          $emailVerified: Boolean
+          $photoUrl: String
           $password: String
-          $userid: String
+          $uid: String
           $email: String
           $provider: String
         ) {
           signup(
             input: {
-              fullname: $fullname
+              fullname: $displayName
               emailverified: $emailVerified
-              photourl: $photourl
+              photourl: $photoUrl
               password: $password
-              userid: $userid
+              userid: $uid
               email: $email
               provider: $provider
             }
@@ -125,19 +129,7 @@ export class AuthApi {
           }
         }
       `,
-      // TODO: không gán trực tiếp trong variable như này, refactor sử dụng function ở current-user model (ví dụ hàm newUser )
-      variables: {
-        email: user.email ?? null,
-        fullname: user.displayName ?? null,
-        emailVerified: user.emailVerified ?? 'false',
-        photourl: user.photoURL ?? null,
-        password: user.password ?? '',
-        userid: user.uid,
-        provider: user.provider ?? 'email/password',
-        address: user.address ?? '',
-        phone: user.phone ?? '',
-        createdat: user.createdat ?? new Date(),
-      },
+      variables: createUserFromFirebase(user),
     });
   }
 }

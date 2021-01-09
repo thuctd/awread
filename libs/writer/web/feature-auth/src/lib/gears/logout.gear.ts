@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { ApolloAuthAddon, FirebaseAuthAddon } from '../addons';
 import { CurrentUserService } from '../states/current-user';
@@ -7,13 +8,15 @@ export class LogoutGear {
   constructor(
     private apolloAuthAddon: ApolloAuthAddon,
     private firebaseAuthAddon: FirebaseAuthAddon,
-    private currentUserService: CurrentUserService
+    private currentUserService: CurrentUserService,
+    private router: Router
   ) {}
 
   logout() {
     this.apolloAuthAddon.logout();
     this.firebaseAuthAddon.logout();
     this.currentUserService.logout();
-    localStorage.removeItem('token');
+    window.localStorage.clear();
+    this.router.navigate(['login']);
   }
 }

@@ -10,17 +10,8 @@ export class CurrentUserFacade {
     private currentUserGear: CurrentUserGear,
     private currentUserQuery: CurrentUserQuery
   ) {}
-  // TODO: cho vao gear
   getCurrentUser() {
-    return this.currentUserGear.getCurrentUser().pipe(
-      map((res) => {
-        if (res['data'] && res['data']['allGetCurrentUsers']['nodes']) {
-          const user = res['data']['allGetCurrentUsers']['nodes'];
-          return user;
-        }
-        return [];
-      })
-    );
+    return this.currentUserGear.getCurrentUser();
   }
 
   updateCurrentUser(user) {
