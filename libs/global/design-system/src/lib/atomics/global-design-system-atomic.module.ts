@@ -68,7 +68,7 @@ import { BaseBtnAtom } from './atoms/base-btn/base-btn.atom';
 import { BaseLinkAtom } from './atoms/base-link/base-link.atom';
 import { RdListTabPageAtom } from './atoms/rd-list-tab-page/rd-list-tab-page.atom';
 import { AuthorAtom } from './atoms/author/author.atom';
-
+import { NgImageSliderModule } from 'ng-image-slider';
 import { DefaultCoverAtom } from './atoms/default-cover/default-cover.atom';
 import {
   DefaultCoverModule,
@@ -82,6 +82,7 @@ import {
     QuillModule.forRoot(),
     DefaultCoverModule,
     CloseOnOutsideModule,
+    NgImageSliderModule
   ],
   exports: [
     CloseOnOutsideModule,
@@ -151,6 +152,7 @@ import {
     BaseLinkAtom,
     AuthorAtom,
     DefaultCoverAtom,
+    NgImageSliderModule
   ],
   declarations: [
     TabBtnAtom,
@@ -225,4 +227,4 @@ import {
     DefaultCoverAtom,
   ],
 })
-export class GlobalDesignSystemAtomicModule {}
+export class GlobalDesignSystemAtomicModule { }
