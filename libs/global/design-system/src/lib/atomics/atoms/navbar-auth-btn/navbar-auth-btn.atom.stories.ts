@@ -1,25 +1,25 @@
-import { LogoAtom } from './logo.atom';
+import { NavbarAuthBtnAtom } from './navbar-auth-btn.atom';
 import { GlobalDesignSystemAtomicModule } from '../../global-design-system-atomic.module';
 
 export default {
-  title: 'Design System/Atoms/Logo'
+  title: 'Design System/Atoms/Navbar Auth Btn'
 }
 
 export const primary = () => ({
   moduleMetadata: {
     imports: [GlobalDesignSystemAtomicModule]
   },
-  component: LogoAtom,
+  component: NavbarAuthBtnAtom,
   props: {
 
   }
 })
-export const logoWhite = () => ({
+export const show = () => ({
   moduleMetadata: {
     imports: [GlobalDesignSystemAtomicModule]
   },
-  component: LogoAtom,
+  component: NavbarAuthBtnAtom,
   props: {
-    logoWhite: true
+    show: true
   }
 })

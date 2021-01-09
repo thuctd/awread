@@ -1,0 +1,6 @@
+<ul id="story__ul" class="list-reset text-xl bg-white story__left absolute w-40 rounded-sm dropdown-menu shadow right-0" [class.hidden]="hidden">
+    <ng-container *ngFor="let data of dropdownData">
+        <molec-rd-dropdown-menu-item [data]="data" [menu]="data.menu">
+        </molec-rd-dropdown-menu-item>
+    </ng-container>
+</ul>

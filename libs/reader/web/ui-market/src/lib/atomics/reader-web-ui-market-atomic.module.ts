@@ -21,10 +21,57 @@ import { HomeInfoBookUpdateMolec } from './molecs/home-info-book-update/home-inf
 import { HomeDetailBookFeaturedOrgan } from './organs/home-detail-book-featured/home-detail-book-featured.organ';
 import { HomeDetailBookReviewOrgan } from './organs/home-detail-book-review/home-detail-book-review.organ';
 import { HomeDetailBookUpdateOrgan } from './organs/home-detail-book-update/home-detail-book-update.organ';
+import { ReviewItemMolec } from './molecs/review-item/review-item.molec';
+import { ChapterItemMolec } from './molecs/chapter-item/chapter-item.molec';
 
 @NgModule({
   imports: [CommonModule, StorybookSupportModule, GlobalDesignSystemAtomicModule],
-  exports: [CommonModule, TabCategoryMolec, TabBookMolec, TabPageMolec, ListInfoLongBookMolec, ListInfoProseMolec, ListInfoShortBookMolec, ListInfoTopBookMolec, ListDetailLongBookOrgan, ListDetailShortBookOrgan, ListDetailProseOrgan, ListDetailTopBookOrgan, ListTemplate, HomeTemplate, HomeTagsOrgan, HomeInfoBookFeaturedMolec, HomeInfoBookReviewMolec, HomeInfoBookUpdateMolec, HomeDetailBookFeaturedOrgan, HomeDetailBookReviewOrgan, HomeDetailBookUpdateOrgan],
-  declarations: [TabCategoryMolec, TabBookMolec, TabPageMolec, ListInfoLongBookMolec, ListInfoProseMolec, ListInfoShortBookMolec, ListInfoTopBookMolec, ListDetailLongBookOrgan, ListDetailShortBookOrgan, ListDetailProseOrgan, ListDetailTopBookOrgan, ListTemplate, HomeTemplate, HomeTagsOrgan, HomeInfoBookFeaturedMolec, HomeInfoBookReviewMolec, HomeInfoBookUpdateMolec, HomeDetailBookFeaturedOrgan, HomeDetailBookReviewOrgan, HomeDetailBookUpdateOrgan]
+  exports: [CommonModule, 
+    TabCategoryMolec, 
+    TabBookMolec, 
+    TabPageMolec, 
+    ListInfoLongBookMolec, 
+    ListInfoProseMolec, 
+    ListInfoShortBookMolec, 
+    ListInfoTopBookMolec, 
+    ListDetailLongBookOrgan, 
+    ListDetailShortBookOrgan, 
+    ListDetailProseOrgan, 
+    ListDetailTopBookOrgan, 
+    ListTemplate, 
+    HomeTemplate, 
+    HomeTagsOrgan, 
+    HomeInfoBookFeaturedMolec, 
+    HomeInfoBookReviewMolec, 
+    HomeInfoBookUpdateMolec, 
+    HomeDetailBookFeaturedOrgan, 
+    HomeDetailBookReviewOrgan, 
+    ReviewItemMolec,
+    HomeDetailBookUpdateOrgan,
+    ChapterItemMolec],
+  declarations: [
+    TabCategoryMolec, 
+    TabBookMolec, 
+    TabPageMolec, 
+    ListInfoLongBookMolec, 
+    ListInfoProseMolec, 
+    ListInfoShortBookMolec, 
+    ListInfoTopBookMolec, 
+    ListDetailLongBookOrgan, 
+    ListDetailShortBookOrgan, 
+    ListDetailProseOrgan, 
+    ListDetailTopBookOrgan, 
+    ListTemplate, 
+    HomeTemplate, 
+    HomeTagsOrgan, 
+    HomeInfoBookFeaturedMolec, 
+    HomeInfoBookReviewMolec, 
+    HomeInfoBookUpdateMolec, 
+    HomeDetailBookFeaturedOrgan, 
+    HomeDetailBookReviewOrgan, 
+    HomeDetailBookUpdateOrgan,
+    ReviewItemMolec,
+    ChapterItemMolec
+  ]
 })
 export class ReaderWebUiMarketAtomicModule { }
