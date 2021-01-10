@@ -54,7 +54,7 @@ export class BooksGear {
   addBook(book) {
     const bookid = this.firebaseFirestoreAddon.createId();
     const bookDetail = { ...book, bookid };
-    return this.booksApi.createBook(book).pipe(
+    return this.booksApi.createBook(bookDetail).pipe(
       tap((res) => {
         console.log('add book res: ', res);
         if (res['data'] && res['data']['createBook']['book']) {

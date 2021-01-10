@@ -1,6 +1,7 @@
+import firebase from 'firebase/app';
 import { ID } from '@datorama/akita';
 
-export interface CurrentUser {
+export interface User {
   userid: string;
   address: string;
   dob: string;
@@ -8,18 +9,19 @@ export interface CurrentUser {
   gender: string;
   introduce: string;
   phone: string;
-  photourl: string;
+  photoUrl: string;
   updatedat: Date;
   createdat: Date;
   username: string;
   website: string;
+  email: string;
 }
 
 export interface UserInputMutation {
   email: string;
   displayName: string;
   emailVerified: string;
-  photoURL: string;
+  photoUrl: string;
   password: string;
   uid: string;
   provider: string;
@@ -28,6 +30,49 @@ export interface UserInputMutation {
   createdat: string;
 }
 
-export function CurrentUser(params: Partial<CurrentUser>) {
-  return {} as CurrentUser;
+export interface FirebaseUser {
+  email: string;
+  displayName: string;
+  emailVerified: string | boolean;
+  photoUrl: string;
+  password: string;
+  uid: string;
+  provider: string;
+  address: string;
+  phone: string;
+  createdat: Date;
+}
+
+export function createUserFromFirebase(user: Partial<FirebaseUser>) {
+  return {
+    email: user?.email ?? '',
+    displayName: user?.displayName ?? '',
+    emailVerified:
+      user?.emailVerified || user?.emailVerified === 'true' ? true : false,
+    photoUrl: user?.photoUrl ?? '',
+    password: user?.password ?? '',
+    uid: user?.uid,
+    provider: user?.provider ?? 'email/password',
+    address: user?.address ?? '',
+    phone: user?.phone ?? '',
+    createdat: user?.createdat ?? new Date(),
+  } as FirebaseUser;
+}
+
+export function createUserObject(user: Partial<User>) {
+  return {
+    userid: user?.userid,
+    address: user?.address ?? '',
+    dob: user?.dob ?? '',
+    fullname: user?.fullname ?? '',
+    gender: user?.gender ?? '',
+    introduce: user?.introduce ?? '',
+    phone: user?.phone ?? '',
+    photoUrl: user?.photoUrl ?? '',
+    updatedat: user?.updatedat ?? new Date(),
+    createdat: user?.createdat ?? new Date(),
+    username: user?.username ?? '',
+    website: user?.website ?? '',
+    email: user?.email ?? '',
+  } as User;
 }

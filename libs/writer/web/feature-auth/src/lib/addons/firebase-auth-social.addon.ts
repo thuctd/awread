@@ -34,19 +34,6 @@ export class FirebaseAuthSocialAddon {
     }
   }
 
-  createUserObject(user) {
-    return {
-      displayName: user.displayName ?? '',
-      email: user.email ?? '',
-      emailVerified: user?.emailVerified.toString() ?? 'false',
-      photoUrl: user.photoURL ?? '',
-      uid: user.uid,
-      provider: user.provider ?? 'email/password',
-      address: user.address ?? '',
-      phone: user.phone ?? '',
-    };
-  }
-
   async loginWithProvider(providerType: ProviderType) {
     switch (providerType) {
       case ProviderType.apple:

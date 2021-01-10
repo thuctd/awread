@@ -29,18 +29,14 @@ export class DetailIndexTemplate implements OnInit {
   ];
 
   @Input() chapters;
-
+  @Input() tabsHead;
   @Input() bookForm: FormGroup;
   @Output() selectedStatusEvent = new EventEmitter();
   @Output() bookSubmitEvent = new EventEmitter();
   @Output() chapterActionEvent = new EventEmitter();
   @Output() createNewChapterEvent = new EventEmitter();
   selectedBookStatus: string;
-  tabs = [
-    { name: 'Tables of Contents', isActive: true },
-    { name: 'Story Details' },
-  ];
-
+  @Input() selectedTab: string;
   constructor() {}
 
   ngOnInit(): void {

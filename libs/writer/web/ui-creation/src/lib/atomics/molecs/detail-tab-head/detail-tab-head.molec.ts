@@ -1,42 +1,38 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
-
-interface TabHead {
-  name: string;
-  isActive: boolean;
-  default: boolean;
-}
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  Input,
+} from '@angular/core';
 
 @Component({
   selector: 'detail-tab-head',
   templateUrl: './detail-tab-head.molec.html',
   styleUrls: ['./detail-tab-head.molec.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DetailTabHeadMolec implements OnInit {
+  @Input() tabs;
 
-  @Input() tabs = [{
-    name: 'Tables of Contents',
-    isActive: true,
-  }, {
+  currentTab = {
     name: 'Story Details',
-    isActive: false,
-  }];
-
-  currentTab = { name: null, isActive: false };
-  constructor() { }
+    tab: 'toc',
+    type: 'create',
+    isActive: true,
+  };
+  constructor() {}
 
   ngOnInit(): void {
-    this.currentTab = this.tabs.find(tab => tab.isActive);
+    this.currentTab = this.tabs.find((tab) => tab.isActive);
   }
 
-  toggleTabs(currentTab: TabHead) {
+  toggleTabs(currentTab) {
     this.currentTab = currentTab;
-    this.tabs.forEach(tab => {
+    this.tabs.forEach((tab) => {
       tab.isActive = false;
       if (tab.name === currentTab.name) {
         tab.isActive = true;
       }
-    })
+    });
   }
-
 }

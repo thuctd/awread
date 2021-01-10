@@ -10,17 +10,23 @@
           Thêm chương mới
         </button>
       </div>
-      <div class="grid grid-cols-12 gap-2 pl-2 py-4 border-b border-gray-200" *ngFor="let chapter of chapters">
-        <div class="col-span-2 md:col-span-4">
-          <detail-part [chapter]="chapter"></detail-part>
+
+      <ng-container *ngIf="chapters.length;else noData">
+        <div class="grid grid-cols-12 gap-2 pl-2 py-4 border-b border-gray-200" *ngFor="let chapter of chapters">
+          <div class="col-span-2 md:col-span-4">
+            <detail-part [chapter]="chapter"></detail-part>
+          </div>
+          <div class="col-span-2 md:col-span-4 justify-self-center">
+            <detail-review></detail-review>
+          </div>
+          <div class="col-span-2 md:col-span-4 justify-self-center">
+            <detail-act (chapterActionEvent)="chapterAction($event, chapter)"></detail-act>
+          </div>
         </div>
-        <div class="col-span-2 md:col-span-4 justify-self-center">
-          <detail-review></detail-review>
-        </div>
-        <div class="col-span-2 md:col-span-4 justify-self-center">
-          <detail-act (chapterActionEvent)="chapterAction($event, chapter)"></detail-act>
-        </div>
-      </div>
+      </ng-container>
+      <ng-template #noData>
+        <p class="text-center">Không có truyện nào!</p>
+      </ng-template>
     </div>
   </div>
 </div>

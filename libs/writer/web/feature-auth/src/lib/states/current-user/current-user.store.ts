@@ -1,3 +1,4 @@
+import { User } from './../../models/current-user.model';
 import { Injectable } from '@angular/core';
 import { Store, StoreConfig } from '@datorama/akita';
 
@@ -16,5 +17,10 @@ export function createInitialState(): CurrentUserState {
 export class CurrentUserStore extends Store<CurrentUserState> {
   constructor() {
     super(createInitialState());
+  }
+
+  updateCurrentUserAkita(user: User) {
+    console.log('user update store: ', user);
+    return this.update((e) => ({ ...e, ...user }));
   }
 }

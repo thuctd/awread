@@ -1,4 +1,4 @@
-import { CurrentUser } from './../models/current-user.model';
+import { createUserObject, User } from './../models/current-user.model';
 import { catchError, retry, tap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
@@ -32,7 +32,7 @@ export class CurrentUserApi {
     });
   }
 
-  update(user: CurrentUser) {
+  update(user: User) {
     return this.apollo.mutate({
       mutation: gql`
         mutation updateUser(
@@ -42,10 +42,11 @@ export class CurrentUserApi {
           $gender: String
           $introduce: String
           $phone: String
-          $photourl: String
+          $photoUrl: String
           $updatedat: Datetime
           $username: String
           $website: String
+          $email: String
           $userid: String!
         ) {
           updateUserByUserid(
@@ -57,10 +58,11 @@ export class CurrentUserApi {
                 gender: $gender
                 introduce: $introduce
                 phone: $phone
-                photourl: $photourl
+                photourl: $photoUrl
                 updatedat: $updatedat
                 username: $username
                 website: $website
+                email: $email
               }
               userid: $userid
             }
@@ -71,20 +73,7 @@ export class CurrentUserApi {
           }
         }
       `,
-      // TODO: dung User(User) trong ../model de tao user moi thay vi khoi tao object nay
-      variables: {
-        userid: user.userid,
-        address: user.address ?? '',
-        dob: user.dob ?? '',
-        fullname: user.fullname ?? '',
-        gender: user.gender ?? '',
-        introduce: user.introduce ?? '',
-        phone: user.phone ?? '',
-        photourl: user.photourl ?? '',
-        updatedat: new Date(),
-        username: user.username ?? '',
-        website: user.website ?? '',
-      },
+      variables: createUserObject(user),
     });
   }
 }
