@@ -14,3 +14,12 @@ export const primary = () => ({
 
   }
 })
+export const logoWhite = () => ({
+  moduleMetadata: {
+    imports: [GlobalDesignSystemAtomicModule]
+  },
+  component: LogoAtom,
+  props: {
+    logoWhite: true
+  }
+})

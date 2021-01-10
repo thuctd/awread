@@ -5,14 +5,9 @@ import { BooksStore } from './books.store';
 
 @Injectable({ providedIn: 'root' })
 export class BooksService {
-
-  constructor(
-    private booksStore: BooksStore,
-  ) {
-  }
+  constructor(private booksStore: BooksStore) {}
 
   get() {
-    return of([]).pipe(tap(entities => this.booksStore.update(entities)));
+    return of([]).pipe(tap((entities) => this.booksStore.update(entities)));
   }
-
 }

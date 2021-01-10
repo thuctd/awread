@@ -70,6 +70,8 @@
         "plugin:@angular-eslint/recommended"
       ],
       "rules": {
+        "@angular-eslint/directive-class-suffix": "off",
+        "@angular-eslint/contextual-lifecycle": "off",
         "@angular-eslint/component-class-suffix": "off",
         "@angular-eslint/directive-class-suffix": "off",
         "@angular-eslint/contextual-lifecycle": "off",
