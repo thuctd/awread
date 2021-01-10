@@ -1,10 +1,15 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  Input,
+} from '@angular/core';
 
 @Component({
   selector: 'list-detail-top-book',
   templateUrl: './list-detail-top-book.organ.html',
   styleUrls: ['./list-detail-top-book.organ.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListDetailTopBookOrgan implements OnInit {
   @Input() btn = {
@@ -13,10 +18,9 @@ export class ListDetailTopBookOrgan implements OnInit {
   };
 
   @Input() isSize = false;
+  counter = Array;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

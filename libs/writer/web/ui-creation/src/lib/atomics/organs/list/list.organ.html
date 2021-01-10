@@ -1,11 +1,6 @@
 <div class="pt-12">
   <div class="text-center">
-    <a
-      class="text-blue-500"
-      [routerLink]="['/detail', {type: 'create'}]"
-      routerLinkActive="router-link-active"
-      >Đăng truyện</a
-    >
+    <a class="text-blue-500" [routerLink]="['/detail', {type: 'create'}]" routerLinkActive="router-link-active">Đăng truyện</a>
   </div>
   <ng-container *ngIf="books.length;else noData">
     <div class="mb-2">
@@ -21,13 +16,7 @@
           <list-chapter [book]="book"></list-chapter>
         </div>
         <div class="col-span-2 md:col-span-4">
-          <list-act
-            [bookId]="book.bookid"
-            (updateBookStatusEvent)="updateBookStatusEvent.emit($event)"
-            (addChapterEvent)="addChapterEvent.emit($event)"
-            (editBookEvent)="editBookEvent.emit($event)"
-            (removeBookEvent)="removeBookEvent.emit($event)"
-          ></list-act>
+          <list-act [bookId]="book.bookid" (updateBookStatusEvent)="updateBookStatusEvent.emit($event)" (addChapterEvent)="addChapterEvent.emit($event)" (editBookEvent)="editBookEvent.emit($event)" (removeBookEvent)="removeBookEvent.emit($event)"></list-act>
         </div>
       </div>
     </infinite-scroll>
@@ -35,12 +24,7 @@
   <ng-template #noData>
     <p class="text-center">Không có truyện nào!</p>
     <div class="text-center">
-      <a
-        class="text-blue-500"
-        [routerLink]="['/detail', {type: 'create'}]"
-        routerLinkActive="router-link-active"
-        >Đăng truyện</a
-      >
+      <a class="text-blue-500" [routerLink]="['/detail', {type: 'create'}]" routerLinkActive="router-link-active">Đăng truyện</a>
     </div>
   </ng-template>
 </div>

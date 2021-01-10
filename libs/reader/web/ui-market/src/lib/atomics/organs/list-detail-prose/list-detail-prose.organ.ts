@@ -7,7 +7,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ListDetailProseOrgan implements OnInit {
-  @Input() size = 2;
+  @Input() size = 5;
   counter = Array;
 
   constructor() { }
