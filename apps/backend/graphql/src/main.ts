@@ -99,7 +99,7 @@ function checkRole(req) {
     console.warn('failed to authenticate, using role default (anonymous)');
     // role null will be using default role of Postgraphile
     return {
-      role: 'anonymous',
+      role: 'writer',
       'jwt.claims.user_id': '10f62cca-d75d-4b7c-8869-9ee319819431',
     };
   }

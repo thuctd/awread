@@ -7,7 +7,7 @@
           <div class="w-full pr-8">
             <div class="text-center border-b border-teal-400">
               <a
-                (click)="selectedTab = tab.tabName"
+                (click)="switchTabEvent.emit(tab.tabName)"
                 [ngClass]="selectedTab === tab.tabName ? 'text-green-400 border-b-2 border-green-400' : 'text-gray-400'"
                 class="inline-block font-bold pb-2 cursor-pointer md:text-sm lg:text-base xl:text-base"
               >
@@ -18,7 +18,6 @@
         </ng-container>
       </div>
     </div>
-
     <index
       *ngIf="selectedTab === 'toc'"
       [chapters]="chapters"
