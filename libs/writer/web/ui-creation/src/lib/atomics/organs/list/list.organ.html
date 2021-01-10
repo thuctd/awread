@@ -1,8 +1,6 @@
 <div class="pt-12">
-  <div class="text-center">
-    <a [routerLink]="['/detail']" routerLinkActive="router-link-active"
-      >Đăng truyện</a
-    >
+  <div class="text-center mb-4">
+    <a [routerLink]="['/detail']" routerLinkActive="router-link-active" class="outline-none text-xs md:text-base bg-green-400 text-white px-4 py-2 rounded-md">Đăng truyện</a>
   </div>
   <div class="mb-2">
     <list-head></list-head>
@@ -16,13 +14,7 @@
         <list-chapter [book]="book"></list-chapter>
       </div>
       <div class="col-span-2 md:col-span-4">
-        <list-act
-          [bookId]="book.bookid"
-          (updateBookStatusEvent)="updateBookStatusEvent.emit($event)"
-          (addChapterEvent)="addChapterEvent.emit($event)"
-          (editBookEvent)="editBookEvent.emit($event)"
-          (removeBookEvent)="removeBookEvent.emit($event)"
-        ></list-act>
+        <list-act [bookId]="book.bookid" (updateBookStatusEvent)="updateBookStatusEvent.emit($event)" (addChapterEvent)="addChapterEvent.emit($event)" (editBookEvent)="editBookEvent.emit($event)" (removeBookEvent)="removeBookEvent.emit($event)"></list-act>
       </div>
     </div>
   </infinite-scroll>

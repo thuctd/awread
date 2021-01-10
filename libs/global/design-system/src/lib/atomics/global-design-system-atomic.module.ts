@@ -101,6 +101,7 @@ import { ChapterPriceAtom } from './atoms/chapter-price/chapter-price.atom';
 import { NavbarAuthBtnAtom } from './atoms/navbar-auth-btn/navbar-auth-btn.atom';
 import { NavbarBtnLoggedAtom } from './atoms/navbar-btn-logged/navbar-btn-logged.atom';
 import { CircleImageAtom } from './atoms/circle-image/circle-image.atom';
+import { SliderAtom } from './atoms/slider/slider.atom';
 
 @NgModule({
   imports: [
@@ -208,6 +209,7 @@ import { CircleImageAtom } from './atoms/circle-image/circle-image.atom';
     NavbarAuthBtnAtom,
     NavbarBtnLoggedAtom,
     CircleImageAtom,
+    SliderAtom
 
   ],
   declarations: [
@@ -308,6 +310,7 @@ import { CircleImageAtom } from './atoms/circle-image/circle-image.atom';
     NavbarAuthBtnAtom,
     NavbarBtnLoggedAtom,
     CircleImageAtom,
+    SliderAtom
   ],
 })
 export class GlobalDesignSystemAtomicModule { }

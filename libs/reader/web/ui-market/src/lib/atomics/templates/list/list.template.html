@@ -1,21 +1,14 @@
 <section class="w-full max-w-screen-xl mx-auto">
-  <div class="grid grid-cols-12 gap-6">
-    <div class="col-span-2 md:col-span-8">
+  <div class="grid grid-cols-12 gap-2">
+    <div class="col-span-2 md:col-span-7">
       <tab-page #tabHead [tabs]="tabs" class="mb-4"></tab-page>
-      <list-detail-long-book
-        *ngIf="tabHead.currentTab.name === 'Truyện dài'"
-      ></list-detail-long-book>
-      <list-detail-short-book
-        *ngIf="tabHead.currentTab.name === 'Truyện ngắn'"
-      ></list-detail-short-book>
-      <list-detail-prose
-        *ngIf="tabHead.currentTab.name === 'Tiểu thuyết'"
-      ></list-detail-prose>
+      <list-detail-long-book *ngIf="tabHead.currentTab.name === 'Truyện dài'"></list-detail-long-book>
+      <list-detail-short-book *ngIf="tabHead.currentTab.name === 'Truyện ngắn'"></list-detail-short-book>
+      <list-detail-prose *ngIf="tabHead.currentTab.name === 'Tiểu thuyết'"></list-detail-prose>
     </div>
+    <div class="col-span-2 md:col-span-1"></div>
     <div class="col-span-2 md:col-span-4">
-      <list-detail-top-book
-        [ngClass]="(tabHead.currentTab.name === 'Tiểu thuyết')?'pt-16':'pt-44'"
-      >
+      <list-detail-top-book [ngClass]="(tabHead.currentTab.name === 'Tiểu thuyết')?'pt-14':'pt-44'">
       </list-detail-top-book>
     </div>
   </div>
