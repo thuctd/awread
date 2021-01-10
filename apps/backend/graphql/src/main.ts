@@ -1,42 +1,23 @@
-/**
- * This is not a production server yet!
- * This is only a minimal backend to get started.
- */
-
-// const express = require('express');
 import express from 'express';
-
-const app = express();
-
-app.get('/api', (req, res) => {
-  res.send({ message: 'Welcome to graphql!' });
-});
-
-// const { postgraphile } = require('postgraphile');
-// const cors = require('cors');
-// const bodyParser = require('body-parser');
-// const admin = require('firebase-admin');
 import { postgraphile } from 'postgraphile';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import admin from 'firebase-admin';
-
-app.use(cors());
-// Enable the use of request body parsing middleware
-app.use(bodyParser.json());
-app.use(
-  bodyParser.urlencoded({
-    extended: true,
-  })
-);
+const app = express();
 
 // const firebaseConfig = require('./adminsdk.json');
 import firebaseConfig from './adminsdk.json';
 import { IncomingMessage } from 'http';
-admin.initializeApp({
-  credential: admin.credential.cert(firebaseConfig as admin.ServiceAccount),
-  databaseURL: 'https://awready-beta.firebaseio.com',
-});
+import { environment } from '@awread/global/environments';
+
+const HOST = environment['graphql'].host;
+const PORT = environment['graphql'].port;
+const USER = environment['graphql'].username;
+const PASSWORD = environment['graphql'].password;
+const DB_NAME = environment['graphql'].db_name;
+const SCHEMA = environment['graphql'].schema;
+const FIREBASE_URL = environment['firebase'].databaseURL;
+const DB_URL = `postgres://${USER}:${PASSWORD}@${HOST}:${PORT}/${DB_NAME}`;
 
 const asyncMiddleware = (fn) => (req, res, next) => {
   Promise.resolve(fn(req, res, next)).catch(next);
@@ -57,53 +38,24 @@ const checkJwt = async (req, res, next) => {
     res.status(401).send(error);
   }
 };
+const postgraphileOptions = {
+  watchPg: true,
+  graphiql: true,
+  enhanceGraphiql: true,
+  pgSettings: async (req: IncomingMessage & { user: any }) => {
+    console.log('req.user', req.user);
+    return checkRole(req);
+  },
+};
 
-app.use('/graphql', asyncMiddleware(checkJwt));
+admin.initializeApp({
+  credential: admin.credential.cert(firebaseConfig as admin.ServiceAccount),
+  databaseURL: FIREBASE_URL,
+});
 
-app.use(
-  postgraphile(
-    'postgres://postgres:admin@localhost:5432/awread_app',
-    'public',
-    {
-      watchPg: true,
-      graphiql: true,
-      enhanceGraphiql: true,
-      // jwtPgTypeIdentifier: 'public.jwt_token',
-      // jwtSecret: 'cc',
-      // pgDefaultRole: 'anonymous',
-      pgSettings: async (req: IncomingMessage & { user: any }) => {
-        console.log('req.user', req.user);
-        return checkRole(req);
-      },
-    }
-  )
-);
-
-function checkRole(req) {
-  if (req.user) {
-    if (req.user.role === 'mod') {
-      console.log('role is admin');
-      return {
-        role: 'admin',
-        'jwt.claims.user_id': req.user.uid,
-      };
-    }
-
-    console.log('role is writer');
-    return {
-      role: 'writer',
-      'jwt.claims.user_id': req.user.uid,
-      // req.user.uid,
-    };
-  } else {
-    console.warn('failed to authenticate, using role default (anonymous)');
-    // role null will be using default role of Postgraphile
-    return {
-      role: 'writer',
-      'jwt.claims.user_id': '10f62cca-d75d-4b7c-8869-9ee319819431',
-    };
-  }
-}
+app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.post('/setCustomClaims', (req, res) => {
   // Get the ID token passed.
@@ -146,8 +98,38 @@ app.post('/setCustomClaims', (req, res) => {
     });
 });
 
+app.use('/graphql', asyncMiddleware(checkJwt));
+
+app.use(postgraphile(DB_URL, SCHEMA, postgraphileOptions));
+
 const port = process.env.port || 5000;
 const server = app.listen(port, () => {
   console.log(`Listening at http://localhost:${port}/graphiql`);
 });
 server.on('error', console.error);
+
+function checkRole(req) {
+  if (req.user) {
+    if (req.user.role === 'mod') {
+      console.log('role is admin');
+      return {
+        role: 'admin',
+        'jwt.claims.user_id': req.user.uid,
+      };
+    }
+
+    console.log('role is writer');
+    return {
+      role: 'writer',
+      'jwt.claims.user_id': req.user.uid,
+      // req.user.uid,
+    };
+  } else {
+    console.warn('failed to authenticate, using role default (anonymous)');
+    // role null will be using default role of Postgraphile
+    return {
+      role: 'writer',
+      'jwt.claims.user_id': '10f62cca-d75d-4b7c-8869-9ee319819431',
+    };
+  }
+}
