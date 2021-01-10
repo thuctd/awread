@@ -1,5 +1,7 @@
+import { User } from './../models/current-user.model';
+import { CurrentUserStore } from './../states/current-user/current-user.store';
 import { CurrentUserService } from './../states/current-user/current-user.service';
-import { tap, catchError, retry } from 'rxjs/operators';
+import { tap, catchError, retry, map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { CurrentUserApi } from '../apis/current-user.api';
 import { of, throwError } from 'rxjs';
@@ -8,31 +10,39 @@ import { of, throwError } from 'rxjs';
 export class CurrentUserGear {
   constructor(
     private currentUserApi: CurrentUserApi,
-    private currentUserService: CurrentUserService
+    private currentUserService: CurrentUserService,
+    private currentUserStore: CurrentUserStore
   ) {}
 
   getCurrentUser() {
     return this.currentUserApi.getCurrentUser().pipe(
-      tap((res) => {
-        console.log('current user: ', res);
-        if (res && res.data && res.data['allGetCurrentUsers']['nodes'].length) {
-          const user = res.data['allGetCurrentUsers']['nodes'][0];
-          this.currentUserService.setCurrentUserToStore(user);
+      map((res) => {
+        if (res['data'] && res['data']['allGetCurrentUsers']['nodes']) {
+          const user = res['data']['allGetCurrentUsers']['nodes'];
+          return user;
+        }
+        return [];
+      }),
+      tap((users) => {
+        console.log('current user: ', users);
+        if (users && users.length) {
+          this.currentUserService.setCurrentUserAkita(users[0]);
         }
       }),
       catchError((err) => of(err))
     );
   }
 
-  update(user) {
+  update(user: User) {
     return this.currentUserApi.update(user).pipe(
       tap((res) => {
         if (res && res['data']) {
-          alert('Update thanh cong roi nhe babe!');
+          alert('update ok');
+          this.currentUserStore.updateCurrentUserAkita(user);
         }
       }),
       catchError((err) => {
-        alert('Update loi nhe!');
+        alert('Update loi!');
         return throwError(err);
       }),
       retry(2)

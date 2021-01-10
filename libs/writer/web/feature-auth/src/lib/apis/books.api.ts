@@ -1,4 +1,4 @@
-import { Book } from './../models/book.model';
+import { Book, createBookObject } from './../models/book.model';
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
 
@@ -178,18 +178,7 @@ export class BooksApi {
           }
         }
       `,
-      // TODO: dung Book(Book) trong ../model de tao book moi thay vi khoi tao object nay
-      variables: {
-        bookid: book.bookid,
-        userid: book.userid,
-        title: book.title ?? '',
-        description: book.description ?? '',
-        tags: book.tags ?? [],
-        completed: book.completed ?? false,
-        status: book.status ?? 'DRAFT',
-        updatedat: new Date(),
-        publishedat: new Date(),
-      },
+      variables: createBookObject(book),
     });
   }
 
@@ -224,16 +213,7 @@ export class BooksApi {
           }
         }
       `,
-      // TODO: dung Book(Book) trong ../model de tao book moi thay vi khoi tao object nay
-      variables: {
-        bookid: book.bookid,
-        title: book.title ?? '',
-        description: book.description ?? '',
-        tags: book.tags ?? [],
-        status: book.status ?? 'DRAFT',
-        completed: book.completed ?? false,
-        updatedat: new Date(),
-      },
+      variables: createBookObject(book),
     });
   }
 

@@ -38,27 +38,27 @@ admin.initializeApp({
   databaseURL: 'https://awready-beta.firebaseio.com',
 });
 
-// const asyncMiddleware = (fn) => (req, res, next) => {
-//   Promise.resolve(fn(req, res, next)).catch(next);
-// };
+const asyncMiddleware = (fn) => (req, res, next) => {
+  Promise.resolve(fn(req, res, next)).catch(next);
+};
 
-// const checkJwt = async (req, res, next) => {
-//   try {
-//     const token = req.headers.authorization?.split('Bearer ')[1];
-//     if (!token) {
-//       console.log('no token found');
-//       next();
-//     } else {
-//       const decodedToken = await admin.auth().verifyIdToken(token);
-//       req['user'] = decodedToken;
-//       next();
-//     }
-//   } catch (error) {
-//     res.status(401).send(error);
-//   }
-// };
+const checkJwt = async (req, res, next) => {
+  try {
+    const token = req.headers.authorization?.split('Bearer ')[1];
+    if (!token) {
+      console.log('no token found');
+      next();
+    } else {
+      const decodedToken = await admin.auth().verifyIdToken(token);
+      req['user'] = decodedToken;
+      next();
+    }
+  } catch (error) {
+    res.status(401).send(error);
+  }
+};
 
-// app.use('/graphql', asyncMiddleware(checkJwt));
+app.use('/graphql', asyncMiddleware(checkJwt));
 
 app.use(
   postgraphile(
@@ -92,14 +92,14 @@ function checkRole(req) {
     console.log('role is writer');
     return {
       role: 'writer',
-      'jwt.claims.user_id': '10f62cca-d75d-4b7c-8869-9ee319819431',
+      'jwt.claims.user_id': req.user.uid,
       // req.user.uid,
     };
   } else {
     console.warn('failed to authenticate, using role default (anonymous)');
     // role null will be using default role of Postgraphile
     return {
-      role: 'writer',
+      role: 'anonymous',
       'jwt.claims.user_id': '10f62cca-d75d-4b7c-8869-9ee319819431',
     };
   }

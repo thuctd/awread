@@ -22,6 +22,11 @@ export class DetailPage implements OnInit {
   bookId: string;
   chapterEntity$: any;
   chapterListByBookId$ = this.chaptersFacade.chapterListByBookId$;
+  tabsHead = [
+    { name: 'Tables of Contents', tabName: 'toc' },
+    { name: 'Story Details', tabName: 'book' },
+  ];
+  selectedTab = 'toc';
   constructor(
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
@@ -34,9 +39,20 @@ export class DetailPage implements OnInit {
 
   ngOnInit(): void {
     this.bookId = this.activatedRoute.snapshot.params['bookId'];
+    this.checkActiveTab();
     this.getAllChapters();
     this.initForm();
     this.updateForm();
+  }
+
+  private checkActiveTab() {
+    return this.activatedRoute.paramMap.subscribe((params) => {
+      if (params.get('type') === 'create') {
+        this.selectedTab = 'book';
+      } else {
+        this.selectedTab = 'toc';
+      }
+    });
   }
 
   createNewChapterEvent() {
