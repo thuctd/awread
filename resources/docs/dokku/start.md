@@ -22,33 +22,6 @@ $ dokku letsencrypt django_dokku_docker
 
 $ dokku letsencrypt:cron-job --add
 
-# SSH Problem
-
-WARNING: ssh-add causing error if ssh, should delete all key to use with
-ssh-add -D
-bash:
-$ eval `ssh-agent -s`
-$ ssh-add -k ~/.ssh/id_rsa
-$ cat ~/.ssh/id_rsa.pub | ssh root@103.109.43.242 dokku ssh-keys:add hiepxanh
-ssh-copy-id -i ~/.ssh/mykey user@host
-
-windows:
-ssh-add -k C:\Users\hiepx\.ssh\id_rsa
-Get-Command ssh
-
-# SSH config
-
-add this to ~/.ssh/config
-
-```
-Host dokku_server
-    ForwardAgent yes
-    Hostname 165.22.153.24
-    Port 22
-    ServerAliveInterval 60
-    ServerAliveCountMax 60
-```
-
 # postgres install
 
 - on the Dokku host
