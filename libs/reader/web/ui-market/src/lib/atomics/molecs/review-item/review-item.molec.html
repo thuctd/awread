@@ -1,0 +1,16 @@
+<div class="w-11/12 text-gray-800">
+    <div class="flex leading-normal p-2 lg:px-0">
+        <img class="w-20 border rounded-full" src="http://tachyons.io/img/avatar-mrmrs.jpg" />
+        <div class="pl-3 flex-auto">
+            <div class="text-sm font-medium mb-1">{{review.userName}}</div>
+            <dl class="mt2 f6 mb-1">
+                <dd class="flex items-center mb-1">
+                    <atom-rating class="mr-4 text-xs"></atom-rating>
+                    <span class="ml-0 text-xs font-light text-gray-400">{{review.createAt}}</span>
+                </dd>
+                <dd class="ml-0 lg:text-sm sm:text-xs mb-1">{{review.content}}</dd>
+                <atom-icon-btn [icon]="icons.faThumbsUp" [value]="'999'" (submitEvent)="submitEvent($event)"></atom-icon-btn>
+            </dl>
+        </div>
+    </div>
+</div>

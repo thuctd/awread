@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StorybookSupportModule } from '../storybook-support.module';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { AuthBgAtom } from './atoms/auth-bg/auth-bg.atom';
 import { CheckBtnAtom } from './atoms/check-btn/check-btn.atom';
@@ -53,7 +54,13 @@ import { CreationSubmitBtnAtom } from './atoms/creation-submit-btn/creation-subm
 import { CreationSocialBtnAtom } from './atoms/creation-social-btn/creation-social-btn.atom';
 import { QuillModule } from 'ngx-quill';
 import { WrtEditerAtom } from './atoms/wrt-editer/wrt-editer.atom';
-
+import { SelectAtom } from './atoms/select/select.atom';
+import { SearchNavbarAtom } from './atoms/search-navbar/search-navbar.atom';
+import { SearchBookAtom } from './atoms/search-book/search-book.atom';
+import { LogoNolinkAtom } from './atoms/logo-nolink/logo-nolink.atom';
+import { AuthBgMobileAtom } from './atoms/auth-bg-mobile/auth-bg-mobile.atom';
+import { BarSeperateAtom } from './atoms/bar-seperate/bar-seperate.atom';
+import { ExampleDialogAtom } from './atoms/example-dialog/example-dialog.atom';
 import { PaginationAtom } from './atoms/pagination/pagination.atom';
 import { RatingAtom } from './atoms/rating/rating.atom';
 import { TitleItemAtom } from './atoms/title-item/title-item.atom';
@@ -68,17 +75,37 @@ import { BaseBtnAtom } from './atoms/base-btn/base-btn.atom';
 import { BaseLinkAtom } from './atoms/base-link/base-link.atom';
 import { RdListTabPageAtom } from './atoms/rd-list-tab-page/rd-list-tab-page.atom';
 import { AuthorAtom } from './atoms/author/author.atom';
-
 import { DefaultCoverAtom } from './atoms/default-cover/default-cover.atom';
 import {
   DefaultCoverModule,
   CloseOnOutsideModule,
 } from '@awread/global/packages';
+import { NavLinkAtom } from './atoms/nav-link/nav-link.atom';
+import { DropdownLinkAtom } from './atoms/dropdown-link/dropdown-link.atom';
+import { BreadcrumbTextAtom } from './atoms/breadcrumb-text/breadcrumb-text.atom';
+import { BreadcrumbLinkAtom } from './atoms/breadcrumb-link/breadcrumb-link.atom';
+import { IconTextAtom } from './atoms/icon-text/icon-text.atom';
+import { DetailInfoLineAtom } from './atoms/detail-info-line/detail-info-line.atom';
+import { RoundBtnAtom } from './atoms/round-btn/round-btn.atom';
+import { DetailTitleAtom } from './atoms/detail-title/detail-title.atom';
+import { DetailImageAtom } from './atoms/detail-image/detail-image.atom';
+import { IconTextButtonAtom } from './atoms/icon-text-button/icon-text-button.atom';
+import { LabelUnderlineAtom } from './atoms/label-underline/label-underline.atom';
+import { IconBtnAtom } from './atoms/icon-btn/icon-btn.atom';
+import { ReviewActionAtom } from './atoms/review-action/review-action.atom';
+import { ReviewInputAtom } from './atoms/review-input/review-input.atom';
+import { SearchBtnAtom } from './atoms/search-btn/search-btn.atom';
+import { ChapterTitleAtom } from './atoms/chapter-title/chapter-title.atom';
+import { ChapterPriceAtom } from './atoms/chapter-price/chapter-price.atom';
+import { NavbarAuthBtnAtom } from './atoms/navbar-auth-btn/navbar-auth-btn.atom';
+import { NavbarBtnLoggedAtom } from './atoms/navbar-btn-logged/navbar-btn-logged.atom';
+import { CircleImageAtom } from './atoms/circle-image/circle-image.atom';
 
 @NgModule({
   imports: [
     CommonModule,
     StorybookSupportModule,
+    MatDialogModule,
     QuillModule.forRoot(),
     DefaultCoverModule,
     CloseOnOutsideModule,
@@ -136,6 +163,13 @@ import {
     CreationSubmitBtnAtom,
     CreationSocialBtnAtom,
     QuillModule,
+    SelectAtom,
+    SearchNavbarAtom,
+    SearchBookAtom,
+    LogoNolinkAtom,
+    AuthBgMobileAtom,
+    BarSeperateAtom,
+    ExampleDialogAtom,
     PaginationAtom,
     RatingAtom,
     TitleItemAtom,
@@ -151,6 +185,27 @@ import {
     BaseLinkAtom,
     AuthorAtom,
     DefaultCoverAtom,
+    NavLinkAtom,
+    DropdownLinkAtom,
+    BreadcrumbTextAtom,
+    BreadcrumbLinkAtom,
+    IconTextAtom,
+    DetailInfoLineAtom,
+    RoundBtnAtom,
+    DetailTitleAtom,
+    DetailImageAtom,
+    IconTextButtonAtom,
+    LabelUnderlineAtom,
+    IconBtnAtom,
+    ReviewActionAtom,
+    ReviewInputAtom,
+    SearchBtnAtom,
+    ChapterTitleAtom,
+    ChapterPriceAtom,
+    NavbarAuthBtnAtom,
+    NavbarBtnLoggedAtom,
+    CircleImageAtom,
+    
   ],
   declarations: [
     TabBtnAtom,
@@ -208,6 +263,13 @@ import {
     DetailSocialMenuAtom,
     CreationSubmitBtnAtom,
     CreationSocialBtnAtom,
+    SelectAtom,
+    SearchNavbarAtom,
+    SearchBookAtom,
+    LogoNolinkAtom,
+    AuthBgMobileAtom,
+    BarSeperateAtom,
+    ExampleDialogAtom,
     PaginationAtom,
     RatingAtom,
     TitleItemAtom,
@@ -223,6 +285,26 @@ import {
     BaseLinkAtom,
     AuthorAtom,
     DefaultCoverAtom,
+    NavLinkAtom,
+    DropdownLinkAtom,
+    BreadcrumbTextAtom,
+    BreadcrumbLinkAtom,
+    IconTextAtom,
+    DetailInfoLineAtom,
+    RoundBtnAtom,
+    DetailTitleAtom,
+    DetailImageAtom,
+    IconTextButtonAtom,
+    LabelUnderlineAtom,
+    IconBtnAtom,
+    ReviewActionAtom,
+    ReviewInputAtom,
+    SearchBtnAtom,
+    ChapterTitleAtom,
+    ChapterPriceAtom,
+    NavbarAuthBtnAtom,
+    NavbarBtnLoggedAtom,
+    CircleImageAtom,
   ],
 })
 export class GlobalDesignSystemAtomicModule {}

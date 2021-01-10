@@ -1,0 +1,11 @@
+<a (click)="toggleDisplay()" class="search__btn text-black cursor-pointer text-base lg:text-lg xl:text-xl transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110">
+    <fa-icon [icon]="icons.faSearch"></fa-icon>
+</a>
+<div *ngIf="isDisplay" class="bg-green justify-center flex items-center shadow-md h-32 py-3">
+    <div class="search-a w-full relative mx-10 pt-5">
+        <input-form class="border-grey-300" [faIcon]="icons.faSearch" [placeholder]="'Tìm kiếm tên truyện, tác giả, thể loại truyện'"></input-form>
+        <a (click)="toggleDisplay()" class="close-btn pointer flex items-center flex-no-wrap absolute inset-y-0 right-3">
+            <fa-icon [icon]="icons.faTimes" class="text-grey-300  text-sm "></fa-icon>
+        </a>
+    </div>
+</div>

@@ -1,3 +1,6 @@
-<div class="flex items-center justify-end ">
-    <img [routerLink]="['/signin']" src="/global-assets/images/newlogo.png" class="w-20 h-auto" alt="Awread">
+<div class="flex items-center  " [ngClass]="{'justify-end': !logoWhite}">
+    <img *ngIf="!logoWhite" [routerLink]="['/signin']" src="/global-assets/images/newlogo.png" class="w-20 h-auto" alt="Awread">
+    <a *ngIf="logoWhite" class="inline-block cursor-pointer" [routerLink]="['/home']">
+        <img [routerLink]="['/home']" src="/global-assets/images/logo-white.png" class="w-20 logo__header outline-none" />
+    </a>
 </div>
