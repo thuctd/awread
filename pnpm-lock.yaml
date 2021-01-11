@@ -49,16 +49,16 @@ devDependencies:
   '@commitlint/config-conventional': 11.0.0
   '@nestjs/schematics': 7.2.6_typescript@4.0.5
   '@nestjs/testing': 7.6.4_390b88005b617b606ec544479f6f1d75
-  '@nrwl/angular': 11.0.2_c8be4a2989bfa533c125b25e6422700a
+  '@nrwl/angular': 11.0.2_c1c5cbd772a50e52e04d7c7bc81b18e5
   '@nrwl/cli': 11.0.2
-  '@nrwl/cypress': 11.0.2_c166e20b9bbdf12f11dfb1e38b4b4b82
+  '@nrwl/cypress': 11.0.2_44cec8f42540fc03147b3abe2aec3d1c
   '@nrwl/eslint-plugin-nx': 11.0.2_44347d63f6fca6869f0f6fde9a7cc346
   '@nrwl/express': 11.0.2_068eee078ab885be25aafa8e8772767e
   '@nrwl/jest': 11.0.2_@nrwl+workspace@11.0.2
   '@nrwl/nest': 11.0.2_068eee078ab885be25aafa8e8772767e
   '@nrwl/node': 11.0.2_068eee078ab885be25aafa8e8772767e
   '@nrwl/nx-cloud': 10.1.9
-  '@nrwl/storybook': 11.0.2_c166e20b9bbdf12f11dfb1e38b4b4b82
+  '@nrwl/storybook': 11.0.2_44cec8f42540fc03147b3abe2aec3d1c
   '@nrwl/tao': 11.0.2
   '@nrwl/workspace': 11.0.2_prettier@2.2.1
   '@schematics/angular': 11.0.5
@@ -86,15 +86,15 @@ devDependencies:
   pluralize: 8.0.0
   postcss: 8.2.2
   postcss-import: 14.0.0_postcss@8.2.2
-  postcss-loader: 4.1.0_postcss@8.2.2+webpack@4.44.2
+  postcss-loader: 4.1.0_postcss@8.2.2+webpack@4.45.0
   postcss-scss: 3.0.4
   prettier: 2.2.1
   tailwindcss: 2.0.2_af0f84ec51438f8ab9d26470b52a2535
   ts-jest: 26.4.4_jest@26.6.3+typescript@4.0.5
   ts-node: 9.1.1_typescript@4.0.5
   typescript: 4.0.5
-  webpack: 4.44.2
-  webpack-filter-warnings-plugin: 1.2.1_webpack@4.44.2
+  webpack: 4.45.0
+  webpack-filter-warnings-plugin: 1.2.1_webpack@4.45.0
 lockfileVersion: 5.2
 packages:
   /@angular-builders/custom-webpack/11.0.0_b6760f87550c5a261d51b191cbb74e5e:
@@ -2638,16 +2638,16 @@ packages:
       node: '>= 6'
     resolution:
       integrity: sha512-TzEC1XMi1hJkywWpRfD2clreTa/Z+lOrXDCxxBTBPEcY5azdPi56A6Xw+O4tWJnaJH3iIE7G5aDXZC6JgRZLcA==
-  /@cypress/webpack-preprocessor/4.1.5_webpack@4.44.2:
+  /@cypress/webpack-preprocessor/4.1.5_webpack@4.45.0:
     dependencies:
       bluebird: 3.7.1
       debug: 4.1.1
-      webpack: 4.44.2
+      webpack: 4.45.0
     dev: true
     optionalDependencies:
       '@babel/core': 7.12.10
       '@babel/preset-env': 7.12.11_@babel+core@7.12.10
-      babel-loader: 8.2.2_cb0b35cdd86d43ae111e54bfa48070d7
+      babel-loader: 8.2.2_54320005add0a0a8e11f570069c4ef76
     peerDependencies:
       webpack: ^4.18.1
     resolution:
@@ -3751,10 +3751,10 @@ packages:
       node: '>=10'
     resolution:
       integrity: sha512-Uv6h1sT+0DrblvIrolFtbvM1FgWm+/sy4B3pvLp67Zys+thcukzS5ekn7HsZFGpWP4Q3fYJCljbWQE/XivMRLw==
-  /@nrwl/angular/11.0.2_c8be4a2989bfa533c125b25e6422700a:
+  /@nrwl/angular/11.0.2_c1c5cbd772a50e52e04d7c7bc81b18e5:
     dependencies:
       '@angular-devkit/schematics': 11.0.5
-      '@nrwl/cypress': 11.0.2_c166e20b9bbdf12f11dfb1e38b4b4b82
+      '@nrwl/cypress': 11.0.2_44cec8f42540fc03147b3abe2aec3d1c
       '@nrwl/devkit': 11.0.2
       '@nrwl/jest': 11.0.2_@nrwl+workspace@11.0.2
       '@nrwl/linter': 11.0.2_@nrwl+workspace@11.0.2
@@ -3782,12 +3782,12 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-bjELE45kKr5jqqKr1D7PSimrOxRVaD7eFpDSNvpx7mYY7Iz2vgdnJipGpMNlb21XzyOtsyqTstimbedUL/1ntg==
-  /@nrwl/cypress/11.0.2_c166e20b9bbdf12f11dfb1e38b4b4b82:
+  /@nrwl/cypress/11.0.2_44cec8f42540fc03147b3abe2aec3d1c:
     dependencies:
       '@angular-devkit/architect': 0.1100.5
       '@angular-devkit/core': 11.0.5
       '@angular-devkit/schematics': 11.0.5
-      '@cypress/webpack-preprocessor': 4.1.5_webpack@4.44.2
+      '@cypress/webpack-preprocessor': 4.1.5_webpack@4.45.0
       '@nrwl/devkit': 11.0.2
       '@nrwl/workspace': 11.0.2_prettier@2.2.1
       cypress: 6.2.0
@@ -3931,9 +3931,9 @@ packages:
     dev: true
     resolution:
       integrity: sha512-4Zi1GzOzn1mYoHplS/nFglFPoGYcaz6mgtLyT+u96uSvxSLSoq2SpcdcJ8Z5iEy1MmyCbcH6PdiVicZoKbVofg==
-  /@nrwl/storybook/11.0.2_c166e20b9bbdf12f11dfb1e38b4b4b82:
+  /@nrwl/storybook/11.0.2_44cec8f42540fc03147b3abe2aec3d1c:
     dependencies:
-      '@nrwl/cypress': 11.0.2_c166e20b9bbdf12f11dfb1e38b4b4b82
+      '@nrwl/cypress': 11.0.2_44cec8f42540fc03147b3abe2aec3d1c
       '@nrwl/devkit': 11.0.2
       '@nrwl/workspace': 11.0.2_prettier@2.2.1
       core-js: 3.8.1
@@ -5798,7 +5798,7 @@ packages:
       fast-deep-equal: 3.1.3
       fast-json-stable-stringify: 2.1.0
       json-schema-traverse: 0.4.1
-      uri-js: 4.4.0
+      uri-js: 4.4.1
     resolution:
       integrity: sha512-j3fVLgvTo527anyYyJOGTYJbG+vnnQYvE0m5mmkc1TK+nxAppkCLMIL0aZ4dblVCNoGShhm+kzE4ZUykBoMg4g==
   /ajv/6.9.1:
@@ -6289,14 +6289,14 @@ packages:
   /axios/0.19.2:
     dependencies:
       follow-redirects: 1.5.10
-    deprecated: 'Critical security vulnerability fixed in v0.21.1. For more information, see https://github.com/axios/axios/pull/3410'
+    deprecated: Critical security vulnerability fixed in v0.21.1. For more information, see https://github.com/axios/axios/pull/3410
     dev: true
     resolution:
       integrity: sha512-fjgm5MvRHLhx+osE2xoekY70AhARk3a6hkN+3Io1jc00jtquGvxYlKlsFUhmUET0V5te6CcZI7lcv2Ym61mjHA==
   /axios/0.21.0:
     dependencies:
       follow-redirects: 1.13.1
-    deprecated: 'Critical security vulnerability fixed in v0.21.1. For more information, see https://github.com/axios/axios/pull/3410'
+    deprecated: Critical security vulnerability fixed in v0.21.1. For more information, see https://github.com/axios/axios/pull/3410
     dev: false
     resolution:
       integrity: sha512-fmkJBknJKoZwem3/IKSSLpkdNXZeBu5Q7GA/aRsr2btgrptmSCxi2oFjZHqGdK9DoTil9PIHlPIZw2EcRJXRvw==
@@ -6375,6 +6375,23 @@ packages:
       webpack: '>=2'
     resolution:
       integrity: sha512-7q7nC1tYOrqvUrN3LQK4GwSk/TQorZSOlO9C+RZDZpODgyN4ZlCqE5q9cDsyWOliN+aU9B4JX01xK9eJXowJLw==
+  /babel-loader/8.2.2_54320005add0a0a8e11f570069c4ef76:
+    dependencies:
+      '@babel/core': 7.12.10
+      find-cache-dir: 3.3.1
+      loader-utils: 1.4.0
+      make-dir: 3.1.0
+      schema-utils: 2.7.1
+      webpack: 4.45.0
+    dev: true
+    engines:
+      node: '>= 8.9'
+    optional: true
+    peerDependencies:
+      '@babel/core': ^7.0.0
+      webpack: '>=2'
+    resolution:
+      integrity: sha512-JvTd0/D889PQBtUXJ2PXaKU/pjZDMtHA9V2ecm+eNRmmBCMR09a+fmpGTNwnJtFmFl5Ei7Vy47LjBb+L0wQ99g==
   /babel-loader/8.2.2_cb0b35cdd86d43ae111e54bfa48070d7:
     dependencies:
       '@babel/core': 7.12.10
@@ -6695,12 +6712,12 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha512-Un7MIEDdUC5gNpcGDV97op1Ywk748MpHcFTHoYs6qnj1Z3j7I53VG3nwZhKzoBZmbdRNnb6WRdFlwl7tSDuZGw==
-  /binary-extensions/2.1.0:
+  /binary-extensions/2.2.0:
     dev: true
     engines:
       node: '>=8'
     resolution:
-      integrity: sha512-1Yj8h9Q+QDF5FzhMs/c9+6UntbD5MkRfRwac8DoEm9ZfUBZ7tZ55YcGVAzEe4bXsdQHEk+s9S5wsOKVdZrw0tQ==
+      integrity: sha512-jDctJ/IVQbZoJykoeHbhXpOlNBqGNcwXJKJog42E5HDPUwQTSdjCHdihjj0DlnheQ7blbT6dHOafNAiS8ooQKA==
   /binary/0.3.0:
     dependencies:
       buffers: 0.1.1
@@ -7325,6 +7342,23 @@ packages:
       fsevents: 2.1.3
     resolution:
       integrity: sha512-DtM3g7juCXQxFVSNPNByEC2+NImtBuxQQvWlHunpJIS5Ocr0lG306cC7FCi7cEA0fzmybPUIl4txBIobk1gGOQ==
+  /chokidar/3.5.0:
+    dependencies:
+      anymatch: 3.1.1
+      braces: 3.0.2
+      glob-parent: 5.1.1
+      is-binary-path: 2.1.0
+      is-glob: 4.0.1
+      normalize-path: 3.0.0
+      readdirp: 3.5.0
+    dev: true
+    engines:
+      node: '>= 8.10.0'
+    optional: true
+    optionalDependencies:
+      fsevents: 2.3.1
+    resolution:
+      integrity: sha512-JgQM9JS92ZbFR4P90EvmzNpSGhpPBGBSj10PILeDyYFwp4h2/D9OM03wsJ4zW1fEp4ka2DGrnUeD7FuvQ2aZ2Q==
   /chownr/1.1.4:
     dev: true
     resolution:
@@ -8556,14 +8590,14 @@ packages:
   /debug/4.1.1:
     dependencies:
       ms: 2.1.3
-    deprecated: 'Debug versions >=3.2.0 <3.2.7 || >=4 <4.3.1 have a low-severity ReDos regression when used in a Node.js environment. It is recommended you upgrade to 3.2.7 or 4.3.1. (https://github.com/visionmedia/debug/issues/797)'
+    deprecated: Debug versions >=3.2.0 <3.2.7 || >=4 <4.3.1 have a low-severity ReDos regression when used in a Node.js environment. It is recommended you upgrade to 3.2.7 or 4.3.1. (https://github.com/visionmedia/debug/issues/797)
     dev: true
     resolution:
       integrity: sha512-pYAIzeRo8J6KPEaJ0VWOh5Pzkbw/RetuzehGM7QRRX5he4fPHx2rdKMB256ehJCkX+XRQm16eZLqLNS8RSZXZw==
   /debug/4.2.0:
     dependencies:
       ms: 2.1.2
-    deprecated: 'Debug versions >=3.2.0 <3.2.7 || >=4 <4.3.1 have a low-severity ReDos regression when used in a Node.js environment. It is recommended you upgrade to 3.2.7 or 4.3.1. (https://github.com/visionmedia/debug/issues/797)'
+    deprecated: Debug versions >=3.2.0 <3.2.7 || >=4 <4.3.1 have a low-severity ReDos regression when used in a Node.js environment. It is recommended you upgrade to 3.2.7 or 4.3.1. (https://github.com/visionmedia/debug/issues/797)
     dev: true
     engines:
       node: '>=6.0'
@@ -10520,6 +10554,15 @@ packages:
       - darwin
     resolution:
       integrity: sha512-bTLYHSeC0UH/EFXS9KqWnXuOl/wHK5Z/d+ghd5AsFMYN7wIGkUCOJyzy88+wJKkZPGON8u4Z9f6U4FdgURE9qA==
+  /fsevents/2.3.1:
+    dev: true
+    engines:
+      node: ^8.16.0 || ^10.6.0 || >=11.0.0
+    optional: true
+    os:
+      - darwin
+    resolution:
+      integrity: sha512-YR47Eg4hChJGAB1O3yEAOkGO+rlzutoICGqGo9EZ4lKWokzZRSyIW1QmTzqjtw8MJdj9srP869CuWw/hyzSiBw==
   /fstream/1.0.12:
     dependencies:
       graceful-fs: 4.2.4
@@ -11917,7 +11960,7 @@ packages:
       integrity: sha1-dfFmQrSA8YenEcgUFh/TpKdlWJg=
   /is-binary-path/2.1.0:
     dependencies:
-      binary-extensions: 2.1.0
+      binary-extensions: 2.2.0
     dev: true
     engines:
       node: '>=8'
@@ -15705,7 +15748,7 @@ packages:
       webpack: ^4.0.0 || ^5.0.0
     resolution:
       integrity: sha512-pntA9zIR14drQo84yGTjQJg1m7T0DkXR4vXYHBngiRZdJtEeCrojL6lOpqUanMzG375lIJbT4Yug85zC/AJWGw==
-  /postcss-loader/4.1.0_postcss@8.2.2+webpack@4.44.2:
+  /postcss-loader/4.1.0_postcss@8.2.2+webpack@4.45.0:
     dependencies:
       cosmiconfig: 7.0.0
       klona: 2.0.4
@@ -15713,7 +15756,7 @@ packages:
       postcss: 8.2.2
       schema-utils: 3.0.0
       semver: 7.3.4
-      webpack: 4.44.2
+      webpack: 4.45.0
     dev: true
     engines:
       node: '>= 10.13.0'
@@ -17113,7 +17156,7 @@ packages:
       request-promise-core: 1.1.4_request@2.88.2
       stealthy-require: 1.1.1
       tough-cookie: 2.5.0
-    deprecated: 'request-promise-native has been deprecated because it extends the now deprecated request package, see https://github.com/request/request/issues/3142'
+    deprecated: request-promise-native has been deprecated because it extends the now deprecated request package, see https://github.com/request/request/issues/3142
     dev: true
     engines:
       node: '>=0.12.0'
@@ -17143,7 +17186,7 @@ packages:
       tough-cookie: 2.5.0
       tunnel-agent: 0.6.0
       uuid: 3.4.0
-    deprecated: 'request has been deprecated, see https://github.com/request/request/issues/3142'
+    deprecated: request has been deprecated, see https://github.com/request/request/issues/3142
     engines:
       node: '>= 6'
     resolution:
@@ -17226,7 +17269,7 @@ packages:
     resolution:
       integrity: sha512-QEb4A76c8Mi7I3xNKXlRKQSlLBwjUV/ULFMP+G7n3/7tJZ8MG5wsZ3ucxP1Jz8Vevn6fnJsxDx9cIls+utGzPQ==
   /resolve-url/0.2.1:
-    deprecated: 'https://github.com/lydell/resolve-url#deprecated'
+    deprecated: https://github.com/lydell/resolve-url#deprecated
     resolution:
       integrity: sha1-LGN/53yJOv0qZj/iGqkIAGjiBSo=
   /resolve/1.17.0:
@@ -18817,6 +18860,25 @@ packages:
       webpack: ^4.0.0
     resolution:
       integrity: sha512-04Rfe496lN8EYruwi6oPQkG0vo8C+HT49X687FZnpPF0qMAIHONI6HEXYPKDOE8e5HjXTyKfqRd/agHtH0kOtw==
+  /terser-webpack-plugin/1.4.5_webpack@4.45.0:
+    dependencies:
+      cacache: 12.0.4
+      find-cache-dir: 2.1.0
+      is-wsl: 1.1.0
+      schema-utils: 1.0.0
+      serialize-javascript: 4.0.0
+      source-map: 0.6.1
+      terser: 4.8.0
+      webpack: 4.45.0
+      webpack-sources: 1.4.3
+      worker-farm: 1.7.0
+    dev: true
+    engines:
+      node: '>= 6.9.0'
+    peerDependencies:
+      webpack: ^4.0.0
+    resolution:
+      integrity: sha512-04Rfe496lN8EYruwi6oPQkG0vo8C+HT49X687FZnpPF0qMAIHONI6HEXYPKDOE8e5HjXTyKfqRd/agHtH0kOtw==
   /terser-webpack-plugin/3.1.0_webpack@4.44.2:
     dependencies:
       cacache: 15.0.5
@@ -19519,10 +19581,16 @@ packages:
   /uri-js/4.4.0:
     dependencies:
       punycode: 2.1.1
+    dev: false
     resolution:
       integrity: sha512-B0yRTzYdUCCn9n+F4+Gh4yIDtMQcaJsmYBDsTSG8g/OejKBodLQ2IHfN3bM7jUsRXndopT7OIXWdYqc1fjmV6g==
+  /uri-js/4.4.1:
+    dependencies:
+      punycode: 2.1.1
+    resolution:
+      integrity: sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==
   /urix/0.1.0:
-    deprecated: 'Please see https://github.com/lydell/urix#deprecated'
+    deprecated: Please see https://github.com/lydell/urix#deprecated
     resolution:
       integrity: sha1-2pN/emLiH+wf0Y1Js1wpNQZ6bHI=
   /url-join/0.0.1:
@@ -19781,7 +19849,7 @@ packages:
       neo-async: 2.6.2
     dev: true
     optionalDependencies:
-      chokidar: 3.4.3
+      chokidar: 3.5.0
       watchpack-chokidar2: 2.0.1
     resolution:
       integrity: sha512-9P3MWk6SrKjHsGkLT2KHXdQ/9SNkyoJbabxnKOoJepsvJjJG8uYTR3yTPxPQvNDI3w4Nz1xnE0TLHK4RIVe/MQ==
@@ -19960,6 +20028,16 @@ packages:
       webpack: ^2.0.0 || ^3.0.0 || ^4.0.0
     resolution:
       integrity: sha512-Ez6ytc9IseDMLPo0qCuNNYzgtUl8NovOqjIq4uAU8LTD4uoa1w1KpZyyzFtLTEMZpkkOkLfL9eN+KGYdk1Qtwg==
+  /webpack-filter-warnings-plugin/1.2.1_webpack@4.45.0:
+    dependencies:
+      webpack: 4.45.0
+    dev: true
+    engines:
+      node: '>= 4.3 < 5.0.0 || >= 5.10'
+    peerDependencies:
+      webpack: ^2.0.0 || ^3.0.0 || ^4.0.0
+    resolution:
+      integrity: sha512-Ez6ytc9IseDMLPo0qCuNNYzgtUl8NovOqjIq4uAU8LTD4uoa1w1KpZyyzFtLTEMZpkkOkLfL9eN+KGYdk1Qtwg==
   /webpack-hot-middleware/2.25.0:
     dependencies:
       ansi-html: 0.0.7
@@ -20113,6 +20191,45 @@ packages:
         optional: true
     resolution:
       integrity: sha512-6KJVGlCxYdISyurpQ0IPTklv+DULv05rs2hseIXer6D7KrUicRDLFb4IUM1S6LUAKypPM/nSiVSuv8jHu1m3/Q==
+  /webpack/4.45.0:
+    dependencies:
+      '@webassemblyjs/ast': 1.9.0
+      '@webassemblyjs/helper-module-context': 1.9.0
+      '@webassemblyjs/wasm-edit': 1.9.0
+      '@webassemblyjs/wasm-parser': 1.9.0
+      acorn: 6.4.2
+      ajv: 6.12.6
+      ajv-keywords: 3.5.2_ajv@6.12.6
+      chrome-trace-event: 1.0.2
+      enhanced-resolve: 4.3.0
+      eslint-scope: 4.0.3
+      json-parse-better-errors: 1.0.2
+      loader-runner: 2.4.0
+      loader-utils: 1.4.0
+      memory-fs: 0.4.1
+      micromatch: 3.1.10
+      mkdirp: 0.5.5
+      neo-async: 2.6.2
+      node-libs-browser: 2.2.1
+      schema-utils: 1.0.0
+      tapable: 1.1.3
+      terser-webpack-plugin: 1.4.5_webpack@4.45.0
+      watchpack: 1.7.5
+      webpack-sources: 1.4.3
+    dev: true
+    engines:
+      node: '>=6.11.5'
+    hasBin: true
+    peerDependencies:
+      webpack-cli: '*'
+      webpack-command: '*'
+    peerDependenciesMeta:
+      webpack-cli:
+        optional: true
+      webpack-command:
+        optional: true
+    resolution:
+      integrity: sha512-JhDaVi4CbRcwLLAoqC7eugMSMJnZbIfE2AyjaZ19pnOIh/R2O/lXOiXA2tQFN0iXEcxgpPJsPJHW2wOWqiTLcw==
   /websocket-driver/0.6.5:
     dependencies:
       websocket-extensions: 0.1.4
