@@ -1,12 +1,16 @@
 import { Router } from '@angular/router';
 import { TransformBookDataGear } from './transform-book-data.gear';
+// TODO: import  ../books thoi
 import { BooksStore } from './../states/books/books.store';
+// TODO: import  ../addons thoi
 import { FirebaseFirestoreAddon } from './../addons/firebase-firestore.addon';
+// TODO: import  ../apis thoi
 import { BooksApi } from './../apis/books.api';
 import { Injectable } from '@angular/core';
 import { of, throwError } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
-import { createBookObject } from '../..';
+// TODO: import sai, phải là ../models
+import { createBookObject } from '../models';
 
 @Injectable({ providedIn: 'root' })
 export class BooksGear {
@@ -16,7 +20,7 @@ export class BooksGear {
     private firebaseFirestoreAddon: FirebaseFirestoreAddon,
     private transformBookDataGear: TransformBookDataGear,
     private router: Router
-  ) {}
+  ) { }
 
   updateBookByIdInAkita(id: string, book) {
     return this.booksStore.updateBookById(id, book);

@@ -1,3 +1,4 @@
+// TODO: ../states/chapter-detail thoi 
 import { ChapterDetailQuery } from './../states/chapter-detail/chapter-detail.query';
 import { ChapterDetailStore } from './../states/chapter-detail/chapter-detail.store';
 import { Router } from '@angular/router';
@@ -19,7 +20,7 @@ export class ChaptersFacade {
     private chapterDetailQuery: ChapterDetailQuery,
     private chaptersQuery: ChaptersQuery,
     private firestoreGear: FirestoreGear
-  ) {}
+  ) { }
 
   getChapterCountAkita() {
     return this.chaptersQuery.getCount();
@@ -33,7 +34,7 @@ export class ChaptersFacade {
     this.chaptersStore.add(chapter);
   }
 
-  deleteChapterInAkita(chapterid: string) {}
+  deleteChapterInAkita(chapterid: string) { }
 
   updateChapterInAkita(chapterid: string, chapter) {
     return this.chaptersStore.updateChapterById(chapterid, chapter);

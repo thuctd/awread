@@ -1,5 +1,6 @@
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AuthRoutingGear } from './auth-routing.gear';
+// TODO: import addons onlny
 import { FirebaseAuthSocialAddon } from './../addons/firebase-auth-social.addon';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
@@ -17,7 +18,7 @@ export class FirebaseAuthGear {
     private firebaseAuthSocialAddon: FirebaseAuthSocialAddon,
     private authRoutingGear: AuthRoutingGear,
     private afAuth: AngularFireAuth
-  ) {}
+  ) { }
 
   shouldLinkProviderPassword(userAccount, currentUser: firebase.User) {
     return this.authApi

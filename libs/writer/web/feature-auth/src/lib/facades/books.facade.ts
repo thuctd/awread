@@ -1,7 +1,10 @@
 import { FirestoreGear } from './../gears/firestore.gear';
+// TODO: ../states/books thoi
 import { BooksQuery } from './../states/books/books.query';
 import { tap, catchError, map } from 'rxjs/operators';
+// TODO: ../states/books thoi
 import { BooksStore } from './../states/books/books.store';
+// TODO: ../gears thoi 
 import { BooksGear } from './../gears/books.gear';
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
@@ -14,7 +17,7 @@ export class BooksFacade {
     private booksStore: BooksStore,
     private booksQuery: BooksQuery,
     private firestoreGear: FirestoreGear
-  ) {}
+  ) { }
 
   setBookIdActiveAkita(bookid: string) {
     return this.booksStore.setActive(bookid);

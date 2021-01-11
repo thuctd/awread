@@ -1,4 +1,5 @@
 import { Router } from '@angular/router';
+//TODO: xoa di 
 import { ForgotPasswordGear } from './../gears/forgot-password.gear';
 import { Injectable } from '@angular/core';
 import { LoginGear, LogoutGear, RegisterGear } from '../gears';
@@ -19,7 +20,7 @@ export class AuthFacade {
     private registerGear: RegisterGear,
     private currentUserQuery: CurrentUserQuery,
     private router: Router
-  ) {}
+  ) { }
 
   logout() {
     this.logoutGear.logout();
