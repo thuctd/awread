@@ -31,7 +31,7 @@ export class SnackbarsService {
       duration,
       horizontalPosition: 'end',
       verticalPosition: 'top',
-      panelClass: ['snackbar-notify', 'bg-primary']
+      panelClass: ['snackbar-notify', 'bg-yellow-400']
     });
   }
 
