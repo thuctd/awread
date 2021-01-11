@@ -1,8 +1,7 @@
 import { ChapterDetailQuery } from './../states/chapter-detail/chapter-detail.query';
 import { ChapterDetailStore } from './../states/chapter-detail/chapter-detail.store';
 import { Router } from '@angular/router';
-import { tap, catchError, map } from 'rxjs/operators';
-import { BooksFacade } from '@awread/writer/web/feature-auth';
+import { BooksFacade } from './books.facade';
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
 import { ChaptersGear, FirestoreGear } from '../gears';

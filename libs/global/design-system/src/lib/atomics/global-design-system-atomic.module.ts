@@ -75,6 +75,7 @@ import { BaseBtnAtom } from './atoms/base-btn/base-btn.atom';
 import { BaseLinkAtom } from './atoms/base-link/base-link.atom';
 import { RdListTabPageAtom } from './atoms/rd-list-tab-page/rd-list-tab-page.atom';
 import { AuthorAtom } from './atoms/author/author.atom';
+import { NgImageSliderModule } from 'ng-image-slider';
 import { DefaultCoverAtom } from './atoms/default-cover/default-cover.atom';
 import {
   DefaultCoverModule,
@@ -100,6 +101,7 @@ import { ChapterPriceAtom } from './atoms/chapter-price/chapter-price.atom';
 import { NavbarAuthBtnAtom } from './atoms/navbar-auth-btn/navbar-auth-btn.atom';
 import { NavbarBtnLoggedAtom } from './atoms/navbar-btn-logged/navbar-btn-logged.atom';
 import { CircleImageAtom } from './atoms/circle-image/circle-image.atom';
+import { SliderAtom } from './atoms/slider/slider.atom';
 
 @NgModule({
   imports: [
@@ -109,6 +111,7 @@ import { CircleImageAtom } from './atoms/circle-image/circle-image.atom';
     QuillModule.forRoot(),
     DefaultCoverModule,
     CloseOnOutsideModule,
+    NgImageSliderModule
   ],
   exports: [
     CloseOnOutsideModule,
@@ -185,6 +188,7 @@ import { CircleImageAtom } from './atoms/circle-image/circle-image.atom';
     BaseLinkAtom,
     AuthorAtom,
     DefaultCoverAtom,
+    NgImageSliderModule,
     NavLinkAtom,
     DropdownLinkAtom,
     BreadcrumbTextAtom,
@@ -205,7 +209,8 @@ import { CircleImageAtom } from './atoms/circle-image/circle-image.atom';
     NavbarAuthBtnAtom,
     NavbarBtnLoggedAtom,
     CircleImageAtom,
-    
+    SliderAtom
+
   ],
   declarations: [
     TabBtnAtom,
@@ -305,6 +310,7 @@ import { CircleImageAtom } from './atoms/circle-image/circle-image.atom';
     NavbarAuthBtnAtom,
     NavbarBtnLoggedAtom,
     CircleImageAtom,
+    SliderAtom
   ],
 })
-export class GlobalDesignSystemAtomicModule {}
+export class GlobalDesignSystemAtomicModule { }
