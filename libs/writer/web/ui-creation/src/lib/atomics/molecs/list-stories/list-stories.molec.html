@@ -1,6 +1,7 @@
 <div class="grid grid-cols-10 gap-2">
   <div class="col-span-3">
-    <list-img-book></list-img-book>
+    <detail-upload-img [srcImg]="srcImg"></detail-upload-img>
+    <span [hidden]="srcImg" class="text-xs sm:text-sm">No Image Cover</span>
   </div>
   <div class="col-span-7">
     <div class="self-start">
@@ -24,16 +25,13 @@
         <fa-icon [icon]="faIcon" class="mr-1"></fa-icon>
       </div>
 
-      <!-- <list-title-book></list-title-book> -->
+      <!-- <atom-title class="truncate" [Title]="'Cô gái chúng ta theo đuổi năm nào'" [sizeText]="'sm'" [sizeTextMd]="'base'" [styleText]="'bold'" [colorText]="'gray'" [numberColorText]="'600'"></atom-title> -->
       <!-- <list-type-book></list-type-book> -->
       <!-- <list-rating-book></list-rating-book> -->
     </div>
-    <div class="self-start mt-2">
-      <list-review-book
-        [countView]="countView"
-        [countPositive]="countPositive"
-        [countNegative]="countNegative"
-      ></list-review-book>
+    <div class="self-start mt-2 flex">
+      <atom-icon-text class="mr-6" [title]="countView"></atom-icon-text>
+      <atom-icon-text [icon]="faIcon2" [title]="countComment"></atom-icon-text>
     </div>
   </div>
 </div>

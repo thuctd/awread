@@ -2,15 +2,13 @@ import { NavLinkAtom } from './nav-link.atom';
 import { GlobalDesignSystemAtomicModule } from '../../global-design-system-atomic.module';
 
 export default {
-  title: 'Design System/Atoms/Nav Link'
-}
+  title: 'Design System/Atoms/Paragraph/textLink/Nav Link',
+};
 
 export const primary = () => ({
   moduleMetadata: {
-    imports: [GlobalDesignSystemAtomicModule]
+    imports: [GlobalDesignSystemAtomicModule],
   },
   component: NavLinkAtom,
-  props: {
-
-  }
-})
+  props: {},
+});

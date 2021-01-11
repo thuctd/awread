@@ -2,15 +2,13 @@ import { NavbarBtnLoggedAtom } from './navbar-btn-logged.atom';
 import { GlobalDesignSystemAtomicModule } from '../../global-design-system-atomic.module';
 
 export default {
-  title: 'Design System/Atoms/Navbar Btn Logged'
-}
+  title: 'Design System/Atoms/Buttons/button/Navbar Btn Logged',
+};
 
 export const primary = () => ({
   moduleMetadata: {
-    imports: [GlobalDesignSystemAtomicModule]
+    imports: [GlobalDesignSystemAtomicModule],
   },
   component: NavbarBtnLoggedAtom,
-  props: {
-
-  }
-})
+  props: {},
+});

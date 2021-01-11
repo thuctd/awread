@@ -1,8 +1,8 @@
-import { MenuNavleftAtom } from "./menu-navleft.atom";
-import { GlobalDesignSystemAtomicModule } from "../../global-design-system-atomic.module";
+import { MenuNavleftAtom } from './menu-navleft.atom';
+import { GlobalDesignSystemAtomicModule } from '../../global-design-system-atomic.module';
 
 export default {
-  title: "Design System/Atoms/Menu Navleft",
+  title: 'Design System/Atoms/Menu/Menu Navleft',
 };
 
 export const Basic = () => ({

@@ -4,13 +4,28 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   selector: 'atom-slider',
   templateUrl: './slider.atom.html',
   styleUrls: ['./slider.atom.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SliderAtom implements OnInit {
+  imageObject = [
+    {
+      image: 'https://via.placeholder.com/1200x500.png',
+      thumbImage: 'https://via.placeholder.com/1200x500.png',
+      alt: 'alt of image',
+    },
+    {
+      image: 'https://via.placeholder.com/1200x500.png',
+      thumbImage: 'https://via.placeholder.com/1200x500.png',
+      alt: 'Image alt',
+    },
+    {
+      image: 'https://via.placeholder.com/1200x500.png',
+      thumbImage: 'https://via.placeholder.com/1200x500.png',
+      alt: 'Image alt',
+    },
+  ];
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

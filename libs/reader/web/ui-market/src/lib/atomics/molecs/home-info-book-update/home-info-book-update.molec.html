@@ -1,6 +1,6 @@
 <div class="pt-2">
     <div class="mb-2">
-        <list-title-book [titleBoook]="book.title" [isSize]="book.isSize"></list-title-book>
+      <atom-title class="truncate" [Title]="book.title" [sizeText]="'sm'" [sizeTextMd]="'base'" [styleText]="'bold'" [colorText]="'gray'" [numberColorText]="'600'"></atom-title>
     </div>
     <div *ngFor="let btn of btns" class="flex">
         <base-btn (onBtnClicked)="submitEvent.emit($event)" [isSize]="btn.isSize" [chapter]="btn.chapter"></base-btn>

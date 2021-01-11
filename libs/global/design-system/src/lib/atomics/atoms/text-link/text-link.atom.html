@@ -1,0 +1,13 @@
+<div>
+  <a
+  (click)="BtnClicked.emit()" [routerLink]="href"
+  class="outline-none
+  text-{{colorTextLink}}-{{numberColorTextLink}}
+  font-{{styleTextLink}}
+  text-{{sizeTextLink}} sm:text-{{sizeTextLinkSm}} md:text-{{sizeTextLinkMd}} lg:text-{{sizeTextLinkLg}} xl:text-{{sizeTextLinkXl}}
+  hover:text-{{colorTextLinkHover}}-{{numberColorTextLinkHover}}
+  "
+  >
+  {{ text }}
+</a>
+</div>

@@ -1,8 +1,5 @@
 <section class="flex flex-col" [formGroup]="profileForm">
-  <title-form-profile
-    [title]="'Thông tin cá nhân'"
-    class="mb-4"
-  ></title-form-profile>
+  <atom-title class="mb-4" [styleText]="'medium'" [sizeText]="'xl'" [colorText]="'gray'" [numberColorText]="'500'" [Title]="'Thông tin cá nhân'"></atom-title>
   <!-- <input-form-profile
     *ngFor="let item of items"
     [key]="item.key"

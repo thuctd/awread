@@ -17,6 +17,7 @@ export class CreationSubmitBtnAtom implements OnInit {
   @Output() btnClicked = new EventEmitter();
   @Input() submitText = 'Publish';
   @Input() active = true;
+  @Input() faIcon;
 
   constructor() {}
 

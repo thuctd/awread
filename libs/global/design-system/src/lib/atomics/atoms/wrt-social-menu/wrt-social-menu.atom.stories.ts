@@ -2,15 +2,13 @@ import { WrtSocialMenuAtom } from './wrt-social-menu.atom';
 import { GlobalDesignSystemAtomicModule } from '../../global-design-system-atomic.module';
 
 export default {
-  title: 'Design System/Atoms/Wrt Social Menu'
-}
+  title: 'Design System/Atoms/Menu/Wrt Social Menu',
+};
 
 export const primary = () => ({
   moduleMetadata: {
-    imports: [GlobalDesignSystemAtomicModule]
+    imports: [GlobalDesignSystemAtomicModule],
   },
   component: WrtSocialMenuAtom,
-  props: {
-
-  }
-})
+  props: {},
+});
