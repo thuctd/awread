@@ -1,13 +1,6 @@
-import { FirestoreGear } from './../gears/firestore.gear';
-// TODO: ../states/books thoi
-import { BooksQuery } from './../states/books/books.query';
-import { tap, catchError, map } from 'rxjs/operators';
-// TODO: ../states/books thoi
-import { BooksStore } from './../states/books/books.store';
-// TODO: ../gears thoi 
-import { BooksGear } from './../gears/books.gear';
 import { Injectable } from '@angular/core';
-import { of } from 'rxjs';
+import { BooksGear } from '../gears';
+import { BooksStore, BooksQuery } from '../states/books';
 
 @Injectable({ providedIn: 'root' })
 export class BooksFacade {
@@ -15,9 +8,8 @@ export class BooksFacade {
   constructor(
     private booksGear: BooksGear,
     private booksStore: BooksStore,
-    private booksQuery: BooksQuery,
-    private firestoreGear: FirestoreGear
-  ) { }
+    private booksQuery: BooksQuery
+  ) {}
 
   setBookIdActiveAkita(bookid: string) {
     return this.booksStore.setActive(bookid);

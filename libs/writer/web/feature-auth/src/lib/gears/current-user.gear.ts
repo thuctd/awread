@@ -1,13 +1,9 @@
-// TODO: import models thoi
-import { User } from './../models/current-user.model';
-// TODO: import states/current-user thoi
-import { CurrentUserStore } from './../states/current-user/current-user.store';
-import { CurrentUserService } from './../states/current-user/current-user.service';
 import { tap, catchError, retry, map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-// TODO: import apis thoi
-import { CurrentUserApi } from '../apis/current-user.api';
 import { of, throwError } from 'rxjs';
+import { User } from '../..';
+import { CurrentUserService, CurrentUserStore } from '../states/current-user';
+import { CurrentUserApi } from '../apis';
 
 @Injectable({ providedIn: 'root' })
 export class CurrentUserGear {
@@ -15,7 +11,7 @@ export class CurrentUserGear {
     private currentUserApi: CurrentUserApi,
     private currentUserService: CurrentUserService,
     private currentUserStore: CurrentUserStore
-  ) { }
+  ) {}
 
   getCurrentUser() {
     return this.currentUserApi.getCurrentUser().pipe(

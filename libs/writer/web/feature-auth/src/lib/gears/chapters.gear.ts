@@ -1,15 +1,12 @@
-// TODO: import  ../model thoi
-import { Chapter } from './../models/chapter.model';
 import { Router } from '@angular/router';
-// TODO: import  ../states/chapers thoi
-import { ChaptersStore } from './../states/chapters/chapters.store';
-// TODO: import  ../apis thoi
-import { ChaptersApi } from './../apis/chapters.api';
 import { Injectable } from '@angular/core';
 import { FirebaseFirestoreAddon } from '../addons';
 import { tap, catchError, map } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { BooksStore } from '../states/books';
+import { Chapter } from '../..';
+import { ChaptersApi } from '../apis';
+import { ChaptersStore } from '../states/chapters';
 
 @Injectable({ providedIn: 'root' })
 export class ChaptersGear {
@@ -19,7 +16,7 @@ export class ChaptersGear {
     private chaptersStore: ChaptersStore,
     private booksStore: BooksStore,
     private router: Router
-  ) { }
+  ) {}
 
   getAllChapters(bookid: string) {
     return this.chaptersApi.getAllChapters(bookid).pipe(

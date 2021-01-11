@@ -1,12 +1,12 @@
-// TODO: ../states/chapter-detail thoi 
-import { ChapterDetailQuery } from './../states/chapter-detail/chapter-detail.query';
-import { ChapterDetailStore } from './../states/chapter-detail/chapter-detail.store';
 import { Router } from '@angular/router';
 import { BooksFacade } from './books.facade';
 import { Injectable } from '@angular/core';
-import { of } from 'rxjs';
 import { ChaptersGear, FirestoreGear } from '../gears';
 import { ChaptersQuery, ChaptersStore } from '../states/chapters';
+import {
+  ChapterDetailStore,
+  ChapterDetailQuery,
+} from '../states/chapter-detail';
 
 @Injectable({ providedIn: 'root' })
 export class ChaptersFacade {
@@ -20,7 +20,7 @@ export class ChaptersFacade {
     private chapterDetailQuery: ChapterDetailQuery,
     private chaptersQuery: ChaptersQuery,
     private firestoreGear: FirestoreGear
-  ) { }
+  ) {}
 
   getChapterCountAkita() {
     return this.chaptersQuery.getCount();
@@ -34,7 +34,7 @@ export class ChaptersFacade {
     this.chaptersStore.add(chapter);
   }
 
-  deleteChapterInAkita(chapterid: string) { }
+  deleteChapterInAkita(chapterid: string) {}
 
   updateChapterInAkita(chapterid: string, chapter) {
     return this.chaptersStore.updateChapterById(chapterid, chapter);

@@ -1,7 +1,5 @@
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AuthRoutingGear } from './auth-routing.gear';
-// TODO: import addons onlny
-import { FirebaseAuthSocialAddon } from './../addons/firebase-auth-social.addon';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import firebase from 'firebase';
@@ -9,6 +7,7 @@ import { AuthApi } from '../apis';
 import { forkJoin, of } from 'rxjs';
 import { tap, catchError, retry } from 'rxjs/operators';
 import { createUserFromFirebase, FirebaseUser } from '../models';
+import { FirebaseAuthSocialAddon } from '../addons';
 
 @Injectable({ providedIn: 'root' })
 export class FirebaseAuthGear {
@@ -18,7 +17,7 @@ export class FirebaseAuthGear {
     private firebaseAuthSocialAddon: FirebaseAuthSocialAddon,
     private authRoutingGear: AuthRoutingGear,
     private afAuth: AngularFireAuth
-  ) { }
+  ) {}
 
   shouldLinkProviderPassword(userAccount, currentUser: firebase.User) {
     return this.authApi
