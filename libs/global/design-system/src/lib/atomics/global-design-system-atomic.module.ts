@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StorybookSupportModule } from '../storybook-support.module';
 import { MatDialogModule } from '@angular/material/dialog';
-import { NgImageSliderModule } from 'ng-image-slider';
 
 import { AuthBgAtom } from './atoms/auth-bg/auth-bg.atom';
 import { CheckBtnAtom } from './atoms/check-btn/check-btn.atom';
@@ -59,6 +58,7 @@ import { RdListContentNovelAtom } from './atoms/rd-list-content-novel/rd-list-co
 import { ImgMAtom } from './atoms/img-m/img-m.atom';
 import { BaseBtnAtom } from './atoms/base-btn/base-btn.atom';
 import { AuthorAtom } from './atoms/author/author.atom';
+import { NgImageSliderModule } from 'ng-image-slider';
 import { DefaultCoverAtom } from './atoms/default-cover/default-cover.atom';
 import {
   DefaultCoverModule,
@@ -155,6 +155,7 @@ import { TextLinkAtom } from './atoms/text-link/text-link.atom';
     BaseBtnAtom,
     AuthorAtom,
     DefaultCoverAtom,
+    NgImageSliderModule,
     NavLinkAtom,
     DropdownLinkAtom,
     BreadcrumbTextAtom,

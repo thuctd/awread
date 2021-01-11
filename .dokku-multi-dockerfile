@@ -1,0 +1,2 @@
+backend-graphql=configs/backend-graphql.Dockerfile
+writer-web=configs/writer-web.Dockerfile

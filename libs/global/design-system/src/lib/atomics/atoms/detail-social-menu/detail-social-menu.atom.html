@@ -1,34 +1,15 @@
-<div
-  closeOnOutSide
-  (clickedOutside)="onClick()"
-  class="relative inline-block text-left"
->
-  <button
-    #toggleButton
-    (click)="toggleMenu($event)"
-    type="button"
-    class="z-10 inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-1 outline-none bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:border-green-400"
-  >
+<div closeOnOutSide (clickedOutside)="onClick()" class="relative inline-block text-left">
+  <button #toggleButton (click)="toggleMenu($event)" type="button" class="z-10 inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-1 outline-none bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:border-green-400">
     <fa-icon [icon]="faIconComments" class="text-gray-700"></fa-icon>
   </button>
-  <div
-    *ngIf="isMenuOpen"
-    class="z-50 origin-top-right absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5"
-  >
+  <div *ngIf="isMenuOpen" class="z-50 origin-top-right absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
     <div class="py-1 text-left">
-      <div
-        *ngFor="let action of actions"
-        class=""
-        (click)="chapterActionEvent.emit(action.type)"
-      >
-        <a
-          class="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 hover:text-gray-900"
-        >
+      <div *ngFor="let action of actions" class="" (click)="chapterActionEvent.emit(action.type)">
+        <a class="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 hover:text-gray-900">
           <span class="text-sm text-gray-500 mr-2">
             <fa-icon [icon]="action.icon"></fa-icon>
           </span>
-          {{action.name | titlecase}}</a
-        >
+          {{action.name | titlecase}}</a>
       </div>
     </div>
   </div>

@@ -250,8 +250,6 @@ export function addProjectStylesFolder(host, projectName, path = `libs/global/st
   // @import './lib/${projectName}theme.scss';
   // @import './lib/${projectName}global.scss';
   // `);
-  // host.create(`${path}/${projectName}material.scss`, ``);
-  // host.create(`${path}/${projectName}tailwind.scss`, ``);
 }
 
 export function updateGenerator() {

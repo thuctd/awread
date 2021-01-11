@@ -1,3 +1,4 @@
+import { User } from '@awread/writer/web/feature-auth';
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import {
   Component,
@@ -17,9 +18,10 @@ import {
 export class MenuNavtopAtom implements OnInit {
   @Input() faIcon = faSignOutAlt;
   @Input() isMenuOpen = false;
-  @Input() avatarUrl = 'http://tachyons.io/img/logo.jpg';
-  @Input() name = 'Hà Thanh Tùng';
-  @Input() email = 'thanhtung@gmail.com';
+  // @Input() avatarUrl = 'http://tachyons.io/img/logo.jpg';
+  // @Input() name = 'Hà Thanh Tùng';
+  // @Input() email = 'thanhtung@gmail.com';
+  @Input() curentUser;
   @Output() signoutEvent = new EventEmitter();
   constructor() {}
 

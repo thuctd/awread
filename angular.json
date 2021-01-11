@@ -107,11 +107,6 @@
     },
     "writer-web": {
       "projectType": "application",
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        }
-      },
       "root": "apps/writer/web",
       "sourceRoot": "apps/writer/web/src",
       "prefix": "awread",
@@ -143,7 +138,6 @@
               "apps/writer/web/src/styles.scss",
               "libs/global/styles/src/tailwind.scss",
               "libs/global/styles/src/index.scss",
-              "libs/global/styles/src/projects/writer-web/writer-web.scss",
               "libs/global/styles/src/projects/writer-web/index.scss"
             ],
             "scripts": [],
@@ -160,33 +154,24 @@
                 }
               ],
               "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
               "extractLicenses": true,
-              "inspect": false
-            },
-            "stage": {
-              "fileReplacements": [
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
                 {
-                  "replace": "libs/global/environments/src/lib/environment.ts",
-                  "with": "libs/global/environments/src/lib/environment.stage.ts"
-                }
-              ],
-              "optimization": true,
-              "extractLicenses": true,
-              "inspect": false
-            },
-            "test": {
-              "fileReplacements": [
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
                 {
-                  "replace": "libs/global/environments/src/lib/environment.ts",
-                  "with": "libs/global/environments/src/lib/environment.test.ts"
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
                 }
-              ],
-              "optimization": true,
-              "extractLicenses": true,
-              "inspect": false
-            },
-            "storybook": {
-              "target-site": "writer-web-story"
+              ]
             }
           }
         },
@@ -199,12 +184,6 @@
           "configurations": {
             "production": {
               "browserTarget": "writer-web:build:production"
-            },
-            "stage": {
-              "browserTarget": "writer-web:build:stage"
-            },
-            "test": {
-              "browserTarget": "writer-web:build:test"
             }
           }
         },
@@ -1276,8 +1255,8 @@
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "apps/reader/web/src/environments/environment.ts",
-                  "with": "apps/reader/web/src/environments/environment.prod.ts"
+                  "replace": "libs/global/environments/src/lib/environment.ts",
+                  "with": "libs/global/environments/src/lib/environment.prod.ts"
                 }
               ],
               "optimization": true,

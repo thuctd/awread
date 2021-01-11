@@ -2,6 +2,8 @@
 <template-detail
   [bookForm]="bookForm"
   [chapters]="chapterListByBookId$ | async"
+  [tabsHead]="tabsHead"
+  [selectedTab]="selectedTab"
   (selectedStatusEvent)="selectedStatusEvent($event)"
   (chapterActionEvent)="chapterActionEvent($event)"
   (createNewChapterEvent)="createNewChapterEvent()"

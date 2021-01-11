@@ -1,6 +1,3 @@
-<div>
-  <a [routerLink]="['/detail']" routerLinkActive="router-link-active"></a>
-</div>
 <template-list
   [books]="bookList$ | async"
   (updateBookStatusEvent)="updateBookStatus($event)"
