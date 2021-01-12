@@ -7,6 +7,7 @@
   (selectedStatusEvent)="selectedStatusEvent($event)"
   (chapterActionEvent)="chapterActionEvent($event)"
   (createNewChapterEvent)="createNewChapterEvent()"
+  (switchTabEvent)="switchTab($event)"
 ></template-detail>
 <button (click)="bookSubmitEvent()">
   {{bookId ? 'Cập nhật' : 'Đăng truyện'}}

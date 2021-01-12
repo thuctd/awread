@@ -1,5 +1,5 @@
 import { Router } from '@angular/router';
-import { BooksFacade } from '@awread/writer/web/feature-auth';
+import { BooksFacade, ChaptersFacade } from '@awread/writer/web/feature-auth';
 import { Directive, Injectable, OnInit } from '@angular/core';
 
 @Injectable({
@@ -8,7 +8,11 @@ import { Directive, Injectable, OnInit } from '@angular/core';
 @Directive()
 export class ListPage implements OnInit {
   bookList$ = this.booksFacade.bookList$;
-  constructor(private booksFacade: BooksFacade, private router: Router) {}
+  constructor(
+    private booksFacade: BooksFacade,
+    private router: Router,
+    private chaptersFacade: ChaptersFacade
+  ) {}
 
   ngOnInit(): void {
     // this.booksFacade.setBooksToStore().subscribe();
@@ -21,7 +25,17 @@ export class ListPage implements OnInit {
   }
 
   addChapter(bookId: string) {
-    this.router.navigate(['writing', { bookId: bookId }]);
+    // get all chapter cho book nay
+    this.chaptersFacade.getAllChapters(bookId).subscribe((res) => {
+      const chapterNumber = this.chaptersFacade.getChapterCountAkita() + 1 ?? 1;
+      this.router.navigate([
+        'writing',
+        {
+          bookId: bookId,
+          chapterNumber,
+        },
+      ]);
+    });
   }
 
   editBook(bookId: string) {
