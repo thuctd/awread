@@ -8,3 +8,6 @@ Run `nx test writer-web-shared` to execute the unit tests.
 
 pass params: this.router.navigate(['writing', {bookId: bookId}]);
 get params: this.activatedRoute.snapshot.params
+
+nx serve backend-graphql
+nx serve writer-web

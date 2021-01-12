@@ -1,9 +1,7 @@
 import { AuthRoutingGear } from './auth-routing.gear';
 import { FirebaseAuthGear } from './firebase-auth.gear';
-import { Router } from '@angular/router';
-import { AuthApi } from './../apis/auth.api';
 import { Injectable } from '@angular/core';
-import { FirebaseAuthAddon, FirebaseAuthSocialAddon } from '../addons';
+import { FirebaseAuthAddon } from '../addons';
 import {
   BasicCredential,
   createUserFromFirebase,
@@ -12,17 +10,13 @@ import {
 import firebase from 'firebase/app';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
-// userCredential.additionalUserInfo.isNewUser;
-// userCredential.credential.providerId;
-// userCredential.user.getIdToken();
+import { AuthApi } from '../apis';
 @Injectable({ providedIn: 'root' })
 export class RegisterGear {
   userCredential: firebase.auth.UserCredential | null = null;
   constructor(
     private firebaseAuthAddon: FirebaseAuthAddon,
-    private firebaseAuthSocialAddon: FirebaseAuthSocialAddon,
     private authApi: AuthApi,
-    private router: Router,
     private firebaseAuthGear: FirebaseAuthGear,
     private authRoutingGear: AuthRoutingGear
   ) {}

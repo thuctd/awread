@@ -1,10 +1,12 @@
 import { Router } from '@angular/router';
-import { ChaptersStore } from './../states/chapters/chapters.store';
-import { ChaptersApi } from './../apis/chapters.api';
 import { Injectable } from '@angular/core';
 import { FirebaseFirestoreAddon } from '../addons';
 import { tap, catchError, map } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { BooksStore } from '../states/books';
+import { Chapter } from '../..';
+import { ChaptersApi } from '../apis';
+import { ChaptersStore } from '../states/chapters';
 
 @Injectable({ providedIn: 'root' })
 export class ChaptersGear {
@@ -12,6 +14,7 @@ export class ChaptersGear {
     private chaptersApi: ChaptersApi,
     private firebaseFirestoreAddon: FirebaseFirestoreAddon,
     private chaptersStore: ChaptersStore,
+    private booksStore: BooksStore,
     private router: Router
   ) {}
 
@@ -51,14 +54,16 @@ export class ChaptersGear {
     );
   }
 
-  createChapter(chapter) {
+  createChapter(chapter: Chapter) {
     const chapterid = this.firebaseFirestoreAddon.createId();
     const chapterDetail = { ...chapter, chapterid };
     return this.chaptersApi.createChapter(chapterDetail).pipe(
       tap((res) => {
         console.log('createChapter res: ', res);
         if (res['data'] && res['data']['createChapter']['chapter']) {
+          const isPublished = chapter.status === 'PUBLISHED';
           this.chaptersStore.add(chapterDetail, { prepend: true });
+          this.booksStore.updateTotalChapterCount(chapter.bookid, isPublished);
         }
         this.router.navigate(['detail', { bookId: chapterDetail.bookid }]);
       }),
