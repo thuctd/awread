@@ -1,9 +1,14 @@
-FROM node:14-alpine
+FROM node:14-alpine as builder
+EXPOSE 5000
 ENV CYPRESS_INSTALL_BINARY=0
 WORKDIR /batcave
-COPY ["package.json", "pnpm-lock.yaml", "./"]
 RUN npm i -g pnpm
-RUN pnpm install --prod --silent --frozen-lockfile
-COPY dist/apps/backend/graphql .
-EXPOSE 5000
+COPY . .
+RUN pnpm install --silent --frozen-lockfile
+
+FROM builder as build-backend-graphql
+RUN pnpm build backend-graphql -- --prod
+
+FROM build-backend-graphql as backend-graphql
+COPY --from=build-backend-graphql /batcave/dist/apps/backend/graphql .
 CMD ["node", "main.js"]
