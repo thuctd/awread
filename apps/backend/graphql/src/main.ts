@@ -10,11 +10,11 @@ import firebaseConfig from './adminsdk.json';
 import { IncomingMessage } from 'http';
 import { environment } from '@awread/global/environments';
 
-const HOST = environment['graphql'].host;
-const PORT = environment['graphql'].port;
-const USER = environment['graphql'].username;
-const PASSWORD = environment['graphql'].password;
-const DB_NAME = environment['graphql'].db_name;
+const HOST = process.env.PG_HOST || environment['graphql'].host;
+const PORT = process.env.PG_PORT || environment['graphql'].port;
+const USER = process.env.PG_USER || environment['graphql'].username;
+const PASSWORD = process.env.PG_PASSWORD || environment['graphql'].password;
+const DB_NAME = process.env.PG_DB_NAME || environment['graphql'].db_name;
 const SCHEMA = environment['graphql'].schema;
 const FIREBASE_URL = environment['firebase'].databaseURL;
 const DB_URL = `postgres://${USER}:${PASSWORD}@${HOST}:${PORT}/${DB_NAME}`;
@@ -104,6 +104,7 @@ app.use(postgraphile(DB_URL, SCHEMA, postgraphileOptions));
 
 const port = process.env.port || 5000;
 const server = app.listen(port, () => {
+  console.log('database url:', DB_URL);
   console.log(`Listening at http://localhost:${port}/graphiql`);
 });
 server.on('error', console.error);
