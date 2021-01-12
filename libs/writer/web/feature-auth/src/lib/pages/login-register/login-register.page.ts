@@ -1,9 +1,9 @@
-import { ProviderType } from './../../models/provider.model';
-import { AuthFacade } from './../../facades/auth.facade';
 import { FormGroup, Validators } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { Directive, Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthFacade } from '../../facades';
+import { ProviderType } from '../../models';
 
 @Injectable({
   providedIn: 'root',
@@ -23,7 +23,7 @@ export class LoginRegisterPage {
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.initForm();
