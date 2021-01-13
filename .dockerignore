@@ -10,4 +10,21 @@ LICENSE
 .git
 .gitignore
 
+.firebase
+.github
 resources
+tools
+.editorconfig
+.eslintrc.json
+.firebaserc
+.lintstagedrc
+.prettierignore
+.prettierrc
+debug.log
+decorate-angular-cli.js
+jest.config.js
+jest.preset.js
+migrations.json
+README.md
+ui-debug.log
+workspace.code-workspace
