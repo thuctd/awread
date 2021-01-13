@@ -6,7 +6,7 @@ DOCKER_BUILDKIT=1 docker build -t awread/backend-graphql . -f ./configs/dockers/
 DOCKER_BUILDKIT=1 docker build -t awread/builder -f ./configs/dockers/Dockerfile .
 
 DOCKER_BUILDKIT=1 docker build -t awread/backend-graphql -f ./configs/dockers/backend-graphql.Dockerfile .
-docker run --rm -d -p 5000:5000 --name hiepxanh awread/backend-graphql
+docker run --rm -d -p 5000:5000 --name backend-graphql.web.1 awread/backend-graphql
 
 DOCKER_BUILDKIT=1 docker build -t awread/writer-web -f ./configs/dockers/writer-web.Dockerfile .
-docker run --rm -d -p 4500:80 --name hiepxanh awread/writer-web
+docker run --rm -d -p 4500:80 --name writer-web.web.1 awread/writer-web
