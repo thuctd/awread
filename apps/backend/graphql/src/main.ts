@@ -10,7 +10,7 @@ import { environment } from '@awread/global/environments';
 const app = express();
 const FIREBASE_URL = environment.firebase.databaseURL;
 const SCHEMA = environment.postgres.SCHEMA;
-const DATABASE_URL = environment.postgres.DB_URL;
+const DATABASE_URL = process.env.DATABASE_URL || environment.postgres.DATABASE_URL;
 
 const asyncMiddleware = (fn) => (req, res, next) => {
   Promise.resolve(fn(req, res, next)).catch(next);

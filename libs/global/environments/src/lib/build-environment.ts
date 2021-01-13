@@ -1,9 +1,8 @@
 
 interface ENV {
-    ENVIRONMENT: string;
-    GRAPHQL_URI: string;
-    DATABASE_URL: string;
-    SCHEMA: string;
+    ENVIRONMENT: undefined | string;
+    GRAPHQL_URI: undefined | string;
+    SCHEMA: undefined | string;
 }
 
 // this $ENV is direct import from webpack.config.js

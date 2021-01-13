@@ -14,7 +14,7 @@ export const environment = {
     appId: '1:158126895088:web:070f0e8433ec012b0a3735',
   },
   postgres: {
-    DB_URL: buildEnvironment?.SCHEMA || 'postgres://postgres:admin@localhost:5432/awread_app',
-    SCHEMA: buildEnvironment?.DATABASE_URL || 'public'
+    DATABASE_URL: 'postgres://postgres:admin@localhost:5432/awread_app',
+    SCHEMA: buildEnvironment?.SCHEMA || 'public'
   },
 };
