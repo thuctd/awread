@@ -17,6 +17,9 @@ export interface Book {
   createdat: Date;
   publishedat: Date;
   updatedat: Date;
+  categoryname: string;
+  totalChapterCount: number;
+  totalChapterCountPublished: number;
 }
 
 export function createBookObject(params: Partial<Book>) {
@@ -33,5 +36,8 @@ export function createBookObject(params: Partial<Book>) {
     createdat: params.createdat ?? new Date(),
     publishedat: params.publishedat ?? new Date(),
     updatedat: params.updatedat ?? new Date(),
+    categoryname: params.categoryname ?? '',
+    totalChapterCount: params.totalChapterCount ?? 0,
+    totalChapterCountPublished: params.totalChapterCountPublished ?? 0,
   } as Book;
 }

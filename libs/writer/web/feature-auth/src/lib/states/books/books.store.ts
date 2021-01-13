@@ -7,21 +7,7 @@ import {
 } from '@datorama/akita';
 import { Book } from '../../..';
 
-export enum VISIBILITY_FILTER {
-  SHOW_ALL = 'SHOW_ALL',
-}
-
-export interface BooksState extends EntityState<Book>, ActiveState {
-  ui: {
-    filter: VISIBILITY_FILTER;
-  };
-}
-const initialState = {
-  ui: {
-    filter: VISIBILITY_FILTER.SHOW_ALL,
-  },
-};
-
+export interface BooksState extends EntityState<Book>, ActiveState {}
 // export interface BookUI {}
 
 // export interface BooksUIState extends EntityState<BookUI>, ActiveState {}
@@ -45,6 +31,18 @@ export class BooksStore extends EntityStore<BooksState> {
   }
 
   addBook(book) {
-    return this.add(book);
+    return this.add(book, { prepend: true });
+  }
+
+  updateTotalChapterCount(bookid: string, isPublished = false) {
+    return this.update(bookid, (book) => {
+      return {
+        ...book,
+        totalChapterCount: book.totalChapterCount + 1,
+        totalChapterCountPublished: isPublished
+          ? book.totalChapterCountPublished + 1
+          : book.totalChapterCountPublished,
+      };
+    });
   }
 }

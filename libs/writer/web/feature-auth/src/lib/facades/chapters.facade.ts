@@ -1,11 +1,12 @@
-import { ChapterDetailQuery } from './../states/chapter-detail/chapter-detail.query';
-import { ChapterDetailStore } from './../states/chapter-detail/chapter-detail.store';
 import { Router } from '@angular/router';
 import { BooksFacade } from './books.facade';
 import { Injectable } from '@angular/core';
-import { of } from 'rxjs';
 import { ChaptersGear, FirestoreGear } from '../gears';
 import { ChaptersQuery, ChaptersStore } from '../states/chapters';
+import {
+  ChapterDetailStore,
+  ChapterDetailQuery,
+} from '../states/chapter-detail';
 
 @Injectable({ providedIn: 'root' })
 export class ChaptersFacade {
@@ -47,7 +48,7 @@ export class ChaptersFacade {
   }
 
   getAllChapters(bookid: string) {
-    return this.chaptersGear.getAllChapters(bookid).pipe();
+    return this.chaptersGear.getAllChapters(bookid);
   }
   getChapterDetail(chapterid: string, bookid: string) {
     return this.chaptersGear.getChapterDetail(chapterid, bookid).pipe();

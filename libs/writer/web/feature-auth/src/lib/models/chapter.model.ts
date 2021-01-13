@@ -1,4 +1,4 @@
-enum ChapterStatus {
+export enum ChapterStatus {
   DRAFT = 'DRAFT',
   PUBLISHED = 'PUBLISHED',
   PENDING = 'PENDING',

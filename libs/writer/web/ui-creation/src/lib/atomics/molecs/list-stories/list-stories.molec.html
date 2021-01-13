@@ -9,10 +9,10 @@
         {{ book.title }}
       </div>
       <div
-        *ngIf="book.categoryByCategoryid.name;else noCategory"
+        *ngIf="book.categoryname;else noCategory"
         class="text-xs font-medium text-green-500"
       >
-        {{ book.categoryByCategoryid.name | titlecase }}
+        {{ book.categoryname | titlecase }}
       </div>
       <ng-template #noCategory>
         <div class="text-xs font-medium text-green-500">-</div>

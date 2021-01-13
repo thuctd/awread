@@ -1,9 +1,8 @@
 <div
   class="w-full justify-around flex bg-white rounded-lg pt-1 pb-2 px-2 relative"
-  [formGroup]="chapterForm"
 >
   <div class="justify-start flex w-4/6 w-50-ns pl-1">
-    <div class="dtc-ns v-mid text-gray-500 pl-8">
+    <div class="dtc-ns v-mid text-gray-500 pl-8" [formGroup]="chapterForm">
       <!-- <wrt-social-menu></wrt-social-menu> -->
       <span class="text-xs font-normal measure">
         <!-- {{chapterForm.get('bookTitle').value | titlecase}} -->

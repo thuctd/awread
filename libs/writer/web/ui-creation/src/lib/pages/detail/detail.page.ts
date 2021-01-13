@@ -1,15 +1,15 @@
 import { switchMap } from 'rxjs/operators';
-import { map, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { ChaptersFacade } from '@awread/writer/web/feature-auth';
 import { CurrentUserFacade } from '@awread/writer/web/feature-auth';
 import { BooksFacade } from '@awread/writer/web/feature-auth';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {
-  ChangeDetectorRef,
   Directive,
   Injectable,
   OnInit,
+  ChangeDetectorRef,
 } from '@angular/core';
 import { of } from 'rxjs';
 
@@ -38,21 +38,19 @@ export class DetailPage implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.bookId = this.activatedRoute.snapshot.params['bookId'];
+    // this.bookId = this.activatedRoute.snapshot.params['bookId'];
     this.checkActiveTab();
     this.getAllChapters();
     this.initForm();
     this.updateForm();
   }
 
-  private checkActiveTab() {
-    return this.activatedRoute.paramMap.subscribe((params) => {
-      if (params.get('type') === 'create') {
-        this.selectedTab = 'book';
-      } else {
-        this.selectedTab = 'toc';
-      }
-    });
+  switchTab(tabName: string) {
+    if (this.bookForm.invalid) {
+      alert('Khong dc de trong bat ky truong nao!');
+      return;
+    }
+    this.selectedTab = tabName;
   }
 
   createNewChapterEvent() {
@@ -86,17 +84,29 @@ export class DetailPage implements OnInit {
   bookSubmitEvent() {
     const userid = this.currentUserFacade.getUserId();
     const book = { ...this.bookForm.value, bookid: this.bookId, userid };
-    // console.log("let's go update book: ", book);
     if (this.bookId) {
-      this.booksFacade.editBook(book).subscribe();
+      this.booksFacade.editBook(book).subscribe(() => {
+        this.selectedTab = 'toc';
+        this.cd.detectChanges();
+      });
     } else {
       this.booksFacade.addBook(book).subscribe();
     }
-    this.router.navigate(['list']);
   }
 
   selectedStatusEvent(status: string) {
     this.bookForm.patchValue({ status });
+  }
+
+  private checkActiveTab() {
+    return this.activatedRoute.paramMap.subscribe((params) => {
+      this.bookId = params.get('bookId');
+      if (params.get('type') === 'create') {
+        this.selectedTab = 'book';
+      } else {
+        this.selectedTab = 'toc';
+      }
+    });
   }
 
   private createChapter() {
