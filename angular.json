@@ -1136,10 +1136,8 @@
       "architect": {
         "build": {
           "builder": "@nrwl/node:build",
-          "outputs": [
-            "{options.outputPath}"
-          ],
           "options": {
+            "webpackConfig": "configs/tailwind/webpack.config.js",
             "outputPath": "dist/apps/backend/graphql",
             "main": "apps/backend/graphql/src/main.ts",
             "tsConfig": "apps/backend/graphql/tsconfig.app.json",

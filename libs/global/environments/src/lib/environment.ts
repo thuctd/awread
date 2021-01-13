@@ -1,3 +1,6 @@
+import { buildEnvironment } from './build-environment';
+console.log('buildEnvironment', buildEnvironment);
+
 export const environment = {
   production: false,
   uri: 'http://localhost:5000/graphql',
@@ -10,12 +13,8 @@ export const environment = {
     messagingSenderId: '158126895088',
     appId: '1:158126895088:web:070f0e8433ec012b0a3735',
   },
-  graphql: {
-    host: 'localhost',
-    port: '5432',
-    db_name: 'awread_app',
-    schema: 'public',
-    username: 'postgres',
-    password: 'admin',
+  postgres: {
+    DB_URL: 'postgres://postgres:admin@localhost:5432/awread_app',
+    SCHEMA: 'public'
   },
 };

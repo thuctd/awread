@@ -3,22 +3,15 @@ import { postgraphile } from 'postgraphile';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import admin from 'firebase-admin';
-const app = express();
-
-// const firebaseConfig = require('./adminsdk.json');
 import firebaseConfig from './adminsdk.json';
 import { IncomingMessage } from 'http';
 import { environment } from '@awread/global/environments';
 
-const HOST = environment['graphql'].host;
-const PORT = environment['graphql'].port;
-const USER = environment['graphql'].username;
-const PASSWORD = environment['graphql'].password;
-const DB_NAME = environment['graphql'].db_name;
-const SCHEMA = environment['graphql'].schema;
-const FIREBASE_URL = environment['firebase'].databaseURL;
-const DB_URL = `postgres://${USER}:${PASSWORD}@${HOST}:${PORT}/${DB_NAME}`;
-const DATABASE_URL = process.env.DATABASE_URL || DB_URL;
+const app = express();
+const FIREBASE_URL = environment.firebase.databaseURL;
+const SCHEMA = environment.postgres.SCHEMA;
+const DATABASE_URL = environment.postgres.DB_URL;
+
 const asyncMiddleware = (fn) => (req, res, next) => {
   Promise.resolve(fn(req, res, next)).catch(next);
 };
