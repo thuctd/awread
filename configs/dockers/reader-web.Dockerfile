@@ -1,6 +1,6 @@
 # // NOTE: update this
-ARG application=backend-graphql
-ARG applicationPath=backend/graphql
+ARG application=reader-web
+ARG applicationPath=reader/web
 
 FROM node:14-alpine as builder
 ENV CYPRESS_INSTALL_BINARY=0
@@ -11,26 +11,26 @@ RUN pnpm install --silent --frozen-lockfile
 RUN pnpm run postinstall
 COPY tsconfig*.json angular.json nx.json ./
 COPY configs/tailwind configs/tailwind
-
-# RUN ls
-# RUN echo application is: $application
-# RUN echo applicationPath is: $applicationPath
-
+# RUN LS
 # //NOTE: update this
-FROM builder as build-backend-graphql
+FROM builder as build-reader-web
 ARG application
 ARG applicationPath
 COPY libs/global ./libs/global
 COPY libs/$applicationPath ./libs/$applicationPath
 COPY apps/$applicationPath ./apps/$applicationPath
-
 RUN pnpm build $application -- --prod
 
+# RUN echo application is: $application
+# RUN echo applicationPath is: $applicationPath
 # //NOTE: update this
-FROM build-backend-graphql as backend-graphql
+FROM nginx:stable-alpine as reader-web
 ARG application
 ARG applicationPath
-EXPOSE 5000
+EXPOSE 80
+WORKDIR /app
 # //NOTE: update this
-COPY --from=build-backend-graphql /batcave/dist/apps/$applicationPath .
-CMD ["node", "main.js"]
+COPY --from=build-reader-web /batcave/dist/apps/$applicationPath /app
+COPY /configs/nginx/default5.conf /etc/nginx/conf.d/default.conf
+
+CMD ["nginx", "-g", "daemon off;"]

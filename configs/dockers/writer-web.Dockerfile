@@ -1,3 +1,4 @@
+# // NOTE: update this
 ARG application=writer-web
 ARG applicationPath=writer/web
 
@@ -10,12 +11,11 @@ RUN pnpm install --silent --frozen-lockfile
 RUN pnpm run postinstall
 COPY tsconfig*.json angular.json nx.json ./
 COPY configs/tailwind configs/tailwind
-# RUN ls
-
+# RUN LS
+# //NOTE: update this
 FROM builder as build-writer-web
 ARG application
 ARG applicationPath
-
 COPY libs/global ./libs/global
 COPY libs/$applicationPath ./libs/$applicationPath
 COPY apps/$applicationPath ./apps/$applicationPath
@@ -23,12 +23,13 @@ RUN pnpm build $application -- --prod
 
 # RUN echo application is: $application
 # RUN echo applicationPath is: $applicationPath
-
+# //NOTE: update this
 FROM nginx:stable-alpine as writer-web
 ARG application
 ARG applicationPath
 EXPOSE 80
 WORKDIR /app
+# //NOTE: update this
 COPY --from=build-writer-web /batcave/dist/apps/$applicationPath /app
 COPY /configs/nginx/default5.conf /etc/nginx/conf.d/default.conf
 
