@@ -6,6 +6,7 @@ RUN npm i -g pnpm
 COPY ["package.json", "pnpm-lock.yaml", "./"]
 RUN pnpm install --silent --frozen-lockfile --filter=!cypress --filter=!prettier
 
+
 FROM builder as build-backend-graphql
 COPY tsconfig*.json angular.json nx.json ./
 COPY libs/global ./libs/global
