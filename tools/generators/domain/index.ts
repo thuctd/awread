@@ -1,9 +1,6 @@
-import {
-  chain, externalSchematic, Rule, SchematicContext, Tree, SchematicsException, schematic, noop
-} from '@angular-devkit/schematics';
+import { chain, externalSchematic, Rule, SchematicContext, Tree, SchematicsException, schematic } from '@angular-devkit/schematics';
 import { modifyEslint, appAndLibSetting } from '../../utility/edit-angular-json';
 import { dasherize } from '@nrwl/workspace/src/utils/strings';
-import { getProjectConfig, readJsonFile, updateWorkspaceInTree } from '@nrwl/workspace';
 
 export default function (schema: any): Rule {
   return async (tree: Tree, context: SchematicContext) => {
@@ -26,34 +23,6 @@ export default function (schema: any): Rule {
   }
 }
 
-function addProxy(frontendProjectName: string): Rule {
-  return (host: Tree, context: SchematicContext) => {
-    const projectConfig = getProjectConfig(host, frontendProjectName);
-    if (projectConfig.architect && projectConfig.architect.serve) {
-      const pathToProxyFile = `${projectConfig.root}/proxy.conf.json`;
-      host.create(
-        pathToProxyFile,
-        JSON.stringify(
-          {
-            '/api': {
-              target: 'http://localhost:3333',
-              secure: false,
-            },
-          },
-          null,
-          2
-        )
-      );
-
-      updateWorkspaceInTree((json) => {
-        projectConfig.architect.serve.options.proxyConfig = pathToProxyFile;
-        json.projects[frontendProjectName] = projectConfig;
-        return json;
-      })(host, context);
-    }
-  };
-}
-
 function domainDeviceVersion(schema, deviceVersion: 'web' | 'phone') {
   const directoryNoSlash: string = schema.directory.replace(/\//g, '-').trim();
   const domainName = dasherize(directoryNoSlash + '-' + deviceVersion);
@@ -68,7 +37,6 @@ function domainDeviceVersion(schema, deviceVersion: 'web' | 'phone') {
       strict: true,
       tags: `scope:shared,type:app`,
     }),
-    schema.proxy ? addProxy(domainName) : noop(),
     schematic('shell', {
       application: domainName,
       directory,

@@ -178,8 +178,7 @@
         "serve": {
           "builder": "@angular-builders/custom-webpack:dev-server",
           "options": {
-            "browserTarget": "writer-web:build",
-            "proxyConfig": "libs/global/core/src/configs/proxy.conf.json"
+            "browserTarget": "writer-web:build"
           },
           "configurations": {
             "production": {
@@ -509,8 +508,7 @@
         "serve": {
           "builder": "@angular-builders/custom-webpack:dev-server",
           "options": {
-            "browserTarget": "writer-phone:build",
-            "proxyConfig": "libs/global/core/src/configs/proxy.conf.json"
+            "browserTarget": "writer-phone:build"
           },
           "configurations": {
             "production": {
@@ -1284,8 +1282,7 @@
         "serve": {
           "builder": "@angular-builders/custom-webpack:dev-server",
           "options": {
-            "browserTarget": "reader-web:build",
-            "proxyConfig": "apps/reader/web/proxy.conf.json"
+            "browserTarget": "reader-web:build"
           },
           "configurations": {
             "production": {
@@ -1553,8 +1550,7 @@
         "serve": {
           "builder": "@angular-builders/custom-webpack:dev-server",
           "options": {
-            "browserTarget": "reader-phone:build",
-            "proxyConfig": "apps/reader/phone/proxy.conf.json"
+            "browserTarget": "reader-phone:build"
           },
           "configurations": {
             "production": {

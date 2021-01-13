@@ -1,6 +1,7 @@
+console.log('$ENV.GRAPHQL_URI', $ENV.GRAPHQL_URI)
 export const environment = {
   production: true,
-  uri: 'http://localhost:5000/graphql',
+  uri: $ENV?.GRAPHQL_URI,
   firebase: {
     apiKey: 'AIzaSyBYIoCiXcDM4lRoLAVUK4WGAwC9hORR0ow',
     authDomain: 'awready-beta.firebaseapp.com',

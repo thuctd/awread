@@ -1,6 +1,7 @@
 # // NOTE: update this
 ARG application=writer-web
 ARG applicationPath=writer/web
+ARG GRAPHQL_URI=backend-graphql.web.1
 
 FROM node:14-alpine as builder
 ENV CYPRESS_INSTALL_BINARY=0
@@ -16,6 +17,7 @@ COPY configs/tailwind configs/tailwind
 FROM builder as build-writer-web
 ARG application
 ARG applicationPath
+ARG GRAPHQL_URI
 COPY libs/global ./libs/global
 COPY libs/$applicationPath ./libs/$applicationPath
 COPY apps/$applicationPath ./apps/$applicationPath

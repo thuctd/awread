@@ -8,7 +8,11 @@ module.exports = (config) => {
 
   config.plugins.push(
     new webpack.DefinePlugin({
-      __ISSTORYBOOK__: false
+      __ISSTORYBOOK__: false,
+      $ENV: {
+        ENVIRONMENT: JSON.stringify(process.env.ENVIRONMENT),
+        GRAPHQL_URI: JSON.stringify(process.env.GRAPHQL_URI),
+      }
     })
   );
 
