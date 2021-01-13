@@ -23,7 +23,7 @@ export default function (schema: any): Rule {
         serveTarget.builder = '@angular-builders/custom-webpack:dev-server';
         buildTarget.builder = '@angular-builders/custom-webpack:browser';
         buildTarget.options.customWebpackConfig = {
-          path: 'webpack.config.js',
+          path: 'configs/tailwind/webpack.config.js',
         };
       });
 

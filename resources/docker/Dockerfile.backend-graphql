@@ -1,5 +1,0 @@
-# Build the app
-FROM node:15-alpine as base
-WORKDIR /app
-COPY /dist/apps/backend/graphql .
-CMD node main.js
