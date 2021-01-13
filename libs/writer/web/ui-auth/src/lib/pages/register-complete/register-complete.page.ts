@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Directive, Injectable, OnInit } from '@angular/core';
 import { AuthFacade } from '@awread/writer/web/feature-auth';
 import { of } from 'rxjs';
+import { SnackbarsService } from '@awread/global/packages';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +19,8 @@ export class RegisterCompletePage implements OnInit {
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
     private authFacade: AuthFacade,
-    private router: Router
+    private router: Router,
+    private snackbarService: SnackbarsService
   ) {}
 
   ngOnInit(): void {
@@ -44,7 +46,7 @@ export class RegisterCompletePage implements OnInit {
           this.authFacade.linkToProviderGoogleorFacebook(user);
         }),
         catchError((err) => {
-          alert('Đã xảy ra lỗi. Vui lòng thử lại!');
+          this.snackbarService.error('Đã xảy ra lỗi. Vui lòng thử lại!');
           return of(err);
         }),
         retry(3)

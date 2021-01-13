@@ -65,7 +65,6 @@ export class WritingPage implements OnInit {
         })
         .subscribe();
     } else {
-      alert('create chapter loi nhe babe, chon sach di!');
     }
   }
 

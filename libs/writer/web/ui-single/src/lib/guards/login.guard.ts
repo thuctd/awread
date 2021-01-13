@@ -18,7 +18,6 @@ export class LoginGuard implements CanActivate {
         if (user && user.uid) {
           return true;
         }
-        alert('Ban phai dang nhap!');
         this.router.navigate(['login']);
         return false;
       })
