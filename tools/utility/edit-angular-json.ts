@@ -425,7 +425,7 @@ function updateApplicationArchitect(projectName) {
     serveTarget.builder = '@angular-builders/custom-webpack:dev-server';
     buildTarget.builder = '@angular-builders/custom-webpack:browser';
     buildTarget.options.customWebpackConfig = {
-      path: 'webpack.config.js',
+      path: 'configs/tailwind/webpack.config.js',
     };
     // add storybook
     let storybookTarget = p.architect['storybook'];

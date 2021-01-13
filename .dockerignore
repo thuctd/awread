@@ -21,7 +21,6 @@ tools
 .prettierignore
 .prettierrc
 debug.log
-decorate-angular-cli.js
 jest.config.js
 jest.preset.js
 migrations.json

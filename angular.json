@@ -142,7 +142,7 @@
             ],
             "scripts": [],
             "customWebpackConfig": {
-              "path": "webpack.config.js"
+              "path": "configs/tailwind/webpack.config.js"
             }
           },
           "configurations": {
@@ -416,7 +416,7 @@
             ],
             "scripts": [],
             "customWebpackConfig": {
-              "path": "webpack.config.js"
+              "path": "configs/tailwind/webpack.config.js"
             }
           },
           "configurations": {
@@ -1248,7 +1248,7 @@
             ],
             "scripts": [],
             "customWebpackConfig": {
-              "path": "webpack.config.js"
+              "path": "configs/tailwind/webpack.config.js"
             }
           },
           "configurations": {
@@ -1517,7 +1517,7 @@
             ],
             "scripts": [],
             "customWebpackConfig": {
-              "path": "webpack.config.js"
+              "path": "configs/tailwind/webpack.config.js"
             }
           },
           "configurations": {
