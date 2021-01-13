@@ -21,7 +21,7 @@ ARG GRAPHQL_URI
 COPY libs/global ./libs/global
 COPY libs/$applicationPath ./libs/$applicationPath
 COPY apps/$applicationPath ./apps/$applicationPath
-RUN pnpm build $application -- --prod
+RUN pnpm build $application -- --prod --no-progress
 
 # RUN echo application is: $application
 # RUN echo applicationPath is: $applicationPath
