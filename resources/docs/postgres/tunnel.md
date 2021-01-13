@@ -15,6 +15,7 @@ hiepxanh@awread.vn: usname@host
 
 psql -U deploy -d myapp -p 5433 -h 127.0.0.1
 psql -U postgres -d awread_app -p 5433 -h localhost
+psql -U postgres -d awread_app -p 5433 -h localhost
 then enter password on server
 password: 41d4955151312a9a900dc2f3681953c1
 

@@ -1,13 +1,9 @@
-import { getNpmScope, getWorkspace, getWorkspacePath, NxJson, readJsonFile, updateJsonInTree, updateWorkspace, updateWorkspaceInTree } from "@nrwl/workspace";
-import { Rule, Tree, SchematicContext, SchematicsException, noop, chain } from '@angular-devkit/schematics';
-import { workspaces } from '@angular-devkit/core';
+import { getNpmScope, NxJson, readJsonFile, updateJsonInTree, updateWorkspaceInTree } from "@nrwl/workspace";
+import { Rule, Tree, noop, chain } from '@angular-devkit/schematics';
 import { normalize } from "path";
 import { insertCustomCode } from "./insert-custom-code";
 import { addImportPathToModule } from "./add-import-module";
 import { myProjectConfig } from '../my-project-config';
-
-import { ProjectDefinition, ProjectDefinitionCollection } from "@angular-devkit/core/src/workspace/definitions";
-import { getProjectsEntries } from "./guess-workspace";
 // base on: https://github.com/LayZeeDK/nx-tiny-app-project
 // base on: https://indepth.dev/tiny-angular-application-projects-in-nx-workspaces
 
@@ -425,7 +421,7 @@ function updateApplicationArchitect(projectName) {
     serveTarget.builder = '@angular-builders/custom-webpack:dev-server';
     buildTarget.builder = '@angular-builders/custom-webpack:browser';
     buildTarget.options.customWebpackConfig = {
-      path: 'webpack.config.js',
+      path: 'configs/tailwind/webpack.config.js',
     };
     // add storybook
     let storybookTarget = p.architect['storybook'];
