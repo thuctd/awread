@@ -4,13 +4,15 @@ import { of, throwError } from 'rxjs';
 import { User } from '../..';
 import { CurrentUserService, CurrentUserStore } from '../states/current-user';
 import { CurrentUserApi } from '../apis';
+import { SnackbarsService } from '@awread/global/packages';
 
 @Injectable({ providedIn: 'root' })
 export class CurrentUserGear {
   constructor(
     private currentUserApi: CurrentUserApi,
     private currentUserService: CurrentUserService,
-    private currentUserStore: CurrentUserStore
+    private currentUserStore: CurrentUserStore,
+    private snackbarsService: SnackbarsService
   ) {}
 
   getCurrentUser() {
@@ -36,12 +38,12 @@ export class CurrentUserGear {
     return this.currentUserApi.update(user).pipe(
       tap((res) => {
         if (res && res['data']) {
-          alert('update ok');
+          this.snackbarsService.create('Cập nhật thông tin thành công!', 5000);
           this.currentUserStore.updateCurrentUserAkita(user);
         }
       }),
       catchError((err) => {
-        alert('Update loi!');
+        this.snackbarsService.error('Đã xảy ra lỗi. Vui lòng thử lại!', 5000);
         return throwError(err);
       }),
       retry(2)

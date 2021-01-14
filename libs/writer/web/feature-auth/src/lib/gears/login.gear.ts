@@ -1,22 +1,27 @@
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { FirebaseAuthAddon, FirebaseAuthSocialAddon } from '../addons';
-import { createUserFromFirebase, EmailLoginCredential, FirebaseUser, ProviderType } from '../models';
+import {
+  createUserFromFirebase,
+  EmailLoginCredential,
+  FirebaseUser,
+  ProviderType,
+} from '../models';
 import firebase from 'firebase/app';
 import { AuthApi } from '../apis';
 import { AuthRoutingGear } from './auth-routing.gear';
 import { FirebaseAuthGear } from './firebase-auth.gear';
+import { SnackbarsService } from '@awread/global/packages';
 
 @Injectable({ providedIn: 'root' })
 export class LoginGear {
   constructor(
     private firebaseAuthAddon: FirebaseAuthAddon,
-    private firebaseAuthSocialAddon: FirebaseAuthSocialAddon,
     private authApi: AuthApi,
-    private router: Router,
     private authRoutingGear: AuthRoutingGear,
-    private firebaseAuthGear: FirebaseAuthGear
-  ) { }
+    private firebaseAuthGear: FirebaseAuthGear,
+    private snackbarService: SnackbarsService
+  ) {}
 
   loginWithRoleAdmin(credential: EmailLoginCredential) {
     this.loginEmail(credential)
@@ -32,16 +37,16 @@ export class LoginGear {
       const userCredential = await this.firebaseAuthAddon.loginWithEmail(
         credential
       );
-      alert('Login thành công');
+      this.snackbarService.create('Đăng nhập thành công!', 150000);
       this.authRoutingGear.navigateAfterLoginComplete('profile');
       console.log('userCredential', userCredential);
       return userCredential;
     } catch (err) {
       console.log('err', err);
       if (err.code === 'auth/user-not-found') {
-        alert('Tài khoản không tồn tại!');
+        this.snackbarService.error('Tài khoản không tồn tại!', 5000);
       } else if (err.code === 'auth/wrong-password') {
-        alert('Mật khẩu không chính xác!');
+        this.snackbarService.error('Mật khẩu không chính xác!', 5000);
       }
     }
   }

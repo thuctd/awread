@@ -2,12 +2,13 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AuthRoutingGear } from './auth-routing.gear';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import firebase from 'firebase';
+import firebase from 'firebase/app';
 import { AuthApi } from '../apis';
 import { forkJoin, of } from 'rxjs';
 import { tap, catchError, retry } from 'rxjs/operators';
 import { createUserFromFirebase, FirebaseUser } from '../models';
 import { FirebaseAuthSocialAddon } from '../addons';
+import { SnackbarsService } from '@awread/global/packages';
 
 @Injectable({ providedIn: 'root' })
 export class FirebaseAuthGear {
@@ -16,7 +17,8 @@ export class FirebaseAuthGear {
     private router: Router,
     private firebaseAuthSocialAddon: FirebaseAuthSocialAddon,
     private authRoutingGear: AuthRoutingGear,
-    private afAuth: AngularFireAuth
+    private afAuth: AngularFireAuth,
+    private snackbarService: SnackbarsService
   ) {}
 
   shouldLinkProviderPassword(userAccount, currentUser: firebase.User) {
@@ -62,11 +64,13 @@ export class FirebaseAuthGear {
         .pipe(
           tap(() => {
             window.localStorage.removeItem('email_reset_password');
-            alert('Reset password thành công');
+            this.snackbarService.create('Reset password thành công!');
             this.router.navigate(['login']);
           }),
           catchError((err) => {
-            alert('Reset password lỗi');
+            this.snackbarService.error(
+              'Reset password xảy ra lỗi. Vui lòng thử lại!'
+            );
             return of(err);
           }),
           retry(2)
@@ -157,7 +161,9 @@ export class FirebaseAuthGear {
       const user = createUserFromFirebase(newUser);
       this.shouldLinkProviderPassword(user, result.user);
     } catch (error) {
-      alert('Login với facebook bị lỗi!');
+      this.snackbarService.error(
+        'Đăng nhập facebook bị lỗi. Vui lòng thử lại!'
+      );
     }
   }
 
@@ -171,7 +177,7 @@ export class FirebaseAuthGear {
         .auth()
         .fetchSignInMethodsForEmail(user.email);
       if (providers.includes('password')) {
-        alert('Tài khoản đã tồn tại!');
+        this.snackbarService.error('Tài khoản đã tồn tại!');
         return;
       }
       const linkedProvider: any = this.firebaseAuthSocialAddon.getProvider(

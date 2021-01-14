@@ -3,21 +3,14 @@ import { postgraphile } from 'postgraphile';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import admin from 'firebase-admin';
-const app = express();
-
-// const firebaseConfig = require('./adminsdk.json');
 import firebaseConfig from './adminsdk.json';
 import { IncomingMessage } from 'http';
 import { environment } from '@awread/global/environments';
 
-const HOST = environment['graphql'].host;
-const PORT = environment['graphql'].port;
-const USER = environment['graphql'].username;
-const PASSWORD = environment['graphql'].password;
-const DB_NAME = environment['graphql'].db_name;
-const SCHEMA = environment['graphql'].schema;
-const FIREBASE_URL = environment['firebase'].databaseURL;
-const DB_URL = `postgres://${USER}:${PASSWORD}@${HOST}:${PORT}/${DB_NAME}`;
+const app = express();
+const FIREBASE_URL = environment.firebase.databaseURL;
+const SCHEMA = environment.postgres.SCHEMA;
+const DATABASE_URL = process.env.DATABASE_URL || environment.postgres.DATABASE_URL;
 
 const asyncMiddleware = (fn) => (req, res, next) => {
   Promise.resolve(fn(req, res, next)).catch(next);
@@ -100,10 +93,11 @@ app.post('/setCustomClaims', (req, res) => {
 
 app.use('/graphql', asyncMiddleware(checkJwt));
 
-app.use(postgraphile(DB_URL, SCHEMA, postgraphileOptions));
+app.use(postgraphile(DATABASE_URL, SCHEMA, postgraphileOptions));
 
 const port = process.env.port || 5000;
 const server = app.listen(port, () => {
+  console.log('database url:', DATABASE_URL);
   console.log(`Listening at http://localhost:${port}/graphiql`);
 });
 server.on('error', console.error);

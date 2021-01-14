@@ -24,33 +24,3 @@ export function createApollo(httpLink: HttpLink) {
     defaultOptions,
   };
 }
-
-// export function createApollo(httpLink: HttpLink) {
-//     const basic = setContext((operation, context) => ({
-//         headers: {
-//             Accept: 'charset=utf-8'
-//         }
-//     }));
-
-//     const auth = setContext((operation, context) => {
-//         const token = localStorage.getItem('token');
-
-//         if (token === null) {
-//             return {};
-//         } else {
-//             return {
-//                 headers: {
-//                     Authorization: `Bearer ${token}`,
-//                 }
-//             };
-//         }
-//     });
-
-//     const link = ApolloLink.from([basic, auth, httpLink.create({ uri: environment.uri })]);
-//     const cache = new InMemoryCache();
-
-//     return {
-//         link,
-//         cache
-//     }
-// }
