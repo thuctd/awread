@@ -1,0 +1,9 @@
+<atom-example-dialog>
+  <atom-title class="text-center uppercase mt-20" [title]="title.title" [class]="title.class"></atom-title>
+  <atom-title *ngIf="!emailFormControl.valid" class="text-center mt-6" [title]="description.title" [class]="description.class"></atom-title>
+  <forgot-form class="mt-6" [emailFormControl]="emailFormControl"></forgot-form>
+  <submit-btn
+  [name]="'Gửi email hướng dẫn'"
+  [active]="emailFormControl.valid"
+  ></submit-btn>
+</atom-example-dialog>

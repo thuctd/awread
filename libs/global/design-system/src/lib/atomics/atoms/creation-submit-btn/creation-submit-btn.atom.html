@@ -5,7 +5,7 @@
   class="text-sm md:text-xs lg:text-base xl:text-base w-full text-white block cursor-pointer rounded-sm border-green-400 focus:shadow-outline focus:outline-none py-2 px-4 rounded-sm"
   type="button"
 >
-<span class="ml-2 text-xs text-white">
+<span *ngIf="faIcon" class="ml-2 text-xs text-white">
   <fa-icon [icon]="faIcon"></fa-icon>
 </span>
 {{ submitText | titlecase }}

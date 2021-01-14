@@ -12,15 +12,8 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TitleAtom implements OnInit {
-  @Input() Title = 'Title';
-  @Input() colorText = '';
-  @Input() numberColorText = '';
-  @Input() styleText = '';
-  @Input() sizeText = '';
-  @Input() sizeTextSm = '';
-  @Input() sizeTextMd = '';
-  @Input() sizeTextLg = '';
-  @Input() sizeTextXl = '';
+  @Input() title = 'Title';
+  @Input() class = '';
 
   constructor() {}
 
