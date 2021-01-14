@@ -1,17 +1,11 @@
-import {
-    chain, externalSchematic, Rule, SchematicContext, Tree, schematic, noop, apply, url, template,
-    branchAndMerge, mergeWith, move, MergeStrategy, applyTemplates
-} from '@angular-devkit/schematics';
-
-import { getWorkspace, buildDefaultPath } from '@schematics/angular/utility/workspace';
-import { createSharedLibrary, createFiles, updateFiles, appAndLibSetting, componentSetting } from '../../utility/edit-angular-json';
-import * as path from 'path';
+import { chain, externalSchematic, Rule, SchematicContext, Tree, url, template, move } from '@angular-devkit/schematics';
+import { componentSetting } from '../../utility/edit-angular-json';
 import { applyWithSkipExisting } from '@nrwl/workspace/src/utils/ast-utils';
 import { classify } from '@nrwl/workspace/src/utils/strings';
-import { Path, normalize, strings } from '@angular-devkit/core';
-import { getNpmScope, readJsonFile } from '@nrwl/workspace';
+import { strings } from '@angular-devkit/core';
+import { getNpmScope } from '@nrwl/workspace';
 import { spacerize } from '../../utility/text-utility';
-import { guessProject, guessProjectToSchema } from '../../utility/guess-workspace';
+import { guessProjectToSchema } from '../../utility/guess-workspace';
 
 export default function (schema: any): Rule {
     return async (tree: Tree, context: SchematicContext) => {
@@ -29,7 +23,8 @@ export default function (schema: any): Rule {
                 path: generatePath,
                 module: atomicModule,
                 skipTests: true,
-                prefix: schema.type
+                prefix: schema.type,
+                inlineStyle: true
             }));
         const componentStories = parts.map(name =>
             applyWithSkipExisting(url('./files'), [
