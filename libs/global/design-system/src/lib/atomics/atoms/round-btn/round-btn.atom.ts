@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter} from '@angular/core';
 
 @Component({
   selector: 'atom-round-btn',
@@ -9,6 +9,8 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 export class RoundBtnAtom implements OnInit {
   @Input() title = 'Đọc chương đầu';
   @Input() href = '/';
+  @Output() submitEvent = new EventEmitter();
+   
   constructor() { }
 
   ngOnInit(): void {

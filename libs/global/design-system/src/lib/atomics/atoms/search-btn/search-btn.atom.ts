@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 import { faSearch, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -10,6 +10,7 @@ import { faSearch, faTimes } from '@fortawesome/free-solid-svg-icons';
 export class SearchBtnAtom implements OnInit {
   icons = {faSearch, faTimes};
   isDisplay = false;
+  @Output() eventSearch = new EventEmitter();
   constructor() { }
 
   ngOnInit(): void {

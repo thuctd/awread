@@ -1,6 +1,6 @@
 <auth-header [title]="title" [description]="description"> </auth-header>
 <forgot-form [emailFormControl]="emailFormControl"></forgot-form>
-<forgot-actions
+<forgot-actions (keydown.enter)='submitEvent.emit(emailFormControl.value)'
   [title]="'Gửi email hướng dẫn'"
   [active]="emailFormControl.valid"
   (submitEvent)="submitEvent.emit(emailFormControl.value)"

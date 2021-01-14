@@ -1,5 +1,5 @@
 <register-form [form]="authForm"></register-form>
-<submit-btn
+<submit-btn (keydown.enter)="regiterEvent.emit()"
   [active]="authForm.valid"
   [name]="'Đăng ký'"
   (btnClicked)="regiterEvent.emit()"
