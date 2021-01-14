@@ -7,6 +7,7 @@ import { createBookObject } from '../models';
 import { FirebaseFirestoreAddon } from '../addons';
 import { BooksApi } from '../apis';
 import { BooksStore } from '../states/books';
+import { SnackbarsService } from '@awread/global/packages';
 
 @Injectable({ providedIn: 'root' })
 export class BooksGear {
@@ -15,7 +16,8 @@ export class BooksGear {
     private booksStore: BooksStore,
     private firebaseFirestoreAddon: FirebaseFirestoreAddon,
     private transformBookDataGear: TransformBookDataGear,
-    private router: Router
+    private router: Router,
+    private snackbarService: SnackbarsService
   ) {}
 
   updateBookByIdInAkita(id: string, book) {
@@ -64,9 +66,10 @@ export class BooksGear {
           this.booksStore.addBook(bookNew);
           this.router.navigate(['detail', { bookId: bookid, type: 'edit' }]);
         }
+        this.snackbarService.create('Thêm truyện thành công!', 5000);
       }),
       catchError((err) => {
-        alert('create lỗi rồi nhé babe!');
+        this.snackbarService.error('Đã xảy ra lỗi. Vui lòng thử lại!!', 5000);
         return throwError(err);
       })
     );
@@ -82,9 +85,10 @@ export class BooksGear {
         ) {
           this.updateBookByIdInAkita(book.bookid, book);
         }
+        this.snackbarService.create('Cập nhật truyện thành công!', 5000);
       }),
       catchError((err) => {
-        alert('update lỗi rồi nhé babe!');
+        this.snackbarService.error('Đã xảy ra lỗi. Vui lòng thử lại!!', 5000);
         return throwError(err);
       })
     );
@@ -92,9 +96,13 @@ export class BooksGear {
 
   updateBookStatus(bookId: string, status: string) {
     return this.booksApi.updateBookStatus(bookId, status).pipe(
-      tap((res) => console.log('update status books: ', res)),
+      tap((res) => {
+        console.log('update status books: ', res);
+        this.snackbarService.create('Cập nhật trạng thái thành công!', 5000);
+      }),
       catchError((err) => {
         console.error('An error occurred:', err);
+        this.snackbarService.error('Đã xảy ra lỗi. Vui lòng thử lại!!', 5000);
         return throwError(err);
       })
     );
@@ -106,9 +114,10 @@ export class BooksGear {
         if (res) {
           this.booksStore.remove(bookId);
         }
+        this.snackbarService.create('Xóa truyện thành công!', 5000);
       }),
       catchError((err) => {
-        alert('Xoa book loi roi nhé babe!');
+        this.snackbarService.error('Đã xảy ra lỗi. Vui lòng thử lại!!', 5000);
         return throwError(err);
       })
     );

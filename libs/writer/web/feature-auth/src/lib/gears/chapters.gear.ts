@@ -7,6 +7,7 @@ import { BooksStore } from '../states/books';
 import { Chapter } from '../..';
 import { ChaptersApi } from '../apis';
 import { ChaptersStore } from '../states/chapters';
+import { SnackbarsService } from '@awread/global/packages';
 
 @Injectable({ providedIn: 'root' })
 export class ChaptersGear {
@@ -15,7 +16,8 @@ export class ChaptersGear {
     private firebaseFirestoreAddon: FirebaseFirestoreAddon,
     private chaptersStore: ChaptersStore,
     private booksStore: BooksStore,
-    private router: Router
+    private router: Router,
+    private snackbarsService: SnackbarsService
   ) {}
 
   getAllChapters(bookid: string) {
@@ -60,6 +62,7 @@ export class ChaptersGear {
     return this.chaptersApi.createChapter(chapterDetail).pipe(
       tap((res) => {
         console.log('createChapter res: ', res);
+        this.snackbarsService.create('Thêm chương thành công!');
         if (res['data'] && res['data']['createChapter']['chapter']) {
           const isPublished = chapter.status === 'PUBLISHED';
           this.chaptersStore.add(chapterDetail, { prepend: true });
@@ -67,31 +70,41 @@ export class ChaptersGear {
         }
         this.router.navigate(['detail', { bookId: chapterDetail.bookid }]);
       }),
-      catchError((err) => throwError(err))
+      catchError((err) => {
+        this.snackbarsService.error('Đã xảy ra lỗi. Vui lòng thử lại!');
+        return throwError(err);
+      })
     );
   }
 
   updateChapter(chapter) {
     return this.chaptersApi.updateChapter(chapter).pipe(
       tap((res) => {
-        console.log('updateChapter res: ', res);
+        this.snackbarsService.create('Cập nhật chương thành công!');
         if (res['data']) {
           this.chaptersStore.updateChapterById(chapter.chapterid, chapter);
         }
         this.router.navigate(['detail', { bookId: chapter.bookid }]);
       }),
-      catchError((err) => throwError(err))
+      catchError((err) => {
+        this.snackbarsService.error('Đã xảy ra lỗi. Vui lòng thử lại!');
+        return throwError(err);
+      })
     );
   }
 
   removeChapter(chapterid: string) {
     return this.chaptersApi.removeChapter(chapterid).pipe(
       tap((res) => {
+        this.snackbarsService.create('Xóa chương thành công!');
         if (res['data']) {
           this.chaptersStore.remove(chapterid);
         }
       }),
-      catchError((err) => throwError(err))
+      catchError((err) => {
+        this.snackbarsService.error('Đã xảy ra lỗi. Vui lòng thử lại!');
+        return throwError(err);
+      })
     );
   }
 }
