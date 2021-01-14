@@ -1,16 +1,11 @@
-import {
-  createUserFromFirebase,
-  FirebaseUser,
-} from './../models/current-user.model';
+import { createUserFromFirebase, FirebaseUser } from './../models';
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
-import { of, throwError } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
-import { UserInputMutation } from '../..';
 @Injectable({ providedIn: 'root' })
 export class AuthApi {
-  constructor(private apollo: Apollo, private http: HttpClient) {}
+  constructor(private apollo: Apollo, private http: HttpClient) { }
 
   updatePassword(email: string, newPassword: string, type = 'forgot') {
     return this.apollo.mutate({

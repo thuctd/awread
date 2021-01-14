@@ -1,3 +1,4 @@
+import { Book } from '@awread/writer/web/feature-auth';
 import {
   Component,
   OnInit,
@@ -12,7 +13,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListChapterMolec implements OnInit {
-  @Input() book;
+  @Input() book: Book;
   @Input() countTotal = 1000;
   @Input() countPublished = 50;
 

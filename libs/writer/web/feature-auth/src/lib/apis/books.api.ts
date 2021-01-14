@@ -10,7 +10,7 @@ export class BooksApi {
     return this.apollo.query({
       query: gql`
         query getAllBooks {
-          allBooks(condition: { isdeleted: false }) {
+          allBooks(condition: { isdeleted: false }, orderBy: CREATEDAT_DESC) {
             nodes {
               bookid
               title
@@ -27,9 +27,6 @@ export class BooksApi {
               chaptersByBookid(orderBy: CREATEDAT_DESC) {
                 totalCount
                 nodes {
-                  chapterid
-                  title
-                  content
                   status
                   updatedat
                   publishedat

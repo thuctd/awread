@@ -1,10 +1,9 @@
-import { User } from './../models/current-user.model';
-import { CurrentUserStore } from './../states/current-user/current-user.store';
-import { CurrentUserService } from './../states/current-user/current-user.service';
 import { tap, catchError, retry, map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { CurrentUserApi } from '../apis/current-user.api';
 import { of, throwError } from 'rxjs';
+import { User } from '../..';
+import { CurrentUserService, CurrentUserStore } from '../states/current-user';
+import { CurrentUserApi } from '../apis';
 
 @Injectable({ providedIn: 'root' })
 export class CurrentUserGear {

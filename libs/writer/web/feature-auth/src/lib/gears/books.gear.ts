@@ -1,10 +1,12 @@
+import { Router } from '@angular/router';
 import { TransformBookDataGear } from './transform-book-data.gear';
-import { BooksStore } from './../states/books/books.store';
-import { FirebaseFirestoreAddon } from './../addons/firebase-firestore.addon';
-import { BooksApi } from './../apis/books.api';
 import { Injectable } from '@angular/core';
-import { of, throwError } from 'rxjs';
+import { throwError } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
+import { createBookObject } from '../models';
+import { FirebaseFirestoreAddon } from '../addons';
+import { BooksApi } from '../apis';
+import { BooksStore } from '../states/books';
 
 @Injectable({ providedIn: 'root' })
 export class BooksGear {
@@ -12,7 +14,8 @@ export class BooksGear {
     private booksApi: BooksApi,
     private booksStore: BooksStore,
     private firebaseFirestoreAddon: FirebaseFirestoreAddon,
-    private transformBookDataGear: TransformBookDataGear
+    private transformBookDataGear: TransformBookDataGear,
+    private router: Router
   ) {}
 
   updateBookByIdInAkita(id: string, book) {
@@ -53,12 +56,13 @@ export class BooksGear {
 
   addBook(book) {
     const bookid = this.firebaseFirestoreAddon.createId();
-    const bookDetail = { ...book, bookid };
-    return this.booksApi.createBook(bookDetail).pipe(
+    const bookNew = createBookObject({ ...book, bookid });
+    return this.booksApi.createBook(bookNew).pipe(
       tap((res) => {
         console.log('add book res: ', res);
         if (res['data'] && res['data']['createBook']['book']) {
-          this.booksStore.addBook(bookDetail);
+          this.booksStore.addBook(bookNew);
+          this.router.navigate(['detail', { bookId: bookid, type: 'edit' }]);
         }
       }),
       catchError((err) => {
