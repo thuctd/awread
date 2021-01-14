@@ -7,8 +7,8 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BaseLinkAtom implements OnInit {
-  @Output() onBtnClicked = new EventEmitter();
-  @Input() linkTitle = "Xêm thêm...";
+  @Output() submitEvent = new EventEmitter();
+  @Input() linkTitle = 'Xêm thêm...';
   @Input() isSize = true;
 
   constructor() { }

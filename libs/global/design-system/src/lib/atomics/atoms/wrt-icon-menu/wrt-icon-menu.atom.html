@@ -17,7 +17,7 @@
   >
     <div class="py-1 text-left">
       <div *ngFor="let action of actions" class="">
-        <a
+        <a (click)='sumitEvent.emit()'
           href="#"
           class="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 hover:text-gray-900"
         >

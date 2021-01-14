@@ -9,6 +9,7 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 })
 export class CreationSocialBtnAtom implements OnInit {
   @Input() faIcon = faPlus;
+  @Output() submitEvent = new EventEmitter();
 
   constructor() { }
 

@@ -7,7 +7,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Output, Input, EventEmitter
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BaseBtnAtom implements OnInit {
-  @Output() onBtnClicked = new EventEmitter();
+  @Output() submitEvent = new EventEmitter();
   @Input() chapter = 'Chương 1';
   @Input() isSize = true;
 
