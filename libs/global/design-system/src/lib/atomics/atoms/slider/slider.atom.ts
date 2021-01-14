@@ -12,22 +12,22 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SliderAtom implements OnInit {
-  imageObject = [
-    {
-      image: 'https://via.placeholder.com/1200x500.png',
-      thumbImage: 'https://via.placeholder.com/1200x500.png',
-      alt: 'alt of image',
-    },
-    {
-      image: 'https://via.placeholder.com/1200x500.png',
-      thumbImage: 'https://via.placeholder.com/1200x500.png',
-      alt: 'Image alt',
-    },
-    {
-      image: 'https://via.placeholder.com/1200x500.png',
-      thumbImage: 'https://via.placeholder.com/1200x500.png',
-      alt: 'Image alt',
-    },
+
+  @Input() imageObject = [{
+    image: 'https://via.placeholder.com/1200x500.png',
+    thumbImage: 'https://via.placeholder.com/1200x500.png',
+    alt: 'alt of image'
+  },
+  {
+    image: 'https://via.placeholder.com/1200x500.png',
+    thumbImage: 'https://via.placeholder.com/1200x500.png',
+    alt: 'Image alt'
+  },
+  {
+    image: 'https://via.placeholder.com/1200x500.png',
+    thumbImage: 'https://via.placeholder.com/1200x500.png',
+    alt: 'Image alt'
+  }
   ];
 
   constructor() {}
