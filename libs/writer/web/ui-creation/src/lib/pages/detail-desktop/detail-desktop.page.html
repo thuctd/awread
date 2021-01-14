@@ -1,4 +1,3 @@
-<div>Form value: {{bookForm.value | json}}</div>
 <template-detail
   [bookForm]="bookForm"
   [chapters]="chapterListByBookId$ | async"
@@ -9,7 +8,9 @@
   (createNewChapterEvent)="createNewChapterEvent()"
   (switchTabEvent)="switchTab($event)"
 ></template-detail>
-<button (click)="bookSubmitEvent()">
-  {{bookId ? 'Cập nhật' : 'Đăng truyện'}}
-</button>
+<div class="text-center" *ngIf="selectedTab === 'book'">
+  <button (click)="bookSubmitEvent()">
+    {{bookId ? 'Cập nhật' : 'Đăng truyện'}}
+  </button>
+</div>
 <!-- (bookSubmitEvent)="bookSubmitEvent()" -->
