@@ -31,6 +31,6 @@ EXPOSE 80
 WORKDIR /app
 # //NOTE: update this
 COPY --from=build-reader-web /batcave/dist/apps/$applicationPath /app
-COPY /configs/nginx/default5.conf /etc/nginx/nginx.conf
+COPY /configs/nginx/default5.conf /etc/nginx/conf.d/default.conf
 
 CMD ["nginx", "-g", "daemon off;"]
