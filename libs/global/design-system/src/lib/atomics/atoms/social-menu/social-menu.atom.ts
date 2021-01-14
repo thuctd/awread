@@ -17,6 +17,7 @@ import { faEllipsisH } from '@fortawesome/free-solid-svg-icons';
 export class SocialMenuAtom implements OnInit {
   @Input() faIconComments = faEllipsisH;
   @Output() copyToClipboard = new EventEmitter();
+  @Output() deleteToClipboard = new EventEmitter();
   @Input() btn = {
     submitText: 'Copy',
     isActive: false,

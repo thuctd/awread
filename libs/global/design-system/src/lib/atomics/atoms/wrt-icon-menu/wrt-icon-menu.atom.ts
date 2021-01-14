@@ -3,6 +3,8 @@ import {
   OnInit,
   ChangeDetectionStrategy,
   Input,
+  Output,
+  EventEmitter,
 } from '@angular/core';
 import {
   faAngleDown,
@@ -20,6 +22,7 @@ import {
 export class WrtIconMenuAtom implements OnInit {
   @Input() faIcon = faAngleDown;
   @Input() faIconBtn = faAngleDown;
+  @Output() sumitEvent = new EventEmitter();
   @Input() actions = [
     {
       name: 'new chapter',

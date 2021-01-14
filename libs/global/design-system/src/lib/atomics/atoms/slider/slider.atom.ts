@@ -8,7 +8,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 })
 export class SliderAtom implements OnInit {
 
-  imageObject = [{
+  @Input() imageObject = [{
     image: 'https://via.placeholder.com/1200x500.png',
     thumbImage: 'https://via.placeholder.com/1200x500.png',
     alt: 'alt of image'
