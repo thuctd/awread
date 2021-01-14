@@ -1,0 +1,5 @@
+<section>
+  <molec-interrogatory [text]="text" [textLink]="textLink"></molec-interrogatory>
+  <register-form class="mt-4" #registerForm [form]="authForm"></register-form>
+  <molec-submit class="mt-8" (btnClicked)="auth.emit('email')" [active]="registerForm.form.valid" [text]="'Đặng ký'"></molec-submit>
+</section>

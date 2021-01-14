@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms';
 import { GlobalDesignSystemAtomicModule } from '../../global-design-system-atomic.module';
 
 export default {
-  title: 'Design System/Atoms/Input Form Profile',
+  title: 'Design System/Atoms/Inputs/form/Input Form Profile',
 };
 
 export const basic = () => ({

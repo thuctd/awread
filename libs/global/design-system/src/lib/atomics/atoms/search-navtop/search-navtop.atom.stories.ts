@@ -1,10 +1,10 @@
-import { FormControl } from "@angular/forms";
-import { searchNavtopAtom } from "./search-navtop.atom";
-import { GlobalDesignSystemAtomicModule } from "../../global-design-system-atomic.module";
-import { action } from "@storybook/addon-actions";
+import { FormControl } from '@angular/forms';
+import { searchNavtopAtom } from './search-navtop.atom';
+import { GlobalDesignSystemAtomicModule } from '../../global-design-system-atomic.module';
+import { action } from '@storybook/addon-actions';
 
 export default {
-  title: "Design System/Atoms/Search Navtop",
+  title: 'Design System/Atoms/Inputs/search/Search Navtop',
 };
 
 export const noData = () => ({
@@ -13,7 +13,7 @@ export const noData = () => ({
   },
   component: searchNavtopAtom,
   props: {
-    searchEvent: action("Search result"),
+    searchEvent: action('Search result'),
   },
 });
 
@@ -23,7 +23,7 @@ export const withText = () => ({
   },
   component: searchNavtopAtom,
   props: {
-    control: new FormControl("Ngay ay vi ai ma doi thay"),
-    searchEvent: action("Search result"),
+    control: new FormControl('Ngay ay vi ai ma doi thay'),
+    searchEvent: action('Search result'),
   },
 });

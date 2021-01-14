@@ -2,15 +2,13 @@ import { PaginationAtom } from './pagination.atom';
 import { GlobalDesignSystemAtomicModule } from '../../global-design-system-atomic.module';
 
 export default {
-  title: 'Design System/Atoms/Pagination'
-}
+  title: 'Design System/Atoms/selectionGroup/Pagination',
+};
 
 export const primary = () => ({
   moduleMetadata: {
-    imports: [GlobalDesignSystemAtomicModule]
+    imports: [GlobalDesignSystemAtomicModule],
   },
   component: PaginationAtom,
-  props: {
-
-  }
-})
+  props: {},
+});

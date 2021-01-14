@@ -1,8 +1,8 @@
-import { MenuNavtopAtom } from "./menu-navtop.atom";
-import { GlobalDesignSystemAtomicModule } from "../../global-design-system-atomic.module";
-import { action } from "@storybook/addon-actions";
+import { MenuNavtopAtom } from './menu-navtop.atom';
+import { GlobalDesignSystemAtomicModule } from '../../global-design-system-atomic.module';
+import { action } from '@storybook/addon-actions';
 export default {
-  title: "Design System/Atoms/Menu Navtop",
+  title: 'Design System/Atoms/Menu/Menu Navtop',
 };
 
 export const basic = () => ({
@@ -20,6 +20,6 @@ export const menuOpen = () => ({
   component: MenuNavtopAtom,
   props: {
     isMenuOpen: true,
-    signoutEvent: action("clicked signout event"),
+    signoutEvent: action('clicked signout event'),
   },
 });

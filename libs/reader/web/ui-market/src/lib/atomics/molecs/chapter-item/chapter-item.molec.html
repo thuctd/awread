@@ -1,8 +1,8 @@
 <div class="text-base sm:text-base pt-6 my-2 sm:pb-6 border-b border-gray-300 w-11/12">
     <div class="justify-between flex ">
         <div class="flex w-4/5">
-            <atom-chapter-title class="w-1/5" [title]="chapter.title"></atom-chapter-title>
-            <atom-chapter-title [title]="chapter.value"></atom-chapter-title>
+            <atom-title class="w-1/5" [title]="chapter.title" [class]="'font-medium'"></atom-title>
+            <atom-title [title]="chapter.value" [class]="'font-medium'"></atom-title>
         </div>
         <atom-chapter-price [value]="chapter.price"></atom-chapter-price>
     </div>

@@ -3791,6 +3791,25 @@ packages:
       webpack: ^4.0.0
     resolution:
       integrity: sha512-hM0LdOSlC6c7ij+BvIpAFbe7dpJhL+A51L5v6YbMA6aM0Sb/y+HpE2u34AHEQvute7cLe4EyOyvJ9jSinVAJhQ==
+  /@ngtools/webpack/11.0.6_dbeeca76d5afdca02a3417a598e41100:
+    dependencies:
+      '@angular-devkit/core': 11.0.6
+      '@angular/compiler-cli': 11.0.5_ae04eea250591f41b901d33a8893b81f
+      enhanced-resolve: 5.3.1
+      typescript: 4.0.5
+      webpack: 4.44.2
+      webpack-sources: 2.0.1
+    dev: false
+    engines:
+      node: '>= 10.13.0'
+      npm: '>= 6.11.0'
+      yarn: '>= 1.13.0'
+    peerDependencies:
+      '@angular/compiler-cli': ^11.0.0
+      typescript: ~4.0.0
+      webpack: ^4.0.0
+    resolution:
+      integrity: sha512-vf5YNEpXWRa0fKC/BRq5sVVj2WnEqW8jn14YQRHwVt5ppUeyu8IKUF69p6W1MwZMgMqMaw/vPQ8LI5cFbyf3uw==
   /@nodelib/fs.scandir/2.1.4:
     dependencies:
       '@nodelib/fs.stat': 2.0.4
@@ -5946,6 +5965,15 @@ packages:
     dev: false
     resolution:
       integrity: sha512-XDN92U311aINL77ieWHmqCcNlwjoP5cHXDxIxbf2MaPYuCXOHS7gHH8jktxeK5omgd52XbSTX6a4Piwd1pQmzA==
+  /ajv/7.0.3:
+    dependencies:
+      fast-deep-equal: 3.1.3
+      json-schema-traverse: 1.0.0
+      require-from-string: 2.0.2
+      uri-js: 4.4.0
+    dev: true
+    resolution:
+      integrity: sha512-R50QRlXSxqXcQP5SvKUrw8VZeypvo12i2IX0EeR5PiZ7bEKeHWgzgo264LDadUsCU42lTJVhFikTqJwNeH34gQ==
   /alphanum-sort/1.0.2:
     dev: true
     resolution:
@@ -9409,7 +9437,6 @@ packages:
     dependencies:
       graceful-fs: 4.2.4
       tapable: 2.2.0
-    dev: true
     engines:
       node: '>=10.13.0'
     resolution:
@@ -9703,7 +9730,7 @@ packages:
       semver: 7.3.4
       strip-ansi: 6.0.0
       strip-json-comments: 3.1.1
-      table: 6.0.4
+      table: 6.0.7
       text-table: 0.2.0
       v8-compile-cache: 2.2.0
     dev: true
@@ -13212,6 +13239,10 @@ packages:
   /json-schema-traverse/0.4.1:
     resolution:
       integrity: sha512-xbbCH5dCYU5T8LcEhhuh7HJ88HXuW3qsI3Y0zOZFKfZEHcpWiHU/Jxzk629Brsab/mMiHQti9wMP+845RPe3Vg==
+  /json-schema-traverse/1.0.0:
+    dev: true
+    resolution:
+      integrity: sha512-NM8/P9n3XjXhIZn1lLhkFaACTOURQXjWhV4BA/RnOv8xvgqtqpAX9IO4mRQxSx1Rlo4tqzeqb0sOlruaOy3dug==
   /json-schema/0.2.3:
     resolution:
       integrity: sha1-tIDIkuWaLwWVTOcnvT8qTogvnhM=
@@ -13917,7 +13948,6 @@ packages:
   /magic-string/0.25.7:
     dependencies:
       sourcemap-codec: 1.4.8
-    dev: true
     resolution:
       integrity: sha512-4CrMT5DOHTDk4HYDlzmwu4FVCcIYI8gauveasrdCu2IKIFOJ3f0v/8MDGJCDL9oD2ppz/Av1b0Nj345H9M+XIA==
   /make-dir/2.1.0:
@@ -18175,7 +18205,6 @@ packages:
     resolution:
       integrity: sha512-o5t52PCNtVdiOvzMry7wU4aOqYWL0PeCXRWBEiJow4/i/wr+wpsJQ9awEu1EonLIqsfGd5qSgDdxEOvCdmBEpA==
   /source-list-map/2.0.1:
-    dev: true
     resolution:
       integrity: sha512-qnQ7gVMxGNxsiL4lEuJwe/To8UnK7fAnmbGEEH8RpLouuKbeEm0lhbQVFIrNSuB+G7tVrAlVsZgETT5nljf+Iw==
   /source-map-loader/1.1.2_webpack@4.44.2:
@@ -18226,7 +18255,6 @@ packages:
     resolution:
       integrity: sha1-igOdLRAh0i0eoUyA2OpGi6LvP8w=
   /source-map/0.6.1:
-    dev: true
     engines:
       node: '>=0.10.0'
     resolution:
@@ -18237,7 +18265,6 @@ packages:
     resolution:
       integrity: sha512-CkCj6giN3S+n9qrYiBTX5gystlENnRW5jZeNLHpe6aue+SrHcG5VYwujhW9s4dY31mEGsxBDrHR6oI69fTXsaQ==
   /sourcemap-codec/1.4.8:
-    dev: true
     resolution:
       integrity: sha512-9NykojV5Uih4lgo5So5dtw+f0JgJX30KCNI8gwhz2J9A15wD0Ml6tjHKwf6fTSa6fAdVBdZeNOs9eJ71qCk8vA==
   /space-separated-tokens/1.1.5:
@@ -18842,9 +18869,9 @@ packages:
       node: '>= 0.11.15'
     resolution:
       integrity: sha512-NvwWb5AdyTtmFNa1x0ksJakFUV/WJ+z7iRrYGU1xZew77Qd+kMrZKsk3uatCckk6yPNpbHhRcOO+JBU+ohcMBw==
-  /table/6.0.4:
+  /table/6.0.7:
     dependencies:
-      ajv: 6.12.6
+      ajv: 7.0.3
       lodash: 4.17.20
       slice-ansi: 4.0.0
       string-width: 4.2.0
@@ -18852,7 +18879,7 @@ packages:
     engines:
       node: '>=10.0.0'
     resolution:
-      integrity: sha512-sBT4xRLdALd+NFBvwOz8bw4b15htyythha+q+DVZqy2RS08PPC8O2sZFgJYEY7bJvbCFKccs+WIZ/cd+xxTWCw==
+      integrity: sha512-rxZevLGTUzWna/qBLObOe16kB2RTnnbhciwgPbMMlazz1yZGVEgnZK762xyVdVznhqxrfCeBMmMkgOOaPwjH7g==
   /tailwindcss/2.0.2_af0f84ec51438f8ab9d26470b52a2535:
     dependencies:
       '@fullhuman/postcss-purgecss': 3.1.3
@@ -18893,7 +18920,6 @@ packages:
     resolution:
       integrity: sha512-4WK/bYZmj8xLr+HUCODHGF1ZFzsYffasLUgEiMBY4fgtltdO6B4WJtlSbPaDTLpYTcGVwM2qLnFTICEcNxs3kA==
   /tapable/2.2.0:
-    dev: true
     engines:
       node: '>=6'
     resolution:
@@ -20295,7 +20321,6 @@ packages:
     dependencies:
       source-list-map: 2.0.1
       source-map: 0.6.1
-    dev: true
     engines:
       node: '>=10.13.0'
     resolution:
