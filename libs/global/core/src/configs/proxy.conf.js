@@ -11,10 +11,10 @@ module.exports = [
     "logLevel": process.env?.ENVIRONMENT === 'prod' ? "info" : "debug",
     "secure": true,
     "changeOrigin": true,
-    // pathRewrite value to the proxy configuration to remove "api" from the end of a path.
-    // "pathRewrite": {
-    //   "^/graphql": ""
-    // }
+    // pathRewrite value to the proxy configuration to remove "graphql" from the end of a path.
+    "pathRewrite": {
+      "^/graphql": ""
+    }
   }
 ]
 
