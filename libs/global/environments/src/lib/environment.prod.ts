@@ -1,12 +1,9 @@
 import { buildEnvironment } from './build-environment';
 console.log('buildEnvironment', buildEnvironment);
 
-const backendGraphqlHost = buildEnvironment?.GRAPHQL_URI || 'localhost';
-const uri = `http://${backendGraphqlHost}:5000/graphql`;
-
 export const environment = {
   production: true,
-  uri,
+  uri: '/graphql',
   firebase: {
     apiKey: 'AIzaSyBYIoCiXcDM4lRoLAVUK4WGAwC9hORR0ow',
     authDomain: 'awready-beta.firebaseapp.com',

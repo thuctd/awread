@@ -99,6 +99,7 @@ const port = process.env.port || 5000;
 const server = app.listen(port, () => {
   console.log('database url:', DATABASE_URL);
   console.log(`Listening at http://localhost:${port}/graphiql`);
+  console.log(`process env`, process.env);
 });
 server.on('error', console.error);
 
