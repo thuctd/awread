@@ -13,7 +13,7 @@ module.exports = [
         "changeOrigin": true,
         // pathRewrite value to the proxy configuration to remove "graphql" from the end of a path.
         "pathRewrite": {
-            "^/graphql": ""
+            "^/graphql": "graphql"
         }
     }
 ]
