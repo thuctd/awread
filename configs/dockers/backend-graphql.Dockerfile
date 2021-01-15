@@ -1,6 +1,7 @@
 # // NOTE: update this
 ARG application=backend-graphql
 ARG applicationPath=backend/graphql
+ARG port=80
 
 FROM node:14-alpine as builder
 ENV CYPRESS_INSTALL_BINARY=0
