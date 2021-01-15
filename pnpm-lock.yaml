@@ -326,11 +326,8 @@ packages:
       magic-string: 0.25.7
       rxjs: 6.6.3
       source-map: 0.7.3
-<<<<<<< HEAD
     dev: false
-=======
     dev: true
->>>>>>> be569369c6fa9f1ac96ce088881fc3a64a3c601d
     engines:
       node: '>= 10.13.0'
       npm: '>= 6.11.0'
