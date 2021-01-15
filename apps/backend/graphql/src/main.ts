@@ -49,7 +49,7 @@ admin.initializeApp({
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
+app.get('/', (req, res) => res.send('Hello world'));
 app.post('/setCustomClaims', (req, res) => {
   // Get the ID token passed.
   const idToken = req.body.idToken;
