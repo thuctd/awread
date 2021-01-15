@@ -44,8 +44,8 @@ dependencies:
 devDependencies:
   '@angular-builders/custom-webpack': 11.0.0_b6760f87550c5a261d51b191cbb74e5e
   '@angular-devkit/build-angular': 0.1100.5_b6760f87550c5a261d51b191cbb74e5e
-  '@angular-devkit/core': 11.0.5
-  '@angular-devkit/schematics': 11.0.5
+  '@angular-devkit/core': 11.0.7
+  '@angular-devkit/schematics': 11.0.7
   '@angular-eslint/eslint-plugin': 0.8.0-beta.7_eslint@7.16.0+typescript@4.0.5
   '@angular-eslint/eslint-plugin-template': 0.8.0-beta.7_a42020ab6769570ab2fc0a270dd16412
   '@angular-eslint/template-parser': 0.8.0-beta.7_8ef00a7675bb14916c4abb1a890aeeec
@@ -68,10 +68,10 @@ devDependencies:
   '@nrwl/storybook': 11.1.1_0cf82fc95046f8de736283c82d2b0bf6
   '@nrwl/tao': 11.1.1
   '@nrwl/workspace': 11.1.1_prettier@2.2.1
-  '@schematics/angular': 11.0.5
+  '@schematics/angular': 11.0.7
   '@storybook/addon-actions': 6.1.11
   '@storybook/addon-knobs': 6.1.11
-  '@storybook/angular': 6.1.11_941033bc2f8e290cc04f97f4ef6b2c81
+  '@storybook/angular': 6.1.11_c3007b5863f7ccc68483806e765cd973
   '@types/express': 4.17.9
   '@types/jest': 26.0.19
   '@types/node': 14.14.16
@@ -107,9 +107,9 @@ lockfileVersion: 5.2
 packages:
   /@angular-builders/custom-webpack/11.0.0_b6760f87550c5a261d51b191cbb74e5e:
     dependencies:
-      '@angular-devkit/architect': 0.1100.5
+      '@angular-devkit/architect': 0.1100.7
       '@angular-devkit/build-angular': 0.1100.5_b6760f87550c5a261d51b191cbb74e5e
-      '@angular-devkit/core': 11.0.5
+      '@angular-devkit/core': 11.0.7
       lodash: 4.17.20
       ts-node: 9.1.1_typescript@4.0.5
       webpack-merge: 5.7.3
@@ -132,9 +132,9 @@ packages:
       yarn: '>= 1.13.0'
     resolution:
       integrity: sha512-yOYfucNouc1doTbcGbCNMXGMSc36+j97XpdNoeGyzFQ7GwezLAro0a9gxc5PdOxndfelkND7J1JuOjxdW5O17A==
-  /@angular-devkit/architect/0.1100.6:
+  /@angular-devkit/architect/0.1100.7:
     dependencies:
-      '@angular-devkit/core': 11.0.6
+      '@angular-devkit/core': 11.0.7
       rxjs: 6.6.3
     dev: true
     engines:
@@ -142,7 +142,7 @@ packages:
       npm: '>= 6.11.0'
       yarn: '>= 1.13.0'
     resolution:
-      integrity: sha512-4O+cg3AimI2bNAxxdu5NrqSf4Oa8r8xL0+G2Ycd3jLoFv0h0ecJiNKEG5F6IpTprb4aexZD6pcxBJCqQ8MmzWQ==
+      integrity: sha512-b2zv2yiRbdhJ7hJfZsAvGYcqgh2DVtc7gRIPo1eDPvOAKrenmZ4zo/v0PRYScrTsPzqmoCokNA5nIwufwUEnuA==
   /@angular-devkit/build-angular/0.1100.5_b6760f87550c5a261d51b191cbb74e5e:
     dependencies:
       '@angular-devkit/architect': 0.1100.5
@@ -274,10 +274,10 @@ packages:
       webpack-dev-server: ^3.1.4
     resolution:
       integrity: sha512-oD5t2oCfyiCyyeZckrqBnQco94zIMkRnRGzy3lFDH7KMiL0DG9l7x3nxn9H0YunYWr55LsGWwXGoR7l03Kl+jw==
-  /@angular-devkit/build-webpack/0.1100.6_f17e7dc3686dc4072a83e169fb8b83a8:
+  /@angular-devkit/build-webpack/0.1100.7_f17e7dc3686dc4072a83e169fb8b83a8:
     dependencies:
-      '@angular-devkit/architect': 0.1100.6
-      '@angular-devkit/core': 11.0.6
+      '@angular-devkit/architect': 0.1100.7
+      '@angular-devkit/core': 11.0.7
       rxjs: 6.6.3
       webpack: 4.42.0
       webpack-dev-server: 3.11.0_webpack@4.42.0
@@ -290,7 +290,7 @@ packages:
       webpack: ^4.6.0
       webpack-dev-server: ^3.1.4
     resolution:
-      integrity: sha512-kK0FlpYJHP25o1yzIGHQqIvO5kp+p6V5OwGpD2GGRZLlJqd3WdjY5DxnyZoX3/IofO6KsTnmm76fzTRqc62z/Q==
+      integrity: sha512-/6Hudd1hs/GMHX4C/Qk7jueIMNg8NKFJWDEbvMPMgDzTqUIa680PTD6SNSCcY5Cz9mEpdpYCZo5N31JB7dlpOg==
   /@angular-devkit/core/11.0.0:
     dependencies:
       ajv: 6.12.6
@@ -334,6 +334,20 @@ packages:
       yarn: '>= 1.13.0'
     resolution:
       integrity: sha512-nhvU5hH01r9qcexAqvIFU233treWWeW3ncs9UFYjD9Hys9sDSvqC3+bvGvl9vCG5FsyY7oDsjaVAipyUc+SFAg==
+  /@angular-devkit/core/11.0.7:
+    dependencies:
+      ajv: 6.12.6
+      fast-json-stable-stringify: 2.1.0
+      magic-string: 0.25.7
+      rxjs: 6.6.3
+      source-map: 0.7.3
+    dev: true
+    engines:
+      node: '>= 10.13.0'
+      npm: '>= 6.11.0'
+      yarn: '>= 1.13.0'
+    resolution:
+      integrity: sha512-1GKnIT++YSUHpzzRx9QC0+8yOw4wy+ZpiJVDlroPSeK4FGrTCJqJKenkfRjVFRFOSrzTiJds+IU6kI4+bFbw9g==
   /@angular-devkit/core/7.3.10:
     dependencies:
       ajv: 6.9.1
@@ -383,6 +397,18 @@ packages:
       yarn: '>= 1.13.0'
     resolution:
       integrity: sha512-hCyu/SSSiC6dKl/NxdWctknIrBqKR6pRe7DMArWowrZX6P9oi36LpKEFnKutE8+tXjsOqQj8XMBq9L64sXZWqg==
+  /@angular-devkit/schematics/11.0.7:
+    dependencies:
+      '@angular-devkit/core': 11.0.7
+      ora: 5.1.0
+      rxjs: 6.6.3
+    dev: true
+    engines:
+      node: '>= 10.13.0'
+      npm: '>= 6.11.0'
+      yarn: '>= 1.13.0'
+    resolution:
+      integrity: sha512-mKkXWmSTlZYjQO4i7xUX+bG1E9h9Ke3GgGQQouA+kth06IPO+VcywLQNsui4qcyLDUjyo8CaX+44aoSXoX3Tgg==
   /@angular-devkit/schematics/7.3.10:
     dependencies:
       '@angular-devkit/core': 7.3.10
@@ -3825,7 +3851,7 @@ packages:
       integrity: sha512-Uv6h1sT+0DrblvIrolFtbvM1FgWm+/sy4B3pvLp67Zys+thcukzS5ekn7HsZFGpWP4Q3fYJCljbWQE/XivMRLw==
   /@nrwl/angular/11.1.1_b6bded475ca168784c7c5798318d04c0:
     dependencies:
-      '@angular-devkit/schematics': 11.0.6
+      '@angular-devkit/schematics': 11.0.7
       '@nrwl/cypress': 11.1.1_0cf82fc95046f8de736283c82d2b0bf6
       '@nrwl/devkit': 11.1.1
       '@nrwl/jest': 11.1.1
@@ -3854,9 +3880,9 @@ packages:
       integrity: sha512-d1m7+V4gOE8ZbqDFk+eHgiJno0IRLeu02K46jRFeiiDuaEvkxQ5iQxawoqiJsXbEhMA7GDaGTBAdaGSar+CnVw==
   /@nrwl/cypress/11.1.1_0cf82fc95046f8de736283c82d2b0bf6:
     dependencies:
-      '@angular-devkit/architect': 0.1100.6
-      '@angular-devkit/core': 11.0.6
-      '@angular-devkit/schematics': 11.0.6
+      '@angular-devkit/architect': 0.1100.7
+      '@angular-devkit/core': 11.0.7
+      '@angular-devkit/schematics': 11.0.7
       '@cypress/webpack-preprocessor': 4.1.5_webpack@4.45.0
       '@nrwl/devkit': 11.1.1
       cypress: 6.2.0
@@ -3887,7 +3913,7 @@ packages:
       integrity: sha512-Twu++BN5dFpQSER6+z3vBznTqrofH5geERDbtM1cl7U9D26tdYFM+eNzk3ma03PVCMBEVZymWqmFtewr869uNw==
   /@nrwl/eslint-plugin-nx/11.1.1_1b0bf84bc6c1d40d00bb35c03427a8b1:
     dependencies:
-      '@angular-devkit/core': 11.0.6
+      '@angular-devkit/core': 11.0.7
       '@typescript-eslint/experimental-utils': 4.12.0_eslint@7.16.0+typescript@4.0.5
       '@typescript-eslint/parser': 4.11.1_eslint@7.16.0+typescript@4.0.5
       confusing-browser-globals: 1.0.10
@@ -3900,8 +3926,8 @@ packages:
       integrity: sha512-tPCgkhdl0VABsMJJMGtjVxtRfowmcTBhFevfgwbzuJpOCrXCreyGY6GiTdXrVBJwRjfx9L8wneC/cTedl6umhA==
   /@nrwl/express/11.1.1_typescript@4.0.5:
     dependencies:
-      '@angular-devkit/core': 11.0.6
-      '@angular-devkit/schematics': 11.0.6
+      '@angular-devkit/core': 11.0.7
+      '@angular-devkit/schematics': 11.0.7
       '@nrwl/devkit': 11.1.1
       '@nrwl/jest': 11.1.1
       '@nrwl/node': 11.1.1_typescript@4.0.5
@@ -3912,9 +3938,9 @@ packages:
       integrity: sha512-W9FvoiTFLWEiS2PELphZ3MvijqZmoCZrOOSs+FBSij8Ma56Yg0E0hppfpBZ3lMBNeWvzof/KNdvGSOFsf4tvGA==
   /@nrwl/jest/11.1.1:
     dependencies:
-      '@angular-devkit/architect': 0.1100.6
-      '@angular-devkit/core': 11.0.6
-      '@angular-devkit/schematics': 11.0.6
+      '@angular-devkit/architect': 0.1100.7
+      '@angular-devkit/core': 11.0.7
+      '@angular-devkit/schematics': 11.0.7
       '@nrwl/devkit': 11.1.1
       jest-resolve: 26.6.2
       rxjs: 6.6.3
@@ -3925,7 +3951,7 @@ packages:
       integrity: sha512-QWBlbuODdPUb4332XSKnWONsewah4jRHPfTcD2lr2LtzBdvc3b7h7q4NmpHtkiWtU9srRhcwgZiPjI46FrDS1w==
   /@nrwl/linter/11.1.1:
     dependencies:
-      '@angular-devkit/architect': 0.1100.6
+      '@angular-devkit/architect': 0.1100.7
       glob: 7.1.4
       minimatch: 3.0.4
       tslib: 2.1.0
@@ -3934,8 +3960,8 @@ packages:
       integrity: sha512-T1LgglzcPuZlgpFFYANVO2uYjWOcThpiUbRLVfehgD7W14Xey46wP3H3AVtfoCYcW+WMfwLUJ/1jqDmyEjdr8g==
   /@nrwl/nest/11.1.1_typescript@4.0.5:
     dependencies:
-      '@angular-devkit/core': 11.0.6
-      '@angular-devkit/schematics': 11.0.6
+      '@angular-devkit/core': 11.0.7
+      '@angular-devkit/schematics': 11.0.7
       '@nestjs/schematics': 7.2.6_typescript@4.0.5
       '@nrwl/devkit': 11.1.1
       '@nrwl/jest': 11.1.1
@@ -3947,10 +3973,10 @@ packages:
       integrity: sha512-P5le/iugJ6n5i5JluYpghPdhDo2h666/R2S2YiBP4mH2DyT13X5T7ECERfg2aOmZaK6Mdowdf2MFXnCrz5+f3Q==
   /@nrwl/node/11.1.1_typescript@4.0.5:
     dependencies:
-      '@angular-devkit/architect': 0.1100.6
-      '@angular-devkit/build-webpack': 0.1100.6_f17e7dc3686dc4072a83e169fb8b83a8
-      '@angular-devkit/core': 11.0.6
-      '@angular-devkit/schematics': 11.0.6
+      '@angular-devkit/architect': 0.1100.7
+      '@angular-devkit/build-webpack': 0.1100.7_f17e7dc3686dc4072a83e169fb8b83a8
+      '@angular-devkit/core': 11.0.7
+      '@angular-devkit/schematics': 11.0.7
       '@nrwl/devkit': 11.1.1
       '@nrwl/jest': 11.1.1
       '@nrwl/linter': 11.1.1
@@ -4005,9 +4031,9 @@ packages:
       integrity: sha512-aPUkKc5DrZEGW30QMdoVTq7rFR8WtTHuP8qHUKeszCLcQwhrLmd7QXXZRC2i+Sq+OW0kq7hBqLp0jEg4QH9yAw==
   /@nrwl/tao/11.1.1:
     dependencies:
-      '@angular-devkit/architect': 0.1100.6
-      '@angular-devkit/core': 11.0.6
-      '@angular-devkit/schematics': 11.0.6
+      '@angular-devkit/architect': 0.1100.7
+      '@angular-devkit/core': 11.0.7
+      '@angular-devkit/schematics': 11.0.7
       chalk: 4.1.0
       fs-extra: 7.0.1
       inquirer: 6.5.2
@@ -4024,9 +4050,9 @@ packages:
       integrity: sha512-cSGCaOV0sHkZ+PkvJK2IILDD4IuIOegq8qOBKwC+kxvfDEBgB528L14CoQwmVkpq5IrGdCLi/zr2h6W5N/6RpA==
   /@nrwl/workspace/11.1.1_prettier@2.2.1:
     dependencies:
-      '@angular-devkit/architect': 0.1100.6
-      '@angular-devkit/core': 11.0.6
-      '@angular-devkit/schematics': 11.0.6
+      '@angular-devkit/architect': 0.1100.7
+      '@angular-devkit/core': 11.0.7
+      '@angular-devkit/schematics': 11.0.7
       '@nrwl/cli': 11.1.1
       '@nrwl/devkit': 11.1.1
       axios: 0.21.1
@@ -4222,6 +4248,18 @@ packages:
       yarn: '>= 1.13.0'
     resolution:
       integrity: sha512-XUcpOrlcp55PBHrgpIVx69lnhDY6ro35BSRmqNmjXik56qcOkfvdki8vvyW9EsWvu9/sfBSsVDdparlbVois7w==
+  /@schematics/angular/11.0.7:
+    dependencies:
+      '@angular-devkit/core': 11.0.7
+      '@angular-devkit/schematics': 11.0.7
+      jsonc-parser: 2.3.1
+    dev: true
+    engines:
+      node: '>= 10.13.0'
+      npm: '>= 6.11.0'
+      yarn: '>= 1.13.0'
+    resolution:
+      integrity: sha512-h8ZmHJvMcvre3rzaDBu1b5RxaaBe008kcniFNeks5nHTQRqDL/5Thg4YhIgH9VQ9Yf8U4atLjRJK5PG1OzmgDA==
   /@schematics/update/0.1100.5:
     dependencies:
       '@angular-devkit/core': 11.0.5
@@ -4354,10 +4392,10 @@ packages:
       react-dom: ^16.8.0 || ^17.0.0
     resolution:
       integrity: sha512-OZXsdmn60dVe482l9zWxzOqqJApD2jggk/8QJKn3/Ub9posmqdqg712bW6v71BBe0UXXG/QfkZA7gcyiyEENbw==
-  /@storybook/angular/6.1.11_941033bc2f8e290cc04f97f4ef6b2c81:
+  /@storybook/angular/6.1.11_c3007b5863f7ccc68483806e765cd973:
     dependencies:
       '@angular-devkit/build-angular': 0.1100.5_b6760f87550c5a261d51b191cbb74e5e
-      '@angular-devkit/core': 11.0.5
+      '@angular-devkit/core': 11.0.7
       '@angular/common': 11.0.5_@angular+core@11.0.5+rxjs@6.6.3
       '@angular/compiler': 11.0.5
       '@angular/compiler-cli': 11.0.5_ae04eea250591f41b901d33a8893b81f
@@ -20808,8 +20846,8 @@ packages:
 specifiers:
   '@angular-builders/custom-webpack': ^11.0.0
   '@angular-devkit/build-angular': 0.1100.5
-  '@angular-devkit/core': ^11.0.5
-  '@angular-devkit/schematics': ^11.0.5
+  '@angular-devkit/core': ^11.0.7
+  '@angular-devkit/schematics': ^11.0.7
   '@angular-eslint/eslint-plugin': ^0.8.0-beta.7
   '@angular-eslint/eslint-plugin-template': ^0.8.0-beta.7
   '@angular-eslint/template-parser': ^0.8.0-beta.7
@@ -20854,7 +20892,7 @@ specifiers:
   '@nrwl/storybook': ^11.1.1
   '@nrwl/tao': 11.1.1
   '@nrwl/workspace': 11.1.1
-  '@schematics/angular': ^11.0.5
+  '@schematics/angular': ^11.0.6
   '@storybook/addon-actions': ^6.1.11
   '@storybook/addon-knobs': ^6.1.11
   '@storybook/angular': ^6.1.11

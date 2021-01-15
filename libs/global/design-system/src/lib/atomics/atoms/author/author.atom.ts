@@ -7,8 +7,8 @@ import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter, Input
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AuthorAtom implements OnInit {
-  @Output() onBtnClicked = new EventEmitter();
-  @Input() authorName = "Cẩm Thương";
+  @Output() submitEvent = new EventEmitter();
+  @Input() authorName = 'Cẩm Thương';
 
   constructor() { }
 

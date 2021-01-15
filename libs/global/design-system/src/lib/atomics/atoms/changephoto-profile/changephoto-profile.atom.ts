@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'changephoto-profile',
@@ -7,7 +7,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChangephotoProfileAtom implements OnInit {
-
+  @Output() eventChangeImg = new EventEmitter();''
   constructor() { }
 
   ngOnInit(): void {

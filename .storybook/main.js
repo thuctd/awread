@@ -1,7 +1,7 @@
 const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
 const path = require('path');
 const webpack = require('webpack');
-const { patchPostCSS } = require('../patchPostCSS');
+const { patchPostCSS } = require('../configs/tailwind/patchPostCSS.js');
 
 module.exports = {
   stories: [
