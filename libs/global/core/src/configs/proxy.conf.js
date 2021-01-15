@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-const backendGraphqlHost = process.env?.GRAPHQL_URI ? `http://${process.env?.GRAPHQL_URI}:5000` : 'http://localhost:5000';
+const backendGraphqlHost = process.env?.GRAPHQL_URI ? `http://${process.env?.GRAPHQL_URI}` : 'http://localhost:5000';
 // eslint-disable-next-line no-undef
 module.exports = [
   {
