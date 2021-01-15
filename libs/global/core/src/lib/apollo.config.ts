@@ -16,6 +16,7 @@ const defaultOptions: DefaultOptions = {
 };
 
 export function createApollo(httpLink: HttpLink) {
+  console.log('environment variable', environment);
   return {
     cache: new InMemoryCache(),
     link: httpLink.create({
