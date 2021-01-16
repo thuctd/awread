@@ -1,10 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Input,
-} from '@angular/core';
-
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 @Component({
   selector: 'list-detail-top-book',
   templateUrl: './list-detail-top-book.organ.html',
@@ -17,7 +11,11 @@ export class ListDetailTopBookOrgan implements OnInit {
     isActive: true,
   };
 
-  @Input() isSize = false;
+  @Input() moreBook = {
+    text: 'Xem thêm...',
+    isSize: false,
+  }
+  @Output() moreEvent = new EventEmitter();
   counter = Array;
 
   constructor() {}

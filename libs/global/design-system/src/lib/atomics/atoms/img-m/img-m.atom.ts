@@ -9,6 +9,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 export class ImgMAtom implements OnInit {
   @Input() isSize = 0;
   @Input() srcImg = 'https://via.placeholder.com/260x370.png';
+  @Input() altImg = 'Placeholder'
 
   constructor() { }
 

@@ -17,7 +17,7 @@ export class SelectAtom implements OnInit {
   @Input() inputControl = new FormControl('');
   @Input() options = [];
   @Input() titleSellect = 'Thể loại';
-  @Input() width = '18rem';
+  @Input() widthClass = 'w-72';
 
   constructor() {
     this.options = this.getOptions();
