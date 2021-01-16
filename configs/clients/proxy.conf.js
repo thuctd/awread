@@ -9,8 +9,8 @@ module.exports = [
         ],
         "target": backendGraphqlHost,
         "logLevel": process.env?.ENVIRONMENT === 'prod' ? "info" : "debug",
-        "secure": false,
-        "changeOrigin": true,
+        "secure": false, // because we using http not https
+        "changeOrigin": true, // because we not using the same origin
         // pathRewrite value to the proxy configuration to remove "graphql" from the end of a path.
         // "pathRewrite": {
         //     "^/graphql": ""
