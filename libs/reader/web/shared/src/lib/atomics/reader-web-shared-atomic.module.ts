@@ -11,16 +11,18 @@ import { NavbarAuthBtnsMolec } from './molecs/navbar-auth-btns/navbar-auth-btns.
 import { NavbarReaderTemplate } from './templates/navbar-reader/navbar-reader.template';
 import { NavbarDesktopOrgan } from './organs/navbar-desktop/navbar-desktop.organ';
 import { NavbarAuthLoggedMolec } from './molecs/navbar-auth-logged/navbar-auth-logged.molec';
+import { NavbarAuthDropdownMolec } from './molecs/navbar-auth-dropdown/navbar-auth-dropdown.molec';
+import { NavbarButtonsOrgan } from './organs/navbar-buttons/navbar-buttons.organ';
 
 
 @NgModule({
   declarations: [
-    RdDropdownMenuMolec, RdDropdownMenuItemMolec, NavbarMenuOrgan, NavbarAuthBtnsMolec, NavbarReaderTemplate, NavbarDesktopOrgan, NavbarAuthLoggedMolec],
+    RdDropdownMenuMolec, RdDropdownMenuItemMolec, NavbarMenuOrgan, NavbarAuthBtnsMolec, NavbarReaderTemplate, NavbarDesktopOrgan, NavbarAuthLoggedMolec, NavbarAuthDropdownMolec, NavbarButtonsOrgan],
   imports: [
     CommonModule,
     GlobalDesignSystemAtomicModule,
     StorybookSupportModule
   ],
-  exports: [RdDropdownMenuMolec, RdDropdownMenuItemMolec, NavbarMenuOrgan, NavbarAuthBtnsMolec, NavbarReaderTemplate, NavbarDesktopOrgan, NavbarAuthLoggedMolec]
+  exports: [RdDropdownMenuMolec, RdDropdownMenuItemMolec, NavbarMenuOrgan, NavbarAuthBtnsMolec, NavbarReaderTemplate, NavbarDesktopOrgan, NavbarAuthLoggedMolec, NavbarAuthDropdownMolec, NavbarButtonsOrgan]
 })
 export class ReaderWebSharedAtomicModule { }

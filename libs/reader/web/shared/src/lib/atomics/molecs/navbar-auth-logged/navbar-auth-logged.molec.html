@@ -1,2 +1,2 @@
-<atom-navbar-btn-logged (submitEvent)="submitEvent.emit('account')"></atom-navbar-btn-logged>
-<div class=""></div>
+<atom-navbar-btn-logged (submitEvent)="submitEvent($event)"></atom-navbar-btn-logged>
+<molec-navbar-auth-dropdown *ngIf="isToggleDropdown"></molec-navbar-auth-dropdown>

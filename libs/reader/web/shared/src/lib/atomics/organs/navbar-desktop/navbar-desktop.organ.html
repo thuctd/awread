@@ -1,4 +1,4 @@
-<nav class="flex items-center flex-wrap h-32 w-full max-w-screen-xl relative mx-auto px-4 lg:px-6">
+<nav class="flex items-center flex-wrap h-32 w-full max-w-screen-xl relative mx-auto lg:max-w-screen-xl px-4 lg:px-6 justify-between">
     <div class="inline-flex items-center lg:ml-2 md:ml-4 ml-6">
         <logo [logoWhite]="'true'"></logo>
         <div class="flex items-center">
@@ -7,8 +7,7 @@
     </div>
     <div class="ml-5 md:flex lg:w-auto xl:w-auto xl:inline-flex xl:flex-row lg:ml-auto xl:ml-auto xl:mr-10">
         <div class="justify-end flex">
-            <atom-search-btn class="mr-6 flex items-center"></atom-search-btn>
-            <molec-navbar-auth-btns [isLogin]="isLogin"></molec-navbar-auth-btns>
+            <organ-navbar-buttons [isLogin]="isLogin"></organ-navbar-buttons>
         </div>
     </div>
 </nav>

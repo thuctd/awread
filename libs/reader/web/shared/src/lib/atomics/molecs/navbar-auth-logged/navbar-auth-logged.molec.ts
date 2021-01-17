@@ -6,17 +6,21 @@ import { Component, OnInit, ChangeDetectionStrategy, Output , EventEmitter} from
   styles: [
     `
       :host {
-        display: block;
+        display: inline-block;
+        position: relative;
       }
     `
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NavbarAuthLoggedMolec implements OnInit {
-
+  isToggleDropdown:boolean = false;
   constructor() { }
-  @Output() submitEvent = new EventEmitter();
+  // @Output() submitEvent = new EventEmitter();
   ngOnInit(): void {
   }
 
+  submitEvent(event){
+    this.isToggleDropdown = !this.isToggleDropdown;
+  }
 }
