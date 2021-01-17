@@ -122,4 +122,8 @@ export class BooksGear {
       })
     );
   }
+
+  updateTotalChapterPublishedAkita(bookid: string, num = 1) {
+    return this.booksStore.updateTotalChapterPublished(bookid, num);
+  }
 }
