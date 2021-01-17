@@ -25,7 +25,6 @@ export class FirebaseAuthGear {
     return this.authApi
       .getUserBaseEmail(userAccount.email)
       .subscribe(async (res) => {
-        console.log('curent user logged', res);
         if (
           res.data &&
           res.data['getUserBaseEmail'] &&
@@ -124,7 +123,6 @@ export class FirebaseAuthGear {
 
   linkAccountFacebookToProviderPassword(err) {
     return this.authApi.getUserBaseEmail(err.email).subscribe(async (res) => {
-      console.log('curent user logged', res);
       if (
         res.data &&
         res.data['getUserBaseEmail'] &&
@@ -156,7 +154,10 @@ export class FirebaseAuthGear {
     console.log('result', result);
     try {
       await result.user.linkWithCredential(err.credential);
-      const newUser: Partial<FirebaseUser> = result.user;
+      const newUser: Partial<FirebaseUser> = {
+        ...result.user,
+        photoUrl: result.user.photoURL ?? '',
+      };
       // check trường hợp google/facebook ghi đè account thì phải link lại provider password (account email/pw)
       const user = createUserFromFirebase(newUser);
       this.shouldLinkProviderPassword(user, result.user);
