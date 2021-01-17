@@ -14,10 +14,10 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TextLinkAtom implements OnInit {
-  @Output() BtnClicked = new EventEmitter();
+  @Output() submitEvent = new EventEmitter();
   @Input() text = 'textLink';
   @Input() href = '';
-  @Input() class = '';
+  @Input() isSize = true;
 
   constructor() {}
 

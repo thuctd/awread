@@ -1,0 +1,7 @@
+<div class="text-center">
+    <a (click)="tabClicked.emit()" [ngClass]="active ? 'text-green-400' : 'text-gray-400'"
+        class="inline-block font-bold pb-2 cursor-pointer md:text-sm lg:text-base xl:text-base">
+        {{ tabName | titlecase }}
+    </a>
+  </div>
+  
