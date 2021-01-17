@@ -67,6 +67,7 @@ export class LoginGear {
           const newUser: Partial<FirebaseUser> = {
             ...userCredential.user,
             provider: 'facebook',
+            photoUrl: userCredential.user.photoURL ?? '',
           };
           // check trường hợp google/facebook ghi đè account thì phải link lại provider password (account email/pw)
           const user = createUserFromFirebase(newUser);
@@ -81,6 +82,7 @@ export class LoginGear {
           const newUser: Partial<FirebaseUser> = {
             ...userCredential.user,
             provider: 'google',
+            photoUrl: userCredential.user.photoURL ?? '',
           };
           const user = createUserFromFirebase(newUser);
           // vì google ghi đè lên tất cả tài khoản cùng email đã tạo trước đó,

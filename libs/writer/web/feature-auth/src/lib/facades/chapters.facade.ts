@@ -59,7 +59,7 @@ export class ChaptersFacade {
   updateChapter(chapter) {
     return this.chaptersGear.updateChapter(chapter).pipe();
   }
-  removeChapter(chapterid: string) {
-    return this.chaptersGear.removeChapter(chapterid).pipe();
+  removeChapter(chapterid: string, bookId: string, status: string) {
+    return this.chaptersGear.removeChapter(chapterid, bookId, status).pipe();
   }
 }

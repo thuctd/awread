@@ -76,7 +76,7 @@ export class DetailPage implements OnInit {
         this.editChapter(data);
         return;
       case 'delete':
-        this.removeChapter(data);
+        this.removeChapter(data, this.bookId);
         return;
     }
   }
@@ -93,7 +93,6 @@ export class DetailPage implements OnInit {
       this.booksFacade.addBook(book).subscribe();
     }
   }
-
   selectedStatusEvent(status: string) {
     this.bookForm.patchValue({ status });
   }
@@ -150,9 +149,10 @@ export class DetailPage implements OnInit {
     ]);
   }
 
-  private removeChapter(chapter) {
+  private removeChapter(chapter, bookId: string) {
+    const status = this.bookForm.get('status').value;
     this.chaptersFacade
-      .removeChapter(chapter.chapterid)
+      .removeChapter(chapter.chapterid, bookId, status)
       .pipe(tap((res) => {}))
       .subscribe((res) => {
         console.log('remove chapter res: ', res);

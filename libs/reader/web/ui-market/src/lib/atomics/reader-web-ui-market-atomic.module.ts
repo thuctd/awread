@@ -38,6 +38,7 @@ import { DetailBookReviewActionsMolec } from './molecs/detail-book-review-action
 import { DetailBookMainContentOrgan } from './organs/detail-book-main-content/detail-book-main-content.organ';
 import { DetailBookReviewsOrgan } from './organs/detail-book-reviews/detail-book-reviews.organ';
 import { DetailBookTemplate } from './templates/detail-book/detail-book.template';
+import { SearchFormMolec } from './molecs/search-form/search-form.molec';
 import { DetailBookSidebarOrgan } from './organs/detail-book-sidebar/detail-book-sidebar.organ';
 
 @NgModule({
@@ -81,7 +82,7 @@ import { DetailBookSidebarOrgan } from './organs/detail-book-sidebar/detail-book
     DetailBookReviewsOrgan,
     DetailBookTemplate,
     DetailBookSidebarOrgan,
-],
+    SearchFormMolec],
   declarations: [
     TabCategoryMolec, 
     TabBookMolec, 
@@ -121,6 +122,7 @@ import { DetailBookSidebarOrgan } from './organs/detail-book-sidebar/detail-book
     DetailBookReviewsOrgan,
     DetailBookTemplate,
     DetailBookSidebarOrgan,
+    SearchFormMolec
   ]
 })
 export class ReaderWebUiMarketAtomicModule { }

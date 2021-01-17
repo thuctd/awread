@@ -1,9 +1,15 @@
-<section>
+<section class="mx-auto px-16 mt-4 py-6">
   <div class="flex">
-    <atom-title class="mr-2" [class]="'text-xl md:text-2xl font-medium text-gray-800'" [title]="titlePage"></atom-title>
+    <atom-title [title]='titlePage' class="mr-4"></atom-title>
     <tab-category></tab-category>
   </div>
-  <div class="container mb-6 mt-4 md:mt-8 h-full w-full overflow-hidden">
-    <tab-book></tab-book>
+  <div class="w-full bg-purple-50 leanding-normal tracking-wide pb-6 mt-4 md:mt-8">
+    <div class="container w-full overflow-hidden relative">
+        <div class="w-full h-full absolute">
+            <div class="w-1/5 h-full absolute z-50 left-0" style="background: linear-gradient(to right, #F5F3FF 0%, rgba(255, 255, 255, 0) 100%);"></div>
+            <div class="w-1/5 h-full absolute z-50 right-0" style="background: linear-gradient(to left, #F5F3FF 0%, rgba(255, 255, 255, 0) 100%);"></div>
+        </div>
+        <tab-book></tab-book>
+    </div>
   </div>
 </section>

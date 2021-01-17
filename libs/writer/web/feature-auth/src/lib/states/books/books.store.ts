@@ -34,14 +34,23 @@ export class BooksStore extends EntityStore<BooksState> {
     return this.add(book, { prepend: true });
   }
 
-  updateTotalChapterCount(bookid: string, isPublished = false) {
+  updateTotalChapterCount(bookid: string, isPublished = false, num = 1) {
     return this.update(bookid, (book) => {
       return {
         ...book,
-        totalChapterCount: book.totalChapterCount + 1,
+        totalChapterCount: book.totalChapterCount + num,
         totalChapterCountPublished: isPublished
-          ? book.totalChapterCountPublished + 1
+          ? book.totalChapterCountPublished + num
           : book.totalChapterCountPublished,
+      };
+    });
+  }
+
+  updateTotalChapterPublished(bookid, num = 1) {
+    return this.update(bookid, (book) => {
+      return {
+        ...book,
+        totalChapterCountPublished: book.totalChapterCountPublished + num,
       };
     });
   }

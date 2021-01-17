@@ -84,6 +84,8 @@ import { CircleImageAtom } from './atoms/circle-image/circle-image.atom';
 import { SliderAtom } from './atoms/slider/slider.atom';
 import { TitleAtom } from './atoms/title/title.atom';
 import { TextLinkAtom } from './atoms/text-link/text-link.atom';
+import { TitleBookAtom } from './atoms/title-book/title-book.atom';
+import { RdListTabPageAtom } from './atoms/rd-list-tab-page/rd-list-tab-page.atom';
 
 @NgModule({
   imports: [
@@ -175,6 +177,8 @@ import { TextLinkAtom } from './atoms/text-link/text-link.atom';
     SliderAtom,
     TitleAtom,
     TextLinkAtom,
+    TitleBookAtom,
+    RdListTabPageAtom,
   ],
   declarations: [
     TabBtnAtom,
@@ -252,6 +256,8 @@ import { TextLinkAtom } from './atoms/text-link/text-link.atom';
     SliderAtom,
     TitleAtom,
     TextLinkAtom,
+    TitleBookAtom,
+    RdListTabPageAtom,
   ],
 })
 export class GlobalDesignSystemAtomicModule {}

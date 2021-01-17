@@ -55,7 +55,7 @@ export function createUserFromFirebase(user: Partial<FirebaseUser>) {
     provider: user?.provider ?? 'email/password',
     address: user?.address ?? '',
     phone: user?.phone ?? '',
-    createdat: user?.createdat ?? new Date(),
+    createdat: user?.createdat ?? null,
   } as FirebaseUser;
 }
 
