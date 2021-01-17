@@ -1,25 +1,25 @@
-import { NavbarMenuOrgan } from './navbar-menu.organ';
+import { NavbarDesktopOrgan } from './navbar-desktop.organ';
 import { ReaderWebSharedAtomicModule } from '../../reader-web-shared-atomic.module';
 
 export default {
-  title: 'Shared/Organs/Navbar Menu'
+  title: 'Shared/Organs/Navbar Desktop'
 }
 
 export const primary = () => ({
   moduleMetadata: {
     imports: [ReaderWebSharedAtomicModule]
   },
-  component: NavbarMenuOrgan,
+  component: NavbarDesktopOrgan,
   props: {
 
   }
 })
-export const navbarTextDark = () => ({
+export const isLogged = () => ({
   moduleMetadata: {
     imports: [ReaderWebSharedAtomicModule]
   },
-  component: NavbarMenuOrgan,
+  component: NavbarDesktopOrgan,
   props: {
-    color: 'text-black'
+    isLogin: true
   }
 })
