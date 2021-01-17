@@ -2,15 +2,13 @@ import { DetailSocialMenuAtom } from './detail-social-menu.atom';
 import { GlobalDesignSystemAtomicModule } from '../../global-design-system-atomic.module';
 
 export default {
-  title: 'Design System/Atoms/Detail Social Menu'
-}
+  title: 'Design System/Atoms/Menu/Detail Social Menu',
+};
 
 export const primary = () => ({
   moduleMetadata: {
-    imports: [GlobalDesignSystemAtomicModule]
+    imports: [GlobalDesignSystemAtomicModule],
   },
   component: DetailSocialMenuAtom,
-  props: {
-
-  }
-})
+  props: {},
+});

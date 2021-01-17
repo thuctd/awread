@@ -2,15 +2,13 @@ import { SliderAtom } from './slider.atom';
 import { GlobalDesignSystemAtomicModule } from '../../global-design-system-atomic.module';
 
 export default {
-  title: 'Design System/Atoms/Slider'
-}
+  title: 'Design System/Atoms/sliderShow/Slider',
+};
 
 export const primary = () => ({
   moduleMetadata: {
-    imports: [GlobalDesignSystemAtomicModule]
+    imports: [GlobalDesignSystemAtomicModule],
   },
   component: SliderAtom,
-  props: {
-
-  }
-})
+  props: {},
+});

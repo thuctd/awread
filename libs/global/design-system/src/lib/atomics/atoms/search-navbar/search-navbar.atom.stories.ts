@@ -4,7 +4,7 @@ import { FormControl } from '@angular/forms';
 import { action } from '@storybook/addon-actions';
 
 export default {
-  title: 'Design System/Atoms/Search Navbar',
+  title: 'Design System/Atoms/Inputs/search/Search Navbar',
 };
 
 export const primary = () => ({

@@ -4,7 +4,7 @@ import {
   ChangeDetectionStrategy,
   Input,
 } from '@angular/core';
-import { faStar } from '@fortawesome/free-solid-svg-icons';
+import { faComments, faStar } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'list-stories',
@@ -15,9 +15,10 @@ import { faStar } from '@fortawesome/free-solid-svg-icons';
 export class ListStoriesMolec implements OnInit {
   @Input() book;
   @Input() faIcon = faStar;
+  @Input() srcImg = 'https://via.placeholder.com/260x370.png';
+  @Input() countComment = '40';
   @Input() countView = '696969k';
-  @Input() countPositive = 35;
-  @Input() countNegative = 69;
+  @Input() faIcon2 = faComments;
 
   constructor() {}
 

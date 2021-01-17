@@ -2,15 +2,13 @@ import { BarSeperateAtom } from './bar-seperate.atom';
 import { GlobalDesignSystemAtomicModule } from '../../global-design-system-atomic.module';
 
 export default {
-  title: 'Design System/Atoms/Bar Seperate'
-}
+  title: 'Design System/Atoms/Bars/Bar Seperate',
+};
 
 export const primary = () => ({
   moduleMetadata: {
-    imports: [GlobalDesignSystemAtomicModule]
+    imports: [GlobalDesignSystemAtomicModule],
   },
   component: BarSeperateAtom,
-  props: {
-
-  }
-})
+  props: {},
+});

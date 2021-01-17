@@ -15,7 +15,10 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ForgotOrgan implements OnInit {
-  @Input() emailFormControl: FormControl;
+  @Input() emailFormControl = new FormControl('', [
+    Validators.required,
+    Validators.email,
+  ]);
   title = 'Quên mật khẩu?';
   description =
     'Vui lòng nhập địa chỉ email đã dùng của bạn khi tạo tài khoản, chúng tôi sẽ gửi hướng dẫn đặt lại mật khẩu cho bạn.';

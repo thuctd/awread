@@ -1,8 +1,8 @@
-import { NavbarIconAtom } from "./navbar-icon.atom";
-import { GlobalDesignSystemAtomicModule } from "../../global-design-system-atomic.module";
+import { NavbarIconAtom } from './navbar-icon.atom';
+import { GlobalDesignSystemAtomicModule } from '../../global-design-system-atomic.module';
 
 export default {
-  title: "Design System/Atoms/navbar icon",
+  title: 'Design System/Atoms/Buttons/iconButton/navbar icon',
 };
 
 export const basic = () => ({
@@ -11,7 +11,7 @@ export const basic = () => ({
   },
   component: NavbarIconAtom,
   props: {
-    name: "",
-    active: "",
+    name: '',
+    active: '',
   },
 });

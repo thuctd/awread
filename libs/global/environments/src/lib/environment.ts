@@ -3,7 +3,7 @@ console.log('buildEnvironment', buildEnvironment);
 
 export const environment = {
   production: false,
-  uri: 'http://localhost:5000/graphql',
+  uri: '/graphql',
   firebase: {
     apiKey: 'AIzaSyBYIoCiXcDM4lRoLAVUK4WGAwC9hORR0ow',
     authDomain: 'awready-beta.firebaseapp.com',
