@@ -23,6 +23,22 @@ import { HomeDetailBookReviewOrgan } from './organs/home-detail-book-review/home
 import { HomeDetailBookUpdateOrgan } from './organs/home-detail-book-update/home-detail-book-update.organ';
 import { ReviewItemMolec } from './molecs/review-item/review-item.molec';
 import { ChapterItemMolec } from './molecs/chapter-item/chapter-item.molec';
+import { BreadcrumbMolec } from './molecs/breadcrumb/breadcrumb.molec';
+import { DetailBookInfoMolec } from './molecs/detail-book-info/detail-book-info.molec';
+import { DetailBookInfoActionsMolec } from './molecs/detail-book-info-actions/detail-book-info-actions.molec';
+import { DetailBookInfoRatingMolec } from './molecs/detail-book-info-rating/detail-book-info-rating.molec';
+import { DetailBookOptionButtonsMolec } from './molecs/detail-book-option-buttons/detail-book-option-buttons.molec';
+import { DetailBookContentOrgan } from './organs/detail-book-content/detail-book-content.organ';
+import { DetailBookBookmarkDonateMolec } from './molecs/detail-book-bookmark-donate/detail-book-bookmark-donate.molec';
+import { DetailBookTopOrgan } from './organs/detail-book-top/detail-book-top.organ';
+import { DetailBookIntroduceMolec } from './molecs/detail-book-introduce/detail-book-introduce.molec';
+import { DetailBookChapterOrgan } from './organs/detail-book-chapter/detail-book-chapter.organ';
+import { DetailBookReviewFormOrgan } from './organs/detail-book-review-form/detail-book-review-form.organ';
+import { DetailBookReviewActionsMolec } from './molecs/detail-book-review-actions/detail-book-review-actions.molec';
+import { DetailBookMainContentOrgan } from './organs/detail-book-main-content/detail-book-main-content.organ';
+import { DetailBookReviewsOrgan } from './organs/detail-book-reviews/detail-book-reviews.organ';
+import { DetailBookTemplate } from './templates/detail-book/detail-book.template';
+import { DetailBookSidebarOrgan } from './organs/detail-book-sidebar/detail-book-sidebar.organ';
 
 @NgModule({
   imports: [CommonModule, StorybookSupportModule, GlobalDesignSystemAtomicModule],
@@ -48,7 +64,24 @@ import { ChapterItemMolec } from './molecs/chapter-item/chapter-item.molec';
     HomeDetailBookReviewOrgan, 
     ReviewItemMolec,
     HomeDetailBookUpdateOrgan,
-    ChapterItemMolec],
+    ChapterItemMolec,
+    BreadcrumbMolec,
+    DetailBookInfoMolec,
+    DetailBookInfoActionsMolec,
+    DetailBookInfoRatingMolec,
+    DetailBookOptionButtonsMolec,
+    DetailBookContentOrgan,
+    DetailBookBookmarkDonateMolec,
+    DetailBookTopOrgan,
+    DetailBookIntroduceMolec,
+    DetailBookChapterOrgan,
+    DetailBookReviewFormOrgan,
+    DetailBookReviewActionsMolec,
+    DetailBookMainContentOrgan,
+    DetailBookReviewsOrgan,
+    DetailBookTemplate,
+    DetailBookSidebarOrgan,
+],
   declarations: [
     TabCategoryMolec, 
     TabBookMolec, 
@@ -71,7 +104,23 @@ import { ChapterItemMolec } from './molecs/chapter-item/chapter-item.molec';
     HomeDetailBookReviewOrgan, 
     HomeDetailBookUpdateOrgan,
     ReviewItemMolec,
-    ChapterItemMolec
+    ChapterItemMolec,
+    BreadcrumbMolec,
+    DetailBookInfoMolec,
+    DetailBookInfoActionsMolec,
+    DetailBookInfoRatingMolec,
+    DetailBookOptionButtonsMolec,
+    DetailBookContentOrgan,
+    DetailBookBookmarkDonateMolec,
+    DetailBookTopOrgan,
+    DetailBookIntroduceMolec,
+    DetailBookChapterOrgan,
+    DetailBookReviewFormOrgan,
+    DetailBookReviewActionsMolec,
+    DetailBookMainContentOrgan,
+    DetailBookReviewsOrgan,
+    DetailBookTemplate,
+    DetailBookSidebarOrgan,
   ]
 })
 export class ReaderWebUiMarketAtomicModule { }
