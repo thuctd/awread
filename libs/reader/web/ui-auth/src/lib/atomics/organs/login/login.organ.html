@@ -1,0 +1,6 @@
+<section>
+  <molec-interrogatory></molec-interrogatory>
+  <login-form class="mt-4" #loginForm [form]="authForm"></login-form>
+  <molec-remember-forgot-password></molec-remember-forgot-password>
+  <molec-submit class="mt-6" (btnClicked)="auth.emit('email')" [active]="loginForm.form.valid"></molec-submit>
+</section>

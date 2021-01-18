@@ -2,15 +2,13 @@ import { ChangephotoProfileAtom } from './changephoto-profile.atom';
 import { GlobalDesignSystemAtomicModule } from '../../global-design-system-atomic.module';
 
 export default {
-  title: 'Design System/Atoms/Changephoto Profile'
-}
+  title: 'Design System/Atoms/Images/image/Changephoto Profile',
+};
 
 export const primary = () => ({
   moduleMetadata: {
-    imports: [GlobalDesignSystemAtomicModule]
+    imports: [GlobalDesignSystemAtomicModule],
   },
   component: ChangephotoProfileAtom,
-  props: {
-
-  }
-})
+  props: {},
+});

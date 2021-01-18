@@ -178,6 +178,7 @@
         "serve": {
           "builder": "@angular-builders/custom-webpack:dev-server",
           "options": {
+            "proxyConfig": "configs/clients/proxy.conf.js",
             "browserTarget": "writer-web:build"
           },
           "configurations": {
@@ -508,6 +509,7 @@
         "serve": {
           "builder": "@angular-builders/custom-webpack:dev-server",
           "options": {
+            "proxyConfig": "configs/clients/proxy.conf.js",
             "browserTarget": "writer-phone:build"
           },
           "configurations": {
@@ -1280,6 +1282,7 @@
         "serve": {
           "builder": "@angular-builders/custom-webpack:dev-server",
           "options": {
+            "proxyConfig": "configs/clients/proxy.conf.js",
             "browserTarget": "reader-web:build"
           },
           "configurations": {
@@ -1548,6 +1551,7 @@
         "serve": {
           "builder": "@angular-builders/custom-webpack:dev-server",
           "options": {
+            "proxyConfig": "configs/clients/proxy.conf.js",
             "browserTarget": "reader-phone:build"
           },
           "configurations": {

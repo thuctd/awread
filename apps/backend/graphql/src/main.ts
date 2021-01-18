@@ -46,10 +46,15 @@ admin.initializeApp({
   databaseURL: FIREBASE_URL,
 });
 
+app.use((req, res, next) => {
+  console.log(req.path, req.url, req.method, req.protocol);
+  next();
+})
+
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
+app.get('/', (req, res) => res.send('Hello world'));
 app.post('/setCustomClaims', (req, res) => {
   // Get the ID token passed.
   const idToken = req.body.idToken;
@@ -95,10 +100,11 @@ app.use('/graphql', asyncMiddleware(checkJwt));
 
 app.use(postgraphile(DATABASE_URL, SCHEMA, postgraphileOptions));
 
-const port = process.env.port || 5000;
+const port = process.env.PORT || 5000;
 const server = app.listen(port, () => {
   console.log('database url:', DATABASE_URL);
   console.log(`Listening at http://localhost:${port}/graphiql`);
+  // console.log(`process env`, process.env);
 });
 server.on('error', console.error);
 

@@ -1,4 +1,4 @@
-<list-title-book [titleBoook]="book.title" [isSize]="book.isSize"></list-title-book>
+<atom-title class="truncate" [class]="'text-sm md:text-base font-bold text-gray-600'"></atom-title>
 <dl class="mt-2 text-sm p-0">
   <dd class="ml-0 pb-1">
     <atom-author></atom-author>
@@ -6,7 +6,7 @@
   <dd class="ml-0 pb-2">
     <div class="flex">
       <atom-rating class="mr-4"></atom-rating>
-      <atom-comment></atom-comment>
+      <atom-icon-text [icon]="faIcon" [title]="countComment"></atom-icon-text>
     </div>
   </dd>
   <dd class="ml-0">

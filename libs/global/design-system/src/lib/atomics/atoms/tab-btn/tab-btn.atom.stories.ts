@@ -2,15 +2,13 @@ import { TabBtnAtom } from './tab-btn.atom';
 import { GlobalDesignSystemAtomicModule } from '../../global-design-system-atomic.module';
 
 export default {
-  title: 'Design System/Atoms/Tab Btn'
-}
+  title: 'Design System/Atoms/Buttons/tabs/Tab Btn',
+};
 
 export const primary = () => ({
   moduleMetadata: {
-    imports: [GlobalDesignSystemAtomicModule]
+    imports: [GlobalDesignSystemAtomicModule],
   },
   component: TabBtnAtom,
-  props: {
-
-  }
-})
+  props: {},
+});

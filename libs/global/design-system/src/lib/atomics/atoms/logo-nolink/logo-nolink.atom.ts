@@ -13,6 +13,7 @@ import {
 })
 export class LogoNolinkAtom implements OnInit {
   @Input() link = '/global-assets/images/logo-white.png';
+  @Input() numberSize = '28';
 
   constructor() {}
 
