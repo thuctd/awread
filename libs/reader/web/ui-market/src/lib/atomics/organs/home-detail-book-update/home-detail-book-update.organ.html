@@ -1,11 +1,14 @@
-<section>
+<section class="mx-auto px-16">
     <div class="mb-4">
-      <atom-title [class]="'text-xl md:text-2xl font-medium text-gray-800'" [title]="titlePage"></atom-title>
+        <atom-title [title]='titlePage'></atom-title>
     </div>
-    <div class="grid grid-cols-10 gap-2">
-        <div *ngFor='let loop3 of counter(10);' class="col-span-2 md:col-span-2">
+    <div class="grid grid-cols-10 place-content-center place-items-center">
+        <div *ngFor='let loop3 of counter(10);' class="col-span-2 md:col-span-2 py-2 w-48">
             <atom-img-m [isSize]='isSize'></atom-img-m>
             <home-info-book-featured></home-info-book-featured>
         </div>
+    </div>
+    <div class="flex justify-center items-center">
+        <pagination></pagination>
     </div>
 </section>

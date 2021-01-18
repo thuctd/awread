@@ -5,7 +5,7 @@ import { tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 @Injectable({ providedIn: 'root' })
 export class AuthApi {
-  constructor(private apollo: Apollo, private http: HttpClient) { }
+  constructor(private apollo: Apollo, private http: HttpClient) {}
 
   updatePassword(email: string, newPassword: string, type = 'forgot') {
     return this.apollo.mutate({
@@ -98,6 +98,8 @@ export class AuthApi {
   }
 
   createAccountOnServer(user: FirebaseUser) {
+    console.log('FirebaseUser: ', user);
+    console.log('user: ', createUserFromFirebase(user));
     return this.apollo.mutate({
       mutation: gql`
         mutation signup(
@@ -111,11 +113,11 @@ export class AuthApi {
         ) {
           signup(
             input: {
-              fullname: $displayName
-              emailverified: $emailVerified
-              photourl: $photoUrl
-              password: $password
               userid: $uid
+              fullname: $displayName
+              photourl: $photoUrl
+              emailverified: $emailVerified
+              password: $password
               email: $email
               provider: $provider
             }

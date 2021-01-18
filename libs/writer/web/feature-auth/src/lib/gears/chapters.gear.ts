@@ -6,7 +6,7 @@ import { throwError } from 'rxjs';
 import { BooksStore } from '../states/books';
 import { Chapter } from '../..';
 import { ChaptersApi } from '../apis';
-import { ChaptersStore } from '../states/chapters';
+import { ChaptersQuery, ChaptersStore } from '../states/chapters';
 import { SnackbarsService } from '@awread/global/packages';
 
 @Injectable({ providedIn: 'root' })
@@ -17,7 +17,8 @@ export class ChaptersGear {
     private chaptersStore: ChaptersStore,
     private booksStore: BooksStore,
     private router: Router,
-    private snackbarsService: SnackbarsService
+    private snackbarsService: SnackbarsService,
+    private chapterQuery: ChaptersQuery
   ) {}
 
   getAllChapters(bookid: string) {
@@ -82,6 +83,14 @@ export class ChaptersGear {
       tap((res) => {
         this.snackbarsService.create('Cập nhật chương thành công!');
         if (res['data']) {
+          const chapterEntity = this.chapterQuery.getEntity(chapter.chapterid);
+          if (chapterEntity.status !== chapter.status) {
+            if (chapter.status === 'PUBLISHED') {
+              this.booksStore.updateTotalChapterPublished(chapter.bookid, 1);
+            } else {
+              this.booksStore.updateTotalChapterPublished(chapter.bookid, -1);
+            }
+          }
           this.chaptersStore.updateChapterById(chapter.chapterid, chapter);
         }
         this.router.navigate(['detail', { bookId: chapter.bookid }]);
@@ -93,12 +102,18 @@ export class ChaptersGear {
     );
   }
 
-  removeChapter(chapterid: string) {
+  removeChapter(chapterid: string, bookId: string, status: string) {
     return this.chaptersApi.removeChapter(chapterid).pipe(
       tap((res) => {
         this.snackbarsService.create('Xóa chương thành công!');
         if (res['data']) {
+          const isRemoveChapterPublished = status === 'PUBLISHED';
           this.chaptersStore.remove(chapterid);
+          this.booksStore.updateTotalChapterCount(
+            bookId,
+            isRemoveChapterPublished,
+            -1
+          );
         }
       }),
       catchError((err) => {

@@ -31,7 +31,7 @@ FROM build-backend-graphql as backend-graphql
 ARG application
 ARG applicationPath
 # //NOTE: we expose this only for testing purpose
-EXPOSE 5000
+EXPOSE 80
 # //NOTE: update this
 COPY --from=build-backend-graphql /batcave/dist/apps/$applicationPath .
 CMD ["node", "main.js"]

@@ -7,7 +7,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ListDetailShortBookOrgan implements OnInit {
-  @Input() size = 1;
+  @Input() size = 5;
   counter = Array
 
   constructor() { }

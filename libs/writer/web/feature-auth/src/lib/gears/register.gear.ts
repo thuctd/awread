@@ -30,11 +30,15 @@ export class RegisterGear {
       );
       const newUser: Partial<FirebaseUser> = {
         ...userCredential.user,
+        displayName: credential.displayName ?? '',
+        password: credential.password ?? '',
         provider: 'email/password',
+        photoUrl: userCredential.user.photoURL ?? '',
       };
       const user = createUserFromFirebase(newUser);
-      this.createAccountOnServer(user);
-      this.authRoutingGear.navigateAfterRegisterComplete('login');
+      this.createAccountOnServer(user).subscribe(() => {
+        this.authRoutingGear.navigateAfterRegisterComplete('profile');
+      });
     } catch (err) {
       console.log('login with email/pw error: ', err);
       if (err.code === 'auth/email-already-in-use') {

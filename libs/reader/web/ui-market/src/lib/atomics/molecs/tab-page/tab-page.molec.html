@@ -1,10 +1,10 @@
-<div class="grid grid-cols-12 gap-6">
-    <tab-btn class="col-span-2 md:col-span-4"
-      [ngClass]="tab.isActive ? ' border-green-400' : ''"
-      *ngFor="let tab of tabs"
-      [tabName]="tab.name"
-      [active]="tab.isActive"
-      (tabClicked)="toggleTabs(tab)"
-    >
-    </tab-btn>
+<div class="grid grid-cols-12 gap-6 border-b border-teal-400">
+  <rd-list-tab-page class="col-span-2 md:col-span-4"
+    [ngClass]="tab.isActive ? ' border-b-2 border-green-400' : ''"
+    *ngFor="let tab of tabs"
+    [tabName]="tab.name"
+    [active]="tab.isActive"
+    (tabClicked)="toggleTabs(tab)"
+  >
+  </rd-list-tab-page>
 </div>

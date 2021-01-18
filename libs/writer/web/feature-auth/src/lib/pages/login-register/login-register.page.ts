@@ -23,7 +23,7 @@ export class LoginRegisterPage {
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.initForm();
@@ -37,6 +37,11 @@ export class LoginRegisterPage {
   }
 
   register() {
+    const { password, confirmPassword } = this.authForm.value;
+    if (password !== confirmPassword) {
+      alert('Password không khớp. Vui lòng thử lại!');
+      return;
+    }
     this.authFacade.registerEmail(this.authForm.value);
   }
 

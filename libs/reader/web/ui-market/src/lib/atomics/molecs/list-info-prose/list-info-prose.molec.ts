@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'list-info-prose',
@@ -11,6 +11,13 @@ export class ListInfoProseMolec implements OnInit {
     title: 'Cô gái chúng ta cùng theo đuổi năm nào',
     isSize: true,
   };
+
+  @Input() moreContent = {
+    text: 'Xem thêm...',
+    isSize: true,
+  }
+
+  @Output() moreEvent = new EventEmitter();
 
   constructor() { }
 
