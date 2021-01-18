@@ -3,6 +3,7 @@
   [chapters]="chapterListByBookId$ | async"
   [tabsHead]="tabsHead"
   [selectedTab]="selectedTab"
+  [selectedBookStatus]="selectedBookStatus"
   (selectedStatusEvent)="selectedStatusEvent($event)"
   (chapterActionEvent)="chapterActionEvent($event)"
   (createNewChapterEvent)="createNewChapterEvent()"

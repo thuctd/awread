@@ -27,6 +27,7 @@ export class DetailPage implements OnInit {
     { name: 'Story Details', tabName: 'book' },
   ];
   selectedTab = 'toc';
+  selectedBookStatus = 'DRAFT';
   constructor(
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
@@ -94,6 +95,7 @@ export class DetailPage implements OnInit {
     }
   }
   selectedStatusEvent(status: string) {
+    this.selectedBookStatus = status;
     this.bookForm.patchValue({ status });
   }
 
@@ -163,6 +165,7 @@ export class DetailPage implements OnInit {
     if (this.bookId) {
       this.booksFacade.selectEntityBook(this.bookId).subscribe((book) => {
         if (book) {
+          this.selectedBookStatus = book.status;
           this.bookForm.patchValue({
             title: book.title,
             description: book.description ?? '',

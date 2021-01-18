@@ -37,16 +37,16 @@ export class DetailIndexTemplate implements OnInit {
   @Output() chapterActionEvent = new EventEmitter();
   @Output() createNewChapterEvent = new EventEmitter();
   @Output() switchTabEvent = new EventEmitter();
-  selectedBookStatus: string;
+  @Input() selectedBookStatus: string;
   constructor() {}
 
   ngOnInit(): void {
-    this.selectedBookStatus = this.bookForm.get('status').value;
+    // this.selectedBookStatus = this.bookForm.get('status').value;
     console.log('chapters: ', this.chapters);
   }
 
   selectBookStatus(status: string) {
-    this.selectedBookStatus = status;
+    // this.selectedBookStatus = status;
     this.selectedStatusEvent.emit(status);
   }
 }
