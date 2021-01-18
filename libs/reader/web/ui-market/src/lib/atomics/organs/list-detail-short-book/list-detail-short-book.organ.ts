@@ -1,4 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'list-detail-short-book',
@@ -7,8 +8,16 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ListDetailShortBookOrgan implements OnInit {
-  @Input() size = 5;
   counter = Array
+
+  @Input() moreContent = {
+    text: 'Xem thêm',
+    size: 'l',
+    color: 'gray'
+  }
+
+  @Input() faIcon = faAngleDown;
+  @Output() moreEvent = new EventEmitter();
 
   constructor() { }
 

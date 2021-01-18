@@ -7,7 +7,6 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomeDetailBookUpdateOrgan implements OnInit {
-  @Input() isSize = 1;
   @Input() titlePage = 'Truyện mới cập nhật';
   counter = Array;
 

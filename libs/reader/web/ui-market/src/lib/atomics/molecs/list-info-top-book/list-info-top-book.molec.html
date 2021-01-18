@@ -1,10 +1,8 @@
-<div class="table-cell align-top pl-2 pr-0">
-  <atom-title-book [titleBoook]='book.title' [isSize]='book.isSize'></atom-title-book>
-  <dl class="text-sm sm:pt-2">
-    <dd class="ml-0">
-      <div *ngFor="let btn of btns" class="leading-normal font-medium">
-        <base-btn (onBtnClicked)="submitEvent.emit($event)" [isSize]="btn.isSize" [chapter]="btn.chapter"></base-btn>
-      </div>
-    </dd>
-  </dl>
-</div>
+<atom-title-book [titleBoook]='book.title' [isSize]='book.isSize'></atom-title-book>
+<dl class="text-sm sm:pt-2">
+  <dd class="ml-0">
+    <div *ngFor="let btn of btns" class="leading-normal font-medium">
+      <base-btn (onBtnClicked)="submitEvent.emit($event)" [isSize]="btn.isSize" [chapter]="btn.chapter"></base-btn>
+    </div>
+  </dd>
+</dl>

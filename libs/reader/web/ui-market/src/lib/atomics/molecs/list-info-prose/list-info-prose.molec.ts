@@ -13,8 +13,9 @@ export class ListInfoProseMolec implements OnInit {
   };
 
   @Input() moreContent = {
-    text: 'Xem thêm...',
-    isSize: true,
+    text: 'Đọc thêm',
+    size: 's',
+    color: 'green'
   }
 
   @Output() moreEvent = new EventEmitter();

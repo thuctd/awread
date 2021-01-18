@@ -2,7 +2,7 @@ import { RdListTabPageAtom } from './rd-list-tab-page.atom';
 import { GlobalDesignSystemAtomicModule } from '../../global-design-system-atomic.module';
 
 export default {
-  title: 'Design System/Atoms/Rd List Tab Page'
+  title: 'Design System/Atoms/Buttons/tabs/Rd List Tab Page'
 }
 
 export const primary = () => ({

@@ -4,7 +4,7 @@
         <div class="flex justify-end">
             <div class="w-full">
                 <div class="relative w-64">
-                    <atom-img-m [isSize]='3'>
+                    <atom-img-m [isSize]='"xl"'>
                     </atom-img-m>
                     <div class="absolute top--04">
                         <rd-home-icon-rating></rd-home-icon-rating>
@@ -16,7 +16,7 @@
         <div class="float-left pl-8 md:pl-12 xl:pl-24 lg:pl-20">
             <div class="grid grid-cols-2 gap-10 mb-6">
                 <div *ngFor='let loop3 of counter(4); let i = index' class="w-44 xl:w-52 rounded relative">
-                    <atom-img-m [isSize]='2'></atom-img-m>
+                    <atom-img-m [isSize]='"m"'></atom-img-m>
                     <div class="absolute -top-1.5">
                         <rd-home-icon-rating [topBook]='i + 2'></rd-home-icon-rating>
                     </div>
