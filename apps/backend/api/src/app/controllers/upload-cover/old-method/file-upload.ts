@@ -1,37 +1,3 @@
-// aws.config.update({
-//     accessKeyId: `31QTFQO80GZFYNGU0O4T`,
-//     secretAccessKey: `bJoHQi1Go9Et70tWcdiOamdJrCXIUBK423X1dcJc`,
-//     region: 'hn',
-//     endpoint: 'https://ss-hn-1.bizflycloud.vn',
-//     apiVersions: {
-//         s3: '2006-03-01'
-//     },
-//     logger: process.stdout
-// });
-// const s3 = new aws.S3();
-
-// const upload = multer({
-//     fileFilter: (req, file, cb) => {
-//         if (file.mimetype === 'application/octet-stream' || file.mimetype === 'video/mp4'
-//             || file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
-//             cb(null, true);
-//         } else {
-//             cb(new Error('Invalid file type'), false);
-//         }
-//     },
-//     storage: multerS3({
-//         acl: 'public-read',
-//         s3,
-//         bucket: 'awread-bucket',
-//         key: function (req, file, cb) {
-//             req.file = Date.now() + file.originalname;
-//             cb(null, Date.now() + file.originalname);
-//         }
-//     })
-// });
-
-// module.exports = upload;
-
 // Import required AWS SDK clients and commands for Node.js
 const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3');
 const path = require('path');
