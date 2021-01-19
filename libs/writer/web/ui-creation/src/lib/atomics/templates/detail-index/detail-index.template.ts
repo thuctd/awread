@@ -7,6 +7,7 @@ import {
   Output,
   EventEmitter,
 } from '@angular/core';
+import { Category, Genre } from '@awread/writer/web/feature-auth';
 
 @Component({
   selector: 'template-detail',
@@ -15,6 +16,8 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DetailIndexTemplate implements OnInit {
+  @Input() categories: Category[];
+  @Input() genres: Genre[];
   @Input() btns = [
     {
       submitText: 'Draft',

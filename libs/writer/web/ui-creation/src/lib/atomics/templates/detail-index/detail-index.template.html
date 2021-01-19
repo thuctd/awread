@@ -27,6 +27,8 @@
     <detail
       *ngIf="selectedTab === 'book'"
       [bookForm]="bookForm"
+      [categories]="categories"
+      [genres]="genres"
       (bookSubmitEvent)="bookSubmitEvent.emit()"
     ></detail>
     <div

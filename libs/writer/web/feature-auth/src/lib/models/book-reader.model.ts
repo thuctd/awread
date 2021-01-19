@@ -1,9 +1,12 @@
 export interface BookReader {
-  id: string;
+  bookid: string;
+  userid: string;
+  title: string;
+  img: string;
+  description: string;
+  categoryid: string;
 }
 
 export function BookReader(params: Partial<BookReader>) {
-  return {
-
-  } as BookReader;
+  return {} as BookReader;
 }

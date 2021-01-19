@@ -1,6 +1,12 @@
-import { switchMap } from 'rxjs/operators';
+import { map, startWith, switchMap } from 'rxjs/operators';
 import { tap } from 'rxjs/operators';
-import { ChaptersFacade } from '@awread/writer/web/feature-auth';
+import {
+  Category,
+  CategoryFacade,
+  ChaptersFacade,
+  Genre,
+  GenresFacade,
+} from '@awread/writer/web/feature-auth';
 import { CurrentUserFacade } from '@awread/writer/web/feature-auth';
 import { BooksFacade } from '@awread/writer/web/feature-auth';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -11,7 +17,7 @@ import {
   OnInit,
   ChangeDetectorRef,
 } from '@angular/core';
-import { of } from 'rxjs';
+import { combineLatest, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -28,12 +34,16 @@ export class DetailPage implements OnInit {
   ];
   selectedTab = 'toc';
   selectedBookStatus = 'DRAFT';
+  categories$;
+  genres$;
   constructor(
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
     private booksFacade: BooksFacade,
     private currentUserFacade: CurrentUserFacade,
     private chaptersFacade: ChaptersFacade,
+    private categoryFacade: CategoryFacade,
+    private genresFacade: GenresFacade,
     private router: Router,
     private cd: ChangeDetectorRef
   ) {}
@@ -44,6 +54,8 @@ export class DetailPage implements OnInit {
     this.getAllChapters();
     this.initForm();
     this.updateForm();
+    this.categories$ = this.getCategories();
+    this.genres$ = this.getAllGenres();
   }
 
   switchTab(tabName: string) {
@@ -52,6 +64,38 @@ export class DetailPage implements OnInit {
       return;
     }
     this.selectedTab = tabName;
+  }
+
+  getAllGenres() {
+    return combineLatest([
+      this.genresFacade.selectAllGenresAkita(),
+      this.bookForm.get('genres').valueChanges.pipe(startWith('')),
+    ]).pipe(
+      map(([genres, genresValueForm]: [Genre[], string]) => {
+        if (genres && genres.length) {
+          return genres.filter((item) =>
+            item.name.toLowerCase().includes(genresValueForm.toLowerCase())
+          );
+        }
+        return [];
+      })
+    );
+  }
+
+  getCategories() {
+    return combineLatest([
+      this.categoryFacade.selectAllCategoriesAkita(),
+      this.bookForm.get('categoryname').valueChanges.pipe(startWith('')),
+    ]).pipe(
+      map(([categories, categoryValueForm]: [Category[], string]) => {
+        if (categories && categories.length) {
+          return categories.filter((item) =>
+            item.name.toLowerCase().includes(categoryValueForm.toLowerCase())
+          );
+        }
+        return [];
+      })
+    );
   }
 
   createNewChapterEvent() {
@@ -167,8 +211,9 @@ export class DetailPage implements OnInit {
         if (book) {
           this.selectedBookStatus = book.status;
           this.bookForm.patchValue({
-            title: book.title,
+            title: book.title ?? '',
             description: book.description ?? '',
+            categoryname: book.categoryname ?? '',
             tags: book.tags ?? [],
             completed: book.completed ?? false,
             status: book.status ?? 'DRAFT',
@@ -182,6 +227,7 @@ export class DetailPage implements OnInit {
     this.bookForm = this.fb.group({
       title: ['', Validators.required],
       description: [''],
+      categoryname: [''],
       tags: [''],
       genres: [''],
       audience: [''],
