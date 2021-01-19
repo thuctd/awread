@@ -22,6 +22,15 @@ export interface Book {
   totalChapterCountPublished: number;
 }
 
+export interface BookReader {
+  bookid: string;
+  userid: string;
+  title: string;
+  img: string;
+  description: string;
+  categoryid: string;
+}
+
 export function createBookObject(params: Partial<Book>) {
   return {
     bookid: params.bookid,
