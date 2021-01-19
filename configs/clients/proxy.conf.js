@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable no-undef */
 // eslint-disable-next-line no-undef
-const backendGraphqlHost = process.env?.GRAPHQL_URI ? `http://${process.env?.GRAPHQL_URI}` : 'http://backend-graphql.awread.vn';
+const backendGraphqlHost = process.env?.GRAPHQL_URI ? `http://${process.env?.GRAPHQL_URI}` : 'https://backend-graphql.awread.vn';
 module.exports = [
   {
     context: [
@@ -11,6 +11,7 @@ module.exports = [
     "logLevel": process.env?.ENVIRONMENT === 'prod' ? "info" : "debug",
     "secure": false, // because we using http not https
     "changeOrigin": true, // because we not using the same origin
+    // "methods": ["POST"], // useless
     // pathRewrite value to the proxy configuration to remove "graphql" from the end of a path.
     // "pathRewrite": {
     //     "^/graphql": ""
