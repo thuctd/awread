@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { faHome , faAngleLeft} from '@fortawesome/free-solid-svg-icons';
+import { faHome , faAngleRight} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'molec-breadcrumb',
@@ -24,14 +24,14 @@ export class BreadcrumbMolec implements OnInit {
     {
       title: 'Truyện ngắn',
       link: '/home',
-      icon: faAngleLeft,
+      icon: faAngleRight,
       size: 'text-xs',
     },
     {
       title: 'Ngày ấy vì ai mà đổi thay',
       link: '',
       size: 'text-xs',
-      icon: faAngleLeft
+      icon: faAngleRight
     }
 
   ];

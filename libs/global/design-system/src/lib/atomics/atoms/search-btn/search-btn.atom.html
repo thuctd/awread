@@ -1,4 +1,4 @@
-<a (click)="toggleDisplay()" class="search__btn {{color}} cursor-pointer text-base lg:text-lg xl:text-xl transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110">
+<a (click)="toggleDisplay()" class="{{color}} cursor-pointer text-base lg:text-lg xl:text-xl transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110">
     <fa-icon [icon]="icons.faSearch"></fa-icon>
 </a>
 <div *ngIf="isDisplay" class="bg-white fixed inset-0 z-50 justify-center flex items-center shadow-md h-32 py-3">
