@@ -38,165 +38,48 @@ import { Observable, combineLatest, Subject } from 'rxjs';
     },
   ],
 })
-export class GenresField
-  implements OnInit, ControlValueAccessor, OnChanges, OnDestroy {
-  onChange: (data: any) => void;
-  onTouch: (data: any) => void;
+export class GenresField implements OnInit {
   isDisabled: boolean;
   separatorKeysCodes: number[] = [ENTER, COMMA];
   @Input() mode: 'string' | 'object' = 'string';
-  @Input() placeholder = 'New genre...';
-  @Input() label = 'Genre selection';
-  @Input() allGenres: any[] = [];
-  @Input() genres: string[] = [];
+  @Input() genres;
   @ViewChild('genreInput') genreInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
   genreCtrl = new FormControl();
-  // typingForm = new FormControl();
   @Input() bookForm: FormGroup;
-  filteredGenres$: Observable<any[]>;
-  destroy$ = new Subject();
-  constructor(private cd: ChangeDetectorRef) {}
+  genresListChip = [];
+  removable = true;
+  selectable = true;
+  constructor() {}
 
-  ngOnChanges(changes: SimpleChanges): void {
-    // console.log('changes', changes);
-    // tslint:disable-next-line: no-string-literal
-    // const allGenres = changes['allGenres'].currentValue;
-    // if (allGenres && allGenres.length) {
-    //   this.setGenres();
-    // }
-  }
-
-  ngOnDestroy() {
-    this.destroy$.next();
-  }
-
-  // setGenres() {
-  //   this.filteredGenres$ =
-  //     this.typingForm.valueChanges.pipe(startWith(''))
-  //       // this.genreCtrl.valueChanges
-  //     .pipe(
-  //         takeUntil(this.destroy$),
-  //         withLatestFrom(this.genreCtrl.valueChanges.pipe(startWith([]))),
-  //         map(([input, selectedGenre]) => {
-  //           // console.log('input', input);
-  //           // console.log('selectedGenre', selectedGenre);
-  //           return this.allGenres.filter(genreItem => {
-  //             const term = input.id ? input.name : input;
-  //             if (this.mode === 'object') {
-  //               return genreItem.name.toLowerCase().includes(term.toLowerCase());
-  //             } else {
-  //               return genreItem.toLowerCase().includes(term.toLowerCase());
-  //             }
-  //           });
-  //         }),
-  //       )
-  // }
-
-  ngOnInit(): void {}
-
-  // click on mat option event
-  writeValue(value: string[]) {
-    // console.log('value', value, this.allGenres);
-    this.genres = value;
-    // this.typingForm.patchValue('');
-    this.workAroundKeepShowListAfterSelectOption();
-  }
-
-  registerOnChange(fn: any) {
-    this.onChange = fn;
-  }
-
-  registerOnTouched(fn: any) {
-    this.onTouch = fn;
-  }
-
-  setDisabledState(isDisabled: boolean) {}
+  ngOnInit() {}
 
   add(event: MatChipInputEvent): void {
     const input = event.input;
-    const addedValue = event.value ?? '';
-    this.updateCurrentState(addedValue);
+    const value = event.value;
+
+    // Add our fruit
+    if ((value || '').trim()) {
+      this.genresListChip.push(value.trim());
+    }
+
+    // Reset the input value
+    if (input) {
+      input.value = '';
+    }
+    this.bookForm.patchValue({ genres: '' });
+    // this.fruitCtrl.setValue(null);
   }
 
-  private workAroundKeepShowListAfterSelectOption() {
-    setTimeout(() => {
-      if (
-        this.genreInput &&
-        this.genreInput.nativeElement &&
-        this.genres.length
-      ) {
-        this.genreInput.nativeElement.blur();
-        setTimeout(() => {
-          this.genreInput.nativeElement.focus();
-        }, 1);
-      }
-    }, 100);
-  }
-
-  remove(genre: string): void {
-    const index = this.genres.indexOf(genre);
+  remove(fruit: string): void {
+    const index = this.genresListChip.indexOf(fruit);
 
     if (index >= 0) {
-      this.genres = this.genres.filter((item) => item !== genre);
+      this.genresListChip.splice(index, 1);
     }
   }
-
-  // click on mat option event
   selected(event: MatAutocompleteSelectedEvent): void {
-    const addedValue =
-      this.mode === 'object' ? event.option.value.name : event.option.value;
-    this.updateCurrentState(addedValue);
-  }
-
-  updateCurrentState(addedValue) {
-    this.genres = [...this.genres, addedValue];
-    this.genreInput.nativeElement.value = '';
-    this.genreCtrl.patchValue(this.genres);
-    this.writeValue(this.genres);
-    this.onChange(this.genres);
-    this.cd.detectChanges();
-    // console.warn('input, value', addedValue, this.genres, this.genreCtrl.value);
-  }
-
-  private _filter(selectedGenres: string[]): any[] {
-    const result = this.allGenres.filter((item) => {
-      const duplicated = this.getDuplicatedItems(selectedGenres, item);
-      // console.log('duplicated', duplicated);
-      return !duplicated;
-    });
-    // console.log('selectedGenres, result, this.allGenres', selectedGenres, result, this.allGenres);
-    return result;
-  }
-
-  private getDuplicatedItems(selectedGenres: string[], item: any | string) {
-    if (this.mode === 'object') {
-      // console.log('selectedGenres', selectedGenres, item);
-      return (
-        selectedGenres &&
-        !!selectedGenres.filter((selectedItem) => selectedItem === item.id)
-          .length
-      );
-    }
-    return !!selectedGenres.filter(
-      (selectedItem) => selectedItem.toLowerCase() === item.toLowerCase()
-    ).length;
-  }
-
-  getId(genre) {
-    return this.mode === 'object' ? genre.id : genre;
-  }
-
-  getName(genre) {
-    return this.mode === 'object' ? genre.name : genre;
-  }
-
-  getNameFromId(genre: string) {
-    const foundItem = this.allGenres.find((item) => item.name === genre);
-    return this.mode === 'object'
-      ? foundItem
-        ? foundItem.name
-        : genre
-      : genre;
+    this.genresListChip.push(event.option.viewValue);
+    this.bookForm.patchValue({ genres: '' });
   }
 }
