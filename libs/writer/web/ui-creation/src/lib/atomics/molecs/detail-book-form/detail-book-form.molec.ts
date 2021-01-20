@@ -12,6 +12,7 @@ import {
   Validators,
   FormGroup,
 } from '@angular/forms';
+import { Category, Genre } from '@awread/writer/web/feature-auth';
 
 @Component({
   selector: 'detail-book-form',
@@ -20,7 +21,8 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DetailBookFormMolec implements OnInit {
-  @Input() genres;
+  @Input() genres: Genre;
+  @Input() categories: Category[];
   @Input() bookForm: FormGroup;
   @Input() formInformation = {
     title: {

@@ -1,3 +1,5 @@
+import { Category } from './category.model';
+
 enum BookStatus {
   DRAFT = 'DRAFT',
   PUBLISHED = 'PUBLISHED',
@@ -10,6 +12,7 @@ export interface Book {
   title: string;
   img: string;
   description: string;
+  categoryid: Category['categoryid'];
   completed: boolean;
   status: BookStatus;
   isdeleted: boolean;

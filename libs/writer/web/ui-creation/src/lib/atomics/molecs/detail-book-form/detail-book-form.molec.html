@@ -9,6 +9,39 @@
     [titleLabel]="formInformation.description.display | titlecase"
     [placeholder]="formInformation.description.placeholder | titlecase"
   ></detail-textarea-form>
+
+  <!-- <detail-input-form
+    [inputControl]="bookForm.get('categorid')"
+    [titleLabel]="formInformation.tags.display | titlecase"
+    [placeholder]="formInformation.tags.placeholder | titlecase"
+  ></detail-input-form> -->
+  <div class="md:flex mb-6 w-100">
+    <div class="md:w-1/3">
+      <label
+        class="block text-gray-500 md:mt-2 font-bold md:text-left mb-1 md:mb-0"
+        for="inline-full-name"
+      >
+        Thể loại
+      </label>
+    </div>
+    <div class="md:w-2/3">
+      <div class="">
+        <input
+          class=""
+          type="text"
+          placeholder="Thể loại"
+          formControlName="categoryname"
+          [matAutocomplete]="auto"
+        />
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+          <mat-option *ngFor="let item of categories" [value]="item.name">
+            {{item.name | titlecase}}
+          </mat-option>
+        </mat-autocomplete>
+      </div>
+    </div>
+  </div>
+
   <detail-input-form
     [inputControl]="bookForm.get('tags')"
     [titleLabel]="formInformation.tags.display | titlecase"
@@ -20,15 +53,14 @@
         class="block text-gray-500 md:mt-2 font-bold md:text-left mb-1 md:mb-0"
         for="inline-full-name"
       >
-        {{ 'Genres' | titlecase }}
+        Genres
       </label>
     </div>
     <div class="md:w-2/3">
       <app-genres
         mode="object"
         [bookForm]="bookForm"
-        [allGenres]="genres"
-        [placeholder]="'Genres' | titlecase"
+        [genres]="genres"
       ></app-genres>
     </div>
   </div>
@@ -36,6 +68,10 @@
     [inputControl]="bookForm.get('audience')"
     [titleLabel]="formInformation.target.display"
   ></detail-cmb-form>
+  <!-- <detail-cmb-form
+    [inputControl]="bookForm.get('language')"
+    [titleLabel]="formInformation.language.display"
+  ></detail-cmb-form> -->
   <detail-toogle-form
     [inputControl]="bookForm.get('completed')"
     [titleLabel]="formInformation.completed.display"
