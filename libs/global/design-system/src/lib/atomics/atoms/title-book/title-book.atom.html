@@ -1,1 +1,1 @@
-<a [ngClass]=" isSize ? 'text-base md:text-lg' : 'text-sm'" class="font-bold mb-1 cursor-pointer block outline-none truncate text-gray-600"> {{ titleBook }} </a>
+<a routerLink="['/{{linkBook}}']" routerLinkActive="router-link-active" [ngClass]=" isSize ? 'text-base md:text-lg' : 'text-sm'"  class="font-bold mb-1 cursor-pointer block outline-none truncate text-gray-600"> {{ titleBook }} </a>

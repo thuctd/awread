@@ -46,9 +46,6 @@ export class DetailBookFormMolec implements OnInit {
     target: {
       display: 'Target Audience',
     },
-    language: {
-      display: 'Language',
-    },
     completed: {
       display: 'completed',
       placeholder: 'completed',

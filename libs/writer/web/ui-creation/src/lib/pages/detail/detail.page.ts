@@ -23,8 +23,8 @@ export class DetailPage implements OnInit {
   chapterEntity$: any;
   chapterListByBookId$ = this.chaptersFacade.chapterListByBookId$;
   tabsHead = [
-    { name: 'Tables of Contents', tabName: 'toc' },
     { name: 'Story Details', tabName: 'book' },
+    { name: 'Tables of Contents', tabName: 'toc' },
   ];
   selectedTab = 'toc';
   constructor(

@@ -17,14 +17,14 @@ import {
 export class DetailIndexTemplate implements OnInit {
   @Input() btns = [
     {
-      submitText: 'Draft',
+      submitText: 'Cancel',
       isActive: false,
-      status: 'DRAFT',
+      status: 'CANCEL',
     },
     {
-      submitText: 'Publish',
+      submitText: 'Skip',
       isActive: true,
-      status: 'PUBLISHED',
+      status: 'SKIP',
     },
   ];
 

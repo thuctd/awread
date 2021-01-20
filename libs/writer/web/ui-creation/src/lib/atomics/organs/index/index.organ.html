@@ -1,13 +1,13 @@
 <div class="grid grid-cols-12 gap-10">
   <div class="col-span-2 md:col-span-12">
     <div class="py-4">
-      <div class="w-36 mb-4">
+      <div class="mb-4">
         <!-- <cr-submit-btn [faIcon]="faIcon" [submitText]="'Thêm chương mới'"></cr-submit-btn> -->
         <button
           (click)="createNewChapterEvent.emit()"
-          class="text-sm md:text-xs lg:text-base xl:text-base w-full bg-green-400 text-white block cursor-pointer rounded-md focus:shadow-outline focus:outline-none p-2"
+          class="text-sm md:text-xs lg:text-base xl:text-base px-2 py-1 md:px-4 md:py-2 bg-green-400 text-white block cursor-pointer rounded-md focus:shadow-outline focus:outline-none"
         >
-          <span class="ml-2 text-xs text-white">
+          <span class="text-xs text-white">
             <fa-icon [icon]="faIcon"></fa-icon>
           </span>
           Thêm chương mới
