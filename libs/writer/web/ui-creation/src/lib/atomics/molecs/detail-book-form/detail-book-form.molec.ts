@@ -66,6 +66,7 @@ export class DetailBookFormMolec implements OnInit {
   };
 
   @Output() btnSubmitEvent = new EventEmitter();
+  @Output() genresEvent = new EventEmitter();
 
   constructor(private fb: FormBuilder) {}
 

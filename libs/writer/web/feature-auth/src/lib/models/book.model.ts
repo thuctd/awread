@@ -1,3 +1,4 @@
+import { Genre } from '.';
 import { Category } from './category.model';
 
 enum BookStatus {
@@ -17,6 +18,7 @@ export interface Book {
   status: BookStatus;
   isdeleted: boolean;
   tags: string[];
+  genres: Genre[];
   createdat: Date;
   publishedat: Date;
   updatedat: Date;
@@ -36,6 +38,7 @@ export function createBookObject(params: Partial<Book>) {
     status: params.status ?? 'DRAFT',
     isdeleted: params.isdeleted ?? false,
     tags: params.tags ?? '',
+    genres: params.genres ?? '',
     createdat: params.createdat ?? new Date(),
     publishedat: params.publishedat ?? new Date(),
     updatedat: params.updatedat ?? new Date(),

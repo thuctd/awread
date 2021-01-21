@@ -10,6 +10,8 @@ import {
   SimpleChanges,
   OnChanges,
   OnDestroy,
+  EventEmitter,
+  Output,
 } from '@angular/core';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import {
@@ -47,6 +49,7 @@ export class GenresField implements OnInit {
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
   genreCtrl = new FormControl();
   @Input() bookForm: FormGroup;
+  @Output() genresEvent = new EventEmitter();
   genresListChip = [];
   removable = true;
   selectable = true;
@@ -61,6 +64,7 @@ export class GenresField implements OnInit {
     // Add our fruit
     if ((value || '').trim()) {
       this.genresListChip.push(value.trim());
+      this.genresEvent.emit(this.genresListChip);
     }
 
     // Reset the input value
@@ -76,10 +80,12 @@ export class GenresField implements OnInit {
 
     if (index >= 0) {
       this.genresListChip.splice(index, 1);
+      this.genresEvent.emit(this.genresListChip);
     }
   }
   selected(event: MatAutocompleteSelectedEvent): void {
     this.genresListChip.push(event.option.viewValue);
+    this.genresEvent.emit(this.genresListChip);
     this.bookForm.patchValue({ genres: '' });
   }
 }

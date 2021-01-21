@@ -21,6 +21,7 @@
       [genres]="genres"
       (btnSubmitEvent)="bookSubmitEvent.emit()"
       [bookForm]="bookForm"
+      (genresEvent)="genresEvent.emit($event)"
     ></detail-book-form>
   </div>
 </div>

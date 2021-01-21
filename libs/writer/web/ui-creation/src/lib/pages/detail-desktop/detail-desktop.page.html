@@ -10,6 +10,7 @@
   (chapterActionEvent)="chapterActionEvent($event)"
   (createNewChapterEvent)="createNewChapterEvent()"
   (switchTabEvent)="switchTab($event)"
+  (genresEvent)="genresEvent($event)"
 ></template-detail>
 <div class="text-center" *ngIf="selectedTab === 'book'">
   <button (click)="bookSubmitEvent()">

@@ -34,6 +34,7 @@ export class DetailPage implements OnInit {
   ];
   selectedTab = 'toc';
   selectedBookStatus = 'DRAFT';
+  genresListChip = [];
   categories$;
   genres$;
   constructor(
@@ -126,9 +127,18 @@ export class DetailPage implements OnInit {
     }
   }
 
+  genresEvent(genres) {
+    this.genresListChip = genres;
+  }
+
   bookSubmitEvent() {
     const userid = this.currentUserFacade.getUserId();
-    const book = { ...this.bookForm.value, bookid: this.bookId, userid };
+    const book = {
+      ...this.bookForm.value,
+      bookid: this.bookId,
+      userid,
+      genres: this.genresListChip,
+    };
     if (this.bookId) {
       this.booksFacade.editBook(book).subscribe(() => {
         this.selectedTab = 'toc';

@@ -61,6 +61,7 @@
         mode="object"
         [bookForm]="bookForm"
         [genres]="genres"
+        (genresEvent)="genresEvent.emit($event)"
       ></app-genres>
     </div>
   </div>

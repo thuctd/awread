@@ -173,6 +173,14 @@ export class BooksApi {
               bookid
             }
           }
+
+          insertgenres {
+            insertBookGenre(
+              input: { bookid: "", genres: { genreid: "", name: "" } }
+            ) {
+              bookid
+            }
+          }
         }
       `,
       variables: createBookObject(book),

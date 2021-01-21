@@ -58,7 +58,11 @@ export class BooksGear {
 
   addBook(book) {
     const bookid = this.firebaseFirestoreAddon.createId();
-    const bookNew = createBookObject({ ...book, bookid });
+    const genres = book.genres.map((genre) => ({
+      name: genre,
+      genreid: this.firebaseFirestoreAddon.createId(),
+    }));
+    const bookNew = createBookObject({ ...book, bookid, genres });
     return this.booksApi.createBook(bookNew).pipe(
       tap((res) => {
         console.log('add book res: ', res);
