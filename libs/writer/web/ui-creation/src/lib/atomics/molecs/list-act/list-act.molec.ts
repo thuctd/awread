@@ -28,14 +28,14 @@ export class ListActMolec implements OnInit {
   @Input() bookId: string;
   @Input() btns = [
     {
-      titleButton: 'Publish',
+      titleButton: 'Stats',
       faIcon: faChartLine,
-      type: 'PUSHLISHED',
+      type: 'STATS',
     },
     {
-      titleButton: 'Draft',
+      titleButton: 'Share',
       faIcon: faShareAlt,
-      type: 'DRAFT',
+      type: 'SHARE',
     },
   ];
 

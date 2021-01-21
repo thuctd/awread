@@ -58,30 +58,5 @@
           class="mx-2"
         ></cr-submit-btn>
       </div>
-    <index
-      *ngIf="selectedTab === 'toc'"
-      [chapters]="chapters"
-      (chapterActionEvent)="chapterActionEvent.emit($event)"
-      (createNewChapterEvent)="createNewChapterEvent.emit()"
-    ></index>
-    <detail
-      *ngIf="selectedTab === 'book'"
-      [bookForm]="bookForm"
-      [categories]="categories"
-      [genres]="genres"
-      (bookSubmitEvent)="bookSubmitEvent.emit()"
-    ></detail>
-    <div
-      class="absolute right-2 -top-1 justify-end flex z-50"
-      *ngIf="selectedTab === 'book'"
-    >
-      <cr-submit-btn
-        *ngFor="let btn of btns"
-        [active]="selectedBookStatus === btn.status"
-        (click)="selectBookStatus(btn.status)"
-        [submitText]="btn.submitText"
-        class="ml-2"
-      ></cr-submit-btn>
-    </div>
   </div>
 </div>

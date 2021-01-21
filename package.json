@@ -52,6 +52,7 @@
     "@nestjs/common": "^7.6.4",
     "@nestjs/core": "^7.6.4",
     "@nestjs/platform-express": "^7.6.4",
+    "@ng-select/ng-select": "^5.0.15",
     "@types/multer": "^1.4.5",
     "apollo-angular": "^2.1.0",
     "apollo-angular-link-http": "^1.11.0",

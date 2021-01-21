@@ -6,7 +6,7 @@
     <div class="py-1 text-left">
       <div *ngFor="let action of actions" class="z-50">
         <a (click)="chapterActionEvent.emit(action.type)"
-           class="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 hover:text-gray-900">
+           class="block px-4 py-2 cursor-pointer text-sm text-gray-600 hover:bg-gray-100 hover:text-gray-900">
           <span class="text-sm text-gray-500 mr-2">
             <fa-icon [icon]="action.icon"></fa-icon>
           </span>

@@ -32,6 +32,7 @@ import { DetailReviewMolec } from './molecs/detail-review/detail-review.molec';
 import { WriterWebSharedAtomicModule } from '@awread/writer/web/shared';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   imports: [
@@ -43,6 +44,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     WriterWebSharedAtomicModule,
     MatFormFieldModule,
     MatAutocompleteModule,
+    NgSelectModule
   ],
   exports: [
     CommonModule,
@@ -68,6 +70,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     DetailActMolec,
     DetailPartMolec,
     DetailReviewMolec,
+    NgSelectModule
   ],
   declarations: [
     WrtHeadMolec,

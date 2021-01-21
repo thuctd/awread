@@ -1,13 +1,12 @@
-// :host {
-//   display: block;
-//   width: fit-content;
-// }
+:host {
+  display: block;
+}
 
-// .chip-custom {
-//   border-radius: 0.25rem !important;
-//   background: #5abd8c;
-//   color: #fff;
-//   .white {
-//     color: #fff;
-//   }
-// }
+.chip-custom {
+  border-radius: 0.25rem !important;
+  background: #5abd8c;
+  color: #fff;
+  .white {
+    color: #fff;
+  }
+}

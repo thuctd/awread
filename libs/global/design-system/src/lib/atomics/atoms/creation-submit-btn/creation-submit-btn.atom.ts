@@ -6,13 +6,13 @@ import {
   Output,
   Input,
 } from '@angular/core';
-import { faHeart } from '@fortawesome/free-solid-svg-icons';
+
 
 @Component({
   selector: 'cr-submit-btn',
   templateUrl: './creation-submit-btn.atom.html',
   styleUrls: ['./creation-submit-btn.atom.scss'],
-  // changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CreationSubmitBtnAtom implements OnInit {
   @Output() btnClicked = new EventEmitter();
