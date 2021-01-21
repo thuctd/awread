@@ -13,7 +13,7 @@ import {
 })
 export class TitleAtom implements OnInit {
   @Input() title = 'Title';
-  @Input() class = '';
+  @Input() isUppercase: true | false = true;
 
   constructor() {}
 

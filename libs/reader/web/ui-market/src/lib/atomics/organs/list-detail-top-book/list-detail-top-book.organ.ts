@@ -13,8 +13,10 @@ export class ListDetailTopBookOrgan implements OnInit {
 
   @Input() moreBook = {
     text: 'Xem thêm...',
-    isSize: false,
+    size: 'm',
+    color: 'green'
   }
+
   @Output() moreEvent = new EventEmitter();
   counter = Array;
 

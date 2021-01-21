@@ -1,21 +1,5 @@
 <div class="grid grid-cols-12 gap-10">
-  <div class="col-span-2 md:col-span-3">
-    <!-- <detail-upload-form [form]="bookForm"></detail-upload-form> -->
-    <div class="">
-      <div class="bg-white" autocomplete="off">
-        <img
-          [src]="bookForm.get('img').value"
-          alt=""
-          class="w-full rounded-lg shadow mb-4 ng-star-inserted"
-        />
-        <submit-btn [active]="true" [name]="'Edit your cover'"></submit-btn>
-        <!-- <detail-upload-img></detail-upload-img> -->
-      </div>
-    </div>
-
-    <detail-link-btns></detail-link-btns>
-  </div>
-  <div class="col-span-2 md:col-span-9">
+  <div class="col-span-2 md:col-span-12">
     <detail-book-form
       [categories]="categories"
       [genres]="genres"
