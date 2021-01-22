@@ -9,7 +9,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
 export class HomeInfoBookReviewMolec implements OnInit {
   @Input() book = {
     title: 'Cô gái chúng ta cùng theo đuổi năm nào',
-    isSize: true,
+    size: 'm',
   };
 
   @Input() btns = [

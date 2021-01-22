@@ -19,7 +19,7 @@ export class ListInfoShortBookMolec implements OnInit {
   @Input() faIcon = faComments;
   @Input() book = {
     title: 'Cô gái chúng ta cùng theo đuổi năm nào',
-    isSize: true,
+    size: 'm',
   };
 
   @Input() btns = [

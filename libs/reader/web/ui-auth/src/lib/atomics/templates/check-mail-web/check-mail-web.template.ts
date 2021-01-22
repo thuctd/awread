@@ -6,7 +6,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   styleUrls: ['./check-mail-web.template.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BigimgProfileAtom implements OnInit {
+export class CheckMailWebTemplate implements OnInit {
   @Input() srcImg = 'https://hochu.ua/images/05600a6dc19a37ef746fb267902398bf.jpg';
 
   constructor() { }

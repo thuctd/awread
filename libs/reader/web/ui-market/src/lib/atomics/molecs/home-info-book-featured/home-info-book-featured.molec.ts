@@ -16,7 +16,7 @@ import {
 export class HomeInfoBookFeaturedMolec implements OnInit {
   @Input() book = {
     title: 'Cô gái chúng ta cùng theo đuổi năm nào',
-    isSize: true,
+    size: 'm',
   };
 
   @Input() btns = [

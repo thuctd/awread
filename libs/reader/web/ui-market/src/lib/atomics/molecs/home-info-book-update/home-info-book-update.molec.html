@@ -1,6 +1,6 @@
 <div class="pt-2">
     <div class="mb-2">
-      <atom-title-book [titleBook]="book.title" [isSize]='book.isSize'></atom-title-book>
+      <atom-title-book [titleBook]="book.title" [size]='book.size'></atom-title-book>
     </div>
     <div *ngFor="let btn of btns" class="flex">
         <base-btn (onBtnClicked)="submitEvent.emit($event)" [isSize]="btn.isSize" [chapter]="btn.chapter"></base-btn>
