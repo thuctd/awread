@@ -7,6 +7,7 @@ import {
   Output,
 } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { Category, Genre } from '@awread/writer/web/feature-auth';
 
 @Component({
   selector: 'detail',
@@ -16,6 +17,8 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 })
 export class DetailOrgan implements OnInit {
   @Input() bookForm: FormGroup;
+  @Input() categories: Category[];
+  @Input() genres: Genre[];
   @Output() bookSubmitEvent = new EventEmitter();
 
   constructor(private fb: FormBuilder) {}

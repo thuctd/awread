@@ -1,6 +1,8 @@
 import {
   BooksFacade,
+  CategoryFacade,
   CurrentUserFacade,
+  GenresFacade,
 } from '@awread/writer/web/feature-auth';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
@@ -13,11 +15,15 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 export class CreationLayout implements OnInit {
   constructor(
     private currentUserFacade: CurrentUserFacade,
-    private booksFacade: BooksFacade
+    private booksFacade: BooksFacade,
+    private categoryFacade: CategoryFacade,
+    private genresFacade: GenresFacade
   ) {}
 
   ngOnInit(): void {
     this.currentUserFacade.getCurrentUser().subscribe();
     this.booksFacade.getAllBooks().subscribe();
+    this.categoryFacade.getAllCategories().subscribe();
+    this.genresFacade.getAllGenres().subscribe();
   }
 }

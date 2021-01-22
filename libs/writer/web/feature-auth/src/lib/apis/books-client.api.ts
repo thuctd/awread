@@ -87,4 +87,46 @@ export class BooksClientApi {
       variables: {},
     });
   }
+
+  getBooksByCategoryId(categoryid: string) {
+    return this.apollo.query({
+      query: gql`
+        query getBooksByCategoryId($categoryid: String) {
+          allBooks(
+            condition: {
+              categoryid: $categoryid
+              status: PUBLISHED
+              isdeleted: false
+            }
+          ) {
+            nodes {
+              bookid
+            }
+          }
+        }
+      `,
+      variables: { categoryid },
+    });
+  }
+
+  getNewlyUpdatedBooks() {
+    return this.apollo.query({
+      query: gql`
+      query getNewlyUpdatedBooks() {
+        allBooks(
+          orderBy: PUBLISHEDAT_DESC
+          condition: { status: PUBLISHED, isdeleted: false}
+        ) {
+          nodes {
+            bookid
+          }
+        }
+      }
+    `,
+    });
+  }
+
+  getBookAppreciate() {
+    return this.apollo.query({ query: gql`` });
+  }
 }
