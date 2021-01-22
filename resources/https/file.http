@@ -1,15 +1,15 @@
 POST http://localhost:3333/api/upload-cover
 Accept: application/json
-Content-Type: multipart/form-data; boundary=MyBoundary
+Content-Type: multipart/form-data; boundary=MyBoundaryy
 Authorization: Bearer {{token}}
 
---MyBoundary
-Content-Disposition: form-data; name="file"; filename="capture2.png"
-Content-Type: application/octet-stream
+--MyBoundaryy
+Content-Disposition: form-data; name="file"; filename="image1.png"
+Content-Type: image/png
 
-< .\capture.png
---MyBoundary
-Content-Disposition: form-data; name="ProspectId"
+< .\image.png
+--MyBoundaryy
+Content-Disposition: form-data; name="xxx-hello"
 
 1
---MyBoundary--
+--MyBoundaryy--

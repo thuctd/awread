@@ -75,6 +75,7 @@ devDependencies:
   '@types/express': 4.17.9
   '@types/jest': 26.0.19
   '@types/node': 14.14.16
+  '@types/sharp': 0.27.1
   '@types/webpack': 4.41.25
   '@typescript-eslint/eslint-plugin': 4.11.1_1b0bf84bc6c1d40d00bb35c03427a8b1
   '@typescript-eslint/parser': 4.11.1_eslint@7.16.0+typescript@4.0.5
@@ -5854,6 +5855,12 @@ packages:
       '@types/node': 14.14.16
     resolution:
       integrity: sha512-MoJhSQreaVoL+/hurAZzIm8wafFR6ajiTM1m4A0kv6AGeVBl4r4pOV8bGFrjjq1sGxDTnCoF8i22o0/aE5XCyA==
+  /@types/sharp/0.27.1:
+    dependencies:
+      '@types/node': 14.14.16
+    dev: true
+    resolution:
+      integrity: sha512-RbYmyPjDUzi3lI9Qm68I+82I+DNOe/jW5w+EC1FvpT/f2TYXDG6mmPZQQohy98ufq+u6OB6pQkqpcNMDxzVclg==
   /@types/sinonjs__fake-timers/6.0.2:
     dev: true
     resolution:
@@ -21703,6 +21710,7 @@ specifiers:
   '@types/jest': 26.0.19
   '@types/multer': ^1.4.5
   '@types/node': 14.14.16
+  '@types/sharp': ^0.27.1
   '@types/webpack': 4.41.25
   '@typescript-eslint/eslint-plugin': 4.11.1
   '@typescript-eslint/parser': 4.11.1
