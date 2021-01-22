@@ -8,7 +8,6 @@ import { FirebaseFirestoreAddon } from '../addons';
 import { BooksApi } from '../apis';
 import { BooksStore } from '../states/books';
 import { SnackbarsService } from '@awread/global/packages';
-
 @Injectable({ providedIn: 'root' })
 export class BooksGear {
   constructor(
@@ -59,11 +58,11 @@ export class BooksGear {
   addBook(book) {
     const bookid = this.firebaseFirestoreAddon.createId();
     const genres = book.genres.map((genre) => ({
-      name: genre,
-      genreid: this.firebaseFirestoreAddon.createId(),
+      name: genre.name,
+      genreid: genre.genreid ?? this.firebaseFirestoreAddon.createId(),
     }));
-    const bookNew = createBookObject({ ...book, bookid, genres });
-    return this.booksApi.createBook(bookNew).pipe(
+    const bookNew = createBookObject({ ...book, bookid });
+    return this.booksApi.createBook(bookNew, genres).pipe(
       tap((res) => {
         console.log('add book res: ', res);
         if (res['data'] && res['data']['createBook']['book']) {
@@ -79,8 +78,12 @@ export class BooksGear {
     );
   }
 
-  editBook(book) {
-    return this.booksApi.editBook(book).pipe(
+  editBook(book, idsGenresAdd: string[], idsGenresRemove: string[]) {
+    const idsGenresAddNew = idsGenresAdd.map((item) => ({
+      genreid: this.firebaseFirestoreAddon.createId(),
+      name: item,
+    }));
+    return this.booksApi.editBook(book, idsGenresAddNew, idsGenresRemove).pipe(
       tap((res) => {
         if (
           res &&

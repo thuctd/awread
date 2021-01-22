@@ -1,7 +1,13 @@
 import { Book, createBookObject } from './../models/book.model';
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
+import { Genre } from '../..';
+import { CREATE_BOOK_MUTATION, EDIT_BOOK_MUTATION } from '../graphqls';
 
+export type GenreInput = {
+  genreid: string;
+  name: string;
+};
 @Injectable({ providedIn: 'root' })
 export class BooksApi {
   constructor(private apollo: Apollo) {}
@@ -30,6 +36,11 @@ export class BooksApi {
                   status
                   updatedat
                   publishedat
+                }
+              }
+              bookGenresByBookid {
+                nodes {
+                  genreid
                 }
               }
             }
@@ -103,122 +114,22 @@ export class BooksApi {
   //   });
   // }
 
-  createBook(book: Book) {
+  createBook(book: Book, genres: Genre[]) {
     console.log('create book: ', book);
     return this.apollo.mutate({
-      mutation: gql`
-        mutation createBook(
-          $bookid: String!
-          $userid: String!
-          $title: String!
-          $description: String
-          $tags: [String]
-          $status: BookStatus
-          $completed: Boolean
-          $updatedat: Datetime
-          $publishedat: Datetime
-        ) {
-          createBook(
-            input: {
-              book: {
-                bookid: $bookid
-                userid: $userid
-                title: $title
-                description: $description
-                tags: $tags
-                status: $status
-                completed: $completed
-                updatedat: $updatedat
-                publishedat: $publishedat
-                categoryid: "2f5187d5-ca67-47a8-aba8-f34e9d07d08a"
-              }
-            }
-          ) {
-            book {
-              bookid
-              title
-              img
-              description
-              completed
-              status
-              publishedat
-              updatedat
-              categoryByCategoryid {
-                categoryid
-                name
-              }
-              chaptersByBookid {
-                totalCount
-                nodes {
-                  chapterid
-                  title
-                  status
-                  updatedat
-                  publishedat
-                }
-              }
-            }
-          }
-
-          createUserBook(
-            input: {
-              userBook: {
-                userid: $userid
-                bookid: $bookid
-                publishedat: $publishedat
-              }
-            }
-          ) {
-            userBook {
-              bookid
-            }
-          }
-
-          insertgenres {
-            insertBookGenre(
-              input: { bookid: "", genres: { genreid: "", name: "" } }
-            ) {
-              bookid
-            }
-          }
-        }
-      `,
-      variables: createBookObject(book),
+      mutation: CREATE_BOOK_MUTATION,
+      variables: { ...createBookObject(book), genres },
     });
   }
 
-  editBook(book: Book) {
+  editBook(book: Book, genres: Genre[], idsGenresRemove: string[]) {
     return this.apollo.mutate({
-      mutation: gql`
-        mutation updateBook(
-          $bookid: String!
-          $title: String
-          $description: String
-          $tags: [String]
-          $status: BookStatus
-          $completed: Boolean
-          $updatedat: Datetime
-        ) {
-          updateBookByBookid(
-            input: {
-              bookPatch: {
-                title: $title
-                description: $description
-                tags: $tags
-                status: $status
-                completed: $completed
-                updatedat: $updatedat
-              }
-              bookid: $bookid
-            }
-          ) {
-            book {
-              bookid
-            }
-          }
-        }
-      `,
-      variables: createBookObject(book),
+      mutation: EDIT_BOOK_MUTATION,
+      variables: {
+        ...createBookObject(book),
+        genres: genres,
+        idsremove: idsGenresRemove,
+      },
     });
   }
 

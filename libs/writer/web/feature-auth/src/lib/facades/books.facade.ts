@@ -15,6 +15,10 @@ export class BooksFacade {
     return this.booksStore.setActive(bookid);
   }
 
+  getGenresByBookId(bookid: string) {
+    return this.booksQuery.getEntity(bookid)?.genresIds ?? [];
+  }
+
   getBookIdActiveAkita() {
     return this.booksQuery.getActiveId();
   }
@@ -57,8 +61,8 @@ export class BooksFacade {
   addBook(book) {
     return this.booksGear.addBook(book).pipe();
   }
-  editBook(book) {
-    return this.booksGear.editBook(book).pipe();
+  editBook(book, idsGenresAdd: string[], idsGenresRemove: string[]) {
+    return this.booksGear.editBook(book, idsGenresAdd, idsGenresRemove).pipe();
   }
 
   updateBookStatus(bookId: string, status: string) {

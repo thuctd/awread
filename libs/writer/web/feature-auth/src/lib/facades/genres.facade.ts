@@ -13,6 +13,10 @@ export class GenresFacade {
     return this.genresQuery.selectAll();
   }
 
+  getNameGenreBaseIdAkita(id: string) {
+    return this.genresQuery.getEntity(id)?.name ?? '';
+  }
+
   getAllGenres() {
     return this.genresGear.getAllGenrest();
   }

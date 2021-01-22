@@ -42,7 +42,7 @@ export class DetailBookFormMolec implements OnInit {
       placeholder: 'tags',
     },
     category: {
-      display: 'Thể loại',
+      display: 'Danh mục',
       placeholder: 'category',
     },
     target: {
@@ -65,15 +65,23 @@ export class DetailBookFormMolec implements OnInit {
   @Output() btnSubmitEvent = new EventEmitter();
   @Output() genresEvent = new EventEmitter();
   @Input() inputControl = new FormControl();
-  @Input() items = [
-    { id: 1, name: 'Tình yêu' },
-    { id: 2, name: 'Tiểu thuyết' },
-    { id: 3, name: 'Kinh dị' },
-    { id: 4, name: 'Kiếm hiệp' },
-    { id: 5, name: 'Viễn Tưởng' },
-  ];
-
+  listGenres = [];
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {}
+
+  addItem(e) {
+    // console.log('add: ', e);
+    // this.listGenres.push(e.genreid);
+    // this.genresEvent.emit(this.listGenres);
+  }
+
+  removeItem(e) {
+    // console.log('remove: ', e);
+    // const index = this.listGenres.indexOf(e.value.genreid);
+    // if (index > 0) {
+    //   this.listGenres.splice(index, 1);
+    //   this.genresEvent.emit(this.listGenres);
+    // }
+  }
 }

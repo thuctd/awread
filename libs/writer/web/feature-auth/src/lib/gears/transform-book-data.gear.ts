@@ -4,12 +4,17 @@ import { Injectable } from '@angular/core';
 export class TransformBookDataGear {
   constructor() {}
   tranformBookData(book) {
-    const chapters = book['chaptersByBookid']['nodes'];
+    const categoryid = book['categoryByCategoryid'].categoryid ?? '';
+    const genreIds = book['bookGenresByBookid']['nodes'].map(
+      (item) => item.genreid
+    );
+    const chapters = book['chaptersByBookid']['nodes'] ?? [];
     const totalCountPublished =
       chapters?.filter((item) => item.status === 'PUBLISHED')?.length ?? 0;
     return {
       ...book,
-      categoryname: book['categoryByCategoryid']?.name ?? '',
+      genreIds,
+      categoryid,
       totalChapterCount: book['chaptersByBookid']?.totalCount ?? 0,
       totalChapterCountPublished: totalCountPublished ?? 0,
     };

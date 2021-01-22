@@ -56,7 +56,7 @@ export class DetailPage implements OnInit {
     this.initForm();
     this.updateForm();
     this.categories$ = this.getCategories();
-    this.genres$ = this.getAllGenres();
+    this.genres$ = this.genresFacade.selectAllGenresAkita();
   }
 
   switchTab(tabName: string) {
@@ -67,21 +67,21 @@ export class DetailPage implements OnInit {
     this.selectedTab = tabName;
   }
 
-  getAllGenres() {
-    return combineLatest([
-      this.genresFacade.selectAllGenresAkita(),
-      this.bookForm.get('genres').valueChanges.pipe(startWith('')),
-    ]).pipe(
-      map(([genres, genresValueForm]: [Genre[], string]) => {
-        if (genres && genres.length) {
-          return genres.filter((item) =>
-            item.name.toLowerCase().includes(genresValueForm.toLowerCase())
-          );
-        }
-        return [];
-      })
-    );
-  }
+  // getAllGenres() {
+  //   return combineLatest([
+  //     this.genresFacade.selectAllGenresAkita(),
+  //     this.bookForm.get('genres').valueChanges.pipe(startWith('')),
+  //   ]).pipe(
+  //     map(([genres, genresValueForm]: [Genre[], string]) => {
+  //       if (genres && genres.length) {
+  //         return genres.filter((item) =>
+  //           item.name.toLowerCase().includes(genresValueForm.toLowerCase())
+  //         );
+  //       }
+  //       return [];
+  //     })
+  //   );
+  // }
 
   getCategories() {
     return combineLatest([
@@ -133,20 +133,36 @@ export class DetailPage implements OnInit {
 
   bookSubmitEvent() {
     const userid = this.currentUserFacade.getUserId();
+    const genres = this.bookForm.value.genreIds.map((id) => ({
+      genreid: id,
+      name: this.genresFacade.getNameGenreBaseIdAkita(id),
+    }));
     const book = {
       ...this.bookForm.value,
       bookid: this.bookId,
-      userid,
-      genres: this.genresListChip,
+      genres,
+      userid, // this.genresListChip ??
     };
     if (this.bookId) {
-      this.booksFacade.editBook(book).subscribe(() => {
-        this.selectedTab = 'toc';
-        this.cd.detectChanges();
-      });
+      const idsGenresAdd = this.genresListChip;
+      const idsGenresRemove = this.booksFacade
+        .getGenresByBookId(this.bookId)
+        .map((i) => i.genreid);
+      this.booksFacade
+        .editBook(book, idsGenresAdd, idsGenresRemove)
+        .subscribe(() => {
+          this.selectedTab = 'toc';
+          this.cd.detectChanges();
+        });
     } else {
       this.booksFacade.addBook(book).subscribe();
     }
+  }
+  shouldUpdateGenres() {
+    const idsGenresForm = this.genresListChip;
+    const idsGenresByBookId = this.booksFacade
+      .getGenresByBookId(this.bookId)
+      .map((i) => i.genreid);
   }
   selectedStatusEvent(status: string) {
     this.selectedBookStatus = status;
@@ -223,7 +239,8 @@ export class DetailPage implements OnInit {
           this.bookForm.patchValue({
             title: book.title ?? '',
             description: book.description ?? '',
-            categoryname: book.categoryname ?? '',
+            categoryid: book.categoryid ?? '',
+            genreIds: book.genresIds ?? [],
             tags: book.tags ?? [],
             completed: book.completed ?? false,
             status: book.status ?? 'DRAFT',
@@ -239,7 +256,8 @@ export class DetailPage implements OnInit {
       description: [''],
       categoryname: [''],
       tags: [''],
-      genres: [''],
+      categoryid: [''],
+      genreIds: [''],
       audience: [''],
       completed: [false],
       status: ['DRAFT'],

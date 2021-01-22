@@ -18,7 +18,7 @@ export interface Book {
   status: BookStatus;
   isdeleted: boolean;
   tags: string[];
-  genres: Genre[];
+  genresIds: Genre[];
   createdat: Date;
   publishedat: Date;
   updatedat: Date;
@@ -32,13 +32,14 @@ export function createBookObject(params: Partial<Book>) {
     bookid: params.bookid,
     userid: params.userid,
     title: params.title ?? '',
+    categoryid: params.categoryid ?? '',
     img: params.img ?? '',
     description: params.description ?? '',
     completed: params.completed ?? '',
     status: params.status ?? 'DRAFT',
     isdeleted: params.isdeleted ?? false,
     tags: params.tags ?? '',
-    genres: params.genres ?? '',
+    genresIds: params.genresIds ?? '',
     createdat: params.createdat ?? new Date(),
     publishedat: params.publishedat ?? new Date(),
     updatedat: params.updatedat ?? new Date(),
