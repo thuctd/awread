@@ -14,16 +14,8 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 })
 export class DetailBookSidebarOrgan implements OnInit {
   @Input() sidebars = [
-    {
-      submitText: 'Cùng tác giả',
-      isActive: true,
-    },
-    {
-      submitText: 'Top phổ biến ',
-      isActive: true,
-    },
-    
-   
+  'Cùng tác giả',
+  'Top phổ biến '
   ]
   constructor() { }
 
