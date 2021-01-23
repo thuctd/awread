@@ -78,12 +78,12 @@ export class BooksGear {
     );
   }
 
-  editBook(book, idsGenresAdd: string[], idsGenresRemove: string[]) {
-    const idsGenresAddNew = idsGenresAdd.map((item) => ({
-      genreid: this.firebaseFirestoreAddon.createId(),
-      name: item,
-    }));
-    return this.booksApi.editBook(book, idsGenresAddNew, idsGenresRemove).pipe(
+  editBook(book, idsGenresRemove: string[]) {
+    // const idsGenresAddNew = idsGenresAdd.map((item) => ({
+    //   genreid: this.firebaseFirestoreAddon.createId(),
+    //   name: item,
+    // }));
+    return this.booksApi.editBook(book, idsGenresRemove).pipe(
       tap((res) => {
         if (
           res &&

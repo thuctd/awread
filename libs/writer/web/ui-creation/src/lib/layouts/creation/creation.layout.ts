@@ -22,8 +22,15 @@ export class CreationLayout implements OnInit {
 
   ngOnInit(): void {
     this.currentUserFacade.getCurrentUser().subscribe();
-    this.booksFacade.getAllBooks().subscribe();
+    this.getAllBook();
     this.categoryFacade.getAllCategories().subscribe();
     this.genresFacade.getAllGenres().subscribe();
+  }
+
+  private getAllBook() {
+    this.booksFacade.setLoading(true);
+    this.booksFacade.getAllBooks().subscribe(() => {
+      this.booksFacade.setLoading(false);
+    });
   }
 }

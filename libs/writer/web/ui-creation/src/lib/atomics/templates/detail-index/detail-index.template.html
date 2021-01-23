@@ -52,6 +52,7 @@
         [categories]="categories"
         [genres]="genres"
         (bookSubmitEvent)="bookSubmitEvent.emit()"
+        (genresEvent)="genresEvent.emit($event)"
       ></detail>
       <div
         class="absolute right-2 -top-1 justify-end flex z-50"
@@ -59,11 +60,20 @@
       >
         <cr-submit-btn
           *ngFor="let btn of btns"
+          [active]="btn.status === 'CONTINUE'"
+          (click)="actionBookEvent.emit(btn.status)"
+          [submitText]="btn.submitText"
+          class="mx-2"
+        ></cr-submit-btn>
+
+        <!-- Logic xu ly trang thai truyen -->
+        <!-- <cr-submit-btn
+          *ngFor="let btn of btns"
           [active]="selectedBookStatus === btn.status"
           (click)="selectBookStatus(btn.status)"
           [submitText]="btn.submitText"
           class="mx-2"
-        ></cr-submit-btn>
+        ></cr-submit-btn> -->
       </div>
     </div>
   </div>

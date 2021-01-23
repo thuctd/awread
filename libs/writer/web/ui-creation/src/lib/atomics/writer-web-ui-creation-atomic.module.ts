@@ -18,6 +18,7 @@ import { DetailIndexTemplate } from './templates/detail-index/detail-index.templ
 import {
   GenresFieldModule,
   InfiniteScrollModule,
+  LoaderModule,
 } from '@awread/global/packages';
 import { DetailLinkBtnsMolec } from './molecs/detail-link-btns/detail-link-btns.molec';
 import { ListActMolec } from './molecs/list-act/list-act.molec';
@@ -44,7 +45,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
     WriterWebSharedAtomicModule,
     MatFormFieldModule,
     MatAutocompleteModule,
-    NgSelectModule
+    NgSelectModule,
+    LoaderModule,
   ],
   exports: [
     CommonModule,
@@ -70,7 +72,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
     DetailActMolec,
     DetailPartMolec,
     DetailReviewMolec,
-    NgSelectModule
+    NgSelectModule,
+    LoaderModule,
   ],
   declarations: [
     WrtHeadMolec,

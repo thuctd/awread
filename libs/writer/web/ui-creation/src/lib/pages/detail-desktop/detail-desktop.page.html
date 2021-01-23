@@ -1,4 +1,3 @@
-<h3>Value form: {{bookForm.value | json}}</h3>
 <section class="w-full max-w-screen-xl mx-auto">
   <template-detail
     [bookForm]="bookForm"
@@ -9,6 +8,7 @@
     [genres]="genres$ | async"
     [selectedBookStatus]="selectedBookStatus"
     (selectedStatusEvent)="selectedStatusEvent($event)"
+    (actionBookEvent)="actionBookEvent($event)"
     (chapterActionEvent)="chapterActionEvent($event)"
     (createNewChapterEvent)="createNewChapterEvent()"
     (switchTabEvent)="switchTab($event)"

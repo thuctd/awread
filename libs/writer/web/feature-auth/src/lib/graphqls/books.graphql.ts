@@ -91,7 +91,9 @@ export const EDIT_BOOK_MUTATION = gql`
     $bookid: String!
     $title: String
     $description: String
+    $categoryid: String
     $tags: [String]
+    $audience: String
     $genres: [GenreInput]
     $status: BookStatus
     $completed: Boolean
@@ -103,7 +105,9 @@ export const EDIT_BOOK_MUTATION = gql`
         bookPatch: {
           title: $title
           description: $description
+          categoryid: $categoryid
           tags: $tags
+          audience: $audience
           status: $status
           completed: $completed
           updatedat: $updatedat
@@ -117,7 +121,7 @@ export const EDIT_BOOK_MUTATION = gql`
     }
 
     editBookGenre(
-      input: { bookid: $bookid, genres: $genres, idsremove: $idsremove }
+      input: { idsremove: $idsremove, genres: $genres, bookid: $bookid }
     ) {
       bookid
     }

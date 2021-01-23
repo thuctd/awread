@@ -24,6 +24,7 @@ export class BooksApi {
               description
               completed
               status
+              audience
               publishedat
               updatedat
               categoryByCategoryid {
@@ -62,6 +63,7 @@ export class BooksApi {
               description
               completed
               status
+              audience
               publishedat
               updatedat
               categoryByCategoryid {
@@ -122,12 +124,13 @@ export class BooksApi {
     });
   }
 
-  editBook(book: Book, genres: Genre[], idsGenresRemove: string[]) {
+  editBook(book: Book, idsGenresRemove: string[]) {
+    console.log('edit book: ', book);
     return this.apollo.mutate({
       mutation: EDIT_BOOK_MUTATION,
       variables: {
         ...createBookObject(book),
-        genres: genres,
+        genres: book.genres,
         idsremove: idsGenresRemove,
       },
     });

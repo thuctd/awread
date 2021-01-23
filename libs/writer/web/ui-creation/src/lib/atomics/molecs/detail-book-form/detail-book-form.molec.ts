@@ -62,10 +62,16 @@ export class DetailBookFormMolec implements OnInit {
     },
   };
 
+  @Input() inputControl = new FormControl();
   @Output() btnSubmitEvent = new EventEmitter();
   @Output() genresEvent = new EventEmitter();
-  @Input() inputControl = new FormControl();
-  listGenres = [];
+
+  @Output() saveChapterEvent = new EventEmitter();
+  audiences = [
+    { name: 'None', id: 'none' },
+    { name: '13+', id: '13' },
+    { name: '18+', id: '18' },
+  ];
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {}

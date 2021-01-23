@@ -18,6 +18,8 @@ import {
   ChangeDetectorRef,
 } from '@angular/core';
 import { combineLatest, of } from 'rxjs';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { ModalComponent } from '@awread/global/packages';
 
 @Injectable({
   providedIn: 'root',
@@ -34,7 +36,7 @@ export class DetailPage implements OnInit {
   ];
   selectedTab = 'toc';
   selectedBookStatus = 'DRAFT';
-  genresListChip = [];
+  genresListSelected = [];
   categories$;
   genres$;
   constructor(
@@ -46,6 +48,7 @@ export class DetailPage implements OnInit {
     private categoryFacade: CategoryFacade,
     private genresFacade: GenresFacade,
     private router: Router,
+    public matDialog: MatDialog,
     private cd: ChangeDetectorRef
   ) {}
 
@@ -128,7 +131,7 @@ export class DetailPage implements OnInit {
   }
 
   genresEvent(genres) {
-    this.genresListChip = genres;
+    this.genresListSelected = genres;
   }
 
   bookSubmitEvent() {
@@ -144,26 +147,32 @@ export class DetailPage implements OnInit {
       userid, // this.genresListChip ??
     };
     if (this.bookId) {
-      const idsGenresAdd = this.genresListChip;
-      const idsGenresRemove = this.booksFacade
-        .getGenresByBookId(this.bookId)
-        .map((i) => i.genreid);
-      this.booksFacade
-        .editBook(book, idsGenresAdd, idsGenresRemove)
-        .subscribe(() => {
-          this.selectedTab = 'toc';
-          this.cd.detectChanges();
-        });
+      // const idsGenresAdd = this.genresListSelected; // dung de them genre khi user them genre ko co trong DB
+      const idsGenresRemove = this.booksFacade.getGenreIdsByBookIdAkita(
+        this.bookId
+      );
+      this.booksFacade.editBook(book, idsGenresRemove).subscribe(() => {
+        this.selectedTab = 'toc';
+        this.cd.detectChanges();
+      });
     } else {
       this.booksFacade.addBook(book).subscribe();
     }
   }
   shouldUpdateGenres() {
-    const idsGenresForm = this.genresListChip;
-    const idsGenresByBookId = this.booksFacade
-      .getGenresByBookId(this.bookId)
-      .map((i) => i.genreid);
+    const idsGenresForm = this.genresListSelected;
+    const idsGenresByBookId = this.booksFacade.getGenreIdsByBookIdAkita(
+      this.bookId
+    );
   }
+
+  actionBookEvent(action: string) {
+    if (action === 'CANCEL') {
+      alert();
+    } else {
+    }
+  }
+
   selectedStatusEvent(status: string) {
     this.selectedBookStatus = status;
     this.bookForm.patchValue({ status });
@@ -240,10 +249,11 @@ export class DetailPage implements OnInit {
             title: book.title ?? '',
             description: book.description ?? '',
             categoryid: book.categoryid ?? '',
-            genreIds: book.genresIds ?? [],
+            genreIds: book.genreIds ?? [],
             tags: book.tags ?? [],
             completed: book.completed ?? false,
             status: book.status ?? 'DRAFT',
+            audience: book.audience ?? 'none',
           });
         }
       });
@@ -256,9 +266,9 @@ export class DetailPage implements OnInit {
       description: [''],
       categoryname: [''],
       tags: [''],
-      categoryid: [''],
+      categoryid: [null],
       genreIds: [''],
-      audience: [''],
+      audience: ['none'],
       completed: [false],
       status: ['DRAFT'],
       img: ['https://picsum.photos/200/300'],
