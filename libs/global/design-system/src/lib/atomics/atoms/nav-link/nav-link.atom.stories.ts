@@ -12,3 +12,12 @@ export const primary = () => ({
   component: NavLinkAtom,
   props: {},
 });
+export const black = () => ({
+  moduleMetadata: {
+    imports: [GlobalDesignSystemAtomicModule],
+  },
+  component: NavLinkAtom,
+  props: {
+    color: 'text-black'
+  },
+});

@@ -7,7 +7,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
 })
 export class ListDetailTopBookOrgan implements OnInit {
   @Input() moreBook = 'Xem thêm...';
-
+  @Input() btnTitle = 'Top phổ biến';
   @Output() moreEvent = new EventEmitter();
   counter = Array;
 

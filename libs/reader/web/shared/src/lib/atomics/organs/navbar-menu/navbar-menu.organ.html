@@ -1,7 +1,7 @@
 <ul class="list-reset flex flex-no-wrap whitespace-no-wrap lg:pl-2 xl:pl-6">
     <ng-container *ngFor="let item of menu">
         <li class="inline-block w-100 w-auto-ns" [ngClass]="{'dropdown relative': item.dropdown}">
-            <atom-nav-link class="px-2" [title]="item.title" [href]="item.href">
+            <atom-nav-link class="px-2" [color]="color" [title]="item.title" [href]="item.href">
                 <fa-icon *ngIf="item.dropdown" class="text-grey-300 text-xs ml-1" [icon]="icon"></fa-icon>
             </atom-nav-link>
             <molec-rd-dropdown-menu *ngIf="item.dropdown" [dropdownData]="item.dropdown"></molec-rd-dropdown-menu>

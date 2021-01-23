@@ -1,7 +1,4 @@
-<div class="flex flex-no-wrap whitespace-no-wrap" *ngIf="!isLogin else logged">
+<div class="flex flex-no-wrap whitespace-no-wrap">
     <atom-navbar-auth-btn [title]="'Đăng nhập'" [show]="show" (submitEvent)="submitEvent.emit('signin')"></atom-navbar-auth-btn>
     <atom-navbar-auth-btn [title]="'Đăng ký'" [show]="show" (submitEvent)="submitEvent.emit('signup')"></atom-navbar-auth-btn>
 </div>
-<ng-template #logged>
-    <atom-navbar-btn-logged (submitEvent)="submitEvent.emit('account')"></atom-navbar-btn-logged>
-</ng-template>

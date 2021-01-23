@@ -66,7 +66,6 @@ import {
 } from '@awread/global/packages';
 import { NavLinkAtom } from './atoms/nav-link/nav-link.atom';
 import { DropdownLinkAtom } from './atoms/dropdown-link/dropdown-link.atom';
-import { BreadcrumbTextAtom } from './atoms/breadcrumb-text/breadcrumb-text.atom';
 import { BreadcrumbLinkAtom } from './atoms/breadcrumb-link/breadcrumb-link.atom';
 import { IconTextAtom } from './atoms/icon-text/icon-text.atom';
 import { DetailInfoLineAtom } from './atoms/detail-info-line/detail-info-line.atom';
@@ -160,7 +159,6 @@ import { RdListTabPageAtom } from './atoms/rd-list-tab-page/rd-list-tab-page.ato
     NgImageSliderModule,
     NavLinkAtom,
     DropdownLinkAtom,
-    BreadcrumbTextAtom,
     BreadcrumbLinkAtom,
     IconTextAtom,
     DetailInfoLineAtom,
@@ -240,7 +238,6 @@ import { RdListTabPageAtom } from './atoms/rd-list-tab-page/rd-list-tab-page.ato
     DefaultCoverAtom,
     NavLinkAtom,
     DropdownLinkAtom,
-    BreadcrumbTextAtom,
     BreadcrumbLinkAtom,
     IconTextAtom,
     DetailInfoLineAtom,
