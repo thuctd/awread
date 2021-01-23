@@ -10,6 +10,7 @@ import { faEllipsisH } from '@fortawesome/free-solid-svg-icons';
 export class WrtMenuBtnAtom implements OnInit {
   @Input() faIconComments = faEllipsisH;
   @Output() copyToClipboard = new EventEmitter();
+  @Output() deletePart = new EventEmitter();
   @Input() awreadLink = 'abcxyz';
   @Input() btn = {
     submitText: 'Copy',

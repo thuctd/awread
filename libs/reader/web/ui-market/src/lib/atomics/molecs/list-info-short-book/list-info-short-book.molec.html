@@ -1,4 +1,4 @@
-<atom-title-book [titleBoook]='book.title' [isSize]='book.isSize'></atom-title-book>
+<atom-title-book [titleBook]='book' [size]='"m"'></atom-title-book>
 <dl class="mt-2 text-sm p-0">
   <dd class="ml-0 pb-1">
     <atom-author></atom-author>
@@ -11,7 +11,7 @@
   </dd>
   <dd class="ml-0">
     <div *ngFor="let btn of btns" class="leading-normal font-medium">
-      <base-btn (onBtnClicked)="submitEvent.emit($event)" [isSize]="btn.isSize" [chapter]="btn.chapter"></base-btn>
+      <base-btn (onBtnClicked)="submitEvent.emit($event)" [isSize]="true" [chapter]="btn"></base-btn>
     </div>
   </dd>
 </dl>

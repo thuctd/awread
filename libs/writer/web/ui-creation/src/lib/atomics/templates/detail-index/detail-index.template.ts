@@ -7,6 +7,7 @@ import {
   Output,
   EventEmitter,
 } from '@angular/core';
+import { Category, Genre } from '@awread/writer/web/feature-auth';
 
 @Component({
   selector: 'template-detail',
@@ -15,16 +16,18 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DetailIndexTemplate implements OnInit {
+  @Input() categories: Category[];
+  @Input() genres: Genre[];
   @Input() btns = [
     {
-      submitText: 'Draft',
+      submitText: 'Hủy bỏ',
       isActive: false,
-      status: 'DRAFT',
+      status: 'CANCEL',
     },
     {
-      submitText: 'Publish',
+      submitText: 'Tiếp tục',
       isActive: true,
-      status: 'PUBLISHED',
+      status: 'SKIP',
     },
   ];
 
@@ -37,16 +40,16 @@ export class DetailIndexTemplate implements OnInit {
   @Output() chapterActionEvent = new EventEmitter();
   @Output() createNewChapterEvent = new EventEmitter();
   @Output() switchTabEvent = new EventEmitter();
-  selectedBookStatus: string;
+  @Input() selectedBookStatus: string;
   constructor() {}
 
   ngOnInit(): void {
-    this.selectedBookStatus = this.bookForm.get('status').value;
+    // this.selectedBookStatus = this.bookForm.get('status').value;
     console.log('chapters: ', this.chapters);
   }
 
   selectBookStatus(status: string) {
-    this.selectedBookStatus = status;
+    // this.selectedBookStatus = status;
     this.selectedStatusEvent.emit(status);
   }
 }

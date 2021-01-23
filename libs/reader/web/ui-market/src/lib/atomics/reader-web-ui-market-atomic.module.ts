@@ -40,9 +40,21 @@ import { DetailBookReviewsOrgan } from './organs/detail-book-reviews/detail-book
 import { DetailBookTemplate } from './templates/detail-book/detail-book.template';
 import { SearchFormMolec } from './molecs/search-form/search-form.molec';
 import { DetailBookSidebarOrgan } from './organs/detail-book-sidebar/detail-book-sidebar.organ';
+import { CarouselModule } from 'ngx-owl-carousel-o';
+import {
+  BrowserAnimationsModule,
+  NoopAnimationsModule,
+} from '@angular/platform-browser/animations';
 
 @NgModule({
-  imports: [CommonModule, StorybookSupportModule, GlobalDesignSystemAtomicModule],
+  imports: [
+    CommonModule, 
+    StorybookSupportModule, 
+    GlobalDesignSystemAtomicModule, 
+    CarouselModule,   
+    BrowserAnimationsModule,
+    NoopAnimationsModule,
+  ],
   exports: [CommonModule, 
     TabCategoryMolec, 
     TabBookMolec, 

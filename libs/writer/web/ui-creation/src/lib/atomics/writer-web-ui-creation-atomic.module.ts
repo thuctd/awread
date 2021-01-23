@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StorybookSupportModule, GlobalDesignSystemAtomicModule } from '@awread/global/design-system';
+import {
+  StorybookSupportModule,
+  GlobalDesignSystemAtomicModule,
+} from '@awread/global/design-system';
 import { WrtHeadMolec } from './molecs/wrt-head/wrt-head.molec';
 import { WrtWriterMolec } from './molecs/wrt-writer/wrt-writer.molec';
 import { WritingOrgan } from './organs/writing/writing.organ';
@@ -12,7 +15,10 @@ import { DetailBookFormMolec } from './molecs/detail-book-form/detail-book-form.
 import { DetailOrgan } from './organs/detail/detail.organ';
 import { IndexOrgan } from './organs/index/index.organ';
 import { DetailIndexTemplate } from './templates/detail-index/detail-index.template';
-import { GenresFieldModule, InfiniteScrollModule } from '@awread/global/packages';
+import {
+  GenresFieldModule,
+  InfiniteScrollModule,
+} from '@awread/global/packages';
 import { DetailLinkBtnsMolec } from './molecs/detail-link-btns/detail-link-btns.molec';
 import { ListActMolec } from './molecs/list-act/list-act.molec';
 import { ListChapterMolec } from './molecs/list-chapter/list-chapter.molec';
@@ -24,10 +30,79 @@ import { DetailActMolec } from './molecs/detail-act/detail-act.molec';
 import { DetailPartMolec } from './molecs/detail-part/detail-part.molec';
 import { DetailReviewMolec } from './molecs/detail-review/detail-review.molec';
 import { WriterWebSharedAtomicModule } from '@awread/writer/web/shared';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { InfoBookMolec } from './molecs/info-book/info-book.molec';
+import { DetailBookOrgan } from './organs/detail-book/detail-book.organ';
+import { DetailBookTemplate } from './templates/detail-book/detail-book.template';
 
 @NgModule({
-  imports: [CommonModule, StorybookSupportModule, GlobalDesignSystemAtomicModule, GenresFieldModule, InfiniteScrollModule, WriterWebSharedAtomicModule],
-  exports: [CommonModule, WrtHeadMolec, WrtWriterMolec, WritingOrgan, WritingTemplate, DetailTabHeadMolec, DetailActionBtnsMolec, DetailUploadFormMolec, DetailBookFormMolec, DetailOrgan, IndexOrgan, DetailIndexTemplate, GenresFieldModule, DetailLinkBtnsMolec, ListHeadMolec, ListActMolec, ListChapterMolec, ListStoriesMolec, ListTemplate, ListOrgan, DetailActMolec, DetailPartMolec, DetailReviewMolec],
-  declarations: [WrtHeadMolec, WrtWriterMolec, WritingOrgan, WritingTemplate, DetailTabHeadMolec, DetailActionBtnsMolec, DetailUploadFormMolec, DetailBookFormMolec, DetailOrgan, IndexOrgan, DetailIndexTemplate, DetailLinkBtnsMolec, ListHeadMolec, ListActMolec, ListChapterMolec, ListStoriesMolec, ListTemplate, ListOrgan, DetailActMolec, DetailPartMolec, DetailReviewMolec,]
+  imports: [
+    CommonModule,
+    StorybookSupportModule,
+    GlobalDesignSystemAtomicModule,
+    GenresFieldModule,
+    InfiniteScrollModule,
+    WriterWebSharedAtomicModule,
+    MatFormFieldModule,
+    MatAutocompleteModule,
+    NgSelectModule
+  ],
+  exports: [
+    CommonModule,
+    WrtHeadMolec,
+    WrtWriterMolec,
+    WritingOrgan,
+    WritingTemplate,
+    DetailTabHeadMolec,
+    DetailActionBtnsMolec,
+    DetailUploadFormMolec,
+    DetailBookFormMolec,
+    DetailOrgan,
+    IndexOrgan,
+    DetailIndexTemplate,
+    GenresFieldModule,
+    DetailLinkBtnsMolec,
+    ListHeadMolec,
+    ListActMolec,
+    ListChapterMolec,
+    ListStoriesMolec,
+    ListTemplate,
+    ListOrgan,
+    DetailActMolec,
+    DetailPartMolec,
+    DetailReviewMolec,
+    NgSelectModule,
+    InfoBookMolec,
+    DetailBookOrgan,
+    DetailBookTemplate
+  ],
+  declarations: [
+    WrtHeadMolec,
+    WrtWriterMolec,
+    WritingOrgan,
+    WritingTemplate,
+    DetailTabHeadMolec,
+    DetailActionBtnsMolec,
+    DetailUploadFormMolec,
+    DetailBookFormMolec,
+    DetailOrgan,
+    IndexOrgan,
+    DetailIndexTemplate,
+    DetailLinkBtnsMolec,
+    ListHeadMolec,
+    ListActMolec,
+    ListChapterMolec,
+    ListStoriesMolec,
+    ListTemplate,
+    ListOrgan,
+    DetailActMolec,
+    DetailPartMolec,
+    DetailReviewMolec,
+    InfoBookMolec,
+    DetailBookOrgan,
+    DetailBookTemplate,
+  ],
 })
-export class WriterWebUiCreationAtomicModule { }
+export class WriterWebUiCreationAtomicModule {}

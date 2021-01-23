@@ -1,4 +1,4 @@
-import { RdListContentNovelAtom } from './rd-list-content-novel.atom';
+import { ExcerptAtom } from './excerpt.atom';
 import { GlobalDesignSystemAtomicModule } from '../../global-design-system-atomic.module';
 
 export default {
@@ -9,6 +9,6 @@ export const primary = () => ({
   moduleMetadata: {
     imports: [GlobalDesignSystemAtomicModule],
   },
-  component: RdListContentNovelAtom,
+  component: ExcerptAtom,
   props: {},
 });

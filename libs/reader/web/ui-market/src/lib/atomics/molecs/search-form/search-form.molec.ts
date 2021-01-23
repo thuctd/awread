@@ -24,7 +24,7 @@ export class SearchFormMolec implements OnInit {
     widthClass: 'w-96'
   }, {
     title: 'Năm phát hành',
-    widthClass: 'w-64'
+    widthClass: 'w-60'
   }];
 
   constructor() { }
