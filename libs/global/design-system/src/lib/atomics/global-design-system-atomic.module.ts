@@ -54,7 +54,7 @@ import { RdHomeIconRatingAtom } from './atoms/rd-home-icon-rating/rd-home-icon-r
 import { RdHomeTabBookAtom } from './atoms/rd-home-tab-book/rd-home-tab-book.atom';
 import { RdHomeTabCategoryAtom } from './atoms/rd-home-tab-category/rd-home-tab-category.atom';
 import { RdListPublicationDateAtom } from './atoms/rd-list-publication-date/rd-list-publication-date.atom';
-import { RdListContentNovelAtom } from './atoms/rd-list-content-novel/rd-list-content-novel.atom';
+import { ExcerptAtom } from './atoms/excerpt/excerpt.atom';
 import { ImgMAtom } from './atoms/img-m/img-m.atom';
 import { BaseBtnAtom } from './atoms/base-btn/base-btn.atom';
 import { AuthorAtom } from './atoms/author/author.atom';
@@ -152,7 +152,7 @@ import { RdListTabPageAtom } from './atoms/rd-list-tab-page/rd-list-tab-page.ato
     RdHomeTabBookAtom,
     RdHomeTabCategoryAtom,
     RdListPublicationDateAtom,
-    RdListContentNovelAtom,
+    ExcerptAtom,
     ImgMAtom,
     BaseBtnAtom,
     AuthorAtom,
@@ -233,7 +233,7 @@ import { RdListTabPageAtom } from './atoms/rd-list-tab-page/rd-list-tab-page.ato
     RdHomeTabBookAtom,
     RdHomeTabCategoryAtom,
     RdListPublicationDateAtom,
-    RdListContentNovelAtom,
+    ExcerptAtom,
     ImgMAtom,
     BaseBtnAtom,
     AuthorAtom,

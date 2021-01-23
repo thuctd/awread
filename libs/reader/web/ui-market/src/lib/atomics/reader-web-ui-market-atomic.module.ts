@@ -24,9 +24,21 @@ import { HomeDetailBookUpdateOrgan } from './organs/home-detail-book-update/home
 import { ReviewItemMolec } from './molecs/review-item/review-item.molec';
 import { ChapterItemMolec } from './molecs/chapter-item/chapter-item.molec';
 import { SearchFormMolec } from './molecs/search-form/search-form.molec';
+import { CarouselModule } from 'ngx-owl-carousel-o';
+import {
+  BrowserAnimationsModule,
+  NoopAnimationsModule,
+} from '@angular/platform-browser/animations';
 
 @NgModule({
-  imports: [CommonModule, StorybookSupportModule, GlobalDesignSystemAtomicModule],
+  imports: [
+    CommonModule, 
+    StorybookSupportModule, 
+    GlobalDesignSystemAtomicModule, 
+    CarouselModule,   
+    BrowserAnimationsModule,
+    NoopAnimationsModule,
+  ],
   exports: [CommonModule, 
     TabCategoryMolec, 
     TabBookMolec, 

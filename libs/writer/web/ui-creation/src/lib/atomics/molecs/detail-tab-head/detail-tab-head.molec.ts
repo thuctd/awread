@@ -15,7 +15,7 @@ export class DetailTabHeadMolec implements OnInit {
   @Input() tabs;
 
   currentTab = {
-    name: 'Story Details',
+    name: 'Thông tin của truyện',
     tab: 'toc',
     type: 'create',
     isActive: true,

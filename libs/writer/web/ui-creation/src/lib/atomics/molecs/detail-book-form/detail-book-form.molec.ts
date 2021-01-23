@@ -26,34 +26,31 @@ export class DetailBookFormMolec implements OnInit {
   @Input() bookForm: FormGroup;
   @Input() formInformation = {
     title: {
-      display: 'title',
-      placeholder: `Story's name`,
+      display: 'Tiêu đề',
+      placeholder: `Tiêu đề`,
     },
     description: {
-      display: 'description',
-      placeholder: `Story's detail`,
+      display: 'Mô tả',
+      placeholder: `Mô tả`,
     },
     genres: {
-      display: 'genres',
-      placeholder: 'genres',
+      display: 'Thể loại',
+      placeholder: 'Thể loại',
     },
     tags: {
-      display: 'tags',
-      placeholder: 'tags',
+      display: 'Gắn thẻ',
+      placeholder: 'Gắn thẻ',
     },
     category: {
-      display: 'category',
+      display: 'Thể loại',
       placeholder: 'category',
     },
     target: {
-      display: 'Target Audience',
-    },
-    language: {
-      display: 'Language',
+      display: 'Đối tượng độc giả',
     },
     completed: {
-      display: 'completed',
-      placeholder: 'completed',
+      display: 'Đã hoàn thành',
+      placeholder: 'Đã hoàn thành',
     },
     adult: {
       display: 'adult',
@@ -66,6 +63,14 @@ export class DetailBookFormMolec implements OnInit {
   };
 
   @Output() btnSubmitEvent = new EventEmitter();
+  @Input() inputControl = new FormControl();
+  @Input() items = [
+    {id: 1, name: 'Tình yêu'},
+    {id: 2, name: 'Tiểu thuyết'},
+    {id: 3, name: 'Kinh dị'},
+    {id: 4, name: 'Kiếm hiệp'},
+    {id: 5, name: 'Viễn Tưởng'}
+  ];
 
   constructor(private fb: FormBuilder) {}
 

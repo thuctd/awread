@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'atom-title-book',
@@ -13,8 +13,9 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TitleBookAtom implements OnInit {
-  @Input() titleBoook = 'Cô gái chúng ta cùng theo đuổi năm nào!'
-  @Input() isSize = true;
+  @Input() titleBook = 'Cô gái chúng ta cùng theo đuổi năm nào!'
+  @Input() size: 's' | 'm' | 'l' = 's';
+  @Input() linkBook = '';
 
   constructor() { }
 
