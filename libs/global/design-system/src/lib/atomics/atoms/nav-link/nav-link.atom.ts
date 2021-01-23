@@ -9,6 +9,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 export class NavLinkAtom implements OnInit {
   @Input() title = 'Trang chủ';
   @Input() href = '/home';
+  @Input() color = 'text-white';
   constructor() { }
 
   ngOnInit(): void {

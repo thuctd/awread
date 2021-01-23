@@ -4,4 +4,17 @@
 }
 ::ng-deep .dropdown:hover .dropdown-menu {
   display: block;
+  &:after{
+    content: "";
+    display: block;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 12px solid #ffffff;
+    position: absolute;
+    top: 5px;
+    right: 30%;
+    z-index: -1;
+  }
 }

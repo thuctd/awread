@@ -14,3 +14,12 @@ export const primary = () => ({
 
   }
 })
+export const navbarTextDark = () => ({
+  moduleMetadata: {
+    imports: [ReaderWebSharedAtomicModule]
+  },
+  component: NavbarMenuOrgan,
+  props: {
+    color: 'text-black'
+  }
+})

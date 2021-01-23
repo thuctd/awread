@@ -1,0 +1,9 @@
+<atom-label-underline [title]="'Danh sách chương'"></atom-label-underline>
+<div class="detail-book-chapters mt-4">
+    <molec-chapter-item *ngFor="let item of chapters; let i = index" [isLastItem]="i == chapters.length - 1" [chapter]="item"></molec-chapter-item>
+</div>
+<div class="text-center mt-2">
+    <button class="m-auto" (click)="submitEvent.emit()"><span class="uppercase">Xem thêm</span>
+        <fa-icon [icon]="icon" class="text-gray-400 ml-2"></fa-icon>
+    </button>
+</div>

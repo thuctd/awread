@@ -1,7 +1,7 @@
-<atom-title-book [titleBook]="book.title" [class]="'text-sm md:text-base font-bold text-gray-600'" [isSize]='book.isSize'></atom-title-book>
+<atom-title-book [titleBook]="book" [class]="'text-sm md:text-base font-bold text-gray-600'" [size]='"m"'></atom-title-book>
 <div class="pt-2">
   <div *ngFor="let btn of btns" class="flex">
-    <base-btn (onBtnClicked)="submitEvent.emit($event)" [isSize]="btn.isSize" [chapter]="btn.chapter"></base-btn>
+    <base-btn (onBtnClicked)="submitEvent.emit($event)" [isSize]="true" [chapter]="btn"></base-btn>
     <rd-list-publication-date></rd-list-publication-date>
   </div>
 </div>

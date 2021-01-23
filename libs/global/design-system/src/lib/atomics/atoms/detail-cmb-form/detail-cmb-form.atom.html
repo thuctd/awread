@@ -13,11 +13,13 @@
     >
       <select
         [formControl]="inputControl"
-        [value]="'none'"
-        class="rounded-full border border-solid border-gray-500 w-52 p-2 focus:outline-none focus:border-green-400"
+        class="rounded-full border border-solid border-gray-300 w-52 p-2 focus:outline-none focus:border-green-400"
       >
-        <option *ngFor="let order of orders; let i = index" [value]="order.id">
-          {{order.name}}
+        <option
+          *ngFor="let order of orders; let i = index"
+          [value]="orders[i].id"
+        >
+          {{orders[i].name}}
         </option>
       </select>
     </div>

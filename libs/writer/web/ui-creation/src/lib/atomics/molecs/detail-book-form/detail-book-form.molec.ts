@@ -38,8 +38,8 @@ export class DetailBookFormMolec implements OnInit {
       placeholder: 'Thể loại',
     },
     tags: {
-      display: 'tags',
-      placeholder: 'tags',
+      display: 'Gắn thẻ',
+      placeholder: 'Gắn thẻ',
     },
     category: {
       display: 'Danh mục',

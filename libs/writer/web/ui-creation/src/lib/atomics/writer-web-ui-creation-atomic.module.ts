@@ -34,6 +34,9 @@ import { WriterWebSharedAtomicModule } from '@awread/writer/web/shared';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { InfoBookMolec } from './molecs/info-book/info-book.molec';
+import { DetailBookOrgan } from './organs/detail-book/detail-book.organ';
+import { DetailBookTemplate } from './templates/detail-book/detail-book.template';
 
 @NgModule({
   imports: [
@@ -74,6 +77,9 @@ import { NgSelectModule } from '@ng-select/ng-select';
     DetailReviewMolec,
     NgSelectModule,
     LoaderModule,
+    InfoBookMolec,
+    DetailBookOrgan,
+    DetailBookTemplate,
   ],
   declarations: [
     WrtHeadMolec,
@@ -97,6 +103,9 @@ import { NgSelectModule } from '@ng-select/ng-select';
     DetailActMolec,
     DetailPartMolec,
     DetailReviewMolec,
+    InfoBookMolec,
+    DetailBookOrgan,
+    DetailBookTemplate,
   ],
 })
 export class WriterWebUiCreationAtomicModule {}
