@@ -1,20 +1,29 @@
 <div id="modal-content-wrapper">
   <header id="modal-header">
-    <h1 id="modal-title">Placeholder title</h1>
+    <h1 id="modal-title">{{ modalData.description }}</h1>
   </header>
   <section id="modal-body">
-    <p>Placeholder description</p>
+    <p>{{ modalData.title }}</p>
   </section>
   <footer id="modal-footer">
     <button
-      mat-raised-button
-      id="modal-action-button"
-      (click)="actionFunction()"
+      id="close"
+      mat-flat-button
+      (click)="closeModal()"
+      class="mr-3 bg-gray-400 text-sm md:text-xs lg:text-base xl:text-base w-full text-white cursor-pointer rounded-md border-green-400 focus:shadow-outline focus:outline-none py-2 px-4"
+      type="button"
     >
-      Do it
+      {{ modalData.actionCancelText }}
     </button>
-    <button mat-raised-button id="modal-cancel-button" (click)="closeModal()">
-      Go back
+
+    <button
+      id="confirm"
+      mat-raised-button
+      (click)="actionFunction()"
+      class="bg-green-400 text-sm md:text-xs lg:text-base xl:text-base w-full text-white cursor-pointer rounded-md border-green-400 focus:shadow-outline focus:outline-none py-2 px-4"
+      type="button"
+    >
+      {{ modalData.actionConfirmText }}
     </button>
   </footer>
 </div>

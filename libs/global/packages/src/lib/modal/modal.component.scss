@@ -1,10 +1,19 @@
 :host {
   display: block;
+
+  #close {
+    grid-area: close;
+  }
+
+  #confirm {
+    grid-area: confirm;
+  }
+
   #modal-content-wrapper {
     width: 100%;
-    height: 100%;
+    height: 100% !important;
     display: grid;
-    color: white;
+    // color: white;
   }
 
   #modal-title {
@@ -14,6 +23,9 @@
   #modal-footer {
     justify-self: right;
     align-self: center;
+    display: grid;
+    grid-gap: 20px;
+    grid-template-areas: 'close confirm';
   }
 
   #modal-action-button {
@@ -26,4 +38,7 @@
     background-color: #4e4e4e;
     color: white;
   }
+}
+::ng-deep awread-modal {
+  height: 100% !important;
 }

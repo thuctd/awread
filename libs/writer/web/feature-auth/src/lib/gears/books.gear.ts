@@ -55,7 +55,7 @@ export class BooksGear {
     );
   }
 
-  addBook(book) {
+  addBook(book, titleToast = '') {
     const bookid = this.firebaseFirestoreAddon.createId();
     const genres = book.genres.map((genre) => ({
       name: genre.name,
@@ -66,10 +66,13 @@ export class BooksGear {
       tap((res) => {
         console.log('add book res: ', res);
         if (res['data'] && res['data']['createBook']['book']) {
+          this.snackbarService.create(
+            titleToast ? titleToast : 'Thêm truyện thành công!',
+            5000
+          );
           this.booksStore.addBook(bookNew);
           this.router.navigate(['detail', { bookId: bookid, type: 'edit' }]);
         }
-        this.snackbarService.create('Thêm truyện thành công!', 5000);
       }),
       catchError((err) => {
         this.snackbarService.error('Đã xảy ra lỗi. Vui lòng thử lại!!', 5000);

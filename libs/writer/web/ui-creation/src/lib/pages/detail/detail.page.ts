@@ -4,8 +4,8 @@ import {
   Category,
   CategoryFacade,
   ChaptersFacade,
-  Genre,
   GenresFacade,
+  ModalFacade,
 } from '@awread/writer/web/feature-auth';
 import { CurrentUserFacade } from '@awread/writer/web/feature-auth';
 import { BooksFacade } from '@awread/writer/web/feature-auth';
@@ -18,8 +18,6 @@ import {
   ChangeDetectorRef,
 } from '@angular/core';
 import { combineLatest, of } from 'rxjs';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { ModalComponent } from '@awread/global/packages';
 
 @Injectable({
   providedIn: 'root',
@@ -39,6 +37,7 @@ export class DetailPage implements OnInit {
   genresListSelected = [];
   categories$;
   genres$;
+  bookFormValueBefore = ''; // dùng để check xem giá trị trước với giá trị bookform hiện tại có khớp nhau hay ko?
   constructor(
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
@@ -48,7 +47,7 @@ export class DetailPage implements OnInit {
     private categoryFacade: CategoryFacade,
     private genresFacade: GenresFacade,
     private router: Router,
-    public matDialog: MatDialog,
+    private modalFacade: ModalFacade,
     private cd: ChangeDetectorRef
   ) {}
 
@@ -58,16 +57,32 @@ export class DetailPage implements OnInit {
     this.getAllChapters();
     this.initForm();
     this.updateForm();
-    this.categories$ = this.getCategories();
+    this.categories$ = this.categoryFacade.selectAllCategoriesAkita();
     this.genres$ = this.genresFacade.selectAllGenresAkita();
   }
 
   switchTab(tabName: string) {
     if (this.bookForm.invalid) {
-      alert('Khong dc de trong bat ky truong nao!');
+      alert('Vui lòng nhập đầy đủ thông tin!');
       return;
     }
-    this.selectedTab = tabName;
+    if (tabName === 'book') {
+      this.selectedTab = 'book';
+      return;
+    }
+    // xem trang thai create hay edit dua vao bookId
+    if (this.bookId) {
+      if (
+        JSON.stringify(this.bookFormValueBefore) !==
+        JSON.stringify(this.bookForm.value)
+      ) {
+        this.openModalConfirmSaveBook();
+      } else {
+        this.selectedTab = 'toc';
+      }
+    } else {
+      this.openModalConfirmSaveBook();
+    }
   }
 
   // getAllGenres() {
@@ -85,22 +100,6 @@ export class DetailPage implements OnInit {
   //     })
   //   );
   // }
-
-  getCategories() {
-    return combineLatest([
-      this.categoryFacade.selectAllCategoriesAkita(),
-      this.bookForm.get('categoryname').valueChanges.pipe(startWith('')),
-    ]).pipe(
-      map(([categories, categoryValueForm]: [Category[], string]) => {
-        if (categories && categories.length) {
-          return categories.filter((item) =>
-            item.name.toLowerCase().includes(categoryValueForm.toLowerCase())
-          );
-        }
-        return [];
-      })
-    );
-  }
 
   createNewChapterEvent() {
     this.router.navigate([
@@ -134,7 +133,33 @@ export class DetailPage implements OnInit {
     this.genresListSelected = genres;
   }
 
-  bookSubmitEvent() {
+  // them hoac cap nhat sach
+  bookAction(titleToast = '') {
+    const book = this.bookSaveDatabase();
+    if (this.bookId) {
+      // const idsGenresAdd = this.genresListSelected; // dung de them genre khi user them genre ko co trong DB
+
+      if (
+        JSON.stringify(this.bookFormValueBefore) ===
+        JSON.stringify(this.bookForm.value)
+      ) {
+        this.selectedTab = 'toc';
+      } else {
+        const idsGenresRemove = this.booksFacade.getGenreIdsByBookIdAkita(
+          this.bookId
+        );
+        this.booksFacade.editBook(book, idsGenresRemove).subscribe(() => {
+          this.selectedTab = 'toc';
+          this.cd.detectChanges();
+        });
+        this.bookFormValueBefore = this.bookForm.value;
+      }
+    } else {
+      this.booksFacade.addBook(book, titleToast).subscribe();
+    }
+  }
+
+  private bookSaveDatabase() {
     const userid = this.currentUserFacade.getUserId();
     const genres = this.bookForm.value.genreIds.map((id) => ({
       genreid: id,
@@ -146,31 +171,63 @@ export class DetailPage implements OnInit {
       genres,
       userid, // this.genresListChip ??
     };
-    if (this.bookId) {
-      // const idsGenresAdd = this.genresListSelected; // dung de them genre khi user them genre ko co trong DB
-      const idsGenresRemove = this.booksFacade.getGenreIdsByBookIdAkita(
-        this.bookId
-      );
-      this.booksFacade.editBook(book, idsGenresRemove).subscribe(() => {
-        this.selectedTab = 'toc';
-        this.cd.detectChanges();
-      });
-    } else {
-      this.booksFacade.addBook(book).subscribe();
-    }
-  }
-  shouldUpdateGenres() {
-    const idsGenresForm = this.genresListSelected;
-    const idsGenresByBookId = this.booksFacade.getGenreIdsByBookIdAkita(
-      this.bookId
-    );
+    return book;
   }
 
   actionBookEvent(action: string) {
     if (action === 'CANCEL') {
-      alert();
+      this.openModalCancelCreateBook();
     } else {
+      if (this.bookForm.invalid) {
+        alert('Vui lòng nhập đầy đủ thông tin!');
+        return;
+      }
+      const titleToast =
+        'Thêm thông tin truyện thành công. Tiếp tục tạo mục lục cho truyện!';
+      this.bookAction(titleToast);
     }
+  }
+
+  private openModalCancelCreateBook() {
+    const dataModal = {
+      name: 'cancel',
+      title: 'Bạn có chắc chắn muốn hủy bỏ ko?',
+      actionCancelText: 'Hủy bỏ',
+      actionConfirmText: 'Đồng ý',
+    };
+    const dialogRef = this.modalFacade.openModal(dataModal);
+    dialogRef.afterClosed().subscribe((isOk) => {
+      console.log('isOk: ', isOk);
+      if (this.bookForm.invalid) {
+        alert('Vui lòng nhập đầy đủ thông tin!');
+        return;
+      }
+      if (isOk) {
+        this.router.navigate(['/list']);
+      }
+    });
+  }
+
+  private openModalConfirmSaveBook() {
+    const dataModal = {
+      title: 'Bạn có muốn lưu thông tin truyện ko?',
+      actionCancelText: 'Hủy bỏ',
+      actionConfirmText: 'Đồng ý',
+    };
+    const dialogRef = this.modalFacade.openModal(dataModal);
+    dialogRef.afterClosed().subscribe((isOk) => {
+      console.log('isOk: ', isOk);
+      if (this.bookForm.invalid) {
+        alert('Vui lòng nhập đầy đủ thông tin!');
+        return;
+      }
+      if (isOk) {
+        this.selectedTab = 'toc';
+        this.bookAction();
+      } else {
+        this.selectedTab = 'book';
+      }
+    });
   }
 
   selectedStatusEvent(status: string) {
@@ -255,6 +312,7 @@ export class DetailPage implements OnInit {
             status: book.status ?? 'DRAFT',
             audience: book.audience ?? 'none',
           });
+          this.bookFormValueBefore = this.bookForm.value;
         }
       });
     }
@@ -264,10 +322,9 @@ export class DetailPage implements OnInit {
     this.bookForm = this.fb.group({
       title: ['', Validators.required],
       description: [''],
-      categoryname: [''],
       tags: [''],
-      categoryid: [null],
-      genreIds: [''],
+      categoryid: [null, Validators.required],
+      genreIds: ['', Validators.required],
       audience: ['none'],
       completed: [false],
       status: ['DRAFT'],
