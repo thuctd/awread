@@ -6,8 +6,8 @@
         <atom-author></atom-author>
       </dd>
       <dd class="ml-0 pb-1">
-        <rd-list-content-novel [size]='"s"'></rd-list-content-novel>
-        <atom-text-link (click)='moreEvent.emit()' [text]='moreContent.text' [size]='moreContent.size' [color]='moreContent.color'></atom-text-link>
+        <excerpt [size]='"s"'></excerpt>
+        <atom-text-link (click)='moreEvent.emit()' [text]='moreContent' [size]='"s"' [color]='"green"'></atom-text-link>
       </dd>
     </dl>
   </div>

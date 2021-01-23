@@ -12,11 +12,7 @@ export class ListInfoProseMolec implements OnInit {
     size: 'm',
   };
 
-  @Input() moreContent = {
-    text: 'Đọc thêm',
-    size: 's',
-    color: 'green'
-  }
+  @Input() moreContent = 'Đọc thêm';
 
   @Output() moreEvent = new EventEmitter();
 

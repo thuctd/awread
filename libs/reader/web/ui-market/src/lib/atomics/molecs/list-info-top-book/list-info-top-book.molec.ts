@@ -7,19 +7,9 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ListInfoTopBookMolec implements OnInit {
-  @Input() book = {
-    title: 'Cô gái chúng ta cùng theo đuổi năm nào',
-    size: 's',
-  };
+  @Input() book = 'Cô gái chúng ta cùng theo đuổi năm nào';
 
-  @Input() btns = [
-    {
-      chapter: 'Chương 1',
-      isSize: false,
-    }, {
-      chapter: 'Chương 2',
-      isSize: false,
-    }];
+  @Input() btns = ['Chương 1','Chương 2'];
   @Output() submitEvent = new EventEmitter();
 
   constructor() { }

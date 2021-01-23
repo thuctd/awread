@@ -6,7 +6,7 @@
   </div>
   <div class="md:w-2/3">
     <div class="options md:flex md:space-x-6 text-sm items-center text-gray-700">
-      <select [formControl]="inputControl" class="rounded-full border border-solid border-gray-500 w-52 p-2 focus:outline-none focus:border-green-400">
+      <select [formControl]="inputControl" class="rounded-full border border-solid border-gray-300 w-52 p-2 focus:outline-none focus:border-green-400">
           <option *ngFor="let order of orders; let i = index" [value]="orders[i].id">{{orders[i].name}}</option>
       </select>
     </div>
