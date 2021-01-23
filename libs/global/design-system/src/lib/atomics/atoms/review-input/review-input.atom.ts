@@ -10,6 +10,7 @@ import { FormControl } from '@angular/forms';
 export class ReviewInputAtom implements OnInit {
   @Input() placeholder = 'Để lại một bình luận...';
   @Input() inputControl: FormControl = new FormControl('');
+  @Input() photoUrl = 'http://mrmrs.github.io/photos/p/2.jpg';
   constructor() { }
 
   ngOnInit(): void {
