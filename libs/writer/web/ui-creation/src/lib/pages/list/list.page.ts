@@ -8,6 +8,7 @@ import { Directive, Injectable, OnInit } from '@angular/core';
 @Directive()
 export class ListPage implements OnInit {
   bookList$ = this.booksFacade.bookList$;
+  isLoading$ = this.booksFacade.selectLoadingAkiata();
   constructor(
     private booksFacade: BooksFacade,
     private router: Router,

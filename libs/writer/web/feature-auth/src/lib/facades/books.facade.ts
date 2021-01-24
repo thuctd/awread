@@ -11,8 +11,20 @@ export class BooksFacade {
     private booksQuery: BooksQuery
   ) {}
 
+  selectLoadingAkiata() {
+    return this.booksQuery.selectLoading();
+  }
+
+  setLoading(isLoading = false) {
+    this.booksStore.setLoading(isLoading);
+  }
+
   setBookIdActiveAkita(bookid: string) {
     return this.booksStore.setActive(bookid);
+  }
+
+  getGenreIdsByBookIdAkita(bookid: string): string[] {
+    return this.booksQuery.getEntity(bookid)?.genreIds ?? [];
   }
 
   getBookIdActiveAkita() {
@@ -54,11 +66,11 @@ export class BooksFacade {
     return this.booksGear.getDetailBook(bookId);
   }
 
-  addBook(book) {
-    return this.booksGear.addBook(book).pipe();
+  addBook(book, titleToast = '') {
+    return this.booksGear.addBook(book, titleToast).pipe();
   }
-  editBook(book) {
-    return this.booksGear.editBook(book).pipe();
+  editBook(book, idsGenresRemove: string[]) {
+    return this.booksGear.editBook(book, idsGenresRemove).pipe();
   }
 
   updateBookStatus(bookId: string, status: string) {

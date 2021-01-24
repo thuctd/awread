@@ -11,3 +11,5 @@ get params: this.activatedRoute.snapshot.params
 
 nx serve backend-graphql
 nx serve writer-web
+
+regex dem so tu: value.split(/\b\W+\b/).length

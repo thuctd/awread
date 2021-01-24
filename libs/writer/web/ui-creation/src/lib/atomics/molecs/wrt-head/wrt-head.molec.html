@@ -1,35 +1,73 @@
-<div class="w-full justify-around flex bg-white rounded-lg pt-1 pb-2 px-2 relative">
+<div
+  class="w-full justify-around flex bg-white rounded-lg pt-1 pb-2 px-2 relative"
+>
   <div class="justify-start flex w-4/6 w-50-ns pl-1">
     <div class="dtc-ns v-mid text-gray-500 pl-8" [formGroup]="chapterForm">
-      <wrt-social-menu></wrt-social-menu>
-      <!-- <span class="text-xs font-normal measure"> -->
-        <!-- {{chapterForm.get('bookTitle').value | titlecase}} -->
-        <!-- <input class="text-xs capitalize bg-white" value="text" type="text" formControlName="bookTitle" disabled />
-        <button class="bg-white hover:bg-gray-300 text-gray-700 font-semibold p-2 rounded-full inline-flex items-center outline-none focus:outline-none">
-          <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+      <!-- <wrt-social-menu></wrt-social-menu> -->
+      <span class="text-xs font-normal measure">
+        <span class="capitalize"> {{chapterForm.get('bookTitle').value}}</span>
+        <button
+          class="bg-white hover:bg-gray-300 text-gray-700 font-semibold p-2 rounded-full inline-flex items-center outline-none focus:outline-none"
+        >
+          <svg
+            class="fill-current h-4 w-4"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+          >
+            <path
+              d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+            />
           </svg>
         </button>
-      </span> -->
+      </span>
 
-      <!-- <div>
-        <span class="text-sm block font-medium mt-0">Chương
-          <input class="capitalize bg-white" type="text" formControlName="chapterNumber" disabled />
-        </span>
-        <span class="text-xs f6-ns font-normal text-gray-500 measure lh-copy my-0">
-          Draft (0 words) <a (click)='submitEvent.emit()' class="link text-green-500">Saved</a>
-        </span>
-      </div> -->
+      <div>
+        <div class="text-sm block font-medium mt-0">
+          Chương {{chapterForm.get('chapterNumber').value}}
+        </div>
+        <div
+          class="text-xs f6-ns font-normal text-gray-500 measure lh-copy my-0"
+        >
+          <span class="capitalize">
+            {{selectedChapterStatus === 'DRAFT' ? 'Phác thảo' : 'Xuất bản'}}
+          </span>
+          <span>
+            ({{chapterForm?.value?.content ?
+            chapterForm?.value?.content?.split(' ')?.length : 0}} words)
+          </span>
+          <a
+            class="link text-green-500 cursor-pointer"
+            (click)="saveChapterEvent.emit()"
+            >Lưu</a
+          >
+        </div>
+      </div>
 
-      <wrt-info-book></wrt-info-book>
+      <!-- <wrt-info-book></wrt-info-book> -->
     </div>
-    <wrt-book-img></wrt-book-img>
+
+    <!-- img  -->
+    <div class="absolute -top-6 -left-28">
+      <img
+        [src]="chapterForm.get('bookImg').value"
+        class="rounded-full border-green-500 border-8 w-36 h-36 inline-block"
+        alt="avatar"
+      />
+    </div>
+
+    <!-- <wrt-book-img [chapterForm]="chapterForm"></wrt-book-img> -->
   </div>
   <div class="w-full mr-6">
     <div class="justify-end flex w-50-ns mr-6">
       <div class="py-6 flex">
         <div class="flex mr-10">
-          <cr-submit-btn *ngFor="let btn of btns" (click)="selectedChapterStatus = btn.type;changeChapterStatus(btn.type)" [active]="selectedChapterStatus === btn.type" [submitText]="btn.submitText" class="ml-2"></cr-submit-btn>
+          <cr-submit-btn
+            *ngFor="let btn of btns"
+            (click)="selectedChapterStatus = btn.type;changeChapterStatus(btn.type)"
+            [active]="selectedChapterStatus === btn.type"
+            [submitText]="btn.submitText"
+            class="ml-2"
+          ></cr-submit-btn>
         </div>
         <wrt-menu-btn class="mt-1"></wrt-menu-btn>
       </div>

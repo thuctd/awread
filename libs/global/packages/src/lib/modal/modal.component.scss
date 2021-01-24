@@ -1,0 +1,44 @@
+:host {
+  display: block;
+
+  #close {
+    grid-area: close;
+  }
+
+  #confirm {
+    grid-area: confirm;
+  }
+
+  #modal-content-wrapper {
+    width: 100%;
+    height: 100% !important;
+    display: grid;
+    // color: white;
+  }
+
+  #modal-title {
+    font-size: 22px;
+  }
+
+  #modal-footer {
+    justify-self: right;
+    align-self: center;
+    display: grid;
+    grid-gap: 20px;
+    grid-template-areas: 'close confirm';
+  }
+
+  #modal-action-button {
+    margin-right: 30px;
+    background-color: #3b3b3b;
+    color: white;
+  }
+
+  #modal-cancel-button {
+    background-color: #4e4e4e;
+    color: white;
+  }
+}
+::ng-deep awread-modal {
+  height: 100% !important;
+}
