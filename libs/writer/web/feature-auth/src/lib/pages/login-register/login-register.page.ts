@@ -14,7 +14,7 @@ export class LoginRegisterPage {
   authForm: FormGroup;
   tabs = [
     { name: 'Đăng nhập', path: 'login' },
-    { name: 'Đăng kí', path: 'register' },
+    { name: 'Đăng ký', path: 'register' },
   ];
 
   currentUser$ = this.authFacade.currentUser$;
@@ -39,7 +39,7 @@ export class LoginRegisterPage {
   register() {
     const { password, confirmPassword } = this.authForm.value;
     if (password !== confirmPassword) {
-      alert('Password không khớp. Vui lòng thử lại!');
+      alert('Mật khẩu không khớp. Vui lòng thử lại!');
       return;
     }
     this.authFacade.registerEmail(this.authForm.value);

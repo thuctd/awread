@@ -1,7 +1,3 @@
 <auth-header [title]="title" [description]="description"></auth-header>
 <login-form [form]="formComplete"></login-form>
-<submit-btn (keydown.enter)='completeEvent.emit()'
-  (btnClicked)="completeEvent.emit()"
-  [name]="'Cập nhật'"
-  [active]="formComplete.valid"
-></submit-btn>
+<submit-btn (keydown.enter)='completeEvent.emit()' (btnClicked)="completeEvent.emit()" [name]="'Cập nhật'" [active]="formComplete.valid"></submit-btn>
