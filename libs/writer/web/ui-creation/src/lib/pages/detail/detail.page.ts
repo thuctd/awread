@@ -29,8 +29,8 @@ export class DetailPage implements OnInit {
   chapterEntity$: any;
   chapterListByBookId$ = this.chaptersFacade.chapterListByBookId$;
   tabsHead = [
-    { name: 'Tables of Contents', tabName: 'toc' },
-    { name: 'Story Details', tabName: 'book' },
+    { name: 'Thông tin của truyện', tabName: 'book' },
+    { name: 'Mục lục', tabName: 'toc' },
   ];
   selectedTab = 'toc';
   selectedBookStatus = 'DRAFT';

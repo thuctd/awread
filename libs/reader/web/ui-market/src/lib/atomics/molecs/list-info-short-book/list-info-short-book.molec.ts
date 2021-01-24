@@ -17,21 +17,9 @@ import { faComments } from '@fortawesome/free-solid-svg-icons';
 export class ListInfoShortBookMolec implements OnInit {
   @Input() countComment = '40';
   @Input() faIcon = faComments;
-  @Input() book = {
-    title: 'Cô gái chúng ta cùng theo đuổi năm nào',
-    isSize: true,
-  };
+  @Input() book = 'Cô gái chúng ta cùng theo đuổi năm nào';
 
-  @Input() btns = [
-    {
-      chapter: 'Chương 1',
-      isSize: true,
-    },
-    {
-      chapter: 'Chương 2',
-      isSize: true,
-    },
-  ];
+  @Input() btns = ['Chương 1','Chương 2'];
   @Output() submitEvent = new EventEmitter();
 
   constructor() {}

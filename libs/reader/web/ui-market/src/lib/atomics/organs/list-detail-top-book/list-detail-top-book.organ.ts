@@ -6,17 +6,8 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListDetailTopBookOrgan implements OnInit {
-  @Input() btn = {
-    submitText: 'Top phổ biến ',
-    isActive: true,
-  };
-
-  @Input() moreBook = {
-    text: 'Xem thêm...',
-    size: 'm',
-    color: 'green'
-  }
-
+  @Input() moreBook = 'Xem thêm...';
+  @Input() btnTitle = 'Top phổ biến';
   @Output() moreEvent = new EventEmitter();
   counter = Array;
 

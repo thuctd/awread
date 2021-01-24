@@ -33,22 +33,23 @@ export class WrtHeadMolec implements OnInit {
 
   btns = [
     {
-      submitText: 'Publish',
+      submitText: 'Xuất bản',
       isActive: true,
       type: 'PUBLISHED',
     },
     {
-      submitText: 'Draft',
+      submitText: 'Phác thảo',
       isActive: false,
       type: 'DRAFT',
     },
     {
-      submitText: 'Preview',
+      submitText: 'Xem trước',
       isActive: false,
       type: 'PREVIEW',
     },
   ];
   selectedChapterStatus = 'DRAFT';
+
   constructor() {}
 
   ngOnInit(): void {}

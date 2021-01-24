@@ -8,6 +8,9 @@ import { faHome } from '@fortawesome/free-solid-svg-icons';
 })
 export class BreadcrumbLinkAtom implements OnInit {
   @Input() icon = faHome;
+  @Input() link = '/home';
+  @Input() title = 'Home';
+  @Input() size = 'text-md';
   constructor() { }
   ngOnInit(): void {
   }

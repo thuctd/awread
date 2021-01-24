@@ -20,6 +20,7 @@ dependencies:
   '@nestjs/common': 7.6.4_0c773f197e7bb0df0bedc332ad8bc35d
   '@nestjs/core': 7.6.4_aec42018cda4bb4b2791b10894bf8e29
   '@nestjs/platform-express': 7.6.4_63d43fd8bd42fa3c0c78e900768c9b10
+  '@ng-select/ng-select': 5.0.15_4aa213f5fe2834439eb76209ba31303c
   '@types/multer': 1.4.5
   apollo-angular: 2.1.0_9367a8463743396cd7a85b639520f495
   apollo-angular-link-http: 1.11.0_d8ebc14774575d49b0730e2373a54e53
@@ -33,6 +34,7 @@ dependencies:
   multer: 1.4.2
   multer-s3: 2.9.0
   ng-image-slider: 2.6.4_97967f89953b2292ef4b216bba210bdf
+  ngx-owl-carousel-o: 5.0.0_df31f03b6ed8f3584fcd5f1274cc1e8f
   ngx-quill: 13.0.1_5b8d09dbaaf2762015b60b6415ab5501
   nodemon: 2.0.7
   postgraphile: 4.10.0
@@ -3773,6 +3775,22 @@ packages:
         optional: true
     resolution:
       integrity: sha512-Igj97EP5NOmR6Fc/eEBpRR+JfCbwq3n4EJyShtrR8naNZbhfB5HoxqtZvZeEEXwExQOo/AhDoDuwzCmUBcz85Q==
+  /@ng-select/ng-select/5.0.15_4aa213f5fe2834439eb76209ba31303c:
+    dependencies:
+      '@angular/common': 11.0.5_@angular+core@11.0.5+rxjs@6.6.3
+      '@angular/core': 11.0.5_rxjs@6.6.3+zone.js@0.11.3
+      '@angular/forms': 11.0.5_63ccc76160f1c79edd342b4fd597800a
+      tslib: 2.1.0
+    dev: false
+    engines:
+      node: '>= 6.9.0'
+      npm: '>= 3.0.0'
+    peerDependencies:
+      '@angular/common': '>=10.0.0 <11.0.0'
+      '@angular/core': '>=10.0.0 <11.0.0'
+      '@angular/forms': '>=10.0.0 <11.0.0'
+    resolution:
+      integrity: sha512-cPs4QGBjkWVli2Gz5e0STRBSTdiVh2VHw+jwGEqLPRdVTSab4LT3QRoN1PIKOSE8sy2h7IiEcxBGjC48hyRWKg==
   /@ngtools/webpack/11.0.5_dbeeca76d5afdca02a3417a598e41100:
     dependencies:
       '@angular-devkit/core': 11.0.5
@@ -14560,6 +14578,19 @@ packages:
       '@angular/core': ^9.1.12
     resolution:
       integrity: sha512-7FxHi0I0Z9hOkKAWmofcBbDOB7j8W5e6j6TY/gTyOyb06zbgbFSYyunNbxoiY+anEn+N2UL+sQxnYw9zCKsm5A==
+  /ngx-owl-carousel-o/5.0.0_df31f03b6ed8f3584fcd5f1274cc1e8f:
+    dependencies:
+      '@angular/common': 11.0.5_@angular+core@11.0.5+rxjs@6.6.3
+      '@angular/core': 11.0.5_rxjs@6.6.3+zone.js@0.11.3
+      rxjs: 6.6.3
+      tslib: 2.1.0
+    dev: false
+    peerDependencies:
+      '@angular/common': ' ^11.0.0-rc.0 || ^11.0.0'
+      '@angular/core': ^11.0.0-rc.0 || ^11.0.0
+      rxjs: ^6.0.1
+    resolution:
+      integrity: sha512-wMfGEMu/cI61jAJQfSS82fMxGfmvSgCdoQ2bZfHZlHwdD1poOpzYkzPu/yTPzdw84gG2kK+sXSawm0X4Mproxg==
   /ngx-quill/13.0.1_5b8d09dbaaf2762015b60b6415ab5501:
     dependencies:
       '@angular/common': 11.0.5_@angular+core@11.0.5+rxjs@6.6.3
@@ -19492,7 +19523,6 @@ packages:
     resolution:
       integrity: sha512-uZtkfKblCEQtZKBF6EBXVZeQNl82yqtDQdv+eck8u7tdPxjLu2/lp5/uPW+um2tpuxINHWy3GhiccY7QgEaVHQ==
   /tslib/2.1.0:
-    dev: true
     resolution:
       integrity: sha512-hcVC3wYEziELGGmEEXue7D75zbwIIVUMWAVbHItGPx0ziyXxrOMQx4rQEVEV45Ut/1IotuEvwqPopzIOkDMf0A==
   /tsutils/3.17.1_typescript@4.0.5:
@@ -20866,6 +20896,7 @@ specifiers:
   '@nestjs/platform-express': ^7.6.4
   '@nestjs/schematics': ^7.2.6
   '@nestjs/testing': ^7.6.4
+  '@ng-select/ng-select': ^5.0.15
   '@nrwl/angular': 11.1.1
   '@nrwl/cli': 11.1.1
   '@nrwl/cypress': 11.1.1
@@ -20914,6 +20945,7 @@ specifiers:
   multer: ^1.4.2
   multer-s3: ^2.9.0
   ng-image-slider: ^2.6.4
+  ngx-owl-carousel-o: ^5.0.0
   ngx-quill: ^13.0.1
   nodemon: ^2.0.7
   pluralize: ^8.0.0

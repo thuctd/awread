@@ -1,0 +1,5 @@
+<atom-search-btn class="mr-6 flex items-center"></atom-search-btn>
+<molec-navbar-auth-btns *ngIf="!isLogin else isLogged"></molec-navbar-auth-btns>
+<ng-template #isLogged>
+    <molec-navbar-auth-logged></molec-navbar-auth-logged>
+</ng-template>

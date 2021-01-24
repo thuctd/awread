@@ -20,14 +20,14 @@ export class DetailIndexTemplate implements OnInit {
   @Input() genres: Genre[];
   @Input() btns = [
     {
-      submitText: 'Draft',
+      submitText: 'Hủy bỏ',
       isActive: false,
-      status: 'DRAFT',
+      status: 'CANCEL',
     },
     {
-      submitText: 'Publish',
+      submitText: 'Tiếp tục',
       isActive: true,
-      status: 'PUBLISHED',
+      status: 'SKIP',
     },
   ];
 

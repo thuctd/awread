@@ -10,11 +10,7 @@ import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 export class ListDetailShortBookOrgan implements OnInit {
   counter = Array
 
-  @Input() moreContent = {
-    text: 'Xem thêm',
-    size: 'l',
-    color: 'gray'
-  }
+  @Input() moreContent = 'Xem thêm';
 
   @Input() faIcon = faAngleDown;
   @Output() moreEvent = new EventEmitter();

@@ -9,14 +9,10 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
 export class ListInfoProseMolec implements OnInit {
   @Input() book = {
     title: 'Cô gái chúng ta cùng theo đuổi năm nào',
-    isSize: true,
+    size: 'm',
   };
 
-  @Input() moreContent = {
-    text: 'Đọc thêm',
-    size: 's',
-    color: 'green'
-  }
+  @Input() moreContent = 'Đọc thêm';
 
   @Output() moreEvent = new EventEmitter();
 

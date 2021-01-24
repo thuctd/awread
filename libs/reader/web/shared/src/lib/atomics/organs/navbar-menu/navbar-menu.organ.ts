@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 import { faAngleDown, faArrowDown } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -79,7 +79,7 @@ export class NavbarMenuOrgan implements OnInit {
         ]
     }
   ]
-
+  @Input() color = 'text-white';
   constructor() { }
 
   ngOnInit(): void {

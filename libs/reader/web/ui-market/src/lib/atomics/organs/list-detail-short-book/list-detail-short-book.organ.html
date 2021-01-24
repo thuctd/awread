@@ -1,12 +1,12 @@
 <section class="pt-28 mx-auto">
   <div class="grid grid-cols-12 gap-6 place-content-center">
     <div *ngFor="let loop3 of counter(9);" class="col-span-2 md:col-span-4 p-2">
-      <atom-img-m [isSize]='"xxl"'></atom-img-m>
+      <atom-img-m [size]='"l"'></atom-img-m>
       <list-info-short-book></list-info-short-book>
     </div>
   </div>
   <div class="flex justify-end pt-4">
-    <atom-text-link (click)='moreEvent.emit()' [text]='moreContent.text' [size]='moreContent.size' [color]='moreContent.color'></atom-text-link>
-    <fa-icon [icon]="faIcon" class="text-gray-600 ml-2 text-xl"></fa-icon>
+    <atom-text-link (click)='moreEvent.emit()' [text]='moreContent' [size]='"l"' [color]='"gray"' class="uppercase"></atom-text-link>
+    <!-- <fa-icon [icon]="faIcon" class="text-gray-600 ml-2 text-xl"></fa-icon> -->
   </div>
 </section>
