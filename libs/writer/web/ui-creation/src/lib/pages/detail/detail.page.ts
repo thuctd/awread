@@ -68,25 +68,17 @@ export class DetailPage implements OnInit {
   }
 
   switchTab(tabName: string) {
-    if (tabName === 'book') {
-      this.selectedTab = 'book';
-      return;
-    }
-    this.submitted = true;
-    if (this.bookForm.invalid) {
-      return;
-    }
-    if (this.type === 'edit') {
-      if (
-        JSON.stringify(this.bookFormValueBefore) !==
-        JSON.stringify(this.bookForm.value)
-      ) {
-        this.openModalConfirmSaveBook();
-      } else {
-        this.selectedTab = 'toc';
-      }
-    } else {
-      this.openModalConfirmSaveBook();
+    // if (tabName === 'book') {
+    //   this.selectedTab = 'book';
+    //   return;
+    // }
+    // this.submitted = true;
+    // if (this.bookForm.invalid) {
+    //   return;
+    // }
+    this.selectedTab = tabName;
+    if (tabName === 'toc') {
+      this.addorUpdateBookToServer();
     }
   }
 
@@ -139,31 +131,35 @@ export class DetailPage implements OnInit {
   }
 
   // them hoac cap nhat sach
-  addBookToServer(titleToast = '') {
+  addorUpdateBookToServer(titleToast = '') {
     this.submitted = true;
     if (this.bookForm.invalid) {
       return;
     }
     const book = this.bookSaveDatabase();
     if (this.type === 'edit') {
-      // const idsGenresAdd = this.genresListSelected; // dung de them genre khi user them genre ko co trong DB
-      if (
-        JSON.stringify(this.bookFormValueBefore) ===
-        JSON.stringify(this.bookForm.value)
-      ) {
-        this.selectedTab = 'toc';
-      } else {
-        const idsGenresRemove = this.booksFacade.getGenreIdsByBookIdAkita(
-          this.bookId
-        );
-        this.booksFacade.editBook(book, idsGenresRemove).subscribe(() => {
-          this.selectedTab = 'toc';
-          this.cd.detectChanges();
-        });
-        this.bookFormValueBefore = this.bookForm.value;
-      }
+      this.updateBook(book);
     } else {
       this.booksFacade.addBook(book, titleToast).subscribe();
+    }
+  }
+
+  private updateBook(book) {
+    // const idsGenresAdd = this.genresListSelected; // dung de them genre khi user them genre ko co trong DB
+    if (
+      JSON.stringify(this.bookFormValueBefore) !==
+      JSON.stringify(this.bookForm.value)
+    ) {
+      const idsGenresRemove = this.booksFacade.getGenreIdsByBookIdAkita(
+        this.bookId
+      );
+      this.booksFacade.editBook(book, idsGenresRemove).subscribe(() => {
+        this.selectedTab = 'toc';
+        this.cd.detectChanges();
+      });
+      this.bookFormValueBefore = this.bookForm.value;
+    } else {
+      this.selectedTab = 'toc';
     }
   }
 
@@ -194,7 +190,7 @@ export class DetailPage implements OnInit {
     } else {
       const titleToast =
         'Thêm thông tin truyện thành công. Tiếp tục tạo mục lục cho truyện!';
-      this.addBookToServer(titleToast);
+      this.addorUpdateBookToServer(titleToast);
     }
   }
 
@@ -225,7 +221,7 @@ export class DetailPage implements OnInit {
       console.log('isOk: ', isOk);
       if (isOk) {
         this.selectedTab = 'toc';
-        this.addBookToServer();
+        this.addorUpdateBookToServer();
       } else {
         this.selectedTab = 'book';
       }

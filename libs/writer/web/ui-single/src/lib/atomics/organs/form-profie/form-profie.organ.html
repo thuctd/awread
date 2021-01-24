@@ -1,6 +1,14 @@
 <section class="">
-  <editprofile-form [profileForm]="profileForm" class="mb-4"></editprofile-form>
-  <info-form [profileForm]="profileForm" class="mb-4"></info-form>
+  <editprofile-form
+    [submitted]="submitted"
+    [profileForm]="profileForm"
+    class="mb-4"
+  ></editprofile-form>
+  <info-form
+    [submitted]="submitted"
+    [profileForm]="profileForm"
+    class="mb-4"
+  ></info-form>
   <!-- <changepw-form></changepw-form> -->
   <span class="text-gray-400"
     >Nếu bạn quên mật khẩu, thì bạn có thể đặt lại mật khẩu bằng</span

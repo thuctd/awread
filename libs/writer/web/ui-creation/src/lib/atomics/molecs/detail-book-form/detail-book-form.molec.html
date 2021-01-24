@@ -9,7 +9,7 @@
       class="invalid-feedback"
     >
       <div *ngIf="bookForm.controls.title.errors.required">
-        Tiêu đề là bắt buộc
+        Tiêu đề không được để trống
       </div>
     </div>
   </detail-input-form>
@@ -53,7 +53,7 @@
         class="invalid-feedback"
       >
         <div *ngIf="bookForm.controls.categoryid.errors.required">
-          Danh mục là bắt buộc
+          Danh mục không được để trống
         </div>
       </div>
     </div>
@@ -89,7 +89,7 @@
         class="invalid-feedback"
       >
         <div *ngIf="bookForm.controls.genreIds.errors.required">
-          Thể loại là bắt buộc
+          Thể loại không được để trống
         </div>
       </div>
     </div>

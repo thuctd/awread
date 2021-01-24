@@ -16,6 +16,7 @@ import {
 })
 export class ProfileTemplate implements OnInit {
   @Input() profileForm: FormGroup;
+  @Input() submitted: boolean;
   @Output() updateProfileEvent = new EventEmitter();
   constructor() {}
 
