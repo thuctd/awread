@@ -1,39 +1,38 @@
 {
-    "$schema": "http://json-schema.org/schema",
-    "id": "logic",
-    "type": "object",
-    "properties": {
-        "type": {
-            "type": "string",
-            "description": "atomic design kind of component",
-            "enum": [
-                "gear",
-                "addon",
-                "api",
-                "facade",
-                "model",
-                "interface"
-            ],
-            "default": "gear",
-            "$default": {
-                "$source": "argv",
-                "index": 0
-            }
-        },
-        "list": {
-            "type": "string",
-            "description": "list of name, separate by comma (,) for example: login,register",
-            "$default": {
-                "$source": "argv",
-                "index": 1
-            }
-        },
-        "directory": {
-            "type": "string",
-            "description": "parent folder name"
-        }
+  "$schema": "http://json-schema.org/schema",
+  "id": "logic",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "description": "atomic design kind of component",
+      "enum": [
+        "gear",
+        "addon",
+        "api",
+        "facade",
+        "model",
+        "interface",
+        "graphql"
+      ],
+      "default": "gear",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      }
     },
-    "required": [
-        "list"
-    ]
+    "list": {
+      "type": "string",
+      "description": "list of name, separate by comma (,) for example: login,register",
+      "$default": {
+        "$source": "argv",
+        "index": 1
+      }
+    },
+    "directory": {
+      "type": "string",
+      "description": "parent folder name"
+    }
+  },
+  "required": ["list"]
 }

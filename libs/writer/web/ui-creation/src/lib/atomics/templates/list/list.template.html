@@ -1,6 +1,7 @@
 <section class="w-full max-w-screen-xl mx-auto">
   <list
     [books]="books"
+    [loading]="loading"
     (updateBookStatusEvent)="updateBookStatusEvent.emit($event)"
     (addChapterEvent)="addChapterEvent.emit($event)"
     (editBookEvent)="editBookEvent.emit($event)"

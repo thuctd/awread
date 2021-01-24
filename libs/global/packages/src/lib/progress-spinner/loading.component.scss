@@ -1,0 +1,11 @@
+:host {
+  display: block;
+}
+::ng-deep mat-progress-spinner {
+  width: 50px !important;
+  height: 50px !important;
+  svg {
+    width: 50px !important;
+    height: 50px !important;
+  }
+}

@@ -15,6 +15,7 @@ import {
 })
 export class ListTemplate implements OnInit {
   @Input() books;
+  @Input() loading: boolean;
   @Output() addChapterEvent = new EventEmitter();
   @Output() removeBookEvent = new EventEmitter();
   @Output() editBookEvent = new EventEmitter();

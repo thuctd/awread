@@ -15,6 +15,7 @@ import {
 })
 export class ListOrgan implements OnInit {
   @Input() books;
+  @Input() loading: boolean;
   @Output() moreEvent = new EventEmitter();
   @Output() addChapterEvent = new EventEmitter();
   @Output() removeBookEvent = new EventEmitter();

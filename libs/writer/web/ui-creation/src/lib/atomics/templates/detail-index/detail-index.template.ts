@@ -27,7 +27,7 @@ export class DetailIndexTemplate implements OnInit {
     {
       submitText: 'Tiếp tục',
       isActive: true,
-      status: 'SKIP',
+      status: 'CONTINUE',
     },
   ];
 
@@ -36,10 +36,12 @@ export class DetailIndexTemplate implements OnInit {
   @Input() bookForm: FormGroup;
   @Input() selectedTab: string;
   @Output() selectedStatusEvent = new EventEmitter();
+  @Output() actionBookEvent = new EventEmitter();
   @Output() bookSubmitEvent = new EventEmitter();
   @Output() chapterActionEvent = new EventEmitter();
   @Output() createNewChapterEvent = new EventEmitter();
   @Output() switchTabEvent = new EventEmitter();
+  @Output() genresEvent = new EventEmitter();
   @Input() selectedBookStatus: string;
   constructor() {}
 

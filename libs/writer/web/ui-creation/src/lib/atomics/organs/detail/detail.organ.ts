@@ -20,6 +20,7 @@ export class DetailOrgan implements OnInit {
   @Input() categories: Category[];
   @Input() genres: Genre[];
   @Output() bookSubmitEvent = new EventEmitter();
+  @Output() genresEvent = new EventEmitter();
 
   constructor(private fb: FormBuilder) {}
 
