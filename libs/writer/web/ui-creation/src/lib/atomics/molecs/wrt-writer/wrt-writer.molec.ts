@@ -14,6 +14,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class WrtWriterMolec implements OnInit {
   @Input() chapterForm: FormGroup;
+  @Input() submitted: boolean;
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {}

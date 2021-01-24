@@ -38,6 +38,8 @@ export class DetailPage implements OnInit {
   categories$;
   genres$;
   bookFormValueBefore = ''; // dùng để check xem giá trị trước với giá trị bookform hiện tại có khớp nhau hay ko?
+  type: string;
+  submitted = false;
   constructor(
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
@@ -51,6 +53,10 @@ export class DetailPage implements OnInit {
     private cd: ChangeDetectorRef
   ) {}
 
+  get f() {
+    return this.bookForm.controls;
+  }
+
   ngOnInit(): void {
     // this.bookId = this.activatedRoute.snapshot.params['bookId'];
     this.checkActiveTab();
@@ -62,16 +68,15 @@ export class DetailPage implements OnInit {
   }
 
   switchTab(tabName: string) {
-    if (this.bookForm.invalid) {
-      alert('Vui lòng nhập đầy đủ thông tin!');
-      return;
-    }
     if (tabName === 'book') {
       this.selectedTab = 'book';
       return;
     }
-    // xem trang thai create hay edit dua vao bookId
-    if (this.bookId) {
+    this.submitted = true;
+    if (this.bookForm.invalid) {
+      return;
+    }
+    if (this.type === 'edit') {
       if (
         JSON.stringify(this.bookFormValueBefore) !==
         JSON.stringify(this.bookForm.value)
@@ -134,11 +139,14 @@ export class DetailPage implements OnInit {
   }
 
   // them hoac cap nhat sach
-  bookAction(titleToast = '') {
+  addBookToServer(titleToast = '') {
+    this.submitted = true;
+    if (this.bookForm.invalid) {
+      return;
+    }
     const book = this.bookSaveDatabase();
-    if (this.bookId) {
+    if (this.type === 'edit') {
       // const idsGenresAdd = this.genresListSelected; // dung de them genre khi user them genre ko co trong DB
-
       if (
         JSON.stringify(this.bookFormValueBefore) ===
         JSON.stringify(this.bookForm.value)
@@ -176,15 +184,17 @@ export class DetailPage implements OnInit {
 
   actionBookEvent(action: string) {
     if (action === 'CANCEL') {
-      this.openModalCancelCreateBook();
-    } else {
-      if (this.bookForm.invalid) {
-        alert('Vui lòng nhập đầy đủ thông tin!');
-        return;
+      // this.openModalCancelCreateBook();
+      if (this.type === 'edit') {
+        this.updateForm(); // update lai form neu ho lo tay xoa may truong roi bam HUY, khi quay lai tab nay se bi rong
+        this.selectedTab = 'toc';
+      } else {
+        this.router.navigate(['list']);
       }
+    } else {
       const titleToast =
         'Thêm thông tin truyện thành công. Tiếp tục tạo mục lục cho truyện!';
-      this.bookAction(titleToast);
+      this.addBookToServer(titleToast);
     }
   }
 
@@ -198,10 +208,6 @@ export class DetailPage implements OnInit {
     const dialogRef = this.modalFacade.openModal(dataModal);
     dialogRef.afterClosed().subscribe((isOk) => {
       console.log('isOk: ', isOk);
-      if (this.bookForm.invalid) {
-        alert('Vui lòng nhập đầy đủ thông tin!');
-        return;
-      }
       if (isOk) {
         this.router.navigate(['/list']);
       }
@@ -217,13 +223,9 @@ export class DetailPage implements OnInit {
     const dialogRef = this.modalFacade.openModal(dataModal);
     dialogRef.afterClosed().subscribe((isOk) => {
       console.log('isOk: ', isOk);
-      if (this.bookForm.invalid) {
-        alert('Vui lòng nhập đầy đủ thông tin!');
-        return;
-      }
       if (isOk) {
         this.selectedTab = 'toc';
-        this.bookAction();
+        this.addBookToServer();
       } else {
         this.selectedTab = 'book';
       }
@@ -238,6 +240,7 @@ export class DetailPage implements OnInit {
   private checkActiveTab() {
     return this.activatedRoute.paramMap.subscribe((params) => {
       this.bookId = params.get('bookId');
+      this.type = params.get('type');
       if (params.get('type') === 'create') {
         this.selectedTab = 'book';
       } else {
@@ -298,7 +301,7 @@ export class DetailPage implements OnInit {
   }
 
   private updateForm() {
-    if (this.bookId) {
+    if (this.type === 'edit') {
       this.booksFacade.selectEntityBook(this.bookId).subscribe((book) => {
         if (book) {
           this.selectedBookStatus = book.status;

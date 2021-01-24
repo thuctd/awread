@@ -3,7 +3,17 @@
     [inputControl]="bookForm.get('title')"
     [titleLabel]="formInformation.title.display"
     [placeholder]=" formInformation.title.display | titlecase"
-  ></detail-input-form>
+  >
+    <div
+      *ngIf="submitted && bookForm.controls.title.errors"
+      class="invalid-feedback"
+    >
+      <div *ngIf="bookForm.controls.title.errors.required">
+        Tiêu đề là bắt buộc
+      </div>
+    </div>
+  </detail-input-form>
+
   <detail-textarea-form
     [inputControl]="bookForm.get('description')"
     [titleLabel]="formInformation.description.display | titlecase"
@@ -38,6 +48,14 @@
         formControlName="categoryid"
       >
       </ng-select>
+      <div
+        *ngIf="submitted && bookForm.controls.categoryid.errors"
+        class="invalid-feedback"
+      >
+        <div *ngIf="bookForm.controls.categoryid.errors.required">
+          Danh mục là bắt buộc
+        </div>
+      </div>
     </div>
   </div>
 
@@ -66,6 +84,14 @@
         (remove)="removeItem($event)"
       >
       </ng-select>
+      <div
+        *ngIf="submitted && bookForm.controls.genreIds.errors"
+        class="invalid-feedback"
+      >
+        <div *ngIf="bookForm.controls.genreIds.errors.required">
+          Thể loại là bắt buộc
+        </div>
+      </div>
     </div>
   </div>
 

@@ -21,7 +21,7 @@ export class DetailOrgan implements OnInit {
   @Input() genres: Genre[];
   @Output() bookSubmitEvent = new EventEmitter();
   @Output() genresEvent = new EventEmitter();
-
+  @Input() submitted: boolean;
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {}

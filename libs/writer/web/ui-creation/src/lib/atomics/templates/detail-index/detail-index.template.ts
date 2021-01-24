@@ -16,6 +16,7 @@ import { Category, Genre } from '@awread/writer/web/feature-auth';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DetailIndexTemplate implements OnInit {
+  @Input() submitted: boolean;
   @Input() categories: Category[];
   @Input() genres: Genre[];
   @Input() btns = [
