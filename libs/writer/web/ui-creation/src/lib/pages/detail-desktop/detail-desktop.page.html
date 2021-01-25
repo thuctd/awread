@@ -1,27 +1,30 @@
-<section class="w-full max-w-screen-xl mx-auto">
-  <template-detail
-    [bookForm]="bookForm"
-    [submitted]="submitted"
-    [chapters]="chapterListByBookId$ | async"
-    [tabsHead]="tabsHead"
-    [selectedTab]="selectedTab"
-    [categories]="categories$ | async"
-    [genres]="genres$ | async"
-    [selectedBookStatus]="selectedBookStatus"
-    (selectedStatusEvent)="selectedStatusEvent($event)"
-    (actionBookEvent)="actionBookEvent($event)"
-    (chapterActionEvent)="chapterActionEvent($event)"
-    (createNewChapterEvent)="createNewChapterEvent()"
-    (switchTabEvent)="switchTab($event)"
-    (genresEvent)="genresEvent($event)"
-  ></template-detail>
-  <div class="text-right pr-2 md:pr-4" *ngIf="selectedTab === 'book'">
-    <button
-      (click)="addorUpdateBookToServer()"
-      class="text-sm md:text-xs lg:text-base xl:text-base bg-green-400 text-white cursor-pointer rounded-md border-green-400 focus:shadow-outline focus:outline-none py-2 px-4"
-    >
-      {{bookId ? 'Cập nhật' : 'Đăng truyện'}}
-    </button>
+<section class="bg-gray-100 h-screen overflow-auto">
+  <div class="w-full max-w-screen-xl mx-auto">
+    <template-detail
+      class="ml-20"
+      [bookForm]="bookForm"
+      [submitted]="submitted"
+      [chapters]="chapterListByBookId$ | async"
+      [tabsHead]="tabsHead"
+      [selectedTab]="selectedTab"
+      [categories]="categories$ | async"
+      [genres]="genres$ | async"
+      [selectedBookStatus]="selectedBookStatus"
+      (selectedStatusEvent)="selectedStatusEvent($event)"
+      (actionBookEvent)="actionBookEvent($event)"
+      (chapterActionEvent)="chapterActionEvent($event)"
+      (createNewChapterEvent)="createNewChapterEvent()"
+      (switchTabEvent)="switchTab($event)"
+      (genresEvent)="genresEvent($event)"
+    ></template-detail>
+    <div class="text-right pr-36 -mt-12" *ngIf="selectedTab === 'book'">
+      <button
+        (click)="addorUpdateBookToServer()"
+        class="text-sm md:text-xs lg:text-base xl:text-base bg-green-400 text-white cursor-pointer rounded-md border-green-400 focus:shadow-outline focus:outline-none py-2 px-4 absolute"
+      >
+        {{bookId ? 'Cập nhật' : 'Đăng truyện'}}
+      </button>
+    </div>
   </div>
 </section>
 <!-- (bookSubmitEvent)="bookSubmitEvent()" -->

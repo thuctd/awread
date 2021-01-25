@@ -1,5 +1,5 @@
 <div class="grid grid-cols-12 gap-10 pt-12">
-  <div class="col-span-2 md:col-span-3">
+  <div class="col-span-2 md:col-span-4 px-16 -mr-12">
     <!-- <detail-upload-form [form]="bookForm"></detail-upload-form> -->
     <div class="pt-10">
       <div class="" autocomplete="off">
@@ -18,7 +18,7 @@
 
     <detail-link-btns></detail-link-btns>
   </div>
-  <div class="col-span-2 md:col-span-9 bg-white p-4 rounded-sm">
+  <div class="col-span-2 md:col-span-8 bg-white p-4 rounded-sm shadow overflow-auto">
     <div class="relative w-full">
       <!-- <detail-tab-head #tabHead [tabs]="tabsHead" class="mb-4"></detail-tab-head> -->
       <div class="flex mb-4 shadow-b">
@@ -46,7 +46,7 @@
         (createNewChapterEvent)="createNewChapterEvent.emit()"
       ></index>
       <detail
-        class="pl-2"
+        class="pl-2 pb-12"
         *ngIf="selectedTab === 'book'"
         [bookForm]="bookForm"
         [submitted]="submitted"
@@ -56,16 +56,16 @@
         (genresEvent)="genresEvent.emit($event)"
       ></detail>
       <div
-        class="absolute right-2 -top-1 justify-end flex z-50"
+        class="absolute right-2 -top-1 justify-end flex z-40"
         *ngIf="selectedTab === 'book'"
       >
         <cr-submit-btn
-          *ngFor="let btn of btns"
-          [active]="btn.status === 'CONTINUE'"
-          (click)="actionBookEvent.emit(btn.status)"
-          [submitText]="btn.submitText"
-          class="mx-2"
-        ></cr-submit-btn>
+        *ngFor="let btn of btns"
+        [active]="btn.status === 'CONTINUE'"
+        (click)="actionBookEvent.emit(btn.status)"
+        [submitText]="btn.submitText"
+        class="mx-2"
+      ></cr-submit-btn>
 
         <!-- Logic xu ly trang thai truyen -->
         <!-- <cr-submit-btn

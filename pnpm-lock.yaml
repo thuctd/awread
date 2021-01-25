@@ -17,6 +17,7 @@ dependencies:
   '@fortawesome/angular-fontawesome': 0.8.1_fdd5b6ccbd0f77fbee969032fbd55394
   '@fortawesome/fontawesome-svg-core': 1.2.32
   '@fortawesome/free-solid-svg-icons': 5.15.1
+  '@graphql-tools/webpack-loader': 6.4.0_graphql@15.4.0
   '@nestjs/common': 7.6.4_0c773f197e7bb0df0bedc332ad8bc35d
   '@nestjs/core': 7.6.4_aec42018cda4bb4b2791b10894bf8e29
   '@nestjs/platform-express': 7.6.4_63d43fd8bd42fa3c0c78e900768c9b10
@@ -3384,6 +3385,34 @@ packages:
       node: '>=8.6'
     resolution:
       integrity: sha512-VAIFIwTVShUaeXKKEErO5+m12+s6GG/6ZwqyM8eilbz/XGypKBhBFbljoidABMwJdmvfGve+gYK8V0dvzS38tQ==
+  /@graphql-tools/optimize/1.0.1_graphql@15.4.0:
+    dependencies:
+      graphql: 15.4.0
+      tslib: 2.0.3
+    dev: false
+    peerDependencies:
+      graphql: ^14.0.0 || ^15.0.0
+    resolution:
+      integrity: sha512-cRlUNsbErYoBtzzS6zXahXeTBZGPVlPHXCpnEZ0XiK/KY/sQL96cyzak0fM/Gk6qEI9/l32MYEICjasiBQrl5w==
+  /@graphql-tools/webpack-loader-runtime/6.2.4_graphql@15.4.0:
+    dependencies:
+      graphql: 15.4.0
+    dev: false
+    peerDependencies:
+      graphql: ^14.0.0 || ^15.0.0
+    resolution:
+      integrity: sha512-ifIo8USW5lzHf2qejRC+Y6NE3ekswY+P0RyjkzWjX/03VrzEESYZ4edveOKSkJ7xzs8TpwDDHYFowfp7NpfEMQ==
+  /@graphql-tools/webpack-loader/6.4.0_graphql@15.4.0:
+    dependencies:
+      '@graphql-tools/optimize': 1.0.1_graphql@15.4.0
+      '@graphql-tools/webpack-loader-runtime': 6.2.4_graphql@15.4.0
+      graphql: 15.4.0
+      tslib: 2.1.0
+    dev: false
+    peerDependencies:
+      graphql: ^14.0.0 || ^15.0.0
+    resolution:
+      integrity: sha512-Mt850cIJweDHB6rodh+W2D8On2buP/7xqgqVyU9snfwFIibb8eowjX5hflKm7eM9FHVQQ636jHKfGk5V6ZZvTg==
   /@graphql-typed-document-node/core/3.1.0_graphql@15.4.0:
     dependencies:
       graphql: 15.4.0
@@ -20891,6 +20920,7 @@ specifiers:
   '@fortawesome/angular-fontawesome': ^0.8.1
   '@fortawesome/fontawesome-svg-core': ^1.2.32
   '@fortawesome/free-solid-svg-icons': ^5.15.1
+  '@graphql-tools/webpack-loader': ^6.4.0
   '@nestjs/common': ^7.6.4
   '@nestjs/core': ^7.6.4
   '@nestjs/platform-express': ^7.6.4
