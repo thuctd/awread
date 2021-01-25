@@ -20,6 +20,7 @@ export class WritingPage implements OnInit {
   bookId: string;
   chapterStatus = 'DRAFT';
   chapterNumber: any;
+  submitted = false;
   constructor(
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
@@ -54,6 +55,10 @@ export class WritingPage implements OnInit {
   }
 
   chapterAction() {
+    this.submitted = true;
+    if (this.chapterForm.invalid) {
+      return;
+    }
     if (this.chapterId) {
       this.editChapter();
     } else {
@@ -112,11 +117,11 @@ export class WritingPage implements OnInit {
       this.updateFormChapterDetail();
     } else {
       // adđ chapter
-      this.updateFormChapterCreate();
+      this.updateFormCreateChapter();
     }
   }
 
-  private updateFormChapterCreate() {
+  private updateFormCreateChapter() {
     this.booksFacade.selectEntityBook(this.bookId).subscribe((book) => {
       if (book) {
         this.chapterForm.patchValue({

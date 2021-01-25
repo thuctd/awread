@@ -14,6 +14,7 @@ import {
 })
 export class EditprofileFormMolec implements OnInit {
   @Input() profileForm: FormGroup;
+  @Input() submitted: boolean;
   items = [{ key: 'Tên' }, { key: 'Tên tài khoản' }, { key: 'Liên kết' }];
 
   constructor() {}

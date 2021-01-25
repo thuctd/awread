@@ -6,7 +6,11 @@
     <label class="text-gray-400 w-2/6">Tên</label>
     <input formControlName="fullname" class="border rounded-full border-gray-300 focus:outline-none px-2 py-1 w-4/6" />
   </div>
-
+  <div *ngIf="submitted && profileForm.controls.fullname.errors" class="invalid-feedback">
+    <div *ngIf="profileForm.controls.fullname.errors.required">
+      Tên là không được để trống
+    </div>
+  </div>
   <div class="mb-4 flex items-center justify-between">
     <label class="text-gray-400 w-2/6">Tên tài khoản</label>
     <input formControlName="username" class="border rounded-full border-gray-300 focus:outline-none px-2 py-1 w-4/6" />

@@ -14,6 +14,7 @@ import { FormGroup } from '@angular/forms';
 })
 export class InfoFormMolec implements OnInit {
   @Input() profileForm: FormGroup;
+  @Input() submitted: boolean;
   items = [
     {
       key: 'Email',

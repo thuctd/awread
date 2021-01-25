@@ -1,5 +1,5 @@
 <section class="flex flex-col" [formGroup]="profileForm">
-  <atom-title class="mb-4 " [class]="'font-medium text-xl text-gray-500'" [title]="'Thông tin cá nhân'"></atom-title>
+  <atom-title class="mb-4" [class]="'font-medium text-xl text-gray-500'" [title]="'Thông tin cá nhân'"></atom-title>
   <!-- <input-form-profile
     *ngFor="let item of items"
     [key]="item.key"
@@ -7,10 +7,21 @@
   ></input-form-profile> -->
 
   <div class="mb-4 flex items-center">
-    <label class="text-gray-400 w-1/3">Email</label>
+    <label class="text-gray-400  w-1/3">Email</label>
     <input formControlName="email" class="border rounded-full border-gray-300 py-1 w-2/3 focus:outline-none px-3 " />
   </div>
-
+  <!-- Loi required -->
+  <div *ngIf="submitted && profileForm.controls.email.errors" class="invalid-feedback">
+    <div *ngIf="profileForm.controls.email.errors.required">
+      Email không được để trống
+    </div>
+  </div>
+  <!-- Loi email -->
+  <div *ngIf="submitted && profileForm.controls.email.errors" class="invalid-feedback">
+    <div *ngIf="profileForm.controls.email.errors.email">
+      Email không hợp lệ
+    </div>
+  </div>
   <div class="mb-4 flex items-center">
     <label class="text-gray-400 w-1/3">Số điện thoại</label>
     <input formControlName="phone" class="border rounded-full border-gray-300 py-1 w-2/3 focus:outline-none px-3 " />

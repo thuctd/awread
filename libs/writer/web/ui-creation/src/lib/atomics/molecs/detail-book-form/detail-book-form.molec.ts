@@ -21,6 +21,7 @@ import { Category, Genre } from '@awread/writer/web/feature-auth';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DetailBookFormMolec implements OnInit {
+  @Input() submitted: boolean;
   @Input() genres: Genre;
   @Input() categories: Category[];
   @Input() bookForm: FormGroup;

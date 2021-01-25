@@ -18,6 +18,7 @@ export class FormProfieOrgan implements OnInit {
   @Input() link = '/forgot';
   @Input() submitText = 'Lưu';
   @Input() profileForm: FormGroup;
+  @Input() submitted: boolean;
   @Output() updateProfileEvent = new EventEmitter();
   constructor() {}
 
