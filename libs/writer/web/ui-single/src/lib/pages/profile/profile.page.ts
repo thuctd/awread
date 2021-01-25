@@ -1,5 +1,5 @@
 import { Directive, Injectable, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CurrentUserFacade } from '@awread/writer/web/feature-auth';
 
 @Injectable({
@@ -9,6 +9,8 @@ import { CurrentUserFacade } from '@awread/writer/web/feature-auth';
 export class ProfilePage implements OnInit {
   profileForm: FormGroup;
   currentUser$ = this.currentUserFacade.currentUser$;
+  profileFormValueBefore = '';
+  submitted = false;
   constructor(
     private currentUserFacade: CurrentUserFacade,
     private fb: FormBuilder
@@ -20,13 +22,22 @@ export class ProfilePage implements OnInit {
   }
 
   updateProfile() {
-    const user = {
-      ...this.profileForm.value,
-      userid: this.currentUserFacade.getUserId(),
-    };
-    this.currentUserFacade
-      .updateCurrentUser(user)
-      .subscribe((res) => console.log('update cureent user result: ', res));
+    this.submitted = true;
+    if (this.profileForm.invalid) {
+      return;
+    }
+    const shouldUpdateProfile =
+      JSON.stringify(this.profileFormValueBefore) !==
+      JSON.stringify(this.profileForm.value);
+    if (shouldUpdateProfile) {
+      const user = {
+        ...this.profileForm.value,
+        userid: this.currentUserFacade.getUserId(),
+      };
+      this.currentUserFacade
+        .updateCurrentUser(user)
+        .subscribe((res) => console.log('update cureent user result: ', res));
+    }
   }
 
   private updateProfileForm(user) {
@@ -40,6 +51,7 @@ export class ProfilePage implements OnInit {
       dob: user.dob ?? '',
       gender: user.gender ?? '',
     });
+    this.profileFormValueBefore = this.profileForm.value;
   }
   private getCurrentUser() {
     this.currentUserFacade.getCurrentUser().subscribe((user) => {
@@ -51,11 +63,11 @@ export class ProfilePage implements OnInit {
 
   private initForm() {
     this.profileForm = this.fb.group({
-      fullname: [''],
+      fullname: ['', Validators.required],
       username: [''],
       website: [''],
       introduce: [''],
-      email: [''],
+      email: ['', [Validators.required, Validators.email]],
       phone: [''],
       dob: [''],
       gender: [''],

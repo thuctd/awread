@@ -1,5 +1,9 @@
 :host {
   display: block;
+  .invalid-feedback {
+    color: red;
+    margin-top: 0.25rem;
+  }
 }
 
 :host ::ng-deep {
@@ -30,4 +34,3 @@
       0 0 0 rgba(22, 243, 206, 0.1);
   }
 }
-

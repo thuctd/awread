@@ -1,6 +1,24 @@
 <div [formGroup]="chapterForm" class="pt-12">
   <div class="bg-white rounded-lg pt-2 pb-6">
-    <wrt-title [inputControl]="chapterForm.get('title')"></wrt-title>
-    <wrt-editer [inputControl]="chapterForm.get('content')"></wrt-editer>
+    <wrt-title [inputControl]="chapterForm.get('title')">
+      <div
+        *ngIf="submitted && chapterForm.controls.title.errors"
+        class="invalid-feedback"
+      >
+        <div *ngIf="chapterForm.controls.title.errors.required">
+          Tiêu đề không được để trống
+        </div>
+      </div>
+    </wrt-title>
+    <wrt-editer [inputControl]="chapterForm.get('content')"> </wrt-editer>
+
+    <div
+      *ngIf="submitted && chapterForm.controls.content.errors"
+      class="invalid-feedback"
+    >
+      <div *ngIf="chapterForm.controls.content.errors.required">
+        Nội dung không được để trống
+      </div>
+    </div>
   </div>
 </div>
