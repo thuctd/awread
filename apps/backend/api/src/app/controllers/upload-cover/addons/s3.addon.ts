@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { S3, S3Client, ListBucketsCommand, PutObjectCommand } from '@aws-sdk/client-s3';
 import { Logger } from '@nestjs/common';
 @Injectable()
-export class UploadCoverService {
+export class S3Addon {
   newClient: S3Client;
   constructor() {
     this.setting();
@@ -23,8 +23,6 @@ export class UploadCoverService {
     } catch (error) {
       console.error(error);
     }
-
-
   }
 
   setting() {
@@ -39,14 +37,36 @@ export class UploadCoverService {
     });
   }
 
-
-  async upload(file) {
+  async uploadFile(file) {
     const { originalname } = file;
     const bucketS3 = 'awread-bucket';
     await this.uploadS3(file.buffer, bucketS3, originalname);
   }
 
-  async uploadS3(fileBuffer: Buffer, bucket, name) {
+  async uploadMulti(buffers: { [kind: string]: Buffer }, bucket: string, name: string, extName: string) {
+    return Promise.all(Object
+      .entries(buffers)
+      .map(async ([kind, buffer]) => {
+        let fullname: string;
+        switch (kind) {
+          case 'webp':
+            fullname = `${kind}/${name}.${kind}`
+            break;
+          default:
+            fullname = `${kind}/${name}.${extName}`
+            break;
+        }
+        try {
+          return this.uploadS3(buffer, bucket, fullname)
+        } catch (error) {
+          return error
+        }
+      })
+      .filter(error => error)
+    )
+  }
+
+  async uploadS3(fileBuffer: Buffer, bucket: string, name: string) {
     const uploadParams = {
       Bucket: bucket,
       Key: String(name),
