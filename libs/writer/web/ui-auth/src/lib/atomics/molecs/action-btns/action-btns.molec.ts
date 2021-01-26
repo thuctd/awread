@@ -15,6 +15,7 @@ import {
 })
 export class ActionBtnsMolec implements OnInit {
   @Input() formActiveStatus = false;
+  @Input() title = 'Đăng nhập với';
   @Output() auth = new EventEmitter();
   constructor() {}
 
