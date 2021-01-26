@@ -1,5 +1,5 @@
 <div class="grid grid-cols-12 gap-10 pt-12">
-  <div class="col-span-2 md:col-span-3">
+  <div class="col-span-2 md:col-span-3 ml-2">
     <!-- <detail-upload-form [form]="bookForm"></detail-upload-form> -->
     <div class="pt-10">
       <div class="" autocomplete="off">
@@ -29,7 +29,7 @@
       </div>
       <index class="pl-2" *ngIf="selectedTab === 'toc'" [chapters]="chapters" (chapterActionEvent)="chapterActionEvent.emit($event)" (createNewChapterEvent)="createNewChapterEvent.emit()"></index>
       <detail class="pl-2" *ngIf="selectedTab === 'book'" [bookForm]="bookForm" [submitted]="submitted" [categories]="categories" [genres]="genres" (bookSubmitEvent)="bookSubmitEvent.emit()" (genresEvent)="genresEvent.emit($event)"></detail>
-      <div class="absolute right-2 top-3 justify-end flex z-50" *ngIf="selectedTab === 'book'">
+      <div class="absolute right-2 top-3 justify-end flex z-40" *ngIf="selectedTab === 'book'">
         <cr-submit-btn *ngFor="let btn of btns" [active]="btn.status === 'CONTINUE'" (click)="actionBookEvent.emit(btn.status)" [submitText]="btn.submitText" class="mx-2"></cr-submit-btn>
 
         <!-- Logic xu ly trang thai truyen -->
