@@ -37,6 +37,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { InfoBookMolec } from './molecs/info-book/info-book.molec';
 import { DetailBookOrgan } from './organs/detail-book/detail-book.organ';
 import { DetailBookTemplate } from './templates/detail-book/detail-book.template';
+import { ReadTemplate } from './templates/read/read.template';
 
 @NgModule({
   imports: [
@@ -80,6 +81,7 @@ import { DetailBookTemplate } from './templates/detail-book/detail-book.template
     InfoBookMolec,
     DetailBookOrgan,
     DetailBookTemplate,
+    ReadTemplate,
   ],
   declarations: [
     WrtHeadMolec,
@@ -106,6 +108,7 @@ import { DetailBookTemplate } from './templates/detail-book/detail-book.template
     InfoBookMolec,
     DetailBookOrgan,
     DetailBookTemplate,
+    ReadTemplate,
   ],
 })
 export class WriterWebUiCreationAtomicModule {}

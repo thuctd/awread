@@ -8,6 +8,7 @@ import {
   Output,
   ChangeDetectorRef,
 } from '@angular/core';
+import { ModalFacade } from '@awread/writer/web/feature-auth';
 
 @Component({
   selector: 'wrt-head',
@@ -51,7 +52,8 @@ export class WrtHeadMolec implements OnInit {
   ];
   selectedChapterStatus = 'DRAFT';
   @Output() saveChapterEvent = new EventEmitter();
-  constructor(private cd: ChangeDetectorRef) {}
+  constructor(private cd: ChangeDetectorRef,
+              private modalFacade: ModalFacade) {}
 
   ngOnInit(): void {
     this.chapterForm.valueChanges.subscribe(() => {
@@ -60,8 +62,13 @@ export class WrtHeadMolec implements OnInit {
   }
   changeChapterStatus(status: string) {
     if (status === 'PREVIEW') {
+      this.openPreview();
       return;
     }
     this.changeChapterStatusEvent.emit(status);
+  }
+
+  openPreview(): void {
+    this.modalFacade.openPreview();
   }
 }

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ModalComponent } from '@awread/global/packages';
+import { ReadTemplate } from '@awread/writer/web/ui-creation';
 
 @Injectable({ providedIn: 'root' })
 export class ModalFacade {
@@ -22,5 +23,11 @@ export class ModalFacade {
       actionConfirmText: data?.actionConfirmText ?? 'Đồng ý',
     };
     return this.matDialog.open(ModalComponent, dialogConfig);
+  }
+
+  openPreview(): void {
+    this.matDialog.open(ReadTemplate, {
+      width: '75rem'
+    });
   }
 }
