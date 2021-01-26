@@ -25,7 +25,9 @@ export function createPageLazy(schema, pageName, type = 'page') {
       type,
       module: `pages/${pageName}/${pageName}.module`,
       project: schema.project,
-      export: true
+      export: true,
+      inlineStyle: true,
+      skipTests: true,
     }),
     ...addRoutesOfLazy(schema, pageName, type, page),
     createEmptySection(page.folderPath),

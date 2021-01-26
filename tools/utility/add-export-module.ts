@@ -23,7 +23,7 @@ export function addExportDeclarationToModule(schema, whatYouWantToImport: string
     const writeToModulePath = normalize(`${writeToFilePath}.ts`);
     const text = tree.read(writeToModulePath);
     if (text === null) {
-      throw new SchematicsException(`File ${writeToModulePath} does not exist.`);
+      throw new SchematicsException(`add-export: File ${writeToModulePath} does not exist.`);
     }
     const sourceText = text.toString('utf-8');
     const source = ts.createSourceFile(writeToModulePath, sourceText, ts.ScriptTarget.Latest, true);

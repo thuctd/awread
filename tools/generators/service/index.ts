@@ -3,23 +3,15 @@ import {
   SchematicContext, Rule, SchematicsException, Tree, apply, applyTemplates, chain, filter, mergeWith, move, noop, schematic, externalSchematic, MergeStrategy, url,
 } from '@angular-devkit/schematics';
 import * as ts from 'typescript';
-import { addImportToModule, getRouterModuleDeclaration, findNodes } from '@schematics/angular/utility/ast-utils';
-import { Change } from '@schematics/angular/utility/change';
-import { MODULE_EXT, ROUTING_MODULE_EXT, buildRelativePath, findModuleFromOptions } from '@schematics/angular/utility/find-module';
-import { applyLintFix } from '@schematics/angular/utility/lint-fix';
-import { parseName } from '@schematics/angular/utility/parse-name';
 import { createDefaultPath } from '@schematics/angular/utility/workspace';
-import { InsertChange } from '@nrwl/workspace';
-import { addImportDeclarationToModule } from '../../utility/add-import-module';
-import { camelize, classify } from '@nrwl/workspace/src/utils/strings';
 import { addGlobal, getSourceNodes, insert, insertImport, RemoveChange, ReplaceChange } from '@nrwl/workspace/src/utils/ast-utils';
-import { write } from 'fs';
 import * as path from 'path';
 
 export default function (schema: any): Rule {
   return async (host: Tree) => {
     schema.name = schema.name.split('/').pop();
     schema.path = await createDefaultPath(host, schema.project as string);
+    console.log('service.index: schema', schema);
     return chain([
       ...addPageFileAsService(schema),
       addPageIndexIfPossible(schema),
@@ -34,7 +26,7 @@ function addPageIndexIfPossible(schema) {
     return noop();
   }
   return (tree: Tree, context: SchematicContext) => {
-    const filePath = path.join(schema.path, schema.name, schema.indexPath, 'index.ts');
+    const filePath = path.join(schema.path, schema.type + 's', schema.indexPath, 'index.ts');
     const existIndex = tree.exists(filePath);
     const exportString = `export * from './${schema.name}.${schema.type}';`;
     if (existIndex) {
@@ -67,7 +59,7 @@ function addLibIndexIfPossible(schema) {
   return (tree: Tree, context: SchematicContext) => {
     const filePath = path.join(schema.path, '../index.ts');
     const existIndex = tree.exists(filePath);
-    const exportString = `export * from './lib/${schema.name}';`;
+    const exportString = `export * from './lib/${schema.type}s';`;
     if (existIndex) {
       const buffer = tree.read(filePath);
       const indexSource = buffer!.toString('utf-8');
@@ -77,14 +69,15 @@ function addLibIndexIfPossible(schema) {
         ts.ScriptTarget.Latest,
         true
       );
-
-      insert(tree, filePath, [
-        ...addGlobal(
-          indexSourceFile,
-          filePath,
-          exportString
-        )
-      ]);
+      if (!indexSource.includes(exportString)) {
+        insert(tree, filePath, [
+          ...addGlobal(
+            indexSourceFile,
+            filePath,
+            exportString
+          )
+        ]);
+      }
     } else {
       tree.create(filePath, exportString);
     }
@@ -95,7 +88,7 @@ function addLibIndexIfPossible(schema) {
 }
 
 function addPageFileAsService(schema) {
-  const pathFile = path.join(schema.path, schema.name);
+  const pathFile = path.join(schema.path, schema.type + 's');
   const templateSource = apply(url('./files'), [
     filter(path => path.endsWith('type@dasherize__.ts.template')),
     applyTemplates({

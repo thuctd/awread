@@ -1,36 +1,61 @@
-import { Tree, noop, SchematicsException } from '@angular-devkit/schematics';
+import { Tree, noop, SchematicsException, schematic, chain } from '@angular-devkit/schematics';
 import { buildRelativePath } from '@schematics/angular/utility/find-module';
-import { Path, normalize, strings } from '@angular-devkit/core';
+import { strings } from '@angular-devkit/core';
 import * as ts from 'typescript';
-import { addGlobal, getNpmScope, insert, RemoveChange } from '@nrwl/workspace';
+import { getNpmScope, RemoveChange } from '@nrwl/workspace';
 import { getSourceNodes, InsertChange, insertImport, ReplaceChange } from '@nrwl/workspace/src/utils/ast-utils';
 import { classify } from '@nrwl/workspace/src/utils/strings';
 import { removeImport } from './ast-utils';
 import { Change } from '@nrwl/workspace/src/core/file-utils';
 import { buildAliasFromProjectRoot } from './build-alias-from-project-root';
 
-export function addPageService(tree: Tree, schema) {
-  const path = `${schema.path}/${schema.name}/${schema.name}.${schema.type}.ts`;
-  const pagePathNotExistYet = !tree.exists(path);
-  if (schema.type && schema.mode && pagePathNotExistYet) {
+export function addPageService(tree: Tree, schema, separatePageLogicToFeatureLib = false) {
+  if (separatePageLogicToFeatureLib) {
+    createPageForFeatureLib(tree, schema);
+  } else {
+    createPageLogicForCurrentLib(tree, schema);
+  }
+  return chain([
+    schema.type && schema.mode ? updateDesktopAndMobilePage(tree, schema) : noop(),
+    separatePageLogicToFeatureLib ? schematic('service', {
+      name: `${schema.type}s/${schema.route}`,
+      type: schema.type,
+      project: schema.project.replace('ui', 'feature'),
+      fuck: `you: ${schema.type}s/${schema.route}`
+    }) : noop()
+  ])
+}
 
-    tree.create(path, `import { Injectable, OnInit } from '@angular/core';
+function createPageForFeatureLib(tree, schema) {
+  const workspaceName = getNpmScope(tree);
+  schema.importPageAbsolute = schema.projectRoot && schema.projectRoot.replace('libs', `@${workspaceName}`).replace('/src', '').replace('ui', 'feature');
+  console.log('addPageService: schema', schema, `${schema.type}s/${schema.route}`);
+}
 
-@Injectable({
-  providedIn: 'root',
-})
-export class ${classify(schema.name) + classify(schema.type)} implements OnInit {
+function createPageLogicForCurrentLib(tree, schema) {
+  try {
+    const path = `${schema.path}/${schema.route}/${schema.route}.${schema.type}.ts`;
+    console.log("addPageService path", path)
+    const pagePathNotExistYet = !tree.exists(path);
+    if (schema.type && schema.mode && pagePathNotExistYet) {
 
-  constructor() { }
+      tree.create(path, `import { Injectable, OnInit } from '@angular/core';
 
-  ngOnInit(): void { }
+  @Injectable({
+    providedIn: 'root',
+  })
+  export class ${classify(schema.name) + classify(schema.type)} implements OnInit {
 
-}`)
+    constructor() { }
+
+    ngOnInit(): void { }
+
+  }`)
+    }
+  } catch (error) {
+    console.error('addPageService error', error);
   }
 
-  return schema.type && schema.mode ? [
-    updateDesktopAndMobilePage(tree, schema),
-  ] : [noop()]
 }
 
 function buildPathRelative(schema) {
@@ -49,48 +74,51 @@ function buildPathRelative(schema) {
 
 function updateDesktopAndMobilePage(tree, schema) {
   return (host: Tree) => {
-    if (!schema.mode) {
-      return host;
-    }
-
-    const writeToFilePath = `${schema.path}/${schema.name}-${schema.mode}/${schema.name}-${schema.mode}.${schema.type}.ts`;
-    const relativePath = schema.importPageAbsolute ? buildAliasFromProjectRoot(schema, tree) : buildPathRelative(schema);
-    const text = host.read(writeToFilePath);
-    if (text === null) {
-      // throw new SchematicsException(`File ${writeToFilePath} does not exist.`);
-      console.warn(`File ${writeToFilePath} does not exist.`);
-      return tree;
-    }
-    const sourceText = text.toString();
-    const source = ts.createSourceFile(writeToFilePath, sourceText, ts.ScriptTarget.Latest, true);
-    let nodes = getSourceNodes(source);
-
-    const insertImportSymbol = insertImport(source,
-      writeToFilePath,
-      strings.classify(`${schema.name}-${schema.type}`),
-      relativePath);
-
-    const renewClass = replaceConstructorForInjection(nodes, classify(`${schema.name}-${schema.mode}-${schema.type}`), writeToFilePath, classify(`${schema.name}-${schema.type}`));
-    const removeImportOnInit = removeImport(source, writeToFilePath, classify('OnInit'));
-    const changes = [insertImportSymbol, renewClass, removeImportOnInit];
-
-    const recorder = host.beginUpdate(writeToFilePath);
-    for (const change of changes) {
-      if (change instanceof InsertChange) {
-        recorder.insertLeft(change.pos, change.toAdd);
-      } else if (change instanceof RemoveChange) {
-        recorder.remove(change.pos, change.toRemove.length);
-      } else if (change instanceof ReplaceChange) {
-        recorder.remove(change.pos, change.oldText.length);
-        recorder.insertLeft(change.pos, change.newText);
+    try {
+      if (!schema.mode) {
+        return host;
       }
+
+      const writeToFilePath = `${schema.path}/${schema.name}/${schema.name}.${schema.type}.ts`;
+      const relativePath = schema.importPageAbsolute ?? buildPathRelative(schema);
+      const text = host.read(writeToFilePath);
+      if (text === null) {
+        console.warn(`page-service: File ${writeToFilePath} does not exist.`);
+        return tree;
+      }
+      const sourceText = text.toString();
+      const source = ts.createSourceFile(writeToFilePath, sourceText, ts.ScriptTarget.Latest, true);
+      let nodes = getSourceNodes(source);
+
+      const insertImportSymbol = insertImport(source,
+        writeToFilePath,
+        strings.classify(`${schema.route}-${schema.type}`),
+        relativePath);
+
+      const renewClass = replaceConstructorForInjection(nodes, classify(`${schema.name}-${schema.type}`), writeToFilePath, classify(`${schema.route}-${schema.type}`));
+      const removeImportOnInit = removeImport(source, writeToFilePath, classify('OnInit'));
+      const changes = [insertImportSymbol, renewClass, removeImportOnInit];
+
+      const recorder = host.beginUpdate(writeToFilePath);
+      for (const change of changes) {
+        if (change instanceof InsertChange) {
+          recorder.insertLeft(change.pos, change.toAdd);
+        } else if (change instanceof RemoveChange) {
+          recorder.remove(change.pos, change.toRemove.length);
+        } else if (change instanceof ReplaceChange) {
+          recorder.remove(change.pos, change.oldText.length);
+          recorder.insertLeft(change.pos, change.newText);
+        }
+      }
+      host.commitUpdate(recorder);
+
+      // PART III: console.log to see the changes
+      const afterInsertContent = host.get(writeToFilePath)?.content.toString();
+
+      return host;
+    } catch (error) {
+      console.error('updateDesktopAndMobilePage error', error);
     }
-    host.commitUpdate(recorder);
-
-    // PART III: console.log to see the changes
-    const afterInsertContent = host.get(writeToFilePath)?.content.toString();
-
-    return host;
   };
 }
 

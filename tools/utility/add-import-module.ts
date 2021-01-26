@@ -22,7 +22,7 @@ export function addImportPathToModule(schema, whatYouWantToImport: string, write
     const writeToModulePath = normalize(`${writeToFilePath}.ts`);
     const text = host.read(writeToModulePath);
     if (text === null) {
-      throw new SchematicsException(`File ${writeToModulePath} does not exist.`);
+      throw new SchematicsException(`add-import: File ${writeToModulePath} does not exist.`);
     }
     const sourceText = text.toString('utf-8');
     const source = ts.createSourceFile(writeToModulePath, sourceText, ts.ScriptTarget.Latest, true);
@@ -68,7 +68,7 @@ export function addImportDeclarationToModule(schema, whatYouWantToImport: string
     const text = tree.read(writeToModulePath);
     if (text === null) {
       console.log('schema', schema);
-      throw new SchematicsException(`trying to import ${whatYouWantToImport} but File ${writeToModulePath} does not exist.`);
+      throw new SchematicsException(`add-import: trying to import ${whatYouWantToImport} but File ${writeToModulePath} does not exist.`);
     }
     const sourceText = text.toString('utf-8');
     const source = ts.createSourceFile(writeToModulePath, sourceText, ts.ScriptTarget.Latest, true);
