@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ModalComponent } from '@awread/global/packages';
-import { ReadTemplate } from '@awread/writer/web/ui-creation';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import { ReadTemplate, DetailBookTemplate } from '@awread/writer/web/ui-creation';
 
 @Injectable({ providedIn: 'root' })
 export class ModalFacade {
@@ -27,7 +28,15 @@ export class ModalFacade {
 
   openPreview(): void {
     this.matDialog.open(ReadTemplate, {
-      width: '75rem'
+      width: '72rem',
+      minHeight: '42.5rem'
+    });
+  }
+
+  openDetailBook(): void {
+    this.matDialog.open(DetailBookTemplate, {
+      width: '55rem',
+      height: '33rem'
     });
   }
 }

@@ -1,8 +1,14 @@
 :host {
   display: block;
 }
+
 ::ng-deep {
   .mat-dialog-content{
-    padding: 1rem 2rem;
+    padding: 0;
+  }
+  
+  .mat-dialog-container {
+    padding: 0;
+    overflow-x: hidden;
   }
 }

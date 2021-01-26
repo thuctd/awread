@@ -1,12 +1,16 @@
 <atom-example-dialog>
-    <div class="text-center border-b border-gray-200">
-        <atom-title-book [size]="'l'" class="mb-4"></atom-title-book>
-    </div>
-    <div class="pt-6">
-        <div class="leading-normal sm:text-base font-normal text-gray-600">
-            <p class="leading-8 text-left">
-                {{contentRead}}
-            </p>
+    <div class="px-12">
+        <div class="sticky top-0 z-40 lg:z-50 w-full max-w-8xl mx-auto bg-white text-center border-b border-gray-200">
+            <div class="pt-4">
+                <atom-title-book [size]="'l'" class="mb-4"></atom-title-book>
+            </div>
+        </div>
+        <div class="pt-6 py-4">
+            <div class="leading-normal sm:text-base font-normal text-gray-600">
+                <p class="leading-8 whitespace-pre-wrap text-left text-sm lg:text-xs xl:text-base">
+                    {{contentRead}}
+                </p>
+            </div>
         </div>
     </div>
 </atom-example-dialog>
