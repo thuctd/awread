@@ -13,16 +13,22 @@ export class UploadCoverGear {
   async upload(file) {
     const { originalname } = file;
     const name = originalname.split('.')[originalname.split('.').length - 2];
-    const extName = originalname.split('.')[originalname.split('.').length - 1]
+    const extension = originalname.split('.')[originalname.split('.').length - 1]
     const bucketS3 = 'awread-bucket';
-    const compressedBuffer = await this.sharpAddon.convertToWebp(file.buffer);
-    const errors = await this.s3Addon.uploadMulti({
-      origin: file.buffer,
-      webp: compressedBuffer
-    }, bucketS3, name, extName);
+    // const compressedBuffer = await this.sharpAddon.convertToWebp(file.buffer);
+    const multiVersionBuffersWebp = await this.sharpAddon.convertToMultiImageVersions(file.buffer);
+    // console.log('upload-cover: multiVersionBuffers', multiVersionBuffersWebp);
+    const errors = await this.s3Addon.uploadMulti([
+      ...multiVersionBuffersWebp,
+      {
+        extension,
+        sizeName: 'origin',
+        buffer: file.buffer,
+      }
+    ], bucketS3, name, 'books/covers');
     // console.log('result multi upload', result);
-    if (errors.length) {
-      console.warn('upload image error');
+    if (errors.filter(error => error).length) {
+      console.warn('upload image error', errors);
       return { status: 1, message: 'failed', error: errors }
     } else {
       return { status: 0, message: 'success"' }

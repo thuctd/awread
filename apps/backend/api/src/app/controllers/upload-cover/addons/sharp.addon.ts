@@ -1,16 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import sharp from 'sharp';
 import { Logger } from '@nestjs/common';
+import { CoverSizes } from './models/cover-sizes';
 
 @Injectable()
 export class SharpAddon {
-  sizes = {
-    s: '112x144',
-    m: '192x256',
-    l: '216x288',
-    xl: '256x356',
-    detail: '372x496'
-  }
+
   constructor(
   ) {
   }
@@ -24,10 +19,33 @@ export class SharpAddon {
       .toBuffer()
   }
 
-  async convertToMultiImageVersions(imageSource: Buffer) {
+  async convertToMultiImageVersions(imageSource: Buffer, extension = 'webp') {
     const imageVersions = {};
-    for (const [sizeName, sizeNumber] of Object.entries(this.sizes)) {
+    for (const [sizeName, sizeNumber] of Object.entries(CoverSizes)) {
       imageVersions[sizeName] = this.convertToWebp(imageSource, sizeNumber);
     }
+
+    // return imageVersions;
+    return Promise.all(
+      Object
+        .entries(CoverSizes)
+        .map(async ([sizeName, sizeNumber]) => {
+          try {
+            const result = {
+              extension,
+              sizeName,
+              buffer: await this.convertToWebp(imageSource, sizeNumber)
+            }
+            return result;
+          } catch (error) {
+            return {
+              extension,
+              sizeName,
+              buffer: null,
+              error
+            }
+          }
+        })
+    )
   }
 }
