@@ -31,8 +31,8 @@ function singleAction(schema, context, name) {
                 module: name,
                 project: 'global-packages',
                 export: true,
-                inlineStyle: schema.inline,
                 inlineTemplate: schema.inline,
+                inlineStyle: schema.inline,
                 skipTests: true,
                 viewEncapsulation: 'None'
             }),

@@ -22,9 +22,9 @@ export default function (schema: any): Rule {
                 export: schema.export,
                 path: generatePath,
                 module: atomicModule,
-                skipTests: true,
                 prefix: schema.type,
-                inlineStyle: true
+                inlineStyle: true,
+                skipTests: true,
             }));
         const componentStories = parts.map(name =>
             applyWithSkipExisting(url('./files'), [

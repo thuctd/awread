@@ -6,10 +6,9 @@ import * as ts from 'typescript';
 import { addImportToModule, getRouterModuleDeclaration, findNodes } from '@schematics/angular/utility/ast-utils';
 import { Change } from '@schematics/angular/utility/change';
 import { MODULE_EXT, ROUTING_MODULE_EXT, buildRelativePath, findModuleFromOptions } from '@schematics/angular/utility/find-module';
-import { applyLintFix } from '@schematics/angular/utility/lint-fix';
 import { parseName } from '@schematics/angular/utility/parse-name';
 import { createDefaultPath } from '@schematics/angular/utility/workspace';
-import { InsertChange } from '@nrwl/workspace';
+import { getNpmScope, InsertChange } from '@nrwl/workspace';
 import { addImportDeclarationToModule } from '../../utility/add-import-module';
 import { camelize, classify } from '@nrwl/workspace/src/utils/strings';
 import { ReplaceChange } from '@nrwl/workspace/src/utils/ast-utils';
@@ -36,12 +35,14 @@ export default function (schema: any): Rule {
     const parsedPath = parseName(schema.path, schema.name);
 
     const dualDeviceMode = schema.type && schema.mode;
+    // console.log('schema before?', schema);
     if (dualDeviceMode) {
       schema.name = `${parsedPath.name}-${schema.mode}`;
     } else {
       schema.name = parsedPath.name;
     }
     schema.path = parsedPath.path;
+
 
     const templateSource = apply(url('./files'), [
       schema.routing || (isLazyLoadedModuleGen && routingModulePath)
@@ -70,10 +71,12 @@ export default function (schema: any): Rule {
           ...componentSetting,
           ...schema,
           module: modulePath,
+          inlineStyle: true,
+          skipTests: true,
         })
         : noop(),
       ...routingOnlyActions(schema, relativePath),
-      ...(schema.mode ? [...addPageService(host, schema)] : [noop()]),
+      schema.mode ? addPageService(host, schema, true) : noop(),
     ]);
   };
 }
@@ -139,8 +142,8 @@ function buildRelativeModulePath(options: any, modulePath: string, deviceName?: 
   const device = options.mode && deviceName ? '-' + deviceName : '';
   const importModulePath = normalize(
     `/${options.path}/`
-    + (options.flat ? '' : strings.dasherize(options.name) + device + '/')
-    + strings.dasherize(options.name) + device
+    + (options.flat ? '' : strings.dasherize(options.route) + device + '/')
+    + strings.dasherize(options.route) + device
     + (options.routingOnly ? '-routing.module' : '.module'),
   );
 
@@ -157,7 +160,7 @@ function addDeclarationToNgModule(options: any): Rule {
     // console.log('is that module is exist', writeToModulePath, host.exists(writeToModulePath));
     const text = host.read(writeToModulePath);
     if (text === null) {
-      throw new SchematicsException(`File ${writeToModulePath} does not exist.`);
+      throw new SchematicsException(`module: File ${writeToModulePath} does not exist.`);
     }
     const sourceText = text.toString();
     const source = ts.createSourceFile(writeToModulePath, sourceText, ts.ScriptTarget.Latest, true);
@@ -304,12 +307,12 @@ function getRoutingModulePath(host: Tree, modulePath: string): Path | undefined 
 
 function buildRoute(options: any, modulePath: string) {
   // const relativeModulePath = buildRelativeModulePath(options, modulePath);
-  const moduleName = `${strings.classify(options.name)}Module`;
+  const moduleName = `${strings.classify(options.route)}Module`;
   const relativeModulePath = buildRelativeModulePath(options, modulePath);
   const relativeModulePathMobile = buildRelativeModulePath(options, modulePath, 'mobile');
   const relativeModulePathDesktop = buildRelativeModulePath(options, modulePath, 'desktop');
-  const moduleMobileName = `${strings.classify(options.name)}MobileModule`;
-  const moduleDesktopName = `${strings.classify(options.name)}DesktopModule`;
+  const moduleMobileName = `${strings.classify(options.route)}MobileModule`;
+  const moduleDesktopName = `${strings.classify(options.route)}DesktopModule`;
   const loadChildren = options.mode ? `
   () => window.innerWidth <= 768 && window?.haveMobile ?
   import('${relativeModulePathMobile}').then(m => m.${moduleMobileName}):

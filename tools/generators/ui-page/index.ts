@@ -1,6 +1,4 @@
 import { chain, externalSchematic, Rule, SchematicContext, Tree, schematic, noop, SchematicsException } from '@angular-devkit/schematics';
-import * as path from 'path';
-import { createDefaultPath } from '@schematics/angular/utility/workspace';
 import { addImportDeclarationToModule, addImportPathToModule } from '../../utility/add-import-module';
 import { classify } from '@nrwl/workspace/src/utils/strings';
 import { componentSetting } from '../../utility/edit-angular-json';
@@ -21,33 +19,35 @@ export default function (schema: any): Rule {
 function singleAction(schema, context, name) {
   return async (tree) => {
     schema.name = name;
-    const routingModulePath = path.join(schema.projectRoot, `${schema.project}-routing.module.ts`);
-
+    const routingModulePath = `${schema.projectRoot}/lib/${schema.project}-routing.module`;
+    // console.log('ui-page: schema module', schema);
     return chain([
-      ...addFeatureRoutingModule(schema, tree, routingModulePath),
+      addFeatureRoutingModuleAndImportLayoutPath(schema, tree, routingModulePath),
       schematic('module', {
         project: schema.project,
-        name: `${schema.kind}s/${schema.name}`,
+        name: `${schema.type}s/${schema.name}`,
         mode: 'desktop',
         module: schema.project,
         route: schema.name,
-        type: schema.kind,
+        type: schema.type,
         prefix: schema.kind,
+        projectRoot: schema.projectRoot
       }),
       schematic('module', {
         project: schema.project,
-        name: `${schema.kind}s/${schema.name}`,
+        name: `${schema.type}s/${schema.name}`,
         mode: 'mobile',
         module: schema.project,
         route: schema.name,
-        type: schema.kind,
+        type: schema.type,
         prefix: schema.kind,
+        projectRoot: schema.projectRoot
       }),
     ])
   }
 }
 
-function addFeatureRoutingModule(schema, tree, routingPath) {
+function addFeatureRoutingModuleAndImportLayoutPath(schema, tree, routingPath) {
   let rule0;
   let mixRules = [];
   if (!tree.exists(routingPath)) {
@@ -57,13 +57,13 @@ function addFeatureRoutingModule(schema, tree, routingPath) {
       routing: true,
       routingOnly: true,
       ui: schema.ui,
-      flat: true
+      flat: true,
+      projectRoot: schema.projectRoot
     });
 
-    const rootModule = `${schema.projectRoot}/${schema.project}.module`;
+    const rootModule = `${schema.projectRoot}/lib/${schema.project}.module`;
     const rule1 = addImportDeclarationToModule(schema, `${schema.project}-routing-module`, rootModule, `./${schema.project}-routing.module`);
-    const rule2 = addImportPathToModule(schema, classify('shell-desktop-layout'), routingPath, null, 'shared', true);
-    const rule3 = addImportPathToModule(schema, classify('shell-mobile-layout'), routingPath, null, 'shared');
+    const { rule2, rule3 } = importLayout(schema, routingPath);
     mixRules = [
       rule0,
       rule1,
@@ -75,10 +75,19 @@ function addFeatureRoutingModule(schema, tree, routingPath) {
         type: 'layout',
         module: schema.project,
         project: schema.project,
-        export: true
+        export: true,
+        inlineStyle: true,
+        skipTests: true,
       }),
       addImportPathToModule(schema, classify(`${schema.ui}-layout`), routingPath, `./layouts/${schema.ui}/${schema.ui}.layout`, null, true),
     ];
   }
-  return mixRules;
+  return chain(mixRules);
+}
+
+function importLayout(schema, routingPath) {
+  // NOTE: this is for shared layout import
+  const rule2 = addImportPathToModule(schema, classify('shared-desktop-layout'), routingPath, null, 'shared', true);
+  const rule3 = addImportPathToModule(schema, classify('shared-mobile-layout'), routingPath, null, 'shared');
+  return { rule2, rule3 }
 }
