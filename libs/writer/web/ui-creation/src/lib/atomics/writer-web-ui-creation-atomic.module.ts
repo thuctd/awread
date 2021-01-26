@@ -18,6 +18,7 @@ import { DetailIndexTemplate } from './templates/detail-index/detail-index.templ
 import {
   GenresFieldModule,
   InfiniteScrollModule,
+  LoaderModule,
 } from '@awread/global/packages';
 import { DetailLinkBtnsMolec } from './molecs/detail-link-btns/detail-link-btns.molec';
 import { ListActMolec } from './molecs/list-act/list-act.molec';
@@ -32,6 +33,10 @@ import { DetailReviewMolec } from './molecs/detail-review/detail-review.molec';
 import { WriterWebSharedAtomicModule } from '@awread/writer/web/shared';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { InfoBookMolec } from './molecs/info-book/info-book.molec';
+import { DetailBookOrgan } from './organs/detail-book/detail-book.organ';
+import { DetailBookTemplate } from './templates/detail-book/detail-book.template';
 
 @NgModule({
   imports: [
@@ -43,6 +48,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     WriterWebSharedAtomicModule,
     MatFormFieldModule,
     MatAutocompleteModule,
+    NgSelectModule,
+    LoaderModule,
   ],
   exports: [
     CommonModule,
@@ -68,6 +75,11 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     DetailActMolec,
     DetailPartMolec,
     DetailReviewMolec,
+    NgSelectModule,
+    LoaderModule,
+    InfoBookMolec,
+    DetailBookOrgan,
+    DetailBookTemplate,
   ],
   declarations: [
     WrtHeadMolec,
@@ -91,6 +103,9 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     DetailActMolec,
     DetailPartMolec,
     DetailReviewMolec,
+    InfoBookMolec,
+    DetailBookOrgan,
+    DetailBookTemplate,
   ],
 })
 export class WriterWebUiCreationAtomicModule {}

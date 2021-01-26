@@ -8,7 +8,6 @@ import { FirebaseFirestoreAddon } from '../addons';
 import { BooksApi } from '../apis';
 import { BooksStore } from '../states/books';
 import { SnackbarsService } from '@awread/global/packages';
-
 @Injectable({ providedIn: 'root' })
 export class BooksGear {
   constructor(
@@ -56,17 +55,24 @@ export class BooksGear {
     );
   }
 
-  addBook(book) {
+  addBook(book, titleToast = '') {
     const bookid = this.firebaseFirestoreAddon.createId();
+    const genres = book.genres.map((genre) => ({
+      name: genre.name,
+      genreid: genre.genreid ?? this.firebaseFirestoreAddon.createId(),
+    }));
     const bookNew = createBookObject({ ...book, bookid });
-    return this.booksApi.createBook(bookNew).pipe(
+    return this.booksApi.createBook(bookNew, genres).pipe(
       tap((res) => {
         console.log('add book res: ', res);
         if (res['data'] && res['data']['createBook']['book']) {
+          this.snackbarService.create(
+            titleToast ? titleToast : 'Thêm truyện thành công!',
+            5000
+          );
           this.booksStore.addBook(bookNew);
           this.router.navigate(['detail', { bookId: bookid, type: 'edit' }]);
         }
-        this.snackbarService.create('Thêm truyện thành công!', 5000);
       }),
       catchError((err) => {
         this.snackbarService.error('Đã xảy ra lỗi. Vui lòng thử lại!!', 5000);
@@ -75,8 +81,12 @@ export class BooksGear {
     );
   }
 
-  editBook(book) {
-    return this.booksApi.editBook(book).pipe(
+  editBook(book, idsGenresRemove: string[]) {
+    // const idsGenresAddNew = idsGenresAdd.map((item) => ({
+    //   genreid: this.firebaseFirestoreAddon.createId(),
+    //   name: item,
+    // }));
+    return this.booksApi.editBook(book, idsGenresRemove).pipe(
       tap((res) => {
         if (
           res &&

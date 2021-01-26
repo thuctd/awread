@@ -25,17 +25,17 @@ export class DetailSocialMenuAtom implements OnInit {
   @Output() chapterActionEvent = new EventEmitter();
   actions = [
     {
-      name: 'new chapter',
+      name: 'Tạo chương',
       type: 'new-chapter',
       icon: faPlusCircle,
     },
     {
-      name: 'edit',
+      name: 'Chỉnh sửa',
       type: 'edit',
       icon: faPlusSquare,
     },
     {
-      name: 'delete',
+      name: 'Xóa',
       type: 'delete',
       icon: faTrash,
     },

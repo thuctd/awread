@@ -6,6 +6,7 @@ import {
   Input,
   EventEmitter,
   Output,
+  ChangeDetectorRef,
 } from '@angular/core';
 
 @Component({
@@ -33,25 +34,30 @@ export class WrtHeadMolec implements OnInit {
 
   btns = [
     {
-      submitText: 'Publish',
+      submitText: 'Xuất bản',
       isActive: true,
       type: 'PUBLISHED',
     },
     {
-      submitText: 'Draft',
+      submitText: 'Phác thảo',
       isActive: false,
       type: 'DRAFT',
     },
     {
-      submitText: 'Preview',
+      submitText: 'Xem trước',
       isActive: false,
       type: 'PREVIEW',
     },
   ];
   selectedChapterStatus = 'DRAFT';
-  constructor() {}
+  @Output() saveChapterEvent = new EventEmitter();
+  constructor(private cd: ChangeDetectorRef) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.chapterForm.valueChanges.subscribe(() => {
+      this.cd.detectChanges();
+    });
+  }
   changeChapterStatus(status: string) {
     if (status === 'PREVIEW') {
       return;

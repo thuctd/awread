@@ -21,39 +21,37 @@ import { Category, Genre } from '@awread/writer/web/feature-auth';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DetailBookFormMolec implements OnInit {
+  @Input() submitted: boolean;
   @Input() genres: Genre;
   @Input() categories: Category[];
   @Input() bookForm: FormGroup;
   @Input() formInformation = {
     title: {
-      display: 'title',
-      placeholder: `Story's name`,
+      display: 'Tiêu đề',
+      placeholder: `Tiêu đề`,
     },
     description: {
-      display: 'description',
-      placeholder: `Story's detail`,
+      display: 'Mô tả',
+      placeholder: `Mô tả`,
     },
     genres: {
-      display: 'genres',
-      placeholder: 'genres',
+      display: 'Thể loại',
+      placeholder: 'Thể loại',
     },
     tags: {
-      display: 'tags',
-      placeholder: 'tags',
+      display: 'Gắn thẻ',
+      placeholder: 'Gắn thẻ',
     },
     category: {
-      display: 'category',
+      display: 'Danh mục',
       placeholder: 'category',
     },
     target: {
-      display: 'Target Audience',
-    },
-    language: {
-      display: 'Language',
+      display: 'Đối tượng độc giả',
     },
     completed: {
-      display: 'completed',
-      placeholder: 'completed',
+      display: 'Đã hoàn thành',
+      placeholder: 'Đã hoàn thành',
     },
     adult: {
       display: 'adult',
@@ -65,9 +63,32 @@ export class DetailBookFormMolec implements OnInit {
     },
   };
 
+  @Input() inputControl = new FormControl();
   @Output() btnSubmitEvent = new EventEmitter();
+  @Output() genresEvent = new EventEmitter();
 
+  @Output() saveChapterEvent = new EventEmitter();
+  audiences = [
+    { name: 'None', id: 'none' },
+    { name: '13+', id: '13' },
+    { name: '18+', id: '18' },
+  ];
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {}
+
+  addItem(e) {
+    // console.log('add: ', e);
+    // this.listGenres.push(e.genreid);
+    // this.genresEvent.emit(this.listGenres);
+  }
+
+  removeItem(e) {
+    // console.log('remove: ', e);
+    // const index = this.listGenres.indexOf(e.value.genreid);
+    // if (index > 0) {
+    //   this.listGenres.splice(index, 1);
+    //   this.genresEvent.emit(this.listGenres);
+    // }
+  }
 }

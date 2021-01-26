@@ -2,7 +2,8 @@
   <wrt-head
     [chapterStatus]="chapterStatus"
     (changeChapterStatusEvent)="changeChapterStatusEvent.emit($event)"
+    (saveChapterEvent)="saveChapterEvent.emit()"
     [chapterForm]="chapterForm"
   ></wrt-head>
-  <wrt-writer [chapterForm]="chapterForm"></wrt-writer>
+  <wrt-writer [chapterForm]="chapterForm" [submitted]="submitted"></wrt-writer>
 </div>

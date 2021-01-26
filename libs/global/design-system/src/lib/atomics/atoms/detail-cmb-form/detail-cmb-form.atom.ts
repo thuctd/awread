@@ -1,31 +1,33 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  Input,
+} from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'detail-cmb-form',
   templateUrl: './detail-cmb-form.atom.html',
   styleUrls: ['./detail-cmb-form.atom.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DetailCmbFormAtom implements OnInit {
   @Input() titleLabel = 'Awread';
-  @Input() inputControl = new FormControl('');
+  @Input() inputControl = new FormControl('none');
   @Input() orders = [];
 
   constructor() {
     this.orders = this.getOrders();
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   getOrders() {
     return [
-      { id: '1', name: 'order 1' },
-      { id: '2', name: 'order 2' },
-      { id: '3', name: 'order 3' },
-      { id: '4', name: 'order 4' }
+      { id: 'none', name: 'None' },
+      { id: '13', name: '13+' },
+      { id: '18', name: '18+' },
     ];
   }
-
 }

@@ -1,0 +1,29 @@
+<div id="modal-content-wrapper">
+  <header id="modal-header">
+    <h1 id="modal-title">{{ modalData.description }}</h1>
+  </header>
+  <section id="modal-body">
+    <p>{{ modalData.title }}</p>
+  </section>
+  <footer id="modal-footer">
+    <button
+      id="close"
+      mat-flat-button
+      (click)="closeModal()"
+      class="mr-3 bg-gray-400 text-sm md:text-xs lg:text-base xl:text-base w-full text-white cursor-pointer rounded-md border-green-400 focus:shadow-outline focus:outline-none py-2 px-4"
+      type="button"
+    >
+      {{ modalData.actionCancelText }}
+    </button>
+
+    <button
+      id="confirm"
+      mat-raised-button
+      (click)="actionFunction()"
+      class="bg-green-400 text-sm md:text-xs lg:text-base xl:text-base w-full text-white cursor-pointer rounded-md border-green-400 focus:shadow-outline focus:outline-none py-2 px-4"
+      type="button"
+    >
+      {{ modalData.actionConfirmText }}
+    </button>
+  </footer>
+</div>

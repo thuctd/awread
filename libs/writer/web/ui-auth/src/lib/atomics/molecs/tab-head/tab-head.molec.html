@@ -1,12 +1,6 @@
-<div class="flex items-center mb-6 mt-24 -ml-8">
+<div class="flex items-center mb-6 mt-24 -mr-8">
   <div class="w-full flex content-start flex-wrap">
-    <tab-btn
-      class="w-1/2"
-      *ngFor="let tab of tabs"
-      [tabName]="tab.name"
-      [active]="tab.path === selectedTab"
-      (tabClicked)="toggleTabs()"
-    >
+    <tab-btn class="w-1/2" *ngFor="let tab of tabs" [tabName]="tab.name" [active]="tab.path === selectedTab" (tabClicked)="toggleTabs()">
     </tab-btn>
   </div>
 </div>

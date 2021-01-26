@@ -17,7 +17,9 @@ import {
 export class WritingOrgan implements OnInit {
   @Input() chapterForm: FormGroup;
   @Input() chapterStatus: string;
+  @Input() submitted: boolean;
   @Output() changeChapterStatusEvent = new EventEmitter();
+  @Output() saveChapterEvent = new EventEmitter();
   constructor() {}
 
   ngOnInit(): void {}

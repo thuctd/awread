@@ -10,7 +10,7 @@ import { FormControl } from '@angular/forms';
 export class DetailToogleFormAtom implements OnInit {
   @Input() inputControl = new FormControl('');
   @Input() titleLabel = 'Awread';
-  @Input() detailToogle = 'Complete?';
+  @Input() detailToogle = 'Hoàn thành?';
 
   constructor() { }
 

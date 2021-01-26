@@ -1,47 +1,46 @@
-<section class="w-full max-w-screen-xl mx-auto">
-  <div class="relative w-full lg:4/5">
-    <!-- <detail-tab-head #tabHead [tabs]="tabsHead" class="mb-4"></detail-tab-head> -->
-    <div class="flex mb-6 mt-12 mb-4">
-      <div class="w-full flex">
-        <ng-container *ngFor="let tab of tabsHead">
-          <div class="w-full pr-8">
-            <div class="text-center border-b border-teal-400">
-              <a
-                (click)="switchTabEvent.emit(tab.tabName)"
-                [ngClass]="selectedTab === tab.tabName ? 'text-green-400 border-b-2 border-green-400' : 'text-gray-400'"
-                class="inline-block font-bold pb-2 cursor-pointer md:text-sm lg:text-base xl:text-base"
-              >
-                {{ tab.name | titlecase }}
-              </a>
-            </div>
-          </div>
-        </ng-container>
+<div class="grid grid-cols-12 gap-10 pt-12">
+  <div class="col-span-2 md:col-span-3 ml-2">
+    <!-- <detail-upload-form [form]="bookForm"></detail-upload-form> -->
+    <div class="pt-10">
+      <div class="" autocomplete="off">
+        <img [src]="bookForm.get('img').value" alt="" class="w-full rounded-lg shadow mb-4 ng-star-inserted" />
+        <cr-submit-btn [active]="true" [submitText]="'Chỉnh sửa ảnh bìa'"></cr-submit-btn>
+        <!-- <detail-upload-img></detail-upload-img> -->
       </div>
     </div>
-    <index
-      *ngIf="selectedTab === 'toc'"
-      [chapters]="chapters"
-      (chapterActionEvent)="chapterActionEvent.emit($event)"
-      (createNewChapterEvent)="createNewChapterEvent.emit()"
-    ></index>
-    <detail
-      *ngIf="selectedTab === 'book'"
-      [bookForm]="bookForm"
-      [categories]="categories"
-      [genres]="genres"
-      (bookSubmitEvent)="bookSubmitEvent.emit()"
-    ></detail>
-    <div
-      class="absolute right-2 -top-1 justify-end flex z-50"
-      *ngIf="selectedTab === 'book'"
-    >
-      <cr-submit-btn
-        *ngFor="let btn of btns"
-        [active]="selectedBookStatus === btn.status"
-        (click)="selectBookStatus(btn.status)"
-        [submitText]="btn.submitText"
-        class="ml-2"
-      ></cr-submit-btn>
+
+    <detail-link-btns></detail-link-btns>
+  </div>
+  <div class="col-span-2 md:col-span-9 p-4 rounded-sm">
+    <div class="bg-white relative w-full shadow-md">
+      <!-- <detail-tab-head #tabHead [tabs]="tabsHead" class="mb-4"></detail-tab-head> -->
+      <div class="flex mb-4 shadow-b">
+        <div class="w-full flex">
+          <ng-container *ngFor="let tab of tabsHead">
+            <div class="pr-8">
+              <div class="text-center">
+                <a (click)="switchTabEvent.emit(tab.tabName)" [ngClass]="selectedTab === tab.tabName ? 'text-green-400 border-b-4 border-green-400' : 'text-gray-400'" class="inline-block font-bold py-4 px-2 cursor-pointer md:text-sm lg:text-base xl:text-xl">
+                  {{ tab.name | titlecase }}
+                </a>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+      <index class="pl-2" *ngIf="selectedTab === 'toc'" [chapters]="chapters" (chapterActionEvent)="chapterActionEvent.emit($event)" (createNewChapterEvent)="createNewChapterEvent.emit()"></index>
+      <detail class="pl-2" *ngIf="selectedTab === 'book'" [bookForm]="bookForm" [submitted]="submitted" [categories]="categories" [genres]="genres" (bookSubmitEvent)="bookSubmitEvent.emit()" (genresEvent)="genresEvent.emit($event)"></detail>
+      <div class="absolute right-2 top-3 justify-end flex z-40" *ngIf="selectedTab === 'book'">
+        <cr-submit-btn *ngFor="let btn of btns" [active]="btn.status === 'CONTINUE'" (click)="actionBookEvent.emit(btn.status)" [submitText]="btn.submitText" class="mx-2"></cr-submit-btn>
+
+        <!-- Logic xu ly trang thai truyen -->
+        <!-- <cr-submit-btn
+          *ngFor="let btn of btns"
+          [active]="selectedBookStatus === btn.status"
+          (click)="selectBookStatus(btn.status)"
+          [submitText]="btn.submitText"
+          class="mx-2"
+        ></cr-submit-btn> -->
+      </div>
     </div>
   </div>
-</section>
+</div>

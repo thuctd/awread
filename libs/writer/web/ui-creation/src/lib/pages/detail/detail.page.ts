@@ -4,8 +4,8 @@ import {
   Category,
   CategoryFacade,
   ChaptersFacade,
-  Genre,
   GenresFacade,
+  ModalFacade,
 } from '@awread/writer/web/feature-auth';
 import { CurrentUserFacade } from '@awread/writer/web/feature-auth';
 import { BooksFacade } from '@awread/writer/web/feature-auth';
@@ -29,13 +29,17 @@ export class DetailPage implements OnInit {
   chapterEntity$: any;
   chapterListByBookId$ = this.chaptersFacade.chapterListByBookId$;
   tabsHead = [
-    { name: 'Tables of Contents', tabName: 'toc' },
-    { name: 'Story Details', tabName: 'book' },
+    { name: 'Thông tin của truyện', tabName: 'book' },
+    { name: 'Mục lục', tabName: 'toc' },
   ];
   selectedTab = 'toc';
   selectedBookStatus = 'DRAFT';
+  genresListSelected = [];
   categories$;
   genres$;
+  bookFormValueBefore = ''; // dùng để check xem giá trị trước với giá trị bookform hiện tại có khớp nhau hay ko?
+  type: string;
+  submitted = false;
   constructor(
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
@@ -45,8 +49,13 @@ export class DetailPage implements OnInit {
     private categoryFacade: CategoryFacade,
     private genresFacade: GenresFacade,
     private router: Router,
+    private modalFacade: ModalFacade,
     private cd: ChangeDetectorRef
   ) {}
+
+  get f() {
+    return this.bookForm.controls;
+  }
 
   ngOnInit(): void {
     // this.bookId = this.activatedRoute.snapshot.params['bookId'];
@@ -54,49 +63,40 @@ export class DetailPage implements OnInit {
     this.getAllChapters();
     this.initForm();
     this.updateForm();
-    this.categories$ = this.getCategories();
-    this.genres$ = this.getAllGenres();
+    this.categories$ = this.categoryFacade.selectAllCategoriesAkita();
+    this.genres$ = this.genresFacade.selectAllGenresAkita();
   }
 
   switchTab(tabName: string) {
-    if (this.bookForm.invalid) {
-      alert('Khong dc de trong bat ky truong nao!');
-      return;
-    }
+    // if (tabName === 'book') {
+    //   this.selectedTab = 'book';
+    //   return;
+    // }
+    // this.submitted = true;
+    // if (this.bookForm.invalid) {
+    //   return;
+    // }
     this.selectedTab = tabName;
+    if (tabName === 'toc') {
+      this.addorUpdateBookToServer();
+    }
   }
 
-  getAllGenres() {
-    return combineLatest([
-      this.genresFacade.selectAllGenresAkita(),
-      this.bookForm.get('genres').valueChanges.pipe(startWith('')),
-    ]).pipe(
-      map(([genres, genresValueForm]: [Genre[], string]) => {
-        if (genres && genres.length) {
-          return genres.filter((item) =>
-            item.name.toLowerCase().includes(genresValueForm.toLowerCase())
-          );
-        }
-        return [];
-      })
-    );
-  }
-
-  getCategories() {
-    return combineLatest([
-      this.categoryFacade.selectAllCategoriesAkita(),
-      this.bookForm.get('categoryname').valueChanges.pipe(startWith('')),
-    ]).pipe(
-      map(([categories, categoryValueForm]: [Category[], string]) => {
-        if (categories && categories.length) {
-          return categories.filter((item) =>
-            item.name.toLowerCase().includes(categoryValueForm.toLowerCase())
-          );
-        }
-        return [];
-      })
-    );
-  }
+  // getAllGenres() {
+  //   return combineLatest([
+  //     this.genresFacade.selectAllGenresAkita(),
+  //     this.bookForm.get('genres').valueChanges.pipe(startWith('')),
+  //   ]).pipe(
+  //     map(([genres, genresValueForm]: [Genre[], string]) => {
+  //       if (genres && genres.length) {
+  //         return genres.filter((item) =>
+  //           item.name.toLowerCase().includes(genresValueForm.toLowerCase())
+  //         );
+  //       }
+  //       return [];
+  //     })
+  //   );
+  // }
 
   createNewChapterEvent() {
     this.router.navigate([
@@ -126,18 +126,108 @@ export class DetailPage implements OnInit {
     }
   }
 
-  bookSubmitEvent() {
-    const userid = this.currentUserFacade.getUserId();
-    const book = { ...this.bookForm.value, bookid: this.bookId, userid };
-    if (this.bookId) {
-      this.booksFacade.editBook(book).subscribe(() => {
+  genresEvent(genres) {
+    this.genresListSelected = genres;
+  }
+
+  // them hoac cap nhat sach
+  addorUpdateBookToServer(titleToast = '') {
+    this.submitted = true;
+    if (this.bookForm.invalid) {
+      return;
+    }
+    const book = this.bookSaveDatabase();
+    if (this.type === 'edit') {
+      this.updateBook(book);
+    } else {
+      this.booksFacade.addBook(book, titleToast).subscribe();
+    }
+  }
+
+  private updateBook(book) {
+    // const idsGenresAdd = this.genresListSelected; // dung de them genre khi user them genre ko co trong DB
+    if (
+      JSON.stringify(this.bookFormValueBefore) !==
+      JSON.stringify(this.bookForm.value)
+    ) {
+      const idsGenresRemove = this.booksFacade.getGenreIdsByBookIdAkita(
+        this.bookId
+      );
+      this.booksFacade.editBook(book, idsGenresRemove).subscribe(() => {
         this.selectedTab = 'toc';
         this.cd.detectChanges();
       });
+      this.bookFormValueBefore = this.bookForm.value;
     } else {
-      this.booksFacade.addBook(book).subscribe();
+      this.selectedTab = 'toc';
     }
   }
+
+  private bookSaveDatabase() {
+    const userid = this.currentUserFacade.getUserId();
+    const genres = this.bookForm.value.genreIds.map((id) => ({
+      genreid: id,
+      name: this.genresFacade.getNameGenreBaseIdAkita(id),
+    }));
+    const book = {
+      ...this.bookForm.value,
+      bookid: this.bookId,
+      genres,
+      userid, // this.genresListChip ??
+    };
+    return book;
+  }
+
+  actionBookEvent(action: string) {
+    if (action === 'CANCEL') {
+      // this.openModalCancelCreateBook();
+      if (this.type === 'edit') {
+        this.updateForm(); // update lai form neu ho lo tay xoa may truong roi bam HUY, khi quay lai tab nay se bi rong
+        this.selectedTab = 'toc';
+      } else {
+        this.router.navigate(['list']);
+      }
+    } else {
+      const titleToast =
+        'Thêm thông tin truyện thành công. Tiếp tục tạo mục lục cho truyện!';
+      this.addorUpdateBookToServer(titleToast);
+    }
+  }
+
+  private openModalCancelCreateBook() {
+    const dataModal = {
+      name: 'cancel',
+      title: 'Bạn có chắc chắn muốn hủy bỏ ko?',
+      actionCancelText: 'Hủy bỏ',
+      actionConfirmText: 'Đồng ý',
+    };
+    const dialogRef = this.modalFacade.openModal(dataModal);
+    dialogRef.afterClosed().subscribe((isOk) => {
+      console.log('isOk: ', isOk);
+      if (isOk) {
+        this.router.navigate(['/list']);
+      }
+    });
+  }
+
+  private openModalConfirmSaveBook() {
+    const dataModal = {
+      title: 'Bạn có muốn lưu thông tin truyện ko?',
+      actionCancelText: 'Hủy bỏ',
+      actionConfirmText: 'Đồng ý',
+    };
+    const dialogRef = this.modalFacade.openModal(dataModal);
+    dialogRef.afterClosed().subscribe((isOk) => {
+      console.log('isOk: ', isOk);
+      if (isOk) {
+        this.selectedTab = 'toc';
+        this.addorUpdateBookToServer();
+      } else {
+        this.selectedTab = 'book';
+      }
+    });
+  }
+
   selectedStatusEvent(status: string) {
     this.selectedBookStatus = status;
     this.bookForm.patchValue({ status });
@@ -146,6 +236,7 @@ export class DetailPage implements OnInit {
   private checkActiveTab() {
     return this.activatedRoute.paramMap.subscribe((params) => {
       this.bookId = params.get('bookId');
+      this.type = params.get('type');
       if (params.get('type') === 'create') {
         this.selectedTab = 'book';
       } else {
@@ -206,18 +297,21 @@ export class DetailPage implements OnInit {
   }
 
   private updateForm() {
-    if (this.bookId) {
+    if (this.type === 'edit') {
       this.booksFacade.selectEntityBook(this.bookId).subscribe((book) => {
         if (book) {
           this.selectedBookStatus = book.status;
           this.bookForm.patchValue({
             title: book.title ?? '',
             description: book.description ?? '',
-            categoryname: book.categoryname ?? '',
+            categoryid: book.categoryid ?? '',
+            genreIds: book.genreIds ?? [],
             tags: book.tags ?? [],
             completed: book.completed ?? false,
             status: book.status ?? 'DRAFT',
+            audience: book.audience ?? 'none',
           });
+          this.bookFormValueBefore = this.bookForm.value;
         }
       });
     }
@@ -227,10 +321,10 @@ export class DetailPage implements OnInit {
     this.bookForm = this.fb.group({
       title: ['', Validators.required],
       description: [''],
-      categoryname: [''],
       tags: [''],
-      genres: [''],
-      audience: [''],
+      categoryid: [null, Validators.required],
+      genreIds: ['', Validators.required],
+      audience: ['none'],
       completed: [false],
       status: ['DRAFT'],
       img: ['https://picsum.photos/200/300'],

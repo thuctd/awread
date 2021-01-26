@@ -6,3 +6,5 @@ export * from './lib/genres/genres-field.module';
 export * from './lib/infinite-scroll/infinite-scroll.module';
 export * from './lib/snackbars/snackbars.module';
 export * from './lib/snackbars/snackbars.service';
+export * from './lib/progress-spinner/loader.module';
+export * from './lib/modal/modal.component';

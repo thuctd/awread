@@ -8,6 +8,7 @@ import {
   Injectable,
   OnInit,
 } from '@angular/core';
+import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -19,6 +20,7 @@ export class WritingPage implements OnInit {
   bookId: string;
   chapterStatus = 'DRAFT';
   chapterNumber: any;
+  submitted = false;
   constructor(
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
@@ -31,11 +33,32 @@ export class WritingPage implements OnInit {
     this.chapterId = this.activatedRoute.snapshot.params['chapterId'];
     this.bookId = this.activatedRoute.snapshot.params['bookId'];
     this.chapterNumber = this.activatedRoute.snapshot.params['chapterNumber'];
+    this.getChapterWhenReloadPageHere();
     this.initForm();
     this.updateForm();
   }
+  private getChapterWhenReloadPageHere() {
+    this.activatedRoute.paramMap
+      .pipe(
+        switchMap((params) => {
+          const chapters = this.chaptersFacade.getAllAkita();
+          if (this.bookId && chapters.length) {
+            return this.chaptersFacade.selectAllChapterAkita();
+          }
+          if (this.bookId) {
+            return this.chaptersFacade.getAllChapters(this.bookId);
+          }
+          return of([]);
+        })
+      )
+      .subscribe();
+  }
 
   chapterAction() {
+    this.submitted = true;
+    if (this.chapterForm.invalid) {
+      return;
+    }
     if (this.chapterId) {
       this.editChapter();
     } else {
@@ -68,6 +91,10 @@ export class WritingPage implements OnInit {
     }
   }
 
+  saveChapter() {
+    this.chapterAction();
+  }
+
   changeChapterStatusEvent(type: string) {
     this.chapterForm.patchValue({ status: type });
   }
@@ -80,6 +107,7 @@ export class WritingPage implements OnInit {
       bookTitle: [''],
       // bookId: [''],
       chapterNumber: [''],
+      bookImg: [''],
     });
   }
 
@@ -89,16 +117,17 @@ export class WritingPage implements OnInit {
       this.updateFormChapterDetail();
     } else {
       // adđ chapter
-      this.updateFormChapterCreate();
+      this.updateFormCreateChapter();
     }
   }
 
-  private updateFormChapterCreate() {
+  private updateFormCreateChapter() {
     this.booksFacade.selectEntityBook(this.bookId).subscribe((book) => {
       if (book) {
         this.chapterForm.patchValue({
           bookTitle: book.title ?? '',
           chapterNumber: this.chapterNumber ?? '',
+          bookImg: 'https://picsum.photos/200/300',
         });
       }
     });
@@ -127,7 +156,7 @@ export class WritingPage implements OnInit {
       bookTitle: chapter['bookByBookid']['title'] ?? '',
       // bookId: chapter['bookByBookid']['bookid'] ?? '',
       chapterNumber: this.chapterNumber ?? '',
+      bookImg: 'https://picsum.photos/200/300',
     });
-    this.cd.detectChanges();
   }
 }

@@ -1,5 +1,7 @@
 <template-list
+  class="bg-gray-100"
   [books]="bookList$ | async"
+  [loading]="isLoading$ | async"
   (updateBookStatusEvent)="updateBookStatus($event)"
   (addChapterEvent)="addChapter($event)"
   (editBookEvent)="editBook($event)"

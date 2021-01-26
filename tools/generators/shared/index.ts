@@ -79,9 +79,8 @@ function createSharedDeviceVersion(
         export: true,
       }),
       addRouterOutlet(true, schema, `shared-${deviceVersion}`),
-      ...addPageService(tree, {
+      addPageService(tree, {
         ...schema,
-        importPageAbsolute: false,
         path: `${schema.projectRoot}/lib/layouts`,
         mode: deviceVersion,
       }),

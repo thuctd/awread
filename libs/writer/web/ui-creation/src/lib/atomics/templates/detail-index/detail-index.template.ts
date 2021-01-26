@@ -16,18 +16,19 @@ import { Category, Genre } from '@awread/writer/web/feature-auth';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DetailIndexTemplate implements OnInit {
+  @Input() submitted: boolean;
   @Input() categories: Category[];
   @Input() genres: Genre[];
   @Input() btns = [
     {
-      submitText: 'Draft',
+      submitText: 'Hủy bỏ',
       isActive: false,
-      status: 'DRAFT',
+      status: 'CANCEL',
     },
     {
-      submitText: 'Publish',
+      submitText: 'Tiếp tục',
       isActive: true,
-      status: 'PUBLISHED',
+      status: 'CONTINUE',
     },
   ];
 
@@ -36,10 +37,12 @@ export class DetailIndexTemplate implements OnInit {
   @Input() bookForm: FormGroup;
   @Input() selectedTab: string;
   @Output() selectedStatusEvent = new EventEmitter();
+  @Output() actionBookEvent = new EventEmitter();
   @Output() bookSubmitEvent = new EventEmitter();
   @Output() chapterActionEvent = new EventEmitter();
   @Output() createNewChapterEvent = new EventEmitter();
   @Output() switchTabEvent = new EventEmitter();
+  @Output() genresEvent = new EventEmitter();
   @Input() selectedBookStatus: string;
   constructor() {}
 

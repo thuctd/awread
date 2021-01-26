@@ -1,3 +1,7 @@
 :host {
   display: block;
+  .invalid-feedback {
+    color: red;
+    margin-top: 0.25rem;
+  }
 }

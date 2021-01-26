@@ -8,6 +8,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 })
 export class RdDropdownMenuItemMolec implements OnInit {
   @Input() data = {title: 'Truyện sưu tầm', href: ''};
+  @Input() isLast = false;
   @Input() menu = [
         {
           href: '/',
