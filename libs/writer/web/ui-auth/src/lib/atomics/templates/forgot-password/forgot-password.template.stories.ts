@@ -12,5 +12,6 @@ export const primary = () => ({
   },
   component: ForgotPasswordTemplate,
   props: {
-    submitEvent: action('close action')  }
+    // forgotSubmitEvent: action('close action')  
+  }
 })

@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { UploadCoverGear } from '../gears';
+import { ImageType, UploadInfo } from '../models';
 
 @Injectable()
 export class UploadCoverFacade {
@@ -9,8 +10,8 @@ export class UploadCoverFacade {
   ) {
   }
 
-  upload(file) {
-    this.uploadCoverGear.upload(file);
+  upload(file, uploadInfo: UploadInfo) {
+    this.uploadCoverGear.upload(file, uploadInfo);
   }
 
 }

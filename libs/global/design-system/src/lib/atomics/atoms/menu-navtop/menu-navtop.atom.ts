@@ -1,5 +1,5 @@
 import { User } from '@awread/writer/web/feature-auth';
-import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { faSignOutAlt, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import {
   Component,
   OnInit,
@@ -16,7 +16,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MenuNavtopAtom implements OnInit {
-  @Input() faIcon = faSignOutAlt;
+  @Input() faIcon = {faSignOutAlt, faInfoCircle};
   @Input() isMenuOpen = false;
   // @Input() avatarUrl = 'http://tachyons.io/img/logo.jpg';
   // @Input() name = 'Hà Thanh Tùng';
@@ -27,8 +27,8 @@ export class MenuNavtopAtom implements OnInit {
 
   ngOnInit(): void {}
 
-  toggleMenu($event) {
-    $event.stopPropagation();
+  toggleMenu($event?) {
+   if($event) $event.stopPropagation();
     this.isMenuOpen = !this.isMenuOpen;
   }
 }
