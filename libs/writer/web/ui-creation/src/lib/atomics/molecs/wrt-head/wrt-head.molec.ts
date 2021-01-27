@@ -8,6 +8,7 @@ import {
   Output,
   ChangeDetectorRef,
 } from '@angular/core';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import { ModalFacade } from '@awread/writer/web/feature-auth';
 
 @Component({
@@ -53,7 +54,7 @@ export class WrtHeadMolec implements OnInit {
   selectedChapterStatus = 'DRAFT';
   @Output() saveChapterEvent = new EventEmitter();
   constructor(private cd: ChangeDetectorRef,
-              private modalFacade: ModalFacade) {}
+    private modalFacade: ModalFacade) { }
 
   ngOnInit(): void {
     this.chapterForm.valueChanges.subscribe(() => {
@@ -69,6 +70,7 @@ export class WrtHeadMolec implements OnInit {
   }
 
   openPreview(): void {
-    this.modalFacade.openPreview();
+    this.modalFacade.openPreview(this.chapterForm.get('title').value, 
+                this.chapterForm.get('content').value);
   }
 }
