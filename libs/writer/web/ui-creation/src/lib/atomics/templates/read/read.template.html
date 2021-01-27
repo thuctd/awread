@@ -2,7 +2,7 @@
     <div class="px-12">
         <div class="sticky top-0 z-40 lg:z-50 w-full max-w-8xl mx-auto bg-white text-center border-b border-gray-200">
             <div class="pt-4">
-                <atom-title-book [titleBook]='data.title === "" ? "Chưa có tiêu đề chương?" : data.title' [size]="'l'" class="mb-4"></atom-title-book>
+                <atom-title-book [titleBook]='data.title === "" ? "Chưa có tiêu đề chương?" : data.title | titlecase' [size]="'l'" class="mb-4"></atom-title-book>
             </div>
         </div>
         <div class="py-4">
