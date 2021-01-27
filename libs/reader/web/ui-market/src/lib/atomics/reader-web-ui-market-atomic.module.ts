@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StorybookSupportModule, GlobalDesignSystemAtomicModule } from '@awread/global/design-system';
+import {
+  StorybookSupportModule,
+  GlobalDesignSystemAtomicModule,
+} from '@awread/global/design-system';
 import { TabCategoryMolec } from './molecs/tab-category/tab-category.molec';
 import { TabBookMolec } from './molecs/tab-book/tab-book.molec';
 import { TabPageMolec } from './molecs/tab-page/tab-page.molec';
@@ -45,36 +48,44 @@ import {
   BrowserAnimationsModule,
   NoopAnimationsModule,
 } from '@angular/platform-browser/animations';
+import { HeadReadBookMolec } from './molecs/head-read-book/head-read-book.molec';
+import { FormCommentBookReadMolec } from './molecs/form-comment-book-read/form-comment-book-read.molec';
+import { CommentBookReadOrgan } from './organs/comment-book-read/comment-book-read.organ';
+import { ContentBookOrgan } from './organs/content-book/content-book.organ';
+import { ReadTemplate } from './templates/read/read.template';
+import { CommentOrgan } from './organs/comment/comment.organ';
+import { CommentItemMolec } from './molecs/comment-item/comment-item.molec';
 
 @NgModule({
   imports: [
-    CommonModule, 
-    StorybookSupportModule, 
-    GlobalDesignSystemAtomicModule, 
-    CarouselModule,   
+    CommonModule,
+    StorybookSupportModule,
+    GlobalDesignSystemAtomicModule,
+    CarouselModule,
     BrowserAnimationsModule,
     NoopAnimationsModule,
   ],
-  exports: [CommonModule, 
-    TabCategoryMolec, 
-    TabBookMolec, 
-    TabPageMolec, 
-    ListInfoLongBookMolec, 
-    ListInfoProseMolec, 
-    ListInfoShortBookMolec, 
-    ListInfoTopBookMolec, 
-    ListDetailLongBookOrgan, 
-    ListDetailShortBookOrgan, 
-    ListDetailProseOrgan, 
-    ListDetailTopBookOrgan, 
-    ListTemplate, 
-    HomeTemplate, 
-    HomeTagsOrgan, 
-    HomeInfoBookFeaturedMolec, 
-    HomeInfoBookReviewMolec, 
-    HomeInfoBookUpdateMolec, 
-    HomeDetailBookFeaturedOrgan, 
-    HomeDetailBookReviewOrgan, 
+  exports: [
+    CommonModule,
+    TabCategoryMolec,
+    TabBookMolec,
+    TabPageMolec,
+    ListInfoLongBookMolec,
+    ListInfoProseMolec,
+    ListInfoShortBookMolec,
+    ListInfoTopBookMolec,
+    ListDetailLongBookOrgan,
+    ListDetailShortBookOrgan,
+    ListDetailProseOrgan,
+    ListDetailTopBookOrgan,
+    ListTemplate,
+    HomeTemplate,
+    HomeTagsOrgan,
+    HomeInfoBookFeaturedMolec,
+    HomeInfoBookReviewMolec,
+    HomeInfoBookUpdateMolec,
+    HomeDetailBookFeaturedOrgan,
+    HomeDetailBookReviewOrgan,
     ReviewItemMolec,
     HomeDetailBookUpdateOrgan,
     ChapterItemMolec,
@@ -94,27 +105,35 @@ import {
     DetailBookReviewsOrgan,
     DetailBookTemplate,
     DetailBookSidebarOrgan,
-    SearchFormMolec],
+    SearchFormMolec,
+    HeadReadBookMolec,
+    FormCommentBookReadMolec,
+    CommentBookReadOrgan,
+    ContentBookOrgan,
+    ReadTemplate,
+    CommentOrgan,
+    CommentItemMolec,
+  ],
   declarations: [
-    TabCategoryMolec, 
-    TabBookMolec, 
-    TabPageMolec, 
-    ListInfoLongBookMolec, 
-    ListInfoProseMolec, 
-    ListInfoShortBookMolec, 
-    ListInfoTopBookMolec, 
-    ListDetailLongBookOrgan, 
-    ListDetailShortBookOrgan, 
-    ListDetailProseOrgan, 
-    ListDetailTopBookOrgan, 
-    ListTemplate, 
-    HomeTemplate, 
-    HomeTagsOrgan, 
-    HomeInfoBookFeaturedMolec, 
-    HomeInfoBookReviewMolec, 
-    HomeInfoBookUpdateMolec, 
-    HomeDetailBookFeaturedOrgan, 
-    HomeDetailBookReviewOrgan, 
+    TabCategoryMolec,
+    TabBookMolec,
+    TabPageMolec,
+    ListInfoLongBookMolec,
+    ListInfoProseMolec,
+    ListInfoShortBookMolec,
+    ListInfoTopBookMolec,
+    ListDetailLongBookOrgan,
+    ListDetailShortBookOrgan,
+    ListDetailProseOrgan,
+    ListDetailTopBookOrgan,
+    ListTemplate,
+    HomeTemplate,
+    HomeTagsOrgan,
+    HomeInfoBookFeaturedMolec,
+    HomeInfoBookReviewMolec,
+    HomeInfoBookUpdateMolec,
+    HomeDetailBookFeaturedOrgan,
+    HomeDetailBookReviewOrgan,
     HomeDetailBookUpdateOrgan,
     ReviewItemMolec,
     ChapterItemMolec,
@@ -134,7 +153,14 @@ import {
     DetailBookReviewsOrgan,
     DetailBookTemplate,
     DetailBookSidebarOrgan,
-    SearchFormMolec
-  ]
+    SearchFormMolec,
+    HeadReadBookMolec,
+    FormCommentBookReadMolec,
+    CommentBookReadOrgan,
+    ContentBookOrgan,
+    ReadTemplate,
+    CommentOrgan,
+    CommentItemMolec,
+  ],
 })
-export class ReaderWebUiMarketAtomicModule { }
+export class ReaderWebUiMarketAtomicModule {}

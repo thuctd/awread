@@ -1,0 +1,7 @@
+<section class="mx-auto">
+  <molec-head-read-book></molec-head-read-book>
+  <p class="text-xs text-gray-600 leading-6 py-8 px-1">{{content}}</p>
+  <div class="flex justify-center">
+    <atom-btn-switch-chapter (btnClick)="btnClick.emit('switchChapter')" class="mx-auto" [title]="'Đọc chương tiếp'" [class]="'pl-8'"></atom-btn-switch-chapter>
+  </div>
+</section>
