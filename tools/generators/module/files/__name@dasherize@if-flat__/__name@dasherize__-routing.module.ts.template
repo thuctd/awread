@@ -11,7 +11,7 @@ const routes: Routes = [
   <% if (lazyRoute) { %>{ path: '', component: <%= classify(name) %><%= capitalize(type) %> }<% } %>
   <% if (routingOnly) { %>{
     path: '',
-    component: window.innerWidth <= 768 && window?.haveMobile ? ShellMobileLayout : ShellDesktopLayout,
+    component: window.innerWidth <= 768 && window?.haveMobile ? SharedMobileLayout : SharedDesktopLayout,
     children: [
       {
         path: '',

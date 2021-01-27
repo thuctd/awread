@@ -1,0 +1,17 @@
+POST http://localhost:3333/api/upload-cover
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="type"
+
+avatar
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="id"
+
+avatar-demo-1
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="demo-avatar.png"; type="avatar"
+Content-Type: image/png
+
+< ./demo-avatar.png
+------WebKitFormBoundary7MA4YWxkTrZu0gW--

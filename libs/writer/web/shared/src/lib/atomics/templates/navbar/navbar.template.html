@@ -1,9 +1,5 @@
+<left-nav></left-nav>
 <section class="">
-  <top-nav
-    [user]="user"
-    (signoutEvent)="signoutEvent.emit()"
-    (searchEvent)="searchEvent.emit($event)"
-  ></top-nav>
+  <top-nav [user]="user" (signoutEvent)="signoutEvent.emit()" (searchEvent)="searchEvent.emit($event)"></top-nav>
   <ng-content></ng-content>
-  <left-nav></left-nav>
 </section>

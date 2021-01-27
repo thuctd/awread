@@ -18,6 +18,20 @@
     "ui": {
       "type": "string",
       "description": "ui name to add the page to, example: --ui=auth"
+    },
+    "project": {
+      "type": "string",
+      "description": "project name"
+    },
+    "kind": {
+      "type": "string",
+      "description": "ui or feature kind",
+      "default": "ui"
+    },
+    "type": {
+      "type": "string",
+      "description": "type of component like page, layout v.v..",
+      "default": "page"
     }
   },
   "required": [

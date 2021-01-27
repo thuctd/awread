@@ -8,6 +8,7 @@ export function getWorkspaceName(tree) {
 }
 
 export async function guessProjectToSchema(tree, schema, context) {
+    // console.log('guess-workspace: context.schematic', context.schematic)
     const kind = schema.kind ?? context.schematic.description.name;
     const { projectName, projectRoot, projectType } = await guessProject(tree, schema);
     const { application, applicationRoot } = await guessApplication(tree, projectName);
