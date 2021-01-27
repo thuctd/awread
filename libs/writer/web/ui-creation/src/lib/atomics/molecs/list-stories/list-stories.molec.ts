@@ -4,6 +4,7 @@ import {
   ChangeDetectionStrategy,
   Input,
 } from '@angular/core';
+import { ModalFacade } from '@awread/writer/web/feature-auth';
 import { faComments, faStar } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -20,7 +21,11 @@ export class ListStoriesMolec implements OnInit {
   @Input() countView = '696969k';
   @Input() faIcon2 = faComments;
 
-  constructor() {}
+  constructor(private modalFacade: ModalFacade) {}
 
   ngOnInit(): void {}
+
+  openPreview(): void {
+    this.modalFacade.openDetailBook();
+  }
 }
