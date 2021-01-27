@@ -57,12 +57,14 @@
       ></detail>
       <div
         class="absolute right-2 -top-1 justify-end flex z-50"
-        *ngIf="selectedTab === 'book'"
+        *ngIf="selectedTab === 'book' && !bookId"
       >
+        <!-- [active]="btn.status === 'CONTINUE'" -->
+
         <cr-submit-btn
           *ngFor="let btn of btns"
-          [active]="btn.status === 'CONTINUE'"
-          (click)="actionBookEvent.emit(btn.status)"
+          (click)="cancelCreateBook.emit(btn.status)"
+          [active]="false"
           [submitText]="btn.submitText"
           class="mx-2"
         ></cr-submit-btn>

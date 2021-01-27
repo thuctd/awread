@@ -32,6 +32,8 @@ export class WrtHeadMolec implements OnInit {
   }
   @Input() chapterForm: FormGroup;
 
+  @Input() shouldShowStatusUI: boolean;
+  @Input() type: string;
   btns = [
     {
       submitText: 'Xuất bản',

@@ -1,6 +1,7 @@
 <section class="w-full max-w-screen-xl mx-auto">
   <template-detail
     [bookForm]="bookForm"
+    [bookId]="bookId"
     [submitted]="submitted"
     [chapters]="chapterListByBookId$ | async"
     [tabsHead]="tabsHead"
@@ -9,7 +10,7 @@
     [genres]="genres$ | async"
     [selectedBookStatus]="selectedBookStatus"
     (selectedStatusEvent)="selectedStatusEvent($event)"
-    (actionBookEvent)="actionBookEvent($event)"
+    (cancelCreateBook)="cancelCreateBook($event)"
     (chapterActionEvent)="chapterActionEvent($event)"
     (createNewChapterEvent)="createNewChapterEvent()"
     (switchTabEvent)="switchTab($event)"

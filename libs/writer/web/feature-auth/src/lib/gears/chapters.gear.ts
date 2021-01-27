@@ -23,13 +23,33 @@ export class ChaptersGear {
 
   getAllChapters(bookid: string) {
     return this.chaptersApi.getAllChapters(bookid).pipe(
-      tap((res) => {
+      map((res) => {
         if (
           res['data'] &&
           res['data']['allChapters'] &&
           res['data']['allChapters']['nodes'].length
         ) {
-          this.chaptersStore.set(res['data']['allChapters']['nodes']);
+          const chapters = res['data']['allChapters']['nodes'];
+          // data chapter tra ve theo thu tu gioam dan de hien thi cac chuong moi nhat
+          let chapterLength = chapters.length;
+          return chapters.map((item, index) => {
+            // them so chuong cho moi chhapter
+            chapterLength = chapterLength - 1;
+            return { ...item, chapterNumber: chapterLength + 1 };
+          });
+          // .sortBy((a, b) => {
+          //   if (a.chapterNumber < b.chapterNumber) {
+          //     return 1;
+          //   }
+          //   return -1;
+          // });
+        }
+        return [];
+      }),
+      tap((res) => {
+        if (res.length) {
+          this.chaptersStore.set([]);
+          this.chaptersStore.set(res);
         } else {
           this.chaptersStore.set([]);
         }
@@ -57,10 +77,10 @@ export class ChaptersGear {
     );
   }
 
-  createChapter(chapter: Chapter) {
+  createChapter(chapter: Chapter, isPublishedBook: boolean) {
     const chapterid = this.firebaseFirestoreAddon.createId();
     const chapterDetail = { ...chapter, chapterid };
-    return this.chaptersApi.createChapter(chapterDetail).pipe(
+    return this.chaptersApi.createChapter(chapterDetail, isPublishedBook).pipe(
       tap((res) => {
         console.log('createChapter res: ', res);
         this.snackbarsService.create('Thêm chương thành công!');

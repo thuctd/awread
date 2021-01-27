@@ -66,8 +66,8 @@ export class BooksFacade {
     return this.booksGear.getDetailBook(bookId);
   }
 
-  addBook(book, titleToast = '') {
-    return this.booksGear.addBook(book, titleToast).pipe();
+  addBook(book) {
+    return this.booksGear.addBook(book).pipe();
   }
   editBook(book, idsGenresRemove: string[]) {
     return this.booksGear.editBook(book, idsGenresRemove).pipe();
