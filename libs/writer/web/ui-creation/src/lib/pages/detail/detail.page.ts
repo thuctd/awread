@@ -132,7 +132,7 @@ export class DetailPage implements OnInit, OnDestroy {
     if (this.bookForm.invalid) {
       return;
     }
-    if (title.trim()) {
+    if (!title.trim()) {
       alert('Tiêu đề không được để trống!');
       return;
     }

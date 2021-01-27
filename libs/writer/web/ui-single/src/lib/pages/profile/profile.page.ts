@@ -28,7 +28,7 @@ export class ProfilePage implements OnInit {
     }
 
     const { fullname } = this.profileForm.value;
-    if (fullname.trim()) {
+    if (!fullname.trim()) {
       alert('Tên không được để trống');
       return;
     }
