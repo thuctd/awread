@@ -69,10 +69,10 @@ export class S3Addon {
 
     try {
       const data = await this.newClient.send(new PutObjectCommand(uploadParams));
-      console.log('Success', data);
+      // console.log('Success', data);
     } catch (err) {
       Logger.error(err);
-      console.log('Error', err);
+      console.error('s3: Upload Image Error', err);
     }
   }
 

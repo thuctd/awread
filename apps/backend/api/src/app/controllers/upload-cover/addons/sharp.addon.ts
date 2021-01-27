@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import sharp from 'sharp';
 import { Logger } from '@nestjs/common';
-import { CoverSizes } from './models/cover-sizes';
+import { AvatarSizes, CoverSizes } from '../models';
 
 @Injectable()
 export class SharpAddon {
@@ -19,33 +19,36 @@ export class SharpAddon {
       .toBuffer()
   }
 
-  async convertToMultiImageVersions(imageSource: Buffer, extension = 'webp') {
+  async convertToMultiImageVersions(imageSource: Buffer, sizes: typeof CoverSizes | typeof AvatarSizes | null, extension = 'webp') {
     const imageVersions = {};
-    for (const [sizeName, sizeNumber] of Object.entries(CoverSizes)) {
+    for (const [sizeName, sizeNumber] of Object.entries(sizes)) {
       imageVersions[sizeName] = this.convertToWebp(imageSource, sizeNumber);
     }
-
-    // return imageVersions;
+    if (!sizes) { return [] }
     return Promise.all(
       Object
-        .entries(CoverSizes)
-        .map(async ([sizeName, sizeNumber]) => {
-          try {
-            const result = {
-              extension,
-              sizeName,
-              buffer: await this.convertToWebp(imageSource, sizeNumber)
-            }
-            return result;
-          } catch (error) {
-            return {
-              extension,
-              sizeName,
-              buffer: null,
-              error
-            }
-          }
-        })
+        .entries(sizes)
+        .map(this.convertEachSize(extension, imageSource))
     )
+  }
+
+  convertEachSize(extension: 'webp' | string, imageSource: Buffer) {
+    return async ([sizeName, sizeNumber]) => {
+      try {
+        const result = {
+          extension,
+          sizeName,
+          buffer: await this.convertToWebp(imageSource, sizeNumber)
+        }
+        return result;
+      } catch (error) {
+        return {
+          extension,
+          sizeName,
+          buffer: null,
+          error
+        }
+      }
+    }
   }
 }
