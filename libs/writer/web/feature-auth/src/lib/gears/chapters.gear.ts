@@ -31,12 +31,7 @@ export class ChaptersGear {
         ) {
           const chapters = res['data']['allChapters']['nodes'];
           // data chapter tra ve theo thu tu gioam dan de hien thi cac chuong moi nhat
-          let chapterLength = chapters.length;
-          return chapters.map((item, index) => {
-            // them so chuong cho moi chhapter
-            chapterLength = chapterLength - 1;
-            return { ...item, chapterNumber: chapterLength + 1 };
-          });
+          return this.transformDataChapters(chapters);
           // .sortBy((a, b) => {
           //   if (a.chapterNumber < b.chapterNumber) {
           //     return 1;
@@ -129,11 +124,9 @@ export class ChaptersGear {
         if (res['data']) {
           const isRemoveChapterPublished = status === 'PUBLISHED';
           this.chaptersStore.remove(chapterid);
-          this.booksStore.updateTotalChapterCount(
-            bookId,
-            isRemoveChapterPublished,
-            -1
-          );
+          const chapters = this.chapterQuery.getAll().filter(item => item.chapterid !== chapterid);
+          this.booksStore.updateTotalChapterCount(  bookId, isRemoveChapterPublished, -1  );
+          this.chaptersStore.set(this.transformDataChapters(chapters));
         }
       }),
       catchError((err) => {
@@ -141,5 +134,15 @@ export class ChaptersGear {
         return throwError(err);
       })
     );
+
+    
+  }
+  private transformDataChapters(chapters) {
+    let chapterLength = chapters.length;
+    return chapters.map((item, index) => {
+      // them so chuong cho moi chhapter
+      chapterLength = chapterLength - 1;
+      return { ...item, chapterNumber: chapterLength + 1 };
+    });
   }
 }

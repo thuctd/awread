@@ -58,7 +58,9 @@ export class ChaptersFacade {
     return this.chaptersGear.getChapterDetail(chapterid, bookid).pipe();
   }
   createChapter(chapter, isPublishedBook: boolean) {
-    return this.chaptersGear.createChapter(chapter, isPublishedBook).pipe();
+    const chapterCount = this.chaptersQuery.getCount();
+    const chapterNew = { ...chapter, chapterNumber: chapterCount + 1 };
+    return this.chaptersGear.createChapter(chapterNew, isPublishedBook).pipe();
   }
   updateChapter(chapter) {
     return this.chaptersGear.updateChapter(chapter).pipe();

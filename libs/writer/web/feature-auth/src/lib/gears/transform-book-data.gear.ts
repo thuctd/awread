@@ -5,6 +5,7 @@ export class TransformBookDataGear {
   constructor() {}
   tranformBookData(book) {
     const categoryid = book['categoryByCategoryid'].categoryid ?? '';
+    const categoryname = book['categoryByCategoryid'].name ?? '';
     const genreIds = book['bookGenresByBookid']['nodes'].map(
       (item) => item.genreid
     );
@@ -15,6 +16,7 @@ export class TransformBookDataGear {
       ...book,
       genreIds,
       categoryid,
+      categoryname,
       totalChapterCount: book['chaptersByBookid']?.totalCount ?? 0,
       totalChapterCountPublished: totalCountPublished ?? 0,
     };

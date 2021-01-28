@@ -29,7 +29,7 @@ export class WritingPage implements OnInit {
     private chaptersFacade: ChaptersFacade,
     private booksFacade: BooksFacade,
     private cd: ChangeDetectorRef
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.chapterId = this.activatedRoute.snapshot.params['chapterId'];
@@ -47,18 +47,21 @@ export class WritingPage implements OnInit {
         switchMap((params) => {
           const chapters = this.chaptersFacade.getAllAkita();
           if (this.bookId && chapters.length) {
-            this.chaptersFacade.selectAllChapterAkita();
-          }
-          if (this.bookId) {
             this.shouldShowStatusUI = this.shouldShowStatus();
-            setTimeout(() => this.cd.detectChanges(), 0);
-            return this.chaptersFacade.getAllChapters(this.bookId);
+            // return this.chaptersFacade.selectAllChapterAkita();
+          } else if (this.bookId) {
+            return this.chaptersFacade.getAllChapters(this.bookId).pipe(
+              tap(() => {
+                this.shouldShowStatusUI = this.shouldShowStatus();
+                setTimeout(() => this.cd.detectChanges(), 0);
+              })
+            );
           }
           return of([]);
         }),
-        tap(() => { })
+        tap(() => {})
       )
-      .subscribe(() => { });
+      .subscribe(() => {});
   }
 
   chapterAction() {
@@ -72,7 +75,12 @@ export class WritingPage implements OnInit {
     }
     this.shouldShowStatusUI = this.shouldShowStatus();
     if (this.chapterId) {
-      this.editChapter();
+      if (
+        this.chapterForm.dirty ||
+        this.chapterStatus !== this.chapterForm.get('status').value
+      ) {
+        this.editChapter();
+      }
     } else {
       this.createChapter();
     }
@@ -93,6 +101,7 @@ export class WritingPage implements OnInit {
     const statusChapterCurrent =
       this.chaptersFacade.getChapterEntityAkita(this.chapterId)?.status ??
       'DRAFT';
+    console.log('chapters: ', this.chaptersFacade.getAllAkita());
     const statusChapterBefore =
       this.chaptersFacade
         .getAllAkita()

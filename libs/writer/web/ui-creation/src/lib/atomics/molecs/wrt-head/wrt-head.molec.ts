@@ -47,16 +47,18 @@ export class WrtHeadMolec implements OnInit {
       isActive: false,
       type: 'DRAFT',
     },
-    {
-      submitText: 'Xem trước',
-      isActive: false,
-      type: 'PREVIEW',
-    },
+    // {
+    //   submitText: 'Xem trước',
+    //   isActive: false,
+    //   type: 'PREVIEW',
+    // },
   ];
   selectedChapterStatus = 'DRAFT';
   @Output() saveChapterEvent = new EventEmitter();
-  constructor(private cd: ChangeDetectorRef,
-    private modalFacade: ModalFacade) { }
+  constructor(
+    private cd: ChangeDetectorRef,
+    private modalFacade: ModalFacade
+  ) {}
 
   ngOnInit(): void {
     this.chapterForm.valueChanges.subscribe(() => {
@@ -72,7 +74,9 @@ export class WrtHeadMolec implements OnInit {
   }
 
   openPreview(): void {
-    this.modalFacade.openPreview(this.chapterForm.get('title').value, 
-                this.chapterForm.get('content').value);
+    this.modalFacade.openPreview(
+      this.chapterForm.get('title').value,
+      this.chapterForm.get('content').value
+    );
   }
 }
