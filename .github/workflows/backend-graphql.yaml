@@ -1,8 +1,8 @@
-name: 'reader-web'
+name: 'backend-graphql'
 on:
   push:
     branches:
-      - reader-web
+      - backend-graphql
 
 jobs:
   deploy:
@@ -16,5 +16,5 @@ jobs:
       - name: Push to dokku
         uses: dokku/github-action@master
         with:
-          git_remote_url: 'ssh://dokku@awread.vn:22/reader-web'
+          git_remote_url: 'ssh://dokku@awread.vn:22/backend-graphql'
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
