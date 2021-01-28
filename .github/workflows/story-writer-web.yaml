@@ -22,7 +22,7 @@ jobs:
         with:
           # specify `--force` as a flag for git pushes
           git_push_flags: '--force'
-          git_remote_url: 'ssh://dokku@awread.vn:22/writer-web'
+          git_remote_url: 'ssh://dokku@awread.vn:22/story-writer-web'
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
 
   review_app:
