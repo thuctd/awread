@@ -6,10 +6,23 @@
   display: block;
   width: 0;
   height: 0;
-  border-right: 1rem solid rgba(110, 231, 183, var(--tw-bg-opacity));
+  border-right: 1rem solid rgba(249, 250, 251, var(--tw-bg-opacity));
   border-top: 0.5rem solid transparent;
   border-bottom: 0.5rem solid transparent;
   position: absolute;
   margin-left: -1rem;
   top: 2.1rem;
+}
+.icon{
+  margin-left: 1.15rem;
+  margin-top: -1.6rem;
+}
+.ml45{
+  margin-left: 4.5rem;
+}
+.aaa{
+  display: none;
+}
+.abc:hover .aaa{
+  display: block;
 }
