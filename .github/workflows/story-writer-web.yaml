@@ -2,7 +2,7 @@ name: 'storybook: writer-web'
 on:
   push:
     branches:
-      - writer-web
+      - story-writer-web
 
 jobs:
   deploy:
