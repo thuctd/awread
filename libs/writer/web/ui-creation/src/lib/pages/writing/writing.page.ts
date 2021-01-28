@@ -47,7 +47,7 @@ export class WritingPage implements OnInit {
         switchMap((params) => {
           const chapters = this.chaptersFacade.getAllAkita();
           if (this.bookId && chapters.length) {
-            return this.chaptersFacade.selectAllChapterAkita();
+            this.chaptersFacade.selectAllChapterAkita();
           }
           if (this.bookId) {
             this.shouldShowStatusUI = this.shouldShowStatus();
@@ -67,9 +67,10 @@ export class WritingPage implements OnInit {
       return;
     }
     const { title, content } = this.chapterForm.value;
-    if (title.trim() || content.trim()) {
+    if (!title.trim() || !content.trim()) {
       return;
     }
+    this.shouldShowStatusUI = this.shouldShowStatus();
     if (this.chapterId) {
       this.editChapter();
     } else {
