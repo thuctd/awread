@@ -1,4 +1,4 @@
-name: 'story-writer-web'
+name: 'storybook: writer-web'
 on:
   push:
     branches:

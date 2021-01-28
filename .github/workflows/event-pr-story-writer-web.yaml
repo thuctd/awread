@@ -1,4 +1,4 @@
-name: 'event-pr-story-writer-reader-web'
+name: 'Tự động build storybook reader web khi có PR'
 
 # yamllint disable-line rule:truthy
 on:
