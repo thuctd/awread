@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 // import { ShellDesktopLayout, ShellMobileLayout } from '@awread/writer/web/shared';
 import { AuthLayout } from './layouts/auth/auth.layout';
+import { LandingGuard } from '@awread/writer/web/ui-single';
 
 declare const window: Window & { haveMobile: boolean };
 
@@ -9,6 +10,7 @@ const routes: Routes = [
   {
     path: '',
     component: AuthLayout,
+    canActivate: [LandingGuard],
     children: [
       {
         path: 'register-complete',

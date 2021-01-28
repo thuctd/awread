@@ -29,7 +29,7 @@ export class WritingPage implements OnInit {
     private chaptersFacade: ChaptersFacade,
     private booksFacade: BooksFacade,
     private cd: ChangeDetectorRef
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.chapterId = this.activatedRoute.snapshot.params['chapterId'];
@@ -56,9 +56,9 @@ export class WritingPage implements OnInit {
           }
           return of([]);
         }),
-        tap(() => {})
+        tap(() => { })
       )
-      .subscribe(() => {});
+      .subscribe(() => { });
   }
 
   chapterAction() {

@@ -5,7 +5,7 @@
   </div>
   <div class="col-span-7">
     <div class="self-start">
-      <div class="text-sm md:text-base font-bold mb-1 truncate text-gray-600">
+      <div (click)='openPreview()' class="text-sm cursor-pointer break-word md:text-base font-bold mb-1 text-gray-600">
         {{ book.title }}
       </div>
       <div
@@ -17,13 +17,13 @@
       <ng-template #noCategory>
         <div class="text-xs font-medium text-green-500">-</div>
       </ng-template>
-      <div class="text-green-400">
+      <!-- <div class="text-green-400">
         <fa-icon [icon]="faIcon" class="mr-1"></fa-icon>
         <fa-icon [icon]="faIcon" class="mr-1"></fa-icon>
         <fa-icon [icon]="faIcon" class="mr-1"></fa-icon>
         <fa-icon [icon]="faIcon" class="mr-1"></fa-icon>
         <fa-icon [icon]="faIcon" class="mr-1"></fa-icon>
-      </div>
+      </div> -->
 
       <!-- <atom-title class="truncate" [title]="'Cô gái chúng ta theo đuổi năm nào'" [class]="'text-sm md:text-base font-bold text-gray-600'"></atom-title> -->
       <!-- <list-type-book></list-type-book> -->

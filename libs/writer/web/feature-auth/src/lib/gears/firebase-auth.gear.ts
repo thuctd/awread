@@ -19,7 +19,7 @@ export class FirebaseAuthGear {
     private authRoutingGear: AuthRoutingGear,
     private afAuth: AngularFireAuth,
     private snackbarService: SnackbarsService
-  ) {}
+  ) { }
 
   shouldLinkProviderPassword(userAccount, currentUser: firebase.User) {
     return this.authApi
@@ -30,7 +30,7 @@ export class FirebaseAuthGear {
           res.data['getUserBaseEmail'] &&
           res.data['getUserBaseEmail']['results'].length
         ) {
-          this.authRoutingGear.navigateAfterLoginComplete('profile');
+          this.authRoutingGear.navigateAfterLoginComplete('list');
           const user = res.data['getUserBaseEmail']['results'][0];
           if (user.provider === 'email/password') {
             const credential = firebase.auth.EmailAuthProvider.credential(
@@ -190,7 +190,7 @@ export class FirebaseAuthGear {
         credential
       );
       if (linkWithCredential) {
-        this.authRoutingGear.navigateAfterLoginComplete('profile');
+        this.authRoutingGear.navigateAfterLoginComplete('list');
       }
       // if (linkWithCredential.user) {
       //   // update password when account Googleor/FB exists.
