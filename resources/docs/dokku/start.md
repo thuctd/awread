@@ -22,8 +22,9 @@ dokku network:set story-writer-web attach-post-create graphql-network
 $ dokku plugin:install https://github.com/dokku/dokku-letsencrypt.git
 $ dokku config:set --no-restart --global DOKKU_LETSENCRYPT_EMAIL=info@awread.vn
 $ dokku config:set --no-restart story-writer-web DOKKU_LETSENCRYPT_EMAIL=info@awread.vn
+// app must be availabe to register let's encypt
 $ dokku letsencrypt story-writer-web
-$ letsencrypt:cron-job --add
+$ dokku letsencrypt:cron-job --add
 // maybe no need this
 $ dokku letsencrypt:auto-renew story-writer-web
 
