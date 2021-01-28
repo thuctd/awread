@@ -29,7 +29,7 @@ export class WritingPage implements OnInit {
     private chaptersFacade: ChaptersFacade,
     private booksFacade: BooksFacade,
     private cd: ChangeDetectorRef
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.chapterId = this.activatedRoute.snapshot.params['chapterId'];
@@ -47,7 +47,7 @@ export class WritingPage implements OnInit {
         switchMap((params) => {
           const chapters = this.chaptersFacade.getAllAkita();
           if (this.bookId && chapters.length) {
-            return this.chaptersFacade.selectAllChapterAkita();
+            this.chaptersFacade.selectAllChapterAkita();
           }
           if (this.bookId) {
             this.shouldShowStatusUI = this.shouldShowStatus();
@@ -56,9 +56,9 @@ export class WritingPage implements OnInit {
           }
           return of([]);
         }),
-        tap(() => {})
+        tap(() => { })
       )
-      .subscribe(() => {});
+      .subscribe(() => { });
   }
 
   chapterAction() {
@@ -67,7 +67,7 @@ export class WritingPage implements OnInit {
       return;
     }
     const { title, content } = this.chapterForm.value;
-    if (title.trim() || content.trim()) {
+    if (!title.trim() || !content.trim()) {
       return;
     }
     if (this.chapterId) {

@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ModalComponent } from '@awread/global/packages';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import { ReadTemplate, DetailBookTemplate } from '@awread/writer/web/ui-creation';
 
 @Injectable({ providedIn: 'root' })
 export class ModalFacade {
@@ -22,5 +25,25 @@ export class ModalFacade {
       actionConfirmText: data?.actionConfirmText ?? 'Đồng ý',
     };
     return this.matDialog.open(ModalComponent, dialogConfig);
+  }
+
+  openPreview(title: string, conent: string): Observable<any> {
+    const dialogRef = this.matDialog.open(ReadTemplate, {
+      width: '72rem',
+      height: '42.5rem',
+      data: {
+        title: title,
+        content: conent
+      }
+    });
+
+    return dialogRef.afterClosed();
+  }
+
+  openDetailBook(): void {
+    this.matDialog.open(DetailBookTemplate, {
+      width: '55rem',
+      height: '33rem'
+    });
   }
 }

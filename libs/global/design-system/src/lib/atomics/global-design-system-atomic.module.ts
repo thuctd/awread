@@ -86,6 +86,9 @@ import { TitleAtom } from './atoms/title/title.atom';
 import { TextLinkAtom } from './atoms/text-link/text-link.atom';
 import { TitleBookAtom } from './atoms/title-book/title-book.atom';
 import { RdListTabPageAtom } from './atoms/rd-list-tab-page/rd-list-tab-page.atom';
+import { BtnSwitchChapterAtom } from './atoms/btn-switch-chapter/btn-switch-chapter.atom';
+import { BtnSelectAtom } from './atoms/btn-select/btn-select.atom';
+import { BtnBackToTopAtom } from './atoms/btn-back-to-top/btn-back-to-top.atom';
 
 @NgModule({
   imports: [
@@ -179,6 +182,9 @@ import { RdListTabPageAtom } from './atoms/rd-list-tab-page/rd-list-tab-page.ato
     TextLinkAtom,
     TitleBookAtom,
     RdListTabPageAtom,
+    BtnSwitchChapterAtom,
+    BtnSelectAtom,
+    BtnBackToTopAtom,
   ],
   declarations: [
     TabBtnAtom,
@@ -258,6 +264,9 @@ import { RdListTabPageAtom } from './atoms/rd-list-tab-page/rd-list-tab-page.ato
     TextLinkAtom,
     TitleBookAtom,
     RdListTabPageAtom,
+    BtnSwitchChapterAtom,
+    BtnSelectAtom,
+    BtnBackToTopAtom,
   ],
 })
 export class GlobalDesignSystemAtomicModule {}

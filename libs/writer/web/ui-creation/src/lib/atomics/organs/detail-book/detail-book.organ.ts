@@ -8,6 +8,10 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
       :host {
         display: block;
       }
+
+      .h-132 {
+        height: 33rem;
+      }
     `
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
