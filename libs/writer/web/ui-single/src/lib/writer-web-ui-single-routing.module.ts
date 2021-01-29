@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ShellDesktopLayout, ShellMobileLayout } from '@awread/writer/web/shared';
-import { LoginGuard } from '@awread/writer/web/ui-single';
+import { LoginGuard } from './guards/login.guard';
 import { SingleLayout } from './layouts/single/single.layout';
 
 declare const window: Window & { haveMobile: boolean };

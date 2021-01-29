@@ -1,6 +1,6 @@
 import { map, startWith, switchMap, takeUntil } from 'rxjs/operators';
 import { tap } from 'rxjs/operators';
-import { CategoryFacade, ChaptersFacade, GenresFacade, ModalFacade } from '@awread/writer/web/feature-auth';
+import { CategoryFacade, ChaptersFacade, GenresFacade } from '@awread/writer/web/feature-auth';
 import { CurrentUserFacade } from '@awread/writer/web/feature-auth';
 import { BooksFacade } from '@awread/writer/web/feature-auth';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -39,7 +39,6 @@ export class DetailPage implements OnInit, OnDestroy {
     private categoryFacade: CategoryFacade,
     private genresFacade: GenresFacade,
     private router: Router,
-    private modalFacade: ModalFacade,
     private cd: ChangeDetectorRef
   ) { }
 
