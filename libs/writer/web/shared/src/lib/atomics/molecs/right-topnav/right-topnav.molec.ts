@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, EventEmitter, Output, Input } from '@angular/core';
-import { User } from '@awread/writer/web/feature-auth';
+import type { User } from '@awread/writer/web/feature-auth';
 
 @Component({
   selector: 'right-topnav',

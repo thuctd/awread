@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
-import { ThemePalette } from '@angular/material/core';
-import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
+import type { ThemePalette } from '@angular/material/core';
+import type { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'awread-loading',

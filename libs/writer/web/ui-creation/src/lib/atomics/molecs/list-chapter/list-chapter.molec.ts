@@ -1,4 +1,4 @@
-import { Book } from '@awread/writer/web/feature-auth';
+import type { Book } from '@awread/writer/web/feature-auth';
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 
 @Component({

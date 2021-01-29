@@ -1,4 +1,4 @@
-import { User } from '@awread/writer/web/feature-auth';
+import type { User } from '@awread/writer/web/feature-auth';
 import { faSignOutAlt, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 

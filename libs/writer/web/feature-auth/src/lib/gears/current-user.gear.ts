@@ -1,7 +1,7 @@
 import { tap, catchError, retry, map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { of, throwError } from 'rxjs';
-import { User } from '../..';
+import type { User } from '../models';
 import { CurrentUserService, CurrentUserStore } from '../states/current-user';
 import { CurrentUserApi } from '../apis';
 import { SnackbarsService } from '@awread/global/packages';
@@ -13,7 +13,7 @@ export class CurrentUserGear {
     private currentUserService: CurrentUserService,
     private currentUserStore: CurrentUserStore,
     private snackbarsService: SnackbarsService
-  ) {}
+  ) { }
 
   getCurrentUser() {
     return this.currentUserApi.getCurrentUser().pipe(

@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { Category, Genre } from '@awread/writer/web/feature-auth';
+import type { Category, Genre } from '@awread/writer/web/feature-auth';
 
 @Component({
   selector: 'detail-book-form',
