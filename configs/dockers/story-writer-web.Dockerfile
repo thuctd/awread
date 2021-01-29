@@ -32,6 +32,6 @@ EXPOSE 80
 WORKDIR /app
 # //NOTE: update this
 COPY --from=build-story-writer-web /batcave/dist/storybook/$application /app
-COPY /configs/nginx/default5.conf /etc/nginx/conf.d/default.conf
+COPY /configs/nginx/storybook.conf /etc/nginx/conf.d/default.conf
 
 CMD ["nginx", "-g", "daemon off;"]

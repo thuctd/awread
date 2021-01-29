@@ -16,6 +16,3 @@ docker run --rm -d -p 4500:80 --name reader-web.web.1 awread/reader-web
 
 DOCKER_BUILDKIT=1 docker build -t awread/story-writer-web -f ./configs/dockers/story-writer-web.Dockerfile .
 docker run --rm -d -p 4500:80 --name story-writer-web.web.1 awread/story-writer-web
-
-DOCKER_BUILDKIT=1 docker build -t awread/story-reader-web -f ./configs/dockers/story-reader-web.Dockerfile .
-docker run --rm -d -p 4500:80 --name story-reader-web.web.1 awread/story-reader-web
