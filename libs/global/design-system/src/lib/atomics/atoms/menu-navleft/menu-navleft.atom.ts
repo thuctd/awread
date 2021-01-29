@@ -5,32 +5,25 @@ import {
   Input,
   Output,
   EventEmitter,
-} from "@angular/core";
-import { faFile } from "@fortawesome/free-solid-svg-icons";
+} from '@angular/core';
+import { faFile } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
-  selector: "menu-navleft",
-  templateUrl: "./menu-navleft.atom.html",
-  styleUrls: ["./menu-navleft.atom.scss"],
+  selector: 'menu-navleft',
+  templateUrl: './menu-navleft.atom.html',
+  styleUrls: ['./menu-navleft.atom.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MenuNavleftAtom implements OnInit {
   upLoad = {
-    UploadUrl: "/global-assets/images/upload.png",
-    linkName: "upLoad",
-    linkTo: "",
+    UploadUrl: '/global-assets/images/upload.png',
+    linkName: 'upLoad',
+    linkTo: '',
   };
-  iconUrl = "/global-assets/images/upload.png";
-  @Input() isMenuOpen = false;
-  @Input() faIcon = faFile;
-  @Output() next = new EventEmitter();
+  iconUrl = '/global-assets/images/upload.png';
+  iconUrlArrow = '/global-assets/images/arrowUp-white.png';
 
   constructor() {}
 
   ngOnInit(): void {}
-
-  toggleMenu($event) {
-    $event.stopPropagation();
-    this.isMenuOpen = !this.isMenuOpen;
-  }
 }

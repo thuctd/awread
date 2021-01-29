@@ -8,11 +8,11 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 })
 export class GroupIconNavleftMolec implements OnInit {
   lefNavData = [
-    {
-      name: 'dashboard',
-      iconUrl: '/global-assets/images/Dashboard.png',
-      linkTo: '/list',
-    },
+    // {
+    //   name: 'dashboard',
+    //   iconUrl: '/global-assets/images/Dashboard.png',
+    //   linkTo: '/dashboard',
+    // },
     {
       name: 'user',
       iconUrl: '/global-assets/images/user.png',

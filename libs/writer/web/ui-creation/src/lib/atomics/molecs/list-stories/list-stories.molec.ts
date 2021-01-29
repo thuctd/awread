@@ -4,8 +4,9 @@ import {
   ChangeDetectionStrategy,
   Input,
 } from '@angular/core';
-import { ModalFacade } from '@awread/writer/web/feature-auth';
+import { MatDialog } from '@angular/material/dialog';
 import { faComments, faStar } from '@fortawesome/free-solid-svg-icons';
+import { DetailBookTemplate } from '../../templates';
 
 @Component({
   selector: 'list-stories',
@@ -21,11 +22,14 @@ export class ListStoriesMolec implements OnInit {
   @Input() countView = '696969k';
   @Input() faIcon2 = faComments;
 
-  constructor(private modalFacade: ModalFacade) {}
+  constructor(private matDialog: MatDialog) {}
 
   ngOnInit(): void {}
-
-  openPreview(): void {
-    this.modalFacade.openDetailBook();
+  
+  openDetailBook(): void {
+    this.matDialog.open(DetailBookTemplate, {
+      width: '55rem',
+      height: '33rem'
+    });
   }
 }

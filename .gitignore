@@ -40,3 +40,4 @@ Thumbs.db
 
 # my config
 .eslintcache
+package-lock.json

@@ -5,7 +5,7 @@ import {
   Input,
   Inject,
 } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 export interface DialogData {
   title: string;
@@ -20,13 +20,14 @@ export interface DialogData {
 })
 export class ReadTemplate implements OnInit {
   
-  constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData) { }
+  constructor(public dialogRef: MatDialogRef<ReadTemplate>,
+            @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
 
   ngOnInit(): void {}
 
   ngAfterViewInit(): void {
     const element = document.getElementById('content');
-    if(this.data.content === "") {
+    if(this.data.content === '') {
       element.innerHTML = `<i>Hãy viết gì đó...</i>`;
     }else{
       element.innerHTML = this.data.content;

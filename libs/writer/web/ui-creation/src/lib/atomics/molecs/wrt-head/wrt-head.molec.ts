@@ -8,8 +8,8 @@ import {
   Output,
   ChangeDetectorRef,
 } from '@angular/core';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
-import { ModalFacade } from '@awread/writer/web/feature-auth';
+import { MatDialog } from '@angular/material/dialog';
+import { ReadTemplate } from '../../templates';
 
 @Component({
   selector: 'wrt-head',
@@ -59,6 +59,7 @@ export class WrtHeadMolec implements OnInit {
     private cd: ChangeDetectorRef,
     private modalFacade: ModalFacade
   ) {}
+
 
   ngOnInit(): void {
     this.chapterForm.valueChanges.subscribe(() => {

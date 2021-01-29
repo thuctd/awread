@@ -91,7 +91,6 @@ app.post('/setCustomClaims', (req, res) => {
         }
         // Add custom claims for additional privileges.
       } else {
-        // Return nothing.
         res.end(JSON.stringify({ status: 'ineligible' }));
       }
     });
