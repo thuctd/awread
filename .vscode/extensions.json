@@ -3,9 +3,7 @@
     "nrwl.angular-console",
     "angular.ng-template",
     "esbenp.prettier-vscode",
-    "firsttris.vscode-jest-runner",
     "dbaeumer.vscode-eslint",
     "johnpapa.angular2",
-    "msjsdiag.debugger-for-chrome"
   ]
 }

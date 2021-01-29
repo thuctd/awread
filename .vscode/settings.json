@@ -1,10 +1,13 @@
 {
   "editor.formatOnSave": true,
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
-  },
-  "html.format.wrapLineLength": 0,
-  "editor.wordWrap": "wordWrapColumn",
-  "editor.wordWrapColumn": 160,
-  "javascript.preferences.importModuleSpecifier": "shortest"
+	"editor.formatOnPaste": true,
+	"editor.codeActionsOnSave": {
+		"source.fixAll.eslint": true
+	},
+	"editor.wordWrap": "wordWrapColumn",
+	"javascript.preferences.importModuleSpecifier": "shortest",
+	"editor.wordWrapColumn": 160,
+	"html.format.wrapLineLength": 160,
+	"window.zoomLevel": 2,
+	"json.format.enable": false,
 }
