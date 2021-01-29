@@ -22,6 +22,7 @@ import {
 })
 export class DetailSocialMenuAtom implements OnInit {
   @Input() faIconComments = faEllipsisH;
+  @Input() chapter;
   @Output() chapterActionEvent = new EventEmitter();
   actions = [
     {

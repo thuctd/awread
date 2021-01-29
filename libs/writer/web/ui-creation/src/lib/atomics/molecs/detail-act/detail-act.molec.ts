@@ -4,6 +4,7 @@ import {
   ChangeDetectionStrategy,
   EventEmitter,
   Output,
+  Input,
 } from '@angular/core';
 
 @Component({
@@ -13,6 +14,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DetailActMolec implements OnInit {
+  @Input() chapter;
   @Output() chapterActionEvent = new EventEmitter();
   constructor() {}
 

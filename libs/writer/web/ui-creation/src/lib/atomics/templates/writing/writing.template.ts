@@ -18,6 +18,8 @@ export class WritingTemplate implements OnInit {
   @Input() chapterForm: FormGroup;
   @Input() chapterStatus: string;
   @Input() submitted: boolean;
+  @Input() shouldShowStatusUI: boolean;
+  @Input() type: string;
   @Output() changeChapterStatusEvent = new EventEmitter();
   @Output() saveChapterEvent = new EventEmitter();
   constructor() {}

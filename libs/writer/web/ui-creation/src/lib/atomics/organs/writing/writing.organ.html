@@ -4,6 +4,8 @@
     (changeChapterStatusEvent)="changeChapterStatusEvent.emit($event)"
     (saveChapterEvent)="saveChapterEvent.emit()"
     [chapterForm]="chapterForm"
+    [type]="type"
+    [shouldShowStatusUI]="shouldShowStatusUI"
   ></wrt-head>
   <wrt-writer [chapterForm]="chapterForm" [submitted]="submitted"></wrt-writer>
 </div>

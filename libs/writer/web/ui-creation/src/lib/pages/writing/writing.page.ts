@@ -21,6 +21,8 @@ export class WritingPage implements OnInit {
   chapterStatus = 'DRAFT';
   chapterNumber: any;
   submitted = false;
+  type = 'create';
+  shouldShowStatusUI = false;
   constructor(
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
@@ -33,6 +35,8 @@ export class WritingPage implements OnInit {
     this.chapterId = this.activatedRoute.snapshot.params['chapterId'];
     this.bookId = this.activatedRoute.snapshot.params['bookId'];
     this.chapterNumber = this.activatedRoute.snapshot.params['chapterNumber'];
+    this.type = this.chapterId ? 'edit' : 'create';
+    // this.shouldShowStatusUI = this.shouldShowStatus();
     this.getChapterWhenReloadPageHere();
     this.initForm();
     this.updateForm();
@@ -43,15 +47,21 @@ export class WritingPage implements OnInit {
         switchMap((params) => {
           const chapters = this.chaptersFacade.getAllAkita();
           if (this.bookId && chapters.length) {
-            return this.chaptersFacade.selectAllChapterAkita();
-          }
-          if (this.bookId) {
-            return this.chaptersFacade.getAllChapters(this.bookId);
+            this.shouldShowStatusUI = this.shouldShowStatus();
+            // return this.chaptersFacade.selectAllChapterAkita();
+          } else if (this.bookId) {
+            return this.chaptersFacade.getAllChapters(this.bookId).pipe(
+              tap(() => {
+                this.shouldShowStatusUI = this.shouldShowStatus();
+                setTimeout(() => this.cd.detectChanges(), 0);
+              })
+            );
           }
           return of([]);
-        })
+        }),
+        tap(() => {})
       )
-      .subscribe();
+      .subscribe(() => {});
   }
 
   chapterAction() {
@@ -59,8 +69,18 @@ export class WritingPage implements OnInit {
     if (this.chapterForm.invalid) {
       return;
     }
+    const { title, content } = this.chapterForm.value;
+    if (!title.trim() || !content.trim()) {
+      return;
+    }
+    this.shouldShowStatusUI = this.shouldShowStatus();
     if (this.chapterId) {
-      this.editChapter();
+      if (
+        this.chapterForm.dirty ||
+        this.chapterStatus !== this.chapterForm.get('status').value
+      ) {
+        this.editChapter();
+      }
     } else {
       this.createChapter();
     }
@@ -77,16 +97,36 @@ export class WritingPage implements OnInit {
       .subscribe();
   }
 
+  private shouldShowStatus() {
+    const statusChapterCurrent =
+      this.chaptersFacade.getChapterEntityAkita(this.chapterId)?.status ??
+      'DRAFT';
+    console.log('chapters: ', this.chaptersFacade.getAllAkita());
+    const statusChapterBefore =
+      this.chaptersFacade
+        .getAllAkita()
+        .find((item) => +item.chapterNumber === +this.chapterNumber - 1)
+        ?.status ?? 'DRAFT';
+    const check =
+      (+this.chapterNumber === 1 && statusChapterCurrent !== 'PUBLISHED') ||
+      (+this.chapterNumber > 1 &&
+        statusChapterBefore === 'PUBLISHED' &&
+        statusChapterCurrent !== 'PUBLISHED');
+    return check;
+  }
+
   private createChapter() {
     if (this.bookId) {
-      this.chaptersFacade
-        .createChapter({
-          ...this.chapterForm.value,
-          bookid: this.bookId,
-          createdat: new Date(),
-          updatedat: new Date(),
-        })
-        .subscribe();
+      const chapterFormValue = this.chapterForm.value;
+      const isPublishedBook =
+        +this.chapterNumber === 1 && chapterFormValue.status === 'PUBLISHED';
+      const chapter = {
+        ...chapterFormValue,
+        bookid: this.bookId,
+        createdat: new Date(),
+        updatedat: new Date(),
+      };
+      this.chaptersFacade.createChapter(chapter, isPublishedBook).subscribe();
     } else {
     }
   }

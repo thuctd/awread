@@ -55,7 +55,7 @@ export class BooksGear {
     );
   }
 
-  addBook(book, titleToast = '') {
+  addBook(book) {
     const bookid = this.firebaseFirestoreAddon.createId();
     const genres = book.genres.map((genre) => ({
       name: genre.name,
@@ -67,7 +67,7 @@ export class BooksGear {
         console.log('add book res: ', res);
         if (res['data'] && res['data']['createBook']['book']) {
           this.snackbarService.create(
-            titleToast ? titleToast : 'Thêm truyện thành công!',
+            'Thêm thông tin truyện thành công!',
             5000
           );
           this.booksStore.addBook(bookNew);

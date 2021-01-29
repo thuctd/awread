@@ -22,6 +22,10 @@ export class ChaptersFacade {
     private firestoreGear: FirestoreGear
   ) {}
 
+  getChapterEntityAkita(id: string) {
+    return this.chaptersQuery.getEntity(id);
+  }
+
   getChapterCountAkita() {
     return this.chaptersQuery.getCount();
   }
@@ -53,8 +57,10 @@ export class ChaptersFacade {
   getChapterDetail(chapterid: string, bookid: string) {
     return this.chaptersGear.getChapterDetail(chapterid, bookid).pipe();
   }
-  createChapter(chapter) {
-    return this.chaptersGear.createChapter(chapter).pipe();
+  createChapter(chapter, isPublishedBook: boolean) {
+    const chapterCount = this.chaptersQuery.getCount();
+    const chapterNew = { ...chapter, chapterNumber: chapterCount + 1 };
+    return this.chaptersGear.createChapter(chapterNew, isPublishedBook).pipe();
   }
   updateChapter(chapter) {
     return this.chaptersGear.updateChapter(chapter).pipe();

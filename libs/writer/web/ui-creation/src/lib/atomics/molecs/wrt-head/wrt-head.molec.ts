@@ -34,6 +34,8 @@ export class WrtHeadMolec implements OnInit {
   }
   @Input() chapterForm: FormGroup;
 
+  @Input() shouldShowStatusUI: boolean;
+  @Input() type: string;
   btns = [
     {
       submitText: 'Xuất bản',
@@ -45,16 +47,19 @@ export class WrtHeadMolec implements OnInit {
       isActive: false,
       type: 'DRAFT',
     },
-    {
-      submitText: 'Xem trước',
-      isActive: false,
-      type: 'PREVIEW',
-    },
+    // {
+    //   submitText: 'Xem trước',
+    //   isActive: false,
+    //   type: 'PREVIEW',
+    // },
   ];
   selectedChapterStatus = 'DRAFT';
   @Output() saveChapterEvent = new EventEmitter();
-  constructor(private cd: ChangeDetectorRef,
-    public matDialog: MatDialog) { }
+  constructor(
+    private cd: ChangeDetectorRef,
+    private modalFacade: ModalFacade
+  ) {}
+
 
   ngOnInit(): void {
     this.chapterForm.valueChanges.subscribe(() => {
@@ -69,14 +74,10 @@ export class WrtHeadMolec implements OnInit {
     this.changeChapterStatusEvent.emit(status);
   }
 
-  openPreview() {
-    this.matDialog.open(ReadTemplate, {
-      width: '72rem',
-      height: '42.5rem',
-      data: {
-        title: this.chapterForm.get('title').value,
-        content: this.chapterForm.get('content').value
-      },
-    });
+  openPreview(): void {
+    this.modalFacade.openPreview(
+      this.chapterForm.get('title').value,
+      this.chapterForm.get('content').value
+    );
   }
 }
