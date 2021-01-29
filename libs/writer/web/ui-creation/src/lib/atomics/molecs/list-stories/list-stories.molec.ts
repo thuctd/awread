@@ -1,9 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Input,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { faComments, faStar } from '@fortawesome/free-solid-svg-icons';
 import { DetailBookTemplate } from '../../templates';
@@ -22,10 +17,10 @@ export class ListStoriesMolec implements OnInit {
   @Input() countView = '696969k';
   @Input() faIcon2 = faComments;
 
-  constructor(private matDialog: MatDialog) {}
+  constructor(private matDialog: MatDialog) { }
 
-  ngOnInit(): void {}
-  
+  ngOnInit(): void { }
+
   openDetailBook(): void {
     this.matDialog.open(DetailBookTemplate, {
       width: '55rem',

@@ -1,6 +1,4 @@
-import {
-  chain, externalSchematic, Rule, SchematicContext, Tree
-} from '@angular-devkit/schematics';
+import { chain, externalSchematic, Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
 import { addImportDeclarationToModule } from '../../utility/add-import-module';
 import { addExportDeclarationToModule } from '../../utility/add-export-module';
 import { Path, normalize, strings } from '@angular-devkit/core';

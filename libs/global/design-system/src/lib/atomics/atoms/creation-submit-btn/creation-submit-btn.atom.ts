@@ -1,11 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  EventEmitter,
-  Output,
-  Input,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, EventEmitter, Output, Input } from '@angular/core';
 
 
 @Component({
@@ -20,7 +13,7 @@ export class CreationSubmitBtnAtom implements OnInit {
   @Input() active = true;
   @Input() faIcon;
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

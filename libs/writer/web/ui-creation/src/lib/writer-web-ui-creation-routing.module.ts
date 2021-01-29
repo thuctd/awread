@@ -1,9 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {
-  ShellDesktopLayout,
-  ShellMobileLayout,
-} from '@awread/writer/web/shared';
+import { ShellDesktopLayout, ShellMobileLayout } from '@awread/writer/web/shared';
 import { CreationLayout } from './layouts/creation/creation.layout';
 import { LoginGuard } from '@awread/writer/web/ui-single';
 
@@ -27,33 +24,33 @@ const routes: Routes = [
             loadChildren: () =>
               window.innerWidth <= 768 && window?.haveMobile
                 ? import('./pages/list-mobile/list-mobile.module').then(
-                    (m) => m.ListMobileModule
-                  )
+                  (m) => m.ListMobileModule
+                )
                 : import('./pages/list-desktop/list-desktop.module').then(
-                    (m) => m.ListDesktopModule
-                  ),
+                  (m) => m.ListDesktopModule
+                ),
           },
           {
             path: 'detail',
             loadChildren: () =>
               window.innerWidth <= 768 && window?.haveMobile
                 ? import('./pages/detail-mobile/detail-mobile.module').then(
-                    (m) => m.DetailMobileModule
-                  )
+                  (m) => m.DetailMobileModule
+                )
                 : import('./pages/detail-desktop/detail-desktop.module').then(
-                    (m) => m.DetailDesktopModule
-                  ),
+                  (m) => m.DetailDesktopModule
+                ),
           },
           {
             path: 'writing',
             loadChildren: () =>
               window.innerWidth <= 768 && window?.haveMobile
                 ? import('./pages/writing-mobile/writing-mobile.module').then(
-                    (m) => m.WritingMobileModule
-                  )
+                  (m) => m.WritingMobileModule
+                )
                 : import('./pages/writing-desktop/writing-desktop.module').then(
-                    (m) => m.WritingDesktopModule
-                  ),
+                  (m) => m.WritingDesktopModule
+                ),
           },
         ],
       },
@@ -65,4 +62,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class WriterWebUiCreationRoutingModule {}
+export class WriterWebUiCreationRoutingModule { }

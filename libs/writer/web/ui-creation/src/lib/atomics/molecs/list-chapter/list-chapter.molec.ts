@@ -1,10 +1,5 @@
 import { Book } from '@awread/writer/web/feature-auth';
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Input,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 
 @Component({
   selector: 'list-chapter',
@@ -17,7 +12,7 @@ export class ListChapterMolec implements OnInit {
   @Input() countTotal = 1000;
   @Input() countPublished = 50;
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

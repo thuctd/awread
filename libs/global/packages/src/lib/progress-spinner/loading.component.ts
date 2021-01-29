@@ -1,9 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Input,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 
@@ -17,7 +12,7 @@ export class LoadingComponent implements OnInit {
   @Input() color: ThemePalette = 'primary';
   @Input() mode: ProgressSpinnerMode = 'indeterminate';
   @Input() value = 50;
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

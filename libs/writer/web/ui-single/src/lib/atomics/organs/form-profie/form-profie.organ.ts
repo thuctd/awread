@@ -1,12 +1,5 @@
 import { FormGroup } from '@angular/forms';
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Output,
-  Input,
-  EventEmitter,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Output, Input, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'form-profie',
@@ -20,7 +13,7 @@ export class FormProfieOrgan implements OnInit {
   @Input() profileForm: FormGroup;
   @Input() submitted: boolean;
   @Output() updateProfileEvent = new EventEmitter();
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

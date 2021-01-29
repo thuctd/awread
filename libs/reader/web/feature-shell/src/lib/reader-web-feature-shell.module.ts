@@ -2,12 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { GlobalCoreModule } from '@awread/global/core';
-import {
-  ReaderWebSharedModule,
-  SharedDesktopLayout,
-  SharedMobileLayout,
-  NotFoundPage,
-} from '@awread/reader/web/shared';
+import { ReaderWebSharedModule, SharedDesktopLayout, SharedMobileLayout, NotFoundPage } from '@awread/reader/web/shared';
 import { ReaderWebUiAuthModule } from '@awread/reader/web/ui-auth';
 import { ReaderWebUiAuthorModule } from '@awread/reader/web/ui-author';
 import { ReaderWebUiSingleModule } from '@awread/reader/web/ui-single';
@@ -45,4 +40,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule, GlobalCoreModule],
 })
-export class ReaderWebFeatureShellModule {}
+export class ReaderWebFeatureShellModule { }

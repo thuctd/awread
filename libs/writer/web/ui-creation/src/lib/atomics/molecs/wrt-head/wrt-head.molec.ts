@@ -1,15 +1,6 @@
 import { FormGroup } from '@angular/forms';
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Input,
-  EventEmitter,
-  Output,
-  ChangeDetectorRef,
-} from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { ReadTemplate } from '../../templates';
+import { Component, OnInit, ChangeDetectionStrategy, Input, EventEmitter, Output, ChangeDetectorRef } from '@angular/core';
+import { ModalFacade } from '@awread/writer/web/feature-auth';
 
 @Component({
   selector: 'wrt-head',
@@ -58,7 +49,7 @@ export class WrtHeadMolec implements OnInit {
   constructor(
     private cd: ChangeDetectorRef,
     private modalFacade: ModalFacade
-  ) {}
+  ) { }
 
 
   ngOnInit(): void {

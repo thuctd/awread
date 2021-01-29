@@ -1,11 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  EventEmitter,
-  Output,
-  Input,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, EventEmitter, Output, Input } from '@angular/core';
 import { User } from '@awread/writer/web/feature-auth';
 
 @Component({
@@ -18,7 +11,7 @@ export class NavbarTemplate implements OnInit {
   @Input() user: User;
   @Output() searchEvent = new EventEmitter();
   @Output() signoutEvent = new EventEmitter();
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

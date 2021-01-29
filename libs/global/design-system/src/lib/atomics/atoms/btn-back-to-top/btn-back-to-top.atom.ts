@@ -1,10 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Output,
-  Input,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Output, Input } from '@angular/core';
 import { faArrowUp } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -21,9 +15,9 @@ import { faArrowUp } from '@fortawesome/free-solid-svg-icons';
 })
 export class BtnBackToTopAtom implements OnInit {
   @Input() faIcon = faArrowUp;
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   @Output() backToTop() {
     window.scroll({

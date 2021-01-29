@@ -1,9 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Input,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 import { faComments } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -16,7 +11,7 @@ export class DetailReviewMolec implements OnInit {
   @Input() chapterCountView = '696969k';
   @Input() chapterCountComments = '2020-12-16';
   @Input() faIcon = faComments;
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

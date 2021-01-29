@@ -1,10 +1,5 @@
 import { FormGroup } from '@angular/forms';
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Input,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { faLock, faEnvelope, faUser } from '@fortawesome/free-solid-svg-icons';
 @Component({
@@ -22,7 +17,7 @@ export class RegisterFormMolec implements OnInit {
     password: ['', [Validators.required]],
     confirmPassword: ['', [Validators.required]],
   });
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

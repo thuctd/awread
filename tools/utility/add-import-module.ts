@@ -5,10 +5,7 @@ import * as ts from 'typescript';
 import { insert, readJsonFile, toFileName } from '@nrwl/workspace';
 import { Change, insertImport } from '@nrwl/workspace/src/utils/ast-utils';
 import { addImportToModule } from '@nrwl/angular/src/utils/ast-utils';
-import {
-  chain, externalSchematic, Rule, SchematicContext, Tree, schematic, noop, apply, url, template,
-  branchAndMerge, mergeWith, move
-} from '@angular-devkit/schematics';
+import { Rule, Tree } from '@angular-devkit/schematics';
 
 import { classify, dasherize, camelize, underscore } from '@angular-devkit/core/src/utils/strings';
 import { buildAliasFromProjectRoot } from './build-alias-from-project-root';

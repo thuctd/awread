@@ -1,15 +1,11 @@
 import { Injectable } from '@angular/core';
-import {
-  HttpHandler,
-  HttpInterceptor,
-  HttpRequest,
-} from '@angular/common/http';
+import { HttpHandler, HttpInterceptor, HttpRequest, } from '@angular/common/http';
 import { first, switchMap } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
 
 @Injectable()
 export class ApolloInterceptor implements HttpInterceptor {
-  constructor(public afAuth: AngularFireAuth) {}
+  constructor(public afAuth: AngularFireAuth) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
     // Filter your endpoint in order to only edit the graphql-related requests

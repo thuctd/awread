@@ -1,9 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Input,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 @Component({
@@ -15,7 +10,7 @@ import { FormGroup } from '@angular/forms';
 export class WrtBookImgAtom implements OnInit {
   @Input() srcImg = 'https://via.placeholder.com/520x740.png';
   @Input() chapterForm: FormGroup;
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

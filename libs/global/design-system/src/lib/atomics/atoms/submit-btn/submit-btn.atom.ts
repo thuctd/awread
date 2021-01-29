@@ -1,11 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Output,
-  EventEmitter,
-  Input,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter, Input } from '@angular/core';
 
 @Component({
   selector: 'submit-btn',
@@ -17,7 +10,7 @@ export class SubmitBtnAtom implements OnInit {
   @Output() btnClicked = new EventEmitter();
   @Input() name = 'Đăng nhập';
   @Input() active = false;
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

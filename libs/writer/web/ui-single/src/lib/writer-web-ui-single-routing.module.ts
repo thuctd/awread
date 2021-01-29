@@ -1,9 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {
-  ShellDesktopLayout,
-  ShellMobileLayout,
-} from '@awread/writer/web/shared';
+import { ShellDesktopLayout, ShellMobileLayout } from '@awread/writer/web/shared';
 import { LoginGuard } from '@awread/writer/web/ui-single';
 import { SingleLayout } from './layouts/single/single.layout';
 

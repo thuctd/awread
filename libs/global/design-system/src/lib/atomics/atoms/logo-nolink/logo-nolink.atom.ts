@@ -1,9 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Input,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 
 @Component({
   selector: 'atom-logo-nolink',
@@ -15,7 +10,7 @@ export class LogoNolinkAtom implements OnInit {
   @Input() link = '/global-assets/images/logo-white.png';
   @Input() numberSize = '28';
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

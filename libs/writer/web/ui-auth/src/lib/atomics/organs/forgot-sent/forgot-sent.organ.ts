@@ -1,11 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Output,
-  EventEmitter,
-  Input,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter, Input } from '@angular/core';
 
 @Component({
   selector: 'forgot-sent',
@@ -19,7 +12,7 @@ export class ForgotSentOrgan implements OnInit {
   @Input() email: string;
   @Output() submitEvent = new EventEmitter();
 
-  constructor() {}
+  constructor() { }
 
   ngOnInit(): void {
     this.description = `Chúng tôi đã gửi đường dẫn đặt lại mật khẩu của bạn tới địa chỉ ${this.email}, hãy chắc chắn bạn đã kiểm tra thư mục spam.`;

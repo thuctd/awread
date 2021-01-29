@@ -1,11 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  EventEmitter,
-  Output,
-  Input,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, EventEmitter, Output, Input } from '@angular/core';
 
 @Component({
   selector: 'template-list',
@@ -20,7 +13,7 @@ export class ListTemplate implements OnInit {
   @Output() removeBookEvent = new EventEmitter();
   @Output() editBookEvent = new EventEmitter();
   @Output() updateBookStatusEvent = new EventEmitter();
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

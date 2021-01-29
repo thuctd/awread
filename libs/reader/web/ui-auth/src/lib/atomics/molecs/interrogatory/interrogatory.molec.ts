@@ -1,9 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Input,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 
 @Component({
   selector: 'molec-interrogatory',
@@ -17,7 +12,7 @@ export class InterrogatoryMolec implements OnInit {
   @Input() textLink = 'Tạo một tài khoản mới';
   @Input() link = '';
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

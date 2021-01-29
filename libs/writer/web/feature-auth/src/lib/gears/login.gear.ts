@@ -1,12 +1,7 @@
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { FirebaseAuthAddon, FirebaseAuthSocialAddon } from '../addons';
-import {
-  createUserFromFirebase,
-  EmailLoginCredential,
-  FirebaseUser,
-  ProviderType,
-} from '../models';
+import { createUserFromFirebase, EmailLoginCredential, FirebaseUser, ProviderType } from '../models';
 import firebase from 'firebase/app';
 import { AuthApi } from '../apis';
 import { AuthRoutingGear } from './auth-routing.gear';

@@ -2,14 +2,11 @@ import { Chapter, createChapterObject } from './../models/chapter.model';
 import { tap, retry } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
-import {
-  CREATE_CHAPTER_AND_UPDATE_BOOK_STATUS_MUATATION,
-  CREATE_CHAPTER_MUATATION,
-} from '../graphqls';
+import { CREATE_CHAPTER_AND_UPDATE_BOOK_STATUS_MUATATION, CREATE_CHAPTER_MUATATION } from '../graphqls';
 
 @Injectable({ providedIn: 'root' })
 export class ChaptersApi {
-  constructor(private apollo: Apollo) {}
+  constructor(private apollo: Apollo) { }
 
   getAllChapters(bookid: string) {
     return this.apollo

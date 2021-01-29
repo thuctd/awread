@@ -1,13 +1,8 @@
 import { Injectable } from '@angular/core';
-import {
-  EntityState,
-  EntityStore,
-  StoreConfig,
-  ActiveState,
-} from '@datorama/akita';
+import { EntityState, EntityStore, StoreConfig, ActiveState } from '@datorama/akita';
 import { Book } from '../../..';
 
-export interface BooksState extends EntityState<Book>, ActiveState {}
+export interface BooksState extends EntityState<Book>, ActiveState { }
 // export interface BookUI {}
 
 // export interface BooksUIState extends EntityState<BookUI>, ActiveState {}
