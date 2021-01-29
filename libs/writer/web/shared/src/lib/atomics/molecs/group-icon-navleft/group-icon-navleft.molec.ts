@@ -16,11 +16,13 @@ export class GroupIconNavleftMolec implements OnInit {
     {
       name: 'user',
       iconUrl: '/global-assets/images/user.png',
+      iconUrl2: '/global-assets/images/Group 2.png',
       linkTo: '/profile',
     },
     {
       name: 'books',
-      iconUrl: '/global-assets/images/books.png',
+      iconUrl: '/global-assets/images/Group 3.png',
+      iconUrl2: '/global-assets/images/books.png',
       linkTo: '/list',
     },
   ];
