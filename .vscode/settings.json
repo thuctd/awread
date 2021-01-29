@@ -9,5 +9,5 @@
 	"editor.wordWrapColumn": 160,
 	"html.format.wrapLineLength": 160,
 	"window.zoomLevel": 2,
-	"json.format.enable": false,
+	// "json.format.enable": false,
 }
