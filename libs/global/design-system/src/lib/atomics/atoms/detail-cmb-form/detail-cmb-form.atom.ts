@@ -1,9 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Input,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -21,7 +16,7 @@ export class DetailCmbFormAtom implements OnInit {
     this.orders = this.getOrders();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   getOrders() {
     return [

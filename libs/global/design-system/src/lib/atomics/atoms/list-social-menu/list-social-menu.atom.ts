@@ -1,17 +1,5 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Input,
-  Output,
-  EventEmitter,
-} from '@angular/core';
-import {
-  faAngleDown,
-  faPlusCircle,
-  faPlusSquare,
-  faTrash,
-} from '@fortawesome/free-solid-svg-icons';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import { faAngleDown, faPlusCircle, faPlusSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'list-social-menu',
@@ -43,7 +31,7 @@ export class ListSocialMenuAtom implements OnInit {
   ];
   @Output() bookActionEvent = new EventEmitter();
   isMenuOpen = false;
-  constructor() {}
+  constructor() { }
   toggleMenu($event) {
     $event.stopPropagation();
     this.isMenuOpen = !this.isMenuOpen;
@@ -53,7 +41,7 @@ export class ListSocialMenuAtom implements OnInit {
     this.isMenuOpen = false;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
   // add chapter, edit book
   handleBookAction(type: string) {
     this.bookActionEvent.emit(type);

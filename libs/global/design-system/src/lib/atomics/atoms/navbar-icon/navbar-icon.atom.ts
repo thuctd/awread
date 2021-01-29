@@ -1,11 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Input,
-  Output,
-  EventEmitter,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter, } from "@angular/core";
 
 @Component({
   selector: 'navbar-icon',
@@ -20,7 +13,7 @@ export class NavbarIconAtom implements OnInit {
   @Input() iconUrl = '/global-assets/images/Dashboard.png';
   @Input() iconUrl2 = '/global-assets/images/Group 1.png';
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

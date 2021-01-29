@@ -1,13 +1,8 @@
 import { FormGroup } from '@angular/forms';
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Input,
-  EventEmitter,
-  Output,
-  ChangeDetectorRef,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, EventEmitter, Output, ChangeDetectorRef } from '@angular/core';
+import { } from '@awread/writer/web/feature-auth';
+import { MatDialog } from '@angular/material/dialog';
+import { ReadTemplate } from '../../templates';
 
 @Component({
   selector: 'wrt-head',
@@ -32,6 +27,8 @@ export class WrtHeadMolec implements OnInit {
   }
   @Input() chapterForm: FormGroup;
 
+  @Input() shouldShowStatusUI: boolean;
+  @Input() type: string;
   btns = [
     {
       submitText: 'Xuất bản',
@@ -43,15 +40,19 @@ export class WrtHeadMolec implements OnInit {
       isActive: false,
       type: 'DRAFT',
     },
-    {
-      submitText: 'Xem trước',
-      isActive: false,
-      type: 'PREVIEW',
-    },
+    // {
+    //   submitText: 'Xem trước',
+    //   isActive: false,
+    //   type: 'PREVIEW',
+    // },
   ];
   selectedChapterStatus = 'DRAFT';
   @Output() saveChapterEvent = new EventEmitter();
-  constructor(private cd: ChangeDetectorRef) {}
+  constructor(
+    private cd: ChangeDetectorRef,
+    private matDialog: MatDialog
+  ) { }
+
 
   ngOnInit(): void {
     this.chapterForm.valueChanges.subscribe(() => {
@@ -60,8 +61,29 @@ export class WrtHeadMolec implements OnInit {
   }
   changeChapterStatus(status: string) {
     if (status === 'PREVIEW') {
+      this.openPreview();
       return;
     }
     this.changeChapterStatusEvent.emit(status);
+  }
+
+  openPreview(): void {
+    this.openModalPreview(
+      this.chapterForm.get('title').value,
+      this.chapterForm.get('content').value
+    );
+  }
+
+  openModalPreview(title: string, conent: string) {
+    const dialogRef = this.matDialog.open(ReadTemplate, {
+      width: '72rem',
+      height: '42.5rem',
+      data: {
+        title: title,
+        content: conent
+      }
+    });
+
+    return dialogRef.afterClosed();
   }
 }

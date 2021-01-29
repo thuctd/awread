@@ -1,7 +1,5 @@
 import { Path, normalize, strings } from '@angular-devkit/core';
-import {
-  Rule, SchematicsException, Tree, apply, applyTemplates, chain, filter, mergeWith, move, noop, schematic, externalSchematic, MergeStrategy, url,
-} from '@angular-devkit/schematics';
+import { Rule, SchematicsException, Tree, apply, applyTemplates, chain, filter, mergeWith, move, noop, schematic, externalSchematic, MergeStrategy, url } from '@angular-devkit/schematics';
 import * as ts from 'typescript';
 import { addImportToModule, getRouterModuleDeclaration, findNodes } from '@schematics/angular/utility/ast-utils';
 import { Change } from '@schematics/angular/utility/change';

@@ -1,9 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Input,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 
 @Component({
   selector: 'detail-tab-head',
@@ -20,7 +15,7 @@ export class DetailTabHeadMolec implements OnInit {
     type: 'create',
     isActive: true,
   };
-  constructor() {}
+  constructor() { }
 
   ngOnInit(): void {
     this.currentTab = this.tabs.find((tab) => tab.isActive);

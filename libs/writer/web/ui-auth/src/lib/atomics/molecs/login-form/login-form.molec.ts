@@ -1,10 +1,5 @@
 import { FormGroup } from '@angular/forms';
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Input,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { faLock, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 @Component({
@@ -20,7 +15,7 @@ export class LoginFormMolec implements OnInit {
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required]],
   });
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

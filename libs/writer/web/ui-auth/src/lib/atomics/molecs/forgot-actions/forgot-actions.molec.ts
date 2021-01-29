@@ -1,11 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Input,
-  Output,
-  EventEmitter,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'forgot-actions',
@@ -14,9 +7,9 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ForgotActionsMolec implements OnInit {
-  constructor() {}
+  constructor() { }
   @Input() title = 'Gửi Email Hướng Dẫn';
   @Input() active = false;
   @Output() submitEvent = new EventEmitter();
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

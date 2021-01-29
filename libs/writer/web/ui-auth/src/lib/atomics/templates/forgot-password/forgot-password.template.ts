@@ -1,10 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Output,
-  EventEmitter,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 
 @Component({
@@ -22,9 +16,9 @@ export class ForgotPasswordTemplate implements OnInit {
   @Output() forgotSubmit = new EventEmitter();
   @Output() closeEvent = new EventEmitter();
   // @Output() submitEvent = new EventEmitter();
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
   forgotSubmitEvent() {
     this.isSentEmail = true;
     this.forgotSubmit.emit(this.emailFormControl.value);

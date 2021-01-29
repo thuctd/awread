@@ -1,12 +1,5 @@
 import { FormGroup } from '@angular/forms';
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Input,
-  Output,
-  EventEmitter,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { Category, Genre } from '@awread/writer/web/feature-auth';
 
 @Component({
@@ -19,17 +12,18 @@ export class DetailIndexTemplate implements OnInit {
   @Input() submitted: boolean;
   @Input() categories: Category[];
   @Input() genres: Genre[];
+  @Input() bookId: string;
   @Input() btns = [
     {
       submitText: 'Hủy bỏ',
       isActive: false,
       status: 'CANCEL',
     },
-    {
-      submitText: 'Tiếp tục',
-      isActive: true,
-      status: 'CONTINUE',
-    },
+    // {
+    //   submitText: 'Tiếp tục',
+    //   isActive: true,
+    //   status: 'CONTINUE',
+    // },
   ];
 
   @Input() chapters;
@@ -37,14 +31,14 @@ export class DetailIndexTemplate implements OnInit {
   @Input() bookForm: FormGroup;
   @Input() selectedTab: string;
   @Output() selectedStatusEvent = new EventEmitter();
-  @Output() actionBookEvent = new EventEmitter();
+  @Output() cancelCreateBook = new EventEmitter();
   @Output() bookSubmitEvent = new EventEmitter();
   @Output() chapterActionEvent = new EventEmitter();
   @Output() createNewChapterEvent = new EventEmitter();
   @Output() switchTabEvent = new EventEmitter();
   @Output() genresEvent = new EventEmitter();
   @Input() selectedBookStatus: string;
-  constructor() {}
+  constructor() { }
 
   ngOnInit(): void {
     // this.selectedBookStatus = this.bookForm.get('status').value;

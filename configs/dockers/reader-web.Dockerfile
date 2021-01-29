@@ -4,7 +4,6 @@ ARG applicationPath=reader/web
 
 FROM node:14-alpine as builder
 ENV CYPRESS_INSTALL_BINARY=0
-ENV SHARP_IGNORE_GLOBAL_LIBVIPS=1
 WORKDIR /batcave
 RUN npm i -g pnpm
 COPY decorate-angular-cli.js package.json pnpm-lock.yaml ./
@@ -32,6 +31,6 @@ EXPOSE 80
 WORKDIR /app
 # //NOTE: update this
 COPY --from=build-reader-web /batcave/dist/apps/$applicationPath /app
-COPY /configs/nginx/default5.conf /etc/nginx/conf.d/default.conf
+COPY /configs/nginx/spa.conf /etc/nginx/conf.d/default.conf
 
 CMD ["nginx", "-g", "daemon off;"]

@@ -1,9 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Input,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 
 @Component({
   selector: 'molec-remember-forgot-password',
@@ -17,7 +12,7 @@ export class RememberForgotPasswordMolec implements OnInit {
     class: 'text-green-500 text-sm',
     link: '',
   };
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

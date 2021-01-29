@@ -1,10 +1,5 @@
 import { FormControl } from '@angular/forms';
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Input,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 
 @Component({
   selector: 'input-form-profile',
@@ -16,7 +11,7 @@ export class InputFormProfileAtom implements OnInit {
   @Input() key = 'Name';
   @Input() control = new FormControl();
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

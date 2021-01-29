@@ -1,11 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Output,
-  EventEmitter,
-  Input,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter, Input } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 
 @Component({
@@ -23,6 +16,6 @@ export class ForgotOrgan implements OnInit {
   description =
     'Vui lòng nhập địa chỉ email đã dùng của bạn khi tạo tài khoản, chúng tôi sẽ gửi hướng dẫn đặt lại mật khẩu cho bạn.';
   @Output() submitEvent = new EventEmitter();
-  constructor(private fb: FormBuilder) {}
-  ngOnInit() {}
+  constructor(private fb: FormBuilder) { }
+  ngOnInit() { }
 }

@@ -1,7 +1,4 @@
-import {
-  chain, externalSchematic, Rule, SchematicContext, Tree, schematic, noop, apply, url, template,
-  branchAndMerge, mergeWith, move
-} from '@angular-devkit/schematics';
+import { Tree } from '@angular-devkit/schematics';
 
 export function addRouterOutlet(usingLayout: boolean, schema, targetName, customContent = '\n<router-outlet></router-outlet>') {
   return (tree: Tree) => {

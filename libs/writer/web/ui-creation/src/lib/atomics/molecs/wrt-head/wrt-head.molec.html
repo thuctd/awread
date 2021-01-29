@@ -35,11 +35,11 @@
             ({{chapterForm?.value?.content ?
             chapterForm?.value?.content?.split(' ')?.length : 0}} words)
           </span>
-          <a
+          <!-- <a
             class="link text-green-500 cursor-pointer"
             (click)="saveChapterEvent.emit()"
             >Lưu</a
-          >
+          > -->
         </div>
       </div>
 
@@ -61,13 +61,63 @@
     <div class="justify-end flex w-50-ns mr-6">
       <div class="py-6 flex">
         <div class="flex mr-10">
-          <cr-submit-btn
-            *ngFor="let btn of btns"
-            (click)="selectedChapterStatus = btn.type;changeChapterStatus(btn.type)"
-            [active]="selectedChapterStatus === btn.type"
-            [submitText]="btn.submitText"
-            class="ml-2"
-          ></cr-submit-btn>
+          <ng-container *ngIf="shouldShowStatusUI;else showAction">
+            <cr-submit-btn
+              *ngFor="let btn of btns"
+              (click)="selectedChapterStatus = btn.type;changeChapterStatus(btn.type)"
+              [active]="selectedChapterStatus === btn.type"
+              [submitText]="btn.submitText"
+              class="ml-2"
+            ></cr-submit-btn>
+            <div class="ml-2">
+              <button
+                mat-flat-button
+                (click)="saveChapterEvent.emit()"
+                [ngClass]="{'bg-green-400': (chapterForm.get('status').value !== chapterStatus) || chapterForm.dirty && chapterForm.valid , 'bg-gray-400': !chapterForm.dirty || chapterForm.invalid}"
+                class="text-sm md:text-xs lg:text-base xl:text-base w-full text-white cursor-pointer rounded-md border-green-400 focus:shadow-outline focus:outline-none py-2 px-4"
+                type="button"
+              >
+                {{type === 'edit' ? 'Lưu' : 'Thêm chương'}}
+              </button>
+            </div>
+          </ng-container>
+
+          <ng-template #showAction>
+            <div *ngIf="type === 'edit'; else create">
+              <button
+                mat-flat-button
+                (click)="saveChapterEvent.emit()"
+                [ngClass]="{'bg-green-400': chapterForm.dirty && chapterForm.valid , 'bg-gray-400': !chapterForm.dirty || chapterForm.invalid}"
+                class="text-sm md:text-xs lg:text-base xl:text-base w-full text-white cursor-pointer rounded-md border-green-400 focus:shadow-outline focus:outline-none py-2 px-4"
+                type="button"
+              >
+                Lưu
+              </button>
+            </div>
+            <ng-template #create>
+              <div>
+                <button
+                  mat-flat-button
+                  (click)="saveChapterEvent.emit()"
+                  [ngClass]="{'bg-green-400': chapterForm.dirty && chapterForm.valid , 'bg-gray-400': !chapterForm.dirty || chapterForm.invalid}"
+                  class="text-sm md:text-xs lg:text-base xl:text-base w-full text-white cursor-pointer rounded-md border-green-400 focus:shadow-outline focus:outline-none py-2 px-4"
+                  type="button"
+                >
+                  Thêm chương
+                </button>
+              </div>
+            </ng-template>
+          </ng-template>
+          <div class="ml-2">
+            <button
+              mat-flat-button
+              (click)="openPreview()"
+              class="bg-gray-400 text-sm md:text-xs lg:text-base xl:text-base w-full text-white cursor-pointer rounded-md border-green-400 focus:shadow-outline focus:outline-none py-2 px-4"
+              type="button"
+            >
+              Xem trước
+            </button>
+          </div>
         </div>
         <wrt-menu-btn class="mt-1"></wrt-menu-btn>
       </div>

@@ -1,9 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  StorybookSupportModule,
-  GlobalDesignSystemAtomicModule,
-} from '@awread/global/design-system';
+import { GlobalDesignSystemAtomicModule, StorybookSupportModule } from '@awread/global/design-system';
 import { TabCategoryMolec } from './molecs/tab-category/tab-category.molec';
 import { TabBookMolec } from './molecs/tab-book/tab-book.molec';
 import { TabPageMolec } from './molecs/tab-page/tab-page.molec';
@@ -44,10 +41,7 @@ import { DetailBookTemplate } from './templates/detail-book/detail-book.template
 import { SearchFormMolec } from './molecs/search-form/search-form.molec';
 import { DetailBookSidebarOrgan } from './organs/detail-book-sidebar/detail-book-sidebar.organ';
 import { CarouselModule } from 'ngx-owl-carousel-o';
-import {
-  BrowserAnimationsModule,
-  NoopAnimationsModule,
-} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { HeadReadBookMolec } from './molecs/head-read-book/head-read-book.molec';
 import { FormCommentBookReadMolec } from './molecs/form-comment-book-read/form-comment-book-read.molec';
 import { CommentBookReadOrgan } from './organs/comment-book-read/comment-book-read.organ';
@@ -163,4 +157,4 @@ import { CommentItemMolec } from './molecs/comment-item/comment-item.molec';
     CommentItemMolec,
   ],
 })
-export class ReaderWebUiMarketAtomicModule {}
+export class ReaderWebUiMarketAtomicModule { }

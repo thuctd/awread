@@ -1,11 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Output,
-  Input,
-  EventEmitter,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Output, Input, EventEmitter } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
@@ -22,7 +15,7 @@ export class SearchBookAtom implements OnInit {
   @Output() searchEvent = new EventEmitter();
   @Input() faIcon = faSearch;
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

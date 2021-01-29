@@ -1,10 +1,5 @@
 import { FormGroup } from '@angular/forms';
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Input,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 
 @Component({
   selector: 'editprofile-form',
@@ -17,7 +12,7 @@ export class EditprofileFormMolec implements OnInit {
   @Input() submitted: boolean;
   items = [{ key: 'Tên' }, { key: 'Tên tài khoản' }, { key: 'Liên kết' }];
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

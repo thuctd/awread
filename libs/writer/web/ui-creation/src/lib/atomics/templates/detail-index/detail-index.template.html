@@ -3,8 +3,15 @@
     <!-- <detail-upload-form [form]="bookForm"></detail-upload-form> -->
     <div class="pt-10">
       <div class="" autocomplete="off">
-        <img [src]="bookForm.get('img').value" alt="" class="w-full rounded-lg shadow mb-4 ng-star-inserted" />
-        <cr-submit-btn [active]="true" [submitText]="'Chỉnh sửa ảnh bìa'"></cr-submit-btn>
+        <img
+          [src]="bookForm.get('img').value"
+          alt=""
+          class="w-full rounded-lg shadow mb-4 ng-star-inserted"
+        />
+        <cr-submit-btn
+          [active]="true"
+          [submitText]="'Chỉnh sửa ảnh bìa'"
+        ></cr-submit-btn>
         <!-- <detail-upload-img></detail-upload-img> -->
       </div>
     </div>
@@ -12,14 +19,18 @@
     <detail-link-btns></detail-link-btns>
   </div>
   <div class="col-span-2 md:col-span-9 p-4 rounded-sm">
-    <div class="bg-white relative w-full shadow-md">
+    <div class="bg-white relative w-full shadow-md p-2">
       <!-- <detail-tab-head #tabHead [tabs]="tabsHead" class="mb-4"></detail-tab-head> -->
       <div class="flex mb-4 shadow-b">
         <div class="w-full flex">
           <ng-container *ngFor="let tab of tabsHead">
             <div class="lg:pr-0 xl:pr-4">
               <div class="text-center">
-                <a (click)="switchTabEvent.emit(tab.tabName)" [ngClass]="selectedTab === tab.tabName ? 'text-green-400 border-b-4 border-green-400' : 'text-gray-400'" class="inline-block font-bold py-4 px-5 cursor-pointer md:text-lg xl:text-xl">
+                <a
+                  (click)="switchTabEvent.emit(tab.tabName)"
+                  [ngClass]="selectedTab === tab.tabName ? 'text-green-400 border-b-4 border-green-400' : 'text-gray-400'"
+                  class="inline-block font-bold py-4 px-5 cursor-pointer md:text-lg xl:text-xl"
+                >
                   {{ tab.name | titlecase }}
                 </a>
               </div>
@@ -27,10 +38,36 @@
           </ng-container>
         </div>
       </div>
-      <index class="pl-2" *ngIf="selectedTab === 'toc'" [chapters]="chapters" (chapterActionEvent)="chapterActionEvent.emit($event)" (createNewChapterEvent)="createNewChapterEvent.emit()"></index>
-      <detail class="pl-2" *ngIf="selectedTab === 'book'" [bookForm]="bookForm" [submitted]="submitted" [categories]="categories" [genres]="genres" (bookSubmitEvent)="bookSubmitEvent.emit()" (genresEvent)="genresEvent.emit($event)"></detail>
-      <div class="absolute right-2 top-3 justify-end flex z-40" *ngIf="selectedTab === 'book'">
-        <cr-submit-btn *ngFor="let btn of btns" [active]="btn.status === 'CONTINUE'" (click)="actionBookEvent.emit(btn.status)" [submitText]="btn.submitText" class="mx-2"></cr-submit-btn>
+      <index
+        class="pl-2"
+        *ngIf="selectedTab === 'toc'"
+        [chapters]="chapters"
+        (chapterActionEvent)="chapterActionEvent.emit($event)"
+        (createNewChapterEvent)="createNewChapterEvent.emit()"
+      ></index>
+      <detail
+        class="pl-2"
+        *ngIf="selectedTab === 'book'"
+        [bookForm]="bookForm"
+        [submitted]="submitted"
+        [categories]="categories"
+        [genres]="genres"
+        (bookSubmitEvent)="bookSubmitEvent.emit()"
+        (genresEvent)="genresEvent.emit($event)"
+      ></detail>
+      <div
+        class="absolute right-2 top-3 justify-end flex z-40"
+        *ngIf="selectedTab === 'book' && !bookId"
+      >
+        <!-- [active]="btn.status === 'CONTINUE'" -->
+
+        <cr-submit-btn
+          *ngFor="let btn of btns"
+          (click)="cancelCreateBook.emit(btn.status)"
+          [active]="false"
+          [submitText]="btn.submitText"
+          class="mx-2"
+        ></cr-submit-btn>
 
         <!-- Logic xu ly trang thai truyen -->
         <!-- <cr-submit-btn

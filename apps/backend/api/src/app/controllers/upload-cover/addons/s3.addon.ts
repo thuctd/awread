@@ -43,26 +43,19 @@ export class S3Addon {
     await this.uploadS3(file.buffer, bucketS3, originalname);
   }
 
-  async uploadMulti(buffers: { [kind: string]: Buffer }, bucket: string, name: string, extName: string) {
-    return Promise.all(Object
-      .entries(buffers)
-      .map(async ([kind, buffer]) => {
-        let fullname: string;
-        switch (kind) {
-          case 'webp':
-            fullname = `${kind}/${name}.${kind}`
-            break;
-          default:
-            fullname = `${kind}/${name}.${extName}`
-            break;
-        }
-        try {
-          return this.uploadS3(buffer, bucket, fullname)
-        } catch (error) {
-          return error
-        }
-      })
-      .filter(error => error)
+  async uploadMulti(buffers: { extension: string, sizeName: string, buffer: Buffer }[], bucket: string, name: string, kind: string) {
+    return Promise.all(
+      buffers
+        .map(async (payload) => {
+          let folderName;
+          let sizeName;
+          let uploadAction;
+          try {
+            return await this.uploadS3(payload.buffer, bucket, `${kind}/${payload.sizeName}/${name}.${payload.extension}`);
+          } catch (error) {
+            return error
+          }
+        })
     )
   }
 
@@ -76,10 +69,10 @@ export class S3Addon {
 
     try {
       const data = await this.newClient.send(new PutObjectCommand(uploadParams));
-      console.log('Success', data);
+      // console.log('Success', data);
     } catch (err) {
       Logger.error(err);
-      console.log('Error', err);
+      console.error('s3: Upload Image Error', err);
     }
   }
 

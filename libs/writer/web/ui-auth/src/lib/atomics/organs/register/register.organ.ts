@@ -1,12 +1,5 @@
 import { FormGroup } from '@angular/forms';
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Output,
-  EventEmitter,
-  Input,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter, Input } from '@angular/core';
 
 @Component({
   selector: 'register',
@@ -17,7 +10,7 @@ import {
 export class RegisterOrgan implements OnInit {
   @Output() regiterEvent = new EventEmitter();
   @Input() authForm: FormGroup;
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }
