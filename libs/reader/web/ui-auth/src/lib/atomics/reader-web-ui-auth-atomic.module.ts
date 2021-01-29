@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { WriterWebUiAuthAtomicModule } from '@awread/writer/web/ui-auth';
+// TODO: looking ways to 
+// import { WriterWebUiAuthAtomicModule } from '@awread/writer/web/ui-auth';
 import { GlobalDesignSystemAtomicModule, StorybookSupportModule } from '@awread/global/design-system';
 import { BgAuthMobileMolec } from './molecs/bg-auth-mobile/bg-auth-mobile.molec';
 import { CheckMailMolec } from './molecs/check-mail/check-mail.molec';
@@ -23,7 +24,7 @@ import { RegisterWebTemplate } from './templates/register-web/register-web.templ
     CommonModule,
     StorybookSupportModule,
     GlobalDesignSystemAtomicModule,
-    WriterWebUiAuthAtomicModule,
+    // WriterWebUiAuthAtomicModule,
   ],
   exports: [
     BgAuthMobileMolec,

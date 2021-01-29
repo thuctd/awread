@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
-import { OwlOptions } from 'ngx-owl-carousel-o';
+import type { OwlOptions } from 'ngx-owl-carousel-o';
 @Component({
   selector: 'tab-book',
   templateUrl: './tab-book.molec.html',
