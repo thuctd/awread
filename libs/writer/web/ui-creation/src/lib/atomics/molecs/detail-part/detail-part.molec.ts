@@ -6,8 +6,13 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   styleUrls: ['./detail-part.molec.scss'],
 })
 export class DetailPartMolec implements OnInit {
-  @Input() chapter;
-  constructor() { }
+  @Input() chapter = {
+    chapterNumber: '',
+    title: '',
+    status: '',
+    updatedat: '',
+  };
+  constructor() {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }

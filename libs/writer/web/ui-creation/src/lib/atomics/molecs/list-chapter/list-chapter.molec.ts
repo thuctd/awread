@@ -8,11 +8,15 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListChapterMolec implements OnInit {
-  @Input() book: Book;
+  @Input() book = {
+    totalChapterCountPublished: 1,
+    updatedat: '',
+    totalChapterCount: 1,
+  };
   @Input() countTotal = 1000;
   @Input() countPublished = 50;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }

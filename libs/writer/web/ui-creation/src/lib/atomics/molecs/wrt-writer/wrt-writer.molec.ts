@@ -8,9 +8,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WrtWriterMolec implements OnInit {
-  @Input() chapterForm: FormGroup;
+  @Input() chapterForm: FormGroup = this.fb.group({
+    title: ['', Validators.required],
+    content: ['', Validators.required],
+  });
   @Input() submitted: boolean;
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }
