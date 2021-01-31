@@ -4,7 +4,13 @@ import { FormGroup } from '@angular/forms';
 @Component({
   selector: 'info-form',
   templateUrl: './info-form.molec.html',
-  styleUrls: ['./info-form.molec.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InfoFormMolec implements OnInit {

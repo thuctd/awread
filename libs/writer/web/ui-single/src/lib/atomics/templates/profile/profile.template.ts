@@ -4,7 +4,13 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, EventEmitter, Output
 @Component({
   selector: 'profile',
   templateUrl: './profile.template.html',
-  styleUrls: ['./profile.template.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfileTemplate implements OnInit {

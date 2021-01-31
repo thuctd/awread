@@ -4,25 +4,25 @@
 
   <div class="mb-4 flex items-center justify-between">
     <label class="text-gray-400 w-2/6">Tên</label>
-    <input formControlName="fullname" class="border rounded-full border-gray-300 focus:outline-none px-2 py-1 w-4/6" />
+    <input formControlName="fullname" placeholder="Tên..." class="border rounded-full border-gray-300 text-gray-700 focus:border-green-400 focus:outline-none px-4 py-1 w-4/6" />
   </div>
-  <div *ngIf="submitted && profileForm.controls.fullname.errors" class="invalid-feedback">
+  <div *ngIf="submitted && profileForm.controls.fullname.errors" class="text-red-600 mt-1">
     <div *ngIf="profileForm.controls.fullname.errors.required">
       Tên là không được để trống
     </div>
   </div>
   <div class="mb-4 flex items-center justify-between">
     <label class="text-gray-400 w-2/6">Tên tài khoản</label>
-    <input formControlName="username" class="border rounded-full border-gray-300 focus:outline-none px-2 py-1 w-4/6" />
+    <input formControlName="username" placeholder="Tên tài khoản..." class="border rounded-full border-gray-300 text-gray-700 focus:border-green-400 focus:outline-none px-4 py-1 w-4/6" />
   </div>
 
   <div class="mb-4 flex items-center justify-between">
     <label class="text-gray-400 w-2/6">Liên kết</label>
-    <input formControlName="website" class="border rounded-full border-gray-300 focus:outline-none px-2 py-1 w-4/6" />
+    <input formControlName="website" placeholder="Liên kết..." class="border rounded-full border-gray-300 text-gray-700 focus:border-green-400 focus:outline-none px-4 py-1 w-4/6" />
   </div>
 
   <div class="mb-4 flex items-center justify-between">
     <label class="text-gray-400 w-2/6">Tiểu sử</label>
-    <textarea formControlName="introduce" class="border rounded-xl border-gray-300 focus:outline-none px-2 py-1 h-20 float-right w-4/6"></textarea>
+    <textarea formControlName="introduce" placeholder="Tiểu sử..." class="border rounded-xl border-gray-300 text-gray-700 focus:border-green-400 focus:outline-none px-4 py-1 h-20 float-right w-4/6"></textarea>
   </div>
 </section>

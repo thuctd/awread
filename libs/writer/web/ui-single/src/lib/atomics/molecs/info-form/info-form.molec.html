@@ -7,8 +7,9 @@
   ></input-form-profile> -->
 
   <div class="mb-4 flex items-center">
-    <label class="text-gray-400  w-1/3">Email</label>
-    <input formControlName="email" class="border rounded-full border-gray-300 py-1 w-2/3 focus:outline-none px-3 " />
+    <label class="text-gray-400 w-1/3">Email</label>
+    <input formControlName="email" placeholder="Email..."
+      class="border rounded-full border-gray-300 py-1 w-2/3 focus:border-green-400 focus:outline-none px-4 " />
   </div>
   <!-- Loi required -->
   <div *ngIf="submitted && profileForm.controls.email.errors" class="invalid-feedback">
@@ -24,19 +25,25 @@
   </div>
   <div class="mb-4 flex items-center">
     <label class="text-gray-400 w-1/3">Số điện thoại</label>
-    <input formControlName="phone" class="border rounded-full border-gray-300 py-1 w-2/3 focus:outline-none px-3 " />
+    <input formControlName="phone" placeholder="Số điện thoại..."
+      class="border rounded-full border-gray-300 focus:border-green-400 py-1 w-2/3 focus:outline-none px-4 " />
   </div>
 
   <div class="mb-4 flex items-center">
     <label class="text-gray-400 w-1/3">Năm sinh</label>
-    <div class=" w-2/3 ">
-      <input formControlName="dob" class="border rounded-full border-gray-300  py-1 w-44 py-1 focus:outline-none px-3 mr-28" />
+    <div class=" w-2/3">
+      <input formControlName="dob" type="date" class="border rounded-full border-gray-300  py-1 w-48 focus:outline-none px-4 mr-28" />
     </div>
   </div>
   <div class="flex items-center">
     <label class="text-gray-400 w-1/3">Giới tính</label>
     <div class=" w-2/3 ">
-      <input formControlName="gender" class="border rounded-full border-gray-300 py-1 w-28 focus:outline-none px-3 mr-44" />
+      <!-- <input formControlName="gender" class="border rounded-full border-gray-300 py-1 w-28 focus:outline-none px-3 mr-44" /> -->
+      <select formControlName="gender" class="border rounded-full bg-white px-3 py-2 focus:border-green-400 outline-none" value="1">
+        <option class="py-1">Nam</option>
+        <option class="py-1">Nữ</option>
+        <option class="py-1">Khác</option>
+      </select>
     </div>
   </div>
 </section>
