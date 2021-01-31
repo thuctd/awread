@@ -27,6 +27,7 @@ jobs:
 
   review_app:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     env:
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
     # only run when a pull request is opened
@@ -36,17 +37,22 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
-
+      - name: noti building
+        uses: act10ns/slack@v1
+        with:
+          status: Đang build review app cho story-writer-web...
+          channel: '#workflows'
+        if: always()
       - name: Push to dokku
         uses: dokku/github-action@master
         with:
           # create a review app
           command: review-apps:create
-          git_remote_url: 'ssh://dokku@awread.vn:22/story-writer-web'
-          # specify a name for the review app
           git_push_flags: '--force'
-          review_app_name: review-story-writer-web-${{ github.event.pull_request.number }}
+          git_remote_url: 'ssh://dokku@awread.vn:22/story-writer-web'
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+          # specify a name for the review app
+          review_app_name: review-story-writer-web-${{ github.event.pull_request.number }}
       - name: Slack Notification
         uses: act10ns/slack@v1
         with:
@@ -54,6 +60,7 @@ jobs:
           steps: ${{ toJson(steps) }}
           channel: '#build-storybook'
         if: always()
+
   destroy_review_app:
     runs-on: ubuntu-latest
     # only run when a pull request is closed
