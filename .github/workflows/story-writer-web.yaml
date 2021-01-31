@@ -67,6 +67,8 @@ jobs:
           review_app_name: review-story-writer-web-${{ github.event.pull_request.number }}
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
     if: github.event_name == 'pull_request' && github.event.pull_request.merged == true
+    env:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
     steps:
       - name: merge this branch to develop
         uses: actions/checkout@v2
