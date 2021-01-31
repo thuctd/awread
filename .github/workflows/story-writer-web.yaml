@@ -41,7 +41,7 @@ jobs:
         uses: act10ns/slack@v1
         with:
           status: Đang build review app cho story-writer-web...
-          channel: '#workflows'
+          channel: '#build-storybook'
         if: always()
       - name: Push to dokku
         uses: dokku/github-action@master
