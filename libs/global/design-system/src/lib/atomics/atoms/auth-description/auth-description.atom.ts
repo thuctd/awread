@@ -7,7 +7,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AuthDescriptionAtom implements OnInit {
-  @Input() description = 'Đây là phần mô tả của phần đăng nhập!';
+  @Input() description = 'Đây là phần mô tả của phần đăng nhập!!!!';
   constructor() { }
 
   ngOnInit(): void {
