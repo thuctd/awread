@@ -46,6 +46,8 @@ jobs:
           review_app_name: review-story-writer-web-${{ github.event.pull_request.number }}
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
       - name: Slack Notification
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
         uses: act10ns/slack@v1
         with:
           status: ${{ job.status }}
@@ -67,18 +69,17 @@ jobs:
           review_app_name: review-story-writer-web-${{ github.event.pull_request.number }}
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
         if: github.event_name == 'pull_request' && github.event.pull_request.merged == true
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
-      - name: merge this branch to develop
-        uses: actions/checkout@v2
-      - name: Set Git config
-        run: |
-          git config --local user.email "actions@github.com"
-          git config --local user.name "Github Actions"
-      - name: checkout develop then merge
-        run: |
-          git fetch --unshallow
-          git checkout develop
-          git pull
-          git merge --no-ff story-writer-web -m "Auto-merge story-writer-web back to develop"
-          git push
+        
+          - name: merge this branch to develop
+            uses: actions/checkout@v2
+          - name: Set Git config
+            run: |
+              git config --local user.email "actions@github.com"
+              git config --local user.name "Github Actions"
+          - name: checkout develop then merge
+            run: |
+              git fetch --unshallow
+              git checkout develop
+              git pull
+              git merge --no-ff story-writer-web -m "Auto-merge story-writer-web back to develop"
+              git push
