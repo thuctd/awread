@@ -86,6 +86,9 @@ import { RdListTabPageAtom } from './atoms/rd-list-tab-page/rd-list-tab-page.ato
 import { BtnSwitchChapterAtom } from './atoms/btn-switch-chapter/btn-switch-chapter.atom';
 import { BtnSelectAtom } from './atoms/btn-select/btn-select.atom';
 import { BtnBackToTopAtom } from './atoms/btn-back-to-top/btn-back-to-top.atom';
+import { PopupCoverHeaderAtom } from './atoms/popup-cover-header/popup-cover-header.atom';
+import { ProcessBarAtom } from './atoms/process-bar/process-bar.atom';
+import { BtnInputFileAtom } from './atoms/btn-input-file/btn-input-file.atom';
 
 @NgModule({
   imports: [
@@ -182,6 +185,9 @@ import { BtnBackToTopAtom } from './atoms/btn-back-to-top/btn-back-to-top.atom';
     BtnSwitchChapterAtom,
     BtnSelectAtom,
     BtnBackToTopAtom,
+    PopupCoverHeaderAtom,
+    ProcessBarAtom,
+    BtnInputFileAtom,
   ],
   declarations: [
     TabBtnAtom,
@@ -264,6 +270,9 @@ import { BtnBackToTopAtom } from './atoms/btn-back-to-top/btn-back-to-top.atom';
     BtnSwitchChapterAtom,
     BtnSelectAtom,
     BtnBackToTopAtom,
+    PopupCoverHeaderAtom,
+    ProcessBarAtom,
+    BtnInputFileAtom,
   ],
 })
 export class GlobalDesignSystemAtomicModule { }

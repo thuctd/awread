@@ -1,4 +1,4 @@
 <section>
   <img-profile [imgSrc]="imgSrc" [isSize]="'smail'"></img-profile>
-  <changephoto-profile class="-mt-14 absolute"></changephoto-profile>
+  <changephoto-profile (eventChangeImg)="eventChangeImg.emit()" class="-mt-14 absolute"></changephoto-profile>
 </section>

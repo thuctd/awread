@@ -12,7 +12,6 @@ import { DetailBookFormMolec } from './molecs/detail-book-form/detail-book-form.
 import { DetailOrgan } from './organs/detail/detail.organ';
 import { IndexOrgan } from './organs/index/index.organ';
 import { DetailIndexTemplate } from './templates/detail-index/detail-index.template';
-import { GenresFieldModule, InfiniteScrollModule, LoaderModule } from '@awread/global/packages';
 import { DetailLinkBtnsMolec } from './molecs/detail-link-btns/detail-link-btns.molec';
 import { ListActMolec } from './molecs/list-act/list-act.molec';
 import { ListChapterMolec } from './molecs/list-chapter/list-chapter.molec';
@@ -31,6 +30,8 @@ import { InfoBookMolec } from './molecs/info-book/info-book.molec';
 import { DetailBookOrgan } from './organs/detail-book/detail-book.organ';
 import { DetailBookTemplate } from './templates/detail-book/detail-book.template';
 import { ReadTemplate } from './templates/read/read.template';
+import { PopupEditCoverBookTemplate } from './templates/popup-edit-cover-book/popup-edit-cover-book.template';
+import { GenresFieldModule, InfiniteScrollModule, LoaderModule } from '@awread/global/packages';
 
 @NgModule({
   imports: [
@@ -75,6 +76,7 @@ import { ReadTemplate } from './templates/read/read.template';
     DetailBookOrgan,
     DetailBookTemplate,
     ReadTemplate,
+    PopupEditCoverBookTemplate,
   ],
   declarations: [
     WrtHeadMolec,
@@ -102,6 +104,7 @@ import { ReadTemplate } from './templates/read/read.template';
     DetailBookOrgan,
     DetailBookTemplate,
     ReadTemplate,
+    PopupEditCoverBookTemplate,
   ],
 })
 export class WriterWebUiCreationAtomicModule { }

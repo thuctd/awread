@@ -1,0 +1,8 @@
+<atom-example-dialog class="h-full">
+    <section class="bg-white relative h-full">
+        <atom-popup-cover-header [title]="title"></atom-popup-cover-header>
+        <template-popup-cover-image [status]="status" class="h-5/6" [percentLoading]="percentLoading" [controlName]="controlName"
+            (eventChooseImage)="eventChooseImage($event)" (submitEvent)="submitEvent($event)">
+        </template-popup-cover-image>
+    </section>
+</atom-example-dialog>
