@@ -115,8 +115,8 @@ jobs:
           # specify a name for the review app
           review_app_name: review-story-writer-web-${{ github.event.pull_request.number }}
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
-      - name: noti on merged
-        if: github.event.pull_request.merged == true
+      - if: github.event.pull_request.merged == 'true'
+        name: noti on merged
         uses: edge/simple-slack-notify@master
         with:
           username: 'Bạch Tuộc Nướng'
