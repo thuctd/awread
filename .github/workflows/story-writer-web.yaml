@@ -99,11 +99,13 @@ jobs:
     steps:
       - name: noti building
         uses: edge/simple-slack-notify@master
-        if: always()
         with:
           username: 'Bạch Tuộc Nướng'
           text: 'Bắt đầu đi dọn dẹp mâm #${{ github.event.pull_request.number }}, không ăn ở đây nữa nha!!! http://review-story-writer-web-${{ github.event.pull_request.number }}.awread.vn'
           channel: '#build-storybook'
+          fields: |
+            [{ "title": "github.event.pull_request.merged", "value": "${{ github.event.pull_request.merged }}", "short": true },
+            { "title": "github.event.action", "value": "${{ github.event.action }}", "short": true }]
       - name: Destroy the review app
         uses: dokku/github-action@master
         with:
@@ -120,7 +122,6 @@ jobs:
           username: 'Bạch Tuộc Nướng'
           text: 'Dọn đồ nướng cất đi và đem mực nướng còn thừa về develop'
           channel: '#build-storybook'
-          if: always()
       - name: merge this branch to develop
         uses: actions/checkout@v2
       - name: Set Git config
@@ -132,5 +133,5 @@ jobs:
           git fetch --unshallow
           git checkout develop
           git pull
-          git merge --no-ff story-writer-web -m "Auto-merge story-writer-web back to develop"
+          git merge --no-ff origin/story-writer-web -m "Auto-merge story-writer-web back to develop"
           git push
