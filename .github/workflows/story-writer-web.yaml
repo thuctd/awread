@@ -105,7 +105,6 @@ jobs:
           channel: '#build-storybook'
           fields: |
             [{ "title": "github.event.pull_request.merged", "value": "${{ github.event.pull_request.merged }}", "short": true },
-            [{ "title": "github.event.pull_request.merged is == true?", "value": "${{ github.event.pull_request.merged == true }}", "short": true },
             { "title": "github.event.action", "value": "${{ github.event.action }}", "short": true }]
       - name: Destroy the review app
         uses: dokku/github-action@master
