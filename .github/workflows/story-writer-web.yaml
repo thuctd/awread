@@ -105,6 +105,7 @@ jobs:
           channel: '#build-storybook'
           fields: |
             [{ "title": "github.event.pull_request.merged", "value": "${{ github.event.pull_request.merged }}", "short": true },
+            [{ "title": "github.event.pull_request.merged is == true?", "value": "${{ github.event.pull_request.merged == true }}", "short": true },
             { "title": "github.event.action", "value": "${{ github.event.action }}", "short": true }]
       - name: Destroy the review app
         uses: dokku/github-action@master
@@ -115,23 +116,25 @@ jobs:
           # specify a name for the review app
           review_app_name: review-story-writer-web-${{ github.event.pull_request.number }}
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
-      - if: github.event.pull_request.merged
+      - if: github.event.pull_request.merged == true
         name: noti on merged
         uses: edge/simple-slack-notify@master
         with:
           username: 'Bạch Tuộc Nướng'
           text: 'Dọn đồ nướng cất đi và đem mực nướng còn thừa về develop'
           channel: '#build-storybook'
-      - name: merge this branch to develop
         uses: actions/checkout@v2
-      - name: Set Git config
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "Github Actions"
-      - name: checkout develop then merge
         run: |
           git fetch --unshallow
           git checkout develop
           git pull
           git merge --no-ff origin/story-writer-web -m "Auto-merge story-writer-web back to develop"
           git push
+        uses: edge/simple-slack-notify@master
+        with:
+          username: 'Bạch Tuộc Nướng'
+          text: 'xong!!!'
+          channel: '#build-storybook'
