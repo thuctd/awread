@@ -29,7 +29,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     env:
-      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL  }}
     # only run when a pull request is opened
     if: github.event_name == 'pull_request' && (github.event.action == 'opened' || github.event.action == 'synchronize')
     steps:
@@ -38,11 +38,12 @@ jobs:
         with:
           fetch-depth: 0
       - name: noti building
-        uses: act10ns/slack@v1
-        with:
-          status: Đang build review app cho story-writer-web...
-          channel: '#build-storybook'
+        uses: edge/simple-slack-notify@master
         if: always()
+        with:
+          username: 'Bạch Tuộc Nướng'
+          text: 'Đang nướng bạch tuộc số: #${{ github.event.pull_request.number }}-${{ github.event.pull_request.title }} bởi đầu bếp ${{ github.event.pull_request.user.avatar_url }} ${{ github.event.pull_request.user.login }}'
+          channel: '#build-storybook'
       - name: Push to dokku
         uses: dokku/github-action@master
         with:
@@ -52,13 +53,18 @@ jobs:
           git_remote_url: 'ssh://dokku@awread.vn:22/story-writer-web'
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
           # specify a name for the review app
-          review_app_name: review-story-writer-web-${{ github.event.pull_request.number }}
+          review_app_name: w-${{ github.event.pull_request.number }}
       - name: Slack Notification
         uses: act10ns/slack@v1
         with:
-          status: ${{ job.status }}
-          steps: ${{ toJson(steps) }}
           channel: '#build-storybook'
+          status: ${{ job.status }}
+          success_text: '${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) nướng thành công, xem thêm tại: http://w-${{ github.event.pull_request.number }}.awread.vn'
+          failure_text: '${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) nướng hỏng'
+          cancelled_text: '${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) nướng bị hủy'
+          fields: |
+            [{ "title": "Repository", "value": "${env.GITHUB_REPOSITORY}", "short": true },
+            { "title": "Branch", "value": "${env.BRANCH}", "short": true }]
         if: always()
 
   destroy_review_app:
