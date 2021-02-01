@@ -1,4 +1,5 @@
-<section class="h-screen flex flex-col items-center justify-center -mt-20">
-  <navbar-icon routerLinkActive="active" *ngFor="let nav of lefNavData" [iconUrl]="nav.iconUrl" [iconUrl2]="nav.iconUrl2" [linkTo]="nav.linkTo" [linkName]="nav.name"></navbar-icon>
+<section class="flex flex-col items-center justify-center">
+  <navbar-icon routerLinkActive="active" *ngFor="let nav of lefNavData" [iconUrl]="nav.iconUrl" [iconUrl2]="nav.iconUrl2" [linkTo]="nav.linkTo"
+    [linkName]="nav.name"></navbar-icon>
   <menu-navleft></menu-navleft>
 </section>
