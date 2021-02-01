@@ -1,0 +1,101 @@
+name: 'storybook: reader-web'
+on:
+  push:
+    branches:
+      - story-reader-web
+  pull_request:
+    branches:
+      - story-reader-web
+
+jobs:
+  pull_request:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL  }}
+    # only run when a pull request is closed
+    if: github.event_name == 'pull_request'
+    steps:
+      - name: noti building
+        uses: edge/simple-slack-notify@master
+        if: always()
+        with:
+          username: 'Bạch Tuộc Nướng'
+          text: 'pull_request'
+          channel: '#botnet'
+  pull_request_opened:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL  }}
+    # only run when a pull request is closed
+    if: github.event_name == 'pull_request' && github.event.action == 'opened'
+    steps:
+      - name: noti building
+        uses: edge/simple-slack-notify@master
+        if: always()
+        with:
+          username: 'Bạch Tuộc Nướng'
+          text: 'pull_request_opened'
+          channel: '#botnet'
+  pull_request_closed:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL  }}
+    # only run when a pull request is closed
+    if: github.event_name == 'pull_request' && github.event.action == 'closed'
+    steps:
+      - name: noti building
+        uses: edge/simple-slack-notify@master
+        if: always()
+        with:
+          username: 'Bạch Tuộc Nướng'
+          text: 'pull_request_closed'
+          channel: '#botnet'
+  pull_request_closed_merged:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL  }}
+    # only run when a pull request is closed
+    if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
+    steps:
+      - name: noti building
+        uses: edge/simple-slack-notify@master
+        if: always()
+        with:
+          username: 'Bạch Tuộc Nướng'
+          text: 'pull_request_closed_merged'
+          channel: '#botnet'
+  pull_request_multi_step:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL  }}
+    # only run when a pull request is closed
+    if: github.event_name == 'pull_request'
+    steps:
+      - name: noti building
+        uses: edge/simple-slack-notify@master
+        if: always()
+        with:
+          username: 'Bạch Tuộc Nướng'
+          text: 'pull_request_multi_step_1'
+          channel: '#botnet'
+      - name: noti building
+        if: github.event.action == 'closed'
+        uses: edge/simple-slack-notify@master
+        if: always()
+        with:
+          username: 'Bạch Tuộc Nướng'
+          text: 'pull_request_multi_step_2'
+          channel: '#botnet'
+      - name: noti building
+        if: github.event.pull_request.merged == true
+        uses: edge/simple-slack-notify@master
+        if: always()
+        with:
+          username: 'Bạch Tuộc Nướng'
+          text: 'pull_request_multi_step_3'
+          channel: '#botnet'
