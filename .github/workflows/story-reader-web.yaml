@@ -4,15 +4,15 @@ on:
     branches:
       - story-reader-web
   pull_request:
+    branches:
+      - story-reader-web
      types: 
      # more on https://github.community/t/pull-request-action-does-not-run-on-merge/16092/8
-      - closed # need this to trigger close PR
+     # need this to trigger close PR
+      - closed 
       - opened
       - reopened
       - synchronize
-    branches:
-      - story-reader-web
-
 jobs:
   pull_request:
     runs-on: ubuntu-latest
