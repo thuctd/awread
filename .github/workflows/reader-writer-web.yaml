@@ -71,7 +71,7 @@ jobs:
           username: 'Bạch Tuộc Nướng'
           text: 'pull_request_closed_merged'
           channel: '#botnet'
-          
+
   pull_request_multi_step:
     runs-on: ubuntu-latest
     timeout-minutes: 30
@@ -87,16 +87,18 @@ jobs:
           username: 'Bạch Tuộc Nướng'
           text: 'pull_request_multi_step_1'
           channel: '#botnet'
+       
+       if: github.event.action == 'closed'
       - name: noti building
-        if: github.event.action == 'closed'
         uses: edge/simple-slack-notify@master
         if: always()
         with:
           username: 'Bạch Tuộc Nướng'
           text: 'pull_request_multi_step_2'
           channel: '#botnet'
-      - name: noti building
+       
         if: github.event.pull_request.merged == true
+      - name: noti building
         uses: edge/simple-slack-notify@master
         if: always()
         with:
