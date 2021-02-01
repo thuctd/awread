@@ -4,6 +4,12 @@ on:
     branches:
       - story-reader-web
   pull_request:
+     types: 
+      - closed # need this to trigger close PR
+      - opened
+      - reopened
+      - synchronize
+      
     branches:
       - story-reader-web
 
