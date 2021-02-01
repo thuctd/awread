@@ -85,17 +85,17 @@ jobs:
           username: 'Bạch Tuộc Nướng'
           text: 'pull_request_multi_step_1'
           channel: '#botnet'
-        - name: on close
-          if: github.event.action == 'closed'
-          uses: edge/simple-slack-notify@master
-          with:
-            username: 'Bạch Tuộc Nướng'
-            text: 'pull_request_multi_step_2'
-            channel: '#botnet'
-        - name: on merge
+      - name: on close
+        if: github.event.action == 'closed'
+        uses: edge/simple-slack-notify@master
+        with:
+          username: 'Bạch Tuộc Nướng'
+          text: 'pull_request_multi_step_2'
+          channel: '#botnet'
+      - name: on merge
         if: github.event.pull_request.merged == true
-          uses: edge/simple-slack-notify@master
-          with:
-            username: 'Bạch Tuộc Nướng'
-            text: 'pull_request_multi_step_3'
-            channel: '#botnet'
+        uses: edge/simple-slack-notify@master
+        with:
+          username: 'Bạch Tuộc Nướng'
+          text: 'pull_request_multi_step_3'
+          channel: '#botnet'
