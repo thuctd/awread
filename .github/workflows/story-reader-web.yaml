@@ -5,11 +5,11 @@ on:
       - story-reader-web
   pull_request:
      types: 
+     # more on https://github.community/t/pull-request-action-does-not-run-on-merge/16092/8
       - closed # need this to trigger close PR
       - opened
       - reopened
       - synchronize
-      
     branches:
       - story-reader-web
 
