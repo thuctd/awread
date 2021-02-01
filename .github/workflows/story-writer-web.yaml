@@ -10,6 +10,9 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL  }}
     if: github.event_name == 'push'
     steps:
       - name: Cloning repo
@@ -24,6 +27,17 @@ jobs:
           git_push_flags: '--force'
           git_remote_url: 'ssh://dokku@awread.vn:22/story-writer-web'
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+      - name: noti building
+        uses: edge/simple-slack-notify@master
+        if: always()
+        with:
+          channel: '#build-storybook'
+          status: ${{ job.status }}
+          success_text: '${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) bạch tuộc chúa thơm ngon tại: http://story-writer-web.awread.vn'
+          failure_text: '${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) bạch tuộc chúa nướng thành than... :('
+          cancelled_text: '${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) đổi ý không nướng bạch tuộc chúa ăn nữa!'
+          fields: |
+            [{ "title": "chi tiết PR", "value": "${{ github.event.pull_request.html_url }}", "short": true }]
 
   review_app:
     runs-on: ubuntu-latest
@@ -44,7 +58,6 @@ jobs:
           username: 'Bạch Tuộc Nướng'
           text: '${{ github.event.pull_request.user.login }} đang nướng bạch tuộc số: #${{ github.event.pull_request.number }}-${{ github.event.pull_request.title }}'
           channel: '#build-storybook'
-          color: 'good'
           fields: |
             [{ "title": "Từ bếp", "value": "${{ github.event.pull_request.head.ref }}", "short": true },
             { "title": "Đến bếp", "value": "${{ github.event.pull_request.base.ref }}", "short": true }]
@@ -64,7 +77,7 @@ jobs:
         with:
           channel: '#build-storybook'
           status: ${{ job.status }}
-          success_text: '${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) bạch tuộc chính rồi, mau ăn thôi: http://w-${{ github.event.pull_request.number }}.awread.vn'
+          success_text: '${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) bạch tuộc chính rồi, mau ăn thôi: http://review-story-writer-web-${{ github.event.pull_request.number }}.awread.vn'
           failure_text: '${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) bạch tuộc nướng thành than... :('
           cancelled_text: '${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) đổi ý không nướng bạch tuộc ăn nữa!'
           fields: |
@@ -72,6 +85,9 @@ jobs:
 
   destroy_review_app:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL  }}
     # only run when a pull request is closed
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
     steps:
@@ -98,3 +114,10 @@ jobs:
           git pull
           git merge --no-ff story-writer-web -m "Auto-merge story-writer-web back to develop"
           git push
+      - name: noti building
+        uses: edge/simple-slack-notify@master
+        if: always()
+        with:
+          username: 'Bạch Tuộc Nướng'
+          text: 'Dọn mâm!!! Bàn #${{ github.event.pull_request.number }} ăn xong rồi không vào nữa nha!'
+          channel: '#build-storybook'
