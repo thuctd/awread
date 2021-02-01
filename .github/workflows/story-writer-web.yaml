@@ -42,13 +42,12 @@ jobs:
         if: always()
         with:
           username: 'Bạch Tuộc Nướng'
-          text: 'Đang nướng bạch tuộc số: #${{ github.event.pull_request.number }}-${{ github.event.pull_request.title }} bởi đầu bếp ${{ github.event.pull_request.user.login }}'
+          text: '${{ github.event.pull_request.user.login }} đang nướng bạch tuộc số: #${{ github.event.pull_request.number }}-${{ github.event.pull_request.title }}'
           channel: '#build-storybook'
           color: 'good'
           fields: |
-            [{ "title": "Avatar", "value": "${{ github.event.pull_request.user.avatar_url }}", "short": true },
-             { "title": "Branch", "value": "${env.BRANCH}", "short": true },
-             { "title": "PR URL", "value": "${{ github.event.pull_request.html_url }}", "short": true }]
+            [{ "title": "Từ bếp", "value": "${{ github.event.pull_request.head.ref }}", "short": true },
+            { "title": "Đến bếp", "value": "${{ github.event.pull_request.base.ref }}", "short": true }]
       - name: Push to dokku
         uses: dokku/github-action@master
         with:
@@ -58,7 +57,7 @@ jobs:
           git_remote_url: 'ssh://dokku@awread.vn:22/story-writer-web'
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
           # specify a name for the review app
-          review_app_name: w-${{ github.event.pull_request.number }}
+          review_app_name: review-story-writer-web-${{ github.event.pull_request.number }}
       - name: Slack Notification
         uses: edge/simple-slack-notify@master
         if: always()
@@ -69,8 +68,7 @@ jobs:
           failure_text: '${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) bạch tuộc nướng thành than... :('
           cancelled_text: '${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) đổi ý không nướng bạch tuộc ăn nữa!'
           fields: |
-            [{ "title": "Repository", "value": "${env.GITHUB_REPOSITORY}", "short": true },
-            { "title": "Branch", "value": "${env.BRANCH}", "short": true }]
+            [{ "title": "chi tiết PR", "value": "${{ github.event.pull_request.html_url }}", "short": true }]
 
   destroy_review_app:
     runs-on: ubuntu-latest
