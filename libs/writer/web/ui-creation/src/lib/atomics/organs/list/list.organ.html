@@ -21,13 +21,13 @@
 
       <infinite-scroll #infiniteScroll (scrolled)="moreEvent.next()">
         <div *ngFor="let book of books ;" class="grid grid-cols-12 gap-6 bg-white pt-6">
-          <div class="col-span-2 md:col-span-4 pl-8">
+          <div class="col-span-2 md:col-span-5 pl-8">
             <list-stories [book]="book"></list-stories>
           </div>
           <div class="col-span-2 md:col-span-4 text-center">
             <list-chapter [book]="book"></list-chapter>
           </div>
-          <div class="col-span-2 md:col-span-4 pr-8">
+          <div class="col-span-2 md:col-span-3 pr-8">
             <list-act
               [bookId]="book.bookid"
               (updateBookStatusEvent)="updateBookStatusEvent.emit($event)"
