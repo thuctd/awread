@@ -6,10 +6,10 @@ on:
   pull_request:
     branches:
       - story-reader-web
-     types: 
-     # more on https://github.community/t/pull-request-action-does-not-run-on-merge/16092/8
-     # need this to trigger close PR
-      - closed 
+    types:
+      # more on https://github.community/t/pull-request-action-does-not-run-on-merge/16092/8
+      # need this to trigger close PR
+      - closed
       - opened
       - reopened
       - synchronize
