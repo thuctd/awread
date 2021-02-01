@@ -23,6 +23,7 @@ jobs:
           username: 'Bạch Tuộc Nướng'
           text: 'pull_request'
           channel: '#botnet'
+
   pull_request_opened:
     runs-on: ubuntu-latest
     timeout-minutes: 30
@@ -38,6 +39,7 @@ jobs:
           username: 'Bạch Tuộc Nướng'
           text: 'pull_request_opened'
           channel: '#botnet'
+
   pull_request_closed:
     runs-on: ubuntu-latest
     timeout-minutes: 30
@@ -53,6 +55,7 @@ jobs:
           username: 'Bạch Tuộc Nướng'
           text: 'pull_request_closed'
           channel: '#botnet'
+
   pull_request_closed_merged:
     runs-on: ubuntu-latest
     timeout-minutes: 30
@@ -68,6 +71,7 @@ jobs:
           username: 'Bạch Tuộc Nướng'
           text: 'pull_request_closed_merged'
           channel: '#botnet'
+          
   pull_request_multi_step:
     runs-on: ubuntu-latest
     timeout-minutes: 30
