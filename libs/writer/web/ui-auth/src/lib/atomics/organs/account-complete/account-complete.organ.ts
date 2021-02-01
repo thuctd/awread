@@ -1,12 +1,5 @@
 import { FormGroup } from '@angular/forms';
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Output,
-  EventEmitter,
-  Input,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter, Input } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
@@ -20,7 +13,7 @@ export class AccountCompleteOrgan implements OnInit {
   @Input() formComplete: FormGroup;
   title = 'Hoàn tất thông tin';
   description = 'Cập nhật email của bạn để dễ dàng lấy lại tài khoản khi cần';
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

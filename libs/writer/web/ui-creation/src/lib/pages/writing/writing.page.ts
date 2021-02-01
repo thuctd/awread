@@ -2,12 +2,7 @@ import { tap, switchMap } from 'rxjs/operators';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ChaptersFacade, BooksFacade } from '@awread/writer/web/feature-auth';
 import { ActivatedRoute } from '@angular/router';
-import {
-  ChangeDetectorRef,
-  Directive,
-  Injectable,
-  OnInit,
-} from '@angular/core';
+import { ChangeDetectorRef, Directive, Injectable, OnInit } from '@angular/core';
 import { of } from 'rxjs';
 
 @Injectable({
@@ -29,7 +24,7 @@ export class WritingPage implements OnInit {
     private chaptersFacade: ChaptersFacade,
     private booksFacade: BooksFacade,
     private cd: ChangeDetectorRef
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.chapterId = this.activatedRoute.snapshot.params['chapterId'];
@@ -59,9 +54,9 @@ export class WritingPage implements OnInit {
           }
           return of([]);
         }),
-        tap(() => {})
+        tap(() => { })
       )
-      .subscribe(() => {});
+      .subscribe(() => { });
   }
 
   chapterAction() {

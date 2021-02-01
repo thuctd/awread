@@ -1,12 +1,5 @@
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Input,
-  Output,
-  EventEmitter,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'atom-btn-switch-chapter',
@@ -26,7 +19,7 @@ export class BtnSwitchChapterAtom implements OnInit {
   @Input() faIcon = faChevronRight;
   @Input() class = 'w-24';
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

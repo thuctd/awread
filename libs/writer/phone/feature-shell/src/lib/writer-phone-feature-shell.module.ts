@@ -2,12 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { GlobalCoreModule } from '@awread/global/core';
-import {
-  WriterPhoneSharedModule,
-  ShellDesktopLayout,
-  ShellMobileLayout,
-  NotFoundPage,
-} from '@awread/writer/phone/shared';
+import { WriterPhoneSharedModule, ShellDesktopLayout, ShellMobileLayout, NotFoundPage } from '@awread/writer/phone/shared';
 
 declare const window: Window & { haveMobile: boolean };
 
@@ -37,4 +32,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule, GlobalCoreModule],
 })
-export class WriterPhoneFeatureShellModule {}
+export class WriterPhoneFeatureShellModule { }

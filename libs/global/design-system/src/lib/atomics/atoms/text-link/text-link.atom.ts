@@ -1,11 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Input,
-  Output,
-  EventEmitter,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'atom-text-link',
@@ -20,7 +13,7 @@ export class TextLinkAtom implements OnInit {
   @Input() color: 'green' | 'gray' = 'green';
   @Input() size: 's' | 'm' | 'l' = 'm';
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

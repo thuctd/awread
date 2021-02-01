@@ -1,9 +1,6 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import {
-  GlobalDesignSystemAtomicModule,
-  StorybookSupportModule,
-} from "@awread/global/design-system";
+import { GlobalDesignSystemAtomicModule, StorybookSupportModule } from '@awread/global/design-system';
 import { NavbarLinkGroupMolec } from "./molecs/navbar-link-group/navbar-link-group.molec";
 import { TopNavOrgan } from "./organs/top-nav/top-nav.organ";
 import { RightTopnavMolec } from "./molecs/right-topnav/right-topnav.molec";
@@ -37,4 +34,4 @@ import { RouterModule } from "@angular/router";
     NavbarTemplate,
   ],
 })
-export class WriterWebSharedAtomicModule {}
+export class WriterWebSharedAtomicModule { }

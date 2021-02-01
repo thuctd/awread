@@ -20,7 +20,7 @@ COPY .storybook ./.storybook
 COPY libs/global ./libs/global
 COPY libs/$applicationPath ./libs/$applicationPath
 COPY apps/$applicationPath ./apps/$applicationPath
-RUN pnpm nx build-storybook $application
+RUN pnpm nx build-storybook $application -- -c ci
 
 # RUN echo application is: $application
 # RUN echo applicationPath is: $applicationPath

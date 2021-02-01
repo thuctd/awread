@@ -1,10 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Input,
-  Output,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -23,7 +17,7 @@ export class SelectAtom implements OnInit {
     this.options = this.getOptions();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   getOptions() {
     return [

@@ -1,8 +1,5 @@
-import {
-  chain, externalSchematic, Rule, SchematicContext, Tree, schematic, noop
-} from '@angular-devkit/schematics';
+import { chain, externalSchematic, Rule, SchematicContext, Tree, schematic, noop } from '@angular-devkit/schematics';
 import { addImportDeclarationToModule } from '../../utility/add-import-module';
-import { guessProjectToSchema } from '../../utility/guess-workspace';
 import { prepareCurrentModule } from '../../utility/prepare-data';
 
 export default function (schema: any): Rule {

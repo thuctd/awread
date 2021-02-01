@@ -3,10 +3,7 @@ import { BooksFacade } from './books.facade';
 import { Injectable } from '@angular/core';
 import { ChaptersGear, FirestoreGear } from '../gears';
 import { ChaptersQuery, ChaptersStore } from '../states/chapters';
-import {
-  ChapterDetailStore,
-  ChapterDetailQuery,
-} from '../states/chapter-detail';
+import { ChapterDetailStore, ChapterDetailQuery } from '../states/chapter-detail';
 
 @Injectable({ providedIn: 'root' })
 export class ChaptersFacade {
@@ -20,7 +17,7 @@ export class ChaptersFacade {
     private chapterDetailQuery: ChapterDetailQuery,
     private chaptersQuery: ChaptersQuery,
     private firestoreGear: FirestoreGear
-  ) {}
+  ) { }
 
   getChapterEntityAkita(id: string) {
     return this.chaptersQuery.getEntity(id);
@@ -38,7 +35,7 @@ export class ChaptersFacade {
     this.chaptersStore.add(chapter);
   }
 
-  deleteChapterInAkita(chapterid: string) {}
+  deleteChapterInAkita(chapterid: string) { }
 
   updateChapterInAkita(chapterid: string, chapter) {
     return this.chaptersStore.updateChapterById(chapterid, chapter);

@@ -1,9 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Input,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -22,7 +17,7 @@ export class FormCommentBookReadMolec implements OnInit {
   @Input() inputControl: FormControl = new FormControl('');
   @Input() photoUrl = 'http://mrmrs.github.io/photos/p/2.jpg';
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

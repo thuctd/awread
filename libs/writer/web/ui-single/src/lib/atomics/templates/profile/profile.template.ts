@@ -1,12 +1,5 @@
 import { FormGroup } from '@angular/forms';
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Input,
-  EventEmitter,
-  Output,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'profile',
@@ -18,7 +11,7 @@ export class ProfileTemplate implements OnInit {
   @Input() profileForm: FormGroup;
   @Input() submitted: boolean;
   @Output() updateProfileEvent = new EventEmitter();
-  constructor() {}
+  constructor() { }
 
   ngOnInit(): void {
     // setTimeout(() => this.profileForm.patchValue({ username: 'ahihi' }), 5000);

@@ -1,18 +1,5 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Input,
-  EventEmitter,
-  Output,
-} from '@angular/core';
-import {
-  faAngleDown,
-  faEllipsisH,
-  faPlusCircle,
-  faPlusSquare,
-  faTrash,
-} from '@fortawesome/free-solid-svg-icons';
+import { Component, OnInit, ChangeDetectionStrategy, Input, EventEmitter, Output } from '@angular/core';
+import { faEllipsisH, faPlusCircle, faPlusSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'detail-social-menu',
@@ -43,7 +30,7 @@ export class DetailSocialMenuAtom implements OnInit {
   ];
 
   isMenuOpen = false;
-  constructor() {}
+  constructor() { }
   toggleMenu($event) {
     $event.stopPropagation();
     this.isMenuOpen = !this.isMenuOpen;
@@ -53,5 +40,5 @@ export class DetailSocialMenuAtom implements OnInit {
     this.isMenuOpen = false;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

@@ -1,14 +1,5 @@
-import {
-    chain, externalSchematic, Rule, SchematicContext, Tree, schematic, noop, apply, url, template,
-    branchAndMerge, mergeWith, move, MergeStrategy, applyTemplates
-} from '@angular-devkit/schematics';
-
-import { getWorkspace, buildDefaultPath } from '@schematics/angular/utility/workspace';
 import * as path from 'path';
-import { applyWithSkipExisting } from '@nrwl/workspace/src/utils/ast-utils';
-import { classify } from '@nrwl/workspace/src/utils/strings';
-import { Path, normalize, strings } from '@angular-devkit/core';
-import { getNpmScope, readJsonFile } from '@nrwl/workspace';
+import { normalize } from '@angular-devkit/core';
 import { getDefaultProjectPath } from './guess-workspace';
 
 export async function getGeneratePath(schema, tree) {

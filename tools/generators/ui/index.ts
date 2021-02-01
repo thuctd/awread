@@ -1,11 +1,8 @@
-import {
-  chain, externalSchematic, Rule, SchematicContext, Tree, schematic
-} from '@angular-devkit/schematics';
+import { chain, externalSchematic, Rule, SchematicContext, Tree, schematic } from '@angular-devkit/schematics';
 import { addImportDeclarationToModule } from '../../utility/add-import-module';
 import { addRouterOutlet } from '../../utility/add-router-outlet';
 import { addStoryBook } from '../../utility/add-storybook';
 import { editArchitectStorybookLibrary } from '../../utility/edit-architect-angular-json';
-import { getProject } from '../../utility/guess-workspace';
 import { getShellModuleData } from '../../utility/import-to-shell-module';
 import { prepareCurrentModule } from '../../utility/prepare-data';
 

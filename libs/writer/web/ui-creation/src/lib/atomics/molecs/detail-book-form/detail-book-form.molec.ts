@@ -1,18 +1,6 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Input,
-  Output,
-  EventEmitter,
-} from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  Validators,
-  FormGroup,
-} from '@angular/forms';
-import { Category, Genre } from '@awread/writer/web/feature-auth';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import type { Category, Genre } from '@awread/writer/web/feature-auth';
 
 @Component({
   selector: 'detail-book-form',
@@ -73,9 +61,9 @@ export class DetailBookFormMolec implements OnInit {
     { name: '13+', id: '13' },
     { name: '18+', id: '18' },
   ];
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   addItem(e) {
     // console.log('add: ', e);

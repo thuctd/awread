@@ -1,10 +1,7 @@
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  StorybookSupportModule,
-  GlobalDesignSystemAtomicModule,
-} from '@awread/global/design-system';
+import { StorybookSupportModule, GlobalDesignSystemAtomicModule } from '@awread/global/design-system';
 import { EditprofileFormMolec } from './molecs/editprofile-form/editprofile-form.molec';
 import { InfoFormMolec } from './molecs/info-form/info-form.molec';
 import { ChangepwFormMolec } from './molecs/changepw-form/changepw-form.molec';
@@ -40,4 +37,4 @@ import { ProfileTemplate } from './templates/profile/profile.template';
     ProfileTemplate,
   ],
 })
-export class WriterWebUiSingleAtomicModule {}
+export class WriterWebUiSingleAtomicModule { }

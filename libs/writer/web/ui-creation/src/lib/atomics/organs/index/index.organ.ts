@@ -1,11 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Input,
-  EventEmitter,
-  Output,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, EventEmitter, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
@@ -22,9 +15,9 @@ export class IndexOrgan implements OnInit {
   });
   @Output() createNewChapterEvent = new EventEmitter();
   faIcon = faPlus;
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   chapterAction(type: string, chapter) {
     this.chapterActionEvent.emit({

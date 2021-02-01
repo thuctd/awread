@@ -1,23 +1,11 @@
 import { map, startWith, switchMap, takeUntil } from 'rxjs/operators';
 import { tap } from 'rxjs/operators';
-import {
-  Category,
-  CategoryFacade,
-  ChaptersFacade,
-  GenresFacade,
-  ModalFacade,
-} from '@awread/writer/web/feature-auth';
+import { CategoryFacade, ChaptersFacade, GenresFacade } from '@awread/writer/web/feature-auth';
 import { CurrentUserFacade } from '@awread/writer/web/feature-auth';
 import { BooksFacade } from '@awread/writer/web/feature-auth';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import {
-  Directive,
-  Injectable,
-  OnInit,
-  ChangeDetectorRef,
-  OnDestroy,
-} from '@angular/core';
+import { Directive, Injectable, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { combineLatest, of, Subject } from 'rxjs';
 
 @Injectable({
@@ -51,9 +39,8 @@ export class DetailPage implements OnInit, OnDestroy {
     private categoryFacade: CategoryFacade,
     private genresFacade: GenresFacade,
     private router: Router,
-    private modalFacade: ModalFacade,
     private cd: ChangeDetectorRef
-  ) {}
+  ) { }
 
   get f() {
     return this.bookForm.controls;
@@ -296,7 +283,7 @@ export class DetailPage implements OnInit, OnDestroy {
     const status = this.bookForm.get('status').value;
     this.chaptersFacade
       .removeChapter(chapter.chapterid, bookId, status)
-      .pipe(tap((res) => {}))
+      .pipe(tap((res) => { }))
       .subscribe((res) => {
         console.log('remove chapter res: ', res);
       });

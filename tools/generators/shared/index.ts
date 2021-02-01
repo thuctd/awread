@@ -1,14 +1,5 @@
-import {
-  chain,
-  externalSchematic,
-  Rule,
-  SchematicContext,
-  Tree,
-} from '@angular-devkit/schematics';
-import {
-  addImportDeclarationToModule,
-  addImportPathToModule,
-} from '../../utility/add-import-module';
+import { chain, externalSchematic, Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
+import { addImportDeclarationToModule, addImportPathToModule } from '../../utility/add-import-module';
 import { addExportDeclarationToModule } from '../../utility/add-export-module';
 import { insertCustomCode } from '../../utility/insert-custom-code';
 import { addRouterOutlet } from '../../utility/add-router-outlet';
@@ -17,10 +8,7 @@ import { classify } from '@nrwl/workspace/src/utils/strings';
 import { addPageService } from '../../utility/page-service';
 import { FileModule } from '../../utility/file-module.type';
 import { insertRoutes } from '../../utility/insert-routes';
-import {
-  appAndLibSetting,
-  componentSetting,
-} from '../../utility/edit-angular-json';
+import { appAndLibSetting, componentSetting } from '../../utility/edit-angular-json';
 import { createPageLazy } from '../../utility/create-page-lazy';
 import { prepareCurrentModule } from '../../utility/prepare-data';
 import { buildAliasFromProjectRoot } from '../../utility/build-alias-from-project-root';

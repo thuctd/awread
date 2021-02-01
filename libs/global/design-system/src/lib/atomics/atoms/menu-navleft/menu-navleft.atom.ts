@@ -1,11 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Input,
-  Output,
-  EventEmitter,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { faFile } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -23,7 +16,7 @@ export class MenuNavleftAtom implements OnInit {
   iconUrl = '/global-assets/images/upload.png';
   iconUrlArrow = '/global-assets/images/arrowUp-white.png';
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

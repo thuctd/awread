@@ -1,12 +1,5 @@
 import { FormGroup } from '@angular/forms';
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Output,
-  EventEmitter,
-  Input,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter, Input } from '@angular/core';
 import { TabHead } from '../../../interface/tabs';
 
 @Component({
@@ -21,7 +14,7 @@ export class LoginRegisterTemplate implements OnInit {
   @Input() selectedTab: string;
   @Output() regiterEvent = new EventEmitter();
   @Output() auth = new EventEmitter();
-  constructor() {}
+  constructor() { }
 
   ngOnInit(): void {
     console.log('mode: ', this.selectedTab);

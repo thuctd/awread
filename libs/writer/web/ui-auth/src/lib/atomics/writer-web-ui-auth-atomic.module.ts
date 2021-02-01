@@ -1,9 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  GlobalDesignSystemAtomicModule,
-  StorybookSupportModule,
-} from '@awread/global/design-system';
+import { GlobalDesignSystemAtomicModule, StorybookSupportModule } from '@awread/global/design-system';
 import { TabHeadMolec } from './molecs/tab-head/tab-head.molec';
 import { LoginFormMolec } from './molecs/login-form/login-form.molec';
 import { RegisterFormMolec } from './molecs/register-form/register-form.molec';
@@ -79,4 +76,4 @@ import { NewPasswordOrgan } from './organs/new-password/new-password.organ';
     NewPasswordOrgan,
   ],
 })
-export class WriterWebUiAuthAtomicModule {}
+export class WriterWebUiAuthAtomicModule { }

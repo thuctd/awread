@@ -1,7 +1,5 @@
 import { Path, normalize, strings } from '@angular-devkit/core';
-import {
-  SchematicContext, Rule, SchematicsException, Tree, apply, applyTemplates, chain, filter, mergeWith, move, noop, schematic, externalSchematic, MergeStrategy, url,
-} from '@angular-devkit/schematics';
+import { SchematicContext, Rule, Tree, apply, applyTemplates, chain, filter, mergeWith, move, noop, MergeStrategy, url } from '@angular-devkit/schematics';
 import * as ts from 'typescript';
 import { createDefaultPath } from '@schematics/angular/utility/workspace';
 import { addGlobal, getSourceNodes, insert, insertImport, RemoveChange, ReplaceChange } from '@nrwl/workspace/src/utils/ast-utils';

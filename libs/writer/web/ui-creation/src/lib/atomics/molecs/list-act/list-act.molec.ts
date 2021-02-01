@@ -1,18 +1,5 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Input,
-  Output,
-  EventEmitter,
-} from '@angular/core';
-import {
-  faChartLine,
-  faPlusCircle,
-  faPlusSquare,
-  faShareAlt,
-  faTrash,
-} from '@fortawesome/free-solid-svg-icons';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import { faChartLine, faShareAlt } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'list-act',
@@ -39,9 +26,9 @@ export class ListActMolec implements OnInit {
     },
   ];
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   updateBookStatus(status: string) {
     this.updateBookStatusEvent.emit({ bookId: this.bookId, type: status });

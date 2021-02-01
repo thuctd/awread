@@ -1,13 +1,6 @@
 import { FormGroup } from '@angular/forms';
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Input,
-  EventEmitter,
-  Output,
-  ChangeDetectorRef,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, EventEmitter, Output, ChangeDetectorRef } from '@angular/core';
+import { } from '@awread/writer/web/feature-auth';
 import { MatDialog } from '@angular/material/dialog';
 import { ReadTemplate } from '../../templates';
 
@@ -57,8 +50,8 @@ export class WrtHeadMolec implements OnInit {
   @Output() saveChapterEvent = new EventEmitter();
   constructor(
     private cd: ChangeDetectorRef,
-    private modalFacade: ModalFacade
-  ) {}
+    private matDialog: MatDialog
+  ) { }
 
 
   ngOnInit(): void {
@@ -75,9 +68,22 @@ export class WrtHeadMolec implements OnInit {
   }
 
   openPreview(): void {
-    this.modalFacade.openPreview(
+    this.openModalPreview(
       this.chapterForm.get('title').value,
       this.chapterForm.get('content').value
     );
+  }
+
+  openModalPreview(title: string, conent: string) {
+    const dialogRef = this.matDialog.open(ReadTemplate, {
+      width: '72rem',
+      height: '42.5rem',
+      data: {
+        title: title,
+        content: conent
+      }
+    });
+
+    return dialogRef.afterClosed();
   }
 }

@@ -60,10 +60,7 @@ import { BaseBtnAtom } from './atoms/base-btn/base-btn.atom';
 import { AuthorAtom } from './atoms/author/author.atom';
 import { NgImageSliderModule } from 'ng-image-slider';
 import { DefaultCoverAtom } from './atoms/default-cover/default-cover.atom';
-import {
-  DefaultCoverModule,
-  CloseOnOutsideModule,
-} from '@awread/global/packages';
+import { DefaultCoverModule, CloseOnOutsideModule, } from '@awread/global/packages';
 import { NavLinkAtom } from './atoms/nav-link/nav-link.atom';
 import { DropdownLinkAtom } from './atoms/dropdown-link/dropdown-link.atom';
 import { BreadcrumbLinkAtom } from './atoms/breadcrumb-link/breadcrumb-link.atom';
@@ -269,4 +266,4 @@ import { BtnBackToTopAtom } from './atoms/btn-back-to-top/btn-back-to-top.atom';
     BtnBackToTopAtom,
   ],
 })
-export class GlobalDesignSystemAtomicModule {}
+export class GlobalDesignSystemAtomicModule { }
