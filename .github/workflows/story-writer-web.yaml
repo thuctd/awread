@@ -43,11 +43,11 @@ jobs:
         with:
           username: 'Bạch Tuộc Nướng'
           text: 'Đang nướng bạch tuộc số: #${{ github.event.pull_request.number }}-${{ github.event.pull_request.title }} bởi đầu bếp ${{ github.event.pull_request.user.login }}'
+          channel: '#build-storybook'
           fields: |
           [{ "title": "Avatar", "value": "${ github.event.pull_request.user.avatar_url }", "short": true },
-          { "title": "Branch", "value": "${env.BRANCH}", "short": true }],
+          { "title": "Branch", "value": "${env.BRANCH}", "short": true },
           { "title": "PR URL", "value": "${ github.event.pull_request.html_url }", "short": true }]
-          channel: '#build-storybook'
       - name: Push to dokku
         uses: dokku/github-action@master
         with:
