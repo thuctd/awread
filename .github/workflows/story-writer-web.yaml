@@ -42,7 +42,11 @@ jobs:
         if: always()
         with:
           username: 'Bạch Tuộc Nướng'
-          text: 'Đang nướng bạch tuộc số: #${{ github.event.pull_request.number }}-${{ github.event.pull_request.title }} bởi đầu bếp ${{ github.event.pull_request.user.avatar_url }} ${{ github.event.pull_request.user.login }}'
+          text: 'Đang nướng bạch tuộc số: #${{ github.event.pull_request.number }}-${{ github.event.pull_request.title }} bởi đầu bếp ${{ github.event.pull_request.user.login }}'
+          fields: |
+          [{ "title": "Avatar", "value": "${ github.event.pull_request.user.avatar_url }", "short": true },
+          { "title": "Branch", "value": "${env.BRANCH}", "short": true }],
+          { "title": "PR URL", "value": "${ github.event.pull_request.html_url }", "short": true }]
           channel: '#build-storybook'
       - name: Push to dokku
         uses: dokku/github-action@master
@@ -55,17 +59,17 @@ jobs:
           # specify a name for the review app
           review_app_name: w-${{ github.event.pull_request.number }}
       - name: Slack Notification
-        uses: act10ns/slack@v1
+        uses: edge/simple-slack-notify@master
+        if: always()
         with:
           channel: '#build-storybook'
           status: ${{ job.status }}
-          success_text: '${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) nướng thành công, xem thêm tại: http://w-${{ github.event.pull_request.number }}.awread.vn'
-          failure_text: '${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) nướng hỏng'
-          cancelled_text: '${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) nướng bị hủy'
+          success_text: '${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) bạch tuộc chính rồi, mau ăn thôi: http://w-${{ github.event.pull_request.number }}.awread.vn'
+          failure_text: '${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) bạch tuộc nướng thành than... :('
+          cancelled_text: '${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) đổi ý không nướng bạch tuộc ăn nữa!'
           fields: |
             [{ "title": "Repository", "value": "${env.GITHUB_REPOSITORY}", "short": true },
             { "title": "Branch", "value": "${env.BRANCH}", "short": true }]
-        if: always()
 
   destroy_review_app:
     runs-on: ubuntu-latest
