@@ -82,26 +82,26 @@ jobs:
     steps:
       - name: noti building
         uses: edge/simple-slack-notify@master
-        if: always()
         with:
           username: 'Bạch Tuộc Nướng'
           text: 'pull_request_multi_step_1'
           channel: '#botnet'
+          if: always()
        
        if: github.event.action == 'closed'
       - name: noti building
         uses: edge/simple-slack-notify@master
-        if: always()
         with:
           username: 'Bạch Tuộc Nướng'
           text: 'pull_request_multi_step_2'
           channel: '#botnet'
+          if: always()
        
         if: github.event.pull_request.merged == true
       - name: noti building
         uses: edge/simple-slack-notify@master
-        if: always()
         with:
           username: 'Bạch Tuộc Nướng'
           text: 'pull_request_multi_step_3'
           channel: '#botnet'
+          if: always()
