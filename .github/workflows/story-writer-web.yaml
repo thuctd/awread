@@ -83,13 +83,13 @@ jobs:
           fields: |
             [{ "title": "chi tiết PR", "value": "${{ github.event.pull_request.html_url }}", "short": true }]
 
-  destroy_review_app:
+  destroy_review_app_on_merged:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     env:
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL  }}
     # only run when a pull request is closed
-    if: github.event_name == 'pull_request' && github.event.action == 'closed'
+    if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
     steps:
       - name: noti building
         uses: edge/simple-slack-notify@master
@@ -107,7 +107,6 @@ jobs:
           # specify a name for the review app
           review_app_name: review-story-writer-web-${{ github.event.pull_request.number }}
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
-        if: github.event.pull_request.merged == true
       - name: noti building
         uses: edge/simple-slack-notify@master
         if: always()
@@ -128,3 +127,28 @@ jobs:
           git pull
           git merge --no-ff story-writer-web -m "Auto-merge story-writer-web back to develop"
           git push
+
+  destroy_review_app_on_close:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL  }}
+    # only run when a pull request is closed
+    if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == false
+    steps:
+      - name: noti building
+        uses: edge/simple-slack-notify@master
+        if: always()
+        with:
+          username: 'Bạch Tuộc Nướng'
+          text: 'Bắt đầu đi dọn dẹp mâm #${{ github.event.pull_request.number }}, không ăn ở đây nữa nha!!! http://review-story-writer-web-${{ github.event.pull_request.number }}.awread.vn'
+          channel: '#build-storybook'
+      - name: Destroy the review app
+        uses: dokku/github-action@master
+        with:
+          # destroy a review app
+          command: review-apps:destroy
+          git_remote_url: 'ssh://dokku@awread.vn:22/story-writer-web'
+          # specify a name for the review app
+          review_app_name: review-story-writer-web-${{ github.event.pull_request.number }}
+          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
