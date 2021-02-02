@@ -8,10 +8,10 @@ import type { User } from '@awread/writer/web/feature-auth';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavbarTemplate implements OnInit {
-  @Input() user: User;
+  @Input() user = [];
   @Output() searchEvent = new EventEmitter();
   @Output() signoutEvent = new EventEmitter();
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }

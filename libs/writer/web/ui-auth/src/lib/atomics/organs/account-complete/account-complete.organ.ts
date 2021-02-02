@@ -10,10 +10,13 @@ import { FormBuilder, Validators } from '@angular/forms';
 })
 export class AccountCompleteOrgan implements OnInit {
   @Output() completeEvent = new EventEmitter();
-  @Input() formComplete: FormGroup;
+  @Input() formComplete: FormGroup = this.fb.group({
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', Validators.required],
+  });
   title = 'Hoàn tất thông tin';
   description = 'Cập nhật email của bạn để dễ dàng lấy lại tài khoản khi cần';
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }
