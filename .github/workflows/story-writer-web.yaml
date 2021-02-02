@@ -138,3 +138,4 @@ jobs:
           git pull
           git merge --no-ff origin/story-writer-web -m "Auto-merge story-writer-web back to develop"
           git push
+          git push origin develop:story-writer-web --force
