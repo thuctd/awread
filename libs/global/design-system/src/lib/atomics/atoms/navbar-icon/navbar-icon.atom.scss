@@ -6,10 +6,10 @@
     display: block;
   }
   .icon1{
-    display: none;
+    opacity: 0 !important;
   }
-  .icon2{
-    display: block;
+  .image-active{
+    opacity:1 !important;
   }
   background-color: #A9E5CE;
 }
