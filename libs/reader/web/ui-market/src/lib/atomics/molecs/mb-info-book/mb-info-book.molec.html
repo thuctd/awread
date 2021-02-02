@@ -10,8 +10,9 @@
     </div>
   </dd>
   <dd class="ml-0">
-    <div *ngFor="let btn of btns" class="leading-normal font-medium">
-      <base-btn (onBtnClicked)="submitEvent.emit($event)" [isSize]="false" [chapter]="btn"></base-btn>
+    <div *ngFor="let btn of btns" class="leading-normal font-medium flex">
+      <base-btn (onBtnClicked)="submitEvent.emit($event)" [isSize]="false" [chapter]="btn" class="mr-8"></base-btn>
+      <rd-list-publication-date></rd-list-publication-date>
     </div>
   </dd>
 </dl>

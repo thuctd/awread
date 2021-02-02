@@ -1,10 +1,8 @@
-<div class="pl-2">
-  <atom-title-book [titleBook]='book' [size]='"s"'></atom-title-book>
-  <dl class="text-sm sm:pt-2">
-    <dd class="ml-0">
-      <div *ngFor="let btn of btns" class="leading-normal font-medium">
-        <base-btn (onBtnClicked)="submitEvent.emit($event)" [isSize]="false" [chapter]="btn"></base-btn>
-      </div>
-    </dd>
-  </dl>
-</div>
+<atom-title-book [titleBook]='book' [size]='"s"'></atom-title-book>
+<dl class="mt-2 text-sm p-0">
+  <dd class="ml-0">
+    <div *ngFor="let btn of btns" class="leading-normal font-medium">
+      <base-btn (onBtnClicked)="submitEvent.emit($event)" [isSize]="false" [chapter]="btn"></base-btn>
+    </div>
+  </dd>
+</dl>
