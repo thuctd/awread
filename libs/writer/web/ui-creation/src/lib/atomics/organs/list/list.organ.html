@@ -20,7 +20,7 @@
       </div>
 
       <infinite-scroll #infiniteScroll (scrolled)="moreEvent.next()">
-        <div *ngFor="let book of books ;" class="grid grid-cols-12 gap-6 bg-white pt-6">
+        <div *ngFor="let book of books ;" class="grid grid-cols-12 gap-6 bg-white pt-4">
           <div class="col-span-2 md:col-span-5 pl-8">
             <list-stories [book]="book"></list-stories>
           </div>
