@@ -9,13 +9,20 @@ import { FormProfieOrgan } from './organs/form-profie/form-profie.organ';
 import { ImageProfileOrgan } from './organs/image-profile/image-profile.organ';
 import { ChangePhotoMolec } from './molecs/change-photo/change-photo.molec';
 import { ProfileTemplate } from './templates/profile/profile.template';
-
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 @NgModule({
   imports: [
     CommonModule,
     StorybookSupportModule,
     GlobalDesignSystemAtomicModule,
     ReactiveFormsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   exports: [
     CommonModule,

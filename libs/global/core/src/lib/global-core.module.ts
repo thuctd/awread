@@ -15,7 +15,7 @@ import { createApollo } from "./apollo.config";
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { ApolloInterceptor } from "./apollo.interceptor";
-
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 @NgModule({
   imports: [
     CommonModule,
@@ -33,6 +33,7 @@ import { ApolloInterceptor } from "./apollo.interceptor";
       useFactory: createApollo,
       deps: [HttpLink],
     },
+    { provide: MAT_DATE_LOCALE, useValue: 'vi' }
   ],
 })
-export class GlobalCoreModule {}
+export class GlobalCoreModule { }
