@@ -1,0 +1,12 @@
+<section class="w-full relative">
+  <div class="mb-4">
+    <atom-title [title]='titlePage' class="uppercase"></atom-title>
+  </div>
+  <owl-carousel-o [options]="customOptions" class="carousel2">
+    <ng-container>
+      <ng-template carouselSlide *ngFor="let tab of counter(3)">
+        <molec-list-detail-book-update-mobile></molec-list-detail-book-update-mobile>
+      </ng-template>
+    </ng-container>
+  </owl-carousel-o>
+</section>

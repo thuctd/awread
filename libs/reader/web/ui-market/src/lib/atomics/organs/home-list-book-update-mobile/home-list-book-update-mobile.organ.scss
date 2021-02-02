@@ -1,0 +1,27 @@
+:host {
+  display: block;
+}
+::ng-deep {
+  .owl-stage {
+    display: flex;
+    flex-direction: row;
+  }
+  .carousel2 .owl-next {
+    width: 30px;
+    background-color: transparent;
+    position: absolute;
+    right: -0.8rem;
+    top: 20rem;
+    z-index: 999;
+    cursor: pointer;
+  }
+  .carousel2 .owl-prev {
+    position: absolute;
+    left: -0.8rem;
+    width: 30px;
+    top: 20rem;
+    z-index: 50;
+    cursor: pointer;
+    background-color: transparent;
+  }
+}

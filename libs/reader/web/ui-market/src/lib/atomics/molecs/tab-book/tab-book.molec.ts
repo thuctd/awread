@@ -4,64 +4,76 @@ import type { OwlOptions } from 'ngx-owl-carousel-o';
   selector: 'tab-book',
   templateUrl: './tab-book.molec.html',
   styleUrls: ['./tab-book.molec.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TabBookMolec implements OnInit {
+  prevIcon = `<img src="/global-assets/images/arrow_left.png" alt="arrow_left">`;
+  nextIcon = `<img src="/global-assets/images/arrow_right.png" alt="arrow_right">`;
 
-  prevIcon = `<img src="/global-assets/images/arrow_left.png" alt="arrow_left">`
-  nextIcon = `<img src="/global-assets/images/arrow_right.png" alt="arrow_right">`
+  @Input() tabBooks = [
+    {
+      title: 'Cô gái chúng ta cùng theo đuổi năm nào',
+      srcImg: 'https://tmthan.com/wp-content/uploads/2015/10/sach-co-gai-nam-ay-chung-ta-cung-theo-duoi.jpg',
+      isActive: true,
+    },
+    {
+      title: 'Yêu em từ cái nhìn đầu tiên',
+      srcImg: 'https://tmthan.com/wp-content/uploads/2015/10/sach-co-gai-nam-ay-chung-ta-cung-theo-duoi.jpg',
+      isActive: false,
+    },
+    {
+      title: 'Tháng 4 là lời nói dối của em',
+      srcImg: 'https://tmthan.com/wp-content/uploads/2015/10/sach-co-gai-nam-ay-chung-ta-cung-theo-duoi.jpg',
+      isActive: false,
+    },
+    {
+      title: 'Em là nhà!!!',
+      srcImg: 'https://tmthan.com/wp-content/uploads/2015/10/sach-co-gai-nam-ay-chung-ta-cung-theo-duoi.jpg',
+      isActive: false,
+    },
+    {
+      title: 'Cô gái chúng ta cùng theo đuổi năm nào',
+      srcImg: 'https://tmthan.com/wp-content/uploads/2015/10/sach-co-gai-nam-ay-chung-ta-cung-theo-duoi.jpg',
+      isActive: true,
+    },
+    {
+      title: 'Yêu em từ cái nhìn đầu tiên',
+      srcImg: 'https://tmthan.com/wp-content/uploads/2015/10/sach-co-gai-nam-ay-chung-ta-cung-theo-duoi.jpg',
+      isActive: false,
+    },
+    {
+      title: 'Tháng 4 là lời nói dối của em',
+      srcImg: 'https://tmthan.com/wp-content/uploads/2015/10/sach-co-gai-nam-ay-chung-ta-cung-theo-duoi.jpg',
+      isActive: false,
+    },
+    {
+      title: 'Em là nhà!!!',
+      srcImg: 'https://tmthan.com/wp-content/uploads/2015/10/sach-co-gai-nam-ay-chung-ta-cung-theo-duoi.jpg',
+      isActive: false,
+    },
+    {
+      title: 'Cô gái chúng ta cùng theo đuổi năm nào',
+      srcImg: 'https://tmthan.com/wp-content/uploads/2015/10/sach-co-gai-nam-ay-chung-ta-cung-theo-duoi.jpg',
+      isActive: true,
+    },
+    {
+      title: 'Yêu em từ cái nhìn đầu tiên',
+      srcImg: 'https://tmthan.com/wp-content/uploads/2015/10/sach-co-gai-nam-ay-chung-ta-cung-theo-duoi.jpg',
+      isActive: false,
+    },
+    {
+      title: 'Tháng 4 là lời nói dối của em',
+      srcImg: 'https://tmthan.com/wp-content/uploads/2015/10/sach-co-gai-nam-ay-chung-ta-cung-theo-duoi.jpg',
+      isActive: false,
+    },
+    {
+      title: 'Em là nhà!!!',
+      srcImg: 'https://tmthan.com/wp-content/uploads/2015/10/sach-co-gai-nam-ay-chung-ta-cung-theo-duoi.jpg',
+      isActive: false,
+    },
+  ];
 
-  @Input() tabBooks = [{
-    title: 'Cô gái chúng ta cùng theo đuổi năm nào',
-    srcImg: 'https://tmthan.com/wp-content/uploads/2015/10/sach-co-gai-nam-ay-chung-ta-cung-theo-duoi.jpg',
-    isActive: true,
-  }, {
-    title: 'Yêu em từ cái nhìn đầu tiên',
-    srcImg: 'https://tmthan.com/wp-content/uploads/2015/10/sach-co-gai-nam-ay-chung-ta-cung-theo-duoi.jpg',
-    isActive: false,
-  }, {
-    title: 'Tháng 4 là lời nói dối của em',
-    srcImg: 'https://tmthan.com/wp-content/uploads/2015/10/sach-co-gai-nam-ay-chung-ta-cung-theo-duoi.jpg',
-    isActive: false,
-  }, {
-    title: 'Em là nhà!!!',
-    srcImg: 'https://tmthan.com/wp-content/uploads/2015/10/sach-co-gai-nam-ay-chung-ta-cung-theo-duoi.jpg',
-    isActive: false,
-  }, {
-    title: 'Cô gái chúng ta cùng theo đuổi năm nào',
-    srcImg: 'https://tmthan.com/wp-content/uploads/2015/10/sach-co-gai-nam-ay-chung-ta-cung-theo-duoi.jpg',
-    isActive: true,
-  }, {
-    title: 'Yêu em từ cái nhìn đầu tiên',
-    srcImg: 'https://tmthan.com/wp-content/uploads/2015/10/sach-co-gai-nam-ay-chung-ta-cung-theo-duoi.jpg',
-    isActive: false,
-  }, {
-    title: 'Tháng 4 là lời nói dối của em',
-    srcImg: 'https://tmthan.com/wp-content/uploads/2015/10/sach-co-gai-nam-ay-chung-ta-cung-theo-duoi.jpg',
-    isActive: false,
-  }, {
-    title: 'Em là nhà!!!',
-    srcImg: 'https://tmthan.com/wp-content/uploads/2015/10/sach-co-gai-nam-ay-chung-ta-cung-theo-duoi.jpg',
-    isActive: false,
-  }, {
-    title: 'Cô gái chúng ta cùng theo đuổi năm nào',
-    srcImg: 'https://tmthan.com/wp-content/uploads/2015/10/sach-co-gai-nam-ay-chung-ta-cung-theo-duoi.jpg',
-    isActive: true,
-  }, {
-    title: 'Yêu em từ cái nhìn đầu tiên',
-    srcImg: 'https://tmthan.com/wp-content/uploads/2015/10/sach-co-gai-nam-ay-chung-ta-cung-theo-duoi.jpg',
-    isActive: false,
-  }, {
-    title: 'Tháng 4 là lời nói dối của em',
-    srcImg: 'https://tmthan.com/wp-content/uploads/2015/10/sach-co-gai-nam-ay-chung-ta-cung-theo-duoi.jpg',
-    isActive: false,
-  }, {
-    title: 'Em là nhà!!!',
-    srcImg: 'https://tmthan.com/wp-content/uploads/2015/10/sach-co-gai-nam-ay-chung-ta-cung-theo-duoi.jpg',
-    isActive: false
-  }];
-
-  constructor() { }
+  constructor() {}
 
   @Input() customOptions: OwlOptions = {
     loop: true,
@@ -74,10 +86,13 @@ export class TabBookMolec implements OnInit {
     navText: [this.prevIcon, this.nextIcon],
     responsive: {
       0: {
-        items: 1,
-      },
-      400: {
         items: 2,
+      },
+      350: {
+        items: 2,
+      },
+      380: {
+        items: 3,
       },
       740: {
         items: 3,
@@ -88,6 +103,5 @@ export class TabBookMolec implements OnInit {
     },
   };
 
-  ngOnInit(): void { }
-
+  ngOnInit(): void {}
 }

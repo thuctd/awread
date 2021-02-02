@@ -5,7 +5,7 @@
     <div class="text-lg font-medium my-5">{{comments.length}} Bình luận</div>
     <molec-comment-item *ngFor="let item of comments" [comment]="item" class="mb-4"></molec-comment-item>
   </div>
-  <div class="flex justify-end">
+  <div class="flex justify-end pt-4">
     <pagination></pagination>
   </div>
 </section>

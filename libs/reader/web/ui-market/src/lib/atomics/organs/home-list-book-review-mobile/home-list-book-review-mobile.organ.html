@@ -1,0 +1,32 @@
+<div class="w-full max-w-screen-xl mx-auto mt-4">
+    <atom-title [title]='titlePage' class="uppercase"></atom-title>
+    <div class="justify-center flex flex-col mt-8">
+        <div class="flex justify-center px-8 mb-10">
+            <div class="w-full">
+                <div class="relative flex flex-row">
+                    <img [src]="srcImg" [alt]="altImg" class="object-cover w-64 h-52">
+                    <div class="absolute top--04">
+                        <rd-home-icon-rating></rd-home-icon-rating>
+                    </div>
+                    <div class="ml-4">
+                      <home-info-book-review [isSize]="false" [size]="'s'"></home-info-book-review>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="float-left pl-8 md:pl-12 xl:pl-24 lg:pl-20">
+            <div class="grid grid-cols-2 gap-8 mb-6">
+                <div *ngFor='let loop3 of counter(4); let i = index' class="w-44 xl:w-52 rounded relative">
+                    <atom-img-m [size]='"m"'></atom-img-m>
+                    <div class="absolute -top-1.5">
+                        <rd-home-icon-rating [topBook]='i + 2'></rd-home-icon-rating>
+                    </div>
+                    <div class="w-36">
+                      <home-info-book-review [isSize]="false" [size]="'s'"></home-info-book-review>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clear-none"></div>
+    </div>
+</div>
