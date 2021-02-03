@@ -52,11 +52,11 @@ export class RegisterGear {
   createAccountOnServer(user) {
     return this.authApi.createAccountOnServer(user).pipe(
       tap((res) => {
-        this.snackbarService.create('Tạo tài khoản thành công');
+        this.snackbarService.showSuccess('Tạo tài khoản thành công');
       }),
       catchError((err) => {
         console.log('error', err);
-        this.snackbarService.error('Đã xảy ra lỗi. Vui lòng thử lại!!', 5000);
+        this.snackbarService.showError('Đã xảy ra lỗi. Vui lòng thử lại!!');
         return throwError(err);
       })
     );

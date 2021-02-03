@@ -1,54 +1,22 @@
 import { Injectable } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { HotToastService } from '@ngneat/hot-toast';
 
 @Injectable({
   providedIn: 'any',
 })
 export class SnackbarsService {
-  constructor(private snackBar: MatSnackBar) {}
+  constructor(private toast: HotToastService) {}
 
-  create(message: string, duration = 2000, action: string = 'Ok') {
-    this.snackBar.open(message, action, {
-      duration,
-      horizontalPosition: 'center',
-      verticalPosition: 'top',
-      panelClass: ['snackbar-notify', 'bg-green-400'],
-    });
+  showSuccess(message: string) {
+    this.toast.success(message);
   }
 
-  update(message: string, duration = 2000, action: string = 'Ok') {
-    this.snackBar.open(message, action, {
-      duration,
-      horizontalPosition: 'end',
-      verticalPosition: 'top',
-      panelClass: ['snackbar-notify', 'bg-green-400'],
-    });
+  showError(message: string) {
+    this.toast.error(message);
   }
 
-  warning(message: string, duration = 2000, action: string = 'Ok') {
-    this.snackBar.open(message, action, {
-      duration,
-      horizontalPosition: 'end',
-      verticalPosition: 'top',
-      panelClass: ['snackbar-notify', 'bg-yellow-400'],
-    });
+  showWarning(message: string) {
+    this.toast.warning(message);
   }
 
-  error(message: string, duration = 2000, action: string = 'Ok') {
-    this.snackBar.open(message, action, {
-      duration,
-      horizontalPosition: 'end',
-      verticalPosition: 'top',
-      panelClass: ['snackbar-notify', 'bg-red-500'],
-    });
-  }
-
-  info(message: string, duration = 2000, action: string = 'Ok') {
-    this.snackBar.open(message, action, {
-      duration,
-      horizontalPosition: 'end',
-      verticalPosition: 'top',
-      panelClass: ['snackbar-notify', 'bg-blue-400'],
-    });
-  }
 }
