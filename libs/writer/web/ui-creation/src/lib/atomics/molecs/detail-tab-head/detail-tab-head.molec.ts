@@ -7,7 +7,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DetailTabHeadMolec implements OnInit {
-  @Input() tabs;
+  @Input() tabs = [];
 
   currentTab = {
     name: 'Thông tin của truyện',
@@ -15,7 +15,7 @@ export class DetailTabHeadMolec implements OnInit {
     type: 'create',
     isActive: true,
   };
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
     this.currentTab = this.tabs.find((tab) => tab.isActive);

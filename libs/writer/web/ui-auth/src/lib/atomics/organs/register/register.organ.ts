@@ -1,4 +1,4 @@
-import { FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter, Input } from '@angular/core';
 
 @Component({
@@ -9,8 +9,13 @@ import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter, Input
 })
 export class RegisterOrgan implements OnInit {
   @Output() regiterEvent = new EventEmitter();
-  @Input() authForm: FormGroup;
-  constructor() { }
+  @Input() authForm: FormGroup = this.fb.group({
+    displayName: ['', Validators.required],
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', Validators.required],
+    confirmPassword: ['', Validators.required],
+  });
+  constructor(private fb: FormBuilder) {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }

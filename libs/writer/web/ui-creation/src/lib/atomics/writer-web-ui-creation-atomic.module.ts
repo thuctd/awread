@@ -32,6 +32,7 @@ import { DetailBookTemplate } from './templates/detail-book/detail-book.template
 import { ReadTemplate } from './templates/read/read.template';
 import { PopupEditCoverBookTemplate } from './templates/popup-edit-cover-book/popup-edit-cover-book.template';
 import { GenresFieldModule, InfiniteScrollModule, LoaderModule } from '@awread/global/packages';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   imports: [
@@ -45,8 +46,10 @@ import { GenresFieldModule, InfiniteScrollModule, LoaderModule } from '@awread/g
     MatAutocompleteModule,
     NgSelectModule,
     LoaderModule,
+    MatDialogModule,
   ],
   exports: [
+    MatDialogModule,
     CommonModule,
     WrtHeadMolec,
     WrtWriterMolec,
@@ -107,4 +110,4 @@ import { GenresFieldModule, InfiniteScrollModule, LoaderModule } from '@awread/g
     PopupEditCoverBookTemplate,
   ],
 })
-export class WriterWebUiCreationAtomicModule { }
+export class WriterWebUiCreationAtomicModule {}

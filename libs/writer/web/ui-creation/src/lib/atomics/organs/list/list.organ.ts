@@ -7,7 +7,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter, Input
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListOrgan implements OnInit {
-  @Input() books;
+  @Input() books = [];
   @Input() loading: boolean;
   @Output() moreEvent = new EventEmitter();
   @Output() addChapterEvent = new EventEmitter();
@@ -19,9 +19,9 @@ export class ListOrgan implements OnInit {
 
   counter = Array;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   numberReturn(length) {
     return new Array(length);

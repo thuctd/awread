@@ -8,16 +8,16 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./index.organ.scss'],
 })
 export class IndexOrgan implements OnInit {
-  @Input() chapters;
+  @Input() chapters = [];
   @Output() chapterActionEvent = new EventEmitter();
-  formImg = this.fb.group({
+  @Input() formImg = this.fb.group({
     srcImg: [''],
   });
   @Output() createNewChapterEvent = new EventEmitter();
   faIcon = faPlus;
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   chapterAction(type: string, chapter) {
     this.chapterActionEvent.emit({

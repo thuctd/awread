@@ -1,6 +1,9 @@
-<div [routerLinkActive]="active" class="relative">
-  <div class="w-1.5 bg-green-400 h-full white-block absolute hidden rounded-r-3xl -ml-10"></div>
-  <div class="w-10 ml-3">
-    <img [routerLinkActive]="active" [src]="iconUrl" [alt]="linkName" [routerLink]="linkTo" class="cursor-pointer focus:outline-none py-10">
+<div [routerLinkActive]="active" class="relative w-32">
+  <div class="w-1.5 bg-green-400 h-full white-block absolute hidden rounded-r-3xl ml003"></div>
+  <div class="flex justify-center cursor-pointer focus:outline-none relative" [routerLink]="linkTo">
+    <img [routerLinkActive]="active" [src]="iconUrl" [alt]="linkName" class=" icon1 focus:outline-none py-10">
+    <div class="image-active absolute inset-0 opacity-0 flex justify-center ">
+      <img [routerLinkActive]="active" [src]="iconUrl2" [alt]="linkName" class="icon2 focus:outline-none py-10 ">
+    </div>
   </div>
 </div>

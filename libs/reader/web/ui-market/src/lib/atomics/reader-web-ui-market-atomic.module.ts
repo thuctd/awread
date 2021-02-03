@@ -57,7 +57,6 @@ import { CommentItemMolec } from './molecs/comment-item/comment-item.molec';
     GlobalDesignSystemAtomicModule,
     CarouselModule,
     BrowserAnimationsModule,
-    NoopAnimationsModule,
   ],
   exports: [
     CommonModule,

@@ -1,4 +1,4 @@
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { Category, Genre } from '@awread/writer/web/feature-auth';
 import { PopupEditCoverBookTemplate } from '../popup-edit-cover-book/popup-edit-cover-book.template';
@@ -24,9 +24,21 @@ export class DetailIndexTemplate implements OnInit {
   ];
 
   @Input() chapters;
-  @Input() tabsHead;
-  @Input() bookForm: FormGroup;
-  @Input() selectedTab: string;
+  @Input() tabsHead = [
+    { name: 'Thông tin của truyện', tabName: 'book' },
+    { name: 'Mục lục', tabName: 'toc' },
+  ];
+  @Input() bookForm: FormGroup = this.fb.group({
+    img: ['', Validators.required],
+    title: ['', Validators.required],
+    description: ['', Validators.required],
+    completed: ['', Validators.required],
+    genreIds: ['', Validators.required],
+    audience: ['', Validators.required],
+    categoryid: ['', Validators.required],
+    srcImg: [''],
+  });
+  @Input() selectedTab = 'book';
   @Output() selectedStatusEvent = new EventEmitter();
   @Output() cancelCreateBook = new EventEmitter();
   @Output() bookSubmitEvent = new EventEmitter();
@@ -35,7 +47,7 @@ export class DetailIndexTemplate implements OnInit {
   @Output() switchTabEvent = new EventEmitter();
   @Output() genresEvent = new EventEmitter();
   @Input() selectedBookStatus: string;
-  constructor(public matDialog: MatDialog) { }
+  constructor(public matDialog: MatDialog, private fb: FormBuilder) { }
 
   ngOnInit(): void {
     // this.selectedBookStatus = this.bookForm.get('status').value;
