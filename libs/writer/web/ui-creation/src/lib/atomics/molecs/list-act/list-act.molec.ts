@@ -20,15 +20,15 @@ export class ListActMolec implements OnInit {
       type: 'STATS',
     },
     {
-      titleButton: 'Chia sẽ',
+      titleButton: 'Chia sẻ',
       faIcon: faShareAlt,
       type: 'SHARE',
     },
   ];
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   updateBookStatus(status: string) {
     this.updateBookStatusEvent.emit({ bookId: this.bookId, type: status });

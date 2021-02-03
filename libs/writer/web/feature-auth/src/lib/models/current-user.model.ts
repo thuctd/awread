@@ -47,8 +47,7 @@ export function createUserFromFirebase(user: Partial<FirebaseUser>) {
   return {
     email: user?.email ?? '',
     displayName: user?.displayName ?? '',
-    emailVerified:
-      user?.emailVerified || user?.emailVerified === 'true' ? true : false,
+    emailVerified: user?.emailVerified || user?.emailVerified === 'true' ? true : false,
     photoUrl: user?.photoUrl ?? '',
     password: user?.password ?? '',
     uid: user?.uid,

@@ -1,6 +1,6 @@
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit, ChangeDetectionStrategy, Input, EventEmitter, Output, ChangeDetectorRef } from '@angular/core';
-import { } from '@awread/writer/web/feature-auth';
+import {} from '@awread/writer/web/feature-auth';
 import { MatDialog } from '@angular/material/dialog';
 import { ReadTemplate } from '../../templates';
 
@@ -25,7 +25,12 @@ export class WrtHeadMolec implements OnInit {
   get chapterStatus() {
     return this._chapterStatus;
   }
-  @Input() chapterForm: FormGroup;
+  @Input() chapterForm: FormGroup = this.fb.group({
+    bookTitle: ['', Validators.required],
+    chapterNumber: ['', Validators.required],
+    bookImg: ['https://via.placeholder.com/520x740.png', Validators.required],
+    status: ['', Validators.required],
+  });
 
   @Input() shouldShowStatusUI: boolean;
   @Input() type: string;
@@ -48,11 +53,7 @@ export class WrtHeadMolec implements OnInit {
   ];
   selectedChapterStatus = 'DRAFT';
   @Output() saveChapterEvent = new EventEmitter();
-  constructor(
-    private cd: ChangeDetectorRef,
-    private matDialog: MatDialog
-  ) { }
-
+  constructor(private fb: FormBuilder, private cd: ChangeDetectorRef, private matDialog: MatDialog) {}
 
   ngOnInit(): void {
     this.chapterForm.valueChanges.subscribe(() => {
@@ -68,10 +69,7 @@ export class WrtHeadMolec implements OnInit {
   }
 
   openPreview(): void {
-    this.openModalPreview(
-      this.chapterForm.get('title').value,
-      this.chapterForm.get('content').value
-    );
+    this.openModalPreview(this.chapterForm.get('title').value, this.chapterForm.get('content').value);
   }
 
   openModalPreview(title: string, conent: string) {
@@ -80,8 +78,8 @@ export class WrtHeadMolec implements OnInit {
       height: '42.5rem',
       data: {
         title: title,
-        content: conent
-      }
+        content: conent,
+      },
     });
 
     return dialogRef.afterClosed();

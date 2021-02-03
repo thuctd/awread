@@ -31,6 +31,7 @@ import { InfoBookMolec } from './molecs/info-book/info-book.molec';
 import { DetailBookOrgan } from './organs/detail-book/detail-book.organ';
 import { DetailBookTemplate } from './templates/detail-book/detail-book.template';
 import { ReadTemplate } from './templates/read/read.template';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   imports: [
@@ -44,8 +45,10 @@ import { ReadTemplate } from './templates/read/read.template';
     MatAutocompleteModule,
     NgSelectModule,
     LoaderModule,
+    MatDialogModule,
   ],
   exports: [
+    MatDialogModule,
     CommonModule,
     WrtHeadMolec,
     WrtWriterMolec,
@@ -104,4 +107,4 @@ import { ReadTemplate } from './templates/read/read.template';
     ReadTemplate,
   ],
 })
-export class WriterWebUiCreationAtomicModule { }
+export class WriterWebUiCreationAtomicModule {}
