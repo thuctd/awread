@@ -2,7 +2,7 @@ import { BtnInputFileAtom } from './btn-input-file.atom';
 import { GlobalDesignSystemAtomicModule } from '../../global-design-system-atomic.module';
 
 export default {
-  title: 'Design System/Atoms/Btn Input File'
+  title: 'Design System/Atoms/Buttons/button/Btn Input File'
 }
 
 export const primary = () => ({

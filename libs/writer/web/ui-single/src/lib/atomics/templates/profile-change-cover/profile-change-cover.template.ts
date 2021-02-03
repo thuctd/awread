@@ -11,6 +11,9 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
         display: block;
         height: 100%;
       }
+      .mat-dialog-content{
+        overflow: hidden !important
+      }
     `
   ],
   changeDetection: ChangeDetectionStrategy.OnPush

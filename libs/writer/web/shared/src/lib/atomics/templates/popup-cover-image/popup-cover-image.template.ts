@@ -9,7 +9,7 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
     `
       :host {
         display: block;
-        *
+        height: calc(100% - 53px)
       }
     `
   ],
