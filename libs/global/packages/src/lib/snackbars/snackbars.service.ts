@@ -5,18 +5,30 @@ import { HotToastService } from '@ngneat/hot-toast';
   providedIn: 'any',
 })
 export class SnackbarsService {
-  constructor(private toast: HotToastService) {}
+  constructor(private toast: HotToastService) { }
 
   showSuccess(message: string) {
-    this.toast.success(message);
+    this.toast.success(message, {
+      style: {
+        padding: '20px'
+      }
+    });
   }
 
   showError(message: string) {
-    this.toast.error(message);
+    this.toast.error(message, {
+      style: {
+        padding: '20px'
+      }
+    });
   }
 
   showWarning(message: string) {
-    this.toast.warning(message);
+    this.toast.warning(message, {
+      style: {
+        padding: '20px'
+      }
+    });
   }
 
 }
