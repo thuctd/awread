@@ -1,8 +1,8 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'organ-mb-detail-book',
-  templateUrl: './mb-detail-book.organ.html',
+  selector: 'organ-mb-list-detail-book',
+  templateUrl: './mb-list-detail-book.organ.html',
   styles: [
     `
       :host {

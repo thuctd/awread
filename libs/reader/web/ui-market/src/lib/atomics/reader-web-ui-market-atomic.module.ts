@@ -51,7 +51,7 @@ import { CommentOrgan } from './organs/comment/comment.organ';
 import { CommentItemMolec } from './molecs/comment-item/comment-item.molec';
 import { TitlePageMenuMolec } from './molecs/title-page-menu/title-page-menu.molec';
 import { MbInfoBookMolec } from './molecs/mb-info-book/mb-info-book.molec';
-import { MbDetailBookOrgan } from './organs/mb-detail-book/mb-detail-book.organ';
+import { MbDetailBookOrgan } from './organs/mb-list-detail-book/mb-list-detail-book.organ';
 import { MbListTemplate } from './templates/mb-list/mb-list.template';
 
 @NgModule({
