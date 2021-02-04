@@ -12,6 +12,8 @@ export class HomeListBookFeaturedMobileOrgan implements OnInit {
   @Input() counter = Array;
   prevIcon = `<img src="/global-assets/images/arrow_left.png" alt="arrow_left">`;
   nextIcon = `<img src="/global-assets/images/arrow_right.png" alt="arrow_right">`;
+  @Input() srcImg = 'https://via.placeholder.com/260x370.png';
+  @Input() altImg = 'Placeholder';
 
   constructor() {}
 
@@ -22,11 +24,16 @@ export class HomeListBookFeaturedMobileOrgan implements OnInit {
     navText: [this.prevIcon, this.nextIcon],
     responsive: {
       0: {
-        items: 1,
+        items: 3,
       },
       320: {
-        items: 1,
-        stagePadding: -10,
+        items: 3,
+      },
+      768: {
+        items: 4,
+      },
+      1200: {
+        items: 5,
       },
     },
   };
