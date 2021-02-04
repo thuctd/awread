@@ -1,2 +1,2 @@
-<a (click)="submitEvent.emit()" [ngClass]=" [(size === 's' ? 'text-xs' : size === 'm' ? 'text-xs md:text-sm' : 'text-xs md:text-base'), (color === 'green' ? 'text-green-400' : 'text-gray-600')]"
+<a (click)="submitEvent.emit()" [ngClass]=" [(size === 's' ? 'text-xs' : size === 'm' ? 'text-sm' : 'text-base'), (color === 'green' ? 'text-green-400' : 'text-gray-600')]"
     [routerLink]="['/']" class="cursor-pointer outline-none">{{text}}</a>
