@@ -10,10 +10,10 @@ import type { User } from '@awread/writer/web/feature-auth';
 export class RightTopnavMolec implements OnInit {
   // avatarUrl = 'http://tachyons.io/img/logo.jpg';
   // name = 'Hà Thanh Tùng';
-  @Input() user: User;
+  @Input() user = [];
   @Output() searchEvent = new EventEmitter();
   @Output() signoutEvent = new EventEmitter();
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }

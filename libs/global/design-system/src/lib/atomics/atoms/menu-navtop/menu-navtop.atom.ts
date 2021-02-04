@@ -14,11 +14,16 @@ export class MenuNavtopAtom implements OnInit {
   // @Input() avatarUrl = 'http://tachyons.io/img/logo.jpg';
   // @Input() name = 'Hà Thanh Tùng';
   // @Input() email = 'thanhtung@gmail.com';
-  @Input() curentUser;
-  @Output() signoutEvent = new EventEmitter();
-  constructor() { }
 
-  ngOnInit(): void { }
+  @Input() curentUser = {
+    photourl: 'http://tachyons.io/img/logo.jpg',
+    fullname: '',
+    email: '',
+  };
+  @Output() signoutEvent = new EventEmitter();
+  constructor() {}
+
+  ngOnInit(): void {}
 
   toggleMenu($event?) {
     if ($event) $event.stopPropagation();

@@ -8,15 +8,9 @@ import { faFile } from '@fortawesome/free-solid-svg-icons';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MenuNavleftAtom implements OnInit {
-  upLoad = {
-    UploadUrl: '/global-assets/images/upload.png',
-    linkName: 'upLoad',
-    linkTo: '',
-  };
-  iconUrl = '/global-assets/images/upload.png';
-  iconUrlArrow = '/global-assets/images/arrowUp-white.png';
+  iconUrl = '/global-assets/images/Group-4.webp';
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }

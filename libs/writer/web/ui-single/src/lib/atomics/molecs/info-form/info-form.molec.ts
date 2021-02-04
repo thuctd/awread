@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
-import { FormGroup } from '@angular/forms';
 import { MatCalendarCellClassFunction } from '@angular/material/datepicker';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'info-form',
@@ -9,7 +9,12 @@ import { MatCalendarCellClassFunction } from '@angular/material/datepicker';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InfoFormMolec implements OnInit {
-  @Input() profileForm: FormGroup;
+  @Input() profileForm: FormGroup = this.fb.group({
+    email: ['', [Validators.required]],
+    phone: ['', [Validators.required]],
+    dob: ['', [Validators.required]],
+    gender: ['', [Validators.required]],
+  });
   @Input() submitted: boolean;
   items = [
     {
@@ -20,7 +25,7 @@ export class InfoFormMolec implements OnInit {
     },
   ];
 
-  constructor() { }
+  constructor(private fb: FormBuilder) {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }

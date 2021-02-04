@@ -14,7 +14,7 @@ export class LoginOrgan implements OnInit {
     password: ['', Validators.required],
   });
   @Output() auth = new EventEmitter();
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }

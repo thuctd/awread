@@ -9,13 +9,20 @@ import { Category, Genre } from '@awread/writer/web/feature-auth';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DetailOrgan implements OnInit {
-  @Input() bookForm: FormGroup;
+  @Input() bookForm: FormGroup = this.fb.group({
+    title: ['', Validators.required],
+    description: ['', Validators.required],
+    completed: ['', Validators.required],
+    genreIds: ['', Validators.required],
+    audience: ['', Validators.required],
+    categoryid: ['', Validators.required],
+  });
   @Input() categories: Category[];
   @Input() genres: Genre[];
   @Output() bookSubmitEvent = new EventEmitter();
   @Output() genresEvent = new EventEmitter();
   @Input() submitted: boolean;
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }

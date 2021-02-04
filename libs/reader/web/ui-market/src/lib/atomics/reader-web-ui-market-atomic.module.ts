@@ -49,6 +49,10 @@ import { ContentBookOrgan } from './organs/content-book/content-book.organ';
 import { ReadTemplate } from './templates/read/read.template';
 import { CommentOrgan } from './organs/comment/comment.organ';
 import { CommentItemMolec } from './molecs/comment-item/comment-item.molec';
+import { TitlePageMenuMolec } from './molecs/title-page-menu/title-page-menu.molec';
+import { MbInfoBookMolec } from './molecs/mb-info-book/mb-info-book.molec';
+import { MbDetailBookOrgan } from './organs/mb-list-detail-book/mb-list-detail-book.organ';
+import { MbListTemplate } from './templates/mb-list/mb-list.template';
 
 @NgModule({
   imports: [
@@ -57,7 +61,6 @@ import { CommentItemMolec } from './molecs/comment-item/comment-item.molec';
     GlobalDesignSystemAtomicModule,
     CarouselModule,
     BrowserAnimationsModule,
-    NoopAnimationsModule,
   ],
   exports: [
     CommonModule,
@@ -107,6 +110,10 @@ import { CommentItemMolec } from './molecs/comment-item/comment-item.molec';
     ReadTemplate,
     CommentOrgan,
     CommentItemMolec,
+    TitlePageMenuMolec,
+    MbInfoBookMolec,
+    MbDetailBookOrgan,
+    MbListTemplate,
   ],
   declarations: [
     TabCategoryMolec,
@@ -155,6 +162,10 @@ import { CommentItemMolec } from './molecs/comment-item/comment-item.molec';
     ReadTemplate,
     CommentOrgan,
     CommentItemMolec,
+    TitlePageMenuMolec,
+    MbInfoBookMolec,
+    MbDetailBookOrgan,
+    MbListTemplate,
   ],
 })
 export class ReaderWebUiMarketAtomicModule { }
