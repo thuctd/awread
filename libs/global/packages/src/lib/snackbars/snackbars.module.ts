@@ -1,17 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
-
-
+import { HotToastModule } from '@ngneat/hot-toast';
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    MatSnackBarModule
+    HotToastModule.forRoot(
+      {
+        position: 'bottom-right',
+      }
+    )
   ],
   exports: [
-    MatSnackBarModule
   ]
 })
 export class SnackbarsModule { }

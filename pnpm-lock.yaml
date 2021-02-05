@@ -23,6 +23,8 @@ dependencies:
   '@nestjs/core': 7.6.7_0108ccbc5d71a06a2f9a171909db8ee0
   '@nestjs/platform-express': 7.6.7_59ab2b540198e9e68600ef21ee00f4c5
   '@ng-select/ng-select': 6.0.0_de939bc47f9793d6a745cf43de53e2d5
+  '@ngneat/hot-toast': 1.0.3_9325f4b6c2fd925122c1e7573c994d01
+  '@ngneat/overview': 1.0.0
   apollo-angular: 2.2.0_0689a1b8408dad656486778a395005e1
   apollo-angular-link-http: 1.11.0_a87a39454660ead1f48e03d56ae11052
   body-parser: 1.19.0
@@ -3894,6 +3896,25 @@ packages:
       '@angular/forms': '>=11.0.0 <12.0.0'
     resolution:
       integrity: sha512-lgn9bEZrMR5duPb0Pnnfuu/6SwpeFnT8HDBBwFMdeMOvV0BIkkd9ZIX2gMqMEYWfdkftO9uH8O07k3K8Un74Lw==
+  /@ngneat/hot-toast/1.0.3_9325f4b6c2fd925122c1e7573c994d01:
+    dependencies:
+      '@angular/common': 11.1.1_@angular+core@11.1.1+rxjs@6.6.3
+      '@angular/core': 11.1.1_rxjs@6.6.3+zone.js@0.11.3
+      '@ngneat/overview': 1.0.0
+      tslib: 2.1.0
+    dev: false
+    peerDependencies:
+      '@angular/common': ^11.0.5
+      '@angular/core': ^11.0.5
+      '@ngneat/overview': ^1.0.0-beta.7
+    resolution:
+      integrity: sha512-rj+siV7W5zkg0zVW3S9aDe+Y9RpB4KPit5VCBQfTlEl4fL3iRoC6AEIWQHVz/Ka0TPAQTJqHANIBm2x7rwlHyw==
+  /@ngneat/overview/1.0.0:
+    dependencies:
+      tslib: 2.1.0
+    dev: false
+    resolution:
+      integrity: sha512-rWR1hwMMrHCwaLNkyRCkRUkh3gB3bN/5+EBfq5Y3I4e4OYvqNdGwF1X0x62iWE5Aof96dxKnyX4UdDnje49hiw==
   /@ngtools/webpack/11.1.1_fcb361c6587f7d09cf8edd09608992b9:
     dependencies:
       '@angular-devkit/core': 11.1.1
@@ -8856,7 +8877,7 @@ packages:
   /debug/4.1.1:
     dependencies:
       ms: 2.1.3
-    deprecated: Debug versions >=3.2.0 <3.2.7 || >=4 <4.3.1 have a low-severity ReDos regression when used in a Node.js environment. It is recommended you upgrade to 3.2.7 or 4.3.1. (https://github.com/visionmedia/debug/issues/797)
+    deprecated: 'Debug versions >=3.2.0 <3.2.7 || >=4 <4.3.1 have a low-severity ReDos regression when used in a Node.js environment. It is recommended you upgrade to 3.2.7 or 4.3.1. (https://github.com/visionmedia/debug/issues/797)'
     dev: true
     resolution:
       integrity: sha512-pYAIzeRo8J6KPEaJ0VWOh5Pzkbw/RetuzehGM7QRRX5he4fPHx2rdKMB256ehJCkX+XRQm16eZLqLNS8RSZXZw==
@@ -17662,7 +17683,7 @@ packages:
       request-promise-core: 1.1.4_request@2.88.2
       stealthy-require: 1.1.1
       tough-cookie: 2.5.0
-    deprecated: request-promise-native has been deprecated because it extends the now deprecated request package, see https://github.com/request/request/issues/3142
+    deprecated: 'request-promise-native has been deprecated because it extends the now deprecated request package, see https://github.com/request/request/issues/3142'
     dev: true
     engines:
       node: '>=0.12.0'
@@ -17692,7 +17713,7 @@ packages:
       tough-cookie: 2.5.0
       tunnel-agent: 0.6.0
       uuid: 3.4.0
-    deprecated: request has been deprecated, see https://github.com/request/request/issues/3142
+    deprecated: 'request has been deprecated, see https://github.com/request/request/issues/3142'
     engines:
       node: '>= 6'
     resolution:
@@ -17772,7 +17793,7 @@ packages:
     resolution:
       integrity: sha512-QEb4A76c8Mi7I3xNKXlRKQSlLBwjUV/ULFMP+G7n3/7tJZ8MG5wsZ3ucxP1Jz8Vevn6fnJsxDx9cIls+utGzPQ==
   /resolve-url/0.2.1:
-    deprecated: https://github.com/lydell/resolve-url#deprecated
+    deprecated: 'https://github.com/lydell/resolve-url#deprecated'
     resolution:
       integrity: sha1-LGN/53yJOv0qZj/iGqkIAGjiBSo=
   /resolve/1.17.0:
@@ -20174,7 +20195,7 @@ packages:
     resolution:
       integrity: sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==
   /urix/0.1.0:
-    deprecated: Please see https://github.com/lydell/urix#deprecated
+    deprecated: 'Please see https://github.com/lydell/urix#deprecated'
     resolution:
       integrity: sha1-2pN/emLiH+wf0Y1Js1wpNQZ6bHI=
   /url-join/0.0.1:
@@ -21228,6 +21249,8 @@ specifiers:
   '@nestjs/schematics': ^7.2.7
   '@nestjs/testing': ^7.6.7
   '@ng-select/ng-select': ^6.0.0
+  '@ngneat/hot-toast': ^1.0.3
+  '@ngneat/overview': ^1.0.0
   '@nrwl/angular': ^11.2.6
   '@nrwl/cli': ^11.2.6
   '@nrwl/cypress': ^11.2.6
