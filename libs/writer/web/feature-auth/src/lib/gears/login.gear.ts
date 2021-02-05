@@ -32,16 +32,16 @@ export class LoginGear {
       const userCredential = await this.firebaseAuthAddon.loginWithEmail(
         credential
       );
-      this.snackbarService.create('Đăng nhập thành công!', 150000);
+      this.snackbarService.showSuccess('Đăng nhập thành công!');
       this.authRoutingGear.navigateAfterLoginComplete('list');
       console.log('userCredential', userCredential);
       return userCredential;
     } catch (err) {
       console.log('err', err);
       if (err.code === 'auth/user-not-found') {
-        this.snackbarService.error('Tài khoản không tồn tại!', 5000);
+        this.snackbarService.showError('Tài khoản không tồn tại!');
       } else if (err.code === 'auth/wrong-password') {
-        this.snackbarService.error('Mật khẩu không chính xác!', 5000);
+        this.snackbarService.showError('Mật khẩu không chính xác!');
       }
     }
   }

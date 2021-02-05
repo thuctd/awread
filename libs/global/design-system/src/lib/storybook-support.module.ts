@@ -12,7 +12,7 @@ console.log('is storybook?', __ISSTORYBOOK__);
   imports: [
     CommonModule,
     __ISSTORYBOOK__ ? RouterModule.forRoot([], { useHash: true }) : RouterModule,
-    __ISSTORYBOOK__ ? NoopAnimationsModule : BrowserAnimationsModule
+    __ISSTORYBOOK__ ? BrowserAnimationsModule : []
 
   ],
   exports: [RouterModule, ReactiveFormsModule, FontAwesomeModule],
