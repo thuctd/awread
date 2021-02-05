@@ -38,12 +38,12 @@ export class CurrentUserGear {
     return this.currentUserApi.update(user).pipe(
       tap((res) => {
         if (res && res['data']) {
-          this.snackbarsService.create('Cập nhật thông tin thành công!', 5000);
+          this.snackbarsService.showSuccess('Cập nhật thông tin thành công!');
           this.currentUserStore.updateCurrentUserAkita(user);
         }
       }),
       catchError((err) => {
-        this.snackbarsService.error('Đã xảy ra lỗi. Vui lòng thử lại!', 5000);
+        this.snackbarsService.showError('Đã xảy ra lỗi. Vui lòng thử lại!');
         return throwError(err);
       }),
       retry(2)
