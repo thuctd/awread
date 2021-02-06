@@ -46,7 +46,7 @@ export class RegisterCompletePage implements OnInit {
           this.authFacade.linkToProviderGoogleorFacebook(user);
         }),
         catchError((err) => {
-          this.snackbarService.error('Đã xảy ra lỗi. Vui lòng thử lại!');
+          this.snackbarService.showError('Đã xảy ra lỗi. Vui lòng thử lại!');
           return of(err);
         }),
         retry(3)

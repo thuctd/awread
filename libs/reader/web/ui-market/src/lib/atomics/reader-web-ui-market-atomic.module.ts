@@ -55,8 +55,19 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { HomeMobileTemplate } from './templates/home-mobile/home-mobile.template';
 import { HomeListBookReviewMobileOrgan } from './organs/home-list-book-review-mobile/home-list-book-review-mobile.organ';
 import { SliderMobileMolec } from './molecs/slider-mobile/slider-mobile.molec';
+import { TitlePageMenuMolec } from './molecs/title-page-menu/title-page-menu.molec';
+import { MbInfoBookMolec } from './molecs/mb-info-book/mb-info-book.molec';
+import { MbDetailBookOrgan } from './organs/mb-list-detail-book/mb-list-detail-book.organ';
+import { MbListTemplate } from './templates/mb-list/mb-list.template';
+
 @NgModule({
-  imports: [CommonModule, StorybookSupportModule, GlobalDesignSystemAtomicModule, CarouselModule, BrowserAnimationsModule, NoopAnimationsModule, MatTabsModule],
+  imports: [
+    CommonModule,
+    StorybookSupportModule,
+    GlobalDesignSystemAtomicModule,
+    CarouselModule,
+    BrowserAnimationsModule,
+  ],
   exports: [
     CommonModule,
     TabCategoryMolec,
@@ -111,6 +122,10 @@ import { SliderMobileMolec } from './molecs/slider-mobile/slider-mobile.molec';
     HomeMobileTemplate,
     HomeListBookReviewMobileOrgan,
     SliderMobileMolec,
+    TitlePageMenuMolec,
+    MbInfoBookMolec,
+    MbDetailBookOrgan,
+    MbListTemplate,
   ],
   declarations: [
     TabCategoryMolec,
@@ -164,6 +179,10 @@ import { SliderMobileMolec } from './molecs/slider-mobile/slider-mobile.molec';
     HomeMobileTemplate,
     HomeListBookReviewMobileOrgan,
     SliderMobileMolec,
+    TitlePageMenuMolec,
+    MbInfoBookMolec,
+    MbDetailBookOrgan,
+    MbListTemplate,
   ],
 })
 export class ReaderWebUiMarketAtomicModule {}
