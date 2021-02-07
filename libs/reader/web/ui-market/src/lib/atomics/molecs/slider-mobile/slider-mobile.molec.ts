@@ -18,16 +18,26 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SliderMobileMolec implements OnInit {
-  @Input() srcImg = 'https://via.placeholder.com/260x370.png';
+  @Input() srcImg = '/global-assets/images/halo.jpg';
   @Input() altImg = 'Placeholder';
-  counter = Array;
+  @Input() slider = [
+    {
+      link: '/global-assets/images/halo.jpg',
+      alt: 'Placeholder',
+    },
+    {
+      link: 'https://via.placeholder.com/260x370.png',
+      alt: 'Placeholder',
+    },
+  ];
 
   @Input() customOptions: OwlOptions = {
     loop: true,
-    mouseDrag: false,
-    touchDrag: false,
-    pullDrag: false,
-    dots: true,
+    autoplay: true,
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: true,
+    autoplayHoverPause: true,
     navSpeed: 500,
     nav: false,
     autoWidth: false,

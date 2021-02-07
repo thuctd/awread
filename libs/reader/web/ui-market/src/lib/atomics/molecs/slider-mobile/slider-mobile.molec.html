@@ -3,8 +3,8 @@
     <div class="container w-full overflow-hidden">
       <owl-carousel-o [options]="customOptions">
         <ng-container>
-          <ng-template carouselSlide *ngFor="let tab of counter(3)">
-            <img class="w-full h-44 sm:h-56 md:h-72 lg:h-96" [src]="srcImg" [alt]="altImg">
+          <ng-template carouselSlide *ngFor="let tab of slider">
+            <img class="w-full h-44 sm:h-56 md:h-72 lg:h-96" [src]="tab.link" [alt]="tab.alt">
           </ng-template>
         </ng-container>
       </owl-carousel-o>
