@@ -137,5 +137,4 @@ jobs:
           git checkout develop
           git pull
           git merge --no-ff origin/story-reader-web -m "Auto-merge story-reader-web back to develop"
-          git push
-          git push origin develop:story-reader-web --force
+          git push origin develop
