@@ -7,25 +7,31 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SliderAtom implements OnInit {
-
-  @Input() imageObject = [{
-    image: 'https://via.placeholder.com/1200x500.png',
-    thumbImage: 'https://via.placeholder.com/1200x500.png',
-    alt: 'alt of image'
-  },
-  {
-    image: 'https://via.placeholder.com/1200x500.png',
-    thumbImage: 'https://via.placeholder.com/1200x500.png',
-    alt: 'Image alt'
-  },
-  {
-    image: 'https://via.placeholder.com/1200x500.png',
-    thumbImage: 'https://via.placeholder.com/1200x500.png',
-    alt: 'Image alt'
-  }
+  @Input() showArrow = 'true';
+  @Input() imageSize = {
+    width: '100%',
+    height: '650px',
+    space: 1,
+  };
+  @Input() imageObject = [
+    {
+      image: 'https://via.placeholder.com/1200x500.png',
+      thumbImage: 'https://via.placeholder.com/1200x500.png',
+      alt: 'alt of image',
+    },
+    {
+      image: 'https://via.placeholder.com/1200x500.png',
+      thumbImage: 'https://via.placeholder.com/1200x500.png',
+      alt: 'Image alt',
+    },
+    {
+      image: 'https://via.placeholder.com/1200x500.png',
+      thumbImage: 'https://via.placeholder.com/1200x500.png',
+      alt: 'Image alt',
+    },
   ];
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }
