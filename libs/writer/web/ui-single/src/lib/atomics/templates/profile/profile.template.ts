@@ -5,7 +5,13 @@ import { ProfileChangeCoverTemplate } from '../profile-change-cover/profile-chan
 @Component({
   selector: 'profile',
   templateUrl: './profile.template.html',
-  styleUrls: ['./profile.template.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfileTemplate implements OnInit {

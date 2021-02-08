@@ -19,6 +19,6 @@ export class LogoutGear {
     this.currentUserService.logout();
     window.localStorage.clear();
     this.router.navigate(['login']);
-    this.snackbarService.create('Đăng xuất thành công!', 100000);
+    this.snackbarService.showSuccess('Đăng xuất thành công!');
   }
 }

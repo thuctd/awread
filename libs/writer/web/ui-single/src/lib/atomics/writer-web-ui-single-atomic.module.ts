@@ -12,6 +12,10 @@ import { ProfileTemplate } from './templates/profile/profile.template';
 import { WriterWebSharedAtomicModule } from '@awread/writer/web/shared';
 import { ProfileChangeCoverTemplate } from './templates/profile-change-cover/profile-change-cover.template';
 
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 @NgModule({
   imports: [
     CommonModule,
@@ -19,6 +23,10 @@ import { ProfileChangeCoverTemplate } from './templates/profile-change-cover/pro
     GlobalDesignSystemAtomicModule,
     ReactiveFormsModule,
     WriterWebSharedAtomicModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   exports: [
     CommonModule,

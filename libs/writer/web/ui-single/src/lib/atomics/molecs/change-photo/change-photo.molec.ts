@@ -3,7 +3,13 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
 @Component({
   selector: 'change-photo',
   templateUrl: './change-photo.molec.html',
-  styleUrls: ['./change-photo.molec.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChangePhotoMolec implements OnInit {
