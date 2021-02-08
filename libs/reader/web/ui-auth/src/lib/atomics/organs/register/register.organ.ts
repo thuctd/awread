@@ -8,7 +8,7 @@ import { FormBuilder, Validators } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegisterOrgan implements OnInit {
-  @Input() text = 'Bạn có chắc chắn tạo tài khoản?';
+  @Input() text = 'Nếu bạn đã có tài khoản?';
   @Input() textLink = 'Đăng nhập';
   @Input() authForm = this.fb.group({
     displayName: ['', [Validators.required]],
@@ -18,7 +18,7 @@ export class RegisterOrgan implements OnInit {
   });
   @Output() auth = new EventEmitter();
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }

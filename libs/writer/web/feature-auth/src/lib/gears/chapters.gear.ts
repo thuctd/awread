@@ -78,7 +78,7 @@ export class ChaptersGear {
     return this.chaptersApi.createChapter(chapterDetail, isPublishedBook).pipe(
       tap((res) => {
         console.log('createChapter res: ', res);
-        this.snackbarsService.create('Thêm chương thành công!');
+        this.snackbarsService.showSuccess('Thêm chương thành công!');
         if (res['data'] && res['data']['createChapter']['chapter']) {
           const isPublished = chapter.status === 'PUBLISHED';
           this.chaptersStore.add(chapterDetail, { prepend: true });
@@ -87,7 +87,7 @@ export class ChaptersGear {
         this.router.navigate(['detail', { bookId: chapterDetail.bookid }]);
       }),
       catchError((err) => {
-        this.snackbarsService.error('Đã xảy ra lỗi. Vui lòng thử lại!');
+        this.snackbarsService.showError('Đã xảy ra lỗi. Vui lòng thử lại!');
         return throwError(err);
       })
     );
@@ -96,7 +96,7 @@ export class ChaptersGear {
   updateChapter(chapter) {
     return this.chaptersApi.updateChapter(chapter).pipe(
       tap((res) => {
-        this.snackbarsService.create('Cập nhật chương thành công!');
+        this.snackbarsService.showSuccess('Cập nhật chương thành công!');
         if (res['data']) {
           const chapterEntity = this.chapterQuery.getEntity(chapter.chapterid);
           if (chapterEntity.status !== chapter.status) {
@@ -111,7 +111,7 @@ export class ChaptersGear {
         this.router.navigate(['detail', { bookId: chapter.bookid }]);
       }),
       catchError((err) => {
-        this.snackbarsService.error('Đã xảy ra lỗi. Vui lòng thử lại!');
+        this.snackbarsService.showError('Đã xảy ra lỗi. Vui lòng thử lại!');
         return throwError(err);
       })
     );
@@ -120,7 +120,7 @@ export class ChaptersGear {
   removeChapter(chapterid: string, bookId: string, status: string) {
     return this.chaptersApi.removeChapter(chapterid).pipe(
       tap((res) => {
-        this.snackbarsService.create('Xóa chương thành công!');
+        this.snackbarsService.showSuccess('Xóa chương thành công!');
         if (res['data']) {
           const isRemoveChapterPublished = status === 'PUBLISHED';
           this.chaptersStore.remove(chapterid);
@@ -130,7 +130,7 @@ export class ChaptersGear {
         }
       }),
       catchError((err) => {
-        this.snackbarsService.error('Đã xảy ra lỗi. Vui lòng thử lại!');
+        this.snackbarsService.showError('Đã xảy ra lỗi. Vui lòng thử lại!');
         return throwError(err);
       })
     );
