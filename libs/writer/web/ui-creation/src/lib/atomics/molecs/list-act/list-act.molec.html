@@ -1,4 +1,4 @@
-<div class="mb-2 mr-1 text-right">
+<div class="mb-2 text-right">
   <list-social-menu
     (bookActionEvent)="bookActionEvent($event)"
   ></list-social-menu>
@@ -8,7 +8,7 @@
   <button
     *ngFor="let btn of btns"
     (click)="updateBookStatus(btn.type)"
-    class="text-sm ml-2 inline-block border border-solid border-gray-500 bg-white px-2 py-1 text-gray-700 rounded font-medium"
+    class="text-sm ml-2.5 inline-block border border-solid border-gray-500 bg-white px-1.5 py-1 text-gray-700 rounded font-medium"
   >
     <fa-icon [icon]="btn.faIcon" class="mr-2"></fa-icon>
     <span>{{btn.titleButton}}</span>

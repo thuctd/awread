@@ -1,9 +1,10 @@
 <section class="flex">
   <search-navtop
     (searchEvent)="searchEvent.emit($event)"
-    class="-mr-20"
+    class="-mr-32"
   ></search-navtop>
   <menu-navtop
+    class="mt-0.5"
     [curentUser]="user"
     (signoutEvent)="signoutEvent.emit()"
   ></menu-navtop>

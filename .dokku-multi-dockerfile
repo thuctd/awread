@@ -1,5 +1,5 @@
 story-writer-web=configs/dockers/story-writer-web.Dockerfile
 story-reader-web=configs/dockers/story-reader-web.Dockerfile
-backend-graphql=configs/dockers/backend-graphql.Dockerfile
 writer-web=configs/dockers/writer-web.Dockerfile
 reader-web=configs/dockers/reader-web.Dockerfile
+backend-graphql=configs/dockers/backend-graphql.Dockerfile
