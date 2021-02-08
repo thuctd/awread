@@ -1,10 +1,11 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { MatCalendarCellClassFunction } from '@angular/material/datepicker';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'info-form',
   templateUrl: './info-form.molec.html',
-  styleUrls: ['./info-form.molec.scss'],
+    styleUrls: ['./info-form.molec.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InfoFormMolec implements OnInit {
