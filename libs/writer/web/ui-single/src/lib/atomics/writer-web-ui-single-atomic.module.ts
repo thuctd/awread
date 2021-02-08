@@ -9,6 +9,9 @@ import { FormProfieOrgan } from './organs/form-profie/form-profie.organ';
 import { ImageProfileOrgan } from './organs/image-profile/image-profile.organ';
 import { ChangePhotoMolec } from './molecs/change-photo/change-photo.molec';
 import { ProfileTemplate } from './templates/profile/profile.template';
+import { WriterWebSharedAtomicModule } from '@awread/writer/web/shared';
+import { ProfileChangeCoverTemplate } from './templates/profile-change-cover/profile-change-cover.template';
+
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -19,6 +22,7 @@ import { MatInputModule } from '@angular/material/input';
     StorybookSupportModule,
     GlobalDesignSystemAtomicModule,
     ReactiveFormsModule,
+    WriterWebSharedAtomicModule,
     MatDatepickerModule,
     MatNativeDateModule,
     MatFormFieldModule,
@@ -33,6 +37,7 @@ import { MatInputModule } from '@angular/material/input';
     ImageProfileOrgan,
     ChangePhotoMolec,
     ProfileTemplate,
+    ProfileChangeCoverTemplate,
   ],
   declarations: [
     EditprofileFormMolec,
@@ -42,6 +47,7 @@ import { MatInputModule } from '@angular/material/input';
     ImageProfileOrgan,
     ChangePhotoMolec,
     ProfileTemplate,
+    ProfileChangeCoverTemplate,
   ],
 })
 export class WriterWebUiSingleAtomicModule { }

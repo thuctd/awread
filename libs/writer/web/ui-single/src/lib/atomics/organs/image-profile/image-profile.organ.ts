@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'image-profile',
@@ -8,7 +8,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 })
 export class ImageProfileOrgan implements OnInit {
   @Input() imgSrc = 'https://hochu.ua/images/05600a6dc19a37ef746fb267902398bf.jpg';
-
+  @Output() eventChangeImg = new EventEmitter();
   constructor() { }
 
   ngOnInit(): void {

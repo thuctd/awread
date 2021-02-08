@@ -1,6 +1,8 @@
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { Category, Genre } from '@awread/writer/web/feature-auth';
+import { PopupEditCoverBookTemplate } from '../popup-edit-cover-book/popup-edit-cover-book.template';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'template-detail',
@@ -19,11 +21,6 @@ export class DetailIndexTemplate implements OnInit {
       isActive: false,
       status: 'CANCEL',
     },
-    // {
-    //   submitText: 'Tiếp tục',
-    //   isActive: true,
-    //   status: 'CONTINUE',
-    // },
   ];
 
   @Input() chapters;
@@ -50,7 +47,7 @@ export class DetailIndexTemplate implements OnInit {
   @Output() switchTabEvent = new EventEmitter();
   @Output() genresEvent = new EventEmitter();
   @Input() selectedBookStatus: string;
-  constructor(private fb: FormBuilder) {}
+  constructor(public matDialog: MatDialog, private fb: FormBuilder) { }
 
   ngOnInit(): void {
     // this.selectedBookStatus = this.bookForm.get('status').value;
@@ -60,5 +57,11 @@ export class DetailIndexTemplate implements OnInit {
   selectBookStatus(status: string) {
     // this.selectedBookStatus = status;
     this.selectedStatusEvent.emit(status);
+  }
+  eventChooseImageCover(event){
+    this.matDialog.open(PopupEditCoverBookTemplate, {
+      width: '55rem',
+      height: '33rem'
+    });
   }
 }

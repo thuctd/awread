@@ -1,8 +1,10 @@
-<section class="relative">
-  <button class="focus:outline-none absolute top-2 right-2" mat-dialog-close>
-    <fa-icon class="text-2xl text-gray-400" [icon]="faIcon"></fa-icon>
+
+<section class="relative h-full">
+  <button class="focus:outline-none absolute top-2 right-4 z-50" mat-dialog-close>
+    <fa-icon class="text-md text-gray-400" [icon]="faIcon"></fa-icon>
+
   </button>
-  <div mat-dialog-content class="flex justify-center flex-col">
+  <div mat-dialog-content class="flex justify-center flex-col h-full">
     <ng-content></ng-content>
   </div>
 </section>
