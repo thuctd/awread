@@ -49,6 +49,12 @@ import { ContentBookOrgan } from './organs/content-book/content-book.organ';
 import { ReadTemplate } from './templates/read/read.template';
 import { CommentOrgan } from './organs/comment/comment.organ';
 import { CommentItemMolec } from './molecs/comment-item/comment-item.molec';
+import { HomeListBookUpdateMobileOrgan } from './organs/home-list-book-update-mobile/home-list-book-update-mobile.organ';
+import { HomeListBookFeaturedMobileOrgan } from './organs/home-list-book-featured-mobile/home-list-book-featured-mobile.organ';
+import { MatTabsModule } from '@angular/material/tabs';
+import { HomeMobileTemplate } from './templates/home-mobile/home-mobile.template';
+import { HomeListBookReviewMobileOrgan } from './organs/home-list-book-review-mobile/home-list-book-review-mobile.organ';
+import { SliderMobileMolec } from './molecs/slider-mobile/slider-mobile.molec';
 import { TitlePageMenuMolec } from './molecs/title-page-menu/title-page-menu.molec';
 import { MbInfoBookMolec } from './molecs/mb-info-book/mb-info-book.molec';
 import { MbDetailBookOrgan } from './organs/mb-list-detail-book/mb-list-detail-book.organ';
@@ -110,6 +116,12 @@ import { MbListTemplate } from './templates/mb-list/mb-list.template';
     ReadTemplate,
     CommentOrgan,
     CommentItemMolec,
+    HomeListBookUpdateMobileOrgan,
+    HomeListBookFeaturedMobileOrgan,
+    MatTabsModule,
+    HomeMobileTemplate,
+    HomeListBookReviewMobileOrgan,
+    SliderMobileMolec,
     TitlePageMenuMolec,
     MbInfoBookMolec,
     MbDetailBookOrgan,
@@ -162,10 +174,15 @@ import { MbListTemplate } from './templates/mb-list/mb-list.template';
     ReadTemplate,
     CommentOrgan,
     CommentItemMolec,
+    HomeListBookUpdateMobileOrgan,
+    HomeListBookFeaturedMobileOrgan,
+    HomeMobileTemplate,
+    HomeListBookReviewMobileOrgan,
+    SliderMobileMolec,
     TitlePageMenuMolec,
     MbInfoBookMolec,
     MbDetailBookOrgan,
     MbListTemplate,
   ],
 })
-export class ReaderWebUiMarketAtomicModule { }
+export class ReaderWebUiMarketAtomicModule {}

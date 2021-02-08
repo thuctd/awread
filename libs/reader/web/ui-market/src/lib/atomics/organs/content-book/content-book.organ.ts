@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'organ-content-book',
@@ -13,6 +14,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ContentBookOrgan implements OnInit {
+  @Input() faIcon = faChevronLeft;
   @Output() btnClick = new EventEmitter();
   @Input() content = `
   Cuộc đời của mỗi người giống như những chuyến đi, chuyến đi ấy có thể thuận lợi, có thể khó khăn, có thể gặp người này hay người khác. Có người nói đi như thế nào, gặp ai đều là do người lái xe cố tình điều khiển khiến chúng ta có chuyến đi như thế, nhưng lại quên rằng, chúng ta chính là người lái những chiếc xe.
@@ -261,7 +263,7 @@ export class ContentBookOrgan implements OnInit {
   Cuộc đời của mỗi người giống như những chuyến đi, chuyến đi ấy có thể thuận lợi, có thể khó khăn, có thể gặp người này hay người khác. Có người nói đi như thế nào, gặp ai đều là do người lái xe cố tình điều khiển khiến chúng ta có chuyến đi như thế, nhưng lại quên rằng, chúng ta chính là người lái những chiếc xe.
   `;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }

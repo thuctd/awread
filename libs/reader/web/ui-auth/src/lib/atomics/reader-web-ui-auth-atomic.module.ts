@@ -18,6 +18,9 @@ import { LoginMobileTemplate } from './templates/login-mobile/login-mobile.templ
 import { LoginWebTemplate } from './templates/login-web/login-web.template';
 import { RegisterMobileTemplate } from './templates/register-mobile/register-mobile.template';
 import { RegisterWebTemplate } from './templates/register-web/register-web.template';
+import { LoginFormMolec } from './molecs/login-form/login-form.molec';
+import { RegisterFormMolec } from './molecs/register-form/register-form.molec';
+import { ForgotFormMolec } from './molecs/forgot-form/forgot-form.molec';
 
 @NgModule({
   imports: [
@@ -42,6 +45,9 @@ import { RegisterWebTemplate } from './templates/register-web/register-web.templ
     LoginWebTemplate,
     RegisterMobileTemplate,
     RegisterWebTemplate,
+    LoginFormMolec,
+    RegisterFormMolec,
+    ForgotFormMolec,
   ],
   declarations: [
     BgAuthMobileMolec,
@@ -59,6 +65,9 @@ import { RegisterWebTemplate } from './templates/register-web/register-web.templ
     LoginWebTemplate,
     RegisterMobileTemplate,
     RegisterWebTemplate,
+    LoginFormMolec,
+    RegisterFormMolec,
+    ForgotFormMolec,
   ],
 })
 export class ReaderWebUiAuthAtomicModule { }

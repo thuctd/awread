@@ -1,3 +1,4 @@
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
@@ -13,9 +14,10 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeadReadBookMolec implements OnInit {
+  @Input() faIcon = faChevronLeft;
   @Output() btnClick = new EventEmitter();
   @Input() title = 'Ngày ấy vì ai mà đổi thay';
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }
