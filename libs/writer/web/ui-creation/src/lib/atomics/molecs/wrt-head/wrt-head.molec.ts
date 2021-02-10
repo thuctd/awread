@@ -26,22 +26,22 @@ export class WrtHeadMolec implements OnInit {
     return this._chapterStatus;
   }
   @Input() chapterForm: FormGroup = this.fb.group({
-    bookTitle: ['', Validators.required],
+    bookTitle: ['test', Validators.required],
     chapterNumber: ['', Validators.required],
     bookImg: ['https://via.placeholder.com/520x740.png', Validators.required],
     status: ['', Validators.required],
   });
 
-  @Input() shouldShowStatusUI: boolean;
+  @Input() shouldShowStatusUI: true;
   @Input() type: string;
-  btns = [
+  @Input() btns = [
     {
       submitText: 'Xuất bản',
       isActive: true,
       type: 'PUBLISHED',
     },
     {
-      submitText: 'Phác thảo',
+      submitText: 'Lưu nháp',
       isActive: false,
       type: 'DRAFT',
     },

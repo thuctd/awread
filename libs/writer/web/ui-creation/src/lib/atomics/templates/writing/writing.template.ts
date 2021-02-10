@@ -20,7 +20,7 @@ export class WritingTemplate implements OnInit {
   });
   @Input() chapterStatus: string;
   @Input() submitted: boolean;
-  @Input() shouldShowStatusUI: boolean;
+  @Input() shouldShowStatusUI = true;
   @Input() type: string;
   @Output() changeChapterStatusEvent = new EventEmitter();
   @Output() saveChapterEvent = new EventEmitter();

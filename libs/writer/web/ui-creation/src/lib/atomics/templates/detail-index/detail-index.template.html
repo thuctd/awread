@@ -17,12 +17,12 @@
       <div class="flex mb-4 shadow-b">
         <div class="w-full flex">
           <ng-container *ngFor="let tab of tabsHead">
-            <div class="lg:pr-0 xl:pr-4">
+            <div class="lg:pr-0 xl:pr-8 2xl:pr-12">
               <div class="text-center">
                 <a (click)="switchTabEvent.emit(tab.tabName)"
                   [ngClass]="selectedTab === tab.tabName ? 'text-green-400 border-b-4 border-green-400' : 'text-gray-400'"
                   class="inline-block font-bold py-4 px-5 cursor-pointer md:text-lg xl:text-xl">
-                  {{ tab.name | titlecase }}
+                  {{ tab.name }}
                 </a>
               </div>
             </div>

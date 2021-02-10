@@ -14,7 +14,7 @@ export class ListSocialMenuAtom implements OnInit {
   @Input() faIconBtn = faAngleDown;
   @Input() actions = [
     {
-      name: 'Tạo chương',
+      name: 'Thêm chương',
       type: 'new-chapter',
       icon: faPlusCircle,
     },
@@ -31,7 +31,7 @@ export class ListSocialMenuAtom implements OnInit {
   ];
   @Output() bookActionEvent = new EventEmitter();
   isMenuOpen = false;
-  constructor() { }
+  constructor() {}
   toggleMenu($event) {
     $event.stopPropagation();
     this.isMenuOpen = !this.isMenuOpen;
@@ -41,7 +41,7 @@ export class ListSocialMenuAtom implements OnInit {
     this.isMenuOpen = false;
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
   // add chapter, edit book
   handleBookAction(type: string) {
     this.bookActionEvent.emit(type);

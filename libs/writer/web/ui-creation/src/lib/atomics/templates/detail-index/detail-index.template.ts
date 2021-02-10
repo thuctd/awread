@@ -21,22 +21,27 @@ export class DetailIndexTemplate implements OnInit {
       isActive: false,
       status: 'CANCEL',
     },
+    {
+      submitText: 'Tiếp tục',
+      isActive: true,
+      status: '',
+    },
   ];
 
   @Input() chapters;
   @Input() tabsHead = [
-    { name: 'Thông tin của truyện', tabName: 'book' },
-    { name: 'Mục lục', tabName: 'toc' },
+    { name: 'THÔNG TIN TRUYỆN', tabName: 'book' },
+    { name: 'MỤC LỤC', tabName: 'toc' },
   ];
   @Input() bookForm: FormGroup = this.fb.group({
-    img: ['', Validators.required],
+    img: ['https://via.placeholder.com/260x370.png'],
     title: ['', Validators.required],
     description: ['', Validators.required],
     completed: ['', Validators.required],
     genreIds: ['', Validators.required],
-    audience: ['', Validators.required],
-    categoryid: ['', Validators.required],
-    srcImg: [''],
+    audience: [null, Validators.required],
+    categoryid: [null, Validators.required],
+    srcImg: ['https://via.placeholder.com/260x370.png'],
   });
   @Input() selectedTab = 'book';
   @Output() selectedStatusEvent = new EventEmitter();
@@ -47,7 +52,7 @@ export class DetailIndexTemplate implements OnInit {
   @Output() switchTabEvent = new EventEmitter();
   @Output() genresEvent = new EventEmitter();
   @Input() selectedBookStatus: string;
-  constructor(public matDialog: MatDialog, private fb: FormBuilder) { }
+  constructor(public matDialog: MatDialog, private fb: FormBuilder) {}
 
   ngOnInit(): void {
     // this.selectedBookStatus = this.bookForm.get('status').value;
@@ -58,10 +63,10 @@ export class DetailIndexTemplate implements OnInit {
     // this.selectedBookStatus = status;
     this.selectedStatusEvent.emit(status);
   }
-  eventChooseImageCover(event){
+  eventChooseImageCover(event) {
     this.matDialog.open(PopupEditCoverBookTemplate, {
       width: '55rem',
-      height: '33rem'
+      height: '33rem',
     });
   }
 }
