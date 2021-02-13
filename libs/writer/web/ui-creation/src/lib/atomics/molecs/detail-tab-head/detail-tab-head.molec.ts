@@ -3,7 +3,13 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 @Component({
   selector: 'detail-tab-head',
   templateUrl: './detail-tab-head.molec.html',
-  styleUrls: ['./detail-tab-head.molec.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DetailTabHeadMolec implements OnInit {

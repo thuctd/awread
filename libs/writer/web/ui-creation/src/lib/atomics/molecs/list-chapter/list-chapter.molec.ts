@@ -4,7 +4,13 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 @Component({
   selector: 'list-chapter',
   templateUrl: './list-chapter.molec.html',
-  styleUrls: ['./list-chapter.molec.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListChapterMolec implements OnInit {

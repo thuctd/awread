@@ -3,8 +3,14 @@ import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter, Input
 @Component({
   selector: 'atom-author',
   templateUrl: './author.atom.html',
-  styleUrls: ['./author.atom.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AuthorAtom implements OnInit {
   @Output() submitEvent = new EventEmitter();
@@ -12,9 +18,7 @@ export class AuthorAtom implements OnInit {
   @Input() title = 'Tác giả:';
   @Input() color = 'text-green-400';
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

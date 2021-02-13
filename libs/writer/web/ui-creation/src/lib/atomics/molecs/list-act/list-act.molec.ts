@@ -4,7 +4,13 @@ import { faChartLine, faShareAlt } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'list-act',
   templateUrl: './list-act.molec.html',
-  styleUrls: ['./list-act.molec.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListActMolec implements OnInit {

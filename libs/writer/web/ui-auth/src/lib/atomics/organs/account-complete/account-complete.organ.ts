@@ -5,7 +5,13 @@ import { FormBuilder, Validators } from '@angular/forms';
 @Component({
   selector: 'account-complete',
   templateUrl: './account-complete.organ.html',
-  styleUrls: ['./account-complete.organ.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AccountCompleteOrgan implements OnInit {

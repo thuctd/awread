@@ -3,7 +3,19 @@ import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter, Input
 @Component({
   selector: 'list',
   templateUrl: './list.organ.html',
-  styleUrls: ['./list.organ.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+      :host .loading {
+        height: calc(100vh - 20rem);
+      }
+      :host .no-data {
+        height: calc(100vh - 20rem);
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListOrgan implements OnInit {

@@ -4,7 +4,13 @@ import { FormBuilder, Validators } from '@angular/forms';
 @Component({
   selector: 'organ-login',
   templateUrl: './login.organ.html',
-  styleUrls: ['./login.organ.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginOrgan implements OnInit {
@@ -14,7 +20,7 @@ export class LoginOrgan implements OnInit {
   });
   @Output() auth = new EventEmitter();
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }

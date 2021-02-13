@@ -4,7 +4,17 @@ import { FormControl } from '@angular/forms';
 @Component({
   selector: 'atom-select',
   templateUrl: './select.atom.html',
-  styleUrls: ['./select.atom.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+      :host .text {
+        font-size: 0.6rem;
+        line-height: 1rem;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectAtom implements OnInit {
@@ -17,7 +27,7 @@ export class SelectAtom implements OnInit {
     this.options = this.getOptions();
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   getOptions() {
     return [

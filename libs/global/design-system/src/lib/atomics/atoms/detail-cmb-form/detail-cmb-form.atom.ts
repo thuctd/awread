@@ -4,7 +4,13 @@ import { FormControl } from '@angular/forms';
 @Component({
   selector: 'detail-cmb-form',
   templateUrl: './detail-cmb-form.atom.html',
-  styleUrls: ['./detail-cmb-form.atom.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DetailCmbFormAtom implements OnInit {
@@ -16,7 +22,7 @@ export class DetailCmbFormAtom implements OnInit {
     this.orders = this.getOrders();
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   getOrders() {
     return [

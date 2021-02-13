@@ -2,7 +2,16 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
 @Component({
   selector: 'list-detail-top-book',
   templateUrl: './list-detail-top-book.organ.html',
-  styleUrls: ['./list-detail-top-book.organ.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+      :host #my-container > p:last-child {
+        border: none;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListDetailTopBookOrgan implements OnInit {

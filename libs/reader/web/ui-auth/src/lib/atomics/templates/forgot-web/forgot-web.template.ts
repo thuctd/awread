@@ -1,10 +1,17 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter, Optional } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'template-forgot-web',
   templateUrl: './forgot-web.template.html',
-  styleUrls: ['./forgot-web.template.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ForgotWebTemplate implements OnInit {
@@ -14,7 +21,7 @@ export class ForgotWebTemplate implements OnInit {
 
   @Output() submitEvent = new EventEmitter();
 
-  constructor() {}
+  constructor(@Optional() public dialogRef: MatDialogRef<ForgotWebTemplate>) {}
 
   ngOnInit(): void {}
 }

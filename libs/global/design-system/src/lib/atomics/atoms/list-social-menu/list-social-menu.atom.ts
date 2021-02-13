@@ -4,7 +4,13 @@ import { faAngleDown, faPlusCircle, faPlusSquare, faTrash } from '@fortawesome/f
 @Component({
   selector: 'list-social-menu',
   templateUrl: './list-social-menu.atom.html',
-  styleUrls: ['./list-social-menu.atom.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListSocialMenuAtom implements OnInit {

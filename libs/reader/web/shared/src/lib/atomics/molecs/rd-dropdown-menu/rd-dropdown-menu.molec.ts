@@ -3,50 +3,53 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 @Component({
   selector: 'molec-rd-dropdown-menu',
   templateUrl: './rd-dropdown-menu.molec.html',
-  styleUrls: ['./rd-dropdown-menu.molec.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RdDropdownMenuMolec implements OnInit {
-  
   @Input() hidden = true;
   @Input() dropdownData = [
     {
       title: 'Truyện tự sáng tác',
-      menu:[
+      menu: [
         {
           href: '/',
-          title:'Truyện dài'
+          title: 'Truyện dài',
         },
         {
           href: '/',
-          title:'Truyện ngắn'
+          title: 'Truyện ngắn',
         },
         {
           href: '/',
-          title:'Truyện tản văn'
+          title: 'Tản văn',
         },
-      ] 
+      ],
     },
     {
       title: 'Truyện sưu tầm',
-      menu:[
+      menu: [
         {
           href: '/',
-          title:'Truyện dài'
+          title: 'Truyện dài',
         },
         {
           href: '/',
-          title:'Truyện ngắn'
+          title: 'Truyện ngắn',
         },
         {
           href: '/',
-          title:'Truyện tản văn'
+          title: 'Tản văn',
         },
-      ] 
-    }
+      ],
+    },
   ];
-  constructor() { }
-  ngOnInit(): void {
-  }
-
+  constructor() {}
+  ngOnInit(): void {}
 }

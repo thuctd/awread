@@ -4,17 +4,21 @@ import { faChartLine } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'list-social-btn',
   templateUrl: './list-social-btn.atom.html',
-  styleUrls: ['./list-social-btn.atom.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListSocialBtnAtom implements OnInit {
   @Output() socialBtn = new EventEmitter();
   @Input() faIcon = faChartLine;
   @Input() titleButton = 'Share';
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

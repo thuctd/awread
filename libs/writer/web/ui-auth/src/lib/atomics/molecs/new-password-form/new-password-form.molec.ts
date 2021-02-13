@@ -4,7 +4,13 @@ import { faLock } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'new-password-form',
   templateUrl: './new-password-form.molec.html',
-  styleUrls: ['./new-password-form.molec.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NewPasswordFormMolec implements OnInit {
@@ -14,7 +20,7 @@ export class NewPasswordFormMolec implements OnInit {
     password: ['', [Validators.required]],
     confirmpassword: ['', [Validators.required]],
   });
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }

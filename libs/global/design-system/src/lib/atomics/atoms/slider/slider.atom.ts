@@ -3,7 +3,13 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 @Component({
   selector: 'atom-slider',
   templateUrl: './slider.atom.html',
-  styleUrls: ['./slider.atom.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SliderAtom implements OnInit {

@@ -7,7 +7,13 @@ import { ReadTemplate } from '../../templates';
 @Component({
   selector: 'wrt-head',
   templateUrl: './wrt-head.molec.html',
-  styleUrls: ['./wrt-head.molec.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WrtHeadMolec implements OnInit {

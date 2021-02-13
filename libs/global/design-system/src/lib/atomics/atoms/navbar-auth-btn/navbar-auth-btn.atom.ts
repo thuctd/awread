@@ -3,16 +3,20 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
 @Component({
   selector: 'atom-navbar-auth-btn',
   templateUrl: './navbar-auth-btn.atom.html',
-  styleUrls: ['./navbar-auth-btn.atom.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavbarAuthBtnAtom implements OnInit {
   @Input() title = 'Đăng nhập';
   @Input() show = false;
   @Output() submitEvent = new EventEmitter();
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

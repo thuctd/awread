@@ -4,7 +4,13 @@ import { DetailPage } from '../detail/detail.page';
 @Component({
   selector: 'page-detail-desktop',
   templateUrl: './detail-desktop.page.html',
-  styleUrls: ['./detail-desktop.page.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DetailDesktopPage extends DetailPage {}

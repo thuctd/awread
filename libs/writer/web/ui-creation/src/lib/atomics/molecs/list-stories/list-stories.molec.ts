@@ -6,7 +6,13 @@ import { DetailBookTemplate } from '../../templates';
 @Component({
   selector: 'list-stories',
   templateUrl: './list-stories.molec.html',
-  styleUrls: ['./list-stories.molec.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListStoriesMolec implements OnInit {

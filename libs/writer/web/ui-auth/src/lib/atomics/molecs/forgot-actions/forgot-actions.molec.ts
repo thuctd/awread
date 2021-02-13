@@ -3,13 +3,19 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
 @Component({
   selector: 'forgot-actions',
   templateUrl: './forgot-actions.molec.html',
-  styleUrls: ['./forgot-actions.molec.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ForgotActionsMolec implements OnInit {
-  constructor() { }
+  constructor() {}
   @Input() title = 'Gửi Email Hướng Dẫn';
   @Input() active = false;
   @Output() submitEvent = new EventEmitter();
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }

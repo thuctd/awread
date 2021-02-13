@@ -5,7 +5,13 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'index',
   templateUrl: './index.organ.html',
-  styleUrls: ['./index.organ.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
 })
 export class IndexOrgan implements OnInit {
   @Input() chapters = [];

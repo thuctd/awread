@@ -4,7 +4,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'wrt-book-img',
   templateUrl: './wrt-book-img.atom.html',
-  styleUrls: ['./wrt-book-img.atom.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WrtBookImgAtom implements OnInit {

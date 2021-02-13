@@ -4,7 +4,13 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, EventEmitter, Output
 @Component({
   selector: 'writing',
   templateUrl: './writing.organ.html',
-  styleUrls: ['./writing.organ.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WritingOrgan implements OnInit {

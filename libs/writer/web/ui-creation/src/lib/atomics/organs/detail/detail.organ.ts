@@ -5,7 +5,13 @@ import { Category, Genre } from '@awread/writer/web/feature-auth';
 @Component({
   selector: 'detail',
   templateUrl: './detail.organ.html',
-  styleUrls: ['./detail.organ.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DetailOrgan implements OnInit {

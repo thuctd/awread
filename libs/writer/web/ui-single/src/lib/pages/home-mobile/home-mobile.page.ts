@@ -4,7 +4,13 @@ import { HomePage } from '../home/home.page';
 @Component({
   selector: 'page-home-mobile',
   templateUrl: './home-mobile.page.html',
-  styleUrls: ['./home-mobile.page.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeMobilePage extends HomePage {}

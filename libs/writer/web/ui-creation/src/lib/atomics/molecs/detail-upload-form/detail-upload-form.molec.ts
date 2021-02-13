@@ -4,24 +4,26 @@ import { FormBuilder } from '@angular/forms';
 @Component({
   selector: 'detail-upload-form',
   templateUrl: './detail-upload-form.molec.html',
-  styleUrls: ['./detail-upload-form.molec.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DetailUploadFormMolec implements OnInit {
   @Input() form = this.fb.group({
     img: [''],
-  })
+  });
 
   @Input() btn = {
     name: 'Edit your cover',
     isActive: true,
   };
 
-  constructor(
-    private fb: FormBuilder,
-  ) { }
+  constructor(private fb: FormBuilder) {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

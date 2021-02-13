@@ -4,7 +4,13 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, EventEmitter, Output
 @Component({
   selector: 'template-writing',
   templateUrl: './writing.template.html',
-  styleUrls: ['./writing.template.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WritingTemplate implements OnInit {
