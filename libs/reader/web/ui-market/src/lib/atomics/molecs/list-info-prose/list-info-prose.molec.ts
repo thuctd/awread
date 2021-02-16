@@ -3,8 +3,14 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
 @Component({
   selector: 'list-info-prose',
   templateUrl: './list-info-prose.molec.html',
-  styleUrls: ['./list-info-prose.molec.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListInfoProseMolec implements OnInit {
   @Input() book = {
@@ -16,9 +22,7 @@ export class ListInfoProseMolec implements OnInit {
 
   @Output() moreEvent = new EventEmitter();
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

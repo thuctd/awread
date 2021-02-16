@@ -15,10 +15,11 @@ export class DetailBookFormMolec implements OnInit {
   @Input() bookForm: FormGroup = this.fb.group({
     title: ['', Validators.required],
     description: ['', Validators.required],
-    completed: ['', Validators.required],
+    categoryid: [null, Validators.required],
     genreIds: ['', Validators.required],
-    audience: ['', Validators.required],
-    categoryid: ['', Validators.required],
+    audience: ['none', Validators.required],
+    tags: ['', Validators.required],
+    completed: ['', Validators.required],
   });
   @Input() formInformation = {
     title: {
@@ -34,15 +35,16 @@ export class DetailBookFormMolec implements OnInit {
       placeholder: 'Thể loại',
     },
     tags: {
-      display: 'Gắn thẻ',
-      placeholder: 'Gắn thẻ',
+      display: 'Thẻ',
+      placeholder: 'Gán thẻ',
     },
     category: {
       display: 'Danh mục',
-      placeholder: 'category',
+      placeholder: 'Danh mục',
     },
     target: {
       display: 'Đối tượng độc giả',
+      placeholder: 'Đối tượng độc giả',
     },
     completed: {
       display: 'Đã hoàn thành',

@@ -4,7 +4,13 @@ import { FormBuilder, Validators } from '@angular/forms';
 @Component({
   selector: 'organ-register',
   templateUrl: './register.organ.html',
-  styleUrls: ['./register.organ.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegisterOrgan implements OnInit {

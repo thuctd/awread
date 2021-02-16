@@ -3,7 +3,13 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
 @Component({
   selector: 'home-info-book-review',
   templateUrl: './home-info-book-review.molec.html',
-  styleUrls: ['./home-info-book-review.molec.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeInfoBookReviewMolec implements OnInit {

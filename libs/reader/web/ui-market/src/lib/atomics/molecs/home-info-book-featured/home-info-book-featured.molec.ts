@@ -3,7 +3,13 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
 @Component({
   selector: 'home-info-book-featured',
   templateUrl: './home-info-book-featured.molec.html',
-  styleUrls: ['./home-info-book-featured.molec.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeInfoBookFeaturedMolec implements OnInit {
@@ -12,7 +18,7 @@ export class HomeInfoBookFeaturedMolec implements OnInit {
   @Input() btns = ['Chương 1', 'Chương 2'];
   @Output() submitEvent = new EventEmitter();
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }

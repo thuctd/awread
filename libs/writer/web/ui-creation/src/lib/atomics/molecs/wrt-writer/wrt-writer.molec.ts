@@ -4,7 +4,17 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'wrt-writer',
   templateUrl: './wrt-writer.molec.html',
-  styleUrls: ['./wrt-writer.molec.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+      :host .invalid-feedback {
+        color: red;
+        margin-top: 0.25rem;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WrtWriterMolec implements OnInit {

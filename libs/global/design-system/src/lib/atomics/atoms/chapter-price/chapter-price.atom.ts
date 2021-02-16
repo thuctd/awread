@@ -3,14 +3,18 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 @Component({
   selector: 'atom-chapter-price',
   templateUrl: './chapter-price.atom.html',
-  styleUrls: ['./chapter-price.atom.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChapterPriceAtom implements OnInit {
   @Input() value = 'Miễn phí';
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

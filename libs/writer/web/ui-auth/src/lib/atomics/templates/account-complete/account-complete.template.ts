@@ -3,12 +3,18 @@ import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter } from
 @Component({
   selector: 'template-account-complete',
   templateUrl: './account-complete.template.html',
-  styleUrls: ['./account-complete.template.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AccountCompleteTemplate implements OnInit {
   @Output() submitEvent = new EventEmitter();
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }

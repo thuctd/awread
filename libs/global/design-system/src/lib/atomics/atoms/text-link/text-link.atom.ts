@@ -3,7 +3,13 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
 @Component({
   selector: 'atom-text-link',
   templateUrl: './text-link.atom.html',
-  styleUrls: ['./text-link.atom.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TextLinkAtom implements OnInit {
@@ -13,7 +19,7 @@ export class TextLinkAtom implements OnInit {
   @Input() color: 'green' | 'gray' = 'green';
   @Input() size: 's' | 'm' | 'l' = 'm';
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }

@@ -3,7 +3,13 @@ import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter, Input
 @Component({
   selector: 'forgot-sent',
   templateUrl: './forgot-sent.organ.html',
-  styleUrls: ['./forgot-sent.organ.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ForgotSentOrgan implements OnInit {
@@ -12,7 +18,7 @@ export class ForgotSentOrgan implements OnInit {
   @Input() email: string;
   @Output() submitEvent = new EventEmitter();
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
     this.description = `Chúng tôi đã gửi đường dẫn đặt lại mật khẩu của bạn tới địa chỉ ${this.email}, hãy chắc chắn bạn đã kiểm tra thư mục spam.`;

@@ -4,20 +4,24 @@ import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'list-detail-short-book',
   templateUrl: './list-detail-short-book.organ.html',
-  styleUrls: ['./list-detail-short-book.organ.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListDetailShortBookOrgan implements OnInit {
-  counter = Array
+  counter = Array;
 
   @Input() moreContent = 'Xem thêm';
 
   @Input() faIcon = faAngleDown;
   @Output() moreEvent = new EventEmitter();
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

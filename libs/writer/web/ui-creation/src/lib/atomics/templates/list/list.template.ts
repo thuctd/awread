@@ -3,7 +3,13 @@ import { Component, OnInit, ChangeDetectionStrategy, EventEmitter, Output, Input
 @Component({
   selector: 'template-list',
   templateUrl: './list.template.html',
-  styleUrls: ['./list.template.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListTemplate implements OnInit {

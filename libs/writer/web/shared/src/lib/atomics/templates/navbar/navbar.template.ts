@@ -4,7 +4,13 @@ import type { User } from '@awread/writer/web/feature-auth';
 @Component({
   selector: 'navbar',
   templateUrl: './navbar.template.html',
-  styleUrls: ['./navbar.template.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavbarTemplate implements OnInit {

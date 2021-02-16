@@ -4,7 +4,13 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 @Component({
   selector: 'awread-creation',
   templateUrl: './creation.layout.html',
-  styleUrls: ['./creation.layout.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreationLayout implements OnInit {
@@ -13,7 +19,7 @@ export class CreationLayout implements OnInit {
     private booksFacade: BooksFacade,
     private categoryFacade: CategoryFacade,
     private genresFacade: GenresFacade
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.currentUserFacade.getCurrentUser().subscribe();

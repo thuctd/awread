@@ -5,13 +5,19 @@ import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'forgot-form',
   templateUrl: './forgot-form.molec.html',
-  styleUrls: ['./forgot-form.molec.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ForgotFormMolec implements OnInit {
   icons = { faEnvelope };
   @Input() emailFormControl: FormControl = new FormControl('');
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }

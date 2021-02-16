@@ -4,8 +4,14 @@ import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'list-detail-long-book',
   templateUrl: './list-detail-long-book.organ.html',
-  styleUrls: ['./list-detail-long-book.organ.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListDetailLongBookOrgan implements OnInit {
   counter = Array;
@@ -15,9 +21,7 @@ export class ListDetailLongBookOrgan implements OnInit {
   @Input() faIcon = faAngleDown;
   @Output() moreEvent = new EventEmitter();
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

@@ -1,7 +1,11 @@
 :host {
   display: block;
 }
-
+select{
+  appearance: none;
+  background: url('https://img.icons8.com/material/24/000000/expand-arrow--v1.png') no-repeat right;
+  background-position-x: 3.8rem;
+}
 ::ng-deep {
   .mat-form-field-wrapper {
     padding-bottom: 0;

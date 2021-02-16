@@ -1,16 +1,16 @@
 <div class="md:flex mb-6">
   <div class="xl:w-96 lg:w-80 md:w-64">
     <label
-      class="block text-gray-500 md:mt-2 font-bold md:text-left mb-1 md:mb-0 pr-4"
+      class="block text-gray-500 md:mt-2 font-bold md:text-left mb-1 md:mb-0 pr-4 text-xl"
       for="inline-full-name"
     >
-      {{titleLabel | titlecase }}
+      {{titleLabel}}
     </label>
   </div>
   <div class="md:w-full">
     <input
       type="{{typeInput}}"
-      class="rounded-full border border-solid border-gray-300 outline-none w-full py-2 px-4 focus:outline-none focus:border-green-400"
+      class="rounded-xl border border-solid border-gray-300 outline-none w-full py-1.5 px-4 focus:outline-none focus:border-green-400"
       [formControl]="inputControl"
       [placeholder]="placeholder"
     />

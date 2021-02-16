@@ -3,14 +3,18 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 @Component({
   selector: 'remember-forgot',
   templateUrl: './remember-forgot.molec.html',
-  styleUrls: ['./remember-forgot.molec.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RememberForgotMolec implements OnInit {
   @Input() link = '/forgot';
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

@@ -3,17 +3,21 @@ import { Component, OnInit, ChangeDetectionStrategy, Output, Input, EventEmitter
 @Component({
   selector: 'rd-home-tab-category',
   templateUrl: './rd-home-tab-category.atom.html',
-  styleUrls: ['./rd-home-tab-category.atom.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RdHomeTabCategoryAtom implements OnInit {
   @Output() tabClicked = new EventEmitter();
   @Input() tabName = 'tab name';
   @Input() active = false;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

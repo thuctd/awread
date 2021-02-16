@@ -4,13 +4,22 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'atom-auth-bg-mobile',
   templateUrl: './auth-bg-mobile.atom.html',
-  styleUrls: ['./auth-bg-mobile.atom.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+      :host .header__popup {
+        clip-path: ellipse(68% 90% at 50% 10%);
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AuthBgMobileAtom implements OnInit {
   @Input() faIcon = faArrowLeft;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }

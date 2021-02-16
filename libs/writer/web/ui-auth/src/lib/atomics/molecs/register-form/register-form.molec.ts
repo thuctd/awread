@@ -5,7 +5,13 @@ import { faLock, faEnvelope, faUser } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'register-form',
   templateUrl: './register-form.molec.html',
-  styleUrls: ['./register-form.molec.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegisterFormMolec implements OnInit {
@@ -17,7 +23,7 @@ export class RegisterFormMolec implements OnInit {
     password: ['', [Validators.required]],
     confirmPassword: ['', [Validators.required]],
   });
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }

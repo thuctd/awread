@@ -4,8 +4,14 @@ import { faEllipsisH } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'wrt-menu-btn',
   templateUrl: './wrt-menu-btn.atom.html',
-  styleUrls: ['./wrt-menu-btn.atom.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WrtMenuBtnAtom implements OnInit {
   @Input() faIconComments = faEllipsisH;
@@ -18,8 +24,7 @@ export class WrtMenuBtnAtom implements OnInit {
   };
 
   isMenuOpen = false;
-  constructor() {
-  }
+  constructor() {}
   toggleMenu($event) {
     $event.stopPropagation();
     this.isMenuOpen = !this.isMenuOpen;
@@ -29,7 +34,5 @@ export class WrtMenuBtnAtom implements OnInit {
     this.isMenuOpen = false;
   }
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

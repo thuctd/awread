@@ -6,9 +6,9 @@
     class="mb-4 flex items-center"
   ></input-form-profile> -->
 
-  <div class="mb-4 flex items-center">
+  <div class="my-4 flex items-center">
     <label class="text-gray-400 w-1/3">Email</label>
-    <input formControlName="email" placeholder="Email..."
+    <input formControlName="email" placeholder="Email"
       class="border rounded-full border-gray-200 py-2 w-2/3 focus:outline-none px-4 focus:ring-1 focus:ring-gray-300 focus:border-gray-300" />
   </div>
   <!-- Loi required -->
@@ -25,7 +25,7 @@
   </div>
   <div class="mb-4 flex items-center">
     <label class="text-gray-400 w-1/3">Số điện thoại</label>
-    <input formControlName="phone" placeholder="Số điện thoại..."
+    <input formControlName="phone" placeholder="Số điện thoại"
       class="border rounded-full border-gray-200 py-2 w-2/3 focus:outline-none px-4 focus:ring-1 focus:ring-gray-300 focus:border-gray-300" />
   </div>
 
@@ -34,7 +34,7 @@
     <div class=" w-2/3">
       <!-- <input formControlName="dob" type="date" class="border rounded-full border-gray-300  py-1 w-48 focus:outline-none px-4 mr-28" /> -->
       <mat-form-field class="w-7/12" appearance="outline" >
-        <input formControlName="dob" placeholder="Choose a date..." disabled matInput [matDatepicker]="picker" class="focus:ring-1 focus:ring-gray-300 focus:border-gray-300">
+        <input formControlName="dob" placeholder="Choose a date" disabled matInput [matDatepicker]="picker" class="focus:ring-1 focus:ring-gray-300 focus:border-gray-300">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker disabled="false"></mat-datepicker>
       </mat-form-field>
@@ -44,7 +44,7 @@
     <label class="text-gray-400 w-1/3">Giới tính</label>
     <div class=" w-2/3 ">
       <!-- <input formControlName="gender" class="border rounded-full border-gray-300 py-1 w-28 focus:outline-none px-3 mr-44" /> -->
-      <select formControlName="gender" class="border rounded-full border-gray-200 bg-white px-3 py-2 outline-none focus:outline-none focus:ring-1 focus:ring-gray-300 focus:border-gray-300">
+      <select formControlName="gender" class="border rounded-full border-gray-200 bg-white pl-4 pr-8 py-2 outline-none focus:outline-none focus:ring-1 focus:ring-gray-300 focus:border-gray-300">
         <option class="py-1">Nam</option>
         <option class="py-1">Nữ</option>
         <option class="py-1">Khác</option>

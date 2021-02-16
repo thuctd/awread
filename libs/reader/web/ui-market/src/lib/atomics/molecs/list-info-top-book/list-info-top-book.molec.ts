@@ -3,18 +3,22 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
 @Component({
   selector: 'list-info-top-book',
   templateUrl: './list-info-top-book.molec.html',
-  styleUrls: ['./list-info-top-book.molec.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListInfoTopBookMolec implements OnInit {
   @Input() book = 'Cô gái chúng ta cùng theo đuổi năm nào';
 
-  @Input() btns = ['Chương 1','Chương 2'];
+  @Input() btns = ['Chương 1', 'Chương 2'];
   @Output() submitEvent = new EventEmitter();
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

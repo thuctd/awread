@@ -4,7 +4,13 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, EventEmitter, Output
 @Component({
   selector: 'template-writing',
   templateUrl: './writing.template.html',
-  styleUrls: ['./writing.template.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WritingTemplate implements OnInit {
@@ -20,7 +26,7 @@ export class WritingTemplate implements OnInit {
   });
   @Input() chapterStatus: string;
   @Input() submitted: boolean;
-  @Input() shouldShowStatusUI: boolean;
+  @Input() shouldShowStatusUI = true;
   @Input() type: string;
   @Output() changeChapterStatusEvent = new EventEmitter();
   @Output() saveChapterEvent = new EventEmitter();
