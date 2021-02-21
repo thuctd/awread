@@ -13,7 +13,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter, Input
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ForgotSentOrgan implements OnInit {
-  title = 'Check Your Inbox';
+  title = 'Kiểm tra Email của bạn';
   description: string;
   @Input() email: string;
   @Output() submitEvent = new EventEmitter();
@@ -21,6 +21,6 @@ export class ForgotSentOrgan implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    this.description = `Chúng tôi đã gửi đường dẫn đặt lại mật khẩu của bạn tới địa chỉ ${this.email}, hãy chắc chắn bạn đã kiểm tra thư mục spam.`;
+    this.description = `Chúng tôi đã gửi đường dẫn đặt lại mật khẩu của bạn tới địa chỉ${this.email}, hãy chắc chắn bạn đã kiểm tra thư mục spam.`;
   }
 }

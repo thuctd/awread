@@ -1,5 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
-import {faHeart, faHeartBroken} from '@fortawesome/free-solid-svg-icons';
+import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter, Input } from '@angular/core';
+import { faHeart, faHeartBroken } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'molec-detail-book-review-actions',
   templateUrl: './detail-book-review-actions.molec.html',
@@ -8,16 +8,15 @@ import {faHeart, faHeartBroken} from '@fortawesome/free-solid-svg-icons';
       :host {
         display: block;
       }
-    `
+    `,
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DetailBookReviewActionsMolec implements OnInit {
-  icons={ faHeart, faHeartBroken}
-  @Output() submitEvent = new EventEmitter()
-  constructor() { }
+  icons = { faHeart, faHeartBroken };
+  @Input() src = '/global-assets/images/Group-687.webp';
+  @Output() submitEvent = new EventEmitter();
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

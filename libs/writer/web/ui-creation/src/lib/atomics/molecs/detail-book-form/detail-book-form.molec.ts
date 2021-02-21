@@ -36,7 +36,7 @@ export class DetailBookFormMolec implements OnInit {
     },
     tags: {
       display: 'Thẻ',
-      placeholder: 'Gán thẻ',
+      placeholder: 'Gắn thẻ',
     },
     category: {
       display: 'Danh mục',

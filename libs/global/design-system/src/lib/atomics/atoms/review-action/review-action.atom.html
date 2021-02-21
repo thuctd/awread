@@ -1,3 +1,4 @@
-<a (click)="submitEvent.emit()" class="no-underline text-xs font-medium text-gray-800 py-2 px-4 bg-green-300 rounded cursor-pointer duration-500 hover:text-white">
-    <fa-icon [icon]="icon" class="mr-2 text-xs"></fa-icon>{{title}}
+<a (click)="submitEvent.emit()" class="no-underline text-xs font-medium text-gray-800 py-2 px-3 bg-green-200 rounded cursor-pointer duration-500 hover:text-white flex">
+  <img [src]="src" class="w-4 mr-2">
+  <div>{{title}}</div>
 </a>

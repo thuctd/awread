@@ -1,6 +1,6 @@
 <auth-header [title]="title" [description]="description"> </auth-header>
 <forgot-form [emailFormControl]="emailFormControl"></forgot-form>
-<forgot-actions (keydown.enter)='submitEvent.emit(emailFormControl.value)' [title]="'Gửi email hướng dẫn'" [active]="emailFormControl.valid" (submitEvent)="submitEvent.emit(emailFormControl.value)"></forgot-actions>
+<forgot-actions (keydown.enter)='submitEvent.emit(emailFormControl.value)' [title]="'Gửi Email hướng dẫn'" [active]="emailFormControl.valid" (submitEvent)="submitEvent.emit(emailFormControl.value)"></forgot-actions>
 <option-link [suggestText]="'Bạn đã nhớ thông tin đăng nhập?'" [title]="'Đăng nhập'" [link]="'/signin'">
 </option-link>
 <option-link [suggestText]="'Chưa có tài khoản?'" [title]="'Đăng ký'" [link]="'/signin'"></option-link>
