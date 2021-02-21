@@ -9,9 +9,6 @@ import { faArrowUp } from '@fortawesome/free-solid-svg-icons';
       :host {
         display: block;
       }
-      :host .bg-grayy {
-        background-color: #e5e5e5;
-      }
     `,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
