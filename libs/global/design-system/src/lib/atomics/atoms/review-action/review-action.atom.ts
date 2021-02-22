@@ -17,6 +17,7 @@ export class ReviewActionAtom implements OnInit {
   @Output() submitEvent = new EventEmitter();
   @Input() icon = faHeart;
   @Input() title = 'Rất tích cực';
+  @Input() src = '/global-assets/images/ic_favorite_24px.webp';
   constructor() {}
 
   ngOnInit(): void {}

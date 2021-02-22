@@ -76,6 +76,9 @@ export class TabBookMolec implements OnInit {
   constructor() {}
 
   @Input() customOptions: OwlOptions = {
+    autoplay: true,
+    autoplayTimeout: 2000,
+    autoplayHoverPause: true,
     loop: true,
     mouseDrag: true,
     touchDrag: true,

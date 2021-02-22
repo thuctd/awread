@@ -17,7 +17,7 @@ export class HomeInfoBookReviewMolec implements OnInit {
   @Input() isSize = 'true';
   @Input() book = 'Cô gái chúng ta cùng theo đuổi năm nào';
 
-  @Input() btns = ['Chương 1', 'Chương 2'];
+  @Input() btns = ['Chương 1'];
   @Output() submitEvent = new EventEmitter();
 
   constructor() {}
