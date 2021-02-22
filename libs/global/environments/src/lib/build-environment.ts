@@ -8,4 +8,5 @@ interface ENV {
 // this $ENV is direct import from webpack.config.js
 declare const $ENV: ENV;
 
-export const buildEnvironment = $ENV;
+// export const buildEnvironment = $ENV;
+export const buildEnvironment = { ENVIRONMENT: undefined, GRAPHQL_URI: undefined, SCHEMA: undefined };

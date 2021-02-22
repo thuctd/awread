@@ -5,9 +5,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 
-declare const __ISSTORYBOOK__: boolean;
-console.log('is storybook?', __ISSTORYBOOK__);
-
+if (__ISSTORYBOOK__ === undefined) {
+  var __ISSTORYBOOK__ = false;
+}
 @NgModule({
   imports: [
     CommonModule,
