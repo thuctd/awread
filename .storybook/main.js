@@ -20,7 +20,7 @@ module.exports = {
 
   webpackFinal: (config, { configType }) => {
     const isProd = config.mode === "production";
-    const tailwindConfig = require("../configs/tailwind/tailwind.config.js")(isProd);
+    const tailwindConfig = require("../tailwind.config.js")(isProd);
     patchPostCSS(config, tailwindConfig, true);
 
     config.plugins.push(
