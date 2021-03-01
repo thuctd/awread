@@ -13,7 +13,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LogoNolinkAtom implements OnInit {
-  @Input() link = '/global-assets/images/logo-white.png';
+  @Input() link = '/global-assets/images/logo-white.webp';
   @Input() numberSize = '28';
 
   constructor() {}

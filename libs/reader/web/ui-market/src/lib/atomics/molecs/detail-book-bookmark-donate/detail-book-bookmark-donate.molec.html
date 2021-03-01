@@ -1,4 +1,9 @@
-<div>
+<div class="flex flex-col items-center">
   <atom-icon-text-button [icon]="icons.faBookmark" [title]="'Lưu truyện'" class="mb-4"></atom-icon-text-button>
-  <atom-icon-text-button [icon]="icons.faCoins" [title]="'Donate'"></atom-icon-text-button>
+  <!-- <atom-icon-text-button [icon]="icons.faCoins" [title]="'Donate'"></atom-icon-text-button> -->
+  <div class="flex flex-col items-center w-14">
+    <img *ngIf="!donate" [src]="bread.srcBread" [alt]="bread.altBread">
+    <img *ngIf="donate" [src]="bread2.srcBread2" [alt]="bread2.altBread2">
+    <div class="pt-2 text-sm text-gray-600 font-medium">Donate</div>
+  </div>
 </div>

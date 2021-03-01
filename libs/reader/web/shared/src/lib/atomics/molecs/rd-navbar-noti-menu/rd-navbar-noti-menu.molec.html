@@ -1,0 +1,9 @@
+<div class="relative">
+  <div class="" (click)="displayMenu()">
+    <fa-icon class="text-white text-2xl cursor-pointer px-1.5" [icon]="bell"></fa-icon>
+  </div>
+  <div *ngIf="isMenu" class="text-xs text-gray-500 shadow absolute w-24 px-2 rounded-lg -left-16 bg-white">
+    <div [routerLink]="'/'" class="border-b py-2 hover:text-green-400 cursor-pointer">Thông báo</div>
+    <div [routerLink]="'/'" class="py-2 hover:text-green-400 cursor-pointer">Hòm thư</div>
+  </div>
+</div>

@@ -14,9 +14,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WrtBookImgAtom implements OnInit {
-  @Input() srcImg = 'https://via.placeholder.com/520x740.png';
+  @Input() srcImg = '/global-assets/images/image.webp';
   @Input() chapterForm: FormGroup = this.fb.group({
-    bookImg: ['https://via.placeholder.com/520x740.png', [Validators.required]],
+    bookImg: ['/global-assets/images/image.webp', [Validators.required]],
   });
   constructor(private fb: FormBuilder) {}
 

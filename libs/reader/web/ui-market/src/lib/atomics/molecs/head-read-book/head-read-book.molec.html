@@ -1,8 +1,8 @@
 <section class="border-b border-gray-300 w-full pb-4">
   <atom-title [title]="title" class="text-center"></atom-title>
-  <atom-btn-select class="float-left"></atom-btn-select>
-  <div class="float-right">
-    <atom-btn-switch-chapter (btnClick)="btnClick.emit('switchChapter')" class="float-right ml-2"></atom-btn-switch-chapter>
+  <atom-btn-select class="float-left sm:pt-0 pt-4"></atom-btn-select>
+  <div class="float-right sm:pt-0 pt-4">
+    <atom-btn-switch-chapter (btnClick)="btnClick.emit('switchChapter')" class="float-right sm:ml-2 ml-1"></atom-btn-switch-chapter>
     <atom-btn-switch-chapter [faIcon]="faIcon" [title]="'Trước'" [case]="false" (btnClick)="btnClick.emit('switchChapter')" class="float-right flex flex-row-reverse"></atom-btn-switch-chapter>
   </div>
   <div class="clear-both"></div>
