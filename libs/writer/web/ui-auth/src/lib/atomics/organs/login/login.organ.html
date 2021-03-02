@@ -1,5 +1,14 @@
 <login-form #loginForm [form]="authForm"></login-form>
-<remember-forgot [link]="forgotLink"></remember-forgot>
+<div class="px-1">
+  <div class="float-left flex">
+    <check-btn></check-btn>
+    <div class="text-gray-400 text-sm">Ghi nhớ mật khẩu</div>
+  </div>
+  <div class="float-right">
+    <remember-forgot [link]="forgotLink"></remember-forgot>
+  </div>
+  <div class="clear-both"></div>
+</div>
 <submit-btn (keydown.enter)="auth.emit($event)"
   (btnClicked)="auth.emit('email')"
   [active]="loginForm.form.valid"

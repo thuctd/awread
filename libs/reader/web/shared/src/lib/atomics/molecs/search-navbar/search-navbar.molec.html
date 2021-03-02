@@ -1,0 +1,8 @@
+<div class="">
+  <div class="" (click)="displayMenu()">
+    <fa-icon class="text-green-400 text-lg py-0.5 px-1 cursor-pointer bg-white rounded-full mr-1.5" [icon]="search"></fa-icon>
+  </div>
+  <div *ngIf="isSearch" class="bg-green-400 w-full h-16 shadoww flex justify-center items-center absolute top-16 left-0">
+    <atom-search-navbar class="w-4/5"></atom-search-navbar>
+  </div>
+</div>

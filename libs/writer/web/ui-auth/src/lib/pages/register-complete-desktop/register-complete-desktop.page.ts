@@ -4,7 +4,13 @@ import { RegisterCompletePage } from '../register-complete/register-complete.pag
 @Component({
   selector: 'page-register-complete-desktop',
   templateUrl: './register-complete-desktop.page.html',
-  styleUrls: ['./register-complete-desktop.page.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegisterCompleteDesktopPage extends RegisterCompletePage {}

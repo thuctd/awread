@@ -16,7 +16,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 60
     env:
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL  }}
     if: github.event_name == 'push'
@@ -47,7 +47,7 @@ jobs:
 
   review_app:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 60
     env:
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL  }}
     # only run when a pull request is opened
@@ -91,7 +91,7 @@ jobs:
 
   destroy_review_app:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 60
     env:
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL  }}
     # only run when a pull request is closed
@@ -137,5 +137,4 @@ jobs:
           git checkout develop
           git pull
           git merge --no-ff origin/story-writer-web -m "Auto-merge story-writer-web back to develop"
-          git push
-          git push origin develop:story-writer-web --force
+          git push origin develop

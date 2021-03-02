@@ -3,16 +3,20 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 @Component({
   selector: 'home-detail-book-featured',
   templateUrl: './home-detail-book-featured.organ.html',
-  styleUrls: ['./home-detail-book-featured.organ.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeDetailBookFeaturedOrgan implements OnInit {
   @Input() titlePage = 'Truyện nổi bật';
   counter = Array;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

@@ -5,7 +5,13 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, EventEmitter, Output
 @Component({
   selector: 'search-navtop',
   templateUrl: './search-navtop.atom.html',
-  styleUrls: ['./search-navtop.atom.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class searchNavtopAtom implements OnInit {
@@ -14,7 +20,7 @@ export class searchNavtopAtom implements OnInit {
   @Input() control = new FormControl();
   @Input() id = 'search-topnav';
   @Output() searchEvent = new EventEmitter();
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }

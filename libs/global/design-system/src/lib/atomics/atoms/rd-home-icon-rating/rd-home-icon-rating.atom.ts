@@ -4,16 +4,23 @@ import { faBookmark } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'rd-home-icon-rating',
   templateUrl: './rd-home-icon-rating.atom.html',
-  styleUrls: ['./rd-home-icon-rating.atom.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+      :host .top-45 {
+        right: 1.15rem;
+      }
+    `,
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RdHomeIconRatingAtom implements OnInit {
   @Input() faIcon = faBookmark;
   @Input() topBook = 1;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

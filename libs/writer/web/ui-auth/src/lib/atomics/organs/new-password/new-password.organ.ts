@@ -4,7 +4,13 @@ import { FormBuilder, Validators } from '@angular/forms';
 @Component({
   selector: 'new-password',
   templateUrl: './new-password.organ.html',
-  styleUrls: ['./new-password.organ.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NewPasswordOrgan implements OnInit {
@@ -13,8 +19,8 @@ export class NewPasswordOrgan implements OnInit {
     confirmpassword: ['', [Validators.required, Validators.minLength(6)]],
   });
   @Output() submitEvent = new EventEmitter();
-  constructor(private fb: FormBuilder) { }
-  ngOnInit(): void { }
+  constructor(private fb: FormBuilder) {}
+  ngOnInit(): void {}
   updatePassworEvent() {
     const formValue = this.form.value;
     if (formValue.password !== formValue.confirmpassword) {

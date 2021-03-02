@@ -3,13 +3,19 @@ import { Component, OnInit, ChangeDetectionStrategy, EventEmitter, Output, Input
 @Component({
   selector: 'detail-act',
   templateUrl: './detail-act.molec.html',
-  styleUrls: ['./detail-act.molec.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DetailActMolec implements OnInit {
   @Input() chapter;
   @Output() chapterActionEvent = new EventEmitter();
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }

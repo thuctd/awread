@@ -1,24 +1,28 @@
-import { Component, OnInit, ChangeDetectionStrategy, Output,Input, EventEmitter } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Output, Input, EventEmitter } from '@angular/core';
 import { faSearch, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'atom-search-btn',
   templateUrl: './search-btn.atom.html',
-  styleUrls: ['./search-btn.atom.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchBtnAtom implements OnInit {
-  icons = {faSearch, faTimes};
+  icons = { faSearch, faTimes };
   isDisplay = false;
   @Output() eventSearch = new EventEmitter();
   @Input() color = 'text-white';
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
-  toggleDisplay(){
+  toggleDisplay() {
     this.isDisplay = !this.isDisplay;
   }
-
 }

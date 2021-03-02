@@ -3,19 +3,23 @@ import { Component, OnInit, ChangeDetectionStrategy, Output, Input, EventEmitter
 @Component({
   selector: 'rd-home-tab-book',
   templateUrl: './rd-home-tab-book.atom.html',
-  styleUrls: ['./rd-home-tab-book.atom.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RdHomeTabBookAtom implements OnInit {
   @Output() tabClicked = new EventEmitter();
   @Output() onBtnClicked = new EventEmitter();
-  @Input() titleBook = 'Cô gái chúng ta cùng theo đuổi'
-  @Input() srcImg = 'https://via.placeholder.com/260x370.png';
+  @Input() titleBook = 'Cô gái chúng ta cùng theo đuổi';
+  @Input() srcImg = '/global-assets/images/image.webp';
   @Input() active = false;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

@@ -3,7 +3,13 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, EventEmitter, Output
 @Component({
   selector: 'molec-submit',
   templateUrl: './submit.molec.html',
-  styleUrls: ['./submit.molec.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SubmitMolec implements OnInit {
@@ -11,7 +17,7 @@ export class SubmitMolec implements OnInit {
   @Input() text = 'Đăng nhập';
   @Output() btnClicked = new EventEmitter();
   @Input() active = false;
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }

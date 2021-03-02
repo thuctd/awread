@@ -3,7 +3,13 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 @Component({
   selector: 'molec-remember-forgot-password',
   templateUrl: './remember-forgot-password.molec.html',
-  styleUrls: ['./remember-forgot-password.molec.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RememberForgotPasswordMolec implements OnInit {
@@ -12,7 +18,7 @@ export class RememberForgotPasswordMolec implements OnInit {
     class: 'text-green-500 text-sm',
     link: '',
   };
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }

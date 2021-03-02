@@ -1,16 +1,21 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'change-photo',
   templateUrl: './change-photo.molec.html',
-  styleUrls: ['./change-photo.molec.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChangePhotoMolec implements OnInit {
-  @Input() imgSrc =
-    'https://i.pinimg.com/originals/5b/57/13/5b5713348f5e82480cc4fd030a54b339.jpg';
+  @Input() imgSrc = '/global-assets/images/smailImg.webp';
+  @Output() eventChangeImg = new EventEmitter();
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }

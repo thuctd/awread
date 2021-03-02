@@ -5,7 +5,13 @@ import { TabHead } from '../../../interface/tabs';
 @Component({
   selector: 'template-login-register',
   templateUrl: './login-register.template.html',
-  styleUrls: ['./login-register.template.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginRegisterTemplate implements OnInit {

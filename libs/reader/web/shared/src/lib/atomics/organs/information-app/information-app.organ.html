@@ -1,0 +1,34 @@
+<section class="bg-green-400 w-full h-full">
+  <div class="flex flex-col md:flex-row justify-around text-white pt-8 md:pt-16">
+    <molec-info></molec-info>
+    <molec-info
+      class="py-6 md:py-0 mr-0 md:mr-6"
+      [title]="Facebook.title"
+      [line1]="Facebook.line1"
+      [line2]="Facebook.line2"
+      [link1]="Facebook.link1"
+      [link2]="Facebook.link2"
+      [isSize]="false">
+    </molec-info>
+    <div class="flex flex-col items-center">
+      <div class="text-lg">{{ Address.title }}</div>
+      <div class="text-sm">{{ Address.line1 }}</div>
+      <div class="text-sm">{{ Address.line2 }}</div>
+    </div>
+  </div>
+  <div>
+    <div class="flex mt-10 ml-4 md:ml-5 justify-center">
+      <social-btn class="mr-2" [provider]="'facebook'"></social-btn>
+      <social-btn class="mr-2" [provider]="'zalo'"></social-btn>
+      <social-btn [provider]="'instagramm'"></social-btn>
+    </div>
+  </div>
+  <div class="flex flex-row justify-center text-white pt-10">
+    <div class="border-r border-white pr-6 md:pr-16 text-center">Trang chủ</div>
+    <div class="border-r border-white px-6 md:px-16 text-center">Điều khoản và hướng dẫn dịch vụ</div>
+    <div class="pl-6 md:pl-16 text-center">Hỏi và đáp</div>
+  </div>
+  <div class="border-t border-white mt-6 py-2 text-sm text-white text-center">
+    @2021 - Awread book Việt Nam
+  </div>
+</section>

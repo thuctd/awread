@@ -3,7 +3,13 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 @Component({
   selector: 'awread-auth',
   templateUrl: './auth.layout.html',
-  styleUrls: ['./auth.layout.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AuthLayout implements OnInit {

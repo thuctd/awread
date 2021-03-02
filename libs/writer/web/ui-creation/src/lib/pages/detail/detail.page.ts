@@ -18,8 +18,8 @@ export class DetailPage implements OnInit, OnDestroy {
   chapterEntity$: any;
   chapterListByBookId$ = this.chaptersFacade.chapterListByBookId$;
   tabsHead = [
-    { name: 'Thông tin của truyện', tabName: 'book' },
-    { name: 'Mục lục', tabName: 'toc' },
+    { name: 'THÔNG TIN TRUYỆN', tabName: 'book' },
+    { name: 'MỤC LỤC', tabName: 'toc' },
   ];
   selectedTab = 'toc';
   selectedBookStatus = 'DRAFT';
@@ -40,7 +40,7 @@ export class DetailPage implements OnInit, OnDestroy {
     private genresFacade: GenresFacade,
     private router: Router,
     private cd: ChangeDetectorRef
-  ) { }
+  ) {}
 
   get f() {
     return this.bookForm.controls;
@@ -90,11 +90,7 @@ export class DetailPage implements OnInit, OnDestroy {
     ]);
   }
 
-  chapterActionEvent(data: {
-    type: string;
-    chapterid: string;
-    chapterNumber: number;
-  }) {
+  chapterActionEvent(data: { type: string; chapterid: string; chapterNumber: number }) {
     switch (data.type) {
       case 'new-chapter':
         this.createChapter();
@@ -137,13 +133,8 @@ export class DetailPage implements OnInit, OnDestroy {
 
   private updateBook(book) {
     // const idsGenresAdd = this.genresListSelected; // dung de them genre khi user them genre ko co trong DB
-    if (
-      JSON.stringify(this.bookFormValueBefore) !==
-      JSON.stringify(this.bookForm.value)
-    ) {
-      const idsGenresRemove = this.booksFacade.getGenreIdsByBookIdAkita(
-        this.bookId
-      );
+    if (JSON.stringify(this.bookFormValueBefore) !== JSON.stringify(this.bookForm.value)) {
+      const idsGenresRemove = this.booksFacade.getGenreIdsByBookIdAkita(this.bookId);
       this.booksFacade.editBook(book, idsGenresRemove).subscribe(() => {
         this.selectedTab = 'toc';
         this.cd.detectChanges();
@@ -283,7 +274,7 @@ export class DetailPage implements OnInit, OnDestroy {
     const status = this.bookForm.get('status').value;
     this.chaptersFacade
       .removeChapter(chapter.chapterid, bookId, status)
-      .pipe(tap((res) => { }))
+      .pipe(tap((res) => {}))
       .subscribe((res) => {
         console.log('remove chapter res: ', res);
       });

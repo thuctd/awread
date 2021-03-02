@@ -4,7 +4,13 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 @Component({
   selector: 'editprofile-form',
   templateUrl: './editprofile-form.molec.html',
-  styleUrls: ['./editprofile-form.molec.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EditprofileFormMolec implements OnInit {

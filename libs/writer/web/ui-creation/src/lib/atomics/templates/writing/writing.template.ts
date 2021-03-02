@@ -4,12 +4,18 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, EventEmitter, Output
 @Component({
   selector: 'template-writing',
   templateUrl: './writing.template.html',
-  styleUrls: ['./writing.template.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WritingTemplate implements OnInit {
   @Input() chapterForm: FormGroup = this.fb.group({
-    bookImg: ['https://via.placeholder.com/520x740.png', [Validators.required]],
+    bookImg: ['/global-assets/images/image.webp', [Validators.required]],
     dirty: ['', Validators.required],
     valueChanges: ['', Validators.required],
     bookTitle: ['', Validators.required],
@@ -20,7 +26,7 @@ export class WritingTemplate implements OnInit {
   });
   @Input() chapterStatus: string;
   @Input() submitted: boolean;
-  @Input() shouldShowStatusUI: boolean;
+  @Input() shouldShowStatusUI = true;
   @Input() type: string;
   @Output() changeChapterStatusEvent = new EventEmitter();
   @Output() saveChapterEvent = new EventEmitter();

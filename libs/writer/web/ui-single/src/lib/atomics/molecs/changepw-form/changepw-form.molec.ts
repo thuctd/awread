@@ -3,7 +3,13 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 @Component({
   selector: 'changepw-form',
   templateUrl: './changepw-form.molec.html',
-  styleUrls: ['./changepw-form.molec.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChangepwFormMolec implements OnInit {

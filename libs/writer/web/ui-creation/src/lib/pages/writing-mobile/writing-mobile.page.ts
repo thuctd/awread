@@ -4,7 +4,13 @@ import { WritingPage } from '../writing/writing.page';
 @Component({
   selector: 'page-writing-mobile',
   templateUrl: './writing-mobile.page.html',
-  styleUrls: ['./writing-mobile.page.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WritingMobilePage extends WritingPage {}

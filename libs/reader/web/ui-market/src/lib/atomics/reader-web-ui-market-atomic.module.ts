@@ -49,19 +49,24 @@ import { ContentBookOrgan } from './organs/content-book/content-book.organ';
 import { ReadTemplate } from './templates/read/read.template';
 import { CommentOrgan } from './organs/comment/comment.organ';
 import { CommentItemMolec } from './molecs/comment-item/comment-item.molec';
+import { HomeListBookUpdateMobileOrgan } from './organs/home-list-book-update-mobile/home-list-book-update-mobile.organ';
+import { HomeListBookFeaturedMobileOrgan } from './organs/home-list-book-featured-mobile/home-list-book-featured-mobile.organ';
+import { MatTabsModule } from '@angular/material/tabs';
+import { HomeMobileTemplate } from './templates/home-mobile/home-mobile.template';
+import { HomeListBookReviewMobileOrgan } from './organs/home-list-book-review-mobile/home-list-book-review-mobile.organ';
+import { SliderMobileMolec } from './molecs/slider-mobile/slider-mobile.molec';
 import { TitlePageMenuMolec } from './molecs/title-page-menu/title-page-menu.molec';
 import { MbInfoBookMolec } from './molecs/mb-info-book/mb-info-book.molec';
 import { MbDetailBookOrgan } from './organs/mb-list-detail-book/mb-list-detail-book.organ';
 import { MbListTemplate } from './templates/mb-list/mb-list.template';
+import { DetailBookMobileTemplate } from './templates/detail-book-mobile/detail-book-mobile.template';
+import { DetailBookChapterMobileOrgan } from './organs/detail-book-chapter-mobile/detail-book-chapter-mobile.organ';
+import { DetailBookContentMobileOrgan } from './organs/detail-book-content-mobile/detail-book-content-mobile.organ';
+import { ReadMobileTemplate } from './templates/read-mobile/read-mobile.template';
+import { DetailBookTopMobileOrgan } from './organs/detail-book-top-mobile/detail-book-top-mobile.organ';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    StorybookSupportModule,
-    GlobalDesignSystemAtomicModule,
-    CarouselModule,
-    BrowserAnimationsModule,
-  ],
+  imports: [CommonModule, StorybookSupportModule, GlobalDesignSystemAtomicModule, CarouselModule, BrowserAnimationsModule],
   exports: [
     CommonModule,
     TabCategoryMolec,
@@ -110,10 +115,21 @@ import { MbListTemplate } from './templates/mb-list/mb-list.template';
     ReadTemplate,
     CommentOrgan,
     CommentItemMolec,
+    HomeListBookUpdateMobileOrgan,
+    HomeListBookFeaturedMobileOrgan,
+    MatTabsModule,
+    HomeMobileTemplate,
+    HomeListBookReviewMobileOrgan,
+    SliderMobileMolec,
     TitlePageMenuMolec,
     MbInfoBookMolec,
     MbDetailBookOrgan,
     MbListTemplate,
+    DetailBookMobileTemplate,
+    DetailBookChapterMobileOrgan,
+    DetailBookContentMobileOrgan,
+    ReadMobileTemplate,
+    DetailBookTopMobileOrgan,
   ],
   declarations: [
     TabCategoryMolec,
@@ -162,10 +178,20 @@ import { MbListTemplate } from './templates/mb-list/mb-list.template';
     ReadTemplate,
     CommentOrgan,
     CommentItemMolec,
+    HomeListBookUpdateMobileOrgan,
+    HomeListBookFeaturedMobileOrgan,
+    HomeMobileTemplate,
+    HomeListBookReviewMobileOrgan,
+    SliderMobileMolec,
     TitlePageMenuMolec,
     MbInfoBookMolec,
     MbDetailBookOrgan,
     MbListTemplate,
+    DetailBookMobileTemplate,
+    DetailBookChapterMobileOrgan,
+    DetailBookContentMobileOrgan,
+    ReadMobileTemplate,
+    DetailBookTopMobileOrgan,
   ],
 })
-export class ReaderWebUiMarketAtomicModule { }
+export class ReaderWebUiMarketAtomicModule {}

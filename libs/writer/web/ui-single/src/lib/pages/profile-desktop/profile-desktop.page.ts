@@ -4,7 +4,13 @@ import { ProfilePage } from '../profile/profile.page';
 @Component({
   selector: 'page-profile-desktop',
   templateUrl: './profile-desktop.page.html',
-  styleUrls: ['./profile-desktop.page.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfileDesktopPage extends ProfilePage {}

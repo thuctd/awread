@@ -4,12 +4,18 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, EventEmitter, Output
 @Component({
   selector: 'writing',
   templateUrl: './writing.organ.html',
-  styleUrls: ['./writing.organ.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WritingOrgan implements OnInit {
   @Input() chapterForm: FormGroup = this.fb.group({
-    bookImg: ['https://via.placeholder.com/520x740.png', [Validators.required]],
+    bookImg: ['/global-assets/images/image.webp', [Validators.required]],
     dirty: ['', Validators.required],
     valueChanges: ['', Validators.required],
     bookTitle: ['', Validators.required],

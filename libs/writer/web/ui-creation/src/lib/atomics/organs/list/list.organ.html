@@ -1,12 +1,5 @@
 <div class="pt-12">
-  <div class="text-center pb-4 -ml-3">
-    <a
-      class="text-sm md:text-xs lg:text-base xl:text-base w-full bg-green-400 text-white cursor-pointer rounded-md border-green-400 focus:shadow-outline focus:outline-none py-2 px-4"
-      [routerLink]="['/detail', {type: 'create'}]"
-      routerLinkActive="router-link-active"
-      >Đăng truyện</a
-    >
-  </div>
+
   <div
     class="flex justify-center items-center loading"
     *ngIf="loading;else loaded"
@@ -15,6 +8,13 @@
   </div>
   <ng-template #loaded>
     <ng-container *ngIf="books.length;else noData">
+      <div class="text-right pb-10">
+        <a
+          class="text-sm md:text-xs lg:text-base xl:text-base w-full bg-green-400 text-white cursor-pointer rounded-md border-green-400 focus:shadow-outline     focus:outline-none py-2 px-4"
+          [routerLink]="['/detail', {type: 'create'}]"
+          routerLinkActive="router-link-active"
+          >Đăng truyện</a>
+      </div>
       <div class="mb-4">
         <list-head></list-head>
       </div>
@@ -40,6 +40,13 @@
       </infinite-scroll>
     </ng-container>
     <ng-template #noData>
+      <div class="text-center pb-4">
+        <a
+          class="text-sm md:text-xs lg:text-base xl:text-base w-full bg-green-400 text-white cursor-pointer rounded-md border-green-400 focus:shadow-outline     focus:outline-none py-2 px-4"
+          [routerLink]="['/detail', {type: 'create'}]"
+          routerLinkActive="router-link-active"
+          >Đăng truyện</a>
+      </div>
       <div class="no-data flex justify-center items-center">
         <p class="text-center">Không có truyện nào!</p>
       </div>

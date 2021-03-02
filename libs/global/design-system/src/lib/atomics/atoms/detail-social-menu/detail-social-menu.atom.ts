@@ -4,7 +4,13 @@ import { faEllipsisH, faPlusCircle, faPlusSquare, faTrash } from '@fortawesome/f
 @Component({
   selector: 'detail-social-menu',
   templateUrl: './detail-social-menu.atom.html',
-  styleUrls: ['./detail-social-menu.atom.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DetailSocialMenuAtom implements OnInit {
@@ -30,7 +36,7 @@ export class DetailSocialMenuAtom implements OnInit {
   ];
 
   isMenuOpen = false;
-  constructor() { }
+  constructor() {}
   toggleMenu($event) {
     $event.stopPropagation();
     this.isMenuOpen = !this.isMenuOpen;
@@ -40,5 +46,5 @@ export class DetailSocialMenuAtom implements OnInit {
     this.isMenuOpen = false;
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }

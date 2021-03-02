@@ -4,7 +4,13 @@ import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'input-form',
   templateUrl: './input-form.atom.html',
-  styleUrls: ['./input-form.atom.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputFormAtom implements OnInit {
@@ -13,7 +19,7 @@ export class InputFormAtom implements OnInit {
   @Input() inputControl: FormControl = new FormControl('');
   @Input() faIcon = faEnvelope;
   @Input() id = this.placeholder.replace(/\s/g, '-') + Math.random();
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }

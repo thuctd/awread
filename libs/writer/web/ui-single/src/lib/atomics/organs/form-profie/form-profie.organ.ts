@@ -4,7 +4,13 @@ import { Component, OnInit, ChangeDetectionStrategy, Output, Input, EventEmitter
 @Component({
   selector: 'form-profie',
   templateUrl: './form-profie.organ.html',
-  styleUrls: ['./form-profie.organ.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormProfieOrgan implements OnInit {

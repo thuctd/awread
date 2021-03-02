@@ -29,7 +29,7 @@
           class="text-xs f6-ns font-normal text-gray-500 measure lh-copy my-0"
         >
           <span class="capitalize">
-            {{selectedChapterStatus === 'DRAFT' ? 'Phác thảo' : 'Xuất bản'}}
+            {{selectedChapterStatus === 'DRAFT' ? 'Lưu nháp' : 'Xuất bản'}}
           </span>
           <span>
             ({{chapterForm?.value?.content ?
@@ -69,7 +69,7 @@
               [submitText]="btn.submitText"
               class="ml-2"
             ></cr-submit-btn>
-            <div class="ml-2">
+            <!-- <div class="ml-2">
               <button
                 mat-flat-button
                 (click)="saveChapterEvent.emit()"
@@ -79,7 +79,7 @@
               >
                 {{type === 'edit' ? 'Lưu' : 'Thêm chương'}}
               </button>
-            </div>
+            </div> -->
           </ng-container>
 
           <ng-template #showAction>
@@ -119,7 +119,7 @@
             </button>
           </div>
         </div>
-        <wrt-menu-btn class="mt-1"></wrt-menu-btn>
+        <wrt-menu-btn class="mt-1 lg:mr-10 xl:mr-12 2xl:mr-14"></wrt-menu-btn>
       </div>
     </div>
   </div>

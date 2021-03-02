@@ -4,12 +4,18 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'molec-check-mail',
   templateUrl: './check-mail.molec.html',
-  styleUrls: ['./check-mail.molec.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CheckMailMolec implements OnInit {
   @Output() BtnClicked = new EventEmitter();
-  @Input() link = '/global-assets/images/mailbox.png';
+  @Input() link = '/global-assets/images/mailbox.webp';
   @Input() faIcon = faArrowLeft;
   @Input() backhome = '/home';
   @Input() textLink = {
@@ -17,7 +23,7 @@ export class CheckMailMolec implements OnInit {
     class: 'text-green-500',
   };
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }

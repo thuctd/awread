@@ -4,7 +4,13 @@ import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter, Input
 @Component({
   selector: 'register',
   templateUrl: './register.organ.html',
-  styleUrls: ['./register.organ.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegisterOrgan implements OnInit {

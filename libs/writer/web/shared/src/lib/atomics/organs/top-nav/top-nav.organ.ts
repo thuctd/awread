@@ -4,7 +4,13 @@ import type { User } from '@awread/writer/web/feature-auth';
 @Component({
   selector: 'top-nav',
   templateUrl: './top-nav.organ.html',
-  styleUrls: ['./top-nav.organ.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TopNavOrgan implements OnInit {
