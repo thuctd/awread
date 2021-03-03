@@ -17,7 +17,7 @@ export class RatingAtom implements OnInit {
   @Input() faIconGood = faHeart;
   @Input() faIconBad = faHeartBroken;
   @Input() isReview = true;
-  @Input() isSize = true;
+  @Input() size = 'text-sm';
 
   constructor() {}
 

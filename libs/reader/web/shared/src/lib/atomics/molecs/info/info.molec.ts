@@ -13,7 +13,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InfoMolec implements OnInit {
-  @Input() isSize = true;
+  @Input() text = 'text-gray-500';
   @Input() title = 'Email';
   @Input() line1 = 'Awread Book';
   @Input() line2 = 'awreadbook@gmail.com';

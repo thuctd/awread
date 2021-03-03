@@ -30,7 +30,20 @@ export class MenuNavbarMolec implements OnInit {
   @Output() submitEvent = new EventEmitter();
   @Input() bars = faBars;
   @Input() times = faTimes;
-  @Input() items = ['Về chúng tôi', 'Tham gia cùng chúng tôi', 'Tin tức'];
+  @Input() items = [
+    {
+      title: 'Về chúng tôi',
+      href: '/',
+    },
+    {
+      title: 'Tham gia cùng chúng tôi',
+      href: '/',
+    },
+    {
+      title: 'Tin tức',
+      href: '/',
+    },
+  ];
 
   @Input() btns = {
     login: 'Đăng nhập',

@@ -1,9 +1,9 @@
-<div class="" (click)="displayMenu()">
+<div (click)="displayMenu()">
   <fa-icon class="text-white text-2xl cursor-pointer ml-1.5" [icon]="bars"></fa-icon>
 </div>
 <section *ngIf="isMenu" class="absolute top-0 right-0 modal">
   <div class="w-4/6 h-screen absolute right-0 bg-white br__menu">
-    <div (click)="displayMenu()" class="absolute top-1 right-2 cursor-pointer text-3xl text-gray-400">
+    <div (click)="displayMenu()" class="absolute top-1 right-2 cursor-pointer text-2xl text-gray-400">
       <fa-icon [icon]="times"></fa-icon>
     </div>
     <div class="mx-8">
@@ -22,16 +22,16 @@
           </div>
         </div>
       </div>
-      <div class="border-b py-3 text-green-400 font-medium text-lg pr-4 cursor-pointer">Trang chủ</div>
+      <div class="border-b py-3 text-green-400 font-medium text-base pr-4 cursor-pointer">Trang chủ</div>
       <molec-dropdown-menu-mb></molec-dropdown-menu-mb>
-      <div class="border-b py-3 text-green-400 font-medium text-lg pr-4 cursor-pointer">Đăng truyện</div>
-      <div class="border-b py-3 text-green-400 font-medium text-lg pr-4 cursor-pointer">Nạp Coin</div>
+      <div class="border-b py-3 text-green-400 font-medium text-base pr-4 cursor-pointer">Đăng truyện</div>
+      <div class="border-b py-3 text-green-400 font-medium text-base pr-4 cursor-pointer">Nạp Coin</div>
       <molec-dropdown-menu-mb [title]="'Cộng đồng'" [items]="items"></molec-dropdown-menu-mb>
-      <div *ngIf="!isLogin" class="border-b py-3 text-green-400 font-medium text-lg pr-4 cursor-pointer">Cài đặt</div>
+      <div *ngIf="!isLogin" class="border-b py-3 text-green-400 font-medium text-base pr-4 cursor-pointer">Cài đặt</div>
       <div class="flex flex-col items-end pt-8">
-        <base-btn (click)="login()" class="mb-1" *ngIf="isLogin" [chapter]="btns.login"></base-btn>
-        <a *ngIf="isLogin" (click)="submitEvent.emit()" class="text-xs cursor-pointer rounded-full border border-solid mb-2 inline-block text-gray-600 bg-white hover:bg-green-400 hover:text-white hover:border-transparent mr-2 md:mr-8 border-gray-300 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 px-5 py-1"> {{ btns.register }}</a>
-        <base-btn (click)="login()" *ngIf="!isLogin" [chapter]="btns.logOut"></base-btn>
+        <atom-rd-base-btn-green (click)="login()" class="mb-1" *ngIf="isLogin" [title]="btns.login"></atom-rd-base-btn-green>
+        <atom-rd-base-btn-green *ngIf="isLogin" [class2]="'px-5'" [title]="btns.register"></atom-rd-base-btn-green>
+        <atom-rd-base-btn-green (click)="login()" *ngIf="!isLogin" [title]="btns.logOut"></atom-rd-base-btn-green>
       </div>
     </div>
   </div>

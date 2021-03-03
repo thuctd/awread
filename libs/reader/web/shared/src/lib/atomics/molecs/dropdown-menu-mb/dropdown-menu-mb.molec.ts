@@ -18,7 +18,16 @@ export class DropdownMenuMbMolec implements OnInit {
   @Input() faIcon = faCaretRight;
   @Input() faIcon2 = faCaretDown;
   @Input() isDisplayMenu = true;
-  @Input() items = ['Truyện tự sáng tác', 'Truyện sưu tầm'];
+  @Input() items = [
+    {
+      title: 'Truyện tự sáng tác',
+      href: '/',
+    },
+    {
+      title: 'Truyện sưu tầm',
+      href: '/',
+    },
+  ];
 
   constructor() {}
 
