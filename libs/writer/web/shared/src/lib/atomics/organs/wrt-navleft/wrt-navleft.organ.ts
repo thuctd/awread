@@ -1,8 +1,8 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
-  selector: 'left-nav',
-  templateUrl: './left-nav.organ.html',
+  selector: 'wrt-navleft',
+  templateUrl: './wrt-navleft.organ.html',
   styles: [
     `
       :host {
@@ -19,7 +19,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LeftNavOrgan implements OnInit {
+export class WrtNavleftOrgan implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}

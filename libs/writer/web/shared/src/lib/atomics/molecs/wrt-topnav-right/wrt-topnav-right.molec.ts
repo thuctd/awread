@@ -2,8 +2,8 @@ import { Component, OnInit, ChangeDetectionStrategy, EventEmitter, Output, Input
 import type { User } from '@awread/writer/web/feature-auth';
 
 @Component({
-  selector: 'navbar',
-  templateUrl: './navbar.template.html',
+  selector: 'wrt-topnav-right',
+  templateUrl: './wrt-topnav-right.molec.html',
   styles: [
     `
       :host {
@@ -13,7 +13,9 @@ import type { User } from '@awread/writer/web/feature-auth';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NavbarTemplate implements OnInit {
+export class WrtTopnavRightMolec implements OnInit {
+  // avatarUrl = 'http://tachyons.io/img/logo.jpg';
+  // name = 'Hà Thanh Tùng';
   @Input() user = [];
   @Output() searchEvent = new EventEmitter();
   @Output() signoutEvent = new EventEmitter();
