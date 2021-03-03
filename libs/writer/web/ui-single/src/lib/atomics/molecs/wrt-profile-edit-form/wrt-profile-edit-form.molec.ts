@@ -1,33 +1,28 @@
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Component, OnInit, ChangeDetectionStrategy, Output, Input, EventEmitter } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 
 @Component({
-  selector: 'form-profie',
-  templateUrl: './form-profie.organ.html',
+  selector: 'wrt-profile-edit-form',
+  templateUrl: './wrt-profile-edit-form.molec.html',
   styles: [
     `
       :host {
         display: block;
       }
-    `
+    `,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FormProfieOrgan implements OnInit {
-  @Input() link = '/forgot';
-  @Input() submitText = 'Lưu';
+export class WrtProfileEditFormMolec implements OnInit {
   @Input() profileForm: FormGroup = this.fb.group({
-    email: ['', [Validators.required]],
-    phone: ['', [Validators.required]],
-    dob: ['', [Validators.required]],
-    gender: ['', [Validators.required]],
     fullname: ['', [Validators.required]],
     username: ['', [Validators.required]],
     website: ['', [Validators.required]],
     introduce: ['', [Validators.required]],
   });
   @Input() submitted: boolean;
-  @Output() updateProfileEvent = new EventEmitter();
+  items = [{ key: 'Tên' }, { key: 'Tên tài khoản' }, { key: 'Liên kết' }];
+
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {}
