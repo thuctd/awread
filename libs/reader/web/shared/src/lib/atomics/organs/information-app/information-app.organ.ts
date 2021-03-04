@@ -13,7 +13,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InformationAppOrgan implements OnInit {
-  @Input() Facebook = {
+  @Input() facebook = {
     title: 'Facebook',
     line1: 'facebook.com/awreadbook',
     line2: 'facebook.com/groups/awread',
@@ -21,7 +21,7 @@ export class InformationAppOrgan implements OnInit {
     link2: '',
   };
 
-  @Input() Address = {
+  @Input() address = {
     title: 'Địa chỉ',
     line1: 'Số 00, Đường 00, 000',
     line2: 'Tel: 0326988916',
