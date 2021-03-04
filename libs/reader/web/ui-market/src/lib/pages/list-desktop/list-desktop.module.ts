@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { DetailDesktopRoutingModule } from './detail-desktop-routing.module';
-import { DetailDesktopPage } from './detail-desktop.page';
+import { ListDesktopRoutingModule } from './list-desktop-routing.module';
+import { ListDesktopPage } from './list-desktop.page';
 import { ReaderWebUiMarketAtomicModule } from '../../atomics/reader-web-ui-market-atomic.module';
 
 
 @NgModule({
-  declarations: [DetailDesktopPage],
+  declarations: [ListDesktopPage],
   imports: [
     CommonModule,
-    DetailDesktopRoutingModule,
+    ListDesktopRoutingModule,
     ReaderWebUiMarketAtomicModule
   ]
 })
-export class DetailDesktopModule { }
+export class ListDesktopModule { }

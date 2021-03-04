@@ -66,7 +66,7 @@ import { MbListTemplate } from './templates/mb-list/mb-list.template';
     StorybookSupportModule,
     GlobalDesignSystemAtomicModule,
     CarouselModule,
-    BrowserAnimationsModule,
+    //BrowserAnimationsModule,
   ],
   exports: [
     CommonModule,

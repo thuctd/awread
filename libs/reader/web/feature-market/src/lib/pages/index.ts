@@ -1,3 +1,5 @@
+export * from './list.page';
+export * from './list.page';
 export * from './collected.page';
 export * from './collected.page';
 export * from './composed.page';
