@@ -1,0 +1,11 @@
+<section>
+  <div class="flex">
+    <atom-rd-author-name class="mr-20 lg:mr-44"></atom-rd-author-name>
+    <molec-rd-author-list-btns></molec-rd-author-list-btns>
+  </div>
+  <div class="flex my-6">
+    <a [routerLink]="'/'" class="font-medium transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-100 mr-32">{{numberProduct}} Tác phẩm</a>
+    <button class="font-medium transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-100">{{numberFollow}} Người theo dõi</button>
+  </div>
+  <excerpt [excerpt]="excerpt"></excerpt>
+</section>

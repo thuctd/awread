@@ -1,0 +1,4 @@
+<button (click)="submitBtn.emit()" [ngClass]="class" class="focus:outline-none border text-xs transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-100">
+  <fa-icon class="mr-0.5" *ngIf="faIcon" [icon]="faIcon"></fa-icon>
+  {{text}}
+</button>
