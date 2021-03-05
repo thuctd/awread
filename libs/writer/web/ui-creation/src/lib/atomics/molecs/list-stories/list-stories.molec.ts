@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { faComments, faStar } from '@fortawesome/free-solid-svg-icons';
-import { DetailBookTemplate } from '../../templates';
+import { WrtDetailPopupBookTemplate } from '../../templates';
 
 @Component({
   selector: 'list-stories',
@@ -31,7 +31,7 @@ export class ListStoriesMolec implements OnInit {
   ngOnInit(): void {}
 
   openDetailBook(): void {
-    this.matDialog.open(DetailBookTemplate, {
+    this.matDialog.open(WrtDetailPopupBookTemplate, {
       width: '55rem',
       height: '33rem',
     });
