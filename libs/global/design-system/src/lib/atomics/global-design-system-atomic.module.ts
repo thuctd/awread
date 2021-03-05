@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StorybookSupportModule } from '../storybook-support.module';
 import { MatDialogModule } from '@angular/material/dialog';
-import { RouterTestingModule } from '@angular/router/testing';
 
 import { AuthBgAtom } from './atoms/auth-bg/auth-bg.atom';
 import { CheckBtnAtom } from './atoms/check-btn/check-btn.atom';
@@ -93,7 +92,6 @@ import { BtnInputFileAtom } from './atoms/btn-input-file/btn-input-file.atom';
 @NgModule({
   imports: [CommonModule, StorybookSupportModule, MatDialogModule, QuillModule.forRoot(), DefaultCoverModule, CloseOnOutsideModule, NgImageSliderModule],
   exports: [
-    RouterTestingModule,
     NgImageSliderModule,
     CloseOnOutsideModule,
     TabBtnAtom,
