@@ -1,2 +1,2 @@
-export * from './read/read.template';
-export * from './detail-book/detail-book.template'
+export * from './wrt-writing-popup-read/wrt-writing-popup-read.template';
+export * from './detail-book/detail-book.template';
