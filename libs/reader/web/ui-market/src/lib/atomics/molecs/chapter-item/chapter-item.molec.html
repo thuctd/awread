@@ -2,7 +2,7 @@
     <div class="justify-between flex ">
         <div class="flex w-4/5">
             <p class="w-1/5 font-medium text-sm">{{chapter.title}}</p>
-            <p class="font-medium text-sm">{{chapter.value}}</p>
+            <a [routerLink]="['/books', '21321zxc_2wqeik','chapters','123asd2qew_was23']" class="font-medium text-sm cursor-pointer outline-none">{{chapter.value}}</a>
         </div>
         <atom-chapter-price [value]="chapter.price"></atom-chapter-price>
     </div>

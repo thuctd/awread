@@ -9,7 +9,7 @@ import type { OwlOptions } from 'ngx-owl-carousel-o';
 export class TabBookMolec implements OnInit {
   prevIcon = `<img src="/global-assets/images/arrow_left.png" alt="arrow_left">`;
   nextIcon = `<img src="/global-assets/images/arrow_right.png" alt="arrow_right">`;
-
+  @Input() bookId = 'zxcxzc456213_sssxx';
   @Input() tabBooks = [
     {
       title: 'Cô gái chúng ta cùng theo đuổi năm nào',

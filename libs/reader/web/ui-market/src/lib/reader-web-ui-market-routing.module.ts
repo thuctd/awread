@@ -73,12 +73,6 @@ const routes: Routes = [
                 import('./pages/collected-desktop/collected-desktop.module').then(m => m.CollectedDesktopModule)
           },
           {
-            path: 'books', loadChildren:
-              () => window.innerWidth <= 768 && window?.haveMobile ?
-                import('./pages/list-mobile/list-mobile.module').then(m => m.ListMobileModule) :
-                import('./pages/list-desktop/list-desktop.module').then(m => m.ListDesktopModule)
-          },
-          {
             path: '',
             pathMatch: 'full',
             redirectTo: 'home',
