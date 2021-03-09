@@ -19,7 +19,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class imgProfileAtom implements OnInit {
-  @Input() imgSrc = 'https://hochu.ua/images/05600a6dc19a37ef746fb267902398bf.jpg';
+  @Input() imgSrc = '/global-assets/images/bigImg.webp';
 
   @Input() isSize = 'big';
 

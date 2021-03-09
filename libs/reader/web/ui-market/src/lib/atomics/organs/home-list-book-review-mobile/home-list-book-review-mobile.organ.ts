@@ -18,7 +18,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 export class HomeListBookReviewMobileOrgan implements OnInit {
   @Input() titlePage = 'Top truyện được đánh giá tích cực';
   counter = Array;
-  @Input() srcImg = 'https://via.placeholder.com/260x370.png';
+  @Input() srcImg = '/global-assets/images/image.webp';
   @Input() altImg = 'Placeholder';
 
   constructor() {}
