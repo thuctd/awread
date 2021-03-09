@@ -1,18 +1,6 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Input,
-  Output,
-  EventEmitter,
-} from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  Validators,
-  FormGroup,
-} from '@angular/forms';
-import { Category, Genre } from '@awread/writer/web/feature-auth';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import type { Category, Genre } from '@awread/writer/web/feature-auth';
 
 @Component({
   selector: 'detail-book-form',
@@ -24,7 +12,15 @@ export class DetailBookFormMolec implements OnInit {
   @Input() submitted: boolean;
   @Input() genres: Genre;
   @Input() categories: Category[];
-  @Input() bookForm: FormGroup;
+  @Input() bookForm: FormGroup = this.fb.group({
+    title: ['', Validators.required],
+    description: ['', Validators.required],
+    categoryid: [null, Validators.required],
+    genreIds: ['', Validators.required],
+    audience: ['none', Validators.required],
+    tags: ['', Validators.required],
+    completed: ['', Validators.required],
+  });
   @Input() formInformation = {
     title: {
       display: 'Tiêu đề',
@@ -39,15 +35,16 @@ export class DetailBookFormMolec implements OnInit {
       placeholder: 'Thể loại',
     },
     tags: {
-      display: 'Gắn thẻ',
+      display: 'Thẻ',
       placeholder: 'Gắn thẻ',
     },
     category: {
       display: 'Danh mục',
-      placeholder: 'category',
+      placeholder: 'Danh mục',
     },
     target: {
       display: 'Đối tượng độc giả',
+      placeholder: 'Đối tượng độc giả',
     },
     completed: {
       display: 'Đã hoàn thành',

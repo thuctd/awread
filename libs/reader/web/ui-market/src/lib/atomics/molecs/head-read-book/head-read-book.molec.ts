@@ -1,11 +1,5 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Input,
-  Output,
-  EventEmitter,
-} from '@angular/core';
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'molec-head-read-book',
@@ -20,6 +14,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeadReadBookMolec implements OnInit {
+  @Input() faIcon = faChevronLeft;
   @Output() btnClick = new EventEmitter();
   @Input() title = 'Ngày ấy vì ai mà đổi thay';
   constructor() {}

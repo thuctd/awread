@@ -1,17 +1,24 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'image-profile',
   templateUrl: './image-profile.organ.html',
-  styleUrls: ['./image-profile.organ.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+      :host .-mt28 {
+        margin-top: -28rem;
+      }
+    `,
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ImageProfileOrgan implements OnInit {
   @Input() imgSrc = 'https://hochu.ua/images/05600a6dc19a37ef746fb267902398bf.jpg';
+  @Output() eventChangeImg = new EventEmitter();
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

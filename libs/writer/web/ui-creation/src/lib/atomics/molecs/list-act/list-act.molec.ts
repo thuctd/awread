@@ -1,23 +1,16 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Input,
-  Output,
-  EventEmitter,
-} from '@angular/core';
-import {
-  faChartLine,
-  faPlusCircle,
-  faPlusSquare,
-  faShareAlt,
-  faTrash,
-} from '@fortawesome/free-solid-svg-icons';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import { faChartLine, faShareAlt } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'list-act',
   templateUrl: './list-act.molec.html',
-  styleUrls: ['./list-act.molec.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListActMolec implements OnInit {
@@ -33,7 +26,7 @@ export class ListActMolec implements OnInit {
       type: 'STATS',
     },
     {
-      titleButton: 'Chia sẽ',
+      titleButton: 'Chia sẻ',
       faIcon: faShareAlt,
       type: 'SHARE',
     },

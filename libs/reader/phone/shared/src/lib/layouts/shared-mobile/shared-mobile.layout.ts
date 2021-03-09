@@ -4,7 +4,13 @@ import { SharedLayout } from '../shared/shared.layout';
 @Component({
   selector: 'awread-shared-mobile',
   templateUrl: './shared-mobile.layout.html',
-  styleUrls: ['./shared-mobile.layout.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SharedMobileLayout extends SharedLayout {}

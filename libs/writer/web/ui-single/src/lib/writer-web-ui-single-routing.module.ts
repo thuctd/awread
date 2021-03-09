@@ -1,9 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {
-  ShellDesktopLayout,
-  ShellMobileLayout,
-} from '@awread/writer/web/shared';
+import { ShellDesktopLayout, ShellMobileLayout } from '@awread/writer/web/shared';
 import { LoginGuard } from './guards/login.guard';
 import { SingleLayout } from './layouts/single/single.layout';
 
@@ -27,33 +24,33 @@ const routes: Routes = [
             loadChildren: () =>
               window.innerWidth <= 768 && window?.haveMobile
                 ? import('./pages/home-mobile/home-mobile.module').then(
-                    (m) => m.HomeMobileModule
-                  )
+                  (m) => m.HomeMobileModule
+                )
                 : import('./pages/home-desktop/home-desktop.module').then(
-                    (m) => m.HomeDesktopModule
-                  ),
+                  (m) => m.HomeDesktopModule
+                ),
           },
           {
             path: 'profile',
             loadChildren: () =>
               window.innerWidth <= 768 && window?.haveMobile
                 ? import('./pages/profile-mobile/profile-mobile.module').then(
-                    (m) => m.ProfileMobileModule
-                  )
+                  (m) => m.ProfileMobileModule
+                )
                 : import('./pages/profile-desktop/profile-desktop.module').then(
-                    (m) => m.ProfileDesktopModule
-                  ),
+                  (m) => m.ProfileDesktopModule
+                ),
           },
           {
             path: 'setting',
             loadChildren: () =>
               window.innerWidth <= 768 && window?.haveMobile
                 ? import('./pages/setting-mobile/setting-mobile.module').then(
-                    (m) => m.SettingMobileModule
-                  )
+                  (m) => m.SettingMobileModule
+                )
                 : import('./pages/setting-desktop/setting-desktop.module').then(
-                    (m) => m.SettingDesktopModule
-                  ),
+                  (m) => m.SettingDesktopModule
+                ),
           },
         ],
       },
@@ -65,4 +62,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class WriterWebUiSingleRoutingModule {}
+export class WriterWebUiSingleRoutingModule { }

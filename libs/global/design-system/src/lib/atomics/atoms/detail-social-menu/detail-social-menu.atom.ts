@@ -1,27 +1,21 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Input,
-  EventEmitter,
-  Output,
-} from '@angular/core';
-import {
-  faAngleDown,
-  faEllipsisH,
-  faPlusCircle,
-  faPlusSquare,
-  faTrash,
-} from '@fortawesome/free-solid-svg-icons';
+import { Component, OnInit, ChangeDetectionStrategy, Input, EventEmitter, Output } from '@angular/core';
+import { faEllipsisH, faPlusCircle, faPlusSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'detail-social-menu',
   templateUrl: './detail-social-menu.atom.html',
-  styleUrls: ['./detail-social-menu.atom.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DetailSocialMenuAtom implements OnInit {
   @Input() faIconComments = faEllipsisH;
+  @Input() chapter;
   @Output() chapterActionEvent = new EventEmitter();
   actions = [
     {

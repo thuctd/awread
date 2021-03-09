@@ -1,17 +1,17 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Input,
-  EventEmitter,
-  Output,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, EventEmitter, Output, Optional } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'template-register-web',
   templateUrl: './register-web.template.html',
-  styleUrls: ['./register-web.template.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegisterWebTemplate implements OnInit {
@@ -25,7 +25,7 @@ export class RegisterWebTemplate implements OnInit {
   });
   @Output() auth = new EventEmitter();
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, @Optional() public dialogRef: MatDialogRef<RegisterWebTemplate>) {}
 
   ngOnInit(): void {}
 }

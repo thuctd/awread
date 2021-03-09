@@ -1,24 +1,6 @@
 import * as ts from 'typescript';
-import {
-  findNodes,
-  Change,
-  getImport,
-  getProjectConfig,
-  getSourceNodes,
-  InsertChange,
-  RemoveChange,
-  NoopChange,
-} from '@nrwl/workspace/src/utils/ast-utils';
-import {
-  Tree,
-  SchematicsException,
-  Source,
-  Rule,
-  SchematicContext,
-  mergeWith,
-  apply,
-  forEach,
-} from '@angular-devkit/schematics';
+import { findNodes, Change, getImport, getProjectConfig, getSourceNodes, InsertChange, RemoveChange, NoopChange } from '@nrwl/workspace/src/utils/ast-utils';
+import { Tree, SchematicsException } from '@angular-devkit/schematics';
 import * as path from 'path';
 import { toFileName } from '@nrwl/workspace';
 

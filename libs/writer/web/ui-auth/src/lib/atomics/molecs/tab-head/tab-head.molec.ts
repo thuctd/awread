@@ -1,18 +1,17 @@
 import { Router } from '@angular/router';
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Input,
-  EventEmitter,
-  Output,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, EventEmitter, Output } from '@angular/core';
 import { TabHead } from '../../../interface/tabs';
 
 @Component({
   selector: 'tab-head',
   templateUrl: './tab-head.molec.html',
-  styleUrls: ['./tab-head.molec.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TabHeadMolec implements OnInit {

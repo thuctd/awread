@@ -1,15 +1,16 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Input,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'input-form',
   templateUrl: './input-form.atom.html',
-  styleUrls: ['./input-form.atom.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputFormAtom implements OnInit {

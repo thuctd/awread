@@ -1,17 +1,16 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  EventEmitter,
-  Output,
-  Input,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, EventEmitter, Output, Input } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'login',
   templateUrl: './login.organ.html',
-  styleUrls: ['./login.organ.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginOrgan implements OnInit {
@@ -21,7 +20,7 @@ export class LoginOrgan implements OnInit {
     password: ['', Validators.required],
   });
   @Output() auth = new EventEmitter();
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }

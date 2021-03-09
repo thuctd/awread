@@ -30,7 +30,6 @@ import { DetailUploadImgAtom } from './atoms/detail-upload-img/detail-upload-img
 import { DetailCmbFormAtom } from './atoms/detail-cmb-form/detail-cmb-form.atom';
 import { DetailTextareaFormAtom } from './atoms/detail-textarea-form/detail-textarea-form.atom';
 import { ListTypeBookAtom } from './atoms/list-type-book/list-type-book.atom';
-import { ListRatingBookAtom } from './atoms/list-rating-book/list-rating-book.atom';
 import { ListChapterBookAtom } from './atoms/list-chapter-book/list-chapter-book.atom';
 import { ListUdBookAtom } from './atoms/list-ud-book/list-ud-book.atom';
 import { ListSocialMenuAtom } from './atoms/list-social-menu/list-social-menu.atom';
@@ -60,10 +59,7 @@ import { BaseBtnAtom } from './atoms/base-btn/base-btn.atom';
 import { AuthorAtom } from './atoms/author/author.atom';
 import { NgImageSliderModule } from 'ng-image-slider';
 import { DefaultCoverAtom } from './atoms/default-cover/default-cover.atom';
-import {
-  DefaultCoverModule,
-  CloseOnOutsideModule,
-} from '@awread/global/packages';
+import { DefaultCoverModule, CloseOnOutsideModule } from '@awread/global/packages';
 import { NavLinkAtom } from './atoms/nav-link/nav-link.atom';
 import { DropdownLinkAtom } from './atoms/dropdown-link/dropdown-link.atom';
 import { BreadcrumbLinkAtom } from './atoms/breadcrumb-link/breadcrumb-link.atom';
@@ -89,17 +85,12 @@ import { RdListTabPageAtom } from './atoms/rd-list-tab-page/rd-list-tab-page.ato
 import { BtnSwitchChapterAtom } from './atoms/btn-switch-chapter/btn-switch-chapter.atom';
 import { BtnSelectAtom } from './atoms/btn-select/btn-select.atom';
 import { BtnBackToTopAtom } from './atoms/btn-back-to-top/btn-back-to-top.atom';
+import { PopupCoverHeaderAtom } from './atoms/popup-cover-header/popup-cover-header.atom';
+import { ProcessBarAtom } from './atoms/process-bar/process-bar.atom';
+import { BtnInputFileAtom } from './atoms/btn-input-file/btn-input-file.atom';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    StorybookSupportModule,
-    MatDialogModule,
-    QuillModule.forRoot(),
-    DefaultCoverModule,
-    CloseOnOutsideModule,
-    NgImageSliderModule,
-  ],
+  imports: [CommonModule, StorybookSupportModule, MatDialogModule, QuillModule.forRoot(), DefaultCoverModule, CloseOnOutsideModule, NgImageSliderModule],
   exports: [
     NgImageSliderModule,
     CloseOnOutsideModule,
@@ -133,7 +124,6 @@ import { BtnBackToTopAtom } from './atoms/btn-back-to-top/btn-back-to-top.atom';
     DetailTextareaFormAtom,
     DetailUdPartAtom,
     ListTypeBookAtom,
-    ListRatingBookAtom,
     ListChapterBookAtom,
     ListUdBookAtom,
     ListSocialMenuAtom,
@@ -185,6 +175,9 @@ import { BtnBackToTopAtom } from './atoms/btn-back-to-top/btn-back-to-top.atom';
     BtnSwitchChapterAtom,
     BtnSelectAtom,
     BtnBackToTopAtom,
+    PopupCoverHeaderAtom,
+    ProcessBarAtom,
+    BtnInputFileAtom,
   ],
   declarations: [
     TabBtnAtom,
@@ -217,7 +210,6 @@ import { BtnBackToTopAtom } from './atoms/btn-back-to-top/btn-back-to-top.atom';
     DetailTextareaFormAtom,
     DetailUdPartAtom,
     ListTypeBookAtom,
-    ListRatingBookAtom,
     ListChapterBookAtom,
     ListUdBookAtom,
     ListSocialMenuAtom,
@@ -267,6 +259,9 @@ import { BtnBackToTopAtom } from './atoms/btn-back-to-top/btn-back-to-top.atom';
     BtnSwitchChapterAtom,
     BtnSelectAtom,
     BtnBackToTopAtom,
+    PopupCoverHeaderAtom,
+    ProcessBarAtom,
+    BtnInputFileAtom,
   ],
 })
 export class GlobalDesignSystemAtomicModule {}

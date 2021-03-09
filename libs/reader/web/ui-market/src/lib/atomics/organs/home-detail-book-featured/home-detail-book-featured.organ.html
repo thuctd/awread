@@ -3,9 +3,11 @@
         <atom-title [title]='titlePage' class="uppercase"></atom-title>
     </div>
     <div class="grid grid-cols-12 gap-6 place-items-center mb-4">
-        <div *ngFor='let loop3 of counter(8);' class="col-span-2 md:col-span-3 w-64">
+        <div *ngFor='let loop3 of counter(8);' class="col-span-2 md:col-span-3 w-64 mx-auto">
             <atom-img-m [size]='"xl"'></atom-img-m>
-            <home-info-book-featured></home-info-book-featured>
+            <div>
+              <home-info-book-featured></home-info-book-featured>
+            </div>
         </div>
     </div>
 </section>

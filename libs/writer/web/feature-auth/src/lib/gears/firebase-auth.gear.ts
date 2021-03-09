@@ -19,7 +19,7 @@ export class FirebaseAuthGear {
     private authRoutingGear: AuthRoutingGear,
     private afAuth: AngularFireAuth,
     private snackbarService: SnackbarsService
-  ) {}
+  ) { }
 
   shouldLinkProviderPassword(userAccount, currentUser: firebase.User) {
     return this.authApi
@@ -30,7 +30,7 @@ export class FirebaseAuthGear {
           res.data['getUserBaseEmail'] &&
           res.data['getUserBaseEmail']['results'].length
         ) {
-          this.authRoutingGear.navigateAfterLoginComplete('profile');
+          this.authRoutingGear.navigateAfterLoginComplete('list');
           const user = res.data['getUserBaseEmail']['results'][0];
           if (user.provider === 'email/password') {
             const credential = firebase.auth.EmailAuthProvider.credential(
@@ -63,11 +63,11 @@ export class FirebaseAuthGear {
         .pipe(
           tap(() => {
             window.localStorage.removeItem('email_reset_password');
-            this.snackbarService.create('Reset password thành công!');
+            this.snackbarService.showSuccess('Reset password thành công!');
             this.router.navigate(['login']);
           }),
           catchError((err) => {
-            this.snackbarService.error(
+            this.snackbarService.showWarning(
               'Reset password xảy ra lỗi. Vui lòng thử lại!'
             );
             return of(err);
@@ -162,7 +162,7 @@ export class FirebaseAuthGear {
       const user = createUserFromFirebase(newUser);
       this.shouldLinkProviderPassword(user, result.user);
     } catch (error) {
-      this.snackbarService.error(
+      this.snackbarService.showError(
         'Đăng nhập facebook bị lỗi. Vui lòng thử lại!'
       );
     }
@@ -178,7 +178,7 @@ export class FirebaseAuthGear {
         .auth()
         .fetchSignInMethodsForEmail(user.email);
       if (providers.includes('password')) {
-        this.snackbarService.error('Tài khoản đã tồn tại!');
+        this.snackbarService.showError('Tài khoản đã tồn tại!');
         return;
       }
       const linkedProvider: any = this.firebaseAuthSocialAddon.getProvider(
@@ -190,7 +190,7 @@ export class FirebaseAuthGear {
         credential
       );
       if (linkWithCredential) {
-        this.authRoutingGear.navigateAfterLoginComplete('profile');
+        this.authRoutingGear.navigateAfterLoginComplete('list');
       }
       // if (linkWithCredential.user) {
       //   // update password when account Googleor/FB exists.

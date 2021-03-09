@@ -1,10 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  EntityState,
-  EntityStore,
-  StoreConfig,
-  ActiveState,
-} from '@datorama/akita';
+import { EntityState, EntityStore, StoreConfig, ActiveState } from '@datorama/akita';
 import { Genre } from '../../models';
 
 export enum VISIBILITY_FILTER {

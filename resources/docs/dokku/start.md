@@ -12,11 +12,21 @@ dokku config django_dokku_docker_db
 
 dokku domains:add django_dokku_docker dokku-docker.accordbox.com
 
+# network
+
+dokku networks:create graphql-network
+dokku network:set story-writer-web attach-post-create graphql-network
+
 # SSL
 
 $ dokku plugin:install https://github.com/dokku/dokku-letsencrypt.git
-$ dokku config:set --no-restart --global DOKKU_LETSENCRYPT_EMAIL=michaelyin@accordbox.com
-$ dokku letsencrypt django_dokku_docker
+$ dokku config:set --no-restart --global DOKKU_LETSENCRYPT_EMAIL=info@awread.vn
+$ dokku config:set --no-restart story-writer-web DOKKU_LETSENCRYPT_EMAIL=info@awread.vn
+// app must be availabe to register let's encypt
+$ dokku letsencrypt story-writer-web
+$ dokku letsencrypt:cron-job --add
+// maybe no need this
+$ dokku letsencrypt:auto-renew story-writer-web
 
 # this would setup cron job to update letsencrypt certificate
 

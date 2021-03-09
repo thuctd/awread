@@ -26,6 +26,12 @@ export class ProfilePage implements OnInit {
     if (this.profileForm.invalid) {
       return;
     }
+
+    const { fullname } = this.profileForm.value;
+    if (!fullname.trim()) {
+      alert('Tên không được để trống');
+      return;
+    }
     const shouldUpdateProfile =
       JSON.stringify(this.profileFormValueBefore) !==
       JSON.stringify(this.profileForm.value);
@@ -67,7 +73,7 @@ export class ProfilePage implements OnInit {
       username: [''],
       website: [''],
       introduce: [''],
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.email]],
       phone: [''],
       dob: [''],
       gender: [''],

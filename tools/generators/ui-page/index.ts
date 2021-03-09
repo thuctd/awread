@@ -50,7 +50,7 @@ function singleAction(schema, context, name) {
 function addFeatureRoutingModuleAndImportLayoutPath(schema, tree, routingPath) {
   let rule0;
   let mixRules = [];
-  if (!tree.exists(routingPath)) {
+  if (!tree.exists(`${routingPath}.ts`)) {
     rule0 = schematic('module', {
       project: schema.project,
       name: schema.project,

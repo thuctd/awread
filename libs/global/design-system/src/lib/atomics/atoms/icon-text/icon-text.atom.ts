@@ -1,15 +1,16 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Input,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'atom-icon-text',
   templateUrl: './icon-text.atom.html',
-  styleUrls: ['./icon-text.atom.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IconTextAtom implements OnInit {

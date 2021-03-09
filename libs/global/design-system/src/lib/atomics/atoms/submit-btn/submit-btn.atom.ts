@@ -1,16 +1,15 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Output,
-  EventEmitter,
-  Input,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter, Input } from '@angular/core';
 
 @Component({
   selector: 'submit-btn',
   templateUrl: './submit-btn.atom.html',
-  styleUrls: ['./submit-btn.atom.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SubmitBtnAtom implements OnInit {

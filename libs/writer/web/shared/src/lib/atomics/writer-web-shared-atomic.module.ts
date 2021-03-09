@@ -1,9 +1,6 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import {
-  GlobalDesignSystemAtomicModule,
-  StorybookSupportModule,
-} from "@awread/global/design-system";
+import { GlobalDesignSystemAtomicModule, StorybookSupportModule } from '@awread/global/design-system';
 import { NavbarLinkGroupMolec } from "./molecs/navbar-link-group/navbar-link-group.molec";
 import { TopNavOrgan } from "./organs/top-nav/top-nav.organ";
 import { RightTopnavMolec } from "./molecs/right-topnav/right-topnav.molec";
@@ -11,6 +8,9 @@ import { LeftNavOrgan } from "./organs/left-nav/left-nav.organ";
 import { GroupIconNavleftMolec } from "./molecs/group-icon-navleft/group-icon-navleft.molec";
 import { NavbarTemplate } from "./templates/navbar/navbar.template";
 import { RouterModule } from "@angular/router";
+import { PopupCoverImageTemplate } from './templates/popup-cover-image/popup-cover-image.template';
+import { PopupCoverImageChooseOrgan } from './organs/popup-cover-image-choose/popup-cover-image-choose.organ';
+import { PopupCoverImageAlignOrgan } from './organs/popup-cover-image-align/popup-cover-image-align.organ';
 
 @NgModule({
   imports: [
@@ -27,6 +27,9 @@ import { RouterModule } from "@angular/router";
     LeftNavOrgan,
     GroupIconNavleftMolec,
     NavbarTemplate,
+    PopupCoverImageTemplate,
+    PopupCoverImageChooseOrgan,
+    PopupCoverImageAlignOrgan,
   ],
   declarations: [
     NavbarLinkGroupMolec,
@@ -35,6 +38,9 @@ import { RouterModule } from "@angular/router";
     LeftNavOrgan,
     GroupIconNavleftMolec,
     NavbarTemplate,
+    PopupCoverImageTemplate,
+    PopupCoverImageChooseOrgan,
+    PopupCoverImageAlignOrgan,
   ],
 })
-export class WriterWebSharedAtomicModule {}
+export class WriterWebSharedAtomicModule { }

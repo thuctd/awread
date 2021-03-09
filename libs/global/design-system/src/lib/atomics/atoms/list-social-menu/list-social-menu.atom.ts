@@ -1,22 +1,16 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Input,
-  Output,
-  EventEmitter,
-} from '@angular/core';
-import {
-  faAngleDown,
-  faPlusCircle,
-  faPlusSquare,
-  faTrash,
-} from '@fortawesome/free-solid-svg-icons';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import { faAngleDown, faPlusCircle, faPlusSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'list-social-menu',
   templateUrl: './list-social-menu.atom.html',
-  styleUrls: ['./list-social-menu.atom.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListSocialMenuAtom implements OnInit {
@@ -26,7 +20,7 @@ export class ListSocialMenuAtom implements OnInit {
   @Input() faIconBtn = faAngleDown;
   @Input() actions = [
     {
-      name: 'Tạo chương',
+      name: 'Thêm chương',
       type: 'new-chapter',
       icon: faPlusCircle,
     },

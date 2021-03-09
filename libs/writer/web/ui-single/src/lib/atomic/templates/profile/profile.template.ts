@@ -1,10 +1,6 @@
 import { FormGroup } from '@angular/forms';
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Input,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'profile',
@@ -13,7 +9,10 @@ import {
 })
 export class ProfileTemplate implements OnInit {
   @Input() profileForm: FormGroup;
-  constructor() {}
+  constructor(
+    private matDialog: MatDialog
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
+  
 }

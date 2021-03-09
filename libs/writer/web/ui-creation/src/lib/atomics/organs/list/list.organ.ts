@@ -1,20 +1,25 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Output,
-  EventEmitter,
-  Input,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter, Input } from '@angular/core';
 
 @Component({
   selector: 'list',
   templateUrl: './list.organ.html',
-  styleUrls: ['./list.organ.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+      :host .loading {
+        height: calc(100vh - 20rem);
+      }
+      :host .no-data {
+        height: calc(100vh - 20rem);
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListOrgan implements OnInit {
-  @Input() books;
+  @Input() books = [];
   @Input() loading: boolean;
   @Output() moreEvent = new EventEmitter();
   @Output() addChapterEvent = new EventEmitter();

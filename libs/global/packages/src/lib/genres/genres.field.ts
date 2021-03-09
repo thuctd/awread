@@ -1,32 +1,8 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Input,
-  ViewChild,
-  ElementRef,
-  forwardRef,
-  ChangeDetectorRef,
-  SimpleChanges,
-  OnChanges,
-  OnDestroy,
-  EventEmitter,
-  Output,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, ViewChild, ElementRef, forwardRef, EventEmitter, Output } from '@angular/core';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import {
-  ControlValueAccessor,
-  FormControl,
-  NG_VALUE_ACCESSOR,
-  FormGroup,
-} from '@angular/forms';
-import {
-  MatAutocomplete,
-  MatAutocompleteSelectedEvent,
-} from '@angular/material/autocomplete';
-import { startWith, map, withLatestFrom, tap, takeUntil } from 'rxjs/operators';
+import { FormControl, NG_VALUE_ACCESSOR, FormGroup } from '@angular/forms';
+import { MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
-import { Observable, combineLatest, Subject } from 'rxjs';
 @Component({
   selector: 'app-genres',
   templateUrl: './genres.field.html',
@@ -53,9 +29,9 @@ export class GenresField implements OnInit {
   genresListChip = [];
   removable = true;
   selectable = true;
-  constructor() {}
+  constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   add(event: MatChipInputEvent): void {
     const input = event.input;

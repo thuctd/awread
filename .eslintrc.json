@@ -27,6 +27,20 @@
                 "onlyDependOnLibsWithTags": [
                   "*"
                 ]
+              },
+              {
+                "sourceTag": "scope:writer",
+                "onlyDependOnLibsWithTags": [
+                  "scope:shared",
+                  "scope:writer"
+                ]
+              },
+              {
+                "sourceTag": "scope:reader",
+                "onlyDependOnLibsWithTags": [
+                  "scope:shared",
+                  "scope:reader"
+                ]
               }
             ]
           }

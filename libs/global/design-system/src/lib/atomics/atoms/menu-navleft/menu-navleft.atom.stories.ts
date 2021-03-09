@@ -12,13 +12,3 @@ export const Basic = () => ({
   component: MenuNavleftAtom,
   props: {},
 });
-
-export const MenuOpen = () => ({
-  moduleMetadata: {
-    imports: [GlobalDesignSystemAtomicModule],
-  },
-  component: MenuNavleftAtom,
-  props: {
-    isMenuOpen: true,
-  },
-});

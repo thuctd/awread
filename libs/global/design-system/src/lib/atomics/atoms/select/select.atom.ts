@@ -1,16 +1,20 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Input,
-  Output,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'atom-select',
   templateUrl: './select.atom.html',
-  styleUrls: ['./select.atom.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+      :host .text {
+        font-size: 0.6rem;
+        line-height: 1rem;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectAtom implements OnInit {

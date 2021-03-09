@@ -1,12 +1,5 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Input,
-  Inject,
-} from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-
+import { Component, OnInit, ChangeDetectionStrategy, Inject, Optional } from '@angular/core';
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 export interface DialogData {
   title: string;
   content: string;
@@ -19,16 +12,17 @@ export interface DialogData {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ReadTemplate implements OnInit {
-  
-  constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData) { }
-
-  ngOnInit(): void {}
+  constructor(
+    @Optional() public dialogRef: MatDialogRef<ReadTemplate>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData
+  ) { }
+  ngOnInit(): void { }
 
   ngAfterViewInit(): void {
     const element = document.getElementById('content');
-    if(this.data.content === "") {
+    if (this.data.content === '') {
       element.innerHTML = `<i>Hãy viết gì đó...</i>`;
-    }else{
+    } else {
       element.innerHTML = this.data.content;
     }
   }

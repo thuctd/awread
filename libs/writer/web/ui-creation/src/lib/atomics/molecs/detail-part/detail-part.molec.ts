@@ -1,17 +1,23 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Input,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 
 @Component({
   selector: 'detail-part',
   templateUrl: './detail-part.molec.html',
-  styleUrls: ['./detail-part.molec.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
 })
 export class DetailPartMolec implements OnInit {
-  @Input() chapter;
+  @Input() chapter = {
+    chapterNumber: '',
+    title: '',
+    status: '',
+    updatedat: '',
+  };
   constructor() {}
 
   ngOnInit(): void {}

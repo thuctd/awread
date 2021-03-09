@@ -3,14 +3,18 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 @Component({
   selector: 'auth-description',
   templateUrl: './auth-description.atom.html',
-  styleUrls: ['./auth-description.atom.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AuthDescriptionAtom implements OnInit {
-  @Input() description;
-  constructor() { }
+  @Input() description = 'Đây là phần mô tả của phần đăng nhập nha!';
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

@@ -1,16 +1,17 @@
 import { FormGroup } from '@angular/forms';
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Input,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { faLock, faEnvelope, faUser } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'register-form',
   templateUrl: './register-form.molec.html',
-  styleUrls: ['./register-form.molec.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegisterFormMolec implements OnInit {

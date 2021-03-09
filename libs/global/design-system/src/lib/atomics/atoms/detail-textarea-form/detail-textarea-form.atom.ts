@@ -4,8 +4,14 @@ import { FormControl } from '@angular/forms';
 @Component({
   selector: 'detail-textarea-form',
   templateUrl: './detail-textarea-form.atom.html',
-  styleUrls: ['./detail-textarea-form.atom.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DetailTextareaFormAtom implements OnInit {
   @Input() placeholder = "Story's name";
@@ -13,9 +19,7 @@ export class DetailTextareaFormAtom implements OnInit {
   @Input() inputControl = new FormControl('');
   @Input() typeInput = 'text';
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

@@ -1,18 +1,15 @@
-<section class="mt-7">
-  <a (click)="toggleMenu($event)" class="cursor-pointer">
+<section class="mt-8 -ml-2">
+  <a class="cursor-pointer relative upload inline-block">
     <img [src]="iconUrl">
-  </a>
-  <div *ngIf="isMenuOpen" class="z-50 absolute -mt-14 ml-20">
-    <div id="frist_div" class="w-64 mh-8 bg-green-300 rounded-b-none shadow"></div>
-    <div class="w-56 bg-green-300 flex flex-col pl-4  rounded-lg shadow">
-      <div class="pt-2 pb-1">
-        <fa-icon class="text-xl text-white" [icon]="faIcon"></fa-icon>
-        <span class="text-sm ml-2 cursor-pointer hover:text-white text-gray-400"><a (click)="next.emit('CreateANewStory'); isMenuOpen=false">Danh sách truyện mới</a></span>
-      </div>
-      <div class="pb-3 pt-1">
-        <fa-icon class="text-xl text-gray-600" [icon]="faIcon"></fa-icon>
-        <span class="text-sm ml-2 cursor-pointer hover:text-white text-gray-400"><a (click)="next.emit('CreateANewStory'); isMenuOpen=false">Danh sách truyện sưu tầm</a></span>
+    <div class="menu z-50 absolute left-full top-1/2 transform -translate-y-1/2 ml-4">
+      <div id="frist_div" class="w-64 mh-8 bg-white rounded-b-none shadow"></div>
+      <div class="w-44 flex flex-col pl-2 bg-white rounded shadow mt-4">
+        <div class="flex py-3 focus:outline-none" [routerLink]="'/detail'">
+          <img src="/global-assets/images/newStory.png">
+          <span class="text-sm mt-1.5 ml-1 cursor-pointer hover:text-green-500 text-gray-600"><a>Truyện tự sáng tác</a></span>
+        </div>
+
       </div>
     </div>
-  </div>
+  </a>
 </section>

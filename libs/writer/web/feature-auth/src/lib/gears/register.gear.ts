@@ -2,11 +2,7 @@ import { AuthRoutingGear } from './auth-routing.gear';
 import { FirebaseAuthGear } from './firebase-auth.gear';
 import { Injectable } from '@angular/core';
 import { FirebaseAuthAddon } from '../addons';
-import {
-  BasicCredential,
-  createUserFromFirebase,
-  FirebaseUser,
-} from '../models';
+import { BasicCredential, createUserFromFirebase, FirebaseUser } from '../models';
 import firebase from 'firebase/app';
 import { catchError, tap } from 'rxjs/operators';
 import { throwError } from 'rxjs';
@@ -21,7 +17,7 @@ export class RegisterGear {
     private firebaseAuthGear: FirebaseAuthGear,
     private authRoutingGear: AuthRoutingGear,
     private snackbarService: SnackbarsService
-  ) {}
+  ) { }
 
   async registerEmail(credential: BasicCredential) {
     try {
@@ -56,11 +52,11 @@ export class RegisterGear {
   createAccountOnServer(user) {
     return this.authApi.createAccountOnServer(user).pipe(
       tap((res) => {
-        this.snackbarService.create('Tạo tài khoản thành công');
+        this.snackbarService.showSuccess('Tạo tài khoản thành công');
       }),
       catchError((err) => {
         console.log('error', err);
-        this.snackbarService.error('Đã xảy ra lỗi. Vui lòng thử lại!!', 5000);
+        this.snackbarService.showError('Đã xảy ra lỗi. Vui lòng thử lại!!');
         return throwError(err);
       })
     );

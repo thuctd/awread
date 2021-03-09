@@ -3,16 +3,20 @@ import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter, Input
 @Component({
   selector: 'tab-btn',
   templateUrl: './tab-btn.atom.html',
-  styleUrls: ['./tab-btn.atom.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TabBtnAtom implements OnInit {
   @Output() tabClicked = new EventEmitter();
   @Input() tabName = 'tab name';
   @Input() active = false;
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

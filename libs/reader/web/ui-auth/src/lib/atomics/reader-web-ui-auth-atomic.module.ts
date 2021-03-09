@@ -1,10 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { WriterWebUiAuthAtomicModule } from '@awread/writer/web/ui-auth';
-import {
-  StorybookSupportModule,
-  GlobalDesignSystemAtomicModule,
-} from '@awread/global/design-system';
+// TODO: looking ways to 
+// import { WriterWebUiAuthAtomicModule } from '@awread/writer/web/ui-auth';
+import { GlobalDesignSystemAtomicModule, StorybookSupportModule } from '@awread/global/design-system';
 import { BgAuthMobileMolec } from './molecs/bg-auth-mobile/bg-auth-mobile.molec';
 import { CheckMailMolec } from './molecs/check-mail/check-mail.molec';
 import { InterrogatoryMolec } from './molecs/interrogatory/interrogatory.molec';
@@ -20,13 +18,16 @@ import { LoginMobileTemplate } from './templates/login-mobile/login-mobile.templ
 import { LoginWebTemplate } from './templates/login-web/login-web.template';
 import { RegisterMobileTemplate } from './templates/register-mobile/register-mobile.template';
 import { RegisterWebTemplate } from './templates/register-web/register-web.template';
+import { LoginFormMolec } from './molecs/login-form/login-form.molec';
+import { RegisterFormMolec } from './molecs/register-form/register-form.molec';
+import { ForgotFormMolec } from './molecs/forgot-form/forgot-form.molec';
 
 @NgModule({
   imports: [
     CommonModule,
     StorybookSupportModule,
     GlobalDesignSystemAtomicModule,
-    WriterWebUiAuthAtomicModule,
+    // WriterWebUiAuthAtomicModule,
   ],
   exports: [
     BgAuthMobileMolec,
@@ -44,6 +45,9 @@ import { RegisterWebTemplate } from './templates/register-web/register-web.templ
     LoginWebTemplate,
     RegisterMobileTemplate,
     RegisterWebTemplate,
+    LoginFormMolec,
+    RegisterFormMolec,
+    ForgotFormMolec,
   ],
   declarations: [
     BgAuthMobileMolec,
@@ -61,6 +65,9 @@ import { RegisterWebTemplate } from './templates/register-web/register-web.templ
     LoginWebTemplate,
     RegisterMobileTemplate,
     RegisterWebTemplate,
+    LoginFormMolec,
+    RegisterFormMolec,
+    ForgotFormMolec,
   ],
 })
-export class ReaderWebUiAuthAtomicModule {}
+export class ReaderWebUiAuthAtomicModule { }

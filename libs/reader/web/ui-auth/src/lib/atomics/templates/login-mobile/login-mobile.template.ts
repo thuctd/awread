@@ -1,17 +1,17 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Input,
-  Output,
-  EventEmitter,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter, Optional } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'template-login-mobile',
   templateUrl: './login-mobile.template.html',
-  styleUrls: ['./login-mobile.template.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginMobileTemplate implements OnInit {
@@ -21,7 +21,7 @@ export class LoginMobileTemplate implements OnInit {
   });
   @Output() auth = new EventEmitter();
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, @Optional() public dialogRef: MatDialogRef<LoginMobileTemplate>) {}
 
   ngOnInit(): void {}
 }

@@ -1,7 +1,7 @@
 import { tap, catchError, retry, map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { of, throwError } from 'rxjs';
-import { User } from '../..';
+import type { User } from '../models';
 import { CurrentUserService, CurrentUserStore } from '../states/current-user';
 import { CurrentUserApi } from '../apis';
 import { SnackbarsService } from '@awread/global/packages';
@@ -13,7 +13,7 @@ export class CurrentUserGear {
     private currentUserService: CurrentUserService,
     private currentUserStore: CurrentUserStore,
     private snackbarsService: SnackbarsService
-  ) {}
+  ) { }
 
   getCurrentUser() {
     return this.currentUserApi.getCurrentUser().pipe(
@@ -38,12 +38,12 @@ export class CurrentUserGear {
     return this.currentUserApi.update(user).pipe(
       tap((res) => {
         if (res && res['data']) {
-          this.snackbarsService.create('Cập nhật thông tin thành công!', 5000);
+          this.snackbarsService.showSuccess('Cập nhật thông tin thành công!');
           this.currentUserStore.updateCurrentUserAkita(user);
         }
       }),
       catchError((err) => {
-        this.snackbarsService.error('Đã xảy ra lỗi. Vui lòng thử lại!', 5000);
+        this.snackbarsService.showError('Đã xảy ra lỗi. Vui lòng thử lại!');
         return throwError(err);
       }),
       retry(2)

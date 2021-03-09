@@ -1,14 +1,4 @@
-import {
-  Component,
-  Input,
-  OnInit,
-  ChangeDetectionStrategy,
-} from '@angular/core';
-import {
-  MatDialog,
-  MatDialogRef,
-  MAT_DIALOG_DATA,
-} from '@angular/material/dialog';
+import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 @Component({

@@ -1,0 +1,16 @@
+
+<label closeOnOutSide (clickedOutside)="onClick()" class="flex text-left text-sm w-52 rounded-sm text-gray-700 relative font-normal measure z-50 ">
+  <atom-title [title]='titlePage' [isUppercase]='true'></atom-title>
+  <button *ngIf="isMenu" #toggleButton (click)="toggleMenu($event)" class="mb-1 sm:mb-2 text-sm text-gray-600 outline-none font-semibold rounded-full ml-2 focus:outline-none transition duration-500 ease-in-out transform">
+    <fa-icon [icon]="faIcon"></fa-icon>
+  </button>
+  <div *ngIf="isMenuOpen" class="absolute right-0 top-4 mt-2 w-32 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+    <div class="text-left">
+      <div *ngFor="let link of links">
+        <a routerLink='/{{link.href}}' class="block cursor-pointer px-4 py-1 text-sm text-gray-600 hover:bg-gray-100 hover:text-gray-900 border-b border-gray-300">
+          {{link.name | titlecase}}</a>
+      </div>
+    </div>
+  </div>
+</label>
+<div class="border-b border-gray-300"></div>

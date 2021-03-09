@@ -1,4 +1,3 @@
-export * from './modal.facade';
 export * from './genres.facade';
 export * from './category.facade';
 export * from './chapters.facade';

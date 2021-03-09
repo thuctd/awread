@@ -1,10 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Output,
-  Input,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Output, Input } from '@angular/core';
 import { faArrowUp } from '@fortawesome/free-solid-svg-icons';
 
 @Component({

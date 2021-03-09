@@ -1,6 +1,4 @@
-import {
-  chain, externalSchematic, Rule, SchematicContext, Tree
-} from '@angular-devkit/schematics';
+import { chain, externalSchematic, Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
 import { createSharedLibrary, createFiles, updateFiles, appAndLibSetting } from '../../utility/edit-angular-json';
 
 export default function (schema: any): Rule {

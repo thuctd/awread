@@ -23,13 +23,28 @@ export class ChaptersGear {
 
   getAllChapters(bookid: string) {
     return this.chaptersApi.getAllChapters(bookid).pipe(
-      tap((res) => {
+      map((res) => {
         if (
           res['data'] &&
           res['data']['allChapters'] &&
           res['data']['allChapters']['nodes'].length
         ) {
-          this.chaptersStore.set(res['data']['allChapters']['nodes']);
+          const chapters = res['data']['allChapters']['nodes'];
+          // data chapter tra ve theo thu tu gioam dan de hien thi cac chuong moi nhat
+          return this.transformDataChapters(chapters);
+          // .sortBy((a, b) => {
+          //   if (a.chapterNumber < b.chapterNumber) {
+          //     return 1;
+          //   }
+          //   return -1;
+          // });
+        }
+        return [];
+      }),
+      tap((res) => {
+        if (res.length) {
+          this.chaptersStore.set([]);
+          this.chaptersStore.set(res);
         } else {
           this.chaptersStore.set([]);
         }
@@ -57,13 +72,13 @@ export class ChaptersGear {
     );
   }
 
-  createChapter(chapter: Chapter) {
+  createChapter(chapter: Chapter, isPublishedBook: boolean) {
     const chapterid = this.firebaseFirestoreAddon.createId();
     const chapterDetail = { ...chapter, chapterid };
-    return this.chaptersApi.createChapter(chapterDetail).pipe(
+    return this.chaptersApi.createChapter(chapterDetail, isPublishedBook).pipe(
       tap((res) => {
         console.log('createChapter res: ', res);
-        this.snackbarsService.create('Thêm chương thành công!');
+        this.snackbarsService.showSuccess('Thêm chương thành công!');
         if (res['data'] && res['data']['createChapter']['chapter']) {
           const isPublished = chapter.status === 'PUBLISHED';
           this.chaptersStore.add(chapterDetail, { prepend: true });
@@ -72,7 +87,7 @@ export class ChaptersGear {
         this.router.navigate(['detail', { bookId: chapterDetail.bookid }]);
       }),
       catchError((err) => {
-        this.snackbarsService.error('Đã xảy ra lỗi. Vui lòng thử lại!');
+        this.snackbarsService.showError('Đã xảy ra lỗi. Vui lòng thử lại!');
         return throwError(err);
       })
     );
@@ -81,7 +96,7 @@ export class ChaptersGear {
   updateChapter(chapter) {
     return this.chaptersApi.updateChapter(chapter).pipe(
       tap((res) => {
-        this.snackbarsService.create('Cập nhật chương thành công!');
+        this.snackbarsService.showSuccess('Cập nhật chương thành công!');
         if (res['data']) {
           const chapterEntity = this.chapterQuery.getEntity(chapter.chapterid);
           if (chapterEntity.status !== chapter.status) {
@@ -96,7 +111,7 @@ export class ChaptersGear {
         this.router.navigate(['detail', { bookId: chapter.bookid }]);
       }),
       catchError((err) => {
-        this.snackbarsService.error('Đã xảy ra lỗi. Vui lòng thử lại!');
+        this.snackbarsService.showError('Đã xảy ra lỗi. Vui lòng thử lại!');
         return throwError(err);
       })
     );
@@ -105,21 +120,29 @@ export class ChaptersGear {
   removeChapter(chapterid: string, bookId: string, status: string) {
     return this.chaptersApi.removeChapter(chapterid).pipe(
       tap((res) => {
-        this.snackbarsService.create('Xóa chương thành công!');
+        this.snackbarsService.showSuccess('Xóa chương thành công!');
         if (res['data']) {
           const isRemoveChapterPublished = status === 'PUBLISHED';
           this.chaptersStore.remove(chapterid);
-          this.booksStore.updateTotalChapterCount(
-            bookId,
-            isRemoveChapterPublished,
-            -1
-          );
+          const chapters = this.chapterQuery.getAll().filter(item => item.chapterid !== chapterid);
+          this.booksStore.updateTotalChapterCount(  bookId, isRemoveChapterPublished, -1  );
+          this.chaptersStore.set(this.transformDataChapters(chapters));
         }
       }),
       catchError((err) => {
-        this.snackbarsService.error('Đã xảy ra lỗi. Vui lòng thử lại!');
+        this.snackbarsService.showError('Đã xảy ra lỗi. Vui lòng thử lại!');
         return throwError(err);
       })
     );
+
+    
+  }
+  private transformDataChapters(chapters) {
+    let chapterLength = chapters.length;
+    return chapters.map((item, index) => {
+      // them so chuong cho moi chhapter
+      chapterLength = chapterLength - 1;
+      return { ...item, chapterNumber: chapterLength + 1 };
+    });
   }
 }

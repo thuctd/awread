@@ -1,15 +1,16 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Input,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { faLock } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'new-password-form',
   templateUrl: './new-password-form.molec.html',
-  styleUrls: ['./new-password-form.molec.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NewPasswordFormMolec implements OnInit {

@@ -1,21 +1,20 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Input,
-  Output,
-  EventEmitter,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'organ-register',
   templateUrl: './register.organ.html',
-  styleUrls: ['./register.organ.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegisterOrgan implements OnInit {
-  @Input() text = 'Bạn có chắc chắn tạo tài khoản?';
+  @Input() text = 'Nếu bạn đã có tài khoản?';
   @Input() textLink = 'Đăng nhập';
   @Input() authForm = this.fb.group({
     displayName: ['', [Validators.required]],

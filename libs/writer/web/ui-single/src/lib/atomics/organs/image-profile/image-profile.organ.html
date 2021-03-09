@@ -1,5 +1,5 @@
 <section class="float-right">
   <img-profile [imgSrc]="imgSrc"></img-profile>
-  <change-photo class="-mt28 -ml-36 absolute"></change-photo>
+  <change-photo class="-mt28 -ml-36 absolute" (eventChangeImg)="eventChangeImg.emit()"></change-photo>
   <div class="clear-both"></div>
 </section>

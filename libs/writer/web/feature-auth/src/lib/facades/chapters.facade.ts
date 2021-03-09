@@ -3,10 +3,7 @@ import { BooksFacade } from './books.facade';
 import { Injectable } from '@angular/core';
 import { ChaptersGear, FirestoreGear } from '../gears';
 import { ChaptersQuery, ChaptersStore } from '../states/chapters';
-import {
-  ChapterDetailStore,
-  ChapterDetailQuery,
-} from '../states/chapter-detail';
+import { ChapterDetailStore, ChapterDetailQuery } from '../states/chapter-detail';
 
 @Injectable({ providedIn: 'root' })
 export class ChaptersFacade {
@@ -20,7 +17,11 @@ export class ChaptersFacade {
     private chapterDetailQuery: ChapterDetailQuery,
     private chaptersQuery: ChaptersQuery,
     private firestoreGear: FirestoreGear
-  ) {}
+  ) { }
+
+  getChapterEntityAkita(id: string) {
+    return this.chaptersQuery.getEntity(id);
+  }
 
   getChapterCountAkita() {
     return this.chaptersQuery.getCount();
@@ -34,7 +35,7 @@ export class ChaptersFacade {
     this.chaptersStore.add(chapter);
   }
 
-  deleteChapterInAkita(chapterid: string) {}
+  deleteChapterInAkita(chapterid: string) { }
 
   updateChapterInAkita(chapterid: string, chapter) {
     return this.chaptersStore.updateChapterById(chapterid, chapter);
@@ -53,8 +54,10 @@ export class ChaptersFacade {
   getChapterDetail(chapterid: string, bookid: string) {
     return this.chaptersGear.getChapterDetail(chapterid, bookid).pipe();
   }
-  createChapter(chapter) {
-    return this.chaptersGear.createChapter(chapter).pipe();
+  createChapter(chapter, isPublishedBook: boolean) {
+    const chapterCount = this.chaptersQuery.getCount();
+    const chapterNew = { ...chapter, chapterNumber: chapterCount + 1 };
+    return this.chaptersGear.createChapter(chapterNew, isPublishedBook).pipe();
   }
   updateChapter(chapter) {
     return this.chaptersGear.updateChapter(chapter).pipe();

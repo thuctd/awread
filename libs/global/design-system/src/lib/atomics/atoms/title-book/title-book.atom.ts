@@ -15,7 +15,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output } from '@angu
 export class TitleBookAtom implements OnInit {
   @Input() titleBook = 'Cô gái chúng ta cùng theo đuổi năm nào!'
   @Input() size: 's' | 'm' | 'l' = 's';
-  @Input() linkBook = '';
+  @Input() bookId = 'bvxz_324345seQ6x';
 
   constructor() { }
 

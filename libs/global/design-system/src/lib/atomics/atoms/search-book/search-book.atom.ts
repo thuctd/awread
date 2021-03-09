@@ -1,18 +1,17 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Output,
-  Input,
-  EventEmitter,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Output, Input, EventEmitter } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'atom-search-book',
   templateUrl: './search-book.atom.html',
-  styleUrls: ['./search-book.atom.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchBookAtom implements OnInit {

@@ -1,19 +1,24 @@
-import { Book } from '@awread/writer/web/feature-auth';
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Input,
-} from '@angular/core';
+import type { Book } from '@awread/writer/web/feature-auth';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 
 @Component({
   selector: 'list-chapter',
   templateUrl: './list-chapter.molec.html',
-  styleUrls: ['./list-chapter.molec.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListChapterMolec implements OnInit {
-  @Input() book: Book;
+  @Input() book = {
+    totalChapterCountPublished: 1,
+    updatedat: '',
+    totalChapterCount: 1,
+  };
   @Input() countTotal = 1000;
   @Input() countPublished = 50;
 

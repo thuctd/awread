@@ -1,20 +1,19 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Input,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 
 @Component({
   selector: 'logo',
   templateUrl: './logo.atom.html',
-  styleUrls: ['./logo.atom.scss'],
+  styles: [`
+    :host {
+        display: block;
+    }
+  `],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LogoAtom implements OnInit {
   @Input() logoWhite = false;
   @Input() isLogged = false;
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

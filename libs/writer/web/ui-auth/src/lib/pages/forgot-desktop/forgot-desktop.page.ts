@@ -4,7 +4,13 @@ import { ForgotPage } from '../forgot/forgot.page';
 @Component({
   selector: 'page-forgot-desktop',
   templateUrl: './forgot-desktop.page.html',
-  styleUrls: ['./forgot-desktop.page.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ForgotDesktopPage extends ForgotPage {}

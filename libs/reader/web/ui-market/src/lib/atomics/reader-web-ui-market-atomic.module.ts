@@ -1,9 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  StorybookSupportModule,
-  GlobalDesignSystemAtomicModule,
-} from '@awread/global/design-system';
+import { GlobalDesignSystemAtomicModule, StorybookSupportModule } from '@awread/global/design-system';
 import { TabCategoryMolec } from './molecs/tab-category/tab-category.molec';
 import { TabBookMolec } from './molecs/tab-book/tab-book.molec';
 import { TabPageMolec } from './molecs/tab-page/tab-page.molec';
@@ -44,10 +41,6 @@ import { DetailBookTemplate } from './templates/detail-book/detail-book.template
 import { SearchFormMolec } from './molecs/search-form/search-form.molec';
 import { DetailBookSidebarOrgan } from './organs/detail-book-sidebar/detail-book-sidebar.organ';
 import { CarouselModule } from 'ngx-owl-carousel-o';
-import {
-  BrowserAnimationsModule,
-  NoopAnimationsModule,
-} from '@angular/platform-browser/animations';
 import { HeadReadBookMolec } from './molecs/head-read-book/head-read-book.molec';
 import { FormCommentBookReadMolec } from './molecs/form-comment-book-read/form-comment-book-read.molec';
 import { CommentBookReadOrgan } from './organs/comment-book-read/comment-book-read.organ';
@@ -55,15 +48,23 @@ import { ContentBookOrgan } from './organs/content-book/content-book.organ';
 import { ReadTemplate } from './templates/read/read.template';
 import { CommentOrgan } from './organs/comment/comment.organ';
 import { CommentItemMolec } from './molecs/comment-item/comment-item.molec';
+import { HomeListBookUpdateMobileOrgan } from './organs/home-list-book-update-mobile/home-list-book-update-mobile.organ';
+import { HomeListBookFeaturedMobileOrgan } from './organs/home-list-book-featured-mobile/home-list-book-featured-mobile.organ';
+import { MatTabsModule } from '@angular/material/tabs';
+import { HomeMobileTemplate } from './templates/home-mobile/home-mobile.template';
+import { HomeListBookReviewMobileOrgan } from './organs/home-list-book-review-mobile/home-list-book-review-mobile.organ';
+import { SliderMobileMolec } from './molecs/slider-mobile/slider-mobile.molec';
+import { TitlePageMenuMolec } from './molecs/title-page-menu/title-page-menu.molec';
+import { MbInfoBookMolec } from './molecs/mb-info-book/mb-info-book.molec';
+import { MbDetailBookOrgan } from './organs/mb-list-detail-book/mb-list-detail-book.organ';
+import { MbListTemplate } from './templates/mb-list/mb-list.template';
 
 @NgModule({
   imports: [
     CommonModule,
     StorybookSupportModule,
     GlobalDesignSystemAtomicModule,
-    CarouselModule,
-    BrowserAnimationsModule,
-    NoopAnimationsModule,
+    CarouselModule
   ],
   exports: [
     CommonModule,
@@ -113,6 +114,16 @@ import { CommentItemMolec } from './molecs/comment-item/comment-item.molec';
     ReadTemplate,
     CommentOrgan,
     CommentItemMolec,
+    HomeListBookUpdateMobileOrgan,
+    HomeListBookFeaturedMobileOrgan,
+    MatTabsModule,
+    HomeMobileTemplate,
+    HomeListBookReviewMobileOrgan,
+    SliderMobileMolec,
+    TitlePageMenuMolec,
+    MbInfoBookMolec,
+    MbDetailBookOrgan,
+    MbListTemplate,
   ],
   declarations: [
     TabCategoryMolec,
@@ -161,6 +172,15 @@ import { CommentItemMolec } from './molecs/comment-item/comment-item.molec';
     ReadTemplate,
     CommentOrgan,
     CommentItemMolec,
+    HomeListBookUpdateMobileOrgan,
+    HomeListBookFeaturedMobileOrgan,
+    HomeMobileTemplate,
+    HomeListBookReviewMobileOrgan,
+    SliderMobileMolec,
+    TitlePageMenuMolec,
+    MbInfoBookMolec,
+    MbDetailBookOrgan,
+    MbListTemplate,
   ],
 })
 export class ReaderWebUiMarketAtomicModule {}

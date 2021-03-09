@@ -1,36 +1,25 @@
-import { map, startWith, switchMap } from 'rxjs/operators';
+import { map, startWith, switchMap, takeUntil } from 'rxjs/operators';
 import { tap } from 'rxjs/operators';
-import {
-  Category,
-  CategoryFacade,
-  ChaptersFacade,
-  GenresFacade,
-  ModalFacade,
-} from '@awread/writer/web/feature-auth';
+import { CategoryFacade, ChaptersFacade, GenresFacade } from '@awread/writer/web/feature-auth';
 import { CurrentUserFacade } from '@awread/writer/web/feature-auth';
 import { BooksFacade } from '@awread/writer/web/feature-auth';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import {
-  Directive,
-  Injectable,
-  OnInit,
-  ChangeDetectorRef,
-} from '@angular/core';
-import { combineLatest, of } from 'rxjs';
+import { Directive, Injectable, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { combineLatest, of, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 @Directive()
-export class DetailPage implements OnInit {
+export class DetailPage implements OnInit, OnDestroy {
   bookForm: FormGroup;
   bookId: string;
   chapterEntity$: any;
   chapterListByBookId$ = this.chaptersFacade.chapterListByBookId$;
   tabsHead = [
-    { name: 'Thông tin của truyện', tabName: 'book' },
-    { name: 'Mục lục', tabName: 'toc' },
+    { name: 'THÔNG TIN TRUYỆN', tabName: 'book' },
+    { name: 'MỤC LỤC', tabName: 'toc' },
   ];
   selectedTab = 'toc';
   selectedBookStatus = 'DRAFT';
@@ -40,6 +29,7 @@ export class DetailPage implements OnInit {
   bookFormValueBefore = ''; // dùng để check xem giá trị trước với giá trị bookform hiện tại có khớp nhau hay ko?
   type: string;
   submitted = false;
+  destroy$ = new Subject();
   constructor(
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
@@ -49,7 +39,6 @@ export class DetailPage implements OnInit {
     private categoryFacade: CategoryFacade,
     private genresFacade: GenresFacade,
     private router: Router,
-    private modalFacade: ModalFacade,
     private cd: ChangeDetectorRef
   ) {}
 
@@ -68,17 +57,10 @@ export class DetailPage implements OnInit {
   }
 
   switchTab(tabName: string) {
-    // if (tabName === 'book') {
-    //   this.selectedTab = 'book';
-    //   return;
-    // }
-    // this.submitted = true;
-    // if (this.bookForm.invalid) {
-    //   return;
-    // }
-    this.selectedTab = tabName;
     if (tabName === 'toc') {
       this.addorUpdateBookToServer();
+    } else {
+      this.selectedTab = 'book';
     }
   }
 
@@ -108,11 +90,7 @@ export class DetailPage implements OnInit {
     ]);
   }
 
-  chapterActionEvent(data: {
-    type: string;
-    chapterid: string;
-    chapterNumber: number;
-  }) {
+  chapterActionEvent(data: { type: string; chapterid: string; chapterNumber: number }) {
     switch (data.type) {
       case 'new-chapter':
         this.createChapter();
@@ -131,28 +109,32 @@ export class DetailPage implements OnInit {
   }
 
   // them hoac cap nhat sach
-  addorUpdateBookToServer(titleToast = '') {
+  addorUpdateBookToServer() {
     this.submitted = true;
+    const { title } = this.bookForm.value;
     if (this.bookForm.invalid) {
       return;
     }
+    if (!title.trim()) {
+      alert('Tiêu đề không được để trống!');
+      return;
+    }
     const book = this.bookSaveDatabase();
-    if (this.type === 'edit') {
+    if (this.bookId) {
       this.updateBook(book);
     } else {
-      this.booksFacade.addBook(book, titleToast).subscribe();
+      this.booksFacade.addBook(book).subscribe(() => {
+        this.selectedTab = 'toc';
+        this.bookFormValueBefore = this.bookForm.value;
+        this.cd.detectChanges();
+      });
     }
   }
 
   private updateBook(book) {
     // const idsGenresAdd = this.genresListSelected; // dung de them genre khi user them genre ko co trong DB
-    if (
-      JSON.stringify(this.bookFormValueBefore) !==
-      JSON.stringify(this.bookForm.value)
-    ) {
-      const idsGenresRemove = this.booksFacade.getGenreIdsByBookIdAkita(
-        this.bookId
-      );
+    if (JSON.stringify(this.bookFormValueBefore) !== JSON.stringify(this.bookForm.value)) {
+      const idsGenresRemove = this.booksFacade.getGenreIdsByBookIdAkita(this.bookId);
       this.booksFacade.editBook(book, idsGenresRemove).subscribe(() => {
         this.selectedTab = 'toc';
         this.cd.detectChanges();
@@ -178,55 +160,55 @@ export class DetailPage implements OnInit {
     return book;
   }
 
-  actionBookEvent(action: string) {
+  cancelCreateBook(action: string) {
     if (action === 'CANCEL') {
       // this.openModalCancelCreateBook();
-      if (this.type === 'edit') {
+      if (this.bookId) {
         this.updateForm(); // update lai form neu ho lo tay xoa may truong roi bam HUY, khi quay lai tab nay se bi rong
         this.selectedTab = 'toc';
       } else {
         this.router.navigate(['list']);
       }
     } else {
-      const titleToast =
-        'Thêm thông tin truyện thành công. Tiếp tục tạo mục lục cho truyện!';
-      this.addorUpdateBookToServer(titleToast);
+      // const titleToast =
+      //   'Thêm thông tin truyện thành công. Tiếp tục tạo mục lục cho truyện!';
+      // this.addorUpdateBookToServer(titleToast);
     }
   }
 
-  private openModalCancelCreateBook() {
-    const dataModal = {
-      name: 'cancel',
-      title: 'Bạn có chắc chắn muốn hủy bỏ ko?',
-      actionCancelText: 'Hủy bỏ',
-      actionConfirmText: 'Đồng ý',
-    };
-    const dialogRef = this.modalFacade.openModal(dataModal);
-    dialogRef.afterClosed().subscribe((isOk) => {
-      console.log('isOk: ', isOk);
-      if (isOk) {
-        this.router.navigate(['/list']);
-      }
-    });
-  }
+  // private openModalCancelCreateBook() {
+  //   const dataModal = {
+  //     name: 'cancel',
+  //     title: 'Bạn có chắc chắn muốn hủy bỏ ko?',
+  //     actionCancelText: 'Hủy bỏ',
+  //     actionConfirmText: 'Đồng ý',
+  //   };
+  //   const dialogRef = this.modalFacade.openModal(dataModal);
+  //   dialogRef.afterClosed().subscribe((isOk) => {
+  //     console.log('isOk: ', isOk);
+  //     if (isOk) {
+  //       this.router.navigate(['/list']);
+  //     }
+  //   });
+  // }
 
-  private openModalConfirmSaveBook() {
-    const dataModal = {
-      title: 'Bạn có muốn lưu thông tin truyện ko?',
-      actionCancelText: 'Hủy bỏ',
-      actionConfirmText: 'Đồng ý',
-    };
-    const dialogRef = this.modalFacade.openModal(dataModal);
-    dialogRef.afterClosed().subscribe((isOk) => {
-      console.log('isOk: ', isOk);
-      if (isOk) {
-        this.selectedTab = 'toc';
-        this.addorUpdateBookToServer();
-      } else {
-        this.selectedTab = 'book';
-      }
-    });
-  }
+  // private openModalConfirmSaveBook() {
+  //   const dataModal = {
+  //     title: 'Bạn có muốn lưu thông tin truyện ko?',
+  //     actionCancelText: 'Hủy bỏ',
+  //     actionConfirmText: 'Đồng ý',
+  //   };
+  //   const dialogRef = this.modalFacade.openModal(dataModal);
+  //   dialogRef.afterClosed().subscribe((isOk) => {
+  //     console.log('isOk: ', isOk);
+  //     if (isOk) {
+  //       this.selectedTab = 'toc';
+  //       this.addorUpdateBookToServer();
+  //     } else {
+  //       this.selectedTab = 'book';
+  //     }
+  //   });
+  // }
 
   selectedStatusEvent(status: string) {
     this.selectedBookStatus = status;
@@ -258,10 +240,12 @@ export class DetailPage implements OnInit {
   private getAllChapters() {
     return this.activatedRoute.paramMap
       .pipe(
+        takeUntil(this.destroy$),
         switchMap((params) => {
           const bookId = params.get('bookId');
           const chapters = this.chaptersFacade.getAllAkita();
-          if (bookId && chapters.length) {
+          if (this.bookId === bookId && bookId && chapters.length) {
+            // lay trong akita
             return this.chaptersFacade.selectAllChapterAkita();
           }
           if (bookId) {
@@ -297,23 +281,26 @@ export class DetailPage implements OnInit {
   }
 
   private updateForm() {
-    if (this.type === 'edit') {
-      this.booksFacade.selectEntityBook(this.bookId).subscribe((book) => {
-        if (book) {
-          this.selectedBookStatus = book.status;
-          this.bookForm.patchValue({
-            title: book.title ?? '',
-            description: book.description ?? '',
-            categoryid: book.categoryid ?? '',
-            genreIds: book.genreIds ?? [],
-            tags: book.tags ?? [],
-            completed: book.completed ?? false,
-            status: book.status ?? 'DRAFT',
-            audience: book.audience ?? 'none',
-          });
-          this.bookFormValueBefore = this.bookForm.value;
-        }
-      });
+    if (this.bookId) {
+      this.booksFacade
+        .selectEntityBook(this.bookId)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe((book) => {
+          if (book) {
+            this.selectedBookStatus = book.status;
+            this.bookForm.patchValue({
+              title: book.title ?? '',
+              description: book.description ?? '',
+              categoryid: book.categoryid ?? '',
+              genreIds: book.genreIds ?? [],
+              tags: book.tags ?? [],
+              completed: book.completed ?? false,
+              status: book.status ?? 'DRAFT',
+              audience: book.audience ?? 'none',
+            });
+            this.bookFormValueBefore = this.bookForm.value;
+          }
+        });
     }
   }
 
@@ -330,5 +317,10 @@ export class DetailPage implements OnInit {
       img: ['https://picsum.photos/200/300'],
       language: [''],
     });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

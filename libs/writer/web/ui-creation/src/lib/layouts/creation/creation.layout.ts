@@ -1,15 +1,16 @@
-import {
-  BooksFacade,
-  CategoryFacade,
-  CurrentUserFacade,
-  GenresFacade,
-} from '@awread/writer/web/feature-auth';
+import { BooksFacade, CategoryFacade, CurrentUserFacade, GenresFacade } from '@awread/writer/web/feature-auth';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'awread-creation',
   templateUrl: './creation.layout.html',
-  styleUrls: ['./creation.layout.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreationLayout implements OnInit {

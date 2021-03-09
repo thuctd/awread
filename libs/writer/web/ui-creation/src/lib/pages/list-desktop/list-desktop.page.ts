@@ -4,7 +4,13 @@ import { ListPage } from '../list/list.page';
 @Component({
   selector: 'page-list-desktop',
   templateUrl: './list-desktop.page.html',
-  styleUrls: ['./list-desktop.page.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListDesktopPage extends ListPage {}

@@ -1,15 +1,16 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Input,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 import { faComments } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'detail-review',
   templateUrl: './detail-review.molec.html',
-  styleUrls: ['./detail-review.molec.scss'],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
   // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DetailReviewMolec implements OnInit {
