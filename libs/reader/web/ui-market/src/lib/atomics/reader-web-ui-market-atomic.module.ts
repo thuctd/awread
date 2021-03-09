@@ -60,8 +60,6 @@ import { MbInfoBookMolec } from './molecs/mb-info-book/mb-info-book.molec';
 import { MbDetailBookOrgan } from './organs/mb-list-detail-book/mb-list-detail-book.organ';
 import { MbListTemplate } from './templates/mb-list/mb-list.template';
 import { DetailBookMobileTemplate } from './templates/detail-book-mobile/detail-book-mobile.template';
-import { DetailBookChapterMobileOrgan } from './organs/detail-book-chapter-mobile/detail-book-chapter-mobile.organ';
-import { DetailBookContentMobileOrgan } from './organs/detail-book-content-mobile/detail-book-content-mobile.organ';
 import { ReadMobileTemplate } from './templates/read-mobile/read-mobile.template';
 import { DetailBookTopMobileOrgan } from './organs/detail-book-top-mobile/detail-book-top-mobile.organ';
 
@@ -126,8 +124,6 @@ import { DetailBookTopMobileOrgan } from './organs/detail-book-top-mobile/detail
     MbDetailBookOrgan,
     MbListTemplate,
     DetailBookMobileTemplate,
-    DetailBookChapterMobileOrgan,
-    DetailBookContentMobileOrgan,
     ReadMobileTemplate,
     DetailBookTopMobileOrgan,
   ],
@@ -188,8 +184,6 @@ import { DetailBookTopMobileOrgan } from './organs/detail-book-top-mobile/detail
     MbDetailBookOrgan,
     MbListTemplate,
     DetailBookMobileTemplate,
-    DetailBookChapterMobileOrgan,
-    DetailBookContentMobileOrgan,
     ReadMobileTemplate,
     DetailBookTopMobileOrgan,
   ],

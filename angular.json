@@ -136,7 +136,7 @@
             ],
             "styles": [
               "apps/writer/web/src/styles.scss",
-              "libs/global/styles/src/tailwind.scss",
+              "libs/global/styles/src/app-tailwind.scss",
               "libs/global/styles/src/index.scss",
               "libs/global/styles/src/projects/writer-web/index.scss"
             ],
@@ -406,7 +406,7 @@
             ],
             "styles": [
               "apps/writer/phone/src/styles.scss",
-              "libs/global/styles/src/tailwind.scss",
+              "libs/global/styles/src/app-tailwind.scss",
               "libs/global/styles/src/index.scss",
               "libs/global/styles/src/projects/writer-phone/writer-phone.scss",
               "libs/global/styles/src/projects/writer-phone/index.scss"
@@ -1235,7 +1235,7 @@
             "styles": [
               "apps/reader/web/src/styles.scss",
               "libs/global/styles/src/index.scss",
-              "libs/global/styles/src/tailwind.scss",
+              "libs/global/styles/src/app-tailwind.scss",
               "libs/global/styles/src/projects/reader-web/index.scss"
             ],
             "scripts": []
@@ -1501,7 +1501,7 @@
             "styles": [
               "apps/reader/phone/src/styles.scss",
               "libs/global/styles/src/index.scss",
-              "libs/global/styles/src/tailwind.scss",
+              "libs/global/styles/src/app-tailwind.scss",
               "libs/global/styles/src/projects/reader-phone/index.scss"
             ],
             "scripts": []

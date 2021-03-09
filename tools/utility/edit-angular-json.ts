@@ -351,7 +351,7 @@ function updateStyle(p, projectName) {
   //   p.architect.build.options.styles.push(globalMaterial);
   // }
 
-  const globalTailwind = `${libRoot}/tailwind.scss`;
+  const globalTailwind = `${libRoot}/app-tailwind.scss`;
   const tailwindFile = styles.find(s => s === globalTailwind);
   if (!tailwindFile) {
     p.architect.build.options.styles.push(globalTailwind);
