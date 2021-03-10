@@ -69,16 +69,18 @@ export class NavbarMenuOrgan implements OnInit {
       href: '/market',
       dropdown: [
         {
-          href: '/',
+          page: '/',
+          type: '',
           title: 'Về chúng tôi',
         },
         {
-          href: '/',
+          page: '/',
+          type: '',
           title: 'Tham gia với chúng tôi',
         },
         {
-          href: '/',
-          title: 'Tin tức',
+          page: '/',
+          type: '',
           tag: 'New',
         },
       ],
