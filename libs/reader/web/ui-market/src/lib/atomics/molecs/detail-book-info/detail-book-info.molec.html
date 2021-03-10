@@ -1,10 +1,14 @@
 <div class="detail-book-info">
-    <dl class="lg:text-sm sm:text-xs leading-tight my-3">
-      <dt class="font-medium inline-block text-gray-800 w-28">Tác giả</dt>
-      <dd class="inline-block ml0 cursor-pointer outline-none text-green-400" [routerLink]="['/author', '123213sad_Xzcsad2']" >{{book.auth}}</dd>
-    </dl>
-    <atom-detail-info-line [title]="'Thể loại'" [value]="book.type"></atom-detail-info-line>
-    <atom-detail-info-line [title]="'Tình trạng'" [value]="book.status"></atom-detail-info-line>
-    <atom-detail-info-line [title]="'Năm phát hành'" [value]="book.publishedAt"></atom-detail-info-line>
-    <atom-detail-info-line [title]="'Quốc gia'" [value]="book.country"></atom-detail-info-line>
+  <dl class="lg:text-sm sm:text-xs leading-tight my-3">
+    <dt class="font-medium inline-block text-gray-800 w-28">Tác giả</dt>
+    <dd class="inline-block ml0 text-green-400">
+      <a [routerLink]="['/author', '123213sad_Xzcsad2']" class="cursor-pointer outline-none">
+        {{book.auth}}
+      </a>
+    </dd>
+  </dl>
+  <atom-detail-info-line [title]="'Thể loại'" [value]="book.type"></atom-detail-info-line>
+  <atom-detail-info-line [title]="'Tình trạng'" [value]="book.status"></atom-detail-info-line>
+  <atom-detail-info-line [title]="'Năm phát hành'" [value]="book.publishedAt"></atom-detail-info-line>
+  <atom-detail-info-line [title]="'Quốc gia'" [value]="book.country"></atom-detail-info-line>
 </div>
