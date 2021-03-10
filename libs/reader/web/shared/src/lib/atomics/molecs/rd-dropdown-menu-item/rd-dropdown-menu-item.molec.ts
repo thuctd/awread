@@ -17,15 +17,18 @@ export class RdDropdownMenuItemMolec implements OnInit {
   @Input() isLast = false;
   @Input() menu = [
     {
-      href: '/',
+      page: 'composed',
+      type: 'lb',
       title: 'Truyện dài',
     },
     {
-      href: '/',
+      page: 'composed',
+      type: 'lb',
       title: 'Truyện ngắn',
     },
     {
-      href: '/',
+      page: 'composed',
+      type: 'lb',
       title: 'Tản văn',
     },
   ];

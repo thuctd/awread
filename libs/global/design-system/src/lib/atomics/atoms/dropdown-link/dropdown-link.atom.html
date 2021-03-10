@@ -1,1 +1,4 @@
-<a href="{{href}}" class="text-xs hover__gr block link dim text-black transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110">{{title}}</a>
+<a [routerLink]="['/{{page}}', {type: '{{type}}'}]" [type] class="text-xs hover__gr block link dim text-black transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110">{{title}}</a>
+
+<!-- Anh Hiệp giúp em truyền 2 @Input này với nha em thử nhiều kiểu rồi mà vẫn không được ạ -->
+<!-- [routerLink]="['/{{page}}', {type: '{{type}}'}]" -->

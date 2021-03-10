@@ -19,15 +19,18 @@ export class RdDropdownMenuMolec implements OnInit {
       title: 'Truyện tự sáng tác',
       menu: [
         {
-          href: '/',
+          page: 'composed',
+          type: 'lb',
           title: 'Truyện dài',
         },
         {
-          href: '/',
+          page: 'composed',
+          type: 'lb',
           title: 'Truyện ngắn',
         },
         {
-          href: '/',
+          page: 'composed',
+          type: 'lb',
           title: 'Tản văn',
         },
       ],
@@ -36,15 +39,18 @@ export class RdDropdownMenuMolec implements OnInit {
       title: 'Truyện sưu tầm',
       menu: [
         {
-          href: '/',
+          page: 'collected',
+          type: 'lb',
           title: 'Truyện dài',
         },
         {
-          href: '/',
+          page: 'collected',
+          type: 'lb',
           title: 'Truyện ngắn',
         },
         {
-          href: '/',
+          page: 'collected',
+          type: 'lb',
           title: 'Tản văn',
         },
       ],
