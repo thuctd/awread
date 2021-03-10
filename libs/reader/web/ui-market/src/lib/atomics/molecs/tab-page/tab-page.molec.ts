@@ -22,14 +22,20 @@ export class TabPageMolec implements OnInit {
   @Input() tabs = [
     {
       name: 'Truyện dài',
+      tab: 'lb',
+      type: 'long',
       isActive: true,
     },
     {
       name: 'Truyện ngắn',
+      tab: 'sb',
+      type: 'short',
       isActive: false,
     },
     {
       name: 'Tiểu thuyết',
+      tab: 'novel',
+      type: 'novel',
       isActive: false,
     },
   ];
@@ -37,19 +43,25 @@ export class TabPageMolec implements OnInit {
   @Input() selectedTab: string;
   @Output() toggleTab = new EventEmitter();
 
-  currentTab = { name: null, isActive: false };
+  currentTab = {
+    name: 'Thông tin truyện',
+    tab: 'lb',
+    type: 'create',
+    isActive: true,
+  };
   constructor() {}
 
   ngOnInit(): void {
     this.currentTab = this.tabs.find((tab) => tab.isActive);
   }
 
-  toggleTabs(currentTab: TabHead) {
+  toggleTabs(currentTab) {
     this.currentTab = currentTab;
     this.tabs.forEach((tab) => {
       tab.isActive = false;
       if (tab.name === currentTab.name) {
         tab.isActive = true;
+        console.log(tab);
       }
     });
   }
