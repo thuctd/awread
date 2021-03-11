@@ -1,7 +1,7 @@
-<section class="w-full max-w-screen-xl mx-auto mt-4 py-6">
+<!-- <section class="w-full max-w-screen-xl mx-auto mt-4 py-6">
   <div class="flex">
     <atom-title [title]='titlePage' class="mr-2 sm:mr-4"></atom-title>
-    <tab-category></tab-category>
+    <tab-category [tabs]='categories'></tab-category>
   </div>
   <div class="w-full bg-purple-50 leanding-normal tracking-wide pb-6 mt-4 md:mt-8">
     <div class="container w-full overflow-hidden relative">
@@ -9,7 +9,18 @@
             <div class="w-1/5 h-full absolute z-50 left-0" style="background: linear-gradient(to right, #F5F3FF 0%, rgba(255, 255, 255, 0) 100%);"></div>
             <div class="w-1/5 h-full absolute z-50 right-0" style="background: linear-gradient(to left, #F5F3FF 0%, rgba(255, 255, 255, 0) 100%);"></div>
         </div>
-        <tab-book></tab-book>
+        <tab-book [tabBooks]='filteredItems'></tab-book>
     </div>
   </div>
-</section>
+</section> -->
+
+
+<div class="items-filter">
+  <div *ngFor="let category of categories">
+    <button type="button" (click)="filterItemsByCategory(category)">{{ category.title }}</button>
+  </div>
+</div>
+
+<div class="list-items">
+  <tab-book *ngFor="let item of filteredItems" [item]="item"></tab-book>
+</div>

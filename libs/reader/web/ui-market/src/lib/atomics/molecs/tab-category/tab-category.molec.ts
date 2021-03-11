@@ -27,20 +27,9 @@ export class TabCategoryMolec implements OnInit {
 
   @Input() tabs = [
     {
+      categoryId: 1,
       name: 'Tình yêu',
       isActive: true,
-    },
-    {
-      name: 'Học trò',
-      isActive: false,
-    },
-    {
-      name: 'Kinh dị',
-      isActive: false,
-    },
-    {
-      name: 'Tiểu thuyết',
-      isActive: false,
     },
   ];
 

@@ -10,7 +10,7 @@ export class ComposedPage implements OnInit, OnDestroy {
   tabsHead = [
     { name: 'Truyện dài', tabName: 'longbook' },
     { name: 'Truyện ngắn', tabName: 'shortbook' },
-    { name: 'Tiểu thuyết', tabName: 'novel' },
+    { name: 'Tản văn', tabName: 'novel' },
   ];
 
   bookId: string;

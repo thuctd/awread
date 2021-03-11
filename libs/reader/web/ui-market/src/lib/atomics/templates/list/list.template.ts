@@ -18,7 +18,7 @@ export class ListTemplate implements OnInit {
   @Input() tabsHead = [
     { name: 'Truyện dài', tabName: 'longbook', isActive: true },
     { name: 'Truyện ngắn', tabName: 'shortbook', isActive: false },
-    { name: 'Tiểu thuyết', tabName: 'novel', isActive: false },
+    { name: 'Tản văn', tabName: 'novel', isActive: false },
   ];
   namePage: String;
 

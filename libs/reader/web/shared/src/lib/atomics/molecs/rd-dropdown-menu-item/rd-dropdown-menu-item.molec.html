@@ -1,11 +1,11 @@
-<li class="block text-sm" [ngClass]="!data.href && !isLast ? 'border-b border-grey-300' : ''">
-    <ng-container *ngIf="!data.href else nomarlMenu">
+<li class="block text-sm" [ngClass]="!data.page && !isLast ? 'border-b border-grey-300' : ''">
+    <ng-container *ngIf="!data.page else nomarlMenu">
         <div class="flex-col flex px-2 py-2 border-b border-grey-300">
             {{data.title}}
         </div>
         <atom-dropdown-link class="px-4 py-2" *ngFor="let item of menu" [title]="item.title" [page]="item.page" [type]="item.type"></atom-dropdown-link>
     </ng-container>
     <ng-template #nomarlMenu>
-        <atom-dropdown-link class="p-2" [ngClass]="!isLast ? 'border-b border-grey-300' : ''" [title]="data.title" [href]="data.href"></atom-dropdown-link>
+        <atom-link class="p-2" [ngClass]="!isLast ? 'border-b border-grey-300' : ''" [title]="data.title" [href]="data.page"></atom-link>
     </ng-template>
 </li>

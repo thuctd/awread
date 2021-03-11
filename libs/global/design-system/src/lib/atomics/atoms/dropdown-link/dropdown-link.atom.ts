@@ -16,7 +16,7 @@ export class DropdownLinkAtom implements OnInit {
   @Input() title = 'title';
   @Input() href = '';
   @Input() page = 'composed';
-  @Input() type = 'lb';
+  @Input() type = '';
 
   constructor() {}
 

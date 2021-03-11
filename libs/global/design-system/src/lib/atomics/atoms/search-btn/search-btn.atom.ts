@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Output, Input, EventEmitter } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Output, Input, EventEmitter, HostListener } from '@angular/core';
 import { faSearch, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -24,5 +24,9 @@ export class SearchBtnAtom implements OnInit {
 
   toggleDisplay() {
     this.isDisplay = !this.isDisplay;
+  }
+
+  @HostListener('document:keydown.escape', ['$event']) onKeydownHandler(event: KeyboardEvent) {
+    this.isDisplay = false;
   }
 }

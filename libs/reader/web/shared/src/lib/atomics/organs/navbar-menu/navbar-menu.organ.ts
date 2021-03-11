@@ -28,12 +28,12 @@ export class NavbarMenuOrgan implements OnInit {
             },
             {
               page: 'composed',
-              type: 'lb',
+              type: 'sb',
               title: 'Truyện ngắn',
             },
             {
               page: 'composed',
-              type: 'lb',
+              type: 'novel',
               title: 'Tản văn',
             },
           ],
@@ -48,12 +48,12 @@ export class NavbarMenuOrgan implements OnInit {
             },
             {
               page: 'collected',
-              type: 'lb',
+              type: 'sb',
               title: 'Truyện ngắn',
             },
             {
               page: 'collected',
-              type: 'lb',
+              type: 'novel',
               title: 'Tản văn',
             },
           ],
@@ -66,22 +66,18 @@ export class NavbarMenuOrgan implements OnInit {
     },
     {
       title: 'Cộng đồng',
-      href: '/market',
       dropdown: [
         {
-          page: '/',
-          type: '',
+          page: 'introduction',
           title: 'Về chúng tôi',
         },
         {
-          page: '/',
-          type: '',
+          page: 'community',
           title: 'Tham gia với chúng tôi',
         },
         {
-          page: '/',
-          type: '',
-          tag: 'New',
+          page: 'news',
+          title: 'Tin tức',
         },
       ],
     },
