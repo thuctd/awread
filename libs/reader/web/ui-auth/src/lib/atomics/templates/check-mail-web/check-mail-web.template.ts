@@ -13,8 +13,6 @@ import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/materia
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CheckMailWebTemplate implements OnInit {
-  @Input() srcImg = 'https://hochu.ua/images/05600a6dc19a37ef746fb267902398bf.jpg';
-
   constructor(@Optional() public dialogRef: MatDialogRef<CheckMailWebTemplate>) {}
 
   ngOnInit(): void {}

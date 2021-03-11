@@ -1,5 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy,Input, Output, EventEmitter } from '@angular/core';
-import {faArrowsAlt} from '@fortawesome/free-solid-svg-icons';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import { faArrowsAlt } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'organ-popup-cover-image-align',
@@ -9,17 +9,15 @@ import {faArrowsAlt} from '@fortawesome/free-solid-svg-icons';
       :host {
         display: block;
       }
-    `
+    `,
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PopupCoverImageAlignOrgan implements OnInit {
-  @Input() sourceTarget = 'https://hochu.ua/images/05600a6dc19a37ef746fb267902398bf.jpg';
+  @Input() sourceTarget = '/global-assets/images/bigImg.webp';
   @Output() submitEvent = new EventEmitter();
   icon = faArrowsAlt;
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

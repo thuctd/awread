@@ -14,8 +14,6 @@ import type { User } from '@awread/writer/web/feature-auth';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RightTopnavMolec implements OnInit {
-  // avatarUrl = 'http://tachyons.io/img/logo.jpg';
-  // name = 'Hà Thanh Tùng';
   @Input() user = [];
   @Output() searchEvent = new EventEmitter();
   @Output() signoutEvent = new EventEmitter();

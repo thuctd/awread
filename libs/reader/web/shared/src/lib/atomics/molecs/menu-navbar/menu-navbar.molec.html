@@ -1,0 +1,39 @@
+<div (click)="displayMenu()">
+  <fa-icon class="text-white text-2xl cursor-pointer ml-1.5" [icon]="bars"></fa-icon>
+</div>
+<section *ngIf="isMenu" class="absolute top-0 right-0 modal">
+  <div class="w-4/6 h-screen absolute right-0 bg-white br__menu">
+    <div (click)="displayMenu()" class="absolute top-1 right-2 cursor-pointer text-2xl text-gray-400">
+      <fa-icon [icon]="times"></fa-icon>
+    </div>
+    <div class="mx-8">
+      <div class="flex justify-center border-b py-3 relative">
+        <logo class="pt-4" *ngIf="isLogin"></logo>
+        <div *ngIf="!isLogin" class="flex flex-col items-center pt-4">
+          <atom-circle-image class="w-16 mb-1"></atom-circle-image>
+          <div class="text-gray-700">{{name}}</div>
+          <div class="absolute bottom-2 right-1">
+            <div>
+              <span class="text-green-400 font-normal ml-2">Vip: </span><span class="text-gray-700">{{lvVip}}</span>
+            </div>
+            <div>
+              <span class="text-green-400 font-normal">Coin: </span><span class="text-gray-700">{{coin}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="border-b py-3 text-green-400 font-medium text-base pr-4 cursor-pointer">Trang chủ</div>
+      <molec-dropdown-menu-mb></molec-dropdown-menu-mb>
+      <div class="border-b py-3 text-green-400 font-medium text-base pr-4 cursor-pointer">Đăng truyện</div>
+      <div class="border-b py-3 text-green-400 font-medium text-base pr-4 cursor-pointer">Nạp Coin</div>
+      <molec-dropdown-menu-mb [title]="'Cộng đồng'" [items]="items"></molec-dropdown-menu-mb>
+      <div *ngIf="!isLogin" class="border-b py-3 text-green-400 font-medium text-base pr-4 cursor-pointer">Cài đặt</div>
+      <div class="flex flex-col items-end pt-8">
+        <atom-rd-base-btn-green (click)="login()" class="mb-1" *ngIf="isLogin" [title]="btns.login"></atom-rd-base-btn-green>
+        <atom-rd-base-btn-green *ngIf="isLogin" [class2]="'px-5'" [title]="btns.register"></atom-rd-base-btn-green>
+        <atom-rd-base-btn-green (click)="login()" *ngIf="!isLogin" [title]="btns.logOut"></atom-rd-base-btn-green>
+      </div>
+    </div>
+  </div>
+</section>
+
