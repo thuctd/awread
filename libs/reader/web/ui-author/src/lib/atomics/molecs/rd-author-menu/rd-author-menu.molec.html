@@ -1,8 +1,8 @@
-<div class="relative transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-100">
+<button closeOnOutSide (clickedOutside)="onClick()" class="relative transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-100 focus:outline-none">
   <fa-icon (click)="displayMenu()" class="text-xl text-gray-600 cursor-pointer ml-1" [icon]="faIcon"></fa-icon>
   <div *ngIf="menu" class="author_menu border shadow w-52 py-0.5 rounded-xl absolute top-10 -left-36 bg-white">
     <div class="border-b py-1.5 text-gray-800 text-sm cursor-pointer text-center hover:text-green-400">Chặn người dùng</div>
     <div class="py-1 text-gray-800 text-sm cursor-pointer text-center hover:text-green-400">Báo cáo người dùng</div>
   </div>
-</div>
+</button>
 

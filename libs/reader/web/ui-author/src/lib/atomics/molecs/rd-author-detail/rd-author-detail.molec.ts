@@ -16,6 +16,8 @@ export class RdAuthorDetailMolec implements OnInit {
   @Input() numberProduct = '5';
   @Input() numberFollow = '10';
   @Input() excerpt = `Chào chúng cậu tớ là Cẩm Thương ...`;
+  @Input() name = 'Cẩm Thương';
+  @Input() fullName = 'Hà Cẩm Thương';
 
   constructor() {}
 

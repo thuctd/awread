@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 
 @Component({
   selector: 'molec-rd-author-list-btns',
@@ -8,15 +8,14 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
       :host {
         display: block;
       }
-    `
+    `,
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RdAuthorListBtnsMolec implements OnInit {
+  @Input() class = 'px-5 py-2 rounded-lg';
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

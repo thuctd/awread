@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 
 @Component({
   selector: 'template-rd-author-popup-unfollow',
@@ -8,15 +8,14 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
       :host {
         display: block;
       }
-    `
+    `,
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RdAuthorPopupUnfollowTemplate implements OnInit {
+  @Input() name = 'Cam Thuong';
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

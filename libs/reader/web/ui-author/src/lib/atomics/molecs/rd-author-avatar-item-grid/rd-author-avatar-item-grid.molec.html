@@ -1,8 +1,8 @@
 <div class="flex flex-col justify-center items-center">
-  <img class="w-3/5 md:w-4/5 lg:w-1/2 rounded-full mb-4" [src]="srcAvatar" alt="avatar">
+  <img class="w-3/5 rounded-full mb-4" [src]="srcAvatar" alt="avatar">
   <div class="ml-14">
-    <atom-rd-author-info></atom-rd-author-info>
-    <atom-rd-author-info [nameIcon]="facebook.icon" [link]="facebook.text" [alt]="facebook.alt"></atom-rd-author-info>
-    <atom-rd-author-info [nameIcon]="globe.icon" [link]="globe.text" [alt]="globe.alt"></atom-rd-author-info>
+    <rd-author-social-link-item [nameIcon]="instagram.icon" [link]="instagram.text" [alt]="instagram.alt"></rd-author-social-link-item>
+    <rd-author-social-link-item [nameIcon]="facebook.icon" [link]="facebook.text" [alt]="facebook.alt"></rd-author-social-link-item>
+    <rd-author-social-link-item [nameIcon]="globe.icon" [link]="globe.text" [alt]="globe.alt"></rd-author-social-link-item>
   </div>
 </div>

@@ -1,5 +1,5 @@
 import { faEllipsisH } from '@fortawesome/free-solid-svg-icons';
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'molec-rd-author-menu',
@@ -31,6 +31,10 @@ export class RdAuthorMenuMolec implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+
+  onClick() {
+    this.menu = false;
+  }
 
   displayMenu() {
     this.menu = !this.menu;

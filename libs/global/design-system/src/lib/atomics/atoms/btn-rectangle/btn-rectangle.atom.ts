@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'atom-btn-rectangle',
@@ -14,6 +14,8 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 })
 export class BtnRectangleAtom implements OnInit {
   @Input() text = 'Nhắn tin';
+  @Input() class = 'px-5 py-2 rounded-lg';
+  @Output() clickBtn = new EventEmitter();
 
   constructor() {}
 

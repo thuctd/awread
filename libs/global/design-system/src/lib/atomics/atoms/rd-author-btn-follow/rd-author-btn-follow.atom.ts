@@ -14,10 +14,13 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output } from '@angu
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RdAuthorBtnFollowAtom implements OnInit {
+  @Input() text = 'Theo dõi';
   @Input() faPlus = faPlus;
   @Input() faUser = faUser;
   @Input() faCheck = faCheck;
   @Input() follow = true;
+  @Input() classBtn1 = 'w-28 py-2 rounded-lg';
+  @Input() classBtn2 = 'w-28 py-1.5 rounded-lg';
 
   constructor() {}
 

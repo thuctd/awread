@@ -13,7 +13,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RdAuthorContentPopupBlockOrgan implements OnInit {
-  @Input() title = 'Chặn Cam Thuong';
+  @Input() title = 'Chặn ';
   @Input() content = 'Tài khoản này hiện không thể theo dõi bạn, gửi bạn tin nhắn, đăng trên hồ sơ của bạn hay bình luận trên truyện của bạn';
 
   @Input() text1 = 'Hủy';

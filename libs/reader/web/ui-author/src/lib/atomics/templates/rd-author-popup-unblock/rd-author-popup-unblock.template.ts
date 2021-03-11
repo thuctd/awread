@@ -14,7 +14,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 })
 export class RdAuthorPopupUnblockTemplate implements OnInit {
   @Input() content = {
-    title: 'Bỏ Chặn Cam Thuong',
+    title: 'Bỏ Chặn ',
     content: 'Tài khoản này hiện có thể theo dõi bạn, gửi bạn tin nhắn, đăng trên hồ sơ của bạn hay bình luận trên truyện của bạn',
     btn: {
       text: 'Bỏ chặn',

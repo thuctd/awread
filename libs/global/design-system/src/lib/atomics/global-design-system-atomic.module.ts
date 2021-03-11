@@ -90,12 +90,13 @@ import { PopupCoverHeaderAtom } from './atoms/popup-cover-header/popup-cover-hea
 import { ProcessBarAtom } from './atoms/process-bar/process-bar.atom';
 import { BtnInputFileAtom } from './atoms/btn-input-file/btn-input-file.atom';
 import { RdBaseBtnGreenAtom } from './atoms/rd-base-btn-green/rd-base-btn-green.atom';
-import { RdAuthorInfoAtom } from './atoms/rd-author-info/rd-author-info.atom';
+import { RdAuthorSocialLinkItemAtom } from './atoms/rd-author-social-link-item/rd-author-social-link-item.atom';
 import { RdAuthorNameAtom } from './atoms/rd-author-name/rd-author-name.atom';
 import { RdAuthorBtnFollowAtom } from './atoms/rd-author-btn-follow/rd-author-btn-follow.atom';
 import { BtnRectangleAtom } from './atoms/btn-rectangle/btn-rectangle.atom';
 import { RdAuthorPopupHeaderAtom } from './atoms/rd-author-popup-header/rd-author-popup-header.atom';
 import { RdAuthorSubmitBtnAtom } from './atoms/rd-author-submit-btn/rd-author-submit-btn.atom';
+import { RdAuthorPopupContentBlockAtom } from './atoms/rd-author-popup-content-block/rd-author-popup-content-block.atom';
 
 @NgModule({
   imports: [
@@ -196,12 +197,13 @@ import { RdAuthorSubmitBtnAtom } from './atoms/rd-author-submit-btn/rd-author-su
     ProcessBarAtom,
     BtnInputFileAtom,
     RdBaseBtnGreenAtom,
-    RdAuthorInfoAtom,
+    RdAuthorSocialLinkItemAtom,
     RdAuthorNameAtom,
     RdAuthorBtnFollowAtom,
     BtnRectangleAtom,
     RdAuthorPopupHeaderAtom,
     RdAuthorSubmitBtnAtom,
+    RdAuthorPopupContentBlockAtom,
   ],
   declarations: [
     TabBtnAtom,
@@ -287,12 +289,13 @@ import { RdAuthorSubmitBtnAtom } from './atoms/rd-author-submit-btn/rd-author-su
     ProcessBarAtom,
     BtnInputFileAtom,
     RdBaseBtnGreenAtom,
-    RdAuthorInfoAtom,
+    RdAuthorSocialLinkItemAtom,
     RdAuthorNameAtom,
     RdAuthorBtnFollowAtom,
     BtnRectangleAtom,
     RdAuthorPopupHeaderAtom,
     RdAuthorSubmitBtnAtom,
+    RdAuthorPopupContentBlockAtom,
   ],
 })
 export class GlobalDesignSystemAtomicModule {}
