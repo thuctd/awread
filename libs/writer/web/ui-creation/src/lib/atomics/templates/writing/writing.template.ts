@@ -15,7 +15,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, EventEmitter, Output
 })
 export class WritingTemplate implements OnInit {
   @Input() chapterForm: FormGroup = this.fb.group({
-    bookImg: ['https://via.placeholder.com/520x740.png', [Validators.required]],
+    bookImg: ['/global-assets/images/image.webp', [Validators.required]],
     dirty: ['', Validators.required],
     valueChanges: ['', Validators.required],
     bookTitle: ['', Validators.required],
