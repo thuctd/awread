@@ -13,7 +13,7 @@ import type { User } from '@awread/writer/web/feature-auth';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class WrtRightTopnavMolec implements OnInit {
+export class WrtTopnavRightMolec implements OnInit {
   @Input() user = [];
   @Output() searchEvent = new EventEmitter();
   @Output() signoutEvent = new EventEmitter();
