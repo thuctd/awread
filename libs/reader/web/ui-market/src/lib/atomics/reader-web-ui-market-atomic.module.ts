@@ -59,15 +59,12 @@ import { TitlePageMenuMolec } from './molecs/title-page-menu/title-page-menu.mol
 import { MbInfoBookMolec } from './molecs/mb-info-book/mb-info-book.molec';
 import { MbDetailBookOrgan } from './organs/mb-list-detail-book/mb-list-detail-book.organ';
 import { MbListTemplate } from './templates/mb-list/mb-list.template';
+import { DetailBookMobileTemplate } from './templates/detail-book-mobile/detail-book-mobile.template';
+import { ReadMobileTemplate } from './templates/read-mobile/read-mobile.template';
+import { DetailBookTopMobileOrgan } from './organs/detail-book-top-mobile/detail-book-top-mobile.organ';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    StorybookSupportModule,
-    GlobalDesignSystemAtomicModule,
-    CarouselModule,
-    BrowserAnimationsModule,
-  ],
+  imports: [CommonModule, StorybookSupportModule, GlobalDesignSystemAtomicModule, CarouselModule, BrowserAnimationsModule],
   exports: [
     CommonModule,
     TabCategoryMolec,
@@ -126,6 +123,9 @@ import { MbListTemplate } from './templates/mb-list/mb-list.template';
     MbInfoBookMolec,
     MbDetailBookOrgan,
     MbListTemplate,
+    DetailBookMobileTemplate,
+    ReadMobileTemplate,
+    DetailBookTopMobileOrgan,
   ],
   declarations: [
     TabCategoryMolec,
@@ -183,6 +183,9 @@ import { MbListTemplate } from './templates/mb-list/mb-list.template';
     MbInfoBookMolec,
     MbDetailBookOrgan,
     MbListTemplate,
+    DetailBookMobileTemplate,
+    ReadMobileTemplate,
+    DetailBookTopMobileOrgan,
   ],
 })
 export class ReaderWebUiMarketAtomicModule {}

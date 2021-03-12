@@ -13,9 +13,7 @@ import type { User } from '@awread/writer/web/feature-auth';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class WrtTopnavRightMolec implements OnInit {
-  // avatarUrl = 'http://tachyons.io/img/logo.jpg';
-  // name = 'Hà Thanh Tùng';
+export class WrtRightTopnavMolec implements OnInit {
   @Input() user = [];
   @Output() searchEvent = new EventEmitter();
   @Output() signoutEvent = new EventEmitter();

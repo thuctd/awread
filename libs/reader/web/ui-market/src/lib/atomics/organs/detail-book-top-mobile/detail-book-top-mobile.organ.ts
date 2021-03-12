@@ -1,0 +1,27 @@
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+
+@Component({
+  selector: 'organ-detail-book-top-mobile',
+  templateUrl: './detail-book-top-mobile.organ.html',
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+      :host .border-12 {
+        border-width: 12px;
+      }
+      :host .width-53 {
+        width: 53%;
+      }
+    `,
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class DetailBookTopMobileOrgan implements OnInit {
+  @Input() src = '/global-assets/images/0004.webp';
+
+  constructor() {}
+
+  ngOnInit(): void {}
+}

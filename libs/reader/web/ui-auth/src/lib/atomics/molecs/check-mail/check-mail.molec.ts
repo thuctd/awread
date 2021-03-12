@@ -15,7 +15,7 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 })
 export class CheckMailMolec implements OnInit {
   @Output() BtnClicked = new EventEmitter();
-  @Input() link = '/global-assets/images/mailbox.png';
+  @Input() link = '/global-assets/images/mailbox.webp';
   @Input() faIcon = faArrowLeft;
   @Input() backhome = '/home';
   @Input() textLink = {

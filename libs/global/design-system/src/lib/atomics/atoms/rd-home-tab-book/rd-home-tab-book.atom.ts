@@ -16,7 +16,7 @@ export class RdHomeTabBookAtom implements OnInit {
   @Output() tabClicked = new EventEmitter();
   @Output() onBtnClicked = new EventEmitter();
   @Input() titleBook = 'Cô gái chúng ta cùng theo đuổi';
-  @Input() srcImg = 'https://via.placeholder.com/260x370.png';
+  @Input() srcImg = '/global-assets/images/image.webp';
   @Input() active = false;
 
   constructor() {}

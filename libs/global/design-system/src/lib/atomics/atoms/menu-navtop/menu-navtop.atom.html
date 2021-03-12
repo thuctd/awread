@@ -1,12 +1,12 @@
 <section>
   <a (click)="toggleMenu($event)" closeOnOutSide (clickedOutside)="isMenuOpen = false" class="cursor-pointer ml-56">
-    <img [src]="curentUser.photourl || 'http://tachyons.io/img/logo.jpg'" class="rounded-full h-8 w-8 inline-block" alt="avatar" />
+    <img [src]="curentUser.photourl || '/global-assets/images/avatar-mrmrs.webp'" class="rounded-full h-8 w-8 inline-block" alt="avatar" />
   </a>
   <div *ngIf="isMenuOpen" class="flex flex-col z-50 right55 top-20 absolute">
     <div id="frist_div" class="w-80 h-12 bg-green-500 rounded-b-none  rounded-2xl shadow"></div>
     <div class="w-80 h-12 bg-white border-gray-300 border-b shadow">
       <div class="w-full">
-        <img [src]="curentUser.photourl || 'http://tachyons.io/img/logo.jpg'" class="bg-green-500 p-1 left-5 top-5 rounded-full h-16 w-16 inline-block absolute" alt="IMG_User" />
+        <img [src]="curentUser.photourl || '/global-assets/images/avatar-mrmrs.webp'" class="bg-green-500 p-1 left-5 top-5 rounded-full h-16 w-16 inline-block absolute" alt="IMG_User" />
         <div class="text-sm pl-20 ml-3 mt-1 text-gray-700">{{ curentUser.fullname }}</div>
         <div class="text-xs pl-20 ml-3 text-gray-400">{{ curentUser.email }}</div>
       </div>

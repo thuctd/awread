@@ -15,7 +15,7 @@ import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/materia
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginWebTemplate implements OnInit {
-  @Input() link = '/global-assets/images/newlogo.png';
+  @Input() link = '/global-assets/images/newlogo.webp';
   @Input() authForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', Validators.required],

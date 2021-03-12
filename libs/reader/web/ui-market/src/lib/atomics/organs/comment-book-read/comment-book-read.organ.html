@@ -1,11 +1,11 @@
 <section>
-  <div class="border-b border-gray-400 pb-3 text-gray-800 text-2xl font-semibold">Bình luận</div>
+  <div class="border-b border-gray-400 pb-3 text-gray-800 text-lg sm:text-2xl font-semibold">Bình luận</div>
   <molec-form-comment-book-read class="pt-6"></molec-form-comment-book-read>
   <div class="reviews-list">
     <div class="text-lg font-medium my-5">{{comments.length}} Bình luận</div>
     <molec-comment-item *ngFor="let item of comments" [comment]="item" class="mb-4"></molec-comment-item>
   </div>
-  <div class="flex justify-end pt-4">
+  <div class="flex justify-center sm:justify-end pt-4">
     <pagination></pagination>
   </div>
 </section>

@@ -11,12 +11,9 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
 export class MenuNavtopAtom implements OnInit {
   @Input() faIcon = { faSignOutAlt, faInfoCircle };
   @Input() isMenuOpen = false;
-  // @Input() avatarUrl = 'http://tachyons.io/img/logo.jpg';
-  // @Input() name = 'Hà Thanh Tùng';
-  // @Input() email = 'thanhtung@gmail.com';
 
   @Input() curentUser = {
-    photourl: 'http://tachyons.io/img/logo.jpg',
+    photourl: '/global-assets/images/avatar-mrmrs.webp',
     fullname: '',
     email: '',
   };
