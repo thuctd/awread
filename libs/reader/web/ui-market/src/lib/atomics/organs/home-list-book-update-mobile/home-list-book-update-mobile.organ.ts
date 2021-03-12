@@ -10,9 +10,9 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
 export class HomeListBookUpdateMobileOrgan implements OnInit {
   @Input() counter = Array;
   @Input() titlePage = 'Truyện mới cập nhật';
-  prevIcon = `<img src="/global-assets/images/arrow_left.png" alt="arrow_left">`;
-  nextIcon = `<img src="/global-assets/images/arrow_right.png" alt="arrow_right">`;
-  @Input() srcImg = 'https://via.placeholder.com/260x370.png';
+  prevIcon = `<img src="/global-assets/images/arrow_left.webp" alt="arrow_left">`;
+  nextIcon = `<img src="/global-assets/images/arrow_right.webp" alt="arrow_right">`;
+  @Input() srcImg = '/global-assets/images/image.webp';
   @Input() altImg = 'Placeholder';
 
   constructor() {}

@@ -9,17 +9,15 @@ import { FormControl } from '@angular/forms';
       :host {
         display: block;
       }
-    `
+    `,
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DetailBookReviewFormOrgan implements OnInit {
   @Output() submitEvent = new EventEmitter();
   @Input() inputControl: FormControl = new FormControl('');
-  @Input() photoUrl= 'http://mrmrs.github.io/photos/p/2.jpg';
-  constructor() { }
+  @Input() photoUrl = '/global-assets/images/2.webp';
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

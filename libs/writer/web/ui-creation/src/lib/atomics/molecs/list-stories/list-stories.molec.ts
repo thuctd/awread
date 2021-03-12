@@ -21,7 +21,7 @@ export class ListStoriesMolec implements OnInit {
     categoryname: '',
   };
   @Input() faIcon = faStar;
-  @Input() srcImg = 'https://via.placeholder.com/260x370.png';
+  @Input() srcImg = '/global-assets/images/image.webp';
   @Input() countComment = '40';
   @Input() countView = '696969k';
   @Input() faIcon2 = faComments;

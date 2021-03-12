@@ -1,3 +1,4 @@
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
@@ -18,6 +19,8 @@ export class SearchNavbarAtom implements OnInit {
   @Input() control = new FormControl();
   @Input() id = 'search-navbar';
   @Output() searchEvent = new EventEmitter();
+
+  @Input() faIcon = faSearch;
 
   constructor() {}
 
