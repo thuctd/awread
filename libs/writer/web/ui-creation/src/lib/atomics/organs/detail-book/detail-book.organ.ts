@@ -12,16 +12,14 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
       .h-132 {
         height: 33rem;
       }
-    `
+    `,
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DetailBookOrgan implements OnInit {
-  @Input() srcImg = 'https://tailwindcss.com/img/card-left.jpg';
+  @Input() srcImg = '/global-assets/images/card-left.webp';
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

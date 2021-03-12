@@ -2,7 +2,7 @@
   <molec-head-read-book></molec-head-read-book>
   <p class="text-sm text-gray-600 leading-8 py-8 px-1 text-justify">{{content}}</p>
   <div class="flex">
-    <atom-btn-switch-chapter [faIcon]="faIcon" [title]="'Trước'" [case]="false" (btnClick)="btnClick.emit('switchChapter')" class="float-right flex flex-row-reverse"></atom-btn-switch-chapter>
-    <atom-btn-switch-chapter (btnClick)="btnClick.emit('switchChapter')" class="mx-auto" [title]="'Đọc chương tiếp'" [class]="'pl-8'"></atom-btn-switch-chapter>
+    <atom-btn-switch-chapter (btnClick)="btnClick.emit('switchChapter')" class="mx-auto" [title]="'Đọc chương tiếp'" [class]="'sm:pl-8 pl-3'"></atom-btn-switch-chapter>
   </div>
+  <atom-btn-switch-chapter [faIcon]="faIcon" [title]="'Trước'" [case]="false" (btnClick)="btnClick.emit('switchChapter')" class="flex flex-row-reverse sm:-mt-9 -mt-7"></atom-btn-switch-chapter>
 </section>

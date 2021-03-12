@@ -6,7 +6,7 @@
   </button>
   <div *ngIf="isMenuOpen" class="absolute right-0 top-4 mt-2 w-36 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
     <div class="text-left">
-      <div *ngFor="let link of links" class="">
+      <div *ngFor="let link of links">
         <a [routerLink]="['/{{link.href}}']" routerLinkActive="router-link-active"  class="block cursor-pointer px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 hover:text-gray-900 border-b border-gray-300">
           {{link.name | titlecase}}</a>
       </div>

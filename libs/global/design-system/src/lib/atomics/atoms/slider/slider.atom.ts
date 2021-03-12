@@ -21,18 +21,18 @@ export class SliderAtom implements OnInit {
   };
   @Input() imageObject = [
     {
-      image: 'https://via.placeholder.com/1200x500.png',
-      thumbImage: 'https://via.placeholder.com/1200x500.png',
+      image: '/global-assets/images/image.webp',
+      thumbImage: '/global-assets/images/image.webp',
       alt: 'alt of image',
     },
     {
-      image: 'https://via.placeholder.com/1200x500.png',
-      thumbImage: 'https://via.placeholder.com/1200x500.png',
+      image: '/global-assets/images/image.webp',
+      thumbImage: '/global-assets/images/image.webp',
       alt: 'Image alt',
     },
     {
-      image: 'https://via.placeholder.com/1200x500.png',
-      thumbImage: 'https://via.placeholder.com/1200x500.png',
+      image: '/global-assets/images/image.webp',
+      thumbImage: '/global-assets/images/image.webp',
       alt: 'Image alt',
     },
   ];

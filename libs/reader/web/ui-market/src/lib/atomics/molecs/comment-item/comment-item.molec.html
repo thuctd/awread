@@ -1,33 +1,33 @@
 <div class="w-full text-gray-800">
   <div class="flex leading-normal pl-1 pr-4">
-      <atom-circle-image [src]="'http://tachyons.io/img/avatar-mrmrs.jpg'"></atom-circle-image>
+      <atom-circle-image [src]="'/global-assets/images/avatar-mrmrs.webp'"></atom-circle-image>
       <div class="pl-3 flex-auto">
           <div>
             <div class="text-sm font-medium mb-1 float-left">{{comment.userName}}</div>
             <a class="text-sm font-medium mb-1 float-right cursor-pointer" (click)="clickBtn.emit()">Trả lời</a>
             <div class="clear-both"></div>
           </div>
-          <dd class="ml-0 lg:text-sm sm:text-xs mb-1">{{comment.content}}</dd>
-          <dl class="mb-1">
-              <dd class="flex items-center mb-1">
-                  <span class="ml-0 text-xs font-light text-gray-400">{{comment.createAt}}</span>
-              </dd>
-          </dl>
+          <div class="lg:text-sm text-sm mb-1">{{comment.content}}</div>
+          <div class="mb-1">
+              <div class="flex items-center mb-1">
+                  <span class="text-xs font-light text-gray-400">{{comment.createAt}}</span>
+              </div>
+            </div>
           <div>
             <a class="text-sm font-medium mb-1 cursor-pointer" (click)="toggleMenu($event)" (clickedOutside)="isMenuOpen = false">{{comment.insideComment.length}} Trả lời</a>
             <div *ngIf="isMenuOpen">
               <div class="flex py-1" *ngFor="let item of comment.insideComment">
-                <atom-circle-image [src]="'http://tachyons.io/img/avatar-mrmrs.jpg'"></atom-circle-image>
+                <atom-circle-image [src]="'/global-assets/images/avatar-mrmrs.webp'"></atom-circle-image>
                 <div class="pl-3 pt-2 flex-auto">
                   <div>
                     <div class="text-sm font-medium mb-1">{{comment.userName}}</div>
                   </div>
-                  <dd class="ml-0 lg:text-sm sm:text-xs mb-1">{{comment.content}}</dd>
-                  <dl class="mb-1">
-                      <dd class="flex items-center mb-1">
-                          <span class="ml-0 text-xs font-light text-gray-400">{{comment.createAt}}</span>
-                      </dd>
-                  </dl>
+                  <div class="lg:text-sm text-sm mb-1 font-light">{{comment.content}}</div>
+                  <div class="mb-1">
+                      <div class="flex items-center mb-1">
+                          <span class="text-xs font-light text-gray-400">{{comment.createAt}}</span>
+                      </div>
+                  </div>
                   <div>
                 </div>
               </div>
