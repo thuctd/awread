@@ -16,7 +16,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DetailBookOrgan implements OnInit {
+export class WrtDetailPopupBookOrgan implements OnInit {
   @Input() srcImg = '/global-assets/images/card-left.webp';
 
   constructor() {}
