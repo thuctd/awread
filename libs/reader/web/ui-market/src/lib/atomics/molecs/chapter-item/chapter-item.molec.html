@@ -1,7 +1,7 @@
-<div class="text-base sm:text-base pt-4 my-1 sm:pb-4" [ngClass]="!isLastItem ? 'border-b border-gray-300': ''">
+<div class="text-sm sm:text-base pt-4 my-1 pb-4" [ngClass]="!isLastItem ? 'border-b border-gray-300': ''">
     <div class="justify-between flex ">
         <div class="flex w-4/5">
-            <p class="w-1/5 font-medium text-sm">{{chapter.title}}</p>
+            <p class="w-2/6 sm:w-1/5 font-medium text-sm">{{chapter.title}}</p>
             <p class="font-medium text-sm">{{chapter.value}}</p>
         </div>
         <atom-chapter-price [value]="chapter.price"></atom-chapter-price>

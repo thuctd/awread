@@ -34,7 +34,7 @@ export class WrtHeadMolec implements OnInit {
   @Input() chapterForm: FormGroup = this.fb.group({
     bookTitle: ['test', Validators.required],
     chapterNumber: ['', Validators.required],
-    bookImg: ['https://via.placeholder.com/520x740.png', Validators.required],
+    bookImg: ['/global-assets/images/image.webp', Validators.required],
     status: ['', Validators.required],
   });
 

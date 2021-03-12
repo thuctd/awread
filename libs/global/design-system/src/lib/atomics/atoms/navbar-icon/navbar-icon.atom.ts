@@ -31,8 +31,8 @@ export class NavbarIconAtom implements OnInit {
   @Input() active = 'active';
   @Input() linkName = 'dashboard';
   @Input() linkTo = 'dashboard';
-  @Input() iconUrl = '/global-assets/images/Dashboard.png';
-  @Input() iconUrl2 = '/global-assets/images/Group 1.png';
+  @Input() iconUrl = '/global-assets/images/Dashboard.webp';
+  @Input() iconUrl2 = '/global-assets/images/Group 1.webp';
 
   constructor() {}
 
