@@ -1,9 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GlobalDesignSystemAtomicModule, StorybookSupportModule } from '@awread/global/design-system';
-import { TabCategoryMolec } from './molecs/tab-category/tab-category.molec';
-import { TabBookMolec } from './molecs/tab-book/tab-book.molec';
-import { TabPageMolec } from './molecs/tab-page/tab-page.molec';
 import { ListInfoLongBookMolec } from './molecs/list-info-long-book/list-info-long-book.molec';
 import { ListInfoProseMolec } from './molecs/list-info-prose/list-info-prose.molec';
 import { ListInfoShortBookMolec } from './molecs/list-info-short-book/list-info-short-book.molec';
@@ -60,17 +57,9 @@ import { MbDetailBookOrgan } from './organs/mb-list-detail-book/mb-list-detail-b
 import { MbListTemplate } from './templates/mb-list/mb-list.template';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    StorybookSupportModule,
-    GlobalDesignSystemAtomicModule,
-    CarouselModule
-  ],
+  imports: [CommonModule, StorybookSupportModule, GlobalDesignSystemAtomicModule, CarouselModule],
   exports: [
     CommonModule,
-    TabCategoryMolec,
-    TabBookMolec,
-    TabPageMolec,
     ListInfoLongBookMolec,
     ListInfoProseMolec,
     ListInfoShortBookMolec,
@@ -126,9 +115,6 @@ import { MbListTemplate } from './templates/mb-list/mb-list.template';
     MbListTemplate,
   ],
   declarations: [
-    TabCategoryMolec,
-    TabBookMolec,
-    TabPageMolec,
     ListInfoLongBookMolec,
     ListInfoProseMolec,
     ListInfoShortBookMolec,
