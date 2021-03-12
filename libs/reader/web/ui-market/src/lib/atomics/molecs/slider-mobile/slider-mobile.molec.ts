@@ -18,15 +18,15 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SliderMobileMolec implements OnInit {
-  @Input() srcImg = '/global-assets/images/halo.jpg';
+  @Input() srcImg = '/global-assets/images/image.webp';
   @Input() altImg = 'Placeholder';
   @Input() slider = [
     {
-      link: '/global-assets/images/halo.jpg',
+      link: '/global-assets/images/image.webp',
       alt: 'Placeholder',
     },
     {
-      link: 'https://via.placeholder.com/260x370.png',
+      link: '/global-assets/images/image.webp',
       alt: 'Placeholder',
     },
   ];

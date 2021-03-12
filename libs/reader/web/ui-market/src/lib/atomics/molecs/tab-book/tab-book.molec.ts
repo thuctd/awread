@@ -7,15 +7,15 @@ import type { OwlOptions } from 'ngx-owl-carousel-o';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TabBookMolec implements OnInit {
-  prevIcon = `<img src="/global-assets/images/arrow_left.png" alt="arrow_left">`;
-  nextIcon = `<img src="/global-assets/images/arrow_right.png" alt="arrow_right">`;
   @Input() item;
   @Input() bookId = 'zxcxzc456213_sssxx';
+  prevIcon = `<img src="/global-assets/images/arrow_left.webp" alt="arrow_left">`;
+  nextIcon = `<img src="/global-assets/images/arrow_right.webp" alt="arrow_right">`;
   @Input() tabBooks = [
     {
       id: 1,
       title: 'Cô gái chúng ta cùng theo đuổi năm nào',
-      srcImg: 'https://tmthan.com/wp-content/uploads/2015/10/sach-co-gai-nam-ay-chung-ta-cung-theo-duoi.jpg',
+      srcImg: '/global-assets/images/sach-co-gai-nam-ay-chung-ta-cung-theo-duoi.webp',
       isActive: true,
       category: 1,
     },

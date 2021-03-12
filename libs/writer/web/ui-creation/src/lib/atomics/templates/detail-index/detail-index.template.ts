@@ -34,14 +34,14 @@ export class DetailIndexTemplate implements OnInit {
     { name: 'MỤC LỤC', tabName: 'toc' },
   ];
   @Input() bookForm: FormGroup = this.fb.group({
-    img: ['https://via.placeholder.com/260x370.png'],
+    img: ['/global-assets/images/image.webp'],
     title: ['', Validators.required],
     description: ['', Validators.required],
     completed: ['', Validators.required],
     genreIds: ['', Validators.required],
     audience: [null, Validators.required],
     categoryid: [null, Validators.required],
-    srcImg: ['https://via.placeholder.com/260x370.png'],
+    srcImg: ['/global-assets/images/image.webp'],
   });
   @Input() selectedTab = 'book';
   @Output() selectedStatusEvent = new EventEmitter();
