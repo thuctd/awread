@@ -150,6 +150,7 @@ export class HomeTagsOrgan implements OnInit {
   };
 
   filteredItems: Item[] = [...this.items];
+  loading = false;
   constructor() {}
 
   ngOnInit(): void {
@@ -158,16 +159,19 @@ export class HomeTagsOrgan implements OnInit {
 
   //Lấy danh sách theo thể loại
   filterItemsByCategory(category: Category) {
+    this.loading = true;
     setTimeout(() => {
       this.filteredItems = this.items.filter((item: Item) => {
+        this.loading = false;
         return item.categories.includes(category.id);
       });
-    }, 100);
+    }, 1000);
   }
 
-  //Lấy danh sách book của thể loại đầu tiên để hiện thị khi loại
+  // Lấy danh sách book của thể loại đầu tiên để hiện thị khi loại
   private loadFirstByCategory() {
     this.filteredItems = this.items.filter((item) => {
+      this.loading = false;
       return item.categories.includes(this.categories[0].id);
     });
   }
