@@ -15,7 +15,7 @@ export class CollectedPage implements OnInit, OnDestroy {
   bookId: string;
   type: string;
 
-  selectedTab = 'toc';
+  selectedTab = 'longbook';
   constructor(private activatedRoute: ActivatedRoute) {}
   ngOnDestroy(): void {}
 
@@ -39,7 +39,7 @@ export class CollectedPage implements OnInit, OnDestroy {
       this.type = params.get('type');
       if (params.get('type') === 'novel') {
         this.selectedTab = 'novel';
-      } else if (params.get('type') === 'sb') {
+      } else if (params.get('type') === 'shortbook') {
         this.selectedTab = 'shortbook';
       } else {
         this.selectedTab = 'longbook';

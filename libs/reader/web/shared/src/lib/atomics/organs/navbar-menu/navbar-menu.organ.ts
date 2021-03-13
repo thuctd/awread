@@ -21,12 +21,12 @@ export class NavbarMenuOrgan implements OnInit {
         menu: [
           {
             page: 'composed',
-            type: 'lb',
+            type: 'longbook',
             title: 'Truyện dài',
           },
           {
             page: 'composed',
-            type: 'sb',
+            type: 'shortbook',
             title: 'Truyện ngắn',
           },
           {
@@ -41,12 +41,12 @@ export class NavbarMenuOrgan implements OnInit {
         menu: [
           {
             page: 'collected',
-            type: 'lb',
+            type: 'longbook',
             title: 'Truyện dài',
           },
           {
             page: 'collected',
-            type: 'sb',
+            type: 'shortbook',
             title: 'Truyện ngắn',
           },
           {
