@@ -88,6 +88,9 @@ import { BtnBackToTopAtom } from './atoms/btn-back-to-top/btn-back-to-top.atom';
 import { PopupCoverHeaderAtom } from './atoms/popup-cover-header/popup-cover-header.atom';
 import { ProcessBarAtom } from './atoms/process-bar/process-bar.atom';
 import { BtnInputFileAtom } from './atoms/btn-input-file/btn-input-file.atom';
+import { LinkAtom } from './atoms/link/link.atom';
+import { DetailInfoLineLinkAtom } from './atoms/detail-info-line-link/detail-info-line-link.atom';
+import { NavItemAtom } from './atoms/nav-item/nav-item.atom';
 
 @NgModule({
   imports: [CommonModule, StorybookSupportModule, MatDialogModule, QuillModule.forRoot(), DefaultCoverModule, CloseOnOutsideModule, NgImageSliderModule],
@@ -178,6 +181,9 @@ import { BtnInputFileAtom } from './atoms/btn-input-file/btn-input-file.atom';
     PopupCoverHeaderAtom,
     ProcessBarAtom,
     BtnInputFileAtom,
+    LinkAtom,
+    DetailInfoLineLinkAtom,
+    NavItemAtom,
   ],
   declarations: [
     TabBtnAtom,
@@ -262,6 +268,9 @@ import { BtnInputFileAtom } from './atoms/btn-input-file/btn-input-file.atom';
     PopupCoverHeaderAtom,
     ProcessBarAtom,
     BtnInputFileAtom,
+    LinkAtom,
+    DetailInfoLineLinkAtom,
+    NavItemAtom,
   ],
 })
 export class GlobalDesignSystemAtomicModule {}
