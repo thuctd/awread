@@ -1,8 +1,8 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 
 @Component({
-  selector: 'atom-nav-link',
-  templateUrl: './nav-link.atom.html',
+  selector: 'atom-detail-info-line-link',
+  templateUrl: './detail-info-line-link.atom.html',
   styles: [
     `
       :host {
@@ -12,11 +12,11 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NavLinkAtom implements OnInit {
-  @Input() title = 'Trang chủ';
-  @Input() href = '/home';
-  @Input() color = 'text-white';
-  @Input() isRouter: false | true = true;
+export class DetailInfoLineLinkAtom implements OnInit {
+  @Input() bookId = '';
+  @Input() title = 'Tác giả';
+  @Input() value = 'Cẩm thương';
+
   constructor() {}
 
   ngOnInit(): void {}

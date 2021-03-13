@@ -2,7 +2,7 @@
     <fa-icon [icon]="icons.faSearch"></fa-icon>
 </a>
 <div *ngIf="isDisplay" class="bg-white fixed inset-0 z-50 justify-center flex items-center shadow-md h-32 py-3">
-    <div (keyup.enter)="eventSearch.emit()" class="search-a w-full relative pt-5 max-w-screen-md xl:max-w-screen-lg mx-auto">
+    <div (keyup.enter)="eventSearch.emit()" (keyup.enter)="toggleDisplay()" class="search-a w-full relative pt-5 max-w-screen-md xl:max-w-screen-lg mx-auto">
         <input-form class="border-grey-300" [faIcon]="icons.faSearch" [placeholder]="'Tìm kiếm tên truyện, tác giả, thể loại truyện'"></input-form>
         <a (click)="toggleDisplay()" class="close-btn cursor-pointer flex items-center flex-no-wrap absolute inset-y-0 right-3">
             <fa-icon [icon]="icons.faTimes" class="text-gray-600 text-base"></fa-icon>
