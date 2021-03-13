@@ -16,19 +16,19 @@ export class GroupIconNavleftMolec implements OnInit {
   lefNavData = [
     // {
     //   name: 'dashboard',
-    //   iconUrl: '/global-assets/images/Dashboard.png',
+    //   iconUrl: '/global-assets/images/Dashboard.webp',
     //   linkTo: '/dashboard',
     // },
     {
       name: 'user',
-      iconUrl: '/global-assets/images/user.png',
-      iconUrl2: '/global-assets/images/Group 2.png',
+      iconUrl: '/global-assets/images/user.webp',
+      iconUrl2: '/global-assets/images/Group 2.webp',
       linkTo: '/profile',
     },
     {
       name: 'books',
-      iconUrl: '/global-assets/images/Group 3.png',
-      iconUrl2: '/global-assets/images/books.png',
+      iconUrl: '/global-assets/images/Group 3.webp',
+      iconUrl2: '/global-assets/images/books.webp',
       linkTo: '/list',
     },
   ];

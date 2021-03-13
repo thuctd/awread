@@ -16,7 +16,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ImageProfileOrgan implements OnInit {
-  @Input() imgSrc = 'https://hochu.ua/images/05600a6dc19a37ef746fb267902398bf.jpg';
+  @Input() imgSrc = '/global-assets/images/bigImg.webp';
   @Output() eventChangeImg = new EventEmitter();
   constructor() {}
 
