@@ -28,17 +28,17 @@ export class HomeTagsOrgan implements OnInit {
   @Input() categories: Category[] = [
     {
       id: 1,
-      title: 'Truyện dài',
+      title: 'Lãng mạn',
       isActive: true,
     },
     {
       id: 2,
-      title: 'Truyện ngắn',
+      title: 'Hài hước',
       isActive: false,
     },
     {
       id: 3,
-      title: 'Tản văn',
+      title: 'Hành động',
       isActive: false,
     },
   ];
@@ -48,13 +48,13 @@ export class HomeTagsOrgan implements OnInit {
       id: 1,
       title: 'Cô gái theo đuổi năm nào',
       imageUrl: 'https://via.placeholder.com/260x370.png',
-      categories: [1],
+      categories: [1, 3],
     },
     {
       id: 2,
       title: 'Cô gái theo đuổi năm nào',
       imageUrl: 'https://via.placeholder.com/260x370.png',
-      categories: [2],
+      categories: [2, 3],
     },
     {
       id: 3,
@@ -66,19 +66,19 @@ export class HomeTagsOrgan implements OnInit {
       id: 4,
       title: 'Em là nhà',
       imageUrl: 'https://via.placeholder.com/260x370.png',
-      categories: [1],
+      categories: [1, 3],
     },
     {
       id: 5,
       title: 'Nên đên vẫn có em!',
       imageUrl: 'https://via.placeholder.com/260x370.png',
-      categories: [1],
+      categories: [1, 3],
     },
     {
       id: 6,
       title: 'Bang bang bang',
       imageUrl: 'https://via.placeholder.com/260x370.png',
-      categories: [2],
+      categories: [1, 2],
     },
     {
       id: 7,
@@ -96,7 +96,7 @@ export class HomeTagsOrgan implements OnInit {
       id: 9,
       title: 'Bang bang bang',
       imageUrl: 'https://via.placeholder.com/260x370.png',
-      categories: [2],
+      categories: [1, 2],
     },
     {
       id: 10,
@@ -109,6 +109,31 @@ export class HomeTagsOrgan implements OnInit {
       title: 'Cô gái chúng ta cùng theo đuổi',
       imageUrl: 'https://via.placeholder.com/260x370.png',
       categories: [2],
+    },
+    ,
+    {
+      id: 8,
+      title: 'Cô gái chúng ta cùng theo đuổi',
+      imageUrl: 'https://via.placeholder.com/260x370.png',
+      categories: [2, 3],
+    },
+    {
+      id: 9,
+      title: 'Bang bang bang',
+      imageUrl: 'https://via.placeholder.com/260x370.png',
+      categories: [2],
+    },
+    {
+      id: 10,
+      title: 'Ở nơi ấy',
+      imageUrl: 'https://via.placeholder.com/260x370.png',
+      categories: [1, 2, 3],
+    },
+    {
+      id: 11,
+      title: 'Cô gái chúng ta cùng theo đuổi',
+      imageUrl: 'https://via.placeholder.com/260x370.png',
+      categories: [3],
     },
   ];
 
