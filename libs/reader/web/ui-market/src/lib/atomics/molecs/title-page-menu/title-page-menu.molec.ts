@@ -14,22 +14,23 @@ import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TitlePageMenuMolec implements OnInit {
-  @Input() titlePage = 'Truyện tự sáng tác';
+  @Input() titlePage = 'Title';
   @Input() bookId: string;
   @Input() faIcon = faAngleDown;
+  @Input() isMenu: true | false = false;
   @Input() links = [
     {
       name: 'Truyện dài',
-      href: 'book-list',
+      href: 'long-story'
     },
     {
       name: 'Truyện ngắn',
-      href: 'book-short'
+      href: 'short-story'
     },
     {
       name: 'Tiểu thuyết',
-      link: 'prose'
-    },
+      href: 'novel'
+    }
   ];
   @Output() bookActionEvent = new EventEmitter();
   isMenuOpen = false;

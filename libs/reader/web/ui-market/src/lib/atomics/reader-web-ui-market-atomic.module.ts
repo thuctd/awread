@@ -41,7 +41,6 @@ import { DetailBookTemplate } from './templates/detail-book/detail-book.template
 import { SearchFormMolec } from './molecs/search-form/search-form.molec';
 import { DetailBookSidebarOrgan } from './organs/detail-book-sidebar/detail-book-sidebar.organ';
 import { CarouselModule } from 'ngx-owl-carousel-o';
-import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { HeadReadBookMolec } from './molecs/head-read-book/head-read-book.molec';
 import { FormCommentBookReadMolec } from './molecs/form-comment-book-read/form-comment-book-read.molec';
 import { CommentBookReadOrgan } from './organs/comment-book-read/comment-book-read.organ';
@@ -64,7 +63,7 @@ import { ReadMobileTemplate } from './templates/read-mobile/read-mobile.template
 import { DetailBookTopMobileOrgan } from './organs/detail-book-top-mobile/detail-book-top-mobile.organ';
 
 @NgModule({
-  imports: [CommonModule, StorybookSupportModule, GlobalDesignSystemAtomicModule, CarouselModule, BrowserAnimationsModule],
+  imports: [CommonModule, StorybookSupportModule, GlobalDesignSystemAtomicModule, CarouselModule],
   exports: [
     CommonModule,
     TabCategoryMolec,

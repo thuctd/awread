@@ -16,6 +16,8 @@ export class BaseBtnAtom implements OnInit {
   @Output() submitEvent = new EventEmitter();
   @Input() chapter = 'Chương 1';
   @Input() isSize = true;
+  @Input() bookId = '2zxcqwe213_azre'
+  @Input() chapterId = '21345xzcasd32_2sa'
 
   constructor() {}
 
