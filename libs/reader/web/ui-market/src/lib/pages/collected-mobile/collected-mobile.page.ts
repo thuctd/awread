@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 import { CollectedPage } from '@awread/reader/web/feature-market';
 
 @Component({
@@ -9,8 +9,23 @@ import { CollectedPage } from '@awread/reader/web/feature-market';
       :host {
         display: block;
       }
-    `
+    `,
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CollectedMobilePage extends CollectedPage {}
+export class CollectedMobilePage extends CollectedPage {
+  @Input() links = [
+    {
+      name: 'Truyện dài',
+      href: 'long-story',
+    },
+    {
+      name: 'Truyện ngắn',
+      href: 'short-story',
+    },
+    {
+      name: 'Tản văn',
+      href: 'novel',
+    },
+  ];
+}
