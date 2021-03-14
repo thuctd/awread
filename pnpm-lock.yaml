@@ -105,7 +105,7 @@ devDependencies:
   tailwindcss: 2.0.3_caf414ac65a978d0d57907a0ec9fb41e
   ts-jest: 26.5.3_jest@26.6.3+typescript@4.1.5
   ts-node: 9.1.1_typescript@4.1.5
-  typescript: 4.2.3
+  typescript: 4.1.5
   webpack: 4.46.0
   webpack-filter-warnings-plugin: 1.2.1_webpack@4.46.0
 lockfileVersion: 5.2
@@ -208,7 +208,7 @@ packages:
       terser-webpack-plugin: 4.2.3_webpack@4.44.2
       text-table: 0.2.0
       tree-kill: 1.2.2
-      typescript: 4.2.3
+      typescript: 4.1.5
       webpack: 4.44.2
       webpack-dev-middleware: 3.7.2_webpack@4.44.2
       webpack-dev-server: 3.11.2_webpack@4.44.2
@@ -379,7 +379,7 @@ packages:
       aria-query: 4.2.2
       axobject-query: 2.2.0
       eslint: 7.22.0
-      typescript: 4.2.3
+      typescript: 4.1.5
     dev: true
     peerDependencies:
       '@angular-eslint/template-parser': '*'
@@ -391,7 +391,7 @@ packages:
     dependencies:
       '@typescript-eslint/experimental-utils': 4.3.0_eslint@7.22.0+typescript@4.1.5
       eslint: 7.22.0
-      typescript: 4.2.3
+      typescript: 4.1.5
     dev: true
     peerDependencies:
       eslint: '*'
@@ -406,7 +406,7 @@ packages:
       '@angular/compiler': 11.2.5
       eslint: 7.22.0
       eslint-scope: 5.1.1
-      typescript: 4.2.3
+      typescript: 4.1.5
     dev: true
     peerDependencies:
       '@angular/compiler': '*'
@@ -497,7 +497,7 @@ packages:
       source-map: 0.6.1
       sourcemap-codec: 1.4.8
       tslib: 2.1.0
-      typescript: 4.2.3
+      typescript: 4.1.5
       yargs: 16.2.0
     dev: true
     engines:
@@ -4502,7 +4502,7 @@ packages:
       fs-extra: 9.1.0
       jsonc-parser: 3.0.0
       pluralize: 8.0.0
-      typescript: 4.2.3
+      typescript: 4.1.5
     dev: true
     peerDependencies:
       typescript: ^3.4.5 || ^4.0.0
@@ -4594,7 +4594,7 @@ packages:
       '@angular-devkit/core': 11.2.4
       '@angular/compiler-cli': 11.2.5_f9e3d0c3124ef31bb2daee53f603608b
       enhanced-resolve: 5.7.0
-      typescript: 4.2.3
+      typescript: 4.1.5
       webpack: 4.44.2
       webpack-sources: 2.2.0
     dev: true
@@ -5246,7 +5246,7 @@ packages:
       strip-json-comments: 3.1.1
       ts-loader: 6.2.2_typescript@4.1.5
       tsconfig-paths-webpack-plugin: 3.4.1
-      typescript: 4.2.3
+      typescript: 4.1.5
       webpack: 4.46.0
       zone.js: 0.11.4
     dev: true
@@ -6136,7 +6136,7 @@ packages:
       regexpp: 3.1.0
       semver: 7.3.4
       tsutils: 3.21.0_typescript@4.1.5
-      typescript: 4.2.3
+      typescript: 4.1.5
     dev: true
     engines:
       node: ^10.12.0 || >=12.0.0
@@ -6190,7 +6190,7 @@ packages:
       '@typescript-eslint/typescript-estree': 4.17.0_typescript@4.1.5
       debug: 4.3.1
       eslint: 7.22.0
-      typescript: 4.2.3
+      typescript: 4.1.5
     dev: true
     engines:
       node: ^10.12.0 || >=12.0.0
@@ -6241,7 +6241,7 @@ packages:
       is-glob: 4.0.1
       semver: 7.3.4
       tsutils: 3.21.0_typescript@4.1.5
-      typescript: 4.2.3
+      typescript: 4.1.5
     dev: true
     engines:
       node: ^10.12.0 || >=12.0.0
@@ -6262,7 +6262,7 @@ packages:
       lodash: 4.17.21
       semver: 7.3.4
       tsutils: 3.21.0_typescript@4.1.5
-      typescript: 4.2.3
+      typescript: 4.1.5
     dev: true
     engines:
       node: ^10.12.0 || >=12.0.0
@@ -20528,7 +20528,7 @@ packages:
       make-error: 1.3.6
       mkdirp: 1.0.4
       semver: 7.3.4
-      typescript: 4.2.3
+      typescript: 4.1.5
       yargs-parser: 20.2.7
     dev: true
     engines:
@@ -20546,7 +20546,7 @@ packages:
       loader-utils: 1.4.0
       micromatch: 3.1.10
       semver: 5.7.1
-      typescript: 4.2.3
+      typescript: 4.1.5
     dev: true
     engines:
       node: '>=6.11.5'
@@ -20561,7 +20561,7 @@ packages:
       loader-utils: 1.4.0
       micromatch: 4.0.2
       semver: 6.3.0
-      typescript: 4.2.3
+      typescript: 4.1.5
     dev: true
     engines:
       node: '>=8.6'
@@ -20584,7 +20584,7 @@ packages:
       diff: 4.0.2
       make-error: 1.3.6
       source-map-support: 0.5.19
-      typescript: 4.2.3
+      typescript: 4.1.5
       yn: 3.1.1
     dev: true
     engines:
@@ -20596,7 +20596,7 @@ packages:
       integrity: sha512-hPlt7ZACERQGf03M253ytLY3dHbGNGrAq9qIHWUY9XHYl1z7wYngSr3OQ5xmui8o2AaxsONxIzjafLUiWBo1Fg==
   /ts-pnp/1.2.0_typescript@4.1.5:
     dependencies:
-      typescript: 4.2.3
+      typescript: 4.1.5
     dev: true
     engines:
       node: '>=6'
@@ -20645,7 +20645,7 @@ packages:
   /tsutils/3.21.0_typescript@4.1.5:
     dependencies:
       tslib: 1.14.1
-      typescript: 4.2.3
+      typescript: 4.1.5
     dev: true
     engines:
       node: '>= 6'
@@ -20763,7 +20763,7 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-6OSu9PTIzmn9TCDiovULTnET6BgXtDYL4Gg4szY+cGsc3JP1dQL8qvE8kShTRx1NIw4Q9IBHlwODjkjWEtMUyA==
-  /typescript/4.2.3:
+  /typescript/4.1.5:
     dev: true
     engines:
       node: '>=4.2.0'
