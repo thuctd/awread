@@ -1,7 +1,9 @@
-import { Injectable } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ChangeDetectorRef, Injectable } from '@angular/core';
+import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
 import { Directive, OnInit, OnDestroy } from '@angular/core';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
+@UntilDestroy()
 @Injectable({
   providedIn: 'root',
 })
@@ -17,12 +19,16 @@ export class ComposedPage implements OnInit, OnDestroy {
   type: string;
 
   selectedTab = 'longbook';
-  constructor(private activatedRoute: ActivatedRoute) {}
-  ngOnDestroy(): void {}
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private cd: ChangeDetectorRef
+  ) { }
+  ngOnDestroy(): void { }
 
   ngOnInit(): void {
     this.checkActiveTab();
   }
+
 
   switchTab(tabName: string) {
     if (tabName === 'novel') {
@@ -35,16 +41,14 @@ export class ComposedPage implements OnInit, OnDestroy {
   }
 
   private checkActiveTab() {
-    return this.activatedRoute.paramMap.subscribe((params) => {
-      this.bookId = params.get('bookId');
-      this.type = params.get('type');
-      if (params.get('type') === 'novel') {
-        this.selectedTab = 'novel';
-      } else if (params.get('type') === 'shortbook') {
-        this.selectedTab = 'shortbook';
-      } else {
-        this.selectedTab = 'longbook';
-      }
-    });
+    return this.activatedRoute.paramMap
+      .pipe(untilDestroyed(this))
+      .subscribe((params) => {
+        console.log('params', params);
+        this.bookId = params.get('bookId');
+        this.type = params.get('type');
+        this.switchTab(this.type);
+        this.cd.detectChanges();
+      });
   }
 }

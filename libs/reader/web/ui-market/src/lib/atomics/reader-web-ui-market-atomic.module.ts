@@ -178,4 +178,4 @@ import { DetailBookTopMobileOrgan } from './organs/detail-book-top-mobile/detail
     DetailBookTopMobileOrgan,
   ],
 })
-export class ReaderWebUiMarketAtomicModule {}
+export class ReaderWebUiMarketAtomicModule { }

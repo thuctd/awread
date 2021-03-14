@@ -12,10 +12,7 @@ declare const window: Window & { haveMobile: boolean };
 const routes: Routes = [
   {
     path: '',
-    component:
-      window.innerWidth <= 768 && window?.haveMobile
-        ? ShellMobileLayout
-        : ShellDesktopLayout,
+    component: window.innerWidth <= 768 && window?.haveMobile ? ShellMobileLayout : ShellDesktopLayout,
     children: [
       {
         path: 'not-found',
@@ -29,7 +26,12 @@ const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes, {
+      scrollPositionRestoration: 'enabled',
+      scrollOffset: [0, 0],
+      anchorScrolling: 'enabled',
+      onSameUrlNavigation: 'reload',
+    }),
     GlobalCoreModule,
     WriterWebSharedModule,
     WriterWebUiAuthModule,
@@ -38,5 +40,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule, GlobalCoreModule],
 })
-export class WriterWebFeatureShellModule {
-}
+export class WriterWebFeatureShellModule {}

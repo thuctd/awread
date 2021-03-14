@@ -307,4 +307,4 @@ import { NavItemAtom } from './atoms/nav-item/nav-item.atom';
     NavItemAtom,
   ],
 })
-export class GlobalDesignSystemAtomicModule {}
+export class GlobalDesignSystemAtomicModule { }

@@ -1,5 +1,13 @@
 name: 'storybook: reader-web'
 on:
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level'
+        required: true
+        default: 'warning'
+      tags:
+        description: 'Test scenario tags'
   push:
     branches:
       - story-reader-web
@@ -19,14 +27,21 @@ jobs:
     timeout-minutes: 60
     env:
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL  }}
-    if: github.event_name == 'push'
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
     steps:
-      - name: Cloning repo
+      - name: using action checkout
         uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-
-      - name: Push to dokku
+      - name: Set Git config
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "Github Actions"
+      - name: get latest code from develop
+        run: |
+          git fetch --unshallow
+          git pull
+          git merge --no-ff origin/develop -m "Auto-merge develop to get latest code"
+          git push
+      - name: Cloning repo
         uses: dokku/github-action@master
         with:
           # specify `--force` as a flag for git pushes
@@ -126,7 +141,6 @@ jobs:
         if: github.event.pull_request.merged
         uses: actions/checkout@v2
       - name: Set Git config
-        if: github.event.pull_request.merged
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "Github Actions"

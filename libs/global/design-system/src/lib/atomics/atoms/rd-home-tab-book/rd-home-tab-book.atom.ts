@@ -23,7 +23,7 @@ export class RdHomeTabBookAtom implements OnInit {
   };
   @Input() active = false;
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }
