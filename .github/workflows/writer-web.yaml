@@ -30,13 +30,13 @@ jobs:
     if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
     steps:
       - name: get latest code from develop
+        uses: actions/checkout@v2
         run: |
           git fetch --unshallow
           git pull
           git merge --no-ff origin/develop -m "Auto-merge develop to get latest code"
           git push
       - name: Cloning repo
-        uses: actions/checkout@v2
         uses: dokku/github-action@master
         with:
           # specify `--force` as a flag for git pushes
