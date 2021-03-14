@@ -1,9 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GlobalDesignSystemAtomicModule, StorybookSupportModule } from '@awread/global/design-system';
-import { TabCategoryMolec } from './molecs/tab-category/tab-category.molec';
-import { TabBookMolec } from './molecs/tab-book/tab-book.molec';
-import { TabPageMolec } from './molecs/tab-page/tab-page.molec';
 import { ListInfoLongBookMolec } from './molecs/list-info-long-book/list-info-long-book.molec';
 import { ListInfoProseMolec } from './molecs/list-info-prose/list-info-prose.molec';
 import { ListInfoShortBookMolec } from './molecs/list-info-short-book/list-info-short-book.molec';
@@ -66,9 +63,6 @@ import { DetailBookTopMobileOrgan } from './organs/detail-book-top-mobile/detail
   imports: [CommonModule, StorybookSupportModule, GlobalDesignSystemAtomicModule, CarouselModule],
   exports: [
     CommonModule,
-    TabCategoryMolec,
-    TabBookMolec,
-    TabPageMolec,
     ListInfoLongBookMolec,
     ListInfoProseMolec,
     ListInfoShortBookMolec,
@@ -127,9 +121,6 @@ import { DetailBookTopMobileOrgan } from './organs/detail-book-top-mobile/detail
     DetailBookTopMobileOrgan,
   ],
   declarations: [
-    TabCategoryMolec,
-    TabBookMolec,
-    TabPageMolec,
     ListInfoLongBookMolec,
     ListInfoProseMolec,
     ListInfoShortBookMolec,

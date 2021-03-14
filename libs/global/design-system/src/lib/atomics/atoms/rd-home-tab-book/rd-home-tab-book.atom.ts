@@ -15,8 +15,12 @@ import { Component, OnInit, ChangeDetectionStrategy, Output, Input, EventEmitter
 export class RdHomeTabBookAtom implements OnInit {
   @Output() tabClicked = new EventEmitter();
   @Output() onBtnClicked = new EventEmitter();
-  @Input() titleBook = 'Cô gái chúng ta cùng theo đuổi';
-  @Input() srcImg = '/global-assets/images/image.webp';
+  @Input() book = {
+    id: 1,
+    title: 'Cô gái chúng ta cùng theo đuổi',
+    srcImg: 'https://via.placeholder.com/260x370.png',
+    categories: [1, 2],
+  };
   @Input() active = false;
 
   constructor() {}

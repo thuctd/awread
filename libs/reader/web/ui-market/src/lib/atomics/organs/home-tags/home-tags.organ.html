@@ -1,26 +1,39 @@
-<!-- <section class="w-full max-w-screen-xl mx-auto mt-4 py-6">
+<section class="w-full max-w-screen-xl mx-auto mt-4 py-6">
   <div class="flex">
-    <atom-title [title]='titlePage' class="mr-2 sm:mr-4"></atom-title>
-    <tab-category [tabs]='categories'></tab-category>
+    <atom-title [title]='titlePage' class="mr-2 sm:mr-4" [isUppercase]='false'></atom-title>
+    <div class="flex mb-6">
+      <div class="w-full flex">
+        <rd-home-tab-category *ngFor="let category of categories" [tabName]="category.title" [active]="category.isActive" (click)="toggleTabs(category)"
+          (emitEvent)="filterItemsByCategory(category)">
+        </rd-home-tab-category>
+      </div>
+    </div>
   </div>
   <div class="w-full bg-purple-50 leanding-normal tracking-wide pb-6 mt-4 md:mt-8">
     <div class="container w-full overflow-hidden relative">
-        <div class="w-full h-full absolute">
-            <div class="w-1/5 h-full absolute z-50 left-0" style="background: linear-gradient(to right, #F5F3FF 0%, rgba(255, 255, 255, 0) 100%);"></div>
-            <div class="w-1/5 h-full absolute z-50 right-0" style="background: linear-gradient(to left, #F5F3FF 0%, rgba(255, 255, 255, 0) 100%);"></div>
+      <div class="w-full h-full absolute">
+        <div class="w-1/5 h-full absolute z-50 left-0" style="background: linear-gradient(to right, #F5F3FF 0%, rgba(255, 255, 255, 0) 100%);"></div>
+        <div class="w-1/5 h-full absolute z-50 right-0" style="background: linear-gradient(to left, #F5F3FF 0%, rgba(255, 255, 255, 0) 100%);"></div>
+      </div>
+      <div>
+        <owl-carousel-o [options]="customOptions">
+          <ng-container *ngFor="let item of filteredItems">
+            <ng-template carouselSlide>
+              <a [routerLink]="['/books', item.id]" class="cursor-pointer outline-none">
+                <div class="carousel-items flex pb-3 justify-center">
+                  <rd-home-tab-book class="carousel-focus flex relative flex-col" [book]="item">
+                  </rd-home-tab-book>
+                </div>
+              </a>
+            </ng-template>
+          </ng-container>
+        </owl-carousel-o>
+        <div class="spinner" *ngIf="loading">
+          <div class="bounce1"></div>
+          <div class="bounce2"></div>
+          <div class="bounce3"></div>
         </div>
-        <tab-book [tabBooks]='filteredItems'></tab-book>
+      </div>
     </div>
   </div>
-</section> -->
-
-
-<div class="items-filter">
-  <div *ngFor="let category of categories">
-    <button type="button" (click)="filterItemsByCategory(category)">{{ category.title }}</button>
-  </div>
-</div>
-
-<div class="list-items">
-  <tab-book *ngFor="let item of filteredItems" [item]="item"></tab-book>
-</div>
+</section>
