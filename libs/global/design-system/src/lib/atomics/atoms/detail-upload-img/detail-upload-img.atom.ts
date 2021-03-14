@@ -13,7 +13,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DetailUploadImgAtom implements OnInit {
-  @Input() srcImg = 'https://via.placeholder.com/520x740.png';
+  @Input() srcImg = '/global-assets/images/image.webp';
 
   constructor() {}
 

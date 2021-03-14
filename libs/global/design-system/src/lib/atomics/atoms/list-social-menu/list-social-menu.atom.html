@@ -6,7 +6,7 @@
   </button>
   <div *ngIf="isMenuOpen" class="origin-top-right absolute right-0 mt-2 w-44 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
     <div class="py-1 text-left">
-      <div *ngFor="let action of actions" class="">
+      <div *ngFor="let action of actions">
         <a (click)="handleBookAction(action.type)" class="block cursor-pointer px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 hover:text-gray-900">
           <span class="text-sm text-gray-500 mr-2">
             <fa-icon [icon]="action.icon"></fa-icon>

@@ -1,8 +1,9 @@
-<div class="text-base sm:text-base pt-4 my-1 sm:pb-4" [ngClass]="!isLastItem ? 'border-b border-gray-300': ''">
+<div class="text-sm sm:text-base pt-4 my-1 pb-4" [ngClass]="!isLastItem ? 'border-b border-gray-300': ''">
     <div class="justify-between flex ">
         <div class="flex w-4/5">
             <p class="w-1/5 font-medium text-sm">{{chapter.title}}</p>
-            <a [routerLink]="['/books', '21321zxc_2wqeik','chapters','123asd2qew_was23']" class="font-medium text-sm cursor-pointer outline-none">{{chapter.value}}</a>
+            <a [routerLink]="['/books', '21321zxc_2wqeik','chapters','123asd2qew_was23']"
+                class="font-medium text-sm cursor-pointer outline-none">{{chapter.value}}</a>
         </div>
         <atom-chapter-price [value]="chapter.price"></atom-chapter-price>
     </div>

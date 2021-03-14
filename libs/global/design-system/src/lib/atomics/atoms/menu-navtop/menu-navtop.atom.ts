@@ -1,4 +1,3 @@
-import type { User } from '@awread/writer/web/feature-auth';
 import { faSignOutAlt, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
@@ -11,19 +10,16 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
 export class MenuNavtopAtom implements OnInit {
   @Input() faIcon = { faSignOutAlt, faInfoCircle };
   @Input() isMenuOpen = false;
-  // @Input() avatarUrl = 'http://tachyons.io/img/logo.jpg';
-  // @Input() name = 'Hà Thanh Tùng';
-  // @Input() email = 'thanhtung@gmail.com';
 
   @Input() curentUser = {
-    photourl: 'http://tachyons.io/img/logo.jpg',
+    photourl: '/global-assets/images/avatar-mrmrs.webp',
     fullname: '',
     email: '',
   };
   @Output() signoutEvent = new EventEmitter();
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   toggleMenu($event?) {
     if ($event) $event.stopPropagation();

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StorybookSupportModule } from '../storybook-support.module';
 import { MatDialogModule } from '@angular/material/dialog';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { AuthBgAtom } from './atoms/auth-bg/auth-bg.atom';
 import { CheckBtnAtom } from './atoms/check-btn/check-btn.atom';
@@ -93,7 +94,16 @@ import { DetailInfoLineLinkAtom } from './atoms/detail-info-line-link/detail-inf
 import { NavItemAtom } from './atoms/nav-item/nav-item.atom';
 
 @NgModule({
-  imports: [CommonModule, StorybookSupportModule, MatDialogModule, QuillModule.forRoot(), DefaultCoverModule, CloseOnOutsideModule, NgImageSliderModule],
+  imports: [
+    CommonModule,
+    RouterTestingModule,
+    StorybookSupportModule,
+    MatDialogModule,
+    QuillModule.forRoot(),
+    DefaultCoverModule,
+    CloseOnOutsideModule,
+    NgImageSliderModule,
+  ],
   exports: [
     NgImageSliderModule,
     CloseOnOutsideModule,
@@ -273,4 +283,4 @@ import { NavItemAtom } from './atoms/nav-item/nav-item.atom';
     NavItemAtom,
   ],
 })
-export class GlobalDesignSystemAtomicModule {}
+export class GlobalDesignSystemAtomicModule { }
