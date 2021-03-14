@@ -31,6 +31,11 @@ jobs:
     steps:
       - name: using action checkout
         uses: actions/checkout@v2
+      - name: Set Git config
+        if: github.event.pull_request.merged
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "Github Actions"
       - name: get latest code from develop
         run: |
           git fetch --unshallow
