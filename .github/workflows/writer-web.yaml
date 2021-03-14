@@ -29,14 +29,14 @@ jobs:
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL  }}
     if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
     steps:
-      - name: Cloning repo
-        uses: actions/checkout@v2
       - name: get latest code from develop
         run: |
           git fetch --unshallow
           git pull
           git merge --no-ff origin/develop -m "Auto-merge develop to get latest code"
           git push
+      - name: Cloning repo
+        uses: actions/checkout@v2
         uses: dokku/github-action@master
         with:
           # specify `--force` as a flag for git pushes
