@@ -10,10 +10,12 @@ jobs:
     steps:
       - name: Cloning repo
         uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-
-      - name: Push to dokku
+      - name: get latest code from develop
+        run: |
+          git fetch --unshallow
+          git pull
+          git merge --no-ff origin/develop -m "Auto-merge develop to get latest code"
+          git push
         uses: dokku/github-action@master
         with:
           # specify `--force` as a flag for git pushes
