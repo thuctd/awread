@@ -8,8 +8,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: get latest code from develop
+      - name: using action checkout
         uses: actions/checkout@v2
+      - name: get latest code from develop
         run: |
           git fetch --unshallow
           git pull
