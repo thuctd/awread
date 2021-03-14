@@ -7,17 +7,10 @@
       <molec-search-form></molec-search-form>
     </div>
     <div class="col-span-2 md:col-span-7">
-      <pre> DEBUG: {{ selectedTab }} </pre>
       <div class="grid grid-cols-12 gap-6 border-b border-teal-400">
         <ng-container *ngFor="let tab of tabsHead">
-          <div class="col-span-2 md:col-span-4" [ngClass]="tab.isActive ? ' border-b-2 border-green-400' : ''">
-            <div class="text-center">
-              <a (click)="switchTabEvent.emit(tab.tabName)"
-                [ngClass]="selectedTab === tab.tabName ? 'border-b-2 border-green-400 text-green-400' : 'text-gray-400'"
-                class="font-bold block pb-2 cursor-pointer md:text-sm lg:text-base xl:text-base">
-                {{ tab.name }}
-              </a>
-            </div>
+          <div class="col-span-2 md:col-span-4" [ngClass]="selectedTab === tab.tabName ? 'border-b-2 border-green-400 text-green-400' : 'text-gray-400'">
+            <molec-tab-categories (switchTabEvent)="switchTabEvent.emit(tab.tabName)" [tab]="tab"></molec-tab-categories>
           </div>
         </ng-container>
       </div>
@@ -27,8 +20,7 @@
     </div>
     <div class="col-span-2 md:col-span-1"></div>
     <div class="col-span-2 md:col-span-4">
-      <list-detail-top-book class="pt-40">
-      </list-detail-top-book>
+      <list-detail-top-book class="pt-40"> </list-detail-top-book>
     </div>
   </div>
 </section>
