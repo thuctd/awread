@@ -13,10 +13,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListInfoProseMolec implements OnInit {
-  @Input() book = {
-    title: 'Cô gái chúng ta cùng theo đuổi năm nào',
-    size: 'm',
-  };
+  @Input() title = 'Cô gái chúng ta cùng theo đuổi năm nào';
 
   @Input() moreContent = 'Đọc thêm';
 

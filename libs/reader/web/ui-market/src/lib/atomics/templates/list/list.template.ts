@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'template-list',
@@ -13,9 +13,16 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListTemplate implements OnInit {
-  tabs = [{ name: 'Truyện dài', isActive: true }, { name: 'Truyện ngắn' }, { name: 'Tiểu thuyết' }];
+  @Input() isLoadedPage: true | false = true;
+  @Input() tabsHead = [
+    { name: 'Truyện dài', tabName: 'longbook', isActive: true },
+    { name: 'Truyện ngắn', tabName: 'shortbook', isActive: false },
+    { name: 'Tản văn', tabName: 'novel', isActive: false },
+  ];
 
-  constructor() {}
+  @Input() selectedTab = 'longbook';
+  @Output() switchTabEvent = new EventEmitter();
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }
