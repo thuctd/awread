@@ -3,13 +3,15 @@ import { CommonModule } from '@angular/common';
 
 import { HomeMobileRoutingModule } from './home-mobile-routing.module';
 import { HomeMobilePage } from './home-mobile.page';
+import { ReaderWebUiMarketAtomicModule } from '../../atomics/reader-web-ui-market-atomic.module';
 
 
 @NgModule({
   declarations: [HomeMobilePage],
   imports: [
     CommonModule,
-    HomeMobileRoutingModule
+    HomeMobileRoutingModule,
+    ReaderWebUiMarketAtomicModule
   ]
 })
 export class HomeMobileModule { }
