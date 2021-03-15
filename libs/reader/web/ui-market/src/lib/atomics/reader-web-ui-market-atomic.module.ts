@@ -1,9 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GlobalDesignSystemAtomicModule, StorybookSupportModule } from '@awread/global/design-system';
-import { TabCategoryMolec } from './molecs/tab-category/tab-category.molec';
-import { TabBookMolec } from './molecs/tab-book/tab-book.molec';
-import { TabPageMolec } from './molecs/tab-page/tab-page.molec';
 import { ListInfoLongBookMolec } from './molecs/list-info-long-book/list-info-long-book.molec';
 import { ListInfoProseMolec } from './molecs/list-info-prose/list-info-prose.molec';
 import { ListInfoShortBookMolec } from './molecs/list-info-short-book/list-info-short-book.molec';
@@ -41,7 +38,6 @@ import { DetailBookTemplate } from './templates/detail-book/detail-book.template
 import { SearchFormMolec } from './molecs/search-form/search-form.molec';
 import { DetailBookSidebarOrgan } from './organs/detail-book-sidebar/detail-book-sidebar.organ';
 import { CarouselModule } from 'ngx-owl-carousel-o';
-import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { HeadReadBookMolec } from './molecs/head-read-book/head-read-book.molec';
 import { FormCommentBookReadMolec } from './molecs/form-comment-book-read/form-comment-book-read.molec';
 import { CommentBookReadOrgan } from './organs/comment-book-read/comment-book-read.organ';
@@ -62,14 +58,12 @@ import { MbListTemplate } from './templates/mb-list/mb-list.template';
 import { DetailBookMobileTemplate } from './templates/detail-book-mobile/detail-book-mobile.template';
 import { ReadMobileTemplate } from './templates/read-mobile/read-mobile.template';
 import { DetailBookTopMobileOrgan } from './organs/detail-book-top-mobile/detail-book-top-mobile.organ';
+import { TabCategoriesMolec } from './molecs/tab-categories/tab-categories.molec';
 
 @NgModule({
-  imports: [CommonModule, StorybookSupportModule, GlobalDesignSystemAtomicModule, CarouselModule, BrowserAnimationsModule],
+  imports: [CommonModule, StorybookSupportModule, GlobalDesignSystemAtomicModule, CarouselModule],
   exports: [
     CommonModule,
-    TabCategoryMolec,
-    TabBookMolec,
-    TabPageMolec,
     ListInfoLongBookMolec,
     ListInfoProseMolec,
     ListInfoShortBookMolec,
@@ -126,11 +120,9 @@ import { DetailBookTopMobileOrgan } from './organs/detail-book-top-mobile/detail
     DetailBookMobileTemplate,
     ReadMobileTemplate,
     DetailBookTopMobileOrgan,
+    TabCategoriesMolec,
   ],
   declarations: [
-    TabCategoryMolec,
-    TabBookMolec,
-    TabPageMolec,
     ListInfoLongBookMolec,
     ListInfoProseMolec,
     ListInfoShortBookMolec,
@@ -186,6 +178,7 @@ import { DetailBookTopMobileOrgan } from './organs/detail-book-top-mobile/detail
     DetailBookMobileTemplate,
     ReadMobileTemplate,
     DetailBookTopMobileOrgan,
+    TabCategoriesMolec,
   ],
 })
-export class ReaderWebUiMarketAtomicModule {}
+export class ReaderWebUiMarketAtomicModule { }

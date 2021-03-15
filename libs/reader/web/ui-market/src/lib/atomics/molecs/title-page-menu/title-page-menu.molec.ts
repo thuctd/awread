@@ -9,31 +9,32 @@ import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
       :host {
         display: block;
       }
-    `
+    `,
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TitlePageMenuMolec implements OnInit {
-  @Input() titlePage = 'Truyện tự sáng tác';
+  @Input() titlePage = 'Title';
   @Input() bookId: string;
   @Input() faIcon = faAngleDown;
+  @Input() isMenu: true | false = false;
   @Input() links = [
     {
       name: 'Truyện dài',
-      href: 'book-list',
+      href: 'long-story',
     },
     {
       name: 'Truyện ngắn',
-      href: 'book-short'
+      href: 'short-story',
     },
     {
-      name: 'Tiểu thuyết',
-      link: 'prose'
+      name: 'Tản văn',
+      href: 'novel',
     },
   ];
   @Output() bookActionEvent = new EventEmitter();
   isMenuOpen = false;
-  constructor() { }
+  constructor() {}
   toggleMenu($event) {
     $event.stopPropagation();
     this.isMenuOpen = !this.isMenuOpen;
@@ -43,10 +44,9 @@ export class TitlePageMenuMolec implements OnInit {
     this.isMenuOpen = false;
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
   // add chapter, edit book
   handleBookAction(type: string) {
     this.bookActionEvent.emit(type);
   }
-
 }
