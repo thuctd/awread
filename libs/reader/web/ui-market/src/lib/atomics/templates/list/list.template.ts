@@ -19,7 +19,6 @@ export class ListTemplate implements OnInit {
     { name: 'Truyện ngắn', tabName: 'shortbook', isActive: false },
     { name: 'Tản văn', tabName: 'novel', isActive: false },
   ];
-  namePage: String;
 
   @Input() selectedTab = 'longbook';
   @Output() switchTabEvent = new EventEmitter();
