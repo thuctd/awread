@@ -13,7 +13,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Output, Input, EventEmitter
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RdHomeTabCategoryAtom implements OnInit {
-  @Output() tabClicked = new EventEmitter();
+  @Output() emitEvent = new EventEmitter();
   @Input() tabName = 'tab name';
   @Input() active = false;
 

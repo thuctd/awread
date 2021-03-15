@@ -9,77 +9,80 @@ import { faAngleDown, faArrowDown } from '@fortawesome/free-solid-svg-icons';
 })
 export class NavbarMenuOrgan implements OnInit {
   icon = faAngleDown;
-  menu = [
-    {
-      title: 'Trang chủ',
-      href: '/home',
-    },
-    {
-      title: 'Truyện',
-      href: '/market',
-      dropdown: [
-        {
-          title: 'Truyện tự sáng tác',
-          menu: [
-            {
-              href: '/',
-              title: 'Truyện dài',
-            },
-            {
-              href: '/',
-              title: 'Truyện ngắn',
-            },
-            {
-              href: '/',
-              title: 'Tản văn',
-            },
-          ],
-        },
-        {
-          title: 'Truyện sưu tầm',
-          menu: [
-            {
-              href: '/',
-              title: 'Truyện dài',
-            },
-            {
-              href: '/',
-              title: 'Truyện ngắn',
-            },
-            {
-              href: '/',
-              title: 'Tản văn',
-            },
-          ],
-        },
-      ],
-    },
-    {
-      title: 'Đăng truyện',
-      href: '/home',
-    },
-    {
-      title: 'Cộng đồng',
-      href: '/market',
-      dropdown: [
-        {
-          href: '/',
-          title: 'Về chúng tôi',
-        },
-        {
-          href: '/',
-          title: 'Tham gia với chúng tôi',
-        },
-        {
-          href: '/',
-          title: 'Tin tức',
-          tag: 'New',
-        },
-      ],
-    },
-  ];
-  @Input() color = 'text-white';
-  constructor() {}
+  navHome = {
+    title: 'Trang chủ',
+    href: '/home',
+  };
+  naveBook = {
+    title: 'Truyện',
+    dropdown: [
+      {
+        title: 'Truyện tự sáng tác',
+        menu: [
+          {
+            page: '/composed',
+            type: 'longbook',
+            title: 'Truyện dài',
+          },
+          {
+            page: '/composed',
+            type: 'shortbook',
+            title: 'Truyện ngắn',
+          },
+          {
+            page: '/composed',
+            type: 'novel',
+            title: 'Tản văn',
+          },
+        ],
+      },
+      {
+        title: 'Truyện sưu tầm',
+        menu: [
+          {
+            page: '/collected',
+            type: 'longbook',
+            title: 'Truyện dài',
+          },
+          {
+            page: '/collected',
+            type: 'shortbook',
+            title: 'Truyện ngắn',
+          },
+          {
+            page: '/collected',
+            type: 'novel',
+            title: 'Tản văn',
+          },
+        ],
+      },
+    ],
+  };
 
-  ngOnInit(): void {}
+  navCreateBook = {
+    title: 'Đăng truyện',
+    href: '/home',
+  };
+
+  navPublic = {
+    title: 'Cộng đồng',
+    dropdown: [
+      {
+        page: '/introduction',
+        title: 'Về chúng tôi',
+      },
+      {
+        page: '/community',
+        title: 'Tham gia với chúng tôi',
+      },
+      {
+        page: '/news',
+        title: 'Tin tức',
+      },
+    ],
+  };
+  @Input() color = 'text-white';
+  constructor() { }
+
+  ngOnInit(): void { }
 }

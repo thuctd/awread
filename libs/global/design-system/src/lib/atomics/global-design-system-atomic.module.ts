@@ -97,6 +97,9 @@ import { BtnRectangleAtom } from './atoms/btn-rectangle/btn-rectangle.atom';
 import { RdAuthorPopupHeaderAtom } from './atoms/rd-author-popup-header/rd-author-popup-header.atom';
 import { RdAuthorSubmitBtnAtom } from './atoms/rd-author-submit-btn/rd-author-submit-btn.atom';
 import { RdAuthorPopupContentBlockAtom } from './atoms/rd-author-popup-content-block/rd-author-popup-content-block.atom';
+import { LinkAtom } from './atoms/link/link.atom';
+import { DetailInfoLineLinkAtom } from './atoms/detail-info-line-link/detail-info-line-link.atom';
+import { NavItemAtom } from './atoms/nav-item/nav-item.atom';
 
 @NgModule({
   imports: [
@@ -204,6 +207,9 @@ import { RdAuthorPopupContentBlockAtom } from './atoms/rd-author-popup-content-b
     RdAuthorPopupHeaderAtom,
     RdAuthorSubmitBtnAtom,
     RdAuthorPopupContentBlockAtom,
+    LinkAtom,
+    DetailInfoLineLinkAtom,
+    NavItemAtom,
   ],
   declarations: [
     TabBtnAtom,
@@ -296,6 +302,9 @@ import { RdAuthorPopupContentBlockAtom } from './atoms/rd-author-popup-content-b
     RdAuthorPopupHeaderAtom,
     RdAuthorSubmitBtnAtom,
     RdAuthorPopupContentBlockAtom,
+    LinkAtom,
+    DetailInfoLineLinkAtom,
+    NavItemAtom,
   ],
 })
-export class GlobalDesignSystemAtomicModule {}
+export class GlobalDesignSystemAtomicModule { }

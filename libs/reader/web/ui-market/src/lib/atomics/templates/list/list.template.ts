@@ -1,5 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'template-list',
@@ -14,14 +13,17 @@ import { Router } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListTemplate implements OnInit {
-  tabs = [{ name: 'Truyện dài', isActive: true }, { name: 'Truyện ngắn' }, { name: 'Tiểu thuyết' }];
-  @Input() titleTemplate: 'Truyện tự sáng tác' | 'Truyện sưu tập' = 'Truyện sưu tập';
+  @Input() isLoadedPage: true | false = true;
+  @Input() tabsHead = [
+    { name: 'Truyện dài', tabName: 'longbook', isActive: true },
+    { name: 'Truyện ngắn', tabName: 'shortbook', isActive: false },
+    { name: 'Tản văn', tabName: 'novel', isActive: false },
+  ];
   namePage: String;
 
-  constructor(private router: Router) {}
+  @Input() selectedTab = 'longbook';
+  @Output() switchTabEvent = new EventEmitter();
+  constructor() { }
 
-  ngOnInit(): void {
-    this.namePage = this.router.url;
-  }
-
+  ngOnInit(): void { }
 }

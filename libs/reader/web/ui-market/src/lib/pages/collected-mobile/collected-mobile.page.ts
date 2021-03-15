@@ -9,23 +9,23 @@ import { CollectedPage } from '@awread/reader/web/feature-market';
       :host {
         display: block;
       }
-    `
+    `,
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CollectedMobilePage extends CollectedPage {
-    @Input() links = [
+  @Input() links = [
     {
       name: 'Truyện dài',
       href: 'long-story',
     },
     {
       name: 'Truyện ngắn',
-      href: 'short-story'
+      href: 'short-story',
     },
     {
-      name: 'Tiểu thuyết',
-      href: 'novel'
+      name: 'Tản văn',
+      href: 'novel',
     },
   ];
 }
