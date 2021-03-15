@@ -13,20 +13,20 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RdDropdownMenuItemMolec implements OnInit {
-  @Input() data = { title: 'Truyện sưu tầm', href: '' };
+  @Input() data = { title: 'Truyện sưu tầm', page: '' };
   @Input() isLast = false;
   @Input() menu = [
     {
-      href: '/',
-      title: 'Truyện dài',
+      page: 'introduction',
+      title: 'Về chúng tôi',
     },
     {
-      href: '/',
-      title: 'Truyện ngắn',
+      page: 'community',
+      title: 'Tham gia với chúng tôi',
     },
     {
-      href: '/',
-      title: 'Tản văn',
+      page: 'news',
+      title: 'Tin tức',
     },
   ];
   constructor() {}
