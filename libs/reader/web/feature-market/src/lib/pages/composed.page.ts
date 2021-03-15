@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Injectable } from '@angular/core';
-import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Directive, OnInit, OnDestroy } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
@@ -44,7 +44,6 @@ export class ComposedPage implements OnInit, OnDestroy {
     return this.activatedRoute.paramMap
       .pipe(untilDestroyed(this))
       .subscribe((params) => {
-        console.log('params', params);
         this.bookId = params.get('bookId');
         this.type = params.get('type');
         this.switchTab(this.type);
