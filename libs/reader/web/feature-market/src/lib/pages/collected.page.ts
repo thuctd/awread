@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Directive, Injectable, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 @UntilDestroy()
@@ -18,7 +18,7 @@ export class CollectedPage implements OnInit, OnDestroy {
   type: string;
 
   selectedTab = 'longbook';
-  constructor(private activatedRoute: ActivatedRoute, private cd: ChangeDetectorRef) { }
+  constructor(private activatedRoute: ActivatedRoute, private cd: ChangeDetectorRef, private router: Router) { }
   ngOnDestroy(): void { }
 
   ngOnInit(): void {
@@ -28,10 +28,13 @@ export class CollectedPage implements OnInit, OnDestroy {
   switchTab(tabName: string) {
     if (tabName === 'novel') {
       this.selectedTab = 'novel';
+      this.router.navigate(['/collected', { type: this.selectedTab }]);
     } else if (tabName === 'shortbook') {
       this.selectedTab = 'shortbook';
+      this.router.navigate(['/collected', { type: this.selectedTab }]);
     } else {
       this.selectedTab = 'longbook';
+      this.router.navigate(['/collected', { type: this.selectedTab }]);
     }
   }
 
