@@ -1,4 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy, Output, Input, EventEmitter } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Output, Input, EventEmitter, HostListener, ViewChild, ElementRef } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { faSearch, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -18,11 +19,20 @@ export class SearchBtnAtom implements OnInit {
   isDisplay = false;
   @Output() eventSearch = new EventEmitter();
   @Input() color = 'text-white';
+  @ViewChild('search') searchElement: ElementRef;
+  @Input() inputControl: FormControl = new FormControl('');
   constructor() {}
 
   ngOnInit(): void {}
 
   toggleDisplay() {
     this.isDisplay = !this.isDisplay;
+    setTimeout(() => {
+      this.searchElement.nativeElement.focus();
+    }, 100);
+  }
+
+  @HostListener('document:keydown.escape', ['$event']) onKeydownHandler(event: KeyboardEvent) {
+    this.isDisplay = false;
   }
 }

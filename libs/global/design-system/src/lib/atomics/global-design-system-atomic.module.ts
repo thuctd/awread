@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { StorybookSupportModule } from '../storybook-support.module';
 import { MatDialogModule } from '@angular/material/dialog';
 import { notReadyDirective } from './directives/not-ready/not-ready.directive';
-import { RouterTestingModule } from '@angular/router/testing';
 
 import { AuthBgAtom } from './atoms/auth-bg/auth-bg.atom';
 import { CheckBtnAtom } from './atoms/check-btn/check-btn.atom';
@@ -90,19 +89,12 @@ import { BtnBackToTopAtom } from './atoms/btn-back-to-top/btn-back-to-top.atom';
 import { PopupCoverHeaderAtom } from './atoms/popup-cover-header/popup-cover-header.atom';
 import { ProcessBarAtom } from './atoms/process-bar/process-bar.atom';
 import { BtnInputFileAtom } from './atoms/btn-input-file/btn-input-file.atom';
-import { RdBaseBtnGreenAtom } from './atoms/rd-base-btn-green/rd-base-btn-green.atom';
+import { LinkAtom } from './atoms/link/link.atom';
+import { DetailInfoLineLinkAtom } from './atoms/detail-info-line-link/detail-info-line-link.atom';
+import { NavItemAtom } from './atoms/nav-item/nav-item.atom';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterTestingModule,
-    StorybookSupportModule,
-    MatDialogModule,
-    QuillModule.forRoot(),
-    DefaultCoverModule,
-    CloseOnOutsideModule,
-    NgImageSliderModule,
-  ],
+  imports: [CommonModule, StorybookSupportModule, MatDialogModule, QuillModule.forRoot(), DefaultCoverModule, CloseOnOutsideModule, NgImageSliderModule],
   exports: [
     notReadyDirective,
     NgImageSliderModule,
@@ -191,7 +183,9 @@ import { RdBaseBtnGreenAtom } from './atoms/rd-base-btn-green/rd-base-btn-green.
     PopupCoverHeaderAtom,
     ProcessBarAtom,
     BtnInputFileAtom,
-    RdBaseBtnGreenAtom,
+    LinkAtom,
+    DetailInfoLineLinkAtom,
+    NavItemAtom,
   ],
   declarations: [
     notReadyDirective,
@@ -277,7 +271,9 @@ import { RdBaseBtnGreenAtom } from './atoms/rd-base-btn-green/rd-base-btn-green.
     PopupCoverHeaderAtom,
     ProcessBarAtom,
     BtnInputFileAtom,
-    RdBaseBtnGreenAtom,
+    LinkAtom,
+    DetailInfoLineLinkAtom,
+    NavItemAtom,
   ],
 })
 export class GlobalDesignSystemAtomicModule {}

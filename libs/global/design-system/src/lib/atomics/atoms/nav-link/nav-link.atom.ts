@@ -16,6 +16,7 @@ export class NavLinkAtom implements OnInit {
   @Input() title = 'Trang chủ';
   @Input() href = '/home';
   @Input() color = 'text-white';
+  @Input() isRouter: false | true = true;
   constructor() {}
 
   ngOnInit(): void {}

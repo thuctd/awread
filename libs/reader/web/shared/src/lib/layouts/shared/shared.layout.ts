@@ -1,10 +1,17 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Directive, Injectable, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
+@Directive()
 export class SharedLayout implements OnInit {
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {}
+
+  navigateToSearch() {
+    console.log('asd');
+    this.router.navigateByUrl('/search');
+  }
 }
