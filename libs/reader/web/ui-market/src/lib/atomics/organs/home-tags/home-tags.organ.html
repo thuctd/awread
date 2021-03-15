@@ -2,7 +2,7 @@
   <div class="flex">
     <atom-title [title]='titlePage' class="mr-2 sm:mr-4" [isUppercase]='false'></atom-title>
     <div class="flex mb-6">
-      <div class="w-full flex">
+      <div class="w-full flex mt-1.5">
         <rd-home-tab-category *ngFor="let category of categories" [tabName]="category.title" [active]="category.isActive" (click)="toggleTabs(category)"
           (emitEvent)="filterItemsByCategory(category)">
         </rd-home-tab-category>

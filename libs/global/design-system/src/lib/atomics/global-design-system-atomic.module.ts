@@ -3,7 +3,9 @@ import { CommonModule } from '@angular/common';
 import { StorybookSupportModule } from '../storybook-support.module';
 import { MatDialogModule } from '@angular/material/dialog';
 import { RouterTestingModule } from '@angular/router/testing';
+// import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { RdBaseBtnGreenAtom } from './atoms/rd-base-btn-green/rd-base-btn-green.atom';
 import { AuthBgAtom } from './atoms/auth-bg/auth-bg.atom';
 import { CheckBtnAtom } from './atoms/check-btn/check-btn.atom';
 import { InputFormAtom } from './atoms/input-form/input-form.atom';
@@ -95,6 +97,7 @@ import { NavItemAtom } from './atoms/nav-item/nav-item.atom';
 
 @NgModule({
   imports: [
+    // BrowserAnimationsModule,
     CommonModule,
     RouterTestingModule,
     StorybookSupportModule,
@@ -105,8 +108,10 @@ import { NavItemAtom } from './atoms/nav-item/nav-item.atom';
     NgImageSliderModule,
   ],
   exports: [
+    // BrowserAnimationsModule,
     NgImageSliderModule,
     CloseOnOutsideModule,
+    RdBaseBtnGreenAtom,
     TabBtnAtom,
     LogoAtom,
     InputFormAtom,
@@ -196,6 +201,7 @@ import { NavItemAtom } from './atoms/nav-item/nav-item.atom';
     NavItemAtom,
   ],
   declarations: [
+    RdBaseBtnGreenAtom,
     TabBtnAtom,
     LogoAtom,
     InputFormAtom,
@@ -283,4 +289,4 @@ import { NavItemAtom } from './atoms/nav-item/nav-item.atom';
     NavItemAtom,
   ],
 })
-export class GlobalDesignSystemAtomicModule { }
+export class GlobalDesignSystemAtomicModule {}
