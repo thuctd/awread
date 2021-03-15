@@ -3,12 +3,13 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { SharedDesktopLayout } from './layouts/shared-desktop/shared-desktop.layout';
 import { SharedMobileLayout } from './layouts/shared-mobile/shared-mobile.layout';
+import { ReaderWebSharedAtomicModule } from './atomics/reader-web-shared-atomic.module';
 
 declare const window: Window & { haveMobile: boolean };
 window.haveMobile = true;
 
 @NgModule({
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, ReaderWebSharedAtomicModule],
   exports: [RouterModule, SharedDesktopLayout, SharedMobileLayout],
   declarations: [SharedDesktopLayout, SharedMobileLayout],
 })

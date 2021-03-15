@@ -1,5 +1,5 @@
-<div class="dropdown-menu absolute right-0 pt-3 w-44 " [class.hidden]="hidden">
-    <ul id="story__ul" class="list-reset text-xl bg-white story__left rounded-sm shadow overflow-visible px-2">
+<div class="dropdown-menu absolute -right-2 pt-3 w-44 " [class.hidden]="hidden">
+    <ul class="list-reset text-xl bg-white rounded-sm shadow overflow-visible px-2">
         <ng-container *ngFor="let data of dropdownData; let i = index">
             <molec-rd-dropdown-menu-item [data]="data" [menu]="data.menu" [isLast]="i == dropdownData.length - 1">
             </molec-rd-dropdown-menu-item>
