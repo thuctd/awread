@@ -100,6 +100,7 @@ import { RdAuthorPopupContentBlockAtom } from './atoms/rd-author-popup-content-b
 import { LinkAtom } from './atoms/link/link.atom';
 import { DetailInfoLineLinkAtom } from './atoms/detail-info-line-link/detail-info-line-link.atom';
 import { NavItemAtom } from './atoms/nav-item/nav-item.atom';
+import { TabPageAtom } from './atoms/tab-page/tab-page.atom';
 
 @NgModule({
   imports: [
@@ -210,6 +211,7 @@ import { NavItemAtom } from './atoms/nav-item/nav-item.atom';
     LinkAtom,
     DetailInfoLineLinkAtom,
     NavItemAtom,
+    TabPageAtom,
   ],
   declarations: [
     TabBtnAtom,
@@ -305,6 +307,7 @@ import { NavItemAtom } from './atoms/nav-item/nav-item.atom';
     LinkAtom,
     DetailInfoLineLinkAtom,
     NavItemAtom,
+    TabPageAtom,
   ],
 })
 export class GlobalDesignSystemAtomicModule { }
