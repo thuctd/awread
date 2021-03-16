@@ -5,14 +5,20 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 
-if (__ISSTORYBOOK__ === undefined) {
-  var __ISSTORYBOOK__ = false;
+declare const __ISSTORYBOOK__;
+let isStorybook = true;
+try {
+  console.log('__ISSTORYBOOK__', __ISSTORYBOOK__);
+} catch (error) {
+  isStorybook = false;
+  console.log('is website, not storybook', isStorybook);
 }
+
 @NgModule({
   imports: [
     CommonModule,
-    __ISSTORYBOOK__ ? RouterModule.forRoot([], { useHash: true }) : RouterModule,
-    __ISSTORYBOOK__ ? BrowserAnimationsModule : []
+    isStorybook ? RouterModule.forRoot([], { useHash: true }) : RouterModule,
+    isStorybook ? BrowserAnimationsModule : []
 
   ],
   exports: [RouterModule, ReactiveFormsModule, FontAwesomeModule],
