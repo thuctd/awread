@@ -1,0 +1,18 @@
+<atom-title-book [titleBook]="title" [class]="'text-sm md:text-base font-bold text-gray-600'" [size]='"m"'></atom-title-book>
+<dl class="mt-0">
+  <dd class="ml-0 pb-1">
+    <atom-author></atom-author>
+  </dd>
+  <dd class="ml-0 pb-2">
+    <div class="flex">
+      <atom-rating class="mr-4"></atom-rating>
+      <atom-icon-text [icon]="faIcon" [title]="countComment"></atom-icon-text>
+    </div>
+  </dd>
+  <dd class="ml-0">
+    <div *ngFor="let btn of btns" class="flex">
+      <base-btn class="mr-4" (onBtnClicked)="submitEvent.emit($event)" [isSize]="true" [chapter]="btn"></base-btn>
+      <rd-list-publication-date></rd-list-publication-date>
+    </div>
+  </dd>
+</dl>
