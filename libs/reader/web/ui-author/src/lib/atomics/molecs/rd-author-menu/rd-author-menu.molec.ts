@@ -27,6 +27,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
 export class RdAuthorMenuMolec implements OnInit {
   @Input() faIcon = faEllipsisH;
   @Input() menu = false;
+  @Output() eventClick = new EventEmitter();
 
   constructor() {}
 

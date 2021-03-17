@@ -2,5 +2,5 @@
   <div class="cursor-pointer" content1>
     <atom-rd-author-popup-content-block [title]="title" [content]="content"></atom-rd-author-popup-content-block>
   </div>
-  <div class="cursor-pointer" content2>Chặn</div>
+  <div (click)="clickBtn.emit()" class="cursor-pointer" content2>Chặn</div>
 </molec-rd-author-popup-mb>

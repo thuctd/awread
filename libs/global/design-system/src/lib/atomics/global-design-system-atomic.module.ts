@@ -98,7 +98,6 @@ import { RdAuthorPopupContentBlockAtom } from './atoms/rd-author-popup-content-b
 import { LinkAtom } from './atoms/link/link.atom';
 import { DetailInfoLineLinkAtom } from './atoms/detail-info-line-link/detail-info-line-link.atom';
 import { NavItemAtom } from './atoms/nav-item/nav-item.atom';
-import { TabPageAtom } from './atoms/tab-page/tab-page.atom';
 import { ImgGridAtom } from './atoms/img-grid/img-grid.atom';
 import { BtnIconAtom } from './atoms/btn-icon/btn-icon.atom';
 
@@ -202,7 +201,6 @@ import { BtnIconAtom } from './atoms/btn-icon/btn-icon.atom';
     LinkAtom,
     DetailInfoLineLinkAtom,
     NavItemAtom,
-    TabPageAtom,
     ImgGridAtom,
     BtnIconAtom,
   ],
@@ -300,7 +298,6 @@ import { BtnIconAtom } from './atoms/btn-icon/btn-icon.atom';
     LinkAtom,
     DetailInfoLineLinkAtom,
     NavItemAtom,
-    TabPageAtom,
     ImgGridAtom,
     BtnIconAtom,
   ],
