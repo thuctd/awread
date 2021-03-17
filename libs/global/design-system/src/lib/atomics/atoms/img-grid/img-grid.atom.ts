@@ -13,8 +13,8 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ImgGridAtom implements OnInit {
-  @Input() srcImg = '/global-assets/images/image.webp';
-  @Input() altImg = 'Placeholder';
+  @Input() srcImg = 'https://via.placeholder.com/260x370.png';
+  @Input() altImg = 'awread';
 
   constructor() { }
 

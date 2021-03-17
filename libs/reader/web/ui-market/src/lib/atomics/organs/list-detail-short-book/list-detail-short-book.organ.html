@@ -1,6 +1,6 @@
 <section class="pt-28 mx-auto">
   <div class="grid grid-cols-12 gap-10 place-content-center" *ngIf="!(display === 'grid');else list_content">
-    <div *ngFor="let loop3 of counter(9);" class="col-span-2 md:col-span-4 p-2">
+    <div *ngFor="let loop3 of counter(9);" class="col-span-2 md:col-span-4">
       <div class="">
         <atom-img-m [size]='"l"'></atom-img-m>
         <list-info-short-book></list-info-short-book>
@@ -9,7 +9,7 @@
   </div>
     <ng-template #list_content>
       <div class="grid grid-cols-12 gap-10 place-content-center">
-        <div *ngFor="let loop3 of counter(8);" class="col-span-2 md:col-span-6 p-2">
+        <div *ngFor="let loop3 of counter(8);" class="col-span-2 md:col-span-6">
           <organ-books-grid></organ-books-grid>
         </div>
       </div>
