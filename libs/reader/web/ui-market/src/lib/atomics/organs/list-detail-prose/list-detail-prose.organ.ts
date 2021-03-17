@@ -15,13 +15,13 @@ import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 })
 export class ListDetailProseOrgan implements OnInit {
   counter = Array;
-
+  @Input() display: 'grid' | 'list' = 'grid';
   @Input() moreContent = 'Xem thêm';
 
   @Input() faIcon = faAngleDown;
   @Output() moreEvent = new EventEmitter();
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

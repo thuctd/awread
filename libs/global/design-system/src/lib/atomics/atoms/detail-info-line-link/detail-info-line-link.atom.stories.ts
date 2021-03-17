@@ -2,7 +2,7 @@ import { DetailInfoLineLinkAtom } from './detail-info-line-link.atom';
 import { GlobalDesignSystemAtomicModule } from '../../global-design-system-atomic.module';
 
 export default {
-  title: 'Design System/Atoms/Detail Info Line Link'
+  title: 'Design System/Atoms/Paragraph/text/Detail Info Line Link'
 }
 
 export const primary = () => ({

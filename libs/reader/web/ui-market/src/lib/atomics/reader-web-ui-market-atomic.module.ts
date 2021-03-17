@@ -59,6 +59,8 @@ import { DetailBookMobileTemplate } from './templates/detail-book-mobile/detail-
 import { ReadMobileTemplate } from './templates/read-mobile/read-mobile.template';
 import { DetailBookTopMobileOrgan } from './organs/detail-book-top-mobile/detail-book-top-mobile.organ';
 import { TabCategoriesMolec } from './molecs/tab-categories/tab-categories.molec';
+import { InfoBookGridMolec } from './molecs/info-book-grid/info-book-grid.molec';
+import { BooksGridOrgan } from './organs/books-grid/books-grid.organ';
 
 @NgModule({
   imports: [CommonModule, StorybookSupportModule, GlobalDesignSystemAtomicModule, CarouselModule],
@@ -121,6 +123,8 @@ import { TabCategoriesMolec } from './molecs/tab-categories/tab-categories.molec
     ReadMobileTemplate,
     DetailBookTopMobileOrgan,
     TabCategoriesMolec,
+    InfoBookGridMolec,
+    BooksGridOrgan
   ],
   declarations: [
     ListInfoLongBookMolec,
@@ -179,6 +183,8 @@ import { TabCategoriesMolec } from './molecs/tab-categories/tab-categories.molec
     ReadMobileTemplate,
     DetailBookTopMobileOrgan,
     TabCategoriesMolec,
+    InfoBookGridMolec,
+    BooksGridOrgan,
   ],
 })
 export class ReaderWebUiMarketAtomicModule { }
