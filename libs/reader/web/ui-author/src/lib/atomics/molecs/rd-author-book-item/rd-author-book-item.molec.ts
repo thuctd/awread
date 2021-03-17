@@ -8,6 +8,9 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
       :host {
         display: block;
       }
+      :host .text-06 {
+        font-size: 0.6rem;
+      }
     `,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
