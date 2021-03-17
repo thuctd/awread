@@ -87,6 +87,14 @@ import { BtnBackToTopAtom } from './atoms/btn-back-to-top/btn-back-to-top.atom';
 import { PopupCoverHeaderAtom } from './atoms/popup-cover-header/popup-cover-header.atom';
 import { ProcessBarAtom } from './atoms/process-bar/process-bar.atom';
 import { BtnInputFileAtom } from './atoms/btn-input-file/btn-input-file.atom';
+import { RdBaseBtnGreenAtom } from './atoms/rd-base-btn-green/rd-base-btn-green.atom';
+import { RdAuthorSocialLinkItemAtom } from './atoms/rd-author-social-link-item/rd-author-social-link-item.atom';
+import { RdAuthorNameAtom } from './atoms/rd-author-name/rd-author-name.atom';
+import { RdAuthorBtnFollowAtom } from './atoms/rd-author-btn-follow/rd-author-btn-follow.atom';
+import { BtnRectangleAtom } from './atoms/btn-rectangle/btn-rectangle.atom';
+import { RdAuthorPopupHeaderAtom } from './atoms/rd-author-popup-header/rd-author-popup-header.atom';
+import { RdAuthorSubmitBtnAtom } from './atoms/rd-author-submit-btn/rd-author-submit-btn.atom';
+import { RdAuthorPopupContentBlockAtom } from './atoms/rd-author-popup-content-block/rd-author-popup-content-block.atom';
 import { LinkAtom } from './atoms/link/link.atom';
 import { DetailInfoLineLinkAtom } from './atoms/detail-info-line-link/detail-info-line-link.atom';
 import { NavItemAtom } from './atoms/nav-item/nav-item.atom';
@@ -94,15 +102,7 @@ import { ImgGridAtom } from './atoms/img-grid/img-grid.atom';
 import { BtnIconAtom } from './atoms/btn-icon/btn-icon.atom';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    StorybookSupportModule,
-    MatDialogModule,
-    QuillModule.forRoot(),
-    DefaultCoverModule,
-    CloseOnOutsideModule,
-    NgImageSliderModule,
-  ],
+  imports: [CommonModule, StorybookSupportModule, MatDialogModule, QuillModule.forRoot(), DefaultCoverModule, CloseOnOutsideModule, NgImageSliderModule],
   exports: [
     NgImageSliderModule,
     CloseOnOutsideModule,
@@ -190,6 +190,14 @@ import { BtnIconAtom } from './atoms/btn-icon/btn-icon.atom';
     PopupCoverHeaderAtom,
     ProcessBarAtom,
     BtnInputFileAtom,
+    RdBaseBtnGreenAtom,
+    RdAuthorSocialLinkItemAtom,
+    RdAuthorNameAtom,
+    RdAuthorBtnFollowAtom,
+    BtnRectangleAtom,
+    RdAuthorPopupHeaderAtom,
+    RdAuthorSubmitBtnAtom,
+    RdAuthorPopupContentBlockAtom,
     LinkAtom,
     DetailInfoLineLinkAtom,
     NavItemAtom,
@@ -279,6 +287,14 @@ import { BtnIconAtom } from './atoms/btn-icon/btn-icon.atom';
     PopupCoverHeaderAtom,
     ProcessBarAtom,
     BtnInputFileAtom,
+    RdBaseBtnGreenAtom,
+    RdAuthorSocialLinkItemAtom,
+    RdAuthorNameAtom,
+    RdAuthorBtnFollowAtom,
+    BtnRectangleAtom,
+    RdAuthorPopupHeaderAtom,
+    RdAuthorSubmitBtnAtom,
+    RdAuthorPopupContentBlockAtom,
     LinkAtom,
     DetailInfoLineLinkAtom,
     NavItemAtom,
@@ -286,4 +302,4 @@ import { BtnIconAtom } from './atoms/btn-icon/btn-icon.atom';
     BtnIconAtom,
   ],
 })
-export class GlobalDesignSystemAtomicModule { }
+export class GlobalDesignSystemAtomicModule {}
