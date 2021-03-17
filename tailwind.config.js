@@ -1,7 +1,7 @@
-module.exports = {
+module.exports = (isProd) = {
   prefix: '',
   purge: {
-    enabled: true,
+    enabled: isProd,
     content: [
       './libs/**/*.{html,ts}'
     ]

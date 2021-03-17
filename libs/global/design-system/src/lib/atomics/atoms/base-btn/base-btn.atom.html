@@ -1,3 +1,3 @@
 <a (click)="submitEvent.emit()" [routerLink]="['/books', bookId,'chapters', chapterId]" routerLinkActive="router-link-active"
   [ngClass]=" isSize ? 'px-3 py-1 md:text-sm' : 'px-2 py-1 text-xs'"
-  class="text-xs cursor-pointer rounded-full border border-solid mb-2 inline-block text-gray-600 bg-white hover:bg-green-400 hover:text-white hover:border-transparent mr-2 md:mr-8 border-gray-300 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110"> {{ chapter | titlecase }}</a>
+  class="text-xs cursor-pointer rounded-full border border-solid mb-2 inline-block text-gray-600 bg-white hover:bg-green-400 hover:text-white hover:border-transparent mr-2 border-gray-300 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110"> {{ chapter | titlecase }}</a>
