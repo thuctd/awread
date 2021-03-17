@@ -1,7 +1,7 @@
-module.exports = (isProd) = {
+module.exports = {
   prefix: '',
   purge: {
-    enabled: isProd,
+    enabled: process.env.NODE_ENV === 'production',
     content: [
       './libs/**/*.{html,ts}'
     ]
