@@ -99,17 +99,11 @@ import { LinkAtom } from './atoms/link/link.atom';
 import { DetailInfoLineLinkAtom } from './atoms/detail-info-line-link/detail-info-line-link.atom';
 import { NavItemAtom } from './atoms/nav-item/nav-item.atom';
 import { TabPageAtom } from './atoms/tab-page/tab-page.atom';
+import { ImgGridAtom } from './atoms/img-grid/img-grid.atom';
+import { BtnIconAtom } from './atoms/btn-icon/btn-icon.atom';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    StorybookSupportModule,
-    MatDialogModule,
-    QuillModule.forRoot(),
-    DefaultCoverModule,
-    CloseOnOutsideModule,
-    NgImageSliderModule,
-  ],
+  imports: [CommonModule, StorybookSupportModule, MatDialogModule, QuillModule.forRoot(), DefaultCoverModule, CloseOnOutsideModule, NgImageSliderModule],
   exports: [
     NgImageSliderModule,
     CloseOnOutsideModule,
@@ -209,6 +203,8 @@ import { TabPageAtom } from './atoms/tab-page/tab-page.atom';
     DetailInfoLineLinkAtom,
     NavItemAtom,
     TabPageAtom,
+    ImgGridAtom,
+    BtnIconAtom,
   ],
   declarations: [
     TabBtnAtom,
@@ -305,6 +301,8 @@ import { TabPageAtom } from './atoms/tab-page/tab-page.atom';
     DetailInfoLineLinkAtom,
     NavItemAtom,
     TabPageAtom,
+    ImgGridAtom,
+    BtnIconAtom,
   ],
 })
-export class GlobalDesignSystemAtomicModule { }
+export class GlobalDesignSystemAtomicModule {}
