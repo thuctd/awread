@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import { faList, faThLarge } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'template-list',
@@ -13,6 +14,16 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListTemplate implements OnInit {
+  display = 'grid';
+  @Input() actions = [{
+    faIcon: faThLarge,
+    display: 'grid',
+    active: false,
+  }, {
+    faIcon: faList,
+    display: 'list',
+    active: true,
+  }]
   @Input() isLoadedPage: true | false = true;
   @Input() tabsHead = [
     { name: 'Truyện dài', tabName: 'longbook', isActive: true },
@@ -22,7 +33,12 @@ export class ListTemplate implements OnInit {
 
   @Input() selectedTab = 'longbook';
   @Output() switchTabEvent = new EventEmitter();
+  @Output() eventSearch = new EventEmitter();
   constructor() { }
 
   ngOnInit(): void { }
+
+  changeDisplay(mode: string) {
+    this.display = mode;
+  }
 }

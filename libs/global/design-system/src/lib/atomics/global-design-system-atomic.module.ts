@@ -91,6 +91,8 @@ import { BtnInputFileAtom } from './atoms/btn-input-file/btn-input-file.atom';
 import { LinkAtom } from './atoms/link/link.atom';
 import { DetailInfoLineLinkAtom } from './atoms/detail-info-line-link/detail-info-line-link.atom';
 import { NavItemAtom } from './atoms/nav-item/nav-item.atom';
+import { ImgGridAtom } from './atoms/img-grid/img-grid.atom';
+import { BtnIconAtom } from './atoms/btn-icon/btn-icon.atom';
 
 @NgModule({
   imports: [
@@ -195,6 +197,8 @@ import { NavItemAtom } from './atoms/nav-item/nav-item.atom';
     LinkAtom,
     DetailInfoLineLinkAtom,
     NavItemAtom,
+    ImgGridAtom,
+    BtnIconAtom,
   ],
   declarations: [
     RdBaseBtnGreenAtom,
@@ -283,6 +287,8 @@ import { NavItemAtom } from './atoms/nav-item/nav-item.atom';
     LinkAtom,
     DetailInfoLineLinkAtom,
     NavItemAtom,
+    ImgGridAtom,
+    BtnIconAtom,
   ],
 })
 export class GlobalDesignSystemAtomicModule {}

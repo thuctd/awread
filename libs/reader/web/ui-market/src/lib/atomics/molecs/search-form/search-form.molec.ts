@@ -20,14 +20,32 @@ export class SearchFormMolec implements OnInit {
     {
       title: 'Thể Loại',
       widthClass: 'xl:w-96 lg:w-80 md:w-64',
+      options: [
+        { id: '1', name: 'Lãng mạn' },
+        { id: '2', name: 'Kiếm hiệp' },
+        { id: '3', name: 'Trinh thám' },
+        { id: '4', name: 'Kinh dị' },
+        { id: '5', name: 'Xuyên không' },
+      ],
     },
     {
       title: 'Tình Trạng',
       widthClass: 'xl:w-96 lg:w-80 md:w-64',
+      options: [
+        { id: '1', name: 'Đã hoàn thành' },
+        { id: '2', name: 'Chưa hoàn thành' },
+      ],
     },
     {
       title: 'Năm phát hành',
       widthClass: 'xl:w-60 lg:w-48 md:w-40',
+      options: [
+        { id: '1', name: '2000' },
+        { id: '2', name: '2001' },
+        { id: '3', name: '2002' },
+        { id: '4', name: '2003' },
+        { id: '5', name: '2004' },
+      ],
     },
   ];
 
