@@ -1,22 +1,26 @@
 <ul class="list-reset flex flex-no-wrap whitespace-no-wrap lg:pl-2 xl:pl-6">
   <ng-container>
-    <li class="inline-block w-100 w-auto-ns">
+    <li class="inline-block">
       <atom-nav-link class="px-2" [color]="color" [title]="navHome.title" [href]="navHome.href"></atom-nav-link>
     </li>
-    <li class="inline-block w-100 w-auto-ns" [ngClass]="{'dropdown relative': naveBook.dropdown}">
+    <li class="inline-block" [ngClass]="{'dropdown relative': naveBook.dropdown}">
       <atom-nav-item [color]="color" [title]="naveBook.title">
         <fa-icon *ngIf="naveBook.dropdown" class="text-grey-300 text-xs ml-1" [icon]="icon"></fa-icon>
       </atom-nav-item>
-      <molec-rd-dropdown-menu *ngIf="naveBook.dropdown" [dropdownData]="naveBook.dropdown"></molec-rd-dropdown-menu>
+      <molec-rd-dropdown-menu *ngIf="naveBook.dropdown" [dropdownData]="naveBook.dropdown">
+        <div class="bg-green-150 w-16 h-0.5 absolute -top-0.5 right-5"></div>
+      </molec-rd-dropdown-menu>
     </li>
-    <li class="inline-block w-100 w-auto-ns">
+    <li class="inline-block">
       <atom-nav-link class="px-2" [color]="color" [title]="navCreateBook.title" [href]="navCreateBook.href"></atom-nav-link>
     </li>
-    <li class="inline-block w-100 w-auto-ns" [ngClass]="{'dropdown relative': navPublic.dropdown}">
+    <li class="inline-block" [ngClass]="{'dropdown relative': navPublic.dropdown}">
       <atom-nav-item [color]="color" [title]="navPublic.title">
         <fa-icon *ngIf="navPublic.dropdown" class="text-grey-300 text-xs ml-1" [icon]="icon"></fa-icon>
       </atom-nav-item>
-      <molec-rd-dropdown-menu *ngIf="navPublic.dropdown" [dropdownData]="navPublic.dropdown"></molec-rd-dropdown-menu>
+      <molec-rd-dropdown-menu *ngIf="navPublic.dropdown" [dropdownData]="navPublic.dropdown">
+        <div class="bg-green-150 w-28 h-0.5 absolute -top-0.5 right-4"></div>
+      </molec-rd-dropdown-menu>
     </li>
   </ng-container>
 </ul>

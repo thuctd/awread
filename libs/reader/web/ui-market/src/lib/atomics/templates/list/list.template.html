@@ -1,12 +1,12 @@
-<section class="w-full max-w-screen-md xl:max-w-screen-xl mx-auto pt-36">
+<section class="w-full max-w-screen-xl mx-auto pt-36 relative">
   <div class="border-b border-gray-300">
     <atom-title [title]="isLoadedPage ?'Truyện tự sưu tầm' : 'Truyện tự sáng tác'"></atom-title>
   </div>
   <div class="grid grid-cols-12 gap-2 mt-8">
-    <div class="bg-white shadow-md py-4 absolute top-64 rounded-sm z-40">
+    <div class="bg-white shadow-md py-4 absolute top-64 rounded-sm z-40 w-full">
       <molec-search-form></molec-search-form>
     </div>
-    <div class="col-span-2 md:col-span-7">
+    <div class="sm:col-span-8 lg:col-span-8">
       <div class="grid grid-cols-12 gap-6 border-b border-teal-400">
         <ng-container *ngFor="let tab of tabsHead">
           <div class="col-span-2 md:col-span-4" [ngClass]="selectedTab === tab.tabName ? 'border-b-2 border-green-400 text-green-400' : 'text-gray-400'">
@@ -18,8 +18,8 @@
       <list-detail-short-book *ngIf="selectedTab === 'shortbook'"></list-detail-short-book>
       <list-detail-prose *ngIf="selectedTab === 'novel'"></list-detail-prose>
     </div>
-    <div class="col-span-2 md:col-span-1"></div>
-    <div class="col-span-2 md:col-span-4">
+    <div class="hidden lg:block lg:col-span-1"></div>
+    <div class="sm:col-span-4 lg:col-span-3">
       <list-detail-top-book class="pt-40"> </list-detail-top-book>
     </div>
   </div>

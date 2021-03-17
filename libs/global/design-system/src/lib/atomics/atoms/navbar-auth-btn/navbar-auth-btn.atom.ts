@@ -15,6 +15,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
 export class NavbarAuthBtnAtom implements OnInit {
   @Input() title = 'Đăng nhập';
   @Input() show = false;
+  @Input() spacing = 'px-4 py-1';
   @Output() submitEvent = new EventEmitter();
   constructor() {}
 

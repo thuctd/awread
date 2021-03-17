@@ -1,8 +1,8 @@
-<section class="w-full max-w-screen-xl mx-auto mt-4 py-6">
+<section class="w-full md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl mx-auto mt-4 py-6">
   <div class="flex">
     <atom-title [title]='titlePage' class="mr-2 sm:mr-4" [isUppercase]='false'></atom-title>
     <div class="flex mb-6">
-      <div class="w-full flex mt-1.5">
+      <div class="w-full flex mt-0 md:mt-1.5">
         <rd-home-tab-category *ngFor="let category of categories" [tabName]="category.title" [active]="category.isActive" (click)="toggleTabs(category)"
           (emitEvent)="filterItemsByCategory(category)">
         </rd-home-tab-category>
