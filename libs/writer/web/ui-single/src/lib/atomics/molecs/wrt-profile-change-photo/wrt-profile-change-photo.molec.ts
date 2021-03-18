@@ -1,8 +1,8 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'change-photo',
-  templateUrl: './change-photo.molec.html',
+  selector: 'wrt-profile-change-photo',
+  templateUrl: './wrt-profile-change-photo.molec.html',
   styles: [
     `
       :host {
@@ -12,7 +12,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ChangePhotoMolec implements OnInit {
+export class WrtProfileChangePhotoMolec implements OnInit {
   @Input() imgSrc = '/global-assets/images/smailImg.webp';
   @Output() eventChangeImg = new EventEmitter();
   constructor() {}

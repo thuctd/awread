@@ -3,12 +3,12 @@ import { MatCalendarCellClassFunction } from '@angular/material/datepicker';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'info-form',
-  templateUrl: './info-form.molec.html',
-    styleUrls: ['./info-form.molec.scss'],
+  selector: 'wrt-profile-info-form',
+  templateUrl: './wrt-profile-info-form.molec.html',
+  styleUrls: ['./wrt-profile-info-form.molec.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InfoFormMolec implements OnInit {
+export class WrtProfileInfoFormMolec implements OnInit {
   @Input() profileForm: FormGroup = this.fb.group({
     email: ['', [Validators.required]],
     phone: ['', [Validators.required]],

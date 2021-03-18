@@ -1,18 +1,18 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
-  selector: 'changepw-form',
-  templateUrl: './changepw-form.molec.html',
+  selector: 'wrt-profile-changepw-form',
+  templateUrl: './wrt-profile-changepw-form.molec.html',
   styles: [
     `
       :host {
         display: block;
       }
-    `
+    `,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ChangepwFormMolec implements OnInit {
+export class WrtProfileChangepwFormMolec implements OnInit {
   items = [
     {
       key: 'New password',
