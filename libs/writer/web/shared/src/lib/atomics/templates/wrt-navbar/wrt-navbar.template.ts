@@ -3,7 +3,7 @@ import type { User } from '@awread/writer/web/feature-auth';
 
 @Component({
   selector: 'navbar',
-  templateUrl: './navbar.template.html',
+  templateUrl: './wrt-navbar.template.html',
   styles: [
     `
       :host {
@@ -13,7 +13,7 @@ import type { User } from '@awread/writer/web/feature-auth';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NavbarTemplate implements OnInit {
+export class WrtNavbarTemplate implements OnInit {
   @Input() user = [];
   @Output() searchEvent = new EventEmitter();
   @Output() signoutEvent = new EventEmitter();

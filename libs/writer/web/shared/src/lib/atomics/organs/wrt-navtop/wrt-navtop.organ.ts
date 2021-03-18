@@ -2,8 +2,8 @@ import { Component, OnInit, ChangeDetectionStrategy, EventEmitter, Output, Input
 import type { User } from '@awread/writer/web/feature-auth';
 
 @Component({
-  selector: 'right-topnav',
-  templateUrl: './right-topnav.molec.html',
+  selector: 'wrt-navtop',
+  templateUrl: './wrt-navtop.organ.html',
   styles: [
     `
       :host {
@@ -13,7 +13,7 @@ import type { User } from '@awread/writer/web/feature-auth';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RightTopnavMolec implements OnInit {
+export class WrtNavtopOrgan implements OnInit {
   @Input() user = [];
   @Output() searchEvent = new EventEmitter();
   @Output() signoutEvent = new EventEmitter();

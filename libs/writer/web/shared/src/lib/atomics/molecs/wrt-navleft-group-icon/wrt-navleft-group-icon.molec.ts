@@ -1,8 +1,8 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
-  selector: 'group-icon-navleft',
-  templateUrl: './group-icon-navleft.molec.html',
+  selector: 'wrt-navleft-group-icon',
+  templateUrl: './wrt-navleft-group-icon.molec.html',
   styles: [
     `
       :host {
@@ -12,7 +12,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GroupIconNavleftMolec implements OnInit {
+export class WrtNavleftGroupIconMolec implements OnInit {
   lefNavData = [
     // {
     //   name: 'dashboard',

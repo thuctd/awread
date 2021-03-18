@@ -3,6 +3,6 @@
     <logo [isLogged]="'true'"></logo>
   </div>
   <div class="flex justify-end items-center w-4/6">
-    <right-topnav [user]="user" (searchEvent)="searchEvent.emit($event)" (signoutEvent)="signoutEvent.emit()"></right-topnav>
+    <wrt-topnav-right [user]="user" (searchEvent)="searchEvent.emit($event)" (signoutEvent)="signoutEvent.emit()"></wrt-topnav-right>
   </div>
 </section>
