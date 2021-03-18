@@ -101,6 +101,7 @@ import { DetailInfoLineLinkAtom } from './atoms/detail-info-line-link/detail-inf
 import { NavItemAtom } from './atoms/nav-item/nav-item.atom';
 import { ImgGridAtom } from './atoms/img-grid/img-grid.atom';
 import { BtnIconAtom } from './atoms/btn-icon/btn-icon.atom';
+import { BreadcrumbAtom } from './atoms/breadcrumb/breadcrumb.atom';
 
 @NgModule({
   imports: [CommonModule, StorybookSupportModule, MatDialogModule, QuillModule.forRoot(), DefaultCoverModule, CloseOnOutsideModule, NgImageSliderModule],
@@ -206,6 +207,7 @@ import { BtnIconAtom } from './atoms/btn-icon/btn-icon.atom';
     NavItemAtom,
     ImgGridAtom,
     BtnIconAtom,
+    BreadcrumbAtom,
   ],
   declarations: [
     notReadyDirective,
@@ -305,6 +307,7 @@ import { BtnIconAtom } from './atoms/btn-icon/btn-icon.atom';
     NavItemAtom,
     ImgGridAtom,
     BtnIconAtom,
+    BreadcrumbAtom,
   ],
 })
 export class GlobalDesignSystemAtomicModule { }

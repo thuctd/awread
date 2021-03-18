@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GlobalDesignSystemAtomicModule, StorybookSupportModule } from '@awread/global/design-system';
+import { ReaderWebUiAuthorAtomicModule } from '@awread/reader/web/ui-author';
 import { ListInfoLongBookMolec } from './molecs/list-info-long-book/list-info-long-book.molec';
 import { ListInfoProseMolec } from './molecs/list-info-prose/list-info-prose.molec';
 import { ListInfoShortBookMolec } from './molecs/list-info-short-book/list-info-short-book.molec';
@@ -20,7 +21,6 @@ import { HomeDetailBookReviewOrgan } from './organs/home-detail-book-review/home
 import { HomeDetailBookUpdateOrgan } from './organs/home-detail-book-update/home-detail-book-update.organ';
 import { ReviewItemMolec } from './molecs/review-item/review-item.molec';
 import { ChapterItemMolec } from './molecs/chapter-item/chapter-item.molec';
-import { BreadcrumbMolec } from './molecs/breadcrumb/breadcrumb.molec';
 import { DetailBookInfoMolec } from './molecs/detail-book-info/detail-book-info.molec';
 import { DetailBookInfoActionsMolec } from './molecs/detail-book-info-actions/detail-book-info-actions.molec';
 import { DetailBookInfoRatingMolec } from './molecs/detail-book-info-rating/detail-book-info-rating.molec';
@@ -65,10 +65,12 @@ import { RdSearchBookTemplate } from './templates/rd-search-book/rd-search-book.
 import { RdSearchBookHeaderMolec } from './molecs/rd-search-book-header/rd-search-book-header.molec';
 import { RdSearchBookTitleMolec } from './molecs/rd-search-book-title/rd-search-book-title.molec';
 import { RdSearchBookItemOrgan } from './organs/rd-search-book-item/rd-search-book-item.organ';
+import { RdSearchBookMbTemplate } from './templates/rd-search-book-mb/rd-search-book-mb.template';
 
 @NgModule({
-  imports: [CommonModule, StorybookSupportModule, GlobalDesignSystemAtomicModule, CarouselModule],
+  imports: [CommonModule, StorybookSupportModule, GlobalDesignSystemAtomicModule, CarouselModule, ReaderWebUiAuthorAtomicModule],
   exports: [
+    ReaderWebUiAuthorAtomicModule,
     CommonModule,
     ListInfoLongBookMolec,
     ListInfoProseMolec,
@@ -89,7 +91,6 @@ import { RdSearchBookItemOrgan } from './organs/rd-search-book-item/rd-search-bo
     ReviewItemMolec,
     HomeDetailBookUpdateOrgan,
     ChapterItemMolec,
-    BreadcrumbMolec,
     DetailBookInfoMolec,
     DetailBookInfoActionsMolec,
     DetailBookInfoRatingMolec,
@@ -133,6 +134,7 @@ import { RdSearchBookItemOrgan } from './organs/rd-search-book-item/rd-search-bo
     RdSearchBookHeaderMolec,
     RdSearchBookTitleMolec,
     RdSearchBookItemOrgan,
+    RdSearchBookMbTemplate,
   ],
   declarations: [
     ListInfoLongBookMolec,
@@ -154,7 +156,6 @@ import { RdSearchBookItemOrgan } from './organs/rd-search-book-item/rd-search-bo
     HomeDetailBookUpdateOrgan,
     ReviewItemMolec,
     ChapterItemMolec,
-    BreadcrumbMolec,
     DetailBookInfoMolec,
     DetailBookInfoActionsMolec,
     DetailBookInfoRatingMolec,
@@ -197,6 +198,7 @@ import { RdSearchBookItemOrgan } from './organs/rd-search-book-item/rd-search-bo
     RdSearchBookHeaderMolec,
     RdSearchBookTitleMolec,
     RdSearchBookItemOrgan,
+    RdSearchBookMbTemplate,
   ],
 })
 export class ReaderWebUiMarketAtomicModule {}
