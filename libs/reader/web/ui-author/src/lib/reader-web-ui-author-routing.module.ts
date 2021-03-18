@@ -22,7 +22,7 @@ const routes: Routes = [
                 : import('./pages/author-desktop/author-desktop.module').then((m) => m.AuthorDesktopModule),
           },
           {
-            path: ':authorId/books/:bookId',
+            path: ':authorId/books',
             loadChildren: () =>
               window.innerWidth <= 768 && window?.haveMobile
                 ? import('./pages/author-book-mobile/author-book-mobile.module').then((m) => m.AuthorBookMobileModule)
