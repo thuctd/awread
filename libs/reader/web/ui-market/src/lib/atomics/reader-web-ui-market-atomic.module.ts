@@ -61,6 +61,10 @@ import { DetailBookTopMobileOrgan } from './organs/detail-book-top-mobile/detail
 import { TabCategoriesMolec } from './molecs/tab-categories/tab-categories.molec';
 import { InfoBookGridMolec } from './molecs/info-book-grid/info-book-grid.molec';
 import { BooksGridOrgan } from './organs/books-grid/books-grid.organ';
+import { RdSearchBookTemplate } from './templates/rd-search-book/rd-search-book.template';
+import { RdSearchBookHeaderMolec } from './molecs/rd-search-book-header/rd-search-book-header.molec';
+import { RdSearchBookTitleMolec } from './molecs/rd-search-book-title/rd-search-book-title.molec';
+import { RdSearchBookItemOrgan } from './organs/rd-search-book-item/rd-search-book-item.organ';
 
 @NgModule({
   imports: [CommonModule, StorybookSupportModule, GlobalDesignSystemAtomicModule, CarouselModule],
@@ -124,7 +128,11 @@ import { BooksGridOrgan } from './organs/books-grid/books-grid.organ';
     DetailBookTopMobileOrgan,
     TabCategoriesMolec,
     InfoBookGridMolec,
-    BooksGridOrgan
+    BooksGridOrgan,
+    RdSearchBookTemplate,
+    RdSearchBookHeaderMolec,
+    RdSearchBookTitleMolec,
+    RdSearchBookItemOrgan,
   ],
   declarations: [
     ListInfoLongBookMolec,
@@ -185,6 +193,10 @@ import { BooksGridOrgan } from './organs/books-grid/books-grid.organ';
     TabCategoriesMolec,
     InfoBookGridMolec,
     BooksGridOrgan,
+    RdSearchBookTemplate,
+    RdSearchBookHeaderMolec,
+    RdSearchBookTitleMolec,
+    RdSearchBookItemOrgan,
   ],
 })
-export class ReaderWebUiMarketAtomicModule { }
+export class ReaderWebUiMarketAtomicModule {}

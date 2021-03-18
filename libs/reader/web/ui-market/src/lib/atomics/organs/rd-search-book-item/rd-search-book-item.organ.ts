@@ -1,8 +1,8 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 
 @Component({
-  selector: 'organ-books-grid',
-  templateUrl: './books-grid.organ.html',
+  selector: 'organ-rd-search-book-item',
+  templateUrl: './rd-search-book-item.organ.html',
   styles: [
     `
       :host {
@@ -12,7 +12,9 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BooksGridOrgan implements OnInit {
+export class RdSearchBookItemOrgan implements OnInit {
+  @Input() category = 'Phiêu lưu, hài hước, hành động';
+  @Input() status = 'Hoàn thành';
   @Input() title = 'Em là nhà';
 
   constructor() {}
