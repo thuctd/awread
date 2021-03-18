@@ -1,0 +1,17 @@
+<wrt-auth-header [title]="title" [description]="description"> </wrt-auth-header>
+<wrt-forgot-actions
+  [title]="'Đóng'"
+  [active]="'true'"
+  (submitEvent)="submitEvent.emit($event)"
+></wrt-forgot-actions>
+<option-link
+  [suggestText]="'Bạn chưa nhận được Email?'"
+  [title]="'Gửi lại'"
+  [link]="'/signin'"
+></option-link>
+<option-link
+  [suggestText]="'Bạn đã nhớ thông tin đăng nhập?'"
+  [title]="'Đăng nhập'"
+  [link]="'/signin'"
+>
+</option-link>
