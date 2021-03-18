@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StorybookSupportModule } from '../storybook-support.module';
 import { MatDialogModule } from '@angular/material/dialog';
+import { notReadyDirective } from './directives/not-ready/not-ready.directive';
 import { AuthBgAtom } from './atoms/auth-bg/auth-bg.atom';
 import { CheckBtnAtom } from './atoms/check-btn/check-btn.atom';
 import { InputFormAtom } from './atoms/input-form/input-form.atom';
@@ -104,6 +105,7 @@ import { BtnIconAtom } from './atoms/btn-icon/btn-icon.atom';
 @NgModule({
   imports: [CommonModule, StorybookSupportModule, MatDialogModule, QuillModule.forRoot(), DefaultCoverModule, CloseOnOutsideModule, NgImageSliderModule],
   exports: [
+    notReadyDirective,
     NgImageSliderModule,
     CloseOnOutsideModule,
     RdBaseBtnGreenAtom,
@@ -206,6 +208,7 @@ import { BtnIconAtom } from './atoms/btn-icon/btn-icon.atom';
     BtnIconAtom,
   ],
   declarations: [
+    notReadyDirective,
     RdBaseBtnGreenAtom,
     TabBtnAtom,
     LogoAtom,

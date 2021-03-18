@@ -1,0 +1,3 @@
+<wrt-auth-header [title]="title" [description]="description"></wrt-auth-header>
+<wrt-login-form [form]="formComplete"></wrt-login-form>
+<submit-btn (keydown.enter)='completeEvent.emit()' (btnClicked)="completeEvent.emit()" [name]="'Cập nhật'" [active]="formComplete.valid"></submit-btn>

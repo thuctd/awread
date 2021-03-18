@@ -1,0 +1,16 @@
+<wrt-login-form #loginForm [form]="authForm"></wrt-login-form>
+<div class="px-1">
+  <div class="float-left flex">
+    <check-btn></check-btn>
+    <div class="text-gray-400 text-sm">Ghi nhớ mật khẩu</div>
+  </div>
+  <div class="float-right">
+    <wrt-remember-forgot [link]="forgotLink"></wrt-remember-forgot>
+  </div>
+  <div class="clear-both"></div>
+</div>
+<submit-btn (keydown.enter)="auth.emit($event)"
+  (btnClicked)="auth.emit('email')"
+  [active]="loginForm.form.valid"
+></submit-btn>
+<wrt-action-btns (keyup.enter)="auth.emit($event)" (auth)="auth.emit($event)"> </wrt-action-btns>
