@@ -132,7 +132,7 @@
     "pluralize": "^8.0.0",
     "postcss": "^8.2.8",
     "postcss-import": "^14.0.0",
-    "postcss-loader": "^5.1.0",
+    "postcss-loader": "^5.2.0",
     "postcss-scss": "^3.0.5",
     "prettier": "^2.2.1",
     "source-map-support": "^0.5.19",

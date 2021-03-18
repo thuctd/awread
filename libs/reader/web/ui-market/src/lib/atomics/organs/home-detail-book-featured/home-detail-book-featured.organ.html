@@ -1,9 +1,9 @@
-<section class="w-full max-w-screen-xl mx-auto mt-4 md:mt-12 py-4">
+<section class="w-full md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl mx-auto mt-4 md:mt-12 py-4">
     <div class="mb-4">
         <atom-title [title]='titlePage' class="uppercase"></atom-title>
     </div>
-    <div class="grid grid-cols-12 gap-6 place-items-center mb-4">
-        <div *ngFor='let loop3 of counter(8);' class="col-span-2 md:col-span-3 w-64 mx-auto">
+    <div class="grid grid-cols-12 sm:gap-x-8 lg:gap-x-12 xl:gap-x-16 place-items-center mb-4">
+        <div *ngFor='let loop3 of counter(8);' class="col-span-2 md:col-span-3 mx-auto py-2">
             <atom-img-m [size]='"xl"'></atom-img-m>
             <div>
               <home-info-book-featured></home-info-book-featured>
