@@ -1,5 +1,5 @@
-<dl class="lg:text-sm sm:text-xs leading-tight my-3">
-  <dt class="font-medium inline-block text-gray-800 w-28">{{title}}</dt>
-  <dd class="inline-block ml0 text-gray-800">
-    <a [routerLink]="['/author', bookId]" routerLinkActive="router-link-active" class="outline-none text-green-400 cursor-pointer">{{value}}</a></dd>
-</dl>
+<div class="lg:text-sm sm:text-xs leading-tight my-3">
+  <span class="font-medium inline-block text-gray-800 mr-2 w-28">{{title}}</span>
+  <a [routerLink]="['/author', bookId]" routerLinkActive="router-link-active"
+    class="inline-block text-gray-800 outline-none text-green-400 cursor-pointer">{{value}}</a>
+</div>

@@ -1,10 +1,11 @@
 <div class="flex flex-col items-center">
-  <div (click)="isSaveBook()" class="flex flex-col items-center cursor-pointer mb-2">
+  <div (click)="isSaveBook()" class="flex flex-col items-center justify-center cursor-pointer mb-2">
     <img class="w-12" *ngIf="!saveBook" [src]="bookMark.srcbookMark" [alt]="bookMark.altbookMark">
+    <div *ngIf="!saveBook" class="-mt-0.5 text-sm text-gray-600 font-medium w-full">Lưu truyện</div>
     <img class="w-10" *ngIf="saveBook" [src]="bookMark2.srcbookMark2" [alt]="bookMark2.altbookMark2">
-    <div class="pt-1 text-sm text-gray-600 font-medium w-full">Lưu truyện</div>
+    <div *ngIf="saveBook" class="mt-0.5 text-sm text-gray-600 font-medium w-full">Lưu truyện</div>
   </div>
-  <div (click)="isDonate()" class="flex flex-col items-center w-14 cursor-pointer">
+  <div (click)="isDonate()" class="flex flex-col items-center justify-center w-14 cursor-pointer">
     <img *ngIf="!donate" [src]="bread.srcBread" [alt]="bread.altBread">
     <img *ngIf="donate" [src]="bread2.srcBread2" [alt]="bread2.altBread2">
     <div class="pt-2 text-sm text-gray-600 font-medium">Donate</div>
