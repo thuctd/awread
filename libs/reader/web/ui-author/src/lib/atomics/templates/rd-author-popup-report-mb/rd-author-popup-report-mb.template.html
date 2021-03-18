@@ -1,0 +1,9 @@
+<div class="relative">
+  <fa-icon mat-dialog-close [icon]="faIcon" class="cursor-pointer absolute left-2 top-3 text-2xl text-gray-400"></fa-icon>
+  <atom-rd-author-popup-header class="border-t" [title]="'Báo cáo người dùng'"></atom-rd-author-popup-header>
+  <organ-rd-author-list-report class="py-12"></organ-rd-author-list-report>
+  <button (click)="btnClick.emit()" class="w-full bg-green-400 py-1 rounded-lg text-white focus:outline-none">
+    Gửi báo cáo
+  </button>
+  <template-footer class="mt-16"></template-footer>
+</div>

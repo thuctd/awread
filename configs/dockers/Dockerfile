@@ -1,3 +1,4 @@
+ARG NODE_ENV=production
 FROM node:14-alpine as builder
 ENV CYPRESS_INSTALL_BINARY=0
 WORKDIR /batcave

@@ -1,79 +1,72 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GlobalDesignSystemAtomicModule, StorybookSupportModule } from '@awread/global/design-system';
-import { TabHeadMolec } from './molecs/tab-head/tab-head.molec';
-import { LoginFormMolec } from './molecs/login-form/login-form.molec';
-import { RegisterFormMolec } from './molecs/register-form/register-form.molec';
-import { RememberForgotMolec } from './molecs/remember-forgot/remember-forgot.molec';
-import { ActionBtnsMolec } from './molecs/action-btns/action-btns.molec';
-import { LoginOrgan } from './organs/login/login.organ';
-import { RegisterOrgan } from './organs/register/register.organ';
-import { LoginRegisterTemplate } from './templates/login-register/login-register.template';
-import { ForgotPasswordTemplate } from './templates/forgot-password/forgot-password.template';
-import { AuthBackgroundTemplate } from './templates/auth-background/auth-background.template';
-import { ForgotFormMolec } from './molecs/forgot-form/forgot-form.molec';
-import { ForgotOrgan } from './organs/forgot/forgot.organ';
-import { ForgotActionsMolec } from './molecs/forgot-actions/forgot-actions.molec';
-import { ForgotOptionsMolec } from './molecs/forgot-options/forgot-options.molec';
-import { ForgotSentOrgan } from './organs/forgot-sent/forgot-sent.organ';
-import { AccountCompleteTemplate } from './templates/account-complete/account-complete.template';
-import { AuthHeaderMolec } from './molecs/auth-header/auth-header.molec';
-import { NewPasswordTemplate } from './templates/new-password/new-password.template';
-import { NewPasswordFormMolec } from './molecs/new-password-form/new-password-form.molec';
-import { AccountCompleteOrgan } from './organs/account-complete/account-complete.organ';
-import { NewPasswordOrgan } from './organs/new-password/new-password.organ';
+import { WrtTabHeadMolec } from './molecs/wrt-tab-head/wrt-tab-head.molec';
+import { WrtLoginFormMolec } from './molecs/wrt-login-form/wrt-login-form.molec';
+import { WrtRegisterFormMolec } from './molecs/wrt-register-form/wrt-register-form.molec';
+import { WrtRememberForgotMolec } from './molecs/wrt-remember-forgot/wrt-remember-forgot.molec';
+import { WrtActionBtnsMolec } from './molecs/wrt-action-btns/wrt-action-btns.molec';
+import { WrtLoginOrgan } from './organs/wrt-login/wrt-login.organ';
+import { WrtRegisterOrgan } from './organs/wrt-register/wrt-register.organ';
+import { WrtLoginRegisterTemplate } from './templates/wrt-login-register/wrt-login-register.template';
+import { WrtForgotPasswordTemplate } from './templates/wrt-forgot-password/wrt-forgot-password.template';
+import { WrtAuthBackgroundTemplate } from './templates/wrt-auth-background/wrt-auth-background.template';
+import { WrtForgotFormMolec } from './molecs/wrt-forgot-form/wrt-forgot-form.molec';
+import { WrtForgotOrgan } from './organs/wrt-forgot/wrt-forgot.organ';
+import { WrtForgotActionsMolec } from './molecs/wrt-forgot-actions/wrt-forgot-actions.molec';
+import { WrtForgotSentOrgan } from './organs/wrt-forgot-sent/wrt-forgot-sent.organ';
+import { WrtAccountCompleteTemplate } from './templates/wrt-account-complete/wrt-account-complete.template';
+import { WrtAuthHeaderMolec } from './molecs/wrt-auth-header/wrt-auth-header.molec';
+import { WrtNewPasswordTemplate } from './templates/wrt-new-password/wrt-new-password.template';
+import { WrtNewPasswordFormMolec } from './molecs/wrt-new-password-form/wrt-new-password-form.molec';
+import { WrtAccountCompleteOrgan } from './organs/wrt-account-complete/wrt-account-complete.organ';
+import { WrtNewPasswordOrgan } from './organs/wrt-new-password/wrt-new-password.organ';
 @NgModule({
-  imports: [
-    CommonModule,
-    GlobalDesignSystemAtomicModule,
-    StorybookSupportModule,
-  ],
+  imports: [CommonModule, GlobalDesignSystemAtomicModule, StorybookSupportModule],
   exports: [
     CommonModule,
-    TabHeadMolec,
-    LoginFormMolec,
-    RegisterFormMolec,
-    RememberForgotMolec,
-    ActionBtnsMolec,
-    LoginOrgan,
-    RegisterOrgan,
-    LoginRegisterTemplate,
-    ForgotPasswordTemplate,
-    AuthBackgroundTemplate,
-    AuthHeaderMolec,
-    ForgotFormMolec,
-    ForgotOrgan,
-    ForgotActionsMolec,
-    ForgotOptionsMolec,
-    ForgotSentOrgan,
-    AccountCompleteTemplate,
-    NewPasswordTemplate,
-    NewPasswordFormMolec,
-    AccountCompleteOrgan,
-    NewPasswordOrgan,
+    WrtTabHeadMolec,
+    WrtLoginFormMolec,
+    WrtRegisterFormMolec,
+    WrtRememberForgotMolec,
+    WrtActionBtnsMolec,
+    WrtLoginOrgan,
+    WrtRegisterOrgan,
+    WrtLoginRegisterTemplate,
+    WrtForgotPasswordTemplate,
+    WrtAuthBackgroundTemplate,
+    WrtAuthHeaderMolec,
+    WrtForgotFormMolec,
+    WrtForgotOrgan,
+    WrtForgotActionsMolec,
+    WrtForgotSentOrgan,
+    WrtAccountCompleteTemplate,
+    WrtNewPasswordTemplate,
+    WrtNewPasswordFormMolec,
+    WrtAccountCompleteOrgan,
+    WrtNewPasswordOrgan,
   ],
   declarations: [
-    TabHeadMolec,
-    LoginFormMolec,
-    RegisterFormMolec,
-    RememberForgotMolec,
-    ActionBtnsMolec,
-    LoginOrgan,
-    RegisterOrgan,
-    LoginRegisterTemplate,
-    ForgotPasswordTemplate,
-    AuthBackgroundTemplate,
-    AuthHeaderMolec,
-    ForgotFormMolec,
-    ForgotOrgan,
-    ForgotActionsMolec,
-    ForgotOptionsMolec,
-    ForgotSentOrgan,
-    AccountCompleteTemplate,
-    NewPasswordTemplate,
-    NewPasswordFormMolec,
-    AccountCompleteOrgan,
-    NewPasswordOrgan,
+    WrtTabHeadMolec,
+    WrtLoginFormMolec,
+    WrtRegisterFormMolec,
+    WrtRememberForgotMolec,
+    WrtActionBtnsMolec,
+    WrtLoginOrgan,
+    WrtRegisterOrgan,
+    WrtLoginRegisterTemplate,
+    WrtForgotPasswordTemplate,
+    WrtAuthBackgroundTemplate,
+    WrtAuthHeaderMolec,
+    WrtForgotFormMolec,
+    WrtForgotOrgan,
+    WrtForgotActionsMolec,
+    WrtForgotSentOrgan,
+    WrtAccountCompleteTemplate,
+    WrtNewPasswordTemplate,
+    WrtNewPasswordFormMolec,
+    WrtAccountCompleteOrgan,
+    WrtNewPasswordOrgan,
   ],
 })
-export class WriterWebUiAuthAtomicModule { }
+export class WriterWebUiAuthAtomicModule {}

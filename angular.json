@@ -136,6 +136,7 @@
             ],
             "styles": [
               "apps/writer/web/src/styles.scss",
+              "libs/global/styles/src/lib/quill.scss",
               "libs/global/styles/src/app-tailwind.scss",
               "libs/global/styles/src/index.scss",
               "libs/global/styles/src/projects/writer-web/index.scss"

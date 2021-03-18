@@ -21,8 +21,8 @@ export interface Item {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeTagsOrgan implements OnInit {
-  prevIcon = `<img src="/global-assets/images/arrow_left.png" alt="arrow_left">`;
-  nextIcon = `<img src="/global-assets/images/arrow_right.png" alt="arrow_right">`;
+  prevIcon = `<img src="/global-assets/images/arrow_left.webp" alt="arrow_left">`;
+  nextIcon = `<img src="/global-assets/images/arrow_right.webp" alt="arrow_right">`;
   @Input() titlePage = 'Tags';
 
   @Input() categories: Category[] = [

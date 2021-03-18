@@ -1,0 +1,16 @@
+<div class="transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-100">
+  <button (click)="isFollow()" *ngIf="follow" [ngClass]="classBtn1" class="border-green-400 bg-green-400 shadow focus:outline-none">
+    <fa-icon *ngIf="faPlus" class="text-white" [icon]="faPlus"></fa-icon>
+    <span class="ml-2 font-normal text-white">{{text}}</span>
+  </button>
+  <button (click)="isFollow()" *ngIf="!follow" [ngClass]="classBtn2" class="float-left sm:float-none border-green-400 bg-green-400 shadow focus:outline-none">
+    <fa-icon class="text-white text-sm sm:text-xl mr-1" [icon]="faUser"></fa-icon>
+    <fa-icon class="text-white text-xs sm:text-lg" [icon]="faCheck"></fa-icon>
+  </button>
+  <button *ngIf="!follow" [ngClass]="classBtn2" class="float-right sm:float-none sm:hidden block border-green-400 bg-green-400 shadow focus:outline-none">
+    <span class="text-sm text-white">Nhắn tin</span>
+  </button>
+  <div class="clear-both sm:clear-none"></div>
+</div>
+
+

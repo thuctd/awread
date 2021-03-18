@@ -1,5 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { faHome , faAngleRight} from '@fortawesome/free-solid-svg-icons';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { faHome, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'molec-breadcrumb',
@@ -9,17 +9,17 @@ import { faHome , faAngleRight} from '@fortawesome/free-solid-svg-icons';
       :host {
         display: block;
       }
-    `
+    `,
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BreadcrumbMolec implements OnInit {
-  menu = [
+  @Input() menu = [
     {
       title: 'Home',
       link: '/home',
       size: 'text-md',
-      icon: faHome
+      icon: faHome,
     },
     {
       title: 'Truyện ngắn',
@@ -31,13 +31,10 @@ export class BreadcrumbMolec implements OnInit {
       title: 'Ngày ấy vì ai mà đổi thay',
       link: '',
       size: 'text-xs',
-      icon: faAngleRight
-    }
-
+      icon: faAngleRight,
+    },
   ];
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

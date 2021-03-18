@@ -2,6 +2,7 @@
 ARG application=writer-web
 ARG applicationPath=writer/web
 ARG GRAPHQL_URI=backend-graphql.web.1
+ARG NODE_ENV=production
 
 FROM node:14-alpine as builder
 ENV CYPRESS_INSTALL_BINARY=0
@@ -17,6 +18,7 @@ COPY configs/tailwind configs/tailwind
 FROM builder as build-writer-web
 ARG application
 ARG applicationPath
+ARG NODE_ENV
 ARG GRAPHQL_URI
 COPY libs/global ./libs/global
 COPY libs/$applicationPath ./libs/$applicationPath
@@ -29,6 +31,7 @@ RUN pnpm build $application -- --prod --no-progress
 FROM nginx:stable-alpine as writer-web
 ARG application
 ARG applicationPath
+ARG NODE_ENV
 EXPOSE 80
 WORKDIR /app
 # //NOTE: update this

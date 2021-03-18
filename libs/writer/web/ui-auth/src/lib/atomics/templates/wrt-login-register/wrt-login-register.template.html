@@ -1,0 +1,20 @@
+<wrt-template-auth-background>
+  <wrt-tab-head
+    #tabHead
+    [tabs]="tabs"
+    [selectedTab]="selectedTab"
+    (toggleTab)="toggleTab($event)"
+  ></wrt-tab-head>
+  <login
+    (auth)="auth.emit($event)"
+    *ngIf="selectedTab === 'login'"
+    [authForm]="authForm"
+    [forgotLink]="'/forgot'"
+  >
+  </login>
+  <register
+    (regiterEvent)="regiterEvent.emit($event)"
+    [authForm]="authForm"
+    *ngIf="selectedTab === 'register'"
+  ></register>
+</wrt-template-auth-background>
