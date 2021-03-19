@@ -1,6 +1,6 @@
 <section class="pl-32 bg-gray-50 h-screen">
   <div class="max-w-screen-xl mx-auto">
-    <template-detail
+    <wrt-template-detail
       [bookForm]="bookForm"
       [bookId]="bookId"
       [submitted]="submitted"
@@ -16,7 +16,7 @@
       (createNewChapterEvent)="createNewChapterEvent()"
       (switchTabEvent)="switchTab($event)"
       (genresEvent)="genresEvent($event)"
-    ></template-detail>
+    ></wrt-template-detail>
     <div class="text-right pr-2 md:pr-4" *ngIf="selectedTab === 'book'">
       <button
         (click)="addorUpdateBookToServer()"
