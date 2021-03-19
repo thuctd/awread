@@ -1,5 +1,5 @@
 <section>
-  <molec-interrogatory></molec-interrogatory>
+  <molec-interrogatory (submitEvent)="openFormRegister($event)"></molec-interrogatory>
   <molec-login-form class="mt-4" #loginForm [form]="authForm"></molec-login-form>
   <molec-remember-forgot-password></molec-remember-forgot-password>
   <molec-submit class="mt-6" (btnClicked)="auth.emit('email')" [active]="loginForm.form.valid"></molec-submit>

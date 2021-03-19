@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter, Optional } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { CheckMailWebTemplate } from '../check-mail-web/check-mail-web.template';
 
 @Component({
   selector: 'template-forgot-web',
@@ -21,7 +22,18 @@ export class ForgotWebTemplate implements OnInit {
 
   @Output() submitEvent = new EventEmitter();
 
-  constructor(@Optional() public dialogRef: MatDialogRef<ForgotWebTemplate>) {}
+  constructor(public dialog: MatDialog, @Optional() public dialogRef: MatDialogRef<ForgotWebTemplate>) {}
 
   ngOnInit(): void {}
+
+  onClick(): void {
+    this.dialogRef.close();
+  }
+
+  openFormCheckMail($event): void {
+    const dialogRef = this.dialog.open(CheckMailWebTemplate, {
+      width: '32rem',
+      height: '25rem',
+    });
+  }
 }
