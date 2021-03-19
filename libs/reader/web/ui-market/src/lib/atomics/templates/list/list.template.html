@@ -16,7 +16,7 @@
         </div>
       </div>
     </div>
-    <div class="col-span-2 md:col-span-8 md:pr-8">
+    <div class="col-span-2 sm:col-span-8 lg:col-span-8 sm:pr-10 lg:pr-0 xl:pr-8">
       <div class="grid grid-cols-12 gap-6 border-b border-teal-400">
         <ng-container *ngFor="let tab of tabsHead">
           <div class="col-span-2 md:col-span-4" [ngClass]="selectedTab === tab.tabName ? 'border-b-2 border-green-400 text-green-400' : 'text-gray-400'">
@@ -28,8 +28,8 @@
       <list-detail-short-book [display]="display" *ngIf="selectedTab === 'shortbook'"></list-detail-short-book>
       <list-detail-prose [display]="display" *ngIf="selectedTab === 'novel'"></list-detail-prose>
     </div>
-    <div class="col-span-2 md:col-span-1"></div>
-    <div class="col-span-2 md:col-span-3">
+    <div class="col-span-2 sm:hidden lg:block lg:col-span-1"></div>
+    <div class="col-span-2 sm:col-span-4 lg:col-span-3">
       <list-detail-top-book class="pt-40"> </list-detail-top-book>
     </div>
   </div>
