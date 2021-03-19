@@ -15,7 +15,7 @@ const routes: Routes = [
         component: MarketLayout,
         children: [
           {
-            path: 'home',
+            path: '',
             loadChildren: () =>
               window.innerWidth <= 768 && window?.haveMobile
                 ? import('./pages/home-mobile/home-mobile.module').then((m) => m.HomeMobileModule)
@@ -109,9 +109,9 @@ const routes: Routes = [
                 : import('./pages/news-desktop/news-desktop.module').then((m) => m.NewsDesktopModule),
           },
           {
-            path: '',
+            path: '**',
             pathMatch: 'full',
-            redirectTo: 'home',
+            redirectTo: '',
           },
         ],
       },
@@ -123,4 +123,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class ReaderWebUiMarketRoutingModule {}
+export class ReaderWebUiMarketRoutingModule { }

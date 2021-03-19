@@ -1,46 +1,39 @@
-import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { GlobalDesignSystemAtomicModule, StorybookSupportModule } from '@awread/global/design-system';
-import { NavbarLinkGroupMolec } from "./molecs/navbar-link-group/navbar-link-group.molec";
-import { TopNavOrgan } from "./organs/top-nav/top-nav.organ";
-import { RightTopnavMolec } from "./molecs/right-topnav/right-topnav.molec";
-import { LeftNavOrgan } from "./organs/left-nav/left-nav.organ";
-import { GroupIconNavleftMolec } from "./molecs/group-icon-navleft/group-icon-navleft.molec";
-import { NavbarTemplate } from "./templates/navbar/navbar.template";
-import { RouterModule } from "@angular/router";
+import { WrtNavtopOrgan } from './organs/wrt-navtop/wrt-navtop.organ';
+import { WrtTopnavRightMolec } from './molecs/wrt-topnav-right/wrt-topnav-right.molec';
+import { WrtNavleftOrgan } from './organs/wrt-navleft/wrt-navleft.organ';
+import { WrtNavleftGroupIconMolec } from './molecs/wrt-navleft-group-icon/wrt-navleft-group-icon.molec';
+import { WrtNavbarTemplate } from './templates/wrt-navbar/wrt-navbar.template';
+import { RouterModule } from '@angular/router';
 import { PopupCoverImageTemplate } from './templates/popup-cover-image/popup-cover-image.template';
 import { PopupCoverImageChooseOrgan } from './organs/popup-cover-image-choose/popup-cover-image-choose.organ';
 import { PopupCoverImageAlignOrgan } from './organs/popup-cover-image-align/popup-cover-image-align.organ';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    StorybookSupportModule,
-    GlobalDesignSystemAtomicModule,
-  ],
+  imports: [CommonModule, StorybookSupportModule, GlobalDesignSystemAtomicModule],
   exports: [
     RouterModule,
     CommonModule,
-    NavbarLinkGroupMolec,
-    TopNavOrgan,
-    RightTopnavMolec,
-    LeftNavOrgan,
-    GroupIconNavleftMolec,
-    NavbarTemplate,
+    WrtNavtopOrgan,
+    WrtTopnavRightMolec,
+    WrtNavleftOrgan,
+    WrtNavleftGroupIconMolec,
+    WrtNavbarTemplate,
     PopupCoverImageTemplate,
     PopupCoverImageChooseOrgan,
     PopupCoverImageAlignOrgan,
   ],
   declarations: [
-    NavbarLinkGroupMolec,
-    TopNavOrgan,
-    RightTopnavMolec,
-    LeftNavOrgan,
-    GroupIconNavleftMolec,
-    NavbarTemplate,
+    WrtNavtopOrgan,
+    WrtTopnavRightMolec,
+    WrtNavleftOrgan,
+    WrtNavleftGroupIconMolec,
+    WrtNavbarTemplate,
     PopupCoverImageTemplate,
     PopupCoverImageChooseOrgan,
     PopupCoverImageAlignOrgan,
   ],
 })
-export class WriterWebSharedAtomicModule { }
+export class WriterWebSharedAtomicModule {}
