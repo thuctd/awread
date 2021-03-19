@@ -17,8 +17,8 @@ export class InformationAppOrgan implements OnInit {
     title: 'Facebook',
     line1: 'facebook.com/awreadbook',
     line2: 'facebook.com/groups/awread',
-    link1: '',
-    link2: '',
+    link1: 'https://www.facebook.com/awread.vn',
+    link2: 'https://www.facebook.com/awread.vn',
   };
 
   @Input() address = {
@@ -27,7 +27,7 @@ export class InformationAppOrgan implements OnInit {
     line2: 'Tel: 0326988916',
   };
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }
