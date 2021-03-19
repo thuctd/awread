@@ -1,5 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, EventEmitter, Output } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { ForgotMobileTemplate } from '../../templates/forgot-mobile/forgot-mobile.template';
 import { ForgotWebTemplate } from '../../templates/forgot-web/forgot-web.template';
 import { LoginWebTemplate } from '../../templates/login-web/login-web.template';
 
@@ -31,6 +32,15 @@ export class RememberForgotPasswordMolec implements OnInit {
     const dialogRef = this.dialog.open(ForgotWebTemplate, {
       width: '32rem',
       height: '28rem',
+    });
+  }
+
+  openFormForgotMobile($event): void {
+    const dialogRef = this.dialog.open(ForgotMobileTemplate, {
+      maxWidth: '100vw',
+      maxHeight: '100vh',
+      width: '100%',
+      height: '100%',
     });
   }
 }
