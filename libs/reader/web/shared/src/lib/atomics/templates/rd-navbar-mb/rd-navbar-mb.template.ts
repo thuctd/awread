@@ -8,6 +8,10 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
       :host {
         display: block;
       }
+
+      .z-999 {
+        z-index: 999;
+      }
     `,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -16,7 +20,7 @@ export class RdNavbarMbTemplate implements OnInit {
   @Input() isLogin = false;
   @Input() isMenu = false;
   @Input() isSearch = false;
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }
