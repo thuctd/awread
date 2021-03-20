@@ -23,7 +23,7 @@ const routes: Routes = [
           },
 
           {
-            path: 'books/:{bookId}/chapters/:{chapterId}',
+            path: 'books/:bookId/chapters/:chapterId',
             loadChildren: () =>
               window.innerWidth <= 768 && window?.haveMobile
                 ? import('./pages/read-mobile/read-mobile.module').then((m) => m.ReadMobileModule)
@@ -31,7 +31,7 @@ const routes: Routes = [
           },
 
           {
-            path: 'books/:{bookId}',
+            path: 'books/:bookId',
             loadChildren: () =>
               window.innerWidth <= 768 && window?.haveMobile
                 ? import('./pages/detail-mobile/detail-mobile.module').then((m) => m.DetailMobileModule)
