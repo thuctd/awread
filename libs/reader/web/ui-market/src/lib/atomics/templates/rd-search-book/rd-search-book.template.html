@@ -3,7 +3,7 @@
     <molec-rd-search-book-title></molec-rd-search-book-title>
     <molec-rd-search-book-header [number]="items.length" class="pt-8 pb-4"></molec-rd-search-book-header>
     <div *ngFor="let item of items" class="py-4">
-      <organ-rd-search-book-item [title]="item.name" [category]="item.category" [status]="item.status"></organ-rd-search-book-item>
+      <organ-rd-search-book-list [title]="item.name" [category]="item.category" [status]="item.status"></organ-rd-search-book-list>
     </div>
   </ng-container>
   <ng-template #noData>

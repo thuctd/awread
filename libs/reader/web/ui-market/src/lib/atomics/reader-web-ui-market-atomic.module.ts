@@ -64,7 +64,7 @@ import { BooksGridOrgan } from './organs/books-grid/books-grid.organ';
 import { RdSearchBookTemplate } from './templates/rd-search-book/rd-search-book.template';
 import { RdSearchBookHeaderMolec } from './molecs/rd-search-book-header/rd-search-book-header.molec';
 import { RdSearchBookTitleMolec } from './molecs/rd-search-book-title/rd-search-book-title.molec';
-import { RdSearchBookItemOrgan } from './organs/rd-search-book-item/rd-search-book-item.organ';
+import { RdSearchBookListOrgan } from './organs/rd-search-book-list/rd-search-book-list.organ';
 import { RdSearchBookMbTemplate } from './templates/rd-search-book-mb/rd-search-book-mb.template';
 
 @NgModule({
@@ -133,7 +133,7 @@ import { RdSearchBookMbTemplate } from './templates/rd-search-book-mb/rd-search-
     RdSearchBookTemplate,
     RdSearchBookHeaderMolec,
     RdSearchBookTitleMolec,
-    RdSearchBookItemOrgan,
+    RdSearchBookListOrgan,
     RdSearchBookMbTemplate,
   ],
   declarations: [
@@ -197,7 +197,7 @@ import { RdSearchBookMbTemplate } from './templates/rd-search-book-mb/rd-search-
     RdSearchBookTemplate,
     RdSearchBookHeaderMolec,
     RdSearchBookTitleMolec,
-    RdSearchBookItemOrgan,
+    RdSearchBookListOrgan,
     RdSearchBookMbTemplate,
   ],
 })
