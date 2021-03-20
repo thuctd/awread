@@ -21,17 +21,17 @@ export class DropdownMenuMbMolec implements OnInit {
   @Input() items = [
     {
       title: 'Truyện tự sáng tác',
-      href: '/',
+      href: '/composed',
     },
     {
       title: 'Truyện sưu tầm',
-      href: '/',
+      href: '/collected',
     },
   ];
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   displayMenu() {
     this.isDisplayMenu = !this.isDisplayMenu;

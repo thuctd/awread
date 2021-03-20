@@ -13,12 +13,12 @@ import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter, Input
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AuthorAtom implements OnInit {
-  @Output() submitEvent = new EventEmitter();
+  @Input() authorId = 'zxcxzcxz456_zxaws123';
   @Input() authorName = 'Cẩm Thương';
   @Input() title = 'Tác giả:';
   @Input() color = 'text-green-400';
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

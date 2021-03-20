@@ -15,7 +15,7 @@ const routes: Routes = [
         component: MarketLayout,
         children: [
           {
-            path: 'home',
+            path: '',
             loadChildren: () =>
               window.innerWidth <= 768 && window?.haveMobile
                 ? import('./pages/home-mobile/home-mobile.module').then((m) => m.HomeMobileModule)
@@ -23,7 +23,7 @@ const routes: Routes = [
           },
 
           {
-            path: 'books/:{bookId}/chapters/:{chapterId}',
+            path: 'books/:bookId/chapters/:chapterId',
             loadChildren: () =>
               window.innerWidth <= 768 && window?.haveMobile
                 ? import('./pages/read-mobile/read-mobile.module').then((m) => m.ReadMobileModule)
@@ -31,7 +31,7 @@ const routes: Routes = [
           },
 
           {
-            path: 'books/:{bookId}',
+            path: 'books/:bookId',
             loadChildren: () =>
               window.innerWidth <= 768 && window?.haveMobile
                 ? import('./pages/detail-mobile/detail-mobile.module').then((m) => m.DetailMobileModule)
@@ -111,7 +111,7 @@ const routes: Routes = [
           {
             path: '',
             pathMatch: 'full',
-            redirectTo: 'home',
+            redirectTo: '',
           },
         ],
       },
@@ -123,4 +123,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class ReaderWebUiMarketRoutingModule {}
+export class ReaderWebUiMarketRoutingModule { }

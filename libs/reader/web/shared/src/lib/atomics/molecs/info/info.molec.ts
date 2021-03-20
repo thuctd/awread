@@ -20,7 +20,7 @@ export class InfoMolec implements OnInit {
   @Input() link1 = '';
   @Input() link2 = '';
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }
