@@ -16,28 +16,28 @@ export class SliderAtom implements OnInit {
   @Input() showArrow = 'true';
   @Input() imageSize = {
     width: '100%',
-    height: '650px',
+    height: '600px',
     space: 1,
   };
   @Input() imageObject = [
     {
-      image: '/global-assets/images/image.webp',
-      thumbImage: '/global-assets/images/image.webp',
+      image: 'https://img3.thuthuatphanmem.vn/uploads/2019/06/13/anh-nen-may-tinh-dep_095242594.jpg',
+      thumbImage: 'https://img3.thuthuatphanmem.vn/uploads/2019/06/13/anh-nen-may-tinh-dep_095242594.jpg',
       alt: 'alt of image',
     },
     {
-      image: '/global-assets/images/image.webp',
-      thumbImage: '/global-assets/images/image.webp',
+      image: 'https://img3.thuthuatphanmem.vn/uploads/2019/06/13/anh-nen-may-tinh-dep_095242594.jpg',
+      thumbImage: 'https://img3.thuthuatphanmem.vn/uploads/2019/06/13/anh-nen-may-tinh-dep_095242594.jpg',
       alt: 'Image alt',
     },
     {
-      image: '/global-assets/images/image.webp',
-      thumbImage: '/global-assets/images/image.webp',
+      image: 'https://img3.thuthuatphanmem.vn/uploads/2019/06/13/anh-nen-may-tinh-dep_095242594.jpg',
+      thumbImage: 'https://img3.thuthuatphanmem.vn/uploads/2019/06/13/anh-nen-may-tinh-dep_095242594.jpg',
       alt: 'Image alt',
     },
   ];
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

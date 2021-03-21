@@ -1,4 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter, Optional } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -18,12 +19,13 @@ export class CheckMailMolec implements OnInit {
   @Input() link = '/global-assets/images/mailbox.webp';
   @Input() faIcon = faArrowLeft;
   @Input() backhome = '/home';
-  @Input() textLink = {
-    text: 'Quay trở về Awread',
-    class: 'text-green-500',
-  };
+  @Input() text = 'Quay trở về Awread';
 
-  constructor() {}
+  constructor(@Optional() public dialogRef: MatDialogRef<CheckMailMolec>) {}
 
   ngOnInit(): void {}
+
+  onClick(): void {
+    this.dialogRef.close();
+  }
 }

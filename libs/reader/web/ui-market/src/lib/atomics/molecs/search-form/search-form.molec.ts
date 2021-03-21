@@ -19,7 +19,7 @@ export class SearchFormMolec implements OnInit {
   @Input() selectSearch = [
     {
       title: 'Thể Loại',
-      widthClass: 'xl:w-96 lg:w-80 md:w-64',
+      widthClass: 'xl:w-96 lg:w-64 md:w-60',
       options: [
         { id: '1', name: 'Lãng mạn' },
         { id: '2', name: 'Kiếm hiệp' },
@@ -49,7 +49,7 @@ export class SearchFormMolec implements OnInit {
     },
   ];
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }
