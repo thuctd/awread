@@ -1,5 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { LoginMobileTemplate, RegisterMobileTemplate } from '@awread/reader/web/ui-auth';
 @Component({
   selector: 'molec-menu-navbar',
   templateUrl: './menu-navbar.molec.html',
@@ -57,7 +59,7 @@ export class MenuNavbarMolec implements OnInit {
   @Input() coin = '0';
   @Input() isMenu = true;
 
-  constructor() {}
+  constructor(private matDialog: MatDialog) {}
 
   ngOnInit(): void {}
 
@@ -67,5 +69,22 @@ export class MenuNavbarMolec implements OnInit {
 
   displayMenu() {
     this.isMenu = !this.isMenu;
+  }
+
+  openFormLogin($event): void {
+    this.matDialog.open(LoginMobileTemplate, {
+      maxWidth: '100vw',
+      maxHeight: '100vh',
+      width: '100%',
+      height: '100%',
+    });
+  }
+  openFormRegister($event): void {
+    this.matDialog.open(RegisterMobileTemplate, {
+      maxWidth: '100vw',
+      maxHeight: '100vh',
+      width: '100%',
+      height: '100%',
+    });
   }
 }

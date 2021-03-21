@@ -1,5 +1,10 @@
 <section>
-  <molec-interrogatory></molec-interrogatory>
+  <div class="hidden sm:block">
+    <molec-interrogatory (submitEvent)="openFormRegister($event)"></molec-interrogatory>
+  </div>
+  <div class="sm:hidden block">
+    <molec-interrogatory (submitEvent)="openFormRegisterMobile($event)"></molec-interrogatory>
+  </div>
   <molec-login-form class="mt-4" #loginForm [form]="authForm"></molec-login-form>
   <molec-remember-forgot-password></molec-remember-forgot-password>
   <molec-submit class="mt-6" (btnClicked)="auth.emit('email')" [active]="loginForm.form.valid"></molec-submit>
