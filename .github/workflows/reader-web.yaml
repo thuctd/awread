@@ -41,6 +41,7 @@ jobs:
           git pull
           git merge --no-ff origin/develop -m "Auto-merge develop to get latest code"
           git push
+          git push origin reader-web:develop
       - name: Cloning repo
         uses: dokku/github-action@master
         with:
