@@ -36,10 +36,10 @@ const postgraphileOptions = {
   watchPg: true,
   graphiql: true,
   enhanceGraphiql: true,
-  pgSettings: async (req: IncomingMessage & { user: any }) => {
-    console.log('req.user', req.user);
-    return checkRole(req);
-  },
+  // pgSettings: async (req: IncomingMessage & { user: any }) => {
+  //   console.log('req.user', req.user);
+  //   return checkRole(req);
+  // },
 };
 
 admin.initializeApp({
@@ -113,14 +113,14 @@ function checkRole(req) {
     if (req.user.role === 'mod') {
       console.log('role is admin');
       return {
-        role: 'admin',
+        role: 'postgres',
         'jwt.claims.user_id': req.user.uid,
       };
     }
 
     console.log('role is writer');
     return {
-      role: 'writer',
+      role: 'postgres',
       'jwt.claims.user_id': req.user.uid,
       // req.user.uid,
     };
@@ -128,7 +128,7 @@ function checkRole(req) {
     console.warn('failed to authenticate, using role default (anonymous)');
     // role null will be using default role of Postgraphile
     return {
-      role: 'writer',
+      role: 'postgres',
       'jwt.claims.user_id': '10f62cca-d75d-4b7c-8869-9ee319819431',
     };
   }
