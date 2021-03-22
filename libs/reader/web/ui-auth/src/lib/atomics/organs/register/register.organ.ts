@@ -1,5 +1,8 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { LoginMobileTemplate } from '../../templates/login-mobile/login-mobile.template';
+import { LoginWebTemplate } from '../../templates/login-web/login-web.template';
 
 @Component({
   selector: 'organ-register',
@@ -24,7 +27,22 @@ export class RegisterOrgan implements OnInit {
   });
   @Output() auth = new EventEmitter();
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private matDialog: MatDialog) {}
 
   ngOnInit(): void {}
+
+  openFormLogin($event): void {
+    this.matDialog.open(LoginWebTemplate, {
+      width: '32rem',
+      height: '38rem',
+    });
+  }
+  openFormLoginMobile($event): void {
+    this.matDialog.open(LoginMobileTemplate, {
+      maxWidth: '100vw',
+      maxHeight: '100vh',
+      width: '100%',
+      height: '100%',
+    });
+  }
 }

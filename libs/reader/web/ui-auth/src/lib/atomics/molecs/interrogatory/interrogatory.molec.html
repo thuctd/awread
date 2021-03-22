@@ -1,7 +1,7 @@
 <div class="text-sm text-gray-500 flex">
   {{text}}
-  <div class="ml-1">
-    <atom-text-link [text]="textLink" [class]="'text-green-500'" [href]="link"></atom-text-link>
+  <div class="ml-1" (click)="onClick()">
+    <div class="cursor-pointer text-green-500" (click)="submitEvent.emit()">{{textLink}}</div>
   </div>
 </div>
 
