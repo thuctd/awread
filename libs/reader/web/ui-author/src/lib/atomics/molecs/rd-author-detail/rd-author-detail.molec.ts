@@ -20,7 +20,7 @@ export class RdAuthorDetailMolec implements OnInit {
   @Input() name = 'Cẩm Thương';
   @Input() fullName = 'Hà Cẩm Thương';
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }

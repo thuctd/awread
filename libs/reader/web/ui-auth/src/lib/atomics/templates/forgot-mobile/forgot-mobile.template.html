@@ -1,9 +1,14 @@
-<molec-bg-auth-mobile>
-  <div class="text-gray-600 text-3xl text-center mb-6 pt-12">{{title}}</div>
-  <div *ngIf="!emailFormControl.valid" class="text-gray-400 text-lg text-center">{{description}}</div>
-  <molec-forgot-form class="mt-6" [emailFormControl]="emailFormControl"></molec-forgot-form>
-  <submit-btn
-  [name]="'Gửi email hướng dẫn'"
-  [active]="emailFormControl.valid"
-></submit-btn>
+<molec-bg-auth-mobile class="bg-white w-screen h-screen absolute top-0 left-0">
+  <section class="px-10">
+    <div class="text-gray-600 text-3xl text-center mb-6 pt-12">{{title}}</div>
+    <div *ngIf="!emailFormControl.valid" class="text-gray-400 text-lg text-center">{{description}}</div>
+    <molec-forgot-form class="mt-6" [emailFormControl]="emailFormControl"></molec-forgot-form>
+    <div (click)="onClick()">
+      <submit-btn
+      (btnClicked)="openFormCheckMailMobile($event)"
+      [name]="'Gửi email hướng dẫn'"
+      [active]="emailFormControl.valid"
+      ></submit-btn>
+    </div>
+  </section>
 </molec-bg-auth-mobile>

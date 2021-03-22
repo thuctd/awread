@@ -18,7 +18,7 @@ export class AuthorAtom implements OnInit {
   @Input() title = 'Tác giả:';
   @Input() color = 'text-green-400';
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }
