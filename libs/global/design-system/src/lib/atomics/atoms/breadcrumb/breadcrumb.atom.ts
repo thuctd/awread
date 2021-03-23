@@ -1,9 +1,8 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 import { faHome, faAngleRight } from '@fortawesome/free-solid-svg-icons';
-
 @Component({
-  selector: 'molec-breadcrumb',
-  templateUrl: './breadcrumb.molec.html',
+  selector: 'atom-breadcrumb',
+  templateUrl: './breadcrumb.atom.html',
   styles: [
     `
       :host {
@@ -13,7 +12,7 @@ import { faHome, faAngleRight } from '@fortawesome/free-solid-svg-icons';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BreadcrumbMolec implements OnInit {
+export class BreadcrumbAtom implements OnInit {
   @Input() menu = [
     {
       title: 'Home',
@@ -34,6 +33,7 @@ export class BreadcrumbMolec implements OnInit {
       icon: faAngleRight,
     },
   ];
+
   constructor() {}
 
   ngOnInit(): void {}

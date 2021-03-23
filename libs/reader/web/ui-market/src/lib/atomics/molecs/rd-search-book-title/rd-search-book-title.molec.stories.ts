@@ -1,15 +1,15 @@
-import { BreadcrumbMolec } from './breadcrumb.molec';
+import { RdSearchBookTitleMolec } from './rd-search-book-title.molec';
 import { ReaderWebUiMarketAtomicModule } from '../../reader-web-ui-market-atomic.module';
 
 export default {
-  title: 'Market/Molecs/Breadcrumb'
+  title: 'Market/Molecs/Rd Search Book Title'
 }
 
 export const primary = () => ({
   moduleMetadata: {
     imports: [ReaderWebUiMarketAtomicModule]
   },
-  component: BreadcrumbMolec,
+  component: RdSearchBookTitleMolec,
   props: {
 
   }
