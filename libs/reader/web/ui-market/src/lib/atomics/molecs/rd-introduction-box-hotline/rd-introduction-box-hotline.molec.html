@@ -1,0 +1,6 @@
+<div class="bg w-104 py-6 pl-10 rounded-3xl relative">
+  <img class="rounded-full absolute h-14 -left-6" [src]="src">
+  <div *ngFor="let item of contents" class="z-40 text-white">
+    <div>{{item.title}} {{item.content}}</div>
+  </div>
+</div>
