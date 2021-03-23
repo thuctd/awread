@@ -1,0 +1,112 @@
+{
+  "categories": [
+    {
+      "name": "Lãng mãn",
+      "id": 1
+    },
+    {
+      "name": "Hư cấu",
+      "id": 2
+    },
+    {
+      "name": "Tình yêu",
+      "id": 3
+    },
+    {
+      "name": "Học trò",
+      "id": 4
+    }
+  ],
+  "books": [
+    {
+      "categories": [1, 2, 3],
+      "title": "Blog Title 1",
+      "author": "John",
+      "id": 1
+    },
+    {
+      "categories": [1, 3],
+      "title": "Blog Title 2",
+      "author": "Harry",
+      "id": 2
+    },
+    {
+      "categories": [1, 2, 3],
+      "title": "Blog Title 1",
+      "author": "John",
+      "id": 3
+    },
+    {
+      "categories": [1, 3],
+      "title": "Blog Title 2",
+      "author": "Harry",
+      "id": 4
+    },
+    {
+      "categories": [1, 2, 3],
+      "title": "Blog Title 1",
+      "author": "John",
+      "id": 5
+    },
+    {
+      "categories": [1, 3],
+      "title": "Blog Title 2",
+      "author": "Harry",
+      "id": 5
+    },
+    {
+      "categories": [1, 2, 3],
+      "title": "Blog Title 1",
+      "author": "John",
+      "id": 6
+    },
+    {
+      "categories": [1, 3],
+      "title": "Blog Title 2",
+      "author": "Harry",
+      "id": 7
+    },
+    {
+      "categories": [1, 2, 3],
+      "title": "Blog Title 1",
+      "author": "John",
+      "id": 8
+    },
+    {
+      "categories": [1, 3],
+      "title": "Blog Title 2",
+      "author": "Harry",
+      "id": 9
+    },
+    {
+      "categories": [1, 2, 3],
+      "title": "Blog Title 1",
+      "author": "John",
+      "id": 10
+    },
+    {
+      "categories": [1, 3],
+      "title": "Blog Title 2",
+      "author": "Harry",
+      "id": 11
+    }
+  ],
+  "authors": [
+    {
+      "id": 1,
+      "name": "Tùng Chan"
+    },
+    {
+      "id": 2,
+      "name": "Hiệp San"
+    },
+    {
+      "id": 3,
+      "name": "Phương Chan"
+    },
+    {
+      "id": 4,
+      "name": "Thương Chan"
+    }
+  ]
+}
