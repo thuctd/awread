@@ -18,7 +18,8 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 export class RdAuthorBookItemMolec implements OnInit {
   @Input() srcImg = '/global-assets/images/sach-co-gai-nam-ay-chung-ta-cung-theo-duoi.webp';
   @Input() alt = '';
-  @Input() Category = 'Hành động, phiêu lưu';
+  @Input() category = 'Hành động, phiêu lưu';
+  @Input() book = 'Cô gái mà chúng ta theo đuổi năm nào';
 
   constructor() {}
 
