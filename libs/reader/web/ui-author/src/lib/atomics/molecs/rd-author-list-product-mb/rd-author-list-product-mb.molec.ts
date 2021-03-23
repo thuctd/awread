@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'molec-rd-author-list-product-mb',
@@ -35,8 +35,11 @@ export class RdAuthorListProductMbMolec implements OnInit {
       altImg: '',
     },
   ];
+  @Input() moreBook = 'Xem thêm...';
+  @Input() btnTitle = 'Top phổ biến';
+  @Output() moreEvent = new EventEmitter();
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }
