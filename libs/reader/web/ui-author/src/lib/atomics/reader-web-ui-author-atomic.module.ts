@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GlobalDesignSystemAtomicModule, StorybookSupportModule } from '@awread/global/design-system';
-import { ReaderWebUiMarketAtomicModule } from '@awread/reader/web/ui-market';
 import { ReaderWebSharedAtomicModule } from '@awread/reader/web/shared';
 import { RdAuthorDetailMolec } from './molecs/rd-author-detail/rd-author-detail.molec';
 import { RdAuthorMainOrgan } from './organs/rd-author-main/rd-author-main.organ';
@@ -81,10 +80,9 @@ import { RdAuthorPopupUnfollowMbTemplate } from './templates/rd-author-popup-unf
     RdAuthorPopupNotiReportMbTemplate,
     RdAuthorPopupUnfollowMbTemplate,
   ],
-  imports: [CommonModule, GlobalDesignSystemAtomicModule, StorybookSupportModule, ReaderWebUiMarketAtomicModule, ReaderWebSharedAtomicModule],
+  imports: [CommonModule, GlobalDesignSystemAtomicModule, StorybookSupportModule, ReaderWebSharedAtomicModule],
   exports: [
     ReaderWebSharedAtomicModule,
-    ReaderWebUiMarketAtomicModule,
     RdAuthorDetailMolec,
     RdAuthorMainOrgan,
     RdAuthorProductOrgan,
