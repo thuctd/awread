@@ -32,6 +32,7 @@ export class BooksFacade {
     return this.booksQuery.selectEntity(id);
   }
 
+  //TODO: Cố gắng đúng tiến độ Quý-San
   getAllBooks() {
     return this.booksGear.getAllBooks();
   }
