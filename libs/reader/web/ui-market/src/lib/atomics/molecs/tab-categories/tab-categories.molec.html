@@ -1,6 +1,6 @@
 <div [ngClass]="tab.isActive ? ' border-b-2 border-green-400' : ''">
   <div class="text-center">
-    <a (click)="switchTabEvent.emit(tab.tabName)" class="font-bold block pb-2 cursor-pointer md:text-sm lg:text-base xl:text-base">
+    <a (click)="switchTabEvent.emit(tab.tabName)" class="outline-none font-bold block pb-2 cursor-pointer md:text-sm lg:text-base xl:text-base">
       {{ tab.name }}
     </a>
   </div>
