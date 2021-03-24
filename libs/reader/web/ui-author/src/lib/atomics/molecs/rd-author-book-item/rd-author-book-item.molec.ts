@@ -20,6 +20,7 @@ export class RdAuthorBookItemMolec implements OnInit {
   @Input() alt = '';
   @Input() category = 'Hành động, phiêu lưu';
   @Input() book = 'Cô gái mà chúng ta theo đuổi năm nào';
+  @Input() bookId = 'bvxz_324345seQ6x';
 
   constructor() {}
 

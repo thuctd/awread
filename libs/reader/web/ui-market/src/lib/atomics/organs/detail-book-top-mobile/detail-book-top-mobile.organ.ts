@@ -20,6 +20,8 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 })
 export class DetailBookTopMobileOrgan implements OnInit {
   @Input() src = '/global-assets/images/0004.webp';
+  @Input() chapterId = '123453_Assxzxc';
+  @Input() bookId = '123453_Assxzxc';
 
   constructor() {}
 
