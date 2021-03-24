@@ -15,7 +15,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 export class RdAuthorListProductOrgan implements OnInit {
   @Input() storys = [];
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

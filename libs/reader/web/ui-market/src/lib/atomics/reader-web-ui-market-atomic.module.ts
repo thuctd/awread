@@ -50,7 +50,6 @@ import { HomeListBookFeaturedMobileOrgan } from './organs/home-list-book-feature
 import { MatTabsModule } from '@angular/material/tabs';
 import { HomeMobileTemplate } from './templates/home-mobile/home-mobile.template';
 import { HomeListBookReviewMobileOrgan } from './organs/home-list-book-review-mobile/home-list-book-review-mobile.organ';
-import { SliderMobileMolec } from './molecs/slider-mobile/slider-mobile.molec';
 import { TitlePageMenuMolec } from './molecs/title-page-menu/title-page-menu.molec';
 import { MbInfoBookMolec } from './molecs/mb-info-book/mb-info-book.molec';
 import { MbDetailBookOrgan } from './organs/mb-list-detail-book/mb-list-detail-book.organ';
@@ -127,7 +126,6 @@ import { RdIntroductionShapeSloganMolec } from './molecs/rd-introduction-shape-s
     MatTabsModule,
     HomeMobileTemplate,
     HomeListBookReviewMobileOrgan,
-    SliderMobileMolec,
     TitlePageMenuMolec,
     MbInfoBookMolec,
     MbDetailBookOrgan,
@@ -199,7 +197,6 @@ import { RdIntroductionShapeSloganMolec } from './molecs/rd-introduction-shape-s
     HomeListBookFeaturedMobileOrgan,
     HomeMobileTemplate,
     HomeListBookReviewMobileOrgan,
-    SliderMobileMolec,
     TitlePageMenuMolec,
     MbInfoBookMolec,
     MbDetailBookOrgan,
