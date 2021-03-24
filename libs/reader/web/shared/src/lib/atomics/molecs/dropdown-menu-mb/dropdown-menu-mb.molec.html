@@ -5,6 +5,6 @@
     <fa-icon *ngIf="!isDisplayMenu" [icon]="faIcon2" class="text-xl text-green-400 cursor-pointer"></fa-icon>
   </div>
   <div *ngIf="!isDisplayMenu" class="mt-2">
-    <a (click)="displayMenu()" class="cursor-pointer text-green-400 text-base font-normal block w-full py-2 pl-6 hover:bg-green-400 hover:text-white" [routerLink]="[item.href]"  *ngFor="let item of items">{{item.title}}</a>
+    <a (click)="displayMenu()" class="cursor-pointer text-green-400 text-sm font-normal block w-full py-2 pl-6 hover:bg-green-400 hover:text-white" [routerLink]="[item.href]"  *ngFor="let item of items">{{item.title}}</a>
   </div>
 </div>

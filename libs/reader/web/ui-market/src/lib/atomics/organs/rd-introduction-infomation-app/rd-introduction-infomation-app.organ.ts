@@ -20,23 +20,28 @@ export class RdIntroductionInfomationAppOrgan implements OnInit {
   @Input() contents = [
     {
       title: 'Trang chủ:',
-      content: 'https://awread.com.vn',
+      content: '',
+      isLink: 'https://awread.com.vn',
     },
     {
       title: 'Facebook',
-      content: 'https://awread.com.vn',
+      content: '',
+      isLink: 'https://awread.com.vn',
     },
     {
       title: 'Nhóm:',
-      content: 'https://awread.com.vn',
+      content: '',
+      isLink: 'https://awread.com.vn',
     },
     {
       title: 'Liên kết IOS',
-      content: 'https://awread.com.vn',
+      content: '',
+      isLink: 'https://awread.com.vn',
     },
     {
       title: 'Liên kết Android',
-      content: 'https://awread.com.vn ',
+      content: '',
+      isLink: 'https://awread.com.vn',
     },
   ];
   constructor() {}

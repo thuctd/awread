@@ -1,8 +1,8 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
-  selector: 'organ-rd-introduction-white-box-third',
-  templateUrl: './rd-introduction-white-box-third.organ.html',
+  selector: 'organ-rd-introduction-aboutus',
+  templateUrl: './rd-introduction-aboutus.organ.html',
   styles: [
     `
       :host {
@@ -15,7 +15,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RdIntroductionWhiteBoxThirdOrgan implements OnInit {
+export class RdIntroductionAboutUsOrgan implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}

@@ -24,22 +24,27 @@ export class RdIntroductionBoxHotlineMolec implements OnInit {
     {
       title: 'Tên công ty:',
       content: 'Awread Web',
+      isLink: '',
     },
     {
       title: 'Danh mục kinh doanh:',
       content: 'Giải trí',
+      isLink: '',
     },
     {
       title: 'Quốc gia:',
       content: 'Việt Nam',
+      isLink: '',
     },
     {
       title: 'Vị trí công ty:',
       content: 'Hà nội',
+      isLink: '',
     },
     {
       title: 'Người dùng:',
       content: 'Việt Nam',
+      isLink: '',
     },
   ];
   constructor() {}

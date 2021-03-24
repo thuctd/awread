@@ -8,9 +8,6 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
       :host {
         display: block;
       }
-      :host .pb-160 {
-        padding-bottom: 40rem;
-      }
     `,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,

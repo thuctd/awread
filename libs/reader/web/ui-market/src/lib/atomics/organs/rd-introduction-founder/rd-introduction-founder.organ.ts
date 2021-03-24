@@ -1,8 +1,8 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
-  selector: 'organ-rd-introduction-white-box-second',
-  templateUrl: './rd-introduction-white-box-second.organ.html',
+  selector: 'organ-rd-introduction-founder',
+  templateUrl: './rd-introduction-founder.organ.html',
   styles: [
     `
       :host {
@@ -18,7 +18,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RdIntroductionWhiteBoxSecondOrgan implements OnInit {
+export class RdIntroductionFounderOrgan implements OnInit {
   facebook = 'https://www.facebook.com/Camthuong95/';
   contact = 'camthuong.awread@gmail.com';
 

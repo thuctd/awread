@@ -65,9 +65,9 @@ import { RdSearchBookHeaderMolec } from './molecs/rd-search-book-header/rd-searc
 import { RdSearchBookTitleMolec } from './molecs/rd-search-book-title/rd-search-book-title.molec';
 import { RdSearchBookListOrgan } from './organs/rd-search-book-list/rd-search-book-list.organ';
 import { RdSearchBookMbTemplate } from './templates/rd-search-book-mb/rd-search-book-mb.template';
-import { RdIntroductionWhiteBoxFirstOrgan } from './organs/rd-introduction-white-box-first/rd-introduction-white-box-first.organ';
-import { RdIntroductionWhiteBoxSecondOrgan } from './organs/rd-introduction-white-box-second/rd-introduction-white-box-second.organ';
-import { RdIntroductionWhiteBoxThirdOrgan } from './organs/rd-introduction-white-box-third/rd-introduction-white-box-third.organ';
+import { RdIntroductionSloganOrgan } from './organs/rd-introduction-slogan/rd-introduction-slogan.organ';
+import { RdIntroductionFounderOrgan } from './organs/rd-introduction-founder/rd-introduction-founder.organ';
+import { RdIntroductionAboutUsOrgan } from './organs/rd-introduction-aboutus/rd-introduction-aboutus.organ';
 import { RdIntroductionInfomationAppOrgan } from './organs/rd-introduction-infomation-app/rd-introduction-infomation-app.organ';
 import { RdIntroductionTemplate } from './templates/rd-introduction/rd-introduction.template';
 import { RdIntroductionShapeMolec } from './molecs/rd-introduction-shape/rd-introduction-shape.molec';
@@ -141,9 +141,9 @@ import { RdIntroductionShapeSloganMolec } from './molecs/rd-introduction-shape-s
     RdSearchBookTitleMolec,
     RdSearchBookListOrgan,
     RdSearchBookMbTemplate,
-    RdIntroductionWhiteBoxFirstOrgan,
-    RdIntroductionWhiteBoxSecondOrgan,
-    RdIntroductionWhiteBoxThirdOrgan,
+    RdIntroductionSloganOrgan,
+    RdIntroductionFounderOrgan,
+    RdIntroductionAboutUsOrgan,
     RdIntroductionInfomationAppOrgan,
     RdIntroductionTemplate,
     RdIntroductionShapeMolec,
@@ -212,9 +212,9 @@ import { RdIntroductionShapeSloganMolec } from './molecs/rd-introduction-shape-s
     RdSearchBookTitleMolec,
     RdSearchBookListOrgan,
     RdSearchBookMbTemplate,
-    RdIntroductionWhiteBoxFirstOrgan,
-    RdIntroductionWhiteBoxSecondOrgan,
-    RdIntroductionWhiteBoxThirdOrgan,
+    RdIntroductionSloganOrgan,
+    RdIntroductionFounderOrgan,
+    RdIntroductionAboutUsOrgan,
     RdIntroductionInfomationAppOrgan,
     RdIntroductionTemplate,
     RdIntroductionShapeMolec,
