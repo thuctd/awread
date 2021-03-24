@@ -8,40 +8,39 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
       :host {
         display: block;
       }
-      :host .image {
-        background-image: url('https://media.geeksforgeeks.org/wp-content/uploads/Screen-Shot-2017-11-13-at-10.23.39-AM.png');
-        height: 30rem;
+      :host .bg-pink {
+        background-color: #f8e8e8;
+      }
+      :host .h-160 {
+        height: 40rem;
+      }
+      @media only screen and (max-width: 1024px) {
+        :host .h-160 {
+          height: 34rem;
+        }
       }
     `,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RdIntroductionInfomationAppOrgan implements OnInit {
+  @Input() srcImg = '/global-assets/images/Group-846.webp';
   @Input() contents = [
     {
-      title: 'Trang chủ:',
-      content: '',
-      isLink: 'https://awread.com.vn',
+      title: 'Tên công ty:',
+      content: 'Awread Web',
     },
     {
-      title: 'Facebook',
-      content: '',
-      isLink: 'https://awread.com.vn',
+      title: 'Danh mục kinh doanh:',
+      content: 'Giải trí',
     },
     {
-      title: 'Nhóm:',
-      content: '',
-      isLink: 'https://awread.com.vn',
+      title: 'Vị trí công ty:',
+      content: 'Hà nội',
     },
     {
-      title: 'Liên kết IOS',
-      content: '',
-      isLink: 'https://awread.com.vn',
-    },
-    {
-      title: 'Liên kết Android',
-      content: '',
-      isLink: 'https://awread.com.vn',
+      title: 'Đối tượng:',
+      content: 'Việt Nam',
     },
   ];
   constructor() {}

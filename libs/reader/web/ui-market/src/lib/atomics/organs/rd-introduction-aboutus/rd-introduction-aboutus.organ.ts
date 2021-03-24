@@ -8,8 +8,14 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
       :host {
         display: block;
       }
-      :host .pb-120 {
-        padding-bottom: 30rem;
+      :host .top-136 {
+        top: 34rem;
+      }
+      .welcome {
+        font-family: 'Sacramento', cursive;
+      }
+      .text {
+        font-family: 'Barlow Semi Condensed', sans-serif;
       }
     `,
   ],
