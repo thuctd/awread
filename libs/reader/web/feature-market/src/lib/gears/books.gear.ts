@@ -12,7 +12,7 @@ export class BooksGear {
 
   constructor(private http: HttpClient, private booksStore: BooksStore) { }
 
-  //TODO: Em gọi từ api sao không được anh Hiệp nhỉ>>> -.-
+  //TODO: Em gọi api kiểu này sao không được anh Hiệp nhỉ>>> -.-
   getAllBooks() {
     return this.http.get<Book[]>(`${this.baseUrl}`).pipe(
       tap((books) => {
