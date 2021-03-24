@@ -5,10 +5,14 @@ import { BooksStore, BooksState } from './books.store';
 
 @Injectable({ providedIn: 'root' })
 export class BooksQuery extends QueryEntity<BooksState> {
+  bookList$ = this.selectAll();
   // ui: EntityUIQuery<BooksUIState>;
   constructor(protected store: BooksStore) {
     super(store);
     // this.createUIQuery();
   }
 
+  getBookById(id: string) {
+    return this.getEntity(id);
+  }
 }

@@ -21,73 +21,85 @@
     {
       "categories": [1, 2, 3],
       "title": "Blog Title 1",
-      "author": "John",
+      "authorId": "2",
+      "imgUrl": "https://salt.tikicdn.com/cache/w1200/media/catalog/product/b/i/bia-1-em-la-nha.u5131.d20170410.t083456.738774.jpg",
       "id": 1
     },
     {
       "categories": [1, 3],
       "title": "Blog Title 2",
-      "author": "Harry",
+      "authorId": "1",
+      "imgUrl": "https://www.khaitam.com/Data/Sites/1/Product/1355/co-gai-nam-ay-chung-ta-cung-theo-duoi.jpg",
       "id": 2
     },
     {
       "categories": [1, 2, 3],
       "title": "Blog Title 1",
-      "author": "John",
+      "authorId": "1",
+      "imgUrl": "https://salt.tikicdn.com/cache/w1200/media/catalog/product/b/i/bia-1-em-la-nha.u5131.d20170410.t083456.738774.jpg",
       "id": 3
     },
     {
       "categories": [1, 3],
       "title": "Blog Title 2",
-      "author": "Harry",
+      "authorId": "2",
+      "imgUrl": "https://www.khaitam.com/Data/Sites/1/Product/1355/co-gai-nam-ay-chung-ta-cung-theo-duoi.jpg",
       "id": 4
     },
     {
       "categories": [1, 2, 3],
       "title": "Blog Title 1",
-      "author": "John",
+      "authorId": "3",
+      "imgUrl": "https://salt.tikicdn.com/cache/w1200/media/catalog/product/b/i/bia-1-em-la-nha.u5131.d20170410.t083456.738774.jpg",
       "id": 5
     },
     {
       "categories": [1, 3],
       "title": "Blog Title 2",
-      "author": "Harry",
+      "authorId": "1",
+      "imgUrl": "https://www.khaitam.com/Data/Sites/1/Product/1355/co-gai-nam-ay-chung-ta-cung-theo-duoi.jpg",
       "id": 5
     },
     {
       "categories": [1, 2, 3],
       "title": "Blog Title 1",
-      "author": "John",
+      "authorId": "3",
+      "imgUrl": "https://salt.tikicdn.com/cache/w1200/media/catalog/product/b/i/bia-1-em-la-nha.u5131.d20170410.t083456.738774.jpg",
       "id": 6
     },
     {
       "categories": [1, 3],
       "title": "Blog Title 2",
-      "author": "Harry",
+      "authorId": "1",
+      "imgUrl": "https://www.khaitam.com/Data/Sites/1/Product/1355/co-gai-nam-ay-chung-ta-cung-theo-duoi.jpg",
       "id": 7
     },
     {
       "categories": [1, 2, 3],
       "title": "Blog Title 1",
-      "author": "John",
+      "authorId": "2",
+      "imgUrl": "https://salt.tikicdn.com/cache/w1200/media/catalog/product/b/i/bia-1-em-la-nha.u5131.d20170410.t083456.738774.jpg",
       "id": 8
     },
     {
       "categories": [1, 3],
       "title": "Blog Title 2",
-      "author": "Harry",
+      "authorId": "1",
+      "imgUrl": "https://www.khaitam.com/Data/Sites/1/Product/1355/co-gai-nam-ay-chung-ta-cung-theo-duoi.jpg",
       "id": 9
     },
     {
       "categories": [1, 2, 3],
       "title": "Blog Title 1",
-      "author": "John",
+      "authorId": "1",
+      "imgUrl": "https://salt.tikicdn.com/cache/w1200/media/catalog/product/b/i/bia-1-em-la-nha.u5131.d20170410.t083456.738774.jpg",
       "id": 10
     },
     {
       "categories": [1, 3],
       "title": "Blog Title 2",
-      "author": "Harry",
+      "authorId": "1",
+      "imgUrl": "https://www.khaitam.com/Data/Sites/1/Product/1355/co-gai-nam-ay-chung-ta-cung-theo-duoi.jpg",
       "id": 11
     }
   ],

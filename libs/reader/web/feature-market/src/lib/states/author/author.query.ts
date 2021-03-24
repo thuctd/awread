@@ -11,4 +11,8 @@ export class AuthorQuery extends QueryEntity<AuthorState> {
     // this.createUIQuery();
   }
 
+  getAuthorById(id: string) {
+    return this.getEntity(id);
+  }
+
 }
