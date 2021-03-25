@@ -16,7 +16,7 @@ export class SliderAtom implements OnInit {
   @Input() showArrow = 'true';
   @Input() imageSize = {
     width: '100%',
-    height: window.innerWidth > 1024 ? '650px' : window.innerWidth > 768 ? '500px' : '200px',
+    height: window.innerWidth > 1024 ? '500px' : window.innerWidth > 768 ? '425px' : '200px',
     space: 1,
   };
   @Input() imageObject = [
