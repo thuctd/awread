@@ -1,11 +1,12 @@
-import { Category } from ".";
+import { Genre } from ".";
 
 export interface Book {
   id: string;
   imgUrl: string;
   authorId: string;
   title: string;
-  categories: Category['id'];
+  category: string;
+  genres: string[];
 }
 
 export function Book(params: Partial<Book>) {

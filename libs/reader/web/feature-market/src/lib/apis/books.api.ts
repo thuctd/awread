@@ -25,7 +25,7 @@ export class BooksApi {
   }
 
   getBooksByGenresId(genreId: string) {
-    return of(db.books = db.books.filter((book) => {
+    return of(db.books = db.books.filter(book => {
       book.genres.includes(genreId)
     }
     )).pipe(delay(500));
