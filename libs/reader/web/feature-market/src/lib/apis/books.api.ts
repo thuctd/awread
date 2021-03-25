@@ -6,7 +6,7 @@ import db from './db.json';
 
 @Injectable({ providedIn: 'root' })
 export class BooksApi {
-  //TODO: tạm thời fake data ở đây 
+  //TODO: tạm thời fake data ở đây
   constructor(
     private apollo: Apollo,
   ) { }
@@ -15,12 +15,20 @@ export class BooksApi {
 
   getAllBooks() {
     return of(db.books)
-      .pipe(delay(500)); //NOTE: fake delay để cho giống lấy dữ liệu từ server
+      .pipe(delay(500));
 
   }
 
   getBookById(bookId: string) {
     return of(db.books.find(book => book.id === bookId))
-      .pipe(delay(500)); //NOTE: fake delay để cho giống lấy dữ liệu từ server
+      .pipe(delay(500));
   }
+
+  getBooksByGenresId(genreId: string) {
+    return of(db.books = db.books.filter((book) => {
+      book.genres.includes(genreId)
+    }
+    )).pipe(delay(500));
+  }
+
 }

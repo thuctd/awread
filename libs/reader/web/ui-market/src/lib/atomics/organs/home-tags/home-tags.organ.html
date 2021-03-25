@@ -3,8 +3,8 @@
     <atom-title [title]='titlePage' class="mr-2 sm:mr-4" [isUppercase]='false'></atom-title>
     <div class="flex mb-6">
       <div class="w-full flex mt-0 md:mt-1.5">
-        <rd-home-tab-category *ngFor="let category of categories" [tabName]="category.title" [active]="category.isActive" (click)="toggleTabs(category)"
-          (emitEvent)="filterItemsByCategory(category)">
+        <rd-home-tab-category *ngFor="let genre of genres" [tabName]="genre.name"
+          (emitEvent)="filterItemsByCategory.emit(genre)">
         </rd-home-tab-category>
       </div>
     </div>
@@ -17,7 +17,7 @@
       </div>
       <div>
         <owl-carousel-o [options]="customOptions">
-          <ng-container *ngFor="let item of filteredItems">
+          <ng-container *ngFor="let item of items">
             <ng-template carouselSlide>
               <a [routerLink]="['/books', item.id]" class="cursor-pointer outline-none">
                 <div class="carousel-items flex pb-3 justify-center">

@@ -17,7 +17,7 @@ export class BooksGear {
   ) { }
 
   //TODO: Em gọi api kiểu này sao không được anh Hiệp nhỉ>>> -.-
-  // NOTE: không gọi data ở đây, mà phải gọi từ API 
+  // NOTE: không gọi data ở đây, mà phải gọi từ API
   getAllBooks() {
     return this.booksApi.getAllBooks().pipe(
       tap((books) => {
@@ -38,6 +38,14 @@ export class BooksGear {
       catchError((err) => {
         console.error('An error occurred:', err);
         return throwError(err);
+      })
+    );
+  }
+
+  getBooksByGenresId(genreId: string) {
+    return this.booksApi.getBooksByGenresId(genreId).pipe(
+      tap((books) => {
+        this.booksStore.set(books);
       })
     );
   }

@@ -4,6 +4,7 @@ import { CategoriesQuery } from '../states/categories';
 
 @Injectable({ providedIn: 'root' })
 export class CategoryFacade {
+  categoryList$ = this.categoryQuery.selectAll();
 
   constructor(
     private categoryGear: CategoryGear,

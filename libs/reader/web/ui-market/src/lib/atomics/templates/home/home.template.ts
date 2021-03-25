@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'template-home',
@@ -14,6 +14,9 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 })
 export class HomeTemplate implements OnInit {
   @Input() books = [];
+  @Input() genres = [];
+  @Input() bookByCategory = [];
+  @Output() filterItemsByCategory = new EventEmitter();
   @Input() loading: boolean;
   constructor() { }
 

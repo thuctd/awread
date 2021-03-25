@@ -12,6 +12,6 @@
     <home-detail-book-review></home-detail-book-review>
   </section>
   <section class="bg-purple-50">
-    <home-tags></home-tags>
+    <home-tags [genres]='genres' [items]='bookByCategory' [loading]='loading' (filterItemsByCategory)='filterItemsByCategory.emit($event)'></home-tags>
   </section>
 </section>

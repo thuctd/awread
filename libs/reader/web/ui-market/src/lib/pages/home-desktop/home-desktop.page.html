@@ -1,1 +1,1 @@
-<template-home [books]="bookList$ | async"></template-home>
+<template-home [books]="bookList$ | async" [genres]="genreList$ | async" (filterItemsByCategory)='filterItemsByGenre($event)' [bookByCategory]='booksByGenre$'></template-home>
