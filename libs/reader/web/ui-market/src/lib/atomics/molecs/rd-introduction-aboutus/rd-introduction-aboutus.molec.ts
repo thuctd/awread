@@ -5,12 +5,13 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   templateUrl: './rd-introduction-aboutus.molec.html',
   styles: [
     `
+      @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap');
       :host {
         display: block;
       }
       :host .image {
         background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/global-assets/images/aboutUs.webp');
-        height: 48rem;
+        height: 35.6vw;
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;

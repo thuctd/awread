@@ -5,14 +5,22 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   templateUrl: './rd-introduction-target-item-grid.molec.html',
   styles: [
     `
+      @import url('https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@700&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@700&display=swap');
       :host {
         display: block;
       }
       :host .color-blue {
         color: #56569c;
       }
+      :host .barlow-semi-condensed {
+        font-family: 'Barlow Semi Condensed', sans-serif;
+      }
       :host .border-bl {
         border: 2px solid #56569c;
+      }
+      :host .font-nunito-bold {
+        font-family: 'Nunito', sans-serif;
       }
     `,
   ],
@@ -24,6 +32,7 @@ export class RdIntroductionTargetItemGridMolec implements OnInit {
     title: 'Thành viên',
     number: '100.000 +',
     text: 'Cộng đồng lớn mạnh',
+    spacing: true,
   };
 
   constructor() {}

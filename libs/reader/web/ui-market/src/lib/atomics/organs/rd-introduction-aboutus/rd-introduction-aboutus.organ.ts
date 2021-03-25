@@ -1,10 +1,13 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 
 @Component({
   selector: 'organ-rd-introduction-aboutus',
   templateUrl: './rd-introduction-aboutus.organ.html',
   styles: [
     `
+      @import url('https://fonts.googleapis.com/css2?family=Sacramento&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed&display=swap');
       :host {
         display: block;
       }
@@ -22,6 +25,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RdIntroductionAboutUsOrgan implements OnInit {
+  @Input() faIcon = faArrowRight;
   constructor() {}
 
   ngOnInit(): void {}

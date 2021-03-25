@@ -1,8 +1,8 @@
 <div class="flex flex-col justify-center items-center">
   <img [src]="items.srcImg" alt="">
-  <div class="py-8 color-blue font-semibold">{{items.title}}</div>
-  <div class="text-center border-bl w-32 h-32 flex flex-col justify-center items-center rounded-xl">
-    <div class="color-blue font-semibold pb-2">{{items.number}}</div>
-    <div class="px-1">{{items.text}}</div>
+  <div class="py-8 color-blue text-xl font-semibold barlow-semi-condensed">{{items.title}}</div>
+  <div class="text-center border-bl w-40 h-36 flex flex-col justify-center items-center rounded-xl">
+    <div class="color-blue text-xl font-semibold pb-2 barlow-semi-condensed">{{items.number}}</div>
+    <div [ngClass]="items.spacing ? 'px-4' : 'px-8'" class="px-4 font-nunito-bold text-gray-700 text-xl">{{items.text}}</div>
   </div>
 </div>

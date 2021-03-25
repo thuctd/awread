@@ -1,5 +1,5 @@
 <div class="flex justify-between">
-  <molec-rd-introduction-target-item-grid></molec-rd-introduction-target-item-grid>
-  <molec-rd-introduction-target-item-grid [items]="items"></molec-rd-introduction-target-item-grid>
-  <molec-rd-introduction-target-item-grid [items]="items2"></molec-rd-introduction-target-item-grid>
+  <div *ngFor="let item of items" >
+    <molec-rd-introduction-target-item-grid [items]="item"></molec-rd-introduction-target-item-grid>
+  </div>
 </div>
