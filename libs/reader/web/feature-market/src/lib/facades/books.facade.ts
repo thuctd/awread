@@ -12,7 +12,7 @@ export class BooksFacade {
     private booksQuery: BooksQuery
   ) { }
 
-  selectLoadingAkiata() {
+  selectLoadingAkita() {
     return this.booksQuery.selectLoading();
   }
 

@@ -12,7 +12,7 @@ export class AuthorFacade {
   ) {
   }
 
-  selectLoadingAkiata() {
+  selectLoadingAkita() {
     return this.authorQuery.selectLoading();
   }
 

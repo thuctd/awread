@@ -9,7 +9,7 @@ export interface BooksState extends EntityState<Book>, ActiveState { };
 
 
 @Injectable({ providedIn: 'root' })
-@StoreConfig({ name: 'dasherize(name)', resettable: true })
+@StoreConfig({ name: 'books', resettable: true })
 export class BooksStore extends EntityStore<BooksState> {
   // ui: EntityUIStore<BookUIState>;
   constructor() {
