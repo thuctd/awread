@@ -18,7 +18,7 @@
   <button (click)="btnClickUnBlock.emit()" [ngClass]="classBtn1" class="hidden sm:block border-green-400 bg-green-400 shadow focus:outline-none transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-100">
     <span class="text-white">Bỏ Chặn</span>
   </button>
-  <button [ngClass]="classBtn2" class="sm:hidden block border-green-400 bg-green-400 shadow focus:outline-none w-full">
+  <button (click)="btnClickUnBlockMb.emit()" [ngClass]="classBtn2" class="sm:hidden block border-green-400 bg-green-400 shadow focus:outline-none w-full">
     <span class="text-sm text-white">Bỏ Chặn</span>
   </button>
 </div>

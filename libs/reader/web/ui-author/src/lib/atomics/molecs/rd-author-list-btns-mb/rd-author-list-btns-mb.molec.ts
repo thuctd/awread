@@ -1,4 +1,7 @@
+import { MatDialog } from '@angular/material/dialog';
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { RdAuthorPopupUnfollowMbTemplate } from '../../templates/rd-author-popup-unfollow-mb/rd-author-popup-unfollow-mb.template';
+import { RdAuthorPopupUnblockMbTemplate } from '../../templates/rd-author-popup-unblock-mb/rd-author-popup-unblock-mb.template';
 
 @Component({
   selector: 'molec-rd-author-list-btns-mb',
@@ -18,7 +21,21 @@ export class RdAuthorListBtnsMbMolec implements OnInit {
   @Input() follow = true;
   @Input() isBlock = false;
 
-  constructor() {}
+  constructor(private MatDialog: MatDialog) {}
 
   ngOnInit(): void {}
+
+  openDiaLogUnFollow($event) {
+    this.MatDialog.open(RdAuthorPopupUnfollowMbTemplate, {
+      width: '17rem',
+      height: '18rem',
+    });
+  }
+
+  openDiaLogUnBlockMb($event) {
+    this.MatDialog.open(RdAuthorPopupUnblockMbTemplate, {
+      width: '17rem',
+      height: '20rem',
+    });
+  }
 }

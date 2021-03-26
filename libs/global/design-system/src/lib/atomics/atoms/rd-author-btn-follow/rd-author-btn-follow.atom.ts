@@ -23,6 +23,7 @@ export class RdAuthorBtnFollowAtom implements OnInit {
   @Input() classBtn2 = 'w-28 py-1.5 rounded-lg';
   @Output() btnClick = new EventEmitter();
   @Output() btnClickUnBlock = new EventEmitter();
+  @Output() btnClickUnBlockMb = new EventEmitter();
 
   constructor() {}
 

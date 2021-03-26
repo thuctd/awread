@@ -1,10 +1,10 @@
-<molec-rd-author-popup-mb>
+<molec-rd-author-popup-mb class="h-full bg-white pt-2 rounded-lg">
   <div content1 class="flex flex-col items-center">
     <atom-circle-image class="w-14 mb-4"></atom-circle-image>
     <div class="flex">
-      <div class="mr-1">Bỏ theo dõi</div>
-      <div class="uppercase">{{name}} ?</div>
+      <div class="mr-1 text-sm sm:text-base">Bỏ theo dõi</div>
+      <div class="uppercase text-sm sm:text-base">{{name}} ?</div>
     </div>
   </div>
-  <div (click)="clickBtn.emit()" class="cursor-pointer" content2>Bỏ Theo dõi</div>
+  <div (click)="clickBtn.emit()" class="cursor-pointer" content2 mat-dialog-close>Bỏ Theo dõi</div>
 </molec-rd-author-popup-mb>

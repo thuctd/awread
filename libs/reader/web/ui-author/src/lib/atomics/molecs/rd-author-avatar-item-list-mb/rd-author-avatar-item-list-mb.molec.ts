@@ -28,8 +28,8 @@ export class RdAuthorAvatarItemListMbMolec implements OnInit {
 
   openDiaLogMenu($event) {
     this.MatDialog.open(RdAuthorPopupMenuMbTemplate, {
-      width: '26rem',
-      height: '25rem',
+      width: '17rem',
+      height: '18rem',
     });
   }
 }

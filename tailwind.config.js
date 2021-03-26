@@ -9,6 +9,9 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      fontSize: {
+        small: ['0.6rem', '1rem']
+      }
     },
     color: {
       gray: {
