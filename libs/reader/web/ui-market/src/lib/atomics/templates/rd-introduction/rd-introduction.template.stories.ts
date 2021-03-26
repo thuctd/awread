@@ -1,15 +1,15 @@
-import { SliderMobileMolec } from './slider-mobile.molec';
+import { RdIntroductionTemplate } from './rd-introduction.template';
 import { ReaderWebUiMarketAtomicModule } from '../../reader-web-ui-market-atomic.module';
 
 export default {
-  title: 'Market/Molecs/Slider Mobile'
+  title: 'Market/Templates/Rd Introduction'
 }
 
 export const primary = () => ({
   moduleMetadata: {
     imports: [ReaderWebUiMarketAtomicModule]
   },
-  component: SliderMobileMolec,
+  component: RdIntroductionTemplate,
   props: {
 
   }

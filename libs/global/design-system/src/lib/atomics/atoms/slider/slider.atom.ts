@@ -16,28 +16,28 @@ export class SliderAtom implements OnInit {
   @Input() showArrow = 'true';
   @Input() imageSize = {
     width: '100%',
-    height: '600px',
+    height: window.innerWidth > 1280 ? '600px' : window.innerWidth > 1024 ? '500px' : window.innerWidth > 768 ? '425' : '200px',
     space: 1,
   };
   @Input() imageObject = [
     {
-      image: 'https://img3.thuthuatphanmem.vn/uploads/2019/06/13/anh-nen-may-tinh-dep_095242594.jpg',
-      thumbImage: 'https://img3.thuthuatphanmem.vn/uploads/2019/06/13/anh-nen-may-tinh-dep_095242594.jpg',
+      image: 'https://cohet.vn/upload/data/images/do-hoa/background/anh-nen-anime-dep-2.jpg',
+      thumbImage: 'https://cohet.vn/upload/data/images/do-hoa/background/anh-nen-anime-dep-2.jpg',
       alt: 'alt of image',
     },
     {
-      image: 'https://img3.thuthuatphanmem.vn/uploads/2019/06/13/anh-nen-may-tinh-dep_095242594.jpg',
-      thumbImage: 'https://img3.thuthuatphanmem.vn/uploads/2019/06/13/anh-nen-may-tinh-dep_095242594.jpg',
+      image: 'https://cohet.vn/upload/data/images/do-hoa/background/anh-nen-anime-dep-2.jpg',
+      thumbImage: 'https://cohet.vn/upload/data/images/do-hoa/background/anh-nen-anime-dep-2.jpg',
       alt: 'Image alt',
     },
     {
-      image: 'https://img3.thuthuatphanmem.vn/uploads/2019/06/13/anh-nen-may-tinh-dep_095242594.jpg',
-      thumbImage: 'https://img3.thuthuatphanmem.vn/uploads/2019/06/13/anh-nen-may-tinh-dep_095242594.jpg',
+      image: 'https://cohet.vn/upload/data/images/do-hoa/background/anh-nen-anime-dep-2.jpg',
+      thumbImage: 'https://cohet.vn/upload/data/images/do-hoa/background/anh-nen-anime-dep-2.jpg',
       alt: 'Image alt',
     },
   ];
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }

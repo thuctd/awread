@@ -1,6 +1,6 @@
 <div class="py-4 relative">
   <div class="flex justify-center mb-4">
-    <img src="{{src}}" alt="" class="block shadow-0 width-53 border-12 border-white" />
+    <img [routerLink]="['/books', bookId,'chapters', chapterId]" src="{{src}}" alt="" class="block shadow-0 width-53 border-12 border-white focus:outline-none" />
   </div>
   <div class="absolute top-0 right-2">
     <molec-detail-book-bookmark-donate></molec-detail-book-bookmark-donate>

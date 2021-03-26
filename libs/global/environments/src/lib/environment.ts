@@ -15,7 +15,7 @@ export const environment = {
   },
   postgres: {
     DATABASE_URL:
-      'postgres://postgres:41d4955151312a9a900dc2f3681953c1@localhost:5433/writer_web',
+      'postgres://postgres:admin@localhost:5432/awread_database',
     SCHEMA: 'public',
   },
 };
