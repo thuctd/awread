@@ -1,5 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
-
+import { MatDialog } from '@angular/material/dialog';
+import { RdAuthorPopupListFollowersTemplate } from '../../templates/rd-author-popup-list-followers/rd-author-popup-list-followers.template';
 @Component({
   selector: 'molec-rd-author-detail',
   templateUrl: './rd-author-detail.molec.html',
@@ -19,8 +20,17 @@ export class RdAuthorDetailMolec implements OnInit {
   @Input() excerpt = `Chào chúng cậu tớ là Cẩm Thương ...`;
   @Input() name = 'Cẩm Thương';
   @Input() fullName = 'Hà Cẩm Thương';
+  @Input() follow = true;
+  @Input() isBlock = false;
 
-  constructor() {}
+  constructor(private MatDialog: MatDialog) {}
 
   ngOnInit(): void {}
+
+  openDiaLogFollowers($event) {
+    this.MatDialog.open(RdAuthorPopupListFollowersTemplate, {
+      width: '30rem',
+      height: '46rem',
+    });
+  }
 }

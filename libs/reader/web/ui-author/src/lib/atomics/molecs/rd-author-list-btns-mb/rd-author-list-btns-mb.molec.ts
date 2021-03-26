@@ -15,6 +15,8 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 export class RdAuthorListBtnsMbMolec implements OnInit {
   @Input() classBtn1 = 'py-1 w-full rounded text-sm';
   @Input() classBtn2 = 'py-1 w-5/12 rounded';
+  @Input() follow = true;
+  @Input() isBlock = false;
 
   constructor() {}
 

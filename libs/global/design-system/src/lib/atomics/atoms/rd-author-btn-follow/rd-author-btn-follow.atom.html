@@ -1,16 +1,26 @@
-<div class="transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-100">
-  <button (click)="isFollow()" *ngIf="follow" [ngClass]="classBtn1" class="border-green-400 bg-green-400 shadow focus:outline-none">
+<div *ngIf="!isBlock" class="flex justify-between">
+  <button (click)="isFollow()" *ngIf="follow" [ngClass]="classBtn1" class="border-green-400 bg-green-400 shadow focus:outline-none transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-100">
     <fa-icon *ngIf="faPlus" class="text-white" [icon]="faPlus"></fa-icon>
     <span class="ml-2 font-normal text-white">{{text}}</span>
   </button>
-  <button (click)="isFollow()" *ngIf="!follow" [ngClass]="classBtn2" class="float-left sm:float-none border-green-400 bg-green-400 shadow focus:outline-none">
+  <button (click)="btnClick.emit()" *ngIf="!follow" [ngClass]="classBtn2" class="border-green-400 bg-green-400 shadow focus:outline-none transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-100">
     <fa-icon class="text-white text-sm sm:text-xl mr-1" [icon]="faUser"></fa-icon>
     <fa-icon class="text-white text-xs sm:text-lg" [icon]="faCheck"></fa-icon>
   </button>
-  <button *ngIf="!follow" [ngClass]="classBtn2" class="float-right sm:float-none sm:hidden block border-green-400 bg-green-400 shadow focus:outline-none">
+  <button [ngClass]="classBtn1" class="mx-6 hidden sm:block border-green-400 bg-green-400 shadow focus:outline-none transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-100">
+    <span class="text-white">Nhắn tin</span>
+  </button>
+  <button *ngIf="!follow" [ngClass]="classBtn2" class="sm:hidden block border-green-400 bg-green-400 shadow focus:outline-none">
     <span class="text-sm text-white">Nhắn tin</span>
   </button>
-  <div class="clear-both sm:clear-none"></div>
+</div>
+<div *ngIf="isBlock">
+  <button (click)="btnClickUnBlock.emit()" [ngClass]="classBtn1" class="hidden sm:block border-green-400 bg-green-400 shadow focus:outline-none transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-100">
+    <span class="text-white">Bỏ Chặn</span>
+  </button>
+  <button [ngClass]="classBtn2" class="sm:hidden block border-green-400 bg-green-400 shadow focus:outline-none w-full">
+    <span class="text-sm text-white">Bỏ Chặn</span>
+  </button>
 </div>
 
 
