@@ -16,6 +16,10 @@ export class GenresFacade {
     return this.genresQuery.selectAll();
   }
 
+  getAllGenresAkita() {
+    return this.genresQuery.getAll();
+  }
+
   getAllGenres() {
     return this.genresGear.getAllGenres();
   }

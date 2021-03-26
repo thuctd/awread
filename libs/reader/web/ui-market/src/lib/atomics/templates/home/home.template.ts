@@ -15,8 +15,8 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
 export class HomeTemplate implements OnInit {
   @Input() books = [];
   @Input() genres = [];
-  @Input() bookByCategory = [];
-  @Output() filterItemsByCategory = new EventEmitter();
+  @Input() bookByGenre = [];
+  @Output() filterItemsByGenre = new EventEmitter();
   @Input() loading: boolean;
   constructor() { }
 

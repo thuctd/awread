@@ -4,7 +4,7 @@
     <div class="flex mb-6">
       <div class="w-full flex mt-0 md:mt-1.5">
         <rd-home-tab-category *ngFor="let genre of genres" [tabName]="genre.name"
-          (emitEvent)="filterItemsByCategory.emit(genre)">
+          (emitEvent)="filterItemsByGenre.emit(genre)">
         </rd-home-tab-category>
       </div>
     </div>

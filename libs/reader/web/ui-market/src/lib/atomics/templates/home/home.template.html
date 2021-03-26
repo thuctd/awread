@@ -6,12 +6,12 @@
     <home-detail-book-update [books]="books"></home-detail-book-update>
   </section>
   <section class="bg-red-50">
-    <home-detail-book-featured></home-detail-book-featured>
+    <home-detail-book-featured [books]="books"></home-detail-book-featured>
   </section>
   <section>
-    <home-detail-book-review></home-detail-book-review>
+    <home-detail-book-review [books]="books"></home-detail-book-review>
   </section>
   <section class="bg-purple-50">
-    <home-tags [genres]='genres' [items]='bookByCategory' [loading]='loading' (filterItemsByCategory)='filterItemsByCategory.emit($event)'></home-tags>
+    <home-tags [genres]='genres' [items]='bookByGenre' [loading]='loading' (filterItemsByGenre)='filterItemsByGenre.emit($event)'></home-tags>
   </section>
 </section>

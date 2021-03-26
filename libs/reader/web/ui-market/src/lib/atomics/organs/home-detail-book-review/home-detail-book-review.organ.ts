@@ -17,9 +17,9 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 })
 export class HomeDetailBookReviewOrgan implements OnInit {
   @Input() titlePage = 'Top truyện được đánh giá tích cực';
-  counter = Array;
+  @Input() books = [];
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

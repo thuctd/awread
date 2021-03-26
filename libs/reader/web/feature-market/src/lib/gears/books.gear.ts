@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
@@ -7,7 +6,6 @@ import { BooksStore } from '../states/books';
 
 @Injectable({ providedIn: 'root' })
 export class BooksGear {
-  baseUrl = 'http://localhost:3000/books';
 
   constructor(
     private booksStore: BooksStore,
@@ -38,11 +36,4 @@ export class BooksGear {
     );
   }
 
-  getBooksByGenresId(genreId: string) {
-    return this.booksApi.getBooksByGenresId(genreId).pipe(
-      tap((books) => {
-        this.booksStore.set(books);
-      })
-    );
-  }
 }

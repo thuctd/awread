@@ -13,7 +13,7 @@ export class HomeTagsOrgan implements OnInit {
   nextIcon = `<img src="/global-assets/images/arrow_right.webp" alt="arrow_right">`;
   @Input() titlePage = 'Tags';
   @Input() loading: false | true = false;
-  @Output() filterItemsByCategory = new EventEmitter();
+  @Output() filterItemsByGenre = new EventEmitter();
   @Input() genres = [
     {
       id: 1,
@@ -72,12 +72,4 @@ export class HomeTagsOrgan implements OnInit {
 
   ngOnInit(): void { }
 
-  // toggleTabs(currentTab) {
-  //   this.genres.forEach((tab) => {
-  //     tab.isActive = false;
-  //     if (tab.name === currentTab.title) {
-  //       tab.isActive = true;
-  //     }
-  //   });
-  // }
 }
