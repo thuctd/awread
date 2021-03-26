@@ -6,7 +6,7 @@ import admin from 'firebase-admin';
 import firebaseConfig from './adminsdk.json';
 import { IncomingMessage } from 'http';
 import { environment } from '@awread/global/environments';
-
+import ConnectionFilterPlugin from "postgraphile-plugin-connection-filter";
 const app = express();
 const FIREBASE_URL = environment.firebase.databaseURL;
 const SCHEMA = environment.postgres.SCHEMA;
@@ -36,6 +36,7 @@ const postgraphileOptions = {
   watchPg: true,
   graphiql: true,
   enhanceGraphiql: true,
+  appendPlugins: [ConnectionFilterPlugin],
   // pgSettings: async (req: IncomingMessage & { user: any }) => {
   //   console.log('req.user', req.user);
   //   return checkRole(req);

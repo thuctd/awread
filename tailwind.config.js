@@ -11,6 +11,11 @@ module.exports = {
     extend: {
       fontSize: {
         small: ['0.6rem', '1rem']
+      },
+      colors: {
+        gray: {
+          greenish: "#4B4B4B",
+        }
       }
     },
     color: {

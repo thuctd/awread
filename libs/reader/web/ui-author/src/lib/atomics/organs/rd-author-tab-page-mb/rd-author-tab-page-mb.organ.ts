@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'organ-rd-author-tab-page-mb',
@@ -15,6 +15,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 export class RdAuthorTabPageMbOrgan implements OnInit {
   @Input() numberProduct = '5';
   @Input() followers = '10';
+  @Output() moreBooks = new EventEmitter();
   tabs = [
     { name: `${this.numberProduct} Tác phẩm`, isActive: true },
     {
@@ -22,7 +23,7 @@ export class RdAuthorTabPageMbOrgan implements OnInit {
     },
   ];
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'template-rd-author-mb',
@@ -15,6 +15,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 export class RdAuthorMbTemplate implements OnInit {
   @Input() follow = true;
   @Input() isBlock = false;
+  @Output() moreBooks = new EventEmitter();
 
   constructor() {}
 
