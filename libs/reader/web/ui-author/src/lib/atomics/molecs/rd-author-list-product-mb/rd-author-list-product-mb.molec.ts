@@ -13,6 +13,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RdAuthorListProductMbMolec implements OnInit {
+  @Input() authorId = '123456zxcasdwqe_zxxzc';
   @Input() storys = [
     {
       srcImg: '/global-assets/images/sach-co-gai-nam-ay-chung-ta-cung-theo-duoi.webp',
