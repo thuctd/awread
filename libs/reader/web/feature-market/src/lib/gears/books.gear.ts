@@ -15,6 +15,44 @@ export class BooksGear {
   getAllBooks() {
     return this.booksApi.getAllBooks().pipe(
       tap((books) => {
+        this.booksStore.set(books);
+      }),
+      catchError((err) => {
+        console.error('An error occurred:', err);
+        return throwError(err);
+      })
+    );
+  }
+
+  getGoodBooks() {
+    return this.booksApi.getGoodBooks().pipe(
+      tap((books) => {
+        console.log('get books new: ', books);
+        this.booksStore.set(books);
+      }),
+      catchError((err) => {
+        console.error('An error occurred:', err);
+        return throwError(err);
+      })
+    );
+  }
+
+  getFeatureBooks() {
+    return this.booksApi.getFeatureBooks().pipe(
+      tap((books) => {
+        console.log('get books: ', books);
+        this.booksStore.set(books);
+      }),
+      catchError((err) => {
+        console.error('An error occurred:', err);
+        return throwError(err);
+      })
+    );
+  }
+
+  getLatestBooks() {
+    return this.booksApi.getLatestBooks().pipe(
+      tap((books) => {
         console.log('get books: ', books);
         this.booksStore.set(books);
       }),

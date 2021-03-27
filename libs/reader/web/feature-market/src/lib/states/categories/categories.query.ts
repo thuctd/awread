@@ -5,6 +5,7 @@ import { CategoriesStore, CategoriesState } from './categories.store';
 
 @Injectable({ providedIn: 'root' })
 export class CategoriesQuery extends QueryEntity<CategoriesState> {
+  categoriesList$ = this.selectAll();
   // ui: EntityUIQuery<CategoriesUIState>;
   constructor(protected store: CategoriesStore) {
     super(store);

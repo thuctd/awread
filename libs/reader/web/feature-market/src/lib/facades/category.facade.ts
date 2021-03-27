@@ -20,4 +20,8 @@ export class CategoryFacade {
     return this.categoryGear.getAllCategories();
   }
 
+  getDetailCategory(categoryId: string) {
+    return this.categoryGear.getCategoryById(categoryId);
+  }
+
 }

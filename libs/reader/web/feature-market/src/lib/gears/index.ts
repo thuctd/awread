@@ -1,3 +1,4 @@
+export * from './event.gear';
 export * from './genres.gear';
 export * from './chapters.gear';
 export * from './author.gear';

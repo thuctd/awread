@@ -4,23 +4,23 @@
         <div class="flex justify-end">
             <div class="w-full">
                 <div class="relative w-64">
-                    <atom-img-m [size]='"xl"'>
+                    <atom-img-m [srcImg]='book.imgUrl' [size]='"xl"'>
                     </atom-img-m>
                     <div class="absolute top--04">
                         <rd-home-icon-rating></rd-home-icon-rating>
                     </div>
-                    <home-info-book-review></home-info-book-review>
+                    <home-info-book-review [book]='book.title'></home-info-book-review>
                 </div>
             </div>
         </div>
         <div class="float-left pl-8 md:pl-12 xl:pl-24 lg:pl-20">
             <div class="grid grid-cols-2 gap-10 mb-6">
                 <div *ngFor='let book of books; let i = index' class="w-44 xl:w-52 rounded relative">
-                    <atom-img-m [size]='"m"' [srcImg]='book.imgUrl'></atom-img-m>
+                    <atom-img-m [size]='"m"' [bookId]='book.id' [srcImg]='book.imgUrl'></atom-img-m>
                     <div class="absolute -top-1.5">
                         <rd-home-icon-rating [topBook]='i + 2'></rd-home-icon-rating>
                     </div>
-                    <home-info-book-review [book]='book.title' class="mr-4"></home-info-book-review>
+                    <home-info-book-review [book]='book' class="mr-4"></home-info-book-review>
                 </div>
             </div>
         </div>

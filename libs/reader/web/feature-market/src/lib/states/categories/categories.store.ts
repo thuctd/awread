@@ -10,7 +10,7 @@ export interface CategoriesState extends EntityState<Category>, ActiveState { };
 
 
 @Injectable({ providedIn: 'root' })
-@StoreConfig({ name: 'dasherize(name)', resettable: true })
+@StoreConfig({ name: 'categories', resettable: true })
 export class CategoriesStore extends EntityStore<CategoriesState> {
   // ui: EntityUIStore<CategoryUIState>;
   constructor() {

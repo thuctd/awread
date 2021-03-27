@@ -1,3 +1,4 @@
+export * from './event.model';
 export * from './genre.model';
 export * from './book-detail.model';
 export * from './book-reader.model';

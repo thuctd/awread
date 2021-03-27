@@ -1,4 +1,21 @@
 {
+  "events": [
+    {
+      "image": "https://image.freepik.com/free-psd/author-book-signing-event-banner-template_23-2148646050.jpg",
+      "thumbImage": "https://image.freepik.com/free-psd/author-book-signing-event-banner-template_23-2148646050.jpg",
+      "alt": "1"
+    },
+    {
+      "image": "https://image.freepik.com/free-psd/how-start-writing-book-banner-template_23-2148646049.jpg",
+      "thumbImage": "https://image.freepik.com/free-psd/how-start-writing-book-banner-template_23-2148646049.jpg",
+      "alt": "2"
+    },
+    {
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxqL67yJ0GuWBhXqQHQzfriKCG5PHhGsVqSOiQe9w8Zh7jc5znQ6Lcjih46yVp8Oi2n2o&usqp=CAU",
+      "thumbImage": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxqL67yJ0GuWBhXqQHQzfriKCG5PHhGsVqSOiQe9w8Zh7jc5znQ6Lcjih46yVp8Oi2n2o&usqp=CAU",
+      "alt": "3"
+    }
+  ],
   "categories": [
     {
       "name": "Truyện ngắn",
@@ -34,11 +51,7 @@
   "books": [
     {
       "category": "1",
-      "genres": [
-        "1",
-        "2",
-        "3"
-      ],
+      "genres": ["1", "2", "3"],
       "title": "Cô gái chúng ta cùng theo đuổi",
       "authorId": "2",
       "imgUrl": "https://salt.tikicdn.com/cache/w1200/media/catalog/product/b/i/bia-1-em-la-nha.u5131.d20170410.t083456.738774.jpg",
@@ -46,10 +59,7 @@
     },
     {
       "category": "1",
-      "genres": [
-        "1",
-        "3"
-      ],
+      "genres": ["1", "3"],
       "title": "Em là nhà!",
       "authorId": "1",
       "imgUrl": "https://www.khaitam.com/Data/Sites/1/Product/1355/co-gai-nam-ay-chung-ta-cung-theo-duoi.jpg",
@@ -57,11 +67,7 @@
     },
     {
       "category": "3",
-      "genres": [
-        "1",
-        "2",
-        "3"
-      ],
+      "genres": ["1", "2", "3"],
       "title": "Chào em, thanh xuân của anh",
       "authorId": "1",
       "imgUrl": "https://salt.tikicdn.com/cache/w1200/media/catalog/product/b/i/bia-1-em-la-nha.u5131.d20170410.t083456.738774.jpg",
@@ -69,10 +75,7 @@
     },
     {
       "category": "1",
-      "genres": [
-        "1",
-        "4"
-      ],
+      "genres": ["1", "4"],
       "title": "Xóm trọ cũ",
       "authorId": "2",
       "imgUrl": "https://www.khaitam.com/Data/Sites/1/Product/1355/co-gai-nam-ay-chung-ta-cung-theo-duoi.jpg",
@@ -80,11 +83,7 @@
     },
     {
       "category": "3",
-      "genres": [
-        "1",
-        "2",
-        "4"
-      ],
+      "genres": ["1", "2", "4"],
       "title": "Yêu em từ cái nhìn đâu tiên",
       "authorId": "3",
       "imgUrl": "https://salt.tikicdn.com/cache/w1200/media/catalog/product/b/i/bia-1-em-la-nha.u5131.d20170410.t083456.738774.jpg",
@@ -92,10 +91,7 @@
     },
     {
       "category": "1",
-      "genres": [
-        "1",
-        "3"
-      ],
+      "genres": ["1", "3"],
       "title": "Có Một Người Anh Rất Thương",
       "authorId": "1",
       "imgUrl": "https://www.khaitam.com/Data/Sites/1/Product/1355/co-gai-nam-ay-chung-ta-cung-theo-duoi.jpg",
@@ -103,11 +99,7 @@
     },
     {
       "category": "1",
-      "genres": [
-        "1",
-        "2",
-        "3"
-      ],
+      "genres": ["1", "2", "3"],
       "title": "Mưa Ơi Đừng Buồn",
       "authorId": "3",
       "imgUrl": "https://salt.tikicdn.com/cache/w1200/media/catalog/product/b/i/bia-1-em-la-nha.u5131.d20170410.t083456.738774.jpg",
@@ -115,10 +107,7 @@
     },
     {
       "category": "2",
-      "genres": [
-        "1",
-        "3"
-      ],
+      "genres": ["1", "3"],
       "title": "Sao Em Lại Tắt Máy?",
       "authorId": "1",
       "imgUrl": "https://www.khaitam.com/Data/Sites/1/Product/1355/co-gai-nam-ay-chung-ta-cung-theo-duoi.jpg",
@@ -126,11 +115,7 @@
     },
     {
       "category": "1",
-      "genres": [
-        "1",
-        "2",
-        "3"
-      ],
+      "genres": ["1", "2", "3"],
       "title": "Người lạ từng thương",
       "authorId": "2",
       "imgUrl": "https://salt.tikicdn.com/cache/w1200/media/catalog/product/b/i/bia-1-em-la-nha.u5131.d20170410.t083456.738774.jpg",
@@ -138,37 +123,11 @@
     },
     {
       "category": "2",
-      "genres": [
-        "1",
-        "3"
-      ],
+      "genres": ["1", "3"],
       "title": "Người từng nói yêu anh mãi mãi",
       "authorId": "1",
       "imgUrl": "https://www.khaitam.com/Data/Sites/1/Product/1355/co-gai-nam-ay-chung-ta-cung-theo-duoi.jpg",
       "id": "9"
-    },
-    {
-      "category": "1",
-      "genres": [
-        "1",
-        "2",
-        "3"
-      ],
-      "title": "Mãi mãi là bao lâu",
-      "authorId": "1",
-      "imgUrl": "https://salt.tikicdn.com/cache/w1200/media/catalog/product/b/i/bia-1-em-la-nha.u5131.d20170410.t083456.738774.jpg",
-      "id": "10"
-    },
-    {
-      "category": "1",
-      "genres": [
-        "1",
-        "3"
-      ],
-      "title": "Thanh xuân của anh là em",
-      "authorId": "1",
-      "imgUrl": "https://www.khaitam.com/Data/Sites/1/Product/1355/co-gai-nam-ay-chung-ta-cung-theo-duoi.jpg",
-      "id": "11"
     }
   ],
   "authors": [
