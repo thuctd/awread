@@ -1,19 +1,22 @@
 {
   "events": [
     {
-      "image": "https://image.freepik.com/free-psd/author-book-signing-event-banner-template_23-2148646050.jpg",
+      "image": "Banner One",
       "thumbImage": "https://image.freepik.com/free-psd/author-book-signing-event-banner-template_23-2148646050.jpg",
-      "alt": "1"
+      "alt": "Event One",
+      "id": "1"
     },
     {
-      "image": "https://image.freepik.com/free-psd/how-start-writing-book-banner-template_23-2148646049.jpg",
+      "image": "Banner Two",
       "thumbImage": "https://image.freepik.com/free-psd/how-start-writing-book-banner-template_23-2148646049.jpg",
-      "alt": "2"
+      "alt": "Event Two",
+      "id": "2"
     },
     {
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxqL67yJ0GuWBhXqQHQzfriKCG5PHhGsVqSOiQe9w8Zh7jc5znQ6Lcjih46yVp8Oi2n2o&usqp=CAU",
+      "image": "Banner Three",
       "thumbImage": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxqL67yJ0GuWBhXqQHQzfriKCG5PHhGsVqSOiQe9w8Zh7jc5znQ6Lcjih46yVp8Oi2n2o&usqp=CAU",
-      "alt": "3"
+      "alt": "Event Three",
+      "id": "3"
     }
   ],
   "categories": [

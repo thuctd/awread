@@ -20,7 +20,8 @@ export class HomeDetailBookReviewOrgan implements OnInit {
   @Input() books = [];
   @Input() book = {
     imgUrl: '',
-    title: ''
+    title: 'Cô gái chúng ta cùng theo đuổi năm nào',
+    id: '1'
   };
 
   constructor() { }

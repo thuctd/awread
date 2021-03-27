@@ -16,7 +16,6 @@ export class EventGear {
   getAllEvents() {
     return this.eventApi.getAllEvents().pipe(
       tap((events) => {
-        console.log(events);
         this.eventStore.set(events);
       }),
       catchError((err) => {

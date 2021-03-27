@@ -14,7 +14,6 @@ export class HomePage implements OnInit {
   evetList$ = this.eventsFacede.eventList$;
   isLoading$ = this.booksFacade.selectLoadingAkita();
   getGoodBooks;
-  getTopGood;
   getLatestBooks;
   getFeatureBooks;
   filteredBooks$;
@@ -33,8 +32,7 @@ export class HomePage implements OnInit {
     this.genresFacade.getAllGenres().subscribe();
     this.eventsFacede.getAllEvents().subscribe();
     this.booksFacade.getGoodBooks().subscribe((books) => {
-      this.getTopGood = books[0];
-      this.getGoodBooks = books.slice(1, 5);
+      this.getGoodBooks = books.slice(0, 5);
     });
     this.booksFacade.getLatestBooks().subscribe((books) => {
       this.getLatestBooks = books;

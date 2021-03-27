@@ -19,6 +19,7 @@ export class SliderAtom implements OnInit {
     height: window.innerWidth > 1024 ? '650px' : window.innerWidth > 768 ? '500px' : '200px',
     space: 1,
   };
+  //TODO: Em truyền Input vào thì nó lỗi ạ...
   @Input() imageObject = [
     {
       image: 'https://cohet.vn/upload/data/images/do-hoa/background/anh-nen-anime-dep-2.jpg',

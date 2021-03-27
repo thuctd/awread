@@ -1,6 +1,6 @@
 <section>
   <section class="pt-40">
-    <atom-slider></atom-slider>
+    <atom-slider [imageObject]='sliders'></atom-slider>
   </section>
   <section>
     <home-detail-book-update [books]="getLatestBooks"></home-detail-book-update>
@@ -9,7 +9,7 @@
     <home-detail-book-featured [books]="getFeatureBooks"></home-detail-book-featured>
   </section>
   <section>
-    <home-detail-book-review [book]='book' [books]="getGoodBooks"></home-detail-book-review>
+    <home-detail-book-review [books]="getGoodBooks"></home-detail-book-review>
   </section>
   <section class="bg-purple-50">
     <home-tags [genres]='genres' [items]='bookByGenre' [loading]='loading' (filterItemsByGenre)='filterItemsByGenre.emit($event)'></home-tags>

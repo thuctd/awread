@@ -14,8 +14,28 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
 })
 export class HomeTemplate implements OnInit {
   @Input() books = [];
-  @Input() book;
-  @Input() sliders = [];
+  @Input() topBook = {
+    imgUrl: '',
+    title: 'Cô gái chúng ta cùng theo đuổi năm nào',
+    id: '1'
+  };
+  @Input() sliders = [
+    {
+      image: 'https://cohet.vn/upload/data/images/do-hoa/background/anh-nen-anime-dep-2.jpg',
+      thumbImage: 'https://cohet.vn/upload/data/images/do-hoa/background/anh-nen-anime-dep-2.jpg',
+      alt: 'alt of image',
+    },
+    {
+      image: 'https://cohet.vn/upload/data/images/do-hoa/background/anh-nen-anime-dep-2.jpg',
+      thumbImage: 'https://cohet.vn/upload/data/images/do-hoa/background/anh-nen-anime-dep-2.jpg',
+      alt: 'Image alt',
+    },
+    {
+      image: 'https://cohet.vn/upload/data/images/do-hoa/background/anh-nen-anime-dep-2.jpg',
+      thumbImage: 'https://cohet.vn/upload/data/images/do-hoa/background/anh-nen-anime-dep-2.jpg',
+      alt: 'Image alt',
+    },
+  ];
   @Input() getGoodBooks = [];
   @Input() getLatestBooks = [];
   @Input() getFeatureBooks = [];
