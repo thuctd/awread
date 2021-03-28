@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { throwError } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError, tap, map } from 'rxjs/operators';
 import { BooksApi } from '../apis';
 import { BooksStore } from '../states/books';
 
@@ -54,6 +54,32 @@ export class BooksGear {
     return this.booksApi.getLatestBooks().pipe(
       tap((books) => {
         console.log('get books: ', books);
+        this.booksStore.set(books);
+      }),
+      catchError((err) => {
+        console.error('An error occurred:', err);
+        return throwError(err);
+      })
+    );
+  }
+
+  getCategoryBooks(categoryId: string) {
+    return this.booksApi.getCategoryBooks(categoryId).pipe(
+      tap((books) => {
+        console.log('get category books: ', books);
+        this.booksStore.set(books);
+      }),
+      catchError((err) => {
+        console.error('An error occurred:', err);
+        return throwError(err);
+      })
+    );
+  }
+
+  getGenreBooks(genreId: string) {
+    return this.booksApi.getGenreBooks(genreId).pipe(
+      tap((books) => {
+        console.log('genre books: ', books);
         this.booksStore.set(books);
       }),
       catchError((err) => {

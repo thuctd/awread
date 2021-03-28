@@ -8,6 +8,10 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
       :host {
         display: block;
       }
+
+      .h-104 {
+        height: 26rem;
+      }
     `,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,

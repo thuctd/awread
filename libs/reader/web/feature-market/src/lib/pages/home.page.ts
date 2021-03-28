@@ -1,7 +1,6 @@
 import { CategoryFacade } from './../facades/category.facade';
 import { Directive, Injectable, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { BooksFacade, EventFacade, GenresFacade } from '../facades';
 import { Genre } from '../models';
 @Injectable({
@@ -46,22 +45,17 @@ export class HomePage implements OnInit {
   filterItemsByGenre(genre: Genre) {
     this.loading$ = true;
     setTimeout(() => {
-      this.filteredBooks$ = this.bookList$.pipe(
-        map((items) =>
-          items.filter((item) => {
-            this.loading$ = false;
-            return item.genres.includes(genre.id);
-          })
-        )
-      );
+      this.filteredBooks$ = this.booksFacade.getGenreBooks(genre.id);
+      this.loading$ = false
     }, 1000);
   }
+
 
   private loadFirstByGenre() {
     this.filteredBooks$ = this.bookList$.pipe(
       map((items) =>
         items.filter((item) => {
-          return item.genres.includes('1');
+          return item.genres.includes(items[0].id);
         })
       )
     );

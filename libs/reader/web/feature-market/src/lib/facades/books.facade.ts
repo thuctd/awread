@@ -36,6 +36,14 @@ export class BooksFacade {
     return this.booksGear.getAllBooks();
   }
 
+  getGenreBooks(genreId: string) {
+    return this.booksGear.getGenreBooks(genreId);
+  }
+
+  getCategoryBooks(categoryId: string) {
+    return this.booksGear.getGenreBooks(categoryId);
+  }
+
   getLatestBooks() {
     return this.booksGear.getLatestBooks();
   }

@@ -33,8 +33,14 @@ export class BooksApi {
   }
 
   getCategoryBooks(categoryId: string) {
-    return of(db.books.find(book => book.category === categoryId))
+    return of(db.books.filter(book => book.category === categoryId))
       .pipe(delay(500));
+  }
+
+  getGenreBooks(genreId: string) {
+    return of(db.books.filter(book => book.genres.find(
+      genre => genre === genreId
+    ))).pipe(delay(500));
   }
 
   getBookById(bookId: string) {
