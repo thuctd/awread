@@ -109,7 +109,7 @@ const routes: Routes = [
                 : import('./pages/news-desktop/news-desktop.module').then((m) => m.NewsDesktopModule),
           },
           {
-            path: '**',
+            path: '',
             pathMatch: 'full',
             redirectTo: '',
           },
