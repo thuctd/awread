@@ -1,9 +1,9 @@
 <div class="flex">
-  <img class="h-16 pr-16 mt-2" [src]="srcImg" alt="">
-  <table class="text-base lg:text-xl xl:text-2xl text-gray-greenish">
+  <img class="md:h-16 xl:h-20 pr-16 mt-2" [src]="srcImg" alt="">
+  <table class="text-base xl:text-xl text-gray-greenish">
     <tr *ngFor="let item of contents">
-      <td class="py-3">{{item.title}}</td>
-      <td class="pl-4 py-3">{{item.content}}</td>
+      <td class="py-2">{{item.title}}</td>
+      <td class="pl-4 py-2">{{item.content}}</td>
     </tr>
   </table>
 </div>

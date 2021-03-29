@@ -12,11 +12,11 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
         background-color: #f8e8e8;
       }
       :host .h-160 {
-        height: 40rem;
+        height: 34rem;
       }
       @media only screen and (max-width: 1024px) {
         :host .h-160 {
-          height: 34rem;
+          height: 28rem;
         }
       }
     `,
