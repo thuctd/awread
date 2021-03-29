@@ -9,12 +9,10 @@ import { Genre } from '../models';
 })
 @Directive()
 export class HomePage implements OnInit {
-  imageObject: Array<any> = [];
   bookList$ = this.booksFacade.bookList$;
   genreList$ = this.genresFacade.genreList$;
-  evetList$ = this.eventsFacede.eventList$;
+  imageObject$ = this.eventsFacede.eventList$;
   isLoading$ = this.booksFacade.selectLoadingAkita();
-  sldiers;
   getGoodBooks;
   getLatestBooks;
   getFeatureBooks;
@@ -45,15 +43,7 @@ export class HomePage implements OnInit {
   setImageObject() {
     this.eventsFacede.getAllEvents().subscribe(
       (data: any) => {
-        this.sldiers = data.map((image) => {
-          return {
-            image: image.image,
-            thumbImage: image.thumbImage,
-            alt: image.alt,
-            title: image.title,
-          };
-        });
-        this.imageObject = this.sldiers;
+
       },
       (error) => {
         if (error != null) {
