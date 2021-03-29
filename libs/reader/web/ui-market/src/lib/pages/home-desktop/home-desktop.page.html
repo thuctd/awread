@@ -1,1 +1,1 @@
-<template-home [loading]='loading$' [getGoodBooks]="getGoodBooks" [getLatestBooks]="getLatestBooks" [getFeatureBooks]="getFeatureBooks" [genres]="genreList$ | async" (filterItemsByGenre)='filterItemsByGenre($event)' [bookByGenre]='filteredBooks$ | async'></template-home>
+<template-home [loading]='loading$' [sliders]='imageObject' [getGoodBooks]="getGoodBooks" [getLatestBooks]="getLatestBooks" [getFeatureBooks]="getFeatureBooks" [genres]="genreList$ | async" (filterItemsByGenre)='filterItemsByGenre($event)' [bookByGenre]='filteredBooks$ | async'></template-home>

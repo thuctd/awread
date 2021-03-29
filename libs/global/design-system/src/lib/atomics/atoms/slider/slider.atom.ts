@@ -19,26 +19,28 @@ export class SliderAtom implements OnInit {
     height: window.innerWidth > 1280 ? '600px' : window.innerWidth > 1024 ? '500px' : window.innerWidth > 768 ? '425' : '200px',
     space: 1,
   };
-  //TODO: Em truyền Input vào thì nó lỗi ạ...
   @Input() imageObject = [
     {
-      image: 'https://cohet.vn/upload/data/images/do-hoa/background/anh-nen-anime-dep-2.jpg',
+      image: 'IMG 1',
       thumbImage: 'https://cohet.vn/upload/data/images/do-hoa/background/anh-nen-anime-dep-2.jpg',
       alt: 'alt of image',
+      id: '1'
     },
     {
-      image: 'https://cohet.vn/upload/data/images/do-hoa/background/anh-nen-anime-dep-2.jpg',
+      image: 'IMG 2',
       thumbImage: 'https://cohet.vn/upload/data/images/do-hoa/background/anh-nen-anime-dep-2.jpg',
       alt: 'Image alt',
+      id: '2'
     },
     {
-      image: 'https://cohet.vn/upload/data/images/do-hoa/background/anh-nen-anime-dep-2.jpg',
+      image: 'IMG 3',
       thumbImage: 'https://cohet.vn/upload/data/images/do-hoa/background/anh-nen-anime-dep-2.jpg',
       alt: 'Image alt',
+      id: '3'
     },
   ];
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

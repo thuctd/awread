@@ -2,20 +2,20 @@
   "events": [
     {
       "image": "Banner One",
-      "thumbImage": "https://image.freepik.com/free-psd/author-book-signing-event-banner-template_23-2148646050.jpg",
+      "thumbImage": "https://i.pinimg.com/originals/02/2c/39/022c39f037078cf7709288018492f2be.jpg",
       "alt": "Event One",
       "id": "1"
     },
     {
       "image": "Banner Two",
-      "thumbImage": "https://image.freepik.com/free-psd/how-start-writing-book-banner-template_23-2148646049.jpg",
+      "thumbImage": "https://i.pinimg.com/originals/df/31/05/df31057ae4e9faa895ac40b7abc74c47.jpg",
       "alt": "Event Two",
       "id": "2"
     },
     {
-      "image": "Banner Three",
-      "thumbImage": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxqL67yJ0GuWBhXqQHQzfriKCG5PHhGsVqSOiQe9w8Zh7jc5znQ6Lcjih46yVp8Oi2n2o&usqp=CAU",
-      "alt": "Event Three",
+      "image": "Banner Two",
+      "thumbImage": "https://i.pinimg.com/originals/57/f4/0d/57f40d4ca72cbb649fc560917b1d45cb.jpg",
+      "alt": "Event Two",
       "id": "3"
     }
   ],
