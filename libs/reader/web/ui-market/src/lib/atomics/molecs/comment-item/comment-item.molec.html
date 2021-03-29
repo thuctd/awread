@@ -1,6 +1,6 @@
 <div class="w-full text-gray-800">
   <div class="flex leading-normal pl-1 pr-4">
-      <atom-circle-image [src]="'/global-assets/images/avatar-mrmrs.webp'"></atom-circle-image>
+      <atom-circle-image></atom-circle-image>
       <div class="pl-3 flex-auto">
           <div>
             <div class="text-sm font-medium mb-1 float-left">{{comment.userName}}</div>
@@ -17,7 +17,7 @@
             <a class="outline-none text-sm font-medium mb-1 cursor-pointer" (click)="toggleMenu($event)" (clickedOutside)="isMenuOpen = false">{{comment.insideComment.length}} Trả lời</a>
             <div *ngIf="isMenuOpen">
               <div class="flex py-1" *ngFor="let item of comment.insideComment">
-                <atom-circle-image [src]="'/global-assets/images/avatar-mrmrs.webp'"></atom-circle-image>
+                <atom-circle-image [src]="src"></atom-circle-image>
                 <div class="pl-3 pt-2 flex-auto">
                   <div>
                     <div class="text-sm font-medium mb-1">{{comment.userName}}</div>

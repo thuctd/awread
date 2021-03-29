@@ -11,9 +11,6 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
       :host .border-12 {
         border-width: 12px;
       }
-      :host .width-53 {
-        width: 53%;
-      }
     `,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -14,6 +14,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
 })
 export class CommentItemMolec implements OnInit {
   @Input() isMenuOpen = false;
+  @Input() src = '/global-assets/images/avatar-mrmrs.webp';
   @Input() comment = {
     userName: 'Lê Ngọc Quý',
     content: 'Hay quá bạn ơi Hay quá bạn ơi Hay quá bạn ơi Hay quá bạn ơi',
@@ -34,13 +35,12 @@ export class CommentItemMolec implements OnInit {
 
   @Output() clickBtn = new EventEmitter();
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   toggleMenu($event?) {
-    if ($event && this.comment.insideComment.length > 0)
-      $event.stopPropagation();
+    if ($event && this.comment.insideComment.length > 0) $event.stopPropagation();
     this.isMenuOpen = !this.isMenuOpen;
   }
 }
