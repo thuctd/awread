@@ -4,7 +4,7 @@
       <div class="pl-3 flex-auto">
           <div>
             <div class="text-sm font-medium mb-1 float-left">{{comment.userName}}</div>
-            <a class="text-sm font-medium mb-1 float-right cursor-pointer" (click)="clickBtn.emit()">Trả lời</a>
+            <a class="outline-none text-sm font-medium mb-1 float-right cursor-pointer" (click)="clickBtn.emit()">Trả lời</a>
             <div class="clear-both"></div>
           </div>
           <div class="text-xs lg:text-sm mb-1">{{comment.content}}</div>
@@ -14,7 +14,7 @@
               </div>
             </div>
           <div>
-            <a class="text-sm font-medium mb-1 cursor-pointer" (click)="toggleMenu($event)" (clickedOutside)="isMenuOpen = false">{{comment.insideComment.length}} Trả lời</a>
+            <a class="outline-none text-sm font-medium mb-1 cursor-pointer" (click)="toggleMenu($event)" (clickedOutside)="isMenuOpen = false">{{comment.insideComment.length}} Trả lời</a>
             <div *ngIf="isMenuOpen">
               <div class="flex py-1" *ngFor="let item of comment.insideComment">
                 <atom-circle-image [src]="'/global-assets/images/avatar-mrmrs.webp'"></atom-circle-image>

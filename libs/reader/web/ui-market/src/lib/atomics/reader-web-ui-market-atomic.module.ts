@@ -65,6 +65,14 @@ import { RdSearchBookHeaderMolec } from './molecs/rd-search-book-header/rd-searc
 import { RdSearchBookTitleMolec } from './molecs/rd-search-book-title/rd-search-book-title.molec';
 import { RdSearchBookListOrgan } from './organs/rd-search-book-list/rd-search-book-list.organ';
 import { RdSearchBookMbTemplate } from './templates/rd-search-book-mb/rd-search-book-mb.template';
+import { RdIntroductionFounderOrgan } from './organs/rd-introduction-founder/rd-introduction-founder.organ';
+import { RdIntroductionAboutUsOrgan } from './organs/rd-introduction-aboutus/rd-introduction-aboutus.organ';
+import { RdIntroductionInfomationAppOrgan } from './organs/rd-introduction-infomation-app/rd-introduction-infomation-app.organ';
+import { RdIntroductionTemplate } from './templates/rd-introduction/rd-introduction.template';
+import { RdIntroductionBoxHotlineMolec } from './molecs/rd-introduction-box-hotline/rd-introduction-box-hotline.molec';
+import { RdIntroductionAboutusMolec } from './molecs/rd-introduction-aboutus/rd-introduction-aboutus.molec';
+import { RdIntroductionTargetItemGridMolec } from './molecs/rd-introduction-target-item-grid/rd-introduction-target-item-grid.molec';
+import { RdIntroductionTargetOrgan } from './organs/rd-introduction-target/rd-introduction-target.organ';
 
 @NgModule({
   imports: [CommonModule, StorybookSupportModule, GlobalDesignSystemAtomicModule, CarouselModule, ReaderWebUiAuthorAtomicModule],
@@ -133,6 +141,14 @@ import { RdSearchBookMbTemplate } from './templates/rd-search-book-mb/rd-search-
     RdSearchBookTitleMolec,
     RdSearchBookListOrgan,
     RdSearchBookMbTemplate,
+    RdIntroductionFounderOrgan,
+    RdIntroductionAboutUsOrgan,
+    RdIntroductionInfomationAppOrgan,
+    RdIntroductionTemplate,
+    RdIntroductionBoxHotlineMolec,
+    RdIntroductionAboutusMolec,
+    RdIntroductionTargetItemGridMolec,
+    RdIntroductionTargetOrgan,
   ],
   declarations: [
     ListInfoLongBookMolec,
@@ -196,6 +212,14 @@ import { RdSearchBookMbTemplate } from './templates/rd-search-book-mb/rd-search-
     RdSearchBookTitleMolec,
     RdSearchBookListOrgan,
     RdSearchBookMbTemplate,
+    RdIntroductionFounderOrgan,
+    RdIntroductionAboutUsOrgan,
+    RdIntroductionInfomationAppOrgan,
+    RdIntroductionTemplate,
+    RdIntroductionBoxHotlineMolec,
+    RdIntroductionAboutusMolec,
+    RdIntroductionTargetItemGridMolec,
+    RdIntroductionTargetOrgan,
   ],
 })
 export class ReaderWebUiMarketAtomicModule {}
