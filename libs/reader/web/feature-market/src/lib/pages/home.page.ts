@@ -10,47 +10,28 @@ import { Genre } from '../models';
 @Directive()
 export class HomePage implements OnInit {
   bookList$ = this.booksFacade.bookList$;
+  goodBookList$ = this.booksFacade.goodBookList$;
+  categoryBookList$ = this.booksFacade.categoryBookList$;
+  genreBookList$ = this.booksFacade.genreBookList$;
+  featureBookList$ = this.booksFacade.featureBookList$;
+  latestBookList$ = this.booksFacade.latestBookList$;
   genreList$ = this.genresFacade.genreList$;
   imageObject$ = this.eventsFacede.eventList$;
   isLoading$ = this.booksFacade.selectLoadingAkita();
-  getGoodBooks;
-  getLatestBooks;
-  getFeatureBooks;
   filteredBooks$;
   loading$ = false;
 
-  constructor(private booksFacade: BooksFacade, private eventsFacede: EventFacade, private genresFacade: GenresFacade, private categoryFacade: CategoryFacade) {
-    this.setImageObject();
-  }
+  constructor(private booksFacade: BooksFacade, private eventsFacede: EventFacade, private genresFacade: GenresFacade, private categoryFacade: CategoryFacade) { }
 
   ngOnInit(): void {
     this.categoryFacade.getAllCategories().subscribe();
     this.booksFacade.getAllBooks().subscribe();
     this.genresFacade.getAllGenres().subscribe();
     this.eventsFacede.getAllEvents().subscribe();
-    this.booksFacade.getGoodBooks().subscribe((books) => {
-      this.getGoodBooks = books.slice(0, 5);
-    });
-    this.booksFacade.getLatestBooks().subscribe((books) => {
-      this.getLatestBooks = books;
-    });
-    this.booksFacade.getFeatureBooks().subscribe((books) => {
-      this.getFeatureBooks = books.slice(0, 8);
-    });
+    this.booksFacade.getGoodBooks().subscribe();
+    this.booksFacade.getLatestBooks().subscribe();
+    this.booksFacade.getFeatureBooks().subscribe();
     this.loadFirstByGenre();
-  }
-
-  setImageObject() {
-    this.eventsFacede.getAllEvents().subscribe(
-      (data: any) => {
-
-      },
-      (error) => {
-        if (error != null) {
-          console.log(error);
-        }
-      }
-    );
   }
 
   filterItemsByGenre(genre: Genre) {

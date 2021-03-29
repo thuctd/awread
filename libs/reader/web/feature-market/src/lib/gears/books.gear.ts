@@ -1,3 +1,8 @@
+import { GoodBooksStore } from './../states/good-books/good-books.store';
+import { FeatureBooksStore } from './../states/feature-books/feature-books.store';
+import { LatestBooksStore } from './../states/latest-books/latest-books.store';
+import { GenreBooksStore } from './../states/genre-books/genre-books.store';
+import { CategoryBooksStore } from './../states/category-books/category-books.store';
 import { Injectable } from '@angular/core';
 import { throwError } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
@@ -9,6 +14,11 @@ export class BooksGear {
 
   constructor(
     private booksStore: BooksStore,
+    private categoryBooksStore: CategoryBooksStore,
+    private genreBooksStore: GenreBooksStore,
+    private latestBooksStore: LatestBooksStore,
+    private featureBooksStore: FeatureBooksStore,
+    private goodBooksStore: GoodBooksStore,
     private booksApi: BooksApi
   ) { }
 
@@ -28,7 +38,7 @@ export class BooksGear {
     return this.booksApi.getGoodBooks().pipe(
       tap((books) => {
         console.log('get books new: ', books);
-        this.booksStore.set(books);
+        this.goodBooksStore.set(books);
       }),
       catchError((err) => {
         console.error('An error occurred:', err);
@@ -41,7 +51,7 @@ export class BooksGear {
     return this.booksApi.getFeatureBooks().pipe(
       tap((books) => {
         console.log('get books: ', books);
-        this.booksStore.set(books);
+        this.featureBooksStore.set(books);
       }),
       catchError((err) => {
         console.error('An error occurred:', err);
@@ -54,7 +64,7 @@ export class BooksGear {
     return this.booksApi.getLatestBooks().pipe(
       tap((books) => {
         console.log('get books: ', books);
-        this.booksStore.set(books);
+        this.latestBooksStore.set(books);
       }),
       catchError((err) => {
         console.error('An error occurred:', err);
@@ -67,7 +77,7 @@ export class BooksGear {
     return this.booksApi.getCategoryBooks(categoryId).pipe(
       tap((books) => {
         console.log('get category books: ', books);
-        this.booksStore.set(books);
+        this.categoryBooksStore.set(books);
       }),
       catchError((err) => {
         console.error('An error occurred:', err);
@@ -80,7 +90,7 @@ export class BooksGear {
     return this.booksApi.getGenreBooks(genreId).pipe(
       tap((books) => {
         console.log('genre books: ', books);
-        this.booksStore.set(books);
+        this.genreBooksStore.set(books);
       }),
       catchError((err) => {
         console.error('An error occurred:', err);

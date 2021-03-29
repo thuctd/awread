@@ -18,12 +18,12 @@ export class BooksApi {
   }
 
   getGoodBooks() {
-    return of(db.books)
+    return of(db.books.slice(0, 5))
       .pipe(delay(500));
   }
 
   getFeatureBooks() {
-    return of(db.books)
+    return of(db.books.slice(0, 8))
       .pipe(delay(500));
   }
 
