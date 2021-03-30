@@ -1,3 +1,5 @@
+import { BooksFacade } from '@awread/reader/web/feature-market';
+import { CategoryFacade } from '@awread/reader/web/feature-market';
 import { ChangeDetectorRef, Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Directive, OnInit, OnDestroy } from '@angular/core';
@@ -9,6 +11,8 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 })
 @Directive()
 export class ComposedPage implements OnInit, OnDestroy {
+  categoryList$ = this.categoryFacede.categoryList$;
+  topBookList$ = this.booksFacede.topBookList$;
   tabsHead = [
     { name: 'Truyện dài', tabName: 'longbook' },
     { name: 'Truyện ngắn', tabName: 'shortbook' },
@@ -19,10 +23,12 @@ export class ComposedPage implements OnInit, OnDestroy {
   type: string;
 
   selectedTab = 'longbook';
-  constructor(private activatedRoute: ActivatedRoute, private cd: ChangeDetectorRef, private router: Router) { }
+  constructor(private activatedRoute: ActivatedRoute, private cd: ChangeDetectorRef, private router: Router, private categoryFacede: CategoryFacade, private booksFacede: BooksFacade) { }
   ngOnDestroy(): void { }
 
   ngOnInit(): void {
+    this.categoryFacede.getAllCategories().subscribe();
+    this.booksFacede.getTopBooks().subscribe();
     this.checkActiveTab();
   }
 

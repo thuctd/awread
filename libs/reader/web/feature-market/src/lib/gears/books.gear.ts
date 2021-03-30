@@ -86,6 +86,32 @@ export class BooksGear {
     );
   }
 
+  getTopBooks() {
+    return this.booksApi.getTopBooks().pipe(
+      tap((books) => {
+        console.log('get top books: ', books);
+        this.latestBooksStore.set(books);
+      }),
+      catchError((err) => {
+        console.error('An error occurred:', err);
+        return throwError(err);
+      })
+    );
+  }
+
+  getAuthorBooks(authorId: string) {
+    return this.booksApi.getAuthorBooks(authorId).pipe(
+      tap((books) => {
+        console.log('get author books: ', books);
+        this.categoryBooksStore.set(books);
+      }),
+      catchError((err) => {
+        console.error('An error occurred:', err);
+        return throwError(err);
+      })
+    );
+  }
+
   getGenreBooks(genreId: string) {
     return this.booksApi.getGenreBooks(genreId).pipe(
       tap((books) => {

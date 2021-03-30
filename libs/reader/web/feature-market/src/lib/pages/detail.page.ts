@@ -8,7 +8,7 @@ import { map, switchMap } from 'rxjs/operators';
 })
 @Directive()
 export class DetailPage implements OnInit {
-  book$;
+  book;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -19,6 +19,6 @@ export class DetailPage implements OnInit {
     this.activatedRoute.paramMap.pipe(
       map(params => params.get('bookId')),
       switchMap(id => this.booksFacade.getDetailBook(id)),
-    ).subscribe(book => this.book$ = book)
+    ).subscribe(book => this.book = book)
   }
 }

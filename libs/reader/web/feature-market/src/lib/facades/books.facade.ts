@@ -1,3 +1,5 @@
+import { AuthorBooksQuery } from './../states/author-books/author-books.query';
+import { TopBooksQuery } from './../states/top-books/top-books.query';
 import { Injectable } from '@angular/core';
 import { BooksGear } from '../gears';
 import { BooksQuery, BooksStore } from '../states/books';
@@ -10,8 +12,10 @@ import { LatestBooksQuery } from '../states/latest-books';
 @Injectable({ providedIn: 'root' })
 export class BooksFacade {
   bookList$ = this.booksQuery.selectAll();
+  topBookList$ = this.topBooksQuery.selectAll();
   goodBookList$ = this.goodBooksQuery.selectAll();
   genreBookList$ = this.genreBooksQuery.selectAll();
+  authorBookList$ = this.authorBooksQuery.selectAll();
   latestBookList$ = this.latestBooksQuery.selectAll();
   featureBookList$ = this.featureBooksQuery.selectAll();
   categoryBookList$ = this.categoryBooksQuery.selectAll();
@@ -20,8 +24,10 @@ export class BooksFacade {
     private booksGear: BooksGear,
     private booksStore: BooksStore,
     private booksQuery: BooksQuery,
+    private topBooksQuery: TopBooksQuery,
     private goodBooksQuery: GoodBooksQuery,
     private genreBooksQuery: GenreBooksQuery,
+    private authorBooksQuery: AuthorBooksQuery,
     private latestBooksQuery: LatestBooksQuery,
     private featureBooksQuery: FeatureBooksQuery,
     private categoryBooksQuery: CategoryBooksQuery
@@ -61,6 +67,14 @@ export class BooksFacade {
 
   getLatestBooks() {
     return this.booksGear.getLatestBooks();
+  }
+
+  getAuthorBooks(authorId: string) {
+    return this.booksGear.getAuthorBooks(authorId);
+  }
+
+  getTopBooks() {
+    return this.booksGear.getTopBooks();
   }
 
   getGoodBooks() {

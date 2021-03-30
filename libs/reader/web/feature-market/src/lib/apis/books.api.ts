@@ -37,6 +37,16 @@ export class BooksApi {
       .pipe(delay(500));
   }
 
+  getTopBooks() {
+    return of(db.books)
+      .pipe(delay(500));
+  }
+
+  getAuthorBooks(authorId: string) {
+    return of(db.books.filter(book => book.authorId === authorId))
+      .pipe(delay(500));
+  }
+
   getGenreBooks(genreId: string) {
     return of(db.books.filter(book => book.genres.find(
       genre => genre === genreId

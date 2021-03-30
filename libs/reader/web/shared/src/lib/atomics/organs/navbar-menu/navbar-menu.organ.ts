@@ -11,7 +11,7 @@ export class NavbarMenuOrgan implements OnInit {
   icon = faAngleDown;
   navHome = {
     title: 'Trang chủ',
-    href: '/home',
+    href: '/',
   };
   naveBook = {
     title: 'Truyện',

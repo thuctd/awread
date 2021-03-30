@@ -1,3 +1,5 @@
+export * from './top-book.model';
+export * from './author-book.model';
 export * from './category-book.model';
 export * from './feature-book.model';
 export * from './latest-book.model';
