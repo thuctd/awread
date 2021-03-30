@@ -9,18 +9,15 @@ import { faThLarge } from '@fortawesome/free-solid-svg-icons';
       :host {
         display: block;
       }
-    `
+    `,
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BtnIconAtom implements OnInit {
   @Input() icon = faThLarge;
-  @Input() isActive: true | false = true;
   @Output() eventChangesDisplay = new EventEmitter();
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

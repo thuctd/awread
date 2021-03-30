@@ -24,7 +24,7 @@ export class RdAuthorTabsMolec implements OnInit {
       isActive: true,
     },
     {
-      name: 'NGười theo dõi',
+      name: 'Người theo dõi',
       isActive: false,
     },
   ];
