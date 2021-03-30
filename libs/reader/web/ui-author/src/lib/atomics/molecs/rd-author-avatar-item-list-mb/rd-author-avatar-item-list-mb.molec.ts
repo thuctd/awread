@@ -19,15 +19,15 @@ export class RdAuthorAvatarItemListMbMolec implements OnInit {
   @Input() fullName = 'Hà Cẩm Thương';
   @Input() name = 'Cẩm Thương';
   @Input() faIcon = faEllipsisH;
-  @Input() follow = true;
+  @Input() isFollow = true;
   @Input() isBlock = true;
 
-  constructor(private MatDialog: MatDialog) {}
+  constructor(private matDialog: MatDialog) {}
 
   ngOnInit(): void {}
 
   openDiaLogMenu($event) {
-    this.MatDialog.open(RdAuthorPopupMenuMbTemplate, {
+    this.matDialog.open(RdAuthorPopupMenuMbTemplate, {
       width: '17rem',
       height: '18rem',
     });

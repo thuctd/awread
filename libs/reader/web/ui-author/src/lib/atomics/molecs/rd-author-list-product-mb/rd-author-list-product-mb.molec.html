@@ -1,8 +1,8 @@
-<div class="grid grid-cols-12 gap-6 place-items-center">
+<div class="grid grid-cols-12 gap-4 place-items-center">
   <div *ngFor="let story of storys" class="col-span-12">
-    <molec-rd-author-book-item></molec-rd-author-book-item>
+    <molec-rd-author-book-item [isText]="false" [isSize]="1"></molec-rd-author-book-item>
   </div>
 </div>
 <div>
-  <atom-text-link (submitEvent)="moreEvent.emit($event)" [text]="moreBook" [class]="'text-sm text-green-400'"></atom-text-link>
+  <atom-text-link (submitEvent)="moreEvent.emit($event)" [text]="moreBook" [class]="class"></atom-text-link>
 </div>

@@ -18,19 +18,19 @@ import { RdAuthorPopupReportMbTemplate } from '../rd-author-popup-report-mb/rd-a
 export class RdAuthorPopupMenuMbTemplate implements OnInit {
   @Output() clickBtn = new EventEmitter();
 
-  constructor(private MatDialog: MatDialog) {}
+  constructor(private matDialog: MatDialog) {}
 
   ngOnInit(): void {}
 
   openDiaLogBlockMb($event) {
-    this.MatDialog.open(RdAuthorPopupBlockMbTemplate, {
+    this.matDialog.open(RdAuthorPopupBlockMbTemplate, {
       width: '16.5rem',
       height: '20rem',
     });
   }
 
   openDiaLogReportMb($event) {
-    this.MatDialog.open(RdAuthorPopupReportMbTemplate, {
+    this.matDialog.open(RdAuthorPopupReportMbTemplate, {
       maxWidth: '100vw',
       maxHeight: '100vh',
       width: '100%',

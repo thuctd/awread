@@ -16,12 +16,12 @@ import { RdAuthorPopupNotiReportTemplate } from '../../templates/rd-author-popup
 export class RdAuthorPopupReportTemplate implements OnInit {
   @Output() btnClick = new EventEmitter();
 
-  constructor(private MatDialog: MatDialog) {}
+  constructor(private matDialog: MatDialog) {}
 
   ngOnInit(): void {}
 
   openDiaLogNotiReport($event) {
-    this.MatDialog.open(RdAuthorPopupNotiReportTemplate, {
+    this.matDialog.open(RdAuthorPopupNotiReportTemplate, {
       width: '30rem',
       height: '20rem',
     });

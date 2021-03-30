@@ -14,7 +14,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 })
 export class RdAuthorPopupContentBlockAtom implements OnInit {
   @Input() title = 'Chặn ';
-  @Input() name = 'Cam Thuong?';
+  @Input() name = 'Cam Thuong';
   @Input() content = 'Tài khoản này hiện không thể theo dõi bạn, gửi bạn tin nhắn, đăng trên hồ sơ của bạn hay bình luận trên truyện của bạn';
 
   constructor() {}

@@ -19,12 +19,12 @@ export class RdAuthorPopupReportMbTemplate implements OnInit {
   @Input() faIcon = faChevronLeft;
   @Output() btnClick = new EventEmitter();
 
-  constructor(private MatDialog: MatDialog) {}
+  constructor(private matDialog: MatDialog) {}
 
   ngOnInit(): void {}
 
   openDiaLogNotiReportMb($event) {
-    this.MatDialog.open(RdAuthorPopupNotiReportMbTemplate, {
+    this.matDialog.open(RdAuthorPopupNotiReportMbTemplate, {
       maxWidth: '100vw',
       maxHeight: '100vh',
       width: '100%',

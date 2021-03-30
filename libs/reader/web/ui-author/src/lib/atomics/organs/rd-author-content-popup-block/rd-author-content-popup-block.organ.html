@@ -5,7 +5,7 @@
       <atom-rd-author-submit-btn mat-dialog-close [text]="text1" [class]="class1"></atom-rd-author-submit-btn>
     </div>
     <div class="w-1/2 text-center">
-      <atom-rd-author-submit-btn mat-dialog-close [text]="text2" [class]="class2"></atom-rd-author-submit-btn>
+      <atom-rd-author-submit-btn (submitBtn)="submitBtn.emit()" mat-dialog-close [text]="text2" [class]="class2"></atom-rd-author-submit-btn>
     </div>
   </div>
 </div>

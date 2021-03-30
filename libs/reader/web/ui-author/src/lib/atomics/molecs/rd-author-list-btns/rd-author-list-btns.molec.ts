@@ -17,22 +17,22 @@ import { RdAuthorPopupUnfollowTemplate } from '../../templates/rd-author-popup-u
 export class RdAuthorListBtnsMolec implements OnInit {
   @Input() btnClick = new EventEmitter();
   @Input() class = 'px-5 py-2 rounded-lg';
-  @Input() follow = true;
+  @Input() isFollow = true;
   @Input() isBlock = false;
 
-  constructor(private MatDialog: MatDialog) {}
+  constructor(private matDialog: MatDialog) {}
 
   ngOnInit(): void {}
 
   openDiaLogUnFollow($event) {
-    this.MatDialog.open(RdAuthorPopupUnfollowTemplate, {
+    this.matDialog.open(RdAuthorPopupUnfollowTemplate, {
       width: '30rem',
       height: '20rem',
     });
   }
 
   openDiaLogUnBlock($event) {
-    this.MatDialog.open(RdAuthorPopupUnblockTemplate, {
+    this.matDialog.open(RdAuthorPopupUnblockTemplate, {
       width: '30rem',
       height: '20rem',
     });

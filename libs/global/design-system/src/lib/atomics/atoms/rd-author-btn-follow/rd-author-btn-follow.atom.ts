@@ -17,19 +17,18 @@ export class RdAuthorBtnFollowAtom implements OnInit {
   @Input() faPlus = faPlus;
   @Input() faUser = faUser;
   @Input() faCheck = faCheck;
-  @Input() follow = true;
+  @Input() isFollow = true;
   @Input() isBlock = true;
   @Input() classBtn1 = 'w-28 py-2 rounded-lg';
   @Input() classBtn2 = 'w-28 py-1.5 rounded-lg';
   @Output() btnClick = new EventEmitter();
   @Output() btnClickUnBlock = new EventEmitter();
-  @Output() btnClickUnBlockMb = new EventEmitter();
 
   constructor() {}
 
   ngOnInit(): void {}
 
-  isFollow() {
-    this.follow = !this.follow;
+  changeFollow() {
+    this.isFollow = !this.isFollow;
   }
 }

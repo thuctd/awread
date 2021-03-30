@@ -18,12 +18,12 @@ export class RdAuthorListFollowersOrgan implements OnInit {
   @Input() counter = Array;
   @Input() show = true;
 
-  constructor(private MatDialog: MatDialog) {}
+  constructor(private matDialog: MatDialog) {}
 
   ngOnInit(): void {}
 
   openDiaLogFollowers($event) {
-    this.MatDialog.open(RdAuthorPopupListFollowersMbTemplate, {
+    this.matDialog.open(RdAuthorPopupListFollowersMbTemplate, {
       maxWidth: '100vw',
       maxHeight: '100vh',
       width: '100%',

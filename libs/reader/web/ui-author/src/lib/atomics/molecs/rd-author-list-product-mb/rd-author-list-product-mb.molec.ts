@@ -36,11 +36,12 @@ export class RdAuthorListProductMbMolec implements OnInit {
       altImg: '',
     },
   ];
+  @Input() class = 'text-sm text-green-400';
   @Input() moreBook = 'Xem thêm...';
   @Input() btnTitle = 'Top phổ biến';
   @Output() moreEvent = new EventEmitter();
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }

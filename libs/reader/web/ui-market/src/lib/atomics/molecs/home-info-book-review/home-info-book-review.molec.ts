@@ -14,7 +14,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
 })
 export class HomeInfoBookReviewMolec implements OnInit {
   @Input() size = 'm';
-  @Input() isSize = 'true';
+  @Input() isSize = true;
   @Input() book = 'Cô gái chúng ta cùng theo đuổi năm nào';
 
   @Input() btns = ['Chương 1'];

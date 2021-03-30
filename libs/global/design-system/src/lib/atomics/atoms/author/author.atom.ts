@@ -17,6 +17,7 @@ export class AuthorAtom implements OnInit {
   @Input() authorName = 'Cẩm Thương';
   @Input() title = 'Tác giả:';
   @Input() color = 'text-green-400';
+  @Input() isText = true;
 
   constructor() {}
 

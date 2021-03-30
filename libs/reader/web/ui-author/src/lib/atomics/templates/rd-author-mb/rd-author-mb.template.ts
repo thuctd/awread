@@ -13,7 +13,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, EventEmitter, Output
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RdAuthorMbTemplate implements OnInit {
-  @Input() follow = true;
+  @Input() isFollow = true;
   @Input() isBlock = false;
   @Output() moreBooks = new EventEmitter();
 

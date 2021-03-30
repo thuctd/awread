@@ -31,7 +31,7 @@ export class RdAuthorMenuMolec implements OnInit {
   @Input() menu = false;
   @Output() eventClick = new EventEmitter();
 
-  constructor(private MatDialog: MatDialog) {}
+  constructor(private matDialog: MatDialog) {}
 
   ngOnInit(): void {}
 
@@ -44,14 +44,14 @@ export class RdAuthorMenuMolec implements OnInit {
   }
 
   opendiaLogBlock($event) {
-    this.MatDialog.open(RdAuthorPopupBlockTemplate, {
+    this.matDialog.open(RdAuthorPopupBlockTemplate, {
       width: '30rem',
       height: '20rem',
     });
   }
 
   opendiaLogReport($event) {
-    this.MatDialog.open(RdAuthorPopupReportTemplate, {
+    this.matDialog.open(RdAuthorPopupReportTemplate, {
       width: '28rem',
       height: '32rem',
     });

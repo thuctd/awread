@@ -18,22 +18,22 @@ import { RdAuthorPopupUnblockMbTemplate } from '../../templates/rd-author-popup-
 export class RdAuthorListBtnsMbMolec implements OnInit {
   @Input() classBtn1 = 'py-1 w-full rounded text-sm';
   @Input() classBtn2 = 'py-1 w-5/12 rounded';
-  @Input() follow = true;
+  @Input() isFollow = true;
   @Input() isBlock = false;
 
-  constructor(private MatDialog: MatDialog) {}
+  constructor(private matDialog: MatDialog) {}
 
   ngOnInit(): void {}
 
   openDiaLogUnFollow($event) {
-    this.MatDialog.open(RdAuthorPopupUnfollowMbTemplate, {
+    this.matDialog.open(RdAuthorPopupUnfollowMbTemplate, {
       width: '17rem',
       height: '18rem',
     });
   }
 
   openDiaLogUnBlockMb($event) {
-    this.MatDialog.open(RdAuthorPopupUnblockMbTemplate, {
+    this.matDialog.open(RdAuthorPopupUnblockMbTemplate, {
       width: '17rem',
       height: '20rem',
     });

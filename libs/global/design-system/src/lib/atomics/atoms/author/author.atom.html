@@ -1,1 +1,4 @@
-<span class="text-xs text-gray-800 mr-1">{{title}} <a [routerLink]="['/author', authorId]" class="text-xs cursor-pointer outline-none {{color}}">{{authorName}}</a></span>
+<div class="flex">
+  <div [ngClass]="isText ? 'block' : 'hidden'" class="text-xs text-gray-800 mr-1">{{title}}</div>
+  <a [routerLink]="['/author', authorId]" class="text-xs cursor-pointer outline-none {{color}}">{{authorName}}</a>
+</div>

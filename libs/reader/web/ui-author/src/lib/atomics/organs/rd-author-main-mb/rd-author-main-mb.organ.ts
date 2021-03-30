@@ -14,7 +14,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 })
 export class RdAuthorMainMbOrgan implements OnInit {
   @Input() excerpt = `Chào chúng cậu tớ là Cẩm Thương ...`;
-  @Input() follow = true;
+  @Input() isFollow = true;
   @Input() isBlock = true;
 
   constructor() {}

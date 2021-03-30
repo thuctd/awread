@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'organ-rd-author-content-popup-block',
@@ -21,6 +21,7 @@ export class RdAuthorContentPopupBlockOrgan implements OnInit {
 
   @Input() text2 = 'Chặn';
   @Input() class2 = 'bg-gray-700 text-white rounded-full py-2 px-8';
+  @Output() submitBtn = new EventEmitter();
   constructor() {}
 
   ngOnInit(): void {}
