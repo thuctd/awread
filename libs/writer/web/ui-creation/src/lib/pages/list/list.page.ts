@@ -8,12 +8,12 @@ import { Directive, Injectable, OnInit } from '@angular/core';
 @Directive()
 export class ListPage implements OnInit {
   bookList$ = this.booksFacade.bookList$;
-  isLoading$ = this.booksFacade.selectLoadingAkiata();
+  isLoading$ = this.booksFacade.selectLoadingAkita();
   constructor(
     private booksFacade: BooksFacade,
     private router: Router,
     private chaptersFacade: ChaptersFacade
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     // this.booksFacade.setBooksToStore().subscribe();

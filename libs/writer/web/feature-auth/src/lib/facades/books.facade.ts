@@ -9,9 +9,9 @@ export class BooksFacade {
     private booksGear: BooksGear,
     private booksStore: BooksStore,
     private booksQuery: BooksQuery
-  ) {}
+  ) { }
 
-  selectLoadingAkiata() {
+  selectLoadingAkita() {
     return this.booksQuery.selectLoading();
   }
 

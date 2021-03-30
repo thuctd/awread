@@ -23,7 +23,7 @@ const initialState = {
 
 
 @Injectable({ providedIn: 'root' })
-@StoreConfig({ name: 'dasherize(name)', resettable: true })
+@StoreConfig({ name: ' <%= dasherize(name) %>', resettable: true })
 export class <%= classify(name) %>Store extends EntityStore<<%= classify(name) %>State> {
   // ui: EntityUIStore<<%= singular(classify(name)) %>UIState>;
   constructor() {
