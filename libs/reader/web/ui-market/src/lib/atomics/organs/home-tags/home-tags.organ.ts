@@ -1,18 +1,6 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import { Genre } from '@awread/reader/web/feature-market';
 import { OwlOptions } from 'ngx-owl-carousel-o';
-
-export interface Category {
-  id: number;
-  title: string;
-  isActive: boolean;
-}
-
-export interface Item {
-  id: number;
-  imageUrl: string;
-  title: string;
-  categories: number[];
-}
 
 @Component({
   selector: 'home-tags',
@@ -24,117 +12,23 @@ export class HomeTagsOrgan implements OnInit {
   prevIcon = `<img src="/global-assets/images/arrow_left.webp" alt="arrow_left">`;
   nextIcon = `<img src="/global-assets/images/arrow_right.webp" alt="arrow_right">`;
   @Input() titlePage = 'Tags';
-
-  @Input() categories: Category[] = [
+  @Input() loading: false | true = false;
+  @Output() filterItemsByGenre = new EventEmitter();
+  @Input() genres = [
     {
       id: 1,
-      title: 'Lãng mạn',
-      isActive: true,
-    },
-    {
-      id: 2,
-      title: 'Hài hước',
-      isActive: false,
-    },
-    {
-      id: 3,
-      title: 'Hành động',
-      isActive: false,
-    },
+      name: 'Lãng mạn'
+    }
   ];
 
-  @Input() items: Item[] = [
+  @Input() items = [
     {
-      id: 1,
+      id: "1",
       title: 'Cô gái theo đuổi năm nào',
       imageUrl: 'https://via.placeholder.com/260x370.png',
-      categories: [1, 3],
-    },
-    {
-      id: 2,
-      title: 'Cô gái theo đuổi năm nào',
-      imageUrl: 'https://via.placeholder.com/260x370.png',
-      categories: [2, 3],
-    },
-    {
-      id: 3,
-      title: 'Cố lên em ơi',
-      imageUrl: 'https://via.placeholder.com/260x370.png',
-      categories: [1, 2],
-    },
-    {
-      id: 4,
-      title: 'Em là nhà',
-      imageUrl: 'https://via.placeholder.com/260x370.png',
-      categories: [1, 3],
-    },
-    {
-      id: 5,
-      title: 'Nên đên vẫn có em!',
-      imageUrl: 'https://via.placeholder.com/260x370.png',
-      categories: [1, 3],
-    },
-    {
-      id: 6,
-      title: 'Bang bang bang',
-      imageUrl: 'https://via.placeholder.com/260x370.png',
-      categories: [1, 2],
-    },
-    {
-      id: 7,
-      title: 'Ở nơi ấy',
-      imageUrl: 'https://via.placeholder.com/260x370.png',
-      categories: [1, 2],
-    },
-    {
-      id: 8,
-      title: 'Cô gái chúng ta cùng theo đuổi',
-      imageUrl: 'https://via.placeholder.com/260x370.png',
-      categories: [2],
-    },
-    {
-      id: 9,
-      title: 'Bang bang bang',
-      imageUrl: 'https://via.placeholder.com/260x370.png',
-      categories: [1, 2],
-    },
-    {
-      id: 10,
-      title: 'Ở nơi ấy',
-      imageUrl: 'https://via.placeholder.com/260x370.png',
-      categories: [1, 2],
-    },
-    {
-      id: 11,
-      title: 'Cô gái chúng ta cùng theo đuổi',
-      imageUrl: 'https://via.placeholder.com/260x370.png',
-      categories: [2],
-    },
-    ,
-    {
-      id: 8,
-      title: 'Cô gái chúng ta cùng theo đuổi',
-      imageUrl: 'https://via.placeholder.com/260x370.png',
-      categories: [2, 3],
-    },
-    {
-      id: 9,
-      title: 'Bang bang bang',
-      imageUrl: 'https://via.placeholder.com/260x370.png',
-      categories: [2],
-    },
-    {
-      id: 10,
-      title: 'Ở nơi ấy',
-      imageUrl: 'https://via.placeholder.com/260x370.png',
-      categories: [1, 2, 3],
-    },
-    {
-      id: 11,
-      title: 'Cô gái chúng ta cùng theo đuổi',
-      imageUrl: 'https://via.placeholder.com/260x370.png',
-      categories: [3],
-    },
+      categoryId: "1",
+      genres: [1, 3],
+    }
   ];
 
   @Input() customOptions: OwlOptions = {
@@ -174,39 +68,8 @@ export class HomeTagsOrgan implements OnInit {
     },
   };
 
-  filteredItems: Item[] = [...this.items];
-  loading = false;
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {
-    this.loadFirstByCategory();
-  }
+  ngOnInit(): void { }
 
-  //Lấy danh sách theo thể loại
-  filterItemsByCategory(category: Category) {
-    this.loading = true;
-    setTimeout(() => {
-      this.filteredItems = this.items.filter((item: Item) => {
-        this.loading = false;
-        return item.categories.includes(category.id);
-      });
-    }, 1000);
-  }
-
-  // Lấy danh sách book của thể loại đầu tiên để hiện thị khi loại
-  private loadFirstByCategory() {
-    this.filteredItems = this.items.filter((item) => {
-      this.loading = false;
-      return item.categories.includes(this.categories[0].id);
-    });
-  }
-
-  toggleTabs(currentTab) {
-    this.categories.forEach((tab) => {
-      tab.isActive = false;
-      if (tab.title === currentTab.title) {
-        tab.isActive = true;
-      }
-    });
-  }
 }

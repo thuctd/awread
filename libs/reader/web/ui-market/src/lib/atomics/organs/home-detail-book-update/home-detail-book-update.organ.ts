@@ -14,9 +14,12 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 })
 export class HomeDetailBookUpdateOrgan implements OnInit {
   @Input() titlePage = 'Truyện mới cập nhật';
+  @Input() books = [];
+  @Input() loading: boolean;
+
   counter = Array;
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }
