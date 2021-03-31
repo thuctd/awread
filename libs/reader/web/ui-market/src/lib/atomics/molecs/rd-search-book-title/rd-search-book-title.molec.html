@@ -1,4 +1,6 @@
-<div class="w-full flex border-b text-gray-400 border-gray-400 pb-1.5">
-  <fa-icon class="pl-2 text-2xl" [icon]="faIcon"></fa-icon>
-  <div class="text-gray-800 ml-8 text-xl mt-1">{{title}}</div>
+<div class="relative">
+  <div (click)="submitBtn.emit()">
+    <fa-icon class="text-gray-400 text-2xl absolute cursor-pointer" [icon]="faIcon"></fa-icon>
+  </div>
+  <input [value]="titleBook" class="focus:outline-none border-b text-xl bg-gray-50 w-full border-gray-500 py-1.5 pl-12">
 </div>
