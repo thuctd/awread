@@ -14,8 +14,9 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 })
 export class BooksGridOrgan implements OnInit {
   @Input() title = 'Em là nhà';
+  @Input() imgUrl = '';
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

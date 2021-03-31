@@ -6,12 +6,11 @@ import { Router } from '@angular/router';
 })
 @Directive()
 export class SharedLayout implements OnInit {
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   navigateToSearch() {
-    console.log('asd');
     this.router.navigateByUrl('/search');
   }
 }
