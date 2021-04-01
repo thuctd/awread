@@ -15,7 +15,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter, Input
 export class AuthorAtom implements OnInit {
   @Input() authorId = 'zxcxzcxz456_zxaws123';
   @Input() authorName = 'Cẩm Thương';
-  @Input() title = 'Tác giả:';
+  @Input() isTitle = 'Tác giả:';
   @Input() color = 'text-green-400';
   @Input() isText = true;
 
