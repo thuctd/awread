@@ -1,7 +1,7 @@
 <section class="max-w-screen-xl m-auto">
   <div class="px-8 xl:px-0">
     <atom-breadcrumb [menu]="menu"></atom-breadcrumb>
-    <organ-rd-author-main [numberProduct]="storys.length" class="mb-4"></organ-rd-author-main>
-    <organ-rd-author-product [storys]="storys"></organ-rd-author-product>
+    <organ-rd-author-main [isFollow]="isFollow" [isBlock]="isBlock" [numberProduct]="stories.length" class="mb-4"></organ-rd-author-main>
+    <organ-rd-author-product [stories]="stories"></organ-rd-author-product>
   </div>
 </section>

@@ -1,5 +1,6 @@
-<div *ngFor="let item of counter(10)">
+<div *ngFor="let item of counter(16)">
   <div class="py-2">
     <molec-rd-author-follower-item></molec-rd-author-follower-item>
   </div>
 </div>
+<div class="text-center pt-4" (click)="openDiaLogFollowers($event)" *ngIf="show">Xem thêm</div>

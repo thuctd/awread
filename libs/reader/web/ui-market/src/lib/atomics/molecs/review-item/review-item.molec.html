@@ -1,9 +1,9 @@
-<div class="w-11/12 text-gray-800">
-    <div class="flex leading-normal p-2 lg:px-0">
-        <atom-circle-image [src]="'/global-assets/images/avatar-mrmrs.webp'"></atom-circle-image>
+<div class="w-full text-gray-800">
+    <div class="flex leading-normal py-2">
+        <atom-circle-image [src]="src"></atom-circle-image>
         <div class="pl-3 flex-auto">
             <div class="text-sm font-medium mb-1">{{review.userName}}</div>
-            <dl class="mt2 f6 mb-1">
+            <dl class="mb-1">
                 <dd class="flex items-center mb-1">
                     <atom-rating [size]="'text-xs'" class="mr-4"></atom-rating>
                     <span class="ml-0 text-xs font-light text-gray-400">{{review.createAt}}</span>

@@ -2,7 +2,7 @@
   <div class="grid grid-cols-12 gap-10 place-content-center" *ngIf="!(display === 'list');else list_content">
     <div *ngFor="let loop3 of counter(9);" class="col-span-2 md:col-span-4">
       <div>
-        <atom-img-m [size]='"l"'></atom-img-m>
+        <atom-img-m [height]="'lg:h-72 xl:h-80'"></atom-img-m>
         <list-info-long-book></list-info-long-book>
       </div>
     </div>

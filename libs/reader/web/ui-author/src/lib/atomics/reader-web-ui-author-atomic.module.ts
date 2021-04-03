@@ -39,6 +39,7 @@ import { RdAuthorPopupUnblockMbTemplate } from './templates/rd-author-popup-unbl
 import { RdAuthorPopupListFollowersMbTemplate } from './templates/rd-author-popup-list-followers-mb/rd-author-popup-list-followers-mb.template';
 import { RdAuthorPopupNotiReportMbTemplate } from './templates/rd-author-popup-noti-report-mb/rd-author-popup-noti-report-mb.template';
 import { RdAuthorPopupUnfollowMbTemplate } from './templates/rd-author-popup-unfollow-mb/rd-author-popup-unfollow-mb.template';
+import { RdAuthorProductMbTemplate } from './templates/rd-author-product-mb/rd-author-product-mb.template';
 
 @NgModule({
   declarations: [
@@ -79,6 +80,7 @@ import { RdAuthorPopupUnfollowMbTemplate } from './templates/rd-author-popup-unf
     RdAuthorPopupListFollowersMbTemplate,
     RdAuthorPopupNotiReportMbTemplate,
     RdAuthorPopupUnfollowMbTemplate,
+    RdAuthorProductMbTemplate,
   ],
   imports: [CommonModule, GlobalDesignSystemAtomicModule, StorybookSupportModule, ReaderWebSharedAtomicModule],
   exports: [
@@ -120,6 +122,7 @@ import { RdAuthorPopupUnfollowMbTemplate } from './templates/rd-author-popup-unf
     RdAuthorPopupListFollowersMbTemplate,
     RdAuthorPopupNotiReportMbTemplate,
     RdAuthorPopupUnfollowMbTemplate,
+    RdAuthorProductMbTemplate,
   ],
 })
 export class ReaderWebUiAuthorAtomicModule {}

@@ -1,9 +1,8 @@
-<div class="w-full">
+<div class="w-full flex flex-col items-center">
   <div class="text-green-500 text-base lg:text-2xl mb-4 uppercase text-center">Tải xuống miễn phí!</div>
-  <div *ngFor="let img of image" class="float-left">
-    <a href="#">
-      <img [src]="img.src" [alt]="img.alt" class="h-11 mr-2 cursor-pointer">
+  <div class="flex">
+    <a [routerLink]="['/']" *ngFor="let img of image">
+      <img [src]="img.src" [alt]="img.alt" class="h-11 ml-1 cursor-pointer">
     </a>
   </div>
-  <div class="clear-both"></div>
 </div>

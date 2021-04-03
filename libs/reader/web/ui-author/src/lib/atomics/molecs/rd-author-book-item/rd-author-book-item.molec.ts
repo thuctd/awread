@@ -8,9 +8,6 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
       :host {
         display: block;
       }
-      :host .text-06 {
-        font-size: 0.6rem;
-      }
     `,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -21,6 +18,8 @@ export class RdAuthorBookItemMolec implements OnInit {
   @Input() category = 'Hành động, phiêu lưu';
   @Input() book = 'Cô gái mà chúng ta theo đuổi năm nào';
   @Input() bookId = 'bvxz_324345seQ6x';
+  @Input() isText = true;
+  @Input() isSize = true;
 
   constructor() {}
 
