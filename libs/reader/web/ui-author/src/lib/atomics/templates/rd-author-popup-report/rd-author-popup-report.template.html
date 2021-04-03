@@ -1,7 +1,11 @@
-<atom-example-dialog>
-  <atom-rd-author-popup-header class="pt-4" [title]="'Báo cáo người dùng'"></atom-rd-author-popup-header>
-  <organ-rd-author-list-report class="py-12"></organ-rd-author-list-report>
-  <button (click)="btnClick.emit()" class="w-full bg-green-400 py-1 rounded-lg text-white focus:outline-none">
-    Gửi báo cáo
-  </button>
+<atom-example-dialog class="h-full">
+  <section class="bg-white h-full relative pb-4">
+    <atom-rd-author-popup-header class="pt-4" [title]="'Báo cáo người dùng'"></atom-rd-author-popup-header>
+    <organ-rd-author-list-report class="py-12 px-10"></organ-rd-author-list-report>
+    <div class="px-6">
+      <button mat-dialog-close (click)="openDiaLogNotiReport($event)" class="w-full bg-green-400 py-1 rounded-lg text-white focus:outline-none transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-100">
+        Gửi báo cáo
+      </button>
+    </div>
+  </section>
 </atom-example-dialog>

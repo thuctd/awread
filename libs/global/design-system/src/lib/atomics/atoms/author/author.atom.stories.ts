@@ -12,3 +12,12 @@ export const primary = () => ({
   component: AuthorAtom,
   props: {},
 });
+export const hasLabel = () => ({
+  moduleMetadata: {
+    imports: [GlobalDesignSystemAtomicModule],
+  },
+  component: AuthorAtom,
+  props: {
+    title: 'Tác giả',
+  },
+});

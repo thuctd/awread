@@ -17,13 +17,13 @@ export class HomeInfoBookReviewMolec implements OnInit {
   @Input() isSize = 'true';
   @Input() book = {
     title: 'Cô gái chúng ta cùng theo đuổi năm nào',
-    id: '1'
+    id: '1',
   };
 
   @Input() btns = ['Chương 1'];
   @Output() submitEvent = new EventEmitter();
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }

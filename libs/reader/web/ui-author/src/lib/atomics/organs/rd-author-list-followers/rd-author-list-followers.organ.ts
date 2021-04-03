@@ -1,4 +1,6 @@
+import { MatDialog } from '@angular/material/dialog';
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { RdAuthorPopupListFollowersMbTemplate } from '../../templates/rd-author-popup-list-followers-mb/rd-author-popup-list-followers-mb.template';
 
 @Component({
   selector: 'organ-rd-author-list-followers',
@@ -14,8 +16,18 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 })
 export class RdAuthorListFollowersOrgan implements OnInit {
   @Input() counter = Array;
+  @Input() show = true;
 
-  constructor() {}
+  constructor(private matDialog: MatDialog) {}
 
   ngOnInit(): void {}
+
+  openDiaLogFollowers($event) {
+    this.matDialog.open(RdAuthorPopupListFollowersMbTemplate, {
+      maxWidth: '100vw',
+      maxHeight: '100vh',
+      width: '100%',
+      height: '100%',
+    });
+  }
 }

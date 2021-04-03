@@ -1,6 +1,6 @@
-<molec-rd-author-popup-mb>
+<molec-rd-author-popup-mb class="h-full bg-white pt-2 rounded-lg">
   <div class="cursor-pointer" content1>
     <atom-rd-author-popup-content-block [title]="title" [content]="content"></atom-rd-author-popup-content-block>
   </div>
-  <div (click)="clickBtn.emit()" class="cursor-pointer" content2>Chặn</div>
+  <div (click)="clickBtn.emit()" class="cursor-pointer" content2 mat-dialog-close>Bỏ chặn</div>
 </molec-rd-author-popup-mb>

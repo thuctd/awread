@@ -1,8 +1,12 @@
 <div class="w-full">
   <atom-rd-author-btn
     [faPlus]="false"
+    [isFollow]="isFollow"
+    [isBlock]="isBlock"
     [classBtn1]="classBtn1"
     [classBtn2]="classBtn2"
+    (btnClick)="openDiaLogUnFollow($event)"
+    (btnClickUnBlock)="openDiaLogUnBlockMb($event)"
   >
 </atom-rd-author-btn>
 </div>

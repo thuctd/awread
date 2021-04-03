@@ -13,7 +13,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, EventEmitter, Output
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RdAuthorPopupUnfollowTemplate implements OnInit {
-  @Output() clickBtn = new EventEmitter();
+  @Output() submitBtn = new EventEmitter();
   @Input() name = 'Cam Thuong';
 
   constructor() {}

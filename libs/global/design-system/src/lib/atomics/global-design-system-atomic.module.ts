@@ -106,6 +106,7 @@ import { BreadcrumbAtom } from './atoms/breadcrumb/breadcrumb.atom';
 @NgModule({
   imports: [CommonModule, StorybookSupportModule, MatDialogModule, QuillModule.forRoot(), DefaultCoverModule, CloseOnOutsideModule, NgImageSliderModule],
   exports: [
+    MatDialogModule,
     notReadyDirective,
     NgImageSliderModule,
     CloseOnOutsideModule,

@@ -13,7 +13,9 @@ import { faAngleRight, faHome } from '@fortawesome/free-solid-svg-icons';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RdAuthorTemplate implements OnInit {
-  @Input() storys = [
+  @Input() isFollow = true;
+  @Input() isBlock = false;
+  @Input() stories = [
     {
       srcImg: '/global-assets/images/sach-co-gai-nam-ay-chung-ta-cung-theo-duoi.webp',
       altImg: '',
