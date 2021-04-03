@@ -51,10 +51,17 @@ export class ComposedPage implements OnInit, OnDestroy {
   }
 
   private loadFirstByCategory() {
+    const type = this.activatedRoute.snapshot.paramMap.get('type')
     this.filteredBooks$ = this.bookList$.pipe(
       map((items) =>
         items.filter((item) => {
-          return item.category.includes(items[0].id);
+          if (type === 'longbook') {
+            return item.category.includes(items[0].id);
+          } else if (type === 'shortbook') {
+            return item.category.includes(items[1].id);
+          } else {
+            return item.category.includes(items[2].id);
+          }
         })
       )
     );

@@ -4,12 +4,14 @@ import { BooksFacade } from '../facades';
 import { map, switchMap, tap } from 'rxjs/operators';
 import { of, Observable } from 'rxjs';
 import { Book } from '../models';
+import { untilDestroyed } from '@ngneat/until-destroy';
 
 @Injectable({
   providedIn: 'root',
 })
 @Directive()
 export class DetailPage implements OnInit {
+  book: Book;
   book$;
   topBookList$ = this.booksFacade.topBookList$;
   authorBookList$ = this.booksFacade.authorBookList$;
@@ -32,9 +34,8 @@ export class DetailPage implements OnInit {
     return this.activatedRoute.snapshot.params.bookId;
   }
 
-
   public getAuthorBooks() {
-    this.booksFacade.getAuthorBooks('1').subscribe();
+    ///
   }
 
 }
