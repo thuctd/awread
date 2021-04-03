@@ -17,6 +17,7 @@ export class ImgMAtom implements OnInit {
   @Input() srcImg = '/global-assets/images/image.webp';
   @Input() altImg = 'Placeholder';
   @Input() bookId = 'bvxz_324345seQ6x';
+  @Input() height = 'h-72';
 
   constructor() {}
 
