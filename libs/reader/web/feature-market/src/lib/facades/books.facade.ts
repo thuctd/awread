@@ -62,7 +62,7 @@ export class BooksFacade {
   }
 
   getCategoryBooks(categoryId: string) {
-    return this.booksGear.getGenreBooks(categoryId);
+    return this.booksGear.getCategoryBooks(categoryId);
   }
 
   getLatestBooks() {
@@ -70,6 +70,7 @@ export class BooksFacade {
   }
 
   getAuthorBooks(authorId: string) {
+    console.log(authorId);
     return this.booksGear.getAuthorBooks(authorId);
   }
 

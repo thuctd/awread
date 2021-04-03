@@ -38,7 +38,7 @@ export class BooksApi {
   }
 
   getTopBooks() {
-    return of(db.books)
+    return of(db.books.slice(0, 3))
       .pipe(delay(500));
   }
 

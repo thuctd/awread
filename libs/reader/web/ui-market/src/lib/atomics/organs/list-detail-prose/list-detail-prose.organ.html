@@ -1,16 +1,16 @@
 <section class="pt-28 mx-auto">
   <div class="grid grid-cols-12 gap-10 place-content-center" *ngIf="!(display === 'grid');else list_content">
-    <div *ngFor="let loop3 of counter(9);" class="col-span-2 md:col-span-4">
+    <div *ngFor="let book of prosebooks;" class="col-span-2 md:col-span-4">
       <div>
-        <atom-img-m [size]='"l"'></atom-img-m>
-        <list-info-prose></list-info-prose>
+        <atom-img-m [srcImg]='book.imgUrl' [bookId]='book.id' [size]='"l"'></atom-img-m>
+        <list-info-prose [bookId]='book.id' [titleBook]='book.title'></list-info-prose>
       </div>
     </div>
   </div>
     <ng-template #list_content>
       <div class="grid grid-cols-12 gap-10 place-content-center">
-        <div *ngFor="let loop3 of counter(8);" class="col-span-2 md:col-span-6">
-          <organ-books-grid></organ-books-grid>
+        <div *ngFor="let book of prosebooks;" class="col-span-2 md:col-span-6">
+          <organ-books-grid [imgUrl]='book.imgUrl' [bookId]='book.id' [title]='book.title'></organ-books-grid>
         </div>
       </div>
     </ng-template>

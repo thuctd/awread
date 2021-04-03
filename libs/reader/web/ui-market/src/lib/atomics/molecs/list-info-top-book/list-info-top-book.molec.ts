@@ -13,12 +13,13 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListInfoTopBookMolec implements OnInit {
-  @Input() book = 'Cô gái chúng ta cùng theo đuổi năm nào';
+  @Input() title = 'Cô gái chúng ta cùng theo đuổi năm nào';
+  @Input() bookId = '';
 
   @Input() btns = ['Chương 1', 'Chương 2'];
   @Output() submitEvent = new EventEmitter();
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

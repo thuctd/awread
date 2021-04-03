@@ -33,14 +33,17 @@
   ],
   "categories": [
     {
-      "name": "Truyện ngắn",
+      "type": "longbook",
+      "name": "Truyện dài",
       "id": "1"
     },
     {
-      "name": "Truyện dài",
+      "type": "shortbook",
+      "name": "Truyện ngắn",
       "id": "2"
     },
     {
+      "type": "prose",
       "name": "Tản văn",
       "id": "3"
     }

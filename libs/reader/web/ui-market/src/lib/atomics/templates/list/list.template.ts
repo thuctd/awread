@@ -15,6 +15,8 @@ import { faList, faThLarge } from '@fortawesome/free-solid-svg-icons';
 })
 export class ListTemplate implements OnInit {
   display = 'grid';
+  @Input() books = [];
+  @Input() categoryBooks = [];
   @Input() actions = [{
     faIcon: faThLarge,
     display: 'grid',
@@ -26,14 +28,13 @@ export class ListTemplate implements OnInit {
   }]
   @Input() isLoadedPage: true | false = true;
   @Input() tabsHead = [
-    { name: 'Truyện dài', tabName: 'longbook', isActive: true },
-    { name: 'Truyện ngắn', tabName: 'shortbook', isActive: false },
-    { name: 'Tản văn', tabName: 'novel', isActive: false },
+    { name: 'Truyện dài', type: 'longbook', isActive: true },
   ];
 
   @Input() selectedTab = 'longbook';
   @Output() switchTabEvent = new EventEmitter();
   @Output() eventSearch = new EventEmitter();
+  @Output() changeCategoryBooks = new EventEmitter();
   constructor() { }
 
   ngOnInit(): void { }

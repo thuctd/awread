@@ -13,10 +13,9 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DetailBookSidebarOrgan implements OnInit {
-  @Input() sidebars = [
-  'Cùng tác giả',
-  'Top phổ biến '
-  ]
+  @Input() topBooks = [];
+  @Input() authorBooks = [];
+
   constructor() { }
 
   ngOnInit(): void {

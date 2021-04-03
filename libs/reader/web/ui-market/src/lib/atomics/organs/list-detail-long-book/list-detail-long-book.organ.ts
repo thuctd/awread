@@ -15,6 +15,11 @@ import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 })
 export class ListDetailLongBookOrgan implements OnInit {
   counter = Array;
+  @Input() longbooks = [{
+    id: '',
+    imgUrl: '',
+    title: ''
+  }];
   @Input() display: 'grid' | 'list' = 'grid';
   @Input() moreContent = 'Xem thêm';
 
