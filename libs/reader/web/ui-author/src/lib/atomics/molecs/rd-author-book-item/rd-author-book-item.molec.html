@@ -1,8 +1,8 @@
 <div class="w-full flex flex-row sm:flex-col">
-  <img [routerLink]="['/books', bookId]" class="pb-4 w-28 sm:w-full cursor-pointer focus:outline-none" [src]="srcImg" [alt]="alt">
-  <molec-rd-author-info-book-item [book]="book" class="px-4 sm:px-0"></molec-rd-author-info-book-item>
+  <img [routerLink]="['/books', bookId]" class="pb-4 w-24 sm:w-full cursor-pointer focus:outline-none" [src]="srcImg" [alt]="alt">
+  <molec-rd-author-info-book-item [book]="book" [isSize]="isSize" class="px-4 sm:px-0"></molec-rd-author-info-book-item>
   <div class="sm:hidden block">
     <div class="text-xs mb-4">Thể loại</div>
-    <div class="text-06">{{category}}</div>
+    <div class="text-small">{{category}}</div>
   </div>
 </div>

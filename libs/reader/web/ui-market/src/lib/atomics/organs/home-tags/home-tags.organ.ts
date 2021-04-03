@@ -48,7 +48,7 @@ export class HomeTagsOrgan implements OnInit {
         items: 2,
       },
       320: {
-        items: 3,
+        items: 2,
       },
       380: {
         items: 3,

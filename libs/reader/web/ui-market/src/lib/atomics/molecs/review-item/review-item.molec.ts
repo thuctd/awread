@@ -15,6 +15,7 @@ import { faThumbsUp, faThumbsDown, faHeart } from '@fortawesome/free-solid-svg-i
 })
 export class ReviewItemMolec implements OnInit {
   icons = { faThumbsUp, faThumbsDown, faHeart };
+  @Input() src = '/global-assets/images/avatar-mrmrs.webp';
   @Input() review = {
     userName: 'Lê Ngọc Quý',
     rate: true,

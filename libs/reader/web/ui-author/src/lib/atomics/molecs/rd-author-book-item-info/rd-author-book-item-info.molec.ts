@@ -18,6 +18,7 @@ export class RdAuthorBookItemInfoMolec implements OnInit {
   @Input() countView = '1M';
   @Input() faIcon = faEye;
   @Input() book = 'Cô gái chúng ta cùng theo đuổi năm nào';
+  @Input() isSize = true;
 
   @Input() btns = ['Chương 1', 'Chương 2'];
   @Output() submitEvent = new EventEmitter();

@@ -1,6 +1,8 @@
+import { MatDialog } from '@angular/material/dialog';
 import { faEllipsisH } from '@fortawesome/free-solid-svg-icons';
 import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
-
+import { RdAuthorPopupBlockTemplate } from '../../templates/rd-author-popup-block/rd-author-popup-block.template';
+import { RdAuthorPopupReportTemplate } from '../../templates/rd-author-popup-report/rd-author-popup-report.template';
 @Component({
   selector: 'molec-rd-author-menu',
   templateUrl: './rd-author-menu.molec.html',
@@ -29,7 +31,7 @@ export class RdAuthorMenuMolec implements OnInit {
   @Input() menu = false;
   @Output() eventClick = new EventEmitter();
 
-  constructor() {}
+  constructor(private matDialog: MatDialog) {}
 
   ngOnInit(): void {}
 
@@ -39,5 +41,19 @@ export class RdAuthorMenuMolec implements OnInit {
 
   displayMenu() {
     this.menu = !this.menu;
+  }
+
+  opendiaLogBlock($event) {
+    this.matDialog.open(RdAuthorPopupBlockTemplate, {
+      width: '30rem',
+      height: '20rem',
+    });
+  }
+
+  opendiaLogReport($event) {
+    this.matDialog.open(RdAuthorPopupReportTemplate, {
+      width: '28rem',
+      height: '32rem',
+    });
   }
 }

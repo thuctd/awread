@@ -1,11 +1,11 @@
 <div class="flex flex-col justify-center items-center">
-  <atom-rd-author-popup-content-block [title]="title" [content]="content"></atom-rd-author-popup-content-block>
-  <div class="flex w-full pt-2">
+  <atom-rd-author-popup-content-block [title]="title" [content]="content" class="px-16"></atom-rd-author-popup-content-block>
+  <div class="flex w-full pt-2 px-14">
     <div class="w-1/2 text-center">
-      <atom-rd-author-submit-btn [text]="text1" [class]="class1"></atom-rd-author-submit-btn>
+      <atom-rd-author-submit-btn mat-dialog-close [text]="text1" [class]="class1"></atom-rd-author-submit-btn>
     </div>
     <div class="w-1/2 text-center">
-      <atom-rd-author-submit-btn [text]="text2" [class]="class2"></atom-rd-author-submit-btn>
+      <atom-rd-author-submit-btn (submitBtn)="submitBtn.emit()" mat-dialog-close [text]="text2" [class]="class2"></atom-rd-author-submit-btn>
     </div>
   </div>
 </div>

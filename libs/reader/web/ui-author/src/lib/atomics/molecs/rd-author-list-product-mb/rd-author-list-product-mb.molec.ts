@@ -13,6 +13,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, EventEmitter, Output
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RdAuthorListProductMbMolec implements OnInit {
+  @Input() authorId = '123456zxcasdwqe_zxxzc';
   @Input() storys = [
     {
       srcImg: '/global-assets/images/sach-co-gai-nam-ay-chung-ta-cung-theo-duoi.webp',
@@ -35,11 +36,12 @@ export class RdAuthorListProductMbMolec implements OnInit {
       altImg: '',
     },
   ];
+  @Input() class = 'text-sm text-green-400';
   @Input() moreBook = 'Xem thêm...';
   @Input() btnTitle = 'Top phổ biến';
   @Output() moreEvent = new EventEmitter();
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }

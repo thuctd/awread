@@ -1,4 +1,4 @@
-<div class="w-44 sm:w-full ">
+<div class="w-36 sm:w-full ">
   <atom-title-book [titleBook]='book' [size]='"m"'></atom-title-book>
   <div class="mt-0 sm:mt-2 text-sm p-0">
     <div class="pb-0 sm:pb-1">
@@ -6,17 +6,17 @@
     </div>
     <div class="pb-0 sm:pb-2">
       <div class="flex">
-        <atom-rating class="mr-4" [size]="'text-xs sm:text-sm'"></atom-rating>
-        <atom-icon-text [icon]="faIcon" [title]="countView"></atom-icon-text>
+        <atom-rating class="mr-3" [size]="'text-small sm:text-sm'"></atom-rating>
+        <atom-icon-text [icon]="faIcon" [title]="countView" [isSize]="isSize"></atom-icon-text>
       </div>
     </div>
-    <div class="flex text-xs pb-1 sm:pb-2">
-      <div class="text-gray-600 font-light mr-11 sm:mr-14">Tình trạng</div>
-      <div class="text-gray-500 font-light ml-1">{{status}}</div>
+    <div class="flex text-small sm:text-xs pb-0.5 sm:pb-2">
+      <div class="text-gray-600 font-light mr-10 sm:mr-14">Tình trạng</div>
+      <div class="text-gray-500 font-light">{{status}}</div>
     </div>
     <div *ngFor="let btn of btns" class="leading-normal font-medium flex">
       <base-btn (onBtnClicked)="submitEvent.emit($event)" [isSize]="false" [chapter]="btn"></base-btn>
-      <rd-list-publication-date class="mt-0.5 ml-8 sm:ml-4"></rd-list-publication-date>
+      <rd-list-publication-date class="ml-6 sm:ml-4"></rd-list-publication-date>
     </div>
   </div>
 </div>

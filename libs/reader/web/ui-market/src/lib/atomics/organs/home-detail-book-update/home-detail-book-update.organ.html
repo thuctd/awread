@@ -4,7 +4,7 @@
     </div>
     <div class="grid grid-cols-10 sm:gap-x-6 lg:gap-x-10 xl:gap-x-12 place-content-center">
         <div *ngFor='let book of books;' class="col-span-2 md:col-span-2 py-2">
-            <atom-img-m [bookId]='book.id' [srcImg]='book.imgUrl' [size]='"m"'></atom-img-m>
+            <atom-img-m [bookId]='book.id' [srcImg]='book.imgUrl' [height]="'md:h-44 lg:h-56 xl:h-72'"></atom-img-m>
             <home-info-book-featured [book]="book"></home-info-book-featured>
         </div>
     </div>
