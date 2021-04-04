@@ -15,11 +15,11 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 export class DownloadAppMolec implements OnInit {
   @Input() image = [
     {
-      src: '/global-assets/images/appStore.webp',
+      src: '/global-assets/images/Group-62.webp',
       alt: 'appStore',
     },
     {
-      src: '/global-assets/images/googlePlay.webp',
+      src: '/global-assets/images/Group-63.webp',
       alt: 'googlePlay',
     },
   ];

@@ -31,7 +31,7 @@ export class RdIntroductionTargetOrgan implements OnInit {
     {
       srcImg: '/global-assets/images/Group-845.webp',
       title: 'Sự kiện',
-      number: '100.000 +',
+      number: '1000 +',
       text: 'Vô vàn event hàng tháng',
       spacing: true,
     },

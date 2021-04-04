@@ -16,6 +16,9 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
         background-repeat: no-repeat;
         background-size: cover;
       }
+      :host .text-8c5xl {
+        font-size: 7rem;
+      }
 
       :host .aboutUs {
         font-family: 'Roboto Condensed', sans-serif;

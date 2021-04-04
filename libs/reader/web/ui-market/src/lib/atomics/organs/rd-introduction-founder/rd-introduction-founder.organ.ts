@@ -11,14 +11,20 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
       :host {
         display: block;
       }
-      :host .w-112 {
-        width: 28rem;
+      :host .w-168 {
+        width: 42rem;
       }
-      :host .w-160 {
-        width: 40rem;
+      :host .text-4c5xl {
+        font-size: 2.5rem;
       }
       :host .bg-green-dark {
         background-color: #b1dac6;
+      }
+      :host .bg-blue-dark {
+        background-color: #d5edf8;
+      }
+      :host .bg-pink-dark {
+        background-color: #f5e7e7;
       }
       :host .font-roboto-condensed {
         font-family: 'Roboto Condensed', sans-serif;
