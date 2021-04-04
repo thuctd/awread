@@ -15,15 +15,18 @@ import { faList, faThLarge } from '@fortawesome/free-solid-svg-icons';
 })
 export class ListTemplate implements OnInit {
   display = 'grid';
-  @Input() actions = [{
-    faIcon: faThLarge,
-    display: 'grid',
-    active: false,
-  }, {
-    faIcon: faList,
-    display: 'list',
-    active: true,
-  }]
+  @Input() actions = [
+    {
+      faIcon: faThLarge,
+      display: 'grid',
+      class: 'rounded-l-md',
+    },
+    {
+      faIcon: faList,
+      display: 'list',
+      class: 'rounded-r-md',
+    },
+  ];
   @Input() isLoadedPage: true | false = true;
   @Input() tabsHead = [
     { name: 'Truyện dài', tabName: 'longbook', isActive: true },
@@ -34,9 +37,9 @@ export class ListTemplate implements OnInit {
   @Input() selectedTab = 'longbook';
   @Output() switchTabEvent = new EventEmitter();
   @Output() eventSearch = new EventEmitter();
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   changeDisplay(mode: string) {
     this.display = mode;

@@ -1,5 +1,5 @@
 <section class="pt-28 mx-auto">
-  <div class="grid grid-cols-12 gap-y-10 lg:gap-x-10 xl:gap-x-14 place-content-center" *ngIf="!(display === 'grid');else list_content">
+  <div class="grid grid-cols-12 gap-10 place-content-center" *ngIf="!(display === 'list');else list_content">
     <div *ngFor="let loop3 of counter(9);" class="col-span-2 md:col-span-4">
       <div>
         <atom-img-m [height]="'lg:h-72 xl:h-80'"></atom-img-m>
@@ -7,13 +7,13 @@
       </div>
     </div>
   </div>
-    <ng-template #list_content>
-      <div class="grid grid-cols-12 gap-10 place-content-center">
-        <div *ngFor="let loop3 of counter(8);" class="col-span-2 md:col-span-6">
-          <organ-books-grid></organ-books-grid>
-        </div>
+  <ng-template #list_content>
+    <div class="grid grid-cols-12 gap-10 place-content-center">
+      <div *ngFor="let loop3 of counter(8);" class="col-span-2 md:col-span-6">
+        <organ-books-grid></organ-books-grid>
       </div>
-    </ng-template>
+    </div>
+  </ng-template>
   <div class="flex justify-end pt-4">
     <atom-text-link (click)="moreEvent.emit()" [text]="moreContent" [class]="'text-base text-gray-400 uppercase'"></atom-text-link>
     <!-- <fa-icon [icon]="faIcon" class="text-gray-600 ml-2 text-xl"></fa-icon> -->

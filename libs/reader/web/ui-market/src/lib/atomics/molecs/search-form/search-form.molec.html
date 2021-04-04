@@ -1,6 +1,6 @@
 <div class="flex justify-center items-center px-2">
     <atom-select [options]='select.options' [inputControl]='valueSelect' *ngFor="let select of selectSearch" [widthClass]='select.widthClass' [titleSellect]='select.title' class="px-4"></atom-select>
-    <div class="px-4">
+    <div class="md:pl-0 xl:pl-5">
         <a (click)="searchEvent.emit(valueSelect.value)" class="outline-none text-sm no-underline text-center block bg-green-400 text-white cursor-pointer px-3 py-1 md:px-6 md:py-1 rounded-full transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110">Lọc</a>
     </div>
 </div>
