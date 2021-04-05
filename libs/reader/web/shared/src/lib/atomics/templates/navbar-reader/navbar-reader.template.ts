@@ -1,4 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'template-navbar-reader',
@@ -17,6 +18,8 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NavbarReaderTemplate implements OnInit {
+  @Input() control = new FormControl();
+  @Output() eventSearch = new EventEmitter();
   @Input() isLogin = false;
   constructor() { }
 

@@ -23,7 +23,9 @@ export class SearchBtnAtom implements OnInit {
   @Input() inputControl: FormControl = new FormControl('');
   constructor() { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.inputControl = this.inputControl ?? new FormControl("");
+  }
 
   toggleDisplay() {
     this.isDisplay = !this.isDisplay;

@@ -9,10 +9,10 @@
     <div class="absolute top-0 right-0">
       <div class="inline-flex">
         <div class="rounded-md text-sm leading-none border-gray-200 mt-1" *ngFor="let action of actions">
-          <atom-btn-icon [icon]="action.faIcon" [isActive]="action.active" (eventChangesDisplay)="changeDisplay(action.display)"></atom-btn-icon>
+          <atom-btn-icon class="{{action.class}}" [icon]="action.faIcon" [ngClass]="display === action.display ? 'bg-green-400 text-white': 'bg-white text-green-400'" (eventChangesDisplay)="changeDisplay(action.display)"></atom-btn-icon>
         </div>
         <div class="pl-8">
-          <submit-btn [name]='"Lọc Truyện"' (btnClicked)="eventSearch.emit()" [active]='true'></submit-btn>
+          <atom-btn-rectangle [text]="'Lọc truyện'" [class]="'py-1.5 px-4 rounded-lg'" (clickBtn)="eventSearch.emit()"></atom-btn-rectangle>
         </div>
       </div>
     </div>

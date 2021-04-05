@@ -1,11 +1,9 @@
 <section class="bg-pink h-160 w-full grid grid-cols-12">
-  <div class="col-span-6">
-    <img class="w-full md:pl-4 xl:pl-10 pt-80" src="/global-assets/images/Untitled.webp" alt="">
+  <div class="col-span-6 relative md:px-6 xl:px-10">
+    <img class="w-full absolute lg:-bottom-24 xl:-bottom-32 2xl:-bottom-52" src="/global-assets/images/Untitled.webp" alt="">
   </div>
-  <div class="col-span-6">
-    <div class="flex flex-col items-center md:pt-28 xl:pt-44">
-      <molec-rd-introduction-box-hotline class="md:pb-16 xl:pb-20" [contents]="contents" [srcImg]="srcImg"></molec-rd-introduction-box-hotline>
-      <molec-rd-introduction-box-hotline></molec-rd-introduction-box-hotline>
-    </div>
+  <div class="col-span-6 flex flex-col items-center justify-center">
+    <molec-rd-introduction-box-hotline class="py-6" [contents]="contents" [srcImg]="srcImg"></molec-rd-introduction-box-hotline>
+    <molec-rd-introduction-box-hotline class="py-6"></molec-rd-introduction-box-hotline>
   </div>
 </section>

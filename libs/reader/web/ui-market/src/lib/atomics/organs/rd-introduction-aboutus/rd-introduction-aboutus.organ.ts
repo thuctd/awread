@@ -14,6 +14,9 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
       :host .top-136 {
         top: 34rem;
       }
+      :host .text-7c5xl {
+        font-size: 7.5rem;
+      }
       .welcome {
         font-family: 'Sacramento', cursive;
       }

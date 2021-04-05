@@ -1,3 +1,4 @@
+export * from './chapter-detail.model';
 export * from './top-book.model';
 export * from './author-book.model';
 export * from './category-book.model';

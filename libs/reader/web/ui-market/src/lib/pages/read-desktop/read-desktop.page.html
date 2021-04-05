@@ -1,1 +1,1 @@
-<template-read class="pt-40"></template-read>
+<template-read [chapters]='chapterListByBookId$ | async' (nextChapterBook)='onChangeNextChapter()' (backChapterBook)='onChangeBackChapter()' [books]='topBookList$ | async' [chapter]='chapter$' class="pt-40"></template-read>

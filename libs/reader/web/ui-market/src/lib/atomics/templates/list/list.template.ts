@@ -17,15 +17,18 @@ export class ListTemplate implements OnInit {
   display = 'grid';
   @Input() books = [];
   @Input() categoryBooks = [];
-  @Input() actions = [{
-    faIcon: faThLarge,
-    display: 'grid',
-    active: false,
-  }, {
-    faIcon: faList,
-    display: 'list',
-    active: true,
-  }]
+  @Input() actions = [
+    {
+      faIcon: faThLarge,
+      display: 'grid',
+      class: 'rounded-l-md',
+    },
+    {
+      faIcon: faList,
+      display: 'list',
+      class: 'rounded-r-md',
+    },
+  ];
   @Input() isLoadedPage: true | false = true;
   @Input() tabsHead = [
     { name: 'Truyện dài', type: 'longbook', isActive: true },

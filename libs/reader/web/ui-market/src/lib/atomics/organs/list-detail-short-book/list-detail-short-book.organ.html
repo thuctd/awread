@@ -13,7 +13,8 @@
           <organ-books-grid [imgUrl]='book.imgUrl' [bookId]='book.id' [title]='book.title'></organ-books-grid>
         </div>
       </div>
-    </ng-template>
+    </div>
+  </ng-template>
   <div class="flex justify-end pt-4">
     <atom-text-link (click)="moreEvent.emit()" [text]="moreContent" [class]="'text-base text-gray-400 uppercase'"></atom-text-link>
     <!-- <fa-icon [icon]="faIcon" class="text-gray-600 ml-2 text-xl"></fa-icon> -->

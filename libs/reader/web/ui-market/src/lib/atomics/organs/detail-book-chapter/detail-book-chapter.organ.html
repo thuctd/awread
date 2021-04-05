@@ -1,6 +1,6 @@
 <atom-label-underline [title]="'Danh sách chương'"></atom-label-underline>
 <div class="detail-book-chapters mt-2 sm:mt-4">
-    <molec-chapter-item *ngFor="let item of chapters; let i = index" [isLastItem]="i == chapters.length - 1" [chapter]="item"></molec-chapter-item>
+    <molec-chapter-item *ngFor="let item of chapters; let i = index" [bookId]='item.bookId' [chapterId]='item.id' [isLastItem]="i == chapters.length - 1" [chapter]="item"></molec-chapter-item>
 </div>
 <div class="hidden sm:block text-center mt-2">
     <button class="focus:outline-none m-auto" (click)="submitEvent.emit()"><span class="uppercase">Xem thêm</span>
