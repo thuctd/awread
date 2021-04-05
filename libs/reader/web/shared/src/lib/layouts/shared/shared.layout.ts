@@ -1,4 +1,3 @@
-import { untilDestroyed } from '@ngneat/until-destroy';
 import { Directive, Injectable, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -19,14 +18,14 @@ export class SharedLayout implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit(): void {
-    this.search$ = this.searchControl.valueChanges.pipe(debounceTime(100), distinctUntilChanged())
+    this.searchControl.valueChanges.pipe(debounceTime(100), distinctUntilChanged())
       .subscribe((term) => {
         this.search$ = term
       });
   }
 
   navigateToSearch() {
-    this.router.navigate(['/search'], { queryParams: { search: 'asd' } });
+    this.router.navigate(['/search'], { queryParams: { search: this.search$ } });
   }
 }
 

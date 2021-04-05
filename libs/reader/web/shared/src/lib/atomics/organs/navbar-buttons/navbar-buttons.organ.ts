@@ -18,11 +18,7 @@ export class NavbarButtonsOrgan implements OnInit {
   @Input() isLogin = false;
   @Input() searchControl = new FormControl();
   @Output() eventSearch = new EventEmitter();
-  constructor(private router: Router) { }
+  constructor() { }
 
   ngOnInit(): void { }
-
-  navigateToSearch() {
-    this.router.navigate(['search']);
-  }
 }
