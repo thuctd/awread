@@ -1,5 +1,4 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
-import { Genre } from '@awread/reader/web/feature-market';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 
 @Component({

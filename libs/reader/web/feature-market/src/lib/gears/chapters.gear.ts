@@ -19,15 +19,20 @@ export class ChaptersGear {
     return this.chaptersApi.getAllChapters(bookId).pipe(
       tap((res) => {
         console.log('Chapters: ', res);
-        this.chaptersStore.add(res);
+        this.chaptersStore.set(res);
       })
     );
   }
 
   getChapterDetail(bookId: string, chapterId: string) {
     return this.chaptersApi.getChapterDetail(bookId, chapterId).pipe(
-      tap((chapter) => console.log('detail category: ', chapter)),
-      tap((chapter) => this.chapterDetailStore.add(chapter)),
+      tap((chapter) => {
+        if (!chapter) {
+          console.log('detail chapter book: ', chapter)
+        }
+        return [];
+        // this.chapterDetailStore.set(chapter);
+      }),
       catchError((err) => {
         console.error('An error occurred:', err);
         return throwError(err);

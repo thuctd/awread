@@ -1,3 +1,4 @@
+import { BookDetailStore } from './../states/book-detail/book-detail.store';
 import { AuthorBooksStore } from './../states/author-books/author-books.store';
 import { TopBooksStore } from './../states/top-books/top-books.store';
 import { GoodBooksStore } from './../states/good-books/good-books.store';
@@ -23,6 +24,7 @@ export class BooksGear {
     private latestBooksStore: LatestBooksStore,
     private featureBooksStore: FeatureBooksStore,
     private goodBooksStore: GoodBooksStore,
+    private bookDetailStore: BookDetailStore,
     private booksApi: BooksApi
   ) { }
 
@@ -132,7 +134,6 @@ export class BooksGear {
   getBookById(bookId: string) {
     return this.booksApi.getBookById(bookId).pipe(
       tap((book) => console.log('detail books: ', book)),
-      tap((book) => this.booksStore.add(book)),
       catchError((err) => {
         console.error('An error occurred:', err);
         return throwError(err);

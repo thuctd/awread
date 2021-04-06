@@ -1,6 +1,6 @@
 <section class="mx-auto">
-  <molec-head-read-book [chapters]='chapters' [title]='chapter.title' (backChapterBook)='backChapterBook.emit($event)' (nextChapterBook)='nextChapterBook.emit($event)'></molec-head-read-book>
-  <p class="text-xs lg:text-sm text-gray-600 leading-6 lg:leading-8 py-4 lg:py-8 text-justify">{{chapter.content}}</p>
+  <molec-head-read-book [chapters]='chapters' [title]='chapter?.title' (backChapterBook)='backChapterBook.emit($event)' (nextChapterBook)='nextChapterBook.emit($event)'></molec-head-read-book>
+  <p class="text-xs lg:text-sm text-gray-600 leading-6 lg:leading-8 py-4 lg:py-8 text-justify">{{chapter?.content}}</p>
   <div class="flex">
     <atom-btn-switch-chapter (btnClick)="nextChapterBook.emit($event)" class="mx-auto" [title]="'Đọc chương tiếp'" [class]="'sm:pl-8 pl-3'"></atom-btn-switch-chapter>
   </div>

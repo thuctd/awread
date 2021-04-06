@@ -17,6 +17,7 @@ export class RdSearchBookListOrgan implements OnInit {
   @Input() status = 'Hoàn thành';
   @Input() title = 'Em là nhà';
   @Input() imgUrl = '';
+  @Input() bookId = '';
 
   constructor() { }
 

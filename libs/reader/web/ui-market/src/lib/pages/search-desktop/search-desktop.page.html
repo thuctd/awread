@@ -1,1 +1,10 @@
 <template-rd-search-book [searchControl]='searchControl' class="pt-44" [items]='bookList$ | async'></template-rd-search-book>
+
+<!-- <ng-container *ngIf="results$ | async as results">
+  <ng-container *ngIf="results?.length; else noResultTmpl">
+    <div *ngFor="let item of results" class="py-4">
+      <organ-rd-search-book-list [imgUrl]='item.imgUrl' [title]="item.title" [category]="item.category" [status]="item.status" [bookId]='item.id'>
+      </organ-rd-search-book-list>
+    </div>
+  </ng-container>
+</ng-container> -->

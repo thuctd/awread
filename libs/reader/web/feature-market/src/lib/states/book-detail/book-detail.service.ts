@@ -12,7 +12,7 @@ export class BookDetailService {
   }
 
   get() {
-    return of([]).pipe(tap(entities => this.bookDetailStore.update(entities)));
+    return of({}).pipe(tap(entities => this.bookDetailStore.update(entities)));
   }
 
 }

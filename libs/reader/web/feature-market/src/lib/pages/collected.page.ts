@@ -14,17 +14,25 @@ export class CollectedPage implements OnInit, OnDestroy {
   bookList$ = this.booksFacade.bookList$;
   categoryList$ = this.categoryFacede.categoryList$;
   topBookList$ = this.booksFacade.topBookList$;
+  isLoading$ = this.booksFacade.selectLoadingAkita();
   filteredBooks$;
 
   bookId: string;
   type: string;
 
   selectedTab = 'longbook';
-  constructor(private activatedRoute: ActivatedRoute, private cd: ChangeDetectorRef, private router: Router, private categoryFacede: CategoryFacade, private booksFacade: BooksFacade) { }
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private cd: ChangeDetectorRef,
+    private router: Router,
+    private categoryFacede: CategoryFacade,
+    private booksFacade: BooksFacade
+  ) { }
   ngOnDestroy(): void { }
 
   ngOnInit(): void {
     this.categoryFacede.getAllCategories().subscribe();
+    this.booksFacade.getAllBooks().subscribe();
     this.booksFacade.getTopBooks().subscribe();
     this.checkActiveTab();
     this.loadFirstByCategory();
@@ -48,7 +56,7 @@ export class CollectedPage implements OnInit, OnDestroy {
   }
 
   private loadFirstByCategory() {
-    const type = this.activatedRoute.snapshot.paramMap.get('type')
+    const type = this.activatedRoute.snapshot.paramMap.get('type');
     this.filteredBooks$ = this.bookList$.pipe(
       map((items) =>
         items.filter((item) => {
@@ -65,13 +73,10 @@ export class CollectedPage implements OnInit, OnDestroy {
   }
 
   private checkActiveTab() {
-    return this.activatedRoute.paramMap
-      .pipe(untilDestroyed(this))
-      .subscribe((params) => {
-        this.bookId = params.get('bookId');
-        this.type = params.get('type');
-        this.switchTab(this.type);
-        this.cd.detectChanges();
-      });
+    return this.activatedRoute.paramMap.pipe(untilDestroyed(this)).subscribe((params) => {
+      this.type = params.get('type');
+      this.switchTab(this.type);
+      this.cd.detectChanges();
+    });
   }
 }

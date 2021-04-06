@@ -1,17 +1,22 @@
 import { Injectable } from '@angular/core';
-import { EntityState, EntityStore, StoreConfig, ActiveState } from '@datorama/akita';
-import { Chapter } from '../../models';
+import { Store, StoreConfig } from '@datorama/akita';
 
-export interface ChapterDetailState extends EntityState<Chapter>, ActiveState { };
+export interface ChapterDetailState {
+  key: string;
+}
 
+export function createInitialState(): ChapterDetailState {
+  return {
+    key: ''
+  };
+}
 
 @Injectable({ providedIn: 'root' })
-@StoreConfig({ name: ' chapter-detail', resettable: true })
-export class ChapterDetailStore extends EntityStore<ChapterDetailState> {
-  // ui: EntityUIStore<ChapterDetailUIState>;
+@StoreConfig({ name: 'chapter-detail', resettable: true })
+export class ChapterDetailStore extends Store<ChapterDetailState> {
+
   constructor() {
-    super();
-    // this.createUIStore().setInitialEntityState();
+    super(createInitialState());
   }
 
 }
