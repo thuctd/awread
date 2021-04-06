@@ -1,5 +1,5 @@
 <section class="w-full max-w-screen-xl mx-auto px-6 xl:px-0 pt-36 relative">
-  <div class="border-b border-gray-300">
+  <div class="border-b border-gray-400">
     <atom-title [title]="isLoadedPage ?'Truyện tự sưu tầm' : 'Truyện tự sáng tác'"></atom-title>
   </div>
   <div class="grid grid-cols-12 gap-2 mt-8 relative">
@@ -9,7 +9,7 @@
     <div class="absolute top-0 right-0">
       <div class="inline-flex">
         <div class="rounded-md text-sm leading-none border-gray-200 mt-1" *ngFor="let action of actions">
-          <atom-btn-icon class="{{action.class}}" [icon]="action.faIcon" [ngClass]="display === action.display ? 'bg-green-400 text-white': 'bg-white text-green-400'" (eventChangesDisplay)="changeDisplay(action.display)"></atom-btn-icon>
+          <atom-btn-icon class="{{action.class}}" [icon]="action.faIcon" [ngClass]="display === action.display ? 'bg-green-primary text-white': 'bg-white text-green-primary'" (eventChangesDisplay)="changeDisplay(action.display)"></atom-btn-icon>
         </div>
         <div class="pl-8">
           <atom-btn-rectangle [text]="'Lọc truyện'" [class]="'py-1.5 px-4 rounded-lg'" (clickBtn)="eventSearch.emit()"></atom-btn-rectangle>
@@ -17,9 +17,9 @@
       </div>
     </div>
     <div class="col-span-2 xl:col-span-8 lg:col-span-9 md:pr-8">
-      <div class="grid grid-cols-12 gap-2 lg:gap-4 xl:gap-6 border-b border-teal-400">
+      <div class="grid grid-cols-12 gap-2 lg:gap-4 xl:gap-6 border-b border-gray-300">
         <ng-container *ngFor="let tab of tabsHead">
-          <div class="col-span-2 md:col-span-4" [ngClass]="selectedTab === tab.tabName ? 'border-b-2 border-green-400 text-green-400' : 'text-gray-400'">
+          <div class="col-span-2 md:col-span-4" [ngClass]="selectedTab === tab.tabName ? 'border-b-2 border-green-primary text-green-primary' : 'text-gray-text'">
             <molec-tab-categories (switchTabEvent)="switchTabEvent.emit(tab.tabName)" [tab]="tab"></molec-tab-categories>
           </div>
         </ng-container>

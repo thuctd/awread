@@ -1,10 +1,10 @@
 <div class="border-b py-3 relative">
   <div class="flex flex-row" (click)="displayMenu()">
-    <div class="text-green-400 font-medium text-base pr-4 cursor-pointer">{{ title }}</div>
-    <fa-icon *ngIf="isDisplayMenu" [icon]="faIcon" class="text-xl text-green-400 cursor-pointer"></fa-icon>
-    <fa-icon *ngIf="!isDisplayMenu" [icon]="faIcon2" class="text-xl text-green-400 cursor-pointer"></fa-icon>
+    <div class="text-green-primary font-medium text-base pr-4 cursor-pointer">{{ title }}</div>
+    <fa-icon *ngIf="isDisplayMenu" [icon]="faIcon" class="text-xl text-green-primary cursor-pointer"></fa-icon>
+    <fa-icon *ngIf="!isDisplayMenu" [icon]="faIcon2" class="text-xl text-green-primary cursor-pointer"></fa-icon>
   </div>
   <div *ngIf="!isDisplayMenu" class="mt-2">
-    <a (click)="displayMenu()" class="outline-none cursor-pointer text-green-400 text-sm font-normal block w-full py-2 pl-6 hover:bg-green-400 hover:text-white" [routerLink]="[item.href]"  *ngFor="let item of items">{{item.title}}</a>
+    <a (click)="displayMenu()" class="outline-none cursor-pointer text-green-primary text-sm font-normal block w-full py-2 pl-6 hover:bg-green-primary hover:text-white" [routerLink]="[item.href]"  *ngFor="let item of items">{{item.title}}</a>
   </div>
 </div>

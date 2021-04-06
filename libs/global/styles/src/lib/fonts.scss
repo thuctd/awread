@@ -1,9 +1,15 @@
+// @font-face {
+//     font-family: 'lexend-deca';
+//     src: url('/global-assets/fonts/lexend-deca/LexendDeca-Regular.ttf')  format('truetype');
+// }
+
 @font-face {
-    font-family: 'lexend-deca';
-    src: url('/global-assets/fonts/lexend-deca/LexendDeca-Regular.ttf')  format('truetype');
+    font-family: 'Nunito';
+    src: url('/global-assets/fonts/nunito/Nunito-Regular.ttf') format('truetype');
 }
 
 // USAGE
 body > * {
-    font-family: 'lexend-deca', sans-serif!important;
+    // font-family: 'lexend-deca', sans-serif!important;
+    font-family: 'Nunito', sans-serif !important;
 }

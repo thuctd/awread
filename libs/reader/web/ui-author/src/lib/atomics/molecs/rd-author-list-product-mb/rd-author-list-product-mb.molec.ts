@@ -36,7 +36,7 @@ export class RdAuthorListProductMbMolec implements OnInit {
       altImg: '',
     },
   ];
-  @Input() class = 'text-sm text-green-400';
+  @Input() class = 'text-sm text-green-primary';
   @Input() moreBook = 'Xem thêm...';
   @Input() btnTitle = 'Top phổ biến';
   @Output() moreEvent = new EventEmitter();

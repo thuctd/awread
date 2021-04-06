@@ -3,7 +3,7 @@
 </div>
 <section *ngIf="isMenu" class="absolute top-0 right-0 modal">
   <div class="w-4/6 md:w-3/6 h-screen absolute right-0 bg-white br__menu">
-    <div (click)="displayMenu()" class="absolute top-1 right-2 cursor-pointer text-2xl text-gray-400">
+    <div (click)="displayMenu()" class="absolute top-1 right-2 cursor-pointer text-2xl text-gray-text">
       <fa-icon [icon]="times"></fa-icon>
     </div>
     <div class="mx-8">
@@ -14,12 +14,12 @@
         <div class="absolute bottom-0 left-0 leading-8">
           <div class="flex items-center">
             <img src="/global-assets/images/Group-868.webp">
-            <div class="text-green-400 font-normal text-sm mx-1">Vip:</div>
+            <div class="text-green-primary font-normal text-sm mx-1">Vip:</div>
             <div class="text-gray-700">{{lvVip}}</div>
           </div>
           <div class="flex items-center ml-0.5">
             <img src="/global-assets/images/Group-869.webp">
-            <div class="text-green-400 font-normal text-sm mx-1">Coin: </div>
+            <div class="text-green-primary font-normal text-sm mx-1">Coin: </div>
             <div class="text-gray-700">{{coin}}</div>
           </div>
         </div>
@@ -28,12 +28,12 @@
           <div class="text-gray-700 text-sm">{{name}}</div>
         </div>
       </div>
-      <div class="border-b py-3 text-green-400 font-medium text-base pr-4 cursor-pointer">Trang chủ</div>
+      <div class="border-b py-3 text-green-primary font-medium text-base pr-4 cursor-pointer">Trang chủ</div>
       <molec-dropdown-menu-mb></molec-dropdown-menu-mb>
-      <div class="border-b py-3 text-green-400 font-medium text-base pr-4 cursor-pointer">Đăng truyện</div>
-      <div class="border-b py-3 text-green-400 font-medium text-base pr-4 cursor-pointer">Nạp Coin</div>
+      <div class="border-b py-3 text-green-primary font-medium text-base pr-4 cursor-pointer">Đăng truyện</div>
+      <div class="border-b py-3 text-green-primary font-medium text-base pr-4 cursor-pointer">Nạp Coin</div>
       <molec-dropdown-menu-mb [title]="'Cộng đồng'" [items]="items"></molec-dropdown-menu-mb>
-      <div *ngIf="!isLogin" class="border-b py-3 text-green-400 font-medium text-base pr-4 cursor-pointer">Cài đặt</div>
+      <div *ngIf="!isLogin" class="border-b py-3 text-green-primary font-medium text-base pr-4 cursor-pointer">Cài đặt</div>
       <div class="flex flex-col items-end pt-8">
         <atom-rd-base-btn-green (submitEvent)="openFormLogin($event)" (click)="login()" class="mb-1" *ngIf="isLogin" [title]="btns.login"></atom-rd-base-btn-green>
         <atom-rd-base-btn-green (submitEvent)="openFormRegister($event)" *ngIf="isLogin" [class2]="'px-5'" [title]="btns.register"></atom-rd-base-btn-green>
