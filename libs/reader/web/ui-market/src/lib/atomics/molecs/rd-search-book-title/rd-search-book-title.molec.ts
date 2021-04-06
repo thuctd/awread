@@ -16,8 +16,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
 })
 export class RdSearchBookTitleMolec implements OnInit {
   @Input() faIcon = faSearch;
-  @Input() inputControl = new FormControl('Em là nhà');
-  @Input() searchString = 'Em là nhà';
+  @Input() inputControl = new FormControl();
   @Output() submitBtn = new EventEmitter();
 
   constructor() {}

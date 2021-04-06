@@ -14,7 +14,7 @@ import { FormControl } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RdSearchBookTemplate implements OnInit {
-  @Input() searchControl: FormControl = new FormControl('');
+  @Input() searchControl: FormControl = new FormControl();
   @Input() items = [
     {
       title: 'Cô gái chúng ta cùng theo đuổi',
