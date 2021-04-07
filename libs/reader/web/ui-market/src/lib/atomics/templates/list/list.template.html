@@ -4,7 +4,7 @@
   </div>
   <div class="grid grid-cols-12 gap-2 mt-8 relative">
     <div class="bg-white shadow-md py-4 absolute top-16 rounded-sm z-40 w-full">
-      <molec-search-form></molec-search-form>
+      <molec-search-form [genres]='genres'></molec-search-form>
     </div>
     <div class="absolute top-0 right-0">
       <div class="inline-flex">
@@ -30,7 +30,7 @@
     </div>
     <div class="lg:hidden xl:block lg:col-span-1"></div>
     <div class="col-span-2 md:col-span-3">
-      <list-detail-top-book class="pt-32" [books]='books'> </list-detail-top-book>
+      <list-detail-top-book class="pt-32" [books]='books'></list-detail-top-book>
     </div>
   </div>
 </section>

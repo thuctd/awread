@@ -1,11 +1,10 @@
-import { BooksFacade } from '@awread/reader/web/feature-market';
-import { CategoryFacade } from '@awread/reader/web/feature-market';
 import { ChangeDetectorRef, Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Directive, OnInit, OnDestroy } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Category } from '../models';
 import { map } from 'rxjs/operators';
+import { BooksFacade, CategoryFacade, GenresFacade } from '../facades';
 
 @UntilDestroy()
 @Injectable({
@@ -16,19 +15,21 @@ export class ComposedPage implements OnInit, OnDestroy {
   bookList$ = this.booksFacade.bookList$;
   categoryList$ = this.categoryFacede.categoryList$;
   topBookList$ = this.booksFacade.topBookList$;
+  genreList$ = this.genresFacade.genreList$;
   filteredBooks$;
 
   bookId: string;
   type: string;
 
   selectedTab = 'longbook';
-  constructor(private activatedRoute: ActivatedRoute, private cd: ChangeDetectorRef, private router: Router, private categoryFacede: CategoryFacade, private booksFacade: BooksFacade) { }
+  constructor(private activatedRoute: ActivatedRoute, private cd: ChangeDetectorRef, private router: Router, private categoryFacede: CategoryFacade, private booksFacade: BooksFacade, private genresFacade: GenresFacade) { }
   ngOnDestroy(): void { }
 
   ngOnInit(): void {
     this.categoryFacede.getAllCategories().subscribe();
     this.booksFacade.getAllBooks().subscribe();
     this.booksFacade.getTopBooks().subscribe();
+    this.genresFacade.getAllGenres().subscribe();
     this.checkActiveTab();
     this.loadFirstByCategory();
   }

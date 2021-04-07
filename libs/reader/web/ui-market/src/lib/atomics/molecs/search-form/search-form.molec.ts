@@ -15,19 +15,20 @@ import { FormControl } from '@angular/forms';
 })
 export class SearchFormMolec implements OnInit {
   @Input() valueSelect = new FormControl('');
+  @Input() valueGenre = new FormControl('');
   @Output() searchEvent = new EventEmitter();
+  @Input() genres = [
+    { id: '1', name: 'Lãng mạn' },
+    { id: '2', name: 'Kiếm hiệp' },
+    { id: '3', name: 'Trinh thám' },
+    { id: '4', name: 'Kinh dị' },
+    { id: '5', name: 'Xuyên không' },
+  ];
+  @Input() selectGenres = {
+    title: 'Thể Loại',
+    widthClass: 'xl:w-96 lg:w-64 md:w-60',
+  };
   @Input() selectSearch = [
-    {
-      title: 'Thể Loại',
-      widthClass: 'xl:w-96 lg:w-64 md:w-60',
-      options: [
-        { id: '1', name: 'Lãng mạn' },
-        { id: '2', name: 'Kiếm hiệp' },
-        { id: '3', name: 'Trinh thám' },
-        { id: '4', name: 'Kinh dị' },
-        { id: '5', name: 'Xuyên không' },
-      ],
-    },
     {
       title: 'Tình Trạng',
       widthClass: 'xl:w-96 lg:w-80 md:w-64',

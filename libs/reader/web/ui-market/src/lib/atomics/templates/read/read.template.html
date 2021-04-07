@@ -1,10 +1,16 @@
 <section class="px-4 sm:px-6 max-w-screen-xl mx-auto relative">
-  <atom-breadcrumb></atom-breadcrumb>
-  <div class="pt-6">
-    <organ-content-book [chapters]='chapters' [chapter]='chapter' (backChapterBook)='backChapterBook.emit($event)' (nextChapterBook)='nextChapterBook.emit($event)'></organ-content-book>
-  </div>
-  <div>
-    <atom-btn-back-to-top class="fixed bottom-6 right-6"></atom-btn-back-to-top>
-  </div>
-  <organ-comment [books]='books' class="pt-16"></organ-comment>
+  <ng-container *ngIf="chapter; else noData">
+    <atom-breadcrumb></atom-breadcrumb>
+    <div class="pt-6">
+      <organ-content-book [chapters]='chapters' [chapter]='chapter' (backChapterBook)='backChapterBook.emit($event)'
+        (nextChapterBook)='nextChapterBook.emit($event)'></organ-content-book>
+    </div>
+    <div>
+      <atom-btn-back-to-top class="fixed bottom-6 right-6"></atom-btn-back-to-top>
+    </div>
+    <organ-comment [books]='books' class="pt-16"></organ-comment>
+  </ng-container>
+    <ng-template #noData>
+      <div class="pt-8 text-xl">Truyện đang được tải mong các bạn chờ trong giây lát...</div>
+    </ng-template>
 </section>

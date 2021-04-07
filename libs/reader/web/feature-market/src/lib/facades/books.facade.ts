@@ -8,10 +8,12 @@ import { FeatureBooksQuery } from '../states/feature-books';
 import { GenreBooksQuery } from '../states/genre-books';
 import { GoodBooksQuery } from '../states/good-books';
 import { LatestBooksQuery } from '../states/latest-books';
+import { of } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class BooksFacade {
   bookList$ = this.booksQuery.selectAll();
+  isLoading$ = this.booksQuery.selectLoading();
   topBookList$ = this.topBooksQuery.selectAll();
   goodBookList$ = this.goodBooksQuery.selectAll();
   genreBookList$ = this.genreBooksQuery.selectAll();
@@ -32,6 +34,14 @@ export class BooksFacade {
     private featureBooksQuery: FeatureBooksQuery,
     private categoryBooksQuery: CategoryBooksQuery
   ) { }
+
+  searchBookApi(term: string) {
+    if (term === '') {
+      return this.booksGear.getAllBooks();
+    } else {
+      return this.booksGear.searhBookByTermApi(term);
+    }
+  }
 
   selectLoadingAkita() {
     return this.booksQuery.selectLoading();

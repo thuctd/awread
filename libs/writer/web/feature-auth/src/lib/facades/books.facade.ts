@@ -5,6 +5,7 @@ import { BooksStore, BooksQuery } from '../states/books';
 @Injectable({ providedIn: 'root' })
 export class BooksFacade {
   bookList$ = this.booksQuery.selectAll();
+  isLoading$ = this.booksQuery.selectLoading();
   constructor(
     private booksGear: BooksGear,
     private booksStore: BooksStore,

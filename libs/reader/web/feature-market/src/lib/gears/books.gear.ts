@@ -141,4 +141,8 @@ export class BooksGear {
     );
   }
 
+  searhBookByTermApi(term: string) {
+    return this.booksApi.searchBookByTerm(term);
+  }
+
 }

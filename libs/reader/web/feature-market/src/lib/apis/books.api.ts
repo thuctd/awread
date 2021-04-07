@@ -12,6 +12,11 @@ export class BooksApi {
 
   get() { }
 
+  searchBookByTerm(term: string) {
+    return of(db.books.filter(book => book.title.toLowerCase().includes(term.toLowerCase())))
+      .pipe(delay(500));
+  }
+
   getAllBooks() {
     return of(db.books)
       .pipe(delay(500));

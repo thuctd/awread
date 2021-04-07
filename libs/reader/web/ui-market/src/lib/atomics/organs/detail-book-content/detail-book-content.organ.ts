@@ -15,6 +15,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 export class DetailBookContentOrgan implements OnInit {
   @Input() book = {
     title: 'Ngày ấy vì ai mà đổi thay',
+    authorId: '1',
     auth: 'Cẩm Thương',
     type: 'Hoang tưởng, kinh dị',
     status: 'Đang tiến hành',

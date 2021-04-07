@@ -13,8 +13,8 @@ import { UntilDestroy } from '@ngneat/until-destroy';
 @Directive()
 export class DetailPage implements OnInit, OnDestroy {
   book$;
-  authorId;
-  bookId;
+  authorId: string;
+  bookId: string;
   destroy$ = new Subject();
   isLoading$ = this.booksFacade.selectLoadingAkita();
   topBookList$ = this.booksFacade.topBookList$;

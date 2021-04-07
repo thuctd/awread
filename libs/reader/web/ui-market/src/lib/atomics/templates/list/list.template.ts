@@ -17,6 +17,7 @@ export class ListTemplate implements OnInit {
   display = 'grid';
   @Input() books = [];
   @Input() categoryBooks = [];
+  @Input() genres = [];
   @Input() actions = [
     {
       faIcon: faThLarge,

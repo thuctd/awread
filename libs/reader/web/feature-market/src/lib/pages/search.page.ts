@@ -1,48 +1,47 @@
 import { FormControl } from '@angular/forms';
-import { BooksFacade } from '@awread/reader/web/feature-market';
-import { Directive, Injectable, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Directive, Injectable, OnInit } from '@angular/core';
 import { BooksQuery } from '../states/books';
-import { debounceTime, switchMap, tap } from 'rxjs/operators';
-import { ActivatedRoute } from '@angular/router';
+import { debounceTime, map, switchMap, tap, startWith, distinctUntilChanged } from 'rxjs/operators';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { combineLatest, of } from 'rxjs';
-export class BookUtil {
-  static searchString(str: string, searchString: string): boolean {
-    str = str ?? '';
-    searchString = searchString ?? '';
-    return str.trim().toLowerCase().includes(searchString.trim().toLowerCase());
-  }
-}
+import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
+import { BooksFacade } from '../facades/books.facade';
+
 @UntilDestroy()
 @Injectable({
   providedIn: 'root',
 })
 @Directive()
 export class SearchPage implements OnInit {
-  bookList$ = this.booksFacade.bookList$;
-  searchControl: FormControl = new FormControl('');
-  results$;
-  search$;
+  searchControl: FormControl = new FormControl();
+  results$: Observable<any[]>;
 
-  constructor(private booksFacade: BooksFacade, private booksQuery: BooksQuery, private activatedRoute: ActivatedRoute) { }
+  constructor(private booksFacade: BooksFacade, private router: Router, private cd: ChangeDetectorRef, private booksQuery: BooksQuery, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.syncUrlSearchText();
+    this.watchingSearchTerm();
+  }
+
+  bindingUrlSeach(term: string) {
+    this.router.navigate(['/search'], { queryParams: { search: term } });
+  }
+
+  syncUrlSearchText() {
     this.activatedRoute.queryParams.subscribe((params) => {
-      this.search$ = params['search'];
-      this.searchControl.setValue(params['search'])
+      const searchTerm: string = params['search'];
+      this.searchControl.setValue(searchTerm);
     });
-    const search$ = this.searchControl.valueChanges.pipe(debounceTime(50));
-    this.results$ = combineLatest([search$, this.booksQuery.bookList$]).pipe(
+  }
+
+  watchingSearchTerm() {
+    this.results$ = this.activatedRoute.queryParams.pipe(
       untilDestroyed(this),
-      switchMap(([term, books]) => {
-        const matchBooks = books.filter((book) => {
-          console.log('asd', term);
-          const foundInTitle = BookUtil.searchString(book.title, term);
-          return foundInTitle;
-        });
-        return of(matchBooks);
-      })
+      map(query => query.search),
+      debounceTime(300),
+      distinctUntilChanged(),
+      switchMap((term: string) => this.booksFacade.searchBookApi(term)),
     );
-    this.booksFacade.getAllBooks().subscribe();
+    this.cd.detectChanges();
   }
 }
