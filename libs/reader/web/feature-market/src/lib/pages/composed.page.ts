@@ -5,6 +5,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Category } from '../models';
 import { map } from 'rxjs/operators';
 import { BooksFacade, CategoryFacade, GenresFacade } from '../facades';
+import { BooksQuery } from '../states/books';
 
 @UntilDestroy()
 @Injectable({
@@ -22,7 +23,7 @@ export class ComposedPage implements OnInit, OnDestroy {
   type: string;
 
   selectedTab = 'longbook';
-  constructor(private activatedRoute: ActivatedRoute, private cd: ChangeDetectorRef, private router: Router, private categoryFacede: CategoryFacade, private booksFacade: BooksFacade, private genresFacade: GenresFacade) { }
+  constructor(private activatedRoute: ActivatedRoute, private cd: ChangeDetectorRef, private router: Router, private categoryFacede: CategoryFacade, private booksFacade: BooksFacade, private booksQuery: BooksQuery, private genresFacade: GenresFacade) { }
   ngOnDestroy(): void { }
 
   ngOnInit(): void {
@@ -32,6 +33,11 @@ export class ComposedPage implements OnInit, OnDestroy {
     this.genresFacade.getAllGenres().subscribe();
     this.checkActiveTab();
     this.loadFirstByCategory();
+    this.booksQuery.filtersChange$.pipe(
+      untilDestroyed(this)
+    ).subscribe(filters => {
+      console.log(filters);
+    });
   }
 
   switchTab(type: string) {
