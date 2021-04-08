@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'organ-detail-book-content',
@@ -21,7 +21,10 @@ export class DetailBookContentOrgan implements OnInit {
     status: 'Đang tiến hành',
     publishedAt: '2020',
     country: '(chủ yếu dành cho truyện sưu tầm)'
-  }
+  };
+  @Output() chapterFistEvent = new EventEmitter();
+  @Output() chapterLastEvent = new EventEmitter();
+
   constructor() { }
 
   ngOnInit(): void {

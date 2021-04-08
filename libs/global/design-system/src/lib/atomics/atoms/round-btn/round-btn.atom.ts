@@ -16,11 +16,9 @@ export class RoundBtnAtom implements OnInit {
   @Input() title = 'Đọc chương đầu';
   @Input() color = 'bg-green-400 text-white';
   @Input() href = '/';
-  @Input() bookId = '2zxcqwe213_azre';
-  @Input() chapterId = '21345xzcasd32_2sa';
   @Output() submitEvent = new EventEmitter();
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

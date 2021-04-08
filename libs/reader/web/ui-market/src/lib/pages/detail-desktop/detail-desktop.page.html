@@ -1,1 +1,1 @@
-<template-detail-book [loading] = "isLoading$ | async" [chapters]='chapterListByBookId$ | async' [book]='book$' [authorBooks]='authorBookList$ | async' [topBooks]='topBookList$ | async'></template-detail-book>
+<template-detail-book (chapterFistEvent)='OnChangeFirstChapter()' (chapterLastEvent)='OnChangeLastChapter()' [loading] = "isLoading$ | async" [chapters]='chapterListByBookId$ | async' [book]='book$' [authorBooks]='authorBookList$ | async' [topBooks]='topBookList$ | async'></template-detail-book>

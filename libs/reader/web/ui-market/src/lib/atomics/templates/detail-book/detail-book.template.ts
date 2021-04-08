@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { faAngleRight, faHome } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -56,6 +56,8 @@ export class DetailBookTemplate implements OnInit {
       icon: faAngleRight,
     },
   ];
+  @Output() chapterFistEvent = new EventEmitter();
+  @Output() chapterLastEvent = new EventEmitter();
 
   constructor() { }
 

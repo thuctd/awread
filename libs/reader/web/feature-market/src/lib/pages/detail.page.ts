@@ -1,4 +1,5 @@
-import { ActivatedRoute } from '@angular/router';
+import { Chapter } from './../models/chapter.model';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ChangeDetectorRef, Directive, Injectable, OnDestroy, OnInit } from '@angular/core';
 import { BooksFacade } from '../facades';
 import { map, switchMap, takeUntil, tap } from 'rxjs/operators';
@@ -13,15 +14,16 @@ import { UntilDestroy } from '@ngneat/until-destroy';
 @Directive()
 export class DetailPage implements OnInit, OnDestroy {
   book$;
-  authorId: string;
   bookId: string;
   destroy$ = new Subject();
   isLoading$ = this.booksFacade.selectLoadingAkita();
   topBookList$ = this.booksFacade.topBookList$;
   authorBookList$ = this.booksFacade.authorBookList$;
   chapterListByBookId$ = this.chaptersFacade.chapterListByBookId$;
+  bookChapter: Chapter[]
 
   constructor(
+    private router: Router,
     private activatedRoute: ActivatedRoute,
     private booksFacade: BooksFacade,
     private chaptersFacade: ChaptersFacade,
@@ -34,8 +36,10 @@ export class DetailPage implements OnInit, OnDestroy {
       map(params => params.get('bookId')),
       switchMap(id => this.booksFacade.getDetailBook(id).pipe(
         tap(book => {
-          this.authorId = book.authorId
-          this.booksFacade.getAuthorBooks(this.authorId).subscribe();
+          this.booksFacade.getAuthorBooks(book.authorId).subscribe();
+          this.chaptersFacade.getAllChapters(book.id).subscribe(chapters => {
+            this.bookChapter = chapters
+          })
         })
       )),
     ).subscribe(book => this.book$ = book)
@@ -64,6 +68,14 @@ export class DetailPage implements OnInit, OnDestroy {
         console.log('all chapters res: ', res);
         this.cd.detectChanges();
       });
+  }
+
+  OnChangeFirstChapter() {
+    this.router.navigate(['/books', this.bookId, 'chapters', this.bookChapter[0].id])
+  }
+
+  OnChangeLastChapter() {
+    this.router.navigate(['/books', this.bookId, 'chapters', this.bookChapter[this.bookChapter.length - 1].id])
   }
 
   ngOnDestroy(): void {
