@@ -32,12 +32,14 @@ dependencies:
   body-parser: 1.19.0
   commitlint: 12.0.1
   cors: 2.8.5
+  cron: 1.8.2
   express: 4.17.1
   firebase-admin: 9.5.0
   graphql: 15.5.0
   ng-image-slider: 2.6.4_b0550eba7aa0167d56798f794764a5df
   ngx-owl-carousel-o: 5.0.0_2659a02cbfe2691f14a09a95419ad827
   ngx-quill: 13.2.0_159876f472a378b874ada8bf0033d6ae
+  pg: 8.5.1
   postgraphile: 4.11.0
   postgraphile-plugin-connection-filter: 2.1.1
   quill: 1.3.7
@@ -77,9 +79,11 @@ devDependencies:
   '@storybook/addon-actions': 6.1.21
   '@storybook/addon-knobs': 6.1.21
   '@storybook/angular': 6.1.21_69069fd902ed50027e84c02bc1b6bb17
+  '@types/cron': 1.7.2
   '@types/express': 4.17.11
   '@types/jest': 26.0.21
   '@types/node': 14.14.35
+  '@types/pg': 7.14.11
   '@types/sharp': 0.27.1
   '@types/webpack': 4.41.26
   '@typescript-eslint/eslint-plugin': 4.19.0_d7037e83e1317c9a8388794edef4baaa
@@ -6014,6 +6018,13 @@ packages:
     dev: true
     resolution:
       integrity: sha512-ePPA/JuI+X0vb+gSWlPKOY0NdNAie/rPUqX2GUPpbZwiKTkSPhjXWuee47E4MtE54QVzGCQMQkAL6JhV2E1+cQ==
+  /@types/cron/1.7.2:
+    dependencies:
+      '@types/node': 14.14.37
+      moment: 2.29.1
+    dev: true
+    resolution:
+      integrity: sha512-AEpNLRcsVSc5AdseJKNHpz0d4e8+ow+abTaC0fKDbAU86rF1evoFF0oC2fV9FdqtfVXkG2LKshpLTJCFOpyvTg==
   /@types/duplexify/3.6.0:
     dependencies:
       '@types/node': 14.14.35
@@ -6159,6 +6170,9 @@ packages:
     dev: true
     resolution:
       integrity: sha512-Lt+wj8NVPx0zUmUwumiVXapmaLUcAk3yPuHCFVXras9k5VT9TdhJqKqGVUQCD60OTMCl0qxJ57OiTL0Mic3Iag==
+  /@types/node/14.14.37:
+    resolution:
+      integrity: sha512-XYmBiy+ohOR4Lh5jE379fV2IU+6Jn4g5qASinhitfyO71b/sCo6MKsMLF5tc7Zf2CE8hViVQyYSobJNke8OvUw==
   /@types/normalize-package-data/2.4.0:
     resolution:
       integrity: sha512-f5j5b/Gf71L+dbqxIpQ4Z2WlmI/mPJ0fOkGGmFgtb6sAu97EPczzbS3/tJKxmcYDj55OX6ssqwDAWOHIYDRDGA==
@@ -6175,10 +6189,9 @@ packages:
       integrity: sha512-//oorEZjL6sbPcKUaCdIGlIUeH26mgzimjBB77G6XRgnDl/L5wOnpyBGRe/Mmf5CVW3PwEBE1NjiMZ/ssFh4wA==
   /@types/pg/7.14.11:
     dependencies:
-      '@types/node': 14.14.34
+      '@types/node': 14.14.37
       pg-protocol: 1.4.0
       pg-types: 2.2.0
-    dev: false
     resolution:
       integrity: sha512-EnZkZ1OMw9DvNfQkn2MTJrwKmhJYDEs5ujWrPfvseWNoI95N8B4HzU/Ltrq5ZfYxDX/Zg8mTzwr6UAyTjjFvXA==
   /@types/prettier/2.2.2:
@@ -9447,6 +9460,12 @@ packages:
     dev: true
     resolution:
       integrity: sha512-qUF2SaAWFYjNPdCcPpu68p2DnHiosia84yx5mPTlUMQjkjChR+n6sO1/I7yn2U2qNDgSPTd2SoaTIDQcUL+EwQ==
+  /cron/1.8.2:
+    dependencies:
+      moment-timezone: 0.5.33
+    dev: false
+    resolution:
+      integrity: sha512-Gk2c4y6xKEO8FSAUTklqtfSr7oTq0CiPQeLBG5Fl0qoXpZyMcj1SG59YL+hqq04bu6/IuEA7lMkYDAplQNKkyg==
   /cross-env/5.2.1:
     dependencies:
       cross-spawn: 6.0.5
@@ -15544,8 +15563,13 @@ packages:
       node: '>=6'
     resolution:
       integrity: sha512-1lM+BMLGuDfsdwf3rsgBSrxJwAZHFIrQ8YR61xIqdHo0uNKI9M52wNpHSrliZATJp51On6JD0AfRxd4YGSU0lw==
+  /moment-timezone/0.5.33:
+    dependencies:
+      moment: 2.29.1
+    dev: false
+    resolution:
+      integrity: sha512-PTc2vcT8K9J5/9rDEPe5czSIKgLoGsH8UNpA4qZTVw0Vd/Uz19geE9abbIOQKaAQFcnQ3v5YEXrbSc5BpshH+w==
   /moment/2.29.1:
-    dev: true
     resolution:
       integrity: sha512-kHmoybcPV8Sqy59DwNDY3Jefr64lK/by/da0ViFcuA4DH0vQg5Q6Ze5VimxkfQNSC+Mls/Kx53s7TjP1RhFEDQ==
   /morgan/1.10.0:
@@ -16786,7 +16810,6 @@ packages:
     resolution:
       integrity: sha512-3iBXuv7XKvxeMrIgym7njT+HlZkwZqqGX4Bu9cci8xHZNT+Um1gWKqCsAzcC0d95rcKMU5WBg6YRUcHyV0HZKQ==
   /pg-int8/1.0.1:
-    dev: false
     engines:
       node: '>=4.0.0'
     resolution:
@@ -16800,7 +16823,6 @@ packages:
     resolution:
       integrity: sha512-ORJoFxAlmmros8igi608iVEbQNNZlp89diFVx6yV5v+ehmpMY9sK6QgpmgoXbmkNaBAx8cOOZh9g80kJv1ooyA==
   /pg-protocol/1.4.0:
-    dev: false
     resolution:
       integrity: sha512-El+aXWcwG/8wuFICMQjM5ZSAm6OWiJicFdNYo+VY3QP+8vI4SvLIWVe51PppTzMhikUJR+PsyIFKqfdXPz/yxA==
   /pg-sql2/4.11.0_pg@8.5.1:
@@ -16824,7 +16846,6 @@ packages:
       postgres-bytea: 1.0.0
       postgres-date: 1.0.7
       postgres-interval: 1.2.0
-    dev: false
     engines:
       node: '>=4'
     resolution:
@@ -17598,19 +17619,16 @@ packages:
     resolution:
       integrity: sha512-PyOzULrRjb4TMaw+odIeA/dqxW+Rr9tXFIuf6tj9Cy6Nq9Y474ZV/sHap5lH8eRLJx0BqxS73v/+8+ITFUDB1A==
   /postgres-array/2.0.0:
-    dev: false
     engines:
       node: '>=4'
     resolution:
       integrity: sha512-VpZrUqU5A69eQyW2c5CA1jtLecCsN2U/bD6VilrFDWq5+5UIEVO7nazS3TEcHf1zuPYO/sqGvUvW62g86RXZuA==
   /postgres-bytea/1.0.0:
-    dev: false
     engines:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-AntTPAqokOJtFy1Hz5zOzFIazTU=
   /postgres-date/1.0.7:
-    dev: false
     engines:
       node: '>=0.10.0'
     resolution:
@@ -17618,7 +17636,6 @@ packages:
   /postgres-interval/1.2.0:
     dependencies:
       xtend: 4.0.2
-    dev: false
     engines:
       node: '>=0.10.0'
     resolution:
@@ -22324,9 +22341,11 @@ specifiers:
   '@storybook/addon-actions': ^6.1.21
   '@storybook/addon-knobs': ^6.1.21
   '@storybook/angular': ^6.1.21
+  '@types/cron': ^1.7.2
   '@types/express': ^4.17.11
   '@types/jest': ^26.0.21
   '@types/node': ^14.14.35
+  '@types/pg': ^7.14.11
   '@types/sharp': ^0.27.1
   '@types/webpack': ^4.41.26
   '@typescript-eslint/eslint-plugin': ^4.19.0
@@ -22337,6 +22356,7 @@ specifiers:
   body-parser: ^1.19.0
   commitlint: ^12.0.1
   cors: ^2.8.5
+  cron: ^1.8.2
   cypress: ^6.8.0
   eslint: ^7.22.0
   eslint-config-prettier: ^8.1.0
@@ -22354,6 +22374,7 @@ specifiers:
   ng-image-slider: ^2.6.4
   ngx-owl-carousel-o: ^5.0.0
   ngx-quill: ^13.2.0
+  pg: ^8.5.1
   pluralize: ^8.0.0
   postcss: ^8.2.8
   postcss-import: ^14.0.0
