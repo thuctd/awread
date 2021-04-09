@@ -4,7 +4,7 @@
   </div>
   <div class="grid grid-cols-12 gap-2 mt-8 relative">
     <div class="bg-white shadow-md py-4 absolute top-16 rounded-sm z-40 w-full">
-      <molec-search-form [genres]='genres'></molec-search-form>
+      <molec-search-form (filterBooksEvent)='filterBooksEvent.emit()' [filters]='filtersForm' [genres]='genres'></molec-search-form>
     </div>
     <div class="absolute top-0 right-0">
       <div class="inline-flex">

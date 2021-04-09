@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { faList, faThLarge } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -15,6 +16,11 @@ import { faList, faThLarge } from '@fortawesome/free-solid-svg-icons';
 })
 export class ListTemplate implements OnInit {
   display = 'grid';
+  @Input() filtersForm: FormGroup = this.fb.group({
+    genre: [''],
+    status: [''],
+    publishedat: ['']
+  });
   @Input() books = [];
   @Input() categoryBooks = [];
   @Input() genres = [];
@@ -39,7 +45,8 @@ export class ListTemplate implements OnInit {
   @Output() switchTabEvent = new EventEmitter();
   @Output() eventSearch = new EventEmitter();
   @Output() changeCategoryBooks = new EventEmitter();
-  constructor() { }
+  @Output() filterBooksEvent = new EventEmitter();
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void { }
 

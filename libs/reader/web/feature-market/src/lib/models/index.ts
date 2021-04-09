@@ -14,3 +14,4 @@ export * from './chapter.model';
 export * from './category.model';
 export * from './author.model';
 export * from './book.model';
+export * from './filter.model';

@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter, Input } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'molec-search-form',
@@ -14,12 +14,9 @@ import { FormControl, FormGroup } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchFormMolec implements OnInit {
-  filters: FormGroup;
-  @Input() valueGenre = new FormControl('');
-  @Input() valueStatus = new FormControl('');
-  @Input() valuePublishedat = new FormControl('');
+  @Input() filters: FormGroup;
 
-  @Output() searchEvent = new EventEmitter();
+
   @Input() genres = [
     { id: '1', name: 'Lãng mạn' },
     { id: '2', name: 'Kiếm hiệp' },
@@ -44,21 +41,22 @@ export class SearchFormMolec implements OnInit {
     title: 'Năm phát hành',
     widthClass: 'xl:w-60 lg:w-48 md:w-40',
     options: [
-      { id: '1', name: '2000' },
-      { id: '2', name: '2001' },
-      { id: '3', name: '2002' },
-      { id: '4', name: '2003' },
-      { id: '5', name: '2004' },
+      { id: '2000', name: '2000' },
+      { id: '2001', name: '2001' },
+      { id: '2002', name: '2002' },
+      { id: '2003', name: '2003' },
+      { id: '2004', name: '2004' },
     ],
   };
+  @Output() filterBooksEvent = new EventEmitter();
 
-  constructor() { }
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    this.filters = new FormGroup({
-      genre: new FormControl(''),
-      status: new FormControl(''),
-      publishedat: new FormControl('')
+    this.filters = this.fb.group({
+      genre: [''],
+      status: [''],
+      publishedat: ['']
     });
   }
 }
