@@ -1,7 +1,8 @@
 import { Component, OnInit, ChangeDetectionStrategy, Output, Input, EventEmitter, HostListener, ViewChild, ElementRef } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { faSearch, faTimes } from '@fortawesome/free-solid-svg-icons';
-
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 @Component({
   selector: 'atom-search-btn',
   templateUrl: './search-btn.atom.html',
@@ -10,6 +11,9 @@ import { faSearch, faTimes } from '@fortawesome/free-solid-svg-icons';
       :host {
         display: block;
       }
+      ::ng-deep .fontNunito {
+        font-family: 'Nunito regular', sans-serif !important;
+      }
     `,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -17,13 +21,28 @@ import { faSearch, faTimes } from '@fortawesome/free-solid-svg-icons';
 export class SearchBtnAtom implements OnInit {
   icons = { faSearch, faTimes };
   isDisplay = false;
+  isDisplayAutoComplete: true | false = false;
   @Output() eventSearch = new EventEmitter();
   @Input() color = 'text-white';
   @ViewChild('search') searchElement: ElementRef;
   @Input() inputControl: FormControl = new FormControl('');
   constructor() {}
 
-  ngOnInit(): void {}
+  options: string[] = ['Tôi lạc quan', 'giữa đám đông', 'Nhưng khi một mình thì lại không'];
+  filteredOptions: Observable<string[]>;
+
+  ngOnInit() {
+    this.filteredOptions = this.inputControl.valueChanges.pipe(
+      startWith(''),
+      map((value) => this.filter(value))
+    );
+  }
+
+  private filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.options.filter((option) => option.toLowerCase().indexOf(filterValue) === 0);
+  }
 
   toggleDisplay() {
     this.isDisplay = !this.isDisplay;
