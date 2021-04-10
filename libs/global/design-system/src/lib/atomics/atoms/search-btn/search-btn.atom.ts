@@ -11,6 +11,9 @@ import { map, startWith } from 'rxjs/operators';
       :host {
         display: block;
       }
+      ::ng-deep .fontNunito {
+        font-family: 'Nunito regular', sans-serif !important;
+      }
     `,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
