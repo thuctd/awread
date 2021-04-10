@@ -1,12 +1,12 @@
 <div class="mx-auto px-4">
   <ng-container *ngIf="items.length; else noData">
-    <div class="text-base font-medium border-b pb-3 text-gray-text">{{title}}</div>
-    <div class="text-sm ml-4 py-2 text-gray-text">{{items.length}} Tác phẩm</div>
+    <div class="text-base border-b pb-3 text-gray-text font-bold">{{title}}</div>
+    <div class="text-sm ml-4 py-2 text-gray-text font-semibold">{{items.length}} Tác phẩm</div>
     <div *ngFor="let item of items" class="py-2">
       <molec-rd-author-book-item [book]="item.name" [category]="item.category"></molec-rd-author-book-item>
     </div>
   </ng-container>
   <ng-template #noData>
-    <div class="flex justify-center items-center text-xs text-gray-text">Không tìm thấy kết quả, Hãy thử một lựa chọn khác...</div>
+    <div class="flex justify-center items-center text-xs text-gray-text font-bold">Không tìm thấy kết quả, Hãy thử một lựa chọn khác...</div>
   </ng-template>
 </div>

@@ -1,4 +1,4 @@
-<select [formControl]="inputControl" [ngClass]="widthClass" class="rounded border border-solid border-gray-400 focus:outline-none text-xs px-2 py-1 text-gray-700">
+<select [formControl]="inputControl" [ngClass]="widthClass" class="rounded border border-solid border-gray-400 focus:outline-none text-xs px-2 py-1 text-gray-700 ">
   <option value="" selected disabled hidden>{{ titleSellect }}</option>
-  <option class="text" *ngFor="let option of options; let i = index" [value]="options[i].id">{{options[i].name}}</option>
+  <option class="text roboto" *ngFor="let option of options; let i = index" [value]="options[i].id">{{options[i].name}}</option>
 </select>

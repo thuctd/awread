@@ -1,8 +1,8 @@
 <atom-label-underline class="mb-6" [title]="'Đánh giá'"></atom-label-underline>
 <organ-detail-book-review-form></organ-detail-book-review-form>
 <div class="reviews-list">
-    <div class="text-base sm:text-lg font-medium my-5 text-gray-text">{{reviews.length}} Đánh giá</div>
-    <molec-review-item *ngFor="let item of reviews" [review]="item" class="mb-4"></molec-review-item>
+    <div class="text-base sm:text-lg font-bold my-5 text-gray-text">{{reviews.length}} Đánh giá</div>
+    <molec-review-item *ngFor="let item of reviews" [review]="item" class="mb-4 roboto"></molec-review-item>
 </div>
 <div class="flex justify-center sm:justify-end">
     <pagination></pagination>

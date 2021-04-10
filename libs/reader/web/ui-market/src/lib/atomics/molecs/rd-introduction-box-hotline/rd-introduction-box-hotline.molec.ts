@@ -5,12 +5,8 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   templateUrl: './rd-introduction-box-hotline.molec.html',
   styles: [
     `
-      @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@600&display=swap');
       :host {
         display: block;
-      }
-      :host div {
-        font-family: 'Nunito', sans-serif;
       }
     `,
   ],
