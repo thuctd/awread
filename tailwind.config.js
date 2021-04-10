@@ -14,7 +14,21 @@ module.exports = {
       },
       colors: {
         gray: {
-          greenish: "#4B4B4B",
+          text: "#4B4B4B",
+          line: "#707070",
+          icon: "#A3A3A3",
+          primary: "#F2F2F2",
+          light: "#BFBFBF",
+        },
+        green: {
+          primary: "#5ABD8C",
+          dark: "rgba(90, 189, 140, 0.411765)",
+        },
+        pink: {
+          light: "#F6E5E5",
+        },
+        blue: {
+          primary: "#4267B2"
         }
       }
     },
