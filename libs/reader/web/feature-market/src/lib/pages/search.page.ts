@@ -31,7 +31,7 @@ export class SearchPage implements OnInit {
   syncUrlSearchText() {
     this.activatedRoute.queryParams.subscribe((params) => {
       const searchTerm: string = params['search'];
-      this.searchControl.setValue(searchTerm);
+      this.searchControl.setValue(searchTerm ?? '');
     });
   }
 

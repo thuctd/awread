@@ -18,7 +18,13 @@ import { FormControl } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NavbarReaderTemplate implements OnInit {
-  @Input() control = new FormControl();
+  @Input() items = [
+    {
+      id: '1',
+      title: 'Tôi lạc quan'
+    }
+  ];
+  @Input() searchControl = new FormControl();
   @Output() eventSearch = new EventEmitter();
   @Input() isLogin = false;
   constructor() { }

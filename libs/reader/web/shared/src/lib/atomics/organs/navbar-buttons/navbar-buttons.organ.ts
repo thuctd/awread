@@ -16,6 +16,12 @@ import { Router } from '@angular/router';
 })
 export class NavbarButtonsOrgan implements OnInit {
   @Input() isLogin = false;
+  @Input() items = [
+    {
+      id: '1',
+      title: 'Tôi lạc quan'
+    }
+  ];
   @Input() searchControl = new FormControl();
   @Output() eventSearch = new EventEmitter();
   constructor() { }

@@ -14,6 +14,12 @@ import { FormControl } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NavbarDesktopOrgan implements OnInit {
+  @Input() items = [
+    {
+      id: '1',
+      title: 'Tôi lạc quan'
+    }
+  ];
   @Input() searchControl = new FormControl();
   @Output() eventSearch = new EventEmitter();
   @Input() isLogin = false;

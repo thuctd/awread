@@ -6,16 +6,7 @@ import { map, startWith } from 'rxjs/operators';
 @Component({
   selector: 'atom-search-btn',
   templateUrl: './search-btn.atom.html',
-  styles: [
-    `
-      :host {
-        display: block;
-      }
-      ::ng-deep .fontNunito {
-        font-family: 'Nunito regular', sans-serif !important;
-      }
-    `,
-  ],
+  styleUrls: ['./search-btn.atom.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchBtnAtom implements OnInit {
@@ -28,21 +19,15 @@ export class SearchBtnAtom implements OnInit {
   @Input() inputControl: FormControl = new FormControl('');
   constructor() { }
 
-  options: string[] = ['Tôi lạc quan', 'giữa đám đông', 'Nhưng khi một mình thì lại không'];
+  @Input() options = [{
+    id: '1',
+    title: 'Tôi lạc quan'
+  }];
+
   filteredOptions: Observable<string[]>;
 
   ngOnInit() {
     this.inputControl = this.inputControl ?? new FormControl("");
-    this.filteredOptions = this.inputControl.valueChanges.pipe(
-      startWith(''),
-      map((value) => this.filter(value))
-    );
-  }
-
-  private filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-
-    return this.options.filter((option) => option.toLowerCase().indexOf(filterValue) === 0);
   }
 
   toggleDisplay() {
