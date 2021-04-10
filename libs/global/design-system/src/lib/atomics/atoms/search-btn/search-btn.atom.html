@@ -6,7 +6,7 @@
   <div (keyup.enter)="eventSearch.emit()" (keyup.enter)="toggleDisplay()" class="search-a w-full relative pt-5 max-w-screen-md xl:max-w-screen-lg mx-auto">
     <div class="form-field form-field--icon form-field--email mb-5">
       <div class="w-full relative">
-        <input #search [formControl]="inputControl" placeholder="Tìm kiếm tên truyện, tác giả, thể loại truyện"
+        <input #search [formControl]="inputControl" [matAutocomplete]="auto" placeholder="Tìm kiếm tên truyện, tác giả, thể loại truyện" autocomplete="off"
           class="appearance-none border border-green-400 md:text-xs lg:text-sm xl:text-sm rounded-full w-full py-3 sm:py-2 pl-12 text-gray-500 text-sm leading-tight focus:outline-none shadow_input nunito"
           id="inline-full-name" id="inline-password">
         <span class="absolute left-0 top-0 bottom-0 flex items-center ml-4 text-green-primary">
@@ -14,8 +14,22 @@
         </span>
       </div>
     </div>
+    <mat-autocomplete #auto="matAutocomplete" class="absolute bg-white rounded-xl shadow-xl px-12 py-4">
+      <div class="ml-4 mb-2 text-gray-400 roboto">Tìm kiếm phổ biến</div>
+      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+        <div class="flex transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-100 py-1">
+          <img class="h-5 mr-4" src="/global-assets/images/ic_class_24px.webp" alt="">
+          <div class="text-base text-gray-text fontNunito">{{option}}</div>
+        </div>
+      </mat-option>
+      <div class="text-gray-300 text-xs">nhấn Enter để hiển thị tất cả kết quả tìm kiếm</div>
+    </mat-autocomplete>
     <a (click)="toggleDisplay()" class="close-btn cursor-pointer flex items-center flex-no-wrap absolute inset-y-0 right-3">
       <fa-icon [icon]="icons.faTimes" class="text-gray-600 text-base"></fa-icon>
     </a>
   </div>
 </div>
+
+
+
+
