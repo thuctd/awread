@@ -16,10 +16,12 @@ import { faList, faThLarge } from '@fortawesome/free-solid-svg-icons';
 })
 export class ListTemplate implements OnInit {
   display = 'grid';
+  filterbook = false;
   @Input() filtersForm: FormGroup = this.fb.group({
+    category: [''],
     genre: [''],
     status: [''],
-    publishedat: ['']
+    publishedAt: ['']
   });
   @Input() books = [];
   @Input() categoryBooks = [];
@@ -52,5 +54,9 @@ export class ListTemplate implements OnInit {
 
   changeDisplay(mode: string) {
     this.display = mode;
+  }
+
+  changeDisplayFilter() {
+    this.filterbook = !this.filterbook;
   }
 }

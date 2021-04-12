@@ -54,9 +54,10 @@ export class SearchFormMolec implements OnInit {
 
   ngOnInit(): void {
     this.filters = this.fb.group({
+      category: [''],
       genre: [''],
       status: [''],
-      publishedat: ['']
+      publishedAt: ['']
     });
   }
 }

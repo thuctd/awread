@@ -31,7 +31,7 @@ export class NavbarMenuOrgan implements OnInit {
           },
           {
             page: '/composed',
-            type: 'novel',
+            type: 'prose',
             title: 'Tản văn',
           },
         ],
@@ -51,7 +51,7 @@ export class NavbarMenuOrgan implements OnInit {
           },
           {
             page: '/collected',
-            type: 'novel',
+            type: 'prose',
             title: 'Tản văn',
           },
         ],

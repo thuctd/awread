@@ -1,4 +1,4 @@
 <section>
-  <template-list [books]='topBookList$ | async' [isLoadedPage]="false" [tabsHead]="categoryList$ | async" [selectedTab]="selectedTab"
+  <template-list (filterBooksEvent)='filterBooks()' [filtersForm]='filtersForm' [books]='topBookList$ | async' [isLoadedPage]="false" [tabsHead]="categoryList$ | async" [selectedTab]="selectedTab"
     (switchTabEvent)="switchTab($event)" (changeCategoryBooks)='filterItemsByCategory($event)' [categoryBooks]='filteredBooks$ | async'></template-list>
 </section>

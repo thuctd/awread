@@ -5,9 +5,10 @@ import { Book } from '../../models';
 export interface BooksState extends EntityState<Book>, ActiveState {
   ui: {
     filters: {
+      category: string;
       genre: string;
       status: string;
-      publishedat: string;
+      publishedAt: string;
     }
   }
 };
@@ -15,9 +16,10 @@ export interface BooksState extends EntityState<Book>, ActiveState {
 const initialState = {
   ui: {
     filters: {
+      category: '',
       genre: '',
       status: '',
-      publishedat: ''
+      publishedAt: ''
     }
   }
 };

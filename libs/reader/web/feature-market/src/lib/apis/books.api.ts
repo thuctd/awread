@@ -48,7 +48,7 @@ export class BooksApi {
   }
 
   getAuthorBooks(authorId: string) {
-    return of(db.books.filter(book => book.authorId === authorId))
+    return of(db.books.filter(book => book.authorId === authorId).slice(0, 3))
       .pipe(delay(500));
   }
 

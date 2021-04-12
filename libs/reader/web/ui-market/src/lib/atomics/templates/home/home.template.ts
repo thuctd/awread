@@ -12,6 +12,14 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
       .h-104 {
         height: 26rem;
       }
+
+      .loading {
+        height: calc(100vh - 20rem);
+      }
+
+      .no-data {
+        height: calc(100vh - 20rem);
+      }
     `,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,

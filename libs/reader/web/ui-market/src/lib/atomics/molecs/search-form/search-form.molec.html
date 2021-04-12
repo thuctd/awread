@@ -1,9 +1,10 @@
 <form class="flex justify-center items-center px-2" [formGroup]="filters">
+  <input hidden [formControl]="filters.get('category')">
   <atom-select [options]='genres' [inputControl]="filters.get('genre')" [widthClass]='selectGenres.widthClass' [titleSellect]='selectGenres.title' class="px-4">
   </atom-select>
   <atom-select [options]='selectStatus.options' [inputControl]="filters.get('status')" [widthClass]='selectStatus.widthClass' [titleSellect]='selectStatus.title'
     class="px-4"></atom-select>
-  <atom-select [options]='selectPublishedat.options' [inputControl]="filters.get('publishedat')" [widthClass]='selectPublishedat.widthClass'
+  <atom-select [options]='selectPublishedat.options' [inputControl]="filters.get('publishedAt')" [widthClass]='selectPublishedat.widthClass'
     [titleSellect]='selectPublishedat.title' class="px-4"></atom-select>
   <div class="md:pl-0 xl:pl-5">
     <a (click)='filterBooksEvent.emit()'

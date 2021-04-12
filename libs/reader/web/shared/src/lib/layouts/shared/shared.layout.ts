@@ -39,6 +39,9 @@ export class SharedLayout implements OnInit {
   }
 
   navigateToSearch() {
+    if (!this.searchControl.value) {
+      return false;
+    }
     this.router.navigate(['/search'], { queryParams: { search: this.search$ } });
   }
 }

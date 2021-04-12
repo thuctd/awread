@@ -24,6 +24,7 @@ export class ComposedPage implements OnInit, OnDestroy {
   filteredBooks$;
 
   bookId: string;
+  categoryId: string;
   type: string;
 
   selectedTab = 'longbook';
@@ -41,16 +42,15 @@ export class ComposedPage implements OnInit, OnDestroy {
   }
 
   switchTab(type: string) {
-    if (type === 'prose') {
-      this.selectedTab = 'prose';
-      this.router.navigate(['/composed', { type: this.selectedTab }]);
-    } else if (type === 'shortbook') {
-      this.selectedTab = 'shortbook';
-      this.router.navigate(['/composed', { type: this.selectedTab }]);
-    } else {
-      this.selectedTab = 'longbook';
-      this.router.navigate(['/composed', { type: this.selectedTab }]);
-    }
+    this.categoryFacede.getDetailCategoryByType(type).subscribe(res => {
+      this.categoryId = res.id;
+      this.selectedTab = res.type;
+      this.filtersForm.get('category').setValue(this.categoryId);
+      if (!this.selectedTab) {
+        return this.router.navigate(['/']);
+      }
+      return this.router.navigate(['/composed', { type: this.selectedTab }]);
+    })
   }
 
   filterItemsByCategory(category: Category) {
@@ -67,18 +67,11 @@ export class ComposedPage implements OnInit, OnDestroy {
 
   private loadFirstByCategory() {
     const type = this.activatedRoute.snapshot.paramMap.get('type')
-    this.filteredBooks$ = this.bookList$.pipe(
-      map((items) =>
-        items.filter((item) => {
-          if (type === 'longbook') {
-            return item.category.includes(items[0].id);
-          } else if (type === 'shortbook') {
-            return item.category.includes(items[1].id);
-          } else {
-            return item.category.includes(items[2].id);
-          }
-        })
-      )
+    this.categoryFacede.getDetailCategoryByType(type).subscribe(
+      res => {
+        this.filteredBooks$ = this.booksFacade.getCategoryBooks(res.id);
+        this.cd.detectChanges();
+      }
     );
   }
 
@@ -92,9 +85,10 @@ export class ComposedPage implements OnInit, OnDestroy {
 
   private initForm() {
     this.filtersForm = this.fb.group({
+      category: [''],
       genre: [''],
       status: [''],
-      publishedat: ['']
+      publishedAt: ['']
     });
 
     this.persistForm = new PersistNgFormPlugin(

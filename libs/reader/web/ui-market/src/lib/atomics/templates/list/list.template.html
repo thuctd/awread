@@ -3,16 +3,19 @@
     <atom-title [title]="isLoadedPage ?'Truyện tự sưu tầm' : 'Truyện tự sáng tác'"></atom-title>
   </div>
   <div class="grid grid-cols-12 gap-2 mt-8 relative">
-    <div class="bg-white shadow-md py-4 absolute top-16 rounded-sm z-40 w-full">
+    <div [ngClass]="filterbook === false ? 'hidden pt-12' : ''" class="bg-white shadow-md py-4 absolute top-16 rounded-sm z-40 w-full">
       <molec-search-form (filterBooksEvent)='filterBooksEvent.emit()' [filters]='filtersForm' [genres]='genres'></molec-search-form>
     </div>
     <div class="absolute top-0 right-0">
       <div class="inline-flex">
         <div class="rounded-md text-sm leading-none border-gray-200 mt-1" *ngFor="let action of actions">
-          <atom-btn-icon class="{{action.class}}" [icon]="action.faIcon" [ngClass]="display === action.display ? 'bg-green-400 text-white': 'bg-white text-green-400'" (eventChangesDisplay)="changeDisplay(action.display)"></atom-btn-icon>
+          <atom-btn-icon class="{{action.class}}" [icon]="action.faIcon"
+            [ngClass]="display === action.display ? 'bg-green-400 text-white': 'bg-white text-green-400'" (eventChangesDisplay)="changeDisplay(action.display)">
+          </atom-btn-icon>
         </div>
         <div class="pl-8">
-          <atom-btn-rectangle [text]="'Lọc truyện'" [class]="'py-1.5 px-4 rounded-lg'" (clickBtn)="eventSearch.emit()"></atom-btn-rectangle>
+          <atom-btn-rectangle (click)='changeDisplayFilter()' [text]="'Lọc truyện'" [class]="'py-1.5 px-4 rounded-lg'" (clickBtn)="eventSearch.emit()">
+          </atom-btn-rectangle>
         </div>
       </div>
     </div>
@@ -20,17 +23,20 @@
       <div class="grid grid-cols-12 gap-2 lg:gap-4 xl:gap-6 border-b border-teal-400">
         <ng-container *ngFor="let tab of tabsHead">
           <div class="col-span-2 md:col-span-4" [ngClass]="selectedTab === tab.type ? 'border-b-2 border-green-400 text-green-400' : 'text-gray-400'">
-            <molec-tab-categories (changeCategoryBooks)='changeCategoryBooks.emit(tab)' (switchTabEvent)="switchTabEvent.emit(tab.type)" [tab]="tab"></molec-tab-categories>
+            <molec-tab-categories (changeCategoryBooks)='changeCategoryBooks.emit(tab)' (switchTabEvent)="switchTabEvent.emit(tab.type)" [tab]="tab">
+            </molec-tab-categories>
           </div>
         </ng-container>
       </div>
-      <list-detail-long-book [longbooks]='categoryBooks' [display]="display" *ngIf="selectedTab === 'longbook'"></list-detail-long-book>
-      <list-detail-short-book [shortbooks]='categoryBooks' [display]="display" *ngIf="selectedTab === 'shortbook'"></list-detail-short-book>
-      <list-detail-prose [prosebooks]='categoryBooks' [display]="display" *ngIf="selectedTab === 'prose'"></list-detail-prose>
+      <div [ngClass]="filterbook === false ? 'pt-12' : 'pt-28'">
+        <list-detail-long-book [longbooks]='categoryBooks' [display]="display" *ngIf="selectedTab === 'longbook'"></list-detail-long-book>
+        <list-detail-short-book [shortbooks]='categoryBooks' [display]="display" *ngIf="selectedTab === 'shortbook'"></list-detail-short-book>
+        <list-detail-prose [prosebooks]='categoryBooks' [display]="display" *ngIf="selectedTab === 'prose'"></list-detail-prose>
+      </div>
     </div>
     <div class="lg:hidden xl:block lg:col-span-1"></div>
     <div class="col-span-2 md:col-span-3">
-      <list-detail-top-book class="pt-32" [books]='books'></list-detail-top-book>
+      <list-detail-top-book [ngClass]="filterbook === false ? 'pt-12' : 'pt-32'" [books]='books'></list-detail-top-book>
     </div>
   </div>
 </section>

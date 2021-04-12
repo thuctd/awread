@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { HomeDesktopRoutingModule } from './home-desktop-routing.module';
 import { HomeDesktopPage } from './home-desktop.page';
 import { ReaderWebUiMarketAtomicModule } from '../../atomics/reader-web-ui-market-atomic.module';
+import { GlobalPackagesModule } from '@awread/global/packages';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { ReaderWebUiMarketAtomicModule } from '../../atomics/reader-web-ui-marke
   imports: [
     CommonModule,
     HomeDesktopRoutingModule,
-    ReaderWebUiMarketAtomicModule
+    ReaderWebUiMarketAtomicModule,
+    GlobalPackagesModule
   ]
 })
 export class HomeDesktopModule { }

@@ -1,9 +1,13 @@
+
+import { PersistNgFormPlugin } from '@datorama/akita';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ChangeDetectorRef, Directive, Injectable, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { map } from 'rxjs/operators';
 import { BooksFacade, CategoryFacade } from '../facades';
 import { Category } from '../models';
+import { BooksQuery } from '../states/books';
 
 @UntilDestroy()
 @Injectable({
@@ -11,6 +15,8 @@ import { Category } from '../models';
 })
 @Directive()
 export class CollectedPage implements OnInit, OnDestroy {
+  filtersForm: FormGroup;
+  persistForm: PersistNgFormPlugin;
   bookList$ = this.booksFacade.bookList$;
   categoryList$ = this.categoryFacede.categoryList$;
   topBookList$ = this.booksFacade.topBookList$;
@@ -18,6 +24,7 @@ export class CollectedPage implements OnInit, OnDestroy {
   filteredBooks$;
 
   bookId: string;
+  categoryId: string;
   type: string;
 
   selectedTab = 'longbook';
@@ -26,7 +33,9 @@ export class CollectedPage implements OnInit, OnDestroy {
     private cd: ChangeDetectorRef,
     private router: Router,
     private categoryFacede: CategoryFacade,
-    private booksFacade: BooksFacade
+    private booksFacade: BooksFacade,
+    private booksQuery: BooksQuery,
+    private fb: FormBuilder
   ) { }
   ngOnDestroy(): void { }
 
@@ -36,39 +45,40 @@ export class CollectedPage implements OnInit, OnDestroy {
     this.booksFacade.getTopBooks().subscribe();
     this.checkActiveTab();
     this.loadFirstByCategory();
+    this.initForm();
   }
 
-  switchTab(tabName: string) {
-    if (tabName === 'prose') {
-      this.selectedTab = 'prose';
-      this.router.navigate(['/collected', { type: this.selectedTab }]);
-    } else if (tabName === 'shortbook') {
-      this.selectedTab = 'shortbook';
-      this.router.navigate(['/collected', { type: this.selectedTab }]);
-    } else {
-      this.selectedTab = 'longbook';
-      this.router.navigate(['/collected', { type: this.selectedTab }]);
-    }
+  switchTab(type: string) {
+    this.categoryFacede.getDetailCategoryByType(type).subscribe(res => {
+      this.categoryId = res.id;
+      this.selectedTab = res.type;
+      this.filtersForm.get('category').setValue(this.categoryId);
+      if (!this.selectedTab) {
+        return this.router.navigate(['/']);
+      }
+      return this.router.navigate(['/collected', { type: this.selectedTab }]);
+    })
   }
 
   filterItemsByCategory(category: Category) {
     this.filteredBooks$ = this.booksFacade.getCategoryBooks(category.id);
   }
 
+  filterBooks() {
+    this.booksQuery.filtersChange$.pipe(
+      untilDestroyed(this)
+    ).subscribe(filters => {
+      console.log(filters);
+    });
+  }
+
   private loadFirstByCategory() {
     const type = this.activatedRoute.snapshot.paramMap.get('type');
-    this.filteredBooks$ = this.bookList$.pipe(
-      map((items) =>
-        items.filter((item) => {
-          if (type === 'longbook') {
-            return item.category.includes(items[0].id);
-          } else if (type === 'shortbook') {
-            return item.category.includes(items[1].id);
-          } else {
-            return item.category.includes(items[2].id);
-          }
-        })
-      )
+    this.categoryFacede.getDetailCategoryByType(type).subscribe(
+      res => {
+        this.filteredBooks$ = this.booksFacade.getCategoryBooks(res.id);
+        this.cd.detectChanges();
+      }
     );
   }
 
@@ -78,5 +88,19 @@ export class CollectedPage implements OnInit, OnDestroy {
       this.switchTab(this.type);
       this.cd.detectChanges();
     });
+  }
+
+  private initForm() {
+    this.filtersForm = this.fb.group({
+      category: [''],
+      genre: [''],
+      status: [''],
+      publishedAt: ['']
+    });
+
+    this.persistForm = new PersistNgFormPlugin(
+      this.booksQuery,
+      'ui.filters')
+      .setForm(this.filtersForm);
   }
 }

@@ -24,4 +24,8 @@ export class CategoryFacade {
     return this.categoryGear.getCategoryById(categoryId);
   }
 
+  getDetailCategoryByType(type: string) {
+    return this.categoryGear.getCategoryByType(type);
+  }
+
 }

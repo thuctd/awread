@@ -1,7 +1,7 @@
 export interface Filter {
   genre: string;
   status: string;
-  publishedat: string;
+  publishedAt: string;
 }
 
 export function Filter(params: Partial<Filter>) {
