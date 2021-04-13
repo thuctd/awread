@@ -58,6 +58,8 @@ export class DetailBookTemplate implements OnInit {
   ];
   @Output() chapterFistEvent = new EventEmitter();
   @Output() chapterLastEvent = new EventEmitter();
+  @Output() nativeTopBook = new EventEmitter();
+  @Output() nativeAuthorBook = new EventEmitter();
 
   constructor() { }
 

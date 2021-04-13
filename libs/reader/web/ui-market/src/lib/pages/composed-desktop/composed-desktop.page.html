@@ -1,4 +1,4 @@
 <section>
-  <template-list (filterBooksEvent)='filterBooks()' [filtersForm]='filtersForm' [genres]='genreList$ | async' [books]='topBookList$ | async' [isLoadedPage]="false" [tabsHead]="categoryList$ | async" [selectedTab]="selectedTab" (switchTabEvent)="switchTab($event)" (changeCategoryBooks)='filterItemsByCategory($event)' [categoryBooks]='filteredBooks$ | async'></template-list>
+  <template-list [titlePage]="'Truyện tự sáng tác'" (nativeTopBook)='nativeTopBook()' (nativeLongBook)='nativeLongBook()' (nativeShortBook)='nativeShortBook()' (nativeProse)='nativeProse()' (filterBooksEvent)='filterBooks()' [filtersForm]='filtersForm' [genres]='genreList$ | async' [books]='topBookList$ | async' [tabsHead]="categoryList$ | async" [selectedTab]="selectedTab" (switchTabEvent)="switchTab($event)" (changeCategoryBooks)='filterItemsByCategory($event)' [categoryBooks]='filteredBooks$ | async'></template-list>
 </section>
 <!-- <pre style="position: absolute; top: 10vh"> PAGE DEBUG: {{ selectedTab }} </pre> -->

@@ -1,2 +1,2 @@
-<list-detail-top-book [books]='authorBooks' [btnTitle]='"Cùng tác giả"' class="mb-8"></list-detail-top-book>
-<list-detail-top-book [books]='topBooks' [btnTitle]='"Top phổ biến"'></list-detail-top-book>
+<list-detail-top-book (moreEvent)='nativeAuthorBook.emit()' [books]='authorBooks' [btnTitle]='"Cùng tác giả"' class="mb-8"></list-detail-top-book>
+<list-detail-top-book (moreEvent)='nativeTopBook.emit()' [books]='topBooks' [btnTitle]='"Top phổ biến"'></list-detail-top-book>

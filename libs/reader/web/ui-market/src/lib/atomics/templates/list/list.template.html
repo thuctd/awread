@@ -1,6 +1,6 @@
 <section class="w-full max-w-screen-xl mx-auto px-6 xl:px-0 pt-36 relative">
   <div class="border-b border-gray-300">
-    <atom-title [title]="isLoadedPage ?'Truyện tự sưu tầm' : 'Truyện tự sáng tác'"></atom-title>
+    <atom-title [title]="titlePage"></atom-title>
   </div>
   <div class="grid grid-cols-12 gap-2 mt-8 relative">
     <div [ngClass]="filterbook === false ? 'hidden pt-12' : ''" class="bg-white shadow-md py-4 absolute top-16 rounded-sm z-40 w-full">
@@ -29,14 +29,14 @@
         </ng-container>
       </div>
       <div [ngClass]="filterbook === false ? 'pt-12' : 'pt-28'">
-        <list-detail-long-book [longbooks]='categoryBooks' [display]="display" *ngIf="selectedTab === 'longbook'"></list-detail-long-book>
-        <list-detail-short-book [shortbooks]='categoryBooks' [display]="display" *ngIf="selectedTab === 'shortbook'"></list-detail-short-book>
-        <list-detail-prose [prosebooks]='categoryBooks' [display]="display" *ngIf="selectedTab === 'prose'"></list-detail-prose>
+        <list-detail-long-book (moreEvent)='nativeLongBook.emit($event)' [longbooks]='categoryBooks' [display]="display" *ngIf="selectedTab === 'longbook'"></list-detail-long-book>
+        <list-detail-short-book (moreEvent)='nativeShortBook.emit($event)' [shortbooks]='categoryBooks' [display]="display" *ngIf="selectedTab === 'shortbook'"></list-detail-short-book>
+        <list-detail-prose (moreEvent)='nativeProse.emit($event)' [prosebooks]='categoryBooks' [display]="display" *ngIf="selectedTab === 'prose'"></list-detail-prose>
       </div>
     </div>
     <div class="lg:hidden xl:block lg:col-span-1"></div>
     <div class="col-span-2 md:col-span-3">
-      <list-detail-top-book [ngClass]="filterbook === false ? 'pt-12' : 'pt-32'" [books]='books'></list-detail-top-book>
+      <list-detail-top-book (moreEvent)='nativeTopBook.emit($event)'[ngClass]="filterbook === false ? 'pt-12' : 'pt-32'" [books]='books'></list-detail-top-book>
     </div>
   </div>
 </section>

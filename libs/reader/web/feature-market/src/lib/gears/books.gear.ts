@@ -40,6 +40,10 @@ export class BooksGear {
     );
   }
 
+  getFilterBooks(filters) {
+    return this.booksApi.getFilterBooks(filters);
+  }
+
   getGoodBooks() {
     return this.booksApi.getGoodBooks().pipe(
       tap((books) => {

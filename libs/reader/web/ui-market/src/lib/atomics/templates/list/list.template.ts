@@ -18,6 +18,7 @@ export class ListTemplate implements OnInit {
   display = 'grid';
   filterbook = false;
   @Input() filtersForm: FormGroup = this.fb.group({
+    typeBook: [''],
     category: [''],
     genre: [''],
     status: [''],
@@ -38,7 +39,8 @@ export class ListTemplate implements OnInit {
       class: 'rounded-r-md',
     },
   ];
-  @Input() isLoadedPage: true | false = true;
+
+  @Input() titlePage: string;
   @Input() tabsHead = [
     { name: 'Truyện dài', type: 'longbook', isActive: true },
   ];
@@ -48,6 +50,10 @@ export class ListTemplate implements OnInit {
   @Output() eventSearch = new EventEmitter();
   @Output() changeCategoryBooks = new EventEmitter();
   @Output() filterBooksEvent = new EventEmitter();
+  @Output() nativeProse = new EventEmitter();
+  @Output() nativeTopBook = new EventEmitter();
+  @Output() nativeLongBook = new EventEmitter();
+  @Output() nativeShortBook = new EventEmitter();
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void { }

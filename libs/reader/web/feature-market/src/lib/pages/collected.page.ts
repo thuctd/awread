@@ -4,8 +4,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ChangeDetectorRef, Directive, Injectable, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { map } from 'rxjs/operators';
-import { BooksFacade, CategoryFacade } from '../facades';
+import { map, tap } from 'rxjs/operators';
+import { BooksFacade, CategoryFacade, GenresFacade } from '../facades';
 import { Category } from '../models';
 import { BooksQuery } from '../states/books';
 
@@ -20,12 +20,14 @@ export class CollectedPage implements OnInit, OnDestroy {
   bookList$ = this.booksFacade.bookList$;
   categoryList$ = this.categoryFacede.categoryList$;
   topBookList$ = this.booksFacade.topBookList$;
+  genreList$ = this.genresFacade.genreList$;
   isLoading$ = this.booksFacade.selectLoadingAkita();
   filteredBooks$;
 
   bookId: string;
   categoryId: string;
   type: string;
+  typeBook: string;
 
   selectedTab = 'longbook';
   constructor(
@@ -35,17 +37,23 @@ export class CollectedPage implements OnInit, OnDestroy {
     private categoryFacede: CategoryFacade,
     private booksFacade: BooksFacade,
     private booksQuery: BooksQuery,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private genresFacade: GenresFacade
   ) { }
   ngOnDestroy(): void { }
 
   ngOnInit(): void {
+    this.activatedRoute.data.subscribe(data =>
+      this.typeBook = data.title
+    );
     this.categoryFacede.getAllCategories().subscribe();
     this.booksFacade.getAllBooks().subscribe();
     this.booksFacade.getTopBooks().subscribe();
+    this.genresFacade.getAllGenres().subscribe();
     this.checkActiveTab();
     this.loadFirstByCategory();
     this.initForm();
+    this.updateForm();
   }
 
   switchTab(type: string) {
@@ -65,11 +73,28 @@ export class CollectedPage implements OnInit, OnDestroy {
   }
 
   filterBooks() {
-    this.booksQuery.filtersChange$.pipe(
-      untilDestroyed(this)
-    ).subscribe(filters => {
-      console.log(filters);
-    });
+    this.filteredBooks$ = this.booksFacade.getFilterBooks()
+      .pipe(
+        tap(results => {
+          console.log('results', results);
+        })
+      );
+  }
+
+  nativeShortBook() {
+    this.router.navigate(['/short-story'])
+  }
+
+  nativeLongBook() {
+    this.router.navigate(['/long-story'])
+  }
+
+  nativeTopBook() {
+    this.router.navigate(['/top-book'])
+  }
+
+  nativeProse() {
+    this.router.navigate(['/novel'])
   }
 
   private loadFirstByCategory() {
@@ -90,8 +115,15 @@ export class CollectedPage implements OnInit, OnDestroy {
     });
   }
 
+  private updateForm() {
+    this.filtersForm.patchValue({
+      typeBook: this.typeBook
+    });
+  }
+
   private initForm() {
     this.filtersForm = this.fb.group({
+      typeBook: [''],
       category: [''],
       genre: [''],
       status: [''],

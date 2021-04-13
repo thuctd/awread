@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Directive, OnInit, OnDestroy } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Category } from '../models';
-import { map } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { BooksFacade, CategoryFacade, GenresFacade } from '../facades';
 import { BooksQuery } from '../states/books';
 import { PersistNgFormPlugin } from '@datorama/akita';
@@ -26,12 +26,16 @@ export class ComposedPage implements OnInit, OnDestroy {
   bookId: string;
   categoryId: string;
   type: string;
+  typeBook: string;
 
   selectedTab = 'longbook';
   constructor(private fb: FormBuilder, private activatedRoute: ActivatedRoute, private cd: ChangeDetectorRef, private router: Router, private categoryFacede: CategoryFacade, private booksFacade: BooksFacade, private booksQuery: BooksQuery, private genresFacade: GenresFacade) { }
   ngOnDestroy(): void { }
 
   ngOnInit(): void {
+    this.activatedRoute.data.subscribe(data =>
+      this.typeBook = data.title
+    );
     this.categoryFacede.getAllCategories().subscribe();
     this.booksFacade.getAllBooks().subscribe();
     this.booksFacade.getTopBooks().subscribe();
@@ -39,6 +43,7 @@ export class ComposedPage implements OnInit, OnDestroy {
     this.checkActiveTab();
     this.loadFirstByCategory();
     this.initForm();
+    this.updateForm();
   }
 
   switchTab(type: string) {
@@ -58,11 +63,28 @@ export class ComposedPage implements OnInit, OnDestroy {
   }
 
   filterBooks() {
-    this.booksQuery.filtersChange$.pipe(
-      untilDestroyed(this)
-    ).subscribe(filters => {
-      console.log(filters);
-    });
+    this.filteredBooks$ = this.booksFacade.getFilterBooks()
+      .pipe(
+        tap(results => {
+          console.log('results', results);
+        })
+      );
+  }
+
+  nativeShortBook() {
+    this.router.navigate(['/short-story'])
+  }
+
+  nativeLongBook() {
+    this.router.navigate(['/long-story'])
+  }
+
+  nativeTopBook() {
+    this.router.navigate(['/top-book'])
+  }
+
+  nativeProse() {
+    this.router.navigate(['/novel'])
   }
 
   private loadFirstByCategory() {
@@ -83,8 +105,15 @@ export class ComposedPage implements OnInit, OnDestroy {
     });
   }
 
+  private updateForm() {
+    this.filtersForm.patchValue({
+      typeBook: this.typeBook
+    });
+  }
+
   private initForm() {
     this.filtersForm = this.fb.group({
+      typeBook: [''],
       category: [''],
       genre: [''],
       status: [''],

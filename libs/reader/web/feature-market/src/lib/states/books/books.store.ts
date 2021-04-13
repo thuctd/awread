@@ -5,6 +5,7 @@ import { Book } from '../../models';
 export interface BooksState extends EntityState<Book>, ActiveState {
   ui: {
     filters: {
+      typeBook: string;
       category: string;
       genre: string;
       status: string;
@@ -16,6 +17,7 @@ export interface BooksState extends EntityState<Book>, ActiveState {
 const initialState = {
   ui: {
     filters: {
+      typeBook: '',
       category: '',
       genre: '',
       status: '',

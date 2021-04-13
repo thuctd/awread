@@ -10,7 +10,11 @@ export class BooksApi {
     private apollo: Apollo,
   ) { }
 
-  get() { }
+  getFilterBooks(filters) {
+    console.log('api filters', filters);
+    return of(db.books)
+      .pipe(delay(500));
+  }
 
   searchBookByTerm(term: string) {
     return of(db.books.filter(book => book.title.toLowerCase().includes(term.toLowerCase())))

@@ -15,12 +15,13 @@ import { UntilDestroy } from '@ngneat/until-destroy';
 export class DetailPage implements OnInit, OnDestroy {
   book$;
   bookId: string;
+  authorId: string;
   destroy$ = new Subject();
   isLoading$ = this.booksFacade.selectLoadingAkita();
   topBookList$ = this.booksFacade.topBookList$;
   authorBookList$ = this.booksFacade.authorBookList$;
   chapterListByBookId$ = this.chaptersFacade.chapterListByBookId$;
-  bookChapter: Chapter[]
+  bookChapter: Chapter[];
 
   constructor(
     private router: Router,
@@ -36,6 +37,7 @@ export class DetailPage implements OnInit, OnDestroy {
       map(params => params.get('bookId')),
       switchMap(id => this.booksFacade.getDetailBook(id).pipe(
         tap(book => {
+          this.authorId = book.authorId;
           this.booksFacade.getAuthorBooks(book.authorId).subscribe();
           this.chaptersFacade.getAllChapters(book.id).subscribe(chapters => {
             this.bookChapter = chapters
@@ -76,6 +78,14 @@ export class DetailPage implements OnInit, OnDestroy {
 
   OnChangeLastChapter() {
     this.router.navigate(['/books', this.bookId, 'chapters', this.bookChapter[this.bookChapter.length - 1].id])
+  }
+
+  nativeBooksAuthor() {
+    this.router.navigate(['/author', this.authorId]);
+  }
+
+  nativeTopBook() {
+    this.router.navigate(['/top-book']);
   }
 
   ngOnDestroy(): void {

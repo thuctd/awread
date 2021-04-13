@@ -35,6 +35,10 @@ export class BooksFacade {
     private categoryBooksQuery: CategoryBooksQuery
   ) { }
 
+  getFilterBooks() {
+    return this.booksGear.getFilterBooks(this.booksQuery.getCurrentFilter());
+  }
+
   searchBookApi(term: string) {
     if (term === '') {
       return this.booksGear.getAllBooks();

@@ -17,4 +17,8 @@ export class BooksQuery extends QueryEntity<BooksState> {
   getBookById(id: string) {
     return this.getEntity(id);
   }
+
+  getCurrentFilter() {
+    return this.getValue().ui.filters;
+  }
 }
