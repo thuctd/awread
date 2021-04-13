@@ -168,6 +168,8 @@ async function startCronJob() {
 }
 
 async function postgresRefeshMV() {
-  const mv = await pool.query(`REFRESH MATERIALIZED VIEW daily_book_view_counts_mv;`);
-  const mv1 = await pool.query(`REFRESH MATERIALIZED VIEW hourly_book_update_mv;`);
+  await pool.query(`REFRESH MATERIALIZED VIEW most_views_books_hour_mv;`);
+  await pool.query(`REFRESH MATERIALIZED VIEW most_views_books_day_mv;`);
+  await pool.query(`REFRESH MATERIALIZED VIEW newest_books_hour_mv;`);
+  await pool.query(`REFRESH MATERIALIZED VIEW newest_books_day_mv;`);
 }
