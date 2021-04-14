@@ -1,0 +1,11 @@
+<div class="relative w-full">
+  <div closeOnOutSide (clickedOutside)="onClick()" (click)="displayDropdwon($event)" class="bg-gray-light flex rounded py-0.5 px-6 text-gray-text items-center shadow z-20 relative">
+    <div class="text-sm pr-3">{{title}}</div>
+    <fa-icon class="mt-0.5" [icon]="faIcon"></fa-icon>
+  </div>
+  <div *ngIf="isDropdown" class="z-10 bg-gray py-1 absolute top-7 rounded-sm w-full">
+    <div *ngFor="let item of items" class="text-sm text-gray-text py-1 pl-4 border-b border-gray-200" (click)="getValueDropdown($event)">
+      {{item.name}}
+    </div>
+  </div>
+</div>

@@ -75,6 +75,7 @@ import { RdIntroductionTargetItemGridMolec } from './molecs/rd-introduction-targ
 import { RdIntroductionTargetOrgan } from './organs/rd-introduction-target/rd-introduction-target.organ';
 import { RdHomeBookUpdateTabMolec } from './molecs/rd-home-book-update-tab/rd-home-book-update-tab.molec';
 import { RdHomeListBookUpdateMolec } from './molecs/rd-home-list-book-update/rd-home-list-book-update.molec';
+import { RdHomeBookUpdateDropdownMbMolec } from './molecs/rd-home-book-update-dropdown-mb/rd-home-book-update-dropdown-mb.molec';
 
 @NgModule({
   imports: [CommonModule, StorybookSupportModule, GlobalDesignSystemAtomicModule, CarouselModule, ReaderWebUiAuthorAtomicModule],
@@ -153,6 +154,7 @@ import { RdHomeListBookUpdateMolec } from './molecs/rd-home-list-book-update/rd-
     RdIntroductionTargetOrgan,
     RdHomeBookUpdateTabMolec,
     RdHomeListBookUpdateMolec,
+    RdHomeBookUpdateDropdownMbMolec,
   ],
   declarations: [
     ListInfoLongBookMolec,
@@ -226,6 +228,7 @@ import { RdHomeListBookUpdateMolec } from './molecs/rd-home-list-book-update/rd-
     RdIntroductionTargetOrgan,
     RdHomeBookUpdateTabMolec,
     RdHomeListBookUpdateMolec,
+    RdHomeBookUpdateDropdownMbMolec,
   ],
 })
 export class ReaderWebUiMarketAtomicModule {}
