@@ -23,3 +23,7 @@ password: 41d4955151312a9a900dc2f3681953c1
 -d: database name
 -p: port name
 -h: host name
+
+# show dokku info:
+
+dokku postgres:info awread_app
