@@ -1,14 +1,14 @@
-<div class="w-full text-gray-800">
+<div class="w-full text-gray-text">
     <div class="flex leading-normal py-2">
         <atom-circle-image [src]="src"></atom-circle-image>
         <div class="pl-3 flex-auto">
-            <div class="text-sm font-medium mb-1">{{review.userName}}</div>
+            <div class="text-sm font-medium mb-1 text-gray-text">{{review.userName}}</div>
             <dl class="mb-1">
                 <dd class="flex items-center mb-1">
                     <atom-rating [size]="'text-xs'" class="mr-4"></atom-rating>
-                    <span class="ml-0 text-xs font-light text-gray-400">{{review.createAt}}</span>
+                    <span class="ml-0 text-xs font-light text-gray-icon nunito">{{review.createAt}}</span>
                 </dd>
-                <dd class="ml-0 lg:text-sm text-xs mb-1">{{review.content}}</dd>
+                <dd class="ml-0 lg:text-sm text-xs mb-1 text-gray-text nunito">{{review.content}}</dd>
                 <atom-icon-btn [icon]="icons.faThumbsUp" [value]="'999'" (submitEvent)="submitEvent($event)"></atom-icon-btn>
             </dl>
         </div>

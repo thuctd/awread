@@ -1,9 +1,37 @@
 @font-face {
-    font-family: 'lexend-deca';
-    src: url('/global-assets/fonts/lexend-deca/LexendDeca-Regular.ttf')  format('truetype');
+  font-family: 'Nunito';
+  src: url('/global-assets/fonts/nunito/Nunito-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('/global-assets/fonts/roboto/Roboto-Medium.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'robotoCondensed';
+  src: url('/global-assets/fonts/roboto-condensed/RobotoCondensed-Light.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'barlowSemiCondensed';
+  src: url('/global-assets/fonts/barlowSemiCondensed/BarlowSemiCondensed-Regular.ttf') format('truetype');
 }
 
 // USAGE
-body > * {
-    font-family: 'lexend-deca', sans-serif!important;
+body > *,
+.nunito {
+  font-family: 'Nunito', sans-serif !important;
+}
+
+.roboto {
+  font-family: 'Roboto', sans-serif !important;
+}
+
+.roboto-condensed {
+  font-family: 'robotoCondensed', sans-serif !important;
+}
+
+.barlowSemiCondensed {
+  font-family: 'barlowSemiCondensed', sans-serif !important;
 }

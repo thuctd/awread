@@ -82,7 +82,7 @@ export class NavbarMenuOrgan implements OnInit {
     ],
   };
   @Input() color = 'text-white';
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }

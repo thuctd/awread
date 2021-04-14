@@ -8,10 +8,10 @@
     <div class="text-left">
       <div *ngFor="let link of links">
         <a routerLink='/{{link.href}}'
-          class="outline-none block cursor-pointer px-4 py-1 text-sm text-gray-600 hover:bg-gray-100 hover:text-gray-900 border-b border-gray-300">
+          class="font-semibold outline-none block cursor-pointer px-4 py-1 text-sm text-gray-text hover:bg-gray-100 hover:text-gray-900 border-b border-gray-400">
           {{link.name | titlecase}}</a>
       </div>
     </div>
   </div>
 </label>
-<div class="border-b border-gray-300"></div>
+<div class="border-b border-gray-400"></div>

@@ -13,7 +13,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RdAuthorSubmitBtnAtom implements OnInit {
-  @Input() class = 'bg-gray-300 text-gray-800 rounded-full py-1.5 px-3';
+  @Input() class = 'bg-gray-light text-gray-text rounded-full py-1.5 px-3';
   @Input() text = 'Bỏ theo dõi';
   @Input() faIcon;
 
