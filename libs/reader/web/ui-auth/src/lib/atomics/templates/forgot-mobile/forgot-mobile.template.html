@@ -1,7 +1,7 @@
 <molec-bg-auth-mobile class="bg-white w-screen h-screen absolute top-0 left-0 overflow-auto">
   <section class="px-10">
-    <div class="text-gray-600 text-3xl text-center mb-6 pt-12">{{title}}</div>
-    <div *ngIf="!emailFormControl.valid" class="text-gray-400 text-base text-center">{{description}}</div>
+    <div class="text-gray-text text-3xl text-center mb-6 pt-12">{{title}}</div>
+    <div *ngIf="!emailFormControl.valid" class="text-gray-400 font-light text-base text-center">{{description}}</div>
     <molec-forgot-form class="mt-6" [emailFormControl]="emailFormControl"></molec-forgot-form>
     <div (click)="onClick()">
       <submit-btn

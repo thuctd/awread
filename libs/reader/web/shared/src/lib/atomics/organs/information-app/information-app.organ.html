@@ -1,4 +1,4 @@
-<section class="bg-green-400 w-full h-full">
+<section class="bg-green-primary w-full h-full">
   <div class="flex flex-col md:flex-row justify-around text-white pt-8 md:pt-16">
     <molec-info></molec-info>
     <molec-info
@@ -11,7 +11,7 @@
       [text]="'text-sm text-white'">
     </molec-info>
     <div class="flex flex-col items-center">
-      <div class="text-base lg:text-lg">{{ address.title }}</div>
+      <div class="text-base lg:text-lg font-semibold sm:font-medium">{{ address.title }}</div>
       <div class="text-sm">{{ address.line1 }}</div>
       <div class="text-sm">{{ address.line2 }}</div>
     </div>
@@ -30,7 +30,7 @@
         hướng dẫn dịch vụ</a></div>
     <div class="pl-0 md:pl-16 text-center font-light text-base"><a [routerLink]="['/']" class="outline-none cursor-pointer">Hỏi và đáp</a></div>
   </div>
-  <div class="border-t border-white mt-6 py-2 text-sm text-white text-center font-light">
+  <div class="border-t border-white mt-6 py-2 text-sm text-white text-center font-light nunito">
     @2021 - Awread book Việt Nam
   </div>
 </section>

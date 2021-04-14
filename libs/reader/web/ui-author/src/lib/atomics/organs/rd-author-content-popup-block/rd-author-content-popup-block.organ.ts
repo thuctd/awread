@@ -17,10 +17,10 @@ export class RdAuthorContentPopupBlockOrgan implements OnInit {
   @Input() content = 'Tài khoản này hiện không thể theo dõi bạn, gửi bạn tin nhắn, đăng trên hồ sơ của bạn hay bình luận trên truyện của bạn';
 
   @Input() text1 = 'Hủy';
-  @Input() class1 = 'bg-gray-300 text-gray-800 rounded-full py-2 px-8';
+  @Input() class1 = 'bg-gray-light text-gray-text rounded-full py-2 px-8';
 
   @Input() text2 = 'Chặn';
-  @Input() class2 = 'bg-gray-700 text-white rounded-full py-2 px-8';
+  @Input() class2 = 'bg-gray-text text-white rounded-full py-2 px-8';
   @Output() submitBtn = new EventEmitter();
   constructor() {}
 

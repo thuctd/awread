@@ -8,6 +8,10 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, EventEmitter, Output
       :host {
         display: block;
       }
+      :host .blue {
+        background-color: #3b5998;
+        border-color: #3b5998;
+      }
     `,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,

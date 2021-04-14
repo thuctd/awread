@@ -24,7 +24,7 @@ export class RdAuthorFollowerItemMolec implements OnInit {
     fullName: 'Hà Cẩm Thương',
   };
   @Input() faIcon = faPlus;
-  @Input() class = 'bg-green-400 text-white rounded-lg py-1.5 px-2';
+  @Input() class = 'bg-green-primary text-white rounded-lg py-1.5 px-2';
 
   constructor() {}
 

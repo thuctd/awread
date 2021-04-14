@@ -1,4 +1,4 @@
 <section class="mx-auto">
-  <div class="mt-1.5 absolute z-50 ml-2"><fa-icon type="submit" (click)="searchEvent.emit(control.value)" [icon]="faIcon" class="text-xl text-gray-400 cursor-pointer"></fa-icon></div>
-  <input (keyup.enter)="searchEvent.emit(control.value)" class="text-base border-gray-500 border border-solid border-t-0 border-r-0 border-l-0 bg-white text-gray-800 py-2 pl-12 focus:outline-none relative w-full" type="text"  [id]="id" type="text" [formControl]="control" [placeholder]="placeholder">
+  <div class="mt-1.5 absolute z-50 ml-2"><fa-icon type="submit" (click)="searchEvent.emit(control.value)" [icon]="faIcon" class="text-xl text-gray-text cursor-pointer"></fa-icon></div>
+  <input (keyup.enter)="searchEvent.emit(control.value)" class="text-base border-gray-500 border border-solid border-t-0 border-r-0 border-l-0 bg-white text-gray-text py-2 pl-12 focus:outline-none relative w-full" type="text"  [id]="id" type="text" [formControl]="control" [placeholder]="placeholder">
 </section>
