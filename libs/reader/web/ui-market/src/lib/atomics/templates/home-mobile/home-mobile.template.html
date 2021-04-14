@@ -1,17 +1,17 @@
 <section>
   <section>
-    <atom-slider></atom-slider>
+    <atom-slider [imageObject]='sliders'></atom-slider>
   </section>
   <section>
-    <organ-home-list-book-update-mobile class="px-4"></organ-home-list-book-update-mobile>
+    <organ-home-list-book-update-mobile [books]="getLatestBooks" class="px-4"></organ-home-list-book-update-mobile>
   </section>
   <section class="bg-red-50 pt-2 px-4">
-    <organ-home-list-book-featured-mobile></organ-home-list-book-featured-mobile>
+    <organ-home-list-book-featured-mobile [books]="getFeatureBooks"></organ-home-list-book-featured-mobile>
   </section>
   <section>
-    <organ-home-list-book-review-mobile class="px-4"></organ-home-list-book-review-mobile>
+    <organ-home-list-book-review-mobile [books]="getGoodBooks" class="px-4"></organ-home-list-book-review-mobile>
   </section>
   <section class="bg-purple-50">
-    <home-tags class="px-4"></home-tags>
+    <home-tags [genres]='genres' [items]='bookByGenre' [loading]='loading' (filterItemsByGenre)='filterItemsByGenre.emit($event)' class="px-4"></home-tags>
   </section>
 </section>

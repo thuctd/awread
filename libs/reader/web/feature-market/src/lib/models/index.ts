@@ -1,3 +1,5 @@
+export * from './collected.model';
+export * from './composed.model';
 export * from './chapter-detail.model';
 export * from './book-detail.model';
 export * from './top-book.model';

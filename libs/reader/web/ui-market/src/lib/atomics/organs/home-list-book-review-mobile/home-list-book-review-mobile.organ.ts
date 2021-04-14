@@ -20,8 +20,9 @@ export class HomeListBookReviewMobileOrgan implements OnInit {
   counter = Array;
   @Input() srcImg = '/global-assets/images/image.webp';
   @Input() altImg = 'Placeholder';
+  @Input() books = [];
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

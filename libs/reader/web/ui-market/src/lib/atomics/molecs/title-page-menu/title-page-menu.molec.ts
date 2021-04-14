@@ -21,20 +21,20 @@ export class TitlePageMenuMolec implements OnInit {
   @Input() links = [
     {
       name: 'Truyện dài',
-      href: 'long-story',
+      href: '/long-story',
     },
     {
       name: 'Truyện ngắn',
-      href: 'short-story',
+      href: '/short-story',
     },
     {
       name: 'Tản văn',
-      href: 'novel',
+      href: '/novel',
     },
   ];
   @Output() bookActionEvent = new EventEmitter();
   isMenuOpen = false;
-  constructor() {}
+  constructor() { }
   toggleMenu($event) {
     $event.stopPropagation();
     this.isMenuOpen = !this.isMenuOpen;
@@ -44,7 +44,7 @@ export class TitlePageMenuMolec implements OnInit {
     this.isMenuOpen = false;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
   // add chapter, edit book
   handleBookAction(type: string) {
     this.bookActionEvent.emit(type);

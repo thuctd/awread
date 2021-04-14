@@ -14,7 +14,6 @@ import { faAngleRight, faHome } from '@fortawesome/free-solid-svg-icons';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DetailBookTemplate implements OnInit {
-  @Input() loading: boolean;
   @Input() items = [];
   @Input() chapters = [
     {
