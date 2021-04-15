@@ -8,6 +8,8 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeTagsOrgan implements OnInit {
+  currentGenre = null;
+  currentIndex = -1;
   prevIcon = `<img src="/global-assets/images/arrow_left.webp" alt="arrow_left">`;
   nextIcon = `<img src="/global-assets/images/arrow_right.webp" alt="arrow_right">`;
   @Input() titlePage = 'Tags';
@@ -71,4 +73,8 @@ export class HomeTagsOrgan implements OnInit {
 
   ngOnInit(): void { }
 
+  setActiveGenre(genre, index) {
+    this.currentGenre = genre;
+    this.currentIndex = index;
+  }
 }

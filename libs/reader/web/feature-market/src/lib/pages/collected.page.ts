@@ -17,11 +17,12 @@ import { BooksQuery } from '../states/books';
 export class CollectedPage implements OnInit, OnDestroy {
   filtersForm: FormGroup;
   persistForm: PersistNgFormPlugin;
-  bookList$ = this.booksFacade.bookList$;
+  isLoading$ = this.booksFacade.selectLoadingAkita();
   categoryList$ = this.categoryFacede.categoryList$;
   topBookList$ = this.booksFacade.topBookList$;
   genreList$ = this.genresFacade.genreList$;
-  isLoading$ = this.booksFacade.selectLoadingAkita();
+  collected$ = this.booksFacade.collected$;
+  bookList$ = this.booksFacade.bookList$;
   filteredBooks$;
 
   bookId: string;
@@ -49,6 +50,7 @@ export class CollectedPage implements OnInit, OnDestroy {
     this.categoryFacede.getAllCategories().subscribe();
     this.booksFacade.getAllBooks().subscribe();
     this.booksFacade.getTopBooks().subscribe();
+    this.booksFacade.getCollectedBooks().subscribe();
     this.genresFacade.getAllGenres().subscribe();
     this.checkActiveTab();
     this.loadFirstByCategory();

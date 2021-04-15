@@ -73,10 +73,9 @@ import { RdIntroductionBoxHotlineMolec } from './molecs/rd-introduction-box-hotl
 import { RdIntroductionAboutusMolec } from './molecs/rd-introduction-aboutus/rd-introduction-aboutus.molec';
 import { RdIntroductionTargetItemGridMolec } from './molecs/rd-introduction-target-item-grid/rd-introduction-target-item-grid.molec';
 import { RdIntroductionTargetOrgan } from './organs/rd-introduction-target/rd-introduction-target.organ';
-import { LoaderModule } from '@awread/global/packages';
 
 @NgModule({
-  imports: [CommonModule, StorybookSupportModule, GlobalDesignSystemAtomicModule, CarouselModule, ReaderWebUiAuthorAtomicModule, LoaderModule],
+  imports: [CommonModule, StorybookSupportModule, GlobalDesignSystemAtomicModule, CarouselModule, ReaderWebUiAuthorAtomicModule],
   exports: [
     ReaderWebUiAuthorAtomicModule,
     CommonModule,

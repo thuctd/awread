@@ -14,6 +14,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 })
 export class MbListTemplate implements OnInit {
   @Input() books = [];
+  @Input() topBooks = [];
 
   constructor() { }
 

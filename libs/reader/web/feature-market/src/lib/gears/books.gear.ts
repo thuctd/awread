@@ -1,3 +1,4 @@
+import { ComposedStore } from './../states/composed/composed.store';
 import { BookDetailStore } from './../states/book-detail/book-detail.store';
 import { AuthorBooksStore } from './../states/author-books/author-books.store';
 import { TopBooksStore } from './../states/top-books/top-books.store';
@@ -11,6 +12,7 @@ import { throwError } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
 import { BooksApi } from '../apis';
 import { BooksStore } from '../states/books';
+import { CollectedStore } from '../states/collected';
 
 @Injectable({ providedIn: 'root' })
 export class BooksGear {
@@ -24,7 +26,8 @@ export class BooksGear {
     private latestBooksStore: LatestBooksStore,
     private featureBooksStore: FeatureBooksStore,
     private goodBooksStore: GoodBooksStore,
-    private bookDetailStore: BookDetailStore,
+    private composedStore: ComposedStore,
+    private collectedStore: CollectedStore,
     private booksApi: BooksApi
   ) { }
 
@@ -101,6 +104,32 @@ export class BooksGear {
       tap((books) => {
         console.log('get top books: ', books);
         this.topBooksStore.set(books);
+      }),
+      catchError((err) => {
+        console.error('An error occurred:', err);
+        return throwError(err);
+      })
+    );
+  }
+
+  getCollectedBooks() {
+    return this.booksApi.getCollectedBooks().pipe(
+      tap((books) => {
+        console.log('get category books: ', books);
+        this.collectedStore.set(books);
+      }),
+      catchError((err) => {
+        console.error('An error occurred:', err);
+        return throwError(err);
+      })
+    );
+  }
+
+  getComposedBooks() {
+    return this.booksApi.getComposedBooks().pipe(
+      tap((books) => {
+        console.log('get top books: ', books);
+        this.composedStore.set(books);
       }),
       catchError((err) => {
         console.error('An error occurred:', err);

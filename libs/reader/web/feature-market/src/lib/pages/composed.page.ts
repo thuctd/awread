@@ -20,6 +20,7 @@ export class ComposedPage implements OnInit, OnDestroy {
   bookList$ = this.booksFacade.bookList$;
   categoryList$ = this.categoryFacede.categoryList$;
   topBookList$ = this.booksFacade.topBookList$;
+  composedList$ = this.booksFacade.composedList$;
   genreList$ = this.genresFacade.genreList$;
   filteredBooks$;
 
@@ -40,6 +41,7 @@ export class ComposedPage implements OnInit, OnDestroy {
     this.booksFacade.getAllBooks().subscribe();
     this.booksFacade.getTopBooks().subscribe();
     this.genresFacade.getAllGenres().subscribe();
+    this.booksFacade.getComposedBooks().subscribe();
     this.checkActiveTab();
     this.loadFirstByCategory();
     this.initForm();

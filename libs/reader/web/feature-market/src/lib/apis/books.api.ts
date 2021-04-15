@@ -41,6 +41,16 @@ export class BooksApi {
       .pipe(delay(500));
   }
 
+  getComposedBooks() {
+    return of(db.books.slice(0, 8))
+      .pipe(delay(500));
+  }
+
+  getCollectedBooks() {
+    return of(db.books)
+      .pipe(delay(500));
+  }
+
   getCategoryBooks(categoryId: string) {
     return of(db.books.filter(book => book.category === categoryId))
       .pipe(delay(500));

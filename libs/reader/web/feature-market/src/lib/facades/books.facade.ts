@@ -9,12 +9,16 @@ import { GenreBooksQuery } from '../states/genre-books';
 import { GoodBooksQuery } from '../states/good-books';
 import { LatestBooksQuery } from '../states/latest-books';
 import { of } from 'rxjs';
+import { CollectedQuery } from '../states/collected';
+import { ComposedQuery } from '../states/composed';
 
 @Injectable({ providedIn: 'root' })
 export class BooksFacade {
   bookList$ = this.booksQuery.selectAll();
   isLoading$ = this.booksQuery.selectLoading();
   topBookList$ = this.topBooksQuery.selectAll();
+  composedList$ = this.composedQuery.selectAll();
+  collected$ = this.collectedQuery.selectAll();
   goodBookList$ = this.goodBooksQuery.selectAll();
   genreBookList$ = this.genreBooksQuery.selectAll();
   authorBookList$ = this.authorBooksQuery.selectAll();
@@ -26,6 +30,8 @@ export class BooksFacade {
     private booksGear: BooksGear,
     private booksStore: BooksStore,
     private booksQuery: BooksQuery,
+    private composedQuery: ComposedQuery,
+    private collectedQuery: CollectedQuery,
     private topBooksQuery: TopBooksQuery,
     private goodBooksQuery: GoodBooksQuery,
     private genreBooksQuery: GenreBooksQuery,
@@ -98,6 +104,14 @@ export class BooksFacade {
 
   getFeatureBooks() {
     return this.booksGear.getFeatureBooks();
+  }
+
+  getCollectedBooks() {
+    return this.booksGear.getCollectedBooks();
+  }
+
+  getComposedBooks() {
+    return this.booksGear.getComposedBooks();
   }
 
   getDetailBook(bookId: string) {

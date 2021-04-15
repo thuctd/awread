@@ -5,6 +5,7 @@ import { ComposedStore, ComposedState } from './composed.store';
 
 @Injectable({ providedIn: 'root' })
 export class ComposedQuery extends QueryEntity<ComposedState> {
+  composedList$ = this.selectAll();
   // ui: EntityUIQuery<ComposedUIState>;
   constructor(protected store: ComposedStore) {
     super(store);

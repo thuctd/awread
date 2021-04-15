@@ -5,6 +5,7 @@ import { CollectedStore, CollectedState } from './collected.store';
 
 @Injectable({ providedIn: 'root' })
 export class CollectedQuery extends QueryEntity<CollectedState> {
+  collectedList$ = this.selectAll();
   // ui: EntityUIQuery<CollectedUIState>;
   constructor(protected store: CollectedStore) {
     super(store);
