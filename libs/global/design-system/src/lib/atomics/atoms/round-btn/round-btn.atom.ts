@@ -14,7 +14,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
 })
 export class RoundBtnAtom implements OnInit {
   @Input() title = 'Đọc chương đầu';
-  @Input() color = 'bg-green-400 text-white';
+  @Input() color = 'bg-green-primary text-white';
   @Input() href = '/';
   @Output() submitEvent = new EventEmitter();
 

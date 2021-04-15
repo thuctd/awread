@@ -1,5 +1,5 @@
 <div closeOnOutSide (clickedOutside)="onClick()" class="relative inline-block text-left">
-  <button #toggleButton (click)="toggleMenu($event)" type="button" class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-1 outline-none bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:border-green-400" id="options-menu" aria-haspopup="true" aria-expanded="true">
+  <button #toggleButton (click)="toggleMenu($event)" type="button" class="inline-flex justify-center w-full rounded-md border border-gray-400 shadow-sm px-4 py-1 outline-none bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:border-green-400" id="options-menu" aria-haspopup="true" aria-expanded="true">
     <fa-icon [icon]="faIconComments" class="text-gray-700"></fa-icon>
   </button>
 
@@ -7,18 +7,18 @@
     <div class="py-2 relative">
       <div class="flex">
         <label [routerLink]="['/routePath']" class="block px-4 py-1 text-sm text-gray-700" role="menuitem">Liên kết bên ngoài
-          <a href="#" class="block py-2 text-xs text-green-400 cursor-pointer" role="menuitem">
+          <a href="#" class="block py-2 text-xs text-green-primary cursor-pointer" role="menuitem">
             https://awreadbook.com/{{awreadLink}}</a>
         </label>
       </div>
       <div class="absolute right-4 top-4">
-        <button (click)="copyToClipboard.emit()" class="text-sm md:text-xs text-white bg-gray-400 inline-block text-right cursor-pointer rounded-sm border-green-400 focus:shadow-outline focus:outline-none px-2 py-1 hover:bg-green-400" type="button">
+        <button (click)="copyToClipboard.emit()" class="text-sm md:text-xs text-white bg-gray-400 inline-block text-right cursor-pointer rounded-sm border-green-400 focus:shadow-outline focus:outline-none px-2 py-1 hover:bg-green-primary" type="button">
           Copy
         </button>
       </div>
     </div>
     <div class="py-2">
-      <a (click)='deletePart.emit()' class="outline-none block px-4 py-2 cursor-pointer text-xs text-center text-green-400 hover:bg-gray-100 hover:text-gray-900" role="menuitem">Xóa chương hiện tại</a>
+      <a (click)='deletePart.emit()' class="outline-none block px-4 py-2 cursor-pointer text-xs text-center text-green-primary hover:bg-gray-100 hover:text-gray-900" role="menuitem">Xóa chương hiện tại</a>
     </div>
   </div>
 </div>

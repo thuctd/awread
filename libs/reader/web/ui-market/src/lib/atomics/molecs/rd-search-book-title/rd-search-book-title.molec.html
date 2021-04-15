@@ -1,6 +1,6 @@
 <div class="relative">
   <div (click)="submitBtn.emit()">
-    <fa-icon class="text-gray-400 text-2xl absolute cursor-pointer" [icon]="faIcon"></fa-icon>
+    <fa-icon class="text-gray-light text-2xl absolute cursor-pointer" [icon]="faIcon"></fa-icon>
   </div>
-  <input #searchBox [formControl]="inputControl" (input)='bindingUrl.emit(searchBox.value)' class="focus:outline-none border-b text-xl bg-gray-50 w-full border-gray-500 py-1.5 pl-12">
+  <input #searchBox [formControl]="inputControl" (input)='bindingUrl.emit(searchBox.value)' class="focus:outline-none border-b text-xl bg-gray-primary w-full border-gray-400 py-1.5 pl-12 text-gray-text roboto">
 </div>

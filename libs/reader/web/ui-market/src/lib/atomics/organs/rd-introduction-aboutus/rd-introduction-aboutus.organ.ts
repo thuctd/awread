@@ -7,7 +7,6 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   styles: [
     `
       @import url('https://fonts.googleapis.com/css2?family=Sacramento&display=swap');
-      @import url('https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed&display=swap');
       :host {
         display: block;
       }
@@ -19,9 +18,6 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
       }
       .welcome {
         font-family: 'Sacramento', cursive;
-      }
-      .text {
-        font-family: 'Barlow Semi Condensed', sans-serif;
       }
     `,
   ],

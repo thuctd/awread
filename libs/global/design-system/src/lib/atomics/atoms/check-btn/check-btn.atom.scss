@@ -2,7 +2,7 @@
   display: block;
 }
 .form-checkbox:checked {
-  background-color: #7dd8b5;
+  background-color: #5ABD8C;
   border-radius: 0.25rem;
   position: relative;
   &::after{
@@ -21,7 +21,7 @@
 
 
 .form-checkbox {
-  border: 1px solid #7dd8b5;
+  border: 1px solid #5ABD8C;
   border-radius: 0.25rem;
   appearance: none;
   width: 15px;

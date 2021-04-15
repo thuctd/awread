@@ -14,15 +14,15 @@
           </atom-btn-icon>
         </div>
         <div class="pl-8">
-          <atom-btn-rectangle (click)='changeDisplayFilter()' [text]="'Lọc truyện'" [class]="'py-1.5 px-4 rounded-lg'" (clickBtn)="eventSearch.emit()">
+          <atom-btn-rectangle (click)='changeDisplayFilter()' [text]="'Lọc truyện'" [class]="'py-1.5 px-4 rounded-lg roboto'" (clickBtn)="eventSearch.emit()">
           </atom-btn-rectangle>
         </div>
       </div>
     </div>
     <div class="col-span-2 xl:col-span-8 lg:col-span-9 md:pr-8">
-      <div class="grid grid-cols-12 gap-2 lg:gap-4 xl:gap-6 border-b border-teal-400">
+      <div class="grid grid-cols-12 gap-2 lg:gap-4 xl:gap-6 border-b border-gray-300">
         <ng-container *ngFor="let tab of tabsHead">
-          <div class="col-span-2 md:col-span-4" [ngClass]="selectedTab === tab.type ? 'border-b-2 border-green-400 text-green-400' : 'text-gray-400'">
+          <div class="col-span-2 md:col-span-4" [ngClass]="selectedTab === tab.type ? 'border-b-2 border-green-primary text-green-primary' : 'text-gray-text'">
             <molec-tab-categories (changeCategoryBooks)='changeCategoryBooks.emit(tab)' (switchTabEvent)="switchTabEvent.emit(tab.type)" [tab]="tab">
             </molec-tab-categories>
           </div>

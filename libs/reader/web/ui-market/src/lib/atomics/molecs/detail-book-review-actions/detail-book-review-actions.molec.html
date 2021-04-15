@@ -1,5 +1,5 @@
 <div class="review-actions">
-    <div class="text-sm mb-4">Bạn đánh giá truyện này như thế nào?</div>
+    <div class="text-sm sm:text-lg text-gray-text mb-4">Bạn đánh giá truyện này như thế nào?</div>
     <div class="flex items-center justify-end ">
         <atom-review-action (submitEvent)="submitEvent.emit('like')" class="mr-4"></atom-review-action>
         <atom-review-action (submitEvent)="submitEvent.emit('dislike')" [title]="'Không tích cực'" [src]="src"></atom-review-action>

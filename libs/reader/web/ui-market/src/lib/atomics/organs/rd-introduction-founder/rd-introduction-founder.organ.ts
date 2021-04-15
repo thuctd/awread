@@ -5,9 +5,6 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   templateUrl: './rd-introduction-founder.organ.html',
   styles: [
     `
-      @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&display=swap');
-      @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
-      @import url('https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500&display=swap');
       :host {
         display: block;
       }
@@ -25,15 +22,6 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
       }
       :host .bg-pink-dark {
         background-color: #f5e7e7;
-      }
-      :host .font-roboto-condensed {
-        font-family: 'Roboto Condensed', sans-serif;
-      }
-      :host .font-roboto {
-        font-family: 'Roboto', sans-serif;
-      }
-      :host .font-barlow-semi-condensed {
-        font-family: 'Barlow Semi Condensed', sans-serif;
       }
     `,
   ],

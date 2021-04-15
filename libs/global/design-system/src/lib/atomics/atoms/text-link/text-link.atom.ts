@@ -16,7 +16,7 @@ export class TextLinkAtom implements OnInit {
   @Output() submitEvent = new EventEmitter();
   @Input() text = 'textLink';
   @Input() href = '';
-  @Input() class = 'text-green-400';
+  @Input() class = 'text-green-primary';
 
   constructor() {}
 

@@ -5,7 +5,6 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   templateUrl: './rd-introduction-aboutus.molec.html',
   styles: [
     `
-      @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap');
       :host {
         display: block;
       }
@@ -18,10 +17,6 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
       }
       :host .text-8c5xl {
         font-size: 7rem;
-      }
-
-      :host .aboutUs {
-        font-family: 'Roboto Condensed', sans-serif;
       }
     `,
   ],
