@@ -57,7 +57,8 @@ export class MenuNavbarMolec implements OnInit {
   @Input() name = 'Name';
   @Input() lvVip = '0';
   @Input() coin = '0';
-  @Input() isMenu = true;
+  @Input() isMenu = false;
+  @Input() no;
 
   constructor(private matDialog: MatDialog) {}
 
@@ -69,6 +70,10 @@ export class MenuNavbarMolec implements OnInit {
 
   displayMenu() {
     this.isMenu = !this.isMenu;
+  }
+
+  onClick() {
+    this.isMenu = false;
   }
 
   openFormLogin($event): void {
