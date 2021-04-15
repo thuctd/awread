@@ -1,5 +1,5 @@
 <div class="grid grid-cols-12">
-  <rd-list-tab-page class="col-span-3 border py-1 text-xs cursor-pointer"
+  <rd-tab-item class="col-span-3 border py-1 text-xs cursor-pointer"
     [ngClass]="tab.isActive ? 'border-green-primary bg-green-primary text-white active' : 'text-gray-text active'"
     *ngFor="let tab of tabs"
     [isTooltip]="true"
@@ -7,5 +7,5 @@
     [active]="tab.isActive"
     (tabClicked)="toggleTabs(tab)"
   >
-  </rd-list-tab-page>
+  </rd-tab-item>
 </div>

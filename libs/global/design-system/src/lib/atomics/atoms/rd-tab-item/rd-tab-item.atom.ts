@@ -1,14 +1,14 @@
 import { Component, OnInit, ChangeDetectionStrategy, Output, Input, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'rd-list-tab-page',
-  templateUrl: './rd-list-tab-page.atom.html',
+  selector: 'rd-tab-item',
+  templateUrl: './rd-tab-item.atom.html',
   styles: [
     `
       :host {
         display: block;
       }
-      :host .tab:hover .show {
+      :host .tab:hover .tooltip {
         display: block;
       }
       :host .bg-orange {
@@ -25,7 +25,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Output, Input, EventEmitter
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RdListTabPageAtom implements OnInit {
+export class RdTabItemAtom implements OnInit {
   @Output() tabClicked = new EventEmitter();
   @Input() tabName = 'tab name';
   @Input() active = false;
