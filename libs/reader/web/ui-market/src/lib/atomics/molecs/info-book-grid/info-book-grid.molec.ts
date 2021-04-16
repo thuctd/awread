@@ -17,6 +17,7 @@ export class InfoBookGridMolec implements OnInit {
   @Input() title = 'Cô gái chúng ta cùng theo đuổi!';
   @Input() countComment = '40';
   @Input() faIcon = faEye;
+  @Input() bookId = '';
   @Input() btns = ['Chương 1', 'Chương 2'];
   @Output() submitEvent = new EventEmitter();
 

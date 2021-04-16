@@ -1,3 +1,9 @@
+export * from './collected.model';
+export * from './composed.model';
+export * from './chapter-detail.model';
+export * from './book-detail.model';
+export * from './top-book.model';
+export * from './author-book.model';
 export * from './category-book.model';
 export * from './feature-book.model';
 export * from './latest-book.model';
@@ -5,7 +11,6 @@ export * from './genre-book.model';
 export * from './good-book.model';
 export * from './event.model';
 export * from './genre.model';
-export * from './book-detail.model';
 export * from './book-reader.model';
 export * from './chapter.model';
 export * from './category.model';

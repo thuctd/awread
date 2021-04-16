@@ -14,10 +14,15 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeadReadBookMolec implements OnInit {
+  @Input() chapters = [{
+    id: '1',
+    chapterNumber: 'Chương 1'
+  }];
   @Input() faIcon = faChevronLeft;
-  @Output() btnClick = new EventEmitter();
+  @Output() nextChapterBook = new EventEmitter();
+  @Output() backChapterBook = new EventEmitter();
   @Input() title = 'Ngày ấy vì ai mà đổi thay';
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

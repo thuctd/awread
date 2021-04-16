@@ -6,10 +6,10 @@
     <div class="container w-full overflow-hidden">
       <owl-carousel-o [options]="customOptions" class="carousel1">
         <ng-container>
-          <ng-template carouselSlide *ngFor="let tab of counter(3)">
+          <ng-template carouselSlide *ngFor="let book of books">
             <div class="mx-2 mb-4">
-              <atom-img-m [height]="'h-36'"></atom-img-m>
-              <molec-home-info-book-update></molec-home-info-book-update>
+              <atom-img-m [height]="'h-36'" [bookId]='book.id' [srcImg]='book.imgUrl'></atom-img-m>
+              <molec-home-info-book-update [book]='book'></molec-home-info-book-update>
             </div>
           </ng-template>
         </ng-container>
@@ -17,4 +17,3 @@
     </div>
   </div>
 </section>
-

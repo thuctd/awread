@@ -1,1 +1,10 @@
-<template-home-mobile></template-home-mobile>
+<template-home-mobile
+  [loading]="loading$"
+  [getGoodBooks]="goodBookList$ | async"
+  [getLatestBooks]="latestBookList$ | async"
+  [getFeatureBooks]="featureBookList$ | async"
+  [sliders]="imageObject$ | async"
+  [genres]="genreList$ | async"
+  (filterItemsByGenre)="filterItemsByGenre($event)"
+  [bookByGenre]="filteredBooks$ | async"
+></template-home-mobile>

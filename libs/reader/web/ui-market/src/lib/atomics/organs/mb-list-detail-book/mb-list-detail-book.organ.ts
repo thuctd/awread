@@ -13,6 +13,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MbDetailBookOrgan implements OnInit {
+  @Input() books = [];
   @Input() moreBook = 'Xem thêm...';
   @Input() btnTitle = 'Top phổ biến';
   @Output() moreEvent = new EventEmitter();

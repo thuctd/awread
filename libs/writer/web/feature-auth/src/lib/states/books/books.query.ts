@@ -8,6 +8,7 @@ import { of } from 'rxjs';
 @Injectable({ providedIn: 'root' })
 export class BooksQuery extends QueryEntity<BooksState> {
   // ui: EntityUIQuery<BooksUIState>;
+  isLoading$ = this.selectLoading();
   bookList$ = this.selectAll();
   constructor(protected store: BooksStore) {
     super(store);

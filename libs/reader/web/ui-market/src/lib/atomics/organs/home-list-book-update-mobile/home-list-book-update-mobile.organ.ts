@@ -14,8 +14,8 @@ export class HomeListBookUpdateMobileOrgan implements OnInit {
   nextIcon = `<img src="/global-assets/images/arrow_right.webp" alt="arrow_right">`;
   @Input() srcImg = '/global-assets/images/image.webp';
   @Input() altImg = 'Placeholder';
-
-  constructor() {}
+  @Input() books = [];
+  constructor() { }
 
   @Input() customOptions: OwlOptions = {
     loop: true,
@@ -43,5 +43,5 @@ export class HomeListBookUpdateMobileOrgan implements OnInit {
     },
   };
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }
