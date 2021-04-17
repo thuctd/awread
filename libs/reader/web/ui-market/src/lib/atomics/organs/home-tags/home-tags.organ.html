@@ -1,9 +1,9 @@
 <section class="px-0 sm:px-6 lg:px-8 w-full max-w-screen-xl mx-auto mt-4 py-6">
   <div class="flex">
-    <atom-title [title]='titlePage' class="mr-2 sm:mr-4" [isUppercase]='false'></atom-title>
+    <atom-title [title]='titlePage' class="mr-2 sm:mr-4 mt-2" [isUppercase]='false'></atom-title>
     <div class="flex mb-6">
       <div class="w-full flex mt-0 md:mt-1.5">
-        <rd-home-tab-category *ngFor="let genre of genres" [tabName]="genre.name"
+        <rd-home-tab-category [active]="i == currentIndex" (click)="setActiveGenre(genre, i)" *ngFor="let genre of genres; let i = index;" [tabName]="genre.name"
           (emitEvent)="filterItemsByGenre.emit(genre)">
         </rd-home-tab-category>
       </div>

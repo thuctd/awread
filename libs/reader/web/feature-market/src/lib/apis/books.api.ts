@@ -10,7 +10,16 @@ export class BooksApi {
     private apollo: Apollo,
   ) { }
 
-  get() { }
+  getFilterBooks(filters) {
+    console.log('api filters', filters);
+    return of(db.books)
+      .pipe(delay(500));
+  }
+
+  searchBookByTerm(term: string) {
+    return of(db.books.filter(book => book.title.toLowerCase().includes(term.toLowerCase())))
+      .pipe(delay(500));
+  }
 
   getAllBooks() {
     return of(db.books)
@@ -32,8 +41,28 @@ export class BooksApi {
       .pipe(delay(500));
   }
 
+  getComposedBooks() {
+    return of(db.books.slice(0, 8))
+      .pipe(delay(500));
+  }
+
+  getCollectedBooks() {
+    return of(db.books)
+      .pipe(delay(500));
+  }
+
   getCategoryBooks(categoryId: string) {
     return of(db.books.filter(book => book.category === categoryId))
+      .pipe(delay(500));
+  }
+
+  getTopBooks() {
+    return of(db.books.slice(0, 3))
+      .pipe(delay(500));
+  }
+
+  getAuthorBooks(authorId: string) {
+    return of(db.books.filter(book => book.authorId === authorId).slice(0, 3))
       .pipe(delay(500));
   }
 

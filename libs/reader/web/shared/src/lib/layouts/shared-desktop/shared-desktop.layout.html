@@ -1,5 +1,5 @@
 <section class="bg-gray-primary">
-  <template-navbar-reader (eventSearch)='navigateToSearch()'></template-navbar-reader>
+  <template-navbar-reader [items]='results$ | async' [searchControl]='searchControl' (eventSearch)='navigateToSearch()'></template-navbar-reader>
   <router-outlet></router-outlet>
   <template-footer></template-footer>
 </section>

@@ -222,4 +222,4 @@ import { RdIntroductionTargetOrgan } from './organs/rd-introduction-target/rd-in
     RdIntroductionTargetOrgan,
   ],
 })
-export class ReaderWebUiMarketAtomicModule {}
+export class ReaderWebUiMarketAtomicModule { }

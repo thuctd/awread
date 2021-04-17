@@ -21,4 +21,9 @@ export class CategoryApi {
     return of(db.categories.find(category => category.id === categoryId))
       .pipe(delay(500));
   }
+
+  getCategoryByType(type: string) {
+    return of(db.categories.find(category => category.type === type))
+      .pipe(delay(500));
+  }
 }

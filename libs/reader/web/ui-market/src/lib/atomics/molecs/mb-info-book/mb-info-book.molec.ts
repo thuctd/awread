@@ -14,11 +14,14 @@ import { faEye } from '@fortawesome/free-solid-svg-icons';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MbInfoBookMolec implements OnInit {
-  @Input() book = 'Em là nhà!';
+  @Input() book = {
+    title: 'Cô gái chúng ta cùng theo đuổi năm nào',
+    id: '1',
+  };
   @Input() countComment = '40';
   @Input() faIcon = faEye;
 
-  @Input() btns = ['Chương 1','Chương 2'];
+  @Input() btns = ['Chương 1', 'Chương 2'];
   @Output() submitEvent = new EventEmitter();
 
   constructor() { }

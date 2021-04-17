@@ -1,3 +1,7 @@
+import { ComposedStore } from './../states/composed/composed.store';
+import { BookDetailStore } from './../states/book-detail/book-detail.store';
+import { AuthorBooksStore } from './../states/author-books/author-books.store';
+import { TopBooksStore } from './../states/top-books/top-books.store';
 import { GoodBooksStore } from './../states/good-books/good-books.store';
 import { FeatureBooksStore } from './../states/feature-books/feature-books.store';
 import { LatestBooksStore } from './../states/latest-books/latest-books.store';
@@ -8,17 +12,22 @@ import { throwError } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
 import { BooksApi } from '../apis';
 import { BooksStore } from '../states/books';
+import { CollectedStore } from '../states/collected';
 
 @Injectable({ providedIn: 'root' })
 export class BooksGear {
 
   constructor(
     private booksStore: BooksStore,
+    private topBooksStore: TopBooksStore,
+    private authorBooksStore: AuthorBooksStore,
     private categoryBooksStore: CategoryBooksStore,
     private genreBooksStore: GenreBooksStore,
     private latestBooksStore: LatestBooksStore,
     private featureBooksStore: FeatureBooksStore,
     private goodBooksStore: GoodBooksStore,
+    private composedStore: ComposedStore,
+    private collectedStore: CollectedStore,
     private booksApi: BooksApi
   ) { }
 
@@ -32,6 +41,10 @@ export class BooksGear {
         return throwError(err);
       })
     );
+  }
+
+  getFilterBooks(filters) {
+    return this.booksApi.getFilterBooks(filters);
   }
 
   getGoodBooks() {
@@ -86,6 +99,58 @@ export class BooksGear {
     );
   }
 
+  getTopBooks() {
+    return this.booksApi.getTopBooks().pipe(
+      tap((books) => {
+        console.log('get top books: ', books);
+        this.topBooksStore.set(books);
+      }),
+      catchError((err) => {
+        console.error('An error occurred:', err);
+        return throwError(err);
+      })
+    );
+  }
+
+  getCollectedBooks() {
+    return this.booksApi.getCollectedBooks().pipe(
+      tap((books) => {
+        console.log('get category books: ', books);
+        this.collectedStore.set(books);
+      }),
+      catchError((err) => {
+        console.error('An error occurred:', err);
+        return throwError(err);
+      })
+    );
+  }
+
+  getComposedBooks() {
+    return this.booksApi.getComposedBooks().pipe(
+      tap((books) => {
+        console.log('get top books: ', books);
+        this.composedStore.set(books);
+      }),
+      catchError((err) => {
+        console.error('An error occurred:', err);
+        return throwError(err);
+      })
+    );
+  }
+
+  getAuthorBooks(authorId: string) {
+    return this.booksApi.getAuthorBooks(authorId).pipe(
+      tap((books) => {
+        console.log('get author books: ', books);
+        this.authorBooksStore.set(books);
+      }),
+      catchError((err) => {
+        console.error('An error occurred:', err);
+        return throwError(err);
+      })
+    );
+  }
+
   getGenreBooks(genreId: string) {
     return this.booksApi.getGenreBooks(genreId).pipe(
       tap((books) => {
@@ -102,12 +167,15 @@ export class BooksGear {
   getBookById(bookId: string) {
     return this.booksApi.getBookById(bookId).pipe(
       tap((book) => console.log('detail books: ', book)),
-      tap((book) => this.booksStore.add(book)),
       catchError((err) => {
         console.error('An error occurred:', err);
         return throwError(err);
       })
     );
+  }
+
+  searhBookByTermApi(term: string) {
+    return this.booksApi.searchBookByTerm(term);
   }
 
 }

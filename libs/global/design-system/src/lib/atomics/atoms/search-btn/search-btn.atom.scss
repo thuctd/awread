@@ -1,0 +1,8 @@
+:host {
+  display: block;
+}
+::ng-deep {
+  .mat-option {
+    font-family: 'Nunito', sans-serif !important;
+  }
+}

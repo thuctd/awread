@@ -39,7 +39,7 @@ export class HomePage implements OnInit {
     setTimeout(() => {
       this.filteredBooks$ = this.booksFacade.getGenreBooks(genre.id);
       this.loading$ = false;
-    }, 1000);
+    }, 200);
   }
 
   private loadFirstByGenre() {

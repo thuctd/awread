@@ -4,13 +4,21 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import admin from 'firebase-admin';
 import firebaseConfig from './adminsdk.json';
-import { IncomingMessage } from 'http';
 import { environment } from '@awread/global/environments';
 import ConnectionFilterPlugin from "postgraphile-plugin-connection-filter";
+import cron from 'cron';
+
+
 const app = express();
 const FIREBASE_URL = environment.firebase.databaseURL;
-const SCHEMA = environment.postgres.SCHEMA;
 const DATABASE_URL = process.env.DATABASE_URL || environment.postgres.DATABASE_URL;
+const SCHEMA = environment.postgres.SCHEMA;
+
+
+import { Pool, Client } from 'pg';
+const pool = new Pool({
+  connectionString: `${DATABASE_URL}`
+});
 
 // support for async middware firebase
 const asyncMiddleware = (fn) => (req, res, next) => {
@@ -106,6 +114,7 @@ const server = app.listen(port, () => {
   console.log('database url:', DATABASE_URL);
   console.log(`Listening at http://localhost:${port}/graphiql`);
   // console.log(`process env`, process.env);
+  startCronJob();
 });
 server.on('error', console.error);
 
@@ -133,4 +142,34 @@ function checkRole(req) {
       'jwt.claims.user_id': '10f62cca-d75d-4b7c-8869-9ee319819431',
     };
   }
+}
+
+
+async function startCronJob() {
+  const now1 = await pool.query(`select current_setting('TIMEZONE'), now();`);
+  console.log('server now before set timezone', now1.rows[0]);
+  const setTimezone = await pool.query(`set timezone='Asia/Ho_Chi_Minh'`);
+  const now = await pool.query(`select current_setting('TIMEZONE'), now();`);
+  console.log('server now', now.rows[0]);
+  // const setTimezone = await pool.query(`set timezone='US/Eastern'`);
+
+  // const job = new cron.CronJob('*/10 * * * * *', function () {
+  //   console.log('You will see this message every 10 seconds');
+  //   postgresRefeshMV();
+  // }, null, true, 'Asia/Ho_Chi_Minh');
+  // job.start();
+
+  const job = new cron.CronJob('*/5 * * * *', function () {
+    console.log('You will see this message every 5 minutes');
+    postgresRefeshMV();
+  }, null, true, 'Asia/Ho_Chi_Minh');
+  job.start();
+
+}
+
+async function postgresRefeshMV() {
+  await pool.query(`REFRESH MATERIALIZED VIEW most_views_books_hour_mv;`);
+  await pool.query(`REFRESH MATERIALIZED VIEW most_views_books_day_mv;`);
+  await pool.query(`REFRESH MATERIALIZED VIEW newest_books_hour_mv;`);
+  await pool.query(`REFRESH MATERIALIZED VIEW newest_books_day_mv;`);
 }

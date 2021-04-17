@@ -13,7 +13,8 @@ import { Component, OnInit, ChangeDetectionStrategy, EventEmitter, Output } from
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DetailBookOptionButtonsMolec implements OnInit {
-  @Output() submitEvent = new EventEmitter();
+  @Output() chapterFistEvent = new EventEmitter();
+  @Output() chapterLastEvent = new EventEmitter();
   constructor() { }
 
   ngOnInit(): void {

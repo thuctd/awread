@@ -1,5 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy, EventEmitter, Output } from '@angular/core';
-import {faAngleDown} from '@fortawesome/free-solid-svg-icons';
+import { Component, OnInit, ChangeDetectionStrategy, EventEmitter, Output, Input } from '@angular/core';
+import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'organ-detail-book-chapter',
   templateUrl: './detail-book-chapter.organ.html',
@@ -15,61 +15,15 @@ import {faAngleDown} from '@fortawesome/free-solid-svg-icons';
 export class DetailBookChapterOrgan implements OnInit {
   icon = faAngleDown;
   @Output() submitEvent = new EventEmitter()
-  chapters = [
+  @Input() chapters = [
     {
-      title : 'Mở đầu',
-      value: '',
+      id: "1",
+      bookId: "1",
+      chapterNumber: 'Chương 1',
+      title: 'Ngày ấy vì ai mà đổi thay',
       price: 'Miễn phí',
       createAt: '09-09-2020'
-    },
-    {
-      title : 'Chương 1',
-      value: 'Ngày ấy vì ai mà đổi thay',
-      price: 'Miễn phí',
-      createAt: '09-09-2020'
-    },
-    {
-      title : 'Chương 1',
-      value: 'Ngày ấy vì ai mà đổi thay',
-      price: 'Miễn phí',
-      createAt: '09-09-2020'
-    },
-    {
-      title : 'Chương 1',
-      value: 'Ngày ấy vì ai mà đổi thay',
-      price: 'Miễn phí',
-      createAt: '09-09-2020'
-    },
-    {
-      title : 'Chương 1',
-      value: 'Ngày ấy vì ai mà đổi thay',
-      price: 'Miễn phí',
-      createAt: '09-09-2020'
-    },
-    {
-      title : 'Chương 1',
-      value: 'Ngày ấy vì ai mà đổi thay',
-      price: '100 coins',
-      createAt: '09-09-2020'
-    },
-    {
-      title : 'Chương 1',
-      value: 'Ngày ấy vì ai mà đổi thay',
-      price: '100 coins',
-      createAt: '09-09-2020'
-    },
-    {
-      title : 'Chương 1',
-      value: 'Ngày ấy vì ai mà đổi thay',
-      price: '100 coins',
-      createAt: '09-09-2020'
-    },
-    {
-      title : 'Chương 1',
-      value: 'Ngày ấy vì ai mà đổi thay',
-      price: '100 coins',
-      createAt: '09-09-2020'
-    },
+    }
   ]
 
   constructor() { }

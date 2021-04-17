@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { faAngleRight, faHome } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -14,6 +14,27 @@ import { faAngleRight, faHome } from '@fortawesome/free-solid-svg-icons';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DetailBookTemplate implements OnInit {
+  @Input() items = [];
+  @Input() chapters = [
+    {
+      id: "1",
+      bookId: "1",
+      chapterNumber: 'Chương 1',
+      title: 'Ngày ấy vì ai mà đổi thay',
+      price: 'Miễn phí',
+      createAt: '09-09-2020'
+    }
+  ];
+  @Input() book = {
+    title: 'Ngày ấy vì ai mà đổi thay',
+    auth: 'Cẩm Thương',
+    type: 'Hoang tưởng, kinh dị',
+    status: 'Đang tiến hành',
+    publishedAt: '2020',
+    country: '(chủ yếu dành cho truyện sưu tầm)'
+  };
+  @Input() topBooks = [];
+  @Input() authorBooks = [];
   menu = [
     {
       title: 'Home',
@@ -34,6 +55,10 @@ export class DetailBookTemplate implements OnInit {
       icon: faAngleRight,
     },
   ];
+  @Output() chapterFistEvent = new EventEmitter();
+  @Output() chapterLastEvent = new EventEmitter();
+  @Output() nativeTopBook = new EventEmitter();
+  @Output() nativeAuthorBook = new EventEmitter();
 
   constructor() { }
 

@@ -17,8 +17,8 @@ export class ChapterItemMolec implements OnInit {
   @Input() chapterId = '123453_Assxzxc';
   @Input() bookId = '123453_Assxzxc';
   @Input() chapter = {
-    title: 'Chương 1',
-    value: 'Ngày ấy vì ai mà đổi thay',
+    chapterNumber: 'Chương 1',
+    title: 'Ngày ấy vì ai mà đổi thay',
     price: 'Miễn phí',
     createAt: '09-09-2020',
   };

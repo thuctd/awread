@@ -1,5 +1,3 @@
-import { Genre } from ".";
-
 export interface Book {
   id: string;
   imgUrl: string;

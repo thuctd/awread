@@ -1,4 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -15,11 +16,15 @@ import { Router } from '@angular/router';
 })
 export class NavbarButtonsOrgan implements OnInit {
   @Input() isLogin = false;
-  constructor(private router: Router) {}
+  @Input() items = [
+    {
+      id: '1',
+      title: 'Tôi lạc quan'
+    }
+  ];
+  @Input() searchControl = new FormControl();
+  @Output() eventSearch = new EventEmitter();
+  constructor() { }
 
-  ngOnInit(): void {}
-
-  navigateToSearch() {
-    this.router.navigate(['search']);
-  }
+  ngOnInit(): void { }
 }
