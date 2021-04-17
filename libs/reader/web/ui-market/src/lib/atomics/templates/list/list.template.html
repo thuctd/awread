@@ -10,7 +10,7 @@
       <div class="inline-flex">
         <div class="rounded-md text-sm leading-none border-gray-200 mt-1" *ngFor="let action of actions">
           <atom-btn-icon class="{{action.class}}" [icon]="action.faIcon"
-            [ngClass]="display === action.display ? 'bg-green-400 text-white': 'bg-white text-green-400'" (eventChangesDisplay)="changeDisplay(action.display)">
+            [ngClass]="display === action.display ? 'bg-green-primary text-white': 'bg-white text-green-primary'" (eventChangesDisplay)="changeDisplay(action.display)">
           </atom-btn-icon>
         </div>
         <div class="pl-8">

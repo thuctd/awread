@@ -1,16 +1,16 @@
 <section class="border-b border-gray-400 w-full pb-4">
   <atom-title [title]="title" class="text-center"></atom-title>
   <div class="float-left sm:pt-3 pt-4">
-    <select class="sm:text-base text-sm outline-none bg-gray-200 rounded-lg py-1 sm:py-1.5 sm:pl-2.5 sm:pr-3 pl-1.5 pr-2 text-gray-800 cursor-pointer">
+    <select class="sm:text-base text-sm outline-none bg-gray-200 rounded-lg py-1 sm:py-1.5 sm:pl-2.5 sm:pr-3 pl-1.5 pr-2 text-gray-text cursor-pointer roboto">
       <option *ngFor="let chapter of chapters" [value]="chapter.id">
         {{chapter.chapterNumber}}
       </option>
     </select>
   </div>
   <div class="float-right sm:pt-3 pt-4">
-    <atom-btn-switch-chapter (btnClick)="backChapterBook.emit($event)" class="float-right sm:ml-2 ml-1"></atom-btn-switch-chapter>
+    <atom-btn-switch-chapter (btnClick)="backChapterBook.emit($event)" class="float-right sm:ml-2 ml-1 roboto"></atom-btn-switch-chapter>
     <atom-btn-switch-chapter [faIcon]="faIcon" [title]="'Trước'" [case]="false" (btnClick)="nextChapterBook.emit($event)"
-      class="float-right flex flex-row-reverse"></atom-btn-switch-chapter>
+      class="float-right flex flex-row-reverse roboto"></atom-btn-switch-chapter>
   </div>
   <div class="clear-both"></div>
 </section>
