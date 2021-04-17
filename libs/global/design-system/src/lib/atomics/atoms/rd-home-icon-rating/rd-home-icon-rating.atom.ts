@@ -9,8 +9,14 @@ import { faBookmark } from '@fortawesome/free-solid-svg-icons';
       :host {
         display: block;
       }
-      :host .top-45 {
+      :host .right-45 {
         right: 1.15rem;
+      }
+
+      @media only screen and (min-device-width: 414px) and (max-device-width: 736px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait) {
+        :host .right-45 {
+          right: 0.9rem;
+        }
       }
     `,
   ],
@@ -20,7 +26,7 @@ export class RdHomeIconRatingAtom implements OnInit {
   @Input() faIcon = faBookmark;
   @Input() topBook = 1;
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

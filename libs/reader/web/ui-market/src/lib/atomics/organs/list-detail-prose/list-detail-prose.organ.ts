@@ -15,6 +15,7 @@ import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 })
 export class ListDetailProseOrgan implements OnInit {
   counter = Array;
+  @Input() prosebooks = [];
   @Input() display: 'grid' | 'list' = 'grid';
   @Input() moreContent = 'Xem thêm';
 

@@ -6,17 +6,7 @@ import { map, startWith } from 'rxjs/operators';
 @Component({
   selector: 'atom-search-btn',
   templateUrl: './search-btn.atom.html',
-  styles: [
-    `
-      :host {
-        display: block;
-      }
-      ::ng-deep .mat-option {
-          font-family: 'nunito', sans-serif !important;
-        }
-      }
-    `,
-  ],
+  styleUrls: ['./search-btn.atom.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchBtnAtom implements OnInit {
@@ -27,29 +17,26 @@ export class SearchBtnAtom implements OnInit {
   @Input() color = 'text-white';
   @ViewChild('search') searchElement: ElementRef;
   @Input() inputControl: FormControl = new FormControl('');
-  constructor() {}
+  constructor() { }
 
-  options: string[] = ['Tôi lạc quan', 'giữa đám đông', 'Nhưng khi một mình thì lại không'];
+  @Input() options = [{
+    id: '1',
+    title: 'Tôi lạc quan'
+  }];
+
   filteredOptions: Observable<string[]>;
 
   ngOnInit() {
-    this.filteredOptions = this.inputControl.valueChanges.pipe(
-      startWith(''),
-      map((value) => this.filter(value))
-    );
-  }
-
-  private filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-
-    return this.options.filter((option) => option.toLowerCase().indexOf(filterValue) === 0);
+    this.inputControl = this.inputControl ?? new FormControl("");
   }
 
   toggleDisplay() {
     this.isDisplay = !this.isDisplay;
-    setTimeout(() => {
-      this.searchElement.nativeElement.focus();
-    }, 100);
+    if (this.isDisplay === true) {
+      setTimeout(() => {
+        this.searchElement.nativeElement.focus();
+      }, 1000);
+    }
   }
 
   @HostListener('document:keydown.escape', ['$event']) onKeydownHandler(event: KeyboardEvent) {

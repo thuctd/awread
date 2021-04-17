@@ -1,11 +1,11 @@
 <div class="w-full max-w-screen-xl mx-auto mt-4">
     <atom-title [title]='titlePage' class="uppercase"></atom-title>
     <div class="justify-center flex flex-col mt-8">
-        <div class="flex justify-center mb-10">
+        <div *ngFor='let book of books | slice:0:1; let i = index' class="flex justify-center mb-10">
             <div class="mx-4">
                 <div class="relative flex flex-row">
                   <div class="w-1/2">
-                    <img [src]="srcImg" [alt]="altImg" class="inline w-40 h-56">
+                    <atom-img-m [height]="'h-56'" [bookId]='book.id' [srcImg]='book.imgUrl'></atom-img-m>
                     <div class="absolute top--04">
                         <rd-home-icon-rating></rd-home-icon-rating>
                     </div>
@@ -18,14 +18,14 @@
         </div>
         <div class="flex justify-center w-full">
             <div class="grid grid-cols-2 gap-8 mb-6">
-                <div *ngFor='let loop3 of counter(4); let i = index' class="w-full rounded relative">
+                <div *ngFor='let book of books | slice:1:5; let i = index' class="w-full rounded relative">
                   <div class="mx-4">
-                    <atom-img-m [height]="'h-48'"></atom-img-m>
+                    <atom-img-m [height]="'h-48'" [bookId]='book.id' [srcImg]='book.imgUrl'></atom-img-m>
                     <div class="absolute -top-1.5">
                         <rd-home-icon-rating [topBook]='i + 2'></rd-home-icon-rating>
                     </div>
                     <div class="w-full">
-                      <home-info-book-review [isSize]="false" [size]="'s'"></home-info-book-review>
+                      <home-info-book-review [book]='book' [isSize]="false" [size]="'s'"></home-info-book-review>
                     </div>
                   </div>
                 </div>

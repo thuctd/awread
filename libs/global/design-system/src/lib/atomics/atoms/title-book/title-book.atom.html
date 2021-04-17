@@ -1,3 +1,3 @@
 <div class="mx-auto">
-  <a [routerLink]="['/books', bookId]" [ngClass]=" size === 's' ? 'text-sm' : size === 'm' ? 'text-xs md:text-base' : 'text-xl'"  class="text-left font-bold mb-1 break-words cursor-pointer block outline-none text-gray-text transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-100 nunito"> {{ titleBook }} </a>
+  <a [routerLink]="['/books', bookId]" [ngClass]=" size === 's' ? 'text-sm' : size === 'm' ? 'text-sm md:text-base' : 'text-base md:text-xl'"  class="text-justify font-bold mb-1 break-words cursor-pointer block outline-none text-gray-text transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-100"> {{ titleBook }} </a>
 </div>

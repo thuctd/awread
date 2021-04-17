@@ -11,7 +11,7 @@ export class NavbarMenuOrgan implements OnInit {
   icon = faAngleDown;
   navHome = {
     title: 'Trang chủ',
-    href: '/home',
+    href: '/',
   };
   naveBook = {
     title: 'Truyện',
@@ -31,7 +31,7 @@ export class NavbarMenuOrgan implements OnInit {
           },
           {
             page: '/composed',
-            type: 'novel',
+            type: 'prose',
             title: 'Tản văn',
           },
         ],
@@ -51,7 +51,7 @@ export class NavbarMenuOrgan implements OnInit {
           },
           {
             page: '/collected',
-            type: 'novel',
+            type: 'prose',
             title: 'Tản văn',
           },
         ],

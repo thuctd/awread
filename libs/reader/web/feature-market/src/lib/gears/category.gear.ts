@@ -33,4 +33,14 @@ export class CategoryGear {
     );
   }
 
+  getCategoryByType(type: string) {
+    return this.categoryApi.getCategoryByType(type).pipe(
+      tap((category) => this.categoriesStore.add(category)), // book lấy về thì thêm vào store
+      catchError((err) => {
+        console.error('An error occurred:', err);
+        return throwError(err);
+      })
+    );
+  }
+
 }

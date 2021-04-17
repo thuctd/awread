@@ -1,4 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'template-rd-search-book',
@@ -13,34 +14,11 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RdSearchBookTemplate implements OnInit {
-  @Input() items = [
-    {
-      id: 1,
-      name: 'Cô gái chúng ta cùng theo đuổi',
-      category: 'Viễn tưởng',
-      status: 'Hoàn thành',
-    },
-    {
-      id: 2,
-      name: 'Em là nhà',
-      category: 'Hành động',
-      status: 'Hoàn thành',
-    },
-    {
-      id: 3,
-      name: 'Em là hot girl trong bộ váy ngắn',
-      category: 'Phiêu lưu, hài hước, hành động',
-      status: 'Hoàn thành',
-    },
-    {
-      id: 4,
-      name: 'muahahahahaha',
-      category: 'Viễn tưởng',
-      status: 'Hoàn thành',
-    },
-  ];
+  @Output() bindingUrl = new EventEmitter();
+  @Input() searchControl: FormControl = new FormControl();
+  @Input() items = [];
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

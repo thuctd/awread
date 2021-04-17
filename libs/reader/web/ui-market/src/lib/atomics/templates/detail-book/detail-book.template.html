@@ -1,11 +1,16 @@
 <div class="max-w-screen-xl mx-auto lg:px-8 xl:px-0 pt-40 bg-gray-primary">
+  <ng-container *ngIf="book; else noData">
     <atom-breadcrumb class="mb-4 xl:mb-8"></atom-breadcrumb>
     <div class="flex items-start">
-        <div class="sm:w-2/3 lg:w-3/4 pr-6 xl:pr-16">
-            <organ-detail-book-main-content></organ-detail-book-main-content>
-        </div>
-        <div class="sm:w-1/3 lg:w-1/4 -mt-4">
-            <organ-detail-book-sidebar></organ-detail-book-sidebar>
-        </div>
+      <div class="sm:w-2/3 lg:w-3/4 pr-6 xl:pr-16">
+        <organ-detail-book-main-content (chapterLastEvent)='chapterLastEvent.emit($event)' (chapterFistEvent)='chapterFistEvent.emit($event)' [chapters]='chapters' [book]='book'></organ-detail-book-main-content>
+      </div>
+      <div class="sm:w-1/3 lg:w-1/4 -mt-4">
+        <organ-detail-book-sidebar (nativeTopBook)='nativeTopBook.emit()' (nativeAuthorBook)='nativeAuthorBook.emit()' [topBooks]='topBooks' [authorBooks]='authorBooks'></organ-detail-book-sidebar>
+      </div>
     </div>
+  </ng-container>
+  <ng-template #noData>
+    <div class="pt-8 text-xl">Truyện đang được tải mong các bạn chờ trong giây lát...</div>
+  </ng-template>
 </div>

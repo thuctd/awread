@@ -231,4 +231,4 @@ import { RdHomeBookUpdateDropdownMbMolec } from './molecs/rd-home-book-update-dr
     RdHomeBookUpdateDropdownMbMolec,
   ],
 })
-export class ReaderWebUiMarketAtomicModule {}
+export class ReaderWebUiMarketAtomicModule { }

@@ -2,7 +2,29 @@ import { Injectable } from '@angular/core';
 import { EntityState, EntityStore, StoreConfig, ActiveState } from '@datorama/akita';
 import { Book } from '../../models';
 
-export interface BooksState extends EntityState<Book>, ActiveState { };
+export interface BooksState extends EntityState<Book>, ActiveState {
+  ui: {
+    filters: {
+      typeBook: string;
+      category: string;
+      genre: string;
+      status: string;
+      publishedAt: string;
+    }
+  }
+};
+
+const initialState = {
+  ui: {
+    filters: {
+      typeBook: '',
+      category: '',
+      genre: '',
+      status: '',
+      publishedAt: ''
+    }
+  }
+};
 // export interface BookUI {}
 
 // export interface BooksUIState extends EntityState<BookUI>, ActiveState {}
@@ -13,7 +35,7 @@ export interface BooksState extends EntityState<Book>, ActiveState { };
 export class BooksStore extends EntityStore<BooksState> {
   // ui: EntityUIStore<BookUIState>;
   constructor() {
-    super();
+    super(initialState);
     // this.createUIStore().setInitialEntityState();
   }
 

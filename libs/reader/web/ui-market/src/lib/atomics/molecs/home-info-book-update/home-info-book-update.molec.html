@@ -1,6 +1,6 @@
 <div class="w-full">
-    <div class="mb-2 h-12">
-      <atom-title-book [titleBook]="book" [size]='"m"'></atom-title-book>
+    <div class="mb-2 h-9 sm:h-12">
+      <atom-title-book [titleBook]="book.title" [bookId]="book.id" [size]='"s"'></atom-title-book>
     </div>
     <div *ngFor="let btn of btns" class="flex">
         <base-btn (onBtnClicked)="submitEvent.emit($event)" [isSize]="false" [chapter]="btn"></base-btn>

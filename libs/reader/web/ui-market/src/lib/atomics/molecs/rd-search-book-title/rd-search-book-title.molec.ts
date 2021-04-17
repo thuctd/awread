@@ -1,6 +1,7 @@
 import { FormControl } from '@angular/forms';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import { E } from '@angular/cdk/keycodes';
 
 @Component({
   selector: 'molec-rd-search-book-title',
@@ -16,11 +17,10 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
 })
 export class RdSearchBookTitleMolec implements OnInit {
   @Input() faIcon = faSearch;
-  @Input() inputControl = new FormControl('Em là nhà');
-  @Input() searchString = 'Em là nhà';
+  @Input() inputControl = new FormControl();
   @Output() submitBtn = new EventEmitter();
+  @Output() bindingUrl = new EventEmitter();
+  constructor() { }
 
-  constructor() {}
-
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

@@ -1,21 +1,25 @@
-<section class="pt-28 mx-auto">
-  <div class="grid grid-cols-12 gap-10 place-content-center" *ngIf="!(display === 'list');else list_content">
-    <div *ngFor="let loop3 of counter(9);" class="col-span-2 md:col-span-4">
-      <div>
-        <atom-img-m [height]="'lg:h-72 xl:h-80'"></atom-img-m>
-        <list-info-long-book></list-info-long-book>
+<section class="mx-auto">
+  <ng-container *ngIf="longbooks?.length; else noData">
+    <div class="grid grid-cols-12 gap-10 lg:gap-x-10 xl:gap-x-14 place-content-center" *ngIf="!(display === 'grid');else list_content">
+      <div *ngFor="let book of longbooks;" class="col-span-2 md:col-span-4">
+        <div>
+          <atom-img-m [height]="'lg:h-72 xl:h-80'" [srcImg]='book.imgUrl' [bookId]='book.id' [size]='"l"'></atom-img-m>
+          <list-info-long-book [bookId]='book.id' [titleBook]='book.title'></list-info-long-book>
+        </div>
       </div>
     </div>
-  </div>
-  <ng-template #list_content>
-    <div class="grid grid-cols-12 gap-10 place-content-center">
-      <div *ngFor="let loop3 of counter(8);" class="col-span-2 md:col-span-6">
-        <organ-books-grid></organ-books-grid>
+    <ng-template #list_content>
+      <div class="grid grid-cols-12 gap-10 place-content-center">
+        <div *ngFor="let book of longbooks;" class="col-span-2 md:col-span-6">
+          <organ-books-grid [imgUrl]='book.imgUrl' [bookId]='book.id' [title]='book.title'></organ-books-grid>
+        </div>
       </div>
+    </ng-template>
+    <div class="flex justify-end pt-4">
+      <atom-text-link (click)="moreEvent.emit()" [text]="moreContent" [class]="'text-base text-gray-400 uppercase font-bold'"></atom-text-link>
     </div>
+  </ng-container>
+  <ng-template #noData>
+    <div class="pt-12 text-xl">Truyện đang được tải, mong các bạn chờ trong giây lát...</div>
   </ng-template>
-  <div class="flex justify-end pt-4">
-    <atom-text-link (click)="moreEvent.emit()" [text]="moreContent" [class]="'text-base text-gray-text uppercase font-bold'"></atom-text-link>
-    <!-- <fa-icon [icon]="faIcon" class="text-gray-600 ml-2 text-xl"></fa-icon> -->
-  </div>
 </section>
