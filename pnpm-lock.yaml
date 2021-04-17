@@ -35,6 +35,7 @@ dependencies:
   cron: 1.8.2
   express: 4.17.1
   firebase-admin: 9.5.0
+  graphile-utils: 4.11.2
   graphql: 15.5.0
   ng-image-slider: 2.6.4_b0550eba7aa0167d56798f794764a5df
   ngx-owl-carousel-o: 5.0.0_2659a02cbfe2691f14a09a95419ad827
@@ -12353,7 +12354,7 @@ packages:
     dependencies:
       debug: 4.3.1
       graphql: 15.5.0
-      tslib: 2.1.0
+      tslib: 2.2.0
     dev: false
     engines:
       node: '>=8.6'
@@ -20961,6 +20962,10 @@ packages:
   /tslib/2.1.0:
     resolution:
       integrity: sha512-hcVC3wYEziELGGmEEXue7D75zbwIIVUMWAVbHItGPx0ziyXxrOMQx4rQEVEV45Ut/1IotuEvwqPopzIOkDMf0A==
+  /tslib/2.2.0:
+    dev: false
+    resolution:
+      integrity: sha512-gS9GVHRU+RGn5KQM2rllAlR3dU6m7AcpJKdtH8gFvQiC4Otgk98XnmMU+nZenHt/+VhnBPWwgrJsyrdcw6i23w==
   /tsutils/3.21.0_typescript@4.1.5:
     dependencies:
       tslib: 1.14.1
@@ -22365,6 +22370,7 @@ specifiers:
   firebase: ^8.3.1
   firebase-admin: ^9.5.0
   firebase-tools: ^9.6.1
+  graphile-utils: ^4.11.2
   graphql: ^15.5.0
   https-proxy-agent: ^5.0.0
   husky: ^5.2.0

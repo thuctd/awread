@@ -7,7 +7,8 @@ import firebaseConfig from './adminsdk.json';
 import { environment } from '@awread/global/environments';
 import ConnectionFilterPlugin from "postgraphile-plugin-connection-filter";
 import cron from 'cron';
-
+import MyRandomFieldPlugin from './plugins/random-field.plugin';
+import MyPlugin from './plugins/my-plugin.plugin';
 
 const app = express();
 const FIREBASE_URL = environment.firebase.databaseURL;
@@ -16,6 +17,9 @@ const SCHEMA = environment.postgres.SCHEMA;
 
 
 import { Pool, Client } from 'pg';
+import MyRandomUserPlugin from './plugins/random-user.plugin';
+import LAST_POST_CREATED_AT from './plugins/books-order-by-random.plugin';
+import TestFieldPlugin from './plugins/test-field.plugin';
 const pool = new Pool({
   connectionString: `${DATABASE_URL}`
 });
@@ -44,6 +48,7 @@ const postgraphileOptions = {
   watchPg: true,
   graphiql: true,
   enhanceGraphiql: true,
+  // appendPlugins: [ConnectionFilterPlugin, MyRandomFieldPlugin, MyPlugin, MyRandomUserPlugin, LAST_POST_CREATED_AT, TestFieldPlugin],
   appendPlugins: [ConnectionFilterPlugin],
   // pgSettings: async (req: IncomingMessage & { user: any }) => {
   //   console.log('req.user', req.user);
@@ -151,6 +156,7 @@ async function startCronJob() {
   const setTimezone = await pool.query(`set timezone='Asia/Ho_Chi_Minh'`);
   const now = await pool.query(`select current_setting('TIMEZONE'), now();`);
   console.log('server now', now.rows[0]);
+  postgresRefeshMV();
   // const setTimezone = await pool.query(`set timezone='US/Eastern'`);
 
   // const job = new cron.CronJob('*/10 * * * * *', function () {
@@ -168,8 +174,8 @@ async function startCronJob() {
 }
 
 async function postgresRefeshMV() {
-  await pool.query(`REFRESH MATERIALIZED VIEW most_views_books_hour_mv;`);
-  await pool.query(`REFRESH MATERIALIZED VIEW most_views_books_day_mv;`);
-  await pool.query(`REFRESH MATERIALIZED VIEW newest_books_hour_mv;`);
-  await pool.query(`REFRESH MATERIALIZED VIEW newest_books_day_mv;`);
+  await pool.query(`REFRESH MATERIALIZED VIEW mv_books_latest_chapters;`);
+  await pool.query(`REFRESH MATERIALIZED VIEW mv_hourly_most_view_books;`);
+  await pool.query(`REFRESH MATERIALIZED VIEW mv_most_view_books;`);
+  await pool.query(`REFRESH MATERIALIZED VIEW v_random_books;`);
 }
