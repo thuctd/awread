@@ -175,7 +175,6 @@ async function startCronJob() {
 
 async function postgresRefeshMV() {
   await pool.query(`REFRESH MATERIALIZED VIEW mv_books_latest_chapters;`);
-  await pool.query(`REFRESH MATERIALIZED VIEW mv_hourly_most_view_books;`);
   await pool.query(`REFRESH MATERIALIZED VIEW mv_most_view_books;`);
   await pool.query(`REFRESH MATERIALIZED VIEW v_random_books;`);
 }
