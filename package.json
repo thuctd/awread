@@ -28,7 +28,8 @@
     "help": "nx help",
     "design-story": "nx run global-design-system:storybook",
     "fb-emu": "firebase emulators:start",
-    "nx-migrate": "npx @nrwl/tao@latest migrate @nrwl/workspace@latest"
+    "nx-migrate": "npx @nrwl/tao@latest migrate @nrwl/workspace@latest",
+    "start-tunnel": "ssh -L localhost:5433:172.17.0.2:5432 hiepxanh@awread.vn"
   },
   "private": true,
   "dependencies": {
@@ -68,6 +69,7 @@
     "cron": "^1.8.2",
     "express": "^4.17.1",
     "firebase-admin": "^9.5.0",
+    "graphile-utils": "^4.11.2",
     "graphql": "^15.5.0",
     "ng-image-slider": "^2.6.4",
     "ngx-owl-carousel-o": "^5.0.0",
