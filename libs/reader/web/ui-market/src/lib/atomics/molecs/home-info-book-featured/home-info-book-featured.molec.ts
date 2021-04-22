@@ -13,15 +13,16 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeInfoBookFeaturedMolec implements OnInit {
+  @Input() isInfoNovel: true | false = false;
   @Input() book = {
     title: 'Cô gái chúng ta cùng theo đuổi năm nào',
-    id: '1'
+    id: '1',
   };
 
   @Input() btns = ['Chương 1', 'Chương 2'];
   @Output() submitEvent = new EventEmitter();
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }
