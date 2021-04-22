@@ -83,7 +83,7 @@ import { SliderAtom } from './atoms/slider/slider.atom';
 import { TitleAtom } from './atoms/title/title.atom';
 import { TextLinkAtom } from './atoms/text-link/text-link.atom';
 import { TitleBookAtom } from './atoms/title-book/title-book.atom';
-import { RdListTabPageAtom } from './atoms/rd-list-tab-page/rd-list-tab-page.atom';
+import { RdTabItemAtom } from './atoms/rd-tab-item/rd-tab-item.atom';
 import { BtnSwitchChapterAtom } from './atoms/btn-switch-chapter/btn-switch-chapter.atom';
 import { BtnSelectAtom } from './atoms/btn-select/btn-select.atom';
 import { BtnBackToTopAtom } from './atoms/btn-back-to-top/btn-back-to-top.atom';
@@ -202,7 +202,7 @@ import { BreadcrumbAtom } from './atoms/breadcrumb/breadcrumb.atom';
     TitleAtom,
     TextLinkAtom,
     TitleBookAtom,
-    RdListTabPageAtom,
+    RdTabItemAtom,
     BtnSwitchChapterAtom,
     BtnSelectAtom,
     BtnBackToTopAtom,
@@ -302,7 +302,7 @@ import { BreadcrumbAtom } from './atoms/breadcrumb/breadcrumb.atom';
     TitleAtom,
     TextLinkAtom,
     TitleBookAtom,
-    RdListTabPageAtom,
+    RdTabItemAtom,
     BtnSwitchChapterAtom,
     BtnSelectAtom,
     BtnBackToTopAtom,
