@@ -58,7 +58,6 @@ export class MenuNavbarMolec implements OnInit {
   @Input() lvVip = '0';
   @Input() coin = '0';
   @Input() isMenu = false;
-  @Input() no;
 
   constructor(private matDialog: MatDialog) {}
 

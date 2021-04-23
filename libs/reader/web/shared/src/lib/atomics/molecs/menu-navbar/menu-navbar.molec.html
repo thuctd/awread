@@ -32,7 +32,7 @@
       <molec-dropdown-menu-mb (closeMenu)="onClick()"></molec-dropdown-menu-mb>
       <div (click)="onClick()" class="border-b py-3 text-green-primary font-bold text-lg pr-4 cursor-pointer">Đăng truyện</div>
       <div (click)="onClick()" class="border-b py-3 text-green-primary font-bold text-lg pr-4 cursor-pointer">Nạp Coin</div>
-      <molec-dropdown-menu-mb no (closeMenu)="onClick()" [title]="'Cộng đồng'" [items]="items"></molec-dropdown-menu-mb>
+      <molec-dropdown-menu-mb (closeMenu)="onClick()" [title]="'Cộng đồng'" [items]="items"></molec-dropdown-menu-mb>
       <div (click)="onClick()" *ngIf="!isLogin" class="border-b py-3 text-green-primary font-bold text-lg pr-4 cursor-pointer">Cài đặt</div>
       <div class="flex flex-col items-end pt-8">
         <atom-rd-base-btn-green (submitEvent)="openFormLogin($event)" (click)="login()" class="mb-1" *ngIf="isLogin" [title]="btns.login"></atom-rd-base-btn-green>
