@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, EventEmitter, Output } from '@angular/core';
 import { faCaretDown, faCaretRight } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -18,6 +18,7 @@ export class DropdownMenuMbMolec implements OnInit {
   @Input() faIcon = faCaretRight;
   @Input() faIcon2 = faCaretDown;
   @Input() isDisplayMenu = true;
+  @Output() closeMenu = new EventEmitter();
   @Input() items = [
     {
       title: 'Truyện tự sáng tác',
@@ -29,9 +30,9 @@ export class DropdownMenuMbMolec implements OnInit {
     },
   ];
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   displayMenu() {
     this.isDisplayMenu = !this.isDisplayMenu;

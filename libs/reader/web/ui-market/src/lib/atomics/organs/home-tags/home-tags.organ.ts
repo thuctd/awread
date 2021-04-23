@@ -9,7 +9,7 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
 })
 export class HomeTagsOrgan implements OnInit {
   currentGenre = null;
-  currentIndex = -1;
+  currentIndex = 0;
   prevIcon = `<img src="/global-assets/images/arrow_left.webp" alt="arrow_left">`;
   nextIcon = `<img src="/global-assets/images/arrow_right.webp" alt="arrow_right">`;
   @Input() titlePage = 'Tags';
@@ -18,18 +18,18 @@ export class HomeTagsOrgan implements OnInit {
   @Input() genres = [
     {
       id: 1,
-      name: 'Lãng mạn'
-    }
+      name: 'Lãng mạn',
+    },
   ];
 
   @Input() items = [
     {
-      id: "1",
+      id: '1',
       title: 'Cô gái theo đuổi năm nào',
       imageUrl: 'https://via.placeholder.com/260x370.png',
-      categoryId: "1",
+      categoryId: '1',
       genres: [1, 3],
-    }
+    },
   ];
 
   @Input() customOptions: OwlOptions = {
@@ -69,9 +69,9 @@ export class HomeTagsOrgan implements OnInit {
     },
   };
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   setActiveGenre(genre, index) {
     this.currentGenre = genre;

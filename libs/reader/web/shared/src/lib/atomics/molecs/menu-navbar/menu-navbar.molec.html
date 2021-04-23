@@ -2,7 +2,7 @@
   <fa-icon class="text-white text-2xl cursor-pointer ml-1.5" [icon]="bars"></fa-icon>
 </div>
 <section *ngIf="isMenu" class="absolute top-0 right-0 modal">
-  <div class="w-4/6 md:w-3/6 h-screen absolute right-0 bg-white br__menu">
+  <div class="w-4/6 md:w-3/6 h-screen absolute right-0 bg-white br__menu" closeOnOutSide (clickedOutside)="onClick()">
     <div (click)="displayMenu()" class="absolute top-1 right-2 cursor-pointer text-2xl text-gray-text">
       <fa-icon [icon]="times"></fa-icon>
     </div>
@@ -28,12 +28,12 @@
           <div class="text-gray-700 text-sm font-semibold">{{name}}</div>
         </div>
       </div>
-      <div class="border-b py-3 text-green-primary font-bold text-lg pr-4 cursor-pointer">Trang chủ</div>
-      <molec-dropdown-menu-mb></molec-dropdown-menu-mb>
-      <div class="border-b py-3 text-green-primary font-bold text-lg pr-4 cursor-pointer">Đăng truyện</div>
-      <div class="border-b py-3 text-green-primary font-bold text-lg pr-4 cursor-pointer">Nạp Coin</div>
-      <molec-dropdown-menu-mb [title]="'Cộng đồng'" [items]="items"></molec-dropdown-menu-mb>
-      <div *ngIf="!isLogin" class="border-b py-3 text-green-primary font-bold text-lg pr-4 cursor-pointer">Cài đặt</div>
+      <div (click)="onClick()" class="border-b py-3 text-green-primary font-bold text-lg pr-4 cursor-pointer">Trang chủ</div>
+      <molec-dropdown-menu-mb (closeMenu)="onClick()"></molec-dropdown-menu-mb>
+      <div (click)="onClick()" class="border-b py-3 text-green-primary font-bold text-lg pr-4 cursor-pointer">Đăng truyện</div>
+      <div (click)="onClick()" class="border-b py-3 text-green-primary font-bold text-lg pr-4 cursor-pointer">Nạp Coin</div>
+      <molec-dropdown-menu-mb (closeMenu)="onClick()" [title]="'Cộng đồng'" [items]="items"></molec-dropdown-menu-mb>
+      <div (click)="onClick()" *ngIf="!isLogin" class="border-b py-3 text-green-primary font-bold text-lg pr-4 cursor-pointer">Cài đặt</div>
       <div class="flex flex-col items-end pt-8">
         <atom-rd-base-btn-green (submitEvent)="openFormLogin($event)" (click)="login()" class="mb-1" *ngIf="isLogin" [title]="btns.login"></atom-rd-base-btn-green>
         <atom-rd-base-btn-green (submitEvent)="openFormRegister($event)" *ngIf="isLogin" [class2]="'px-5'" [title]="btns.register"></atom-rd-base-btn-green>

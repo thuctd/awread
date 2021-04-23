@@ -22,7 +22,7 @@ module.exports = {
         },
         green: {
           primary: "#5ABD8C",
-          dark: "rgba(90, 189, 140, 0.411765)",
+          dark: "#9BB9B4",
         },
         pink: {
           light: "#F6E5E5",

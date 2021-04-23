@@ -2,7 +2,7 @@
   <ng-container *ngIf="chapter; else noData">
     <atom-breadcrumb></atom-breadcrumb>
     <div class="pt-6">
-      <organ-content-book class="roboto" [chapters]='chapters' [chapter]='chapter' (backChapterBook)='backChapterBook.emit($event)'
+      <organ-content-book [chapters]='chapters' [chapter]='chapter' (backChapterBook)='backChapterBook.emit($event)'
         (nextChapterBook)='nextChapterBook.emit($event)'></organ-content-book>
     </div>
     <div>

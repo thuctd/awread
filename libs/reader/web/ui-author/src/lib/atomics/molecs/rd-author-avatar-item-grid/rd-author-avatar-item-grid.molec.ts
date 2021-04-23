@@ -24,7 +24,7 @@ export class RdAuthorAvatarItemGridMolec implements OnInit {
     alt: 'facebook',
   };
   @Input() globe = {
-    icon: 'globe-icon',
+    icon: 'globe',
     text: 'https://awreadbook.com',
     alt: 'globe',
   };
