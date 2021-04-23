@@ -13,6 +13,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeInfoBookFeaturedMolec implements OnInit {
+  @Input() size = 'm';
   @Input() isInfoNovel: true | false = false;
   @Input() book = {
     title: 'Cô gái chúng ta cùng theo đuổi năm nào',

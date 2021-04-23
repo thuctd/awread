@@ -6,7 +6,7 @@
         <div *ngFor='let book of books;' class="col-span-2 md:col-span-4 mx-auto py-4">
             <atom-img-m [height]="'md:h-56 lg:h-72 xl:h-96'" [bookId]='book.id' [srcImg]='book.imgUrl'></atom-img-m>
             <div>
-              <home-info-book-featured [book]='book'></home-info-book-featured>
+              <home-info-book-featured [book]='book' [size]="'l'"></home-info-book-featured>
             </div>
         </div>
     </div>
