@@ -8,7 +8,6 @@ import db from './db.json';
 export class BooksApi {
   constructor(private apollo: Apollo) { }
 
-  //Text commit git
   getFilterBooks(filters) {
     console.log('api filters', filters);
     return of(db.books).pipe(delay(500));
@@ -18,6 +17,7 @@ export class BooksApi {
     return of(db.books.filter((book) => book.title.toLowerCase().includes(term.toLowerCase()))).pipe(delay(500));
   }
 
+  //TODO: Lỗi hình như version ở đây ạ
   getAllBooks() {
     return this.apollo.query({
       query: gql`
