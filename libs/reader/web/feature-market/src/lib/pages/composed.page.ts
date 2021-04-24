@@ -61,7 +61,7 @@ export class ComposedPage implements OnInit, OnDestroy {
   }
 
   filterItemsByCategory(category: Category) {
-    this.filteredBooks$ = this.booksFacade.getCategoryBooks(category.id);
+    this.filteredBooks$ = this.booksFacade.getCategoryBooks(category.categoryid);
   }
 
   filterBooks() {

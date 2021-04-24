@@ -37,7 +37,7 @@ export class HomePage implements OnInit {
   filterItemsByGenre(genre: Genre) {
     this.loading$ = true;
     setTimeout(() => {
-      this.filteredBooks$ = this.booksFacade.getGenreBooks(genre.id);
+      this.filteredBooks$ = this.booksFacade.getGenreBooks(genre.genreid);
       this.loading$ = false;
     }, 200);
   }
@@ -46,7 +46,7 @@ export class HomePage implements OnInit {
     this.filteredBooks$ = this.bookList$.pipe(
       map((items) =>
         items.filter((item) => {
-          return item.genres.includes(items[0].id);
+          // return item.genres.includes(items[0].id);
         })
       )
     );

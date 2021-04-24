@@ -139,7 +139,7 @@ export class BooksGear {
     return this.booksApi.getTopBooks().pipe(
       tap((books) => {
         console.log('get top books: ', books);
-        this.topBooksStore.set(books);
+        // this.topBooksStore.set(books);
       }),
       catchError((err) => {
         console.error('An error occurred:', err);
@@ -152,7 +152,7 @@ export class BooksGear {
     return this.booksApi.getCollectedBooks().pipe(
       tap((books) => {
         console.log('get category books: ', books);
-        this.collectedStore.set(books);
+        // this.collectedStore.set(books);
       }),
       catchError((err) => {
         console.error('An error occurred:', err);
@@ -165,7 +165,7 @@ export class BooksGear {
     return this.booksApi.getComposedBooks().pipe(
       tap((books) => {
         console.log('get top books: ', books);
-        this.composedStore.set(books);
+        // this.composedStore.set(books);
       }),
       catchError((err) => {
         console.error('An error occurred:', err);
@@ -178,7 +178,7 @@ export class BooksGear {
     return this.booksApi.getAuthorBooks(authorId).pipe(
       tap((books) => {
         console.log('get author books: ', books);
-        this.authorBooksStore.set(books);
+        // this.authorBooksStore.set(books);
       }),
       catchError((err) => {
         console.error('An error occurred:', err);
@@ -191,7 +191,7 @@ export class BooksGear {
     return this.booksApi.getGenreBooks(genreId).pipe(
       tap((books) => {
         console.log('genre books: ', books);
-        this.genreBooksStore.set(books);
+        // this.genreBooksStore.set(books);
       }),
       catchError((err) => {
         console.error('An error occurred:', err);

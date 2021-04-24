@@ -17,7 +17,7 @@ export class CategoryGear {
     return this.categoryApi.getAllCategories().pipe(
       tap((res) => {
         console.log('categories: ', res);
-        this.categoriesStore.set(res);
+        // this.categoriesStore.set(res);
       })
     );
   }
@@ -25,7 +25,7 @@ export class CategoryGear {
   getCategoryById(categoryId: string) {
     return this.categoryApi.getCategoryById(categoryId).pipe(
       tap((category) => console.log('detail category: ', category)),
-      tap((category) => this.categoriesStore.add(category)), // book lấy về thì thêm vào store
+      // tap((category) => this.categoriesStore.add(category)), // book lấy về thì thêm vào store
       catchError((err) => {
         console.error('An error occurred:', err);
         return throwError(err);
@@ -35,7 +35,7 @@ export class CategoryGear {
 
   getCategoryByType(type: string) {
     return this.categoryApi.getCategoryByType(type).pipe(
-      tap((category) => this.categoriesStore.add(category)), // book lấy về thì thêm vào store
+      // tap((category) => this.categoriesStore.add(category)), // book lấy về thì thêm vào store
       catchError((err) => {
         console.error('An error occurred:', err);
         return throwError(err);
