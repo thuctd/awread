@@ -1,4 +1,4 @@
-export * from './<%= singular(dasherize(name)) %>.model';
+export * from '../../models/<%= singular(dasherize(name)) %>.model';
 export * from './<%= dasherize(name) %>.query';
 export * from './<%= dasherize(name) %>.service';
 export { <%= classify(name) %>State, <%= classify(name) %>Store } from './<%= dasherize(name) %>.store';

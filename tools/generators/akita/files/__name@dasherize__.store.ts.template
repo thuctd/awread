@@ -7,7 +7,7 @@ export interface <%= classify(name) %>State {
 
 export function createInitialState(): <%= classify(name) %>State {
   return {
-    key: ''
+    key: 'value'
   };
 }
 
