@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { tap } from 'rxjs/operators';
+import { throwError } from 'rxjs';
+import { tap, catchError, map } from 'rxjs/operators';
 import { GenresApi } from '../apis';
 import { GenresStore } from '../states/genres';
 
@@ -14,9 +15,20 @@ export class GenresGear {
 
   getAllGenres() {
     return this.genresApi.getAllGenres().pipe(
-      tap((res) => {
-        console.log('genres: ', res);
-        this.genresStore.set(res);
+      map((res) => {
+        if (
+          res['data'] &&
+          res['data']['allGenres'] &&
+          res['data']['allGenres']['nodes'].length
+        ) {
+          const result = res['data']['allGenres']['nodes'];
+          console.log(result);
+          this.genresStore.set(result);
+        }
+      }),
+      catchError((err) => {
+        console.error('An error occurred:', err);
+        return throwError(err);
       })
     );
   }

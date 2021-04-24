@@ -11,7 +11,19 @@ export class GenresApi {
   get() { }
 
   getAllGenres() {
-    return of(db.genres).pipe(delay(500));
+    return this.apollo.query({
+      query: gql`
+        query allGenres {
+          allGenres {
+            nodes {
+              genreId
+              name
+              description
+            }
+          }
+        }
+      `,
+    });
   }
 
 }

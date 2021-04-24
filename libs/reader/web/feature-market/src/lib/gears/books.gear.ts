@@ -33,8 +33,16 @@ export class BooksGear {
 
   getAllBooks() {
     return this.booksApi.getAllBooks().pipe(
-      tap((books) => {
-        this.booksStore.set(books);
+      tap((res) => {
+        if (
+          res['data'] &&
+          res['data']['allBooks'] &&
+          res['data']['allBooks']['nodes'].length
+        ) {
+          const result = res['data']['allBooks']['nodes'];
+          console.log(result);
+          this.booksStore.set(result);
+        }
       }),
       catchError((err) => {
         console.error('An error occurred:', err);
@@ -49,9 +57,16 @@ export class BooksGear {
 
   getGoodBooks() {
     return this.booksApi.getGoodBooks().pipe(
-      tap((books) => {
-        console.log('get books new: ', books);
-        this.goodBooksStore.set(books);
+      tap((res) => {
+        if (
+          res['data'] &&
+          res['data']['allMvMostViewBooks'] &&
+          res['data']['allMvMostViewBooks']['nodes'].length
+        ) {
+          const result = res['data']['allMvMostViewBooks']['nodes'];
+          console.log(result);
+          this.booksStore.set(result);
+        }
       }),
       catchError((err) => {
         console.error('An error occurred:', err);
@@ -62,9 +77,16 @@ export class BooksGear {
 
   getFeatureBooks() {
     return this.booksApi.getFeatureBooks().pipe(
-      tap((books) => {
-        console.log('get books: ', books);
-        this.featureBooksStore.set(books);
+      tap((res) => {
+        if (
+          res['data'] &&
+          res['data']['allBooks'] &&
+          res['data']['allBooks']['nodes'].length
+        ) {
+          const result = res['data']['allBooks']['nodes'];
+          console.log(result);
+          this.booksStore.set(result);
+        }
       }),
       catchError((err) => {
         console.error('An error occurred:', err);
@@ -75,9 +97,16 @@ export class BooksGear {
 
   getLatestBooks() {
     return this.booksApi.getLatestBooks().pipe(
-      tap((books) => {
-        console.log('get books: ', books);
-        this.latestBooksStore.set(books);
+      tap((res) => {
+        if (
+          res['data'] &&
+          res['data']['allMvBooksLatestChapters'] &&
+          res['data']['allMvBooksLatestChapters']['nodes'].length
+        ) {
+          const result = res['data']['allMvBooksLatestChapters']['nodes'];
+          console.log(result);
+          this.booksStore.set(result);
+        }
       }),
       catchError((err) => {
         console.error('An error occurred:', err);
@@ -88,9 +117,16 @@ export class BooksGear {
 
   getCategoryBooks(categoryId: string) {
     return this.booksApi.getCategoryBooks(categoryId).pipe(
-      tap((books) => {
-        console.log('get category books: ', books);
-        this.categoryBooksStore.set(books);
+      tap((res) => {
+        if (
+          res['data'] &&
+          res['data']['allMvBooksLatestChapters'] &&
+          res['data']['allMvBooksLatestChapters']['nodes'].length
+        ) {
+          const result = res['data']['allMvBooksLatestChapters']['nodes'];
+          console.log(result);
+          this.booksStore.set(result);
+        }
       }),
       catchError((err) => {
         console.error('An error occurred:', err);
