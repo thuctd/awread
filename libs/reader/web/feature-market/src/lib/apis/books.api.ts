@@ -6,8 +6,9 @@ import db from './db.json';
 
 @Injectable({ providedIn: 'root' })
 export class BooksApi {
-  constructor(private apollo: Apollo) {}
+  constructor(private apollo: Apollo) { }
 
+  //Text commit git
   getFilterBooks(filters) {
     console.log('api filters', filters);
     return of(db.books).pipe(delay(500));
