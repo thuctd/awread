@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "id": "core",
+  "type": "object",
+  "properties": {
+    "list": {
+      "type": "string",
+      "description": "name of core",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      }
+    },
+    "directory": {
+      "type": "string",
+      "description": "library location, example: --directory=writer/web",
+      "default": "core"
+    },
+    "kind": {
+      "type": "string",
+      "description": "core function kind",
+      "default": "core"
+    }
+  },
+  "required": [
+    "list"
+  ]
+}

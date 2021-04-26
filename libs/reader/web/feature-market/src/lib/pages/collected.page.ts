@@ -71,7 +71,7 @@ export class CollectedPage implements OnInit, OnDestroy {
   }
 
   filterItemsByCategory(category: Category) {
-    this.filteredBooks$ = this.booksFacade.getCategoryBooks(category.id);
+    this.filteredBooks$ = this.booksFacade.getCategoryBooks(category.categoryid);
   }
 
   filterBooks() {

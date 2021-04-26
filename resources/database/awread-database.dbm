@@ -1,0 +1,714 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+CAUTION: Do not modify this file unless you know what you are doing.
+         Unexpected results may occur if the code is changed deliberately.
+-->
+<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="325,647" last-zoom="0.95" max-obj-count="21"
+	 default-owner="postgres">
+<database name="awread_database" is-template="false" allow-conns="true">
+</database>
+
+<schema name="public" layer="0" fill-color="#e1e1e1" sql-disabled="true">
+</schema>
+
+<extension name="uuid-ossp">
+	<schema name="public"/>
+</extension>
+
+<table name="books" layer="0" collapse-mode="2" max-obj-count="13" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<appended-sql><![CDATA[-- create index title_gin_idx on public.books
+-- using gin (title gin_trgm_ops);]]></appended-sql>
+	<prepended-sql><![CDATA[set timezone='Asia/Ho_Chi_Minh';]]></prepended-sql>
+	<position x="1220" y="720"/>
+	<column name="bookId" not-null="true" default-value="uuid_generate_v4 ()">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="userId" not-null="true">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="categoryId" not-null="true">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="publisherId" not-null="true">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="title" not-null="true">
+		<type name="text" length="0"/>
+	</column>
+	<column name="updatedAt" not-null="true" default-value="CURRENT_TIMESTAMP">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="completed" not-null="true" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="published" not-null="true" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="ages" not-null="true" default-value="2">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="description">
+		<type name="text" length="0"/>
+	</column>
+	<column name="cover">
+		<type name="text" length="0"/>
+	</column>
+	<constraint name="books_pk" type="pk-constr" table="public.books">
+		<columns names="bookId" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="genres" layer="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1720" y="1300"/>
+	<column name="genreId" not-null="true">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="name">
+		<type name="text" length="0"/>
+	</column>
+	<column name="description">
+		<type name="text" length="0"/>
+	</column>
+	<constraint name="genres_pk" type="pk-constr" table="public.genres">
+		<columns names="genreId" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="users" layer="0" collapse-mode="2" max-obj-count="4" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="460" y="800"/>
+	<column name="userId" not-null="true" default-value="uuid_generate_v4()">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="username" not-null="true">
+		<type name="text" length="0"/>
+	</column>
+	<column name="email">
+		<type name="text" length="0"/>
+	</column>
+	<column name="name" not-null="true">
+		<type name="text" length="0"/>
+	</column>
+	<constraint name="users_pk" type="pk-constr" table="public.users">
+		<columns names="userId" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="chapters" layer="0" collapse-mode="2" max-obj-count="8" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1760" y="660"/>
+	<column name="chapterId" not-null="true" default-value="uuid_generate_v4 ()">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="published" default-value="true">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="position" default-value="0">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="bookId" not-null="true">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="title">
+		<type name="text" length="0"/>
+	</column>
+	<column name="createdAt" not-null="true" default-value="now()">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="updatedAt" not-null="true" default-value="now()">
+		<type name="timestamp" length="0"/>
+	</column>
+	<constraint name="chapters_pk" type="pk-constr" table="public.chapters">
+		<columns names="chapterId" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="categories" layer="0" collapse-mode="2" max-obj-count="2" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1240" y="1300"/>
+	<column name="categoryId" not-null="true">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="name">
+		<type name="text" length="0"/>
+	</column>
+	<constraint name="categories_pk" type="pk-constr" table="public.categories">
+		<columns names="categoryId" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="books_genres" layer="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1640" y="1040"/>
+	<column name="bookId" not-null="true">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="genreId" not-null="true">
+		<type name="numeric" length="0"/>
+	</column>
+	<constraint name="books_genres_pk" type="pk-constr" table="public.books_genres">
+		<columns names="bookId,genreId" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="book_visits" layer="0" collapse-mode="2" max-obj-count="8" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="480" y="460"/>
+	<column name="ip" not-null="true">
+		<type name="text" length="0"/>
+	</column>
+	<column name="userId" not-null="true">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="bookId" not-null="true">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="chapterId" not-null="true">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="visitTime" not-null="true" default-value="now()">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="count" not-null="true" default-value="0">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="isMobile" not-null="true" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<constraint name="book_visits_pk" type="pk-constr" table="public.book_visits">
+		<columns names="ip,userId,bookId,chapterId,visitTime" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="authors" layer="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="800" y="780"/>
+	<column name="bookId" not-null="true">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="userId" not-null="true">
+		<type name="uuid" length="0"/>
+	</column>
+	<constraint name="books_by_users_pk" type="pk-constr" table="public.authors">
+		<columns names="bookId,userId" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="books_rank" layer="0" collapse-mode="2" max-obj-count="8" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1400" y="1520"/>
+	<column name="book_id" not-null="true" default-value="uuid_generate_v4 ()">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="title" not-null="true">
+		<type name="text" length="0"/>
+	</column>
+	<column name="genreIds">
+		<type name="uuid" length="0" dimension="1"/>
+	</column>
+	<column name="categoryId">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="sold" default-value="0">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="rate">
+		<type name="numeric" length="4" precision="2"/>
+	</column>
+	<column name="view" default-value="0">
+		<type name="numeric" length="0"/>
+	</column>
+</table>
+
+<table name="publishers" layer="0" collapse-mode="2" max-obj-count="2" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="2040" y="900"/>
+	<column name="publisherId" not-null="true" default-value="uuid_generate_v4 ()">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="name" not-null="true">
+		<type name="text" length="0"/>
+	</column>
+	<constraint name="publisher_pk" type="pk-constr" table="public.publishers">
+		<columns names="publisherId" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<function name="update_books_updatedAt"
+		window-func="false"
+		returns-setof="false"
+		behavior-type="CALLED ON NULL INPUT"
+		function-type="VOLATILE"
+		security-type="SECURITY INVOKER"
+		execution-cost="1"
+		row-amount="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<language name="plpgsql"/>
+	<return-type>
+	<type name="trigger" length="0"/>
+	</return-type>
+	<definition><![CDATA[begin
+update public.books
+set "updatedAt" = new."updatedAt"
+where books."bookId" = new."bookId";
+return new;
+end;]]></definition>
+</function>
+
+<view name="mv_books_latest_chapters" layer="0" materialized="true" collapse-mode="2" max-obj-count="10" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="960" y="1500"/>
+	<reference table="public.chapters" column="bookId"/>
+	<reference table="public.books" column="title"/>
+	<reference table="public.books" column="updatedAt"/>
+	<reference table="public.books" column="categoryId"/>
+	<reference>
+		<expression><![CDATA[jsonb_agg(distinct "newestChapters") as "newestChapters"]]></expression>
+	</reference>
+	<reference table="public.chapters"/>
+	<reference>
+		<expression><![CDATA[join lateral (
+	select jsonb_build_object(
+		'chapterId', c."chapterId",
+		'position', c.position
+    ) as "newestChapters"
+	from chapters c
+	where c."bookId" = chapters."bookId"
+	group by c."bookId", c.position, c."chapterId"
+	order by c.position desc
+	limit 2
+) chapters_results on true]]></expression>
+	</reference>
+	<reference>
+		<expression><![CDATA[inner join books on books."bookId" = chapters."bookId"]]></expression>
+	</reference>
+	<reference>
+		<expression><![CDATA[group by chapters."bookId", books.title, public.books."updatedAt", public.books."categoryId"
+order by chapters."bookId"]]></expression>
+	</reference>
+	<expression type="select-exp">0,1,2,3,4</expression>
+	<expression type="from-exp">5</expression>
+	<expression type="end-exp">6,7,8</expression>
+</view>
+
+<relationship name="rel_mv_latest_books_chapters" type="reltv" layer="0"
+	 src-table="public.mv_books_latest_chapters"
+	 dst-table="public.chapters"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_mv_latest_books_books" type="reltv" layer="0"
+	 src-table="public.mv_books_latest_chapters"
+	 dst-table="public.books"
+	 src-required="false" dst-required="false"/>
+
+<view name="v_random_books" layer="0" materialized="true" collapse-mode="2" max-obj-count="7" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="960" y="1360"/>
+	<reference table="public.books" column="bookId"/>
+	<reference table="public.books" column="title"/>
+	<reference table="public.books" column="userId"/>
+	<reference>
+		<expression><![CDATA[ARRAY_AGG(public.books_genres."genreId") as "genreIds"]]></expression>
+	</reference>
+	<reference>
+		<expression><![CDATA[public.books natural join public.books_genres]]></expression>
+	</reference>
+	<reference>
+		<expression><![CDATA[group by 1,2
+order by random()]]></expression>
+	</reference>
+	<expression type="select-exp">0,1,2,3</expression>
+	<expression type="from-exp">4</expression>
+	<expression type="end-exp">5</expression>
+</view>
+
+<relationship name="rel_random_books_books" type="reltv" layer="0"
+	 src-table="public.v_random_books"
+	 dst-table="public.books"
+	 src-required="false" dst-required="false"/>
+
+<index name="chapters_bookId_idx" table="public.chapters"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="&quot;bookId&quot;"/>
+		</idxelement>
+</index>
+
+<view name="mv_most_view_books" layer="0" materialized="true" collapse-mode="2" max-obj-count="9" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="580" y="1500"/>
+	<reference table="public.book_visits" column="bookId"/>
+	<reference table="public.books" column="title"/>
+	<reference table="public.books" column="categoryId"/>
+	<reference table="public.books" column="updatedAt"/>
+	<reference>
+		<expression><![CDATA[public.mv_books_latest_chapters."newestChapters"]]></expression>
+	</reference>
+	<reference>
+		<expression><![CDATA[sum(public.book_visits.count) as "views"]]></expression>
+	</reference>
+	<reference>
+		<expression><![CDATA[public.book_visits natural join public.books natural join public.mv_books_latest_chapters]]></expression>
+	</reference>
+	<reference>
+		<expression><![CDATA[group by 1,2,3,4,5
+order by 6 DESC]]></expression>
+	</reference>
+	<expression type="select-exp">0,1,2,3,4,5</expression>
+	<expression type="from-exp">6</expression>
+	<expression type="end-exp">7</expression>
+</view>
+
+<relationship name="rel_most_views_books_hour_mv_cp_book_visits" type="reltv" layer="0"
+	 src-table="public.mv_most_view_books"
+	 dst-table="public.book_visits"
+	 src-required="false" dst-required="false">
+	<label ref-type="name-label">
+		<position x="105.108" y="6.19832"/>
+	</label>
+</relationship>
+
+<relationship name="rel_most_views_books_hour_mv_cp_books" type="reltv" layer="0"
+	 src-table="public.mv_most_view_books"
+	 dst-table="public.books"
+	 src-required="false" dst-required="false"/>
+
+<view name="mv_detail_books" layer="0" materialized="true" collapse-mode="2" max-obj-count="4" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1200" y="1740"/>
+	<reference table="public.books"/>
+	<reference>
+		<expression><![CDATA[(select 
+		jsonb_agg(jsonb_build_object(
+			'id', genres."genreId",
+			'name', genres."name"
+		))
+	 from 
+	 	books_genres
+	 join 
+	 	genres
+	 on 
+	 	books_genres."genreId" = genres."genreId"
+	 where 
+	 	books_genres."bookId" = books."bookId"
+	) as genres]]></expression>
+	</reference>
+	<reference>
+		<expression><![CDATA[(select 
+		jsonb_agg(jsonb_build_object(
+			'id', users."userId",
+			'name', users."name"
+		))
+	 from 
+	 	authors
+	 join 
+	 	users
+	 on 
+	 	authors."userId" = users."userId"
+	 where 
+	 	authors."bookId" = books."bookId"
+	) as authors]]></expression>
+	</reference>
+	<reference>
+		<expression><![CDATA[group by books."bookId"]]></expression>
+	</reference>
+	<expression type="select-exp">0,1,2</expression>
+	<expression type="from-exp">0</expression>
+	<expression type="end-exp">3</expression>
+</view>
+
+<relationship name="rel_mv_detail_books_books" type="reltv" layer="0"
+	 src-table="public.mv_detail_books"
+	 dst-table="public.books"
+	 src-required="false" dst-required="false"/>
+
+<table name="contents" layer="0" collapse-mode="2" max-obj-count="2" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1740" y="480"/>
+	<column name="chapterId" not-null="true">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="content">
+		<type name="text" length="0"/>
+	</column>
+	<constraint name="contents_pk" type="pk-constr" table="public.contents">
+		<columns names="chapterId" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<function name="create_chapter"
+		window-func="false"
+		returns-setof="false"
+		behavior-type="CALLED ON NULL INPUT"
+		function-type="VOLATILE"
+		security-type="SECURITY INVOKER"
+		execution-cost="1"
+		row-amount="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<language name="plpgsql"/>
+	<return-type>
+	<type name="uuid" length="0"/>
+	</return-type>
+	<parameter name="chapter">
+		<type name="jsonb" length="0"/>
+	</parameter>
+	<definition><![CDATA[/*
+declare 
+"newChapterId" numeric;
+begin
+
+insert into categories("categoryId", name)
+values(
+(chapter ->> 'categoryId')::numeric,
+(chapter ->> 'title')::text
+) returning "categoryId" into "newChapterId";
+*/
+
+
+declare 
+"newChapterId" uuid;
+begin
+
+insert into chapters(published, position, "bookId", title)
+values(
+(chapter ->> 'published')::boolean,
+(chapter ->> 'position')::numeric,
+(chapter ->> 'bookId')::uuid,
+(chapter ->> 'title')::text
+) 
+returning "chapterId"
+into "newChapterId";
+
+
+
+insert into contents("chapterId", content)
+values("newChapterId", (chapter ->> 'content')::text);
+
+return "newChapterId";
+end;]]></definition>
+</function>
+
+<function name="hello_world"
+		window-func="false"
+		returns-setof="false"
+		behavior-type="CALLED ON NULL INPUT"
+		function-type="VOLATILE"
+		security-type="SECURITY INVOKER"
+		execution-cost="1"
+		row-amount="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<language name="plpgsql"/>
+	<return-type>
+	<type name="text" length="0"/>
+	</return-type>
+	<definition><![CDATA[begin
+return 'hello world';
+end;]]></definition>
+</function>
+
+<function name="search_books"
+		window-func="false"
+		returns-setof="true"
+		behavior-type="CALLED ON NULL INPUT"
+		function-type="VOLATILE"
+		security-type="SECURITY INVOKER"
+		execution-cost="1"
+		row-amount="50">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<language name="plpgsql"/>
+	<return-type>
+	<type name="public.books" length="0"/>
+	</return-type>
+	<parameter name="searchTerm">
+		<type name="text" length="0"/>
+	</parameter>
+	<parameter name="searchUserId">
+		<type name="uuid" length="0"/>
+	</parameter>
+	<definition><![CDATA[begin 
+   RETURN QUERY SELECT
+		*
+    FROM
+        books
+    WHERE "searchTerm" % ANY(STRING_TO_ARRAY(title,' ')) 
+	AND  ("searchUserId" is null or "searchUserId" = public.books."userId")
+    order by SIMILARITY("searchTerm",title) desc;
+end;]]></definition>
+</function>
+
+<extension name="pg_trgm">
+</extension>
+
+<opclass  name="gin_trgm_ops" index-type="gin" default="false" sql-disabled="true">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<type name="smallint" length="0"/>
+	<element type="storage">
+		<type name="smallint" length="0"/>
+	</element>
+</opclass>
+
+<index name="books_title_gin_idx" table="public.books"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="gin" factor="0">
+		<idxelement use-sorting="false">
+			<column name="title"/>
+			<opclass  signature="public.gin_trgm_ops USING gin"/>
+		</idxelement>
+</index>
+
+<constraint name="books_userId_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="CASCADE" ref-table="public.users" table="public.books">
+	<columns names="userId" ref-type="src-columns"/>
+	<columns names="userId" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="books_category_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="CASCADE" ref-table="public.categories" table="public.books">
+	<columns names="categoryId" ref-type="src-columns"/>
+	<columns names="categoryId" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="books_publisherId_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="CASCADE" ref-table="public.publishers" table="public.books">
+	<columns names="publisherId" ref-type="src-columns"/>
+	<columns names="publisherId" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="chapters_bookId_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="CASCADE" ref-table="public.books" table="public.chapters">
+	<columns names="bookId" ref-type="src-columns"/>
+	<columns names="bookId" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="books_genres_bookId_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="CASCADE" ref-table="public.books" table="public.books_genres">
+	<columns names="bookId" ref-type="src-columns"/>
+	<columns names="bookId" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="books_genres_genreId_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="CASCADE" ref-table="public.genres" table="public.books_genres">
+	<columns names="genreId" ref-type="src-columns"/>
+	<columns names="genreId" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="book_visits_bookId_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="CASCADE" ref-table="public.books" table="public.book_visits">
+	<columns names="bookId" ref-type="src-columns"/>
+	<columns names="bookId" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="book_visits_chapterId_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="CASCADE" ref-table="public.chapters" table="public.book_visits">
+	<columns names="chapterId" ref-type="src-columns"/>
+	<columns names="chapterId" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="books_visits_userId_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="CASCADE" ref-table="public.users" table="public.book_visits">
+	<columns names="userId" ref-type="src-columns"/>
+	<columns names="userId" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="books_by_users_bookId_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="CASCADE" ref-table="public.books" table="public.authors">
+	<columns names="bookId" ref-type="src-columns"/>
+	<columns names="bookId" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="books_by_users_userId_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="CASCADE" ref-table="public.users" table="public.authors">
+	<columns names="userId" ref-type="src-columns"/>
+	<columns names="userId" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="contents_chapterId_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="CASCADE" del-action="CASCADE" ref-table="public.chapters" table="public.contents">
+	<columns names="chapterId" ref-type="src-columns"/>
+	<columns names="chapterId" ref-type="dst-columns"/>
+</constraint>
+
+<relationship name="rel_books_users" type="relfk" layer="0"
+	 src-table="public.books"
+	 dst-table="public.users" reference-fk="books_userId_fk"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_books_categories" type="relfk" layer="0"
+	 src-table="public.books"
+	 dst-table="public.categories" reference-fk="books_category_fk"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_books_publishers" type="relfk" layer="0"
+	 src-table="public.books"
+	 dst-table="public.publishers" reference-fk="books_publisherId_fk"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_chapters_books" type="relfk" layer="0"
+	 src-table="public.chapters"
+	 dst-table="public.books" reference-fk="chapters_bookId_fk"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_books_genres_books" type="relfk" layer="0"
+	 src-table="public.books_genres"
+	 dst-table="public.books" reference-fk="books_genres_bookId_fk"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_books_genres_genres" type="relfk" layer="0"
+	 src-table="public.books_genres"
+	 dst-table="public.genres" reference-fk="books_genres_genreId_fk"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_book_visits_books" type="relfk" layer="0"
+	 src-table="public.book_visits"
+	 dst-table="public.books" reference-fk="book_visits_bookId_fk"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_book_visits_chapters" type="relfk" layer="0"
+	 src-table="public.book_visits"
+	 dst-table="public.chapters" reference-fk="book_visits_chapterId_fk"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_book_visits_users" type="relfk" layer="0"
+	 src-table="public.book_visits"
+	 dst-table="public.users" reference-fk="books_visits_userId_fk"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_authors_books" type="relfk" layer="0"
+	 src-table="public.authors"
+	 dst-table="public.books" reference-fk="books_by_users_bookId_fk"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_authors_users" type="relfk" layer="0"
+	 src-table="public.authors"
+	 dst-table="public.users" reference-fk="books_by_users_userId_fk"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_contents_chapters" type="relfk" layer="0"
+	 src-table="public.contents"
+	 dst-table="public.chapters" reference-fk="contents_chapterId_fk"
+	 src-required="false" dst-required="true"/>
+
+</dbmodel>

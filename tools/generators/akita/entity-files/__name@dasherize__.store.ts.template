@@ -13,7 +13,7 @@ export interface <%= classify(name) %>State extends EntityState<<%= singular(cla
 }
 const initialState = {
   ui: { 
-    filter: VISIBILITY_FILTER.SHOW_ALL;
+    filter: VISIBILITY_FILTER.SHOW_ALL
    }
 };
 

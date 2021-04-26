@@ -36,13 +36,13 @@ export class SearchPage implements OnInit {
   }
 
   watchingSearchTerm() {
-    this.results$ = this.activatedRoute.queryParams.pipe(
-      untilDestroyed(this),
-      map(query => query.search),
-      debounceTime(300),
-      distinctUntilChanged(),
-      switchMap((term: string) => this.booksFacade.searchBookApi(term)),
-    );
+    // this.results$ = this.activatedRoute.queryParams.pipe(
+    //   untilDestroyed(this),
+    //   map(query => query.search),
+    //   debounceTime(300),
+    //   distinctUntilChanged(),
+    //   switchMap((term: string) => this.booksFacade.searchBookApi(term)),
+    // );
     this.cd.detectChanges();
   }
 }

@@ -6,7 +6,7 @@ import db from './db.json';
 
 @Injectable({ providedIn: 'root' })
 export class BooksApi {
-  constructor(private apollo: Apollo) {}
+  constructor(private apollo: Apollo) { }
 
   getFilterBooks(filters) {
     console.log('api filters', filters);
@@ -17,20 +17,113 @@ export class BooksApi {
     return of(db.books.filter((book) => book.title.toLowerCase().includes(term.toLowerCase()))).pipe(delay(500));
   }
 
+  //TODO: Lỗi hình như version ở đây ạ
   getAllBooks() {
-    return of(db.books).pipe(delay(500));
+    return this.apollo.query({
+      query: gql`
+        query getAllBooks {
+          allBooks(orderBy: UPDATED_AT_DESC) {
+            nodes {
+              bookId
+              title
+              description
+              published
+              updatedAt
+              completed
+              categoryByCategoryId {
+                categoryId
+                name
+              }
+              chaptersByBookId(orderBy: CREATED_AT_DESC) {
+                nodes {
+                  published
+                  updatedAt
+                }
+                totalCount
+              }
+              booksGenresByBookId {
+                nodes {
+                  genreId
+                }
+              }
+            }
+          }
+        }
+      `,
+    });
   }
 
   getGoodBooks() {
-    return of(db.books.slice(0, 5)).pipe(delay(500));
+    return this.apollo.query({
+      query: gql`
+        query allMvMostViewBooks {
+          allMvMostViewBooks(orderBy: VIEWS_DESC) {
+            nodes {
+              bookId
+              title
+              categoryId
+              newestChapters
+              updatedAt
+              views
+            }
+          }
+        }
+      `,
+    });
   }
 
   getFeatureBooks() {
-    return of(db.books.slice(0, 6)).pipe(delay(500));
+    return this.apollo.query({
+      query: gql`
+        query getFeatureBooks {
+          allBooks(orderBy: UPDATED_AT_DESC, first: 8) {
+            nodes {
+              bookId
+              title
+              description
+              completed
+              published
+              updatedAt
+              categoryByCategoryId {
+                categoryId
+                name
+              }
+              chaptersByBookId(orderBy: CREATED_AT_DESC) {
+                nodes {
+                  published
+                  updatedAt
+                }
+                totalCount
+              }
+              booksGenresByBookId {
+                nodes {
+                  genreId
+                }
+              }
+            }
+          }
+        }
+      `,
+    });
   }
 
   getLatestBooks() {
-    return of(db.books).pipe(delay(500));
+    return this.apollo.query({
+      query: gql`
+        query allMvBooksLatestChapters {
+          allMvBooksLatestChapters(orderBy: VIEWS_DESC) {
+            nodes {
+              bookId
+              title
+              categoryId
+              newestChapters
+              updatedAt
+              views
+            }
+          }
+        }
+      `,
+    });
   }
 
   getComposedBooks() {
@@ -58,6 +151,23 @@ export class BooksApi {
   }
 
   getBookById(bookId: string) {
-    return of(db.books.find((book) => book.id === bookId)).pipe(delay(500));
+    return this.apollo.query({
+      query: gql`
+        query allMvDetailBooks($bookId: String) {
+          allMvDetailBooks(condition: { bookId: $bookId }) {
+            nodes {
+              bookId
+              title
+              description
+              published
+              updatedAt
+              completed
+              categoryId
+              userId
+          }
+        }
+      `,
+      variables: { bookId },
+    });
   }
 }
