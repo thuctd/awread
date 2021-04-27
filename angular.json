@@ -2181,6 +2181,50 @@
           }
         }
       }
+    },
+    "core-chapters": {
+      "projectType": "library",
+      "root": "libs/core/chapters",
+      "sourceRoot": "libs/core/chapters/src",
+      "prefix": "awread",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/core/chapters/src/**/*.ts", "libs/core/chapters/src/**/*.html"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/core/chapters"],
+          "options": {
+            "jestConfig": "libs/core/chapters/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "core-book-data": {
+      "projectType": "library",
+      "root": "libs/core/book-data",
+      "sourceRoot": "libs/core/book-data/src",
+      "prefix": "awread",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/core/book-data/src/**/*.ts", "libs/core/book-data/src/**/*.html"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/core/book-data"],
+          "options": {
+            "jestConfig": "libs/core/book-data/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   },
   "cli": {
