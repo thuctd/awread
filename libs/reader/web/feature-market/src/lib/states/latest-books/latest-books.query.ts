@@ -5,7 +5,7 @@ import { LatestBooksStore, LatestBooksState } from './latest-books.store';
 
 @Injectable({ providedIn: 'root' })
 export class LatestBooksQuery extends QueryEntity<LatestBooksState> {
-  latestBookList$ = this.selectAll();
+  latestBooks$ = this.selectAll();
   // ui: EntityUIQuery<LatestBooksUIState>;
   constructor(protected store: LatestBooksStore) {
     super(store);

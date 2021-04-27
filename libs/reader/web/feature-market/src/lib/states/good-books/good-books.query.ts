@@ -5,7 +5,7 @@ import { GoodBooksStore, GoodBooksState } from './good-books.store';
 
 @Injectable({ providedIn: 'root' })
 export class GoodBooksQuery extends QueryEntity<GoodBooksState> {
-  goodBookList$ = this.selectAll();
+  goodBooks$ = this.selectAll();
   // ui: EntityUIQuery<GoodBooksUIState>;
   constructor(protected store: GoodBooksStore) {
     super(store);

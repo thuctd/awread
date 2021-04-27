@@ -5,7 +5,7 @@ import { BooksStore, BooksState } from './books.store';
 
 @Injectable({ providedIn: 'root' })
 export class BooksQuery extends QueryEntity<BooksState> {
-  bookList$ = this.selectAll();
+  books$ = this.selectAll();
   isLoading$ = this.selectLoading();
   filtersChange$ = this.select(state => state.ui.filters);
   // ui: EntityUIQuery<BooksUIState>;
