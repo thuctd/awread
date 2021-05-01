@@ -1,5 +1,5 @@
-import { Category } from "./category.model";
-import { Genre } from "./genre.model";
+import { Genre } from './../../../../genres/src/lib/models/genre.model';
+import { Category } from './../../../../categories/src/lib/models/category.model';
 
 export interface Book {
   bookId: string
@@ -10,7 +10,7 @@ export interface Book {
   bookid: string;
   userid: string;
   description: string;
-  categoryid: Category['categoryid'];
+  categoryid: Category['categoryId'];
   completed: boolean;
   isdeleted: boolean;
   tags: string[];

@@ -2225,6 +2225,72 @@
           }
         }
       }
+    },
+    "core-categories": {
+      "projectType": "library",
+      "root": "libs/core/categories",
+      "sourceRoot": "libs/core/categories/src",
+      "prefix": "awread",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/core/categories/src/**/*.ts", "libs/core/categories/src/**/*.html"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/core/categories"],
+          "options": {
+            "jestConfig": "libs/core/categories/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "core-genres": {
+      "projectType": "library",
+      "root": "libs/core/genres",
+      "sourceRoot": "libs/core/genres/src",
+      "prefix": "awread",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/core/genres/src/**/*.ts", "libs/core/genres/src/**/*.html"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/core/genres"],
+          "options": {
+            "jestConfig": "libs/core/genres/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "core-authors": {
+      "projectType": "library",
+      "root": "libs/core/authors",
+      "sourceRoot": "libs/core/authors/src",
+      "prefix": "awread",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/core/authors/src/**/*.ts", "libs/core/authors/src/**/*.html"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/core/authors"],
+          "options": {
+            "jestConfig": "libs/core/authors/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   },
   "cli": {

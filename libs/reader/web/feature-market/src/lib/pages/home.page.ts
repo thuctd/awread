@@ -1,4 +1,3 @@
-import { async } from '@angular/core/testing';
 import { CategoryFacade } from './../facades/category.facade';
 import { Directive, Injectable, OnInit } from '@angular/core';
 import { map, tap } from 'rxjs/operators';

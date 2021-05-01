@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
 import { throwError } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
-import { BooksApi } from '../apis';
+import { BooksHomeApi } from '../apis';
 
 @Injectable({ providedIn: 'root' })
 export class BooksHomeGear {
 
   constructor(
-    private booksApi: BooksApi,
+    private booksHomeApi: BooksHomeApi
   ) { }
 
   getGoodBooks() {
-    return this.booksApi.getGoodBooks().pipe(
+    return this.booksHomeApi.getGoodBooks().pipe(
       map((res) => {
 
       }),
@@ -23,7 +23,7 @@ export class BooksHomeGear {
   }
 
   getFeatureBooks() {
-    return this.booksApi.getFeatureBooks().pipe(
+    return this.booksHomeApi.getFeatureBooks().pipe(
       map((res) => {
 
       }),
@@ -35,7 +35,7 @@ export class BooksHomeGear {
   }
 
   getLatestBooks() {
-    return this.booksApi.getLatestBooks().pipe(
+    return this.booksHomeApi.getLatestBooks().pipe(
       map((res) => {
 
       }),
@@ -47,7 +47,7 @@ export class BooksHomeGear {
   }
 
   getTopBooks() {
-    return this.booksApi.getTopBooks().pipe(
+    return this.booksHomeApi.getTopBooks().pipe(
       map((books) => {
 
       }),

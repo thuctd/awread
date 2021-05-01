@@ -59,7 +59,10 @@
       "@awread/core/news": ["libs/core/news/src/index.ts"],
       "@awread/core/marketing": ["libs/core/marketing/src/index.ts"],
       "@awread/core/chapters": ["libs/core/chapters/src/index.ts"],
-      "@awread/core/book-data": ["libs/core/book-data/src/index.ts"]
+      "@awread/core/book-data": ["libs/core/book-data/src/index.ts"],
+      "@awread/core/categories": ["libs/core/categories/src/index.ts"],
+      "@awread/core/genres": ["libs/core/genres/src/index.ts"],
+      "@awread/core/authors": ["libs/core/authors/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

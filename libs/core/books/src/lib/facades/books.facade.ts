@@ -1,18 +1,16 @@
-/* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import { Injectable } from '@angular/core';
 import { BooksHomeGear } from '../gears/books-home.gear';
 import { BooksGear } from '../gears/books.gear';
-
-import { ComposedQuery } from 'libs/reader/web/feature-market/src/lib/states/composed';
-import { TopBooksQuery } from 'libs/reader/web/feature-market/src/lib/states/top-books';
-import { CollectedQuery } from 'libs/reader/web/feature-market/src/lib/states/collected';
-import { GoodBooksQuery } from 'libs/reader/web/feature-market/src/lib/states/good-books';
-import { GenreBooksQuery } from 'libs/reader/web/feature-market/src/lib/states/genre-books';
-import { BooksStore, BooksQuery } from 'libs/reader/web/feature-market/src/lib/states/books';
-import { AuthorBooksQuery } from 'libs/reader/web/feature-market/src/lib/states/author-books';
-import { LatestBooksQuery } from 'libs/reader/web/feature-market/src/lib/states/latest-books';
-import { FeatureBooksQuery } from 'libs/reader/web/feature-market/src/lib/states/feature-books';
-import { CategoryBooksQuery } from 'libs/reader/web/feature-market/src/lib/states/category-books';
+import { AuthorBooksQuery } from '../states/author-books';
+import { BooksQuery, BooksStore } from '../states/books';
+import { CategoryBooksQuery } from '../states/category-books';
+import { CollectedQuery } from '../states/collected';
+import { ComposedQuery } from '../states/composed';
+import { FeatureBooksQuery } from '../states/feature-books';
+import { GenreBooksQuery } from '../states/genre-books';
+import { GoodBooksQuery } from '../states/good-books';
+import { LatestBooksQuery } from '../states/latest-books';
+import { TopBooksQuery } from '../states/top-books';
 
 
 @Injectable({ providedIn: 'root' })
@@ -36,8 +34,8 @@ export class BooksFacade {
     private booksQuery: BooksQuery,
     private booksHomeGear: BooksHomeGear,
     private composedQuery: ComposedQuery,
-    private collectedQuery: CollectedQuery,
     private topBooksQuery: TopBooksQuery,
+    private collectedQuery: CollectedQuery,
     private goodBooksQuery: GoodBooksQuery,
     private genreBooksQuery: GenreBooksQuery,
     private authorBooksQuery: AuthorBooksQuery,

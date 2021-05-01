@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { throwError } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
 import { BooksApi } from '../apis';
+import { BooksStore } from '../states/books';
 
 import { TransformBookDataGear } from './transform-book-data.gear';
-import { BooksStore } from './../../../../../reader/web/feature-market/src/lib/states/books/books.store';
 
 @Injectable({ providedIn: 'root' })
 export class BooksGear {
