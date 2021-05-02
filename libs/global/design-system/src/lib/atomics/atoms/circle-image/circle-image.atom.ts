@@ -13,6 +13,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CircleImageAtom implements OnInit {
+  @Input() size: 'xs' | 's' | 'm' | 'l' | 'xl' = 'm';
   @Input() src = '/global-assets/images/avatar-mrmrs.webp';
   constructor() {}
 
