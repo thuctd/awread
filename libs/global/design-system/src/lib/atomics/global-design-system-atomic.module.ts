@@ -101,7 +101,6 @@ import { RdAuthorPopupContentBlockAtom } from './atoms/rd-author-popup-content-b
 import { LinkAtom } from './atoms/link/link.atom';
 import { DetailInfoLineLinkAtom } from './atoms/detail-info-line-link/detail-info-line-link.atom';
 import { NavItemAtom } from './atoms/nav-item/nav-item.atom';
-import { ImgGridAtom } from './atoms/img-grid/img-grid.atom';
 import { BtnIconAtom } from './atoms/btn-icon/btn-icon.atom';
 import { BreadcrumbAtom } from './atoms/breadcrumb/breadcrumb.atom';
 
@@ -220,7 +219,6 @@ import { BreadcrumbAtom } from './atoms/breadcrumb/breadcrumb.atom';
     LinkAtom,
     DetailInfoLineLinkAtom,
     NavItemAtom,
-    ImgGridAtom,
     BtnIconAtom,
     BreadcrumbAtom,
   ],
@@ -320,7 +318,6 @@ import { BreadcrumbAtom } from './atoms/breadcrumb/breadcrumb.atom';
     LinkAtom,
     DetailInfoLineLinkAtom,
     NavItemAtom,
-    ImgGridAtom,
     BtnIconAtom,
     BreadcrumbAtom,
   ],

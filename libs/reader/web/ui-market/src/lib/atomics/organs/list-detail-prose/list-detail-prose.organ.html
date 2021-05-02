@@ -3,7 +3,7 @@
       <div class="grid grid-cols-12 gap-10 lg:gap-x-10 xl:gap-x-14 place-content-center" *ngIf="!(display === 'grid');else list_content">
         <div *ngFor="let book of prosebooks;" class="col-span-2 md:col-span-4">
           <div>
-            <atom-img-m [height]="'lg:h-72 xl:h-80'" [srcImg]='book.imgUrl' [bookId]='book.id' [size]='"l"'></atom-img-m>
+            <atom-img-m [srcImg]='book.imgUrl' [bookId]='book.id' [size]="'l'"></atom-img-m>
             <list-info-prose [bookId]='book.id' [titleBook]='book.title'></list-info-prose>
           </div>
         </div>
