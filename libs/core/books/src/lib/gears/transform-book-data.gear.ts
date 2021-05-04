@@ -9,7 +9,6 @@ export class TransformBookDataGear {
     const genreIds = book['booksGenresByBookId']['nodes'].map(
       (item) => item.genreId
     );
-    const chapters = book['chaptersByBookId']['nodes'] ?? [];
     return {
       ...book,
       genreIds,
@@ -18,4 +17,5 @@ export class TransformBookDataGear {
       totalChapterCount: book['chaptersByBookId']?.totalCount ?? 0,
     };
   }
+
 }

@@ -51,5 +51,6 @@ module.exports = {
     '<rootDir>/libs/core/categories',
     '<rootDir>/libs/core/genres',
     '<rootDir>/libs/core/authors',
+    '<rootDir>/libs/core/slider',
   ],
 };

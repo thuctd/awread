@@ -2291,6 +2291,28 @@
           }
         }
       }
+    },
+    "core-slider": {
+      "projectType": "library",
+      "root": "libs/core/slider",
+      "sourceRoot": "libs/core/slider/src",
+      "prefix": "awread",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/core/slider/src/**/*.ts", "libs/core/slider/src/**/*.html"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/core/slider"],
+          "options": {
+            "jestConfig": "libs/core/slider/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   },
   "cli": {

@@ -27,7 +27,7 @@ export class BooksHomeApi {
   getFeatureBooks() {
     return this.apollo.query({
       query: gql`
-        query getFeatureBooks {
+        query allBooks {
           allBooks(orderBy: UPDATED_AT_DESC, first: 8) {
             nodes {
               bookId
@@ -77,22 +77,4 @@ export class BooksHomeApi {
     });
   }
 
-  getTopBooks() {
-    return this.apollo.query({
-      query: gql`
-        query getTopBooks {
-          allMvMostViewBooks(orderBy: VIEWS_DESC) {
-            nodes {
-              bookId
-              title
-              categoryId
-              newestChapters
-              updatedAt
-              views
-            }
-          }
-        }
-      `,
-    });
-  }
 }

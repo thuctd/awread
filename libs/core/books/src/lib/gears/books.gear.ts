@@ -18,7 +18,17 @@ export class BooksGear {
   getAllBooks() {
     return this.booksApi.getAllBooks().pipe(
       tap((res) => {
-
+        if (
+          res['data'] &&
+          res['data']['allBooks'] &&
+          res['data']['allBooks']['nodes'].length
+        ) {
+          const result = res['data']['allBooks']['nodes'];
+          const books = result.map((book) =>
+            this.transformBookDataGear.tranformBookData(book)
+          );
+          this.booksStore.set(books);
+        }
       }),
       catchError((err) => {
         console.error('An error occurred:', err);
@@ -30,7 +40,17 @@ export class BooksGear {
   getCategoryBooks(categoryId: string) {
     return this.booksApi.getCategoryBooks(categoryId).pipe(
       tap((res) => {
-
+        if (
+          res['data'] &&
+          res['data']['allBooks'] &&
+          res['data']['allBooks']['nodes'].length
+        ) {
+          const result = res['data']['allBooks']['nodes'];
+          const books = result.map((book) =>
+            this.transformBookDataGear.tranformBookData(book)
+          );
+          this.booksStore.set(books);
+        }
       }),
       catchError((err) => {
         console.error('An error occurred:', err);
@@ -100,12 +120,28 @@ export class BooksGear {
     );
   }
 
+  getTopBooks() {
+    return this.booksApi.getTopBooks().pipe(
+      map((books) => {
+
+      }),
+      catchError((err) => {
+        console.error('An error occurred:', err);
+        return throwError(err);
+      })
+    );
+  }
+
   getFilterBooks(filters) {
     return this.booksApi.getFilterBooks(filters);
   }
 
   searhBookByTermApi(term: string) {
-    return this.booksApi.searchBookByTerm(term);
+    return this.booksApi.searchBookByTerm("Sát").pipe(
+      tap((res) => {
+        console.log('books', res);
+      }),
+    );
   }
 
 }

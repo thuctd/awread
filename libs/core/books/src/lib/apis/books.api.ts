@@ -24,7 +24,24 @@ export class BooksApi {
     });
   }
 
-  searchBookByTerm(term: string) { }
+  searchBookByTerm(filter: string) {
+    return this.apollo.mutate({
+      mutation: gql`
+        mutation SearchBooks($filter: String) {
+          searchBooks(input: { searchTerm: $filter }) {
+            books {
+              title
+              description
+              userId
+            }
+          }
+        }
+      `,
+      variables: {
+        filter
+      },
+    });
+  }
 
   getAllBooks() {
     return this.apollo.query({
@@ -236,6 +253,25 @@ export class BooksApi {
       variables: {
         genreId,
       },
+    });
+  }
+
+  getTopBooks() {
+    return this.apollo.query({
+      query: gql`
+        query getTopBooks {
+          allMvMostViewBooks(orderBy: VIEWS_DESC) {
+            nodes {
+              bookId
+              title
+              categoryId
+              newestChapters
+              updatedAt
+              views
+            }
+          }
+        }
+      `,
     });
   }
 

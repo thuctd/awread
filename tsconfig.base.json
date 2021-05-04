@@ -62,7 +62,8 @@
       "@awread/core/book-data": ["libs/core/book-data/src/index.ts"],
       "@awread/core/categories": ["libs/core/categories/src/index.ts"],
       "@awread/core/genres": ["libs/core/genres/src/index.ts"],
-      "@awread/core/authors": ["libs/core/authors/src/index.ts"]
+      "@awread/core/authors": ["libs/core/authors/src/index.ts"],
+      "@awread/core/slider": ["libs/core/slider/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

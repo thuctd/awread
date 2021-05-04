@@ -18,7 +18,7 @@ export class BooksFacade {
 
   books$ = this.booksQuery.selectAll();
   topBooks$ = this.topBooksQuery.selectAll();
-  composeds$ = this.composedQuery.selectAll();
+  composed$ = this.composedQuery.selectAll();
   goodBooks$ = this.goodBooksQuery.selectAll();
   collected$ = this.collectedQuery.selectAll();
   isLoading$ = this.booksQuery.selectLoading();
@@ -89,7 +89,7 @@ export class BooksFacade {
   }
 
   getTopBooks() {
-    return this.booksHomeGear.getTopBooks();
+    return this.booksGear.getTopBooks();
   }
 
   getGoodBooks() {

@@ -1,9 +1,9 @@
-import { Book, BooksFacade } from '@awread/reader/web/feature-market';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Directive, Injectable, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged, startWith, switchMap, map } from 'rxjs/operators';
+import { BooksFacade } from 'libs/core/books/src/lib/facades/books.facade';
 @UntilDestroy()
 @Injectable({
   providedIn: 'root',

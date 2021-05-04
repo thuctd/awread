@@ -1,12 +1,10 @@
-import { Book } from './../models/book.model';
 import { FormControl } from '@angular/forms';
 import { ChangeDetectorRef, Directive, Injectable, OnInit } from '@angular/core';
-import { BooksQuery } from '../states/books';
 import { debounceTime, map, switchMap, distinctUntilChanged } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { Observable } from 'rxjs';
-import { BooksFacade } from '../facades/books.facade';
+import { BooksQuery } from 'libs/core/books/src/lib/states/books';
+import { BooksFacade } from 'libs/core/books/src/lib/facades/books.facade';
 
 @UntilDestroy()
 @Injectable({
@@ -15,7 +13,7 @@ import { BooksFacade } from '../facades/books.facade';
 @Directive()
 export class SearchPage implements OnInit {
   searchControl: FormControl = new FormControl();
-  results$: Observable<Book[]>;
+  results$;
 
   constructor(private booksFacade: BooksFacade, private router: Router, private cd: ChangeDetectorRef, private booksQuery: BooksQuery, private activatedRoute: ActivatedRoute) { }
 
@@ -36,13 +34,13 @@ export class SearchPage implements OnInit {
   }
 
   watchingSearchTerm() {
-    // this.results$ = this.activatedRoute.queryParams.pipe(
-    //   untilDestroyed(this),
-    //   map(query => query.search),
-    //   debounceTime(300),
-    //   distinctUntilChanged(),
-    //   switchMap((term: string) => this.booksFacade.searchBookApi(term)),
-    // );
+    this.results$ = this.activatedRoute.queryParams.pipe(
+      untilDestroyed(this),
+      map(query => query.search),
+      debounceTime(300),
+      distinctUntilChanged(),
+      switchMap((term: string) => this.booksFacade.searchBookApi(term)),
+    );
     this.cd.detectChanges();
   }
 }

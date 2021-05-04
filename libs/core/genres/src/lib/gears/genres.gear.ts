@@ -1,7 +1,7 @@
+import { GenresApi } from './../api/genres.api';
 import { Injectable } from '@angular/core';
 import { throwError } from 'rxjs';
 import { tap, catchError, map } from 'rxjs/operators';
-import { GenresApi } from '../apis/genres.api';
 import { GenresStore } from '../states/genres';
 
 @Injectable({ providedIn: 'root' })
