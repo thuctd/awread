@@ -1,5 +1,5 @@
-<div class="grid grid-cols-10 sm:gap-x-6 lg:gap-x-10 xl:gap-x-12 place-content-center">
-  <div *ngFor='let book of books;' class="col-span-2 md:col-span-2 py-2">
+<div class="grid md:grid-cols-8 xl:grid-cols-10 sm:gap-x-6 lg:gap-x-10 xl:gap-x-12 place-content-center">
+  <div *ngFor='let book of books;' class="col-span-2 py-2">
     <atom-img-m [bookId]='book.id' [srcImg]='book.imgUrl'></atom-img-m>
     <home-info-book-featured [isInfoNovel]="isInfoNovel" [book]="book"></home-info-book-featured>
   </div>
