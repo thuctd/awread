@@ -7,8 +7,6 @@ import firebaseConfig from './adminsdk.json';
 import { environment } from '@awread/global/environments';
 import ConnectionFilterPlugin from "postgraphile-plugin-connection-filter";
 import cron from 'cron';
-import MyRandomFieldPlugin from './plugins/random-field.plugin';
-import MyPlugin from './plugins/my-plugin.plugin';
 
 const app = express();
 const FIREBASE_URL = environment.firebase.databaseURL;
@@ -17,9 +15,6 @@ const SCHEMA = environment.postgres.SCHEMA;
 
 
 import { Pool, Client } from 'pg';
-import MyRandomUserPlugin from './plugins/random-user.plugin';
-import LAST_POST_CREATED_AT from './plugins/books-order-by-random.plugin';
-import TestFieldPlugin from './plugins/test-field.plugin';
 const pool = new Pool({
   connectionString: `${DATABASE_URL}`
 });
@@ -48,8 +43,11 @@ const postgraphileOptions = {
   watchPg: true,
   graphiql: true,
   enhanceGraphiql: true,
-  // appendPlugins: [ConnectionFilterPlugin, MyRandomFieldPlugin, MyPlugin, MyRandomUserPlugin, LAST_POST_CREATED_AT, TestFieldPlugin],
   appendPlugins: [ConnectionFilterPlugin],
+  jwtSecret: 'hiepxanh',
+  jwtPgTypeIdentifier: 'public.jwt_token',
+  pgDefaultRole: 'anonymous',
+  // appendPlugins: [ConnectionFilterPlugin, MyRandomFieldPlugin, MyPlugin, MyRandomUserPlugin, LAST_POST_CREATED_AT, TestFieldPlugin],
   // pgSettings: async (req: IncomingMessage & { user: any }) => {
   //   console.log('req.user', req.user);
   //   return checkRole(req);
