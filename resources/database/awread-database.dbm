@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="0,504" last-zoom="0.95" max-obj-count="15"
+<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="0,1055" last-zoom="0.95" max-obj-count="15"
 	 default-owner="postgres">
 <role name="anonymous">
 </role>
@@ -370,7 +370,7 @@ end;]]></definition>
 	</constraint>
 </table>
 
-<function name="create_chapter"
+<function name="start_new_chapter"
 		window-func="false"
 		returns-setof="false"
 		behavior-type="CALLED ON NULL INPUT"
@@ -549,6 +549,12 @@ end;]]></definition>
 		row-amount="0">
 	<schema name="public"/>
 	<role name="postgres"/>
+	<appended-sql><![CDATA[grant anonymous to reader;
+grant anonymous to writer;
+grant reader to writer;
+grant anonymous to postgraphile;
+grant reader to postgraphile;
+grant writer to postgraphile;]]></appended-sql>
 	<language name="plpgsql"/>
 	<return-type>
 	<type name="public.jwt_token" length="0"/>
@@ -636,7 +642,7 @@ order by random();]]></expression>
 	<expression type="end-exp">2</expression>
 </view>
 
-<view name="mv_most_view_books" layer="0" collapse-mode="2" max-obj-count="3" z-value="0">
+<view name="mv_most_view_books" layer="0" materialized="true" collapse-mode="2" max-obj-count="3" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
 	<position x="640" y="1560"/>
@@ -661,7 +667,7 @@ order by 6 DESC;
 	<expression type="end-exp">2</expression>
 </view>
 
-<view name="mv_detail_books" layer="0" collapse-mode="2" max-obj-count="3" z-value="0">
+<view name="mv_detail_books" layer="0" materialized="true" collapse-mode="2" max-obj-count="3" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
 	<position x="1180" y="1560"/>
