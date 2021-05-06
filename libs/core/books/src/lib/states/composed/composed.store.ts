@@ -5,7 +5,7 @@ import { Composed } from '../../models';
 export interface ComposedState extends EntityState<Composed>, ActiveState { };
 
 @Injectable({ providedIn: 'root' })
-@StoreConfig({ name: ' composed', resettable: true })
+@StoreConfig({ name: ' composed', resettable: true, idKey: 'bookId' })
 export class ComposedStore extends EntityStore<ComposedState> {
   // ui: EntityUIStore<ComposedUIState>;
   constructor() {

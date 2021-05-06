@@ -27,7 +27,10 @@ export class BooksHomeGear {
           res['data']['allMvMostViewBooks']['nodes'].length
         ) {
           const result = res['data']['allMvMostViewBooks']['nodes'];
-          this.goodBooksStore.set(result);
+          const books = result.map((book) =>
+            this.transformBookDataGear.tranformBookHomeData(book)
+          );
+          this.goodBooksStore.set(books);
         }
       }),
       catchError((err) => {

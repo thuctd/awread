@@ -1,3 +1,5 @@
+import { AuthorBooksStore } from './../states/author-books/author-books.store';
+import { GenreBooksStore } from './../states/genre-books/genre-books.store';
 import { Injectable } from '@angular/core';
 import { throwError } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
@@ -11,6 +13,8 @@ export class BooksGear {
 
   constructor(
     private transformBookDataGear: TransformBookDataGear,
+    private genreBooksStore: GenreBooksStore,
+    private athorBooksStore: AuthorBooksStore,
     private booksStore: BooksStore,
     private booksApi: BooksApi,
   ) { }
@@ -87,7 +91,17 @@ export class BooksGear {
   getAuthorBooks(authorId: string) {
     return this.booksApi.getAuthorBooks(authorId).pipe(
       tap((res) => {
-
+        if (
+          res['data'] &&
+          res['data']['allBooks'] &&
+          res['data']['allBooks']['nodes'].length
+        ) {
+          const result = res['data']['allBooks']['nodes'];
+          const books = result.map((book) =>
+            this.transformBookDataGear.tranformBookData(book)
+          );
+          this.athorBooksStore.set(books);
+        }
       }),
       catchError((err) => {
         console.error('An error occurred:', err);
@@ -99,7 +113,13 @@ export class BooksGear {
   getGenreBooks(genreId: string) {
     return this.booksApi.getGenreBooks(genreId).pipe(
       tap((res) => {
-
+        if (
+          res['data'] &&
+          res['data']['allBooksGenres'] &&
+          res['data']['allBooksGenres']['nodes'].length
+        ) {
+          this.genreBooksStore.set(res['data']['allBooksGenres']['nodes']);
+        }
       }),
       catchError((err) => {
         console.error('An error occurred:', err);

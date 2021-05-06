@@ -27,7 +27,7 @@ const initialState = {
 };
 
 @Injectable({ providedIn: 'root' })
-@StoreConfig({ name: ' books', resettable: true })
+@StoreConfig({ name: ' books', resettable: true, idKey: 'bookId' })
 export class BooksStore extends EntityStore<BooksState> {
   // ui: EntityUIStore<BookUIState>;
   constructor() {

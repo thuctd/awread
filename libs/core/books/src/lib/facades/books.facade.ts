@@ -73,6 +73,7 @@ export class BooksFacade {
   }
 
   getGenreBooks(genreId: string) {
+    console.log('asd', genreId);
     return this.booksGear.getGenreBooks(genreId);
   }
 

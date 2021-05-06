@@ -5,7 +5,7 @@ import { Book } from '../../models';
 export interface FeatureBooksState extends EntityState<Book>, ActiveState { };
 
 @Injectable({ providedIn: 'root' })
-@StoreConfig({ name: ' feature-books', resettable: true })
+@StoreConfig({ name: ' feature-books', resettable: true, idKey: 'bookId' })
 export class FeatureBooksStore extends EntityStore<FeatureBooksState> {
   // ui: EntityUIStore<FeatureBookUIState>;
   constructor() {
