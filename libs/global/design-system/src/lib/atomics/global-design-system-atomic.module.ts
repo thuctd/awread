@@ -104,6 +104,7 @@ import { NavItemAtom } from './atoms/nav-item/nav-item.atom';
 import { ImgGridAtom } from './atoms/img-grid/img-grid.atom';
 import { BtnIconAtom } from './atoms/btn-icon/btn-icon.atom';
 import { BreadcrumbAtom } from './atoms/breadcrumb/breadcrumb.atom';
+import { SocialLoginBtnFbAtom } from './atoms/social-login-btn-fb/social-login-btn-fb.atom';
 
 @NgModule({
   imports: [
@@ -223,6 +224,7 @@ import { BreadcrumbAtom } from './atoms/breadcrumb/breadcrumb.atom';
     ImgGridAtom,
     BtnIconAtom,
     BreadcrumbAtom,
+    SocialLoginBtnFbAtom,
   ],
   declarations: [
     notReadyDirective,
@@ -323,6 +325,7 @@ import { BreadcrumbAtom } from './atoms/breadcrumb/breadcrumb.atom';
     ImgGridAtom,
     BtnIconAtom,
     BreadcrumbAtom,
+    SocialLoginBtnFbAtom,
   ],
 })
 export class GlobalDesignSystemAtomicModule {}
