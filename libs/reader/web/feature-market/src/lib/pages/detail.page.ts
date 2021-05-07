@@ -1,11 +1,11 @@
-import { Chapter } from './../models/chapter.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ChangeDetectorRef, Directive, Injectable, OnDestroy, OnInit } from '@angular/core';
-import { BooksFacade } from '../facades';
 import { map, switchMap, takeUntil, tap } from 'rxjs/operators';
-import { ChaptersFacade } from '../facades/chapters.facede';
 import { of, Subject } from 'rxjs';
 import { UntilDestroy } from '@ngneat/until-destroy';
+import { Chapter } from 'libs/core/chapters/src/lib/models';
+import { BooksFacade } from 'libs/core/books/src/lib/facades/books.facade';
+import { ChaptersFacade } from 'libs/core/chapters/src/lib/facades/chapters.facade';
 
 @UntilDestroy()
 @Injectable({
@@ -18,9 +18,9 @@ export class DetailPage implements OnInit, OnDestroy {
   authorId: string;
   destroy$ = new Subject();
   isLoading$ = this.booksFacade.selectLoadingAkita();
-  topBookList$ = this.booksFacade.topBookList$;
-  authorBookList$ = this.booksFacade.authorBookList$;
-  chapterListByBookId$ = this.chaptersFacade.chapterListByBookId$;
+  topBookList$ = this.booksFacade.topBooks$;
+  authorBookList$ = this.booksFacade.authorBooks$;
+  chapterListByBookId$ = this.chaptersFacade.chapters$;
   bookChapter: Chapter[];
 
   constructor(
@@ -73,11 +73,11 @@ export class DetailPage implements OnInit, OnDestroy {
   }
 
   OnChangeFirstChapter() {
-    this.router.navigate(['/books', this.bookId, 'chapters', this.bookChapter[0].id])
+    this.router.navigate(['/books', this.bookId, 'chapters', this.bookChapter[0].chapterId])
   }
 
   OnChangeLastChapter() {
-    this.router.navigate(['/books', this.bookId, 'chapters', this.bookChapter[this.bookChapter.length - 1].id])
+    this.router.navigate(['/books', this.bookId, 'chapters', this.bookChapter[this.bookChapter.length - 1].chapterId])
   }
 
   nativeBooksAuthor() {

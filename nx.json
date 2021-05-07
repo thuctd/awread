@@ -69,6 +69,12 @@
     "core-reviews": { "tags": ["scope: core - undefined", "scope: shared", "type: core"] },
     "core-system": { "tags": ["scope: core - undefined", "scope: shared", "type: core"] },
     "core-news": { "tags": ["scope: core - undefined", "scope: shared", "type: core"] },
-    "core-marketing": { "tags": ["scope: core - undefined", "scope: shared", "type: core"] }
+    "core-marketing": { "tags": ["scope: core - undefined", "scope: shared", "type: core"] },
+    "core-chapters": { "tags": ["scope: core - undefined", "scope: shared", "type: core"] },
+    "core-book-data": { "tags": ["scope: core - undefined", "scope: shared", "type: core"] },
+    "core-categories": { "tags": ["scope: core - undefined", "scope: shared", "type: core"] },
+    "core-genres": { "tags": ["scope: core - undefined", "scope: shared", "type: core"] },
+    "core-authors": { "tags": ["scope: core - undefined", "scope: shared", "type: core"] },
+    "core-slider": { "tags": ["scope: core - undefined", "scope: shared", "type: core"] }
   }
 }

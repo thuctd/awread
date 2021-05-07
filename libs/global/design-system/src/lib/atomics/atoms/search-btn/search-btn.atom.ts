@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Output, Input, EventEmitter
 import { FormControl } from '@angular/forms';
 import { faSearch, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
+
 @Component({
   selector: 'atom-search-btn',
   templateUrl: './search-btn.atom.html',
@@ -20,7 +20,7 @@ export class SearchBtnAtom implements OnInit {
   constructor() { }
 
   @Input() options = [{
-    id: '1',
+    bookId: '1',
     title: 'Tôi lạc quan'
   }];
 

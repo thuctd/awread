@@ -10,7 +10,7 @@ import { CheckBtnAtom } from './atoms/check-btn/check-btn.atom';
 import { InputFormAtom } from './atoms/input-form/input-form.atom';
 import { LogoAtom } from './atoms/logo/logo.atom';
 import { SocialBtnAtom } from './atoms/social-btn/social-btn.atom';
-import { SubmitBtnAtom } from './atoms/submit-btn/submit-btn.atom';
+import { NormalLoginBtn } from './atoms/normal-login-btn/normal-login-btn.atom';
 import { TabBtnAtom } from './atoms/tab-btn/tab-btn.atom';
 import { AuthTitleAtom } from './atoms/auth-title/auth-title.atom';
 import { AuthDescriptionAtom } from './atoms/auth-description/auth-description.atom';
@@ -104,6 +104,7 @@ import { NavItemAtom } from './atoms/nav-item/nav-item.atom';
 import { ImgGridAtom } from './atoms/img-grid/img-grid.atom';
 import { BtnIconAtom } from './atoms/btn-icon/btn-icon.atom';
 import { BreadcrumbAtom } from './atoms/breadcrumb/breadcrumb.atom';
+import { SocialLoginBtnFbAtom } from './atoms/social-login-btn-fb/social-login-btn-fb.atom';
 
 @NgModule({
   imports: [
@@ -129,7 +130,7 @@ import { BreadcrumbAtom } from './atoms/breadcrumb/breadcrumb.atom';
     LogoAtom,
     InputFormAtom,
     CheckBtnAtom,
-    SubmitBtnAtom,
+    NormalLoginBtn,
     SocialBtnAtom,
     AuthBgAtom,
     AuthTitleAtom,
@@ -223,6 +224,7 @@ import { BreadcrumbAtom } from './atoms/breadcrumb/breadcrumb.atom';
     ImgGridAtom,
     BtnIconAtom,
     BreadcrumbAtom,
+    SocialLoginBtnFbAtom,
   ],
   declarations: [
     notReadyDirective,
@@ -231,7 +233,7 @@ import { BreadcrumbAtom } from './atoms/breadcrumb/breadcrumb.atom';
     LogoAtom,
     InputFormAtom,
     CheckBtnAtom,
-    SubmitBtnAtom,
+    NormalLoginBtn,
     SocialBtnAtom,
     AuthBgAtom,
     AuthTitleAtom,
@@ -323,6 +325,7 @@ import { BreadcrumbAtom } from './atoms/breadcrumb/breadcrumb.atom';
     ImgGridAtom,
     BtnIconAtom,
     BreadcrumbAtom,
+    SocialLoginBtnFbAtom,
   ],
 })
 export class GlobalDesignSystemAtomicModule {}

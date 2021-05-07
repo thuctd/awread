@@ -46,5 +46,11 @@ module.exports = {
     '<rootDir>/libs/core/system',
     '<rootDir>/libs/core/news',
     '<rootDir>/libs/core/marketing',
+    '<rootDir>/libs/core/chapters',
+    '<rootDir>/libs/core/book-data',
+    '<rootDir>/libs/core/categories',
+    '<rootDir>/libs/core/genres',
+    '<rootDir>/libs/core/authors',
+    '<rootDir>/libs/core/slider',
   ],
 };

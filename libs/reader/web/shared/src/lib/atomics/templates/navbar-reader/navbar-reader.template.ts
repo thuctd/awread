@@ -20,7 +20,7 @@ import { FormControl } from '@angular/forms';
 export class NavbarReaderTemplate implements OnInit {
   @Input() items = [
     {
-      id: '1',
+      bookId: '1',
       title: 'Tôi lạc quan'
     }
   ];

@@ -2181,6 +2181,138 @@
           }
         }
       }
+    },
+    "core-chapters": {
+      "projectType": "library",
+      "root": "libs/core/chapters",
+      "sourceRoot": "libs/core/chapters/src",
+      "prefix": "awread",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/core/chapters/src/**/*.ts", "libs/core/chapters/src/**/*.html"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/core/chapters"],
+          "options": {
+            "jestConfig": "libs/core/chapters/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "core-book-data": {
+      "projectType": "library",
+      "root": "libs/core/book-data",
+      "sourceRoot": "libs/core/book-data/src",
+      "prefix": "awread",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/core/book-data/src/**/*.ts", "libs/core/book-data/src/**/*.html"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/core/book-data"],
+          "options": {
+            "jestConfig": "libs/core/book-data/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "core-categories": {
+      "projectType": "library",
+      "root": "libs/core/categories",
+      "sourceRoot": "libs/core/categories/src",
+      "prefix": "awread",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/core/categories/src/**/*.ts", "libs/core/categories/src/**/*.html"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/core/categories"],
+          "options": {
+            "jestConfig": "libs/core/categories/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "core-genres": {
+      "projectType": "library",
+      "root": "libs/core/genres",
+      "sourceRoot": "libs/core/genres/src",
+      "prefix": "awread",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/core/genres/src/**/*.ts", "libs/core/genres/src/**/*.html"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/core/genres"],
+          "options": {
+            "jestConfig": "libs/core/genres/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "core-authors": {
+      "projectType": "library",
+      "root": "libs/core/authors",
+      "sourceRoot": "libs/core/authors/src",
+      "prefix": "awread",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/core/authors/src/**/*.ts", "libs/core/authors/src/**/*.html"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/core/authors"],
+          "options": {
+            "jestConfig": "libs/core/authors/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "core-slider": {
+      "projectType": "library",
+      "root": "libs/core/slider",
+      "sourceRoot": "libs/core/slider/src",
+      "prefix": "awread",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/core/slider/src/**/*.ts", "libs/core/slider/src/**/*.html"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/core/slider"],
+          "options": {
+            "jestConfig": "libs/core/slider/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   },
   "cli": {
