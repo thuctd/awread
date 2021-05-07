@@ -101,7 +101,6 @@ import { RdAuthorPopupContentBlockAtom } from './atoms/rd-author-popup-content-b
 import { LinkAtom } from './atoms/link/link.atom';
 import { DetailInfoLineLinkAtom } from './atoms/detail-info-line-link/detail-info-line-link.atom';
 import { NavItemAtom } from './atoms/nav-item/nav-item.atom';
-import { ImgGridAtom } from './atoms/img-grid/img-grid.atom';
 import { BtnIconAtom } from './atoms/btn-icon/btn-icon.atom';
 import { BreadcrumbAtom } from './atoms/breadcrumb/breadcrumb.atom';
 import { SocialLoginBtnFbAtom } from './atoms/social-login-btn-fb/social-login-btn-fb.atom';
@@ -221,7 +220,6 @@ import { SocialLoginBtnFbAtom } from './atoms/social-login-btn-fb/social-login-b
     LinkAtom,
     DetailInfoLineLinkAtom,
     NavItemAtom,
-    ImgGridAtom,
     BtnIconAtom,
     BreadcrumbAtom,
     SocialLoginBtnFbAtom,
@@ -322,7 +320,6 @@ import { SocialLoginBtnFbAtom } from './atoms/social-login-btn-fb/social-login-b
     LinkAtom,
     DetailInfoLineLinkAtom,
     NavItemAtom,
-    ImgGridAtom,
     BtnIconAtom,
     BreadcrumbAtom,
     SocialLoginBtnFbAtom,

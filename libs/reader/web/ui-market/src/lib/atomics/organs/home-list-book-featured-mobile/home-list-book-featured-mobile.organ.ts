@@ -16,7 +16,7 @@ export class HomeListBookFeaturedMobileOrgan implements OnInit {
   @Input() altImg = 'Placeholder';
   @Input() books = [];
 
-  constructor() { }
+  constructor() {}
 
   @Input() customOptions: OwlOptions = {
     loop: true,
@@ -30,14 +30,14 @@ export class HomeListBookFeaturedMobileOrgan implements OnInit {
       320: {
         items: 3,
       },
-      768: {
+      640: {
         items: 4,
       },
-      1200: {
+      728: {
         items: 5,
       },
     },
   };
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }

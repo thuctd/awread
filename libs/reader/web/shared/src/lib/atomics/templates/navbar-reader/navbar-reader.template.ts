@@ -13,9 +13,9 @@ import { FormControl } from '@angular/forms';
       .z-999 {
         z-index: 999;
       }
-    `
+    `,
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavbarReaderTemplate implements OnInit {
   @Input() items = [
@@ -27,9 +27,7 @@ export class NavbarReaderTemplate implements OnInit {
   @Input() searchControl = new FormControl();
   @Output() eventSearch = new EventEmitter();
   @Input() isLogin = false;
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

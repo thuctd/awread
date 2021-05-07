@@ -1,7 +1,7 @@
 <div class="px-1 pt-2">
     <div *ngFor="let book of books;" class="grid grid-cols-12 gap-4 py-4">
         <div class="col-span-4">
-            <atom-img-m [height]="'h-40'" [bookId]='book.id' [srcImg]='book.imgUrl'></atom-img-m>
+            <atom-img-m [size]="'s'" [bookId]='book.id' [srcImg]='book.imgUrl'></atom-img-m>
         </div>
         <div class="col-span-8">
             <molec-mb-info-book [book]='book'></molec-mb-info-book>

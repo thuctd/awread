@@ -1,7 +1,5 @@
 <section class="px-4">
   <organ-content-book class="pb-8"></organ-content-book>
   <organ-comment-book-read class="pb-4"></organ-comment-book-read>
-  <div class="md:hidden border-t">
-    <list-detail-top-book></list-detail-top-book>
-  </div>
+  <list-detail-top-book [books]='topBooks' (moreEvent)='nativeTopBook.emit($event)' class="border-t px-4"></list-detail-top-book>
 </section>
