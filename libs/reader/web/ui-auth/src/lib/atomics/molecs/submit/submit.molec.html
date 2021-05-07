@@ -1,12 +1,5 @@
 <section>
-  <submit-btn [active]="active" [name]="text"></submit-btn>
+  <normal-login-btn (btnClicked)="btnClicked.emit()" [active]="active" [name]="text"></normal-login-btn>
   <atom-bar-seperate class="py-3 px-3"></atom-bar-seperate>
-  <div>
-    <button
-    class="text-sm md:text-xs lg:text-base xl:text-base w-full text-white cursor-pointer rounded-full blue focus:shadow-outline focus:outline-none px-4 py-2 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 roboto" type="button"
-    (click)="btnClicked.emit()"
-    >
-  {{ name }}
-</button>
-  </div>
+  <social-login-btn-fb (socialFbBtnClicked)="socialFbBtnClicked.emit()"></social-login-btn-fb>
 </section>

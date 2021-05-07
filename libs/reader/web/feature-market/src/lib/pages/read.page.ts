@@ -1,9 +1,8 @@
 import { Directive, Injectable, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { map, switchMap, tap } from 'rxjs/operators';
-import { BooksFacade } from '../facades/books.facade';
-import { ChaptersFacade } from '../facades/chapters.facede';
-
+import { switchMap, tap } from 'rxjs/operators';
+import { BooksFacade } from 'libs/core/books/src/lib/facades/books.facade';
+import { ChaptersFacade } from 'libs/core/chapters/src/lib/facades/chapters.facade';
 @Injectable({
   providedIn: 'root',
 })
@@ -12,8 +11,8 @@ export class ReadPage implements OnInit {
   chapter$;
   bookId;
   chapterId;
-  topBookList$ = this.booksFacade.topBookList$;
-  chapterListByBookId$ = this.chaptersFacade.chapterListByBookId$;
+  topBookList$ = this.booksFacade.topBooks$;
+  chapterListByBookId$ = this.chaptersFacade.chapters$;
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private chaptersFacade: ChaptersFacade, private booksFacade: BooksFacade) { }
 
@@ -25,7 +24,7 @@ export class ReadPage implements OnInit {
         switchMap((params) => {
           return this.chaptersFacade.getChapterDetail(params.get('bookId'), params.get('chapterId')).pipe(
             tap((chapter) => {
-              this.chaptersFacade.getAllChapters(chapter.bookId).subscribe();
+              this.chaptersFacade.getAllChapters(chapter['bookId']).subscribe();
             })
           );
         })

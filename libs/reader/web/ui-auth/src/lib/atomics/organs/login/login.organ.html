@@ -7,5 +7,10 @@
   </div>
   <molec-login-form class="mt-4" #loginForm [form]="authForm"></molec-login-form>
   <molec-remember-forgot-password></molec-remember-forgot-password>
-  <molec-submit class="mt-6" (btnClicked)="auth.emit('email')" [active]="loginForm.form.valid"></molec-submit>
+  <molec-submit
+    class="mt-6"
+    (btnClicked)="auth.emit()"
+    (socialFbBtnClicked)="auth.emit('facebook')"
+    [active]="loginForm.form.valid">
+  </molec-submit>
 </section>
