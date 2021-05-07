@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="0,1055" last-zoom="0.95" max-obj-count="15"
+<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="0,306" last-zoom="0.95" max-obj-count="15"
 	 default-owner="postgres">
 <role name="anonymous">
 </role>
@@ -152,7 +152,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 		<type name="timestamp with time zone" length="0" with-timezone="true"/>
 	</column>
 	<column name="phone">
-		<type name="numeric" length="0"/>
+		<type name="text" length="0"/>
 	</column>
 	<column name="code" default-value="+84">
 		<type name="text" length="0"/>
@@ -508,8 +508,23 @@ end;]]></definition>
 	<return-type>
 	<type name="public.users" length="0"/>
 	</return-type>
-	<parameter name="userData">
-		<type name="jsonb" length="0"/>
+	<parameter name="username">
+		<type name="text" length="0"/>
+	</parameter>
+	<parameter name="email">
+		<type name="text" length="0"/>
+	</parameter>
+	<parameter name="phone">
+		<type name="numeric" length="0"/>
+	</parameter>
+	<parameter name="name">
+		<type name="text" length="0"/>
+	</parameter>
+	<parameter name="age">
+		<type name="numeric" length="0"/>
+	</parameter>
+	<parameter name="password">
+		<type name="text" length="0"/>
 	</parameter>
 	<definition><![CDATA[declare 
 	"userAccount" public.users;
@@ -522,24 +537,24 @@ begin
 		name,
 		age
 	) values (
-		("inputData" ->> 'username')::text,
-		("inputData"  ->> 'email')::text,
-		("inputData"  ->> 'phone')::numeric,
-		("inputData"  ->> 'name')::text,
-		("inputData"  ->> 'age')::numeric
+		username, 
+		email,
+		phone, 
+		name,
+		age
 	)
 	returning * into "userAccount";	
 	
 	insert into private.users("userId", "passwordHash") values(
 		"userAccount"."userId",
-		crypt("userData".password, gen_salt('bf'))
+		crypt(password, gen_salt('bf'))
     );
  	return "userAccount";
 
 end;]]></definition>
 </function>
 
-<function name="authenticate"
+<function name="authenticate_user"
 		window-func="false"
 		returns-setof="false"
 		behavior-type="CALLED ON NULL INPUT"
@@ -559,27 +574,30 @@ grant writer to postgraphile;]]></appended-sql>
 	<return-type>
 	<type name="public.jwt_token" length="0"/>
 	</return-type>
-	<parameter name="inputData">
-		<type name="jsonb" length="0"/>
+	<parameter name="loginname">
+		<type name="text" length="0"/>
+	</parameter>
+	<parameter name="password">
+		<type name="text" length="0"/>
 	</parameter>
 	<definition><![CDATA[declare 
 	account public.users;
-	"passwordHash" text;
+	"accountPasswordHash" text;
 
 begin
   select * into account
   from public.users
   where
-	email = 'inputData' ->> 'username' or 
-	phone = 'inputData' ->> 'username' or 
-	username = 'inputData' ->> 'username';
+	public.users.email = loginname or 
+	public.users.phone = loginname or 
+	public.users.username = loginname;
 
-	select "passwordHash" into "passwordHash"
+	select "passwordHash" into "accountPasswordHash"
 	from private.users
 	where account."userId" = "userId";
 
-  if "passwordHash" = crypt('inputData' ->> 'password', "passwordHash" ) then
-    return (account.roles, account."userId", extract(epoch from (now() + interval '14 days')))::public.jwt_token;
+  if "accountPasswordHash" = crypt(password, "accountPasswordHash" ) then
+    return (account."userId", account.roles, extract(epoch from (now() + interval '14 days')))::public.jwt_token;
   else
     return null;
   end if;

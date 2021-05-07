@@ -12,7 +12,8 @@ const app = express();
 const FIREBASE_URL = environment.firebase.databaseURL;
 const DATABASE_URL = process.env.DATABASE_URL || environment.postgres.DATABASE_URL;
 const SCHEMA = environment.postgres.SCHEMA;
-
+import { AuthController } from './app/auth.controller';
+const authController = new AuthController(app);
 
 import { Pool, Client } from 'pg';
 const pool = new Pool({
@@ -164,7 +165,7 @@ async function startCronJob() {
   // job.start();
 
   const job = new cron.CronJob('*/5 * * * *', function () {
-    console.log('You will see this message every 5 minutes');
+    // console.log('You will see this message every 5 minutes');
     postgresRefeshMV();
   }, null, true, 'Asia/Ho_Chi_Minh');
   job.start();

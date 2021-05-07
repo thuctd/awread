@@ -24,6 +24,12 @@ const routes: Routes = [
   },
 ];
 
+import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import {
+  GoogleLoginProvider,
+  FacebookLoginProvider
+} from 'angularx-social-login';
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   imports: [
     CommonModule,
@@ -39,7 +45,28 @@ const routes: Routes = [
     ReaderWebUiAuthorModule,
     ReaderWebUiSingleModule,
     ReaderWebUiMarketModule,
+    SocialLoginModule,
+    HttpClientModule
   ],
-  exports: [RouterModule, GlobalCoreModule],
+  exports: [
+    RouterModule,
+    GlobalCoreModule,
+    SocialLoginModule,
+    HttpClientModule
+  ],
+  providers: [
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider('1687794138050695')
+          }
+        ]
+      } as SocialAuthServiceConfig,
+    }
+  ]
 })
-export class ReaderWebFeatureShellModule {}
+export class ReaderWebFeatureShellModule { }
