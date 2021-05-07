@@ -1,3 +1,5 @@
 <a [routerLink]="['/books', bookId,'chapters', chapterId]" class="outline-none table-cell w-2/5 focus:outline-none">
-    <img src="{{src}}" alt="" class="block shadow cursor-pointer w-full lg:h-72 xl:h-96" />
+    <div class="focus:outline-none relative overflow-hidden w-54 h-72 xl:w-72 xl:h-96">
+      <img src="{{src}}" alt="" class="block shadow object-cover w-full cursor-pointer absolute" />
+    </div>
 </a>

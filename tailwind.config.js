@@ -30,6 +30,10 @@ module.exports = {
         blue: {
           primary: "#4267B2"
         }
+      },
+      spacing: {
+        "27": "6.75rem",
+        "54": "13.5rem"
       }
     },
     color: {

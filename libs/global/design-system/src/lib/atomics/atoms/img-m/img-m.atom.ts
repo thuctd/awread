@@ -13,11 +13,11 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ImgMAtom implements OnInit {
-  @Input() size: 's' | 'm' | 'l' | 'xl' = 's';
+  @Input() size: 's' | 'm' | 'l' | 'xl' | 'xxl' | 'other' = 'xl';
   @Input() srcImg = '/global-assets/images/image.webp';
   @Input() altImg = 'Placeholder';
   @Input() bookId = 'bvxz_324345seQ6x';
-  @Input() height = 'h-72';
+  @Input() sizeImg = '';
 
   constructor() {}
 

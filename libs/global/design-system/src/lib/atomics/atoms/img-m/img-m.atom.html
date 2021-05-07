@@ -1,3 +1,6 @@
-<div [routerLink]="['/books', bookId]" class="mb-2 focus:outline-none">
-    <img [src]="srcImg" alt="{{altImg}}" [ngClass]="height" class="object-cover w-full cursor-pointer">
+<div
+  [routerLink]="['/books', bookId]"
+  [ngClass]="size === 's' ? 'w-27 h-36' : size === 'm' ? 'w-36 h-48' : size === 'l' ? 'w-48 h-64' : size === 'xl' ? 'w-54 h-72' : size === 'xxl' ? 'w-72 h-96' : size === 'other' ? sizeImg : ''"
+  class="mb-2 focus:outline-none relative overflow-hidden">
+    <img [src]="srcImg" alt="{{altImg}}" class="object-cover w-full cursor-pointer absolute">
 </div>

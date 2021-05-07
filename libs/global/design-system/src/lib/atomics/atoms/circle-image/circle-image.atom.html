@@ -1,3 +1,5 @@
-<div class="w-16 h-16 sm:w-20 sm:h-20">
-  <img class="border rounded-full" src="{{src}}" />
+<div
+  [ngClass]="size === 's' ? 'w-12 h-12' : size === 'm' ? 'w-20 h-20' : size === 'l' ? 'w-20 h-20 sm:w-24 sm:h-24' : 'w-64 h-64'"
+  class="focus:outline-none relative overflow-hidden">
+    <img class="border rounded-full object-cover w-full cursor-pointer absolute" src="{{src}}" />
 </div>
