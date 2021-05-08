@@ -34,10 +34,15 @@ export class LoginWebTemplate implements OnInit {
 
   ngOnInit(): void { }
 
-  async authClicked(event) {
-    this.auth.emit(event);
-    const result = await this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
-    console.log('login result', result);
+  async authClicked(provider: string) {
+    this.auth.emit(provider);
+    let socialLoginResult;
+    if (provider == 'google') {
+      socialLoginResult = await this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
+    } else if (provider == 'facebook') {
+      socialLoginResult = await this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
+    }
+    console.log('login result', socialLoginResult);
     // const ob = this.http.get('/auth/facebook')
     //   .pipe(tap(result => console.log('result')));
     // console.log('ob', ob);

@@ -15,9 +15,10 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, EventEmitter, Output
 export class SubmitMolec implements OnInit {
   @Input() text = 'Đăng nhập';
   @Output() btnClicked = new EventEmitter();
-  @Output() socialFbBtnClicked = new EventEmitter();
+  @Output() socialFBBtnClicked = new EventEmitter();
+  @Output() socialGGBtnClicked = new EventEmitter();
   @Input() active = false;
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }
