@@ -18,14 +18,14 @@
       <div>
         <owl-carousel-o [options]="customOptions">
           <ng-container *ngFor="let item of items">
-            <!-- <ng-template carouselSlide>
-              <a [routerLink]="['/books', item.id]" class="cursor-pointer outline-none">
+            <ng-template carouselSlide>
+              <a [routerLink]="['/books', item.bookId]" class="cursor-pointer outline-none">
                 <div class="carousel-items flex pb-3 justify-center">
                   <rd-home-tab-book class="carousel-focus flex relative flex-col" [book]="item">
                   </rd-home-tab-book>
                 </div>
               </a>
-            </ng-template> -->
+            </ng-template>
           </ng-container>
         </owl-carousel-o>
         <div class="spinner" *ngIf="loading">

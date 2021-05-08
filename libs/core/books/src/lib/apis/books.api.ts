@@ -30,9 +30,19 @@ export class BooksApi {
         mutation SearchBooks($filter: String) {
           searchBooks(input: { searchTerm: $filter }) {
             books {
+              bookId
               title
               description
               userId
+              categoryByCategoryId {
+                categoryId
+                name
+              }
+              booksGenresByBookId {
+                nodes {
+                  genreId
+                }
+              }
             }
           }
         }
@@ -218,10 +228,10 @@ export class BooksApi {
     return this.apollo.query({
       query: gql`
         query getGenreBooks($genreId: BigFloat!) {
-          allBooksGenres(first: 20, condition: { genreId: $genreId }) {
+          allBooksGenres(first: 10, condition: { genreId: $genreId }) {
             nodes {
-              genreId
               bookId
+              genreId
               bookByBookId {
                 bookId
                 title

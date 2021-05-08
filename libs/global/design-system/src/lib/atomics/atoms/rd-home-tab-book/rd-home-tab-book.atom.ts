@@ -16,9 +16,9 @@ export class RdHomeTabBookAtom implements OnInit {
   @Output() tabClicked = new EventEmitter();
   @Output() onBtnClicked = new EventEmitter();
   @Input() book = {
-    id: "1",
+    bookId: "1",
     title: 'Cô gái theo đuổi năm nào',
-    imgUrl: 'https://via.placeholder.com/260x370.png',
+    cover: 'https://via.placeholder.com/260x370.png',
     categoryId: "1",
     genres: [1, 3],
   };

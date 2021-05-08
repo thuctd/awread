@@ -9,7 +9,7 @@ export class GenresApi {
     return this.apollo.query({
       query: gql`
         query allGenres {
-          allGenres(first: 10) {
+          allGenres(first: 7) {
             nodes {
               genreId
               name

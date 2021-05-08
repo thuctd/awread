@@ -4,7 +4,7 @@
   [getLatestBooks]="latestBookList$ | async"
   [getFeatureBooks]="featureBookList$ | async"
   [sliders]="imageObject$ | async"
-  [genres]="genreList$ | async"
+  [genres]="genres$ | async"
   (filterItemsByGenre)="filterItemsByGenre($event)"
   [bookByGenre]="filteredBooks$ | async"
 ></template-home-mobile>

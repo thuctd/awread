@@ -16,7 +16,7 @@ export class RdSearchBookListOrgan implements OnInit {
   @Input() category = 'Phiêu lưu, hài hước, hành động';
   @Input() status = 'Hoàn thành';
   @Input() title = 'Em là nhà';
-  @Input() imgUrl = '';
+  @Input() cover = '';
   @Input() bookId = '';
 
   constructor() { }

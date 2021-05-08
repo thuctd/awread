@@ -1,3 +1,4 @@
+import { SearchBooksStore } from './../states/search-books/search-books.store';
 import { TopBooksStore } from './../states/top-books/top-books.store';
 import { AuthorBooksStore } from './../states/author-books/author-books.store';
 import { GenreBooksStore } from './../states/genre-books/genre-books.store';
@@ -18,6 +19,7 @@ export class BooksGear {
     private authorBooksStore: AuthorBooksStore,
     private topBooksStore: TopBooksStore,
     private booksStore: BooksStore,
+    private searchBooksStore: SearchBooksStore,
     private booksApi: BooksApi,
   ) { }
 
@@ -100,6 +102,7 @@ export class BooksGear {
         ) {
           this.authorBooksStore.set(res['data']['allAuthors']['nodes']);
         }
+        return [];
       }),
       catchError((err) => {
         console.error('An error occurred:', err);
@@ -110,15 +113,19 @@ export class BooksGear {
 
   getGenreBooks(genreId: string) {
     return this.booksApi.getGenreBooks(genreId).pipe(
-      map((res) => {
+      tap((res) => {
         if (
           res['data'] &&
           res['data']['allBooksGenres'] &&
           res['data']['allBooksGenres']['nodes'].length
         ) {
           const result = res['data']['allBooksGenres']['nodes'];
-          this.genreBooksStore.set(result);
+          const books = result.map((book) =>
+            this.tranformBookGenres(book)
+          );
+          this.genreBooksStore.set(books);
         }
+        return [];
       }),
       catchError((err) => {
         console.error('An error occurred:', err);
@@ -175,11 +182,29 @@ export class BooksGear {
   }
 
   searhBookByTermApi(term: string) {
-    return this.booksApi.searchBookByTerm("Sát").pipe(
+    return this.booksApi.searchBookByTerm(term).pipe(
       tap((res) => {
-        console.log('books', res);
+        if (
+          res['data'] &&
+          res['data']['searchBooks'] &&
+          res['data']['searchBooks']['books'].length
+        ) {
+          const result = res['data']['searchBooks']['books'];
+          this.searchBooksStore.set(result);
+        }
       }),
+      catchError((err) => {
+        console.error('An error occurred:', err);
+        return throwError(err);
+      })
     );
   }
 
+  private tranformBookGenres(book) {
+    const title = book['bookByBookId'].title ?? '';
+    return {
+      ...book,
+      title
+    };
+  }
 }

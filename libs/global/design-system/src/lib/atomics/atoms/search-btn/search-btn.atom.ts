@@ -19,10 +19,7 @@ export class SearchBtnAtom implements OnInit {
   @Input() inputControl: FormControl = new FormControl('');
   constructor() { }
 
-  @Input() options = [{
-    bookId: '1',
-    title: 'Tôi lạc quan'
-  }];
+  @Input() options = [];
 
   filteredOptions: Observable<string[]>;
 

@@ -1,5 +1,6 @@
 export interface GenreBook {
-  id: string;
+  bookId: string;
+  title: string;
 }
 
 export function GenreBook(params: Partial<GenreBook>) {
