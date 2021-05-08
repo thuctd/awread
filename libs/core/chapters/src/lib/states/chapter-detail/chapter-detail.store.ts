@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { Store, StoreConfig } from '@datorama/akita';
 
 export interface ChapterDetailState {
-  key: string;
+  chapterId: string;
 }
 
 export function createInitialState(): ChapterDetailState {
   return {
-    key: 'value'
+    chapterId: '',
   };
 }
 

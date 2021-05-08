@@ -18,7 +18,7 @@ export class ListDetailTopBookOrgan implements OnInit {
   @Input() moreBook = 'Xem thêm...';
   @Input() btnTitle = 'Top phổ biến';
   @Input() books = [{
-    id: '',
+    bookId: '',
     imgUrl: '',
     title: '',
   }];

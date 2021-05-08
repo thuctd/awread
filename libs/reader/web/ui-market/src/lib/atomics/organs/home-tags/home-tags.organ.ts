@@ -17,20 +17,12 @@ export class HomeTagsOrgan implements OnInit {
   @Output() filterItemsByGenre = new EventEmitter();
   @Input() genres = [
     {
-      id: 1,
+      genreId: 1,
       name: 'Lãng mạn',
     },
   ];
 
-  @Input() items = [
-    {
-      id: '1',
-      title: 'Cô gái theo đuổi năm nào',
-      imageUrl: 'https://via.placeholder.com/260x370.png',
-      categoryId: '1',
-      genres: [1, 3],
-    },
-  ];
+  @Input() items = [];
 
   @Input() customOptions: OwlOptions = {
     autoplay: true,
@@ -69,9 +61,9 @@ export class HomeTagsOrgan implements OnInit {
     },
   };
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   setActiveGenre(genre, index) {
     this.currentGenre = genre;

@@ -70,7 +70,11 @@ export class BooksHomeGear {
           res['data']['allMvBooksLatestChapters'] &&
           res['data']['allMvBooksLatestChapters']['nodes'].length
         ) {
-          this.latestBooksStore.set(res['data']['allMvBooksLatestChapters']['nodes']);
+          const result = res['data']['allMvBooksLatestChapters']['nodes'];
+          const books = result.map((book) =>
+            this.transformBookDataGear.tranformBookHomeData(book)
+          );
+          this.latestBooksStore.set(books);
         }
       }),
       catchError((err) => {

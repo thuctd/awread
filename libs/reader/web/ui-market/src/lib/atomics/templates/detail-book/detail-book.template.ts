@@ -17,7 +17,7 @@ export class DetailBookTemplate implements OnInit {
   @Input() items = [];
   @Input() chapters = [
     {
-      id: "1",
+      chapterId: "1",
       bookId: "1",
       chapterNumber: 'Chương 1',
       title: 'Ngày ấy vì ai mà đổi thay',

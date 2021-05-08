@@ -50,7 +50,7 @@ export class HomePage implements OnInit {
     this.filteredBooks$ = this.bookList$.pipe(
       map((items) =>
         items.filter((item) => {
-          // return item.genres.includes(items[0].id);
+          // return item.genres.includes(items[0].genreIds);
         })
       )
     );

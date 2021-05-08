@@ -1,3 +1,4 @@
+import { TopBooksStore } from './../states/top-books/top-books.store';
 import { AuthorBooksStore } from './../states/author-books/author-books.store';
 import { GenreBooksStore } from './../states/genre-books/genre-books.store';
 import { Injectable } from '@angular/core';
@@ -14,7 +15,8 @@ export class BooksGear {
   constructor(
     private transformBookDataGear: TransformBookDataGear,
     private genreBooksStore: GenreBooksStore,
-    private athorBooksStore: AuthorBooksStore,
+    private authorBooksStore: AuthorBooksStore,
+    private topBooksStore: TopBooksStore,
     private booksStore: BooksStore,
     private booksApi: BooksApi,
   ) { }
@@ -93,14 +95,10 @@ export class BooksGear {
       tap((res) => {
         if (
           res['data'] &&
-          res['data']['allBooks'] &&
-          res['data']['allBooks']['nodes'].length
+          res['data']['allAuthors'] &&
+          res['data']['allAuthors']['nodes'].length
         ) {
-          const result = res['data']['allBooks']['nodes'];
-          const books = result.map((book) =>
-            this.transformBookDataGear.tranformBookData(book)
-          );
-          this.athorBooksStore.set(books);
+          this.authorBooksStore.set(res['data']['allAuthors']['nodes']);
         }
       }),
       catchError((err) => {
@@ -112,13 +110,14 @@ export class BooksGear {
 
   getGenreBooks(genreId: string) {
     return this.booksApi.getGenreBooks(genreId).pipe(
-      tap((res) => {
+      map((res) => {
         if (
           res['data'] &&
           res['data']['allBooksGenres'] &&
           res['data']['allBooksGenres']['nodes'].length
         ) {
-          this.genreBooksStore.set(res['data']['allBooksGenres']['nodes']);
+          const result = res['data']['allBooksGenres']['nodes'];
+          this.genreBooksStore.set(result);
         }
       }),
       catchError((err) => {
@@ -130,8 +129,16 @@ export class BooksGear {
 
   getBookById(bookId: string) {
     return this.booksApi.getBookById(bookId).pipe(
-      tap((res) => {
-
+      map((res) => {
+        if (
+          res['data'] &&
+          res['data']['allMvDetailBooks'] &&
+          res['data']['allMvDetailBooks']['nodes'].length
+        ) {
+          const book = res['data']['allMvDetailBooks']['nodes'];
+          return book;
+        }
+        return [];
       }),
       catchError((err) => {
         console.error('An error occurred:', err);
@@ -142,8 +149,19 @@ export class BooksGear {
 
   getTopBooks() {
     return this.booksApi.getTopBooks().pipe(
-      map((books) => {
-
+      map((res) => {
+        if (
+          res['data'] &&
+          res['data']['allMvMostViewBooks'] &&
+          res['data']['allMvMostViewBooks']['nodes'].length
+        ) {
+          const result = res['data']['allMvMostViewBooks']['nodes'];
+          const books = result.map((book) =>
+            this.transformBookDataGear.tranformBookHomeData(book)
+          );
+          this.topBooksStore.set(books);
+        }
+        return [];
       }),
       catchError((err) => {
         console.error('An error occurred:', err);
