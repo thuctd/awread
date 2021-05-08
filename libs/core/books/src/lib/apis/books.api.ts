@@ -38,7 +38,7 @@ export class BooksApi {
         }
       `,
       variables: {
-        filter
+        filter,
       },
     });
   }
@@ -47,9 +47,10 @@ export class BooksApi {
     return this.apollo.query({
       query: gql`
         query getAllBooks {
-          allBooks(orderBy: UPDATED_AT_DESC) {
+          allBooks(first: 50, orderBy: UPDATED_AT_DESC) {
             nodes {
               bookId
+              cover
               title
               description
               published
@@ -82,7 +83,7 @@ export class BooksApi {
     return this.apollo.query({
       query: gql`
         query getAllBooks {
-          allBooks(orderBy: UPDATED_AT_DESC) {
+          allBooks(first: 10, orderBy: UPDATED_AT_DESC) {
             nodes {
               bookId
               title
@@ -117,7 +118,7 @@ export class BooksApi {
     return this.apollo.query({
       query: gql`
         query getAllBooks {
-          allBooks(orderBy: UPDATED_AT_DESC) {
+          allBooks(first: 10, orderBy: UPDATED_AT_DESC) {
             nodes {
               bookId
               title
@@ -151,8 +152,8 @@ export class BooksApi {
   getCategoryBooks(categoryId: string) {
     return this.apollo.query({
       query: gql`
-        query allBooks($categoryId: String) {
-          allBooks(condition: { categoryId: $categoryId }) {
+        query allBooks($categoryId: UUID!) {
+          allBooks(first: 10, condition: { categoryId: $categoryId }) {
             nodes {
               bookId
               title
@@ -189,21 +190,19 @@ export class BooksApi {
   getAuthorBooks(authorId: string) {
     return this.apollo.query({
       query: gql`
-        query getAuthorBooks($userId: String) {
-          allBooks(condition: { userId: $userId }) {
+        query getAuthorBooks($userId: UUID) {
+          allAuthors(first: 3, condition: { userId: $userId }) {
             nodes {
               bookId
-              title
-              description
-              published
-              updatedAt
-              completed
-              chaptersByBookId(orderBy: CREATED_AT_DESC) {
-                nodes {
-                  published
-                  updatedAt
-                }
-                totalCount
+              bookByBookId {
+                bookId
+                cover
+                title
+                description
+                published
+                updatedAt
+                completed
+                ages
               }
             }
           }
@@ -218,33 +217,18 @@ export class BooksApi {
   getGenreBooks(genreId: string) {
     return this.apollo.query({
       query: gql`
-        query getGenreBooks($genreId: String) {
-          allBooksGenres(condition: { genreId: $genreId }) {
+        query getGenreBooks($genreId: BigFloat!) {
+          allBooksGenres(first: 20, condition: { genreId: $genreId }) {
             nodes {
               genreId
-              nodes {
+              bookId
+              bookByBookId {
                 bookId
                 title
                 description
                 published
                 updatedAt
                 completed
-                categoryByCategoryId {
-                  categoryId
-                  name
-                }
-                chaptersByBookId(orderBy: CREATED_AT_DESC) {
-                  nodes {
-                    published
-                    updatedAt
-                  }
-                  totalCount
-                }
-                booksGenresByBookId {
-                  nodes {
-                    genreId
-                  }
-                }
               }
             }
           }
@@ -260,7 +244,7 @@ export class BooksApi {
     return this.apollo.query({
       query: gql`
         query getTopBooks {
-          allMvMostViewBooks(orderBy: VIEWS_DESC) {
+          allMvMostViewBooks(first: 3, orderBy: VIEWS_DESC) {
             nodes {
               bookId
               title
@@ -278,16 +262,20 @@ export class BooksApi {
   getBookById(bookId: string) {
     return this.apollo.query({
       query: gql`
-        query allMvDetailBooks($bookId: String) {
+        query allMvDetailBooks($bookId: UUID!) {
           allMvDetailBooks(condition: { bookId: $bookId }) {
             nodes {
+              ages
+              authors
               bookId
-              title
-              description
-              published
-              updatedAt
-              completed
               categoryId
+              completed
+              description
+              genres
+              published
+              publisherId
+              title
+              updatedAt
               userId
             }
           }

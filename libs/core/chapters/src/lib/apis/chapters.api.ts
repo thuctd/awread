@@ -8,8 +8,8 @@ export class ChaptersApi {
   getAllChapters(bookId) {
     return this.apollo.query({
       query: gql`
-        query BookChapters($bookId) {
-          allChapters(condition: { bookId: $bookId }) {
+        query BookChapters($bookId: UUID!) {
+          allChapters(first: 20, condition: { bookId: $bookId }) {
             nodes {
               chapterId
               title
@@ -29,8 +29,8 @@ export class ChaptersApi {
   getChapterDetail(bookId: string, chapterId: string) {
     return this.apollo.query({
       query: gql`
-        query DetailChapter($bookId) {
-          allChapters(condition: { bookId: $bookId, chapterId: $chapterId }) {
+        query DetailChapter($bookId: UUID!, $chapterId: UUID!) {
+          allChapters(first: 20, condition: { bookId: $bookId, chapterId: $chapterId }) {
             nodes {
               chapterId
               title
@@ -44,6 +44,10 @@ export class ChaptersApi {
           }
         }
       `,
+      variables: {
+        bookId,
+        chapterId
+      },
     });
   }
 }

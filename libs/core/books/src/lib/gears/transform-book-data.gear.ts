@@ -18,4 +18,12 @@ export class TransformBookDataGear {
     };
   }
 
+  tranformBookHomeData(book) {
+    const newestChapters = JSON.parse(book['newestChapters'].split('/'));
+    return {
+      ...book,
+      newestChapters
+    };
+  }
+
 }

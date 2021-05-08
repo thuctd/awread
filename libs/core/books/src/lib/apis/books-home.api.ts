@@ -28,7 +28,7 @@ export class BooksHomeApi {
     return this.apollo.query({
       query: gql`
         query allBooks {
-          allBooks(orderBy: UPDATED_AT_DESC, first: 8) {
+          allBooks(orderBy: UPDATED_AT_DESC, first: 6) {
             nodes {
               bookId
               title
@@ -76,5 +76,4 @@ export class BooksHomeApi {
       `,
     });
   }
-
 }

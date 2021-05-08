@@ -4,9 +4,9 @@
     </div>
     <div class="grid grid-cols-12 sm:gap-x-8 lg:gap-x-12 xl:gap-x-24 place-content-center mb-4 px-0 xl:px-32">
         <div *ngFor='let book of books;' class="col-span-2 md:col-span-4 mx-auto py-4">
-            <atom-img-m [size]="'xxl'" [bookId]='book.id' [srcImg]='book.imgUrl'></atom-img-m>
+            <atom-img-m [height]="'md:h-56 lg:h-72 xl:h-96'" [bookId]='book.bookId' [srcImg]='book.imgUrl'></atom-img-m>
             <div>
-              <home-info-book-featured [book]='book' [size]="'l'"></home-info-book-featured>
+                <home-info-book-featured [book]='book' [size]="'l'"></home-info-book-featured>
             </div>
         </div>
     </div>

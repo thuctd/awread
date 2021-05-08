@@ -5,7 +5,7 @@ import { Genre } from '../../models';
 export interface GenresState extends EntityState<Genre>, ActiveState { };
 
 @Injectable({ providedIn: 'root' })
-@StoreConfig({ name: ' genres', resettable: true })
+@StoreConfig({ name: ' genres', resettable: true, idKey: 'genreId' })
 export class GenresStore extends EntityStore<GenresState> {
   // ui: EntityUIStore<GenreUIState>;
   constructor() {
