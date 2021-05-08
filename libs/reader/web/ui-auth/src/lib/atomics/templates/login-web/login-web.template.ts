@@ -34,13 +34,13 @@ export class LoginWebTemplate implements OnInit {
 
   ngOnInit(): void { }
 
-  authClicked(event) {
-    console.log('event', event);
+  async authClicked(event) {
     this.auth.emit(event);
-    // this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
-    const ob = this.http.get('https://localhost:5000/auth/facebook')
-      .pipe(tap(result => console.log('result')));
-    console.log('ob', ob);
-    ob.subscribe(result => console.log(result))
+    const result = await this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
+    console.log('login result', result);
+    // const ob = this.http.get('/auth/facebook')
+    //   .pipe(tap(result => console.log('result')));
+    // console.log('ob', ob);
+    // ob.subscribe(result => console.log(result))
   }
 }

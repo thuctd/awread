@@ -12,8 +12,11 @@ const app = express();
 const FIREBASE_URL = environment.firebase.databaseURL;
 const DATABASE_URL = process.env.DATABASE_URL || environment.postgres.DATABASE_URL;
 const SCHEMA = environment.postgres.SCHEMA;
+
 import { AuthController } from './app/auth.controller';
-const authController = new AuthController(app);
+const authController = new AuthController();
+app.use(authController.passport.initialize());
+app.use(authController.router);
 
 import { Pool, Client } from 'pg';
 const pool = new Pool({
@@ -26,19 +29,21 @@ const asyncMiddleware = (fn) => (req, res, next) => {
 };
 
 const checkJwt = async (req, res, next) => {
-  try {
-    const token = req.headers.authorization?.split('Bearer ')[1];
-    if (!token) {
-      console.log('no token found');
-      next();
-    } else {
-      const decodedToken = await admin.auth().verifyIdToken(token);
-      req['user'] = decodedToken;
-      next();
-    }
-  } catch (error) {
-    res.status(401).send(error);
-  }
+  next();
+  // try {
+  //   const token = req.headers.authorization?.split('Bearer ')[1];
+  //   if (!token) {
+  //     console.log('no token found');
+  //     next();
+  //   } else {
+  //     console.log('token', token);
+  //     const decodedToken = await admin.auth().verifyIdToken(token);
+  //     req['user'] = decodedToken;
+  //     next();
+  //   }
+  // } catch (error) {
+  //   res.status(401).send(error);
+  // }
 };
 const postgraphileOptions = {
   watchPg: true,
@@ -108,6 +113,8 @@ app.post('/setCustomClaims', (req, res) => {
       }
     });
 });
+
+
 
 app.use('/graphql', asyncMiddleware(checkJwt));
 

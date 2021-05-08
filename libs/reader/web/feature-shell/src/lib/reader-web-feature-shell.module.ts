@@ -61,6 +61,10 @@ import { HttpClientModule } from '@angular/common/http';
         autoLogin: false,
         providers: [
           {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider('265413764260-sqgbeot6gpv6u7dp6moov7jp2blkvp3i.apps.googleusercontent.com')
+          },
+          {
             id: FacebookLoginProvider.PROVIDER_ID,
             provider: new FacebookLoginProvider('1687794138050695')
           }

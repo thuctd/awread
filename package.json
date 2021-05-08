@@ -30,7 +30,8 @@
     "fb-emu": "firebase emulators:start",
     "nx-migrate": "npx @nrwl/tao@latest migrate @nrwl/workspace@latest",
     "start-tunnel": "ssh -L localhost:5433:172.17.0.2:5432 hiepxanh@awread.vn",
-    "reader-local": "GRAPHQL_URI=localhost:5000 nx serve reader-web --ssl=true"
+    "reader-local": "set GRAPHQL_URI=localhost:5000 && nx serve reader-web --ssl=true",
+    "backend-debug": "nx serve backend-graphql --inspect --port=7777"
   },
   "private": true,
   "dependencies": {
@@ -124,6 +125,7 @@
     "@types/express": "^4.17.11",
     "@types/jest": "^26.0.21",
     "@types/node": "^14.14.35",
+    "@types/passport": "^1.0.6",
     "@types/pg": "^7.14.11",
     "@types/sharp": "^0.27.1",
     "@types/webpack": "^4.41.26",
