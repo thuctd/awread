@@ -33,8 +33,8 @@ export class RegisterOrgan implements OnInit {
 
   openFormLogin($event): void {
     this.matDialog.open(LoginWebTemplate, {
-      width: '32rem',
-      height: '38rem',
+      width: '31rem',
+      height: '40rem',
     });
   }
   openFormLoginMobile($event): void {

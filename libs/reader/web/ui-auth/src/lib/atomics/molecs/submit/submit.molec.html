@@ -1,6 +1,6 @@
 <section>
   <normal-login-btn (btnClicked)="btnClicked.emit()" [active]="active" [name]="text"></normal-login-btn>
-  <atom-bar-seperate class="py-3 px-3"></atom-bar-seperate>
-  <social-login-btn-fb name="Facebook" (socialFbBtnClicked)="socialFBBtnClicked.emit()"></social-login-btn-fb>
-  <social-login-btn-fb name="Google" (socialFbBtnClicked)="socialGGBtnClicked.emit()"></social-login-btn-fb>
+  <atom-bar-seperate class="p-3"></atom-bar-seperate>
+  <social-login-btn name="Facebook" (socialBtnClicked)="socialFBBtnClicked.emit()"></social-login-btn>
+  <social-login-btn class="pt-3.5" [isColor]="false" name="Google" (socialBtnClicked)="socialGGBtnClicked.emit()"></social-login-btn>
 </section>
