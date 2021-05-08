@@ -12,59 +12,163 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
-    "typeRoots": ["node_modules/@types"],
-    "lib": ["es2017", "dom", "esnext"],
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "es2017",
+      "dom",
+      "esnext"
+    ],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@awread/backend/api-interfaces": ["libs/backend/api-interfaces/src/index.ts"],
-      "@awread/writer/web/feature-shell": ["libs/writer/web/feature-shell/src/index.ts"],
-      "@awread/writer/web/shared": ["libs/writer/web/shared/src/index.ts"],
-      "@awread/writer/phone/feature-shell": ["libs/writer/phone/feature-shell/src/index.ts"],
-      "@awread/writer/phone/shared": ["libs/writer/phone/shared/src/index.ts"],
-      "@awread/global/assets": ["libs/global/assets/src/index.ts"],
-      "@awread/global/styles": ["libs/global/styles/src/index.ts"],
-      "@awread/global/environments": ["libs/global/environments/src/index.ts"],
-      "@awread/global/core": ["libs/global/core/src/index.ts"],
-      "@awread/writer/web/ui-auth": ["libs/writer/web/ui-auth/src/index.ts"],
-      "@awread/writer/web/feature-auth": ["libs/writer/web/feature-auth/src/index.ts"],
-      "@awread/writer/web/ui-single": ["libs/writer/web/ui-single/src/index.ts"],
-      "@awread/writer/web/feature-single": ["libs/writer/web/feature-single/src/index.ts"],
-      "@awread/global/design-system": ["libs/global/design-system/src/index.ts"],
-      "@awread/writer/web/ui-creation": ["libs/writer/web/ui-creation/src/index.ts"],
-      "@awread/writer/web/feature-creation": ["libs/writer/web/feature-creation/src/index.ts"],
-      "@awread/global/packages": ["libs/global/packages/src/index.ts"],
-      "@awread/reader/web/feature-shell": ["libs/reader/web/feature-shell/src/index.ts"],
-      "@awread/reader/web/shared": ["libs/reader/web/shared/src/index.ts"],
-      "@awread/reader/phone/feature-shell": ["libs/reader/phone/feature-shell/src/index.ts"],
-      "@awread/reader/phone/shared": ["libs/reader/phone/shared/src/index.ts"],
-      "@awread/reader/web/ui-auth": ["libs/reader/web/ui-auth/src/index.ts"],
-      "@awread/reader/web/feature-auth": ["libs/reader/web/feature-auth/src/index.ts"],
-      "@awread/reader/web/ui-author": ["libs/reader/web/ui-author/src/index.ts"],
-      "@awread/reader/web/feature-author": ["libs/reader/web/feature-author/src/index.ts"],
-      "@awread/reader/web/ui-single": ["libs/reader/web/ui-single/src/index.ts"],
-      "@awread/reader/web/feature-single": ["libs/reader/web/feature-single/src/index.ts"],
-      "@awread/reader/web/ui-market": ["libs/reader/web/ui-market/src/index.ts"],
-      "@awread/reader/web/feature-market": ["libs/reader/web/feature-market/src/index.ts"],
-      "@awread/global/powers": ["libs/global/powers/src/index.ts"],
-      "@awread/core/books": ["libs/core/books/src/index.ts"],
-      "@awread/core/users": ["libs/core/users/src/index.ts"],
-      "@awread/core/sales": ["libs/core/sales/src/index.ts"],
-      "@awread/core/background": ["libs/core/background/src/index.ts"],
-      "@awread/core/analytics": ["libs/core/analytics/src/index.ts"],
-      "@awread/core/comments": ["libs/core/comments/src/index.ts"],
-      "@awread/core/reviews": ["libs/core/reviews/src/index.ts"],
-      "@awread/core/system": ["libs/core/system/src/index.ts"],
-      "@awread/core/news": ["libs/core/news/src/index.ts"],
-      "@awread/core/marketing": ["libs/core/marketing/src/index.ts"],
-      "@awread/core/chapters": ["libs/core/chapters/src/index.ts"],
-      "@awread/core/book-data": ["libs/core/book-data/src/index.ts"],
-      "@awread/core/categories": ["libs/core/categories/src/index.ts"],
-      "@awread/core/genres": ["libs/core/genres/src/index.ts"],
-      "@awread/core/authors": ["libs/core/authors/src/index.ts"],
-      "@awread/core/slider": ["libs/core/slider/src/index.ts"]
+      "apollo-angular": [
+        "node_modules/apollo-angular/"
+      ],
+      "@awread/backend/api-interfaces": [
+        "libs/backend/api-interfaces/src/index.ts"
+      ],
+      "@awread/writer/web/feature-shell": [
+        "libs/writer/web/feature-shell/src/index.ts"
+      ],
+      "@awread/writer/web/shared": [
+        "libs/writer/web/shared/src/index.ts"
+      ],
+      "@awread/writer/phone/feature-shell": [
+        "libs/writer/phone/feature-shell/src/index.ts"
+      ],
+      "@awread/writer/phone/shared": [
+        "libs/writer/phone/shared/src/index.ts"
+      ],
+      "@awread/global/assets": [
+        "libs/global/assets/src/index.ts"
+      ],
+      "@awread/global/styles": [
+        "libs/global/styles/src/index.ts"
+      ],
+      "@awread/global/environments": [
+        "libs/global/environments/src/index.ts"
+      ],
+      "@awread/global/core": [
+        "libs/global/core/src/index.ts"
+      ],
+      "@awread/writer/web/ui-auth": [
+        "libs/writer/web/ui-auth/src/index.ts"
+      ],
+      "@awread/writer/web/feature-auth": [
+        "libs/writer/web/feature-auth/src/index.ts"
+      ],
+      "@awread/writer/web/ui-single": [
+        "libs/writer/web/ui-single/src/index.ts"
+      ],
+      "@awread/writer/web/feature-single": [
+        "libs/writer/web/feature-single/src/index.ts"
+      ],
+      "@awread/global/design-system": [
+        "libs/global/design-system/src/index.ts"
+      ],
+      "@awread/writer/web/ui-creation": [
+        "libs/writer/web/ui-creation/src/index.ts"
+      ],
+      "@awread/writer/web/feature-creation": [
+        "libs/writer/web/feature-creation/src/index.ts"
+      ],
+      "@awread/global/packages": [
+        "libs/global/packages/src/index.ts"
+      ],
+      "@awread/reader/web/feature-shell": [
+        "libs/reader/web/feature-shell/src/index.ts"
+      ],
+      "@awread/reader/web/shared": [
+        "libs/reader/web/shared/src/index.ts"
+      ],
+      "@awread/reader/phone/feature-shell": [
+        "libs/reader/phone/feature-shell/src/index.ts"
+      ],
+      "@awread/reader/phone/shared": [
+        "libs/reader/phone/shared/src/index.ts"
+      ],
+      "@awread/reader/web/ui-auth": [
+        "libs/reader/web/ui-auth/src/index.ts"
+      ],
+      "@awread/reader/web/feature-auth": [
+        "libs/reader/web/feature-auth/src/index.ts"
+      ],
+      "@awread/reader/web/ui-author": [
+        "libs/reader/web/ui-author/src/index.ts"
+      ],
+      "@awread/reader/web/feature-author": [
+        "libs/reader/web/feature-author/src/index.ts"
+      ],
+      "@awread/reader/web/ui-single": [
+        "libs/reader/web/ui-single/src/index.ts"
+      ],
+      "@awread/reader/web/feature-single": [
+        "libs/reader/web/feature-single/src/index.ts"
+      ],
+      "@awread/reader/web/ui-market": [
+        "libs/reader/web/ui-market/src/index.ts"
+      ],
+      "@awread/reader/web/feature-market": [
+        "libs/reader/web/feature-market/src/index.ts"
+      ],
+      "@awread/global/powers": [
+        "libs/global/powers/src/index.ts"
+      ],
+      "@awread/core/books": [
+        "libs/core/books/src/index.ts"
+      ],
+      "@awread/core/users": [
+        "libs/core/users/src/index.ts"
+      ],
+      "@awread/core/sales": [
+        "libs/core/sales/src/index.ts"
+      ],
+      "@awread/core/background": [
+        "libs/core/background/src/index.ts"
+      ],
+      "@awread/core/analytics": [
+        "libs/core/analytics/src/index.ts"
+      ],
+      "@awread/core/comments": [
+        "libs/core/comments/src/index.ts"
+      ],
+      "@awread/core/reviews": [
+        "libs/core/reviews/src/index.ts"
+      ],
+      "@awread/core/system": [
+        "libs/core/system/src/index.ts"
+      ],
+      "@awread/core/news": [
+        "libs/core/news/src/index.ts"
+      ],
+      "@awread/core/marketing": [
+        "libs/core/marketing/src/index.ts"
+      ],
+      "@awread/core/chapters": [
+        "libs/core/chapters/src/index.ts"
+      ],
+      "@awread/core/book-data": [
+        "libs/core/book-data/src/index.ts"
+      ],
+      "@awread/core/categories": [
+        "libs/core/categories/src/index.ts"
+      ],
+      "@awread/core/genres": [
+        "libs/core/genres/src/index.ts"
+      ],
+      "@awread/core/authors": [
+        "libs/core/authors/src/index.ts"
+      ],
+      "@awread/core/slider": [
+        "libs/core/slider/src/index.ts"
+      ]
     }
   },
-  "exclude": ["node_modules", "tmp"]
+  "exclude": [
+    "node_modules",
+    "tmp"
+  ]
 }
