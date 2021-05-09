@@ -1,6 +1,6 @@
 <atom-example-dialog class="h-full">
-  <section class="bg-white relative h-full p-16">
+  <section class="bg-white relative h-full px-16 py-10">
     <atom-logo-nolink [link]="link" [numberSize]="'40'" class="mb-6"></atom-logo-nolink>
-    <organ-login [authForm]="authForm" (auth)="auth.emit($event)"></organ-login>
+    <organ-login [authForm]="authForm" (auth)="authClicked($event)"></organ-login>
   </section>
 </atom-example-dialog>

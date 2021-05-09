@@ -38,6 +38,6 @@ export class ApolloInterceptor implements HttpInterceptor {
     //     },
     //   });
     // }
-    // return next.handle(req);
+    return next.handle(req);
   }
 }

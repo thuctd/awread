@@ -1,6 +1,10 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter, Optional } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { SocialAuthService } from "angularx-social-login";
+import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
+import { HttpClient } from '@angular/common/http';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'template-login-web',
@@ -22,7 +26,26 @@ export class LoginWebTemplate implements OnInit {
   });
   @Output() auth = new EventEmitter();
 
-  constructor(private fb: FormBuilder, @Optional() public dialogRef: MatDialogRef<LoginWebTemplate>) {}
+  constructor(
+    private fb: FormBuilder, @Optional() public dialogRef: MatDialogRef<LoginWebTemplate>,
+    private authService: SocialAuthService,
+    private http: HttpClient
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
+
+  async authClicked(provider: string) {
+    this.auth.emit(provider);
+    let socialLoginResult;
+    if (provider == 'google') {
+      socialLoginResult = await this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
+    } else if (provider == 'facebook') {
+      socialLoginResult = await this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
+    }
+    console.log('login result', socialLoginResult);
+    // const ob = this.http.get('/auth/facebook')
+    //   .pipe(tap(result => console.log('result')));
+    // console.log('ob', ob);
+    // ob.subscribe(result => console.log(result))
+  }
 }

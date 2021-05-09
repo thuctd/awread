@@ -5,7 +5,8 @@ const backendGraphqlHost = process.env && process.env.GRAPHQL_URI ? `http://${pr
 module.exports = [
     {
         context: [
-            "/graphql"
+            "/graphql",
+            "/auth"
         ],
         "target": backendGraphqlHost,
         "logLevel": process.env && process.env.ENVIRONMENT === 'prod' ? "info" : "debug",

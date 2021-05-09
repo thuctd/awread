@@ -25,5 +25,36 @@
 			"dbaeumer.vscode-eslint",
 			"johnpapa.angular2",
 		],
+	},
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+			{
+				"name": "Attach",
+				"port": 7777,
+				"request": "attach",
+				"skipFiles": [
+					"<node_internals>/**"
+				],
+				"type": "pwa-node"
+			},
+			{
+				"console": "integratedTerminal",
+				"internalConsoleOptions": "neverOpen",
+				"name": "nx backend-graphql",
+				"program": "${workspaceFolder}/node_modules/@nrwl/cli/nx.js",
+				"runtimeExecutable": "nx",
+				"args": [
+					"serve",
+					"backend-graphql"
+				],
+				"request": "launch",
+				"restart": true,
+				"skipFiles": [
+					"<node_internals>/**"
+				],
+				"type": "pwa-node"
+			}
+		]
 	}
 }

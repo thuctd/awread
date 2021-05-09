@@ -3,10 +3,9 @@ import { catchError, retry, tap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
 import { of, throwError } from 'rxjs';
-import { ApolloQueryResult } from '@apollo/client';
 @Injectable({ providedIn: 'root' })
 export class CurrentUserApi {
-  constructor(private apollo: Apollo) {}
+  constructor(private apollo: Apollo) { }
 
   getCurrentUser() {
     return this.apollo.query({

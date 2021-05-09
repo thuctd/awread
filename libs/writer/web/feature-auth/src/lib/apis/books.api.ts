@@ -3,14 +3,13 @@ import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
 import { Genre } from '../..';
 import { CREATE_BOOK_MUTATION, EDIT_BOOK_MUTATION } from '../graphqls';
-
 export type GenreInput = {
   genreid: string;
   name: string;
 };
 @Injectable({ providedIn: 'root' })
 export class BooksApi {
-  constructor(private apollo: Apollo) {}
+  constructor(private apollo: Apollo) { }
 
   getAllBooks() {
     return this.apollo.query({

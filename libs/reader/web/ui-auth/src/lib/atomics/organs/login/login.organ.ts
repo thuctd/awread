@@ -30,7 +30,7 @@ export class LoginOrgan implements OnInit {
   openFormRegister($event): void {
     this.matDialog.open(RegisterWebTemplate, {
       width: '32rem',
-      height: '42rem',
+      height: '43rem',
     });
   }
   openFormRegisterMobile($event): void {

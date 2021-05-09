@@ -6,7 +6,7 @@ export interface ChaptersState extends EntityState<Chapter>, ActiveState { };
 
 
 @Injectable({ providedIn: 'root' })
-@StoreConfig({ name: ' chapters', resettable: true })
+@StoreConfig({ name: ' chapters', resettable: true, idKey: 'chapterId' })
 export class ChaptersStore extends EntityStore<ChaptersState> {
   // ui: EntityUIStore<ChapterUIState>;
   constructor() {

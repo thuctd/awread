@@ -5,7 +5,7 @@ import { Collected } from '../../models';
 export interface CollectedState extends EntityState<Collected>, ActiveState { };
 
 @Injectable({ providedIn: 'root' })
-@StoreConfig({ name: ' collected', resettable: true })
+@StoreConfig({ name: ' collected', resettable: true, idKey: 'bookId' })
 export class CollectedStore extends EntityStore<CollectedState> {
   // ui: EntityUIStore<CollectedUIState>;
   constructor() {

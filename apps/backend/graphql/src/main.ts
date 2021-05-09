@@ -7,19 +7,18 @@ import firebaseConfig from './adminsdk.json';
 import { environment } from '@awread/global/environments';
 import ConnectionFilterPlugin from "postgraphile-plugin-connection-filter";
 import cron from 'cron';
-import MyRandomFieldPlugin from './plugins/random-field.plugin';
-import MyPlugin from './plugins/my-plugin.plugin';
 
 const app = express();
 const FIREBASE_URL = environment.firebase.databaseURL;
 const DATABASE_URL = process.env.DATABASE_URL || environment.postgres.DATABASE_URL;
 const SCHEMA = environment.postgres.SCHEMA;
 
+import { AuthController } from './app/auth.controller';
+const authController = new AuthController();
+app.use(authController.passport.initialize());
+app.use(authController.router);
 
 import { Pool, Client } from 'pg';
-import MyRandomUserPlugin from './plugins/random-user.plugin';
-import LAST_POST_CREATED_AT from './plugins/books-order-by-random.plugin';
-import TestFieldPlugin from './plugins/test-field.plugin';
 const pool = new Pool({
   connectionString: `${DATABASE_URL}`
 });
@@ -30,26 +29,31 @@ const asyncMiddleware = (fn) => (req, res, next) => {
 };
 
 const checkJwt = async (req, res, next) => {
-  try {
-    const token = req.headers.authorization?.split('Bearer ')[1];
-    if (!token) {
-      console.log('no token found');
-      next();
-    } else {
-      const decodedToken = await admin.auth().verifyIdToken(token);
-      req['user'] = decodedToken;
-      next();
-    }
-  } catch (error) {
-    res.status(401).send(error);
-  }
+  next();
+  // try {
+  //   const token = req.headers.authorization?.split('Bearer ')[1];
+  //   if (!token) {
+  //     console.log('no token found');
+  //     next();
+  //   } else {
+  //     console.log('token', token);
+  //     const decodedToken = await admin.auth().verifyIdToken(token);
+  //     req['user'] = decodedToken;
+  //     next();
+  //   }
+  // } catch (error) {
+  //   res.status(401).send(error);
+  // }
 };
 const postgraphileOptions = {
   watchPg: true,
   graphiql: true,
   enhanceGraphiql: true,
-  // appendPlugins: [ConnectionFilterPlugin, MyRandomFieldPlugin, MyPlugin, MyRandomUserPlugin, LAST_POST_CREATED_AT, TestFieldPlugin],
   appendPlugins: [ConnectionFilterPlugin],
+  jwtSecret: 'hiepxanh',
+  jwtPgTypeIdentifier: 'public.jwt_token',
+  pgDefaultRole: 'anonymous',
+  // appendPlugins: [ConnectionFilterPlugin, MyRandomFieldPlugin, MyPlugin, MyRandomUserPlugin, LAST_POST_CREATED_AT, TestFieldPlugin],
   // pgSettings: async (req: IncomingMessage & { user: any }) => {
   //   console.log('req.user', req.user);
   //   return checkRole(req);
@@ -110,6 +114,8 @@ app.post('/setCustomClaims', (req, res) => {
     });
 });
 
+
+
 app.use('/graphql', asyncMiddleware(checkJwt));
 
 app.use(postgraphile(DATABASE_URL, SCHEMA, postgraphileOptions));
@@ -166,7 +172,7 @@ async function startCronJob() {
   // job.start();
 
   const job = new cron.CronJob('*/5 * * * *', function () {
-    console.log('You will see this message every 5 minutes');
+    // console.log('You will see this message every 5 minutes');
     postgresRefeshMV();
   }, null, true, 'Asia/Ho_Chi_Minh');
   job.start();
