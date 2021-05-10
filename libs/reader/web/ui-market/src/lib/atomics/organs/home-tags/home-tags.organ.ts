@@ -23,7 +23,7 @@ export class HomeTagsOrgan implements OnInit {
   ];
 
   @Input() items = [];
-
+ 
   @Input() customOptions: OwlOptions = {
     autoplay: true,
     autoplayTimeout: 2000,
@@ -63,7 +63,10 @@ export class HomeTagsOrgan implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void { 
+
+
+  }
 
   setActiveGenre(genre, index) {
     this.currentGenre = genre;

@@ -1,5 +1,5 @@
 <div class="text-sm sm:text-base pt-4 my-1 pb-4" [ngClass]="!isLastItem ? 'border-b border-gray-icon': ''">
-  <a class="outline-none focus:outline-none" [routerLink]="['/books', bookId,'chapters', chapterId]">
+  <a class="outline-none focus:outline-none" [routerLink]="['/books', bookId,'chapters', chapter.chapterId]">
     <div class="justify-between flex ">
         <div class="flex w-4/5">
             <p class="w-1/4 font-medium text-sm text-gray-text">{{chapter.chapterNumber}}</p>
@@ -7,6 +7,6 @@
         </div>
         <atom-chapter-price [value]="chapter.price"></atom-chapter-price>
     </div>
-    <rd-list-publication-date class="font-medium" [publicationDate]="chapter.createAt"></rd-list-publication-date>
+    <rd-list-publication-date class="font-medium" [publicationDate]="chapter.createdAt"></rd-list-publication-date>
   </a>
 </div>

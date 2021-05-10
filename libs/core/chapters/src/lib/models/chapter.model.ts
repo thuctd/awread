@@ -3,8 +3,9 @@ export interface Chapter {
   title: string;
   createdAt: Date;
   updatedAt: Date;
-  published: Date;
+  published: Boolean;
   bookId: string;
+  chapterNumber: number;
 }
 
 export function Chapter(params: Partial<Chapter>) {

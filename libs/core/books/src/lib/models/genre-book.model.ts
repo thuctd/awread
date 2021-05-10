@@ -1,6 +1,9 @@
+import { Book } from "./book.model";
+
 export interface GenreBook {
   bookId: string;
-  title: string;
+  genreId: string;
+  bookByBookId: Book;
 }
 
 export function GenreBook(params: Partial<GenreBook>) {

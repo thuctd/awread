@@ -36,7 +36,7 @@ export class HomeTemplate implements OnInit {
   @Input() getLatestBooks = [];
   @Input() getFeatureBooks = [];
   @Input() genres = [];
-  @Input() bookByGenre = [];
+  @Input() bookByGenre;
   @Output() filterItemsByGenre = new EventEmitter();
   @Input() loading: boolean;
   constructor() { }

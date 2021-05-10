@@ -1,7 +1,7 @@
 <atom-label-underline [title]="'Danh sách chương'"></atom-label-underline>
-<ng-container *ngIf="chapters?.length; else noData">
+<ng-container *ngIf="chapters.length | async; else noData">
   <div class="detail-book-chapters mt-2 sm:mt-4 roboto">
-    <molec-chapter-item *ngFor="let item of chapters; let i = index" [bookId]='item.bookId' [chapterId]='item.id' [isLastItem]="i == chapters.length - 1"
+    <molec-chapter-item *ngFor="let item of chapters; let i = index" [bookId]='item.bookId' [chapterId]='item.chapterId' [isLastItem]="i == chapters.length - 1"
       [chapter]="item"></molec-chapter-item>
   </div>
   <div class="hidden sm:block text-center mt-2 roboto">
@@ -16,3 +16,6 @@
 <ng-template #noData>
   <div class="pt-4 text-base">Tác phẩm hiện tại chưa có chương nào, sẽ được cập nhật vào thời gian sớm nhất.</div>
 </ng-template>
+
+
+<pre>{{chapters | json}}</pre>

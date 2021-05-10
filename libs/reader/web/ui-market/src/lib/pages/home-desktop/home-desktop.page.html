@@ -1,3 +1,3 @@
-<template-home [loading]='loading$' [sliders]='imageObject$ | async' [getGoodBooks]="goodBookList$ | async" [getLatestBooks]="latestBookList$ | async"
+<template-home [sliders]='imageObject$ | async' [getGoodBooks]="goodBookList$ | async" [getLatestBooks]="latestBookList$ | async"
     [getFeatureBooks]="featureBookList$ | async" [genres]="genres$ | async" (filterItemsByGenre)='filterItemsByGenre($event)' [bookByGenre]='filteredBooks$ | async'>
 </template-home>

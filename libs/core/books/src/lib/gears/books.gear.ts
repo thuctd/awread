@@ -119,11 +119,9 @@ export class BooksGear {
           res['data']['allBooksGenres'] &&
           res['data']['allBooksGenres']['nodes'].length
         ) {
-          const result = res['data']['allBooksGenres']['nodes'];
-          const books = result.map((book) =>
-            this.tranformBookGenres(book)
-          );
-          this.genreBooksStore.set(books);
+          console.log(res['data']['allBooksGenres']['nodes']);
+          
+          this.genreBooksStore.set(res['data']['allBooksGenres']['nodes']);
         }
         return [];
       }),
@@ -200,11 +198,4 @@ export class BooksGear {
     );
   }
 
-  private tranformBookGenres(book) {
-    const title = book['bookByBookId'].title ?? '';
-    return {
-      ...book,
-      title
-    };
-  }
 }

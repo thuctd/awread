@@ -20,7 +20,6 @@ export class RdHomeTabBookAtom implements OnInit {
     title: 'Cô gái theo đuổi năm nào',
     cover: 'https://via.placeholder.com/260x370.png',
     categoryId: "1",
-    genres: [1, 3],
   };
   @Input() active = false;
 
