@@ -1,8 +1,8 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'social-login-btn-fb',
-  templateUrl: './social-login-btn-fb.atom.html',
+  selector: 'social-login-btn',
+  templateUrl: './social-login-btn.atom.html',
   styles: [
     `
       :host {
@@ -12,16 +12,21 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
         background-color: #3b5998;
         border-color: #3b5998;
       }
+      :host .color-red {
+        background-color: #dc4e41;
+        border-color: #dc4e41;
+      }
     `,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SocialLoginBtnFbAtom implements OnInit {
+export class SocialLoginBtnAtom implements OnInit {
+  @Input() isColor = true;
   @Input() startText = 'Đăng nhập bằng ';
   @Input() name = 'Facebook';
-  @Output() socialFbBtnClicked = new EventEmitter();
+  @Output() socialBtnClicked = new EventEmitter();
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }

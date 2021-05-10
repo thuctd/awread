@@ -23,15 +23,15 @@ export class NavbarAuthBtnsMolec implements OnInit {
 
   openFormLogin($event): void {
     this.matDialog.open(LoginWebTemplate, {
-      width: '32rem',
-      height: '38rem',
+      width: '31rem',
+      height: '40rem',
     });
   }
 
   openFormRegister($event): void {
     this.matDialog.open(RegisterWebTemplate, {
       width: '32rem',
-      height: '42rem',
+      height: '43rem',
     });
   }
 }

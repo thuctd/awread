@@ -103,7 +103,7 @@ import { DetailInfoLineLinkAtom } from './atoms/detail-info-line-link/detail-inf
 import { NavItemAtom } from './atoms/nav-item/nav-item.atom';
 import { BtnIconAtom } from './atoms/btn-icon/btn-icon.atom';
 import { BreadcrumbAtom } from './atoms/breadcrumb/breadcrumb.atom';
-import { SocialLoginBtnFbAtom } from './atoms/social-login-btn-fb/social-login-btn-fb.atom';
+import { SocialLoginBtnAtom } from './atoms/social-login-btn/social-login-btn.atom';
 
 @NgModule({
   imports: [
@@ -222,7 +222,7 @@ import { SocialLoginBtnFbAtom } from './atoms/social-login-btn-fb/social-login-b
     NavItemAtom,
     BtnIconAtom,
     BreadcrumbAtom,
-    SocialLoginBtnFbAtom,
+    SocialLoginBtnAtom,
   ],
   declarations: [
     notReadyDirective,
@@ -322,7 +322,7 @@ import { SocialLoginBtnFbAtom } from './atoms/social-login-btn-fb/social-login-b
     NavItemAtom,
     BtnIconAtom,
     BreadcrumbAtom,
-    SocialLoginBtnFbAtom,
+    SocialLoginBtnAtom,
   ],
 })
 export class GlobalDesignSystemAtomicModule {}

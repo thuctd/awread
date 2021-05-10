@@ -31,6 +31,7 @@
     "nx-migrate": "npx @nrwl/tao@latest migrate @nrwl/workspace@latest",
     "start-tunnel": "ssh -L localhost:5433:172.17.0.2:5432 hiepxanh@awread.vn",
     "reader-local": "set GRAPHQL_URI=localhost:5000 && nx serve reader-web --ssl=true",
+    "writer-local": "set GRAPHQL_URI=localhost:5000 && nx serve writer-web --ssl=true",
     "backend-debug": "nx serve backend-graphql --inspect --port=7777"
   },
   "private": true,
@@ -46,7 +47,7 @@
     "@angular/platform-browser": "11.2.6",
     "@angular/platform-browser-dynamic": "11.2.6",
     "@angular/router": "11.2.6",
-    "@apollo/client": "^3.3.12",
+    "@apollo/client": "^3.3.16",
     "@aws-sdk/client-s3": "^3.9.0",
     "@datorama/akita": "^6.1.2",
     "@datorama/akita-ngdevtools": "^6.0.0",
