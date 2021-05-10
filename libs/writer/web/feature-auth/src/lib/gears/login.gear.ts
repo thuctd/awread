@@ -16,34 +16,54 @@ export class LoginGear {
     private authRoutingGear: AuthRoutingGear,
     private firebaseAuthGear: FirebaseAuthGear,
     private snackbarService: SnackbarsService
-  ) { }
+  ) {
+    // TODO: remove this 
+    localStorage.setItem('accessToken', '');
+  }
 
   loginWithRoleAdmin(credential: EmailLoginCredential) {
     this.loginEmail(credential)
       .then(async (res) => {
-        console.log('user', res.user);
-        this.authApi.setCustomClaimsToken(await res.user.getIdToken());
+        // console.log('user', res.user);
+        // this.authApi.setCustomClaimsToken(await res.user.getIdToken());
       })
       .catch((err) => console.log(err));
   }
 
   async loginEmail(credential: EmailLoginCredential) {
-    try {
-      const userCredential = await this.firebaseAuthAddon.loginWithEmail(
-        credential
-      );
-      this.snackbarService.showSuccess('Đăng nhập thành công!');
-      this.authRoutingGear.navigateAfterLoginComplete('list');
-      console.log('userCredential', userCredential);
-      return userCredential;
-    } catch (err) {
-      console.log('err', err);
-      if (err.code === 'auth/user-not-found') {
-        this.snackbarService.showError('Tài khoản không tồn tại!');
-      } else if (err.code === 'auth/wrong-password') {
-        this.snackbarService.showError('Mật khẩu không chính xác!');
+    this.authApi.authenticateUser(credential.loginname, credential.password).subscribe(result => {
+      console.log('result', result);
+      const accessToken = result?.data ? result.data['jwtToken'] : null;
+      switch (result.case) {
+        case 'success':
+          localStorage.setItem('accessToken', accessToken);
+          this.snackbarService.showSuccess(`Chúc bạn một ngày tốt lành! ${result.user.name}`);
+          this.authRoutingGear.navigateAfterLoginComplete('list');
+          break;
+        case 'password-not-match':
+          this.snackbarService.showWarning(`Mật khẩu không khớp! Bạn có phải là: ${result.user.name}`);
+          break;
+        default:
+          this.snackbarService.showError(`Tài khoản của bạn không tồn tại`);
+          break;
       }
-    }
+    })
+    // try {
+    //   const userCredential = await this.firebaseAuthAddon.loginWithEmail(
+    //     credential
+    //   );
+    //   this.snackbarService.showSuccess('Đăng nhập thành công!');
+    //   this.authRoutingGear.navigateAfterLoginComplete('list');
+    //   console.log('userCredential', userCredential);
+    //   return userCredential;
+    // } catch (err) {
+    //   console.log('err', err);
+    //   if (err.code === 'auth/user-not-found') {
+    //     this.snackbarService.showError('Tài khoản không tồn tại!');
+    //   } else if (err.code === 'auth/wrong-password') {
+    //     this.snackbarService.showError('Mật khẩu không chính xác!');
+    //   }
+    // }
   }
 
   async loginSocial(providerType: ProviderType) {

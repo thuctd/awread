@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="0,304" last-zoom="0.95" max-obj-count="15"
+<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="0,302" last-zoom="0.95" max-obj-count="15"
 	 default-owner="postgres">
 <role name="anonymous">
 </role>
@@ -592,7 +592,15 @@ end;]]></definition>
 	<role name="postgres"/>
 	<language name="plpgsql"/>
 	<return-type>
-	<type name="public.jwt_token" length="0"/>
+	<parameter name="accessToken">
+		<type name="public.jwt_token" length="0"/>
+	</parameter>
+	<parameter name="user">
+		<type name="public.users" length="0"/>
+	</parameter>
+	<parameter name="matchPassword">
+		<type name="boolean" length="0"/>
+	</parameter>
 	</return-type>
 	<parameter name="loginname">
 		<type name="text" length="0"/>
@@ -601,9 +609,10 @@ end;]]></definition>
 		<type name="text" length="0"/>
 	</parameter>
 	<definition><![CDATA[declare 
+	"accessToken" public.jwt_token;
 	account public.users;
+	"matchPassword" boolean := false;
 	"accountPasswordHash" text;
-
 begin
   select * into account
   from public.users
@@ -616,11 +625,16 @@ begin
 	from private.users
 	where account."userId" = "userId";
 
-  if "accountPasswordHash" = crypt(password, "accountPasswordHash" ) then
-    return (account."userId", account.role, extract(epoch from (now() + interval '3 months')))::public.jwt_token;
-  else
-    return null;
-  end if;
+	"matchPassword"  := "accountPasswordHash" = crypt(password, "accountPasswordHash" );
+
+  	if "matchPassword" then
+		"accessToken" := (account."userId", account.role, extract(epoch from (now() + interval '3 months')))::public.jwt_token;
+    	return query select "accessToken", account, "matchPassword";
+  	elsif account is not null then 
+		return query select "accessToken", account, "matchPassword";
+	else 
+    	return query select "accessToken", account, "matchPassword";
+  	end if;
 end;]]></definition>
 </function>
 

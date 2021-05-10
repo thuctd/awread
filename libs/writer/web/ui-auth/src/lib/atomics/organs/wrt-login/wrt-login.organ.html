@@ -1,4 +1,4 @@
-<wrt-login-form #loginForm [form]="authForm"></wrt-login-form>
+<wrt-login-form (auth)="auth.emit('email')" #loginForm [form]="authForm"></wrt-login-form>
 <div class="px-1">
   <div class="float-left flex">
     <check-btn></check-btn>
@@ -9,8 +9,5 @@
   </div>
   <div class="clear-both"></div>
 </div>
-<normal-login-btn (keydown.enter)="auth.emit($event)"
-  (btnClicked)="auth.emit('email')"
-  [active]="loginForm.form.valid"
-></normal-login-btn>
-<wrt-action-btns (keyup.enter)="auth.emit($event)" (auth)="auth.emit($event)"> </wrt-action-btns>
+<normal-login-btn (btnClicked)="auth.emit('email')" [active]="loginForm.form.valid"></normal-login-btn>
+<wrt-action-btns (auth)="auth.emit($event)"> </wrt-action-btns>

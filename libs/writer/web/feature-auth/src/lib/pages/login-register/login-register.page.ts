@@ -23,7 +23,7 @@ export class LoginRegisterPage {
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.initForm();
@@ -77,10 +77,8 @@ export class LoginRegisterPage {
 
   private initForm() {
     this.authForm = this.fb.group({
-      displayName: [''],
-      email: ['', [Validators.required, Validators.email]],
+      loginname: ['', [Validators.required]],
       password: ['', Validators.required],
-      confirmPassword: [''],
     });
   }
 }
