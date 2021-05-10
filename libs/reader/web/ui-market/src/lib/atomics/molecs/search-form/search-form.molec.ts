@@ -1,21 +1,16 @@
 import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter, Input } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'molec-search-form',
   templateUrl: './search-form.molec.html',
-  styles: [
-    `
-      :host {
-        display: block;
-      }
-    `,
-  ],
+  styleUrls: ['./search-form.molec.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchFormMolec implements OnInit {
+  @Input() faIcon = faChevronDown;
   @Input() filters: FormGroup;
-
 
   @Input() genres = [
     { id: '1', name: 'Lãng mạn' },
@@ -25,32 +20,36 @@ export class SearchFormMolec implements OnInit {
     { id: '5', name: 'Xuyên không' },
   ];
   @Input() selectGenres = {
-    title: 'Thể Loại',
-    widthClass: 'xl:w-96 lg:w-64 md:w-60',
+    title: 'Tiêu chí',
+    widthClass: 'xl:w-60 md:w-48',
+    options: [
+      { id: '1', name: 'Truyện mới nhất' },
+      { id: '2', name: 'Truyện đọc nhiều nhất' },
+      { id: '3', name: 'Truyện được đánh giá tốt nhất' },
+      { id: '4', name: 'Truyện bất kì' },
+    ],
   };
 
   @Input() selectStatus = {
     title: 'Tình Trạng',
-    widthClass: 'xl:w-96 lg:w-80 md:w-64',
+    widthClass: 'xl:w-60 md:w-48',
     options: [
       { id: '1', name: 'Đã hoàn thành' },
       { id: '2', name: 'Chưa hoàn thành' },
     ],
   };
-  @Input() selectPublishedat = {
-    title: 'Năm phát hành',
-    widthClass: 'xl:w-60 lg:w-48 md:w-40',
+  @Input() publishedAt = {
+    title: 'Thời gian',
+    widthClass: 'xl:w-44 md:w-36',
     options: [
-      { id: '2000', name: '2000' },
-      { id: '2001', name: '2001' },
-      { id: '2002', name: '2002' },
-      { id: '2003', name: '2003' },
-      { id: '2004', name: '2004' },
+      { id: '1', name: '7 ngày' },
+      { id: '2', name: '30 ngày' },
+      { id: '3', name: '90 ngày' },
     ],
   };
   @Output() filterBooksEvent = new EventEmitter();
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.filters = this.fb.group({
@@ -58,7 +57,7 @@ export class SearchFormMolec implements OnInit {
       category: [''],
       genre: [''],
       status: [''],
-      publishedAt: ['']
+      publishedAt: [''],
     });
   }
 }
