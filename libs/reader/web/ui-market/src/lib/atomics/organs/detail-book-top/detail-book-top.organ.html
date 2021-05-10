@@ -1,7 +1,7 @@
 <div class="detail-bool-top bg-white p-4 flex relative">
     <div class="items-start grid grid-cols-12 gap-2">
         <div class="col-span-4 p-1">
-            <atom-detail-image [src]='book.imgUrl' [bookId]='book.imgUrl' [chapterId]='book.chapterId'></atom-detail-image>
+            <atom-detail-image [src]='book.cover' [bookId]='book.bookId' [chapterId]='book.chapterId'></atom-detail-image>
         </div>
         <div class="col-span-8 pl-6">
             <organ-detail-book-content (chapterLastEvent)='chapterLastEvent.emit($event)' (chapterFistEvent)='chapterFistEvent.emit($event)' [book]='book'></organ-detail-book-content>

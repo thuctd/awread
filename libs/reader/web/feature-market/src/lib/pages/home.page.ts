@@ -1,4 +1,5 @@
-import { tap, first, takeWhile, delay, switchMap } from 'rxjs/operators';
+import { takeWhile, switchMap } from 'rxjs/operators';
+import { of, Subject } from 'rxjs';
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import { Directive, Injectable, OnInit } from '@angular/core';
 import { Genre } from 'libs/core/genres/src/lib/models';
@@ -55,7 +56,7 @@ export class HomePage implements OnInit {
       takeWhile(val => val !== undefined, false),
       switchMap((items) => {
         if (!items.length) {
-          return [];
+          return of([]);
         }
         return this.booksFacade.getGenreBooks(items[0].genreId);
       })

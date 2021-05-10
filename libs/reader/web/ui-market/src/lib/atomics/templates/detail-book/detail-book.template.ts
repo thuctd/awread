@@ -17,14 +17,7 @@ export class DetailBookTemplate implements OnInit {
   @Input() items = [];
   @Input() newestChapters = [];
   @Input() chapters = [];
-  @Input() book = {
-    title: 'Ngày ấy vì ai mà đổi thay',
-    auth: 'Cẩm Thương',
-    type: 'Hoang tưởng, kinh dị',
-    status: 'Đang tiến hành',
-    publishedAt: '2020',
-    country: '(chủ yếu dành cho truyện sưu tầm)'
-  };
+  @Input() book = {};
   @Input() topBooks = [];
   @Input() authorBooks = [];
   menu = [
