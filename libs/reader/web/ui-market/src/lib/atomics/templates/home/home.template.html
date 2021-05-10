@@ -12,6 +12,6 @@
     <home-detail-book-review [books]="getGoodBooks"></home-detail-book-review>
   </section>
   <section class="bg-purple-50 h-104">
-    <home-tags [genres]='genres' [items]='bookByGenre' (filterItemsByGenre)='filterItemsByGenre.emit($event)'></home-tags>
+    <home-tags [genres]='genres' [items]='genreBooks' (filterItemsByGenre)='filterItemsByGenre.emit($event)'></home-tags>
   </section>
 </section>

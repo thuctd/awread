@@ -19,7 +19,7 @@ export class DetailPage implements OnInit, OnDestroy {
   isLoading$ = this.booksFacade.selectLoadingAkita();
   topBookList$ = this.booksFacade.topBooks$;
   authorBookList$ = this.booksFacade.authorBooks$;
-  chapterListByBookId$ = this.chaptersFacade.chapters$;
+  chapters$ = this.chaptersFacade.chapters$;
   bookChapter;
 
   constructor(
@@ -38,13 +38,10 @@ export class DetailPage implements OnInit, OnDestroy {
         tap(book => {
           this.authorId = book[0]['userId'];
           this.booksFacade.getAuthorBooks(book[0]['userId']).subscribe();
-          this.chaptersFacade.getAllChapters(id).subscribe(chapters => {
-            this.bookChapter = chapters
-          })
         })
       )),
     ).subscribe(book => {
-      this.book$ = book[0];  
+      this.book$ = book[0];
     })
     this.booksFacade.getTopBooks().subscribe();
     this.getAllChapters();

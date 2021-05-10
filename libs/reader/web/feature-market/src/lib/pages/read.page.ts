@@ -29,7 +29,10 @@ export class ReadPage implements OnInit {
           );
         })
       )
-      .subscribe((chapter) => (this.chapter$ = chapter));
+      .subscribe((chapter) => {
+        this.chapter$ = chapter;
+        console.log(this.chapter$);
+      });
     this.booksFacade.getTopBooks().subscribe();
   }
 

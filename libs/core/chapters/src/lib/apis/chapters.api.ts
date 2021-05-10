@@ -1,3 +1,4 @@
+import { retry } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
 
@@ -9,29 +10,30 @@ export class ChaptersApi {
     return this.apollo.query({
       query: gql`
         query BookChapters($bookId: UUID!) {
-          allChapters(first: 20, condition: { bookId: $bookId }) {
+          allChapters(condition: { bookId: $bookId }, orderBy: POSITION_ASC) {
             nodes {
+              bookId
               chapterId
               title
               createdAt
               updatedAt
               published
+              position
             }
           }
         }
       `,
-      variables: {
-        bookId,
-      },
-    });
+      variables: { bookId },
+    }).pipe(retry(2));
   }
 
   getChapterDetail(bookId: string, chapterId: string) {
     return this.apollo.query({
       query: gql`
         query DetailChapter($bookId: UUID!, $chapterId: UUID!) {
-          allChapters(first: 20, condition: { bookId: $bookId, chapterId: $chapterId }) {
+          allChapters(condition: { bookId: $bookId, chapterId: $chapterId }) {
             nodes {
+              bookId
               chapterId
               title
               createdAt

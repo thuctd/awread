@@ -1,5 +1,5 @@
 export interface ChapterDetail {
-  id: string;
+  chapterId: string;
 }
 
 export function ChapterDetail(params: Partial<ChapterDetail>) {

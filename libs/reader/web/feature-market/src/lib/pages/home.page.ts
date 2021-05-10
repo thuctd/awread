@@ -1,5 +1,5 @@
 import { takeWhile, switchMap } from 'rxjs/operators';
-import { of, Subject } from 'rxjs';
+import { of, Subject, Observable } from 'rxjs';
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import { Directive, Injectable, OnInit } from '@angular/core';
 import { Genre } from 'libs/core/genres/src/lib/models';

@@ -17,9 +17,11 @@ export class DetailBookChapterOrgan implements OnInit {
   @Output() submitEvent = new EventEmitter()
   @Input() chapters = [];
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
+    console.log('chapters: ', this.chapters);
   }
 
 }

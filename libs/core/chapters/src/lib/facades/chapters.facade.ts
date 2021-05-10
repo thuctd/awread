@@ -4,7 +4,7 @@ import { ChaptersQuery } from '../states/chapters';
 
 @Injectable({ providedIn: 'root' })
 export class ChaptersFacade {
-  chapters$ = this.chaptersQuery.select();
+  chapters$ = this.chaptersQuery.selectAll();
   constructor(
     private chaptersGear: ChaptersGear,
     private chaptersQuery: ChaptersQuery,
@@ -22,7 +22,7 @@ export class ChaptersFacade {
     return this.chaptersQuery.getAll();
   }
 
-  deleteChapterInAkita(chapterid: string) { }
+  deleteChapterInAkita(bookId: string) { }
 
   selectAllChapterAkita() {
     return this.chaptersQuery.selectAll();
@@ -31,8 +31,8 @@ export class ChaptersFacade {
     return this.chaptersQuery.selectEntity(id);
   }
 
-  getAllChapters(bookid: string) {
-    return this.chaptersGear.getAllChapters(bookid);
+  getAllChapters(bookId: string) {
+    return this.chaptersGear.getAllChapters(bookId);
   }
 
   getChapterDetail(chapterid: string, bookid: string) {

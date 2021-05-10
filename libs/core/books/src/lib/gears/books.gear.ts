@@ -113,17 +113,14 @@ export class BooksGear {
 
   getGenreBooks(genreId: string) {
     return this.booksApi.getGenreBooks(genreId).pipe(
-      tap((res) => {
+      map((res) => {
         if (
           res['data'] &&
-          res['data']['allBooksGenres'] &&
-          res['data']['allBooksGenres']['nodes'].length
+          res['data']['allVRandomBooks'] &&
+          res['data']['allVRandomBooks']['nodes'].length
         ) {
-          console.log(res['data']['allBooksGenres']['nodes']);
-          
-          this.genreBooksStore.set(res['data']['allBooksGenres']['nodes']);
+          this.genreBooksStore.set(res['data']['allVRandomBooks']['nodes']);
         }
-        return [];
       }),
       catchError((err) => {
         console.error('An error occurred:', err);

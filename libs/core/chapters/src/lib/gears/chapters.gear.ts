@@ -52,7 +52,7 @@ export class ChaptersGear {
           res['data']['allChapters']['nodes'].length
         ) {
           const chapter = res['data']['allChapters']['nodes'];
-          return chapter;
+          console.log(chapter);
         }
         return [];
       }),

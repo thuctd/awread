@@ -16,7 +16,7 @@ import { faAngleRight, faHome } from '@fortawesome/free-solid-svg-icons';
 export class DetailBookTemplate implements OnInit {
   @Input() items = [];
   @Input() newestChapters = [];
-  @Input() chapters = [];
+  @Input() chapters;
   @Input() book = {};
   @Input() topBooks = [];
   @Input() authorBooks = [];

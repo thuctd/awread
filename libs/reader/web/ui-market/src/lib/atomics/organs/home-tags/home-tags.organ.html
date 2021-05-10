@@ -21,18 +21,18 @@
             <ng-template carouselSlide>
               <a [routerLink]="['/books', item.bookId]" class="cursor-pointer outline-none">
                 <div class="carousel-items flex pb-3 justify-center">
-                  <rd-home-tab-book class="carousel-focus flex relative flex-col" [book]="item.bookByBookId">
+                  <rd-home-tab-book class="carousel-focus flex relative flex-col" [book]="item">
                   </rd-home-tab-book>
                 </div>
               </a>
             </ng-template>
           </ng-container>
         </owl-carousel-o>
-        <!-- <div class="spinner" *ngIf="loading">
+        <div class="spinner" *ngIf="loading">
           <div class="bounce1"></div>
           <div class="bounce2"></div>
           <div class="bounce3"></div>
-        </div> -->
+        </div>
       </div>
     </div>
   </div>

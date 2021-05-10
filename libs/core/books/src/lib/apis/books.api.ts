@@ -227,26 +227,18 @@ export class BooksApi {
   getGenreBooks(genreId: string) {
     return this.apollo.query({
       query: gql`
-        query getGenreBooks($genreId: BigFloat!) {
-          allBooksGenres(first: 10, condition: { genreId: $genreId }) {
+        query DetailChapter($genreId: BigFloat!) {
+          allVRandomBooks(filter: { genreIds: { anyEqualTo: $genreId } }, first: 20) {
             nodes {
               bookId
-              genreId
-              bookByBookId {
-                bookId
-                title
-                description
-                published
-                updatedAt
-                completed
-              }
+              genreIds
+              title
+              userId
             }
           }
         }
       `,
-      variables: {
-        genreId,
-      },
+      variables: { genreId },
     });
   }
 
