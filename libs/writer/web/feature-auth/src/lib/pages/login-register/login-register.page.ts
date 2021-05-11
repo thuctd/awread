@@ -4,6 +4,7 @@ import { Directive, Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthFacade } from '../../facades';
 import { ProviderType } from '../../models';
+import { SnackbarsService } from '@awread/global/packages';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +12,8 @@ import { ProviderType } from '../../models';
 @Directive()
 export class LoginRegisterPage {
   selectedTab: 'login' | 'register' = 'login';
-  authForm: FormGroup;
+  loginForm: FormGroup;
+  registerForm: FormGroup;
   tabs = [
     { name: 'Đăng nhập', path: 'login' },
     { name: 'Đăng ký', path: 'register' },
@@ -22,7 +24,8 @@ export class LoginRegisterPage {
     private authFacade: AuthFacade,
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private snackbarService: SnackbarsService
   ) { }
 
   ngOnInit() {
@@ -36,36 +39,47 @@ export class LoginRegisterPage {
     // this.router.navigate(['register']);
   }
 
-  register() {
-    const { password, confirmPassword } = this.authForm.value;
+  register(provider: 'email' | 'facebook' | 'google' | 'apple') {
+    const { password, confirmPassword } = this.registerForm.value;
     if (password !== confirmPassword) {
-      alert('Mật khẩu không khớp. Vui lòng thử lại!');
-      return;
+      return this.snackbarService.showError('Mật khẩu không khớp. Vui lòng thử lại!');
     }
-    this.authFacade.registerEmail(this.authForm.value);
+
+
+    switch (provider) {
+      case 'google':
+        this.authFacade.registerSocial(ProviderType.facebook);
+        break;
+      case 'facebook':
+        this.authFacade.registerSocial(ProviderType.facebook);
+        break;
+      case 'apple':
+        this.authFacade.registerSocial(ProviderType.facebook);
+        break;
+
+      default:
+        this.authFacade.registerEmail(this.registerForm.value);
+        break;
+    }
   }
 
   login(provider: 'email' | 'facebook' | 'google' | 'apple') {
     // debugger
     console.log('provider', provider);
-    console.log('form Value', this.authForm.value);
+    console.log('form Value', this.loginForm.value);
     if (this.selectedTab === 'login') {
-      // this.authFacade.signin(provider, this.form.value);
       switch (provider) {
-        case 'email':
-          this.authFacade.loginEmail(this.authForm.value);
-          break;
-
-        case 'apple':
-          this.authFacade.loginSocials(ProviderType.apple);
-          break;
         case 'facebook':
-          this.authFacade.loginSocials(ProviderType.facebook);
+          this.authFacade.loginSocial(ProviderType.facebook);
           break;
         case 'google':
-          this.authFacade.loginSocials(ProviderType.google);
+          this.authFacade.loginSocial(ProviderType.google);
+          break;
+        case 'apple':
+          this.authFacade.loginSocial(ProviderType.apple);
           break;
         default:
+          this.authFacade.loginEmail(this.loginForm.value);
           break;
       }
     }
@@ -76,9 +90,16 @@ export class LoginRegisterPage {
   }
 
   private initForm() {
-    this.authForm = this.fb.group({
+    this.loginForm = this.fb.group({
       loginname: ['', [Validators.required]],
       password: ['', Validators.required],
+    });
+    this.registerForm = this.fb.group({
+      username: ['', Validators.required],
+      email: ['', []],
+      phone: ['', []],
+      password: ['', Validators.required],
+      confirmPassword: ['', Validators.required],
     });
   }
 }

@@ -1,12 +1,14 @@
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { FirebaseAuthAddon, FirebaseAuthSocialAddon } from '../addons';
-import { createUserFromFirebase, EmailLoginCredential, FirebaseUser, ProviderType } from '../models';
+import { createUserFromFirebase, LoginCredential, FirebaseUser, ProviderType } from '../models';
 import firebase from 'firebase/app';
 import { AuthApi } from '../apis';
 import { AuthRoutingGear } from './auth-routing.gear';
 import { FirebaseAuthGear } from './firebase-auth.gear';
 import { SnackbarsService } from '@awread/global/packages';
+import { SocialAuthService, SocialUser } from "angularx-social-login";
+import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
 
 @Injectable({ providedIn: 'root' })
 export class LoginGear {
@@ -15,13 +17,14 @@ export class LoginGear {
     private authApi: AuthApi,
     private authRoutingGear: AuthRoutingGear,
     private firebaseAuthGear: FirebaseAuthGear,
-    private snackbarService: SnackbarsService
+    private snackbarService: SnackbarsService,
+    private socialAuthService: SocialAuthService
   ) {
     // TODO: remove this 
     localStorage.setItem('accessToken', '');
   }
 
-  loginWithRoleAdmin(credential: EmailLoginCredential) {
+  loginWithRoleAdmin(credential: LoginCredential) {
     this.loginEmail(credential)
       .then(async (res) => {
         // console.log('user', res.user);
@@ -30,21 +33,22 @@ export class LoginGear {
       .catch((err) => console.log(err));
   }
 
-  async loginEmail(credential: EmailLoginCredential) {
-    this.authApi.authenticateUser(credential.loginname, credential.password).subscribe(result => {
+  async loginEmail(credential: LoginCredential) {
+    this.authApi.authenticateUser(credential).subscribe(result => {
       console.log('result', result);
       const accessToken = result?.data ? result.data['jwtToken'] : null;
       switch (result.case) {
         case 'success':
           localStorage.setItem('accessToken', accessToken);
-          this.snackbarService.showSuccess(`Chúc bạn một ngày tốt lành! ${result.user.name}`);
+          this.snackbarService.showSuccess(`Chúc bạn một ngày tốt lành! ${result.user.firstname ?? result.user.name}`);
           this.authRoutingGear.navigateAfterLoginComplete('list');
           break;
         case 'password-not-match':
-          this.snackbarService.showWarning(`Mật khẩu không khớp! Bạn có phải là: ${result.user.name}`);
+          this.snackbarService.showWarning(`Mật khẩu không khớp! Bạn có phải là: ${result.user.firstname ?? result.user.name}`);
           break;
         default:
-          this.snackbarService.showError(`Tài khoản của bạn không tồn tại`);
+          localStorage.setItem('accessToken', '');
+          this.snackbarService.showError(`Tài khoản của bạn không tồn tại, vui lòng tạo tài khoản mới nhé!`);
           break;
       }
     })
@@ -66,61 +70,85 @@ export class LoginGear {
     // }
   }
 
-  async loginSocial(providerType: ProviderType) {
-    switch (providerType) {
-      case ProviderType.apple:
-        try {
-          const userCredential = await this.firebaseAuthAddon.loginWithApple();
-          console.log('userCredential apple', userCredential);
-        } catch (error) {
-          console.log('error', error);
-        }
+  async loginSocial(provider: ProviderType) {
+    let socialUser: SocialUser;
+    switch (provider) {
+      case 'google':
+        socialUser = await this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID);
         break;
-      case ProviderType.facebook:
-        try {
-          const userCredential: any = await this.firebaseAuthAddon.loginWithFacebook();
-          const newUser: Partial<FirebaseUser> = {
-            ...userCredential.user,
-            provider: 'facebook',
-            photoUrl: userCredential.user.photoURL ?? '',
-          };
-          // check trường hợp google/facebook ghi đè account thì phải link lại provider password (account email/pw)
-          const user = createUserFromFirebase(newUser);
-          this.checkMustNewUserWhenLoginFaceBook(user);
-        } catch (err) {
-          this.firebaseAuthGear.linkAccountWithProviderFacebook(err);
-        }
-        break;
-      case ProviderType.google:
-        try {
-          const userCredential: any = await this.firebaseAuthAddon.loginWithGoogle();
-          const newUser: Partial<FirebaseUser> = {
-            ...userCredential.user,
-            provider: 'google',
-            photoUrl: userCredential.user.photoURL ?? '',
-          };
-          const user = createUserFromFirebase(newUser);
-          // vì google ghi đè lên tất cả tài khoản cùng email đã tạo trước đó,
-          // nên phải check lại TH đã tạo email/password trước đó,
-          // nếu đúng thì link lại với account google
-          this.firebaseAuthGear.shouldLinkProviderPassword(
-            user,
-            firebase.auth().currentUser
-          );
-          return userCredential;
-        } catch (err) {
-          // this.linkAccount(err);
-          console.log('google login error: ', err);
-        }
+      case 'facebook':
+        socialUser = await this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID);
         break;
       default:
-        return null;
+        break;
     }
+
+    console.log('login result', socialUser);
+
+    this.authApi.authenticateSocialUser({ provider, providerId: socialUser.id }).subscribe(result => {
+      if (result.case == 'success') {
+        localStorage.setItem('accessToken', result.jwtToken);
+        this.snackbarService.showSuccess(`Chúc bạn một ngày tốt lành! ${result.user.firstname ?? result.user.name}`);
+        this.authRoutingGear.navigateAfterLoginComplete('list');
+      } else {
+        this.snackbarService.showError(`Tài khoản của bạn không tồn tại, vui lòng tạo tài khoản mới nhé!`);
+        localStorage.setItem('accessToken', '');
+        this.socialAuthService.signOut(true);
+      }
+    })
+    // switch (providerType) {
+    //   case ProviderType.apple:
+    //     try {
+    //       const userCredential = await this.firebaseAuthAddon.loginWithApple();
+    //       console.log('userCredential apple', userCredential);
+    //     } catch (error) {
+    //       console.log('error', error);
+    //     }
+    //     break;
+    //   case ProviderType.facebook:
+    //     try {
+    //       const userCredential: any = await this.firebaseAuthAddon.loginWithFacebook();
+    //       const newUser: Partial<FirebaseUser> = {
+    //         ...userCredential.user,
+    //         provider: 'facebook',
+    //         photoUrl: userCredential.user.photoURL ?? '',
+    //       };
+    //       // check trường hợp google/facebook ghi đè account thì phải link lại provider password (account email/pw)
+    //       const user = createUserFromFirebase(newUser);
+    //       this.checkMustNewUserWhenLoginFaceBook(user);
+    //     } catch (err) {
+    //       this.firebaseAuthGear.linkAccountWithProviderFacebook(err);
+    //     }
+    //     break;
+    //   case ProviderType.google:
+    //     try {
+    //       const userCredential: any = await this.firebaseAuthAddon.loginWithGoogle();
+    //       const newUser: Partial<FirebaseUser> = {
+    //         ...userCredential.user,
+    //         provider: 'google',
+    //         photoUrl: userCredential.user.photoURL ?? '',
+    //       };
+    //       const user = createUserFromFirebase(newUser);
+    //       // vì google ghi đè lên tất cả tài khoản cùng email đã tạo trước đó,
+    //       // nên phải check lại TH đã tạo email/password trước đó,
+    //       // nếu đúng thì link lại với account google
+    //       this.firebaseAuthGear.shouldLinkProviderPassword(
+    //         user,
+    //         firebase.auth().currentUser
+    //       );
+    //       return userCredential;
+    //     } catch (err) {
+    //       // this.linkAccount(err);
+    //       console.log('google login error: ', err);
+    //     }
+    //     break;
+    //   default:
+    //     return null;
+    // }
     // this.getCurrentUser();
   }
 
   getCurrentUser() {
-    this.authApi.getAllBooks();
     return this.authApi.getCurrentUserIdAndRole();
   }
 

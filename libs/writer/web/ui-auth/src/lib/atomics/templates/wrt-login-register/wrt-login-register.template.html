@@ -1,20 +1,9 @@
 <wrt-template-auth-background>
-  <wrt-tab-head
-    #tabHead
-    [tabs]="tabs"
-    [selectedTab]="selectedTab"
-    (toggleTab)="toggleTab($event)"
-  ></wrt-tab-head>
-  <login
-    (auth)="auth.emit($event)"
-    *ngIf="selectedTab === 'login'"
-    [authForm]="authForm"
-    [forgotLink]="'/forgot'"
-  >
+  <wrt-tab-head #tabHead [tabs]="tabs" [selectedTab]="selectedTab" (toggleTab)="toggleTab($event)">
+  </wrt-tab-head>
+  <login (auth)="auth.emit($event)" *ngIf="selectedTab === 'login'" [authForm]="loginForm" [forgotLink]="'/forgot'">
   </login>
-  <register
-    (regiterEvent)="regiterEvent.emit($event)"
-    [authForm]="authForm"
-    *ngIf="selectedTab === 'register'"
-  ></register>
+  <register (regiterEvent)="regiterEvent.emit($event)" [authForm]="registerForm" *ngIf="selectedTab === 'register'">
+  </register>
+  <pre> {{ registerForm.value | json }} </pre>
 </wrt-template-auth-background>

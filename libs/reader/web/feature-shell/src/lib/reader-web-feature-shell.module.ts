@@ -24,11 +24,6 @@ const routes: Routes = [
   },
 ];
 
-import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
-import {
-  GoogleLoginProvider,
-  FacebookLoginProvider
-} from 'angularx-social-login';
 import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   imports: [
@@ -45,32 +40,17 @@ import { HttpClientModule } from '@angular/common/http';
     ReaderWebUiAuthorModule,
     ReaderWebUiSingleModule,
     ReaderWebUiMarketModule,
-    SocialLoginModule,
+
     HttpClientModule
   ],
   exports: [
     RouterModule,
     GlobalCoreModule,
-    SocialLoginModule,
+
     HttpClientModule
   ],
   providers: [
-    {
-      provide: 'SocialAuthServiceConfig',
-      useValue: {
-        autoLogin: false,
-        providers: [
-          {
-            id: GoogleLoginProvider.PROVIDER_ID,
-            provider: new GoogleLoginProvider('265413764260-sqgbeot6gpv6u7dp6moov7jp2blkvp3i.apps.googleusercontent.com')
-          },
-          {
-            id: FacebookLoginProvider.PROVIDER_ID,
-            provider: new FacebookLoginProvider('1687794138050695')
-          }
-        ]
-      } as SocialAuthServiceConfig,
-    }
+
   ]
 })
 export class ReaderWebFeatureShellModule { }

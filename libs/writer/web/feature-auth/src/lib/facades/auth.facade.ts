@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { LoginGear, LogoutGear, RegisterGear } from '../gears';
-import { BasicCredential, EmailLoginCredential, ProviderType } from '../models';
+import { CreateUserCredential, LoginCredential, ProviderType } from '../models';
 import { CurrentUserQuery } from '../states/current-user';
 
 @Injectable({ providedIn: 'root' })
@@ -16,7 +16,7 @@ export class AuthFacade {
     private loginGear: LoginGear,
     private registerGear: RegisterGear,
     private currentUserQuery: CurrentUserQuery
-  ) {}
+  ) { }
 
   logout() {
     this.logoutGear.logout();
@@ -30,23 +30,23 @@ export class AuthFacade {
     this.registerGear.linkToProviderGoogleorFacebook(user);
   }
 
-  loginWithRoleAdmin(credential: EmailLoginCredential) {
+  loginWithRoleAdmin(credential: LoginCredential) {
     this.loginGear.loginWithRoleAdmin(credential);
   }
 
-  loginEmail(credential: EmailLoginCredential) {
+  loginEmail(credential: LoginCredential) {
     this.loginGear.loginEmail(credential);
   }
 
-  loginSocials(providerType: ProviderType) {
+  loginSocial(providerType: ProviderType) {
     this.loginGear.loginSocial(providerType);
   }
 
-  registerEmail(basicCredential: BasicCredential) {
+  registerEmail(basicCredential: CreateUserCredential) {
     this.registerGear.registerEmail(basicCredential);
   }
 
-  // registerSocial(providerType: ProviderType) {
-  //   this.registerGear.registerSocial(providerType);
-  // }
+  registerSocial(providerType: ProviderType) {
+    this.registerGear.registerSocial(providerType);
+  }
 }

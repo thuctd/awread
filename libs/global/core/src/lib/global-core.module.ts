@@ -16,6 +16,10 @@ import { createApollo } from "./apollo.config";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { ApolloInterceptor } from "./apollo.interceptor";
 import { MAT_DATE_LOCALE } from '@angular/material/core';
+
+import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import { GoogleLoginProvider, FacebookLoginProvider } from 'angularx-social-login';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -24,8 +28,11 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
     AngularFireAuthModule,
     HttpClientModule,
     environment.production ? [] : AkitaNgDevtools.forRoot(),
+    SocialLoginModule,
   ],
-  exports: [],
+  exports: [
+    SocialLoginModule,
+  ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ApolloInterceptor, multi: true },
     {
@@ -33,7 +40,23 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
       useFactory: createApollo,
       deps: [HttpLink],
     },
-    { provide: MAT_DATE_LOCALE, useValue: 'vi' }
+    { provide: MAT_DATE_LOCALE, useValue: 'vi' },
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider('265413764260-sqgbeot6gpv6u7dp6moov7jp2blkvp3i.apps.googleusercontent.com')
+          },
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider('1687794138050695')
+          }
+        ]
+      } as SocialAuthServiceConfig,
+    }
   ],
 })
 export class GlobalCoreModule { }

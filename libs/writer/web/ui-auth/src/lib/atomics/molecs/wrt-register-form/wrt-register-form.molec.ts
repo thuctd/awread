@@ -1,7 +1,7 @@
 import { FormGroup } from '@angular/forms';
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { faLock, faEnvelope, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faLock, faEnvelope, faPhone, faUser } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'wrt-register-form',
   templateUrl: './wrt-register-form.molec.html',
@@ -16,14 +16,15 @@ import { faLock, faEnvelope, faUser } from '@fortawesome/free-solid-svg-icons';
 })
 export class WrtRegisterFormMolec implements OnInit {
   @Input() type = 'password';
-  icons = { faLock, faEnvelope, faUser };
+  icons = { faLock, faEnvelope, faUser, faPhone };
   @Input() form: FormGroup = this.fb.group({
-    displayName: ['', [Validators.required]],
-    email: ['', [Validators.required, Validators.email]],
+    username: ['', [Validators.required]],
+    email: ['', []],
+    phone: ['', []],
     password: ['', [Validators.required]],
     confirmPassword: ['', [Validators.required]],
   });
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }
