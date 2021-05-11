@@ -4,7 +4,7 @@
 <dl *ngIf="!isInfoNovel" class="mt-2 text-sm p-0">
     <dd class="ml-0">
         <div *ngFor="let btn of btns" class="leading-normal font-medium">
-            <base-btn (onBtnClicked)="submitEvent.emit($event)" [isSize]="true" [chapterId]="btn.chapterId" [chapter]="btn.position">
+            <base-btn (onBtnClicked)="submitEvent.emit($event)" [isSize]="true" [bookId]='book.bookId' [chapterId]="btn.chapterId" [chapter]="btn.position">
             </base-btn>
         </div>
     </dd>

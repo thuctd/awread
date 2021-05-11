@@ -15,11 +15,11 @@ export class BooksGear {
 
   constructor(
     private transformBookDataGear: TransformBookDataGear,
-    private genreBooksStore: GenreBooksStore,
+    private searchBooksStore: SearchBooksStore,
     private authorBooksStore: AuthorBooksStore,
+    private genreBooksStore: GenreBooksStore,
     private topBooksStore: TopBooksStore,
     private booksStore: BooksStore,
-    private searchBooksStore: SearchBooksStore,
     private booksApi: BooksApi,
   ) { }
 
@@ -119,7 +119,21 @@ export class BooksGear {
           res['data']['allVRandomBooks'] &&
           res['data']['allVRandomBooks']['nodes'].length
         ) {
-          this.genreBooksStore.set(res['data']['allVRandomBooks']['nodes']);
+          const result = res['data']['allVRandomBooks']['nodes'];
+          const books = result.map((book) => {
+            return {
+              ...book
+            };
+          });
+          return books;
+        }
+      }),
+      tap((res) => {
+        if (res.length) {
+          this.genreBooksStore.set([]);
+          this.genreBooksStore.set(res);
+        } else {
+          this.genreBooksStore.set([]);
         }
       }),
       catchError((err) => {

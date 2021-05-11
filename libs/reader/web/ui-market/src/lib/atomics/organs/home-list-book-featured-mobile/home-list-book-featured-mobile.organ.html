@@ -8,7 +8,7 @@
         <ng-container>
           <ng-template carouselSlide *ngFor="let book of books">
             <div class="mx-2 sm:mx-5 mb-4">
-              <atom-img-m [size]="'s'" [bookId]='book.id' [srcImg]='book.imgUrl'></atom-img-m>
+              <atom-img-m [size]="'s'" [bookId]='book.bookId' [srcImg]='book.cover'></atom-img-m>
               <molec-home-info-book-update [book]='book'></molec-home-info-book-update>
             </div>
           </ng-template>

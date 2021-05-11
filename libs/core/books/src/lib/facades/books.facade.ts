@@ -64,6 +64,14 @@ export class BooksFacade {
     return this.booksQuery.selectEntity(id);
   }
 
+  selectAllBookAkita() {
+    return this.booksQuery.selectAll();
+  }
+
+  getAllAkita() {
+    return this.booksQuery.getAll();
+  }
+
   getAllBooks() {
     return this.booksGear.getAllBooks();
   }

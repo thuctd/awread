@@ -1,4 +1,4 @@
-import { takeWhile, switchMap } from 'rxjs/operators';
+import { takeWhile, switchMap, retry, tap, takeUntil } from 'rxjs/operators';
 import { of, Subject, Observable } from 'rxjs';
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import { Directive, Injectable, OnInit } from '@angular/core';
@@ -13,12 +13,14 @@ import { CategoryFacade } from 'libs/core/categories/src/lib/facades/category.fa
 })
 @Directive()
 export class HomePage implements OnInit {
+  destroy$ = new Subject();
   bookList$ = this.booksFacade.books$;
   goodBookList$ = this.booksFacade.goodBooks$;
   categoryBookList$ = this.booksFacade.categoryBooks$;
   genreBookList$ = this.booksFacade.genreBooks$;
   featureBookList$ = this.booksFacade.featureBooks$;
   latestBookList$ = this.booksFacade.latestBooks$;
+  genreBooks$ = this.booksFacade.genreBooks$;
   genres$ = this.genresFacade.genres$;
   imageObject$ = this.sliderFacede.slider$;
   isLoading$ = this.booksFacade.selectLoadingAkita();
@@ -61,5 +63,10 @@ export class HomePage implements OnInit {
         return this.booksFacade.getGenreBooks(items[0].genreId);
       })
     );
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

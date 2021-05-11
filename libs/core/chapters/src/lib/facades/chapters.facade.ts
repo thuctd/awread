@@ -36,6 +36,6 @@ export class ChaptersFacade {
   }
 
   getChapterDetail(chapterid: string, bookid: string) {
-    return this.chaptersGear.getChapterDetail(chapterid, bookid).pipe();
+    return this.chaptersGear.getChapterDetail(chapterid, bookid);
   }
 }

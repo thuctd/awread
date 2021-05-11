@@ -10,8 +10,7 @@ export class ChaptersGear {
 
   constructor(
     private chaptersApi: ChaptersApi,
-    private chaptersStore: ChaptersStore,
-    private chapterDetailStore: ChapterDetailStore
+    private chaptersStore: ChaptersStore
   ) {
   }
 
@@ -52,7 +51,10 @@ export class ChaptersGear {
           res['data']['allChapters']['nodes'].length
         ) {
           const chapter = res['data']['allChapters']['nodes'];
-          console.log(chapter);
+          return chapter.map((item) => {
+            const content = item['contentByChapterId']?.content;
+            return { ...item, content };
+          });
         }
         return [];
       }),

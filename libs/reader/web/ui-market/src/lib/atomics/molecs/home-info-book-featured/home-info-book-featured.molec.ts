@@ -22,7 +22,7 @@ export class HomeInfoBookFeaturedMolec implements OnInit {
 
   @Input() btns = [{
     position: '1',
-    chapterId: 'a8c80b60-acd6-4522-82cb-095d0ba677a7'
+    chapterId: ''
   }];
   @Output() submitEvent = new EventEmitter();
 
