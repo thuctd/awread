@@ -17,7 +17,7 @@ export class DetailBookContentOrgan implements OnInit {
     title: 'Ngày ấy vì ai mà đổi thay',
     authorId: '1',
     auth: 'Cẩm Thương',
-    type: 'Hoang tưởng, kinh dị',
+    genres: 'Hoang tưởng, kinh dị',
     status: 'Đang tiến hành',
     publishedAt: '2020',
     country: '(chủ yếu dành cho truyện sưu tầm)'

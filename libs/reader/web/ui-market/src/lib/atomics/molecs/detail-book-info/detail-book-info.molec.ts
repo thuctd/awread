@@ -14,11 +14,11 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 })
 export class DetailBookInfoMolec implements OnInit {
   @Input() book = {
-    auth: 'Cẩm Thương',
-    type: 'Hoang tưởng, kinh dị',
-    status: 'Đang tiến hành',
-    publishedAt: '2020',
-    country: '(chủ yếu dành cho truyện sưu tầm)'
+    authors: [],
+    genreIds: [],
+    published: true,
+    updatedAt: '2020',
+    description: '(chủ yếu dành cho truyện sưu tầm)'
   }
   constructor() { }
 

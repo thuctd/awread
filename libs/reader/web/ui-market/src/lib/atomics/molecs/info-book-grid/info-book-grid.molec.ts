@@ -18,7 +18,10 @@ export class InfoBookGridMolec implements OnInit {
   @Input() countComment = '40';
   @Input() faIcon = faEye;
   @Input() bookId = '';
-  @Input() btns = ['Chương 1', 'Chương 2'];
+  @Input() btns = [{
+    position: '1',
+    chapterId: ''
+  }];
   @Output() submitEvent = new EventEmitter();
 
   constructor() { }

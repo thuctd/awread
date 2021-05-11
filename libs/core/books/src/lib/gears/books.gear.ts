@@ -25,7 +25,7 @@ export class BooksGear {
 
   getAllBooks() {
     return this.booksApi.getAllBooks().pipe(
-      tap((res) => {
+      map((res) => {
         if (
           res['data'] &&
           res['data']['allBooks'] &&
@@ -35,7 +35,15 @@ export class BooksGear {
           const books = result.map((book) =>
             this.transformBookDataGear.tranformBookData(book)
           );
-          this.booksStore.set(books);
+          return books;
+        }
+      }),
+      tap((res) => {
+        if (res.length) {
+          this.booksStore.set([]);
+          this.booksStore.set(res);
+        } else {
+          this.booksStore.set([]);
         }
       }),
       catchError((err) => {
@@ -97,12 +105,15 @@ export class BooksGear {
       tap((res) => {
         if (
           res['data'] &&
-          res['data']['allAuthors'] &&
-          res['data']['allAuthors']['nodes'].length
+          res['data']['getAuthorBooks'] &&
+          res['data']['getAuthorBooks']['mvBooksLatestChapters'].length
         ) {
-          this.authorBooksStore.set(res['data']['allAuthors']['nodes']);
+          const result = res['data']['getAuthorBooks']['mvBooksLatestChapters'];
+          const books = result.map((book) =>
+            this.transformBookDataGear.tranformBookHomeData(book)
+          );
+          this.authorBooksStore.set(books);
         }
-        return [];
       }),
       catchError((err) => {
         console.error('An error occurred:', err);
@@ -151,7 +162,17 @@ export class BooksGear {
           res['data']['allMvDetailBooks'] &&
           res['data']['allMvDetailBooks']['nodes'].length
         ) {
-          const book = res['data']['allMvDetailBooks']['nodes'];
+          const result = res['data']['allMvDetailBooks']['nodes'];
+          const book = result.map((book) => {
+            const authors = JSON.parse(book['authors'].split('/'));
+            const genreIds = JSON.parse(book['genres'].split('/'));
+            return {
+              ...book,
+              authors,
+              genreIds,
+            };
+          }
+          );
           return book;
         }
         return [];
@@ -192,14 +213,30 @@ export class BooksGear {
 
   searhBookByTermApi(term: string) {
     return this.booksApi.searchBookByTerm(term).pipe(
-      tap((res) => {
+      map((res) => {
+        console.log(res);
         if (
           res['data'] &&
           res['data']['searchBooks'] &&
           res['data']['searchBooks']['books'].length
         ) {
           const result = res['data']['searchBooks']['books'];
-          this.searchBooksStore.set(result);
+          const books = result.map((book) => {
+            const categoryName = book['categoryByCategoryId'].name;
+            return {
+              ...book,
+              categoryName
+            };
+          });
+          return books;
+        }
+      }),
+      tap((res) => {
+        if (res.length) {
+          this.searchBooksStore.set([]);
+          this.searchBooksStore.set(res);
+        } else {
+          this.searchBooksStore.set([]);
         }
       }),
       catchError((err) => {

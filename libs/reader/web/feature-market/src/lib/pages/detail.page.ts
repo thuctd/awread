@@ -37,11 +37,12 @@ export class DetailPage implements OnInit, OnDestroy {
       switchMap(id => this.booksFacade.getDetailBook(id).pipe(
         tap(book => {
           this.authorId = book[0]['userId'];
-          this.booksFacade.getAuthorBooks(book[0]['userId']).subscribe();
+          this.booksFacade.getAuthorBooks(this.authorId).subscribe();
         })
       )),
     ).subscribe(book => {
       this.book$ = book[0];
+      console.log(this.book$);
     })
     this.booksFacade.getTopBooks().subscribe();
     this.getAllChapters();
