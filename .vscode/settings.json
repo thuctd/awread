@@ -1,5 +1,5 @@
 {
-  "editor.formatOnSave": true,
+	"editor.formatOnSave": true,
 	"editor.formatOnPaste": true,
 	"editor.codeActionsOnSave": {
 		"source.fixAll.eslint": true
@@ -8,6 +8,6 @@
 	"javascript.preferences.importModuleSpecifier": "shortest",
 	"editor.wordWrapColumn": 160,
 	"html.format.wrapLineLength": 160,
-	"window.zoomLevel": 0,
+	// "window.zoomLevel": 3,
 	// "json.format.enable": false,
 }
