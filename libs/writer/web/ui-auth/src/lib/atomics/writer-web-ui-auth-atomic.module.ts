@@ -21,6 +21,7 @@ import { WrtNewPasswordTemplate } from './templates/wrt-new-password/wrt-new-pas
 import { WrtNewPasswordFormMolec } from './molecs/wrt-new-password-form/wrt-new-password-form.molec';
 import { WrtAccountCompleteOrgan } from './organs/wrt-account-complete/wrt-account-complete.organ';
 import { WrtNewPasswordOrgan } from './organs/wrt-new-password/wrt-new-password.organ';
+import { WrtRegisterCompleteFormMolec } from './molecs/wrt-register-complete-form/wrt-register-complete-form.molec';
 @NgModule({
   imports: [CommonModule, GlobalDesignSystemAtomicModule, StorybookSupportModule],
   exports: [
@@ -45,6 +46,7 @@ import { WrtNewPasswordOrgan } from './organs/wrt-new-password/wrt-new-password.
     WrtNewPasswordFormMolec,
     WrtAccountCompleteOrgan,
     WrtNewPasswordOrgan,
+    WrtRegisterCompleteFormMolec,
   ],
   declarations: [
     WrtTabHeadMolec,
@@ -67,6 +69,7 @@ import { WrtNewPasswordOrgan } from './organs/wrt-new-password/wrt-new-password.
     WrtNewPasswordFormMolec,
     WrtAccountCompleteOrgan,
     WrtNewPasswordOrgan,
+    WrtRegisterCompleteFormMolec,
   ],
 })
 export class WriterWebUiAuthAtomicModule {}

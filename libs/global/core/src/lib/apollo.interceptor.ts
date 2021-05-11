@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpHandler, HttpInterceptor, HttpRequest, } from '@angular/common/http';
-import { first, switchMap } from 'rxjs/operators';
+import { HttpErrorResponse, HttpHandler, HttpInterceptor, HttpRequest, } from '@angular/common/http';
+import { catchError, first, switchMap } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { throwError } from 'rxjs';
 
 @Injectable()
 export class ApolloInterceptor implements HttpInterceptor {
@@ -56,4 +57,23 @@ export class ApolloInterceptor implements HttpInterceptor {
     }
     return next.handle(req);
   }
+
+  // private handleUnknownError(request: HttpRequest<any>, next: HttpHandler) {
+  //   return next.handle(request).pipe(
+  //     catchError(err => {
+  //       if (err instanceof HttpErrorResponse) {
+  //         switch (err.status) {
+  //           case 401:
+  //             return this.handle401Error(request, next);
+  //           case 0:
+  //             return this.handleUnknownError(request, next);
+  //           default:
+  //             return this.router.navigate(['system-error']);
+  //         }
+  //       } else {
+  //         return throwError(err);
+  //       }
+  //     })
+  //   );
+  // }
 }

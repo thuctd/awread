@@ -20,8 +20,6 @@ export class LoginGear {
     private snackbarService: SnackbarsService,
     private socialAuthService: SocialAuthService
   ) {
-    // TODO: remove this 
-    localStorage.setItem('accessToken', '');
   }
 
   loginWithRoleAdmin(credential: LoginCredential) {
@@ -36,11 +34,11 @@ export class LoginGear {
   async loginEmail(credential: LoginCredential) {
     this.authApi.authenticateUser(credential).subscribe(result => {
       console.log('result', result);
-      const accessToken = result?.data ? result.data['jwtToken'] : null;
+      const accessToken = result?.accessToken;
       switch (result.case) {
         case 'success':
           localStorage.setItem('accessToken', accessToken);
-          this.snackbarService.showSuccess(`Chúc bạn một ngày tốt lành! ${result.user.firstname ?? result.user.name}`);
+          this.snackbarService.showSuccess(`Chúc bạn một ngày tốt lành! ${result.user.firstname ?? result.user.name ?? ''}`);
           this.authRoutingGear.navigateAfterLoginComplete('list');
           break;
         case 'password-not-match':

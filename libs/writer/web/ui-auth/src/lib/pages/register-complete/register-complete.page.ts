@@ -21,46 +21,26 @@ export class RegisterCompletePage implements OnInit {
     private authFacade: AuthFacade,
     private router: Router,
     private snackbarService: SnackbarsService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-    this.user = this.activatedRoute.snapshot.params;
-    console.log('user', this.user);
     this.initForm();
     this.updateForm();
   }
 
   completeRegister() {
-    const user = {
-      ...this.user,
-      password: this.formComplete.get('password').value,
-      provider: 'email/password',
-    };
-
-    // link o day nha
-    // console.log('create user: ', user);
-    this.authFacade
-      .createAccountOnServer(user)
-      .pipe(
-        tap(() => {
-          this.authFacade.linkToProviderGoogleorFacebook(user);
-        }),
-        catchError((err) => {
-          this.snackbarService.showError('Đã xảy ra lỗi. Vui lòng thử lại!');
-          return of(err);
-        }),
-        retry(3)
-      )
-      .subscribe();
+    this.authFacade.updateUser(this.formComplete.value);
   }
 
   private updateForm() {
-    this.formComplete.patchValue({ email: this.user.email });
+
   }
+
   private initForm() {
     this.formComplete = this.fb.group({
-      email: ['', [Validators.email]],
-      password: [''],
+      lastname: ['', []],
+      middlename: ['', []],
+      firstname: ['', []],
     });
   }
 }

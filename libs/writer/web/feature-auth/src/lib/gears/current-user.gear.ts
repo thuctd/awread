@@ -36,17 +36,13 @@ export class CurrentUserGear {
 
   update(user: User) {
     return this.currentUserApi.update(user).pipe(
-      tap((res) => {
-        if (res && res['data']) {
-          this.snackbarsService.showSuccess('Cập nhật thông tin thành công!');
-          this.currentUserStore.updateCurrentUserAkita(user);
-        }
-      }),
-      catchError((err) => {
-        this.snackbarsService.showError('Đã xảy ra lỗi. Vui lòng thử lại!');
-        return throwError(err);
-      }),
-      retry(2)
-    );
+    ).subscribe(result => {
+      if (result.data) {
+        this.snackbarsService.showSuccess('Cập nhật thông tin thành công!');
+        this.currentUserStore.updateCurrentUserAkita(user);
+      } else {
+        this.snackbarsService.showError(result.errors?.[0]['message']);
+      }
+    })
   }
 }

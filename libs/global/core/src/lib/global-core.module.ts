@@ -19,6 +19,7 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
 import { GoogleLoginProvider, FacebookLoginProvider } from 'angularx-social-login';
+import { ErrorInterceptor } from "./error.interceptor";
 
 @NgModule({
   imports: [
@@ -35,6 +36,7 @@ import { GoogleLoginProvider, FacebookLoginProvider } from 'angularx-social-logi
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ApolloInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     {
       provide: APOLLO_OPTIONS,
       useFactory: createApollo,

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { LoginGear, LogoutGear, RegisterGear } from '../gears';
+import { CurrentUserGear, LoginGear, LogoutGear, RegisterGear } from '../gears';
 import { CreateUserCredential, LoginCredential, ProviderType } from '../models';
 import { CurrentUserQuery } from '../states/current-user';
 
@@ -15,11 +15,16 @@ export class AuthFacade {
     private logoutGear: LogoutGear,
     private loginGear: LoginGear,
     private registerGear: RegisterGear,
-    private currentUserQuery: CurrentUserQuery
+    private currentUserQuery: CurrentUserQuery,
+    private currentUserGear: CurrentUserGear,
   ) { }
 
   logout() {
     this.logoutGear.logout();
+  }
+
+  updateUser(user) {
+    return this.currentUserGear.update(user);
   }
 
   createAccountOnServer(user) {

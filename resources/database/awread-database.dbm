@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="0,603" last-zoom="0.95" max-obj-count="15"
+<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="0,602" last-zoom="0.95" max-obj-count="15"
 	 default-owner="postgres">
 <role name="anonymous">
 </role>
@@ -45,7 +45,8 @@ grant writer to postgraphile;
 
 grant connect on database awread_database  to anonymous, reader, writer, postgraphile;
 grant usage on schema public to anonymous, reader, writer, postgraphile;
-GRANT SELECT ON ALL TABLES IN SCHEMA public to anonymous, reader, writer, postgraphile;]]></appended-sql>
+GRANT SELECT ON ALL TABLES IN SCHEMA public to anonymous, reader, writer, postgraphile;
+grant update on public.users to reader;]]></appended-sql>
 	<typeattrib name="userId">
 		<type name="uuid" length="0"/>
 	</typeattrib>

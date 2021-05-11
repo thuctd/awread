@@ -14,7 +14,7 @@ export class ProfilePage implements OnInit {
   constructor(
     private currentUserFacade: CurrentUserFacade,
     private fb: FormBuilder
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -40,9 +40,7 @@ export class ProfilePage implements OnInit {
         ...this.profileForm.value,
         userid: this.currentUserFacade.getUserId(),
       };
-      this.currentUserFacade
-        .updateCurrentUser(user)
-        .subscribe((res) => console.log('update cureent user result: ', res));
+      this.currentUserFacade.updateCurrentUser(user)
     }
   }
 
