@@ -3,18 +3,19 @@ import { TopBooksStore } from './../states/top-books/top-books.store';
 import { AuthorBooksStore } from './../states/author-books/author-books.store';
 import { GenreBooksStore } from './../states/genre-books/genre-books.store';
 import { Injectable } from '@angular/core';
-import { throwError } from 'rxjs';
-import { catchError, tap, map } from 'rxjs/operators';
+import { tap, map } from 'rxjs/operators';
 import { BooksApi } from '../apis';
 import { BooksStore } from '../states/books';
 
 import { TransformBookDataGear } from './transform-book-data.gear';
+import { CategoryBooksStore } from '../states/category-books';
 
 @Injectable({ providedIn: 'root' })
 export class BooksGear {
 
   constructor(
     private transformBookDataGear: TransformBookDataGear,
+    private categoryBooksStore: CategoryBooksStore,
     private searchBooksStore: SearchBooksStore,
     private authorBooksStore: AuthorBooksStore,
     private genreBooksStore: GenreBooksStore,
@@ -25,53 +26,15 @@ export class BooksGear {
 
   getAllBooks() {
     return this.booksApi.getAllBooks().pipe(
-      map((res) => {
-        if (
-          res['data'] &&
-          res['data']['allBooks'] &&
-          res['data']['allBooks']['nodes'].length
-        ) {
-          const result = res['data']['allBooks']['nodes'];
-          const books = result.map((book) =>
-            this.transformBookDataGear.tranformBookData(book)
-          );
-          return books;
-        }
-      }),
-      tap((res) => {
-        if (res.length) {
-          this.booksStore.set([]);
-          this.booksStore.set(res);
-        } else {
-          this.booksStore.set([]);
-        }
-      }),
-      catchError((err) => {
-        console.error('An error occurred:', err);
-        return throwError(err);
-      })
+      map((result) => result.map(book => this.transformBookDataGear.tranformBookData(book))),
+      tap(books => this.booksStore.set(books))
     );
   }
 
   getCategoryBooks(categoryId: string) {
     return this.booksApi.getCategoryBooks(categoryId).pipe(
-      tap((res) => {
-        if (
-          res['data'] &&
-          res['data']['allBooks'] &&
-          res['data']['allBooks']['nodes'].length
-        ) {
-          const result = res['data']['allBooks']['nodes'];
-          const books = result.map((book) =>
-            this.transformBookDataGear.tranformBookData(book)
-          );
-          this.booksStore.set(books);
-        }
-      }),
-      catchError((err) => {
-        console.error('An error occurred:', err);
-        return throwError(err);
-      })
+      map((result) => result.map(book => this.transformBookDataGear.tranformBookData(book))),
+      tap(books => this.categoryBooksStore.set(books))
     );
   }
 
@@ -81,10 +44,6 @@ export class BooksGear {
       tap((res) => {
 
       }),
-      catchError((err) => {
-        console.error('An error occurred:', err);
-        return throwError(err);
-      })
     );
   }
 
@@ -93,117 +52,35 @@ export class BooksGear {
       tap((books) => {
 
       }),
-      catchError((err) => {
-        console.error('An error occurred:', err);
-        return throwError(err);
-      })
     );
   }
 
   getAuthorBooks(authorId: string) {
     return this.booksApi.getAuthorBooks(authorId).pipe(
-      tap((res) => {
-        if (
-          res['data'] &&
-          res['data']['getAuthorBooks'] &&
-          res['data']['getAuthorBooks']['mvBooksLatestChapters'].length
-        ) {
-          const result = res['data']['getAuthorBooks']['mvBooksLatestChapters'];
-          const books = result.map((book) =>
-            this.transformBookDataGear.tranformBookHomeData(book)
-          );
-          this.authorBooksStore.set(books);
-        }
-      }),
-      catchError((err) => {
-        console.error('An error occurred:', err);
-        return throwError(err);
-      })
+      map((result) => result.map(book => this.transformBookDataGear.tranformBookHomeData(book))),
+      tap(books => this.authorBooksStore.set(books))
     );
   }
 
   getGenreBooks(genreId: string) {
     return this.booksApi.getGenreBooks(genreId).pipe(
-      map((res) => {
-        if (
-          res['data'] &&
-          res['data']['allVRandomBooks'] &&
-          res['data']['allVRandomBooks']['nodes'].length
-        ) {
-          const result = res['data']['allVRandomBooks']['nodes'];
-          const books = result.map((book) => {
-            return {
-              ...book
-            };
-          });
-          return books;
-        }
+      map((books) => {
+        return books;
       }),
-      tap((res) => {
-        if (res.length) {
-          this.genreBooksStore.set([]);
-          this.genreBooksStore.set(res);
-        } else {
-          this.genreBooksStore.set([]);
-        }
-      }),
-      catchError((err) => {
-        console.error('An error occurred:', err);
-        return throwError(err);
-      })
+      tap(books => this.genreBooksStore.set(books))
     );
   }
 
   getBookById(bookId: string) {
     return this.booksApi.getBookById(bookId).pipe(
-      map((res) => {
-        if (
-          res['data'] &&
-          res['data']['allMvDetailBooks'] &&
-          res['data']['allMvDetailBooks']['nodes'].length
-        ) {
-          const result = res['data']['allMvDetailBooks']['nodes'];
-          const book = result.map((book) => {
-            const authors = JSON.parse(book['authors'].split('/'));
-            const genreIds = JSON.parse(book['genres'].split('/'));
-            return {
-              ...book,
-              authors,
-              genreIds,
-            };
-          }
-          );
-          return book;
-        }
-        return [];
-      }),
-      catchError((err) => {
-        console.error('An error occurred:', err);
-        return throwError(err);
-      })
+      map((result) => result.map(book => this.tranformBookDetailData(book))),      
     );
   }
 
   getTopBooks() {
     return this.booksApi.getTopBooks().pipe(
-      map((res) => {
-        if (
-          res['data'] &&
-          res['data']['allMvMostViewBooks'] &&
-          res['data']['allMvMostViewBooks']['nodes'].length
-        ) {
-          const result = res['data']['allMvMostViewBooks']['nodes'];
-          const books = result.map((book) =>
-            this.transformBookDataGear.tranformBookHomeData(book)
-          );
-          this.topBooksStore.set(books);
-        }
-        return [];
-      }),
-      catchError((err) => {
-        console.error('An error occurred:', err);
-        return throwError(err);
-      })
+      map((result) => result.map(book => this.transformBookDataGear.tranformBookHomeData(book))),
+      tap(books => this.topBooksStore.set(books))
     );
   }
 
@@ -213,37 +90,23 @@ export class BooksGear {
 
   searhBookByTermApi(term: string) {
     return this.booksApi.searchBookByTerm(term).pipe(
-      map((res) => {
-        console.log(res);
-        if (
-          res['data'] &&
-          res['data']['searchBooks'] &&
-          res['data']['searchBooks']['books'].length
-        ) {
-          const result = res['data']['searchBooks']['books'];
-          const books = result.map((book) => {
-            const categoryName = book['categoryByCategoryId'].name;
+      map((result) => result.map(book => {
+        const categoryName = book['categoryByCategoryId'].name;
             return {
               ...book,
               categoryName
             };
-          });
-          return books;
-        }
-      }),
-      tap((res) => {
-        if (res.length) {
-          this.searchBooksStore.set([]);
-          this.searchBooksStore.set(res);
-        } else {
-          this.searchBooksStore.set([]);
-        }
-      }),
-      catchError((err) => {
-        console.error('An error occurred:', err);
-        return throwError(err);
-      })
-    );
+      })),
+      tap(books => this.searchBooksStore.set(books)));
   }
 
+  private tranformBookDetailData(book) {
+    const authors = JSON.parse(book['authors'].split('/'));
+    const genreIds = JSON.parse(book['genres'].split('/'));
+    return {
+      ...book,
+      authors,
+      genreIds
+    };
+  }
 }

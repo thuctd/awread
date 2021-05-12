@@ -1,3 +1,4 @@
+import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
 
@@ -57,7 +58,9 @@ export class BooksApi {
       variables: {
         filter,
       },
-    });
+    }).pipe(
+        map(res => res?.['data']?.['searchBooks']?.['books'])
+      );
   }
 
   getAllBooks() {
@@ -95,7 +98,9 @@ export class BooksApi {
           }
         }
       `,
-    });
+    }).pipe(
+        map(res => res?.['data']?.['allBooks']?.['nodes'])
+      );
   }
 
   getComposedBooks() {
@@ -203,7 +208,9 @@ export class BooksApi {
       variables: {
         categoryId,
       },
-    });
+    }).pipe(
+        map(res => res?.['data']?.['allBooks']?.['nodes'])
+      );
   }
 
   getAuthorBooks(userId: string) {
@@ -224,7 +231,9 @@ export class BooksApi {
       variables: {
         userId,
       },
-    });
+    }).pipe(
+        map(res => res?.['data']?.['getAuthorBooks']?.['mvBooksLatestChapters'])
+      );
   }
 
   getGenreBooks(genreId: string) {
@@ -243,7 +252,9 @@ export class BooksApi {
         }
       `,
       variables: { genreId },
-    });
+    }).pipe(
+        map(res => res?.['data']?.['allVRandomBooks']?.['nodes'])
+      );
   }
 
   getTopBooks() {
@@ -262,7 +273,9 @@ export class BooksApi {
           }
         }
       `,
-    });
+    }).pipe(
+        map(res => res?.['data']?.['allMvMostViewBooks']?.['nodes'])
+      );
   }
 
   getBookById(bookId: string) {
@@ -290,6 +303,8 @@ export class BooksApi {
       variables: {
         bookId,
       },
-    });
+    }).pipe(
+        map(res => res?.['data']?.['allMvDetailBooks']?.['nodes'])
+      );
   }
 }

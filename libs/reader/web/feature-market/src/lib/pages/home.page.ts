@@ -21,6 +21,7 @@ export class HomePage implements OnInit {
   featureBookList$ = this.booksFacade.featureBooks$;
   latestBookList$ = this.booksFacade.latestBooks$;
   genreBooks$ = this.booksFacade.genreBooks$;
+  categories$ = this.categoryFacade.categories$;
   genres$ = this.genresFacade.genres$;
   imageObject$ = this.sliderFacede.slider$;
   isLoading$ = this.booksFacade.selectLoadingAkita();
@@ -38,6 +39,7 @@ export class HomePage implements OnInit {
     this.categoryFacade.getAllCategories().subscribe();
     this.booksFacade.getAllBooks().subscribe();
     this.genresFacade.getAllGenres().subscribe();
+    this.categoryFacade.getAllCategories().subscribe();
     this.sliderFacede.getAllSlider().subscribe();
     this.booksFacade.getGoodBooks().subscribe();
     this.booksFacade.getLatestBooks().subscribe();

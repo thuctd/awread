@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { throwError } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError, tap, map } from 'rxjs/operators';
 import { CategoryApi } from '../apis/category.api';
 import { CategoriesStore } from '../states/categories';
 
@@ -10,11 +10,7 @@ export class CategoryGear {
 
   getAllCategories() {
     return this.categoryApi.getAllCategories().pipe(
-      tap((res) => { }),
-      catchError((err) => {
-        console.error('An error occurred:', err);
-        return throwError(err);
-      })
+      map((result) => this.categoriesStore.set(result))
     );
   }
 

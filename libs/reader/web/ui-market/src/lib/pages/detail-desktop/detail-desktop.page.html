@@ -1,1 +1,3 @@
 <template-detail-book (nativeAuthorBook)='nativeBooksAuthor()' (nativeTopBook)='nativeTopBook()' (chapterFistEvent)='OnChangeFirstChapter()' (chapterLastEvent)='OnChangeLastChapter()' [chapters]='chapters$ | async' [book]='book$' [authorBooks]='authorBookList$ | async' [topBooks]='topBookList$ | async'></template-detail-book>
+
+<pre>{{breadcrumbs | json}}</pre>

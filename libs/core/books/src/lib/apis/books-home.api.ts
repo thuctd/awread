@@ -25,7 +25,7 @@ export class BooksHomeApi {
     })
       .pipe(
         map(res => res?.['data']?.['allMvMostViewBooks']?.['nodes'])
-      )
+      );
   }
 
   getFeatureBooks() {

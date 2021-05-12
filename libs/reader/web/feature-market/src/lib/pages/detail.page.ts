@@ -21,6 +21,9 @@ export class DetailPage implements OnInit, OnDestroy {
   authorBookList$ = this.booksFacade.authorBooks$;
   chapters$ = this.chaptersFacade.chapters$;
   bookChapter;
+  get breadcrumbs() {
+    return [{title: 'Home', link: ''}, {title: this.book$?.categoryId, link: '/composed;type=longbook'}, {title: this.book$?.title, link: `/books/${this.book$?.bookId}`}];
+  }
 
   constructor(
     private router: Router,

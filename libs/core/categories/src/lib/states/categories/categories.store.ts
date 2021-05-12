@@ -5,7 +5,7 @@ import { Category } from '../../models';
 export interface CategoriesState extends EntityState<Category>, ActiveState { };
 
 @Injectable({ providedIn: 'root' })
-@StoreConfig({ name: ' categories', resettable: true })
+@StoreConfig({ name: ' categories', resettable: true, idKey: 'categoryId' })
 export class CategoriesStore extends EntityStore<CategoriesState> {
   // ui: EntityUIStore<CategoryUIState>;
   constructor() {

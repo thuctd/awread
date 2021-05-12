@@ -17,6 +17,7 @@ export class HomeDetailBookUpdateOrgan implements OnInit {
   @Input() titlePage = 'Truyện mới cập nhật';
   @Input() books = [];
   @Input() loading: boolean;
+  @Input() categories = [];
   @Input() tabs = [
     {
       name: 'Tất cả',

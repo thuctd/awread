@@ -13,26 +13,11 @@ import { faHome, faAngleRight } from '@fortawesome/free-solid-svg-icons';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BreadcrumbAtom implements OnInit {
-  @Input() menu = [
-    {
-      title: 'Home',
-      link: '/home',
-      size: 'text-md',
-      icon: faHome,
-    },
-    {
-      title: 'Truyện ngắn',
-      link: '/home',
-      icon: faAngleRight,
-      size: 'text-xs',
-    },
-    {
-      title: 'Ngày ấy vì ai mà đổi thay',
-      link: '',
-      size: 'text-xs',
-      icon: faAngleRight,
-    },
-  ];
+  @Input() icon = faHome;
+  @Input() items = [{
+    title: 'Home',
+    link: '/home'
+  }];
 
   constructor() {}
 

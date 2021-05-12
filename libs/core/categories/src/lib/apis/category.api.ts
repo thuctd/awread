@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
 import { of } from 'rxjs';
-import { delay } from 'rxjs/operators';
+import { delay, map } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class CategoryApi {
@@ -21,7 +21,9 @@ export class CategoryApi {
           }
         }
       `,
-    });
+    }).pipe(
+        map(res => res?.['data']?.['allCategories']?.['nodes'])
+      );
   }
 
   getCategoryById(categoryId: string) {

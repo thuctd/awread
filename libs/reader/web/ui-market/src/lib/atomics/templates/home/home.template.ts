@@ -26,6 +26,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
 })
 export class HomeTemplate implements OnInit {
   @Input() books = [];
+  @Input() categories = [];
   @Input() sliders = [];
   @Input() getGoodBooks = [];
   @Input() getLatestBooks = [];
