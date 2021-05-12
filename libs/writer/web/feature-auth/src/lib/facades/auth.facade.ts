@@ -23,6 +23,10 @@ export class AuthFacade {
     this.logoutGear.logout();
   }
 
+  linkSocial(provider) {
+    this.currentUserGear.linkSocial(provider);
+  }
+
   updateUser(user) {
     return this.currentUserGear.update(user);
   }
@@ -52,6 +56,6 @@ export class AuthFacade {
   }
 
   registerSocial(providerType: ProviderType) {
-    this.registerGear.registerSocial(providerType);
+
   }
 }

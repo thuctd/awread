@@ -39,28 +39,12 @@ export class LoginRegisterPage {
     // this.router.navigate(['register']);
   }
 
-  register(provider: 'email' | 'facebook' | 'google' | 'apple') {
+  register() {
     const { password, confirmPassword } = this.registerForm.value;
     if (password !== confirmPassword) {
       return this.snackbarService.showError('Mật khẩu không khớp. Vui lòng thử lại!');
     }
-
-
-    switch (provider) {
-      case 'google':
-        this.authFacade.registerSocial(ProviderType.facebook);
-        break;
-      case 'facebook':
-        this.authFacade.registerSocial(ProviderType.facebook);
-        break;
-      case 'apple':
-        this.authFacade.registerSocial(ProviderType.facebook);
-        break;
-
-      default:
-        this.authFacade.registerEmail(this.registerForm.value);
-        break;
-    }
+    this.authFacade.registerEmail(this.registerForm.value);
   }
 
   login(provider: 'email' | 'facebook' | 'google' | 'apple') {

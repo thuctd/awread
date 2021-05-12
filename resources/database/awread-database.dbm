@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="0,602" last-zoom="0.95" max-obj-count="15"
+<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="0,882" last-zoom="0.95" max-obj-count="15"
 	 default-owner="postgres">
 <role name="anonymous">
 </role>
@@ -137,7 +137,7 @@ grant update on public.users to reader;]]></appended-sql>
 	</constraint>
 </table>
 
-<table name="users" layer="0" collapse-mode="2" max-obj-count="19" z-value="0">
+<table name="users" layer="0" collapse-mode="2" max-obj-count="20" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
 	<position x="460" y="800"/>
@@ -171,12 +171,6 @@ grant update on public.users to reader;]]></appended-sql>
 	<column name="age" default-value="2">
 		<type name="numeric" length="0"/>
 	</column>
-	<column name="provider" default-value="'password'">
-		<type name="text" length="0"/>
-	</column>
-	<column name="providerId">
-		<type name="text" length="0"/>
-	</column>
 	<column name="firstname">
 		<type name="text" length="0"/>
 	</column>
@@ -187,6 +181,15 @@ grant update on public.users to reader;]]></appended-sql>
 		<type name="text" length="0"/>
 	</column>
 	<column name="avatar">
+		<type name="text" length="0"/>
+	</column>
+	<column name="facebook">
+		<type name="text" length="0"/>
+	</column>
+	<column name="apple">
+		<type name="text" length="0"/>
+	</column>
+	<column name="google">
 		<type name="text" length="0"/>
 	</column>
 	<constraint name="users_pk" type="pk-constr" table="public.users">
@@ -399,7 +402,7 @@ end;]]></definition>
 	</constraint>
 </table>
 
-<function name="start_new_chapter"
+<function name="new_chapter"
 		window-func="false"
 		returns-setof="false"
 		behavior-type="CALLED ON NULL INPUT"
@@ -413,8 +416,17 @@ end;]]></definition>
 	<return-type>
 	<type name="uuid" length="0"/>
 	</return-type>
-	<parameter name="chapter">
-		<type name="jsonb" length="0"/>
+	<parameter name="title">
+		<type name="text" length="0"/>
+	</parameter>
+	<parameter name="published">
+		<type name="boolean" length="0"/>
+	</parameter>
+	<parameter name="position">
+		<type name="numeric" length="0"/>
+	</parameter>
+	<parameter name="bookId">
+		<type name="uuid" length="0"/>
 	</parameter>
 	<definition><![CDATA[/*
 declare 
@@ -431,22 +443,22 @@ values(
 
 declare 
 "newChapterId" uuid;
+"inputBookId" uuid := "bookId";
+"inputTitle" text := title;
+"inputPosition" numeric := position;
+"inputPublished" boolean := published;
+"inputContent" text := content;
 begin
 
-insert into chapters(published, position, "bookId", title)
-values(
-(chapter ->> 'published')::boolean,
-(chapter ->> 'position')::numeric,
-(chapter ->> 'bookId')::uuid,
-(chapter ->> 'title')::text
-) 
+insert into chapters("bookId", title, position, published)
+values("inputBookId", "inputTitle", "inputPosition", "inputPublished") 
 returning "chapterId"
 into "newChapterId";
 
 
 
 insert into contents("chapterId", content)
-values("newChapterId", (chapter ->> 'content')::text);
+values("newChapterId", "inputContent");
 
 return "newChapterId";
 end;]]></definition>
@@ -523,7 +535,7 @@ end;]]></definition>
 		<function signature="public.&quot;set_updateAt&quot;()"/>
 </trigger>
 
-<function name="register_user"
+<function name="new_user"
 		window-func="false"
 		returns-setof="false"
 		behavior-type="CALLED ON NULL INPUT"
@@ -554,12 +566,6 @@ end;]]></definition>
 	<parameter name="phone">
 		<type name="text" length="0"/>
 	</parameter>
-	<parameter name="provider">
-		<type name="text" length="0"/>
-	</parameter>
-	<parameter name="providerId">
-		<type name="text" length="0"/>
-	</parameter>
 	<definition><![CDATA[declare 
 	"userAccount" public.users;
 	"inputUsername" text := username;
@@ -580,14 +586,12 @@ begin
 			username,
 			email,
 			phone,
-			provider,
-			"providerId"
+	
 		) values (
 			username, 
 			email,
 			phone, 
-			provider,
-			"providerId"
+	
 		)
 		returning * into "userAccount";	
 
@@ -853,11 +857,13 @@ grant writer to postgraphile;]]></appended-sql>
 	"userProvider" text := provider;
 	"userProviderId" text := "providerId";
 begin
-  select * into account
+  execute format('
+select *
   from public.users
   where
-	public.users.provider = "userProvider" and
-	public.users."providerId" = "userProviderId";
+	public.users.%I = %L; 
+', "userProvider", "userProviderId") into account;
+
 
   if account is null  then
 	return query select "accessToken", account;

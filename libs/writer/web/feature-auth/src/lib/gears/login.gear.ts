@@ -85,7 +85,7 @@ export class LoginGear {
 
     this.authApi.authenticateSocialUser({ provider, providerId: socialUser.id }).subscribe(result => {
       if (result.case == 'success') {
-        localStorage.setItem('accessToken', result.jwtToken);
+        localStorage.setItem('accessToken', result.accessToken);
         this.snackbarService.showSuccess(`Chúc bạn một ngày tốt lành! ${result.user.firstname ?? result.user.name}`);
         this.authRoutingGear.navigateAfterLoginComplete('list');
       } else {

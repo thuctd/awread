@@ -32,6 +32,10 @@ export class RegisterCompletePage implements OnInit {
     this.authFacade.updateUser(this.formComplete.value);
   }
 
+  linkSocialEvent(event) {
+    this.authFacade.linkSocial(event);
+  }
+
   private updateForm() {
 
   }

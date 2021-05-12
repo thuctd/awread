@@ -3,6 +3,4 @@ export interface CreateUserCredential {
   email: string;
   phone: string;
   password: string;
-  providerId?: string;
-  provider?: string;
 }

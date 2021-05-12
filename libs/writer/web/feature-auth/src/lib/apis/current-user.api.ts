@@ -7,6 +7,7 @@ import { of, throwError } from 'rxjs';
 export class CurrentUserApi {
   constructor(private apollo: Apollo) { }
 
+
   getCurrentUser() {
     return this.apollo.query({
       query: gql`
@@ -31,28 +32,56 @@ export class CurrentUserApi {
     });
   }
 
-  update(user: User) {
+  update(user) {
     return this.apollo.mutate({
       mutation: gql`
-      mutation updateUserByUserId($userId: UUID!, $firstname: String, $middlename: String, $lastname:String) {
+      mutation updateUserByUserId($userId: UUID!, $firstname: String, $middlename: String, $lastname: String) {
         updateUserByUserId(
           input: {
             userId: $userId,
             userPatch: {
               firstname: $firstname,
-              lastname: $lastname,
               middlename: $middlename,
+              lastname: $lastname
             }
           }
         ) {
           user {
-            firstname
+            firstname,
+            middlename,
+            lastname
           }
         }
       }
       `,
       variables: {
         ...user,
+        userId: "7cc248bc-8d3a-4f23-b8ab-6ae93c3848b0"
+      },
+    })
+  }
+
+
+  linkSocial(credential) {
+    return this.apollo.mutate({
+      mutation: gql`
+      mutation updateUserByUserId($userId: UUID!, $providerId: String) {
+        updateUserByUserId(
+          input: {
+            userId: $userId,
+            userPatch: {
+              ${credential.provider}: $providerId,
+            }
+          }
+        ) {
+          user {
+            ${credential.provider}
+          }
+        }
+      }
+      `,
+      variables: {
+        ...credential,
         userId: "7cc248bc-8d3a-4f23-b8ab-6ae93c3848b0"
       },
     })
