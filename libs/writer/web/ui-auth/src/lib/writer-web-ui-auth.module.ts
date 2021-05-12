@@ -9,6 +9,6 @@ import { AuthLayout } from './layouts/auth/auth.layout';
     // WriterWebFeatureAuthModule,
   ],
   declarations: [AuthLayout],
-  exports: [AuthLayout],
+  exports: [AuthLayout, WriterWebUiAuthRoutingModule],
 })
 export class WriterWebUiAuthModule { }

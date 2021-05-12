@@ -13,7 +13,8 @@
         "facade",
         "model",
         "interface",
-        "graphql"
+        "graphql",
+        "ipage"
       ],
       "default": "gear",
       "$default": {
@@ -34,5 +35,7 @@
       "description": "parent folder name"
     }
   },
-  "required": ["list"]
+  "required": [
+    "list"
+  ]
 }

@@ -4,6 +4,7 @@ import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/materia
 
 import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
+import { LoginRegisterPage } from '../../../pages/login-register.page';
 
 @Component({
   selector: 'template-login-web',
@@ -17,27 +18,4 @@ import { tap } from 'rxjs/operators';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LoginWebTemplate implements OnInit {
-  @Input() link = '/global-assets/images/newlogo.webp';
-  @Input() authForm = this.fb.group({
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', Validators.required],
-  });
-  @Output() auth = new EventEmitter();
-
-  constructor(
-    private fb: FormBuilder, @Optional() public dialogRef: MatDialogRef<LoginWebTemplate>,
-    private http: HttpClient
-  ) { }
-
-  ngOnInit(): void { }
-
-  async authClicked(provider: string) {
-    this.auth.emit(provider);
-
-    // const ob = this.http.get('/auth/facebook')
-    //   .pipe(tap(result => console.log('result')));
-    // console.log('ob', ob);
-    // ob.subscribe(result => console.log(result))
-  }
-}
+export class LoginWebTemplate extends LoginRegisterPage { }

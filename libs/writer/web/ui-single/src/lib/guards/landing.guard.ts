@@ -10,7 +10,7 @@ export class LandingGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     if (localStorage.getItem('accessToken')) {
-      this.router.navigate(['list']);
+      this.router.navigate(['/']);
       return of(false);
     }
     return of(true);
