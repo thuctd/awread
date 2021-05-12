@@ -13,11 +13,14 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DetailInfoLineLinkAtom implements OnInit {
-  @Input() bookId = '';
+  @Input() color: true | false = true;
   @Input() title = 'Tác giả';
-  @Input() value = 'Cẩm thương';
+  @Input() items = [{
+    id: '',
+    name: ''
+  }];
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

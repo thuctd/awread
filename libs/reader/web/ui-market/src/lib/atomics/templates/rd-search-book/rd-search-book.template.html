@@ -1,11 +1,9 @@
-  <!-- <pre> length: ({{ items?.length}}) {{ items | json }} </pre> -->
-
 <section class="max-w-screen-xl mx-auto px-6 xl:px-0">
   <molec-rd-search-book-title (bindingUrl)='bindingUrl.emit($event)' [inputControl]='searchControl'></molec-rd-search-book-title>
   <ng-container *ngIf="items?.length; else noData">
     <molec-rd-search-book-header [number]="items.length" class="pt-8 pb-4"></molec-rd-search-book-header>
     <div *ngFor="let item of items" class="py-4">
-      <organ-rd-search-book-list [imgUrl]='item.cover' [title]="item.title" [category]="item.category" [status]="item.status" [bookId]='item.id'>
+      <organ-rd-search-book-list [chapters]="item['chaptersByBookId']['nodes']" [cover]='item.cover' [title]="item.title" [category]="item.categoryName" [status]="item.completed" [bookId]='item.bookId'>
       </organ-rd-search-book-list>
     </div>
   </ng-container>
@@ -13,5 +11,3 @@
     <div class="flex justify-center pt-40 text-xl text-gray-text roboto">Không tìm thấy kết quả, Hãy thử một lựa chọn khác...</div>
   </ng-template>
 </section>
-
-<pre>{{items | json}}</pre>

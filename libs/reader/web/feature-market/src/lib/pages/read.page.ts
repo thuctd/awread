@@ -12,7 +12,7 @@ export class ReadPage implements OnInit {
   bookId;
   chapterId;
   topBookList$ = this.booksFacade.topBooks$;
-  chapterListByBookId$ = this.chaptersFacade.chapters$;
+  bookChapters$ = this.chaptersFacade.chapters$;
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private chaptersFacade: ChaptersFacade, private booksFacade: BooksFacade) { }
 
@@ -24,12 +24,17 @@ export class ReadPage implements OnInit {
         switchMap((params) => {
           return this.chaptersFacade.getChapterDetail(params.get('bookId'), params.get('chapterId')).pipe(
             tap((chapter) => {
-              this.chaptersFacade.getAllChapters(chapter['bookId']).subscribe();
+              this.chaptersFacade.getAllChapters(chapter[0].bookId).subscribe(
+                res => console.log('chapters', res)                
+              );
             })
           );
         })
       )
-      .subscribe((chapter) => (this.chapter$ = chapter));
+      .subscribe((chapter) => {
+        this.chapter$ = chapter[0];
+        console.log('asd', chapter);
+      });
     this.booksFacade.getTopBooks().subscribe();
   }
 

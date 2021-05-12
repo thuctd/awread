@@ -26,17 +26,12 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
 })
 export class HomeTemplate implements OnInit {
   @Input() books = [];
-  @Input() topBook = {
-    imgUrl: '',
-    title: 'Cô gái chúng ta cùng theo đuổi năm nào',
-    id: '1'
-  };
   @Input() sliders = [];
   @Input() getGoodBooks = [];
   @Input() getLatestBooks = [];
   @Input() getFeatureBooks = [];
   @Input() genres = [];
-  @Input() bookByGenre = [];
+  @Input() genreBooks = [];
   @Output() filterItemsByGenre = new EventEmitter();
   @Input() loading: boolean;
   constructor() { }

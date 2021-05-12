@@ -14,9 +14,9 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
 })
 export class DetailBookTopOrgan implements OnInit {
   @Input() book = {
-    id: '',
+    bookId: '',
     chapterId: '',
-    imgUrl: '',
+    cover: '',
     title: 'Ngày ấy vì ai mà đổi thay',
     auth: 'Cẩm Thương',
     type: 'Hoang tưởng, kinh dị',

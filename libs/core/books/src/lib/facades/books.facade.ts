@@ -64,6 +64,14 @@ export class BooksFacade {
     return this.booksQuery.selectEntity(id);
   }
 
+  selectAllBookAkita() {
+    return this.booksQuery.selectAll();
+  }
+
+  getAllAkita() {
+    return this.booksQuery.getAll();
+  }
+
   getAllBooks() {
     return this.booksGear.getAllBooks();
   }
@@ -73,7 +81,6 @@ export class BooksFacade {
   }
 
   getGenreBooks(genreId: string) {
-    console.log('asd', genreId);
     return this.booksGear.getGenreBooks(genreId);
   }
 

@@ -16,6 +16,7 @@ export class BooksGridOrgan implements OnInit {
   @Input() bookId = '';
   @Input() title = 'Em là nhà';
   @Input() imgUrl = '';
+  @Input() chapters = [];
 
   constructor() { }
 

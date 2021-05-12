@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { EntityState, EntityStore, StoreConfig, ActiveState } from '@datorama/akita';
-import { Book } from '../../models';
+import { GenreBook } from '../../models';
 
-export interface GenreBooksState extends EntityState<Book>, ActiveState { };
+export interface GenreBooksState extends EntityState<GenreBook>, ActiveState { };
 
 @Injectable({ providedIn: 'root' })
 @StoreConfig({ name: ' genre-books', resettable: true, idKey: 'bookId' })

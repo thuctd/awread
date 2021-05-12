@@ -9,4 +9,3 @@ export * from './top-book.model';
 export * from './latest-book.model';
 export * from './good-book.model';
 export * from './book.model';
-

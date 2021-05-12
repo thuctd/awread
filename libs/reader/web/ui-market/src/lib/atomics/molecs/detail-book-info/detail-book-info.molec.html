@@ -1,7 +1,7 @@
 <div class="detail-book-info">
-  <atom-detail-info-line-link [title]="'Tác giả'" [value]="book.auth" [bookId]="'1'"></atom-detail-info-line-link>
-  <atom-detail-info-line [title]="'Thể loại'" [value]="book.type"></atom-detail-info-line>
-  <atom-detail-info-line [title]="'Tình trạng'" [value]="book.status"></atom-detail-info-line>
-  <atom-detail-info-line [title]="'Năm phát hành'" [value]="book.publishedAt"></atom-detail-info-line>
-  <atom-detail-info-line [title]="'Quốc gia'" [value]="book.country"></atom-detail-info-line>
+  <atom-detail-info-line-link [title]="'Tác giả'" [items]="book.authors"></atom-detail-info-line-link>
+  <atom-detail-info-line-link [title]="'Thể loại'" [items]="book.genreIds" [color]='false'></atom-detail-info-line-link>
+  <atom-detail-info-line [title]="'Tình trạng'" [value]="book.published === true ? 'Đã xuất bản' : 'Chưa xuất bản'"></atom-detail-info-line>
+  <atom-detail-info-line [title]="'Năm phát hành'" [value]="book.updatedAt"></atom-detail-info-line>
+  <atom-detail-info-line [title]="'Quốc gia'" [value]="book.description"></atom-detail-info-line>
 </div>

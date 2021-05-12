@@ -3,7 +3,6 @@ import { ChangeDetectorRef, Directive, Injectable, OnDestroy, OnInit } from '@an
 import { map, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { of, Subject } from 'rxjs';
 import { UntilDestroy } from '@ngneat/until-destroy';
-import { Chapter } from 'libs/core/chapters/src/lib/models';
 import { BooksFacade } from 'libs/core/books/src/lib/facades/books.facade';
 import { ChaptersFacade } from 'libs/core/chapters/src/lib/facades/chapters.facade';
 
@@ -20,7 +19,7 @@ export class DetailPage implements OnInit, OnDestroy {
   isLoading$ = this.booksFacade.selectLoadingAkita();
   topBookList$ = this.booksFacade.topBooks$;
   authorBookList$ = this.booksFacade.authorBooks$;
-  chapterListByBookId$ = this.chaptersFacade.chapters$;
+  chapters$ = this.chaptersFacade.chapters$;
   bookChapter;
 
   constructor(
@@ -38,13 +37,13 @@ export class DetailPage implements OnInit, OnDestroy {
       switchMap(id => this.booksFacade.getDetailBook(id).pipe(
         tap(book => {
           this.authorId = book[0]['userId'];
-          this.booksFacade.getAuthorBooks(book[0]['userId']).subscribe();
-          this.chaptersFacade.getAllChapters(id).subscribe(chapters => {
-            this.bookChapter = chapters
-          })
+          this.booksFacade.getAuthorBooks(this.authorId).subscribe();
         })
       )),
-    ).subscribe(book => this.book$ = book)
+    ).subscribe(book => {
+      this.book$ = book[0];
+      console.log(this.book$);
+    })
     this.booksFacade.getTopBooks().subscribe();
     this.getAllChapters();
   }
@@ -57,7 +56,6 @@ export class DetailPage implements OnInit, OnDestroy {
           const bookId = params.get('bookId');
           const chapters = this.chaptersFacade.getAllAkita();
           if (this.bookId === bookId && bookId && chapters.length) {
-            // lay trong akita
             return this.chaptersFacade.selectAllChapterAkita();
           }
           if (bookId) {

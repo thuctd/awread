@@ -14,13 +14,15 @@ import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 })
 export class ChapterItemMolec implements OnInit {
   @Input() isLastItem = false;
-  @Input() chapterId = '123453_Assxzxc';
-  @Input() bookId = '123453_Assxzxc';
   @Input() chapter = {
+    chapterId: "1",
+    bookId: "1",
+    position: "1",
     chapterNumber: 'Chương 1',
     title: 'Ngày ấy vì ai mà đổi thay',
     price: 'Miễn phí',
-    createAt: '09-09-2020',
+    createdAt: '09-09-2020',
+    updatedAt: '09-09-2020',
   };
   constructor() { }
 

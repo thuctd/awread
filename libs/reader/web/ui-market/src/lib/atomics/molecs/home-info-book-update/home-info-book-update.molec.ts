@@ -15,10 +15,13 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
 export class HomeInfoBookUpdateMolec implements OnInit {
   @Input() book = {
     title: 'Cô gái chúng ta cùng theo đuổi năm nào',
-    id: '1',
+    bookId: '1',
   };
 
-  @Input() btns = ['Chương 1', 'Chương 2'];
+  @Input() btns = [{
+    position: '1',
+    chapterId: 'a8c80b60-acd6-4522-82cb-095d0ba677a7'
+  }];
   @Output() submitEvent = new EventEmitter();
 
   constructor() { }

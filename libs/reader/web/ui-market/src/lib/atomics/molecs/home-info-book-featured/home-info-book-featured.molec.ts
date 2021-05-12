@@ -20,7 +20,10 @@ export class HomeInfoBookFeaturedMolec implements OnInit {
     bookId: '1',
   };
 
-  @Input() btns = ['Chương 1', 'Chương 2'];
+  @Input() btns = [{
+    position: '1',
+    chapterId: ''
+  }];
   @Output() submitEvent = new EventEmitter();
 
   constructor() { }

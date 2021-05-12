@@ -1,5 +1,10 @@
+import { Genre } from "libs/core/genres/src/lib/models/genre.model";
 export interface GenreBook {
-  id: string;
+  bookId: string;
+  cover: string;
+  genreIds: Genre[];
+  title: string;
+  userId: string;
 }
 
 export function GenreBook(params: Partial<GenreBook>) {

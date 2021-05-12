@@ -15,24 +15,9 @@ import { faAngleRight, faHome } from '@fortawesome/free-solid-svg-icons';
 })
 export class DetailBookTemplate implements OnInit {
   @Input() items = [];
-  @Input() chapters = [
-    {
-      chapterId: "1",
-      bookId: "1",
-      chapterNumber: 'Chương 1',
-      title: 'Ngày ấy vì ai mà đổi thay',
-      price: 'Miễn phí',
-      createAt: '09-09-2020'
-    }
-  ];
-  @Input() book = {
-    title: 'Ngày ấy vì ai mà đổi thay',
-    auth: 'Cẩm Thương',
-    type: 'Hoang tưởng, kinh dị',
-    status: 'Đang tiến hành',
-    publishedAt: '2020',
-    country: '(chủ yếu dành cho truyện sưu tầm)'
-  };
+  @Input() newestChapters = [];
+  @Input() chapters;
+  @Input() book = {};
   @Input() topBooks = [];
   @Input() authorBooks = [];
   menu = [

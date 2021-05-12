@@ -20,7 +20,10 @@ export class HomeInfoBookReviewMolec implements OnInit {
     bookId: '1',
   };
 
-  @Input() btns = ['Chương 1'];
+  @Input() btns = [{
+    position: '1',
+    chapterId: 'a8c80b60-acd6-4522-82cb-095d0ba677a7'
+  }];
   @Output() submitEvent = new EventEmitter();
 
   constructor() { }

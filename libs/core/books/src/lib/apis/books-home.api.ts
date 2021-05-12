@@ -9,7 +9,7 @@ export class BooksHomeApi {
     return this.apollo.query({
       query: gql`
         query allMvMostViewBooks {
-          allMvMostViewBooks(orderBy: VIEWS_DESC) {
+          allMvMostViewBooks(first: 10, orderBy: VIEWS_DESC) {
             nodes {
               bookId
               title
@@ -28,7 +28,7 @@ export class BooksHomeApi {
     return this.apollo.query({
       query: gql`
         query allBooks {
-          allBooks(orderBy: UPDATED_AT_DESC, first: 6) {
+          allBooks(first: 6, orderBy: UPDATED_AT_DESC) {
             nodes {
               bookId
               title
@@ -40,10 +40,10 @@ export class BooksHomeApi {
                 categoryId
                 name
               }
-              chaptersByBookId(orderBy: CREATED_AT_DESC) {
+              chaptersByBookId(orderBy: POSITION_ASC, first: 2) {
                 nodes {
-                  published
-                  updatedAt
+                  chapterId
+                  position
                 }
                 totalCount
               }

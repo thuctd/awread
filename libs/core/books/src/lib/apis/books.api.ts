@@ -30,9 +30,26 @@ export class BooksApi {
         mutation SearchBooks($filter: String) {
           searchBooks(input: { searchTerm: $filter }) {
             books {
+              bookId
               title
               description
               userId
+              published
+              categoryByCategoryId {
+                categoryId
+                name
+              }
+              booksGenresByBookId {
+                nodes {
+                  genreId
+                }
+              }
+              chaptersByBookId(first: 2, orderBy: POSITION_ASC) {
+                nodes {
+                  chapterId
+                  position
+                }
+              }
             }
           }
         }
@@ -60,8 +77,10 @@ export class BooksApi {
                 categoryId
                 name
               }
-              chaptersByBookId(orderBy: CREATED_AT_DESC) {
+              chaptersByBookId(first: 2, orderBy: POSITION_ASC) {
                 nodes {
+                  chapterId
+                  position
                   published
                   updatedAt
                 }
@@ -187,29 +206,23 @@ export class BooksApi {
     });
   }
 
-  getAuthorBooks(authorId: string) {
-    return this.apollo.query({
-      query: gql`
-        query getAuthorBooks($userId: UUID) {
-          allAuthors(first: 3, condition: { userId: $userId }) {
-            nodes {
+  getAuthorBooks(userId: string) {
+    return this.apollo.mutate({
+      mutation: gql`
+        mutation AuthorBooks($userId: UUID) {
+          getAuthorBooks(input: { userId: $userId }) {
+            mvBooksLatestChapters {
               bookId
-              bookByBookId {
-                bookId
-                cover
-                title
-                description
-                published
-                updatedAt
-                completed
-                ages
-              }
+              categoryId
+              newestChapters
+              updatedAt
+              title
             }
           }
         }
       `,
       variables: {
-        authorId,
+        userId,
       },
     });
   }
@@ -217,26 +230,19 @@ export class BooksApi {
   getGenreBooks(genreId: string) {
     return this.apollo.query({
       query: gql`
-        query getGenreBooks($genreId: BigFloat!) {
-          allBooksGenres(first: 20, condition: { genreId: $genreId }) {
+        query allVRandomBooks($genreId: BigFloat!) {
+          allVRandomBooks(filter: { genreIds: { anyEqualTo: $genreId } }, first: 20) {
             nodes {
-              genreId
               bookId
-              bookByBookId {
-                bookId
-                title
-                description
-                published
-                updatedAt
-                completed
-              }
+              genreIds
+              title
+              userId
+              cover
             }
           }
         }
       `,
-      variables: {
-        genreId,
-      },
+      variables: { genreId },
     });
   }
 

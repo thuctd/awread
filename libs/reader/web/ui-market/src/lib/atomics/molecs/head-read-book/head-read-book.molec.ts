@@ -14,10 +14,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeadReadBookMolec implements OnInit {
-  @Input() chapters = [{
-    id: '1',
-    chapterNumber: 'Chương 1'
-  }];
+  @Input() chapters = [];
   @Input() faIcon = faChevronLeft;
   @Output() nextChapterBook = new EventEmitter();
   @Output() backChapterBook = new EventEmitter();

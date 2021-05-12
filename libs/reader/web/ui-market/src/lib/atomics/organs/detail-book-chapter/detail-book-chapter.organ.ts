@@ -15,20 +15,13 @@ import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 export class DetailBookChapterOrgan implements OnInit {
   icon = faAngleDown;
   @Output() submitEvent = new EventEmitter()
-  @Input() chapters = [
-    {
-      id: "1",
-      bookId: "1",
-      chapterNumber: 'Chương 1',
-      title: 'Ngày ấy vì ai mà đổi thay',
-      price: 'Miễn phí',
-      createAt: '09-09-2020'
-    }
-  ]
+  @Input() chapters = [];
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
+    console.log('chapters: ', this.chapters);
   }
 
 }

@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { throwError } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
 import { ChaptersApi } from '../apis/chapters.api';
-import { ChapterDetailStore } from '../states/chapter-detail';
 import { ChaptersStore } from '../states/chapters';
 
 @Injectable({ providedIn: 'root' })
@@ -10,8 +9,7 @@ export class ChaptersGear {
 
   constructor(
     private chaptersApi: ChaptersApi,
-    private chaptersStore: ChaptersStore,
-    private chapterDetailStore: ChapterDetailStore
+    private chaptersStore: ChaptersStore
   ) {
   }
 
@@ -52,7 +50,10 @@ export class ChaptersGear {
           res['data']['allChapters']['nodes'].length
         ) {
           const chapter = res['data']['allChapters']['nodes'];
-          return chapter;
+          return chapter.map((item) => {
+            const content = item['contentByChapterId'].content;
+            return { ...item, content };
+          });
         }
         return [];
       }),
