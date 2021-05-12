@@ -21,10 +21,12 @@ export class CurrentUserGear {
   ) { }
 
   getCurrentUser() {
-    return this.currentUserApi.getCurrentUser().subscribe(result => {
-      console.log('result', result);
-      this.currentUserStore.update(result);
-    });
+    return this.currentUserApi.getCurrentUser().pipe(
+      tap(result => {
+        console.log('result', result);
+        this.currentUserStore.update(result);
+      })
+    )
   }
 
   update(user: User) {
