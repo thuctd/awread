@@ -2,8 +2,7 @@ import { FormGroup, Validators } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { Directive, Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthFacade } from '../../facades';
-import { ProviderType } from '../../models';
+import { AuthFacade } from '@awread/core/users';
 import { SnackbarsService } from '@awread/global/packages';
 
 @Injectable({
@@ -24,7 +23,6 @@ export class LoginRegisterPage {
     private authFacade: AuthFacade,
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
-    private router: Router,
     private snackbarService: SnackbarsService
   ) { }
 
@@ -48,23 +46,13 @@ export class LoginRegisterPage {
   }
 
   login(provider: 'email' | 'facebook' | 'google' | 'apple') {
-    // debugger
     console.log('provider', provider);
     console.log('form Value', this.loginForm.value);
     if (this.selectedTab === 'login') {
-      switch (provider) {
-        case 'facebook':
-          this.authFacade.loginSocial(ProviderType.facebook);
-          break;
-        case 'google':
-          this.authFacade.loginSocial(ProviderType.google);
-          break;
-        case 'apple':
-          this.authFacade.loginSocial(ProviderType.apple);
-          break;
-        default:
-          this.authFacade.loginEmail(this.loginForm.value);
-          break;
+      if (provider == 'email') {
+        this.authFacade.loginEmail(this.loginForm.value);
+      } else {
+        this.authFacade.loginSocial(provider);
       }
     }
   }

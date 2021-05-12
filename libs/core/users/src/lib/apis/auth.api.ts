@@ -1,13 +1,16 @@
-import { CreateUserCredential, createUserFromFirebase, LoginCredential, FirebaseUser } from './../models';
+import { CreateUserCredential, SocialLoginCredential } from './../models';
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
 import { map, tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 @Injectable({ providedIn: 'root' })
 export class AuthApi {
-  constructor(private apollo: Apollo, private http: HttpClient) { }
+  constructor(
+    private apollo: Apollo,
+    private http: HttpClient,
+  ) { }
 
-  authenticateUser(variables: LoginCredential) {
+  authenticateUser(variables) {
     return this.apollo.mutate({
       mutation: gql`
         mutation authenticateUser($loginname: String, $password: String) {
@@ -47,7 +50,7 @@ export class AuthApi {
       }))
   }
 
-  authenticateSocialUser(variables: LoginCredential) {
+  authenticateSocialUser(variables: SocialLoginCredential) {
     return this.apollo.mutate({
       mutation: gql`
         mutation authenticateSocialUser($provider: String, $providerId: String) {
@@ -228,38 +231,5 @@ export class AuthApi {
       .valueChanges.subscribe((result) => {
         console.log('allBooks', result);
       });
-  }
-
-  createAccountOnServer(user: FirebaseUser) {
-    console.log('FirebaseUser: ', user);
-    console.log('user: ', createUserFromFirebase(user));
-    return this.apollo.mutate({
-      mutation: gql`
-        mutation signup(
-          $displayName: String
-          $emailVerified: Boolean
-          $photoUrl: String
-          $password: String
-          $uid: String
-          $email: String
-          $provider: String
-        ) {
-          signup(
-            input: {
-              userid: $uid
-              fullname: $displayName
-              photourl: $photoUrl
-              emailverified: $emailVerified
-              password: $password
-              email: $email
-              provider: $provider
-            }
-          ) {
-            string
-          }
-        }
-      `,
-      variables: createUserFromFirebase(user),
-    });
   }
 }

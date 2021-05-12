@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 
 @Injectable({ providedIn: 'root' })
-export class ApolloAuthAddon {
+export class ApolloAddon {
 
   constructor(
     private apollo: Apollo

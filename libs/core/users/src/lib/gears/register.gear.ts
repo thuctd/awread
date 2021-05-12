@@ -1,11 +1,6 @@
-import { AuthRoutingGear } from './auth-routing.gear';
-import { FirebaseAuthGear } from './firebase-auth.gear';
 import { Injectable } from '@angular/core';
-import { FirebaseAuthAddon } from '../addons';
-import { CreateUserCredential, createUserFromFirebase, FirebaseUser, ProviderType } from '../models';
+import { CreateUserCredential } from '../models';
 import firebase from 'firebase/app';
-import { catchError, tap } from 'rxjs/operators';
-import { throwError } from 'rxjs';
 import { AuthApi } from '../apis';
 import { SnackbarsService } from '@awread/global/packages';
 import { CurrentUserStore } from '../states/current-user';

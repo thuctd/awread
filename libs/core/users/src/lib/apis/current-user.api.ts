@@ -1,4 +1,3 @@
-import { createUserObject, User } from './../models/current-user.model';
 import { catchError, map, retry, tap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';

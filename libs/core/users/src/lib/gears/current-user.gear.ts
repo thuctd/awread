@@ -1,7 +1,6 @@
-import { tap, catchError, retry, map } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { of, throwError } from 'rxjs';
-import type { ProviderType, User } from '../models';
+import type { CurrentUser } from '../models';
 import { CurrentUserService, CurrentUserStore } from '../states/current-user';
 import { CurrentUserApi } from '../apis';
 import { SnackbarsService } from '@awread/global/packages';
@@ -29,7 +28,7 @@ export class CurrentUserGear {
     )
   }
 
-  update(user: User) {
+  update(user: CurrentUser) {
     return this.currentUserApi.update(user).pipe(
     ).subscribe(result => {
       if (result.data) {
@@ -42,7 +41,7 @@ export class CurrentUserGear {
   }
 
 
-  async linkSocial(provider: ProviderType) {
+  async linkSocial(provider) {
     let socialUser: SocialUser;
     switch (provider) {
       case 'google':
