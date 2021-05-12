@@ -4,11 +4,11 @@ import { CurrentUserQuery } from '../states/current-user';
 
 @Injectable({ providedIn: 'root' })
 export class CurrentUserFacade {
-  currentUser$ = this.currentUserQuery.currentUser$;
+  currentUser$ = this.currentUserQuery.select();
   constructor(
     private currentUserGear: CurrentUserGear,
     private currentUserQuery: CurrentUserQuery
-  ) {}
+  ) { }
   getCurrentUser() {
     return this.currentUserGear.getCurrentUser();
   }

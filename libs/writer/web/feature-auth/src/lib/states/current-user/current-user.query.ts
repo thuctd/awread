@@ -5,9 +5,7 @@ import { CurrentUserStore, CurrentUserState } from './current-user.store';
 
 @Injectable({ providedIn: 'root' })
 export class CurrentUserQuery extends Query<CurrentUserState> {
-  currentUser$ = this.select().pipe(
-    tap((data) => console.log('user current$: ', data))
-  );
+
   constructor(protected store: CurrentUserStore) {
     super(store);
   }
