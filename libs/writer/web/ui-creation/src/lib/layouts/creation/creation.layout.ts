@@ -1,5 +1,6 @@
-import { BooksFacade, CategoryFacade, CurrentUserFacade, GenresFacade } from '@awread/writer/web/feature-auth';
+import { BooksFacade, CategoryFacade, GenresFacade } from '@awread/writer/web/feature-auth';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { CurrentUserFacade } from '@awread/core/users';
 
 @Component({
   selector: 'awread-creation',

@@ -1,6 +1,6 @@
 import { Directive, Injectable, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CurrentUserFacade } from '@awread/writer/web/feature-auth';
+import { CurrentUserFacade } from '@awread/core/users';
 
 @Injectable({
   providedIn: 'root',

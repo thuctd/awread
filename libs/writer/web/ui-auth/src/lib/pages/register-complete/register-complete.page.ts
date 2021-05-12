@@ -1,10 +1,8 @@
-import { retry, tap } from 'rxjs/operators';
-import { catchError } from 'rxjs/operators';
 import { FormBuilder } from '@angular/forms';
 import { FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Directive, Injectable, OnInit } from '@angular/core';
-import { AuthFacade } from '@awread/writer/web/feature-auth';
+import { AuthFacade } from '@awread/core/users';
 import { of } from 'rxjs';
 import { SnackbarsService } from '@awread/global/packages';
 
