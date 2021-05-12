@@ -31,8 +31,8 @@ export class BooksHomeGear {
     );
   }
 
-  getLatestBooks() {
-    return this.booksHomeApi.getLatestBooks().pipe(
+  getLatestBooks(categoryId: string) {
+    return this.booksHomeApi.getLatestBooks(categoryId).pipe(
       map((result) => result.map(book => this.transformBookDataGear.tranformBookHomeData(book))),
       tap(books => this.latestBooksStore.set(books))
     );

@@ -73,7 +73,7 @@ export class BooksGear {
 
   getBookById(bookId: string) {
     return this.booksApi.getBookById(bookId).pipe(
-      map((result) => result.map(book => this.tranformBookDetailData(book))),      
+      map((result) => result.map(book => this.tranformBookDetailData(book))),
     );
   }
 
@@ -92,10 +92,10 @@ export class BooksGear {
     return this.booksApi.searchBookByTerm(term).pipe(
       map((result) => result.map(book => {
         const categoryName = book['categoryByCategoryId'].name;
-            return {
-              ...book,
-              categoryName
-            };
+        return {
+          ...book,
+          categoryName
+        };
       })),
       tap(books => this.searchBooksStore.set(books)));
   }

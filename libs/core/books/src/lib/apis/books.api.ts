@@ -59,15 +59,15 @@ export class BooksApi {
         filter,
       },
     }).pipe(
-        map(res => res?.['data']?.['searchBooks']?.['books'])
-      );
+      map(res => res?.['data']?.['searchBooks']?.['books'])
+    );
   }
 
   getAllBooks() {
     return this.apollo.query({
       query: gql`
         query getAllBooks {
-          allBooks(first: 50, orderBy: UPDATED_AT_DESC) {
+          allBooks(first: 50, orderBy: UPDATED_AT_ASC) {
             nodes {
               bookId
               cover
@@ -99,8 +99,8 @@ export class BooksApi {
         }
       `,
     }).pipe(
-        map(res => res?.['data']?.['allBooks']?.['nodes'])
-      );
+      map(res => res?.['data']?.['allBooks']?.['nodes'])
+    );
   }
 
   getComposedBooks() {
@@ -209,8 +209,8 @@ export class BooksApi {
         categoryId,
       },
     }).pipe(
-        map(res => res?.['data']?.['allBooks']?.['nodes'])
-      );
+      map(res => res?.['data']?.['allBooks']?.['nodes'])
+    );
   }
 
   getAuthorBooks(userId: string) {
@@ -232,8 +232,8 @@ export class BooksApi {
         userId,
       },
     }).pipe(
-        map(res => res?.['data']?.['getAuthorBooks']?.['mvBooksLatestChapters'])
-      );
+      map(res => res?.['data']?.['getAuthorBooks']?.['mvBooksLatestChapters'])
+    );
   }
 
   getGenreBooks(genreId: string) {
@@ -253,8 +253,8 @@ export class BooksApi {
       `,
       variables: { genreId },
     }).pipe(
-        map(res => res?.['data']?.['allVRandomBooks']?.['nodes'])
-      );
+      map(res => res?.['data']?.['allVRandomBooks']?.['nodes'])
+    );
   }
 
   getTopBooks() {
@@ -274,8 +274,8 @@ export class BooksApi {
         }
       `,
     }).pipe(
-        map(res => res?.['data']?.['allMvMostViewBooks']?.['nodes'])
-      );
+      map(res => res?.['data']?.['allMvMostViewBooks']?.['nodes'])
+    );
   }
 
   getBookById(bookId: string) {
@@ -304,7 +304,7 @@ export class BooksApi {
         bookId,
       },
     }).pipe(
-        map(res => res?.['data']?.['allMvDetailBooks']?.['nodes'])
-      );
+      map(res => res?.['data']?.['allMvDetailBooks']?.['nodes'])
+    );
   }
 }

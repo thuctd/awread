@@ -1,6 +1,6 @@
 <div class="max-w-screen-xl mx-auto lg:px-8 xl:px-0 pt-40 bg-gray-primary">
   <ng-container *ngIf="book; else noData">
-    <atom-breadcrumb class="mb-4 xl:mb-8"></atom-breadcrumb>
+    <atom-breadcrumb class="mb-4 xl:mb-8" [items]='items'></atom-breadcrumb>
     <div class="flex items-start">
       <div class="sm:w-2/3 lg:w-3/4 pr-6 xl:pr-16">
         <organ-detail-book-main-content (chapterLastEvent)='chapterLastEvent.emit($event)' (chapterFistEvent)='chapterFistEvent.emit($event)' [chapters]='chapters' [book]='book'></organ-detail-book-main-content>

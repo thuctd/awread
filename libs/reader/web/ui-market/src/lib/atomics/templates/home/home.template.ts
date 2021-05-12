@@ -25,6 +25,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeTemplate implements OnInit {
+  @Input() loading: boolean;
   @Input() books = [];
   @Input() categories = [];
   @Input() sliders = [];
@@ -33,8 +34,10 @@ export class HomeTemplate implements OnInit {
   @Input() getFeatureBooks = [];
   @Input() genres = [];
   @Input() genreBooks = [];
+  @Output() emitBooks = new EventEmitter();
+  @Output() emitAllBooks = new EventEmitter();
   @Output() filterItemsByGenre = new EventEmitter();
-  @Input() loading: boolean;
+
   constructor() { }
 
   ngOnInit(): void { }

@@ -66,11 +66,30 @@ export class BooksHomeApi {
       )
   }
 
-  getLatestBooks() {
+  getLatestBooks(categoryId: string) {
+    if (categoryId === '') {
+      return this.apollo.query({
+        query: gql`
+          query allMvBooksLatestChapters {
+            allMvBooksLatestChapters(first: 10) {
+              nodes {
+                bookId
+                categoryId
+                newestChapters
+                title
+                updatedAt
+              }
+            }
+          }
+        `,
+      }).pipe(
+        map(res => res?.['data']?.['allMvBooksLatestChapters']?.['nodes'])
+      )
+    }
     return this.apollo.query({
       query: gql`
-        query allMvBooksLatestChapters {
-          allMvBooksLatestChapters(first: 10) {
+        query allMvBooksLatestChapters ($categoryId: BigFloat) {
+          allMvBooksLatestChapters(first: 10, condition: {categoryId: $categoryId}) {
             nodes {
               bookId
               categoryId
@@ -81,9 +100,9 @@ export class BooksHomeApi {
           }
         }
       `,
-    })
-      .pipe(
-        map(res => res?.['data']?.['allMvBooksLatestChapters']?.['nodes'])
-      )
+      variables: { categoryId }
+    }).pipe(
+      map(res => res?.['data']?.['allMvBooksLatestChapters']?.['nodes'])
+    )
   }
 }

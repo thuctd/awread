@@ -3,7 +3,7 @@
     <atom-slider [imageObject]='sliders'></atom-slider>
   </section>
   <section>
-    <home-detail-book-update [books]="getLatestBooks"></home-detail-book-update>
+    <home-detail-book-update (emitBooks)='emitBooks.emit($event)' (emitAllBooks)='emitAllBooks.emit($event)' [books]="getLatestBooks" [categories]='categories'></home-detail-book-update>
   </section>
   <section class="bg-pink-light">
     <home-detail-book-featured [books]="getFeatureBooks"></home-detail-book-featured>

@@ -88,8 +88,8 @@ export class BooksFacade {
     return this.booksGear.getCategoryBooks(categoryId);
   }
 
-  getLatestBooks() {
-    return this.booksHomeGear.getLatestBooks();
+  getLatestBooks(cateogoryId: string) {
+    return this.booksHomeGear.getLatestBooks(cateogoryId);
   }
 
   getAuthorBooks(authorId: string) {

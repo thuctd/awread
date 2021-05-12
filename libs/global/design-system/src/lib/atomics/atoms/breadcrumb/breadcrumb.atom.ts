@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
-import { faHome, faAngleRight } from '@fortawesome/free-solid-svg-icons';
+import { faHome } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'atom-breadcrumb',
   templateUrl: './breadcrumb.atom.html',
@@ -14,12 +14,9 @@ import { faHome, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 })
 export class BreadcrumbAtom implements OnInit {
   @Input() icon = faHome;
-  @Input() items = [{
-    title: 'Home',
-    link: '/home'
-  }];
+  @Input() items = [];
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

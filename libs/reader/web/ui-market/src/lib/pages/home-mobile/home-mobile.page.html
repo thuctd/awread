@@ -1,7 +1,7 @@
 <template-home-mobile
   [loading]="loading$"
   [getGoodBooks]="goodBookList$ | async"
-  [getLatestBooks]="latestBookList$ | async"
+  [getLatestBooks]="categoryBooks$ | async"
   [getFeatureBooks]="featureBookList$ | async"
   [sliders]="imageObject$ | async"
   [genres]="genres$ | async"

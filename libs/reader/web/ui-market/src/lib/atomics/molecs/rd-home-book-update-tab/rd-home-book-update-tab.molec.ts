@@ -22,42 +22,34 @@ interface TabHead {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RdHomeBookUpdateTabMolec implements OnInit {
-  @Input() tabs = [
+  currentCategory = null;
+  currentIndex = 999;
+  currentName = 'Tất cả';
+
+  @Input() categories = [
     {
-      name: 'Tất cả',
-      isActive: true,
-    },
-    {
-      name: 'Truyện dài',
-      isActive: false,
-    },
-    {
-      name: 'Truyện ngắn',
-      isActive: false,
-    },
-    {
-      name: 'Tản văn',
-      isActive: false,
-    },
+      categoryId: '',
+      name: 'Tất cả'
+    }
   ];
 
   @Input() selectedTab: string;
-  @Output() toggleTab = new EventEmitter();
+  @Output() emitBooks = new EventEmitter();
+  @Output() emitAllBooks = new EventEmitter();
 
-  currentTab = { name: null, isActive: false };
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {
-    this.currentTab = this.tabs.find((tab) => tab.isActive);
+  ngOnInit(): void { }
+
+  setActiveCategory(category, index) {
+    this.currentCategory = category;
+    this.currentIndex = index;
+    this.currentName = category.name;
   }
 
-  toggleTabs(currentTab: TabHead) {
-    this.currentTab = currentTab;
-    this.tabs.forEach((tab) => {
-      tab.isActive = false;
-      if (tab.name === currentTab.name) {
-        tab.isActive = true;
-      }
-    });
+  setNoneActiveAll() {
+    this.currentIndex = 999;
   }
+
+
 }
