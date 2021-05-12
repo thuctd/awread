@@ -76,6 +76,14 @@ import { RdIntroductionTargetOrgan } from './organs/rd-introduction-target/rd-in
 import { RdHomeBookUpdateTabMolec } from './molecs/rd-home-book-update-tab/rd-home-book-update-tab.molec';
 import { RdHomeListBookUpdateMolec } from './molecs/rd-home-list-book-update/rd-home-list-book-update.molec';
 import { RdHomeBookUpdateDropdownMbMolec } from './molecs/rd-home-book-update-dropdown-mb/rd-home-book-update-dropdown-mb.molec';
+import { RdNewsTemplate } from './templates/rd-news/rd-news.template';
+import { RdNewsEventsOrgan } from './organs/rd-news-events/rd-news-events.organ';
+import { RdNewsBookOrgan } from './organs/rd-news-book/rd-news-book.organ';
+import { RdNewsAwreadOrgan } from './organs/rd-news-awread/rd-news-awread.organ';
+import { RdNewsBookItemMolec } from './molecs/rd-news-book-item/rd-news-book-item.molec';
+import { RdNewsAwreadHotMolec } from './molecs/rd-news-awread-hot/rd-news-awread-hot.molec';
+import { RdNewsEventItemMolec } from './molecs/rd-news-event-item/rd-news-event-item.molec';
+import { RdNewsAwreadListMolec } from './molecs/rd-news-awread-list/rd-news-awread-list.molec';
 
 @NgModule({
   imports: [CommonModule, StorybookSupportModule, GlobalDesignSystemAtomicModule, CarouselModule, ReaderWebUiAuthorAtomicModule],
@@ -155,6 +163,14 @@ import { RdHomeBookUpdateDropdownMbMolec } from './molecs/rd-home-book-update-dr
     RdHomeBookUpdateTabMolec,
     RdHomeListBookUpdateMolec,
     RdHomeBookUpdateDropdownMbMolec,
+    RdNewsTemplate,
+    RdNewsEventsOrgan,
+    RdNewsBookOrgan,
+    RdNewsAwreadOrgan,
+    RdNewsBookItemMolec,
+    RdNewsAwreadHotMolec,
+    RdNewsEventItemMolec,
+    RdNewsAwreadListMolec,
   ],
   declarations: [
     ListInfoLongBookMolec,
@@ -229,6 +245,14 @@ import { RdHomeBookUpdateDropdownMbMolec } from './molecs/rd-home-book-update-dr
     RdHomeBookUpdateTabMolec,
     RdHomeListBookUpdateMolec,
     RdHomeBookUpdateDropdownMbMolec,
+    RdNewsTemplate,
+    RdNewsEventsOrgan,
+    RdNewsBookOrgan,
+    RdNewsAwreadOrgan,
+    RdNewsBookItemMolec,
+    RdNewsAwreadHotMolec,
+    RdNewsEventItemMolec,
+    RdNewsAwreadListMolec,
   ],
 })
-export class ReaderWebUiMarketAtomicModule { }
+export class ReaderWebUiMarketAtomicModule {}

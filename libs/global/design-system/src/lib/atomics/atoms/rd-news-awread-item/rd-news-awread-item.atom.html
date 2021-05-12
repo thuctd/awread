@@ -1,0 +1,25 @@
+<div class="w-full">
+  <div *ngIf="mode === 'grid';else list">
+    <a [routerLink]="" class="outline-none">
+      <img class="w-full h-27" [src]="newsGrid.src">
+    </a>
+    <atom-rd-news-title class="mt-2" [class]="'font-semibold'"
+      [isDisplay]="true"
+      [title]="newsGrid.title">
+    </atom-rd-news-title>
+  </div>
+  <ng-template #list>
+    <div class="grid grid-cols-8 gap-6">
+      <div class="col-span-3 pr-2">
+        <a [routerLink]="" class="outline-none">
+          <img class="w-full h-28" [src]="newsList.src">
+        </a>
+      </div>
+      <div class="col-span-5">
+        <atom-rd-news-title [title]="newsList.title"></atom-rd-news-title>
+        <atom-rd-news-date class="my-3"></atom-rd-news-date>
+        <excerpt [excerpt]="newsList.excerpt"></excerpt>
+      </div>
+    </div>
+  </ng-template>
+</div>

@@ -7,7 +7,7 @@
         <cr-submit-btn *ngFor="let btn of btns" [submitText]='btn.title' [active]='btn.active' class="mr-4"></cr-submit-btn>
     </div>
     <div class="ml-0">
-        <excerpt [excerpt]='contentBook' [size]='"m"'></excerpt>
+        <excerpt [excerpt]='contentBook' [class]="'text-gray-text text-sm'"></excerpt>
         <atom-text-link (click)="moreEvent.emit()" [text]="moreContent" [class]="'text-base text-green-400'"></atom-text-link>
     </div>
 </div>
