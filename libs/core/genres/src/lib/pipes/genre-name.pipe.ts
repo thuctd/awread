@@ -10,13 +10,9 @@ export class GenreNamePipe implements PipeTransform {
   ) {
 
   }
-
+  //LEARN: Pipe tool
   transform(value: string | string[] | undefined, ...args: any[]): any {
-    // if (isObject(value) && (value as any).id === 'custom-service') {
-    //   return (value as any).serviceName;
-    // } else {
     return pipeName(value, this.genreQuery);
-    // }
   }
 
 }
