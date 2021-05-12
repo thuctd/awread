@@ -30,7 +30,7 @@ export class FirebaseAuthGear {
           res.data['getUserBaseEmail'] &&
           res.data['getUserBaseEmail']['results'].length
         ) {
-          this.authRoutingGear.navigateAfterLoginComplete('list');
+          this.authRoutingGear.navigateAfterLoginComplete();
           const user = res.data['getUserBaseEmail']['results'][0];
           if (user.provider === 'email/password') {
             const credential = firebase.auth.EmailAuthProvider.credential(
@@ -82,13 +82,6 @@ export class FirebaseAuthGear {
     }
   }
 
-  // createAccountOnServer(user) {
-  //   // send data to server
-  //   this.authApi.createAccountOnServer(user).subscribe((status) => {
-  //     console.log('status new user', status);
-  //     // this.actionAfterCreateAccountSuccess();
-  //   });
-  // }
 
   async linkAccountWithProviderFacebook(err) {
     if (
@@ -190,7 +183,7 @@ export class FirebaseAuthGear {
         credential
       );
       if (linkWithCredential) {
-        this.authRoutingGear.navigateAfterLoginComplete('list');
+        this.authRoutingGear.navigateAfterLoginComplete();
       }
       // if (linkWithCredential.user) {
       //   // update password when account Googleor/FB exists.

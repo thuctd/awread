@@ -58,11 +58,12 @@ export class ProfilePage implements OnInit {
     this.profileFormValueBefore = this.profileForm.value;
   }
   private getCurrentUser() {
-    this.currentUserFacade.getCurrentUser().subscribe((user) => {
-      if (user && user.length) {
-        this.updateProfileForm(user[0]);
-      }
-    });
+    this.currentUserFacade.getCurrentUser()
+    //   .subscribe((user) => {
+    //   if (user && user.length) {
+    //     this.updateProfileForm(user[0]);
+    //   }
+    // });
   }
 
   private initForm() {

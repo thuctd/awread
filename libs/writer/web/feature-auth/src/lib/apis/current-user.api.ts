@@ -1,35 +1,40 @@
 import { createUserObject, User } from './../models/current-user.model';
-import { catchError, retry, tap } from 'rxjs/operators';
+import { catchError, map, retry, tap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
 import { of, throwError } from 'rxjs';
+import { CurrentUserQuery } from '../states/current-user';
 @Injectable({ providedIn: 'root' })
 export class CurrentUserApi {
-  constructor(private apollo: Apollo) { }
+  constructor(
+    private apollo: Apollo,
+    private currentUserQuery: CurrentUserQuery
+  ) { }
 
 
   getCurrentUser() {
     return this.apollo.query({
       query: gql`
-        query getcurentuser {
-          allGetCurrentUsers {
-            nodes {
-              userid
-              address
-              photourl
-              fullname
-              phone
+        mutation currentUser {
+          currentUser(input: {}) {
+            user {
+              userId
               username
-              website
-              introduce
               email
-              dob
-              gender
+              phone
+              name
+              firstname
+              middlename
+              lastname
+              age
+              avatar
             }
           }
         }
       `,
-    });
+    }).pipe(
+      map(res => res.data?.['currentUser']?.['user'])
+    )
   }
 
   update(user) {
@@ -56,7 +61,7 @@ export class CurrentUserApi {
       `,
       variables: {
         ...user,
-        userId: "7cc248bc-8d3a-4f23-b8ab-6ae93c3848b0"
+        userId: this.currentUserQuery.getUserId()
       },
     })
   }
@@ -82,7 +87,7 @@ export class CurrentUserApi {
       `,
       variables: {
         ...credential,
-        userId: "7cc248bc-8d3a-4f23-b8ab-6ae93c3848b0"
+        userId: this.currentUserQuery.getUserId()
       },
     })
   }

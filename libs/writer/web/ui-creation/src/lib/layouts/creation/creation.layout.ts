@@ -19,13 +19,13 @@ export class CreationLayout implements OnInit {
     private booksFacade: BooksFacade,
     private categoryFacade: CategoryFacade,
     private genresFacade: GenresFacade
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-    this.currentUserFacade.getCurrentUser().subscribe();
+    this.currentUserFacade.getCurrentUser();
+    this.categoryFacade.getAllCategories();
+    this.genresFacade.getAllGenres();
     this.getAllBook();
-    this.categoryFacade.getAllCategories().subscribe();
-    this.genresFacade.getAllGenres().subscribe();
   }
 
   private getAllBook() {

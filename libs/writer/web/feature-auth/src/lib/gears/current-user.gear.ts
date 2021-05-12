@@ -21,22 +21,10 @@ export class CurrentUserGear {
   ) { }
 
   getCurrentUser() {
-    return this.currentUserApi.getCurrentUser().pipe(
-      map((res) => {
-        if (res['data'] && res['data']['allGetCurrentUsers']['nodes']) {
-          const user = res['data']['allGetCurrentUsers']['nodes'];
-          return user;
-        }
-        return [];
-      }),
-      tap((users) => {
-        console.log('current user: ', users);
-        if (users && users.length) {
-          this.currentUserService.setCurrentUserAkita(users[0]);
-        }
-      }),
-      catchError((err) => of(err))
-    );
+    return this.currentUserApi.getCurrentUser().subscribe(result => {
+      console.log('result', result);
+      this.currentUserStore.update(result);
+    });
   }
 
   update(user: User) {

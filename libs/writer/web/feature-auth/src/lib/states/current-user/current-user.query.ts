@@ -13,10 +13,10 @@ export class CurrentUserQuery extends Query<CurrentUserState> {
   }
 
   getUserId() {
-    return this.getValue().userid;
+    return this.getValue().userId;
   }
 
   selectUserId() {
-    return this.select((e) => e.userid);
+    return this.select((e) => e.userId);
   }
 }

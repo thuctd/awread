@@ -31,13 +31,6 @@ export class AuthFacade {
     return this.currentUserGear.update(user);
   }
 
-  createAccountOnServer(user) {
-    return this.registerGear.createAccountOnServer(user);
-  }
-
-  linkToProviderGoogleorFacebook(user) {
-    this.registerGear.linkToProviderGoogleorFacebook(user);
-  }
 
   loginWithRoleAdmin(credential: LoginCredential) {
     this.loginGear.loginWithRoleAdmin(credential);
