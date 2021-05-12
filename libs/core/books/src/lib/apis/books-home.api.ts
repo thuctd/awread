@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
+import { map } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class BooksHomeApi {
@@ -21,7 +22,10 @@ export class BooksHomeApi {
           }
         }
       `,
-    });
+    })
+      .pipe(
+        map(res => res?.['data']?.['allMvMostViewBooks']?.['nodes'])
+      )
   }
 
   getFeatureBooks() {
@@ -56,7 +60,10 @@ export class BooksHomeApi {
           }
         }
       `,
-    });
+    })
+      .pipe(
+        map(res => res?.['data']?.['allBooks']?.['nodes'])
+      )
   }
 
   getLatestBooks() {
@@ -74,6 +81,9 @@ export class BooksHomeApi {
           }
         }
       `,
-    });
+    })
+      .pipe(
+        map(res => res?.['data']?.['allMvBooksLatestChapters']?.['nodes'])
+      )
   }
 }
