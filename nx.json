@@ -306,114 +306,114 @@
     },
     "core-books": {
       "tags": [
-        "scope: core - undefined",
-        "scope: shared",
-        "type: core"
+        "scope:core-books",
+        "scope:shared",
+        "type:core"
       ]
     },
     "core-users": {
       "tags": [
-        "scope: core - undefined",
-        "scope: shared",
-        "type: core"
+        "scope:core-users",
+        "scope:shared",
+        "type:core"
       ]
     },
     "core-sales": {
       "tags": [
-        "scope: core - undefined",
-        "scope: shared",
-        "type: core"
+        "scope:core-sales",
+        "scope:shared",
+        "type:core"
       ]
     },
     "core-background": {
       "tags": [
-        "scope: core - undefined",
-        "scope: shared",
-        "type: core"
+        "scope:core-background",
+        "scope:shared",
+        "type:core"
       ]
     },
     "core-analytics": {
       "tags": [
-        "scope: core - undefined",
-        "scope: shared",
-        "type: core"
+        "scope:core-analytics",
+        "scope:shared",
+        "type:core"
       ]
     },
     "core-comments": {
       "tags": [
-        "scope: core - undefined",
-        "scope: shared",
-        "type: core"
+        "scope:core-comments",
+        "scope:shared",
+        "type:core"
       ]
     },
     "core-reviews": {
       "tags": [
-        "scope: core - undefined",
-        "scope: shared",
-        "type: core"
+        "scope:core-reviews",
+        "scope:shared",
+        "type:core"
       ]
     },
     "core-system": {
       "tags": [
-        "scope: core - undefined",
-        "scope: shared",
-        "type: core"
+        "scope:core-system",
+        "scope:shared",
+        "type:core"
       ]
     },
     "core-news": {
       "tags": [
-        "scope: core - undefined",
-        "scope: shared",
-        "type: core"
+        "scope:core-news",
+        "scope:shared",
+        "type:core"
       ]
     },
     "core-marketing": {
       "tags": [
-        "scope: core - undefined",
-        "scope: shared",
-        "type: core"
+        "scope:core-marketing",
+        "scope:shared",
+        "type:core"
       ]
     },
     "core-chapters": {
       "tags": [
-        "scope: core - undefined",
-        "scope: shared",
-        "type: core"
+        "scope:core-chapters",
+        "scope:shared",
+        "type:core"
       ]
     },
     "core-book-data": {
       "tags": [
-        "scope: core - undefined",
-        "scope: shared",
-        "type: core"
+        "scope:core-book-data",
+        "scope:shared",
+        "type:core"
       ]
     },
     "core-categories": {
       "tags": [
-        "scope: core - undefined",
-        "scope: shared",
-        "type: core"
+        "scope:core-categories",
+        "scope:shared",
+        "type:core"
       ]
     },
     "core-genres": {
       "tags": [
-        "scope: core - undefined",
-        "scope: shared",
-        "type: core"
+        "scope:core-genres",
+        "scope:shared",
+        "type:core"
       ]
     },
     "core-authors": {
       "tags": [
-        "scope: core - undefined",
-        "scope: shared",
-        "type: core"
+        "scope:core-authors",
+        "scope:shared",
+        "type:core"
       ]
     },
     "core-slider": {
       "tags": [
-        "scope: core - undefined",
-        "scope: shared",
-        "type: core"
+        "scope:core-slider",
+        "scope:shared",
+        "type:core"
       ]
     }
   }

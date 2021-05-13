@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter, Optional } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { LoginRegisterPage } from '../../../pages/login-register.page';
 
 @Component({
   selector: 'template-login-mobile',
@@ -14,14 +15,4 @@ import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/materia
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LoginMobileTemplate implements OnInit {
-  @Input() authForm = this.fb.group({
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', Validators.required],
-  });
-  @Output() auth = new EventEmitter();
-
-  constructor(private fb: FormBuilder, @Optional() public dialogRef: MatDialogRef<LoginMobileTemplate>) {}
-
-  ngOnInit(): void {}
-}
+export class LoginMobileTemplate extends LoginRegisterPage { }

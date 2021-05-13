@@ -1,4 +1,7 @@
-<div (click)="submitEvent.emit()" class="text-xs text-white lg:text-sm rounded-full border border-solid pl-4 pr-14 py-1 inline-block mr-2 cursor-pointer hover:text-green-500 hover:bg-white transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 relative">
-    <span>Hi, {{userName}}</span>
+<div (click)="submitEvent.emit()"
+    class="text-xs text-white lg:text-sm rounded-full border border-solid pl-4 pr-14 py-1 inline-block mr-2 cursor-pointer hover:text-green-500 hover:bg-white transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 relative">
+    <span>Hi, {{ user.firstname ? user.firstname : user.name }}</span>
     <atom-circle-image class="absolute auth-ava shadow rounded-full -right-1" [size]="'s'"></atom-circle-image>
 </div>
+
+<!-- <pre> {{ user | json }} </pre> -->

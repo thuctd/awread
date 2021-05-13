@@ -8,21 +8,21 @@ declare const window: Window & { haveMobile: boolean };
 
 const routes: Routes = [
   {
+    path: 'register-complete',
+    loadChildren: () =>
+      window.innerWidth <= 768 && window?.haveMobile
+        ? import(
+          './pages/register-complete-mobile/register-complete-mobile.module'
+        ).then((m) => m.RegisterCompleteMobileModule)
+        : import(
+          './pages/register-complete-desktop/register-complete-desktop.module'
+        ).then((m) => m.RegisterCompleteDesktopModule),
+  },
+  {
     path: '',
     component: AuthLayout,
     canActivate: [LandingGuard],
     children: [
-      {
-        path: 'register-complete',
-        loadChildren: () =>
-          window.innerWidth <= 768 && window?.haveMobile
-            ? import(
-              './pages/register-complete-mobile/register-complete-mobile.module'
-            ).then((m) => m.RegisterCompleteMobileModule)
-            : import(
-              './pages/register-complete-desktop/register-complete-desktop.module'
-            ).then((m) => m.RegisterCompleteDesktopModule),
-      },
       {
         path: 'new-password',
         loadChildren: () =>
@@ -68,12 +68,7 @@ const routes: Routes = [
             : import('./pages/forgot-desktop/forgot-desktop.module').then(
               (m) => m.ForgotDesktopModule
             ),
-      },
-      {
-        path: '',
-        pathMatch: 'full',
-        redirectTo: 'login',
-      },
+      }
     ],
   },
 ];

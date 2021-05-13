@@ -9,7 +9,7 @@ export default function (schema: any): Rule {
         linter: "eslint",
         name: `${name}`,
         directory: `${schema.directory}` ?? './',
-        tags: `scope: ${schema.kind} - ${schema.name}, scope: shared, type: ${schema.kind}`,
+        tags: `scope:${schema.kind}-${name},scope:shared,type:${schema.kind}`,
         style: 'scss'
       })
     ]))

@@ -24,7 +24,6 @@ import { WrtListOrgan } from './organs/wrt-list/wrt-list.organ';
 import { WriterWebSharedAtomicModule } from '@awread/writer/web/shared';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { NgSelectModule } from '@ng-select/ng-select';
 import { InfoBookMolec } from './molecs/info-book/info-book.molec';
 import { WrtDetailPopupBookOrgan } from './organs/wrt-detail-popup-book/wrt-detail-popup-book.organ';
 import { WrtDetailPopupBookTemplate } from './templates/wrt-detail-popup-book/wrt-detail-popup-book.template';
@@ -43,7 +42,6 @@ import { GenresFieldModule, InfiniteScrollModule, LoaderModule } from '@awread/g
     WriterWebSharedAtomicModule,
     MatFormFieldModule,
     MatAutocompleteModule,
-    NgSelectModule,
     LoaderModule,
     MatDialogModule,
   ],
@@ -60,7 +58,6 @@ import { GenresFieldModule, InfiniteScrollModule, LoaderModule } from '@awread/g
     WrtDetailActMolec,
     WrtDetailPartMolec,
     WrtDetailReviewMolec,
-    NgSelectModule,
     InfoBookMolec,
     WrtDetailPopupBookOrgan,
     WrtDetailPopupBookTemplate,
@@ -105,4 +102,4 @@ import { GenresFieldModule, InfiniteScrollModule, LoaderModule } from '@awread/g
     PopupEditCoverBookTemplate,
   ],
 })
-export class WriterWebUiCreationAtomicModule { }
+export class WriterWebUiCreationAtomicModule {}

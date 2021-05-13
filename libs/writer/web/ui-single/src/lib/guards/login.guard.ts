@@ -1,4 +1,3 @@
-import { map } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
@@ -12,6 +11,7 @@ export class LoginGuard implements CanActivate {
     if (localStorage.getItem('accessToken')) {
       return of(true);
     }
+    console.log('not allow, go login');
     this.router.navigate(['login']);
     return of(false);
   }

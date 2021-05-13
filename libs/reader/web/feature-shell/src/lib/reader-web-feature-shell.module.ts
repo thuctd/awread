@@ -7,6 +7,7 @@ import { ReaderWebUiAuthModule } from '@awread/reader/web/ui-auth';
 import { ReaderWebUiAuthorModule } from '@awread/reader/web/ui-author';
 import { ReaderWebUiSingleModule } from '@awread/reader/web/ui-single';
 import { ReaderWebUiMarketModule } from '@awread/reader/web/ui-market';
+import { WriterWebUiAuthModule } from '@awread/writer/web/ui-auth';
 
 declare const window: Window & { haveMobile: boolean };
 
@@ -27,21 +28,24 @@ const routes: Routes = [
 import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   imports: [
+
     CommonModule,
-    RouterModule.forRoot(routes, {
-      scrollPositionRestoration: 'enabled',
-      scrollOffset: [0, 0],
-      anchorScrolling: 'enabled',
-      onSameUrlNavigation: 'reload',
-    }),
+    HttpClientModule,
     GlobalCoreModule,
     ReaderWebSharedModule,
     ReaderWebUiAuthModule,
     ReaderWebUiAuthorModule,
     ReaderWebUiSingleModule,
     ReaderWebUiMarketModule,
-
-    HttpClientModule
+    // away be the 2nd last
+    WriterWebUiAuthModule,
+    // aways be the last
+    RouterModule.forRoot(routes, {
+      scrollPositionRestoration: 'enabled',
+      scrollOffset: [0, 0],
+      anchorScrolling: 'enabled',
+      onSameUrlNavigation: 'reload',
+    }),
   ],
   exports: [
     RouterModule,

@@ -9,10 +9,6 @@ import { FormControl } from '@angular/forms';
       :host {
         display: block;
       }
-      :host .text {
-        font-size: 0.6rem;
-        line-height: 1rem;
-      }
     `,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,

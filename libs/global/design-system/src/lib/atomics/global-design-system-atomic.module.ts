@@ -4,6 +4,7 @@ import { StorybookSupportModule } from '../storybook-support.module';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { NgSelectModule } from '@ng-select/ng-select';
 import { notReadyDirective } from './directives/not-ready/not-ready.directive';
 import { AuthBgAtom } from './atoms/auth-bg/auth-bg.atom';
 import { CheckBtnAtom } from './atoms/check-btn/check-btn.atom';
@@ -112,6 +113,7 @@ import { SocialLoginBtnAtom } from './atoms/social-login-btn/social-login-btn.at
     MatDialogModule,
     MatAutocompleteModule,
     MatFormFieldModule,
+    NgSelectModule,
     QuillModule.forRoot(),
     DefaultCoverModule,
     CloseOnOutsideModule,
@@ -121,6 +123,7 @@ import { SocialLoginBtnAtom } from './atoms/social-login-btn/social-login-btn.at
     MatDialogModule,
     MatAutocompleteModule,
     MatFormFieldModule,
+    NgSelectModule,
     notReadyDirective,
     NgImageSliderModule,
     CloseOnOutsideModule,

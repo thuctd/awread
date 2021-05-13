@@ -1,10 +1,31 @@
 <form class="flex justify-center items-center px-2" [formGroup]="filters">
-  <atom-select [options]='genres' [inputControl]="filters.get('genre')" [widthClass]='selectGenres.widthClass' [titleSellect]='selectGenres.title' class="px-4">
+  <div class="relative pr-3">
+    <ng-select [items]="genres"
+      [closeOnSelect]="false"
+      bindValue="id"
+      bindLabel="name"
+      [multiple]="true"
+      placeholder="Thể loại">
+      <ng-template ng-option-tmp let-item="item" let-index="index" let-item$="item$">
+        <div class="flex">
+          <div class="ml-1.5 mt-0.5">
+            <!-- <input class="form-checkbox" type="checkbox" [checked]="item$.selected"> -->
+            <check-btn [checked]="item$.selected"></check-btn>
+          </div>
+          {{item.name}}
+        </div>
+      </ng-template>
+    </ng-select>
+    <div class="absolute right1125 top-1">
+      <fa-icon class="text text-gray-text" [icon]="faIcon"></fa-icon>
+    </div>
+  </div>
+  <atom-select [options]='selectGenres.options' [inputControl]="filters.get('genre')" [widthClass]='selectGenres.widthClass' [titleSellect]='selectGenres.title' class="px-3">
   </atom-select>
   <atom-select [options]='selectStatus.options' [inputControl]="filters.get('status')" [widthClass]='selectStatus.widthClass' [titleSellect]='selectStatus.title'
-    class="px-4"></atom-select>
-  <atom-select [options]='selectPublishedat.options' [inputControl]="filters.get('publishedAt')" [widthClass]='selectPublishedat.widthClass'
-    [titleSellect]='selectPublishedat.title' class="px-4"></atom-select>
+    class="px-3"></atom-select>
+  <atom-select [options]='publishedAt.options' [inputControl]="filters.get('publishedAt')" [widthClass]='publishedAt.widthClass'
+    [titleSellect]='publishedAt.title' class="px-3"></atom-select>
   <div class="md:pl-0 xl:pl-5">
     <a (click)='filterBooksEvent.emit()'
       class="outline-none text-sm no-underline text-center block bg-green-primary text-white cursor-pointer px-3 py-1 md:px-6 md:py-1 rounded-full transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 roboto">Lọc</a>
