@@ -1,6 +1,6 @@
 <div class="flex justify-center items-center tab relative" (click)="tabClicked.emit($event)">
   <a class="outline-none inline-block cursor-pointer">{{ tabName | titlecase }}</a>
-  <div *ngIf="isTooltip" class="tooltip  hidden absolute -top-8">
+  <div *ngIf="isTooltip" class="tooltip hidden absolute -top-8">
     <div class="bg-orange px-4 py-1 text-white rounded-full">Mới nhất</div>
     <div class="triangle-down absolute left-9"></div>
   </div>

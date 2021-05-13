@@ -1,4 +1,4 @@
-import { retry } from 'rxjs/operators';
+import { retry, map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
 
@@ -24,7 +24,9 @@ export class ChaptersApi {
         }
       `,
       variables: { bookId },
-    }).pipe(retry(2));
+    }).pipe(
+      map(res => res?.['data']?.['allChapters']?.['nodes'])
+    );
   }
 
   getChapterDetail(bookId: string, chapterId: string) {
@@ -50,6 +52,9 @@ export class ChaptersApi {
         bookId,
         chapterId
       },
-    });
+    }).pipe(
+      retry(2),
+      map(res => res?.['data']?.['allChapters']?.['nodes'])
+    );;
   }
 }

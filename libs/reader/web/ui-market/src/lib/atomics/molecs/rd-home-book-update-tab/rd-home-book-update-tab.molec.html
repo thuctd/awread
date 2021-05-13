@@ -1,6 +1,5 @@
 <div class="grid grid-cols-12">
-  <rd-tab-item class="col-span-3 border py-1 text-xs cursor-pointer"
-    [ngClass]="'border-green-primary bg-green-primary text-white active'" (click)="setNoneActiveAll()" [isTooltip]="true" [tabName]="'Tất cả'" (tabClicked)="emitAllBooks.emit($event)">
+  <rd-tab-item  [ngClass]="999 === currentIndex ? 'border-green-primary bg-green-primary text-white active' : 'text-gray-text active'" class="col-span-3 border text-xs cursor-pointer" [isTooltip]="true" [tabName]="'Tất cả'" (tabClicked)="emitAllBooks.emit($event)" (click)="setNoneActiveAll()">
   </rd-tab-item>
   <rd-tab-item class="col-span-3 border py-1 text-xs cursor-pointer"
     [ngClass]="i === currentIndex ? 'border-green-primary bg-green-primary text-white active' : 'text-gray-text active'" *ngFor="let item of categories; let i = index;"

@@ -1,3 +1,4 @@
+import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
 
@@ -18,7 +19,9 @@ export class GenresApi {
           }
         }
       `,
-    });
+    }).pipe(
+        map(res => res?.['data']?.['allGenres']?.['nodes'])
+      );;
   }
 
   getGenreById(genreId: string) {
@@ -37,7 +40,9 @@ export class GenresApi {
       variables: {
         genreId
       }
-    });
+    }).pipe(
+        map(res => res?.['data']?.['allGenres']?.['nodes'])
+      );;;
   }
 
 }

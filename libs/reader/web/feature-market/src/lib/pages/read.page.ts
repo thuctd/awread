@@ -13,6 +13,9 @@ export class ReadPage implements OnInit {
   chapterId;
   topBookList$ = this.booksFacade.topBooks$;
   bookChapters$ = this.chaptersFacade.chapters$;
+  get breadcrumbs(): string[] {
+    return ['Home', this.chapter$?.title, this.chapter$?.title];
+  }
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private chaptersFacade: ChaptersFacade, private booksFacade: BooksFacade) { }
 
@@ -24,16 +27,14 @@ export class ReadPage implements OnInit {
         switchMap((params) => {
           return this.chaptersFacade.getChapterDetail(params.get('bookId'), params.get('chapterId')).pipe(
             tap((chapter) => {
-              this.chaptersFacade.getAllChapters(chapter[0].bookId).subscribe(
-                res => console.log('chapters', res)                
-              );
+              this.chaptersFacade.getAllChapters(chapter[0].bookId).subscribe();
             })
           );
         })
       )
       .subscribe((chapter) => {
         this.chapter$ = chapter[0];
-        console.log('asd', chapter);
+        console.log(this.chapter$);        
       });
     this.booksFacade.getTopBooks().subscribe();
   }
@@ -43,7 +44,6 @@ export class ReadPage implements OnInit {
       this.backHome();
       return;
     }
-    console.log('Chapter ID: ', this.chapterId);
   }
 
   onChangeBackChapter() {
@@ -51,7 +51,6 @@ export class ReadPage implements OnInit {
       this.backHome();
       return;
     }
-    console.log('Chapter ID: ', this.chapterId);
   }
 
   private backHome() {

@@ -10,7 +10,7 @@ export interface Book {
   bookid: string;
   userid: string;
   description: string;
-  categoryid: Category['categoryId'];
+  categoryId: Category['categoryId'];
   completed: boolean;
   isdeleted: boolean;
   tags: string[];

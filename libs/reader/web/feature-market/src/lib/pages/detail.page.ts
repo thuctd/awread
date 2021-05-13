@@ -1,10 +1,12 @@
+
 import { ActivatedRoute, Router } from '@angular/router';
 import { ChangeDetectorRef, Directive, Injectable, OnDestroy, OnInit } from '@angular/core';
 import { map, switchMap, takeUntil, tap } from 'rxjs/operators';
-import { of, Subject, Observable } from 'rxjs';
+import { of, Subject } from 'rxjs';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { BooksFacade } from 'libs/core/books/src/lib/facades/books.facade';
 import { ChaptersFacade } from 'libs/core/chapters/src/lib/facades/chapters.facade';
+import { Book } from 'libs/core/books/src/lib/models';
 
 @UntilDestroy()
 @Injectable({
@@ -12,7 +14,7 @@ import { ChaptersFacade } from 'libs/core/chapters/src/lib/facades/chapters.faca
 })
 @Directive()
 export class DetailPage implements OnInit, OnDestroy {
-  book$;
+  book$: Book;
   bookId: string;
   authorId: string;
   destroy$ = new Subject();
@@ -20,7 +22,6 @@ export class DetailPage implements OnInit, OnDestroy {
   topBookList$ = this.booksFacade.topBooks$;
   authorBookList$ = this.booksFacade.authorBooks$;
   chapters$ = this.chaptersFacade.chapters$;
-  bookChapters;
   get breadcrumbs(): string[] {
     return ['Home', this.book$?.categoryId, this.book$?.title];
   }
@@ -45,7 +46,6 @@ export class DetailPage implements OnInit, OnDestroy {
       )),
     ).subscribe(book => {
       this.book$ = book[0];
-      console.log(this.book$);
     })
     this.booksFacade.getTopBooks().subscribe();
     this.getAllChapters();
@@ -62,11 +62,7 @@ export class DetailPage implements OnInit, OnDestroy {
             return this.chaptersFacade.selectAllChapterAkita();
           }
           if (bookId) {
-            return this.chaptersFacade.getAllChapters(bookId).pipe(
-              map(res => {
-                this.bookChapters = res;
-              })
-            );
+            return this.chaptersFacade.getAllChapters(bookId);
           }
           return of([]);
         })
@@ -77,11 +73,43 @@ export class DetailPage implements OnInit, OnDestroy {
   }
 
   OnChangeFirstChapter() {
-    this.router.navigate(['/books', this.bookId, 'chapters', this.bookChapters[0].chapterId])
+    return this.activatedRoute.paramMap
+      .pipe(
+        takeUntil(this.destroy$),
+        switchMap((params) => {
+          if (this.bookId) {
+            return this.chaptersFacade.getAllChapters(this.bookId).pipe(
+              tap(chapters => {
+                return this.router.navigate(['/books', this.bookId, 'chapters', chapters[0].chapterId])
+              })
+            );
+          }
+          return this.router.navigate(['/not-found']);
+        })
+      )
+      .subscribe((res) => {
+        this.cd.detectChanges();
+      });
   }
 
   OnChangeLastChapter() {
-    this.router.navigate(['/books', this.bookId, 'chapters', this.bookChapters[this.bookChapters?.length - 1].chapterId])
+    return this.activatedRoute.paramMap
+      .pipe(
+        takeUntil(this.destroy$),
+        switchMap((params) => {
+          if (this.bookId) {
+            return this.chaptersFacade.getAllChapters(this.bookId).pipe(
+              tap(chapters => {
+                return this.router.navigate(['/books', this.bookId, 'chapters', chapters[chapters.length - 1].chapterId])
+              })
+            );
+          }
+          return this.router.navigate(['/not-found']);
+        })
+      )
+      .subscribe((res) => {
+        this.cd.detectChanges();
+      });
   }
 
   nativeBooksAuthor() {

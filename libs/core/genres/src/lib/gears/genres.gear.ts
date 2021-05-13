@@ -15,27 +15,13 @@ export class GenresGear {
 
   getAllGenres() {
     return this.genresApi.getAllGenres().pipe(
-      map((res) => {
-        if (
-          res['data'] &&
-          res['data']['allGenres'] &&
-          res['data']['allGenres']['nodes'].length
-        ) {
-          this.genresStore.set(res['data']['allGenres']['nodes']);
-        }
-      }),
-      catchError((err) => {
-        console.error('An error occurred:', err);
-        return throwError(err);
-      })
+      map((result) => this.genresStore.set(result))
     );
   }
 
   getGenreById(genreId: string) {
     return this.genresApi.getGenreById(genreId).pipe(
-      tap((res) => {
-        console.log('detail genre', res);
-      }),
+      tap((res) => {  }),
       catchError((err) => {
         console.error('An error occurred:', err);
         return throwError(err);
