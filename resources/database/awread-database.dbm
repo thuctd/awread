@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="0,882" last-zoom="0.95" max-obj-count="15"
+<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="0,504" last-zoom="0.95" max-obj-count="15"
 	 default-owner="postgres">
 <role name="anonymous">
 </role>
@@ -137,7 +137,7 @@ grant update on public.users to reader;]]></appended-sql>
 	</constraint>
 </table>
 
-<table name="users" layer="0" collapse-mode="2" max-obj-count="20" z-value="0">
+<table name="users" layer="0" collapse-mode="2" max-obj-count="26" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
 	<position x="460" y="800"/>
@@ -190,6 +190,21 @@ grant update on public.users to reader;]]></appended-sql>
 		<type name="text" length="0"/>
 	</column>
 	<column name="google">
+		<type name="text" length="0"/>
+	</column>
+	<column name="websiteAddress">
+		<type name="text" length="0"/>
+	</column>
+	<column name="facebookAddress">
+		<type name="text" length="0"/>
+	</column>
+	<column name="dob">
+		<type name="text" length="0"/>
+	</column>
+	<column name="gender">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="bio">
 		<type name="text" length="0"/>
 	</column>
 	<constraint name="users_pk" type="pk-constr" table="public.users">
