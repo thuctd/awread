@@ -1,4 +1,4 @@
 <section>
-  <template-list [titlePage]="'Truyện tự sưu tầm'" (nativeTopBook)='nativeTopBook()' (nativeLongBook)='nativeLongBook()' (nativeShortBook)='nativeShortBook()' (nativeProse)='nativeProse()' (filterBooksEvent)='filterBooks()' [filtersForm]='filtersForm' [genres]='genreList$ | async' [books]='topBookList$ | async' [tabsHead]="categoryList$ | async" [selectedTab]="selectedTab"
-    (switchTabEvent)="switchTab($event)" (changeCategoryBooks)='filterItemsByCategory($event)' [categoryBooks]='filteredBooks$ | async'></template-list>
+  <template-list [titlePage]="'Truyện tự sưu tầm'" (nativeTopBook)="nativeTopBook()" (nativeLongBook)="nativeLongBook()" (nativeShortBook)="nativeShortBook()" (nativeProse)="nativeProse()" (filterBooksEvent)="filterBooks()" [filtersForm]="filtersForm" [genres]="genreList$ | async" [books]="topBookList$ | async" [tabsHead]="categoryList$ | async" [selectedTab]="selectedTab"
+    (switchTabEvent)="switchTab($event)" (changeCategoryBooks)="filterItemsByCategory($event)" [categoryBooks]="filteredBooks$ | async"></template-list>
 </section>

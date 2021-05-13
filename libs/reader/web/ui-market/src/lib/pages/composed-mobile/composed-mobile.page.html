@@ -1,6 +1,6 @@
 <section class="px-4">
   <section>
-    <molec-title-page-menu [titlePage]='"Truyện tự sáng tác"' [isMenu]='true'></molec-title-page-menu>
+    <molec-title-page-menu [titlePage]="'Truyện tự sáng tác'" [isMenu]="true"></molec-title-page-menu>
   </section>
-  <template-mb-list [books]='composedList$ | async' [topBooks]='topBookList$ | async'></template-mb-list>
+  <template-mb-list [books]="composedList$ | async" [topBooks]="topBookList$ | async"></template-mb-list>
 </section>

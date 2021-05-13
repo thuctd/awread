@@ -14,8 +14,10 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeadReadBookMolec implements OnInit {
+  @Input() defaultSelect = '';
   @Input() chapters = [];
   @Input() faIcon = faChevronLeft;
+  @Output() selectionChange = new EventEmitter();
   @Output() nextChapterBook = new EventEmitter();
   @Output() backChapterBook = new EventEmitter();
   @Input() title = 'Ngày ấy vì ai mà đổi thay';

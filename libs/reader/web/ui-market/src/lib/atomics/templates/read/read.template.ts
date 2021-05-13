@@ -15,6 +15,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
 export class ReadTemplate implements OnInit {
   @Input() chapters = [];
   @Input() breadcrumbs = [];
+  @Output() selectionChange = new EventEmitter();
   @Output() nextChapterBook = new EventEmitter();
   @Output() backChapterBook = new EventEmitter();
   @Input() books = [];

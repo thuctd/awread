@@ -1,9 +1,9 @@
 <section class="px-4 sm:px-6 max-w-screen-xl mx-auto relative">
   <ng-container *ngIf="chapter?.content; else noContent">
     <ng-container *ngIf="chapter; else noData">
-      <atom-breadcrumb [items]='breadcrumbs'></atom-breadcrumb>
+      <atom-breadcrumb [items]="breadcrumbs"></atom-breadcrumb>
       <div class="pt-6">
-        <organ-content-book [chapters]="chapters" [chapter]="chapter" (backChapterBook)="backChapterBook.emit($event)"
+        <organ-content-book (selectionChange)="selectionChange.emit($event)" [chapters]="chapters" [chapter]="chapter" (backChapterBook)="backChapterBook.emit($event)"
           (nextChapterBook)="nextChapterBook.emit($event)"></organ-content-book>
       </div>
       <div>

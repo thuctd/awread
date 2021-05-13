@@ -1,14 +1,13 @@
-import { AuthorStore } from './../states/author/author.store';
 import { Injectable } from '@angular/core';
 import { catchError, tap } from 'rxjs/operators';
 import { throwError } from 'rxjs';
-import { Author, Book } from '../models';
 import { AuthorApi } from '../apis/author.api';
+import { AuthorsStore } from '../states/authors';
 
 @Injectable({ providedIn: 'root' })
 export class AuthorGear {
 
-  constructor(private authorApi: AuthorApi, private authorStore: AuthorStore) { }
+  constructor(private authorApi: AuthorApi, private authorStore: AuthorsStore) { }
 
   getAuthors() {
     return this.authorApi.getAuthors().pipe(

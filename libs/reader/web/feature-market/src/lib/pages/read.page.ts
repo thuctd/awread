@@ -1,8 +1,12 @@
-import { Directive, Injectable, OnInit } from '@angular/core';
+import { UntilDestroy } from '@ngneat/until-destroy';
+import { Directive, Injectable, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap, tap } from 'rxjs/operators';
 import { BooksFacade } from 'libs/core/books/src/lib/facades/books.facade';
 import { ChaptersFacade } from 'libs/core/chapters/src/lib/facades/chapters.facade';
+import { Chapter } from 'libs/core/chapters/src/lib/models';
+
+@UntilDestroy()
 @Injectable({
   providedIn: 'root',
 })
@@ -17,7 +21,7 @@ export class ReadPage implements OnInit {
     return ['Home', this.chapter$?.title, this.chapter$?.title];
   }
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, private chaptersFacade: ChaptersFacade, private booksFacade: BooksFacade) { }
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private chaptersFacade: ChaptersFacade, private cd: ChangeDetectorRef, private booksFacade: BooksFacade) { }
 
   ngOnInit(): void {
     this.bookId = this.activatedRoute.snapshot.paramMap.get('bookId');
@@ -37,6 +41,11 @@ export class ReadPage implements OnInit {
         console.log(this.chapter$);        
       });
     this.booksFacade.getTopBooks().subscribe();
+  }
+
+  navigateToChapter(chapter: Chapter){
+    console.log(chapter);    
+    // this.router.navigate(['/books', chapter.bookId, 'chapters', chapter.chapterId]);
   }
 
   onChangeNextChapter() {

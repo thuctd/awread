@@ -16,9 +16,11 @@ import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 export class ContentBookOrgan implements OnInit {
   @Input() chapters = [];
   @Input() faIcon = faChevronLeft;
+  @Output() selectionChange = new EventEmitter();
   @Output() nextChapterBook = new EventEmitter();
   @Output() backChapterBook = new EventEmitter();
   @Input() chapter = {
+    chapterId: '',
     title: 'Cuộc đời của mỗi người...',
     content: `
   Cuộc đời của mỗi người giống như những chuyến đi, chuyến đi ấy có thể thuận lợi, có thể khó khăn, có thể gặp người này hay người khác. Có người nói đi như thế nào, gặp ai đều là do người lái xe cố tình điều khiển khiến chúng ta có chuyến đi như thế, nhưng lại quên rằng, chúng ta chính là người lái những chiếc xe.
