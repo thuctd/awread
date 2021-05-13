@@ -41,25 +41,59 @@ export class CurrentUserApi {
     )
   }
 
+  updateName(user) {
+    return this.apollo.mutate({
+      mutation: gql`
+      mutation updateUserByUserId(
+        $userId: UUID!,
+        $firstname: String,
+        $middlename: String,
+        $lastname: String
+        ) {
+        updateUserByUserId(
+          input: {
+            userId: $userId,
+            userPatch: {
+              firstname: $firstname,
+              middlename: $middlename,
+              lastname: $lastname,
+            }
+          }
+        ) {
+          user {
+            firstname
+            middlename
+            lastname
+          }
+        }
+      }
+      `,
+      variables: {
+        ...user,
+        userId: this.currentUserQuery.getUserId()
+      },
+    })
+  }
+
   update(user) {
     return this.apollo.mutate({
       mutation: gql`
       mutation updateUserByUserId(
         $userId: UUID!,
-        age: BigFloat,
-        gender: BigFloat,
-        username: String,
-        email: String,
-        phone: String,
-        name: String,
-        firstname: String,
-        middlename: String,
-        lastname: String,
-        avatar: String,
-        dob: String,
-        bio: String,
-        websiteAddress: String,
-        facebookAddress: String,
+        $age: BigFloat,
+        $gender: BigFloat,
+        $username: String,
+        $email: String,
+        $phone: String,
+        $name: String,
+        $firstname: String,
+        $middlename: String,
+        $lastname: String,
+        $avatar: String,
+        $dob: String,
+        $bio: String,
+        $websiteAddress: String,
+        $facebookAddress: String,
         ) {
         updateUserByUserId(
           input: {

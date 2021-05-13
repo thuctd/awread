@@ -9,12 +9,17 @@ export class CurrentUserFacade {
     private currentUserGear: CurrentUserGear,
     private currentUserQuery: CurrentUserQuery
   ) { }
+
   getCurrentUser() {
     return this.currentUserGear.getCurrentUser();
   }
 
   updateCurrentUser(user) {
     return this.currentUserGear.update(user);
+  }
+
+  updateName(user) {
+    return this.currentUserGear.updateName(user);
   }
 
   getUserId() {

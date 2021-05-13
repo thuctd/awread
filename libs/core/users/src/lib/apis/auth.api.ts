@@ -87,12 +87,13 @@ export class AuthApi {
   registerUser(variables: CreateUserCredential) {
     return this.apollo.mutate({
       mutation: gql`
-       mutation newUser($email: String,$password: String,$phone: String,$provider: String,$providerId: String,$username: String) {
-          newUser(
-          input: {email: $email, password: $password, phone: $phone, provider: $provider, providerId: $providerId, username: $username}
+       mutation newUser($email: String,$password: String,$phone: String, $username: String) {
+        newUser(
+          input: { email: $email, password: $password, phone: $phone, username: $username }
         ) {
           results {
             case
+            accessToken
             user {
               userId
               username
@@ -105,7 +106,7 @@ export class AuthApi {
       `,
       variables: variables,
     }).pipe(
-      map(res => res.data?.['newUser']['results'][0]),
+      map(res => res.data?.['newUser']?.['results']?.[0]),
       map(result => {
         if (result.case == 'success') {
           return {

@@ -7,8 +7,12 @@ export class AuthRoutingGear {
   registerCompleteRoute = '/profile';
   constructor(private router: Router) { }
 
-  navigateAfterRegisterComplete(router: string) {
-    this.router.navigateByUrl(router);
+  navigateAfterCreateAccount(router: string = 'register-complete') {
+    this.router.navigate([router]);
+  }
+
+  navigateAfterRegisterCompleted(router: string = '/') {
+    this.router.navigate([router]);
   }
 
   navigateAfterLoginComplete(router: string = domainEnvironment.afterLoginUrl, params?) {

@@ -40,6 +40,19 @@ export class CurrentUserGear {
     })
   }
 
+  updateName(user) {
+    return this.currentUserApi.updateName(user).pipe(
+
+    ).subscribe(result => {
+      if (result.data) {
+        this.snackbarsService.showSuccess('Cập nhật thông tin thành công!');
+        this.currentUserStore.updateCurrentUserAkita(user);
+        this.authRoutingGear.navigateAfterRegisterCompleted();
+      } else {
+        this.snackbarsService.showError(result.errors?.[0]['message']);
+      }
+    })
+  }
 
   async linkSocial(provider) {
     let socialUser: SocialUser;

@@ -3,13 +3,15 @@ import { Injectable } from '@angular/core';
 import { ApolloAddon } from '../addons';
 import { CurrentUserService } from '../states/current-user';
 import { SnackbarsService } from '@awread/global/packages';
+import { SocialAuthService } from 'angularx-social-login';
 @Injectable({ providedIn: 'root' })
 export class LogoutGear {
   constructor(
     private apolloAddon: ApolloAddon,
     private currentUserService: CurrentUserService,
     private router: Router,
-    private snackbarService: SnackbarsService
+    private snackbarService: SnackbarsService,
+    private socialAuthService: SocialAuthService,
   ) { }
 
   logout(redirect = '/login') {
@@ -18,5 +20,10 @@ export class LogoutGear {
     window.localStorage.clear();
     this.router.navigate([redirect]);
     this.snackbarService.showSuccess('Tạm biệt!');
+    try {
+      this.socialAuthService.signOut(true);
+    } catch (error) {
+
+    }
   }
 }
