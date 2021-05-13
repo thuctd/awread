@@ -38,6 +38,10 @@ export class SharedLayout implements OnInit {
     this.currentUserFacade.getCurrentUser().subscribe();
   }
 
+  logout() {
+    this.authFacade.logout('/');
+  }
+
   watchingSearchTerm() {
     this.results$ = this.searchControl.valueChanges.pipe(
       untilDestroyed(this),

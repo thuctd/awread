@@ -27,6 +27,7 @@ export class NavbarReaderTemplate implements OnInit {
   ];
   @Input() searchControl = new FormControl();
   @Output() eventSearch = new EventEmitter();
+  @Output() logoutEvent = new EventEmitter();
   @Input() isLogin = false;
   constructor() { }
 

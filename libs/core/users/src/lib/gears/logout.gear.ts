@@ -12,11 +12,11 @@ export class LogoutGear {
     private snackbarService: SnackbarsService
   ) { }
 
-  logout() {
+  logout(redirect = '/login') {
     this.apolloAddon.logout();
     this.currentUserService.logout();
     window.localStorage.clear();
-    this.router.navigate(['login']);
+    this.router.navigate([redirect]);
     this.snackbarService.showSuccess('Tạm biệt!');
   }
 }

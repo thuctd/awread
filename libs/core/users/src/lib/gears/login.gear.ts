@@ -5,6 +5,8 @@ import { AuthRoutingGear } from './auth-routing.gear';
 import { SnackbarsService } from '@awread/global/packages';
 import { SocialAuthService, SocialUser } from "angularx-social-login";
 import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
+import { CurrentUserGear } from './current-user.gear';
+import { MatDialog } from '@angular/material/dialog';
 
 @Injectable({ providedIn: 'root' })
 export class LoginGear {
@@ -12,25 +14,23 @@ export class LoginGear {
     private authApi: AuthApi,
     private authRoutingGear: AuthRoutingGear,
     private snackbarService: SnackbarsService,
-    private socialAuthService: SocialAuthService
+    private socialAuthService: SocialAuthService,
+    private currentUserGear: CurrentUserGear,
+    private matDialog: MatDialog
   ) {
   }
 
   async loginEmail(credential: SocialLoginCredential) {
     this.authApi.authenticateUser(credential).subscribe(result => {
-      const accessToken = result?.accessToken;
       switch (result.case) {
         case 'success':
-          localStorage.setItem('accessToken', accessToken);
-          this.snackbarService.showSuccess(`Chúc bạn một ngày tốt lành! ${result.user.firstname ?? result.user.name ?? ''}`);
-          this.authRoutingGear.navigateAfterLoginComplete();
+          this.loginSuccess(result);
           break;
         case 'password-not-match':
           this.snackbarService.showWarning(`Mật khẩu không khớp! Bạn có phải là: ${result.user.firstname ?? result.user.name}`);
           break;
         default:
-          localStorage.setItem('accessToken', '');
-          this.snackbarService.showError(`Tài khoản của bạn không tồn tại, vui lòng tạo tài khoản mới nhé!`);
+          this.loginFail();
           break;
       }
     })
@@ -51,14 +51,25 @@ export class LoginGear {
 
     this.authApi.authenticateSocialUser({ provider, providerId: socialUser.id }).subscribe(result => {
       if (result.case == 'success') {
-        this.snackbarService.showSuccess(`Chúc bạn một ngày tốt lành! ${result.user.firstname ?? result.user.name}`);
-        this.authRoutingGear.navigateAfterLoginComplete();
+        this.loginSuccess(result);
       } else {
-        this.snackbarService.showError(`Tài khoản của bạn không tồn tại, vui lòng tạo tài khoản mới nhé!`);
-        localStorage.setItem('accessToken', '');
+        this.loginFail();
         this.socialAuthService.signOut(true);
       }
     })
+  }
+
+  loginSuccess(result) {
+    localStorage.setItem('accessToken', result?.accessToken);
+    this.snackbarService.showSuccess(`Chúc bạn một ngày tốt lành! ${result.user.firstname ?? result.user.name ?? ''}`);
+    this.currentUserGear.getCurrentUser().subscribe();
+    this.authRoutingGear.navigateAfterLoginComplete();
+    this.matDialog.closeAll();
+  }
+
+  loginFail() {
+    this.snackbarService.showError(`Tài khoản của bạn không tồn tại, vui lòng tạo tài khoản mới nhé!`);
+    localStorage.setItem('accessToken', '');
   }
 
 }

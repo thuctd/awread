@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { faCoins, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -14,6 +14,7 @@ import { faCoins, faArrowRight } from '@fortawesome/free-solid-svg-icons';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NavbarAuthDropdownMolec implements OnInit {
+  @Output() logoutEvent = new EventEmitter();
   @Input() user = {
     name: 'BlackCu',
     firstname: 'BlackCu'

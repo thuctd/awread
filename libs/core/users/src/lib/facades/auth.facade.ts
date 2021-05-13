@@ -20,8 +20,8 @@ export class AuthFacade {
     private authRoutingGear: AuthRoutingGear,
   ) { }
 
-  logout() {
-    this.logoutGear.logout();
+  logout(redirectLink?) {
+    this.logoutGear.logout(redirectLink);
   }
 
   linkSocial(provider) {

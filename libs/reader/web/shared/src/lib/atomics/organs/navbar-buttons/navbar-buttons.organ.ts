@@ -19,6 +19,7 @@ export class NavbarButtonsOrgan implements OnInit {
   @Input() items = [];
   @Input() searchControl = new FormControl();
   @Output() eventSearch = new EventEmitter();
+  @Output() logoutEvent = new EventEmitter();
   constructor() { }
 
   ngOnInit(): void { }

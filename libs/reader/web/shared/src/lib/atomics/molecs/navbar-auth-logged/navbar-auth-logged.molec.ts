@@ -15,6 +15,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter, Input
 })
 export class NavbarAuthLoggedMolec implements OnInit {
   @Input() user = {};
+  @Output() logoutEvent = new EventEmitter();
   isToggleDropdown: boolean = false;
   constructor() { }
   // @Output() submitEvent = new EventEmitter();
