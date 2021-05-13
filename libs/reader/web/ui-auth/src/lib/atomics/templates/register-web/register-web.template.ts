@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, EventEmitter, Output, Optional } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { LoginRegisterPage } from '../../../pages/login-register.page';
 
 @Component({
   selector: 'template-register-web',
@@ -14,18 +15,4 @@ import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/materia
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RegisterWebTemplate implements OnInit {
-  @Input() link = '/global-assets/images/newlogo.webp';
-
-  @Input() authForm = this.fb.group({
-    displayName: ['', [Validators.required]],
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', Validators.required],
-    confirmPassword: ['', Validators.required],
-  });
-  @Output() auth = new EventEmitter();
-
-  constructor(private fb: FormBuilder, @Optional() public dialogRef: MatDialogRef<RegisterWebTemplate>) {}
-
-  ngOnInit(): void {}
-}
+export class RegisterWebTemplate extends LoginRegisterPage { }

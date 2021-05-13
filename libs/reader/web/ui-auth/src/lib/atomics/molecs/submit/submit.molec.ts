@@ -13,6 +13,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, EventEmitter, Output
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SubmitMolec implements OnInit {
+  @Input() noSocial = false;
   @Input() text = 'Đăng nhập';
   @Output() btnClicked = new EventEmitter();
   @Output() socialFBBtnClicked = new EventEmitter();

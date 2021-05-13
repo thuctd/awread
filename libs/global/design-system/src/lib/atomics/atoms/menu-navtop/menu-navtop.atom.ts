@@ -11,10 +11,11 @@ export class MenuNavtopAtom implements OnInit {
   @Input() faIcon = { faSignOutAlt, faInfoCircle };
   @Input() isMenuOpen = false;
 
-  @Input() curentUser = {
-    photourl: '/global-assets/images/avatar-mrmrs.webp',
-    fullname: '',
+  @Input() user = {
+    avatar: '/global-assets/images/avatar-mrmrs.webp',
+    name: '',
     email: '',
+    firstname: '',
   };
   @Output() signoutEvent = new EventEmitter();
   constructor() { }

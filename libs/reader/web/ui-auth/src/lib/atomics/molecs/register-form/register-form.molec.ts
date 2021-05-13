@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { faLock, faEnvelope, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faLock, faEnvelope, faUser, faPhone } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'molec-register-form',
@@ -16,14 +16,14 @@ import { faLock, faEnvelope, faUser } from '@fortawesome/free-solid-svg-icons';
 })
 export class RegisterFormMolec implements OnInit {
   @Input() type = 'password';
-  icons = { faLock, faEnvelope, faUser };
+  icons = { faLock, faEnvelope, faUser, faPhone };
   @Input() form: FormGroup = this.fb.group({
     displayName: ['', [Validators.required]],
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required]],
     confirmPassword: ['', [Validators.required]],
   });
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

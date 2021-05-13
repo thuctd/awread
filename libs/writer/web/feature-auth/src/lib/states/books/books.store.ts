@@ -8,7 +8,7 @@ export interface BooksState extends EntityState<Book>, ActiveState { }
 // export interface BooksUIState extends EntityState<BookUI>, ActiveState {}
 
 @Injectable({ providedIn: 'root' })
-@StoreConfig({ name: 'books', resettable: true, idKey: 'bookid' })
+@StoreConfig({ name: 'books', resettable: true, idKey: 'bookId' })
 export class BooksStore extends EntityStore<BooksState> {
   // ui: EntityUIStore<BookUIState>;
   constructor() {

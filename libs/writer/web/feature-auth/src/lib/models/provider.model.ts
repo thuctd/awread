@@ -1,5 +1,5 @@
 export enum ProviderType {
-    facebook = 'facebook.com',
-    google = 'google.com',
-    apple = 'apple.com',
+    facebook = 'facebook',
+    google = 'google',
+    apple = 'apple',
 }

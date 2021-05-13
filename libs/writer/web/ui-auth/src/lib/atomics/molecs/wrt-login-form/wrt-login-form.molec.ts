@@ -1,5 +1,5 @@
 import { FormGroup } from '@angular/forms';
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { faLock, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 @Component({
@@ -18,10 +18,12 @@ export class WrtLoginFormMolec implements OnInit {
   @Input() type = 'password';
   icons = { faLock, faEnvelope };
   @Input() form: FormGroup = this.fb.group({
-    email: ['', [Validators.required, Validators.email]],
+    loginname: ['', [Validators.required]],
     password: ['', [Validators.required]],
   });
-  constructor(private fb: FormBuilder) {}
+  @Output() auth = new EventEmitter();
+  constructor(private fb: FormBuilder) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
+
 }

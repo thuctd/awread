@@ -7,6 +7,7 @@ import { ReaderWebUiAuthModule } from '@awread/reader/web/ui-auth';
 import { ReaderWebUiAuthorModule } from '@awread/reader/web/ui-author';
 import { ReaderWebUiSingleModule } from '@awread/reader/web/ui-single';
 import { ReaderWebUiMarketModule } from '@awread/reader/web/ui-market';
+import { WriterWebUiAuthModule } from '@awread/writer/web/ui-auth';
 
 declare const window: Window & { haveMobile: boolean };
 
@@ -24,53 +25,36 @@ const routes: Routes = [
   },
 ];
 
-import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
-import {
-  GoogleLoginProvider,
-  FacebookLoginProvider
-} from 'angularx-social-login';
 import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   imports: [
+
     CommonModule,
-    RouterModule.forRoot(routes, {
-      scrollPositionRestoration: 'enabled',
-      scrollOffset: [0, 0],
-      anchorScrolling: 'enabled',
-      onSameUrlNavigation: 'reload',
-    }),
+    HttpClientModule,
     GlobalCoreModule,
     ReaderWebSharedModule,
     ReaderWebUiAuthModule,
     ReaderWebUiAuthorModule,
     ReaderWebUiSingleModule,
     ReaderWebUiMarketModule,
-    SocialLoginModule,
-    HttpClientModule
+    // away be the 2nd last
+    WriterWebUiAuthModule,
+    // aways be the last
+    RouterModule.forRoot(routes, {
+      scrollPositionRestoration: 'enabled',
+      scrollOffset: [0, 0],
+      anchorScrolling: 'enabled',
+      onSameUrlNavigation: 'reload',
+    }),
   ],
   exports: [
     RouterModule,
     GlobalCoreModule,
-    SocialLoginModule,
+
     HttpClientModule
   ],
   providers: [
-    {
-      provide: 'SocialAuthServiceConfig',
-      useValue: {
-        autoLogin: false,
-        providers: [
-          {
-            id: GoogleLoginProvider.PROVIDER_ID,
-            provider: new GoogleLoginProvider('265413764260-sqgbeot6gpv6u7dp6moov7jp2blkvp3i.apps.googleusercontent.com')
-          },
-          {
-            id: FacebookLoginProvider.PROVIDER_ID,
-            provider: new FacebookLoginProvider('1687794138050695')
-          }
-        ]
-      } as SocialAuthServiceConfig,
-    }
+
   ]
 })
 export class ReaderWebFeatureShellModule { }

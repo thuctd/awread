@@ -18,10 +18,10 @@ export class LoginFormMolec implements OnInit {
   @Input() type = 'password';
   icons = { faLock, faEnvelope };
   @Input() form: FormGroup = this.fb.group({
-    email: ['', [Validators.required, Validators.email]],
+    loginname: ['', [Validators.required]],
     password: ['', [Validators.required]],
   });
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

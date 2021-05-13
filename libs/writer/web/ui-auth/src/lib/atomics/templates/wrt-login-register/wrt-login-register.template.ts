@@ -15,9 +15,14 @@ import { TabHead } from '../../../interface/tabs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WrtLoginRegisterTemplate implements OnInit {
-  @Input() authForm: FormGroup = this.fb.group({
-    displayName: ['', Validators.required],
-    email: ['', [Validators.required, Validators.email]],
+  @Input() loginForm: FormGroup = this.fb.group({
+    loginname: ['', Validators.required],
+    password: ['', Validators.required],
+  });
+  @Input() registerForm: FormGroup = this.fb.group({
+    username: ['', Validators.required],
+    email: ['', []],
+    phone: ['', []],
     password: ['', Validators.required],
     confirmPassword: ['', Validators.required],
   });
@@ -29,14 +34,15 @@ export class WrtLoginRegisterTemplate implements OnInit {
   @Input() selectedTab = 'login';
   @Output() regiterEvent = new EventEmitter();
   @Output() auth = new EventEmitter();
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
     console.log('mode: ', this.selectedTab);
   }
 
   toggleTab(event) {
-    this.authForm.reset();
+    this.loginForm.reset();
+    this.registerForm.reset();
     if (this.selectedTab === 'login') {
       this.selectedTab = 'register';
     } else {
