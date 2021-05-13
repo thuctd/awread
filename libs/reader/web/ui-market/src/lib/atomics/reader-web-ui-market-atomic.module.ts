@@ -84,6 +84,7 @@ import { RdNewsBookItemMolec } from './molecs/rd-news-book-item/rd-news-book-ite
 import { RdNewsAwreadHotMolec } from './molecs/rd-news-awread-hot/rd-news-awread-hot.molec';
 import { RdNewsEventItemMolec } from './molecs/rd-news-event-item/rd-news-event-item.molec';
 import { RdNewsAwreadListMolec } from './molecs/rd-news-awread-list/rd-news-awread-list.molec';
+import { RdNewsMbTemplate } from './templates/rd-news-mb/rd-news-mb.template';
 
 @NgModule({
   imports: [CommonModule, StorybookSupportModule, GlobalDesignSystemAtomicModule, CarouselModule, ReaderWebUiAuthorAtomicModule],
@@ -171,6 +172,7 @@ import { RdNewsAwreadListMolec } from './molecs/rd-news-awread-list/rd-news-awre
     RdNewsAwreadHotMolec,
     RdNewsEventItemMolec,
     RdNewsAwreadListMolec,
+    RdNewsMbTemplate,
   ],
   declarations: [
     ListInfoLongBookMolec,
@@ -253,6 +255,7 @@ import { RdNewsAwreadListMolec } from './molecs/rd-news-awread-list/rd-news-awre
     RdNewsAwreadHotMolec,
     RdNewsEventItemMolec,
     RdNewsAwreadListMolec,
+    RdNewsMbTemplate,
   ],
 })
 export class ReaderWebUiMarketAtomicModule {}

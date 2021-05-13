@@ -9,10 +9,10 @@
     </atom-rd-news-title>
   </div>
   <ng-template #list>
-    <div class="grid grid-cols-8 gap-6">
-      <div class="col-span-3 pr-2">
+    <div class="grid grid-cols-9 md:grid-cols-8 gap-6">
+      <div class="col-span-4 md:col-span-3 pr-0 md:pr-2">
         <a [routerLink]="" class="outline-none">
-          <img class="w-full h-28" [src]="newsList.src">
+          <img class="w-full h-24 md:h-28" [src]="newsList.src">
         </a>
       </div>
       <div class="col-span-5">
