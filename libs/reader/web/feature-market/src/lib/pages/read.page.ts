@@ -18,9 +18,7 @@ export class ReadPage implements OnInit {
   chapterId;
   topBookList$ = this.booksFacade.topBooks$;
   bookChapters$ = this.chaptersFacade.chapters$;
-  get breadcrumbs(): string[] {
-    return ['Home', this.chapter?.title, this.chapter?.title];
-  }
+  breadcrumbs;
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private chaptersFacade: ChaptersFacade, private cd: ChangeDetectorRef, private booksFacade: BooksFacade) { }
 
@@ -41,6 +39,16 @@ export class ReadPage implements OnInit {
         this.chapter = chapter[0];
       });
     this.booksFacade.getTopBooks().subscribe();
+  }
+
+  getbreadcrumbs() {
+    return [{
+      title: 'Home',
+      link: '/'
+    }, {
+      title: 'Home',
+      link: '/'
+    }];
   }
 
   navigateToChapter(chapter: Chapter) {

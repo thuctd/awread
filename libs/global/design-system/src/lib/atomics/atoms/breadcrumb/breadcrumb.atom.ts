@@ -15,7 +15,10 @@ import { faHome } from '@fortawesome/free-solid-svg-icons';
 //FIX: Lặp vô hạn(Deatil&&Read)
 export class BreadcrumbAtom implements OnInit {
   @Input() icon = faHome;
-  @Input() items = [];
+  @Input() items = [{
+    title: 'home',
+    link: '/'
+  }];
 
   constructor() { }
 

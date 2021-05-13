@@ -4,9 +4,8 @@ import { ChangeDetectorRef, Directive, Injectable, OnDestroy, OnInit } from '@an
 import { map, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { of, Subject } from 'rxjs';
 import { UntilDestroy } from '@ngneat/until-destroy';
-import { Book } from '@awread/core/books';
-import { BooksFacade } from 'libs/core/books/src/lib/facades/books.facade';
-import { ChaptersFacade } from 'libs/core/chapters/src/lib/facades/chapters.facade';
+import { Book, BooksFacade } from '@awread/core/books';
+import { ChaptersFacade } from '@awread/core/chapters';
 
 @UntilDestroy()
 @Injectable({
@@ -22,9 +21,7 @@ export class DetailPage implements OnInit, OnDestroy {
   topBookList$ = this.booksFacade.topBooks$;
   authorBookList$ = this.booksFacade.authorBooks$;
   chapters$ = this.chaptersFacade.chapters$;
-  get breadcrumbs(): string[] {
-    return ['Home', this.book?.categoryId, this.book?.title];
-  }
+  breadcrumbs;
 
   constructor(
     private router: Router,
@@ -46,9 +43,20 @@ export class DetailPage implements OnInit, OnDestroy {
       )),
     ).subscribe(book => {
       this.book = book[0];
+      this.breadcrumbs = this.getbreadcrumbs();
     })
     this.booksFacade.getTopBooks().subscribe();
     this.getAllChapters();
+  }
+
+  getbreadcrumbs() {
+    return [{
+      title: 'Home',
+      link: '/'
+    }, {
+      title: 'Home',
+      link: '/'
+    }];
   }
 
   private getAllChapters() {
