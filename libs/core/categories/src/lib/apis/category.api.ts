@@ -22,14 +22,14 @@ export class CategoryApi {
         }
       `,
     }).pipe(
-        map(res => res?.['data']?.['allCategories']?.['nodes'])
-      );
+      map(res => res?.['data']?.['allCategories']?.['nodes'])
+    );
   }
 
   getCategoryById(categoryId: string) {
     return this.apollo.query({
       query: gql`
-        query Categories($categoryId: String!) {
+        query Categories($categoryId: BigFloat!) {
           allCategories(condition: { categoryId: $categoryId }) {
             nodes {
               categoryId
@@ -51,6 +51,8 @@ export class CategoryApi {
       variables: {
         categoryId,
       },
-    });
+    }).pipe(
+      map(res => res?.['data']?.['allCategories']?.['nodes'])
+    );;
   }
 }

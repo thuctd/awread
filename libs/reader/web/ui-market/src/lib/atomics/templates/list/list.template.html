@@ -22,16 +22,16 @@
     <div class="col-span-2 xl:col-span-8 lg:col-span-9 md:pr-8">
       <div class="grid grid-cols-12 gap-2 lg:gap-4 xl:gap-6 border-b border-gray-300">
         <ng-container *ngFor="let tab of tabsHead">
-          <div class="col-span-2 md:col-span-4" [ngClass]="selectedTab === tab.type ? 'border-b-2 border-green-primary text-green-primary' : 'text-gray-text'">
-            <molec-tab-categories (changeCategoryBooks)="changeCategoryBooks.emit(tab)" (switchTabEvent)="switchTabEvent.emit(tab.type)" [tab]="tab">
+          <div class="col-span-2 md:col-span-4" [ngClass]="selectedTab === tab.name ? 'border-b-2 border-green-primary text-green-primary' : 'text-gray-text'">
+            <molec-tab-categories (changeCategoryBooks)="changeCategoryBooks.emit(tab)" (switchTabEvent)="switchTabEvent.emit(tab.categoryId)" [tab]="tab">
             </molec-tab-categories>
           </div>
         </ng-container>
       </div>
       <div [ngClass]="filterbook === false ? 'pt-12' : 'pt-28'">
-        <list-detail-long-book (moreEvent)="nativeLongBook.emit($event)" [longbooks]="categoryBooks" [display]="display" *ngIf="selectedTab === 'longbook'"></list-detail-long-book>
-        <list-detail-short-book (moreEvent)="nativeShortBook.emit($event)" [shortbooks]="categoryBooks" [display]="display" *ngIf="selectedTab === 'shortbook'"></list-detail-short-book>
-        <list-detail-prose (moreEvent)="nativeProse.emit($event)" [prosebooks]="categoryBooks" [display]="display" *ngIf="selectedTab === 'prose'"></list-detail-prose>
+        <list-detail-long-book (moreEvent)="nativeLongBook.emit($event)" [longbooks]="categoryBooks" [display]="display" *ngIf="selectedTab === 'Truyện dài'"></list-detail-long-book>
+        <list-detail-short-book (moreEvent)="nativeShortBook.emit($event)" [shortbooks]="categoryBooks" [display]="display" *ngIf="selectedTab === 'Truyện ngắn'"></list-detail-short-book>
+        <list-detail-prose (moreEvent)="nativeProse.emit($event)" [prosebooks]="categoryBooks" [display]="display" *ngIf="selectedTab === 'Tản văn'"></list-detail-prose>
       </div>
     </div>
     <div class="lg:hidden xl:block lg:col-span-1"></div>

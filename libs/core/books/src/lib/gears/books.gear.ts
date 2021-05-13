@@ -91,12 +91,11 @@ export class BooksGear {
   searhBookByTermApi(term: string) {
     return this.booksApi.searchBookByTerm(term).pipe(
       map((result) => result.map(book => {
-        this.transformBookDataGear.tranformBookHomeData(book)
-        // const categoryName = book['categoryByCategoryId'].name;
-        // return {
-        //   ...book,
-        //   categoryName
-        // };
+        const categoryName = book['categoryByCategoryId'].name;
+        return {
+          ...book,
+          categoryName
+        };
       })),
       tap(books => this.searchBooksStore.set(books)));
   }

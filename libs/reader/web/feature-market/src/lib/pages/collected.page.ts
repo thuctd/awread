@@ -60,16 +60,16 @@ export class CollectedPage implements OnInit, OnDestroy {
     this.updateForm();
   }
 
-  switchTab(type: string) {
-    // this.categoryFacede.getDetailCategoryByType(type).subscribe(res => {
-    //   this.categoryId = res.id;
-    //   this.selectedTab = res.type;
-    //   this.filtersForm.get('category').setValue(this.categoryId);
-    //   if (!this.selectedTab) {
-    //     return this.router.navigate(['/']);
-    //   }
-    //   return this.router.navigate(['/collected', { type: this.selectedTab }]);
-    // })
+  switchTab(categoryId: string) {
+    this.categoryFacede.getDetailCategory(categoryId).subscribe(res => {
+      this.categoryId = res[0].categoryId;
+      this.selectedTab = res[0].name;
+      this.filtersForm.get('category').setValue(this.categoryId);
+      if (!this.selectedTab) {
+        return this.router.navigate(['/']);
+      }
+      return this.router.navigate(['/collected', { type: this.categoryId }]);
+    })
   }
 
   filterItemsByCategory(category: Category) {
@@ -103,12 +103,13 @@ export class CollectedPage implements OnInit, OnDestroy {
 
   private loadFirstByCategory() {
     const type = this.activatedRoute.snapshot.paramMap.get('type');
-    // this.categoryFacede.getDetailCategoryByType(type).subscribe(
-    //   res => {
-    //     this.filteredBooks$ = this.booksFacade.getCategoryBooks(res.id);
-    //     this.cd.detectChanges();
-    //   }
-    // );
+    console.log(type);
+    this.categoryFacede.getDetailCategory(type).subscribe(
+      res => {
+        this.filteredBooks$ = this.booksFacade.getCategoryBooks(res[0].categoryId);
+        this.cd.detectChanges();
+      }
+    );
   }
 
   private checkActiveTab() {

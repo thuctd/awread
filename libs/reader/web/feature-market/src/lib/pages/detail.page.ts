@@ -22,8 +22,14 @@ export class DetailPage implements OnInit, OnDestroy {
   topBookList$ = this.booksFacade.topBooks$;
   authorBookList$ = this.booksFacade.authorBooks$;
   chapters$ = this.chaptersFacade.chapters$;
-  get breadcrumbs(): string[] {
-    return ['Home', this.book$?.categoryId, this.book$?.title];
+  get breadcrumbs() {
+    return [{
+      title: 'Home',
+      link: '/a'
+    }, {
+      title: 'Home',
+      link: '/b'
+    }];
   }
 
   constructor(

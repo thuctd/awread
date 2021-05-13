@@ -176,7 +176,7 @@ export class BooksApi {
   getCategoryBooks(categoryId: string) {
     return this.apollo.query({
       query: gql`
-        query allBooks($categoryId: UUID!) {
+        query allBooks($categoryId: BigFloat!) {
           allBooks(first: 10, condition: { categoryId: $categoryId }) {
             nodes {
               bookId

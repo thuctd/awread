@@ -42,10 +42,10 @@ export class ListTemplate implements OnInit {
 
   @Input() titlePage: string;
   @Input() tabsHead = [
-    { name: 'Truyện dài', type: 'longbook', isActive: true },
+    { categoryId: 1, name: 'Truyện dài', type: 'longbook', isActive: true },
   ];
 
-  @Input() selectedTab = 'longbook';
+  @Input() selectedTab = '1';
   @Output() switchTabEvent = new EventEmitter();
   @Output() eventSearch = new EventEmitter();
   @Output() changeCategoryBooks = new EventEmitter();

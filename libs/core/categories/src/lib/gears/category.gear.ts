@@ -16,7 +16,9 @@ export class CategoryGear {
 
   getCategoryById(categoryId: string) {
     return this.categoryApi.getCategoryById(categoryId).pipe(
-      tap((res) => { }),
+      map((category) => {
+        return category;
+      }),
       catchError((err) => {
         console.error('An error occurred:', err);
         return throwError(err);

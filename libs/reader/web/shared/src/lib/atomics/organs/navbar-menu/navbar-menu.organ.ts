@@ -21,17 +21,17 @@ export class NavbarMenuOrgan implements OnInit {
         menu: [
           {
             page: '/composed',
-            type: 'longbook',
+            type: '1',
             title: 'Truyện dài',
           },
           {
             page: '/composed',
-            type: 'shortbook',
+            type: '2',
             title: 'Truyện ngắn',
           },
           {
             page: '/composed',
-            type: 'prose',
+            type: '3',
             title: 'Tản văn',
           },
         ],
@@ -41,17 +41,17 @@ export class NavbarMenuOrgan implements OnInit {
         menu: [
           {
             page: '/collected',
-            type: 'longbook',
+            type: '1',
             title: 'Truyện dài',
           },
           {
             page: '/collected',
-            type: 'shortbook',
+            type: '2',
             title: 'Truyện ngắn',
           },
           {
             page: '/collected',
-            type: 'prose',
+            type: '3',
             title: 'Tản văn',
           },
         ],
@@ -82,7 +82,7 @@ export class NavbarMenuOrgan implements OnInit {
     ],
   };
   @Input() color = 'text-white';
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }
