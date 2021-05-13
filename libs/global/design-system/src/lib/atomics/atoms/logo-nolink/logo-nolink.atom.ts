@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, SimpleChanges, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'atom-logo-nolink',
@@ -12,11 +12,24 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LogoNolinkAtom implements OnInit {
+export class LogoNolinkAtom implements OnInit, OnChanges {
+  @Input() mode: 'new' | undefined;
   @Input() link = '/global-assets/images/logo-white.webp';
   @Input() numberSize = '28';
+  constructor() { }
 
-  constructor() {}
+  ngOnInit(): void { }
 
-  ngOnInit(): void {}
+  //LEARN: ngOnChanges
+  ngOnChanges(changes: SimpleChanges) {
+    console.log('changes', changes);
+    switch (changes?.mode.currentValue) {
+      case 'new':
+        this.link = '/global-assets/images/newlogo.webp';
+        break;
+      default:
+        this.link = '/global-assets/images/logo-white.webp';
+        break;
+    }
+  }
 }

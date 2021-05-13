@@ -2,14 +2,14 @@
     <div class="py-2 px-4 mb-2 bg-white">
         <div class="flex items-center mb-1">
             <span class="text-xs">Thành viên: </span>
-            <span class="text-xs text-yellow-500 ml-3">BlackCu </span>
+            <span class="text-xs text-yellow-500 ml-3"> {{ user.name ? user.name : user.firstname }} </span>
         </div>
         <div class="flex items-center mb-1">
             <span class="text-xs">Coin: </span>
             <span class="text-xs ml-4">0 </span>
             <fa-icon class="ml-6 text-green-primary" [icon]="icons.faCoins"></fa-icon>
         </div>
-        <div class="flex items-center mb-1">
+        <div class="flex items-center mb-1z">
             <span class="text-xs">VIP: </span>
             <span class="text-xs ml-4">1 </span>
         </div>
@@ -19,7 +19,7 @@
             <atom-dropdown-link [title]="item.title" [routerLink]="item.href"></atom-dropdown-link>
         </li>
     </ul>
-    <button class="py-2 px-4 bg-white w-full flex items-center focus:outline-none">
+    <button (click)="logoutEvent.emit()" class="py-2 px-4 bg-white w-full flex items-center focus:outline-none">
         <span class="text-xs">Đăng xuất</span>
         <fa-icon class="ml-6 text-xs" [icon]="icons.faArrowRight"  ></fa-icon>
     </button>

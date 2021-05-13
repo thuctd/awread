@@ -1,6 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'organ-navbar-buttons',
@@ -15,10 +14,12 @@ import { Router } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavbarButtonsOrgan implements OnInit {
+  @Input() user = {};
   @Input() isLogin = false;
   @Input() items = [];
   @Input() searchControl = new FormControl();
   @Output() eventSearch = new EventEmitter();
+  @Output() logoutEvent = new EventEmitter();
   constructor() { }
 
   ngOnInit(): void { }

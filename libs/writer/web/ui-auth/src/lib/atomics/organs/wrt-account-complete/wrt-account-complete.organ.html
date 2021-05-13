@@ -1,3 +1,6 @@
 <wrt-auth-header [title]="title" [description]="description"></wrt-auth-header>
-<wrt-login-form [form]="formComplete"></wrt-login-form>
-<normal-login-btn (keydown.enter)='completeEvent.emit()' (btnClicked)="completeEvent.emit()" [name]="'Cập nhật'" [active]="formComplete.valid"></normal-login-btn>
+<wrt-action-btns (auth)="linkSocialEvent.emit($event)" [title]="'Liên kết tài khoản mạng xã hội để đăng nhập nhanh hơn!'"> </wrt-action-btns>
+
+<molec-wrt-register-complete-form [form]="formComplete"></molec-wrt-register-complete-form>
+<normal-login-btn (keydown.enter)='completeEvent.emit()' (btnClicked)="completeEvent.emit()" [name]="'Cập nhật'" [active]="formComplete.valid">
+</normal-login-btn>

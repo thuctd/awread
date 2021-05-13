@@ -43,7 +43,13 @@ function domainDeviceVersion(schema, deviceVersion: 'web' | 'phone') {
     }),
     schematic('shared', {
       directory,
-    })
+    }),
+    (tree: Tree) => {
+      tree.delete(`${directory}/assets/.gitkeep`);
+      tree.delete(`${directory}/environments/environment.prod.ts`);
+      tree.delete(`${directory}/environments/environment.ts`);
+      return tree;
+    }
   ];
   return chain;
 }

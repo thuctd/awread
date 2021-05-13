@@ -15,7 +15,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 })
 export class WrtProfileEditFormMolec implements OnInit {
   @Input() profileForm: FormGroup = this.fb.group({
-    fullname: ['', [Validators.required]],
+    name: ['', [Validators.required]],
     username: ['', [Validators.required]],
     website: ['', [Validators.required]],
     introduce: ['', [Validators.required]],
@@ -23,7 +23,7 @@ export class WrtProfileEditFormMolec implements OnInit {
   @Input() submitted: boolean;
   items = [{ key: 'Tên' }, { key: 'Tên tài khoản' }, { key: 'Liên kết' }];
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

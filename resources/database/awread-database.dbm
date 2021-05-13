@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="0,304" last-zoom="0.95" max-obj-count="15"
+<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="0,502" last-zoom="0.95" max-obj-count="15"
 	 default-owner="postgres">
 <role name="anonymous">
 </role>
@@ -45,7 +45,8 @@ grant writer to postgraphile;
 
 grant connect on database awread_database  to anonymous, reader, writer, postgraphile;
 grant usage on schema public to anonymous, reader, writer, postgraphile;
-GRANT SELECT ON ALL TABLES IN SCHEMA public to anonymous, reader, writer, postgraphile;]]></appended-sql>
+GRANT SELECT ON ALL TABLES IN SCHEMA public to anonymous, reader, writer, postgraphile;
+grant update on public.users to reader;]]></appended-sql>
 	<typeattrib name="userId">
 		<type name="uuid" length="0"/>
 	</typeattrib>
@@ -136,7 +137,7 @@ GRANT SELECT ON ALL TABLES IN SCHEMA public to anonymous, reader, writer, postgr
 	</constraint>
 </table>
 
-<table name="users" layer="0" collapse-mode="2" max-obj-count="14" z-value="0">
+<table name="users" layer="0" collapse-mode="2" max-obj-count="26" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
 	<position x="460" y="800"/>
@@ -149,7 +150,7 @@ GRANT SELECT ON ALL TABLES IN SCHEMA public to anonymous, reader, writer, postgr
 	<column name="email">
 		<type name="text" length="0"/>
 	</column>
-	<column name="name" not-null="true">
+	<column name="name">
 		<type name="text" length="0"/>
 	</column>
 	<column name="role" default-value="'reader'">
@@ -170,10 +171,40 @@ GRANT SELECT ON ALL TABLES IN SCHEMA public to anonymous, reader, writer, postgr
 	<column name="age" default-value="2">
 		<type name="numeric" length="0"/>
 	</column>
-	<column name="provider" default-value="'password'">
+	<column name="firstname">
 		<type name="text" length="0"/>
 	</column>
-	<column name="providerId">
+	<column name="middlename">
+		<type name="text" length="0"/>
+	</column>
+	<column name="lastname">
+		<type name="text" length="0"/>
+	</column>
+	<column name="avatar">
+		<type name="text" length="0"/>
+	</column>
+	<column name="facebook">
+		<type name="text" length="0"/>
+	</column>
+	<column name="apple">
+		<type name="text" length="0"/>
+	</column>
+	<column name="google">
+		<type name="text" length="0"/>
+	</column>
+	<column name="websiteAddress">
+		<type name="text" length="0"/>
+	</column>
+	<column name="facebookAddress">
+		<type name="text" length="0"/>
+	</column>
+	<column name="dob">
+		<type name="text" length="0"/>
+	</column>
+	<column name="gender">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="bio">
 		<type name="text" length="0"/>
 	</column>
 	<constraint name="users_pk" type="pk-constr" table="public.users">
@@ -358,7 +389,7 @@ GRANT SELECT ON ALL TABLES IN SCHEMA public to anonymous, reader, writer, postgr
 	<type name="trigger" length="0"/>
 	</return-type>
 	<definition><![CDATA[begin
-	new.update_at := current_timestamp;
+	new."updatedAt" := current_timestamp;
 	return new;
 end;]]></definition>
 </function>
@@ -386,7 +417,7 @@ end;]]></definition>
 	</constraint>
 </table>
 
-<function name="start_new_chapter"
+<function name="new_chapter"
 		window-func="false"
 		returns-setof="false"
 		behavior-type="CALLED ON NULL INPUT"
@@ -400,8 +431,17 @@ end;]]></definition>
 	<return-type>
 	<type name="uuid" length="0"/>
 	</return-type>
-	<parameter name="chapter">
-		<type name="jsonb" length="0"/>
+	<parameter name="title">
+		<type name="text" length="0"/>
+	</parameter>
+	<parameter name="published">
+		<type name="boolean" length="0"/>
+	</parameter>
+	<parameter name="position">
+		<type name="numeric" length="0"/>
+	</parameter>
+	<parameter name="bookId">
+		<type name="uuid" length="0"/>
 	</parameter>
 	<definition><![CDATA[/*
 declare 
@@ -418,22 +458,22 @@ values(
 
 declare 
 "newChapterId" uuid;
+"inputBookId" uuid := "bookId";
+"inputTitle" text := title;
+"inputPosition" numeric := position;
+"inputPublished" boolean := published;
+"inputContent" text := content;
 begin
 
-insert into chapters(published, position, "bookId", title)
-values(
-(chapter ->> 'published')::boolean,
-(chapter ->> 'position')::numeric,
-(chapter ->> 'bookId')::uuid,
-(chapter ->> 'title')::text
-) 
+insert into chapters("bookId", title, position, published)
+values("inputBookId", "inputTitle", "inputPosition", "inputPublished") 
 returning "chapterId"
 into "newChapterId";
 
 
 
 insert into contents("chapterId", content)
-values("newChapterId", (chapter ->> 'content')::text);
+values("newChapterId", "inputContent");
 
 return "newChapterId";
 end;]]></definition>
@@ -510,7 +550,7 @@ end;]]></definition>
 		<function signature="public.&quot;set_updateAt&quot;()"/>
 </trigger>
 
-<function name="register_user"
+<function name="new_user"
 		window-func="false"
 		returns-setof="false"
 		behavior-type="CALLED ON NULL INPUT"
@@ -522,61 +562,68 @@ end;]]></definition>
 	<role name="postgres"/>
 	<language name="plpgsql"/>
 	<return-type>
-	<type name="public.users" length="0"/>
+	<parameter name="case">
+		<type name="text" length="0"/>
+	</parameter>
+	<parameter name="user">
+		<type name="public.users" length="0"/>
+	</parameter>
+	<parameter name="accessToken">
+		<type name="public.jwt_token" length="0"/>
+	</parameter>
 	</return-type>
 	<parameter name="username">
+		<type name="text" length="0"/>
+	</parameter>
+	<parameter name="password">
 		<type name="text" length="0"/>
 	</parameter>
 	<parameter name="email">
 		<type name="text" length="0"/>
 	</parameter>
 	<parameter name="phone">
-		<type name="numeric" length="0"/>
-	</parameter>
-	<parameter name="name">
-		<type name="text" length="0"/>
-	</parameter>
-	<parameter name="age">
-		<type name="numeric" length="0"/>
-	</parameter>
-	<parameter name="password">
-		<type name="text" length="0"/>
-	</parameter>
-	<parameter name="provider">
-		<type name="text" length="0"/>
-	</parameter>
-	<parameter name="providerId">
 		<type name="text" length="0"/>
 	</parameter>
 	<definition><![CDATA[declare 
 	"userAccount" public.users;
-
+	"inputUsername" text := username;
+	"inputEmail" text := email;
+	"inputPhone" text := phone;
+	"accessToken" public.jwt_token;
 begin
-	insert into public.users(
-		username,
-		email,
-		phone,
-		name,
-		age,
-		provider,
-		"providerId"
-	) values (
-		username, 
-		email,
-		phone, 
-		name,
-		age,
-		provider,
-		"providerId"
-	)
-	returning * into "userAccount";	
-	
-	insert into private.users("userId", "passwordHash") values(
-		"userAccount"."userId",
-		crypt(password, gen_salt('bf'))
-    );
- 	return "userAccount";
 
+	select * into "userAccount"
+	from public.users as u
+	where 
+	(u.username = "inputUsername" and length("inputUsername") > 0) or
+	(u.email = "inputEmail" and length("inputEmail") > 0 ) or
+	(u.phone = "inputPhone" and length("inputPhone") > 0);
+
+	if "userAccount" IS NULL then 
+
+		insert into public.users(
+			username,
+			email,
+			phone
+		) values (
+			username, 
+			email,
+			phone
+		)
+		returning * into "userAccount";	
+
+		insert into private.users("userId", "passwordHash") values(
+			"userAccount"."userId",
+			crypt(password, gen_salt('bf'))
+	    );
+
+		"accessToken" := (account."userId", account.role, extract(epoch from (now() + interval '3 months')))::public.jwt_token;
+
+		return query select 'success', "userAccount", "accessToken";
+		
+	else
+		return query select 'duplicated', "userAccount", "accessToken";
+	end if;
 end;]]></definition>
 </function>
 
@@ -592,7 +639,15 @@ end;]]></definition>
 	<role name="postgres"/>
 	<language name="plpgsql"/>
 	<return-type>
-	<type name="public.jwt_token" length="0"/>
+	<parameter name="accessToken">
+		<type name="public.jwt_token" length="0"/>
+	</parameter>
+	<parameter name="user">
+		<type name="public.users" length="0"/>
+	</parameter>
+	<parameter name="matchPassword">
+		<type name="boolean" length="0"/>
+	</parameter>
 	</return-type>
 	<parameter name="loginname">
 		<type name="text" length="0"/>
@@ -601,9 +656,10 @@ end;]]></definition>
 		<type name="text" length="0"/>
 	</parameter>
 	<definition><![CDATA[declare 
+	"accessToken" public.jwt_token;
 	account public.users;
+	"matchPassword" boolean := false;
 	"accountPasswordHash" text;
-
 begin
   select * into account
   from public.users
@@ -616,11 +672,16 @@ begin
 	from private.users
 	where account."userId" = "userId";
 
-  if "accountPasswordHash" = crypt(password, "accountPasswordHash" ) then
-    return (account."userId", account.role, extract(epoch from (now() + interval '3 months')))::public.jwt_token;
-  else
-    return null;
-  end if;
+	"matchPassword"  := "accountPasswordHash" = crypt(password, "accountPasswordHash" );
+
+  	if "matchPassword" then
+		"accessToken" := (account."userId", account.role, extract(epoch from (now() + interval '3 months')))::public.jwt_token;
+    	return query select "accessToken", account, "matchPassword";
+  	elsif account is not null then 
+		return query select "accessToken", account, "matchPassword";
+	else 
+    	return query select "accessToken", account, "matchPassword";
+  	end if;
 end;]]></definition>
 </function>
 
@@ -631,6 +692,7 @@ end;]]></definition>
 	<reference>
 		<expression><![CDATA["bookId",
 title,
+cover,
 "userId",
 ARRAY_AGG(public.books_genres."genreId") as "genreIds"]]></expression>
 	</reference>
@@ -795,29 +857,76 @@ grant reader to postgraphile;
 grant writer to postgraphile;]]></appended-sql>
 	<language name="plpgsql"/>
 	<return-type>
-	<type name="public.jwt_token" length="0"/>
+	<parameter name="accessToken">
+		<type name="public.jwt_token" length="0"/>
+	</parameter>
+	<parameter name="user">
+		<type name="public.users" length="0"/>
+	</parameter>
 	</return-type>
-	<parameter name="userProvider">
+	<parameter name="provider">
 		<type name="text" length="0"/>
 	</parameter>
-	<parameter name="userProviderId">
+	<parameter name="providerId">
 		<type name="text" length="0"/>
 	</parameter>
 	<definition><![CDATA[declare 
+	"accessToken" public.jwt_token;
 	account public.users;
-
+	"userProvider" text := provider;
+	"userProviderId" text := "providerId";
 begin
-  select * into account
+  execute format('
+select *
   from public.users
   where
-	public.users.provider = "userProvider" and
-	public.users."providerId" = "userProviderId";
+	public.users.%I = %L; 
+', "userProvider", "userProviderId") into account;
 
-  if account is not null  then
-    return (account."userId", account.role, extract(epoch from (now() + interval '3 months')))::public.jwt_token;
+
+  if account is null  then
+	return query select "accessToken", account;
+   
   else
-    return null;
+   return query select (account."userId", account.role, extract(epoch from (now() + interval '3 months')))::public.jwt_token, account; 
   end if;
+end;]]></definition>
+</function>
+
+<function name="get_author_books"
+		window-func="false"
+		returns-setof="true"
+		behavior-type="CALLED ON NULL INPUT"
+		function-type="VOLATILE"
+		security-type="SECURITY INVOKER"
+		execution-cost="1"
+		row-amount="1000">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<language name="plpgsql"/>
+	<return-type>
+	<type name="public.mv_books_latest_chapters" length="0"/>
+	</return-type>
+	<parameter name="userId">
+		<type name="uuid" length="0"/>
+	</parameter>
+	<definition><![CDATA[
+declare 
+	"authorId" uuid := "userId";
+begin
+	return query select
+	   b."bookId",
+	   b.title,
+	   b."updatedAt",
+	   b."categoryId",
+	   b."newestChapters"
+	from
+	   public.mv_books_latest_chapters as b
+	   natural join public.authors as a
+	where 
+		a."userId" = "authorId"
+	order by
+		b."updatedAt" desc;
 end;]]></definition>
 </function>
 

@@ -6,8 +6,7 @@
     <molec-interrogatory (submitEvent)="openFormRegisterMobile($event)"></molec-interrogatory>
   </div>
   <molec-login-form class="mt-4" #loginForm [form]="authForm"></molec-login-form>
-  <molec-remember-forgot-password></molec-remember-forgot-password>
-  <molec-submit class="mt-6" (btnClicked)="auth.emit()" (socialFBBtnClicked)="auth.emit('facebook')" (socialGGBtnClicked)="auth.emit('google')"
+  <molec-submit class="mt-6" (btnClicked)="auth.emit('email')" (socialFBBtnClicked)="auth.emit('facebook')" (socialGGBtnClicked)="auth.emit('google')"
     [active]="loginForm.form.valid">
   </molec-submit>
 </section>

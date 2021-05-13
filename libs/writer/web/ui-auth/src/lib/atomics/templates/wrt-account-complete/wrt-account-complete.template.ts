@@ -14,7 +14,8 @@ import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter } from
 })
 export class WrtAccountCompleteTemplate implements OnInit {
   @Output() submitEvent = new EventEmitter();
-  constructor() {}
+  @Output() linkSocialEvent = new EventEmitter();
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

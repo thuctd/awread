@@ -16,11 +16,11 @@ import { Validators, FormBuilder } from '@angular/forms';
 export class WrtLoginOrgan implements OnInit {
   @Input() forgotLink = '/forgot';
   @Input() authForm = this.fb.group({
-    email: ['', [Validators.required, Validators.email]],
+    loginname: ['', Validators.required],
     password: ['', Validators.required],
   });
   @Output() auth = new EventEmitter();
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

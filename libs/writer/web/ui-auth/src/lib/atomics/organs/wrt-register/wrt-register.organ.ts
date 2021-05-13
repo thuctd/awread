@@ -16,12 +16,12 @@ import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter, Input
 export class WrtRegisterOrgan implements OnInit {
   @Output() regiterEvent = new EventEmitter();
   @Input() authForm: FormGroup = this.fb.group({
-    displayName: ['', Validators.required],
+    username: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
     password: ['', Validators.required],
     confirmPassword: ['', Validators.required],
   });
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

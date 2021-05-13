@@ -1,7 +1,7 @@
 import { map, startWith, switchMap, takeUntil } from 'rxjs/operators';
 import { tap } from 'rxjs/operators';
 import { CategoryFacade, ChaptersFacade, GenresFacade } from '@awread/writer/web/feature-auth';
-import { CurrentUserFacade } from '@awread/writer/web/feature-auth';
+import { CurrentUserFacade } from '@awread/core/users';
 import { BooksFacade } from '@awread/writer/web/feature-auth';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -40,7 +40,7 @@ export class DetailPage implements OnInit, OnDestroy {
     private genresFacade: GenresFacade,
     private router: Router,
     private cd: ChangeDetectorRef
-  ) {}
+  ) { }
 
   get f() {
     return this.bookForm.controls;
@@ -274,7 +274,7 @@ export class DetailPage implements OnInit, OnDestroy {
     const status = this.bookForm.get('status').value;
     this.chaptersFacade
       .removeChapter(chapter.chapterid, bookId, status)
-      .pipe(tap((res) => {}))
+      .pipe(tap((res) => { }))
       .subscribe((res) => {
         console.log('remove chapter res: ', res);
       });

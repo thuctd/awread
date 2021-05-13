@@ -1,6 +1,6 @@
 import { Directive, Injectable, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CurrentUserFacade } from '@awread/writer/web/feature-auth';
+import { CurrentUserFacade } from '@awread/core/users';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +14,7 @@ export class ProfilePage implements OnInit {
   constructor(
     private currentUserFacade: CurrentUserFacade,
     private fb: FormBuilder
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -22,62 +22,54 @@ export class ProfilePage implements OnInit {
   }
 
   updateProfile() {
-    this.submitted = true;
-    if (this.profileForm.invalid) {
-      return;
-    }
-
-    const { fullname } = this.profileForm.value;
-    if (!fullname.trim()) {
-      alert('Tên không được để trống');
-      return;
-    }
-    const shouldUpdateProfile =
-      JSON.stringify(this.profileFormValueBefore) !==
-      JSON.stringify(this.profileForm.value);
-    if (shouldUpdateProfile) {
-      const user = {
-        ...this.profileForm.value,
-        userid: this.currentUserFacade.getUserId(),
-      };
-      this.currentUserFacade
-        .updateCurrentUser(user)
-        .subscribe((res) => console.log('update cureent user result: ', res));
-    }
+    this.currentUserFacade.updateCurrentUser(this.profileForm.value);
   }
 
   private updateProfileForm(user) {
     this.profileForm.patchValue({
-      fullname: user.fullname ?? '',
-      username: user.username ?? '',
-      website: user.website ?? '',
-      introduce: user.introduce ?? '',
-      email: user.email ?? '',
-      phone: user.phone ?? '',
-      dob: user.dob ?? '',
-      gender: user.gender ?? '',
+      username: user.username,
+      email: user.email,
+      phone: user.phone,
+      name: user.name,
+      firstname: user.firstname,
+      middlename: user.middlename,
+      lastname: user.lastname,
+      age: user.age,
+      avatar: user.avatar,
+      dob: user.dob,
+      gender: user.gender,
+      bio: user.bio,
+      websiteAddress: user.websiteAddress,
+      facebookAddress: user.facebookAddress,
+
     });
     this.profileFormValueBefore = this.profileForm.value;
   }
   private getCurrentUser() {
-    this.currentUserFacade.getCurrentUser().subscribe((user) => {
-      if (user && user.length) {
-        this.updateProfileForm(user[0]);
-      }
-    });
+    this.currentUserFacade.getCurrentUser()
+      .subscribe((user) => {
+        if (user) {
+          this.updateProfileForm(user);
+        }
+      });
   }
 
   private initForm() {
     this.profileForm = this.fb.group({
-      fullname: ['', Validators.required],
-      username: [''],
-      website: [''],
-      introduce: [''],
-      email: ['', [Validators.email]],
-      phone: [''],
-      dob: [''],
-      gender: [''],
-      photoUrl: [''],
+      username: [null],
+      email: [null],
+      phone: [null],
+      name: [null],
+      firstname: [null],
+      middlename: [null],
+      lastname: [null],
+      age: [null],
+      avatar: [null],
+      dob: [null],
+      gender: [null],
+      bio: [null],
+      websiteAddress: [null],
+      facebookAddress: [null],
     });
   }
 }

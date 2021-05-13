@@ -8,16 +8,14 @@ export class CategoryGear {
   constructor(
     private categoryApi: CategoryApi,
     private categoriesStore: CategoriesStore
-  ) {}
+  ) { }
 
   getAllCategories() {
-    return this.categoryApi.getAllCategories().pipe(
-      tap((res) => {
-        console.log('ctaegories: ', res);
-        if (res['data'] && res['data']['allCategories']['nodes'].length) {
-          this.categoriesStore.set(res['data']['allCategories']['nodes']);
-        }
+    return this.categoryApi.allCategories().pipe(
+      tap((result) => {
+        console.log('result: ', result);
+        this.categoriesStore.set(result);
       })
-    );
+    ).subscribe();
   }
 }

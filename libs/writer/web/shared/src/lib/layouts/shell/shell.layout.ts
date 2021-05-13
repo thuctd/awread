@@ -1,4 +1,4 @@
-import { CurrentUserFacade, AuthFacade } from '@awread/writer/web/feature-auth';
+import { CurrentUserFacade, AuthFacade } from '@awread/core/users';
 import { Directive, Injectable, OnInit } from '@angular/core';
 
 @Injectable({
@@ -11,10 +11,10 @@ export class ShellLayout implements OnInit {
   constructor(
     private currentUserFacade: CurrentUserFacade,
     private authFacade: AuthFacade
-  ) {}
+  ) { }
 
-  ngOnInit(): void {}
-  searchEvent(term: string) {}
+  ngOnInit(): void { }
+  searchEvent(term: string) { }
 
   logout() {
     this.authFacade.logout();

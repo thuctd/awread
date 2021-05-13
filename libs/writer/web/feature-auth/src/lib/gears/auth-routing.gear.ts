@@ -5,13 +5,13 @@ import { Router } from '@angular/router';
 export class AuthRoutingGear {
   loginCompleteRoute = '/profile';
   registerCompleteRoute = '/profile';
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
 
   navigateAfterRegisterComplete(router: string) {
     this.router.navigateByUrl(router);
   }
 
-  navigateAfterLoginComplete(router: string, params?) {
+  navigateAfterLoginComplete(router: string = 'profile', params?) {
     if (params) {
       // pass object len url thi moi gia tri deu la string, emailVerified se nhan string la 'true'
       this.router.navigate([router, params]);
