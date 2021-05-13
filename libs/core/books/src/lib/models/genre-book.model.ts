@@ -1,4 +1,4 @@
-import { Genre } from "libs/core/genres/src/lib/models/genre.model";
+import { Genre } from "@awread/core/genres";
 export interface GenreBook {
   bookId: string;
   cover: string;

@@ -1,13 +1,13 @@
+/* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import { takeWhile, switchMap, retry, tap, takeUntil, debounceTime } from 'rxjs/operators';
 import { of, Subject, Observable } from 'rxjs';
-/* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import { Directive, Injectable, OnInit, OnDestroy } from '@angular/core';
-import { Genre } from 'libs/core/genres/src/lib/models';
+import { Genre } from '@awread/core/genres';
+import { Category } from '@awread/core/categories';
 import { BooksFacade } from 'libs/core/books/src/lib/facades/books.facade';
 import { GenresFacade } from 'libs/core/genres/src/lib/facades/genres.facade';
 import { SliderFacade } from 'libs/core//slider/src/lib/facades/slider.facade';
-import { CategoryFacade } from 'libs/core/categories/src/lib/facades/category.facade';
-import { Category } from 'libs/core/categories/src/lib/models';
+import { CategoriesFacade } from 'libs/core/categories/src/lib/facades/categories.facade';
 
 @Injectable({
   providedIn: 'root',
@@ -21,7 +21,7 @@ export class HomePage implements OnInit, OnDestroy {
   genreBookList$ = this.booksFacade.genreBooks$;
   featureBookList$ = this.booksFacade.featureBooks$;
   genreBooks$ = this.booksFacade.genreBooks$;
-  categories$ = this.categoryFacade.categories$;
+  categories$ = this.categoriesFacade.categories$;
   genres$ = this.genresFacade.genres$;
   imageObject$ = this.sliderFacede.slider$;
   isLoading$ = this.booksFacade.selectLoadingAkita();
@@ -33,14 +33,13 @@ export class HomePage implements OnInit, OnDestroy {
     private booksFacade: BooksFacade,
     private sliderFacede: SliderFacade,
     private genresFacade: GenresFacade,
-    private categoryFacade: CategoryFacade
+    private categoriesFacade: CategoriesFacade
   ) { }
 
   ngOnInit(): void {
-    this.categoryFacade.getAllCategories().subscribe();
+    this.categoriesFacade.getAllCategories().subscribe();
     this.booksFacade.getAllBooks().subscribe();
     this.genresFacade.getAllGenres().subscribe();
-    this.categoryFacade.getAllCategories().subscribe();
     this.sliderFacede.getAllSlider().subscribe();
     this.booksFacade.getGoodBooks().subscribe();
     this.booksFacade.getFeatureBooks().subscribe();

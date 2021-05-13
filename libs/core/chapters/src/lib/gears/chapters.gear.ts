@@ -14,8 +14,8 @@ export class ChaptersGear {
 
   getAllChapters(bookId: string) {
     return this.chaptersApi.getAllChapters(bookId).pipe(
-      map((chapters) => { return this.transformDataChapters(chapters)}),
-      tap(chapters => {this.chaptersStore.set(chapters)})
+      map((chapters) => { return this.transformDataChapters(chapters) }),
+      tap(chapters => { this.chaptersStore.set(chapters) })
     );
   }
 
@@ -31,7 +31,6 @@ export class ChaptersGear {
   private transformDataChapters(chapters) {
     let chapterLength = chapters.length;
     return chapters.map((item, index) => {
-      // them so chuong cho moi chhapter
       chapterLength = chapterLength - 1;
       return { ...item, chapterNumber: chapterLength + 1 };
     });

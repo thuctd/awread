@@ -1,1 +1,1 @@
-export * from './category.facade'
+export * from './categories.facade'

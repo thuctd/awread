@@ -13,9 +13,11 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BooksGridOrgan implements OnInit {
-  @Input() bookId = '';
-  @Input() title = 'Em là nhà';
-  @Input() imgUrl = '';
+  @Input() book = {
+    bookId: '',
+    title: 'Em là nhà',
+    cover: ''
+  }
   @Input() chapters = [];
 
   constructor() { }

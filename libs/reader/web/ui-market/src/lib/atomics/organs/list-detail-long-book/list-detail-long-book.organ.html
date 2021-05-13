@@ -1,17 +1,17 @@
 <section class="mx-auto">
   <ng-container *ngIf="longbooks?.length; else noData">
     <div class="grid grid-cols-12 gap-10 lg:gap-x-10 xl:gap-x-14 place-content-center" *ngIf="!(display === 'grid');else list_content">
-      <div *ngFor="let book of longbooks;" class="col-span-2 md:col-span-4">
+      <div *ngFor="let book of longbooks| slice:0:9;" class="col-span-2 md:col-span-4">
         <div>
-          <atom-img-m [srcImg]="book.imgUrl" [bookId]="book.id"></atom-img-m>
-          <list-info-long-book [bookId]="book.id" [titleBook]="book.title"></list-info-long-book>
+          <atom-img-m [srcImg]="book.cover" [bookId]="book.bookId"></atom-img-m>
+          <list-info-long-book [book]="book" [btns]="book['chaptersByBookId']['nodes']"></list-info-long-book>
         </div>
       </div>
     </div>
     <ng-template #list_content>
       <div class="grid grid-cols-12 gap-10 place-content-center">
         <div *ngFor="let book of longbooks;" class="col-span-2 md:col-span-6">
-          <organ-books-grid [imgUrl]="book.imgUrl" [bookId]="book.id" [title]="book.title"></organ-books-grid>
+          <organ-books-grid [book]="book" [chapters]="book['chaptersByBookId']['nodes']"></organ-books-grid>
         </div>
       </div>
     </ng-template>

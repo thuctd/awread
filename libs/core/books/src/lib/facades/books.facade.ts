@@ -117,7 +117,8 @@ export class BooksFacade {
   }
 
   getFilterBooks() {
-    return this.booksGear.getFilterBooks(this.booksQuery.getCurrentFilter());
+    console.log(this.booksQuery.getCurrentFilter());
+    // return this.booksGear.getFilterBooks(this.booksQuery.getCurrentFilter());
   }
 
   searchBookApi(term: string) {

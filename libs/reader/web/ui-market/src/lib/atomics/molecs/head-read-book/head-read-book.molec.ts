@@ -14,6 +14,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
+//FIX: Giá trị mặc định của chương, routerLink
 export class HeadReadBookMolec implements OnInit {
   @Input() defaultSelect;
   @Input() chapters = [];

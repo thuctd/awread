@@ -14,12 +14,17 @@ import { faComments } from '@fortawesome/free-solid-svg-icons';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListInfoShortBookMolec implements OnInit {
-  @Input() bookId = '';
+  @Input() book = {
+    title: 'Cô gái chúng ta cùng theo đuổi năm nào',
+    bookId: ''
+  };
   @Input() countComment = '40';
   @Input() faIcon = faComments;
-  @Input() book = 'Cô gái chúng ta cùng theo đuổi năm nào';
 
-  @Input() btns = ['Chương 1', 'Chương 2'];
+  @Input() btns = [{
+    position: '1',
+    chapterId: ''
+  }];
   @Output() submitEvent = new EventEmitter();
 
   constructor() { }

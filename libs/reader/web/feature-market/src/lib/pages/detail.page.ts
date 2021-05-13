@@ -1,12 +1,12 @@
-
+/* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import { ActivatedRoute, Router } from '@angular/router';
 import { ChangeDetectorRef, Directive, Injectable, OnDestroy, OnInit } from '@angular/core';
 import { map, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { of, Subject } from 'rxjs';
 import { UntilDestroy } from '@ngneat/until-destroy';
+import { Book } from '@awread/core/books';
 import { BooksFacade } from 'libs/core/books/src/lib/facades/books.facade';
 import { ChaptersFacade } from 'libs/core/chapters/src/lib/facades/chapters.facade';
-import { Book } from 'libs/core/books/src/lib/models';
 
 @UntilDestroy()
 @Injectable({
@@ -14,7 +14,7 @@ import { Book } from 'libs/core/books/src/lib/models';
 })
 @Directive()
 export class DetailPage implements OnInit, OnDestroy {
-  book$: Book;
+  book: Book;
   bookId: string;
   authorId: string;
   destroy$ = new Subject();
@@ -22,14 +22,8 @@ export class DetailPage implements OnInit, OnDestroy {
   topBookList$ = this.booksFacade.topBooks$;
   authorBookList$ = this.booksFacade.authorBooks$;
   chapters$ = this.chaptersFacade.chapters$;
-  get breadcrumbs() {
-    return [{
-      title: 'Home',
-      link: '/a'
-    }, {
-      title: 'Home',
-      link: '/b'
-    }];
+  get breadcrumbs(): string[] {
+    return ['Home', this.book?.categoryId, this.book?.title];
   }
 
   constructor(
@@ -51,7 +45,7 @@ export class DetailPage implements OnInit, OnDestroy {
         })
       )),
     ).subscribe(book => {
-      this.book$ = book[0];
+      this.book = book[0];
     })
     this.booksFacade.getTopBooks().subscribe();
     this.getAllChapters();

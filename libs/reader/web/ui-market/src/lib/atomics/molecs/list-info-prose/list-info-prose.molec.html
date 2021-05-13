@@ -1,12 +1,12 @@
 <div class="mt-2">
-  <atom-title-book [bookId]='bookId' [titleBook]="title" [size]='"m"'></atom-title-book>
+  <atom-title-book [bookId]="book.bookId" [titleBook]="book.title" [size]="'m'"></atom-title-book>
   <div class="table-cell align-top roboto">
     <dl class="mt-2 text-sm">
       <dd class="ml-0 pb-1">
         <atom-author [title]="'Tác giả'"></atom-author>
       </dd>
       <dd class="ml-0 pb-1">
-        <excerpt [size]='"s"'></excerpt>
+        <excerpt [size]="'s'"></excerpt>
         <atom-text-link (click)="moreEvent.emit()" [text]="moreContent" [class]="'text-xs text-green-primary'" ></atom-text-link>
       </dd>
     </dl>

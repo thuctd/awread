@@ -1,3 +1,4 @@
+/* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ChangeDetectorRef, Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -5,11 +6,11 @@ import { Directive, OnInit, OnDestroy } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { tap } from 'rxjs/operators';
 import { PersistNgFormPlugin } from '@datorama/akita';
-import { Category } from 'libs/core/categories/src/lib/models';
+import { Category } from '@awread/core/categories';
 import { BooksQuery } from 'libs/core/books/src/lib/states/books';
 import { BooksFacade } from 'libs/core/books/src/lib/facades/books.facade';
 import { GenresFacade } from 'libs/core/genres/src/lib/facades/genres.facade';
-import { CategoryFacade } from 'libs/core/categories/src/lib/facades/category.facade';
+import { CategoriesFacade } from 'libs/core/categories/src/lib/facades/categories.facade';
 
 @UntilDestroy()
 @Injectable({
@@ -20,7 +21,7 @@ export class ComposedPage implements OnInit, OnDestroy {
   filtersForm: FormGroup;
   persistForm: PersistNgFormPlugin;
   bookList$ = this.booksFacade.books$;
-  categoryList$ = this.categoryFacede.categories$;
+  categoryList$ = this.categoriesFacade.categories$;
   topBookList$ = this.booksFacade.topBooks$;
   composedList$ = this.booksFacade.composed$;
   genreList$ = this.genresFacade.genres$;
@@ -32,14 +33,14 @@ export class ComposedPage implements OnInit, OnDestroy {
   typeBook: string;
 
   selectedTab = 'longbook';
-  constructor(private fb: FormBuilder, private activatedRoute: ActivatedRoute, private cd: ChangeDetectorRef, private router: Router, private categoryFacede: CategoryFacade, private booksFacade: BooksFacade, private booksQuery: BooksQuery, private genresFacade: GenresFacade) { }
+  constructor(private fb: FormBuilder, private activatedRoute: ActivatedRoute, private cd: ChangeDetectorRef, private router: Router, private categoriesFacade: CategoriesFacade, private booksFacade: BooksFacade, private booksQuery: BooksQuery, private genresFacade: GenresFacade) { }
   ngOnDestroy(): void { }
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(data =>
       this.typeBook = data.title
     );
-    this.categoryFacede.getAllCategories().subscribe();
+    this.categoriesFacade.getAllCategories().subscribe();
     this.booksFacade.getAllBooks().subscribe();
     this.booksFacade.getTopBooks().subscribe();
     this.genresFacade.getAllGenres().subscribe();
@@ -50,16 +51,16 @@ export class ComposedPage implements OnInit, OnDestroy {
     this.updateForm();
   }
 
-  switchTab(type: string) {
-    // this.categoryFacede.getDetailCategoryByType(type).subscribe(res => {
-    //   this.categoryId = res.id;
-    //   this.selectedTab = res.type;
-    //   this.filtersForm.get('category').setValue(this.categoryId);
-    //   if (!this.selectedTab) {
-    //     return this.router.navigate(['/']);
-    //   }
-    //   return this.router.navigate(['/composed', { type: this.selectedTab }]);
-    // })
+  switchTab(categoryId: string) {
+    this.categoriesFacade.getDetailCategory(categoryId).subscribe(res => {
+      this.categoryId = res[0].categoryId;
+      this.selectedTab = res[0].name;
+      this.filtersForm.get('category').setValue(this.categoryId);
+      if (!this.selectedTab) {
+        return this.router.navigate(['/']);
+      }
+      return this.router.navigate(['/composed', { type: this.categoryId }]);
+    })
   }
 
   filterItemsByCategory(category: Category) {
@@ -67,12 +68,7 @@ export class ComposedPage implements OnInit, OnDestroy {
   }
 
   filterBooks() {
-    this.filteredBooks$ = this.booksFacade.getFilterBooks()
-      .pipe(
-        tap(results => {
-          console.log('results', results);
-        })
-      );
+    // this.filteredBooks$ = this.booksFacade.getFilterBooks();
   }
 
   nativeShortBook() {
@@ -93,12 +89,12 @@ export class ComposedPage implements OnInit, OnDestroy {
 
   private loadFirstByCategory() {
     const type = this.activatedRoute.snapshot.paramMap.get('type')
-    // this.categoryFacede.getDetailCategoryByType(type).subscribe(
-    //   res => {
-    //     this.filteredBooks$ = this.booksFacade.getCategoryBooks(res.id);
-    //     this.cd.detectChanges();
-    //   }
-    // );
+    this.categoriesFacade.getDetailCategory(type).subscribe(
+      res => {
+        this.filteredBooks$ = this.booksFacade.getCategoryBooks(res[0].categoryId);
+        this.cd.detectChanges();
+      }
+    );
   }
 
   private checkActiveTab() {

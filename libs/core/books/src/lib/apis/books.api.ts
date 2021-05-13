@@ -189,8 +189,10 @@ export class BooksApi {
                 categoryId
                 name
               }
-              chaptersByBookId(orderBy: CREATED_AT_DESC) {
+              chaptersByBookId(first: 2, orderBy: POSITION_ASC) {
                 nodes {
+                  chapterId
+                  position
                   published
                   updatedAt
                 }

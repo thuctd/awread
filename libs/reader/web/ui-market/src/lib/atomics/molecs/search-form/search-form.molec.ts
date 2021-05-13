@@ -49,7 +49,7 @@ export class SearchFormMolec implements OnInit {
   };
   @Output() filterBooksEvent = new EventEmitter();
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.filters = this.fb.group({

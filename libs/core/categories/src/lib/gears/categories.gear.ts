@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { throwError } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
-import { CategoryApi } from '../apis/category.api';
+import { CategoriesApi } from '../apis/categories.api';
 import { CategoriesStore } from '../states/categories';
 
 @Injectable({ providedIn: 'root' })
-export class CategoryGear {
-  constructor(private categoryApi: CategoryApi, private categoriesStore: CategoriesStore) { }
+export class CategoriesGear {
+  constructor(private categoryApi: CategoriesApi, private categoriesStore: CategoriesStore) { }
 
   getAllCategories() {
     return this.categoryApi.getAllCategories().pipe(

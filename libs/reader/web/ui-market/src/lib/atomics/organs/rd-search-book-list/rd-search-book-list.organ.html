@@ -1,6 +1,6 @@
 <div class="grid grid-cols-12">
   <div class="col-span-6 flex justify-start">
-    <organ-books-grid [imgUrl]="cover" [title]="title" [bookId]="bookId" [chapters]="chapters"></organ-books-grid>
+    <organ-books-grid [book]="book" [chapters]="chapters"></organ-books-grid>
   </div>
   <div class="col-span-3 text-sm text-gray-text pl-10 roboto">{{category}}</div>
   <div class="col-span-3 text-sm text-gray-text flex justify-end mr-1.5 roboto">{{published === true ? "Hoàn thành" : "Chưa hoàn thiện"}}</div>

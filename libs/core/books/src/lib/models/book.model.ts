@@ -1,5 +1,5 @@
-import { Genre } from './../../../../genres/src/lib/models/genre.model';
-import { Category } from './../../../../categories/src/lib/models/category.model';
+import { Genre } from '@awread/core/genres';
+import { Category } from '@awread/core/categories';
 
 export interface Book {
   bookId: string

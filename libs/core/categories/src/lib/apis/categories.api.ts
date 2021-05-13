@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
-import { of } from 'rxjs';
-import { delay, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
-export class CategoryApi {
+export class CategoriesApi {
   constructor(private apollo: Apollo) { }
 
   get() { }

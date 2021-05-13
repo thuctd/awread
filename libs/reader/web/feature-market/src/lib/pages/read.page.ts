@@ -1,10 +1,11 @@
+/* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { Directive, Injectable, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap, tap } from 'rxjs/operators';
+import { Chapter } from '@awread/core/chapters';
 import { BooksFacade } from 'libs/core/books/src/lib/facades/books.facade';
 import { ChaptersFacade } from 'libs/core/chapters/src/lib/facades/chapters.facade';
-import { Chapter } from 'libs/core/chapters/src/lib/models';
 
 @UntilDestroy()
 @Injectable({
@@ -12,13 +13,13 @@ import { Chapter } from 'libs/core/chapters/src/lib/models';
 })
 @Directive()
 export class ReadPage implements OnInit {
-  chapter$;
+  chapter: Chapter;
   bookId;
   chapterId;
   topBookList$ = this.booksFacade.topBooks$;
   bookChapters$ = this.chaptersFacade.chapters$;
   get breadcrumbs(): string[] {
-    return ['Home', this.chapter$?.title, this.chapter$?.title];
+    return ['Home', this.chapter?.title, this.chapter?.title];
   }
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private chaptersFacade: ChaptersFacade, private cd: ChangeDetectorRef, private booksFacade: BooksFacade) { }
@@ -37,14 +38,13 @@ export class ReadPage implements OnInit {
         })
       )
       .subscribe((chapter) => {
-        this.chapter$ = chapter[0];
-        console.log(this.chapter$);        
+        this.chapter = chapter[0];
       });
     this.booksFacade.getTopBooks().subscribe();
   }
 
-  navigateToChapter(chapter: Chapter){
-    console.log(chapter);    
+  navigateToChapter(chapter: Chapter) {
+    console.log(chapter);
     // this.router.navigate(['/books', chapter.bookId, 'chapters', chapter.chapterId]);
   }
 
