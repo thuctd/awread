@@ -165,22 +165,6 @@ export class AuthApi {
       });
   }
 
-  getCurrentUserIdAndRole() {
-    return this.apollo
-      .watchQuery({
-        query: gql`
-          query currentUser {
-            currentRoles
-            currentUserId
-          }
-        `,
-      })
-      .valueChanges.pipe(
-        tap((res) => {
-          console.log('currentUser', res);
-        })
-      );
-  }
 
   checkEmailExistInDatabase(email: string) {
     return this.apollo.mutate({

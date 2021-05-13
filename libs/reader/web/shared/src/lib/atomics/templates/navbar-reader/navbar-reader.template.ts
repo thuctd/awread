@@ -18,6 +18,7 @@ import { FormControl } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavbarReaderTemplate implements OnInit {
+  @Input() user = {};
   @Input() items = [
     {
       bookId: '1',
@@ -27,7 +28,7 @@ export class NavbarReaderTemplate implements OnInit {
   @Input() searchControl = new FormControl();
   @Output() eventSearch = new EventEmitter();
   @Input() isLogin = false;
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

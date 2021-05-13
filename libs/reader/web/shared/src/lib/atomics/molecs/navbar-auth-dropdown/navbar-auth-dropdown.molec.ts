@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 import { faCoins, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -14,29 +14,33 @@ import { faCoins, faArrowRight } from '@fortawesome/free-solid-svg-icons';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NavbarAuthDropdownMolec implements OnInit {
+  @Input() user = {
+    name: 'BlackCu',
+    firstname: 'BlackCu'
+  };
   menu = [
     {
       href: '/',
-      title:'Thông báo'
+      title: 'Thông báo'
     },
     {
       href: '/',
-      title:'Hộp thư'
+      title: 'Hộp thư'
     },
     {
       href: '/',
-      title:'Nạp coin'
+      title: 'Nạp coin'
     },
     {
       href: '/',
-      title:'Thư viện'
+      title: 'Thư viện'
     },
     {
       href: '/',
-      title:'Cài đặt tài khoản'
+      title: 'Cài đặt tài khoản'
     }
- ];
- icons = {faCoins, faArrowRight};
+  ];
+  icons = { faCoins, faArrowRight };
   constructor() { }
 
   ngOnInit(): void {

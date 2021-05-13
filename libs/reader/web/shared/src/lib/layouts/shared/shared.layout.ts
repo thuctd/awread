@@ -4,12 +4,15 @@ import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged, startWith, switchMap, map } from 'rxjs/operators';
 import { BooksFacade } from 'libs/core/books/src/lib/facades/books.facade';
+import { AuthFacade, CurrentUserFacade } from '@awread/core/users';
 @UntilDestroy()
 @Injectable({
   providedIn: 'root',
 })
 @Directive()
 export class SharedLayout implements OnInit {
+  isLogin$ = this.authFacade.isLogin$;
+  user$ = this.currentUserFacade.currentUser$;
   searchControl: FormControl = new FormControl('');
   search$;
   results$;
@@ -18,7 +21,13 @@ export class SharedLayout implements OnInit {
     return !!this.searchControl.value;
   }
 
-  constructor(private router: Router, private booksFacade: BooksFacade, private cd: ChangeDetectorRef) { }
+  constructor(
+    private router: Router,
+    private booksFacade: BooksFacade,
+    private cd: ChangeDetectorRef,
+    private authFacade: AuthFacade,
+    private currentUserFacade: CurrentUserFacade,
+  ) { }
 
   ngOnInit(): void {
     this.searchControl.valueChanges.pipe(debounceTime(100), distinctUntilChanged())
@@ -26,6 +35,7 @@ export class SharedLayout implements OnInit {
         this.search$ = term
       });
     this.watchingSearchTerm();
+    this.currentUserFacade.getCurrentUser().subscribe();
   }
 
   watchingSearchTerm() {

@@ -61,7 +61,4 @@ export class LoginGear {
     })
   }
 
-  getCurrentUser() {
-    return this.authApi.getCurrentUserIdAndRole();
-  }
 }

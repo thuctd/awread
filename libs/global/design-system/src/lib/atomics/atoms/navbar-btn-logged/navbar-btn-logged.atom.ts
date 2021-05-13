@@ -17,9 +17,12 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavbarBtnLoggedAtom implements OnInit {
-  @Input() userName = 'BlackCu';
+  @Input() user = {
+    firstname: 'BlackCu',
+    name: 'Hi'
+  };
   @Output() submitEvent = new EventEmitter();
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

@@ -5,8 +5,8 @@ import { CurrentUserQuery } from '../states/current-user';
 
 @Injectable({ providedIn: 'root' })
 export class AuthFacade {
-  currentUser$ = this.loginGear.getCurrentUser();
-
+  currentUser$ = this.currentUserQuery.select();
+  isLogin$ = this.currentUserQuery.select(state => !!state.userId);
   get currentUser() {
     return this.currentUserQuery.getValue();
   }

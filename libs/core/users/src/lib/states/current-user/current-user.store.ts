@@ -8,7 +8,7 @@ export interface CurrentUserState {
 
 export function createInitialState(): CurrentUserState {
   return {
-    userId: '',
+    userId: null,
   };
 }
 

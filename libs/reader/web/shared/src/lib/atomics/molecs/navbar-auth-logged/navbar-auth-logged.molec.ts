@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Output , EventEmitter} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter, Input } from '@angular/core';
 
 @Component({
   selector: 'molec-navbar-auth-logged',
@@ -14,13 +14,14 @@ import { Component, OnInit, ChangeDetectionStrategy, Output , EventEmitter} from
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NavbarAuthLoggedMolec implements OnInit {
-  isToggleDropdown:boolean = false;
+  @Input() user = {};
+  isToggleDropdown: boolean = false;
   constructor() { }
   // @Output() submitEvent = new EventEmitter();
   ngOnInit(): void {
   }
 
-  submitEvent(event){
+  submitEvent(event) {
     this.isToggleDropdown = !this.isToggleDropdown;
   }
 }
