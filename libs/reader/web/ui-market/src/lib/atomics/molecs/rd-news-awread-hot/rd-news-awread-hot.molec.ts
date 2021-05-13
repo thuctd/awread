@@ -13,6 +13,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RdNewsAwreadHotMolec implements OnInit {
+  @Input() newsId = 'bvxz_324988seQ6x';
   @Input() srcImg = '/global-assets/images/Rectangle-492.webp';
 
   @Input() content = {

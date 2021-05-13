@@ -110,6 +110,7 @@ import { RdNewsStatusBoxAtom } from './atoms/rd-news-status-box/rd-news-status-b
 import { RdNewsDateAtom } from './atoms/rd-news-date/rd-news-date.atom';
 import { RdNewsTitleAtom } from './atoms/rd-news-title/rd-news-title.atom';
 import { RdNewsAwreadItemAtom } from './atoms/rd-news-awread-item/rd-news-awread-item.atom';
+import { SocialShareFbBtnAtom } from './atoms/social-share-fb-btn/social-share-fb-btn.atom';
 
 @NgModule({
   imports: [
@@ -236,6 +237,7 @@ import { RdNewsAwreadItemAtom } from './atoms/rd-news-awread-item/rd-news-awread
     RdNewsDateAtom,
     RdNewsTitleAtom,
     RdNewsAwreadItemAtom,
+    SocialShareFbBtnAtom,
   ],
   declarations: [
     notReadyDirective,
@@ -341,6 +343,7 @@ import { RdNewsAwreadItemAtom } from './atoms/rd-news-awread-item/rd-news-awread
     RdNewsDateAtom,
     RdNewsTitleAtom,
     RdNewsAwreadItemAtom,
+    SocialShareFbBtnAtom,
   ],
 })
 export class GlobalDesignSystemAtomicModule {}
