@@ -68,12 +68,7 @@ const routes: Routes = [
             : import('./pages/forgot-desktop/forgot-desktop.module').then(
               (m) => m.ForgotDesktopModule
             ),
-      },
-      {
-        path: '',
-        pathMatch: 'full',
-        redirectTo: 'login',
-      },
+      }
     ],
   },
 ];

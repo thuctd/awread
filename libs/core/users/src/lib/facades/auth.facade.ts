@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CurrentUserGear, LoginGear, LogoutGear, RegisterGear } from '../gears';
+import { AuthRoutingGear, CurrentUserGear, LoginGear, LogoutGear, RegisterGear } from '../gears';
 import { CreateUserCredential } from '../models';
 import { CurrentUserQuery } from '../states/current-user';
 
@@ -17,6 +17,7 @@ export class AuthFacade {
     private registerGear: RegisterGear,
     private currentUserQuery: CurrentUserQuery,
     private currentUserGear: CurrentUserGear,
+    private authRoutingGear: AuthRoutingGear,
   ) { }
 
   logout() {
@@ -41,5 +42,9 @@ export class AuthFacade {
 
   registerEmail(basicCredential: CreateUserCredential) {
     this.registerGear.registerEmail(basicCredential);
+  }
+
+  routeDefaultPage() {
+    this.authRoutingGear.navigateAfterLoginComplete();
   }
 }

@@ -28,15 +28,18 @@ const routes: Routes = [
 import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   imports: [
+
     CommonModule,
+    HttpClientModule,
     GlobalCoreModule,
     ReaderWebSharedModule,
     ReaderWebUiAuthModule,
     ReaderWebUiAuthorModule,
     ReaderWebUiSingleModule,
     ReaderWebUiMarketModule,
+    // away be the 2nd last
     WriterWebUiAuthModule,
-    HttpClientModule,
+    // aways be the last
     RouterModule.forRoot(routes, {
       scrollPositionRestoration: 'enabled',
       scrollOffset: [0, 0],
