@@ -63,17 +63,11 @@
       "@awread/writer/web/ui-single": [
         "libs/writer/web/ui-single/src/index.ts"
       ],
-      "@awread/writer/web/feature-single": [
-        "libs/writer/web/feature-single/src/index.ts"
-      ],
       "@awread/global/design-system": [
         "libs/global/design-system/src/index.ts"
       ],
       "@awread/writer/web/ui-creation": [
         "libs/writer/web/ui-creation/src/index.ts"
-      ],
-      "@awread/writer/web/feature-creation": [
-        "libs/writer/web/feature-creation/src/index.ts"
       ],
       "@awread/global/packages": [
         "libs/global/packages/src/index.ts"

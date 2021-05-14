@@ -142,14 +142,6 @@
         "type:ui"
       ]
     },
-    "writer-web-feature-single": {
-      "tags": [
-        "scope:writer",
-        "scope:feature-single",
-        "scope:shared",
-        "type:feature"
-      ]
-    },
     "global-design-system": {
       "tags": [
         "scope:shared"
@@ -161,14 +153,6 @@
         "scope:ui-creation",
         "scope:shared",
         "type:ui"
-      ]
-    },
-    "writer-web-feature-creation": {
-      "tags": [
-        "scope:writer",
-        "scope:feature-creation",
-        "scope:shared",
-        "type:feature"
       ]
     },
     "global-packages": {
