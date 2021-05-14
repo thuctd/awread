@@ -1832,33 +1832,6 @@
         }
       }
     },
-    "reader-web-feature-auth": {
-      "projectType": "library",
-      "root": "libs/reader/web/feature-auth",
-      "sourceRoot": "libs/reader/web/feature-auth/src",
-      "prefix": "awread",
-      "architect": {
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/reader/web/feature-auth/src/**/*.ts",
-              "libs/reader/web/feature-auth/src/**/*.html"
-            ]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/reader/web/feature-auth"
-          ],
-          "options": {
-            "jestConfig": "libs/reader/web/feature-auth/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
     "reader-web-ui-author": {
       "projectType": "library",
       "root": "libs/reader/web/ui-author",
@@ -1912,33 +1885,6 @@
             "ci": {
               "quiet": true
             }
-          }
-        }
-      }
-    },
-    "reader-web-feature-author": {
-      "projectType": "library",
-      "root": "libs/reader/web/feature-author",
-      "sourceRoot": "libs/reader/web/feature-author/src",
-      "prefix": "awread",
-      "architect": {
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/reader/web/feature-author/src/**/*.ts",
-              "libs/reader/web/feature-author/src/**/*.html"
-            ]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/reader/web/feature-author"
-          ],
-          "options": {
-            "jestConfig": "libs/reader/web/feature-author/jest.config.js",
-            "passWithNoTests": true
           }
         }
       }
@@ -2000,33 +1946,6 @@
         }
       }
     },
-    "reader-web-feature-single": {
-      "projectType": "library",
-      "root": "libs/reader/web/feature-single",
-      "sourceRoot": "libs/reader/web/feature-single/src",
-      "prefix": "awread",
-      "architect": {
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/reader/web/feature-single/src/**/*.ts",
-              "libs/reader/web/feature-single/src/**/*.html"
-            ]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/reader/web/feature-single"
-          ],
-          "options": {
-            "jestConfig": "libs/reader/web/feature-single/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
     "reader-web-ui-market": {
       "projectType": "library",
       "root": "libs/reader/web/ui-market",
@@ -2080,33 +1999,6 @@
             "ci": {
               "quiet": true
             }
-          }
-        }
-      }
-    },
-    "reader-web-feature-market": {
-      "projectType": "library",
-      "root": "libs/reader/web/feature-market",
-      "sourceRoot": "libs/reader/web/feature-market/src",
-      "prefix": "awread",
-      "architect": {
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/reader/web/feature-market/src/**/*.ts",
-              "libs/reader/web/feature-market/src/**/*.html"
-            ]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/reader/web/feature-market"
-          ],
-          "options": {
-            "jestConfig": "libs/reader/web/feature-market/jest.config.js",
-            "passWithNoTests": true
           }
         }
       }

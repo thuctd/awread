@@ -243,28 +243,12 @@
         "type:ui"
       ]
     },
-    "reader-web-feature-auth": {
-      "tags": [
-        "scope:reader",
-        "scope:feature-auth",
-        "scope:shared",
-        "type:feature"
-      ]
-    },
     "reader-web-ui-author": {
       "tags": [
         "scope:reader",
         "scope:ui-author",
         "scope:shared",
         "type:ui"
-      ]
-    },
-    "reader-web-feature-author": {
-      "tags": [
-        "scope:reader",
-        "scope:feature-author",
-        "scope:shared",
-        "type:feature"
       ]
     },
     "reader-web-ui-single": {
@@ -275,28 +259,12 @@
         "type:ui"
       ]
     },
-    "reader-web-feature-single": {
-      "tags": [
-        "scope:reader",
-        "scope:feature-single",
-        "scope:shared",
-        "type:feature"
-      ]
-    },
     "reader-web-ui-market": {
       "tags": [
         "scope:reader",
         "scope:ui-market",
         "scope:shared",
         "type:ui"
-      ]
-    },
-    "reader-web-feature-market": {
-      "tags": [
-        "scope:reader",
-        "scope:feature-market",
-        "scope:shared",
-        "type:feature"
       ]
     },
     "global-powers": {

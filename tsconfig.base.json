@@ -93,26 +93,14 @@
       "@awread/reader/web/ui-auth": [
         "libs/reader/web/ui-auth/src/index.ts"
       ],
-      "@awread/reader/web/feature-auth": [
-        "libs/reader/web/feature-auth/src/index.ts"
-      ],
       "@awread/reader/web/ui-author": [
         "libs/reader/web/ui-author/src/index.ts"
-      ],
-      "@awread/reader/web/feature-author": [
-        "libs/reader/web/feature-author/src/index.ts"
       ],
       "@awread/reader/web/ui-single": [
         "libs/reader/web/ui-single/src/index.ts"
       ],
-      "@awread/reader/web/feature-single": [
-        "libs/reader/web/feature-single/src/index.ts"
-      ],
       "@awread/reader/web/ui-market": [
         "libs/reader/web/ui-market/src/index.ts"
-      ],
-      "@awread/reader/web/feature-market": [
-        "libs/reader/web/feature-market/src/index.ts"
       ],
       "@awread/global/powers": [
         "libs/global/powers/src/index.ts"
