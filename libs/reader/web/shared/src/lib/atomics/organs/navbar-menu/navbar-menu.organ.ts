@@ -21,17 +21,17 @@ export class NavbarMenuOrgan implements OnInit {
         menu: [
           {
             page: '/composed',
-            type: '1',
-            title: 'Truyện dài',
-          },
-          {
-            page: '/composed',
-            type: '2',
+            categoryId: '1',
             title: 'Truyện ngắn',
           },
           {
             page: '/composed',
-            type: '3',
+            categoryId: '2',
+            title: 'Truyện dài',
+          },
+          {
+            page: '/composed',
+            categoryId: '3',
             title: 'Tản văn',
           },
         ],
@@ -41,17 +41,17 @@ export class NavbarMenuOrgan implements OnInit {
         menu: [
           {
             page: '/collected',
-            type: '1',
-            title: 'Truyện dài',
-          },
-          {
-            page: '/collected',
-            type: '2',
+            categoryId: '1',
             title: 'Truyện ngắn',
           },
           {
             page: '/collected',
-            type: '3',
+            categoryId: '2',
+            title: 'Truyện dài',
+          },
+          {
+            page: '/collected',
+            categoryId: '3',
             title: 'Tản văn',
           },
         ],

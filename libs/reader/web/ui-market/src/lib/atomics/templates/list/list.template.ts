@@ -24,7 +24,7 @@ export class ListTemplate implements OnInit {
     status: [''],
     publishedAt: ['']
   });
-  @Input() books = [];
+  @Input() topBookList = [];
   @Input() categoryBooks = [];
   @Input() genres = [];
   @Input() actions = [
@@ -39,13 +39,12 @@ export class ListTemplate implements OnInit {
       class: 'rounded-r-md',
     },
   ];
-
   @Input() titlePage: string;
   @Input() tabsHead = [
     { categoryId: 1, name: 'Truyện dài', type: 'longbook', isActive: true },
   ];
 
-  @Input() selectedTab = '1';
+  @Input() selectedTabCategoryId = '1';
   @Output() switchTabEvent = new EventEmitter();
   @Output() eventSearch = new EventEmitter();
   @Output() changeCategoryBooks = new EventEmitter();

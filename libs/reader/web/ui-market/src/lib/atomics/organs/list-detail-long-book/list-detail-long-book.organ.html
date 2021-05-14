@@ -4,7 +4,17 @@
       <div *ngFor="let book of longbooks| slice:0:9;" class="col-span-2 md:col-span-4">
         <div>
           <atom-img-m [srcImg]="book.cover" [bookId]="book.bookId"></atom-img-m>
-          <list-info-long-book [book]="book" [btns]="book['chaptersByBookId']['nodes']"></list-info-long-book>
+          <div [ngSwitch]="categoryId">
+            <div *ngSwitchCase="'1'">
+              <list-info-long-book [book]="book" [btns]="book['chaptersByBookId']['nodes']"></list-info-long-book>
+            </div>
+            <div *ngSwitchCase="'1'">
+              <list-info-short-book [book]="book" [btns]="book['chaptersByBookId']['nodes']"></list-info-short-book>
+            </div>
+            <div *ngSwitchDefault>
+              <list-info-prose [book]="book"></list-info-prose>
+            </div>
+          </div>
         </div>
       </div>
     </div>

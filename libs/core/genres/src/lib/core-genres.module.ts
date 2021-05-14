@@ -5,6 +5,7 @@ import { GenreNamePipe } from './pipes/genre-name.pipe';
 @NgModule({
   imports: [CommonModule],
   declarations: [GenreNamePipe],
-  exports: [GenreNamePipe]
+  exports: [GenreNamePipe],
+  providers: [GenreNamePipe]
 })
 export class CoreGenresModule { }

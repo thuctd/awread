@@ -68,7 +68,7 @@ const routes: Routes = [
               window.innerWidth <= 768 && window?.haveMobile
                 ? import('./pages/composed-mobile/composed-mobile.module').then((m) => m.ComposedMobileModule)
                 : import('./pages/composed-desktop/composed-desktop.module').then((m) => m.ComposedDesktopModule),
-            data: { title: 'composed' },
+
           },
 
           {
@@ -77,7 +77,7 @@ const routes: Routes = [
               window.innerWidth <= 768 && window?.haveMobile
                 ? import('./pages/collected-mobile/collected-mobile.module').then((m) => m.CollectedMobileModule)
                 : import('./pages/collected-desktop/collected-desktop.module').then((m) => m.CollectedDesktopModule),
-            data: { title: 'collected' },
+
           },
           {
             path: 'search',
@@ -132,4 +132,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class ReaderWebUiMarketRoutingModule {}
+export class ReaderWebUiMarketRoutingModule { }

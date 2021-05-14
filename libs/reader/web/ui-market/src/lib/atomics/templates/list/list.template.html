@@ -10,7 +10,8 @@
       <div class="inline-flex">
         <div class="rounded-md text-sm leading-none border-gray-200 mt-1" *ngFor="let action of actions">
           <atom-btn-icon class="{{action.class}}" [icon]="action.faIcon"
-            [ngClass]="display === action.display ? 'bg-green-primary text-white': 'bg-white text-green-primary'" (eventChangesDisplay)="changeDisplay(action.display)">
+            [ngClass]="display === action.display ? 'bg-green-primary text-white': 'bg-white text-green-primary'"
+            (eventChangesDisplay)="changeDisplay(action.display)">
           </atom-btn-icon>
         </div>
         <div class="pl-8">
@@ -19,24 +20,29 @@
         </div>
       </div>
     </div>
+
     <div class="col-span-2 xl:col-span-8 lg:col-span-9 md:pr-8">
       <div class="grid grid-cols-12 gap-2 lg:gap-4 xl:gap-6 border-b border-gray-300">
         <ng-container *ngFor="let tab of tabsHead">
-          <div class="col-span-2 md:col-span-4" [ngClass]="selectedTab === tab.name ? 'border-b-2 border-green-primary text-green-primary' : 'text-gray-text'">
+          <div class="col-span-2 md:col-span-4" [title]=" tabsHead | json"
+            [ngClass]="selectedTabCategoryId === tab.categoryId ? 'border-b-2 border-green-primary text-green-primary' : 'text-gray-text'">
             <molec-tab-categories (changeCategoryBooks)="changeCategoryBooks.emit(tab)" (switchTabEvent)="switchTabEvent.emit(tab.categoryId)" [tab]="tab">
             </molec-tab-categories>
           </div>
         </ng-container>
       </div>
       <div [ngClass]="filterbook === false ? 'pt-12' : 'pt-28'">
-        <list-detail-long-book (moreEvent)="nativeLongBook.emit($event)" [longbooks]="categoryBooks" [display]="display" *ngIf="selectedTab === 'Truyện dài'"></list-detail-long-book>
-        <list-detail-short-book (moreEvent)="nativeShortBook.emit($event)" [shortbooks]="categoryBooks" [display]="display" *ngIf="selectedTab === 'Truyện ngắn'"></list-detail-short-book>
-        <list-detail-prose (moreEvent)="nativeProse.emit($event)" [prosebooks]="categoryBooks" [display]="display" *ngIf="selectedTab === 'Tản văn'"></list-detail-prose>
+        <list-detail-long-book (moreEvent)="nativeLongBook.emit($event)" [longbooks]="categoryBooks" [display]="display" [categoryId]="selectedTabCategoryId">
+        </list-detail-long-book>
+        <!-- <list-detail-short-book (moreEvent)="nativeShortBook.emit($event)" [shortbooks]="categoryBooks" [display]="display" *ngIf="selectedTab === 'Truyện ngắn'"></list-detail-short-book>
+        <list-detail-prose (moreEvent)="nativeProse.emit($event)" [prosebooks]="categoryBooks" [display]="display" *ngIf="
+         === 'Tản văn'"></list-detail-prose> -->
       </div>
     </div>
     <div class="lg:hidden xl:block lg:col-span-1"></div>
     <div class="col-span-2 md:col-span-3">
-      <list-detail-top-book (moreEvent)="nativeTopBook.emit($event)"[ngClass]="filterbook === false ? 'pt-12' : 'pt-32'" [books]="books"></list-detail-top-book>
+      <list-detail-top-book (moreEvent)="nativeTopBook.emit($event)" [ngClass]="filterbook === false ? 'pt-12' : 'pt-32'" [books]="topBookList">
+      </list-detail-top-book>
     </div>
   </div>
 </section>

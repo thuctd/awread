@@ -20,90 +20,105 @@ import { CategoriesFacade } from 'libs/core/categories/src/lib/facades/categorie
 export class ComposedPage implements OnInit, OnDestroy {
   filtersForm: FormGroup;
   persistForm: PersistNgFormPlugin;
-  bookList$ = this.booksFacade.books$;
   categoryList$ = this.categoriesFacade.categories$;
   topBookList$ = this.booksFacade.topBooks$;
-  composedList$ = this.booksFacade.composed$;
   genreList$ = this.genresFacade.genres$;
   filteredBooks$;
-
-  bookId: string;
-  categoryId: string;
-  type: string;
   typeBook: string;
-
-  selectedTab = 'longbook';
-  constructor(private fb: FormBuilder, private activatedRoute: ActivatedRoute, private cd: ChangeDetectorRef, private router: Router, private categoriesFacade: CategoriesFacade, private booksFacade: BooksFacade, private booksQuery: BooksQuery, private genresFacade: GenresFacade) { }
+  selectedCategoryId: string;
+  constructor(
+    private fb: FormBuilder,
+    private activatedRoute: ActivatedRoute,
+    private cd: ChangeDetectorRef,
+    private router: Router,
+    private categoriesFacade: CategoriesFacade,
+    private booksFacade: BooksFacade,
+    private booksQuery: BooksQuery,
+    private genresFacade: GenresFacade
+  ) { }
   ngOnDestroy(): void { }
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(data =>
-      this.typeBook = data.title
-    );
-    this.categoriesFacade.getAllCategories().subscribe();
+    this.initForm();
+    this.updateForm();
     this.booksFacade.getAllBooks().subscribe();
     this.booksFacade.getTopBooks().subscribe();
     this.genresFacade.getAllGenres().subscribe();
     this.booksFacade.getComposedBooks().subscribe();
-    this.checkActiveTab();
-    this.loadFirstByCategory();
-    this.initForm();
-    this.updateForm();
+    this.activatedRoute.parent.url.subscribe(([urlSegment]) => {
+      this.typeBook = urlSegment.path;
+      this.selectedCategoryId = urlSegment.parameterMap.get('categoryId');
+      this.switchTab(this.selectedCategoryId);
+
+    })
+
+    // this.checkActiveTab();
+    // this.loadFirstByCategory();
+
+
   }
 
   switchTab(categoryId: string) {
-    this.categoriesFacade.getDetailCategory(categoryId).subscribe(res => {
-      this.categoryId = res[0].categoryId;
-      this.selectedTab = res[0].name;
-      this.filtersForm.get('category').setValue(this.categoryId);
-      if (!this.selectedTab) {
-        return this.router.navigate(['/']);
-      }
-      return this.router.navigate(['/composed', { type: this.categoryId }]);
-    })
+    this.selectedCategoryId = categoryId;
+    this.filtersForm.get('category').setValue(this.selectedCategoryId);
+    this.router.navigate(['/composed', { categoryId: this.selectedCategoryId }]);
+    this.filterItemsByCategory(categoryId);
+    this.cd.detectChanges();
+    // this.selectedTabCategoryId = 'Truyện ngắn';
+    // this.selectedTab = res[0].name;
+
+    // this.categoriesFacade.getDetailCategory(categoryId).subscribe(res => {
+    //   this.categoryId = res[0].categoryId;
+    //   this.selectedTab = res[0].name;
+    //   //   this.filtersForm.get('category').setValue(this.categoryId);
+    //   //   if (!this.selectedTab) {
+    //   //     return this.router.navigate(['/']);
+    //   //   }
+    //   //   return this.router.navigate(['/composed', { type: this.categoryId }]);
+    // })
   }
 
-  filterItemsByCategory(category: Category) {
-    this.filteredBooks$ = this.booksFacade.getCategoryBooks(category.categoryId);
+  filterItemsByCategory(categoryId) {
+    this.filteredBooks$ = this.booksFacade.getCategoryBooks(categoryId);
   }
 
   filterBooks() {
     // this.filteredBooks$ = this.booksFacade.getFilterBooks();
   }
 
-  nativeShortBook() {
-    this.router.navigate(['/short-story'])
-  }
+  // nativeShortBook() {
+  //   this.router.navigate(['/short-story'])
+  // }
 
-  nativeLongBook() {
-    this.router.navigate(['/long-story'])
-  }
+  // nativeLongBook() {
+  //   this.router.navigate(['/long-story'])
+  // }
 
-  nativeTopBook() {
-    this.router.navigate(['/top-book'])
-  }
+  // nativeTopBook() {
+  //   this.router.navigate(['/top-book'])
+  // }
 
-  nativeProse() {
-    this.router.navigate(['/novel'])
-  }
+  // nativeProse() {
+  //   this.router.navigate(['/novel'])
+  // }
 
-  private loadFirstByCategory() {
-    const type = this.activatedRoute.snapshot.paramMap.get('type')
-    this.categoriesFacade.getDetailCategory(type).subscribe(
-      res => {
-        this.filteredBooks$ = this.booksFacade.getCategoryBooks(res[0].categoryId);
-        this.cd.detectChanges();
-      }
-    );
-  }
+  // private loadFirstByCategory() {
+  //   const type = this.activatedRoute.snapshot.paramMap.get('type')
+  //   this.categoriesFacade.getDetailCategory(type).subscribe(
+  //     res => {
+  //       this.filteredBooks$ = this.booksFacade.getCategoryBooks(res[0].categoryId);
+  //       this.cd.detectChanges();
+  //     }
+  //   );
+  // }
 
-  private checkActiveTab() {
-    return this.activatedRoute.paramMap.pipe(untilDestroyed(this)).subscribe((params) => {
-      this.type = params.get('type');
-      this.switchTab(this.type);
-      this.cd.detectChanges();
-    });
-  }
+  // private checkActiveTab() {
+  //   return this.activatedRoute.paramMap.pipe(untilDestroyed(this)).subscribe((params) => {
+  //     this.type = params.get('type');
+  //     this.switchTab(this.type);
+  //     this.cd.detectChanges();
+  //   });
+  // }
 
   private updateForm() {
     this.filtersForm.patchValue({

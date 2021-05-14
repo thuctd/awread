@@ -11,6 +11,24 @@ export class CategoriesStore extends EntityStore<CategoriesState> {
   constructor() {
     super();
     // this.createUIStore().setInitialEntityState();
+    this.init();
+  }
+
+  init() {
+    this.set([
+      {
+        name: 'Truyện ngắn',
+        categoryId: '1',
+      },
+      {
+        name: 'Truyện dài',
+        categoryId: '2',
+      },
+      {
+        name: 'Tản văn',
+        categoryId: '3',
+      }
+    ]);
   }
 
 }
