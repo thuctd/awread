@@ -51,6 +51,7 @@ function addFeatureRoutingModuleAndImportLayoutPath(schema, tree, routingPath) {
   let rule0;
   let mixRules = [];
   if (!tree.exists(`${routingPath}.ts`)) {
+    // auto generate page service in module index
     rule0 = schematic('module', {
       project: schema.project,
       name: schema.project,
