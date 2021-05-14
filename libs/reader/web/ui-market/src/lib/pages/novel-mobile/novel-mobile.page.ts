@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { NovelPage } from '@awread/reader/web/feature-market';
+import { NovelPage } from '../novel/novel.page';
 
 @Component({
   selector: 'ui-novel-mobile',
@@ -13,4 +13,4 @@ import { NovelPage } from '@awread/reader/web/feature-market';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class NovelMobilePage extends NovelPage {}
+export class NovelMobilePage extends NovelPage { }

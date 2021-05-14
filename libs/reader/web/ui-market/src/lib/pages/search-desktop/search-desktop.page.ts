@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { SearchPage } from '@awread/reader/web/feature-market';
+import { SearchPage } from '../search/search.page';
 
 @Component({
   selector: 'ui-search-desktop',
@@ -13,4 +13,4 @@ import { SearchPage } from '@awread/reader/web/feature-market';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SearchDesktopPage extends SearchPage {}
+export class SearchDesktopPage extends SearchPage { }

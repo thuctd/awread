@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { IntroductionPage } from '@awread/reader/web/feature-market';
+import { IntroductionPage } from '../introduction/introduction.page';
 
 @Component({
   selector: 'ui-introduction-desktop',
@@ -13,4 +13,4 @@ import { IntroductionPage } from '@awread/reader/web/feature-market';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class IntroductionDesktopPage extends IntroductionPage {}
+export class IntroductionDesktopPage extends IntroductionPage { }

@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { HomePage } from '@awread/reader/web/feature-market';
+import { HomePage } from '../home/home.page';
 
 @Component({
   selector: 'ui-home-mobile',
@@ -13,4 +13,4 @@ import { HomePage } from '@awread/reader/web/feature-market';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HomeMobilePage extends HomePage {}
+export class HomeMobilePage extends HomePage { }

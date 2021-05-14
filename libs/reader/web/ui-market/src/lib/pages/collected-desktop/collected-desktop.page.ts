@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { CollectedPage } from '@awread/reader/web/feature-market';
+import { CollectedPage } from '../collected/collected.page';
 
 @Component({
   selector: 'ui-collected-desktop',
@@ -13,4 +13,4 @@ import { CollectedPage } from '@awread/reader/web/feature-market';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CollectedDesktopPage extends CollectedPage {}
+export class CollectedDesktopPage extends CollectedPage { }

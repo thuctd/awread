@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { ReadPage } from '@awread/reader/web/feature-market';
+import { ReadPage } from '../read/read.page';
 
 @Component({
   selector: 'ui-read-desktop',
@@ -13,4 +13,4 @@ import { ReadPage } from '@awread/reader/web/feature-market';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ReadDesktopPage extends ReadPage {}
+export default class ReadDesktopPage extends ReadPage { }

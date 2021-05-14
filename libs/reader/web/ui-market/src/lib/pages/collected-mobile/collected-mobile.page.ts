@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
-import { CollectedPage } from '@awread/reader/web/feature-market';
+import { CollectedPage } from '../collected/collected.page';
 
 @Component({
   selector: 'ui-collected-mobile',

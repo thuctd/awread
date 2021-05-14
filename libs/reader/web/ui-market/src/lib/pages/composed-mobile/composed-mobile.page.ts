@@ -1,6 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { ComposedPage } from '@awread/reader/web/feature-market';
-
+import { ComposedPage } from '../composed/composed.page';
 @Component({
   selector: 'ui-composed-mobile',
   templateUrl: './composed-mobile.page.html',
@@ -13,4 +12,4 @@ import { ComposedPage } from '@awread/reader/web/feature-market';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ComposedMobilePage extends ComposedPage {}
+export class ComposedMobilePage extends ComposedPage { }

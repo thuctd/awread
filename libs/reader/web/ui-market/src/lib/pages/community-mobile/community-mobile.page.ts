@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { CommunityPage } from '@awread/reader/web/feature-market';
+import { CommunityPage } from '../community/community.page';
 
 @Component({
   selector: 'ui-community-mobile',
@@ -13,4 +13,4 @@ import { CommunityPage } from '@awread/reader/web/feature-market';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CommunityMobilePage extends CommunityPage {}
+export class CommunityMobilePage extends CommunityPage { }

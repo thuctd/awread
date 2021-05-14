@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { CommunityPage } from '@awread/reader/web/feature-market';
+import { CommunityPage } from '../community/community.page';
 
 @Component({
   selector: 'ui-community-desktop',
@@ -13,4 +13,4 @@ import { CommunityPage } from '@awread/reader/web/feature-market';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CommunityDesktopPage extends CommunityPage {}
+export class CommunityDesktopPage extends CommunityPage { }

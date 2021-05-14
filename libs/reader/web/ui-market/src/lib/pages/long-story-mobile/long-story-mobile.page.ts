@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { LongStoryPage } from '@awread/reader/web/feature-market';
+import { LongStoryPage } from '../long-story/long-story.page';
 
 @Component({
   selector: 'ui-long-story-mobile',
@@ -13,4 +13,4 @@ import { LongStoryPage } from '@awread/reader/web/feature-market';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LongStoryMobilePage extends LongStoryPage {}
+export class LongStoryMobilePage extends LongStoryPage { }

@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { DetailPage } from '@awread/reader/web/feature-market';
+import { DetailPage } from '../detail/detail.page';
 
 @Component({
   selector: 'ui-detail-desktop',
@@ -13,4 +13,4 @@ import { DetailPage } from '@awread/reader/web/feature-market';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DetailDesktopPage extends DetailPage {}
+export class DetailDesktopPage extends DetailPage { }

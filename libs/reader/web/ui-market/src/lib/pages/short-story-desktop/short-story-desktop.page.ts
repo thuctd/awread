@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { ShortStoryPage } from '@awread/reader/web/feature-market';
+import { ShortStoryPage } from '../short-story/short-story.page';
 
 @Component({
   selector: 'ui-short-story-desktop',
@@ -13,4 +13,4 @@ import { ShortStoryPage } from '@awread/reader/web/feature-market';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ShortStoryDesktopPage extends ShortStoryPage {}
+export class ShortStoryDesktopPage extends ShortStoryPage { }
