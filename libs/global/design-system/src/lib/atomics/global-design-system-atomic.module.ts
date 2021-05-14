@@ -105,6 +105,12 @@ import { NavItemAtom } from './atoms/nav-item/nav-item.atom';
 import { BtnIconAtom } from './atoms/btn-icon/btn-icon.atom';
 import { BreadcrumbAtom } from './atoms/breadcrumb/breadcrumb.atom';
 import { SocialLoginBtnAtom } from './atoms/social-login-btn/social-login-btn.atom';
+import { AdvertisAtom } from './atoms/advertis/advertis.atom';
+import { RdNewsStatusBoxAtom } from './atoms/rd-news-status-box/rd-news-status-box.atom';
+import { RdNewsDateAtom } from './atoms/rd-news-date/rd-news-date.atom';
+import { RdNewsTitleAtom } from './atoms/rd-news-title/rd-news-title.atom';
+import { RdNewsAwreadItemAtom } from './atoms/rd-news-awread-item/rd-news-awread-item.atom';
+import { SocialShareFbBtnAtom } from './atoms/social-share-fb-btn/social-share-fb-btn.atom';
 
 @NgModule({
   imports: [
@@ -226,6 +232,12 @@ import { SocialLoginBtnAtom } from './atoms/social-login-btn/social-login-btn.at
     BtnIconAtom,
     BreadcrumbAtom,
     SocialLoginBtnAtom,
+    AdvertisAtom,
+    RdNewsStatusBoxAtom,
+    RdNewsDateAtom,
+    RdNewsTitleAtom,
+    RdNewsAwreadItemAtom,
+    SocialShareFbBtnAtom,
   ],
   declarations: [
     notReadyDirective,
@@ -326,6 +338,12 @@ import { SocialLoginBtnAtom } from './atoms/social-login-btn/social-login-btn.at
     BtnIconAtom,
     BreadcrumbAtom,
     SocialLoginBtnAtom,
+    AdvertisAtom,
+    RdNewsStatusBoxAtom,
+    RdNewsDateAtom,
+    RdNewsTitleAtom,
+    RdNewsAwreadItemAtom,
+    SocialShareFbBtnAtom,
   ],
 })
 export class GlobalDesignSystemAtomicModule {}

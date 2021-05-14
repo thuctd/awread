@@ -28,6 +28,8 @@ export class RdAuthorTabsMolec implements OnInit {
       isActive: false,
     },
   ];
+  @Input() classActive = 'border-b-2 border-green-primary text-green-primary';
+  @Input() classNormal = 'text-gray-text';
 
   @Input() selectedTab: string;
   @Output() toggleTab = new EventEmitter();

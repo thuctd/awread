@@ -1,0 +1,10 @@
+<section class="px-4">
+  <atom-title class="border-b pb-4" [title]="'Tin tức'"></atom-title>
+  <molec-rd-author-tabs #tabHead class="my-6 font-semibold text-sm"
+    [tabs]="tabs"
+    [classActive]="classActive"
+    [classNormal]="classNormal">
+  </molec-rd-author-tabs>
+  <molec-rd-news-awread-list *ngIf="tabHead.currentTab.name === tabs[0].name"></molec-rd-news-awread-list>
+  <molec-rd-news-awread-list *ngIf="tabHead.currentTab.name === tabs[1].name"></molec-rd-news-awread-list>
+</section>

@@ -1,0 +1,13 @@
+<div class="w-full relative">
+  <a [routerLink]="['/news', newsId]" class="outline-none">
+    <img class="w-full h-56" [src]="srcImg">
+    <div class="w-full h-28 outline-none cursor-pointer block bg-black bg-opacity-40 bottom-0 absolute px-6">
+      <div class="flex pt-3">
+        <atom-rd-news-status-box [bgColor]="status.bgColor" [text]="status.text"></atom-rd-news-status-box>
+        <atom-rd-news-title class="pl-3" [class]="'text-white font-semibold'" [title]="content.title"></atom-rd-news-title>
+      </div>
+      <atom-rd-news-date class="py-3" [isColor]="false"></atom-rd-news-date>
+      <excerpt [class]="'text-white text-xs'" [excerpt]="content.excerpt"></excerpt>
+    </div>
+  </a>
+</div>
