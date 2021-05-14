@@ -4,10 +4,10 @@ import { of, Subject, Observable } from 'rxjs';
 import { Directive, Injectable, OnInit, OnDestroy } from '@angular/core';
 import { Genre } from '@awread/core/genres';
 import { Category } from '@awread/core/categories';
-import { BooksFacade } from 'libs/core/books/src/lib/facades/books.facade';
-import { GenresFacade } from 'libs/core/genres/src/lib/facades/genres.facade';
-import { SliderFacade } from 'libs/core//slider/src/lib/facades/slider.facade';
-import { CategoriesFacade } from 'libs/core/categories/src/lib/facades/categories.facade';
+import { BooksFacade } from '@awread/core/books';
+import { GenresFacade } from '@awread/core/genres';
+import { SliderFacade } from '@awread/core/slider';
+import { CategoriesFacade } from '@awread/core/categories';
 
 @Injectable({
   providedIn: 'root',
@@ -37,7 +37,6 @@ export class HomePage implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.categoriesFacade.getAllCategories().subscribe();
     this.booksFacade.getAllBooks().subscribe();
     this.genresFacade.getAllGenres().subscribe();
     this.sliderFacede.getAllSlider().subscribe();

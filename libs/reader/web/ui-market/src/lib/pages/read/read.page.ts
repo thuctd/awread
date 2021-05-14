@@ -4,8 +4,8 @@ import { Directive, Injectable, OnInit, ChangeDetectorRef } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap, tap } from 'rxjs/operators';
 import { Chapter } from '@awread/core/chapters';
-import { BooksFacade } from 'libs/core/books/src/lib/facades/books.facade';
-import { ChaptersFacade } from 'libs/core/chapters/src/lib/facades/chapters.facade';
+import { BooksFacade } from '@awread/core/books';
+import { ChaptersFacade } from '@awread/core/chapters';
 
 @UntilDestroy()
 @Injectable({

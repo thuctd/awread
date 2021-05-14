@@ -3,7 +3,7 @@ import { Directive, Injectable, OnInit, ChangeDetectorRef } from '@angular/core'
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged, startWith, switchMap, map } from 'rxjs/operators';
-import { BooksFacade } from 'libs/core/books/src/lib/facades/books.facade';
+import { BooksFacade } from '@awread/core/books';
 import { AuthFacade, CurrentUserFacade } from '@awread/core/users';
 @UntilDestroy()
 @Injectable({

@@ -84,9 +84,17 @@ import { RdNewsEventItemMolec } from './molecs/rd-news-event-item/rd-news-event-
 import { RdNewsAwreadListMolec } from './molecs/rd-news-awread-list/rd-news-awread-list.molec';
 import { RdNewsMbTemplate } from './templates/rd-news-mb/rd-news-mb.template';
 import { RdNewsDetailTemplate } from './templates/rd-news-detail/rd-news-detail.template';
+import { CoreCategoriesModule } from '@awread/core/categories';
 
 @NgModule({
-  imports: [CommonModule, StorybookSupportModule, GlobalDesignSystemAtomicModule, CarouselModule, ReaderWebUiAuthorAtomicModule],
+  imports: [
+    CommonModule,
+    StorybookSupportModule,
+    GlobalDesignSystemAtomicModule,
+    CarouselModule,
+    ReaderWebUiAuthorAtomicModule,
+    CoreCategoriesModule
+  ],
   exports: [
     ReaderWebUiAuthorAtomicModule,
     CommonModule,

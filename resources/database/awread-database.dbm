@@ -6,15 +6,22 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="0,341" last-zoom="0.95" max-obj-count="15"
 	 default-owner="postgres">
 <role name="anonymous">
+	<roles names="public_read" role-type="refer" />
 </role>
 
 <role name="writer">
+	<roles names="public_read" role-type="refer" />
 </role>
 
 <role name="reader">
+	<roles names="public_read" role-type="refer" />
 </role>
 
 <role name="postgraphile">
+	<roles names="public_read" role-type="refer" />
+</role>
+
+<role name="public_read">
 </role>
 
 <database name="awread_database" is-template="false" allow-conns="true">
@@ -36,17 +43,6 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <usertype name="jwt_token" configuration="composite">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<appended-sql><![CDATA[grant anonymous to reader;
-grant anonymous to writer;
-grant reader to writer;
-grant anonymous to postgraphile;
-grant reader to postgraphile;
-grant writer to postgraphile;
-
-grant connect on database awread_database  to anonymous, reader, writer, postgraphile;
-grant usage on schema public to anonymous, reader, writer, postgraphile;
-GRANT SELECT ON ALL TABLES IN SCHEMA public to anonymous, reader, writer, postgraphile;
-grant update on public.users to reader, writer, postgraphile;]]></appended-sql>
 	<typeattrib name="userId">
 		<type name="uuid" length="0"/>
 	</typeattrib>
@@ -320,7 +316,7 @@ grant update on public.users to reader, writer, postgraphile;]]></appended-sql>
 <table name="authors" layer="0" collapse-mode="2" max-obj-count="3" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="800" y="780"/>
+	<position x="820" y="780"/>
 	<column name="bookId" not-null="true">
 		<type name="uuid" length="0"/>
 	</column>
@@ -800,7 +796,18 @@ order by 6 DESC;
 	 	authors."userId" = users."userId"
 	 where 
 	 	authors."bookId" = books."bookId"
-	) as authors]]></expression>
+	) as authors,
+(select 
+		name as categoryName
+	 from 
+	 	categories
+	join 
+	 	books
+	 on 
+	 	categories."categoryId" = books."categoryId"
+	limit 
+		1
+	) as categoryName]]></expression>
 	</reference>
 	<reference>
 		<expression><![CDATA[public.books]]></expression>
@@ -1077,5 +1084,10 @@ end;]]></definition>
 	<object name="awread_database" type="database"/>
 	<roles names="reader"/>
 	<privileges create="grant-op"/>
+</permission>
+<permission>
+	<object name="public.books" type="table"/>
+	<roles names="public_read"/>
+	<privileges select="true"/>
 </permission>
 </dbmodel>
