@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { GlobalCoreModule } from '@awread/global/core';
+import { GlobalSettingsModule } from '@awread/global/settings';
 import { ReaderWebSharedModule, SharedDesktopLayout, SharedMobileLayout, NotFoundPage } from '@awread/reader/web/shared';
 import { ReaderWebUiAuthModule } from '@awread/reader/web/ui-auth';
 import { ReaderWebUiAuthorModule } from '@awread/reader/web/ui-author';
@@ -31,7 +31,7 @@ import { HttpClientModule } from '@angular/common/http';
 
     CommonModule,
     HttpClientModule,
-    GlobalCoreModule,
+    GlobalSettingsModule,
     ReaderWebSharedModule,
     ReaderWebUiAuthModule,
     ReaderWebUiAuthorModule,
@@ -49,7 +49,7 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   exports: [
     RouterModule,
-    GlobalCoreModule,
+    GlobalSettingsModule,
 
     HttpClientModule
   ],

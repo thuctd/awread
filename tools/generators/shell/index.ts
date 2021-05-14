@@ -12,7 +12,8 @@ export default function (schema: any): Rule {
     schema = await guessApplicationToSchema(schema, tree);
     const workspaceName = getWorkspaceName(tree);
     const currentModule = prepareCurrentModule(schema, context);
-
+    const globalSettingsModule = 'GlobalSettingsModule';
+    const globalSettingPath = `@${workspaceName}/global/settings`;
     return chain([
       externalSchematic('@nrwl/angular', 'lib', {
         ...appAndLibSetting,
@@ -22,8 +23,8 @@ export default function (schema: any): Rule {
       }),
       addImportDeclarationToModule(schema, 'RouterModule', currentModule.path, '@angular/router', 'RouterModule.forRoot([])'),
       addExportDeclarationToModule(schema, 'RouterModule', currentModule.path, '@angular/router'),
-      addImportDeclarationToModule(schema, 'GlobalCoreModule', currentModule.path, `@${workspaceName}/global/core`),
-      addExportDeclarationToModule(schema, 'GlobalCoreModule', currentModule.path, `@${workspaceName}/global/core`),
+      addImportDeclarationToModule(schema, globalSettingsModule, currentModule.path, globalSettingPath),
+      addExportDeclarationToModule(schema, globalSettingsModule, currentModule.path, globalSettingPath),
       importShellToAppModule(schema, currentModule.name, schema.applicationRoot),
       addRouterOutlet(false, schema, `app.component`)
     ])

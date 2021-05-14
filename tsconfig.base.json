@@ -51,9 +51,6 @@
       "@awread/global/environments": [
         "libs/global/environments/src/index.ts"
       ],
-      "@awread/global/core": [
-        "libs/global/core/src/index.ts"
-      ],
       "@awread/writer/web/ui-auth": [
         "libs/writer/web/ui-auth/src/index.ts"
       ],
@@ -146,6 +143,9 @@
       ],
       "@awread/core/slider": [
         "libs/core/slider/src/index.ts"
+      ],
+      "@awread/global/settings": [
+        "libs/global/settings/src/index.ts"
       ]
     }
   },

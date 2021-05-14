@@ -3,10 +3,10 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { ReaderWebFeatureShellModule } from '@awread/reader/web/feature-shell';
-import { GlobalCoreModule } from '@awread/global/core';
+import { GlobalSettingsModule } from '@awread/global/settings';
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, ReaderWebFeatureShellModule, GlobalCoreModule],
+  imports: [BrowserModule, ReaderWebFeatureShellModule, GlobalSettingsModule],
   providers: [],
   bootstrap: [AppComponent],
 })

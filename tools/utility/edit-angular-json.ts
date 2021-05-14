@@ -129,13 +129,13 @@ export function createFiles() {
     tree.overwrite(`libs/global/environments/src/index.ts`, `export * from './lib/environment';`);
 
     // handle main
-    tree.create(`libs/global/core/src/lib/main.global.ts`, `import { environment } from '@${workspaceName}/global/environments';
+    tree.create(`libs/global/settings/src/lib/main.global.ts`, `import { environment } from '@${workspaceName}/global/environments';
 
 export function customMain() {
   return environment;
 }`);
-    tree.overwrite(`libs/global/core/src/index.ts`,
-      tree.read(`libs/global/core/src/index.ts`).toString('utf-8') + `\nexport * from './lib/main.global';`
+    tree.overwrite(`libs/global/settings/src/index.ts`,
+      tree.read(`libs/global/settings/src/index.ts`).toString('utf-8') + `\nexport * from './lib/main.global';`
     );
 
     const { rules } = await updateFilesAction(tree);
@@ -171,7 +171,7 @@ export function updateMainFile(host: Tree, name: string, project: any): Rule {
     insertCustomCode(mainPath, `
 customMain();
     `),
-    addImportPathToModule(host, 'customMain', mainPath, `@${workspaceName}/global/core`, null, true, false)
+    addImportPathToModule(host, 'customMain', mainPath, `@${workspaceName}/global/settings`, null, true, false)
   ])
 }
 
