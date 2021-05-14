@@ -1,9 +1,9 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { ComposedPage } from '../composed/composed.page';
+import { ListPage } from '@awread/reader/web/feature-market';
 
 @Component({
-  selector: 'ui-composed-desktop',
-  templateUrl: './composed-desktop.page.html',
+  selector: 'ui-list-mobile',
+  templateUrl: './list-mobile.page.html',
   styles: [
     `
       :host {
@@ -13,4 +13,4 @@ import { ComposedPage } from '../composed/composed.page';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ComposedDesktopPage extends ComposedPage { }
+export class ListMobilePage extends ListPage {}

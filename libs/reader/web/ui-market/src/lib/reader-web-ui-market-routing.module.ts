@@ -37,47 +37,20 @@ const routes: Routes = [
                 ? import('./pages/detail-mobile/detail-mobile.module').then((m) => m.DetailMobileModule)
                 : import('./pages/detail-desktop/detail-desktop.module').then((m) => m.DetailDesktopModule),
           },
-
-          {
-            path: 'novel',
-            loadChildren: () =>
-              window.innerWidth <= 768 && window?.haveMobile
-                ? import('./pages/novel-mobile/novel-mobile.module').then((m) => m.NovelMobileModule)
-                : import('./pages/novel-desktop/novel-desktop.module').then((m) => m.NovelDesktopModule),
-          },
-
-          {
-            path: 'long-story',
-            loadChildren: () =>
-              window.innerWidth <= 768 && window?.haveMobile
-                ? import('./pages/long-story-mobile/long-story-mobile.module').then((m) => m.LongStoryMobileModule)
-                : import('./pages/long-story-desktop/long-story-desktop.module').then((m) => m.LongStoryDesktopModule),
-          },
-
-          {
-            path: 'short-story',
-            loadChildren: () =>
-              window.innerWidth <= 768 && window?.haveMobile
-                ? import('./pages/short-story-mobile/short-story-mobile.module').then((m) => m.ShortStoryMobileModule)
-                : import('./pages/short-story-desktop/short-story-desktop.module').then((m) => m.ShortStoryDesktopModule),
-          },
-
           {
             path: 'composed',
             loadChildren: () =>
               window.innerWidth <= 768 && window?.haveMobile
-                ? import('./pages/composed-mobile/composed-mobile.module').then((m) => m.ComposedMobileModule)
-                : import('./pages/composed-desktop/composed-desktop.module').then((m) => m.ComposedDesktopModule),
-
+                ? import('./pages/list-mobile/list-mobile.module').then((m) => m.ListMobileModule)
+                : import('./pages/list-desktop/list-desktop.module').then((m) => m.ListDesktopModule),
           },
 
           {
             path: 'collected',
             loadChildren: () =>
               window.innerWidth <= 768 && window?.haveMobile
-                ? import('./pages/collected-mobile/collected-mobile.module').then((m) => m.CollectedMobileModule)
-                : import('./pages/collected-desktop/collected-desktop.module').then((m) => m.CollectedDesktopModule),
-
+                ? import('./pages/list-mobile/list-mobile.module').then((m) => m.ListMobileModule)
+                : import('./pages/list-desktop/list-desktop.module').then((m) => m.ListDesktopModule),
           },
           {
             path: 'search',

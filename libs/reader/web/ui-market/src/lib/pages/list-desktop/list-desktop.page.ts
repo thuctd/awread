@@ -1,9 +1,9 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { CollectedPage } from '../collected/collected.page';
+import { ListPage } from '../list/list.page';
 
 @Component({
-  selector: 'ui-collected-desktop',
-  templateUrl: './collected-desktop.page.html',
+  selector: 'ui-list-desktop',
+  templateUrl: './list-desktop.page.html',
   styles: [
     `
       :host {
@@ -13,4 +13,4 @@ import { CollectedPage } from '../collected/collected.page';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CollectedDesktopPage extends CollectedPage { }
+export class ListDesktopPage extends ListPage { }

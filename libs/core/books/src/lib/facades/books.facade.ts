@@ -31,7 +31,7 @@ export class BooksFacade {
   constructor(
     private booksGear: BooksGear,
     private booksStore: BooksStore,
-    private booksQuery: BooksQuery,
+    public booksQuery: BooksQuery,
     private booksHomeGear: BooksHomeGear,
     private composedQuery: ComposedQuery,
     private topBooksQuery: TopBooksQuery,

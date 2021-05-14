@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { LongStoryDesktopPage } from './long-story-desktop.page';
+import { ListMobilePage } from './list-mobile.page';
 
 
 
 const routes: Routes = [
-  { path: '', component: LongStoryDesktopPage }
+  { path: '', component: ListMobilePage }
   
 ];
 
@@ -14,4 +14,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class LongStoryDesktopRoutingModule { }
+export class ListMobileRoutingModule { }

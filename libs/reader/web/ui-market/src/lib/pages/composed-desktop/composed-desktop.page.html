@@ -1,5 +1,0 @@
-<section>
-  <template-list [titlePage]="'Truyện tự sáng tác'" (filterBooksEvent)="filterBooks()" [filtersForm]="filtersForm" [genres]="genreList$ | async"
-    [topBookList]="topBookList$ | async" [tabsHead]="categoryList$ | async" [selectedTabCategoryId]="selectedCategoryId" (switchTabEvent)="switchTab($event)"
-    (changeCategoryBooks)="filterItemsByCategory($event)" [categoryBooks]="filteredBooks$ | async"></template-list>
-</section>

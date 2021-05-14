@@ -7,8 +7,6 @@ import { ListInfoProseMolec } from './molecs/list-info-prose/list-info-prose.mol
 import { ListInfoShortBookMolec } from './molecs/list-info-short-book/list-info-short-book.molec';
 import { ListInfoTopBookMolec } from './molecs/list-info-top-book/list-info-top-book.molec';
 import { ListDetailLongBookOrgan } from './organs/list-detail-long-book/list-detail-long-book.organ';
-import { ListDetailShortBookOrgan } from './organs/list-detail-short-book/list-detail-short-book.organ';
-import { ListDetailProseOrgan } from './organs/list-detail-prose/list-detail-prose.organ';
 import { ListDetailTopBookOrgan } from './organs/list-detail-top-book/list-detail-top-book.organ';
 import { ListTemplate } from './templates/list/list.template';
 import { HomeTemplate } from './templates/home/home.template';
@@ -97,8 +95,6 @@ import { RdNewsDetailTemplate } from './templates/rd-news-detail/rd-news-detail.
     ListInfoShortBookMolec,
     ListInfoTopBookMolec,
     ListDetailLongBookOrgan,
-    ListDetailShortBookOrgan,
-    ListDetailProseOrgan,
     ListDetailTopBookOrgan,
     ListTemplate,
     HomeTemplate,
@@ -182,8 +178,6 @@ import { RdNewsDetailTemplate } from './templates/rd-news-detail/rd-news-detail.
     ListInfoShortBookMolec,
     ListInfoTopBookMolec,
     ListDetailLongBookOrgan,
-    ListDetailShortBookOrgan,
-    ListDetailProseOrgan,
     ListDetailTopBookOrgan,
     ListTemplate,
     HomeTemplate,
@@ -261,4 +255,4 @@ import { RdNewsDetailTemplate } from './templates/rd-news-detail/rd-news-detail.
     RdNewsDetailTemplate,
   ],
 })
-export class ReaderWebUiMarketAtomicModule {}
+export class ReaderWebUiMarketAtomicModule { }
