@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { AuthorBookPage } from '@awread/reader/web/feature-author';
+import { AuthorBookPage } from '../author-book/author-book.page';
 
 @Component({
   selector: 'ui-author-book-desktop',
@@ -13,4 +13,4 @@ import { AuthorBookPage } from '@awread/reader/web/feature-author';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AuthorBookDesktopPage extends AuthorBookPage {}
+export class AuthorBookDesktopPage extends AuthorBookPage { }
