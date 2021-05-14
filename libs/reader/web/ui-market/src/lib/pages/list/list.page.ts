@@ -99,4 +99,9 @@ export class ListPage implements OnInit, OnDestroy {
       'ui.filters')
       .setForm(this.filtersForm);
   }
+
+  filterBooks() {
+    this.filteredBooks$ = this.booksFacade.getFilterBooks();
+  }
+
 }

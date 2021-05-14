@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { ListPage } from '@awread/reader/web/feature-market';
+import { ListPage } from '../list/list.page';
 
 @Component({
   selector: 'ui-list-mobile',
@@ -13,4 +13,4 @@ import { ListPage } from '@awread/reader/web/feature-market';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ListMobilePage extends ListPage {}
+export class ListMobilePage extends ListPage { }

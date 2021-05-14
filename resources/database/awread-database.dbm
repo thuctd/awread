@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="0,502" last-zoom="0.95" max-obj-count="15"
+<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="0,341" last-zoom="0.95" max-obj-count="15"
 	 default-owner="postgres">
 <role name="anonymous">
 </role>
@@ -46,7 +46,7 @@ grant writer to postgraphile;
 grant connect on database awread_database  to anonymous, reader, writer, postgraphile;
 grant usage on schema public to anonymous, reader, writer, postgraphile;
 GRANT SELECT ON ALL TABLES IN SCHEMA public to anonymous, reader, writer, postgraphile;
-grant update on public.users to reader;]]></appended-sql>
+grant update on public.users to reader, writer, postgraphile;]]></appended-sql>
 	<typeattrib name="userId">
 		<type name="uuid" length="0"/>
 	</typeattrib>
@@ -585,21 +585,21 @@ end;]]></definition>
 		<type name="text" length="0"/>
 	</parameter>
 	<definition><![CDATA[declare 
-	"userAccount" public.users;
+	account public.users;
 	"inputUsername" text := username;
 	"inputEmail" text := email;
 	"inputPhone" text := phone;
 	"accessToken" public.jwt_token;
 begin
 
-	select * into "userAccount"
+	select * into account
 	from public.users as u
 	where 
 	(u.username = "inputUsername" and length("inputUsername") > 0) or
 	(u.email = "inputEmail" and length("inputEmail") > 0 ) or
 	(u.phone = "inputPhone" and length("inputPhone") > 0);
 
-	if "userAccount" IS NULL then 
+	if account IS NULL then 
 
 		insert into public.users(
 			username,
@@ -610,19 +610,19 @@ begin
 			email,
 			phone
 		)
-		returning * into "userAccount";	
+		returning * into account;	
 
 		insert into private.users("userId", "passwordHash") values(
-			"userAccount"."userId",
+			account."userId",
 			crypt(password, gen_salt('bf'))
 	    );
 
 		"accessToken" := (account."userId", account.role, extract(epoch from (now() + interval '3 months')))::public.jwt_token;
 
-		return query select 'success', "userAccount", "accessToken";
+		return query select 'success', account, "accessToken";
 		
 	else
-		return query select 'duplicated', "userAccount", "accessToken";
+		return query select 'duplicated', account, "accessToken";
 	end if;
 end;]]></definition>
 </function>
