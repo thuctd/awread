@@ -1,13 +1,13 @@
 import { ForgotFormMolec } from './forgot-form.molec';
-import { ReaderWebUiAuthAtomicModule } from '../../reader-web-ui-auth-atomic.module';
+import { GlobalDesignSystemAtomicModule } from '../../global-design-system-atomic.module';
 
 export default {
-  title: 'Auth/Molecs/Forgot Form'
+  title: 'Design System/Molecs/Forgot Form'
 }
 
 export const primary = () => ({
   moduleMetadata: {
-    imports: [ReaderWebUiAuthAtomicModule]
+    imports: [GlobalDesignSystemAtomicModule]
   },
   component: ForgotFormMolec,
   props: {

@@ -9,20 +9,23 @@ import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter, Input
         display: inline-block;
         position: relative;
       }
-    `
+    `,
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavbarAuthLoggedMolec implements OnInit {
   @Input() user = {};
   @Output() logoutEvent = new EventEmitter();
-  isToggleDropdown: boolean = false;
-  constructor() { }
+  isToggleDropdown = false;
+  constructor() {}
   // @Output() submitEvent = new EventEmitter();
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   submitEvent(event) {
     this.isToggleDropdown = !this.isToggleDropdown;
+  }
+
+  onClick() {
+    this.isToggleDropdown = false;
   }
 }

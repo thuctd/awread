@@ -1,10 +1,9 @@
-import { FormGroup } from '@angular/forms';
 import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { faLock, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 @Component({
-  selector: 'wrt-login-form',
-  templateUrl: './wrt-login-form.molec.html',
+  selector: 'molec-login-form',
+  templateUrl: './login-form.molec.html',
   styles: [
     `
       :host {
@@ -14,7 +13,7 @@ import { faLock, faEnvelope } from '@fortawesome/free-solid-svg-icons';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class WrtLoginFormMolec implements OnInit {
+export class LoginFormMolec implements OnInit {
   @Input() type = 'password';
   icons = { faLock, faEnvelope };
   @Input() form: FormGroup = this.fb.group({
@@ -22,8 +21,7 @@ export class WrtLoginFormMolec implements OnInit {
     password: ['', [Validators.required]],
   });
   @Output() auth = new EventEmitter();
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {}
 
-  ngOnInit(): void { }
-
+  ngOnInit(): void {}
 }

@@ -1,13 +1,13 @@
 import { RegisterFormMolec } from './register-form.molec';
-import { ReaderWebUiAuthAtomicModule } from '../../reader-web-ui-auth-atomic.module';
+import { GlobalDesignSystemAtomicModule } from '../../global-design-system-atomic.module';
 
 export default {
-  title: 'Auth/Molecs/Register Form'
+  title: 'Design System/Molecs/Register Form'
 }
 
 export const primary = () => ({
   moduleMetadata: {
-    imports: [ReaderWebUiAuthAtomicModule]
+    imports: [GlobalDesignSystemAtomicModule]
   },
   component: RegisterFormMolec,
   props: {
