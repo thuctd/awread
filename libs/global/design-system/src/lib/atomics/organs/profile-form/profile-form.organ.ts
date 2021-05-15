@@ -1,10 +1,9 @@
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Component, OnInit, ChangeDetectionStrategy, Input, EventEmitter, Output } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { PopupChangeCoverOrgan } from '@awread/global/design-system';
+import { Component, OnInit, ChangeDetectionStrategy, Output, Input, EventEmitter } from '@angular/core';
+
 @Component({
-  selector: 'profile',
-  templateUrl: './wrt-profile.template.html',
+  selector: 'organ-profile-form',
+  templateUrl: './profile-form.organ.html',
   styles: [
     `
       :host {
@@ -14,7 +13,9 @@ import { PopupChangeCoverOrgan } from '@awread/global/design-system';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class WrtProfileTemplate implements OnInit {
+export class ProfileFormOrgan implements OnInit {
+  @Input() link = '/forgot';
+  @Input() submitText = 'Lưu';
   @Input() profileForm: FormGroup = this.fb.group({
     email: ['', [Validators.required]],
     phone: ['', [Validators.required]],
@@ -27,15 +28,7 @@ export class WrtProfileTemplate implements OnInit {
   });
   @Input() submitted: boolean;
   @Output() updateProfileEvent = new EventEmitter();
-  constructor(public matDialog: MatDialog, private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) {}
 
-  ngOnInit(): void {
-    // setTimeout(() => this.profileForm.patchValue({ username: 'ahihi' }), 5000);
-  }
-  openChangeCover($event) {
-    this.matDialog.open(PopupChangeCoverOrgan, {
-      width: '55rem',
-      height: '33rem',
-    });
-  }
+  ngOnInit(): void {}
 }
