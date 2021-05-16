@@ -9,6 +9,9 @@ import { Component, OnInit, ChangeDetectionStrategy, Output, Input, EventEmitter
       :host {
         display: block;
       }
+      .bg-blue {
+        background-color: #3b5998;
+      }
     `,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -28,6 +31,7 @@ export class ProfileFormOrgan implements OnInit {
   });
   @Input() submitted: boolean;
   @Output() updateProfileEvent = new EventEmitter();
+  @Output() ClickConnectFB = new EventEmitter();
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {}

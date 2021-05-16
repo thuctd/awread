@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 import { MatCalendarCellClassFunction } from '@angular/material/datepicker';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'molec-profile-info-form',
@@ -16,12 +16,32 @@ export class ProfileInfoFormMolec implements OnInit {
     gender: ['', [Validators.required]],
   });
   @Input() submitted: boolean;
-  items = [
+  @Input() inputControl = new FormControl('');
+
+  @Input() items = [
     {
-      key: 'Email',
+      title: 'Họ',
+      formControlName: 'firstname',
     },
     {
-      key: 'Số điện thoại',
+      title: 'Tên đệm',
+      formControlName: 'middlename',
+    },
+    {
+      title: 'Tên',
+      formControlName: 'lastname',
+    },
+    {
+      title: 'Email',
+      formControlName: 'email',
+    },
+    {
+      title: 'Số điện thoại',
+      formControlName: 'phone',
+    },
+    {
+      title: 'Tuổi',
+      formControlName: 'age',
     },
   ];
 

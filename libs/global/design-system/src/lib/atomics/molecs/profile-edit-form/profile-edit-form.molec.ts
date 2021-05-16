@@ -21,7 +21,25 @@ export class ProfileEditFormMolec implements OnInit {
     introduce: ['', [Validators.required]],
   });
   @Input() submitted: boolean;
-  items = [{ key: 'Tên' }, { key: 'Tên tài khoản' }, { key: 'Liên kết' }];
+
+  @Input() items = [
+    {
+      title: 'Tên hiển thị',
+      formControlName: 'name',
+    },
+    {
+      title: 'Tên tài khoản',
+      formControlName: 'username',
+    },
+    {
+      title: 'Liên kết',
+      formControlName: 'website',
+    },
+    {
+      title: 'Facebook',
+      formControlName: 'Facebook',
+    },
+  ];
 
   constructor(private fb: FormBuilder) {}
 

@@ -27,6 +27,7 @@ export class WrtProfileTemplate implements OnInit {
   });
   @Input() submitted: boolean;
   @Output() updateProfileEvent = new EventEmitter();
+  @Output() ClickConnectFB = new EventEmitter();
   constructor(public matDialog: MatDialog, private fb: FormBuilder) {}
 
   ngOnInit(): void {
