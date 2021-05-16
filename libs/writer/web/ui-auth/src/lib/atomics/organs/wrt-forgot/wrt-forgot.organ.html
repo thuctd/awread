@@ -1,5 +1,5 @@
 <wrt-auth-header [title]="title" [description]="description"> </wrt-auth-header>
-<wrt-forgot-form [emailFormControl]="emailFormControl"></wrt-forgot-form>
+<molec-forgot-form [emailFormControl]="emailFormControl"></molec-forgot-form>
 <wrt-forgot-actions (keydown.enter)='submitEvent.emit(emailFormControl.value)' [title]="'Gửi Email hướng dẫn'" [active]="emailFormControl.valid" (submitEvent)="submitEvent.emit(emailFormControl.value)"></wrt-forgot-actions>
 <option-link [suggestText]="'Bạn đã nhớ thông tin đăng nhập?'" [title]="'Đăng nhập'" [link]="'/signin'">
 </option-link>

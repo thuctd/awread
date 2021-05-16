@@ -111,6 +111,9 @@ import { RdNewsDateAtom } from './atoms/rd-news-date/rd-news-date.atom';
 import { RdNewsTitleAtom } from './atoms/rd-news-title/rd-news-title.atom';
 import { RdNewsAwreadItemAtom } from './atoms/rd-news-awread-item/rd-news-awread-item.atom';
 import { SocialShareFbBtnAtom } from './atoms/social-share-fb-btn/social-share-fb-btn.atom';
+import { LoginFormMolec } from './molecs/login-form/login-form.molec';
+import { RegisterFormMolec } from './molecs/register-form/register-form.molec';
+import { ForgotFormMolec } from './molecs/forgot-form/forgot-form.molec';
 
 @NgModule({
   imports: [
@@ -238,6 +241,9 @@ import { SocialShareFbBtnAtom } from './atoms/social-share-fb-btn/social-share-f
     RdNewsTitleAtom,
     RdNewsAwreadItemAtom,
     SocialShareFbBtnAtom,
+    LoginFormMolec,
+    RegisterFormMolec,
+    ForgotFormMolec,
   ],
   declarations: [
     notReadyDirective,
@@ -344,6 +350,9 @@ import { SocialShareFbBtnAtom } from './atoms/social-share-fb-btn/social-share-f
     RdNewsTitleAtom,
     RdNewsAwreadItemAtom,
     SocialShareFbBtnAtom,
+    LoginFormMolec,
+    RegisterFormMolec,
+    ForgotFormMolec,
   ],
 })
 export class GlobalDesignSystemAtomicModule {}

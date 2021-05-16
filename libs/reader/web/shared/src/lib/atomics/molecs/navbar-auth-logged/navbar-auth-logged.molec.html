@@ -1,2 +1,2 @@
 <atom-navbar-btn-logged [user]="user" (submitEvent)="submitEvent($event)"></atom-navbar-btn-logged>
-<molec-navbar-auth-dropdown (logoutEvent)="logoutEvent.emit()" [user]="user" *ngIf="isToggleDropdown"></molec-navbar-auth-dropdown>
+<molec-navbar-auth-dropdown closeOnOutSide (clickedOutside)="onClick()" (logoutEvent)="logoutEvent.emit()" [user]="user" *ngIf="isToggleDropdown"></molec-navbar-auth-dropdown>

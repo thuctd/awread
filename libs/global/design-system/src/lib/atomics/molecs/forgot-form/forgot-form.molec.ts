@@ -1,5 +1,6 @@
+import { FormControl } from '@angular/forms';
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
-import { FormBuilder, FormControl } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
