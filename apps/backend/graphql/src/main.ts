@@ -53,6 +53,7 @@ const postgraphileOptions = {
   jwtSecret: 'hiepxanh',
   jwtPgTypeIdentifier: 'public.jwt_token',
   pgDefaultRole: 'anonymous',
+  dynamicJson: true //FUCK: this is why json value always return string
   // appendPlugins: [ConnectionFilterPlugin, MyRandomFieldPlugin, MyPlugin, MyRandomUserPlugin, LAST_POST_CREATED_AT, TestFieldPlugin],
   // pgSettings: async (req: IncomingMessage & { user: any }) => {
   //   console.log('req.user', req.user);

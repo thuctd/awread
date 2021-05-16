@@ -55,9 +55,9 @@ export class BooksGear {
     );
   }
 
-  getAuthorBooks(authorId: string) {
-    return this.booksApi.getAuthorBooks(authorId).pipe(
-      map((result) => result.map(book => this.transformBookDataGear.tranformBookHomeData(book))),
+  getAuthorBooks(authors) {
+    const authorIds = Object.keys(authors ?? {});
+    return this.booksApi.getAuthorBooks(authorIds).pipe(
       tap(books => this.authorBooksStore.set(books))
     );
   }
@@ -72,14 +72,11 @@ export class BooksGear {
   }
 
   getBookById(bookId: string) {
-    return this.booksApi.getBookById(bookId).pipe(
-      map((result) => result.map(book => this.tranformBookDetailData(book))),
-    );
+    return this.booksApi.getBookById(bookId)
   }
 
   getTopBooks() {
     return this.booksApi.getTopBooks().pipe(
-      map((result) => result.map(book => this.transformBookDataGear.tranformBookHomeData(book))),
       tap(books => this.topBooksStore.set(books))
     );
   }
@@ -100,13 +97,4 @@ export class BooksGear {
       tap(books => this.searchBooksStore.set(books)));
   }
 
-  private tranformBookDetailData(book) {
-    const authors = JSON.parse(book['authors'].split('/'));
-    const genreIds = JSON.parse(book['genres'].split('/'));
-    return {
-      ...book,
-      authors,
-      genreIds
-    };
-  }
 }

@@ -215,26 +215,40 @@ export class BooksApi {
     );
   }
 
-  getAuthorBooks(userId: string) {
-    return this.apollo.mutate({
-      mutation: gql`
-        mutation AuthorBooks($userId: UUID) {
-          getAuthorBooks(input: { userId: $userId }) {
-            mvBooksLatestChapters {
-              bookId
-              categoryId
-              newestChapters
-              updatedAt
-              title
-            }
+  getAuthorBooks(authorIds: string[]) {
+    //NOTE: console.log(`containsAnyKeys: ${['id1', 'id2']}`); // containsAnyKeys: id1,id2
+    //NOTE: console.log(`containsAnyKeys: ${JSON.stringify(['id1', 'id2'])}`); // containsAnyKeys: ["id1","id2"]
+    //NOTE: JSON.stringify() is important
+    return this.apollo.query({
+      query: gql`
+      query allMvDetailBooks {
+        allMvDetailBooks(
+              filter: {authors: {containsAnyKeys: ${JSON.stringify(authorIds)} }}
+
+        ) {
+          nodes {
+            ages
+            authors
+            bookId
+            categoryId
+            completed
+            publisherId
+            createdAt
+            description
+            cover
+            published
+            genreIds
+            type
+            title
+            updatedAt
+            userId
           }
         }
-      `,
-      variables: {
-        userId,
-      },
+      }
+      `
+
     }).pipe(
-      map(res => res?.['data']?.['getAuthorBooks']?.['mvBooksLatestChapters'])
+      map(res => res?.['data']?.['allMvDetailBooks']?.['nodes'])
     );
   }
 
@@ -245,7 +259,9 @@ export class BooksApi {
           allVRandomBooks(filter: { genreIds: { anyEqualTo: $genreId } }, first: 20) {
             nodes {
               bookId
+              categoryId
               genreIds
+              type
               title
               userId
               cover
@@ -268,6 +284,8 @@ export class BooksApi {
               bookId
               title
               categoryId
+              genreIds
+              type
               newestChapters
               updatedAt
               views
@@ -290,9 +308,10 @@ export class BooksApi {
               authors
               bookId
               categoryId
+              genreIds
+              type
               completed
               description
-              genres
               published
               publisherId
               title

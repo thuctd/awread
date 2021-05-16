@@ -38,7 +38,7 @@ export class DetailPage implements OnInit, OnDestroy {
       switchMap(id => this.booksFacade.getDetailBook(id).pipe(
         tap(book => {
           this.authorId = book[0]['userId'];
-          this.booksFacade.getAuthorBooks(this.authorId).subscribe();
+          this.booksFacade.getAuthorBooks(book[0].authors).subscribe();
         })
       )),
     ).subscribe(book => {
@@ -49,13 +49,15 @@ export class DetailPage implements OnInit, OnDestroy {
     this.getAllChapters();
   }
 
+
+  // BUG: breadcrumb truyen vao ; bi bien doi
   getbreadcrumbs() {
     return [{
       title: 'Home',
-      link: '/'
+      link: ['/']
     }, {
-      title: 'Home',
-      link: '/'
+      title: this.book.type,
+      link: [this.book.type, { categoryId: this.book.categoryId }]
     }];
   }
 
