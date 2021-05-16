@@ -18,7 +18,7 @@ export class DetailPage implements OnInit, OnDestroy {
   authorId: string;
   destroy$ = new Subject();
   isLoading$ = this.booksFacade.selectLoadingAkita();
-  topBookList$ = this.booksFacade.topBooks$;
+  topBooks$ = this.booksFacade.topBooks$;
   authorBookList$ = this.booksFacade.authorBooks$;
   chapters$ = this.chaptersFacade.chapters$;
   breadcrumbs;
@@ -55,10 +55,16 @@ export class DetailPage implements OnInit, OnDestroy {
     return [{
       title: 'Home',
       link: ['/']
-    }, {
+    },
+    {
       title: this.book.type,
-      link: [this.book.type, { categoryId: this.book.categoryId }]
-    }];
+      link: ['/', this.book.type, { categoryId: this.book.categoryId }]
+    },
+    {
+      title: this.book.title,
+      link: ['/', this.book.type, { categoryId: this.book.categoryId }, this.bookId]
+    }
+    ];
   }
 
   private getAllChapters() {

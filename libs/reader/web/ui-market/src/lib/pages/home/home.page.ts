@@ -47,11 +47,12 @@ export class HomePage implements OnInit, OnDestroy {
   }
 
   filterItemsByGenre(genre: Genre) {
-    this.loading$ = true;
-    setTimeout(() => {
-      this.filteredBooks$ = this.booksFacade.getGenreBooks(genre.genreId);
-      this.loading$ = false;
-    }, 200);
+    //TODO: sai nhe, phai cho loading vao trong, cho ham goi api
+    // this.loading$ = true;
+    // setTimeout(() => {
+    this.filteredBooks$ = this.booksFacade.getGenreBooks(genre.genreId);
+    // this.loading$ = false;
+    // }, 200);
   }
 
   filterItemsByCategory(category: Category) {

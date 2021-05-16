@@ -237,7 +237,7 @@ export class BooksApi {
             description
             cover
             published
-            genreIds
+            genres
             type
             title
             updatedAt
@@ -255,12 +255,12 @@ export class BooksApi {
   getGenreBooks(genreId: string) {
     return this.apollo.query({
       query: gql`
-        query allVRandomBooks($genreId: BigFloat!) {
-          allVRandomBooks(filter: { genreIds: { anyEqualTo: $genreId } }, first: 20) {
+        query allVRandomBooks($genreId: String!) {
+          allVRandomBooks(filter: { genres: { containsKey: $genreId } }, first: 20) {
             nodes {
               bookId
               categoryId
-              genreIds
+              genres
               type
               title
               userId
@@ -284,7 +284,7 @@ export class BooksApi {
               bookId
               title
               categoryId
-              genreIds
+              genres
               type
               newestChapters
               updatedAt
@@ -308,7 +308,7 @@ export class BooksApi {
               authors
               bookId
               categoryId
-              genreIds
+              genres
               type
               completed
               description
