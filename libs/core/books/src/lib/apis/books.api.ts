@@ -221,14 +221,16 @@ export class BooksApi {
     //NOTE: JSON.stringify() is important
     return this.apollo.query({
       query: gql`
-      query allMvDetailBooks {
-        allMvDetailBooks(
+      query allMvBooksLatestChapters {
+        allMvBooksLatestChapters(
               filter: {authors: {containsAnyKeys: ${JSON.stringify(authorIds)} }}
 
         ) {
           nodes {
-            ages
+            title
             authors
+            newestChapters
+            genres
             bookId
             categoryId
             completed
@@ -239,7 +241,7 @@ export class BooksApi {
             published
             genres
             type
-            title
+            ages
             updatedAt
             userId
           }
@@ -248,7 +250,7 @@ export class BooksApi {
       `
 
     }).pipe(
-      map(res => res?.['data']?.['allMvDetailBooks']?.['nodes'])
+      map(res => res?.['data']?.['allMvBooksLatestChapters']?.['nodes'])
     );
   }
 
