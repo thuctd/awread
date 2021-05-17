@@ -4,6 +4,7 @@ import { Category } from '@awread/core/categories';
 export interface Book {
   bookId: string
   cover: string;
+  type: 'collected' | 'composed';
   authorId: string;
   title: string;
   category: string;

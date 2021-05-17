@@ -3,7 +3,7 @@
   <ng-container *ngIf="items?.length; else noData">
     <molec-rd-search-book-header [number]="items.length" class="pt-8 pb-4"></molec-rd-search-book-header>
     <div *ngFor="let item of items" class="py-4">
-      <organ-rd-search-book-list [chapters]="item['chaptersByBookId']['nodes']" [book]="item"[category]="item.categoryName" [status]="item.completed">
+      <organ-rd-search-book-list [chapters]="item['chaptersByBookId']['nodes']" [book]="item" [category]="item.categoryName" [status]="item.completed">
       </organ-rd-search-book-list>
     </div>
   </ng-container>

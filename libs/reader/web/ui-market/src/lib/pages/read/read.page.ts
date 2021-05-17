@@ -4,8 +4,8 @@ import { Directive, Injectable, OnInit, ChangeDetectorRef } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap, tap } from 'rxjs/operators';
 import { Chapter } from '@awread/core/chapters';
-import { BooksFacade } from 'libs/core/books/src/lib/facades/books.facade';
-import { ChaptersFacade } from 'libs/core/chapters/src/lib/facades/chapters.facade';
+import { Book, BooksFacade } from '@awread/core/books';
+import { ChaptersFacade } from '@awread/core/chapters';
 
 @UntilDestroy()
 @Injectable({
@@ -37,6 +37,7 @@ export class ReadPage implements OnInit {
       )
       .subscribe((chapter) => {
         this.chapter = chapter[0];
+        this.breadcrumbs = this.getbreadcrumbs();
       });
     this.booksFacade.getTopBooks().subscribe();
   }
@@ -44,11 +45,21 @@ export class ReadPage implements OnInit {
   getbreadcrumbs() {
     return [{
       title: 'Home',
-      link: '/'
-    }, {
-      title: 'Home',
-      link: '/'
-    }];
+      link: ['/']
+    },
+    {
+      title: this.chapter.book.type,
+      link: ['/', this.chapter.book.type, { categoryId: this.chapter.book.categoryId }]
+    },
+    {
+      title: this.chapter.book.title,
+      link: ['/', 'books', this.bookId]
+    },
+    {
+      title: this.chapter.title,
+      link: ['/', 'books', this.bookId, 'chapters', this.chapter.chapterId]
+    }
+    ];
   }
 
   navigateToChapter(chapter: Chapter) {

@@ -1,4 +1,3 @@
-import { first } from 'rxjs/operators';
 import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 interface TabHead {
   name: string;

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { GlobalCoreModule } from '@awread/global/core';
+import { GlobalSettingsModule } from '@awread/global/settings';
 import { WriterWebSharedModule, ShellDesktopLayout, ShellMobileLayout, NotFoundPage } from '@awread/writer/web/shared';
 import { WriterWebUiAuthModule } from '@awread/writer/web/ui-auth';
 import { WriterWebUiSingleModule } from '@awread/writer/web/ui-single';
@@ -32,12 +32,12 @@ const routes: Routes = [
       anchorScrolling: 'enabled',
       onSameUrlNavigation: 'reload',
     }),
-    GlobalCoreModule,
+    GlobalSettingsModule,
     WriterWebSharedModule,
     WriterWebUiAuthModule,
     WriterWebUiSingleModule,
     WriterWebUiCreationModule,
   ],
-  exports: [RouterModule, GlobalCoreModule],
+  exports: [RouterModule, GlobalSettingsModule],
 })
-export class WriterWebFeatureShellModule {}
+export class WriterWebFeatureShellModule { }

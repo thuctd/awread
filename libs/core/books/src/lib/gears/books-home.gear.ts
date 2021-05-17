@@ -19,21 +19,18 @@ export class BooksHomeGear {
 
   getGoodBooks() {
     return this.booksHomeApi.getGoodBooks().pipe(
-      map((result) => result.map(book => this.transformBookDataGear.tranformBookHomeData(book))),
       tap(books => this.goodBooksStore.set(books))
     );
   }
 
   getFeatureBooks() {
     return this.booksHomeApi.getFeatureBooks().pipe(
-      map((result) => result.map(book => this.transformBookDataGear.tranformBookData(book))),
       tap(books => this.featureBooksStore.set(books))
     );
   }
 
   getLatestBooks(categoryId: string) {
     return this.booksHomeApi.getLatestBooks(categoryId).pipe(
-      map((result) => result.map(book => this.transformBookDataGear.tranformBookHomeData(book))),
       tap(books => this.latestBooksStore.set(books))
     );
   }
