@@ -17,9 +17,12 @@ export class ListInfoLongBookMolec implements OnInit {
     title: 'Cô gái chúng ta cùng theo đuổi năm nào',
     bookId: ''
   };
+
   @Input() btns = [{
-    position: '1',
-    chapterId: ''
+    chapterId: {
+      position: '1',
+      chapterId: ''
+    }
   }];
   @Output() submitEvent = new EventEmitter();
 

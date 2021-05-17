@@ -15,7 +15,8 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
 export class ListInfoProseMolec implements OnInit {
   @Input() book = {
     title: 'Cô gái chúng ta cùng theo đuổi năm nào',
-    bookId: ''
+    bookId: '',
+    authors: []
   };
 
   @Input() moreContent = 'Đọc thêm';

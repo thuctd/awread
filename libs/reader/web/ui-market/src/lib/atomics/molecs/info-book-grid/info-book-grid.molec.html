@@ -1,7 +1,7 @@
-<atom-title-book class="absolute top-0" [bookId]="bookId" [titleBook]="title" [class]="'text-sm md:text-base font-bold text-gray-600'" [size]="'m'">
+<atom-title-book class="absolute top-0" [bookId]="book.bookId" [titleBook]="book.title" [class]="'text-sm md:text-base font-bold text-gray-600'" [size]="'m'">
 </atom-title-book>
 <div class="absolute bottom-0">
-  <atom-author></atom-author>
+  <atom-author [items]="book.authors"></atom-author>
   <div class="flex pb-2">
     <atom-rating class="mr-4"></atom-rating>
     <atom-icon-text [icon]="faIcon" [title]="countComment"></atom-icon-text>

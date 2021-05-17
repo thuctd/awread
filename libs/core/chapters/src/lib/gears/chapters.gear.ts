@@ -29,6 +29,16 @@ export class ChaptersGear {
     );
   }
 
+  getPaginationChapter(bookId: string, after: string) {
+    return this.chaptersApi.getPaginationChapter(bookId, after).pipe(
+      map((result) => {
+        console.log(result);
+
+        return result;
+      }),
+    );
+  }
+
   private transformDataChapters(chapters) {
     let chapterLength = chapters.length;
     return chapters.map((item, index) => {

@@ -5,7 +5,6 @@
       <div *ngFor="let book of longbooks| slice:0:9;" class="col-span-2 md:col-span-4">
         <div>
           <atom-img-m [srcImg]="book.cover" [bookId]="book.bookId"></atom-img-m>
-
           <div [ngSwitch]="categoryId">
             <div *ngSwitchCase="'1'">
               <list-info-short-book [book]="book" [btns]="book.newestChapters"></list-info-short-book>
@@ -22,7 +21,7 @@
     </div>
     <ng-template #list_content>
       <div class="grid grid-cols-12 gap-10 place-content-center">
-        <div *ngFor="let book of longbooks;" class="col-span-2 md:col-span-6">
+        <div *ngFor="let book of longbooks| slice:0:9;" class="col-span-2 md:col-span-6">
           <!-- <pre> {{ book | json }} </pre> -->
           <organ-books-grid [book]="book" [chapters]="book.newestChapters"></organ-books-grid>
         </div>

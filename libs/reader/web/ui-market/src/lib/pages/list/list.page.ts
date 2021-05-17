@@ -1,3 +1,4 @@
+import { tap } from 'rxjs/operators';
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ChangeDetectorRef, Injectable } from '@angular/core';
@@ -74,7 +75,9 @@ export class ListPage implements OnInit, OnDestroy {
   }
 
   filterItemsByCategory(categoryId) {
-    this.filteredBooks$ = this.booksFacade.getCategoryBooks(categoryId);
+    this.filteredBooks$ = this.booksFacade.getCategoryBooks(categoryId).pipe(
+      tap(res => console.log(res))
+    );
   }
 
 

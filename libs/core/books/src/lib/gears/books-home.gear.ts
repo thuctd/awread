@@ -32,5 +32,4 @@ export class BooksHomeGear {
       tap(books => this.latestBooksStore.set(books))
     );
   }
-
 }

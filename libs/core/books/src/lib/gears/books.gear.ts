@@ -24,6 +24,11 @@ export class BooksGear {
 
   getCategoryBooks(categoryId?: string) {
     return this.booksApi.getCategoryBooks(categoryId).pipe(
+      // map((result) => result.map(res => {
+      //   const chapters = Object.keys(res['newestChapters']).map(
+      //     key => console.log(res['newestChapters'][key], 'position')
+      //   );
+      // })),
       tap(books => this.categoryBooksStore.set(books))
     );
   }
@@ -69,5 +74,4 @@ export class BooksGear {
       })),
       tap(books => this.searchBooksStore.set(books)));
   }
-
 }

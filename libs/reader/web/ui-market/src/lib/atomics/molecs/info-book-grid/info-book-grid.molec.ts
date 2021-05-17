@@ -14,10 +14,13 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InfoBookGridMolec implements OnInit {
-  @Input() title = 'Cô gái chúng ta cùng theo đuổi!';
+  @Input() book = {
+    title: 'Cô gái chúng ta cùng theo đuổi năm nào',
+    bookId: '',
+    authors: []
+  };
   @Input() countComment = '40';
   @Input() faIcon = faEye;
-  @Input() bookId = '';
   @Input() btns = [{
     position: '1',
     chapterId: ''

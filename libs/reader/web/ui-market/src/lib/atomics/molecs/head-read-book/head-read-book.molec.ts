@@ -17,6 +17,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
 export class HeadReadBookMolec implements OnInit {
   @Input() defaultChapter;
   @Input() chapters = [];
+  @Input() chapter;
   @Input() faIcon = faChevronLeft;
   @Output() selectionChange = new EventEmitter();
   @Output() nextChapterBook = new EventEmitter();

@@ -67,7 +67,8 @@ export class ReadPage implements OnInit {
     // this.router.navigate(['/books', chapter.bookId, 'chapters', chapter.chapterId]);
   }
 
-  onChangeNextChapter() {
+  onChangeNextChapter(chapter: Chapter) {
+    this.chaptersFacade.getPaginationChapter(this.bookId, '').subscribe();
     if (!this.chapterId) {
       this.backHome();
       return;

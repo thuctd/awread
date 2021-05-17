@@ -38,4 +38,8 @@ export class ChaptersFacade {
   getChapterDetail(chapterid: string, bookid: string) {
     return this.chaptersGear.getChapterDetail(chapterid, bookid);
   }
+
+  getPaginationChapter(bookId: string, after: string) {
+    return this.chaptersGear.getPaginationChapter(bookId, after);
+  }
 }
