@@ -15,7 +15,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 export class DetailBookInfoMolec implements OnInit {
   @Input() book = {
     authors: [],
-    genreIds: [],
+    genres: [],
     published: true,
     updatedAt: '2020',
     description: '(chủ yếu dành cho truyện sưu tầm)'

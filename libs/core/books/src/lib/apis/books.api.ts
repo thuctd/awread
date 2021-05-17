@@ -215,37 +215,55 @@ export class BooksApi {
     );
   }
 
-  getAuthorBooks(userId: string) {
-    return this.apollo.mutate({
-      mutation: gql`
-        mutation AuthorBooks($userId: UUID) {
-          getAuthorBooks(input: { userId: $userId }) {
-            mvBooksLatestChapters {
-              bookId
-              categoryId
-              newestChapters
-              updatedAt
-              title
-            }
+  getAuthorBooks(authorIds: string[]) {
+    //NOTE: console.log(`containsAnyKeys: ${['id1', 'id2']}`); // containsAnyKeys: id1,id2
+    //NOTE: console.log(`containsAnyKeys: ${JSON.stringify(['id1', 'id2'])}`); // containsAnyKeys: ["id1","id2"]
+    //NOTE: JSON.stringify() is important
+    return this.apollo.query({
+      query: gql`
+      query allMvBooksLatestChapters {
+        allMvBooksLatestChapters(
+              filter: {authors: {containsAnyKeys: ${JSON.stringify(authorIds)} }}
+
+        ) {
+          nodes {
+            title
+            authors
+            newestChapters
+            genres
+            bookId
+            categoryId
+            completed
+            publisherId
+            createdAt
+            description
+            cover
+            published
+            genres
+            type
+            ages
+            updatedAt
+            userId
           }
         }
-      `,
-      variables: {
-        userId,
-      },
+      }
+      `
+
     }).pipe(
-      map(res => res?.['data']?.['getAuthorBooks']?.['mvBooksLatestChapters'])
+      map(res => res?.['data']?.['allMvBooksLatestChapters']?.['nodes'])
     );
   }
 
   getGenreBooks(genreId: string) {
     return this.apollo.query({
       query: gql`
-        query allVRandomBooks($genreId: BigFloat!) {
-          allVRandomBooks(filter: { genreIds: { anyEqualTo: $genreId } }, first: 20) {
+        query allVRandomBooks($genreId: String!) {
+          allVRandomBooks(filter: { genres: { containsKey: $genreId } }, first: 20) {
             nodes {
               bookId
-              genreIds
+              categoryId
+              genres
+              type
               title
               userId
               cover
@@ -268,6 +286,8 @@ export class BooksApi {
               bookId
               title
               categoryId
+              genres
+              type
               newestChapters
               updatedAt
               views
@@ -290,9 +310,10 @@ export class BooksApi {
               authors
               bookId
               categoryId
+              genres
+              type
               completed
               description
-              genres
               published
               publisherId
               title

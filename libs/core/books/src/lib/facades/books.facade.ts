@@ -92,8 +92,8 @@ export class BooksFacade {
     return this.booksHomeGear.getLatestBooks(cateogoryId);
   }
 
-  getAuthorBooks(authorId: string) {
-    return this.booksGear.getAuthorBooks(authorId);
+  getAuthorBooks(authors) {
+    return this.booksGear.getAuthorBooks(authors);
   }
 
   getTopBooks() {

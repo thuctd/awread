@@ -18,7 +18,7 @@ export class DetailPage implements OnInit, OnDestroy {
   authorId: string;
   destroy$ = new Subject();
   isLoading$ = this.booksFacade.selectLoadingAkita();
-  topBookList$ = this.booksFacade.topBooks$;
+  topBooks$ = this.booksFacade.topBooks$;
   authorBookList$ = this.booksFacade.authorBooks$;
   chapters$ = this.chaptersFacade.chapters$;
   breadcrumbs;
@@ -38,7 +38,7 @@ export class DetailPage implements OnInit, OnDestroy {
       switchMap(id => this.booksFacade.getDetailBook(id).pipe(
         tap(book => {
           this.authorId = book[0]['userId'];
-          this.booksFacade.getAuthorBooks(this.authorId).subscribe();
+          this.booksFacade.getAuthorBooks(book[0].authors).subscribe();
         })
       )),
     ).subscribe(book => {
@@ -49,14 +49,22 @@ export class DetailPage implements OnInit, OnDestroy {
     this.getAllChapters();
   }
 
+
+  // BUG: breadcrumb truyen vao ; bi bien doi
   getbreadcrumbs() {
     return [{
       title: 'Home',
-      link: '/'
-    }, {
-      title: 'Home',
-      link: '/'
-    }];
+      link: ['/']
+    },
+    {
+      title: this.book.type,
+      link: ['/', this.book.type, { categoryId: this.book.categoryId }]
+    },
+    {
+      title: this.book.title,
+      link: ['/', 'books', this.bookId]
+    }
+    ];
   }
 
   private getAllChapters() {

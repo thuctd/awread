@@ -4,8 +4,7 @@ import { ChangeDetectorRef, Directive, Injectable, OnInit } from '@angular/core'
 import { debounceTime, map, switchMap, distinctUntilChanged } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { BooksQuery } from 'libs/core/books/src/lib/states/books';
-import { BooksFacade } from 'libs/core/books/src/lib/facades/books.facade';
+import { BooksFacade } from '@awread/core/books';
 
 @UntilDestroy()
 @Injectable({
@@ -16,7 +15,12 @@ export class SearchPage implements OnInit {
   searchControl: FormControl = new FormControl();
   results$;
 
-  constructor(private booksFacade: BooksFacade, private router: Router, private cd: ChangeDetectorRef, private booksQuery: BooksQuery, private activatedRoute: ActivatedRoute) { }
+  constructor(
+    private booksFacade: BooksFacade,
+    private router: Router,
+    private cd: ChangeDetectorRef,
+    private activatedRoute: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
     this.syncUrlSearchText();

@@ -69,7 +69,7 @@ export class ListPage implements OnInit, OnDestroy {
   switchTab(categoryId: string) {
     this.selectedCategoryId = categoryId;
     this.filtersForm.get('category').setValue(this.selectedCategoryId);
-    this.router.navigate(['/composed', { categoryId: this.selectedCategoryId }]);
+    this.router.navigate([this.typeBook, { categoryId: this.selectedCategoryId }]);
     this.filterItemsByCategory(categoryId);
     this.cd.detectChanges();
   }

@@ -41,6 +41,10 @@ export class ChaptersApi {
               createdAt
               updatedAt
               published
+              bookByBookId {
+                title
+                type
+              }
               contentByChapterId {
                 content
               }

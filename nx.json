@@ -112,12 +112,6 @@
         "type:environments"
       ]
     },
-    "global-core": {
-      "tags": [
-        "scope:shared",
-        "type:core"
-      ]
-    },
     "writer-web-ui-auth": {
       "tags": [
         "scope:writer",
@@ -366,6 +360,12 @@
         "scope:core-slider",
         "scope:shared",
         "type:core"
+      ]
+    },
+    "global-settings": {
+      "tags": [
+        "scope:shared",
+        "type:global"
       ]
     }
   }
