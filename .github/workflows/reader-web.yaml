@@ -25,7 +25,8 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     timeout-minutes: 60
-
+    env:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL  }}
     if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
     steps:
       # - name: using action checkout
@@ -41,6 +42,8 @@ jobs:
       #     git merge --no-ff origin/develop -m "Auto-merge develop to get latest code"
       #     git push
       #     git push origin reader-web:develop
+      - name: Test
+        run: echo $SLACK_WEBHOOK_URL and ${{ secrets.SLACK_WEBHOOK_URL }}
       - name: Using dokku
         uses: dokku/github-action@master
         with:
@@ -48,8 +51,7 @@ jobs:
           git_push_flags: '--force'
           git_remote_url: 'ssh://dokku@awread.vn:22/reader-web'
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
-      - name: Test
-        run: echo ${{ secrets.SLACK_WEBHOOK_URL }}
+
       - name: noti building
         uses: edge/simple-slack-notify@master
         env:
