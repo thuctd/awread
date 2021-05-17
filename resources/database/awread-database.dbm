@@ -9,24 +9,16 @@ CAUTION: Do not modify this file unless you know what you are doing.
       inherit="true">
 </role>
 
-<role name="anonymous"
-      inherit="true">
-	<roles names="public_read" role-type="member" />
+<role name="anonymous" inherit="true">
 </role>
 
-<role name="writer"
-      inherit="true">
-	<roles names="public_read" role-type="member" />
+<role name="writer" inherit="true">
 </role>
 
-<role name="reader"
-      inherit="true">
-	<roles names="public_read" role-type="member" />
+<role name="reader" inherit="true">
 </role>
 
-<role name="postgraphile"
-      inherit="true">
-	<roles names="public_read" role-type="member" />
+<role name="postgraphile" inherit="true">
 </role>
 
 <database name="awread_database" is-template="false" allow-conns="true">
@@ -903,12 +895,6 @@ end;
 		row-amount="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<appended-sql><![CDATA[grant anonymous to reader;
-grant anonymous to writer;
-grant reader to writer;
-grant anonymous to postgraphile;
-grant reader to postgraphile;
-grant writer to postgraphile;]]></appended-sql>
 	<language name="plpgsql"/>
 	<return-type>
 	<parameter name="accessToken">
