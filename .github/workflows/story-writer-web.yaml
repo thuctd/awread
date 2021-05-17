@@ -29,8 +29,10 @@ jobs:
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL  }}
     if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
     steps:
-      # - name: using action checkout
-      #   uses: actions/checkout@v2
+      - name: using action checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       # - name: Set Git config
       #   run: |
       #     git config --local user.email "actions@github.com"
