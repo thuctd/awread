@@ -55,7 +55,8 @@ jobs:
       - name: noti building
         uses: edge/simple-slack-notify@master
         env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL  }}
+          # SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL  }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL_CHANNEL_BOTNET  }}
         if: always()
         with:
           channel: '#botnet'
