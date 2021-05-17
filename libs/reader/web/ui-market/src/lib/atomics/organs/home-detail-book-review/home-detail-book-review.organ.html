@@ -12,7 +12,7 @@
                 <rd-home-icon-rating></rd-home-icon-rating>
               </div>
               <!-- <home-info-book-review [size]="'xl'" [book]="book" class="mr-4"></home-info-book-review> -->
-              <molec-info-book [book]="book" [displayUI]="displayUI"></molec-info-book>
+              <molec-info-book [book]="book" [btns]="book.newestChapters" [displayUI]="displayUI"></molec-info-book>
             </div>
           </div>
         </div>
@@ -26,7 +26,7 @@
             <rd-home-icon-rating [topBook]="i + 2"></rd-home-icon-rating>
           </div>
           <!-- <home-info-book-review [book]="book" class="mr-4" [chapters]="book.newestChapters"></home-info-book-review> -->
-          <molec-info-book [book]="book" [chapters]="book.newestChapters" [displayUI]="displayUI"></molec-info-book>
+          <molec-info-book [book]="book" [btns]="book.newestChapters" [displayUI]="displayUI"></molec-info-book>
         </div>
       </div>
     </div>

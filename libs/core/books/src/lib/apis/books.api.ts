@@ -63,155 +63,39 @@ export class BooksApi {
     );
   }
 
-  getAllBooks() {
-    return this.apollo.query({
-      query: gql`
-        query getAllBooks {
-          allBooks(first: 50, orderBy: UPDATED_AT_ASC) {
-            nodes {
-              bookId
-              cover
-              title
-              description
-              published
-              updatedAt
-              completed
-              categoryByCategoryId {
-                categoryId
-                name
-              }
-              chaptersByBookId(first: 2, orderBy: POSITION_ASC) {
-                nodes {
-                  chapterId
-                  position
-                  published
-                  updatedAt
-                }
-                totalCount
-              }
-              booksGenresByBookId {
-                nodes {
-                  genreId
-                }
-              }
-            }
-          }
-        }
-      `,
-    }).pipe(
-      map(res => res?.['data']?.['allBooks']?.['nodes'])
-    );
-  }
 
-  getComposedBooks() {
+  getCategoryBooks(categoryId?: string) {
     return this.apollo.query({
       query: gql`
-        query getAllBooks {
-          allBooks(first: 10, orderBy: UPDATED_AT_DESC) {
-            nodes {
-              bookId
-              title
-              description
-              published
-              updatedAt
-              completed
-              categoryByCategoryId {
-                categoryId
-                name
-              }
-              chaptersByBookId(orderBy: CREATED_AT_DESC) {
-                nodes {
-                  published
-                  updatedAt
-                }
-                totalCount
-              }
-              booksGenresByBookId {
-                nodes {
-                  genreId
-                }
-              }
-            }
+         query allMvBooksLatestChapters${categoryId ? `($categoryId: BigFloat)` : ''} {
+        allMvBooksLatestChapters ${categoryId ? `(condition: {categoryId: $categoryId}) ` : ''} {
+          nodes {
+            title
+            authors
+            newestChapters
+            genres
+            bookId
+            categoryId
+            completed
+            publisherId
+            createdAt
+            description
+            cover
+            published
+            genres
+            type
+            ages
+            updatedAt
+            userId
           }
         }
-      `,
-    });
-  }
-
-  getCollectedBooks() {
-    return this.apollo.query({
-      query: gql`
-        query getAllBooks {
-          allBooks(first: 10, orderBy: UPDATED_AT_DESC) {
-            nodes {
-              bookId
-              title
-              description
-              published
-              updatedAt
-              completed
-              categoryByCategoryId {
-                categoryId
-                name
-              }
-              chaptersByBookId(orderBy: CREATED_AT_DESC) {
-                nodes {
-                  published
-                  updatedAt
-                }
-                totalCount
-              }
-              booksGenresByBookId {
-                nodes {
-                  genreId
-                }
-              }
-            }
-          }
-        }
-      `,
-    });
-  }
-
-  getCategoryBooks(categoryId: string) {
-    return this.apollo.query({
-      query: gql`
-        query allBooks($categoryId: BigFloat!) {
-          allBooks(first: 10, condition: { categoryId: $categoryId }) {
-            nodes {
-              bookId
-              title
-              description
-              published
-              updatedAt
-              completed
-              categoryByCategoryId {
-                categoryId
-                name
-              }
-              chaptersByBookId(first: 2, orderBy: POSITION_ASC) {
-                nodes {
-                  chapterId
-                  position
-                  published
-                  updatedAt
-                }
-                totalCount
-              }
-              booksGenresByBookId {
-                nodes {
-                  genreId
-                }
-              }
-            }
-          }
-        }
+      }
       `,
       variables: {
         categoryId,
       },
     }).pipe(
-      map(res => res?.['data']?.['allBooks']?.['nodes'])
+      map(res => res?.['data']?.['allMvBooksLatestChapters']?.['nodes'])
     );
   }
 
@@ -224,7 +108,6 @@ export class BooksApi {
       query allMvBooksLatestChapters {
         allMvBooksLatestChapters(
               filter: {authors: {containsAnyKeys: ${JSON.stringify(authorIds)} }}
-
         ) {
           nodes {
             title

@@ -40,7 +40,6 @@ export class ListPage implements OnInit, OnDestroy {
     this.updateForm();
     this.booksFacade.getTopBooks().subscribe();
     this.genresFacade.getAllGenres().subscribe();
-    this.booksFacade.getComposedBooks().subscribe();
     this.watchRouting();
   }
 

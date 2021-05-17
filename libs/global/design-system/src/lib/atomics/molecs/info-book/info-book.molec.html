@@ -5,7 +5,7 @@
   <atom-icon-text class="mt-0.5" *ngIf="displayUI.ui.isIcon"></atom-icon-text>
 </div>
 <div *ngFor="let btn of btns | keyvalue" class="leading-normal font-medium flex">
-  <base-btn (onBtnClicked)="submitEvent.emit($event)" [isSize]="true" [bookId]='book.bookId' [chapterId]="btn.key" [chapter]="btn.value.position">
+  <base-btn (onBtnClicked)="submitEvent.emit($event)" [isSize]="displayUI.size.sizeBtn" [bookId]='book.bookId' [chapterId]="btn.key" [chapter]="btn.value.position">
   </base-btn>
   <rd-list-publication-date class="mt-0.5 ml-2"></rd-list-publication-date>
 </div>

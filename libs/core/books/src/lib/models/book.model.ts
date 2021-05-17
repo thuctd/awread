@@ -19,8 +19,6 @@ export interface Book {
   genreIds: string[];
   updatedat: Date;
   genres?: Genre[];
-  totalChapterCount: number;
-  totalChapterCountPublished: number;
 }
 
 export function Book(params: Partial<Book>) {

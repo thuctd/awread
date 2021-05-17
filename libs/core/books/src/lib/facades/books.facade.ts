@@ -72,10 +72,6 @@ export class BooksFacade {
     return this.booksQuery.getAll();
   }
 
-  getAllBooks() {
-    return this.booksGear.getAllBooks();
-  }
-
   getDetailBook(bookId: string) {
     return this.booksGear.getBookById(bookId);
   }
@@ -108,14 +104,6 @@ export class BooksFacade {
     return this.booksHomeGear.getFeatureBooks();
   }
 
-  getCollectedBooks() {
-    return this.booksGear.getCollectedBooks();
-  }
-
-  getComposedBooks() {
-    return this.booksGear.getComposedBooks();
-  }
-
   getFilterBooks() {
     console.log(this.booksQuery.getCurrentFilter());
     // return this.booksGear.getFilterBooks(this.booksQuery.getCurrentFilter());
@@ -123,7 +111,7 @@ export class BooksFacade {
 
   searchBookApi(term: string) {
     if (term === '') {
-      return this.booksGear.getAllBooks();
+      return this.booksGear.getCategoryBooks();
     } else {
       return this.booksGear.searhBookByTermApi(term);
     }
