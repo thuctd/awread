@@ -18,9 +18,8 @@ FROM builder as build-reader-web
 ARG application
 ARG applicationPath
 ARG NODE_ENV
-COPY libs/global ./libs/global
-COPY libs/$applicationPath ./libs/$applicationPath
-COPY apps/$applicationPath ./apps/$applicationPath
+COPY libs ./libs
+COPY apps ./apps
 RUN pnpm build $application -- --prod --no-progress
 
 # RUN echo application is: $application

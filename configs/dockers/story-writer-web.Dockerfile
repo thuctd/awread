@@ -19,9 +19,8 @@ ARG application
 ARG applicationPath
 ARG NODE_ENV
 COPY .storybook ./.storybook
-COPY libs/global ./libs/global
-COPY libs/$applicationPath ./libs/$applicationPath
-COPY apps/$applicationPath ./apps/$applicationPath
+COPY libs ./libs
+COPY apps ./apps
 RUN pnpm nx build-storybook $application -- -c ci
 
 # RUN echo application is: $application
