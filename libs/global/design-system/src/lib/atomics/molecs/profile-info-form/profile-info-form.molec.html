@@ -1,0 +1,95 @@
+<section class="flex flex-col" [formGroup]="profileForm">
+  <atom-title [class]="'font-medium text-xl text-gray-500'" [title]="'Thông tin cá nhân'" [isUppercase]="false"></atom-title>
+  <!-- <div class="my-4 flex items-center">
+    <label class="text-gray-400 w-2/5">Họ</label>
+    <input formControlName="firstname" placeholder="Họ"
+      class="border rounded-full border-gray-200 py-2 w-3/5 focus:outline-none px-4 focus:ring-1 focus:ring-gray-300 focus:border-gray-300" />
+  </div> -->
+  <atom-profile-input [item]="items[0]"></atom-profile-input>
+
+  <!-- <div class="mb-4 flex items-center">
+    <label class="text-gray-400 w-2/5">Tên đệm</label>
+    <input formControlName="middlename" placeholder="Tên đệm"
+      class="border rounded-full border-gray-200 py-2 w-3/5 focus:outline-none px-4 focus:ring-1 focus:ring-gray-300 focus:border-gray-300" />
+  </div> -->
+  <atom-profile-input [item]="items[1]"></atom-profile-input>
+
+  <!-- <div class="mb-4 flex items-center">
+    <label class="text-gray-400 w-2/5">Tên</label>
+    <input formControlName="lastname" placeholder="Tên"
+      class="border rounded-full border-gray-200 py-2 w-3/5 focus:outline-none px-4 focus:ring-1 focus:ring-gray-300 focus:border-gray-300" />
+  </div> -->
+  <atom-profile-input [item]="items[2]"></atom-profile-input>
+
+  <!-- <div class="mb-4 flex items-center">
+    <label class="text-gray-400 w-2/5">Email</label>
+    <input formControlName="email" placeholder="Email"
+      class="border rounded-full border-gray-200 py-2 w-3/5 focus:outline-none px-4 focus:ring-1 focus:ring-gray-300 focus:border-gray-300" />
+  </div> -->
+  <atom-profile-input [item]="items[3]"></atom-profile-input>
+  <!-- Loi required -->
+  <div *ngIf="submitted && profileForm.controls.email.errors" class="invalid-feedback">
+    <div *ngIf="profileForm.controls.email.errors.required">
+      Email không được để trống
+    </div>
+  </div>
+  <!-- Loi email -->
+  <div *ngIf="submitted && profileForm.controls.email.errors" class="invalid-feedback">
+    <div *ngIf="profileForm.controls.email.errors.email">
+      Email không hợp lệ
+    </div>
+  </div>
+  <!-- <div class="mb-4 flex items-center">
+    <label class="text-gray-400 w-2/5">Số điện thoại</label>
+    <input formControlName="phone" placeholder="Số điện thoại"
+      class="border rounded-full border-gray-200 py-2 w-3/5 focus:outline-none px-4 focus:ring-1 focus:ring-gray-300 focus:border-gray-300" />
+  </div> -->
+  <atom-profile-input [item]="items[4]"></atom-profile-input>
+
+  <!-- <div class="mb-4 flex items-center">
+    <label class="text-gray-400 w-2/5">Tuổi</label>
+    <input formControlName="age" placeholder="Tuổi"
+      class="border rounded-full border-gray-200 py-2 w-3/5 focus:outline-none px-4 focus:ring-1 focus:ring-gray-300 focus:border-gray-300" />
+  </div> -->
+  <atom-profile-input [item]="items[5]"></atom-profile-input>
+
+
+  <div class="mb-4 flex items-center">
+    <label class="text-gray-400 w-2/5">Năm sinh</label>
+    <div class="w-3/5">
+      <!-- <input formControlName="dob" type="date" class="border rounded-full border-gray-300  py-1 w-48 focus:outline-none px-4 mr-28" /> -->
+      <mat-form-field class="w-2/3" appearance="outline">
+        <input formControlName="dob" placeholder="Choose a date" disabled matInput [matDatepicker]="picker" class="focus:ring-1 focus:ring-gray-300 focus:border-gray-300">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker disabled="false"></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="mb-6 flex items-center">
+    <label class="text-gray-400 w-2/5">Giới tính</label>
+    <div class="w-3/5">
+      <!-- <input formControlName="gender" class="border rounded-full border-gray-300 py-1 w-28 focus:outline-none px-3 mr-44" /> -->
+      <select formControlName="gender" class="border rounded-full border-gray-200 bg-white pl-4 pr-8 py-2 outline-none focus:outline-none focus:ring-1 focus:ring-gray-300 focus:border-gray-300">
+        <option class="py-1">Nam</option>
+        <option class="py-1">Nữ</option>
+        <option class="py-1">Khác</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="flex justify-between">
+    <div>
+      <div class="text-gray-text font-semibold mb-1">Cho phép nội dung nhạy cảm</div>
+      <div class="text text-gray-400">Cho phép hiển thị những truyện có nội dung nhạy cảm</div>
+    </div>
+    <label for="toogleA" class="flex items-center cursor-pointer -mt-6">
+      <div class="relative">
+        <input [formControl]="inputControl" id="toogleA" type="checkbox" class="hidden" />
+        <div class="toggle__line w-10 h-4 bg-gray-400 rounded-full shadow-inner"></div>
+        <div class="toggle__dot absolute w-6 h-6 bg-white rounded-full shadow inset-y-0 left-0"></div>
+      </div>
+      </label>
+  </div>
+</section>
+
