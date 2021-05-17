@@ -13,6 +13,13 @@ on:
       - backend-graphql
 
 jobs:
+ printInputs:
+    runs-on: ubuntu-latest
+    steps:
+    - run: |
+        echo "Log level: ${{ github.event.inputs.logLevel }}"
+        echo "Tags: ${{ github.event.inputs.tags }}" 
+
   deploy:
     runs-on: ubuntu-latest
     timeout-minutes: 60
@@ -44,7 +51,7 @@ jobs:
 
       - name: noti building
         uses: edge/simple-slack-notify@master
-      env:
+        env:
           # SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL  }}
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL_CHANNEL_BOTNET  }}
         if: always()
