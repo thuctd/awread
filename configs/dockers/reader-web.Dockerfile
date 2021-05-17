@@ -1,4 +1,4 @@
-# // NOTE: update this
+# // INPUT: update this
 ARG application=reader-web
 ARG applicationPath=reader/web
 ARG NODE_ENV=production
@@ -13,7 +13,7 @@ RUN pnpm run postinstall
 COPY *.js tsconfig*.json angular.json nx.json ./
 COPY configs/tailwind configs/tailwind
 # RUN LS
-# //NOTE: update this
+# //INPUT: update this
 FROM builder as build-reader-web
 ARG application
 ARG applicationPath
@@ -25,14 +25,14 @@ RUN pnpm build $application -- --prod --no-progress
 
 # RUN echo application is: $application
 # RUN echo applicationPath is: $applicationPath
-# //NOTE: update this
+# //INPUT: update this
 FROM nginx:stable-alpine as reader-web
 ARG application
 ARG applicationPath
 ARG NODE_ENV
 EXPOSE 80
 WORKDIR /app
-# //NOTE: update this
+# //INPUT: update this
 COPY --from=build-reader-web /batcave/dist/apps/$applicationPath /app
 COPY /configs/nginx/spa.conf /etc/nginx/conf.d/default.conf
 

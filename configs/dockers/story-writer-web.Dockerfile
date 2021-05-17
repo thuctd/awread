@@ -1,4 +1,4 @@
-# // NOTE: update this
+# // INPUT: update this
 ARG application=writer-web
 ARG applicationPath=writer/web
 ARG NODE_ENV=production
@@ -13,7 +13,7 @@ RUN pnpm run postinstall
 COPY *.js tsconfig*.json angular.json nx.json ./
 COPY configs/tailwind configs/tailwind
 # RUN LS
-# //NOTE: update this
+# //INPUT: update this
 FROM builder as build-story-writer-web
 ARG application
 ARG applicationPath
@@ -26,14 +26,14 @@ RUN pnpm nx build-storybook $application -- -c ci
 
 # RUN echo application is: $application
 # RUN echo applicationPath is: $applicationPath
-# //NOTE: update this
+# //INPUT: update this
 FROM nginx:stable-alpine as story-writer-web
 ARG application
 ARG applicationPath
 ARG NODE_ENV
 EXPOSE 80
 WORKDIR /app
-# //NOTE: update this
+# //INPUT: update this
 COPY --from=build-story-writer-web /batcave/dist/storybook/$application /app
 COPY /configs/nginx/storybook.conf /etc/nginx/conf.d/default.conf
 

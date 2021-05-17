@@ -1,8 +1,22 @@
+<!-- <pre> {{ chapter | json }} </pre>
+<pre> {{ chapters | json }} </pre> -->
+
 <section class="mx-auto">
-  <molec-head-read-book [defaultSelect]="chapter" (selectionChange)="selectionChange.emit($event)" [chapters]="chapters" [title]="chapter?.title" (backChapterBook)="backChapterBook.emit($event)" (nextChapterBook)="nextChapterBook.emit($event)"></molec-head-read-book>
-  <p class="text-xs lg:text-sm text-gray-text leading-6 lg:leading-8 py-4 lg:py-8 text-justify nunito">{{chapter?.content}}</p>
+  <molec-head-read-book [defaultChapter]="chapter" (selectionChange)="selectionChange.emit($event)" [chapters]="chapters" [title]="chapter?.title"
+    (backChapterBook)="backChapterBook.emit($event)" (nextChapterBook)="nextChapterBook.emit($event)"></molec-head-read-book>
+  <ng-container *ngIf="chapter?.content; else noContent">
+    <p class="text-xs lg:text-sm text-gray-text leading-6 lg:leading-8 py-4 lg:py-8 text-justify nunito">{{chapter?.content}}</p>
+  </ng-container>
   <div class="flex">
-    <atom-btn-switch-chapter (btnClick)="nextChapterBook.emit($event)" class="mx-auto roboto" [title]="'Đọc chương tiếp'" [class]="'sm:pl-8 pl-3'"></atom-btn-switch-chapter>
+    <atom-btn-switch-chapter (btnClick)="nextChapterBook.emit($event)" class="mx-auto roboto" [title]="'Đọc chương tiếp'" [class]="'sm:pl-8 pl-3'">
+    </atom-btn-switch-chapter>
   </div>
-  <atom-btn-switch-chapter [faIcon]="faIcon" [title]="'Trước'" [case]="false" (btnClick)="backChapterBook.emit($event)" class="flex flex-row-reverse sm:-mt-9 -mt-7 roboto"></atom-btn-switch-chapter>
+  <atom-btn-switch-chapter [faIcon]="faIcon" [title]="'Trước'" [case]="false" (btnClick)="backChapterBook.emit($event)"
+    class="flex flex-row-reverse sm:-mt-9 -mt-7 roboto"></atom-btn-switch-chapter>
 </section>
+
+<ng-template #noContent>
+  <div class="pt-18 text-xl">
+    Chương này chưa có nội dung, chúng tôi sẽ cập nhập trong thời gian sớm thật sự xin lỗi các bạn.
+  </div>
+</ng-template>

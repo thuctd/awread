@@ -23,7 +23,8 @@ export class ChaptersGear {
     return this.chaptersApi.getChapterDetail(bookId, chapterId).pipe(
       map((result) => result.map(chapter => {
         const content = chapter['contentByChapterId']?.content;
-        return { ...chapter, content };
+        const book = chapter['bookByBookId'];
+        return { ...chapter, content, book };
       })),
     );
   }

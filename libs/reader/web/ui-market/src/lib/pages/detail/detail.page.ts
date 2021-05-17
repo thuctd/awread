@@ -62,7 +62,7 @@ export class DetailPage implements OnInit, OnDestroy {
     },
     {
       title: this.book.title,
-      link: ['/', this.book.type, { categoryId: this.book.categoryId }, this.bookId]
+      link: ['/', 'books', this.bookId]
     }
     ];
   }
