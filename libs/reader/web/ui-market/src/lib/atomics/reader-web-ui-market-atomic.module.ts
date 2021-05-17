@@ -2,18 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GlobalDesignSystemAtomicModule, StorybookSupportModule } from '@awread/global/design-system';
 import { ReaderWebUiAuthorAtomicModule } from '@awread/reader/web/ui-author';
-import { ListInfoLongBookMolec } from './molecs/list-info-long-book/list-info-long-book.molec';
 import { ListInfoProseMolec } from './molecs/list-info-prose/list-info-prose.molec';
-import { ListInfoShortBookMolec } from './molecs/list-info-short-book/list-info-short-book.molec';
-import { ListInfoTopBookMolec } from './molecs/list-info-top-book/list-info-top-book.molec';
 import { ListDetailLongBookOrgan } from './organs/list-detail-long-book/list-detail-long-book.organ';
 import { ListDetailTopBookOrgan } from './organs/list-detail-top-book/list-detail-top-book.organ';
 import { ListTemplate } from './templates/list/list.template';
 import { HomeTemplate } from './templates/home/home.template';
 import { HomeTagsOrgan } from './organs/home-tags/home-tags.organ';
-import { HomeInfoBookFeaturedMolec } from './molecs/home-info-book-featured/home-info-book-featured.molec';
-import { HomeInfoBookReviewMolec } from './molecs/home-info-book-review/home-info-book-review.molec';
-import { HomeInfoBookUpdateMolec } from './molecs/home-info-book-update/home-info-book-update.molec';
 import { HomeDetailBookFeaturedOrgan } from './organs/home-detail-book-featured/home-detail-book-featured.organ';
 import { HomeDetailBookReviewOrgan } from './organs/home-detail-book-review/home-detail-book-review.organ';
 import { HomeDetailBookUpdateOrgan } from './organs/home-detail-book-update/home-detail-book-update.organ';
@@ -49,14 +43,12 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { HomeMobileTemplate } from './templates/home-mobile/home-mobile.template';
 import { HomeListBookReviewMobileOrgan } from './organs/home-list-book-review-mobile/home-list-book-review-mobile.organ';
 import { TitlePageMenuMolec } from './molecs/title-page-menu/title-page-menu.molec';
-import { MbInfoBookMolec } from './molecs/mb-info-book/mb-info-book.molec';
 import { MbDetailBookOrgan } from './organs/mb-list-detail-book/mb-list-detail-book.organ';
 import { MbListTemplate } from './templates/mb-list/mb-list.template';
 import { DetailBookMobileTemplate } from './templates/detail-book-mobile/detail-book-mobile.template';
 import { ReadMobileTemplate } from './templates/read-mobile/read-mobile.template';
 import { DetailBookTopMobileOrgan } from './organs/detail-book-top-mobile/detail-book-top-mobile.organ';
 import { TabCategoriesMolec } from './molecs/tab-categories/tab-categories.molec';
-import { InfoBookGridMolec } from './molecs/info-book-grid/info-book-grid.molec';
 import { BooksGridOrgan } from './organs/books-grid/books-grid.organ';
 import { RdSearchBookTemplate } from './templates/rd-search-book/rd-search-book.template';
 import { RdSearchBookHeaderMolec } from './molecs/rd-search-book-header/rd-search-book-header.molec';
@@ -87,29 +79,16 @@ import { RdNewsDetailTemplate } from './templates/rd-news-detail/rd-news-detail.
 import { CoreCategoriesModule } from '@awread/core/categories';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    StorybookSupportModule,
-    GlobalDesignSystemAtomicModule,
-    CarouselModule,
-    ReaderWebUiAuthorAtomicModule,
-    CoreCategoriesModule
-  ],
+  imports: [CommonModule, StorybookSupportModule, GlobalDesignSystemAtomicModule, CarouselModule, ReaderWebUiAuthorAtomicModule, CoreCategoriesModule],
   exports: [
     ReaderWebUiAuthorAtomicModule,
     CommonModule,
-    ListInfoLongBookMolec,
     ListInfoProseMolec,
-    ListInfoShortBookMolec,
-    ListInfoTopBookMolec,
     ListDetailLongBookOrgan,
     ListDetailTopBookOrgan,
     ListTemplate,
     HomeTemplate,
     HomeTagsOrgan,
-    HomeInfoBookFeaturedMolec,
-    HomeInfoBookReviewMolec,
-    HomeInfoBookUpdateMolec,
     HomeDetailBookFeaturedOrgan,
     HomeDetailBookReviewOrgan,
     ReviewItemMolec,
@@ -144,14 +123,12 @@ import { CoreCategoriesModule } from '@awread/core/categories';
     HomeMobileTemplate,
     HomeListBookReviewMobileOrgan,
     TitlePageMenuMolec,
-    MbInfoBookMolec,
     MbDetailBookOrgan,
     MbListTemplate,
     DetailBookMobileTemplate,
     ReadMobileTemplate,
     DetailBookTopMobileOrgan,
     TabCategoriesMolec,
-    InfoBookGridMolec,
     BooksGridOrgan,
     RdSearchBookTemplate,
     RdSearchBookHeaderMolec,
@@ -181,18 +158,12 @@ import { CoreCategoriesModule } from '@awread/core/categories';
     RdNewsDetailTemplate,
   ],
   declarations: [
-    ListInfoLongBookMolec,
     ListInfoProseMolec,
-    ListInfoShortBookMolec,
-    ListInfoTopBookMolec,
     ListDetailLongBookOrgan,
     ListDetailTopBookOrgan,
     ListTemplate,
     HomeTemplate,
     HomeTagsOrgan,
-    HomeInfoBookFeaturedMolec,
-    HomeInfoBookReviewMolec,
-    HomeInfoBookUpdateMolec,
     HomeDetailBookFeaturedOrgan,
     HomeDetailBookReviewOrgan,
     HomeDetailBookUpdateOrgan,
@@ -226,14 +197,12 @@ import { CoreCategoriesModule } from '@awread/core/categories';
     HomeMobileTemplate,
     HomeListBookReviewMobileOrgan,
     TitlePageMenuMolec,
-    MbInfoBookMolec,
     MbDetailBookOrgan,
     MbListTemplate,
     DetailBookMobileTemplate,
     ReadMobileTemplate,
     DetailBookTopMobileOrgan,
     TabCategoriesMolec,
-    InfoBookGridMolec,
     BooksGridOrgan,
     RdSearchBookTemplate,
     RdSearchBookHeaderMolec,
@@ -263,4 +232,4 @@ import { CoreCategoriesModule } from '@awread/core/categories';
     RdNewsDetailTemplate,
   ],
 })
-export class ReaderWebUiMarketAtomicModule { }
+export class ReaderWebUiMarketAtomicModule {}

@@ -16,11 +16,23 @@ export class BooksGridOrgan implements OnInit {
   @Input() book = {
     bookId: '',
     title: 'Em là nhà',
-    cover: ''
-  }
+    cover: '',
+  };
   @Input() chapters = [];
+  @Input() displayUI = {
+    ui: {
+      isAuthor: true,
+      isRating: true,
+      isIcon: true,
+      isDate: true,
+    },
+    size: {
+      sizeTitle: 'm',
+      sizeBtn: true,
+    },
+  };
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }

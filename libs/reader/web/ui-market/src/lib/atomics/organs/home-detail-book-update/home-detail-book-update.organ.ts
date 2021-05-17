@@ -22,22 +22,22 @@ export class HomeDetailBookUpdateOrgan implements OnInit {
     {
       name: 'Tất cả',
       isActive: true,
-      isInfoNovel: false,
+      isNovel: false,
     },
     {
       name: 'Truyện dài',
       isActive: false,
-      isInfoNovel: false,
+      isNovel: false,
     },
     {
       name: 'Truyện ngắn',
       isActive: false,
-      isInfoNovel: false,
+      isNovel: false,
     },
     {
       name: 'Tản văn',
       isActive: false,
-      isInfoNovel: true,
+      isNovel: true,
     },
   ];
 
@@ -46,7 +46,7 @@ export class HomeDetailBookUpdateOrgan implements OnInit {
 
   counter = Array;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }

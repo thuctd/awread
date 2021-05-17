@@ -15,14 +15,15 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
 export class ListInfoProseMolec implements OnInit {
   @Input() book = {
     title: 'Cô gái chúng ta cùng theo đuổi năm nào',
-    bookId: ''
+    bookId: '',
   };
+  @Input() isBtn = false;
 
   @Input() moreContent = 'Đọc thêm';
 
   @Output() moreEvent = new EventEmitter();
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }
