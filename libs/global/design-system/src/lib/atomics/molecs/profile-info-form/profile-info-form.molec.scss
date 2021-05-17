@@ -1,0 +1,74 @@
+:host {
+  display: block;
+}
+
+select {
+  appearance: none;
+  background: url('https://img.icons8.com/material/24/000000/expand-arrow--v1.png') no-repeat right;
+  background-position-x: 3.8rem;
+}
+
+::ng-deep {
+  .mat-form-field-wrapper {
+    padding-bottom: 0;
+  }
+
+  .mat-form-field-appearance-outline .mat-form-field-outline .mat-form-field-outline-end {
+    border: 1px solid #cbcdcf;
+    border-radius: 50px;
+  }
+
+  .mat-form-field-appearance-outline .mat-form-field-outline .mat-form-field-outline-start {
+    border: none;
+  }
+
+  .mat-form-field-appearance-outline .mat-form-field-flex {
+    margin-left: -0.275rem;
+  }
+
+  .mat-form-field-appearance-outline .mat-form-field-infix {
+    padding: 0.75em 0 0.75em 0.5em;
+  }
+
+  .mat-form-field:not(.mat-form-field-appearance-legacy) .mat-form-field-suffix .mat-icon-button {
+    width: 2.5em;
+    height: 2.5em;
+  }
+
+  .mat-form-field-infix {
+    border-top: none;
+  }
+
+  .mat-form-field {
+    border: 0;
+  }
+
+  .mat-form-field-appearance-outline .mat-form-field-suffix {
+    top: 0.35em !important;
+  }
+
+  .mat-input-element {
+    color: #1f2937 !important;
+    font-weight: 500;
+    font-family: 'lexend-deca', sans-serif !important;
+  }
+}
+
+:host .toggle__dot {
+  top: -.25rem;
+  left: -.25rem;
+  transition: all 0.3s ease-in-out;
+}
+
+input:checked~.toggle__dot {
+  transform: translateX(100%);
+  background-color: #48bb78;
+}
+
+input:checked~.toggle__line {
+  background-color: #abf5ca;
+}
+
+.text {
+  font-size: 0.85rem;
+}

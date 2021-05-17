@@ -25,35 +25,39 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     timeout-minutes: 60
-    env:
-      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL  }}
     if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
     steps:
       - name: using action checkout
         uses: actions/checkout@v2
-      - name: Set Git config
-        run: |
-          git config --local user.email "actions@github.com"
-          git config --local user.name "Github Actions"
-      - name: get latest code from develop
-        run: |
-          git fetch --unshallow
-          git pull
-          git merge --no-ff origin/develop -m "Auto-merge develop to get latest code"
-          git push
-          git push origin reader-web:develop
-      - name: Cloning repo
+        with:
+          fetch-depth: 0
+      # - name: Set Git config
+      #   run: |
+      #     git config --local user.email "actions@github.com"
+      #     git config --local user.name "Github Actions"
+      # - name: get latest code from develop
+      #   run: |
+      #     git fetch --unshallow
+      #     git pull
+      #     git merge --no-ff origin/develop -m "Auto-merge develop to get latest code"
+      #     git push
+      #     git push origin reader-web:develop
+      - name: Using dokku
         uses: dokku/github-action@master
         with:
           # specify `--force` as a flag for git pushes
           git_push_flags: '--force'
           git_remote_url: 'ssh://dokku@awread.vn:22/reader-web'
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+
       - name: noti building
         uses: edge/simple-slack-notify@master
+        env:
+          # SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL  }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL_CHANNEL_BOTNET  }}
         if: always()
         with:
-          channel: '#build-web'
+          channel: '#botnet'
           status: ${{ job.status }}
           success_text: '${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER})  https://awread.vn sẵn sàng'
           failure_text: '${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) build thất bại cho trang https://awread.vn '
@@ -69,7 +73,7 @@ jobs:
   #   # only run when a pull request is opened
   #   if: github.event_name == 'pull_request' && (github.event.action == 'opened' || github.event.action == 'synchronize')
   #   steps:
-  #     - name: Cloning repo
+  #     - name: Using dokku
   #       uses: actions/checkout@v2
   #       with:
   #         fetch-depth: 0
@@ -79,7 +83,7 @@ jobs:
   #       with:
   #         username: 'Bạch Tuộc Nướng'
   #         text: '${{ github.event.pull_request.user.login }} đang nướng bạch con tuộc số: #${{ github.event.pull_request.number }}-${{ github.event.pull_request.title }}'
-  #         channel: '#build-web'
+  #         channel: '#botnet'
   #         fields: |
   #           [{ "title": "Từ bếp", "value": "${{ github.event.pull_request.head.ref }}", "short": true },
   #           { "title": "Đến bếp", "value": "${{ github.event.pull_request.base.ref }}", "short": true }]
@@ -97,7 +101,7 @@ jobs:
   #       uses: edge/simple-slack-notify@master
   #       if: always()
   #       with:
-  #         channel: '#build-web'
+  #         channel: '#botnet'
   #         status: ${{ job.status }}
   #         success_text: '${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) bạch tuộc con chín rồi, mau ăn thôi: http://review-reader-web-${{ github.event.pull_request.number }}.awread.vn'
   #         failure_text: '${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) bạch tuộc con nướng thành than... :('
@@ -118,7 +122,7 @@ jobs:
   #       with:
   #         username: 'Bạch Tuộc Nướng'
   #         text: 'Bắt đầu đi dọn dẹp mâm #${{ github.event.pull_request.number }}, không ăn ở đây nữa nha!!! http://review-reader-web-${{ github.event.pull_request.number }}.awread.vn'
-  #         channel: '#build-web'
+  #         channel: '#botnet'
   #         fields: |
   #           [{ "title": "github.event.pull_request.merged", "value": "${{ github.event.pull_request.merged }}", "short": true },
   #           { "title": "github.event.action", "value": "${{ github.event.action }}", "short": true }]
@@ -137,7 +141,7 @@ jobs:
   #       with:
   #         username: 'Bạch Tuộc Nướng'
   #         text: 'Dọn đồ nướng cất đi và đem mực nướng còn thừa về develop'
-  #         channel: '#build-web'
+  #         channel: '#botnet'
   #     - name: merge this branch to develop
   #       if: github.event.pull_request.merged
   #       uses: actions/checkout@v2

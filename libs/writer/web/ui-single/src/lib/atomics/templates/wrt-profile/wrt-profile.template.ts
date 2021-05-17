@@ -1,7 +1,7 @@
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit, ChangeDetectionStrategy, Input, EventEmitter, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { WrtProfileChangeCoverTemplate } from '../wrt-profile-change-cover/wrt-profile-change-cover.template';
+import { PopupChangeCoverOrgan } from '@awread/global/design-system';
 @Component({
   selector: 'profile',
   templateUrl: './wrt-profile.template.html',
@@ -27,13 +27,14 @@ export class WrtProfileTemplate implements OnInit {
   });
   @Input() submitted: boolean;
   @Output() updateProfileEvent = new EventEmitter();
+  @Output() ClickConnectFB = new EventEmitter();
   constructor(public matDialog: MatDialog, private fb: FormBuilder) {}
 
   ngOnInit(): void {
     // setTimeout(() => this.profileForm.patchValue({ username: 'ahihi' }), 5000);
   }
   openChangeCover($event) {
-    this.matDialog.open(WrtProfileChangeCoverTemplate, {
+    this.matDialog.open(PopupChangeCoverOrgan, {
       width: '55rem',
       height: '33rem',
     });

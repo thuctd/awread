@@ -22,9 +22,8 @@ FROM builder as build-backend-graphql
 ARG application
 ARG applicationPath
 ARG NODE_ENV
-COPY libs/global ./libs/global
-COPY libs/$applicationPath ./libs/$applicationPath
-COPY apps/$applicationPath ./apps/$applicationPath
+COPY libs ./libs
+COPY apps ./apps
 
 RUN pnpm build $application -- --prod
 

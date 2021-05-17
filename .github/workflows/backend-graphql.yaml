@@ -1,30 +1,65 @@
 name: 'backend-graphql'
 on:
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level'
+        required: true
+        default: 'warning'
+      tags:
+        description: 'Test scenario tags'
   push:
     branches:
       - backend-graphql
 
 jobs:
+  printInputs:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "Log level: ${{ github.event.inputs.logLevel }}"
+          echo "Tags: ${{ github.event.inputs.tags }}"
+
   deploy:
     runs-on: ubuntu-latest
+    timeout-minutes: 60
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
     steps:
       - name: using action checkout
         uses: actions/checkout@v2
-      - name: Set Git config
-        run: |
-          git config --local user.email "actions@github.com"
-          git config --local user.name "Github Actions"
-      - name: get latest code from develop
-        run: |
-          git fetch --unshallow
-          git pull
-          git merge --no-ff origin/develop -m "Auto-merge develop to get latest code"
-          git push
-          git push origin backend-graphql:develop
-      - name: Cloning repo
+        with:
+          fetch-depth: 0
+      # - name: Set Git config
+      #   run: |
+      #     git config --local user.email "actions@github.com"
+      #     git config --local user.name "Github Actions"
+      # - name: get latest code from develop
+      #   run: |
+      #     git fetch --unshallow
+      #     git pull
+      #     git merge --no-ff origin/develop -m "Auto-merge develop to get latest code"
+      #     git push
+      #     git push origin backend-graphql:develop
+
+      - name: Using dokku
         uses: dokku/github-action@master
         with:
           # specify `--force` as a flag for git pushes
           git_push_flags: '--force'
           git_remote_url: 'ssh://dokku@awread.vn:22/backend-graphql'
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: noti building
+        uses: edge/simple-slack-notify@master
+        env:
+          # SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL  }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL_CHANNEL_BOTNET  }}
+        if: always()
+        with:
+          channel: '#botnet'
+          status: ${{ job.status }}
+          success_text: '${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER})  https://awread.vn sẵn sàng'
+          failure_text: '${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) build thất bại cho trang https://awread.vn '
+          cancelled_text: '${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) hủy không build trang https://awread.vn'
+          fields: |
+            [{ "title": "chi tiết PR", "value": "${{ github.event.pull_request.html_url }}", "short": true }]

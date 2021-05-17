@@ -28,7 +28,6 @@ import { InfoBookMolec } from './molecs/info-book/info-book.molec';
 import { WrtDetailPopupBookOrgan } from './organs/wrt-detail-popup-book/wrt-detail-popup-book.organ';
 import { WrtDetailPopupBookTemplate } from './templates/wrt-detail-popup-book/wrt-detail-popup-book.template';
 import { WrtWritingPopupReadTemplate } from './templates/wrt-writing-popup-read/wrt-writing-popup-read.template';
-import { PopupEditCoverBookTemplate } from './templates/popup-edit-cover-book/popup-edit-cover-book.template';
 import { MatDialogModule } from '@angular/material/dialog';
 import { GenresFieldModule, InfiniteScrollModule, LoaderModule } from '@awread/global/packages';
 
@@ -72,7 +71,6 @@ import { GenresFieldModule, InfiniteScrollModule, LoaderModule } from '@awread/g
     WrtListTemplate,
     WrtListOrgan,
     WrtWritingPopupReadTemplate,
-    PopupEditCoverBookTemplate,
   ],
   declarations: [
     WrtDetailTabHeadMolec,
@@ -99,7 +97,6 @@ import { GenresFieldModule, InfiniteScrollModule, LoaderModule } from '@awread/g
     WrtListTemplate,
     WrtListOrgan,
     WrtWritingPopupReadTemplate,
-    PopupEditCoverBookTemplate,
   ],
 })
 export class WriterWebUiCreationAtomicModule {}

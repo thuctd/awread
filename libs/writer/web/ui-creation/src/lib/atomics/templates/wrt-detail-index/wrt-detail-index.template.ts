@@ -1,8 +1,8 @@
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { Category, Genre } from '@awread/writer/web/feature-auth';
-import { PopupEditCoverBookTemplate } from '../popup-edit-cover-book/popup-edit-cover-book.template';
 import { MatDialog } from '@angular/material/dialog';
+import { PopupChangeCoverOrgan } from '@awread/global/design-system';
 
 @Component({
   selector: 'wrt-template-detail',
@@ -64,7 +64,7 @@ export class WrtDetailIndexTemplate implements OnInit {
     this.selectedStatusEvent.emit(status);
   }
   eventChooseImageCover(event) {
-    this.matDialog.open(PopupEditCoverBookTemplate, {
+    this.matDialog.open(PopupChangeCoverOrgan, {
       width: '55rem',
       height: '33rem',
     });

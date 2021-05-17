@@ -4,13 +4,11 @@ import { BooksHomeApi } from '../apis';
 import { FeatureBooksStore } from '../states/feature-books';
 import { GoodBooksStore } from '../states/good-books';
 import { LatestBooksStore } from '../states/latest-books';
-import { TransformBookDataGear } from './transform-book-data.gear';
 
 @Injectable({ providedIn: 'root' })
 export class BooksHomeGear {
 
   constructor(
-    private transformBookDataGear: TransformBookDataGear,
     private latestBooksStore: LatestBooksStore,
     private featureBooksStore: FeatureBooksStore,
     private goodBooksStore: GoodBooksStore,

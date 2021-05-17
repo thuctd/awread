@@ -31,18 +31,20 @@ jobs:
     steps:
       - name: using action checkout
         uses: actions/checkout@v2
-      - name: Set Git config
-        run: |
-          git config --local user.email "actions@github.com"
-          git config --local user.name "Github Actions"
-      - name: get latest code from develop
-        run: |
-          git fetch --unshallow
-          git pull
-          git merge --no-ff origin/develop -m "Auto-merge develop to get latest code"
-          git push
-          git push origin story-writer-web:develop
-      - name: Cloning repo
+        with:
+          fetch-depth: 0
+      # - name: Set Git config
+      #   run: |
+      #     git config --local user.email "actions@github.com"
+      #     git config --local user.name "Github Actions"
+      # - name: get latest code from develop
+      #   run: |
+      #     git fetch --unshallow
+      #     git pull
+      #     git merge --no-ff origin/develop -m "Auto-merge develop to get latest code"
+      #     git push
+      #     git push origin story-writer-web:develop
+      - name: Using dokku
         uses: dokku/github-action@master
         with:
           # specify `--force` as a flag for git pushes
@@ -69,7 +71,7 @@ jobs:
   #   # only run when a pull request is opened
   #   if: github.event_name == 'pull_request' && (github.event.action == 'opened' || github.event.action == 'synchronize')
   #   steps:
-  #     - name: Cloning repo
+  #     - name: Using dokku
   #       uses: actions/checkout@v2
   #       with:
   #         fetch-depth: 0

@@ -4,6 +4,9 @@ import { StorybookSupportModule } from '../storybook-support.module';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatInputModule } from '@angular/material/input';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { notReadyDirective } from './directives/not-ready/not-ready.directive';
 import { AuthBgAtom } from './atoms/auth-bg/auth-bg.atom';
@@ -114,6 +117,15 @@ import { SocialShareFbBtnAtom } from './atoms/social-share-fb-btn/social-share-f
 import { LoginFormMolec } from './molecs/login-form/login-form.molec';
 import { RegisterFormMolec } from './molecs/register-form/register-form.molec';
 import { ForgotFormMolec } from './molecs/forgot-form/forgot-form.molec';
+import { ProfileChangePasswordFormMolec } from './molecs/profile-change-password-form/profile-change-password-form.molec';
+import { ProfileEditFormMolec } from './molecs/profile-edit-form/profile-edit-form.molec';
+import { ProfileInfoFormMolec } from './molecs/profile-info-form/profile-info-form.molec';
+import { ProfileFormOrgan } from './organs/profile-form/profile-form.organ';
+import { PopupCoverImageAlignAtom } from './atoms/popup-cover-image-align/popup-cover-image-align.atom';
+import { PopupCoverImageChooseAtom } from './atoms/popup-cover-image-choose/popup-cover-image-choose.atom';
+import { PopupCoverImageMolec } from './molecs/popup-cover-image/popup-cover-image.molec';
+import { PopupChangeCoverOrgan } from './organs/popup-change-cover/popup-change-cover.organ';
+import { ProfileInputAtom } from './atoms/profile-input/profile-input.atom';
 
 @NgModule({
   imports: [
@@ -122,6 +134,9 @@ import { ForgotFormMolec } from './molecs/forgot-form/forgot-form.molec';
     MatDialogModule,
     MatAutocompleteModule,
     MatFormFieldModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatInputModule,
     NgSelectModule,
     QuillModule.forRoot(),
     DefaultCoverModule,
@@ -132,6 +147,9 @@ import { ForgotFormMolec } from './molecs/forgot-form/forgot-form.molec';
     MatDialogModule,
     MatAutocompleteModule,
     MatFormFieldModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatInputModule,
     NgSelectModule,
     notReadyDirective,
     NgImageSliderModule,
@@ -244,6 +262,15 @@ import { ForgotFormMolec } from './molecs/forgot-form/forgot-form.molec';
     LoginFormMolec,
     RegisterFormMolec,
     ForgotFormMolec,
+    ProfileChangePasswordFormMolec,
+    ProfileEditFormMolec,
+    ProfileInfoFormMolec,
+    ProfileFormOrgan,
+    PopupCoverImageAlignAtom,
+    PopupCoverImageChooseAtom,
+    PopupCoverImageMolec,
+    PopupChangeCoverOrgan,
+    ProfileInputAtom,
   ],
   declarations: [
     notReadyDirective,
@@ -353,6 +380,15 @@ import { ForgotFormMolec } from './molecs/forgot-form/forgot-form.molec';
     LoginFormMolec,
     RegisterFormMolec,
     ForgotFormMolec,
+    ProfileChangePasswordFormMolec,
+    ProfileEditFormMolec,
+    ProfileInfoFormMolec,
+    ProfileFormOrgan,
+    PopupCoverImageAlignAtom,
+    PopupCoverImageChooseAtom,
+    PopupCoverImageMolec,
+    PopupChangeCoverOrgan,
+    ProfileInputAtom,
   ],
 })
 export class GlobalDesignSystemAtomicModule {}

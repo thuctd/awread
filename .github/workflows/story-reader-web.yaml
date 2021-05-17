@@ -31,33 +31,39 @@ jobs:
     steps:
       - name: using action checkout
         uses: actions/checkout@v2
-      - name: Set Git config
-        run: |
-          git config --local user.email "actions@github.com"
-          git config --local user.name "Github Actions"
-      - name: get latest code from develop
-        run: |
-          git fetch --unshallow
-          git pull
-          git merge --no-ff origin/develop -m "Auto-merge develop to get latest code"
-          git push
-          git push origin story-reader-web:develop
-      - name: Cloning repo
+        with:
+          fetch-depth: 0
+      # - name: Set Git config
+      #   run: |
+      #     git config --local user.email "actions@github.com"
+      #     git config --local user.name "Github Actions"
+      # - name: get latest code from develop
+      #   run: |
+      #     git fetch --unshallow
+      #     git pull
+      #     git merge --no-ff origin/develop -m "Auto-merge develop to get latest code"
+      #     git push
+      #     git push origin story-reader-web:develop
+      - name: Using dokku
         uses: dokku/github-action@master
         with:
           # specify `--force` as a flag for git pushes
           git_push_flags: '--force'
           git_remote_url: 'ssh://dokku@awread.vn:22/story-reader-web'
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+
       - name: noti building
         uses: edge/simple-slack-notify@master
+        env:
+          # SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL  }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL_CHANNEL_BOTNET  }}
         if: always()
         with:
-          channel: '#build-storybook'
+          channel: '#botnet'
           status: ${{ job.status }}
-          success_text: '${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) Mời cả lớp thưởng thức bạch tuộc chúa thơm ngon tại: http://story-reader-web.awread.vn'
-          failure_text: '${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) Téo teo tèo bạch tuộc chúa nướng thành than... :('
-          cancelled_text: '${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) AAAAAAA đổi ý không nướng bạch tuộc chúa ăn nữa!'
+          success_text: '${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER})  https://awread.vn sẵn sàng'
+          failure_text: '${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) build thất bại cho trang https://awread.vn '
+          cancelled_text: '${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) hủy không build trang https://awread.vn'
           fields: |
             [{ "title": "chi tiết PR", "value": "${{ github.event.pull_request.html_url }}", "short": true }]
 
@@ -69,7 +75,7 @@ jobs:
   #   # only run when a pull request is opened
   #   if: github.event_name == 'pull_request' && (github.event.action == 'opened' || github.event.action == 'synchronize')
   #   steps:
-  #     - name: Cloning repo
+  #     - name: Using dokku
   #       uses: actions/checkout@v2
   #       with:
   #         fetch-depth: 0

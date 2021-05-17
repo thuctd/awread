@@ -1,0 +1,7 @@
+<div class="popup-cover-content h-full flex items-center">
+    <atom-popup-cover-image-choose *ngIf="status == 'pending'" class="w-full py-5" [controlName]="controlName" (eventChooseImage)="eventChooseImage.emit()">
+    </atom-popup-cover-image-choose>
+    <atom-process-bar *ngIf="status == 'loading'" class="w-full px-11" [percentLoading]="percentLoading"></atom-process-bar>
+    <atom-popup-cover-image-align *ngIf="status == 'reposition'" class="w-full" (submitEvent)="submitEvent.emit($event)"></atom-popup-cover-image-align>
+</div>
+

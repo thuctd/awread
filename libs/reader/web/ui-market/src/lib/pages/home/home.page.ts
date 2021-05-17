@@ -37,7 +37,6 @@ export class HomePage implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.booksFacade.getAllBooks().subscribe();
     this.genresFacade.getAllGenres().subscribe();
     this.sliderFacede.getAllSlider().subscribe();
     this.booksFacade.getGoodBooks().subscribe();
