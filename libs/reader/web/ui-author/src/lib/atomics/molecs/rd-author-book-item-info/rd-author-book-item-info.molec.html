@@ -14,7 +14,7 @@
       <div class="text-gray-text mr-10 sm:mr-14">Tình trạng</div>
       <div class="text-gray-text">{{status}}</div>
     </div>
-    <div *ngFor="let btn of btns" class="leading-normal font-medium flex">
+    <div *ngFor="let btn of btns | keyvalue" class="leading-normal font-medium flex">
       <base-btn (onBtnClicked)="submitEvent.emit($event)" [isSize]="false" [chapter]="btn"></base-btn>
       <rd-list-publication-date class="ml-6 sm:ml-10"></rd-list-publication-date>
     </div>

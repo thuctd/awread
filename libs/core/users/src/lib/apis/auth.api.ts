@@ -200,21 +200,4 @@ export class AuthApi {
     });
   }
 
-  getAllBooks() {
-    this.apollo
-      .watchQuery({
-        query: gql`
-          query allBooks {
-            allBooks {
-              nodes {
-                bookid
-              }
-            }
-          }
-        `,
-      })
-      .valueChanges.subscribe((result) => {
-        console.log('allBooks', result);
-      });
-  }
 }

@@ -24,7 +24,7 @@
     <div class="col-span-2 xl:col-span-8 lg:col-span-9 md:pr-8">
       <div class="grid grid-cols-12 gap-2 lg:gap-4 xl:gap-6 border-b border-gray-300">
         <ng-container *ngFor="let tab of tabsHead">
-          <div class="col-span-2 md:col-span-4" [title]=" tabsHead | json"
+          <div class="col-span-2 md:col-span-4"
             [ngClass]="selectedTabCategoryId === tab.categoryId ? 'border-b-2 border-green-primary text-green-primary' : 'text-gray-text'">
             <molec-tab-categories (changeCategoryBooks)="changeCategoryBooks.emit(tab)" (switchTabEvent)="switchTabEvent.emit(tab.categoryId)" [tab]="tab">
             </molec-tab-categories>

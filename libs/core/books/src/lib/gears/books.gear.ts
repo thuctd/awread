@@ -7,14 +7,12 @@ import { tap, map } from 'rxjs/operators';
 import { BooksApi } from '../apis';
 import { BooksStore } from '../states/books';
 
-import { TransformBookDataGear } from './transform-book-data.gear';
 import { CategoryBooksStore } from '../states/category-books';
 
 @Injectable({ providedIn: 'root' })
 export class BooksGear {
 
   constructor(
-    private transformBookDataGear: TransformBookDataGear,
     private categoryBooksStore: CategoryBooksStore,
     private searchBooksStore: SearchBooksStore,
     private authorBooksStore: AuthorBooksStore,
@@ -24,34 +22,9 @@ export class BooksGear {
     private booksApi: BooksApi,
   ) { }
 
-  getAllBooks() {
-    return this.booksApi.getAllBooks().pipe(
-      map((result) => result.map(book => this.transformBookDataGear.tranformBookData(book))),
-      tap(books => this.booksStore.set(books))
-    );
-  }
-
-  getCategoryBooks(categoryId: string) {
+  getCategoryBooks(categoryId?: string) {
     return this.booksApi.getCategoryBooks(categoryId).pipe(
-      map((result) => result.map(book => this.transformBookDataGear.tranformBookData(book))),
       tap(books => this.categoryBooksStore.set(books))
-    );
-  }
-
-
-  getCollectedBooks() {
-    return this.booksApi.getCollectedBooks().pipe(
-      tap((res) => {
-
-      }),
-    );
-  }
-
-  getComposedBooks() {
-    return this.booksApi.getComposedBooks().pipe(
-      tap((books) => {
-
-      }),
     );
   }
 
