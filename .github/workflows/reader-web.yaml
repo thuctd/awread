@@ -48,6 +48,8 @@ jobs:
           git_push_flags: '--force'
           git_remote_url: 'ssh://dokku@awread.vn:22/reader-web'
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+      - name: Test
+        run: echo ${{ secrets.SLACK_WEBHOOK_URL }}
       - name: noti building
         uses: edge/simple-slack-notify@master
         env:
