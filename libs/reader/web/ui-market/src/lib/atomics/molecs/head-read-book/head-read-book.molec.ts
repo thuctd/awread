@@ -14,9 +14,8 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-//FIX: Giá trị mặc định của chương, routerLink
 export class HeadReadBookMolec implements OnInit {
-  @Input() defaultSelect;
+  @Input() defaultChapter;
   @Input() chapters = [];
   @Input() faIcon = faChevronLeft;
   @Output() selectionChange = new EventEmitter();
@@ -30,7 +29,9 @@ export class HeadReadBookMolec implements OnInit {
   ngOnInit(): void { }
 
 
-  selectChapter(chapterId: string) {
-    this.router.navigate(['books', this.defaultSelect.bookId, 'chapters', chapterId]);
+  selectChapter(event) {
+    const chapterId = event.target.value;
+    console.log("chapterId", chapterId);
+    this.router.navigate(['books', this.defaultChapter.bookId, 'chapters', chapterId]);
   }
 }

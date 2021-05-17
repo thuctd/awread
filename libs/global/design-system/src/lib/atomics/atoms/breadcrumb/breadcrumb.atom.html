@@ -1,12 +1,14 @@
-<pre> {{ items | json }} </pre>
+<!-- <pre> {{ items | json }} </pre> -->
+
 <div class="flex items-center">
     <fa-icon *ngIf="icon" class="text-gray-icon text-md mr-4" [icon]="icon"></fa-icon>
     <ng-container *ngFor="let item of items; let idx = index">
-        <a routerLinkActive="active" [routerLink]="[item.link]"
+        <a routerLinkActive="active" [routerLink]="item.link"
             class="text-gray-icon flex items-center cursor-pointer text-xs sm:text-2xl mr-1 sm:mr-2 outline-none">
             <span class="text-gray-icon text-xs hover:text-green-primary duration-300">
                 <span class="relative mx-2 font-lg" *ngIf="idx !== 0">/</span>
-                {{item.title}}</span>
+                {{item.title}}
+            </span>
         </a>
     </ng-container>
 </div>

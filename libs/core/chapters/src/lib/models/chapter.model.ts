@@ -8,6 +8,7 @@ export interface Chapter {
   position: string;
   chapterNumber: number;
   content?: string;
+  book?: any;
 }
 
 export function Chapter(params: Partial<Chapter>) {

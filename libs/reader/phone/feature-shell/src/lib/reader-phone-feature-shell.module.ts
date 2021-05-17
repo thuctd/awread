@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { GlobalCoreModule } from '@awread/global/core';
+import { GlobalSettingsModule } from '@awread/global/settings';
 import { ReaderPhoneSharedModule, SharedDesktopLayout, SharedMobileLayout, NotFoundPage } from '@awread/reader/phone/shared';
 
 declare const window: Window & { haveMobile: boolean };
@@ -29,9 +29,9 @@ const routes: Routes = [
       anchorScrolling: 'enabled',
       onSameUrlNavigation: 'reload',
     }),
-    GlobalCoreModule,
+    GlobalSettingsModule,
     ReaderPhoneSharedModule,
   ],
-  exports: [RouterModule, GlobalCoreModule],
+  exports: [RouterModule, GlobalSettingsModule],
 })
 export class ReaderPhoneFeatureShellModule { }

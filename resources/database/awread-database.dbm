@@ -3,18 +3,22 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="0,341" last-zoom="0.95" max-obj-count="15"
+<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="0,986" last-zoom="0.95" max-obj-count="18"
 	 default-owner="postgres">
-<role name="anonymous">
+<role name="public_read"
+      inherit="true">
 </role>
 
-<role name="writer">
+<role name="anonymous" inherit="true">
 </role>
 
-<role name="reader">
+<role name="writer" inherit="true">
 </role>
 
-<role name="postgraphile">
+<role name="reader" inherit="true">
+</role>
+
+<role name="postgraphile" inherit="true">
 </role>
 
 <database name="awread_database" is-template="false" allow-conns="true">
@@ -36,17 +40,6 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <usertype name="jwt_token" configuration="composite">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<appended-sql><![CDATA[grant anonymous to reader;
-grant anonymous to writer;
-grant reader to writer;
-grant anonymous to postgraphile;
-grant reader to postgraphile;
-grant writer to postgraphile;
-
-grant connect on database awread_database  to anonymous, reader, writer, postgraphile;
-grant usage on schema public to anonymous, reader, writer, postgraphile;
-GRANT SELECT ON ALL TABLES IN SCHEMA public to anonymous, reader, writer, postgraphile;
-grant update on public.users to reader, writer, postgraphile;]]></appended-sql>
 	<typeattrib name="userId">
 		<type name="uuid" length="0"/>
 	</typeattrib>
@@ -71,7 +64,7 @@ grant update on public.users to reader, writer, postgraphile;]]></appended-sql>
 	</element>
 </opclass>
 
-<table name="books" layer="0" collapse-mode="2" max-obj-count="14" z-value="0">
+<table name="books" layer="0" collapse-mode="2" max-obj-count="15" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
 	<appended-sql><![CDATA[-- create index title_gin_idx on public.books
@@ -113,6 +106,9 @@ grant update on public.users to reader, writer, postgraphile;]]></appended-sql>
 	</column>
 	<column name="createdAt">
 		<type name="timestamp with time zone" length="0" with-timezone="true"/>
+	</column>
+	<column name="type" default-value="'composed'">
+		<type name="text" length="0"/>
 	</column>
 	<constraint name="books_pk" type="pk-constr" table="public.books">
 		<columns names="bookId" ref-type="src-columns"/>
@@ -260,7 +256,7 @@ grant update on public.users to reader, writer, postgraphile;]]></appended-sql>
 <table name="categories" layer="0" collapse-mode="2" max-obj-count="2" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="1480" y="1340"/>
+	<position x="1400" y="1320"/>
 	<column name="categoryId" not-null="true">
 		<type name="numeric" length="0"/>
 	</column>
@@ -320,7 +316,7 @@ grant update on public.users to reader, writer, postgraphile;]]></appended-sql>
 <table name="authors" layer="0" collapse-mode="2" max-obj-count="3" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="800" y="780"/>
+	<position x="820" y="780"/>
 	<column name="bookId" not-null="true">
 		<type name="uuid" length="0"/>
 	</column>
@@ -685,23 +681,40 @@ begin
 end;]]></definition>
 </function>
 
-<view name="v_random_books" layer="0" collapse-mode="2" max-obj-count="3" z-value="0">
+<view name="v_random_books" layer="0" collapse-mode="2" pagination="true" attribs-page="0" ext-attribs-page="0" max-obj-count="3" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="1100" y="1480"/>
+	<position x="1100" y="1380"/>
 	<reference>
-		<expression><![CDATA["bookId",
-title,
-cover,
-"userId",
-ARRAY_AGG(public.books_genres."genreId") as "genreIds"]]></expression>
+		<expression><![CDATA[	books.*,
+	jsonb_object_agg(z."authorId", z.authors) as "authors",
+	jsonb_object_agg(k."genreId", k.genres) as "genres"]]></expression>
 	</reference>
 	<reference>
-		<expression><![CDATA[public.books natural join public.books_genres
-]]></expression>
+		<expression><![CDATA[   	public.books 
+	inner join (
+		select 
+		  "bookId",
+		  "userId" as "authorId",
+		  to_jsonb(jsonb_build_object(
+			  'userId', users."userId",
+			  'name', users."name"
+		  )) as authors
+		from authors natural join users
+	) z USING ("bookId")
+	inner join (
+		select 
+		"bookId",
+		"genreId",
+		to_jsonb(jsonb_build_object(
+			'genreId', genres."genreId",
+			'name', genres."name"
+		)) as genres
+		from books_genres natural join genres
+	) k USING ("bookId")]]></expression>
 	</reference>
 	<reference>
-		<expression><![CDATA[group by 1,2
+		<expression><![CDATA[group by 1
 order by random();]]></expression>
 	</reference>
 	<expression type="select-exp">0</expression>
@@ -712,30 +725,55 @@ order by random();]]></expression>
 <view name="mv_books_latest_chapters" layer="0" materialized="true" collapse-mode="2" max-obj-count="3" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="900" y="1560"/>
+	<position x="1100" y="1480"/>
 	<reference>
-		<expression><![CDATA[   public.chapters."bookId",
-   public.books.title,
-   public.books."updatedAt",
-   public.books."categoryId",
-   jsonb_agg(distinct "newestChapters") as "newestChapters"]]></expression>
+		<expression><![CDATA[	books.*,
+	jsonb_object_agg(x."chapterId", x."newestChapters") as "newestChapters",
+	jsonb_object_agg(k."genreId", k.genres) as "genres",
+	jsonb_object_agg(y."authorId", y.authors) as "authors"]]></expression>
 	</reference>
 	<reference>
-		<expression><![CDATA[public.chapters
-   join lateral (
-	select jsonb_build_object(
-		'chapterId', c."chapterId",
-		'position', c.position
-    ) as "newestChapters"
-	from chapters c
-	where c."bookId" = chapters."bookId"
-	group by c."bookId", c.position, c."chapterId"
-	order by c.position desc
-	limit 2
-) chapters_results on true   inner join books on books."bookId" = chapters."bookId"   group by chapters."bookId", books.title, public.books."updatedAt", public.books."categoryId"]]></expression>
+		<expression><![CDATA[
+	books 
+	inner join (
+		select 
+			*
+		from (
+			select 
+				"bookId",
+				"chapterId",
+				to_jsonb(jsonb_build_object(
+				'chapterId', "chapterId",
+				'position', position
+	    		)) as "newestChapters",
+				rank() over (partition by "bookId" order by position desc) as RANK
+			from chapters
+		) z
+		where rank <= 2
+	) x using ("bookId")
+	inner join (
+		select 
+		"bookId",
+		"genreId",
+		to_jsonb(jsonb_build_object(
+			'genreId', genres."genreId",
+			'name', genres."name"
+		)) as genres
+		from books_genres natural join genres
+	) k  USING ("bookId")
+	inner join (
+		select 
+		  "bookId",
+		  "userId" as "authorId",
+		  to_jsonb(jsonb_build_object(
+			  'userId', users."userId",
+			  'name', users."name"
+		  )) as authors
+		from authors natural join users
+	) y USING ("bookId")]]></expression>
 	</reference>
 	<reference>
-		<expression><![CDATA[order by chapters."bookId";]]></expression>
+		<expression><![CDATA[group by 1;]]></expression>
 	</reference>
 	<expression type="select-exp">0</expression>
 	<expression type="from-exp">1</expression>
@@ -745,22 +783,36 @@ order by random();]]></expression>
 <view name="mv_most_view_books" layer="0" materialized="true" collapse-mode="2" max-obj-count="3" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="640" y="1560"/>
+	<position x="1100" y="1640"/>
 	<reference>
-		<expression><![CDATA[   public.book_visits."bookId",
-   public.books.title,
-   public.books."categoryId",
-   public.books."updatedAt",
-   public.mv_books_latest_chapters."newestChapters",
-   sum(public.book_visits.count) as "views"]]></expression>
+		<expression><![CDATA[	books.*,
+	sum(book_visits.count) as "views",
+	jsonb_object_agg(k."genreId", k.genres) as "genres",
+	mv_books_latest_chapters."newestChapters",
+	mv_books_latest_chapters.authors]]></expression>
 	</reference>
 	<reference>
-		<expression><![CDATA[public.book_visits natural join public.books natural join public.mv_books_latest_chapters]]></expression>
+		<expression><![CDATA[    public.books 
+	inner join book_visits using ("bookId")
+	inner join mv_books_latest_chapters using ("bookId")
+	inner join books_genres using ("bookId")
+	inner join (
+		select 
+		"bookId",
+		"genreId",
+		to_jsonb(jsonb_build_object(
+			'genreId', genres."genreId",
+			'name', genres."name"
+		)) as genres
+		from books_genres natural join genres
+	) k  USING ("bookId")]]></expression>
 	</reference>
 	<reference>
-		<expression><![CDATA[   group by 1,2,3,4,5
-order by 6 DESC;
-]]></expression>
+		<expression><![CDATA[group by 	
+		1, 
+		mv_books_latest_chapters."newestChapters", 
+		mv_books_latest_chapters.authors
+order by "views" DESC;]]></expression>
 	</reference>
 	<expression type="select-exp">0</expression>
 	<expression type="from-exp">1</expression>
@@ -770,43 +822,37 @@ order by 6 DESC;
 <view name="mv_detail_books" layer="0" materialized="true" collapse-mode="2" max-obj-count="3" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="1180" y="1560"/>
+	<position x="1100" y="1560"/>
 	<reference>
-		<expression><![CDATA[public.books.*,
-   (select 
-		jsonb_agg(jsonb_build_object(
-			'id', genres."genreId",
-			'name', genres."name"
-		))
-	 from 
-	 	books_genres
-	 join 
-	 	genres
-	 on 
-	 	books_genres."genreId" = genres."genreId"
-	 where 
-	 	books_genres."bookId" = books."bookId"
-	) as genres,
-   (select 
-		jsonb_agg(jsonb_build_object(
-			'id', users."userId",
-			'name', users."name"
-		))
-	 from 
-	 	authors
-	 join 
-	 	users
-	 on 
-	 	authors."userId" = users."userId"
-	 where 
-	 	authors."bookId" = books."bookId"
-	) as authors]]></expression>
+		<expression><![CDATA[ 	books.*,
+	jsonb_object_agg(z."authorId", z.authors) as "authors",
+	jsonb_object_agg(k."genreId", k.genres) as "genres"]]></expression>
 	</reference>
 	<reference>
-		<expression><![CDATA[public.books]]></expression>
+		<expression><![CDATA[(
+	select 
+	"bookId",
+	"userId" as "authorId",
+	to_jsonb(jsonb_build_object(
+		'userId', users."userId",
+		'name', users."name"
+	)) as authors
+	from authors natural join users
+) z
+inner join books USING ("bookId")
+inner join (
+	select 
+	"bookId",
+	"genreId",
+	to_jsonb(jsonb_build_object(
+		'genreId', genres."genreId",
+		'name', genres."name"
+	)) as genres
+	from books_genres natural join genres
+) k  USING ("bookId")]]></expression>
 	</reference>
 	<reference>
-		<expression><![CDATA[   group by books."bookId"]]></expression>
+		<expression><![CDATA[group by 1;]]></expression>
 	</reference>
 	<expression type="select-exp">0</expression>
 	<expression type="from-exp">1</expression>
@@ -849,12 +895,6 @@ end;
 		row-amount="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<appended-sql><![CDATA[grant anonymous to reader;
-grant anonymous to writer;
-grant reader to writer;
-grant anonymous to postgraphile;
-grant reader to postgraphile;
-grant writer to postgraphile;]]></appended-sql>
 	<language name="plpgsql"/>
 	<return-type>
 	<parameter name="accessToken">
@@ -929,6 +969,89 @@ begin
 		b."updatedAt" desc;
 end;]]></definition>
 </function>
+
+<view name="v_show_privileges" layer="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1680" y="1940"/>
+	<reference>
+		<expression><![CDATA[  grantee,
+        string_agg(relname, ', ' ORDER BY relname) AS rel_names,
+        privileges]]></expression>
+	</reference>
+	<reference>
+		<expression><![CDATA[(
+        SELECT 
+            relname,
+            coalesce(nullif(s[1], ''), 'public') grantee, 
+            (SELECT string_agg(privilege, ', ' ORDER BY privilege ASC)
+                FROM (SELECT
+                    CASE ch
+                        WHEN 'r' THEN 'SELECT'
+                        WHEN 'w' THEN 'UPDATE'
+                        WHEN 'a' THEN 'INSERT'
+                        WHEN 'd' THEN 'DELETE'
+                        WHEN 'D' THEN 'TRUNCATE'
+                        WHEN 'x' THEN 'REFERENCES'
+                        WHEN 't' THEN 'TRIGGER'
+                    END AS privilege
+                    FROM regexp_split_to_table(s[2], '') ch
+                ) s
+            ) AS privileges
+        FROM 
+            pg_class
+            JOIN pg_namespace ON pg_namespace.oid = relnamespace
+            JOIN pg_roles ON pg_roles.oid = relowner,
+            unnest(coalesce(relacl::text[], format('{%s=arwdDxt/%s}', rolname, rolname)::text[])) AS acl,
+            regexp_split_to_array(acl, '=|/') AS s
+        WHERE nspname = 'public'
+    ) AS t]]></expression>
+	</reference>
+	<reference>
+		<expression><![CDATA[GROUP BY grantee, privileges
+    ORDER BY grantee, privileges, rel_names]]></expression>
+	</reference>
+	<expression type="select-exp">0</expression>
+	<expression type="from-exp">1</expression>
+	<expression type="end-exp">2</expression>
+</view>
+
+<view name="v_show_role" layer="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1900" y="1940"/>
+	<reference>
+		<expression><![CDATA[
+      r.rolname, 
+      r.rolsuper, 
+      r.rolinherit,
+      r.rolcreaterole,
+      r.rolcreatedb,
+      r.rolcanlogin,
+      r.rolconnlimit, r.rolvaliduntil,
+  ARRAY(SELECT b.rolname
+        FROM pg_catalog.pg_auth_members m
+        JOIN pg_catalog.pg_roles b ON (m.roleid = b.oid)
+        WHERE m.member = r.oid) as memberof
+, r.rolreplication
+]]></expression>
+	</reference>
+	<reference>
+		<expression><![CDATA[pg_catalog.pg_roles r
+]]></expression>
+	</reference>
+	<reference>
+		<expression><![CDATA[ORDER BY 1;]]></expression>
+	</reference>
+	<expression type="select-exp">0</expression>
+	<expression type="from-exp">1</expression>
+	<expression type="end-exp">2</expression>
+</view>
+
+<genericsql name="grant_access">
+	<definition><![CDATA[grant public_read to anonymous, reader, writer, postgraphile;]]></definition>
+	<object name="public_read" type="role" ref-name="grant_access_public_read"/>
+</genericsql>
 
 <constraint name="books_userId_fk" type="fk-constr" comparison-type="MATCH FULL"
 	 upd-action="NO ACTION" del-action="CASCADE" ref-table="public.users" table="public.books">
@@ -1023,6 +1146,11 @@ end;]]></definition>
 	 dst-table="public.publishers" reference-fk="books_publisherId_fk"
 	 src-required="false" dst-required="true"/>
 
+<relationship name="rel_users_users" type="relfk" layer="0"
+	 src-table="private.users"
+	 dst-table="public.users" reference-fk="public_users_userId_fk"
+	 src-required="false" dst-required="true"/>
+
 <relationship name="rel_chapters_books" type="relfk" layer="0"
 	 src-table="public.chapters"
 	 dst-table="public.books" reference-fk="chapters_bookId_fk"
@@ -1068,14 +1196,79 @@ end;]]></definition>
 	 dst-table="public.chapters" reference-fk="contents_chapterId_fk"
 	 src-required="false" dst-required="true"/>
 
-<relationship name="rel_user_users" type="relfk" layer="0"
-	 src-table="private.users"
-	 dst-table="public.users" reference-fk="public_users_userId_fk"
-	 src-required="false" dst-required="true"/>
-
 <permission>
-	<object name="awread_database" type="database"/>
-	<roles names="reader"/>
-	<privileges create="grant-op"/>
+	<object name="public.books" type="table"/>
+	<roles names="public_read"/>
+	<privileges select="grant-op"/>
+</permission>
+<permission>
+	<object name="public.mv_most_view_books" type="view"/>
+	<roles names="public_read"/>
+	<privileges select="grant-op"/>
+</permission>
+<permission>
+	<object name="public.mv_detail_books" type="view"/>
+	<roles names="public_read"/>
+	<privileges select="grant-op"/>
+</permission>
+<permission>
+	<object name="public.mv_books_latest_chapters" type="view"/>
+	<roles names="public_read"/>
+	<privileges select="grant-op"/>
+</permission>
+<permission>
+	<object name="public.v_random_books" type="view"/>
+	<roles names="public_read"/>
+	<privileges select="grant-op"/>
+</permission>
+<permission>
+	<object name="public.genres" type="table"/>
+	<roles names="public_read"/>
+	<privileges select="grant-op"/>
+</permission>
+<permission>
+	<object name="public.categories" type="table"/>
+	<roles names="public_read"/>
+	<privileges select="grant-op"/>
+</permission>
+<permission>
+	<object name="public.books_genres" type="table"/>
+	<roles names="public_read"/>
+	<privileges select="grant-op"/>
+</permission>
+<permission>
+	<object name="public.publishers" type="table"/>
+	<roles names="public_read"/>
+	<privileges select="grant-op"/>
+</permission>
+<permission>
+	<object name="public.chapters" type="table"/>
+	<roles names="public_read"/>
+	<privileges select="grant-op"/>
+</permission>
+<permission>
+	<object name="public.contents" type="table"/>
+	<roles names="public_read"/>
+	<privileges select="grant-op"/>
+</permission>
+<permission>
+	<object name="public.authors" type="table"/>
+	<roles names="public_read"/>
+	<privileges select="grant-op"/>
+</permission>
+<permission>
+	<object name="public.book_visits" type="table"/>
+	<roles names="public_read"/>
+	<privileges select="grant-op"/>
+</permission>
+<permission>
+	<object name="public.users" type="table"/>
+	<roles names="public_read"/>
+	<privileges select="grant-op"/>
+</permission>
+<permission>
+	<object name="public.users" type="table"/>
+	<roles names="reader,writer"/>
+	<privileges update="true"/>
 </permission>
 </dbmodel>

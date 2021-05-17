@@ -12,7 +12,6 @@ import { faHome } from '@fortawesome/free-solid-svg-icons';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-//FIX: Lặp vô hạn(Deatil&&Read)
 export class BreadcrumbAtom implements OnInit {
   @Input() icon = faHome;
   @Input() items = [{

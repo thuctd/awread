@@ -3,18 +3,18 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { WriterWebFeatureShellModule } from '@awread/writer/web/feature-shell';
-import { GlobalCoreModule } from '@awread/global/core';
+import { GlobalSettingsModule } from '@awread/global/settings';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
-    GlobalCoreModule,
+    GlobalSettingsModule,
     WriterWebFeatureShellModule,
     HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

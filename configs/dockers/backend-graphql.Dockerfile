@@ -1,4 +1,4 @@
-# // NOTE: update this
+# // INPUT: update this
 ARG application=backend-graphql
 ARG applicationPath=backend/graphql
 ARG NODE_ENV=production
@@ -17,7 +17,7 @@ COPY configs/tailwind configs/tailwind
 # RUN echo application is: $application
 # RUN echo applicationPath is: $applicationPath
 
-# //NOTE: update this
+# //INPUT: update this
 FROM builder as build-backend-graphql
 ARG application
 ARG applicationPath
@@ -28,13 +28,13 @@ COPY apps/$applicationPath ./apps/$applicationPath
 
 RUN pnpm build $application -- --prod
 
-# //NOTE: update this
+# //INPUT: update this
 FROM build-backend-graphql as backend-graphql
 ARG application
 ARG applicationPath
 ARG NODE_ENV
-# //NOTE: we expose this only for testing purpose
+# //INPUT: we expose this only for testing purpose
 EXPOSE 80
-# //NOTE: update this
+# //INPUT: update this
 COPY --from=build-backend-graphql /batcave/dist/apps/$applicationPath .
 CMD ["node", "main.js"]

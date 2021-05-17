@@ -12,7 +12,6 @@ module.exports = {
     '<rootDir>/libs/global/assets',
     '<rootDir>/libs/global/styles',
     '<rootDir>/libs/global/environments',
-    '<rootDir>/libs/global/core',
     '<rootDir>/libs/writer/web/ui-auth',
     '<rootDir>/libs/writer/web/feature-auth',
     '<rootDir>/libs/writer/web/ui-single',
@@ -46,5 +45,6 @@ module.exports = {
     '<rootDir>/libs/core/genres',
     '<rootDir>/libs/core/authors',
     '<rootDir>/libs/core/slider',
+    '<rootDir>/libs/global/settings',
   ],
 };

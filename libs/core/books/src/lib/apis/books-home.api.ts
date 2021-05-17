@@ -31,38 +31,22 @@ export class BooksHomeApi {
   getFeatureBooks() {
     return this.apollo.query({
       query: gql`
-        query allBooks {
-          allBooks(first: 6, orderBy: UPDATED_AT_DESC) {
+        query allMvMostViewBooks {
+          allMvMostViewBooks(first: 6) {
             nodes {
               bookId
+              categoryId
+              newestChapters
               title
-              description
-              completed
-              published
               updatedAt
-              categoryByCategoryId {
-                categoryId
-                name
-              }
-              chaptersByBookId(orderBy: POSITION_ASC, first: 2) {
-                nodes {
-                  chapterId
-                  position
-                }
-                totalCount
-              }
-              booksGenresByBookId {
-                nodes {
-                  genreId
-                }
-              }
+              cover
             }
           }
         }
       `,
     })
       .pipe(
-        map(res => res?.['data']?.['allBooks']?.['nodes'])
+        map(res => res?.['data']?.['allMvMostViewBooks']?.['nodes'])
       )
   }
 

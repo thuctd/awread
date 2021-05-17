@@ -32,9 +32,9 @@ export default function (schema: any): Rule {
       }),
       externalSchematic('@nrwl/angular', 'lib', {
         ...appAndLibSetting,
-        name: 'core',
+        name: 'settings',
         directory: schema.name,
-        tags: `scope:shared,type:core`,
+        tags: `scope:shared,type:global`,
       }),
       createSharedLibrary(),
       createFiles(),

@@ -61,4 +61,4 @@ import { ErrorInterceptor } from "./error.interceptor";
     }
   ],
 })
-export class GlobalCoreModule { }
+export class GlobalSettingsModule { }
