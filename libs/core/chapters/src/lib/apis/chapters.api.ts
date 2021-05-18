@@ -4,7 +4,7 @@ import { Apollo, gql } from 'apollo-angular';
 
 @Injectable({ providedIn: 'root' })
 export class ChaptersApi {
-  constructor(private apollo: Apollo) { }
+  constructor(private apollo: Apollo) {}
 
   getAllChapters(bookId) {
     return this.apollo
@@ -42,7 +42,9 @@ export class ChaptersApi {
                 createdAt
                 updatedAt
                 published
+                position
                 bookByBookId {
+                  categoryId
                   title
                   type
                 }
@@ -64,28 +66,21 @@ export class ChaptersApi {
       );
   }
 
-  getPaginationChapter(bookId: string, after?: string) {
+  getPageChapter(bookId: string, offset: number) {
     return this.apollo
       .query({
         query: gql`
-          query PaginationChapter($bookId: UUID, ${after ? `$after: Cursor` : ''}) {
-            allChapters (condition: { bookId: $bookId }, first: 1, orderBy: POSITION_ASC, ${after ? ` after: $after ` : ''}) {
-              pageInfo {
-                startCursor
-                endCursor
-              }
-              edges {
-                cursor
-                node {
-                  chapterId
-                  title
-                }
+          query getPageChapter($bookId: UUID, $offset: Int) {
+            allChapters(condition: { bookId: $bookId }, first: 1, offset: $offset, orderBy: POSITION_ASC) {
+              nodes {
+                chapterId
+                title
               }
             }
           }
         `,
-        variables: { bookId, after },
+        variables: { bookId, offset },
       })
-      .pipe(map((res) => res?.['data']?.['allChapters']?.['edges']));
+      .pipe(map((res) => res?.['data']?.['allChapters']?.['nodes']));
   }
 }

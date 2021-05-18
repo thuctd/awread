@@ -16,10 +16,10 @@ import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 export class ContentBookOrgan implements OnInit {
   @Input() chapters = [];
   @Input() faIcon = faChevronLeft;
-  @Output() selectionChange = new EventEmitter();
   @Output() nextChapterBook = new EventEmitter();
   @Output() backChapterBook = new EventEmitter();
   @Input() chapter = {
+    position: '',
     chapterId: '',
     title: 'Cuộc đời của mỗi người...',
     content: `

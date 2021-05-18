@@ -29,11 +29,9 @@ export class ChaptersGear {
     );
   }
 
-  getPaginationChapter(bookId: string, after: string) {
-    return this.chaptersApi.getPaginationChapter(bookId, after).pipe(
+  getPageChapter(bookId: string, offset: number) {
+    return this.chaptersApi.getPageChapter(bookId, offset).pipe(
       map((result) => {
-        console.log(result);
-
         return result;
       }),
     );

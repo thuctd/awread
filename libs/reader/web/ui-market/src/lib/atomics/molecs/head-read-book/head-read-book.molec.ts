@@ -19,7 +19,6 @@ export class HeadReadBookMolec implements OnInit {
   @Input() chapters = [];
   @Input() chapter;
   @Input() faIcon = faChevronLeft;
-  @Output() selectionChange = new EventEmitter();
   @Output() nextChapterBook = new EventEmitter();
   @Output() backChapterBook = new EventEmitter();
   @Input() title = 'Ngày ấy vì ai mà đổi thay';
@@ -32,7 +31,6 @@ export class HeadReadBookMolec implements OnInit {
 
   selectChapter(event) {
     const chapterId = event.target.value;
-    console.log("chapterId", chapterId);
     this.router.navigate(['books', this.defaultChapter.bookId, 'chapters', chapterId]);
   }
 }

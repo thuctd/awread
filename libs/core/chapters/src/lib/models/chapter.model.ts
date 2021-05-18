@@ -1,3 +1,5 @@
+import { Book } from '@awread/core/books';
+
 export interface Chapter {
   chapterId: string;
   title: string;
@@ -8,7 +10,7 @@ export interface Chapter {
   position: string;
   chapterNumber: number;
   content?: string;
-  book?: any;
+  book?: Book;
 }
 
 export function Chapter(params: Partial<Chapter>) {

@@ -39,7 +39,7 @@ export class ChaptersFacade {
     return this.chaptersGear.getChapterDetail(chapterid, bookid);
   }
 
-  getPaginationChapter(bookId: string, after: string) {
-    return this.chaptersGear.getPaginationChapter(bookId, after);
+  getPageChapter(bookId: string, offset: number) {
+    return this.chaptersGear.getPageChapter(bookId, offset);
   }
 }

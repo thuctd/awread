@@ -14,8 +14,8 @@ import { ChaptersFacade } from '@awread/core/chapters';
 @Directive()
 export class ReadPage implements OnInit {
   chapter: Chapter;
-  bookId;
-  chapterId;
+  bookId: string;
+  chapterId: string;
   topBookList$ = this.booksFacade.topBooks$;
   bookChapters$ = this.chaptersFacade.chapters$;
   breadcrumbs;
@@ -36,7 +36,7 @@ export class ReadPage implements OnInit {
         })
       )
       .subscribe((chapter) => {
-        this.chapter = chapter[0];
+        this.chapter = chapter[0];        
         this.breadcrumbs = this.getbreadcrumbs();
       });
     this.booksFacade.getTopBooks().subscribe();
@@ -54,35 +54,26 @@ export class ReadPage implements OnInit {
     {
       title: this.chapter.book.title,
       link: ['/', 'books', this.bookId]
-    },
-    {
-      title: this.chapter.title,
-      link: ['/', 'books', this.bookId, 'chapters', this.chapter.chapterId]
-    }
-    ];
-  }
-
-  navigateToChapter(chapter: Chapter) {
-    console.log(chapter);
-    // this.router.navigate(['/books', chapter.bookId, 'chapters', chapter.chapterId]);
+    }];
   }
 
   onChangeNextChapter(chapter: Chapter) {
-    this.chaptersFacade.getPaginationChapter(this.bookId, '').subscribe();
-    if (!this.chapterId) {
-      this.backHome();
-      return;
-    }
+    const offset = parseInt(chapter.position);
+    this.chaptersFacade.getPageChapter(chapter.bookId, offset + 1).pipe(
+      tap(res => {
+        this.router.navigate(['/books', this.bookId, 'chapters', res[0].chapterId]);
+      })
+    ).subscribe();
+    this.cd.detectChanges();
   }
 
-  onChangeBackChapter() {
-    if (!this.chapterId) {
-      this.backHome();
-      return;
-    }
-  }
-
-  private backHome() {
-    this.router.navigate(['/']);
+  onChangeBackChapter(chapter: Chapter) {
+    const offset = parseInt(chapter.position);
+    this.chaptersFacade.getPageChapter(chapter.bookId, offset - 1).pipe(
+      tap(res => {
+        this.router.navigate(['/books', this.bookId, 'chapters', res[0].chapterId]);
+      })
+    ).subscribe();
+    this.cd.detectChanges();
   }
 }
