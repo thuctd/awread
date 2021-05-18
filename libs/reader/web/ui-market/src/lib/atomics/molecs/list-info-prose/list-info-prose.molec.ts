@@ -18,12 +18,13 @@ export class ListInfoProseMolec implements OnInit {
     bookId: '',
     authors: []
   };
+  @Input() isBtn = false;
 
   @Input() moreContent = 'Đọc thêm';
 
   @Output() moreEvent = new EventEmitter();
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }

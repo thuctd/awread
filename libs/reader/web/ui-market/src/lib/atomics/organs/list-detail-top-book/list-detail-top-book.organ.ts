@@ -18,15 +18,31 @@ export class ListDetailTopBookOrgan implements OnInit {
   @Input() moreBook = 'Xem thêm...';
   @Input() btnTitle = 'Top phổ biến';
   @Input() chapters = [];
-  @Input() books = [{
-    bookId: '',
-    imgUrl: '',
-    title: '',
-  }];
+  @Input() books = [
+    {
+      bookId: '',
+      imgUrl: '',
+      title: '',
+    },
+  ];
+
   @Output() moreEvent = new EventEmitter();
   counter = Array;
 
-  constructor() { }
+  @Input() displayUI = {
+    ui: {
+      isAuthor: false,
+      isRating: false,
+      isIcon: false,
+      isDate: false,
+    },
+    size: {
+      sizeTitle: 's',
+      sizeBtn: false,
+    },
+  };
 
-  ngOnInit(): void { }
+  constructor() {}
+
+  ngOnInit(): void {}
 }

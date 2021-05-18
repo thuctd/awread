@@ -15,8 +15,20 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 export class HomeDetailBookFeaturedOrgan implements OnInit {
   @Input() titlePage = 'Truyện nổi bật';
   @Input() books = [];
+  @Input() displayUI = {
+    ui: {
+      isAuthor: false,
+      isRating: false,
+      isIcon: false,
+      isDate: false,
+    },
+    size: {
+      sizeTitle: 'l',
+      sizeBtn: true,
+    },
+  };
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }

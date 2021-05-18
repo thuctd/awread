@@ -7,12 +7,15 @@ import { guessProjectToSchema } from '../../utility/guess-workspace';
 export default function (schema: any): Rule {
   return async (tree: Tree, context: SchematicContext) => {
     schema = await guessProjectToSchema(tree, schema, context);
-    return async (tree: Tree, context: SchematicContext) => {
-      const actions = schema.list.split(',').map(name => singleAction(schema, context, name))
-      return chain([
-        ...actions
-      ])
-    }
+    console.log('schema ui', schema.ui);
+    const generatePath = `${schema.projectRoot}/lib`;
+    const parts = schema.list.length ? schema.list.split(',') : [];
+    // const generateActions = parts.map(name => fileAction(strings.dasherize(schema.type), strings.dasherize(name), generatePath))
+    const generateActions = parts.map(name => singleAction(schema, context, name))
+
+    return chain([
+      ...generateActions,
+    ])
   }
 }
 
@@ -20,7 +23,6 @@ function singleAction(schema, context, name) {
   return async (tree) => {
     schema.name = name;
     const routingModulePath = `${schema.projectRoot}/lib/${schema.project}-routing.module`;
-    // console.log('ui-page: schema module', schema);
     return chain([
       addFeatureRoutingModuleAndImportLayoutPath(schema, tree, routingModulePath),
       schematic('module', {

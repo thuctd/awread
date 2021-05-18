@@ -15,6 +15,18 @@ export class HomeListBookFeaturedMobileOrgan implements OnInit {
   @Input() srcImg = '/global-assets/images/image.webp';
   @Input() altImg = 'Placeholder';
   @Input() books = [];
+  @Input() displayUI = {
+    ui: {
+      isAuthor: false,
+      isRating: false,
+      isIcon: false,
+      isDate: false,
+    },
+    size: {
+      sizeTitle: 's',
+      sizeBtn: false,
+    },
+  };
 
   constructor() {}
 

@@ -12,6 +12,7 @@ export async function guessProjectToSchema(tree, schema, context) {
     const kind = schema.kind ?? context.schematic.description.name;
     const { projectName, projectRoot, projectType } = await guessProject(tree, schema);
     const { application, applicationRoot } = await guessApplication(tree, projectName);
+    const ui = projectName.split('ui-')[1];
     return {
         ...schema,
         kind,
@@ -19,7 +20,8 @@ export async function guessProjectToSchema(tree, schema, context) {
         projectRoot,
         application,
         applicationRoot,
-        projectType
+        projectType,
+        ui
     }
 }
 

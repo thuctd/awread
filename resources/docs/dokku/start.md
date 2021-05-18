@@ -1,3 +1,9 @@
+# remember
+
+after new build on backend-graphql, you need to restart client app:
+
+- dokku ps:restart reader-web
+
 tutorial 1 easy: https://github.com/amannn/dokku-node-hello-world
 
 tutorial 2 normal: https://www.accordbox.com/blog/how-deploy-django-project-dokku-docker/
@@ -51,3 +57,7 @@ dokku postgres:info your-database-db
 
 dokku apps:lock APP
 dokku apps:unlock APP
+
+# log:
+
+dokku logs backend-graphql -t

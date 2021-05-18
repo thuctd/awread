@@ -44,6 +44,7 @@ function createPageLogicForCurrentLib(tree, schema) {
   @Injectable({
     providedIn: 'root',
   })
+  @Directive()
   export class ${classify(schema.name) + classify(schema.type)} implements OnInit {
 
     constructor() { }

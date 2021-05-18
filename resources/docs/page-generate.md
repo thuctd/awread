@@ -1,2 +1,7 @@
-nx workspace-generator ui-page --project=reader-web-ui-market --ui=market --directory=reader/web home -d
-nx workspace-generator feature-page --project=reader-web-ui-market --ui=market --directory=reader/web home -d
+TRƯỜNG HỢP 1: nếu mà terminal đang ở root: /c/projects/awread
+thì ta generate kèm theo tên project:
+nx workspace-generator ui-page beautiful-home --project=reader-web-ui-market
+
+TRƯỜNG HỢP 2: nếu terminial đã ở trong project /c/projects/awread/lib/reader/web/ui-author
+thì ta generate bình thường:
+nx workspace-generator ui-page beautiful-home

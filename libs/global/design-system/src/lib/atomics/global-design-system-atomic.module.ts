@@ -126,6 +126,7 @@ import { PopupCoverImageChooseAtom } from './atoms/popup-cover-image-choose/popu
 import { PopupCoverImageMolec } from './molecs/popup-cover-image/popup-cover-image.molec';
 import { PopupChangeCoverOrgan } from './organs/popup-change-cover/popup-change-cover.organ';
 import { ProfileInputAtom } from './atoms/profile-input/profile-input.atom';
+import { InfoBookMolec } from './molecs/info-book/info-book.molec';
 
 @NgModule({
   imports: [
@@ -271,6 +272,7 @@ import { ProfileInputAtom } from './atoms/profile-input/profile-input.atom';
     PopupCoverImageMolec,
     PopupChangeCoverOrgan,
     ProfileInputAtom,
+    InfoBookMolec,
   ],
   declarations: [
     notReadyDirective,
@@ -389,6 +391,7 @@ import { ProfileInputAtom } from './atoms/profile-input/profile-input.atom';
     PopupCoverImageMolec,
     PopupChangeCoverOrgan,
     ProfileInputAtom,
+    InfoBookMolec,
   ],
 })
 export class GlobalDesignSystemAtomicModule {}

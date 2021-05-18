@@ -74,7 +74,7 @@ export default function (schema: any): Rule {
         })
         : noop(),
       ...routingOnlyActions(schema, relativePath),
-      schema.mode ? addPageService(host, schema, true) : noop(),
+      schema.mode ? addPageService(host, schema, false) : noop(),
     ]);
   };
 }
@@ -216,6 +216,7 @@ function addRouteDeclarationToModule(source, fileToAdd, routeLiteral, schema) {
         `to router module at line ${line} in ${fileToAdd}`);
     }
     const routesArrFindingResults = findNodes(routesVar, ts.SyntaxKind.ArrayLiteralExpression, 3, true);
+    //NOTE: this is where we are looking for array
     routesArr = routesArrFindingResults[isPageMode ? routesArrFindingResults.length - 1 : 0];
   }
   const occurrencesCount = routesArr.elements.length;

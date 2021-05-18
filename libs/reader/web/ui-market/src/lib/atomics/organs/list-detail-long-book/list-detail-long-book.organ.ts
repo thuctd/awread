@@ -24,7 +24,20 @@ export class ListDetailLongBookOrgan implements OnInit {
   @Input() faIcon = faAngleDown;
   @Output() moreEvent = new EventEmitter();
 
-  constructor() { }
+  @Input() displayUI = {
+    ui: {
+      isAuthor: false,
+      isRating: false,
+      isIcon: false,
+      isDate: true,
+    },
+    size: {
+      sizeTitle: 'm',
+      sizeBtn: true,
+    },
+  };
 
-  ngOnInit(): void { }
+  constructor() {}
+
+  ngOnInit(): void {}
 }
