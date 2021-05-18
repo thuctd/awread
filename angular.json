@@ -1156,9 +1156,13 @@
             "tsConfig": "apps/reader/web/tsconfig.app.json",
             "aot": true,
             "assets": [
-              "libs/global/assets/src/global-assets/files/google40ce3f532fbe065a.html",
               "apps/reader/web/src/favicon.ico",
               "apps/reader/web/src/assets",
+              {
+                "glob": "google40ce3f532fbe065a.html",
+                "input": "libs/global/assets/src/global-assets/files",
+                "output": "."
+              },
               {
                 "glob": "**/*",
                 "input": "libs/global/assets/src/global-assets",
