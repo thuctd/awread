@@ -1156,6 +1156,7 @@
             "tsConfig": "apps/reader/web/tsconfig.app.json",
             "aot": true,
             "assets": [
+              "resources/files/google40ce3f532fbe065a.html",
               "apps/reader/web/src/favicon.ico",
               "apps/reader/web/src/assets",
               {
