@@ -22,7 +22,20 @@ export class HomeListBookReviewMobileOrgan implements OnInit {
   @Input() altImg = 'Placeholder';
   @Input() books = [];
 
-  constructor() { }
+  @Input() displayUI = {
+    ui: {
+      isAuthor: false,
+      isRating: true,
+      isIcon: false,
+      isDate: false,
+    },
+    size: {
+      sizeTitle: 's',
+      sizeBtn: false,
+    },
+  };
 
-  ngOnInit(): void { }
+  constructor() {}
+
+  ngOnInit(): void {}
 }

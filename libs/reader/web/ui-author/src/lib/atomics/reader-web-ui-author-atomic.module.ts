@@ -10,7 +10,6 @@ import { RdAuthorListProductOrgan } from './organs/rd-author-list-product/rd-aut
 import { RdAuthorMenuMolec } from './molecs/rd-author-menu/rd-author-menu.molec';
 import { RdAuthorAvatarItemGridMolec } from './molecs/rd-author-avatar-item-grid/rd-author-avatar-item-grid.molec';
 import { RdAuthorListBtnsMolec } from './molecs/rd-author-list-btns/rd-author-list-btns.molec';
-import { RdAuthorBookItemInfoMolec } from './molecs/rd-author-book-item-info/rd-author-book-item-info.molec';
 import { RdAuthorBookItemMolec } from './molecs/rd-author-book-item/rd-author-book-item.molec';
 import { RdAuthorProductTemplate } from './templates/rd-author-product/rd-author-product.template';
 import { RdAuthorPopupUnfollowTemplate } from './templates/rd-author-popup-unfollow/rd-author-popup-unfollow.template';
@@ -51,7 +50,6 @@ import { RdAuthorProductMbTemplate } from './templates/rd-author-product-mb/rd-a
     RdAuthorMenuMolec,
     RdAuthorAvatarItemGridMolec,
     RdAuthorListBtnsMolec,
-    RdAuthorBookItemInfoMolec,
     RdAuthorBookItemMolec,
     RdAuthorProductTemplate,
     RdAuthorPopupUnfollowTemplate,
@@ -93,7 +91,6 @@ import { RdAuthorProductMbTemplate } from './templates/rd-author-product-mb/rd-a
     RdAuthorMenuMolec,
     RdAuthorAvatarItemGridMolec,
     RdAuthorListBtnsMolec,
-    RdAuthorBookItemInfoMolec,
     RdAuthorBookItemMolec,
     RdAuthorProductTemplate,
     RdAuthorPopupUnfollowTemplate,

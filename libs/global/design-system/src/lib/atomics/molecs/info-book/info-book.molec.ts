@@ -1,32 +1,22 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 
 @Component({
-  selector: 'home-detail-book-review',
-  templateUrl: './home-detail-book-review.organ.html',
+  selector: 'molec-info-book',
+  templateUrl: './info-book.molec.html',
   styles: [
     `
       :host {
         display: block;
       }
-      :host .top--04 {
-        top: -0.4rem;
-      }
     `,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomeDetailBookReviewOrgan implements OnInit {
-  @Input() titlePage = 'Top truyện được đánh giá tích cực';
-  @Input() books = [];
-  @Input() book = {
-    imgUrl: '',
-    title: 'Cô gái chúng ta cùng theo đuổi năm nào',
-    id: '1',
-  };
+export class InfoBookMolec implements OnInit {
   @Input() displayUI = {
     ui: {
       isAuthor: false,
-      isRating: true,
+      isRating: false,
       isIcon: false,
       isDate: false,
     },
@@ -35,6 +25,18 @@ export class HomeDetailBookReviewOrgan implements OnInit {
       sizeBtn: true,
     },
   };
+
+  @Input() book = {
+    title: 'Cô gái chúng ta cùng theo đuổi năm nào',
+    bookId: '1',
+  };
+
+  @Input() btns = [
+    {
+      position: '1',
+      chapterId: '',
+    },
+  ];
 
   constructor() {}
 

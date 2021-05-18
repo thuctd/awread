@@ -21,6 +21,19 @@ export class RdAuthorBookItemMolec implements OnInit {
   @Input() isText = true;
   @Input() isSize = true;
 
+  @Input() displayUI = {
+    ui: {
+      isAuthor: true,
+      isRating: true,
+      isIcon: true,
+      isDate: true,
+    },
+    size: {
+      sizeTitle: 's',
+      sizeBtn: false,
+    },
+  };
+
   constructor() {}
 
   ngOnInit(): void {}
