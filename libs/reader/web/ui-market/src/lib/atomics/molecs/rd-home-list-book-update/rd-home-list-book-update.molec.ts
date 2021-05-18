@@ -13,7 +13,8 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RdHomeListBookUpdateMolec implements OnInit {
-  @Input() isInfoNovel: true | false = false;
+  // @Input() isInfoNovel: true | false = false;
+  @Input() isNovel = true;
   @Input() books = [];
 
   constructor() {}

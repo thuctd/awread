@@ -8,9 +8,9 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
       :host {
         display: block;
       }
-    `
+    `,
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MbDetailBookOrgan implements OnInit {
   @Input() books = [];
@@ -19,9 +19,20 @@ export class MbDetailBookOrgan implements OnInit {
   @Output() moreEvent = new EventEmitter();
   counter = Array;
 
-  constructor() { }
+  @Input() displayUI = {
+    ui: {
+      isAuthor: true,
+      isRating: true,
+      isIcon: true,
+      isDate: true,
+    },
+    size: {
+      sizeTitle: 's',
+      sizeBtn: false,
+    },
+  };
 
-  ngOnInit(): void {
-  }
+  constructor() {}
 
+  ngOnInit(): void {}
 }

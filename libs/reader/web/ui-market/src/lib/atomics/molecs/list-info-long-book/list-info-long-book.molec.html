@@ -1,8 +1,0 @@
-<atom-title-book [bookId]="book.bookId" [titleBook]="book.title" [class]="'text-sm md:text-base font-bold text-gray-600'" [size]="'m'"></atom-title-book>
-<div class="pt-2">
-  <div *ngFor="let btn of btns | keyvalue" class="flex">
-    <base-btn class="mr-8" (onBtnClicked)="submitEvent.emit($event)" [isSize]="true" [bookId]="book.bookId" [chapterId]="btn.key"
-      [chapter]="btn.value.position"></base-btn>
-    <rd-list-publication-date></rd-list-publication-date>
-  </div>
-</div>
