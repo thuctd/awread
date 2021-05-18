@@ -1,6 +1,7 @@
-import { BooksFacade, CategoryFacade, GenresFacade } from '@awread/writer/web/feature-auth';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { CurrentUserFacade } from '@awread/core/users';
+import { CategoriesFacade } from '@awread/core/categories';
+import { GenresFacade } from '@awread/core/genres';
 
 @Component({
   selector: 'awread-creation',
@@ -17,22 +18,21 @@ import { CurrentUserFacade } from '@awread/core/users';
 export class CreationLayout implements OnInit {
   constructor(
     private currentUserFacade: CurrentUserFacade,
-    private booksFacade: BooksFacade,
-    private categoryFacade: CategoryFacade,
-    private genresFacade: GenresFacade
+    private categoriesFacade: CategoriesFacade,
+    private genresFacade: GenresFacade,
   ) { }
 
   ngOnInit(): void {
-    this.currentUserFacade.getCurrentUser();
-    this.categoryFacade.getAllCategories();
-    this.genresFacade.getAllGenres();
+    this.currentUserFacade.getCurrentUser().subscribe();
+    this.categoriesFacade.getAllCategories().subscribe();
+    this.genresFacade.getAllGenres().subscribe();
     this.getAllBook();
   }
 
   private getAllBook() {
-    this.booksFacade.setLoading(true);
-    this.booksFacade.getAllBooks().subscribe(() => {
-      this.booksFacade.setLoading(false);
-    });
+    // this.booksFacade.setLoading(true);
+    // this.booksFacade.getAllBooks().subscribe(() => {
+    //   this.booksFacade.setLoading(false);
+    // });
   }
 }

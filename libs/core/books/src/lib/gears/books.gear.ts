@@ -23,8 +23,10 @@ export class BooksGear {
   ) { }
 
   getCategoryBooks(categoryId?: string) {
+    this.booksStore.setLoading(true);
     return this.booksApi.getCategoryBooks(categoryId).pipe(
-      tap(books => this.categoryBooksStore.set(books))
+      tap(books => this.categoryBooksStore.set(books)),
+      tap(books => this.booksStore.setLoading(false))
     );
   }
 
