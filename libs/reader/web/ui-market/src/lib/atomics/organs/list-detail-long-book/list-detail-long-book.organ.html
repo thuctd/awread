@@ -7,11 +7,9 @@
           <atom-img-m [srcImg]="book.cover" [bookId]="book.bookId"></atom-img-m>
           <div [ngSwitch]="categoryId">
             <div *ngSwitchCase="'1'">
-              <!-- <list-info-short-book [book]="book" [btns]="book.newestChapters"></list-info-short-book> -->
               <molec-info-book [book]="book" [btns]="book.newestChapters" [displayUI]="displayUI"></molec-info-book>
             </div>
             <div *ngSwitchCase="'2'">
-              <!-- <list-info-long-book [book]="book" [btns]="book.newestChapters"></list-info-long-book> -->
               <molec-info-book [book]="book" [btns]="book.newestChapters" [displayUI]="displayUI"></molec-info-book>
             </div>
             <div *ngSwitchDefault>

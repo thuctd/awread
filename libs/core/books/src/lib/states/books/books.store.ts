@@ -6,10 +6,10 @@ export interface BooksState extends EntityState<Book>, ActiveState {
   ui: {
     filters: {
       typeBook: string;
-      category: string;
+      genres: string[];
       criteria: string;
       status: string;
-      date: string;
+      postingDate: string;
     }
   }
 };
@@ -18,10 +18,10 @@ const initialState = {
   ui: {
     filters: {
       typeBook: '',
-      category: '',
+      genres: [''],
       criteria: '',
       status: '',
-      date: ''
+      postingDate: ''
     }
   }
 };

@@ -1,24 +1,11 @@
 <div class="mt-2">
   <atom-title-book [bookId]="book.bookId" [titleBook]="book.title" [size]="'m'"></atom-title-book>
-<<<<<<< HEAD
-  <div class="table-cell align-top roboto">
-    <dl class="mt-2 text-sm">
-      <dd class="ml-0 pb-1">
-        <atom-author [title]="'Tác giả'" [items]="book.authors"></atom-author>
-      </dd>
-      <dd class="ml-0 pb-1">
-        <excerpt></excerpt>
-        <atom-text-link (click)="moreEvent.emit()" [text]="moreContent" [class]="'text-xs text-green-primary'"></atom-text-link>
-      </dd>
-    </dl>
-=======
   <div class="roboto">
-    <atom-author class="my-2" [title]="'Tác giả'"></atom-author>
+    <atom-author class="my-2" [title]="'Tác giả'" [items]="book.authors"></atom-author>
     <div *ngIf="!isBtn">
       <excerpt></excerpt>
       <atom-text-link (click)="moreEvent.emit()" [text]="moreContent" [class]="'text-xs text-green-primary'"></atom-text-link>
     </div>
     <a *ngIf="isBtn" [routerLink]="" class="outline-none border border-green-primary px-4 py-1 text-green-primary rounded-full hover:text-white hover:bg-green-primary">Đọc</a>
->>>>>>> 0c9962945e0d9311a80ed9053729e8b6bc69b08a
   </div>
 </div>

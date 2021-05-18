@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { faList, faThLarge } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -19,10 +19,10 @@ export class ListTemplate implements OnInit {
   filterbook = false;
   @Input() filtersForm: FormGroup = this.fb.group({
     typeBook: [''],
-    category: [''],
-    genre: [''],
+    genres: [''],
+    criteria: [''],
     status: [''],
-    publishedAt: ['']
+    postingDate: [''],
   });
   @Input() topBookList = [];
   @Input() categoryBooks = [];
@@ -55,7 +55,7 @@ export class ListTemplate implements OnInit {
   @Output() nativeShortBook = new EventEmitter();
   constructor(private fb: FormBuilder) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   changeDisplay(mode: string) {
     this.display = mode;
