@@ -68,7 +68,7 @@ export class BooksApi {
     return this.apollo.query({
       query: gql`
          query allMvBooksLatestChapters${categoryId ? `($categoryId: BigFloat)` : ''} {
-        allMvBooksLatestChapters ${categoryId ? `(first: 20, condition: {categoryId: $categoryId}) ` : ''} {
+        allMvBooksLatestChapters (first: 10, condition: {published: true ${categoryId ? `, categoryId: $categoryId ` : ''}} ){
           nodes {
             title
             authors
@@ -107,7 +107,7 @@ export class BooksApi {
       query: gql`
       query allMvBooksLatestChapters {
         allMvBooksLatestChapters(
-              filter: {authors: {containsAnyKeys: ${JSON.stringify(authorIds)} }}
+              filter: {authors: {containsAnyKeys: ${JSON.stringify(authorIds)} }}, condition: { published: true }
         ) {
           nodes {
             title

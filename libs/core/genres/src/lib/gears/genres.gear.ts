@@ -21,11 +21,7 @@ export class GenresGear {
 
   getGenreById(genreId: string) {
     return this.genresApi.getGenreById(genreId).pipe(
-      tap((res) => {  }),
-      catchError((err) => {
-        console.error('An error occurred:', err);
-        return throwError(err);
-      })
+      tap((res) => { }),
     );
   }
 

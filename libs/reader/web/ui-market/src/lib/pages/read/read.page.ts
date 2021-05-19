@@ -36,7 +36,9 @@ export class ReadPage implements OnInit {
         })
       )
       .subscribe((chapter) => {
-        this.chapter = chapter[0];        
+        this.chapter = chapter[0];
+        console.log(this.chapter);
+
         this.breadcrumbs = this.getbreadcrumbs();
       });
     this.booksFacade.getTopBooks().subscribe();

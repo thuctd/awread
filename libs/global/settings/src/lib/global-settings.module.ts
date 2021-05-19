@@ -54,7 +54,7 @@ import { ErrorInterceptor } from "./error.interceptor";
           },
           {
             id: FacebookLoginProvider.PROVIDER_ID,
-            provider: new FacebookLoginProvider('1687794138050695')
+            provider: new FacebookLoginProvider('178697176886410')
           }
         ]
       } as SocialAuthServiceConfig,

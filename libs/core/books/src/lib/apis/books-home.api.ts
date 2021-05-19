@@ -10,7 +10,7 @@ export class BooksHomeApi {
     return this.apollo.query({
       query: gql`
         query allMvMostViewBooks {
-          allMvMostViewBooks(first: 10, orderBy: VIEWS_DESC) {
+          allMvMostViewBooks(first: 10, orderBy: VIEWS_DESC, condition: {published: true}) {
             nodes {
               bookId
               title
@@ -32,7 +32,7 @@ export class BooksHomeApi {
     return this.apollo.query({
       query: gql`
         query allMvMostViewBooks {
-          allMvMostViewBooks(first: 6) {
+          allMvMostViewBooks(first: 6, condition: {published: true}) {
             nodes {
               bookId
               categoryId
@@ -51,40 +51,21 @@ export class BooksHomeApi {
   }
 
   getLatestBooks(categoryId: string) {
-    if (categoryId === '') {
-      return this.apollo.query({
-        query: gql`
-          query allMvBooksLatestChapters {
-            allMvBooksLatestChapters(first: 10) {
+    return this.apollo.query({
+      query: gql`
+          query allMvBooksLatestChapters${categoryId ? `($categoryId: BigFloat)` : ''} {
+            allMvBooksLatestChapters(first: 10, condition: {published: true ${categoryId ? `, categoryId: $categoryId ` : ''}}) {
               nodes {
                 bookId
                 categoryId
                 newestChapters
                 title
                 updatedAt
+                authors
               }
             }
           }
         `,
-      }).pipe(
-        map(res => res?.['data']?.['allMvBooksLatestChapters']?.['nodes'])
-      )
-    }
-    return this.apollo.query({
-      query: gql`
-        query allMvBooksLatestChapters ($categoryId: BigFloat) {
-          allMvBooksLatestChapters(first: 10, condition: {categoryId: $categoryId}) {
-            nodes {
-              bookId
-              categoryId
-              newestChapters
-              title
-              updatedAt
-            }
-          }
-        }
-      `,
-      variables: { categoryId }
     }).pipe(
       map(res => res?.['data']?.['allMvBooksLatestChapters']?.['nodes'])
     )

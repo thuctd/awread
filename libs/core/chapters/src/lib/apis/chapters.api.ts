@@ -4,7 +4,7 @@ import { Apollo, gql } from 'apollo-angular';
 
 @Injectable({ providedIn: 'root' })
 export class ChaptersApi {
-  constructor(private apollo: Apollo) {}
+  constructor(private apollo: Apollo) { }
 
   getAllChapters(bookId) {
     return this.apollo
