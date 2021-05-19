@@ -9,7 +9,7 @@
    nx workspace-generator logic api news
    nx workspace-generator logic gear news
    nx workspace-generator logic facade news
-   nx workspace-generator logic state news
+   nx workspace-generator akita news --entity=true
 
 4. get connect from server to api
 

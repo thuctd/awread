@@ -1,14 +1,29 @@
-import { catchError, map, retry, tap } from 'rxjs/operators';
+import { catchError, delay, map, repeat, retry, tap, timeout } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
-import { of, throwError } from 'rxjs';
+import { interval, Observable, of, throwError } from 'rxjs';
 import { CurrentUserQuery } from '../states/current-user';
+import { HttpClient } from '@angular/common/http';
 @Injectable({ providedIn: 'root' })
 export class CurrentUserApi {
+  // user$: Observable<any>;
+  // user: any;
   constructor(
     private apollo: Apollo,
+    private httpClient: HttpClient,
     private currentUserQuery: CurrentUserQuery
-  ) { }
+  ) {
+    // setInterval(function () {
+    //   this.httpClient
+    //     .get(`https://raw.githubusercontent.com/small-cosmos/awread-hq/master/news/index.json`)
+    //     .subscribe(result => {
+    //       console.log('news result', result);
+    //       result = result.banner;
+    //     });
+    //  }, 3000);
+
+
+  }
 
 
   getCurrentUser() {

@@ -2,7 +2,7 @@
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { Directive, Injectable, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { switchMap, tap } from 'rxjs/operators';
+import { map, switchMap, tap } from 'rxjs/operators';
 import { Chapter } from '@awread/core/chapters';
 import { Book, BooksFacade } from '@awread/core/books';
 import { ChaptersFacade } from '@awread/core/chapters';
@@ -20,25 +20,34 @@ export class ReadPage implements OnInit {
   bookChapters$ = this.chaptersFacade.chapters$;
   breadcrumbs;
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, private chaptersFacade: ChaptersFacade, private cd: ChangeDetectorRef, private booksFacade: BooksFacade) { }
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private chaptersFacade: ChaptersFacade,
+    private cd: ChangeDetectorRef,
+    private booksFacade: BooksFacade
+  ) { }
 
   ngOnInit(): void {
+
+    this.bookChapters$.subscribe(value => console.log('chapters', value));
+
+
     this.bookId = this.activatedRoute.snapshot.paramMap.get('bookId');
     this.chapterId = this.activatedRoute.snapshot.paramMap.get('chapterId');
+
     this.activatedRoute.paramMap
       .pipe(
-        switchMap((params) => {
-          return this.chaptersFacade.getChapterDetail(params.get('bookId'), params.get('chapterId')).pipe(
-            tap((chapter) => {
-              this.chaptersFacade.getAllChapters(chapter[0].bookId).subscribe();
-            })
-          );
-        })
+        switchMap((params) => this.chaptersFacade.getChapterDetail(params.get('bookId'), params.get('chapterId'))),
+        switchMap(chapters => this.chaptersFacade.getAllChapters(chapters[0].bookId))
       )
-      .subscribe((chapter) => {
-        this.chapter = chapter[0];
+      .subscribe((chapters) => {
+        console.log('chapters', chapters);
+        this.chapter = chapters[0];
         this.breadcrumbs = this.getbreadcrumbs();
       });
+
+
     this.booksFacade.getTopBooks().subscribe();
   }
 

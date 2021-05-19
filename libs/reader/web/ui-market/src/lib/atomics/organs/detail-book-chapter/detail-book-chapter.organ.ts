@@ -21,7 +21,7 @@ export class DetailBookChapterOrgan implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('chapters: ', this.chapters);
+    // console.log('chapters: ', this.chapters);
   }
 
 }

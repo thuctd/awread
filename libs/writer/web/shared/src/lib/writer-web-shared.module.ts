@@ -6,9 +6,8 @@ import { ShellMobileLayout } from './layouts/shell-mobile/shell-mobile.layout';
 import { WriterWebSharedAtomicModule } from './atomics/writer-web-shared-atomic.module';
 import { SnackbarsModule } from '@awread/global/packages';
 
-declare const window: Window & { haveMobile: boolean };
-window.haveMobile = false;
 
+// console.log("reader-web-shared: have Mobile ?", (window as any).haveMobile);
 @NgModule({
   imports: [
     CommonModule,
@@ -24,4 +23,4 @@ window.haveMobile = false;
   ],
   declarations: [ShellDesktopLayout, ShellMobileLayout],
 })
-export class WriterWebSharedModule {}
+export class WriterWebSharedModule { }

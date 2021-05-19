@@ -15,7 +15,7 @@ export class ChaptersGear {
   getAllChapters(bookId: string) {
     return this.chaptersApi.getAllChapters(bookId).pipe(
       map((chapters) => { return this.transformDataChapters(chapters) }),
-      tap(chapters => { this.chaptersStore.set(chapters) })
+      tap(chapters => { this.chaptersStore.set(chapters) }),
     );
   }
 
