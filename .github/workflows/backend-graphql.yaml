@@ -4,9 +4,10 @@ on:
     inputs:
       logLevel:
         description: 'Log level'
-        required: true
         default: 'warning'
+        required: true
       tags:
+        required: false
         description: 'Test scenario tags'
   push:
     branches:
@@ -76,4 +77,5 @@ jobs:
           host: awread.vn
           username: dokku
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: 'curl -X POST -H 'Content-type: application/json' --data '{"text":"Restarting client web"}' https://hooks.slack.com/services/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'
+          script: |
+            curl -X POST -H 'Content-type: application/json' --data '{"text":"Restarting client web"}' https://hooks.slack.com/services/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
