@@ -30,27 +30,24 @@ export class BooksApi {
       mutation: gql`
         mutation SearchBooks($filter: String) {
           searchBooks(input: { searchTerm: $filter }) {
-            books {
-              bookId
+            mvBooksLatestChapters {
               title
+              authors
+              newestChapters
+              genres
+              bookId
+              categoryId
+              completed
+              publisherId
+              createdAt
               description
-              userId
+              cover
               published
-              categoryByCategoryId {
-                categoryId
-                name
-              }
-              booksGenresByBookId {
-                nodes {
-                  genreId
-                }
-              }
-              chaptersByBookId(first: 2, orderBy: POSITION_ASC) {
-                nodes {
-                  chapterId
-                  position
-                }
-              }
+              genres
+              type
+              ages
+              updatedAt
+              userId
             }
           }
         }
@@ -59,7 +56,7 @@ export class BooksApi {
         filter,
       },
     }).pipe(
-      map(res => res?.['data']?.['searchBooks']?.['books'])
+      map(res => res?.['data']?.['searchBooks']?.['mvBooksLatestChapters'])
     );
   }
 

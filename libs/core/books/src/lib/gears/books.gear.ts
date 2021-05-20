@@ -74,13 +74,6 @@ export class BooksGear {
   searhBookByTermApi(term: string) {
     this.searchBooksStore.setLoading(true);
     return this.booksApi.searchBookByTerm(term).pipe(
-      map((result) => result.map(book => {
-        const categoryName = book['categoryByCategoryId'].name;
-        return {
-          ...book,
-          categoryName
-        };
-      })),
       tap(books => this.searchBooksStore.set(books)),
       tap(() => this.searchBooksStore.setLoading(false))
     );

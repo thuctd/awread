@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="0,416" last-zoom="0.95" max-obj-count="18"
+<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="0,414" last-zoom="0.95" max-obj-count="18"
 	 default-owner="postgres">
 <role name="public_read"
       inherit="true">
@@ -416,118 +416,6 @@ end;]]></definition>
 	</constraint>
 </table>
 
-<function name="new_chapter"
-		window-func="false"
-		returns-setof="false"
-		behavior-type="CALLED ON NULL INPUT"
-		function-type="VOLATILE"
-		security-type="SECURITY INVOKER"
-		execution-cost="1"
-		row-amount="0">
-	<schema name="public"/>
-	<role name="postgres"/>
-	<language name="plpgsql"/>
-	<return-type>
-	<type name="uuid" length="0"/>
-	</return-type>
-	<parameter name="title">
-		<type name="text" length="0"/>
-	</parameter>
-	<parameter name="published">
-		<type name="boolean" length="0"/>
-	</parameter>
-	<parameter name="position">
-		<type name="numeric" length="0"/>
-	</parameter>
-	<parameter name="bookId">
-		<type name="uuid" length="0"/>
-	</parameter>
-	<definition><![CDATA[/*
-declare 
-"newChapterId" numeric;
-begin
-
-insert into categories("categoryId", name)
-values(
-(chapter ->> 'categoryId')::numeric,
-(chapter ->> 'title')::text
-) returning "categoryId" into "newChapterId";
-*/
-
-
-declare 
-"newChapterId" uuid;
-"inputBookId" uuid := "bookId";
-"inputTitle" text := title;
-"inputPosition" numeric := position;
-"inputPublished" boolean := published;
-"inputContent" text := content;
-begin
-
-insert into chapters("bookId", title, position, published)
-values("inputBookId", "inputTitle", "inputPosition", "inputPublished") 
-returning "chapterId"
-into "newChapterId";
-
-
-
-insert into contents("chapterId", content)
-values("newChapterId", "inputContent");
-
-return "newChapterId";
-end;]]></definition>
-</function>
-
-<function name="hello_world"
-		window-func="false"
-		returns-setof="false"
-		behavior-type="CALLED ON NULL INPUT"
-		function-type="VOLATILE"
-		security-type="SECURITY INVOKER"
-		execution-cost="1"
-		row-amount="0">
-	<schema name="public"/>
-	<role name="postgres"/>
-	<language name="plpgsql"/>
-	<return-type>
-	<type name="text" length="0"/>
-	</return-type>
-	<definition><![CDATA[begin
-return 'hello world';
-end;]]></definition>
-</function>
-
-<function name="search_books"
-		window-func="false"
-		returns-setof="true"
-		behavior-type="CALLED ON NULL INPUT"
-		function-type="VOLATILE"
-		security-type="SECURITY INVOKER"
-		execution-cost="1"
-		row-amount="50">
-	<schema name="public"/>
-	<role name="postgres"/>
-	<language name="plpgsql"/>
-	<return-type>
-	<type name="public.books" length="0"/>
-	</return-type>
-	<parameter name="searchTerm">
-		<type name="text" length="0"/>
-	</parameter>
-	<parameter name="searchUserId">
-		<type name="uuid" length="0"/>
-	</parameter>
-	<definition><![CDATA[begin 
-   RETURN QUERY SELECT
-		*
-    FROM
-        books
-    WHERE "searchTerm" % ANY(STRING_TO_ARRAY(title,' ')) 
-	AND  ("searchUserId" is null or "searchUserId" = public.books."userId")
-    order by SIMILARITY("searchTerm",title) desc;
-end;]]></definition>
-</function>
-
 <index name="books_title_gin_idx" table="public.books"
 	 concurrent="false" unique="false" fast-update="false" buffering="false"
 	 index-type="gin" factor="0" sql-disabled="true">
@@ -548,141 +436,6 @@ end;]]></definition>
 	 table="public.users">
 		<function signature="public.&quot;set_updateAt&quot;()"/>
 </trigger>
-
-<function name="new_user"
-		window-func="false"
-		returns-setof="false"
-		behavior-type="CALLED ON NULL INPUT"
-		function-type="VOLATILE"
-		security-type="SECURITY DEFINER"
-		execution-cost="1"
-		row-amount="0">
-	<schema name="public"/>
-	<role name="postgres"/>
-	<language name="plpgsql"/>
-	<return-type>
-	<parameter name="case">
-		<type name="text" length="0"/>
-	</parameter>
-	<parameter name="user">
-		<type name="public.users" length="0"/>
-	</parameter>
-	<parameter name="accessToken">
-		<type name="public.jwt_token" length="0"/>
-	</parameter>
-	</return-type>
-	<parameter name="username">
-		<type name="text" length="0"/>
-	</parameter>
-	<parameter name="password">
-		<type name="text" length="0"/>
-	</parameter>
-	<parameter name="email">
-		<type name="text" length="0"/>
-	</parameter>
-	<parameter name="phone">
-		<type name="text" length="0"/>
-	</parameter>
-	<definition><![CDATA[declare 
-	account public.users;
-	"inputUsername" text := username;
-	"inputEmail" text := email;
-	"inputPhone" text := phone;
-	"accessToken" public.jwt_token;
-begin
-
-	select * into account
-	from public.users as u
-	where 
-	(u.username = "inputUsername" and length("inputUsername") > 0) or
-	(u.email = "inputEmail" and length("inputEmail") > 0 ) or
-	(u.phone = "inputPhone" and length("inputPhone") > 0);
-
-	if account IS NULL then 
-
-		insert into public.users(
-			username,
-			email,
-			phone
-		) values (
-			username, 
-			email,
-			phone
-		)
-		returning * into account;	
-
-		insert into private.users("userId", "passwordHash") values(
-			account."userId",
-			crypt(password, gen_salt('bf'))
-	    );
-
-		"accessToken" := (account."userId", account.role, extract(epoch from (now() + interval '3 months')))::public.jwt_token;
-
-		return query select 'success', account, "accessToken";
-		
-	else
-		return query select 'duplicated', account, "accessToken";
-	end if;
-end;]]></definition>
-</function>
-
-<function name="authenticate_user"
-		window-func="false"
-		returns-setof="false"
-		behavior-type="CALLED ON NULL INPUT"
-		function-type="VOLATILE"
-		security-type="SECURITY DEFINER"
-		execution-cost="1"
-		row-amount="0">
-	<schema name="public"/>
-	<role name="postgres"/>
-	<language name="plpgsql"/>
-	<return-type>
-	<parameter name="accessToken">
-		<type name="public.jwt_token" length="0"/>
-	</parameter>
-	<parameter name="user">
-		<type name="public.users" length="0"/>
-	</parameter>
-	<parameter name="matchPassword">
-		<type name="boolean" length="0"/>
-	</parameter>
-	</return-type>
-	<parameter name="loginname">
-		<type name="text" length="0"/>
-	</parameter>
-	<parameter name="password">
-		<type name="text" length="0"/>
-	</parameter>
-	<definition><![CDATA[declare 
-	"accessToken" public.jwt_token;
-	account public.users;
-	"matchPassword" boolean := false;
-	"accountPasswordHash" text;
-begin
-  select * into account
-  from public.users
-  where
-	public.users.email = loginname or 
-	public.users.phone = loginname or 
-	public.users.username = loginname;
-
-	select "passwordHash" into "accountPasswordHash"
-	from private.users
-	where account."userId" = "userId";
-
-	"matchPassword"  := "accountPasswordHash" = crypt(password, "accountPasswordHash" );
-
-  	if "matchPassword" then
-		"accessToken" := (account."userId", account.role, extract(epoch from (now() + interval '3 months')))::public.jwt_token;
-    	return query select "accessToken", account, "matchPassword";
-  	elsif account is not null then 
-		return query select "accessToken", account, "matchPassword";
-	else 
-    	return query select "accessToken", account, "matchPassword";
-  	end if;
-end;]]></definition>
-</function>
 
 <view name="v_random_books" layer="0" collapse-mode="2" pagination="true" attribs-page="0" ext-attribs-page="0" max-obj-count="3" z-value="0">
 	<schema name="public"/>
@@ -861,6 +614,249 @@ inner join (
 	<expression type="from-exp">1</expression>
 	<expression type="end-exp">2</expression>
 </view>
+
+<function name="new_chapter"
+		window-func="false"
+		returns-setof="false"
+		behavior-type="CALLED ON NULL INPUT"
+		function-type="VOLATILE"
+		security-type="SECURITY INVOKER"
+		execution-cost="1"
+		row-amount="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<language name="plpgsql"/>
+	<return-type>
+	<type name="uuid" length="0"/>
+	</return-type>
+	<parameter name="title">
+		<type name="text" length="0"/>
+	</parameter>
+	<parameter name="published">
+		<type name="boolean" length="0"/>
+	</parameter>
+	<parameter name="position">
+		<type name="numeric" length="0"/>
+	</parameter>
+	<parameter name="bookId">
+		<type name="uuid" length="0"/>
+	</parameter>
+	<definition><![CDATA[/*
+declare 
+"newChapterId" numeric;
+begin
+
+insert into categories("categoryId", name)
+values(
+(chapter ->> 'categoryId')::numeric,
+(chapter ->> 'title')::text
+) returning "categoryId" into "newChapterId";
+*/
+
+
+declare 
+"newChapterId" uuid;
+"inputBookId" uuid := "bookId";
+"inputTitle" text := title;
+"inputPosition" numeric := position;
+"inputPublished" boolean := published;
+"inputContent" text := content;
+begin
+
+insert into chapters("bookId", title, position, published)
+values("inputBookId", "inputTitle", "inputPosition", "inputPublished") 
+returning "chapterId"
+into "newChapterId";
+
+
+
+insert into contents("chapterId", content)
+values("newChapterId", "inputContent");
+
+return "newChapterId";
+end;]]></definition>
+</function>
+
+<function name="hello_world"
+		window-func="false"
+		returns-setof="false"
+		behavior-type="CALLED ON NULL INPUT"
+		function-type="VOLATILE"
+		security-type="SECURITY INVOKER"
+		execution-cost="1"
+		row-amount="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<language name="plpgsql"/>
+	<return-type>
+	<type name="text" length="0"/>
+	</return-type>
+	<definition><![CDATA[begin
+return 'hello world';
+end;]]></definition>
+</function>
+
+<function name="search_books"
+		window-func="false"
+		returns-setof="true"
+		behavior-type="CALLED ON NULL INPUT"
+		function-type="VOLATILE"
+		security-type="SECURITY INVOKER"
+		execution-cost="1"
+		row-amount="50">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<language name="plpgsql"/>
+	<return-type>
+	<type name="public.mv_books_latest_chapters" length="0"/>
+	</return-type>
+	<parameter name="searchTerm">
+		<type name="text" length="0"/>
+	</parameter>
+	<definition><![CDATA[begin 
+   RETURN QUERY SELECT
+		*
+    FROM
+        mv_books_latest_chapters
+    WHERE "searchTerm" % ANY(STRING_TO_ARRAY(title,' ')) 
+    order by SIMILARITY("searchTerm",title) desc;
+end;]]></definition>
+</function>
+
+<function name="new_user"
+		window-func="false"
+		returns-setof="false"
+		behavior-type="CALLED ON NULL INPUT"
+		function-type="VOLATILE"
+		security-type="SECURITY DEFINER"
+		execution-cost="1"
+		row-amount="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<language name="plpgsql"/>
+	<return-type>
+	<parameter name="case">
+		<type name="text" length="0"/>
+	</parameter>
+	<parameter name="user">
+		<type name="public.users" length="0"/>
+	</parameter>
+	<parameter name="accessToken">
+		<type name="public.jwt_token" length="0"/>
+	</parameter>
+	</return-type>
+	<parameter name="username">
+		<type name="text" length="0"/>
+	</parameter>
+	<parameter name="password">
+		<type name="text" length="0"/>
+	</parameter>
+	<parameter name="email">
+		<type name="text" length="0"/>
+	</parameter>
+	<parameter name="phone">
+		<type name="text" length="0"/>
+	</parameter>
+	<definition><![CDATA[declare 
+	account public.users;
+	"inputUsername" text := username;
+	"inputEmail" text := email;
+	"inputPhone" text := phone;
+	"accessToken" public.jwt_token;
+begin
+
+	select * into account
+	from public.users as u
+	where 
+	(u.username = "inputUsername" and length("inputUsername") > 0) or
+	(u.email = "inputEmail" and length("inputEmail") > 0 ) or
+	(u.phone = "inputPhone" and length("inputPhone") > 0);
+
+	if account IS NULL then 
+
+		insert into public.users(
+			username,
+			email,
+			phone
+		) values (
+			username, 
+			email,
+			phone
+		)
+		returning * into account;	
+
+		insert into private.users("userId", "passwordHash") values(
+			account."userId",
+			crypt(password, gen_salt('bf'))
+	    );
+
+		"accessToken" := (account."userId", account.role, extract(epoch from (now() + interval '3 months')))::public.jwt_token;
+
+		return query select 'success', account, "accessToken";
+		
+	else
+		return query select 'duplicated', account, "accessToken";
+	end if;
+end;]]></definition>
+</function>
+
+<function name="authenticate_user"
+		window-func="false"
+		returns-setof="false"
+		behavior-type="CALLED ON NULL INPUT"
+		function-type="VOLATILE"
+		security-type="SECURITY DEFINER"
+		execution-cost="1"
+		row-amount="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<language name="plpgsql"/>
+	<return-type>
+	<parameter name="accessToken">
+		<type name="public.jwt_token" length="0"/>
+	</parameter>
+	<parameter name="user">
+		<type name="public.users" length="0"/>
+	</parameter>
+	<parameter name="matchPassword">
+		<type name="boolean" length="0"/>
+	</parameter>
+	</return-type>
+	<parameter name="loginname">
+		<type name="text" length="0"/>
+	</parameter>
+	<parameter name="password">
+		<type name="text" length="0"/>
+	</parameter>
+	<definition><![CDATA[declare 
+	"accessToken" public.jwt_token;
+	account public.users;
+	"matchPassword" boolean := false;
+	"accountPasswordHash" text;
+begin
+  select * into account
+  from public.users
+  where
+	public.users.email = loginname or 
+	public.users.phone = loginname or 
+	public.users.username = loginname;
+
+	select "passwordHash" into "accountPasswordHash"
+	from private.users
+	where account."userId" = "userId";
+
+	"matchPassword"  := "accountPasswordHash" = crypt(password, "accountPasswordHash" );
+
+  	if "matchPassword" then
+		"accessToken" := (account."userId", account.role, extract(epoch from (now() + interval '3 months')))::public.jwt_token;
+    	return query select "accessToken", account, "matchPassword";
+  	elsif account is not null then 
+		return query select "accessToken", account, "matchPassword";
+	else 
+    	return query select "accessToken", account, "matchPassword";
+  	end if;
+end;]]></definition>
+</function>
 
 <function name="current_user"
 		window-func="false"
