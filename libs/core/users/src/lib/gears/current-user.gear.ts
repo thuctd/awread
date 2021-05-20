@@ -22,7 +22,7 @@ export class CurrentUserGear {
   getCurrentUser() {
     return this.currentUserApi.getCurrentUser().pipe(
       tap(result => {
-        console.log('result', result);
+        // console.log('result', result);
         this.currentUserStore.update(result);
       })
     )

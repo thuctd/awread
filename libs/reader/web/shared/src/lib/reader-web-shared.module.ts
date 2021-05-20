@@ -5,12 +5,11 @@ import { SharedDesktopLayout } from './layouts/shared-desktop/shared-desktop.lay
 import { SharedMobileLayout } from './layouts/shared-mobile/shared-mobile.layout';
 import { ReaderWebSharedAtomicModule } from './atomics/reader-web-shared-atomic.module';
 
-declare const window: Window & { haveMobile: boolean };
-window.haveMobile = true;
 
+// console.log("reader-web-shared: have Mobile ?", (window as any).haveMobile);
 @NgModule({
   imports: [CommonModule, RouterModule, ReaderWebSharedAtomicModule],
   exports: [RouterModule, SharedDesktopLayout, SharedMobileLayout],
   declarations: [SharedDesktopLayout, SharedMobileLayout],
 })
-export class ReaderWebSharedModule {}
+export class ReaderWebSharedModule { }

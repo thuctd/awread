@@ -74,6 +74,7 @@ export class ChaptersApi {
             allChapters(condition: { bookId: $bookId }, first: 1, offset: $offset, orderBy: POSITION_ASC) {
               nodes {
                 chapterId
+                bookId
                 title
               }
             }
