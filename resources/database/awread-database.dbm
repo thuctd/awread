@@ -3,22 +3,26 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="0,986" last-zoom="0.95" max-obj-count="18"
+<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="0,416" last-zoom="0.95" max-obj-count="18"
 	 default-owner="postgres">
 <role name="public_read"
       inherit="true">
 </role>
 
-<role name="anonymous" inherit="true">
+<role name="anonymous"
+      inherit="true">
 </role>
 
-<role name="writer" inherit="true">
+<role name="writer"
+      inherit="true">
 </role>
 
-<role name="reader" inherit="true">
+<role name="reader"
+      inherit="true">
 </role>
 
-<role name="postgraphile" inherit="true">
+<role name="postgraphile"
+      inherit="true">
 </role>
 
 <database name="awread_database" is-template="false" allow-conns="true">
@@ -52,7 +56,6 @@ CAUTION: Do not modify this file unless you know what you are doing.
 </usertype>
 
 <extension name="uuid-ossp">
-	<schema name="public"/>
 </extension>
 
 <opclass  name="gin_trgm_ops" index-type="gin" default="false" sql-disabled="true">

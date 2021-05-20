@@ -1,0 +1,9 @@
+{
+    "scripts": {
+        "dokku": {
+            "predeploy": "",
+            "postdeploy": "./backend-graphql.sh"
+        },
+        "postdeploy": ""
+    }
+}
