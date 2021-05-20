@@ -63,3 +63,11 @@ jobs:
           cancelled_text: '${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) hủy không build trang https://awread.vn'
           fields: |
             [{ "title": "chi tiết PR", "value": "${{ github.event.pull_request.html_url }}", "short": true }]
+
+      - name: executing remote ssh commands using ssh key
+        uses: appleboy/ssh-action@master
+        with:
+          host: awread.vn
+          username: dokku
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: whoami
