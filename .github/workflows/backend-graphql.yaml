@@ -52,29 +52,23 @@ jobs:
       - name: noti on failure
         uses: edge/simple-slack-notify@master
         env:
-          # SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL  }}
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL_CHANNEL_BOTNET  }}
         # if: always()
         if: failure()
         with:
           channel: '#botnet'
           status: ${{ job.status }}
-          success_text: '${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER})  https://awread.vn sẵn sàng'
-          failure_text: '${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) build thất bại cho trang https://awread.vn '
-          cancelled_text: '${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) hủy không build trang https://awread.vn'
-          fields: |
-            [{ "title": "chi tiết PR", "value": "${{ github.event.pull_request.html_url }}", "short": true }]
+          failure_text: '${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) build thất bại cho trang https://backend-graphql.awread.vn'
 
       - name: noti on success
         uses: edge/simple-slack-notify@master
         env:
-          # SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL  }}
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL_CHANNEL_BOTNET  }}
         if: success()
         with:
           channel: '#general'
           status: ${{ job.status }}
-          success_text: '${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER})  https://awread.vn sẵn sàng'
+          success_text: '${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER})  https://backend-graphql.awread.vn sẵn sàng'
 
       - name: executing remote ssh commands using ssh key
         uses: appleboy/ssh-action@master
@@ -82,4 +76,4 @@ jobs:
           host: awread.vn
           username: dokku
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: curl -X POST -H 'Content-type: application/json' --data '{"text":"Restarting client web"}' https://hooks.slack.com/services/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
+          script: 'curl -X POST -H 'Content-type: application/json' --data '{"text":"Restarting client web"}' https://hooks.slack.com/services/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'
