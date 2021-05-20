@@ -8,7 +8,7 @@ on:
         required: true
       tags:
         description: 'build or restart'
-        default: 'restart'
+        default: 'buil'
         required: true
   push:
     branches:
