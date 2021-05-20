@@ -48,10 +48,12 @@ sudo dokku plugin:install https://github.com/dokku/dokku-postgres.git
 
 - create a postgres service with the name railsdatabase
 
-dokku postgres:create railsdatabase --image postgres --image-version latest
+dokku postgres:create awread_database --image postgres --image-version latest
+dokku postgres:link awread_database backend-graphql
 
 get database
-dokku postgres:info your-database-db
+dokku postgres:info awread_database
+dokku config backend-graphql --all
 
 # deploy lock
 
