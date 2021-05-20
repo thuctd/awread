@@ -39,9 +39,8 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             curl -X POST -H 'Content-type: application/json' --data '{"text":"Restarting client web"}' https://hooks.slack.com/services/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
-            dokku ps:restart reader-web
-            dokku ps:restart writer-web
-            curl -X POST -H 'Content-type: application/json' --data '{"text":"Restart completed"}' https://hooks.slack.com/services/T01CT0VDRH7/B022NMWP25S/
+            dokku ps:restart backend-graphql
+            curl -X POST -H 'Content-type: application/json' --data '{"text":"Restart completed"}' https://hooks.slack.com/services/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
 
   build:
     runs-on: ubuntu-latest
