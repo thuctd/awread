@@ -40,7 +40,12 @@ export class InfoBookMolec implements OnInit {
     },
   ];
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
+
+  orderByPosition(a, b) {
+    // console.log('a, b', a, b);
+    return a.value.position > b.value.position ? -1 : (b.value.position > a.value.position ? 1 : 0);
+  }
 }
