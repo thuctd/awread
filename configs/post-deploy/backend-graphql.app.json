@@ -2,7 +2,7 @@
     "scripts": {
         "dokku": {
             "predeploy": "",
-            "postdeploy": "./backend-graphql.sh"
+            "postdeploy": "sudo ./backend-graphql.sh"
         },
         "postdeploy": ""
     }
