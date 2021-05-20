@@ -13,9 +13,11 @@ export class ChaptersGear {
   }
 
   getAllChapters(bookId: string) {
+    this.chaptersStore.setLoading(true);
     return this.chaptersApi.getAllChapters(bookId).pipe(
       map((chapters) => { return this.transformDataChapters(chapters) }),
       tap(chapters => { this.chaptersStore.set(chapters) }),
+      tap(() => { this.chaptersStore.setLoading(false) }),
     );
   }
 
