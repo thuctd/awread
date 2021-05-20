@@ -10,3 +10,11 @@ usage
 # replace APP_NAME with your application's name
 
 dokku config:set backend-graphql DOKKU_PROCFILE=backend-graphql.Procfile
+
+dokku config:show backend-graphql
+
+# dokku
+
+dokku enter backend-graphql
+dokku enter backend-graphql web.1 /bin/sh
+dokku enter backend-graphql web.1 your-custom-command

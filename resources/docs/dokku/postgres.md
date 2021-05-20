@@ -20,11 +20,13 @@ Fedora
 - get info
   dokku postgres:info awread_database
 - run psql
-  psql -U postgres -W awread_database
+  psql -U postgres -W -d awread_database
 - then enter password
   a1ff75bcb371eeb48ae6c6f0a958ece5
 - run psql command;
-  SELECT \* FROM pg_extension
+  SELECT _ FROM pg_extension;
+  select _ from pg_available_extensions;
+  CREATE EXTENSION pgcrypto;
 
 # list container
 

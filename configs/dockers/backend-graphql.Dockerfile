@@ -12,7 +12,7 @@ RUN pnpm install --frozen-lockfile
 RUN pnpm run postinstall
 COPY *.js tsconfig*.json angular.json nx.json ./
 COPY configs/tailwind configs/tailwind
-COPY configs/procfiles ./
+COPY configs/procfiles/backend-graphql.Procfile ./
 
 # RUN ls
 # RUN echo application is: $application
