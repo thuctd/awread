@@ -49,12 +49,13 @@ jobs:
           git_remote_url: 'ssh://dokku@awread.vn:22/backend-graphql'
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-      - name: noti building
+      - name: noti on failure
         uses: edge/simple-slack-notify@master
         env:
           # SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL  }}
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL_CHANNEL_BOTNET  }}
-        if: always()
+        # if: always()
+        if: failure()
         with:
           channel: '#botnet'
           status: ${{ job.status }}
@@ -64,10 +65,21 @@ jobs:
           fields: |
             [{ "title": "chi tiết PR", "value": "${{ github.event.pull_request.html_url }}", "short": true }]
 
+      - name: noti on success
+        uses: edge/simple-slack-notify@master
+        env:
+          # SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL  }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL_CHANNEL_BOTNET  }}
+        if: success()
+        with:
+          channel: '#general'
+          status: ${{ job.status }}
+          success_text: '${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER})  https://awread.vn sẵn sàng'
+
       - name: executing remote ssh commands using ssh key
         uses: appleboy/ssh-action@master
         with:
           host: awread.vn
           username: dokku
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: whoami
+          script: curl -X POST -H 'Content-type: application/json' --data '{"text":"Restarting client web"}' https://hooks.slack.com/services/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
