@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="0,414" last-zoom="0.95" max-obj-count="18"
+<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="0,918" last-zoom="0.95" max-obj-count="18"
 	 default-owner="postgres">
 <role name="public_read"
       inherit="true">
@@ -440,7 +440,7 @@ end;]]></definition>
 <view name="v_random_books" layer="0" collapse-mode="2" pagination="true" attribs-page="0" ext-attribs-page="0" max-obj-count="3" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="1100" y="1380"/>
+	<position x="1080" y="1500"/>
 	<reference>
 		<expression><![CDATA[	books.*,
 	jsonb_object_agg(z."authorId", z.authors) as "authors",
@@ -481,7 +481,7 @@ order by random();]]></expression>
 <view name="mv_books_latest_chapters" layer="0" materialized="true" collapse-mode="2" max-obj-count="3" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="1100" y="1480"/>
+	<position x="1080" y="1320"/>
 	<reference>
 		<expression><![CDATA[	books.*,
 	jsonb_object_agg(x."chapterId", x."newestChapters") as "newestChapters",
@@ -539,7 +539,7 @@ order by random();]]></expression>
 <view name="mv_most_view_books" layer="0" materialized="true" collapse-mode="2" max-obj-count="3" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="1100" y="1640"/>
+	<position x="1080" y="1600"/>
 	<reference>
 		<expression><![CDATA[	books.*,
 	sum(book_visits.count) as "views",
@@ -578,7 +578,7 @@ order by "views" DESC;]]></expression>
 <view name="mv_detail_books" layer="0" materialized="true" collapse-mode="2" max-obj-count="3" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="1100" y="1560"/>
+	<position x="1080" y="1400"/>
 	<reference>
 		<expression><![CDATA[ 	books.*,
 	jsonb_object_agg(z."authorId", z.authors) as "authors",
