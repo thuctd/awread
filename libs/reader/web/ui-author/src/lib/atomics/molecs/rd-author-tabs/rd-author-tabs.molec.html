@@ -1,5 +1,6 @@
 <div class="grid grid-cols-12 gap-6">
   <rd-tab-item class="col-span-6 pb-2"
+    [faIcon]="tab.faIcon"
     [ngClass]="tab.isActive ? classActive : classNormal"
     *ngFor="let tab of tabs"
     [tabName]="tab.name"

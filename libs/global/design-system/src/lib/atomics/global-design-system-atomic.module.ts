@@ -128,6 +128,7 @@ import { PopupChangeCoverOrgan } from './organs/popup-change-cover/popup-change-
 import { ProfileInputAtom } from './atoms/profile-input/profile-input.atom';
 import { InfoBookMolec } from './molecs/info-book/info-book.molec';
 import { SocialConnectBtnAtom } from './atoms/social-connect-btn/social-connect-btn.atom';
+import { RdProfileInfoPersonalItemAtom } from './atoms/rd-profile-info-personal-item/rd-profile-info-personal-item.atom';
 
 @NgModule({
   imports: [
@@ -275,6 +276,7 @@ import { SocialConnectBtnAtom } from './atoms/social-connect-btn/social-connect-
     ProfileInputAtom,
     InfoBookMolec,
     SocialConnectBtnAtom,
+    RdProfileInfoPersonalItemAtom,
   ],
   declarations: [
     notReadyDirective,
@@ -395,6 +397,7 @@ import { SocialConnectBtnAtom } from './atoms/social-connect-btn/social-connect-
     ProfileInputAtom,
     InfoBookMolec,
     SocialConnectBtnAtom,
+    RdProfileInfoPersonalItemAtom,
   ],
 })
 export class GlobalDesignSystemAtomicModule {}
