@@ -23,26 +23,35 @@ export class BooksGear {
   ) { }
 
   getCategoryBooks(categoryId?: string) {
-    this.booksStore.setLoading(true);
+    this.categoryBooksStore.setLoading(true);
     return this.booksApi.getCategoryBooks(categoryId).pipe(
+      // map((result) => result.map(res => {
+      //   const chapters = Object.keys(res['newestChapters']).map(
+      //     key => console.log(res['newestChapters'][key], 'position')
+      //   );
+      // })),
       tap(books => this.categoryBooksStore.set(books)),
-      tap(books => this.booksStore.setLoading(false))
+      tap(() => this.categoryBooksStore.setLoading(false))
     );
   }
 
   getAuthorBooks(authors) {
     const authorIds = Object.keys(authors ?? {});
+    this.authorBooksStore.setLoading(true);
     return this.booksApi.getAuthorBooks(authorIds).pipe(
-      tap(books => this.authorBooksStore.set(books))
+      tap(books => this.authorBooksStore.set(books)),
+      tap(() => this.authorBooksStore.setLoading(false))
     );
   }
 
   getGenreBooks(genreId: string) {
+    this.genreBooksStore.setLoading(true);
     return this.booksApi.getGenreBooks(genreId).pipe(
       map((books) => {
         return books;
       }),
-      tap(books => this.genreBooksStore.set(books))
+      tap(books => this.genreBooksStore.set(books)),
+      tap(() => this.genreBooksStore.setLoading(false)),
     );
   }
 
@@ -51,8 +60,10 @@ export class BooksGear {
   }
 
   getTopBooks() {
+    this.topBooksStore.setLoading(true);
     return this.booksApi.getTopBooks().pipe(
-      tap(books => this.topBooksStore.set(books))
+      tap(books => this.topBooksStore.set(books)),
+      tap(() => this.topBooksStore.setLoading(false)),
     );
   }
 
@@ -61,15 +72,10 @@ export class BooksGear {
   }
 
   searhBookByTermApi(term: string) {
+    this.searchBooksStore.setLoading(true);
     return this.booksApi.searchBookByTerm(term).pipe(
-      map((result) => result.map(book => {
-        const categoryName = book['categoryByCategoryId'].name;
-        return {
-          ...book,
-          categoryName
-        };
-      })),
-      tap(books => this.searchBooksStore.set(books)));
+      tap(books => this.searchBooksStore.set(books)),
+      tap(() => this.searchBooksStore.setLoading(false))
+    );
   }
-
 }

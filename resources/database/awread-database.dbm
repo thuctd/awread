@@ -3,22 +3,26 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="0,986" last-zoom="0.95" max-obj-count="18"
+<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="0,918" last-zoom="0.95" max-obj-count="18"
 	 default-owner="postgres">
 <role name="public_read"
       inherit="true">
 </role>
 
-<role name="anonymous" inherit="true">
+<role name="anonymous"
+      inherit="true">
 </role>
 
-<role name="writer" inherit="true">
+<role name="writer"
+      inherit="true">
 </role>
 
-<role name="reader" inherit="true">
+<role name="reader"
+      inherit="true">
 </role>
 
-<role name="postgraphile" inherit="true">
+<role name="postgraphile"
+      inherit="true">
 </role>
 
 <database name="awread_database" is-template="false" allow-conns="true">
@@ -52,7 +56,6 @@ CAUTION: Do not modify this file unless you know what you are doing.
 </usertype>
 
 <extension name="uuid-ossp">
-	<schema name="public"/>
 </extension>
 
 <opclass  name="gin_trgm_ops" index-type="gin" default="false" sql-disabled="true">
@@ -413,6 +416,205 @@ end;]]></definition>
 	</constraint>
 </table>
 
+<index name="books_title_gin_idx" table="public.books"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="gin" factor="0" sql-disabled="true">
+		<idxelement use-sorting="false">
+			<column name="title"/>
+			<opclass  signature="public.gin_trgm_ops USING gin"/>
+		</idxelement>
+</index>
+
+<trigger name="book_updated_at" firing-type="BEFORE" per-line="true" constraint="false"
+	 ins-event="false" del-event="false" upd-event="true" trunc-event="false"
+	 table="public.books">
+		<function signature="public.&quot;set_updateAt&quot;()"/>
+</trigger>
+
+<trigger name="person_updated_at" firing-type="BEFORE" per-line="false" constraint="false"
+	 ins-event="false" del-event="false" upd-event="true" trunc-event="false"
+	 table="public.users">
+		<function signature="public.&quot;set_updateAt&quot;()"/>
+</trigger>
+
+<view name="v_random_books" layer="0" collapse-mode="2" pagination="true" attribs-page="0" ext-attribs-page="0" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1080" y="1500"/>
+	<reference>
+		<expression><![CDATA[	books.*,
+	jsonb_object_agg(z."authorId", z.authors) as "authors",
+	jsonb_object_agg(k."genreId", k.genres) as "genres"]]></expression>
+	</reference>
+	<reference>
+		<expression><![CDATA[   	public.books 
+	inner join (
+		select 
+		  "bookId",
+		  "userId" as "authorId",
+		  to_jsonb(jsonb_build_object(
+			  'userId', users."userId",
+			  'name', users."name"
+		  )) as authors
+		from authors natural join users
+	) z USING ("bookId")
+	inner join (
+		select 
+		"bookId",
+		"genreId",
+		to_jsonb(jsonb_build_object(
+			'genreId', genres."genreId",
+			'name', genres."name"
+		)) as genres
+		from books_genres natural join genres
+	) k USING ("bookId")]]></expression>
+	</reference>
+	<reference>
+		<expression><![CDATA[group by 1
+order by random();]]></expression>
+	</reference>
+	<expression type="select-exp">0</expression>
+	<expression type="from-exp">1</expression>
+	<expression type="end-exp">2</expression>
+</view>
+
+<view name="mv_books_latest_chapters" layer="0" materialized="true" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1080" y="1320"/>
+	<reference>
+		<expression><![CDATA[	books.*,
+	jsonb_object_agg(x."chapterId", x."newestChapters") as "newestChapters",
+	jsonb_object_agg(k."genreId", k.genres) as "genres",
+	jsonb_object_agg(y."authorId", y.authors) as "authors"]]></expression>
+	</reference>
+	<reference>
+		<expression><![CDATA[
+	books 
+	inner join (
+		select 
+			*
+		from (
+			select 
+				"bookId",
+				"chapterId",
+				to_jsonb(jsonb_build_object(
+				'chapterId', "chapterId",
+				'position', position
+	    		)) as "newestChapters",
+				rank() over (partition by "bookId" order by position desc) as RANK
+			from chapters
+		) z
+		where rank <= 2
+	) x using ("bookId")
+	inner join (
+		select 
+		"bookId",
+		"genreId",
+		to_jsonb(jsonb_build_object(
+			'genreId', genres."genreId",
+			'name', genres."name"
+		)) as genres
+		from books_genres natural join genres
+	) k  USING ("bookId")
+	inner join (
+		select 
+		  "bookId",
+		  "userId" as "authorId",
+		  to_jsonb(jsonb_build_object(
+			  'userId', users."userId",
+			  'name', users."name"
+		  )) as authors
+		from authors natural join users
+	) y USING ("bookId")]]></expression>
+	</reference>
+	<reference>
+		<expression><![CDATA[group by 1;]]></expression>
+	</reference>
+	<expression type="select-exp">0</expression>
+	<expression type="from-exp">1</expression>
+	<expression type="end-exp">2</expression>
+</view>
+
+<view name="mv_most_view_books" layer="0" materialized="true" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1080" y="1600"/>
+	<reference>
+		<expression><![CDATA[	books.*,
+	sum(book_visits.count) as "views",
+	jsonb_object_agg(k."genreId", k.genres) as "genres",
+	mv_books_latest_chapters."newestChapters",
+	mv_books_latest_chapters.authors]]></expression>
+	</reference>
+	<reference>
+		<expression><![CDATA[    public.books 
+	inner join book_visits using ("bookId")
+	inner join mv_books_latest_chapters using ("bookId")
+	inner join books_genres using ("bookId")
+	inner join (
+		select 
+		"bookId",
+		"genreId",
+		to_jsonb(jsonb_build_object(
+			'genreId', genres."genreId",
+			'name', genres."name"
+		)) as genres
+		from books_genres natural join genres
+	) k  USING ("bookId")]]></expression>
+	</reference>
+	<reference>
+		<expression><![CDATA[group by 	
+		1, 
+		mv_books_latest_chapters."newestChapters", 
+		mv_books_latest_chapters.authors
+order by "views" DESC;]]></expression>
+	</reference>
+	<expression type="select-exp">0</expression>
+	<expression type="from-exp">1</expression>
+	<expression type="end-exp">2</expression>
+</view>
+
+<view name="mv_detail_books" layer="0" materialized="true" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1080" y="1400"/>
+	<reference>
+		<expression><![CDATA[ 	books.*,
+	jsonb_object_agg(z."authorId", z.authors) as "authors",
+	jsonb_object_agg(k."genreId", k.genres) as "genres"]]></expression>
+	</reference>
+	<reference>
+		<expression><![CDATA[(
+	select 
+	"bookId",
+	"userId" as "authorId",
+	to_jsonb(jsonb_build_object(
+		'userId', users."userId",
+		'name', users."name"
+	)) as authors
+	from authors natural join users
+) z
+inner join books USING ("bookId")
+inner join (
+	select 
+	"bookId",
+	"genreId",
+	to_jsonb(jsonb_build_object(
+		'genreId', genres."genreId",
+		'name', genres."name"
+	)) as genres
+	from books_genres natural join genres
+) k  USING ("bookId")]]></expression>
+	</reference>
+	<reference>
+		<expression><![CDATA[group by 1;]]></expression>
+	</reference>
+	<expression type="select-exp">0</expression>
+	<expression type="from-exp">1</expression>
+	<expression type="end-exp">2</expression>
+</view>
+
 <function name="new_chapter"
 		window-func="false"
 		returns-setof="false"
@@ -506,45 +708,20 @@ end;]]></definition>
 	<role name="postgres"/>
 	<language name="plpgsql"/>
 	<return-type>
-	<type name="public.books" length="0"/>
+	<type name="public.mv_books_latest_chapters" length="0"/>
 	</return-type>
 	<parameter name="searchTerm">
 		<type name="text" length="0"/>
-	</parameter>
-	<parameter name="searchUserId">
-		<type name="uuid" length="0"/>
 	</parameter>
 	<definition><![CDATA[begin 
    RETURN QUERY SELECT
 		*
     FROM
-        books
+        mv_books_latest_chapters
     WHERE "searchTerm" % ANY(STRING_TO_ARRAY(title,' ')) 
-	AND  ("searchUserId" is null or "searchUserId" = public.books."userId")
     order by SIMILARITY("searchTerm",title) desc;
 end;]]></definition>
 </function>
-
-<index name="books_title_gin_idx" table="public.books"
-	 concurrent="false" unique="false" fast-update="false" buffering="false"
-	 index-type="gin" factor="0" sql-disabled="true">
-		<idxelement use-sorting="false">
-			<column name="title"/>
-			<opclass  signature="public.gin_trgm_ops USING gin"/>
-		</idxelement>
-</index>
-
-<trigger name="book_updated_at" firing-type="BEFORE" per-line="true" constraint="false"
-	 ins-event="false" del-event="false" upd-event="true" trunc-event="false"
-	 table="public.books">
-		<function signature="public.&quot;set_updateAt&quot;()"/>
-</trigger>
-
-<trigger name="person_updated_at" firing-type="BEFORE" per-line="false" constraint="false"
-	 ins-event="false" del-event="false" upd-event="true" trunc-event="false"
-	 table="public.users">
-		<function signature="public.&quot;set_updateAt&quot;()"/>
-</trigger>
 
 <function name="new_user"
 		window-func="false"
@@ -680,184 +857,6 @@ begin
   	end if;
 end;]]></definition>
 </function>
-
-<view name="v_random_books" layer="0" collapse-mode="2" pagination="true" attribs-page="0" ext-attribs-page="0" max-obj-count="3" z-value="0">
-	<schema name="public"/>
-	<role name="postgres"/>
-	<position x="1100" y="1380"/>
-	<reference>
-		<expression><![CDATA[	books.*,
-	jsonb_object_agg(z."authorId", z.authors) as "authors",
-	jsonb_object_agg(k."genreId", k.genres) as "genres"]]></expression>
-	</reference>
-	<reference>
-		<expression><![CDATA[   	public.books 
-	inner join (
-		select 
-		  "bookId",
-		  "userId" as "authorId",
-		  to_jsonb(jsonb_build_object(
-			  'userId', users."userId",
-			  'name', users."name"
-		  )) as authors
-		from authors natural join users
-	) z USING ("bookId")
-	inner join (
-		select 
-		"bookId",
-		"genreId",
-		to_jsonb(jsonb_build_object(
-			'genreId', genres."genreId",
-			'name', genres."name"
-		)) as genres
-		from books_genres natural join genres
-	) k USING ("bookId")]]></expression>
-	</reference>
-	<reference>
-		<expression><![CDATA[group by 1
-order by random();]]></expression>
-	</reference>
-	<expression type="select-exp">0</expression>
-	<expression type="from-exp">1</expression>
-	<expression type="end-exp">2</expression>
-</view>
-
-<view name="mv_books_latest_chapters" layer="0" materialized="true" collapse-mode="2" max-obj-count="3" z-value="0">
-	<schema name="public"/>
-	<role name="postgres"/>
-	<position x="1100" y="1480"/>
-	<reference>
-		<expression><![CDATA[	books.*,
-	jsonb_object_agg(x."chapterId", x."newestChapters") as "newestChapters",
-	jsonb_object_agg(k."genreId", k.genres) as "genres",
-	jsonb_object_agg(y."authorId", y.authors) as "authors"]]></expression>
-	</reference>
-	<reference>
-		<expression><![CDATA[
-	books 
-	inner join (
-		select 
-			*
-		from (
-			select 
-				"bookId",
-				"chapterId",
-				to_jsonb(jsonb_build_object(
-				'chapterId', "chapterId",
-				'position', position
-	    		)) as "newestChapters",
-				rank() over (partition by "bookId" order by position desc) as RANK
-			from chapters
-		) z
-		where rank <= 2
-	) x using ("bookId")
-	inner join (
-		select 
-		"bookId",
-		"genreId",
-		to_jsonb(jsonb_build_object(
-			'genreId', genres."genreId",
-			'name', genres."name"
-		)) as genres
-		from books_genres natural join genres
-	) k  USING ("bookId")
-	inner join (
-		select 
-		  "bookId",
-		  "userId" as "authorId",
-		  to_jsonb(jsonb_build_object(
-			  'userId', users."userId",
-			  'name', users."name"
-		  )) as authors
-		from authors natural join users
-	) y USING ("bookId")]]></expression>
-	</reference>
-	<reference>
-		<expression><![CDATA[group by 1;]]></expression>
-	</reference>
-	<expression type="select-exp">0</expression>
-	<expression type="from-exp">1</expression>
-	<expression type="end-exp">2</expression>
-</view>
-
-<view name="mv_most_view_books" layer="0" materialized="true" collapse-mode="2" max-obj-count="3" z-value="0">
-	<schema name="public"/>
-	<role name="postgres"/>
-	<position x="1100" y="1640"/>
-	<reference>
-		<expression><![CDATA[	books.*,
-	sum(book_visits.count) as "views",
-	jsonb_object_agg(k."genreId", k.genres) as "genres",
-	mv_books_latest_chapters."newestChapters",
-	mv_books_latest_chapters.authors]]></expression>
-	</reference>
-	<reference>
-		<expression><![CDATA[    public.books 
-	inner join book_visits using ("bookId")
-	inner join mv_books_latest_chapters using ("bookId")
-	inner join books_genres using ("bookId")
-	inner join (
-		select 
-		"bookId",
-		"genreId",
-		to_jsonb(jsonb_build_object(
-			'genreId', genres."genreId",
-			'name', genres."name"
-		)) as genres
-		from books_genres natural join genres
-	) k  USING ("bookId")]]></expression>
-	</reference>
-	<reference>
-		<expression><![CDATA[group by 	
-		1, 
-		mv_books_latest_chapters."newestChapters", 
-		mv_books_latest_chapters.authors
-order by "views" DESC;]]></expression>
-	</reference>
-	<expression type="select-exp">0</expression>
-	<expression type="from-exp">1</expression>
-	<expression type="end-exp">2</expression>
-</view>
-
-<view name="mv_detail_books" layer="0" materialized="true" collapse-mode="2" max-obj-count="3" z-value="0">
-	<schema name="public"/>
-	<role name="postgres"/>
-	<position x="1100" y="1560"/>
-	<reference>
-		<expression><![CDATA[ 	books.*,
-	jsonb_object_agg(z."authorId", z.authors) as "authors",
-	jsonb_object_agg(k."genreId", k.genres) as "genres"]]></expression>
-	</reference>
-	<reference>
-		<expression><![CDATA[(
-	select 
-	"bookId",
-	"userId" as "authorId",
-	to_jsonb(jsonb_build_object(
-		'userId', users."userId",
-		'name', users."name"
-	)) as authors
-	from authors natural join users
-) z
-inner join books USING ("bookId")
-inner join (
-	select 
-	"bookId",
-	"genreId",
-	to_jsonb(jsonb_build_object(
-		'genreId', genres."genreId",
-		'name', genres."name"
-	)) as genres
-	from books_genres natural join genres
-) k  USING ("bookId")]]></expression>
-	</reference>
-	<reference>
-		<expression><![CDATA[group by 1;]]></expression>
-	</reference>
-	<expression type="select-exp">0</expression>
-	<expression type="from-exp">1</expression>
-	<expression type="end-exp">2</expression>
-</view>
 
 <function name="current_user"
 		window-func="false"

@@ -18,7 +18,9 @@ export class DetailBookInfoMolec implements OnInit {
     genres: [],
     published: true,
     updatedAt: '2020',
-    description: '(chủ yếu dành cho truyện sưu tầm)'
+    description: '(chủ yếu dành cho truyện sưu tầm)',
+    categoryId: '',
+    completed: true
   }
   constructor() { }
 

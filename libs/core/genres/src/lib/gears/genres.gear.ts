@@ -14,18 +14,16 @@ export class GenresGear {
   }
 
   getAllGenres() {
+    this.genresStore.setLoading(true);
     return this.genresApi.getAllGenres().pipe(
-      map((result) => this.genresStore.set(result))
+      map((result) => this.genresStore.set(result)),
+      tap(() => { this.genresStore.setLoading(false) })
     );
   }
 
   getGenreById(genreId: string) {
     return this.genresApi.getGenreById(genreId).pipe(
-      tap((res) => {  }),
-      catchError((err) => {
-        console.error('An error occurred:', err);
-        return throwError(err);
-      })
+      tap((res) => { }),
     );
   }
 

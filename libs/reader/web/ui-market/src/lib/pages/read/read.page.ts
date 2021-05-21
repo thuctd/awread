@@ -14,8 +14,8 @@ import { ChaptersFacade } from '@awread/core/chapters';
 @Directive()
 export class ReadPage implements OnInit {
   chapter: Chapter;
-  bookId;
-  chapterId;
+  bookId: string;
+  chapterId: string;
   topBookList$ = this.booksFacade.topBooks$;
   bookChapters$ = this.chaptersFacade.chapters$;
   breadcrumbs;
@@ -29,21 +29,16 @@ export class ReadPage implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
-    this.bookChapters$.subscribe(value => console.log('chapters', value));
-
-
     this.bookId = this.activatedRoute.snapshot.paramMap.get('bookId');
     this.chapterId = this.activatedRoute.snapshot.paramMap.get('chapterId');
 
     this.activatedRoute.paramMap
       .pipe(
         switchMap((params) => this.chaptersFacade.getChapterDetail(params.get('bookId'), params.get('chapterId'))),
-        switchMap(chapters => this.chaptersFacade.getAllChapters(chapters[0].bookId))
       )
       .subscribe((chapters) => {
-        console.log('chapters', chapters);
         this.chapter = chapters[0];
+        this.chaptersFacade.getAllChapters(chapters[0].bookId).subscribe();
         this.breadcrumbs = this.getbreadcrumbs();
       });
 
@@ -63,34 +58,26 @@ export class ReadPage implements OnInit {
     {
       title: this.chapter.book.title,
       link: ['/', 'books', this.bookId]
-    },
-    {
-      title: this.chapter.title,
-      link: ['/', 'books', this.bookId, 'chapters', this.chapter.chapterId]
-    }
-    ];
+    }];
   }
 
-  navigateToChapter(chapter: Chapter) {
-    console.log(chapter);
-    // this.router.navigate(['/books', chapter.bookId, 'chapters', chapter.chapterId]);
+  onChangeNextChapter(chapter: Chapter) {
+    const offset = parseInt(chapter.position);
+    this.chaptersFacade.getPageChapter(chapter.bookId, offset + 1).pipe(
+      tap(res => {
+        this.router.navigate(['/books', res[0].bookId, 'chapters', res[0].chapterId]);
+      })
+    ).subscribe();
+    this.cd.detectChanges();
   }
 
-  onChangeNextChapter() {
-    if (!this.chapterId) {
-      this.backHome();
-      return;
-    }
-  }
-
-  onChangeBackChapter() {
-    if (!this.chapterId) {
-      this.backHome();
-      return;
-    }
-  }
-
-  private backHome() {
-    this.router.navigate(['/']);
+  onChangeBackChapter(chapter: Chapter) {
+    const offset = parseInt(chapter.position);
+    this.chaptersFacade.getPageChapter(chapter.bookId, offset - 1).pipe(
+      tap(res => {
+        this.router.navigate(['/books', res[0].bookId, 'chapters', res[0].chapterId]);
+      })
+    ).subscribe();
+    this.cd.detectChanges();
   }
 }

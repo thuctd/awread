@@ -34,9 +34,6 @@
       <div [ngClass]="filterbook === false ? 'pt-12' : 'pt-28'">
         <list-detail-long-book (moreEvent)="nativeLongBook.emit($event)" [longbooks]="categoryBooks" [display]="display" [categoryId]="selectedTabCategoryId">
         </list-detail-long-book>
-        <!-- <list-detail-short-book (moreEvent)="nativeShortBook.emit($event)" [shortbooks]="categoryBooks" [display]="display" *ngIf="selectedTab === 'Truyện ngắn'"></list-detail-short-book>
-        <list-detail-prose (moreEvent)="nativeProse.emit($event)" [prosebooks]="categoryBooks" [display]="display" *ngIf="
-         === 'Tản văn'"></list-detail-prose> -->
       </div>
     </div>
     <div class="lg:hidden xl:block lg:col-span-1"></div>

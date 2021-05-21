@@ -1,1 +1,1 @@
-<template-read [breadcrumbs]="breadcrumbs" [chapters]="bookChapters$ | async" (nextChapterBook)="onChangeNextChapter()" (backChapterBook)="onChangeBackChapter()" [books]="topBookList$ | async" [chapter]="chapter" (selectionChange)="navigateToChapter($event)" class="pt-40"></template-read>
+<template-read [breadcrumbs]="breadcrumbs" [chapters]="bookChapters$ | async" (nextChapterBook)="onChangeNextChapter(chapter)" (backChapterBook)="onChangeBackChapter(chapter)" [books]="topBookList$ | async" [chapter]="chapter" class="pt-40"></template-read>

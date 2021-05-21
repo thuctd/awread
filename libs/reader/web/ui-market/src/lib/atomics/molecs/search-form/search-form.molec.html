@@ -2,14 +2,14 @@
   <div class="relative pr-3">
     <ng-select [items]="genres"
       [closeOnSelect]="false"
-      bindValue="id"
+      bindValue="genreId"
       bindLabel="name"
       [multiple]="true"
-      placeholder="Thể loại">
+      placeholder="Thể loại"
+      formControlName="genres">
       <ng-template ng-option-tmp let-item="item" let-index="index" let-item$="item$">
         <div class="flex">
           <div class="ml-1.5 mt-0.5">
-            <!-- <input class="form-checkbox" type="checkbox" [checked]="item$.selected"> -->
             <check-btn [checked]="item$.selected"></check-btn>
           </div>
           {{item.name}}
@@ -20,12 +20,12 @@
       <fa-icon class="text text-gray-text" [icon]="faIcon"></fa-icon>
     </div>
   </div>
-  <atom-select [options]="selectGenres.options" [inputControl]="filters.get('genre')" [widthClass]="selectGenres.widthClass" [titleSellect]="selectGenres.title" class="px-3">
+  <atom-select [options]="selectCriteria.options" [inputControl]="filters.get('criteria')" [widthClass]="selectCriteria.widthClass" [titleSellect]="selectCriteria.title" class="px-3">
   </atom-select>
   <atom-select [options]="selectStatus.options" [inputControl]="filters.get('status')" [widthClass]="selectStatus.widthClass" [titleSellect]="selectStatus.title"
     class="px-3"></atom-select>
-  <atom-select [options]="publishedAt.options" [inputControl]="filters.get('publishedAt')" [widthClass]="publishedAt.widthClass"
-    [titleSellect]="publishedAt.title" class="px-3"></atom-select>
+  <atom-select [options]="postingDate.options" [inputControl]="filters.get('postingDate')" [widthClass]="postingDate.widthClass"
+    [titleSellect]="postingDate.title" class="px-3"></atom-select>
   <div class="md:pl-0 xl:pl-5">
     <a (click)="filterBooksEvent.emit()"
       class="outline-none text-sm no-underline text-center block bg-green-primary text-white cursor-pointer px-3 py-1 md:px-6 md:py-1 rounded-full transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 roboto">Lọc</a>

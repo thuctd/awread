@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter, Input } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -10,16 +10,16 @@ import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 })
 export class SearchFormMolec implements OnInit {
   @Input() faIcon = faChevronDown;
-  @Input() filters: FormGroup;
+  @Input() filters: FormGroup = this.fb.group({
+      typeBook: [''],
+      genres: [''],
+      criteria: [''],
+      status: [''],
+      postingDate: [''],
+    });;
 
-  @Input() genres = [
-    { id: '1', name: 'Lãng mạn' },
-    { id: '2', name: 'Kiếm hiệp' },
-    { id: '3', name: 'Trinh thám' },
-    { id: '4', name: 'Kinh dị' },
-    { id: '5', name: 'Xuyên không' },
-  ];
-  @Input() selectGenres = {
+  @Input() genres = [];
+  @Input() selectCriteria = {
     title: 'Tiêu chí',
     widthClass: 'xl:w-60 md:w-48',
     options: [
@@ -38,7 +38,7 @@ export class SearchFormMolec implements OnInit {
       { id: '2', name: 'Chưa hoàn thành' },
     ],
   };
-  @Input() publishedAt = {
+  @Input() postingDate = {
     title: 'Thời gian',
     widthClass: 'xl:w-44 md:w-36',
     options: [
@@ -51,13 +51,5 @@ export class SearchFormMolec implements OnInit {
 
   constructor(private fb: FormBuilder) { }
 
-  ngOnInit(): void {
-    this.filters = this.fb.group({
-      typeBook: [''],
-      category: [''],
-      genre: [''],
-      status: [''],
-      publishedAt: [''],
-    });
-  }
+  ngOnInit(): void { }
 }

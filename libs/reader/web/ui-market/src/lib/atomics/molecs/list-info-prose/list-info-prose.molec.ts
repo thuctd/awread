@@ -16,6 +16,7 @@ export class ListInfoProseMolec implements OnInit {
   @Input() book = {
     title: 'Cô gái chúng ta cùng theo đuổi năm nào',
     bookId: '',
+    authors: []
   };
   @Input() isBtn = false;
 

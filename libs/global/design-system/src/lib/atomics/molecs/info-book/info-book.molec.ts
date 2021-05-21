@@ -29,6 +29,8 @@ export class InfoBookMolec implements OnInit {
   @Input() book = {
     title: 'Cô gái chúng ta cùng theo đuổi năm nào',
     bookId: '1',
+    authors: [],
+    updatedAt: '2021-05-03'
   };
 
   @Input() btns = [
@@ -38,7 +40,12 @@ export class InfoBookMolec implements OnInit {
     },
   ];
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
+
+  orderByPosition(a, b) {
+    // console.log('a, b', a, b);
+    return a.value.position > b.value.position ? -1 : (b.value.position > a.value.position ? 1 : 0);
+  }
 }

@@ -13,9 +13,11 @@ export class ChaptersGear {
   }
 
   getAllChapters(bookId: string) {
+    this.chaptersStore.setLoading(true);
     return this.chaptersApi.getAllChapters(bookId).pipe(
       map((chapters) => { return this.transformDataChapters(chapters) }),
       tap(chapters => { this.chaptersStore.set(chapters) }),
+      tap(() => { this.chaptersStore.setLoading(false) }),
     );
   }
 
@@ -26,6 +28,14 @@ export class ChaptersGear {
         const book = chapter['bookByBookId'];
         return { ...chapter, content, book };
       })),
+    );
+  }
+
+  getPageChapter(bookId: string, offset: number) {
+    return this.chaptersApi.getPageChapter(bookId, offset).pipe(
+      map((result) => {
+        return result;
+      }),
     );
   }
 

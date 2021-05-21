@@ -1,5 +1,4 @@
 import { Genre } from '@awread/core/genres';
-import { Category } from '@awread/core/categories';
 
 export interface Book {
   bookId: string
@@ -11,7 +10,7 @@ export interface Book {
   bookid: string;
   userid: string;
   description: string;
-  categoryId: Category['categoryId'];
+  categoryId: string;
   completed: boolean;
   isdeleted: boolean;
   tags: string[];

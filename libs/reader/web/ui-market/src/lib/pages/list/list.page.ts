@@ -1,4 +1,5 @@
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
+import { tap } from 'rxjs/operators';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ChangeDetectorRef, Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -67,30 +68,33 @@ export class ListPage implements OnInit, OnDestroy {
 
   switchTab(categoryId: string) {
     this.selectedCategoryId = categoryId;
-    this.filtersForm.get('category').setValue(this.selectedCategoryId);
     this.router.navigate([this.typeBook, { categoryId: this.selectedCategoryId }]);
     this.filterItemsByCategory(categoryId);
     this.cd.detectChanges();
   }
 
   filterItemsByCategory(categoryId) {
-    this.filteredBooks$ = this.booksFacade.getCategoryBooks(categoryId);
+    this.filteredBooks$ = this.booksFacade.getCategoryBooks(categoryId).pipe(
+      tap(res => console.log(res))
+    );
   }
 
 
   private updateForm() {
-    this.filtersForm.patchValue({
-      typeBook: this.typeBook
-    });
+    this.activatedRoute.parent.url.subscribe(([urlSegment]) => {
+      this.filtersForm.patchValue({
+        typeBook: urlSegment.path
+      });
+    })
   }
 
   private initForm() {
     this.filtersForm = this.fb.group({
       typeBook: [''],
-      category: [''],
-      genre: [''],
+      genres: [''],
+      criteria: [''],
       status: [''],
-      publishedAt: ['']
+      postingDate: [''],
     });
 
     this.persistForm = new PersistNgFormPlugin(
@@ -100,7 +104,8 @@ export class ListPage implements OnInit, OnDestroy {
   }
 
   filterBooks() {
-    this.filteredBooks$ = this.booksFacade.getFilterBooks();
+    console.log(this.filtersForm.value);
+    // this.filteredBooks$ = this.booksFacade.getFilterBooks();
   }
 
 }

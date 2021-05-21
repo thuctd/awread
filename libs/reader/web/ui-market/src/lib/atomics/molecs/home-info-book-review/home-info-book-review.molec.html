@@ -1,0 +1,14 @@
+<div class="h-7 sm:h-12">
+    <atom-title-book [titleBook]="book.title" [bookId]="book.bookId" [size]='size'></atom-title-book>
+</div>
+<dl class="mt-4 sm:mt-2 text-sm p-0">
+    <dd class="ml-0 pb-2">
+        <atom-rating></atom-rating>
+    </dd>
+    <dd class="ml-0">
+        <div *ngFor="let btn of btns | keyvalue" class="leading-normal font-medium">
+            <base-btn (onBtnClicked)="submitEvent.emit($event)" [isSize]="isSize" [bookId]="book.bookId" [chapterId]="btn.key" [chapter]="btn.value.position">
+            </base-btn>
+        </div>
+    </dd>
+</dl>

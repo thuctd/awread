@@ -30,27 +30,24 @@ export class BooksApi {
       mutation: gql`
         mutation SearchBooks($filter: String) {
           searchBooks(input: { searchTerm: $filter }) {
-            books {
-              bookId
+            mvBooksLatestChapters {
               title
+              authors
+              newestChapters
+              genres
+              bookId
+              categoryId
+              completed
+              publisherId
+              createdAt
               description
-              userId
+              cover
               published
-              categoryByCategoryId {
-                categoryId
-                name
-              }
-              booksGenresByBookId {
-                nodes {
-                  genreId
-                }
-              }
-              chaptersByBookId(first: 2, orderBy: POSITION_ASC) {
-                nodes {
-                  chapterId
-                  position
-                }
-              }
+              genres
+              type
+              ages
+              updatedAt
+              userId
             }
           }
         }
@@ -59,7 +56,7 @@ export class BooksApi {
         filter,
       },
     }).pipe(
-      map(res => res?.['data']?.['searchBooks']?.['books'])
+      map(res => res?.['data']?.['searchBooks']?.['mvBooksLatestChapters'])
     );
   }
 
@@ -68,7 +65,7 @@ export class BooksApi {
     return this.apollo.query({
       query: gql`
          query allMvBooksLatestChapters${categoryId ? `($categoryId: BigFloat)` : ''} {
-        allMvBooksLatestChapters ${categoryId ? `(condition: {categoryId: $categoryId}) ` : ''} {
+        allMvBooksLatestChapters (first: 10, condition: {published: true ${categoryId ? `, categoryId: $categoryId ` : ''}} ){
           nodes {
             title
             authors
@@ -107,7 +104,7 @@ export class BooksApi {
       query: gql`
       query allMvBooksLatestChapters {
         allMvBooksLatestChapters(
-              filter: {authors: {containsAnyKeys: ${JSON.stringify(authorIds)} }}
+              filter: {authors: {containsAnyKeys: ${JSON.stringify(authorIds)} }}, condition: { published: true }
         ) {
           nodes {
             title
