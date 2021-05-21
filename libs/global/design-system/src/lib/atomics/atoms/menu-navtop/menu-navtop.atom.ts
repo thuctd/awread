@@ -15,12 +15,12 @@ export class MenuNavtopAtom implements OnInit {
     avatar: '/global-assets/images/avatar-mrmrs.webp',
     name: '',
     email: '',
-    firstname: '',
+    lastname: '',
   };
   @Output() signoutEvent = new EventEmitter();
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   toggleMenu($event?) {
     if ($event) $event.stopPropagation();

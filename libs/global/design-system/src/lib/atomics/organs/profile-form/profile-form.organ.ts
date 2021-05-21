@@ -9,14 +9,17 @@ import { Component, OnInit, ChangeDetectionStrategy, Output, Input, EventEmitter
       :host {
         display: block;
       }
-      .bg-blue {
-        background-color: #3b5998;
-      }
     `,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfileFormOrgan implements OnInit {
+  @Input() conentGG = {
+    title: 'Kết nối bằng google',
+    image: '/global-assets/images/google.webp',
+  };
+  @Output() ClickConnectFB = new EventEmitter();
+  @Output() ClickConnectGG = new EventEmitter();
   @Input() link = '/forgot';
   @Input() submitText = 'Lưu';
   @Input() profileForm: FormGroup = this.fb.group({
@@ -31,7 +34,6 @@ export class ProfileFormOrgan implements OnInit {
   });
   @Input() submitted: boolean;
   @Output() updateProfileEvent = new EventEmitter();
-  @Output() ClickConnectFB = new EventEmitter();
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {}

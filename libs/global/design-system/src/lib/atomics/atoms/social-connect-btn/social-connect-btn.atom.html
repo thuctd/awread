@@ -1,0 +1,7 @@
+<div class="my-4">
+  <div (click)="ClickConnect.emit()" [ngClass]="bg"
+    class="cursor-pointer w-4/5 rounded-full flex py-2 relative justify-center transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110">
+    <img class="h-10 absolute left-10 top-0" src="{{image}}" alt="">
+    <div class="text-white text-lg font-semibold">{{title}}</div>
+  </div>
+</div>
