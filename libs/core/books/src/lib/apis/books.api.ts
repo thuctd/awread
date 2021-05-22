@@ -183,8 +183,8 @@ export class BooksApi {
   getBookById(bookId: string) {
     return this.apollo.query({
       query: gql`
-        query allMvDetailBooks($bookId: UUID!) {
-          allMvDetailBooks(condition: { bookId: $bookId }) {
+        query allMvBooksLatestChapters($bookId: UUID!) {
+          allMvBooksLatestChapters(condition: { bookId: $bookId }) {
             nodes {
               ages
               authors
@@ -207,7 +207,7 @@ export class BooksApi {
         bookId,
       },
     }).pipe(
-      map(res => res?.['data']?.['allMvDetailBooks']?.['nodes'])
+      map(res => res?.['data']?.['allMvBooksLatestChapters']?.['nodes'])
     );
   }
 }
