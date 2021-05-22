@@ -20,9 +20,9 @@ const routes: Routes = [
         path: 'not-found',
         component: NotFoundPage,
       },
-      { path: '**', pathMatch: 'full', redirectTo: 'not-found' },
     ],
   },
+  // { path: '**', pathMatch: 'full', redirectTo: 'not-found' },
 ];
 
 import { HttpClientModule } from '@angular/common/http';
@@ -33,10 +33,10 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     GlobalSettingsModule,
     ReaderWebSharedModule,
-    ReaderWebUiAuthModule,
-    ReaderWebUiAuthorModule,
-    ReaderWebUiSingleModule,
     ReaderWebUiMarketModule,
+    ReaderWebUiAuthorModule,
+    ReaderWebUiAuthModule,
+    ReaderWebUiSingleModule,
     // away be the 2nd last
     WriterWebUiAuthModule,
     // aways be the last
@@ -45,12 +45,12 @@ import { HttpClientModule } from '@angular/common/http';
       scrollOffset: [0, 0],
       anchorScrolling: 'enabled',
       onSameUrlNavigation: 'reload',
+      // enableTracing: true  // <-- debugging purposes only
     }),
   ],
   exports: [
     RouterModule,
     GlobalSettingsModule,
-
     HttpClientModule
   ],
   providers: [

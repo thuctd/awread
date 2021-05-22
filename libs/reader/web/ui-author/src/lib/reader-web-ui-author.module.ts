@@ -8,4 +8,4 @@ import { AuthorLayout } from './layouts/author/author.layout';
   declarations: [AuthorLayout],
   exports: [AuthorLayout],
 })
-export class ReaderWebUiAuthorModule {}
+export class ReaderWebUiAuthorModule { }
