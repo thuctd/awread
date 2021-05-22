@@ -23,7 +23,24 @@
       <div class="grid grid-cols-12 gap-10 place-content-center">
         <div *ngFor="let book of longbooks| slice:0:10;" class="col-span-2 md:col-span-6">
           <!-- <pre> {{ book | json }} </pre> -->
-          <organ-books-grid [book]="book" [chapters]="book.newestChapters"></organ-books-grid>
+          <div [ngSwitch]="categoryId">
+            <div *ngSwitchCase="'1'">
+              <organ-books-grid [book]="book" [chapters]="book.newestChapters"></organ-books-grid>
+            </div>
+            <div *ngSwitchCase="'2'">
+              <organ-books-grid [book]="book" [chapters]="book.newestChapters"></organ-books-grid>
+            </div>
+            <div *ngSwitchDefault>
+              <div class="grid grid-cols-11 gap-2 place-content-center">
+                <div class="col-span-5">
+                  <atom-img-m [size]="'m'" [srcImg]="book.cover" [bookId]="book.bookId"></atom-img-m>
+                </div>
+                <div class="col-span-6 -mt-2.5">
+                  <list-info-prose [book]="book"></list-info-prose>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </ng-template>
