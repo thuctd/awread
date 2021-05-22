@@ -23,11 +23,13 @@ export class RdAuthorTabsMolec implements OnInit {
       name: 'Tác phẩm',
       isActive: true,
       faIcon: null,
+      href: null,
     },
     {
       name: 'Người theo dõi',
       isActive: false,
       faIcon: null,
+      href: null,
     },
   ];
   @Input() faIcon;

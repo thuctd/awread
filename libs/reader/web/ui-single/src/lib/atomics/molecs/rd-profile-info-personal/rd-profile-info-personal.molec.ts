@@ -1,3 +1,4 @@
+import { Genre } from '@awread/writer/web/feature-auth';
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 
 @Component({
@@ -13,7 +14,14 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RdProfileInfoPersonalMolec implements OnInit {
-  @Input() currentUser = {};
+  @Input() currentUser = {
+    name: '',
+    username: '',
+    email: '',
+    phone: '',
+    dob: '',
+    gender: '',
+  };
 
   constructor() {}
 

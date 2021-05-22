@@ -19,11 +19,13 @@ export class RdSettingTabTemplateTemplate implements OnInit {
       name: 'Hồ sơ của tôi',
       isActive: false,
       faIcon: faUserCircle,
+      href: '/single/profile',
     },
     {
       name: 'Cài đặt',
       isActive: true,
       faIcon: faCog,
+      href: null,
     },
   ];
 

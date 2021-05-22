@@ -27,21 +27,24 @@ export class RdProfileTabTemplateTemplate implements OnInit {
     website: ['', [Validators.required]],
     introduce: ['', [Validators.required]],
   });
-  @Input() currentUser;
+  @Input() currentUser = {};
   @Input() submitted: boolean;
   @Output() updateProfileEvent = new EventEmitter();
   @Output() ClickConnect = new EventEmitter();
-  @Input() mode = 'display';
+  @Input() mode: 'display' | 'edit' = 'display';
+  @Input() actions = ['display', 'edit'];
   @Input() tabs = [
     {
       name: 'Hồ sơ của tôi',
       isActive: true,
       faIcon: faUserCircle,
+      href: null,
     },
     {
       name: 'Cài đặt',
       isActive: false,
       faIcon: faCog,
+      href: '/single/setting',
     },
   ];
   @Input() classActive = 'border-b-2 border-green-primary text-green-primary';
@@ -58,7 +61,7 @@ export class RdProfileTabTemplateTemplate implements OnInit {
     });
   }
 
-  changeDisplay(mode: string) {
+  changeDisplay(mode: any) {
     this.mode = mode;
   }
 }

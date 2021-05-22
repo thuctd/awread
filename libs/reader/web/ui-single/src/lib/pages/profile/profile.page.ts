@@ -39,8 +39,10 @@ export class ProfilePage implements OnInit {
       websiteAddress: user.websiteAddress,
       facebookAddress: user.facebookAddress,
     });
+
     this.profileFormValueBefore = this.profileForm.value;
   }
+
   private getCurrentUser() {
     this.currentUserFacade.getCurrentUser().subscribe((user) => {
       if (user) {
