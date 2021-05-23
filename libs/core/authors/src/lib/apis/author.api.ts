@@ -1,3 +1,4 @@
+import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
 
@@ -22,23 +23,44 @@ export class AuthorApi {
     });
   }
 
-  getDetailAuthor(authorId: string) {
-    return this.apollo.query({
-      query: gql`
-        query AuthorDetail($authorId: String!) {
-          allAuthors(condition: { userId: $authorId }) {
-            nodes {
-              userByUserId {
+  getDetailAuthor(userId: string) {
+    return this.apollo
+      .query({
+        query: gql`
+          query AuthorDetail($userId: UUID) {
+            allAuthors(condition: { userId: $userId }) {
+              nodes {
+                userByUserId {
+                  userId
+                  name
+                  age
+                  apple
+                  avatar
+                  bio
+                  code
+                  createdAt
+                  dob
+                  email
+                  facebook
+                  facebookAddress
+                  firstname
+                  gender
+                  lastname
+                  google
+                  middlename
+                  phone
+                  username
+                  websiteAddress
+                }
                 userId
-                name
               }
             }
           }
-        }
-      `,
-      variables: {
-        authorId
-      }
-    });
+        `,
+        variables: {
+          userId,
+        },
+      })
+      .pipe(map((res) => res?.['data']?.['allAuthors']?.['nodes']));
   }
 }

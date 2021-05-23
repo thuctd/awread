@@ -13,11 +13,8 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RdAuthorBookItemMolec implements OnInit {
-  @Input() srcImg = '/global-assets/images/sach-co-gai-nam-ay-chung-ta-cung-theo-duoi.webp';
-  @Input() alt = '';
   @Input() category = 'Hành động, phiêu lưu';
-  @Input() book = 'Cô gái mà chúng ta theo đuổi năm nào';
-  @Input() bookId = 'bvxz_324345seQ6x';
+  @Input() book;
   @Input() isText = true;
   @Input() isSize = true;
 
@@ -34,7 +31,7 @@ export class RdAuthorBookItemMolec implements OnInit {
     },
   };
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

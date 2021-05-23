@@ -3,27 +3,12 @@ import { EntityState, EntityStore, StoreConfig, ActiveState } from '@datorama/ak
 import { Author } from '../../models';
 
 export enum VISIBILITY_FILTER {
-    SHOW_ALL = 'SHOW_ALL'
+  SHOW_ALL = 'SHOW_ALL'
 }
 
-export interface AuthorsState extends EntityState<Author>, ActiveState {
-  ui: {
-    filter: VISIBILITY_FILTER;
-  };
-}
-const initialState = {
-  ui: { 
-    filter: VISIBILITY_FILTER.SHOW_ALL
-   }
-};
-
-// export interface AuthorUI {}
-
-// export interface AuthorsUIState extends EntityState<AuthorUI>, ActiveState {}
-
-
+export interface AuthorsState extends EntityState<Author>, ActiveState { };
 @Injectable({ providedIn: 'root' })
-@StoreConfig({ name: ' authors', resettable: true })
+@StoreConfig({ name: ' authors', resettable: true, idKey: "userId" })
 export class AuthorsStore extends EntityStore<AuthorsState> {
   // ui: EntityUIStore<AuthorUIState>;
   constructor() {

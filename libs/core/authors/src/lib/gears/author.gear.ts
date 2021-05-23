@@ -12,20 +12,10 @@ export class AuthorGear {
   getAuthors() {
     return this.authorApi.getAuthors().pipe(
       tap((res) => { }),
-      catchError((err) => {
-        console.error('An error occurred:', err);
-        return throwError(err);
-      })
     );
   }
 
-  getDetailAuthor(authorId: string) {
-    return this.authorApi.getDetailAuthor(authorId).pipe(
-      tap((res) => console.log('author detail: ', res)),
-      catchError((err) => {
-        console.error('An error occurred:', err);
-        return throwError(err);
-      })
-    );
+  getDetailAuthor(userId: string) {
+    return this.authorApi.getDetailAuthor(userId);
   }
 }

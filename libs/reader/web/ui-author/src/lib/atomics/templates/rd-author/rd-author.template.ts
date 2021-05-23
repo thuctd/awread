@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
-import { faAngleRight, faHome } from '@fortawesome/free-solid-svg-icons';
+
 @Component({
   selector: 'template-rd-author',
   templateUrl: './rd-author.template.html',
@@ -15,54 +15,11 @@ import { faAngleRight, faHome } from '@fortawesome/free-solid-svg-icons';
 export class RdAuthorTemplate implements OnInit {
   @Input() isFollow = true;
   @Input() isBlock = false;
-  @Input() stories = [
-    {
-      srcImg: '/global-assets/images/sach-co-gai-nam-ay-chung-ta-cung-theo-duoi.webp',
-      altImg: '',
-    },
-    {
-      srcImg: '/global-assets/images/sach-co-gai-nam-ay-chung-ta-cung-theo-duoi.webp',
-      altImg: '',
-    },
-    {
-      srcImg: '/global-assets/images/sach-co-gai-nam-ay-chung-ta-cung-theo-duoi.webp',
-      altImg: '',
-    },
-    {
-      srcImg: '/global-assets/images/sach-co-gai-nam-ay-chung-ta-cung-theo-duoi.webp',
-      altImg: '',
-    },
-    {
-      srcImg: '/global-assets/images/sach-co-gai-nam-ay-chung-ta-cung-theo-duoi.webp',
-      altImg: '',
-    },
-    {
-      srcImg: '/global-assets/images/sach-co-gai-nam-ay-chung-ta-cung-theo-duoi.webp',
-      altImg: '',
-    },
-  ];
+  @Input() author;
+  @Input() books = [];
 
-  menu = [
-    {
-      title: 'Home',
-      link: '/home',
-      size: 'text-md',
-      icon: faHome,
-    },
-    {
-      title: 'Tác giả',
-      link: '',
-      icon: faAngleRight,
-      size: 'text-xs',
-    },
-    {
-      title: 'Cẩm Thương',
-      link: '',
-      size: 'text-xs',
-      icon: faAngleRight,
-    },
-  ];
-  constructor() {}
+  @Input() items = [];
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

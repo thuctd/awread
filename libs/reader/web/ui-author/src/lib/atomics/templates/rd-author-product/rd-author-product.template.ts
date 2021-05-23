@@ -1,5 +1,4 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
-import { faAngleRight, faHome } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'template-rd-author-product',
@@ -14,27 +13,10 @@ import { faAngleRight, faHome } from '@fortawesome/free-solid-svg-icons';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RdAuthorProductTemplate implements OnInit {
-  menu = [
-    {
-      title: 'Home',
-      link: '/home',
-      size: 'text-md',
-      icon: faHome,
-    },
-    {
-      title: 'Tác giả',
-      link: '',
-      icon: faAngleRight,
-      size: 'text-xs',
-    },
-    {
-      title: 'Cẩm Thương',
-      link: '',
-      size: 'text-xs',
-      icon: faAngleRight,
-    },
-  ];
-  constructor() {}
+  @Input() items = [];
+  @Input() books = [];
 
-  ngOnInit(): void {}
+  constructor() { }
+
+  ngOnInit(): void { }
 }

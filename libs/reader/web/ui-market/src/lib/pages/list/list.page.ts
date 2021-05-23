@@ -104,8 +104,8 @@ export class ListPage implements OnInit, OnDestroy {
   }
 
   filterBooks() {
-    console.log(this.filtersForm.value);
-    // this.filteredBooks$ = this.booksFacade.getFilterBooks();
+    // console.log(this.filtersForm.get('genres').value);
+    this.booksFacade.getFilterBooks();
   }
 
 }

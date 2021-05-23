@@ -105,7 +105,7 @@ export class BooksFacade {
   }
 
   getFilterBooks() {
-    console.log(this.booksQuery.getCurrentFilter());
+    console.log(this.booksQuery.getCurrentFilter().genres);
     // return this.booksGear.getFilterBooks(this.booksQuery.getCurrentFilter());
   }
 
