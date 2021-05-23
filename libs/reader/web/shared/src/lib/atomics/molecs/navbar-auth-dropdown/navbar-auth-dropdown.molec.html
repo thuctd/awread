@@ -6,12 +6,13 @@
         </div>
         <div class="flex items-center mb-1">
             <span class="text-xs">Coin: </span>
-            <span class="text-xs ml-4">0 </span>
-            <fa-icon class="ml-6 text-green-primary" [icon]="icons.faCoins"></fa-icon>
+            <span class="text-xs ml-3">0 </span>
+            <fa-icon class="ml-4 text-green-primary" [icon]="icons.faCoins"></fa-icon>
         </div>
         <div class="flex items-center mb-1z">
             <span class="text-xs">VIP: </span>
             <span class="text-xs ml-4">1 </span>
+            <img class="h-4 ml-4 -mt-1" src="/global-assets/images/crown.png" alt="">
         </div>
     </div>
     <ul class=" bg-white">
@@ -19,7 +20,7 @@
             <atom-dropdown-link [title]="item.title" [routerLink]="item.href"></atom-dropdown-link>
         </li>
     </ul>
-    <button (click)="logoutEvent.emit()" class="py-2 px-4 bg-white w-full flex items-center focus:outline-none">
+    <button (click)="logoutEvent.emit()" class="py-2 px-4 bg-white w-full flex items-center focus:outline-none hover:text-green-primary transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110">
         <span class="text-xs">Đăng xuất</span>
         <fa-icon class="ml-6 text-xs" [icon]="icons.faArrowRight"  ></fa-icon>
     </button>

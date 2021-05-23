@@ -9,5 +9,5 @@
   <base-btn (onBtnClicked)="submitEvent.emit($event)" [isSize]="displayUI.size.sizeBtn" [bookId]='book.bookId' [chapterId]="btn.key"
     [chapter]="btn.value.position">
   </base-btn>
-  <rd-list-publication-date class="mt-0.5 ml-2" [publicationDate]="book.updatedAt"></rd-list-publication-date>
+  <rd-list-publication-date *ngIf="displayUI.ui.isDate" class="mt-0.5 ml-2" [publicationDate]="book.updatedAt"></rd-list-publication-date>
 </div>
