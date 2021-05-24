@@ -16,10 +16,13 @@ export class RdAuthorBookItemMolec implements OnInit {
   @Input() srcImg = '/global-assets/images/sach-co-gai-nam-ay-chung-ta-cung-theo-duoi.webp';
   @Input() alt = '';
   @Input() category = 'Hành động, phiêu lưu';
-  @Input() book = 'Cô gái mà chúng ta theo đuổi năm nào';
+  @Input() book = {
+    title: 'Cô gái chúng ta cùng theo đuổi năm nào',
+    bookId: '1',
+    authors: [],
+    updatedAt: '2021-05-03',
+  };
   @Input() bookId = 'bvxz_324345seQ6x';
-  @Input() isText = true;
-  @Input() isSize = true;
 
   @Input() displayUI = {
     ui: {

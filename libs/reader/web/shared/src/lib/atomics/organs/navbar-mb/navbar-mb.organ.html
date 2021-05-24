@@ -1,7 +1,11 @@
 <div class="relative flex justify-between items-center px-5">
-  <logo class="w-14 mt-2" [logoWhite]="true"></logo>
-  <div class="mt-3">
-    <organ-group-icon-navbar [isLogin]="isLogin" [isMenu]="isMenu" [isSearch]="isSearch"></organ-group-icon-navbar>
+  <logo class="w-14 mt-3" [logoWhite]="true"></logo>
+  <div class="mt-3 flex flex-row">
+    <div (click)="clickDisplaySearch.emit()" class="bg-white w-7 h-7 rounded-full border mr-1.5 cursor-pointer flex justify-center items-center">
+      <fa-icon class="text-green-primary text-lg" [icon]="search"></fa-icon>
+    </div>
+    <molec-rd-navbar-noti-menu *ngIf="isLogin"></molec-rd-navbar-noti-menu>
+    <molec-menu-navbar [isMenu]="isMenu"></molec-menu-navbar>
   </div>
 </div>
 

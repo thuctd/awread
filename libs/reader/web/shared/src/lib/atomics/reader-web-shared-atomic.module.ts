@@ -18,8 +18,6 @@ import { FooterTemplate } from './templates/footer/footer.template';
 import { DropdownMenuMbMolec } from './molecs/dropdown-menu-mb/dropdown-menu-mb.molec';
 import { MenuNavbarMolec } from './molecs/menu-navbar/menu-navbar.molec';
 import { NavbarMbOrgan } from './organs/navbar-mb/navbar-mb.organ';
-import { SearchNavbarMolec } from './molecs/search-navbar/search-navbar.molec';
-import { GroupIconNavbarOrgan } from './organs/group-icon-navbar/group-icon-navbar.organ';
 import { RdNavbarMbTemplate } from './templates/rd-navbar-mb/rd-navbar-mb.template';
 import { RdNavbarNotiMenuMolec } from './molecs/rd-navbar-noti-menu/rd-navbar-noti-menu.molec';
 
@@ -42,8 +40,6 @@ import { RdNavbarNotiMenuMolec } from './molecs/rd-navbar-noti-menu/rd-navbar-no
     DropdownMenuMbMolec,
     MenuNavbarMolec,
     NavbarMbOrgan,
-    SearchNavbarMolec,
-    GroupIconNavbarOrgan,
     RdNavbarMbTemplate,
     RdNavbarNotiMenuMolec,
   ],
@@ -66,8 +62,6 @@ import { RdNavbarNotiMenuMolec } from './molecs/rd-navbar-noti-menu/rd-navbar-no
     DropdownMenuMbMolec,
     MenuNavbarMolec,
     NavbarMbOrgan,
-    SearchNavbarMolec,
-    GroupIconNavbarOrgan,
     RdNavbarMbTemplate,
     RdNavbarNotiMenuMolec,
   ],

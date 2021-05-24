@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, EventEmitter, Output } from '@angular/core';
 import { faBars, faBell, faSearch } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -19,7 +19,7 @@ export class NavbarMbOrgan implements OnInit {
   @Input() bars = faBars;
   @Input() isLogin = true;
   @Input() isMenu = false;
-  @Input() isSearch = false;
+  @Output() clickDisplaySearch = new EventEmitter();
 
   constructor() {}
 
