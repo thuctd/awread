@@ -7,7 +7,7 @@ declare const window: Window & { haveMobile: boolean };
 
 const routes: Routes = [
   {
-    path: 'author',
+    path: '',
     component: window.innerWidth <= 768 && window?.haveMobile ? SharedMobileLayout : SharedDesktopLayout,
     children: [
       {
@@ -15,14 +15,14 @@ const routes: Routes = [
         component: AuthorLayout,
         children: [
           {
-            path: ':authorId',
+            path: ':userId',
             loadChildren: () =>
               window.innerWidth <= 768 && window?.haveMobile
                 ? import('./pages/author-mobile/author-mobile.module').then((m) => m.AuthorMobileModule)
                 : import('./pages/author-desktop/author-desktop.module').then((m) => m.AuthorDesktopModule),
           },
           {
-            path: ':authorId/books',
+            path: ':userId/books',
             loadChildren: () =>
               window.innerWidth <= 768 && window?.haveMobile
                 ? import('./pages/author-book-mobile/author-book-mobile.module').then((m) => m.AuthorBookMobileModule)

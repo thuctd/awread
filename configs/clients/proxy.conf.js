@@ -6,7 +6,7 @@ module.exports = [
     {
         context: [
             "/graphql",
-            "/auth"
+            // "/auth"
         ],
         "target": backendGraphqlHost,
         "logLevel": process.env && process.env.ENVIRONMENT === 'prod' ? "info" : "debug",
