@@ -1,7 +1,12 @@
 <div class="w-full flex flex-row lg:flex-col">
   <atom-img-m [size]="'other'" [sizeImg]="'w-27 h-36 md:w-54 md:h-72'"></atom-img-m>
   <!-- <molec-rd-author-info-book-item [book]="book" [isSize]="isSize" class="px-4 sm:px-12 lg:px-0 roboto"></molec-rd-author-info-book-item> -->
-  <molec-info-book class="px-3 w-48" [displayUI]="displayUI" [book]="book"></molec-info-book>
+  <div class="md:hidden">
+    <molec-info-book class="px-3 w-48" [displayUI]="displayUIMobile" [book]="book"></molec-info-book>
+  </div>
+  <div class="hidden md:block">
+    <molec-info-book [displayUI]="displayUIDesktop" [book]="book"></molec-info-book>
+  </div>
   <div class="lg:hidden block text-gray-text">
     <div class="text-xs sm:text-base mb-4 font-semibold ">Thể loại</div>
     <div class="text-small sm:text-sm font-semibold">{{category}}</div>

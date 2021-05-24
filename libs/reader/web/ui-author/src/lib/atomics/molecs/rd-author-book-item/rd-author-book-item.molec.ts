@@ -24,7 +24,7 @@ export class RdAuthorBookItemMolec implements OnInit {
   };
   @Input() bookId = 'bvxz_324345seQ6x';
 
-  @Input() displayUI = {
+  @Input() displayUIMobile = {
     ui: {
       isAuthor: true,
       isRating: true,
@@ -34,6 +34,19 @@ export class RdAuthorBookItemMolec implements OnInit {
     size: {
       sizeTitle: 's',
       sizeBtn: false,
+    },
+  };
+
+  @Input() displayUIDesktop = {
+    ui: {
+      isAuthor: true,
+      isRating: true,
+      isIcon: true,
+      isDate: true,
+    },
+    size: {
+      sizeTitle: 'm',
+      sizeBtn: true,
     },
   };
 
