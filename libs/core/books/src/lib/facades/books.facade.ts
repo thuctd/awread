@@ -104,9 +104,8 @@ export class BooksFacade {
     return this.booksHomeGear.getFeatureBooks();
   }
 
-  getFilterBooks() {
-    console.log(this.booksQuery.getCurrentFilter().genres);
-    // return this.booksGear.getFilterBooks(this.booksQuery.getCurrentFilter());
+  getFilterBooks(categoryId: string) {
+    return this.booksGear.getFilterBooks(this.booksQuery.getCurrentFilter(), categoryId);
   }
 
   searchBookApi(term: string) {

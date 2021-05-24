@@ -9,6 +9,7 @@ import { PersistNgFormPlugin } from '@datorama/akita';
 import { BooksFacade } from '@awread/core/books';
 import { GenresFacade } from '@awread/core/genres';
 import { CategoriesFacade } from '@awread/core/categories';
+import { DatePipe } from '@angular/common';
 
 @UntilDestroy()
 @Injectable({
@@ -32,7 +33,7 @@ export class ListPage implements OnInit, OnDestroy {
     private router: Router,
     private categoriesFacade: CategoriesFacade,
     private booksFacade: BooksFacade,
-    private genresFacade: GenresFacade
+    private genresFacade: GenresFacade,
   ) { }
   ngOnDestroy(): void { }
 
@@ -79,6 +80,12 @@ export class ListPage implements OnInit, OnDestroy {
     );
   }
 
+  filterBooks() {
+    this.activatedRoute.parent.url.subscribe(([urlSegment]) => {
+      const categoryId = urlSegment.parameterMap.get('categoryId');
+      this.filteredBooks$ = this.booksFacade.getFilterBooks(categoryId);
+    })
+  }
 
   private updateForm() {
     this.activatedRoute.parent.url.subscribe(([urlSegment]) => {
@@ -93,7 +100,7 @@ export class ListPage implements OnInit, OnDestroy {
       typeBook: [''],
       genres: [''],
       criteria: [''],
-      status: [''],
+      completed: [''],
       postingDate: [''],
     });
 
@@ -101,11 +108,6 @@ export class ListPage implements OnInit, OnDestroy {
       this.booksFacade.booksQuery,
       'ui.filters')
       .setForm(this.filtersForm);
-  }
-
-  filterBooks() {
-    // console.log(this.filtersForm.get('genres').value);
-    this.booksFacade.getFilterBooks();
   }
 
 }

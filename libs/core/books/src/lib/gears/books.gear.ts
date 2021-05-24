@@ -68,8 +68,10 @@ export class BooksGear {
     );
   }
 
-  getFilterBooks(filters) {
-    return this.booksApi.getFilterBooks(filters);
+  getFilterBooks(filters, cateogyrId: string) {
+    return this.booksApi.getFilterBooks(filters, cateogyrId).pipe(
+      tap(books => this.categoryBooksStore.set(books)),
+    );;
   }
 
   searhBookByTermApi(term: string) {

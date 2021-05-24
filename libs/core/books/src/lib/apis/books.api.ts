@@ -1,69 +1,49 @@
 import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
-
 @Injectable({ providedIn: 'root' })
 export class BooksApi {
   constructor(private apollo: Apollo) { }
 
-  getFilterBooks(filters) {
-    return this.apollo.mutate({
-      mutation: gql`
-        mutation SearchBooks($filters: String!) {
-          searchBooks(input: { searchTerm: $filters }) {
-            books {
-              title
-              description
-              userId
-            }
-          }
-        }
-      `,
-      variables: {
-        filters,
-      },
-    });
-  }
-
   searchBookByTerm(filter: string) {
-    return this.apollo.mutate({
-      mutation: gql`
-        mutation SearchBooks($filter: String) {
-          searchBooks(input: { searchTerm: $filter }) {
-            mvBooksLatestChapters {
-              title
-              authors
-              newestChapters
-              genres
-              bookId
-              categoryId
-              completed
-              publisherId
-              createdAt
-              description
-              cover
-              published
-              genres
-              type
-              ages
-              updatedAt
-              userId
+    return this.apollo
+      .mutate({
+        mutation: gql`
+          mutation SearchBooks($filter: String) {
+            searchBooks(input: { searchTerm: $filter }) {
+              mvBooksLatestChapters {
+                title
+                authors
+                newestChapters
+                genres
+                bookId
+                categoryId
+                completed
+                publisherId
+                createdAt
+                description
+                cover
+                published
+                genres
+                type
+                ages
+                updatedAt
+                userId
+              }
             }
           }
-        }
-      `,
-      variables: {
-        filter,
-      },
-    }).pipe(
-      map(res => res?.['data']?.['searchBooks']?.['mvBooksLatestChapters'])
-    );
+        `,
+        variables: {
+          filter,
+        },
+      })
+      .pipe(map((res) => res?.['data']?.['searchBooks']?.['mvBooksLatestChapters']));
   }
-
 
   getCategoryBooks(categoryId?: string) {
-    return this.apollo.query({
-      query: gql`
+    return this.apollo
+      .query({
+        query: gql`
          query allMvBooksLatestChapters${categoryId ? `($categoryId: BigFloat)` : ''} {
         allMvBooksLatestChapters (first: 10, condition: {published: true ${categoryId ? `, categoryId: $categoryId ` : ''}} ){
           nodes {
@@ -88,20 +68,20 @@ export class BooksApi {
         }
       }
       `,
-      variables: {
-        categoryId,
-      },
-    }).pipe(
-      map(res => res?.['data']?.['allMvBooksLatestChapters']?.['nodes'])
-    );
+        variables: {
+          categoryId,
+        },
+      })
+      .pipe(map((res) => res?.['data']?.['allMvBooksLatestChapters']?.['nodes']));
   }
 
   getAuthorBooks(authorIds: string[]) {
     //NOTE: console.log(`containsAnyKeys: ${['id1', 'id2']}`); // containsAnyKeys: id1,id2
     //NOTE: console.log(`containsAnyKeys: ${JSON.stringify(['id1', 'id2'])}`); // containsAnyKeys: ["id1","id2"]
     //NOTE: JSON.stringify() is important
-    return this.apollo.query({
-      query: gql`
+    return this.apollo
+      .query({
+        query: gql`
       query allMvBooksLatestChapters {
         allMvBooksLatestChapters(
               filter: {authors: {containsAnyKeys: ${JSON.stringify(authorIds)} }}, condition: { published: true }
@@ -127,87 +107,138 @@ export class BooksApi {
           }
         }
       }
-      `
-
-    }).pipe(
-      map(res => res?.['data']?.['allMvBooksLatestChapters']?.['nodes'])
-    );
+      `,
+      })
+      .pipe(map((res) => res?.['data']?.['allMvBooksLatestChapters']?.['nodes']));
   }
 
   getGenreBooks(genreId: string) {
-    return this.apollo.query({
-      query: gql`
-        query allVRandomBooks($genreId: String!) {
-          allVRandomBooks(filter: { genres: { containsKey: $genreId } }, first: 20) {
-            nodes {
-              bookId
-              categoryId
-              genres
-              type
-              title
-              userId
-              cover
+    return this.apollo
+      .query({
+        query: gql`
+          query allVRandomBooks($genreId: String!) {
+            allVRandomBooks(filter: { genres: { containsKey: $genreId } }, first: 20) {
+              nodes {
+                bookId
+                categoryId
+                genres
+                type
+                title
+                userId
+                cover
+              }
             }
           }
-        }
-      `,
-      variables: { genreId },
-    }).pipe(
-      map(res => res?.['data']?.['allVRandomBooks']?.['nodes'])
-    );
+        `,
+        variables: { genreId },
+      })
+      .pipe(map((res) => res?.['data']?.['allVRandomBooks']?.['nodes']));
   }
 
   getTopBooks() {
-    return this.apollo.query({
-      query: gql`
-        query getTopBooks {
-          allMvMostViewBooks(first: 3, orderBy: VIEWS_DESC) {
-            nodes {
-              bookId
-              title
-              categoryId
-              genres
-              type
-              newestChapters
-              updatedAt
-              views
+    return this.apollo
+      .query({
+        query: gql`
+          query getTopBooks {
+            allMvMostViewBooks(first: 3, orderBy: VIEWS_DESC) {
+              nodes {
+                bookId
+                title
+                categoryId
+                genres
+                type
+                newestChapters
+                updatedAt
+                views
+              }
             }
           }
-        }
-      `,
-    }).pipe(
-      map(res => res?.['data']?.['allMvMostViewBooks']?.['nodes'])
-    );
+        `,
+      })
+      .pipe(map((res) => res?.['data']?.['allMvMostViewBooks']?.['nodes']));
   }
 
   getBookById(bookId: string) {
-    return this.apollo.query({
-      query: gql`
-        query allMvBooksLatestChapters($bookId: UUID!) {
-          allMvBooksLatestChapters(condition: { bookId: $bookId }) {
-            nodes {
-              ages
-              authors
-              bookId
-              categoryId
-              genres
-              type
-              completed
-              description
-              published
-              publisherId
-              title
-              updatedAt
-              userId
+    return this.apollo
+      .query({
+        query: gql`
+          query allMvBooksLatestChapters($bookId: UUID!) {
+            allMvBooksLatestChapters(condition: { bookId: $bookId }) {
+              nodes {
+                ages
+                authors
+                bookId
+                categoryId
+                genres
+                type
+                completed
+                description
+                published
+                publisherId
+                title
+                updatedAt
+                userId
+              }
             }
           }
-        }
-      `,
-      variables: {
-        bookId,
-      },
-    }).pipe(
-      map(res => res?.['data']?.['allMvBooksLatestChapters']?.['nodes'])
-    );
+        `,
+        variables: {
+          bookId,
+        },
+      })
+      .pipe(map((res) => res?.['data']?.['allMvBooksLatestChapters']?.['nodes']));
+  }
+
+  getFilterBooks(filters, categoryId: string) {
+    const genres = filters.genres;
+    const completed = filters.completed === '0' ? false : true;
+    const type = filters.type;
+    const updatedAt = this.transformDate(filters.postingDate);
+    let queryString = '';
+    let mvBooks = '';
+
+    if (filters.criteria === '') {
+      mvBooks = 'allMvBooksLatestChapters';
+    } else if (filters.criteria === '0') {
+      mvBooks = 'allMvBooksLatestChapters';
+    } else if (filters.criteria === '1') {
+      mvBooks = 'allMvMostViewBooks';
+    } else if (filters.criteria === '2') {
+      mvBooks = 'allMvMostViewBooks';
+    } else {
+      mvBooks = 'allVRandomBooks';
+    }
+
+    queryString = `query ${mvBooks}($categoryId: BigFloat, $completed: Boolean, $type: String) {
+              ${mvBooks}(first: 20, condition: { categoryId: $categoryId, type: $type, completed: $completed }, orderBy: PUBLISHED_DESC,
+                filter: { updatedAt: {greaterThan: "${updatedAt}"} ${genres.length ? `, genres: {containsAnyKeys: ${JSON.stringify(genres)}}` : ''}}) {
+                nodes {
+                  bookId
+                  title
+                  categoryId
+                  newestChapters
+                  updatedAt
+                  authors
+                }
+              }
+            }`;
+    console.log(queryString);
+
+    return this.apollo.query({
+      query: gql`
+          ${queryString}
+        `,
+      variables: { categoryId, type, completed },
+    }).pipe(map((res) => res?.['data']?.[mvBooks]?.['nodes']));
+  }
+
+  private transformDate(postingDate: any) {
+    const date = new Date();
+    date.setDate(date.getDate() - (postingDate === '' ? 3650 : postingDate));
+    const dd = String(date.getDate()).padStart(2, '0');
+    const MM = String(date.getMonth() + 1).padStart(2, '0');
+    const yyyy = date.getFullYear();
+
+    return yyyy + '-' + MM + '-' + dd;
   }
 }

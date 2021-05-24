@@ -1,6 +1,6 @@
 <div class="text-xs md:text-sm leading-tight my-3">
   <span class="font-medium inline-block text-gray-text mr-2 w-28">{{title}}</span>
-  <a [ngClass]='color ? "text-green-primary" : "text-gray-text"' *ngFor="let item of items | keyvalue; let inx = index" [routerLink]="[item.key]"
+  <a [ngClass]='color ? "text-green-primary" : "text-gray-text"' *ngFor="let item of items | keyvalue; let inx = index" [routerLink]="['/', item.key]"
     routerLinkActive="router-link-active" class="inline-block outline-none cursor-pointer"><span
       class="text-gray-icon text-xs hover:text-green-primary duration-300" class="relative mx-2 font-lg" *ngIf="inx !== 0">-</span>
     {{item.value.name}}

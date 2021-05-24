@@ -8,7 +8,7 @@ export interface BooksState extends EntityState<Book>, ActiveState {
       typeBook: string;
       genres: string[];
       criteria: string;
-      status: string;
+      completed: string;
       postingDate: string;
     }
   }
@@ -20,7 +20,7 @@ const initialState = {
       typeBook: '',
       genres: [''],
       criteria: '',
-      status: '',
+      completed: '',
       postingDate: ''
     }
   }
