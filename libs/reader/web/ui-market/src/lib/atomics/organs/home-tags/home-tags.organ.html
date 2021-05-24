@@ -1,12 +1,16 @@
-<section class="px-0 sm:px-6 lg:px-8 w-full max-w-screen-xl mx-auto mt-4 py-6">
-  <div class="flex">
-    <atom-title [title]="titlePage" class="mr-2 sm:mr-4 mt-2" [isUppercase]="false"></atom-title>
-    <div class="flex mb-6">
-      <div class="w-full flex mt-0 md:mt-1.5">
-        <rd-home-tab-category [active]="i == currentIndex" (click)="setActiveGenre(genre, i)" *ngFor="let genre of genres; let i = index;"
-          [tabName]="genre.name" (emitEvent)="filterItemsByGenre.emit(genre)">
-        </rd-home-tab-category>
-      </div>
+<section class="px-0 sm:px-6 lg:px-8 w-full max-w-screen-xl mx-auto mt-4 py-6 relative">
+  <div  class="flex">
+    <atom-title [title]='titlePage' class="mr-2 sm:mr-4 mt-2" [isUppercase]='false'></atom-title>
+    <div *ngIf="isDisplay" (click)="scrollLeft()" class="bg-white rounded-full w-8 h-8 flex justify-center items-center mt-2 shadow cursor-pointer">
+      <fa-icon class="text-gray-text p-3" [icon]="arrowLeftIcon"></fa-icon>
+    </div>
+    <div #widgetsContent class="flex mt-1 mx-2 sm:mx-6 overflow-x-hidden">
+      <rd-home-tab-category [active]="i == currentIndex" (click)="setActiveGenre(genre, i)" *ngFor="let genre of genres; let i = index;" [tabName]="genre.name"
+          (emitEvent)="filterItemsByGenre.emit(genre)">
+      </rd-home-tab-category>
+    </div>
+    <div *ngIf="isDisplay" (click)="scrollRight()" class="bg-white rounded-full w-8 h-8 flex justify-center items-center mt-2 shadow cursor-pointer">
+      <fa-icon class="text-gray-text p-3" [icon]="arrowRightIcon"></fa-icon>
     </div>
   </div>
   <div class="w-full bg-purple-50 leanding-normal tracking-wide pb-6 mt-4 md:mt-8">
