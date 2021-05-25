@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
-import { AuthorGear } from '../gears';
-import { AuthorQuery, AuthorStore } from '../states/author';
+import { AuthorGear } from '../gears/author.gear';
+import { AuthorsQuery, AuthorsStore } from '../states/authors';
 
 @Injectable({ providedIn: 'root' })
 export class AuthorFacade {
 
   constructor(
     private authorGear: AuthorGear,
-    private authorStore: AuthorStore,
-    private authorQuery: AuthorQuery
+    private authorStore: AuthorsStore,
+    private authorQuery: AuthorsQuery
   ) {
   }
 
@@ -36,8 +36,8 @@ export class AuthorFacade {
     return this.authorGear.getAuthors();
   }
 
-  getDetailAuthor(authorId: string) {
-    return this.authorGear.getDetailAuthor(authorId);
+  getDetailAuthor(userId: string) {
+    return this.authorGear.getDetailAuthor(userId);
   }
 
 }

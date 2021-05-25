@@ -23,9 +23,9 @@ export class RdAuthorDetailMolec implements OnInit {
   @Input() isFollow = true;
   @Input() isBlock = false;
 
-  constructor(private matDialog: MatDialog) {}
+  constructor(private matDialog: MatDialog) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   openDiaLogFollowers($event) {
     this.matDialog.open(RdAuthorPopupListFollowersTemplate, {

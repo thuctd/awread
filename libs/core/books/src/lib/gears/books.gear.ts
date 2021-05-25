@@ -25,18 +25,19 @@ export class BooksGear {
   getCategoryBooks(categoryId?: string) {
     this.categoryBooksStore.setLoading(true);
     return this.booksApi.getCategoryBooks(categoryId).pipe(
-      // map((result) => result.map(res => {
-      //   const chapters = Object.keys(res['newestChapters']).map(
-      //     key => console.log(res['newestChapters'][key], 'position')
-      //   );
-      // })),
       tap(books => this.categoryBooksStore.set(books)),
       tap(() => this.categoryBooksStore.setLoading(false))
     );
   }
 
   getAuthorBooks(authors) {
-    const authorIds = Object.keys(authors ?? {});
+    const isCheck = typeof (authors);
+    let authorIds: string[];
+    if (isCheck === 'string') {
+      authorIds = authors.split();
+    } else {
+      authorIds = Object.keys(authors ?? {});
+    }
     this.authorBooksStore.setLoading(true);
     return this.booksApi.getAuthorBooks(authorIds).pipe(
       tap(books => this.authorBooksStore.set(books)),
@@ -56,7 +57,7 @@ export class BooksGear {
   }
 
   getBookById(bookId: string) {
-    return this.booksApi.getBookById(bookId)
+    return this.booksApi.getBookById(bookId);
   }
 
   getTopBooks() {
@@ -67,8 +68,10 @@ export class BooksGear {
     );
   }
 
-  getFilterBooks(filters) {
-    return this.booksApi.getFilterBooks(filters);
+  getFilterBooks(filters, cateogyrId: string) {
+    return this.booksApi.getFilterBooks(filters, cateogyrId).pipe(
+      tap(books => this.categoryBooksStore.set(books)),
+    );;
   }
 
   searhBookByTermApi(term: string) {

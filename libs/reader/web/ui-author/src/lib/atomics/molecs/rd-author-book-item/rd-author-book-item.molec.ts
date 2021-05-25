@@ -13,16 +13,8 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RdAuthorBookItemMolec implements OnInit {
-  @Input() srcImg = '/global-assets/images/sach-co-gai-nam-ay-chung-ta-cung-theo-duoi.webp';
-  @Input() alt = '';
   @Input() category = 'Hành động, phiêu lưu';
-  @Input() book = {
-    title: 'Cô gái chúng ta cùng theo đuổi năm nào',
-    bookId: '1',
-    authors: [],
-    updatedAt: '2021-05-03',
-  };
-  @Input() bookId = 'bvxz_324345seQ6x';
+  @Input() book;
 
   @Input() displayUIMobile = {
     ui: {
@@ -51,6 +43,5 @@ export class RdAuthorBookItemMolec implements OnInit {
   };
 
   constructor() {}
-
   ngOnInit(): void {}
 }

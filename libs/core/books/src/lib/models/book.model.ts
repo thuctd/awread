@@ -16,6 +16,7 @@ export interface Book {
   tags: string[];
   audience: string;
   genreIds: string[];
+  published: boolean;
   updatedat: Date;
   genres?: Genre[];
 }
