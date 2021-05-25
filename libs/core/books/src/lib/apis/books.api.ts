@@ -222,8 +222,6 @@ export class BooksApi {
                 }
               }
             }`;
-    console.log(queryString);
-
     return this.apollo.query({
       query: gql`
           ${queryString}
@@ -234,7 +232,7 @@ export class BooksApi {
 
   private transformDate(postingDate: any) {
     const date = new Date();
-    date.setDate(date.getDate() - (postingDate === '' ? 3650 : postingDate));
+    date.setDate(date.getDate() - (postingDate === '' ? 7300 : postingDate));
     const dd = String(date.getDate()).padStart(2, '0');
     const MM = String(date.getMonth() + 1).padStart(2, '0');
     const yyyy = date.getFullYear();

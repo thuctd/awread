@@ -30,6 +30,7 @@ export class AuthorPage implements OnInit {
       tap(author => this.booksFacade.getAuthorBooks(author[0].userId).subscribe())
     ).subscribe(users => {
       this.user = users[0];
+      console.log(this.user);      
       this.breadcrumbs = this.getbreadcrumbs()
     })
   }
