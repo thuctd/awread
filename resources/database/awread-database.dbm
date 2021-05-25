@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="0,682" last-zoom="0.95" max-obj-count="16"
+<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="0,416" last-zoom="0.95" max-obj-count="26"
 	 default-owner="postgres">
 <role name="public_read"
       inherit="true">
@@ -23,6 +23,9 @@ CAUTION: Do not modify this file unless you know what you are doing.
 
 <role name="postgraphile"
       inherit="true">
+</role>
+
+<role name="basic_write">
 </role>
 
 <database name="awread_database" is-template="false" allow-conns="true">
@@ -966,7 +969,8 @@ end;]]></definition>
 </view>
 
 <genericsql name="grant_access">
-	<definition><![CDATA[grant public_read to anonymous, reader, writer, postgraphile;]]></definition>
+	<definition><![CDATA[grant public_read to anonymous, reader, writer, postgraphile;
+grant basic_write to reader, writer, postgraphile;]]></definition>
 	<object name="public_read" type="role" ref-name="grant_access_public_read"/>
 </genericsql>
 
@@ -1114,11 +1118,6 @@ end;]]></definition>
 	 src-required="false" dst-required="true"/>
 
 <permission>
-	<object name="public.books" type="table"/>
-	<roles names="public_read"/>
-	<privileges select="grant-op"/>
-</permission>
-<permission>
 	<object name="public.mv_most_view_books" type="view"/>
 	<roles names="public_read"/>
 	<privileges select="grant-op"/>
@@ -1140,11 +1139,6 @@ end;]]></definition>
 </permission>
 <permission>
 	<object name="public.categories" type="table"/>
-	<roles names="public_read"/>
-	<privileges select="grant-op"/>
-</permission>
-<permission>
-	<object name="public.books_genres" type="table"/>
 	<roles names="public_read"/>
 	<privileges select="grant-op"/>
 </permission>
@@ -1182,5 +1176,55 @@ end;]]></definition>
 	<object name="public.users" type="table"/>
 	<roles names="reader,writer"/>
 	<privileges update="true"/>
+</permission>
+<permission>
+	<object name="public.books" type="table"/>
+	<roles names="reader,writer,postgraphile"/>
+	<privileges insert="true" update="true"/>
+</permission>
+<permission>
+	<object name="public.books_genres" type="table"/>
+	<roles names="postgraphile,reader,writer"/>
+	<privileges insert="true" update="true"/>
+</permission>
+<permission>
+	<object name="public.books" type="table"/>
+	<roles names="basic_write"/>
+	<privileges insert="true" update="true"/>
+</permission>
+<permission>
+	<object name="public.books_genres" type="table"/>
+	<roles names="basic_write"/>
+	<privileges delete="true" insert="true" update="true"/>
+</permission>
+<permission>
+	<object name="public.chapters" type="table"/>
+	<roles names="basic_write"/>
+	<privileges delete="true" insert="true" update="true"/>
+</permission>
+<permission>
+	<object name="public.contents" type="table"/>
+	<roles names="basic_write"/>
+	<privileges delete="true" insert="true" update="true"/>
+</permission>
+<permission>
+	<object name="public.authors" type="table"/>
+	<roles names="basic_write"/>
+	<privileges delete="true" insert="true" update="true"/>
+</permission>
+<permission>
+	<object name="private.users" type="table"/>
+	<roles names="public_read"/>
+	<privileges select="true"/>
+</permission>
+<permission>
+	<object name="private.users" type="table"/>
+	<roles names="basic_write"/>
+	<privileges insert="true" update="true"/>
+</permission>
+<permission>
+	<object name="public.book_visits" type="table"/>
+	<roles names="basic_write"/>
+	<privileges insert="true" update="true"/>
 </permission>
 </dbmodel>
