@@ -10,7 +10,6 @@
           <ng-template *ngFor="let book of books" carouselSlide>
             <div *ngFor="let story of counter(2)" class="mx-2 sm:mx-5 mb-4">
               <atom-img-m [size]="'s'" [bookId]="book.id" [srcImg]="book.imgUrl"></atom-img-m>
-              <!-- <molec-home-info-book-update [book]="book"></molec-home-info-book-update> -->
               <molec-info-book [book]="book" [displayUI]="displayUI"></molec-info-book>
             </div>
           </ng-template>

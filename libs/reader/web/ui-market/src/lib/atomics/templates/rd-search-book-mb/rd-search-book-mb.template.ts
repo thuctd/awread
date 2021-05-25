@@ -1,4 +1,6 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'template-rd-search-book-mb',
@@ -14,21 +16,23 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 })
 export class RdSearchBookMbTemplate implements OnInit {
   @Input() title = 'Cô gái năm ấy chúng ta theo đuổi';
+  @Input() faIcon = faSearch;
+  @Output() submitSearchBtn = new EventEmitter();
+  @Input() inputControl = new FormControl();
   @Input() items = [
     {
-      id: 1,
-      name: 'Cô gái năm ấy chúng ta theo đuổi',
-      category: 'Phiêu lưu, hành động',
+      title: 'Cô gái chúng ta cùng theo đuổi năm nào',
+      bookId: '1',
+      authors: [],
+      updatedAt: '2021-05-03',
+      category: 'Hành động',
     },
     {
-      id: 2,
-      name: 'Cô gái năm ấy chúng ta theo đuổi',
-      category: 'Phiêu lưu',
-    },
-    {
-      id: 3,
-      name: 'Cô gái năm ấy chúng ta theo đuổi',
-      category: 'Phiêu lưu',
+      title: 'Cô gái chúng ta cùng theo đuổi năm nào',
+      bookId: '1',
+      authors: [],
+      updatedAt: '2021-05-03',
+      category: 'zui zẻ',
     },
   ];
 

@@ -1,9 +1,13 @@
 <div class="mx-auto px-4">
+  <div (click)="submitSearchBtn.emit()">
+    <fa-icon class="text-gray-light text-lg absolute cursor-pointer" [icon]="faIcon"></fa-icon>
+  </div>
+  <input [formControl]="inputControl" class="pl-8 pt-0.5 focus:outline-none nunito font-semibold w-full text-gray-text">
   <ng-container *ngIf="items.length; else noData">
-    <div class="text-base border-b pb-3 text-gray-text font-bold">{{title}}</div>
+    <!-- <div class="text-base border-b pb-3 text-gray-text font-bold">{{title}}</div> -->
     <div class="text-sm ml-4 py-2 text-gray-text font-semibold">{{items.length}} Tác phẩm</div>
     <div *ngFor="let item of items" class="py-2">
-      <molec-rd-author-book-item [book]="item.name" [category]="item.category"></molec-rd-author-book-item>
+      <molec-rd-author-book-item [book]="item" [category]="item.category"></molec-rd-author-book-item>
     </div>
   </ng-container>
   <ng-template #noData>

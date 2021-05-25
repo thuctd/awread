@@ -11,11 +11,6 @@ interface TabHead {
       :host {
         display: block;
       }
-      :host .active:first-child {
-        border: none;
-        background-color: transparent;
-        color: black;
-      }
     `,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -28,17 +23,17 @@ export class RdHomeBookUpdateTabMolec implements OnInit {
   @Input() categories = [
     {
       categoryId: '',
-      name: 'Tất cả'
-    }
+      name: 'Tất cả',
+    },
   ];
 
   @Input() selectedTab: string;
   @Output() emitBooks = new EventEmitter();
   @Output() emitAllBooks = new EventEmitter();
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   setActiveCategory(category, index) {
     this.currentCategory = category;
@@ -49,6 +44,4 @@ export class RdHomeBookUpdateTabMolec implements OnInit {
   setNoneActiveAll() {
     this.currentIndex = 999;
   }
-
-
 }
