@@ -11,8 +11,8 @@ export class NewsPage {
   constructor(private newsFacade: NewsFacade) {}
 
   ngOnInit(): void {
-    this.newsFacade.get().subscribe((value) => {
-      console.log('Apidata', value);
+    this.newsFacade.get().subscribe((data) => {
+      console.log('Apidata', data);
     });
 
     // this.news$.subscribe((value) => {
