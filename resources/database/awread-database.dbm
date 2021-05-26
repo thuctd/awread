@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="0,792" last-zoom="0.95" max-obj-count="27"
+<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="0,608" last-zoom="0.95" max-obj-count="27"
 	 default-owner="postgres">
 <role name="public_read"
       inherit="true">
@@ -34,15 +34,18 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <schema name="public" layer="0" fill-color="#e1e1e1" sql-disabled="true">
 </schema>
 
+<extension name="pgcrypto">
+</extension>
+
 <extension name="pg_trgm">
+</extension>
+
+<extension name="uuid-ossp">
 </extension>
 
 <schema name="private" layer="0" rect-visible="true" fill-color="#e1e1e1">
 	<role name="postgres"/>
 </schema>
-
-<extension name="pgcrypto">
-</extension>
 
 <usertype name="jwt_token" configuration="composite">
 	<schema name="public"/>
@@ -57,9 +60,6 @@ CAUTION: Do not modify this file unless you know what you are doing.
 		<type name="numeric" length="0"/>
 	</typeattrib>
 </usertype>
-
-<extension name="uuid-ossp">
-</extension>
 
 <opclass  name="gin_trgm_ops" index-type="gin" default="false" sql-disabled="true">
 	<schema name="public"/>
