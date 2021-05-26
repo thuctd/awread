@@ -27,11 +27,6 @@ export class ListPage implements OnInit {
 
   }
 
-  editBook(bookId: string) {
-    // this.booksFacade.setBookIdActive(bookId);
-    this.router.navigate(['detail', { bookId: bookId, type: 'edit' }]);
-  }
-
   removeBook(bookId: string) {
   }
 }

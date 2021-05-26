@@ -6,7 +6,7 @@
   <ng-template #loaded>
     <ng-container *ngIf="books.length;else noData">
       <div class="text-right pb-10">
-        <a class="text-sm md:text-xs lg:text-base xl:text-base w-full bg-green-400 text-white cursor-pointer rounded-md border-green-400 focus:shadow-outline     focus:outline-none py-2 px-4"
+        <a class="text-sm md:text-xs lg:text-base xl:text-base w-full bg-green-400 text-white cursor-pointer rounded-md border-green-400 focus:shadow-outline focus:outline-none py-2 px-4"
           [routerLink]="['/detail', {type: 'create'}]" routerLinkActive="router-link-active">Đăng truyện</a>
       </div>
       <div class="mb-4">
@@ -16,14 +16,15 @@
       <infinite-scroll #infiniteScroll (scrolled)="moreEvent.next()">
         <div *ngFor="let book of books ;" class="grid grid-cols-12 gap-6 bg-white pt-4">
           <div class="col-span-2 md:col-span-5 pl-8">
-            <wrt-list-stories [book]="book"></wrt-list-stories>
+            <wrt-list-stories [href]="['/detail', { bookId: book.bookId, type: 'edit' }]" (openDetailBookEvent)="openDetailBook()" [book]="book">
+            </wrt-list-stories>
           </div>
           <div class="col-span-2 md:col-span-4 text-center">
             <wrt-list-chapter [book]="book"></wrt-list-chapter>
           </div>
           <div class="col-span-2 md:col-span-3 pr-8">
             <wrt-list-act [bookId]="book.bookid" (updateBookStatusEvent)="updateBookStatusEvent.emit($event)" (addChapterEvent)="addChapterEvent.emit($event)"
-              (editBookEvent)="editBookEvent.emit($event)" (removeBookEvent)="removeBookEvent.emit($event)"></wrt-list-act>
+              (removeBookEvent)="removeBookEvent.emit($event)"></wrt-list-act>
           </div>
         </div>
       </infinite-scroll>

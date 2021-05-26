@@ -1,4 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter, Input } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { WrtDetailPopupBookTemplate } from '@awread/writer/web/ui-creation';
 
 @Component({
   selector: 'list',
@@ -24,18 +26,24 @@ export class WrtListOrgan implements OnInit {
   @Output() moreEvent = new EventEmitter();
   @Output() addChapterEvent = new EventEmitter();
   @Output() removeBookEvent = new EventEmitter();
-  @Output() editBookEvent = new EventEmitter();
   @Output() updateBookStatusEvent = new EventEmitter();
 
   demoNumber = 10;
 
   counter = Array;
 
-  constructor() {}
+  constructor(private matDialog: MatDialog) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   numberReturn(length) {
     return new Array(length);
+  }
+
+  openDetailBook(): void {
+    this.matDialog.open(WrtDetailPopupBookTemplate, {
+      width: '55rem',
+      height: '33rem',
+    });
   }
 }
