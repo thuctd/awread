@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
+import { Order } from '@datorama/akita';
 import { ChaptersGear } from '../gears/chapters.gear';
 import { ChaptersQuery } from '../states/chapters';
 
 @Injectable({ providedIn: 'root' })
 export class ChaptersFacade {
-  chapters$ = this.chaptersQuery.selectAll();
+  chapters$ = this.chaptersQuery.selectAll({ sortBy: 'position', sortByOrder: Order.DESC });
   constructor(
     private chaptersGear: ChaptersGear,
     private chaptersQuery: ChaptersQuery,

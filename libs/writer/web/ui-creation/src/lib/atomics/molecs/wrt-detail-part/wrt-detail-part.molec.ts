@@ -13,12 +13,12 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 })
 export class WrtDetailPartMolec implements OnInit {
   @Input() chapter = {
-    chapterNumber: '',
+    position: '',
     title: '',
-    status: '',
-    updatedat: '',
+    published: true,
+    updatedAt: '',
   };
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }
