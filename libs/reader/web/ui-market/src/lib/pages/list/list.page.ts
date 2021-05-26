@@ -75,13 +75,14 @@ export class ListPage implements OnInit, OnDestroy {
   }
 
   filterItemsByCategory(categoryId) {
-    this.filteredBooks$ = this.booksFacade.getCategoryBooks(categoryId).pipe();
+    this.filteredBooks$ = this.booksFacade.getCategoryBooks(categoryId).pipe(
+      tap(res => console.log(res))
+    );
   }
 
   filterBooks() {
     this.activatedRoute.parent.url.subscribe(([urlSegment]) => {
       const categoryId = urlSegment.parameterMap.get('categoryId');
-      const type = urlSegment.path;
       this.filteredBooks$ = this.booksFacade.getFilterBooks(categoryId);
     })
   }

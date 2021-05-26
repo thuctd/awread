@@ -46,6 +46,6 @@ export class InfoBookMolec implements OnInit {
 
   orderByPosition(a, b) {
     // console.log('a, b', a, b);
-    return b.value.position > a.value.position ? -1 : (a.value.position > b.value.position ? 1 : 0);
+    return a.value.position > b.value.position ? -1 : (b.value.position > a.value.position ? 1 : 0);
   }
 }

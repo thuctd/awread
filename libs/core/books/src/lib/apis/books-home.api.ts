@@ -66,7 +66,6 @@ export class BooksHomeApi {
             }
           }
         `,
-      variables: { categoryId }
     }).pipe(
       map(res => res?.['data']?.['allMvBooksLatestChapters']?.['nodes'])
     )
