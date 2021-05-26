@@ -63,5 +63,10 @@ export class RdProfileTabTemplateTemplate implements OnInit {
 
   changeDisplay(mode: any) {
     this.mode = mode;
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth',
+    });
   }
 }
