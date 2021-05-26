@@ -14,7 +14,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Output, Input, EventEmitter
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfileFormOrgan implements OnInit {
-  @Input() conentGG = {
+  @Input() connectGg = {
     title: 'Kết nối bằng google',
     image: '/global-assets/images/google.webp',
   };
