@@ -2,7 +2,6 @@ import { Rule, SchematicContext, Tree, apply, applyTemplates, chain, schematic, 
 import { normalize, strings } from '@angular-devkit/core';
 import * as pluralize from 'pluralize';
 import { guessProjectToSchema } from '../../utility/guess-workspace';
-import { exportToLibIndex } from '../../utility/export-to-index';
 
 export default function (schema: any): Rule {
     return async (tree: Tree, context: SchematicContext) => {

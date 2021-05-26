@@ -1,22 +1,17 @@
 <div class="inline-block self-start">
-  <h3 class="text-gray-800">Chương {{ chapter.chapterNumber }}</h3>
+  <h3 class="text-gray-800">Chương {{ chapter.position }}</h3>
   <div class="text-base font-bold mb-1 text-gray-700 break-words">
     {{ chapter.title | titlecase }}
   </div>
-
-  <!-- <atom-title class="truncate" [title]="'Cô gái chúng ta theo đuổi năm nào'" [class]="'text-sm md:text-base font-bold text-gray-600'"></atom-title> -->
   <div class="mb-1 whitespace-normal">
     <div class="mb-1 whitespace-normal">
       <span class="text-xs text-green-400">
-        {{ chapter.status | titlecase }}
+        {{ chapter.published ? 'Đã xuất bản' : 'Nháp' | titlecase }}
       </span>
       -
-      <span class="pr-16 flex-no-wrap text-xs text-gray-700"
-        >Updated At {{ chapter.updatedat ? (chapter.updatedat | date:
-        'yyyy-MM-dd') : 'Unknown Date'}}
+      <span class="pr-16 flex-no-wrap text-xs text-gray-700">
+        {{ chapter.updatedAt ? (chapter.updatedAt | date :'dd-M-yy, h:mm a') : 'Unknown Date'}}
       </span>
     </div>
-
-    <!-- <detail-ud-part></detail-ud-part> -->
   </div>
 </div>

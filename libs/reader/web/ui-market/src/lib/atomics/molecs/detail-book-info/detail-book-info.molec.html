@@ -3,5 +3,5 @@
   <atom-detail-info-line [title]="'Kiểu'" [value]="book.categoryId | categoryName"></atom-detail-info-line>
   <atom-detail-info-line-link [title]="'Thể loại'" [items]="book.genres" [color]='false'></atom-detail-info-line-link>
   <atom-detail-info-line [title]="'Tình trạng'" [value]="book.completed === true ? 'Đã hoàn thành' : 'Chưa hoàn thành'"></atom-detail-info-line>
-  <atom-detail-info-line [title]="'Năm phát hành'" [value]="book.updatedAt | date:'dd-MM-yyyy'"></atom-detail-info-line>
+  <atom-detail-info-line [title]="'Năm phát hành'" [value]="book.updatedAt | date :'dd-MM-yyyy'></atom-detail-info-line>
 </div>

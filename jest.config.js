@@ -46,5 +46,6 @@ module.exports = {
     '<rootDir>/libs/core/authors',
     '<rootDir>/libs/core/slider',
     '<rootDir>/libs/global/settings',
+    '<rootDir>/libs/core/creations',
   ],
 };
