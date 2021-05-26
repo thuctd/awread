@@ -22,7 +22,7 @@ export class SocialConnectBtnAtom implements OnInit {
   @Input() image = '/global-assets/images/facebook.webp';
   @Input() title = 'Kết nối bằng facebook';
   @Input() bg = '';
-  @Output() ClickConnect = new EventEmitter();
+  @Output() clickConnect = new EventEmitter();
 
   constructor() {}
 

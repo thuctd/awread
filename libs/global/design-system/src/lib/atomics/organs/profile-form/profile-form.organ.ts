@@ -18,8 +18,8 @@ export class ProfileFormOrgan implements OnInit {
     title: 'Kết nối bằng google',
     image: '/global-assets/images/google.webp',
   };
-  @Output() ClickConnectFB = new EventEmitter();
-  @Output() ClickConnectGG = new EventEmitter();
+  @Output() clickConnectFb = new EventEmitter();
+  @Output() clickConnectGg = new EventEmitter();
   @Input() link = '/forgot';
   @Input() submitText = 'Lưu';
   @Input() profileForm: FormGroup = this.fb.group({

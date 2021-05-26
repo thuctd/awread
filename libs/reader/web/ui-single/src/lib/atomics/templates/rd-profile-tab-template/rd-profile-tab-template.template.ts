@@ -30,7 +30,7 @@ export class RdProfileTabTemplateTemplate implements OnInit {
   @Input() currentUser = {};
   @Input() submitted: boolean;
   @Output() updateProfileEvent = new EventEmitter();
-  @Output() ClickConnect = new EventEmitter();
+  @Output() clickConnect = new EventEmitter();
   @Input() mode: 'display' | 'edit' = 'display';
   @Input() actions = ['display', 'edit'];
   @Input() tabs = [

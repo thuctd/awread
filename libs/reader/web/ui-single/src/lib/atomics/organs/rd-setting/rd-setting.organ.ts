@@ -13,7 +13,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RdSettingOrgan implements OnInit {
-  @Input() bgs = ['Mặc định', 'Sáng', 'Tối'];
+  @Input() backgroundList = ['Mặc định', 'Sáng', 'Tối'];
   @Input() sizes = ['To', 'Vừa', 'Nhỏ'];
 
   constructor() {}

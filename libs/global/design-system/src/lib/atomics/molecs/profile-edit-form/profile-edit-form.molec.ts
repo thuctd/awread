@@ -17,8 +17,8 @@ export class ProfileEditFormMolec implements OnInit {
   @Input() profileForm: FormGroup = this.fb.group({
     name: ['', [Validators.required]],
     username: ['', [Validators.required]],
-    website: ['', [Validators.required]],
-    Facebook: ['', [Validators.required]],
+    websiteAddress: ['', [Validators.required]],
+    facebookAddress: ['', [Validators.required]],
     bio: ['', ''],
   });
   @Input() submitted: boolean;
