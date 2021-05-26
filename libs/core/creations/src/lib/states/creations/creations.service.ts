@@ -12,7 +12,7 @@ export class CreationsService {
   }
 
   get() {
-    return of({}).pipe(tap(entities => this.creationsStore.update(entities)));
+    return of([]).pipe(tap(entities => this.creationsStore.update(entities)));
   }
 
 }

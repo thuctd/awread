@@ -1,16 +1,25 @@
 import { Injectable } from '@angular/core';
+import { tap } from 'rxjs/operators';
 import { CreationsApi } from '../apis';
-
+import { CreationsStore } from '../states/creations';
+import { CurrentUserFacade } from '@awread/core/users';
 @Injectable({ providedIn: 'root' })
 export class CreationsGear {
 
   constructor(
     private creationsApi: CreationsApi,
+    private creationsStore: CreationsStore,
+    private currentUserFacade: CurrentUserFacade,
   ) {
   }
 
   get() {
-    return this.creationsApi.get();
+    this.creationsStore.setLoading(true);
+    return this.creationsApi.get(this.currentUserFacade.getUserId())
+      .pipe(
+        tap(value => this.creationsStore.setLoading(false)),
+        tap(value => this.creationsStore.set(value))
+      )
   }
 
   getDetail(bookId: string) {

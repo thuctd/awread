@@ -18,17 +18,16 @@ import { WrtDetailPopupBookTemplate } from '../../templates';
 export class WrtListStoriesMolec implements OnInit {
   @Input() book = {
     title: '',
-    categoryname: '',
+    categoryId: '',
+    viewCount: ''
   };
   @Input() faIcon = faStar;
   @Input() srcImg = '/global-assets/images/image.webp';
-  @Input() countComment = '40';
-  @Input() countView = '696969k';
   @Input() faIcon2 = faComments;
 
-  constructor(private matDialog: MatDialog) {}
+  constructor(private matDialog: MatDialog) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   openDetailBook(): void {
     this.matDialog.open(WrtDetailPopupBookTemplate, {

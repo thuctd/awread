@@ -1,22 +1,34 @@
 import { Injectable } from '@angular/core';
-import { Store, StoreConfig } from '@datorama/akita';
+import { EntityState, EntityStore, StoreConfig, ActiveState } from '@datorama/akita';
+import { Creation } from '../../models';
 
-export interface CreationsState {
-  key: string;
+export enum VISIBILITY_FILTER {
+  SHOW_ALL = 'SHOW_ALL'
 }
 
-export function createInitialState(): CreationsState {
-  return {
-    key: 'value'
+export interface CreationsState extends EntityState<Creation>, ActiveState {
+  ui: {
+    filter: VISIBILITY_FILTER;
   };
 }
+const initialState = {
+  ui: {
+    filter: VISIBILITY_FILTER.SHOW_ALL
+  }
+};
+
+// export interface CreationUI {}
+
+// export interface CreationsUIState extends EntityState<CreationUI>, ActiveState {}
+
 
 @Injectable({ providedIn: 'root' })
-@StoreConfig({ name: 'creations', resettable: true })
-export class CreationsStore extends Store<CreationsState> {
-
+@StoreConfig({ name: ' creations', resettable: true, idKey: 'bookId' })
+export class CreationsStore extends EntityStore<CreationsState> {
+  // ui: EntityUIStore<CreationUIState>;
   constructor() {
-    super(createInitialState());
+    super();
+    // this.createUIStore().setInitialEntityState();
   }
 
 }

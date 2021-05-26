@@ -1,27 +1,12 @@
 <section class="pl-32 bg-gray-50 h-screen">
   <div class="max-w-screen-xl mx-auto">
-    <wrt-template-detail
-      [bookForm]="bookForm"
-      [bookId]="bookId"
-      [submitted]="submitted"
-      [chapters]="chapterListByBookId$ | async"
-      [tabsHead]="tabsHead"
-      [selectedTab]="selectedTab"
-      [categories]="categories$ | async"
-      [genres]="genres$ | async"
-      [selectedBookStatus]="selectedBookStatus"
-      (selectedStatusEvent)="selectedStatusEvent($event)"
-      (cancelCreateBook)="cancelCreateBook($event)"
-      (chapterActionEvent)="chapterActionEvent($event)"
-      (createNewChapterEvent)="createNewChapterEvent()"
-      (switchTabEvent)="switchTab($event)"
-      (genresEvent)="genresEvent($event)"
-    ></wrt-template-detail>
+    <wrt-template-detail [bookForm]="bookForm" [bookId]="bookId" [submitted]="submitted" [chapters]="chapters$ | async" [tabsHead]="tabsHead"
+      [selectedTab]="selectedTab" [categories]="categories$ | async" [genres]="genres$ | async" [selectedBookStatus]="selectedBookStatus"
+      (selectedStatusEvent)="selectedStatusEvent($event)" (cancelCreateBook)="cancelCreateBook($event)" (chapterActionEvent)="chapterActionEvent($event)"
+      (createNewChapterEvent)="createNewChapterEvent()" (switchTabEvent)="switchTab($event)" (genresEvent)="genresEvent($event)"></wrt-template-detail>
     <div class="text-right pr-2 md:pr-4" *ngIf="selectedTab === 'book'">
-      <button
-        (click)="addorUpdateBookToServer()"
-        class="text-sm md:text-xs lg:text-base xl:text-base bg-green-400 text-white cursor-pointer rounded-md border-green-400 focus:shadow-outline focus:outline-none py-2 px-4"
-      >
+      <button (click)="addorUpdateBookToServer()"
+        class="text-sm md:text-xs lg:text-base xl:text-base bg-green-400 text-white cursor-pointer rounded-md border-green-400 focus:shadow-outline focus:outline-none py-2 px-4">
         {{bookId ? 'Cập nhật' : 'Đăng truyện'}}
       </button>
     </div>

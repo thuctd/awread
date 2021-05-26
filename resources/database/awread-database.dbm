@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="0,416" last-zoom="0.95" max-obj-count="26"
+<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="0,414" last-zoom="0.95" max-obj-count="26"
 	 default-owner="postgres">
 <role name="public_read"
       inherit="true">
@@ -973,6 +973,170 @@ end;]]></definition>
 grant basic_write to reader, writer, postgraphile;]]></definition>
 	<object name="public_read" type="role" ref-name="grant_access_public_read"/>
 </genericsql>
+
+<function name="upsert_authors"
+		window-func="false"
+		returns-setof="false"
+		behavior-type="CALLED ON NULL INPUT"
+		function-type="VOLATILE"
+		security-type="SECURITY INVOKER"
+		execution-cost="1"
+		row-amount="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<language name="plpgsql"/>
+	<return-type>
+	<type name="uuid" length="0"/>
+	</return-type>
+	<parameter name="bookId">
+		<type name="uuid" length="0"/>
+	</parameter>
+	<parameter name="authorIds">
+		<type name="uuid" length="0" dimension="1"/>
+	</parameter>
+	<definition><![CDATA[DECLARE
+  	"varUserId" uuid;
+	"inputBookId" uuid := "bookId";
+BEGIN
+	DELETE FROM authors b
+ 	WHERE 
+		b."bookId" = "inputBookId" and  
+		b."userId" <> any ("authorIds");
+		
+  	FOREACH "varUserId" IN ARRAY "authorIds"
+  	LOOP
+		insert into authors("bookId","userId")
+		values("inputBookId", "varUserId"); 
+  	END LOOP;
+  	
+  	RETURN "inputBookId";
+end;]]></definition>
+</function>
+
+<function name="upsert_books_genres"
+		window-func="false"
+		returns-setof="false"
+		behavior-type="CALLED ON NULL INPUT"
+		function-type="VOLATILE"
+		security-type="SECURITY INVOKER"
+		execution-cost="1"
+		row-amount="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<language name="plpgsql"/>
+	<return-type>
+	<type name="uuid" length="0"/>
+	</return-type>
+	<parameter name="bookId">
+		<type name="uuid" length="0"/>
+	</parameter>
+	<parameter name="genreIds">
+		<type name="numeric" length="0" dimension="1"/>
+	</parameter>
+	<definition><![CDATA[DECLARE
+  	"varGenreId" numeric;
+	"inputBookId" uuid := "bookId";
+BEGIN
+	DELETE FROM books_genres b
+ 	WHERE 
+		b."bookId" = "inputBookId" and  
+		b."genreId" <> any ("genreIds");
+		
+  	FOREACH "varGenreId" IN ARRAY "genreIds"
+  	LOOP
+		insert into books_genres("bookId","genreId")
+		values("inputBookId", "varGenreId"); 
+  	END LOOP;
+  	
+  	RETURN "inputBookId";
+
+END;]]></definition>
+</function>
+
+<function name="new_book"
+		window-func="false"
+		returns-setof="false"
+		behavior-type="CALLED ON NULL INPUT"
+		function-type="VOLATILE"
+		security-type="SECURITY INVOKER"
+		execution-cost="1"
+		row-amount="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<language name="plpgsql"/>
+	<return-type>
+	<type name="uuid" length="0"/>
+	</return-type>
+	<parameter name="authorIds">
+		<type name="uuid" length="0" dimension="1"/>
+	</parameter>
+	<parameter name="genreIds">
+		<type name="numeric" length="0" dimension="1"/>
+	</parameter>
+	<parameter name="userId">
+		<type name="uuid" length="0"/>
+	</parameter>
+	<parameter name="categoryId">
+		<type name="numeric" length="0"/>
+	</parameter>
+	<parameter name="publisherId">
+		<type name="uuid" length="0"/>
+	</parameter>
+	<parameter name="title">
+		<type name="text" length="0"/>
+	</parameter>
+	<parameter name="completed">
+		<type name="boolean" length="0"/>
+	</parameter>
+	<parameter name="ages">
+		<type name="numeric" length="0"/>
+	</parameter>
+	<parameter name="description">
+		<type name="text" length="0"/>
+	</parameter>
+	<parameter name="cover">
+		<type name="text" length="0"/>
+	</parameter>
+	<parameter name="type">
+		<type name="text" length="0"/>
+	</parameter>
+	<definition><![CDATA[declare 
+"bookId" uuid;
+
+begin
+
+INSERT INTO books (
+"userId",
+"categoryId",
+"publisherId",
+title,
+completed,
+ages,
+description,
+cover,
+type
+)
+VALUES (
+userId",
+"categoryId",
+"publisherId",
+title,
+completed,
+ages,
+description,
+cover,
+type
+) 
+RETURNING "bookId" INTO "bookId";
+
+select upsert_books_genres("bookId", array "genreIds" ::uuid[]);
+
+select upsert_authors("bookId", array "authorIds" ::uuid[]);
+
+return "bookId";
+
+end;]]></definition>
+</function>
 
 <constraint name="books_userId_fk" type="fk-constr" comparison-type="MATCH FULL"
 	 upd-action="NO ACTION" del-action="CASCADE" ref-table="public.users" table="public.books">

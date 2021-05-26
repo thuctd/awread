@@ -30,6 +30,7 @@ import { WrtDetailPopupBookTemplate } from './templates/wrt-detail-popup-book/wr
 import { WrtWritingPopupReadTemplate } from './templates/wrt-writing-popup-read/wrt-writing-popup-read.template';
 import { MatDialogModule } from '@angular/material/dialog';
 import { GenresFieldModule, InfiniteScrollModule, LoaderModule } from '@awread/global/packages';
+import { CoreCategoriesModule } from '@awread/core/categories';
 
 @NgModule({
   imports: [
@@ -43,6 +44,7 @@ import { GenresFieldModule, InfiniteScrollModule, LoaderModule } from '@awread/g
     MatAutocompleteModule,
     LoaderModule,
     MatDialogModule,
+    CoreCategoriesModule
   ],
   exports: [
     MatDialogModule,
@@ -99,4 +101,4 @@ import { GenresFieldModule, InfiniteScrollModule, LoaderModule } from '@awread/g
     WrtWritingPopupReadTemplate,
   ],
 })
-export class WriterWebUiCreationAtomicModule {}
+export class WriterWebUiCreationAtomicModule { }

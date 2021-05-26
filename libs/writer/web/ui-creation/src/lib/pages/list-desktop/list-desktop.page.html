@@ -1,9 +1,2 @@
-<template-list
-  class="bg-gray-50"
-  [books]="bookList$ | async"
-  [loading]="isLoading$ | async"
-  (updateBookStatusEvent)="updateBookStatus($event)"
-  (addChapterEvent)="addChapter($event)"
-  (editBookEvent)="editBook($event)"
-  (removeBookEvent)="removeBook($event)"
-></template-list>
+<template-list class="bg-gray-50" [books]="creations$ | async" [loading]="loading$ | async" (updateBookStatusEvent)="updateBookStatus($event)"
+  (addChapterEvent)="addChapter($event)" (editBookEvent)="editBook($event)" (removeBookEvent)="removeBook($event)"></template-list>

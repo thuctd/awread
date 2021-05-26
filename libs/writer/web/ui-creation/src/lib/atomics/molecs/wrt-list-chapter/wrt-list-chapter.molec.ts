@@ -1,4 +1,3 @@
-import type { Book } from '@awread/writer/web/feature-auth';
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 
 @Component({
@@ -15,14 +14,12 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 })
 export class WrtListChapterMolec implements OnInit {
   @Input() book = {
-    totalChapterCountPublished: 1,
-    updatedat: '',
-    totalChapterCount: 1,
+    publishedCount: '1',
+    draftCount: '1',
+    updatedAt: Date.now()
   };
-  @Input() countTotal = 1000;
-  @Input() countPublished = 50;
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

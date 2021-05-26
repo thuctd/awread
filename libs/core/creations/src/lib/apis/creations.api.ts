@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from "apollo-angular";
+import { map } from 'rxjs/operators';
 import { Creation } from '../models';
 
 @Injectable({ providedIn: 'root' })
@@ -10,43 +11,36 @@ export class CreationsApi {
   ) { }
 
 
-  get() {
+  get(userId) {
     return this.apollo.query({
       query: gql`
-        query getAllBooks {
-          allBooks(condition: { isdeleted: false }, orderBy: CREATEDAT_DESC) {
+        query getAllBooks($userId: UUID!) {
+          allVCreations(condition: { isDeleted: false, userId: $userId }, orderBy: CREATED_AT_DESC) {
             nodes {
-              bookid
               title
-              img
-              description
+              bookId
+              categoryId
               completed
-              status
-              audience
-              publishedat
-              updatedat
-              categoryByCategoryid {
-                categoryid
-                name
-              }
-              chaptersByBookid(orderBy: CREATEDAT_DESC) {
-                totalCount
-                nodes {
-                  status
-                  updatedat
-                  publishedat
-                }
-              }
-              bookGenresByBookid {
-                nodes {
-                  genreid
-                }
-              }
+              publisherId
+              createdAt
+              description
+              cover
+              published
+              type
+              ages
+              updatedAt
+              userId,
+              publishedCount,
+              draftCount,
+              viewCount
             }
           }
         }
       `,
-    });
+      variables: { userId },
+    }).pipe(
+      map(result => result?.['data']?.['allVCreations']?.['nodes'])
+    )
   }
 
   getDetail(bookid: string) {

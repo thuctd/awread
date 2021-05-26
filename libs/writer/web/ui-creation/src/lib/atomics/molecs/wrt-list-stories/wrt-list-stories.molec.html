@@ -8,11 +8,8 @@
       <div (click)='openDetailBook()' class="text-sm cursor-pointer break-word md:text-base font-bold mb-1 text-gray-600">
         {{ book.title }}
       </div>
-      <div
-        *ngIf="book.categoryname;else noCategory"
-        class="text-xs font-medium text-green-500"
-      >
-        {{ book.categoryname | titlecase }}
+      <div *ngIf="book.categoryId;else noCategory" class="text-xs font-medium text-green-500">
+        {{ book.categoryId | categoryName }}
       </div>
       <ng-template #noCategory>
         <div class="text-xs font-medium text-green-500">-</div>
@@ -30,8 +27,8 @@
       <!-- <list-rating-book></list-rating-book> -->
     </div>
     <div class="self-start mt-2 flex">
-      <atom-icon-text class="mr-6" [title]="countView"></atom-icon-text>
-      <atom-icon-text [icon]="faIcon2" [title]="countComment"></atom-icon-text>
+      <atom-icon-text class="mr-6" [title]="book.viewCount"></atom-icon-text>
+      <atom-icon-text [icon]="faIcon2" [title]="0"></atom-icon-text>
     </div>
   </div>
 </div>
