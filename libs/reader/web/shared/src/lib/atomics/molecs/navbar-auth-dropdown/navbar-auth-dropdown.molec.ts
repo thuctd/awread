@@ -9,42 +9,40 @@ import { faCoins, faArrowRight } from '@fortawesome/free-solid-svg-icons';
       :host {
         display: block;
       }
-    `
+    `,
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavbarAuthDropdownMolec implements OnInit {
   @Output() logoutEvent = new EventEmitter();
   @Input() user = {
     name: 'BlackCu',
-    firstname: 'BlackCu'
+    lastname: 'BlackCu',
   };
   menu = [
     {
       href: '/',
-      title: 'Thông báo'
+      title: 'Thông báo',
     },
     {
       href: '/',
-      title: 'Hộp thư'
+      title: 'Hộp thư',
     },
     {
       href: '/',
-      title: 'Nạp coin'
+      title: 'Nạp coin',
     },
     {
       href: '/',
-      title: 'Thư viện'
+      title: 'Thư viện',
     },
     {
-      href: '/',
-      title: 'Cài đặt tài khoản'
-    }
+      href: '/single/profile',
+      title: 'Cài đặt tài khoản',
+    },
   ];
   icons = { faCoins, faArrowRight };
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

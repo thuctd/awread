@@ -27,6 +27,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Output, Input, EventEmitter
 })
 export class RdTabItemAtom implements OnInit {
   @Output() tabClicked = new EventEmitter();
+  @Input() faIcon;
   @Input() tabName = 'tab name';
   @Input() active = false;
   @Input() isTooltip = false;

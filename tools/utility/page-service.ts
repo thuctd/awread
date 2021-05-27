@@ -17,13 +17,15 @@ export function addPageService(tree: Tree, schema, separatePageLogicToFeatureLib
   }
   return chain([
     schema.type && schema.mode ? updateDesktopAndMobilePage(tree, schema) : noop(),
-    separatePageLogicToFeatureLib ? schematic('service', {
-      name: `${schema.type}s/${schema.route}`,
-      type: schema.type,
-      project: schema.project.replace('ui', 'feature'),
-      fuck: `you: ${schema.type}s/${schema.route}`
-    }) : noop()
-  ])
+    separatePageLogicToFeatureLib
+      ? schematic('service', {
+          name: `${schema.type}s/${schema.route}`,
+          type: schema.type,
+          project: schema.project.replace('ui', 'feature'),
+          fuck: `you: ${schema.type}s/${schema.route}`,
+        })
+      : noop(),
+  ]);
 }
 
 function createPageForFeatureLib(tree, schema) {
@@ -35,11 +37,12 @@ function createPageForFeatureLib(tree, schema) {
 function createPageLogicForCurrentLib(tree, schema) {
   try {
     const path = `${schema.path}/${schema.route}/${schema.route}.${schema.type}.ts`;
-    console.log("addPageService path", path)
+    console.log('addPageService path', path);
     const pagePathNotExistYet = !tree.exists(path);
     if (schema.type && schema.mode && pagePathNotExistYet) {
-
-      tree.create(path, `import { Injectable, OnInit } from '@angular/core';
+      tree.create(
+        path,
+        `import { Injectable, OnInit, Directive } from '@angular/core';
 
   @Injectable({
     providedIn: 'root',
@@ -51,12 +54,12 @@ function createPageLogicForCurrentLib(tree, schema) {
 
     ngOnInit(): void { }
 
-  }`)
+  }`
+      );
     }
   } catch (error) {
     console.error('addPageService error', error);
   }
-
 }
 
 function buildPathRelative(schema) {
@@ -71,7 +74,6 @@ function buildPathRelative(schema) {
   // console.log('is that module is exist', writeToPath, host.exists(writeToPath));
   return relativePath;
 }
-
 
 function updateDesktopAndMobilePage(tree, schema) {
   return (host: Tree) => {
@@ -91,12 +93,14 @@ function updateDesktopAndMobilePage(tree, schema) {
       const source = ts.createSourceFile(writeToFilePath, sourceText, ts.ScriptTarget.Latest, true);
       let nodes = getSourceNodes(source);
 
-      const insertImportSymbol = insertImport(source,
-        writeToFilePath,
-        strings.classify(`${schema.route}-${schema.type}`),
-        relativePath);
+      const insertImportSymbol = insertImport(source, writeToFilePath, strings.classify(`${schema.route}-${schema.type}`), relativePath);
 
-      const renewClass = replaceConstructorForInjection(nodes, classify(`${schema.name}-${schema.type}`), writeToFilePath, classify(`${schema.route}-${schema.type}`));
+      const renewClass = replaceConstructorForInjection(
+        nodes,
+        classify(`${schema.name}-${schema.type}`),
+        writeToFilePath,
+        classify(`${schema.route}-${schema.type}`)
+      );
       const removeImportOnInit = removeImport(source, writeToFilePath, classify('OnInit'));
       const changes = [insertImportSymbol, renewClass, removeImportOnInit];
 
@@ -124,7 +128,7 @@ function updateDesktopAndMobilePage(tree, schema) {
 }
 
 function replaceConstructorForInjection(nodes: ts.Node[], writeToName: string, writeToPath: string, symbolName: string): Change {
-  let classNode = nodes.find(n => n.kind === ts.SyntaxKind.ClassKeyword);
+  let classNode = nodes.find((n) => n.kind === ts.SyntaxKind.ClassKeyword);
 
   if (!classNode) {
     throw new SchematicsException(`expected class in <span class="hljs-subst" > ${writeToPath} < /span>`);
@@ -139,7 +143,7 @@ function replaceConstructorForInjection(nodes: ts.Node[], writeToName: string, w
 
   siblings = siblings.slice(classIndex);
 
-  let classIdentifierNode = siblings.find(n => n.kind === ts.SyntaxKind.Identifier);
+  let classIdentifierNode = siblings.find((n) => n.kind === ts.SyntaxKind.Identifier);
 
   if (!classIdentifierNode) {
     throw new SchematicsException(`expected class in <span class="hljs-subst" > ${writeToPath} < /span> to have an identifier`);
@@ -150,11 +154,11 @@ function replaceConstructorForInjection(nodes: ts.Node[], writeToName: string, w
   }
 
   // Find opening cury braces (FirstPunctuation means '{' here).
-  let curlyNodeIndex = siblings.findIndex(n => n.kind === ts.SyntaxKind.FirstPunctuation);
-  let pageNameSymbol = siblings.find(n => n.kind === ts.SyntaxKind.Identifier);
+  let curlyNodeIndex = siblings.findIndex((n) => n.kind === ts.SyntaxKind.FirstPunctuation);
+  let pageNameSymbol = siblings.find((n) => n.kind === ts.SyntaxKind.Identifier);
   const oldText = classNode.parent.getText().split(pageNameSymbol.getText())[1];
 
-  let listNode = siblings.find(n => n.kind === ts.SyntaxKind.SyntaxList);
+  let listNode = siblings.find((n) => n.kind === ts.SyntaxKind.SyntaxList);
 
   if (!listNode) {
     throw new SchematicsException(`expected first class in <span class="hljs-subst" > ${writeToPath} < /span> to have a body`);
@@ -164,5 +168,3 @@ function replaceConstructorForInjection(nodes: ts.Node[], writeToName: string, w
   // return new ReplaceChange(writeToPath, classNode.parent.pos, beforeText, toAdd);
   return new ReplaceChange(writeToPath, pageNameSymbol.end, oldText, toAdd);
 }
-
-

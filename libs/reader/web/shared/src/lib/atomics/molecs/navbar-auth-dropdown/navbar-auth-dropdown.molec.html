@@ -2,7 +2,7 @@
     <div class="py-2 px-4 mb-2 bg-white">
         <div class="flex items-center mb-1">
             <span class="text-xs">Thành viên: </span>
-            <span class="text-xs text-yellow-500 ml-3"> {{ user.name ? user.name : user.firstname }} </span>
+            <span class="text-xs text-yellow-500 ml-3"> {{ user.name ? user.name : user.lastname }} </span>
         </div>
         <div class="flex items-center mb-1">
             <span class="text-xs">Coin: </span>
@@ -16,7 +16,7 @@
     </div>
     <ul class=" bg-white">
         <li *ngFor="let item of menu" class="border-b border-grey-300 py-2 px-4">
-            <atom-dropdown-link [title]="item.title" [routerLink]="item.href"></atom-dropdown-link>
+            <atom-link [title]="item.title" [href]="item.href"></atom-link>
         </li>
     </ul>
     <button (click)="logoutEvent.emit()" class="py-2 px-4 bg-white w-full flex items-center focus:outline-none">

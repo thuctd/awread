@@ -1,0 +1,15 @@
+<div class="border-b border-gray-500 w-full pb-4 mb-8">
+  <atom-rd-profile-info-personal-item [key]="'Tên hiển thị'" [value]="currentUser.name"></atom-rd-profile-info-personal-item>
+  <atom-rd-profile-info-personal-item [key]="'Tên tài khoản'" [value]="currentUser.username"></atom-rd-profile-info-personal-item>
+</div>
+<atom-rd-profile-info-personal-item [key]="'Email'" [value]="currentUser.email"></atom-rd-profile-info-personal-item>
+<atom-rd-profile-info-personal-item [key]="'Số điện thoại'" [value]="currentUser.phone"></atom-rd-profile-info-personal-item>
+<atom-rd-profile-info-personal-item [key]="'Năm sinh'" [value]="currentUser.dob | date: 'dd/MM/yyyy'"></atom-rd-profile-info-personal-item>
+
+<atom-rd-profile-info-personal-item [key]="'Giới tính'" *ngIf="currentUser.gender == '0'" [value]="'Nam'"></atom-rd-profile-info-personal-item>
+<atom-rd-profile-info-personal-item [key]="'Giới tính'" *ngIf="currentUser.gender == '1'" [value]="'Nữ'"></atom-rd-profile-info-personal-item>
+<atom-rd-profile-info-personal-item [key]="'Giới tính'" *ngIf="currentUser.gender == '2'" [value]="'Khác'"></atom-rd-profile-info-personal-item>
+
+
+
+<!-- <pre>{{currentUser | json}}</pre> -->
