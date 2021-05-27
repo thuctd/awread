@@ -2,7 +2,7 @@
     <section class="bg-white relative h-full">
         <atom-popup-cover-header [title]="title"></atom-popup-cover-header>
         <molec-popup-cover-image [status]="status" class="h-5/6" [percentLoading]="percentLoading" [controlName]="controlName"
-            (eventChooseImage)="eventChooseImage($event)" (submitEvent)="submitEvent($event)">
+            (eventChooseImage)="eventChooseImage($event)" (submitEvent)="submitEvent($event)" [sourceTarget]="sourceTarget">
         </molec-popup-cover-image>
     </section>
 </atom-example-dialog>
