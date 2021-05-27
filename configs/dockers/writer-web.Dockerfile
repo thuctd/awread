@@ -13,7 +13,6 @@ RUN pnpm install --frozen-lockfile
 RUN pnpm run postinstall
 COPY *.js tsconfig*.json angular.json nx.json ./
 COPY configs/tailwind configs/tailwind
-COPY configs/procfiles ./
 # RUN LS
 # //INPUT: update this
 FROM builder as build-writer-web

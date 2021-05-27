@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, ChangeDetectorRef } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 
@@ -20,17 +20,30 @@ export class PopupChangeCoverOrgan implements OnInit {
   controlName = new FormControl('');
   status = 'pending';
   percentLoading = '10%';
-  constructor(public matDialogRef: MatDialogRef<PopupChangeCoverOrgan>) {}
+  sourceTarget;
+  constructor(
+    public matDialogRef: MatDialogRef<PopupChangeCoverOrgan>,
+    private cd: ChangeDetectorRef,
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   eventChooseImage($event) {
     this.status = 'loading';
-    console.log(this.controlName.value);
-    setTimeout(() => {
-      this.status = 'reposition';
-      console.log(this.status);
-    }, 3000);
+    const [file] = $event.target.files
+    const reader = new FileReader();
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = e => {
+        this.sourceTarget = reader.result;
+        console.log('result', !!this.sourceTarget);
+        this.status = 'reposition';
+        setTimeout(() => {
+          this.cd.detectChanges();
+        }, 100);
+      };
+      reader.readAsDataURL(file);
+    }
   }
 
   submitEvent(event) {
