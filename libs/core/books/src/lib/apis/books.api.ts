@@ -209,8 +209,8 @@ export class BooksApi {
       mvBooks = 'allVRandomBooks';
     }
 
-    queryString = `query ${mvBooks}($categoryId: BigFloat, $completed: Boolean, $type: String) {
-              ${mvBooks}(first: 20, condition: { categoryId: $categoryId, type: $type, completed: $completed }, orderBy: PUBLISHED_DESC,
+    queryString = `query ${mvBooks}($categoryId: BigFloat, $completed: Boolean ${filters.completed ? `, $type: String` : ''}) {
+              ${mvBooks}(first: 20, condition: { categoryId: $categoryId, ${filters.completed ? ` type: $type,` : ''} completed: $completed }, orderBy: PUBLISHED_DESC,
                 filter: { updatedAt: {greaterThan: "${updatedAt}"} ${genres.length ? `, genres: {containsAnyKeys: ${JSON.stringify(genres)}}` : ''}}) {
                 nodes {
                   bookId
