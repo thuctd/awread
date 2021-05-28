@@ -1,6 +1,6 @@
 <div class="mx-auto w-full relative">
-  <input (keyup.enter)="searchEvent.emit(control.value)" class="sm:text-sm text-xs shadow bg-white text-gray-800 sm:py-2 py-1.5 px-4 rounded-full focus:outline-none relative w-full" type="text" [id]="id" type="text" [formControl]="control" [placeholder]="placeholder">
+  <input (keyup.enter)="searchEvent.emit($event)" class="sm:text-sm text-xs shadow bg-white text-gray-800 sm:py-2 py-1.5 px-4 rounded-full focus:outline-none relative w-full" type="text" [id]="id" type="text" [formControl]="control" [placeholder]="placeholder">
   <div class="absolute sm:top-1.5 top-0.5 right-3">
-    <fa-icon class="text-sm text-green-primary cursor-pointer" [icon]="faIcon"></fa-icon>
+    <fa-icon class="text-sm text-green-primary cursor-pointer" [icon]="faIcon" (click)="searchEvent.emit($event)"></fa-icon>
   </div>
 </div>
