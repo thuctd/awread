@@ -1,6 +1,10 @@
-<div>
-  <span class="text-sm f5-ns block font-medium mt-0">{{titleChapter}} </span>
-  <span class="text-xs f6-ns font-normal text-gray-500 measure lh-copy my-0">
-    Nháp (0 từ) <a (click)='submitEvent.emit()' class="outline-none cursor-pointer text-green-500">Đã lưu</a>
+<div class="text-sm block font-medium mt-0">
+  Chương {{chapterForm.get('chapterNumber').value}}
+</div>
+<div class="text-xs f6-ns font-normal text-gray-500 measure lh-copy my-0">
+  <span class="capitalize">{{selectedChapterStatus === 'DRAFT' ? 'Lưu nháp' : 'Xuất bản'}}</span>
+  <span>
+    ({{ chapterForm?.value?.content ? chapterForm?.value?.content?.split(' ')?.length : 0 }} words)
   </span>
+  <!-- <a class="link text-green-500 cursor-pointer" (click)="saveChapterEvent.emit()">Lưu</a> -->
 </div>

@@ -1,0 +1,11 @@
+<div class="grid grid-cols-12 gap-2 pl-4 py-4 border-b border-gray-200" *ngFor="let chapter of chapters">
+  <div class="col-span-2 md:col-span-4">
+    <molec-wrt-detail-toc-chapter-info [chapter]="chapter"></molec-wrt-detail-toc-chapter-info>
+  </div>
+  <div class="col-span-2 md:col-span-4 justify-self-center">
+    <molec-wrt-detail-toc-chapter-review [chapterCountView]="chapterCouter.chapterCountView" [chapterCountComments]="chapterCouter.chapterCountComments"></molec-wrt-detail-toc-chapter-review>
+  </div>
+  <div class="col-span-2 md:col-span-4 justify-self-center">
+    <molec-wrt-detail-toc-chapter-act [chapter]="chapter" (chapterActionEvent)="chapterActionEvent.emit()"></molec-wrt-detail-toc-chapter-act>
+  </div>
+</div>
