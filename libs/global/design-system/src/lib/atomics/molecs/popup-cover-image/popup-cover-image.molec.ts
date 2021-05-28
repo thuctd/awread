@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
@@ -18,11 +18,20 @@ export class PopupCoverImageMolec implements OnInit {
   @Input() title = 'Chọn ảnh đại diện';
   @Input() status = 'pending';
   @Input() percentLoading = '50%';
+  @Input() imageChangedEvent = '';
   @Input() controlName = new FormControl('');
   @Output() eventChooseImage = new EventEmitter();
   @Output() submitEvent = new EventEmitter();
   icon = faTimes;
-  constructor() {}
+  constructor(
+    private cd: ChangeDetectorRef
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
+
+  chooseImage(event) {
+    this.imageChangedEvent = event;
+    this.eventChooseImage.emit(event);
+    this.cd.detectChanges();
+  }
 }

@@ -1,0 +1,23 @@
+{
+    "$schema": "http://json-schema.org/schema",
+    "id": "state",
+    "type": "object",
+    "properties": {
+        "list": {
+            "type": "string",
+            "description": "name of state",
+            "$default": {
+                "$source": "argv",
+                "index": 0
+            }
+        },
+        "entity": {
+            "type": "boolean",
+            "description": "using if state of many items",
+            "default": false
+        }
+    },
+    "required": [
+        "list"
+    ]
+}

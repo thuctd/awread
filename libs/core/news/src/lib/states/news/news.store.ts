@@ -3,7 +3,7 @@ import { EntityState, EntityStore, StoreConfig, ActiveState } from '@datorama/ak
 import { News } from '../../models';
 
 export enum VISIBILITY_FILTER {
-    SHOW_ALL = 'SHOW_ALL'
+  SHOW_ALL = 'SHOW_ALL',
 }
 
 export interface NewsState extends EntityState<News>, ActiveState {
@@ -12,23 +12,21 @@ export interface NewsState extends EntityState<News>, ActiveState {
   };
 }
 const initialState = {
-  ui: { 
-    filter: VISIBILITY_FILTER.SHOW_ALL
-   }
+  ui: {
+    filter: VISIBILITY_FILTER.SHOW_ALL,
+  },
 };
 
 // export interface NewsUI {}
 
 // export interface NewsUIState extends EntityState<NewsUI>, ActiveState {}
 
-
 @Injectable({ providedIn: 'root' })
-@StoreConfig({ name: ' news', resettable: true })
+@StoreConfig({ name: ' news', resettable: true, idKey: 'blogId' })
 export class NewsStore extends EntityStore<NewsState> {
   // ui: EntityUIStore<NewsUIState>;
   constructor() {
     super();
     // this.createUIStore().setInitialEntityState();
   }
-
 }

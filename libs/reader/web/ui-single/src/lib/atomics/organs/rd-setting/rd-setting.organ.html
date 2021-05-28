@@ -1,0 +1,18 @@
+<div class="pt-2 px-32">
+  <div class="border-b border-gray-400 py-5">
+    <div class="font-semibold text-gray-600 pb-2">Phông nền</div>
+    <check-btn *ngFor="let bg of backgroundList" [text]="bg"></check-btn>
+  </div>
+  <div class="border-b border-gray-400 py-5">
+    <div class="font-semibold text-gray-600 pb-2">Cỡ chữ</div>
+    <check-btn *ngFor="let size of sizes" [text]="size"></check-btn>
+  </div>
+  <div class="border-b border-gray-400 py-5 flex">
+    <div class="font-semibold text-gray-600 pr-8">Ngôn ngữ</div>
+      <select class="-mt-1 border rounded-full border-gray-200 bg-white pl-6 pr-12 py-1 outline-none focus:outline-none focus:ring-1 focus:ring-gray-300 focus:border-gray-300">
+        <option value="0" class="py-1">English</option>
+        <option value="1" class="py-1">Việt Nam</option>
+        <option value="2" class="py-1">Lào</option>
+      </select>
+  </div>
+</div>

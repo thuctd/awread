@@ -50,6 +50,7 @@ export class S3Addon {
           let folderName;
           let sizeName;
           let uploadAction;
+          // console.log('payload', payload, bucket, name, kind)
           try {
             return await this.uploadS3(payload.buffer, bucket, `${kind}/${payload.sizeName}/${name}.${payload.extension}`);
           } catch (error) {

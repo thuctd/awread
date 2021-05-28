@@ -127,7 +127,10 @@ import { PopupCoverImageMolec } from './molecs/popup-cover-image/popup-cover-ima
 import { PopupChangeCoverOrgan } from './organs/popup-change-cover/popup-change-cover.organ';
 import { ProfileInputAtom } from './atoms/profile-input/profile-input.atom';
 import { InfoBookMolec } from './molecs/info-book/info-book.molec';
-
+import { SocialConnectBtnAtom } from './atoms/social-connect-btn/social-connect-btn.atom';
+import { RdProfileInfoPersonalItemAtom } from './atoms/rd-profile-info-personal-item/rd-profile-info-personal-item.atom';
+import { ImageCropperModule } from 'ngx-image-cropper';
+import { CoreUsersModule } from '@awread/core/users';
 @NgModule({
   imports: [
     CommonModule,
@@ -143,6 +146,8 @@ import { InfoBookMolec } from './molecs/info-book/info-book.molec';
     DefaultCoverModule,
     CloseOnOutsideModule,
     NgImageSliderModule,
+    ImageCropperModule,
+    CoreUsersModule
   ],
   exports: [
     MatDialogModule,
@@ -273,6 +278,8 @@ import { InfoBookMolec } from './molecs/info-book/info-book.molec';
     PopupChangeCoverOrgan,
     ProfileInputAtom,
     InfoBookMolec,
+    SocialConnectBtnAtom,
+    RdProfileInfoPersonalItemAtom,
   ],
   declarations: [
     notReadyDirective,
@@ -392,6 +399,8 @@ import { InfoBookMolec } from './molecs/info-book/info-book.molec';
     PopupChangeCoverOrgan,
     ProfileInputAtom,
     InfoBookMolec,
+    SocialConnectBtnAtom,
+    RdProfileInfoPersonalItemAtom,
   ],
 })
-export class GlobalDesignSystemAtomicModule {}
+export class GlobalDesignSystemAtomicModule { }

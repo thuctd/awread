@@ -1,4 +1,5 @@
 <div class="flex justify-center items-center tab relative" (click)="tabClicked.emit($event)">
+  <fa-icon class="pr-2 text-2xl cursor-pointer" *ngIf="faIcon" [icon]="faIcon"></fa-icon>
   <a class="outline-none inline-block cursor-pointer">{{ tabName | titlecase }}</a>
   <div *ngIf="isTooltip" class="tooltip hidden absolute -top-8">
     <div class="bg-orange px-4 py-1 text-white rounded-full">Mới nhất</div>
