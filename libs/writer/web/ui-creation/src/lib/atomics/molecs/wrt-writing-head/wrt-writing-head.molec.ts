@@ -20,6 +20,8 @@ export class WrtWritingHeadMolec implements OnInit {
   _chapterStatus: string;
   @Input() formActiveStatus = false;
   @Output() changeChapterStatusEvent = new EventEmitter();
+  @Output() copyToClipboard = new EventEmitter();
+  @Output() deletePart = new EventEmitter();
   @Input() set chapterStatus(value) {
     console.log('status: ', value);
     if (value) {
@@ -59,6 +61,7 @@ export class WrtWritingHeadMolec implements OnInit {
   ];
   selectedChapterStatus = 'DRAFT';
   @Output() saveChapterEvent = new EventEmitter();
+  @Output() createNewChapterEvent = new EventEmitter();
   constructor(private fb: FormBuilder, private cd: ChangeDetectorRef, private matDialog: MatDialog) {}
 
   ngOnInit(): void {

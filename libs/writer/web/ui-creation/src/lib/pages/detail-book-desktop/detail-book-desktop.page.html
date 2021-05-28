@@ -1,0 +1,13 @@
+<section class="pl-32 bg-gray-50 h-screen">
+  <template-wrt-book-detail-tab
+    [bookId]="bookId"
+    [bookForm]="bookForm"
+    [submitted]="submitted"
+    [categories]="categories$ | async"
+    [genres]="genres$ | async"
+    (genresEvent)="genresEvent($event)"
+    (addorUpdateBook)="addorUpdateBookToServer()"
+    (cancelCreateBook)="cancelCreateBook($event)"
+  ></template-wrt-book-detail-tab>
+</section>
+

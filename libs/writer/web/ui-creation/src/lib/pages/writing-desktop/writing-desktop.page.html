@@ -1,4 +1,4 @@
-<template-writing
+<template-wrt-chapter-writing
   class="bg-gray-50 px-40"
   (changeChapterStatusEvent)="changeChapterStatusEvent($event)"
   (saveChapterEvent)="saveChapter()"
@@ -7,9 +7,4 @@
   [submitted]="submitted"
   [type]="type"
   [shouldShowStatusUI]="shouldShowStatusUI"
-></template-writing>
-<!-- <div>
-  <button (click)="chapterAction()">
-    {{(chapterId ? 'cập nhật' : 'thêm chương') | titlecase}}
-  </button>
-</div> -->
+></template-wrt-chapter-writing>

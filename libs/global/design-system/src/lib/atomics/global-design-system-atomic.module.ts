@@ -129,6 +129,7 @@ import { ProfileInputAtom } from './atoms/profile-input/profile-input.atom';
 import { InfoBookMolec } from './molecs/info-book/info-book.molec';
 import { SocialConnectBtnAtom } from './atoms/social-connect-btn/social-connect-btn.atom';
 import { RdProfileInfoPersonalItemAtom } from './atoms/rd-profile-info-personal-item/rd-profile-info-personal-item.atom';
+import { UploadStoryBtnAtom } from './atoms/upload-story-btn/upload-story-btn.atom';
 
 @NgModule({
   imports: [
@@ -277,6 +278,7 @@ import { RdProfileInfoPersonalItemAtom } from './atoms/rd-profile-info-personal-
     InfoBookMolec,
     SocialConnectBtnAtom,
     RdProfileInfoPersonalItemAtom,
+    UploadStoryBtnAtom,
   ],
   declarations: [
     notReadyDirective,
@@ -398,6 +400,7 @@ import { RdProfileInfoPersonalItemAtom } from './atoms/rd-profile-info-personal-
     InfoBookMolec,
     SocialConnectBtnAtom,
     RdProfileInfoPersonalItemAtom,
+    UploadStoryBtnAtom,
   ],
 })
 export class GlobalDesignSystemAtomicModule {}
