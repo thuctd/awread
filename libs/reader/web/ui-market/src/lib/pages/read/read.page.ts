@@ -19,6 +19,7 @@ export class ReadPage implements OnInit {
   topBookList$ = this.booksFacade.topBooks$;
   bookChapters$ = this.chaptersFacade.chapters$;
   breadcrumbs;
+  loading: boolean;
 
   constructor(
     private router: Router,
@@ -63,21 +64,27 @@ export class ReadPage implements OnInit {
 
   onChangeNextChapter(chapter: Chapter) {
     const offset = parseInt(chapter.position);
+    this.loading = true;
     this.chaptersFacade.getPageChapter(chapter.bookId, offset + 1).pipe(
       tap(res => {
         this.router.navigate(['/books', res[0].bookId, 'chapters', res[0].chapterId]);
       })
-    ).subscribe();
+    ).subscribe(res => {
+      this.loading = false;
+    });
     this.cd.detectChanges();
   }
 
   onChangeBackChapter(chapter: Chapter) {
     const offset = parseInt(chapter.position);
+    this.loading = true;
     this.chaptersFacade.getPageChapter(chapter.bookId, offset - 1).pipe(
       tap(res => {
         this.router.navigate(['/books', res[0].bookId, 'chapters', res[0].chapterId]);
       })
-    ).subscribe();
+    ).subscribe(res => {
+      this.loading = false;
+    });
     this.cd.detectChanges();
   }
 }
