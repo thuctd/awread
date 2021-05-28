@@ -47,5 +47,6 @@ module.exports = {
     '<rootDir>/libs/global/settings',
     '<rootDir>/libs/core/creations',
     '<rootDir>/libs/feature/upload-image',
+    '<rootDir>/libs/core/setting',
   ],
 };
