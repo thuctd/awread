@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
 import { faComments, faEye } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
-  selector: 'molec-info-book',
+  selector: 'wrt-molec-info-book',
   templateUrl: './info-book.molec.html',
   styles: [
     `
@@ -21,7 +21,7 @@ export class InfoBookMolec implements OnInit {
   @Input() icons = [{
     fa: faEye,
     text: '136.5k'
-  },{
+  }, {
     fa: faComments,
     text: '69k'
   }];
@@ -29,7 +29,7 @@ export class InfoBookMolec implements OnInit {
   @Input() btns = [{
     title: 'Đọc',
     active: true
-  },{
+  }, {
     title: '+',
     active: true
   }];

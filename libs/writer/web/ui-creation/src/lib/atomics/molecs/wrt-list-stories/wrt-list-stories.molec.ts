@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { faComments, faStar } from '@fortawesome/free-solid-svg-icons';
 import { WrtDetailPopupBookTemplate } from '../../templates';
@@ -18,22 +18,16 @@ import { WrtDetailPopupBookTemplate } from '../../templates';
 export class WrtListStoriesMolec implements OnInit {
   @Input() book = {
     title: '',
-    categoryname: '',
+    categoryId: '',
+    viewCount: ''
   };
+  @Input() href = [];
   @Input() faIcon = faStar;
   @Input() srcImg = '/global-assets/images/image.webp';
-  @Input() countComment = '40';
-  @Input() countView = '696969k';
   @Input() faIcon2 = faComments;
+  @Output() openDetailBookEvent = new EventEmitter();
+  constructor(private matDialog: MatDialog) { }
 
-  constructor(private matDialog: MatDialog) {}
+  ngOnInit(): void { }
 
-  ngOnInit(): void {}
-
-  openDetailBook(): void {
-    this.matDialog.open(WrtDetailPopupBookTemplate, {
-      width: '55rem',
-      height: '33rem',
-    });
-  }
 }

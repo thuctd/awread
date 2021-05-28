@@ -93,9 +93,6 @@
       "@awread/reader/web/ui-market": [
         "libs/reader/web/ui-market/src/index.ts"
       ],
-      "@awread/global/powers": [
-        "libs/global/powers/src/index.ts"
-      ],
       "@awread/core/books": [
         "libs/core/books/src/index.ts"
       ],
@@ -146,6 +143,12 @@
       ],
       "@awread/global/settings": [
         "libs/global/settings/src/index.ts"
+      ],
+      "@awread/core/creations": [
+        "libs/core/creations/src/index.ts"
+      ],
+      "@awread/feature/upload-image": [
+        "libs/feature/upload-image/src/index.ts"
       ]
     }
   },

@@ -15,11 +15,11 @@ This will generate `gears` folder with `index.ts` inside. Then create `login.gea
 
 The same for other file types.
 
-# AKITA
+# State
 
-akita generator generate file for full feature function like: service, query and store file
+State generator generate file for full feature function like: service, query and store file
 for example:
-`nx workspace-generator akita current-user`
+`nx workspace-generator state current-user`
 this will generate `states` folder with `index.ts` inside. Then create 3 file `current-user.service.ts, current-user.query.ts, current-user.store.ts`
 
 ```

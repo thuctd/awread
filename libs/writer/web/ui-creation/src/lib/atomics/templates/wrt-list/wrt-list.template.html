@@ -1,11 +1,4 @@
 <section class="w-full max-w-screen-xl mx-auto">
-  <list
-    class="ml-32"
-    [books]="books"
-    [loading]="loading"
-    (updateBookStatusEvent)="updateBookStatusEvent.emit($event)"
-    (addChapterEvent)="addChapterEvent.emit($event)"
-    (editBookEvent)="editBookEvent.emit($event)"
-    (removeBookEvent)="removeBookEvent.emit($event)"
-  ></list>
+  <list class="ml-32" [books]="books" [loading]="loading" (updateBookStatusEvent)="updateBookStatusEvent.emit($event)"
+    (addChapterEvent)="addChapterEvent.emit($event)" (removeBookEvent)="removeBookEvent.emit($event)"></list>
 </section>

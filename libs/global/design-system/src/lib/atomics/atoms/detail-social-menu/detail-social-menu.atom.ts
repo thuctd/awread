@@ -23,11 +23,11 @@ export class DetailSocialMenuAtom implements OnInit {
       type: 'new-chapter',
       icon: faPlusCircle,
     },
-    {
-      name: 'Chỉnh sửa',
-      type: 'edit',
-      icon: faPlusSquare,
-    },
+    // {
+    //   name: 'Chỉnh sửa',
+    //   type: 'edit',
+    //   icon: faPlusSquare,
+    // },
     {
       name: 'Xóa',
       type: 'delete',
@@ -36,7 +36,7 @@ export class DetailSocialMenuAtom implements OnInit {
   ];
 
   isMenuOpen = false;
-  constructor() {}
+  constructor() { }
   toggleMenu($event) {
     $event.stopPropagation();
     this.isMenuOpen = !this.isMenuOpen;
@@ -46,5 +46,5 @@ export class DetailSocialMenuAtom implements OnInit {
     this.isMenuOpen = false;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

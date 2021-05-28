@@ -245,11 +245,6 @@
         "type:ui"
       ]
     },
-    "global-powers": {
-      "tags": [
-        "scope:shared"
-      ]
-    },
     "core-books": {
       "tags": [
         "scope:core-books",
@@ -366,6 +361,18 @@
       "tags": [
         "scope:shared",
         "type:global"
+      ]
+    },
+    "core-creations": {
+      "tags": [
+        "scope:core-creations",
+        "scope:shared",
+        "type:core"
+      ]
+    },
+    "feature-upload-image": {
+      "tags": [
+        "scope:shared"
       ]
     }
   }

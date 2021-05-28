@@ -9,11 +9,9 @@ if (environment.production) {
   enableProdMode();
 }
 
-customMain();
-
-customMain();
+const custom = customMain();
 
 
-platformBrowserDynamic()
+platformBrowserDynamic(custom.providers)
   .bootstrapModule(AppModule, { ngZoneEventCoalescing: true })
   .catch((err) => console.error(err));

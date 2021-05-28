@@ -1925,33 +1925,6 @@
         }
       }
     },
-    "global-powers": {
-      "projectType": "library",
-      "root": "libs/global/powers",
-      "sourceRoot": "libs/global/powers/src",
-      "prefix": "awread",
-      "architect": {
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/global/powers/src/**/*.ts",
-              "libs/global/powers/src/**/*.html"
-            ]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/global/powers"
-          ],
-          "options": {
-            "jestConfig": "libs/global/powers/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
     "core-books": {
       "projectType": "library",
       "root": "libs/core/books",
@@ -2406,6 +2379,60 @@
           ],
           "options": {
             "jestConfig": "libs/global/settings/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "core-creations": {
+      "projectType": "library",
+      "root": "libs/core/creations",
+      "sourceRoot": "libs/core/creations/src",
+      "prefix": "awread",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/core/creations/src/**/*.ts",
+              "libs/core/creations/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/core/creations"
+          ],
+          "options": {
+            "jestConfig": "libs/core/creations/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "feature-upload-image": {
+      "projectType": "library",
+      "root": "libs/feature/upload-image",
+      "sourceRoot": "libs/feature/upload-image/src",
+      "prefix": "awread",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/feature/upload-image/src/**/*.ts",
+              "libs/feature/upload-image/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/feature/upload-image"
+          ],
+          "options": {
+            "jestConfig": "libs/feature/upload-image/jest.config.js",
             "passWithNoTests": true
           }
         }

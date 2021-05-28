@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="0,682" last-zoom="0.95" max-obj-count="16"
+<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="0,608" last-zoom="0.95" max-obj-count="27"
 	 default-owner="postgres">
 <role name="public_read"
       inherit="true">
@@ -25,21 +25,27 @@ CAUTION: Do not modify this file unless you know what you are doing.
       inherit="true">
 </role>
 
+<role name="basic_write">
+</role>
+
 <database name="awread_database" is-template="false" allow-conns="true">
 </database>
 
 <schema name="public" layer="0" fill-color="#e1e1e1" sql-disabled="true">
 </schema>
 
+<extension name="pgcrypto">
+</extension>
+
 <extension name="pg_trgm">
+</extension>
+
+<extension name="uuid-ossp">
 </extension>
 
 <schema name="private" layer="0" rect-visible="true" fill-color="#e1e1e1">
 	<role name="postgres"/>
 </schema>
-
-<extension name="pgcrypto">
-</extension>
 
 <usertype name="jwt_token" configuration="composite">
 	<schema name="public"/>
@@ -54,9 +60,6 @@ CAUTION: Do not modify this file unless you know what you are doing.
 		<type name="numeric" length="0"/>
 	</typeattrib>
 </usertype>
-
-<extension name="uuid-ossp">
-</extension>
 
 <opclass  name="gin_trgm_ops" index-type="gin" default="false" sql-disabled="true">
 	<schema name="public"/>
@@ -966,9 +969,197 @@ end;]]></definition>
 </view>
 
 <genericsql name="grant_access">
-	<definition><![CDATA[grant public_read to anonymous, reader, writer, postgraphile;]]></definition>
+	<definition><![CDATA[grant public_read to anonymous, reader, writer, postgraphile;
+grant basic_write to reader, writer, postgraphile;]]></definition>
 	<object name="public_read" type="role" ref-name="grant_access_public_read"/>
 </genericsql>
+
+<function name="upsert_authors"
+		window-func="false"
+		returns-setof="false"
+		behavior-type="CALLED ON NULL INPUT"
+		function-type="VOLATILE"
+		security-type="SECURITY INVOKER"
+		execution-cost="1"
+		row-amount="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<language name="plpgsql"/>
+	<return-type>
+	<type name="uuid" length="0"/>
+	</return-type>
+	<parameter name="bookId">
+		<type name="uuid" length="0"/>
+	</parameter>
+	<parameter name="authorIds">
+		<type name="uuid" length="0" dimension="1"/>
+	</parameter>
+	<definition><![CDATA[DECLARE
+  	"varUserId" uuid;
+	"inputBookId" uuid := "bookId";
+BEGIN
+	DELETE FROM authors b
+ 	WHERE 
+		b."bookId" = "inputBookId" and  
+		b."userId" <> any ("authorIds");
+		
+  	FOREACH "varUserId" IN ARRAY "authorIds"
+  	LOOP
+		insert into authors("bookId","userId")
+		values("inputBookId", "varUserId"); 
+  	END LOOP;
+  	
+  	RETURN "inputBookId";
+end;]]></definition>
+</function>
+
+<function name="upsert_books_genres"
+		window-func="false"
+		returns-setof="false"
+		behavior-type="CALLED ON NULL INPUT"
+		function-type="VOLATILE"
+		security-type="SECURITY INVOKER"
+		execution-cost="1"
+		row-amount="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<language name="plpgsql"/>
+	<return-type>
+	<type name="uuid" length="0"/>
+	</return-type>
+	<parameter name="bookId">
+		<type name="uuid" length="0"/>
+	</parameter>
+	<parameter name="genreIds">
+		<type name="numeric" length="0" dimension="1"/>
+	</parameter>
+	<definition><![CDATA[DECLARE
+  	"varGenreId" numeric;
+	"inputBookId" uuid := "bookId";
+BEGIN
+	DELETE FROM books_genres b
+ 	WHERE 
+		b."bookId" = "inputBookId" and  
+		b."genreId" <> any ("genreIds");
+		
+  	FOREACH "varGenreId" IN ARRAY "genreIds"
+  	LOOP
+		insert into books_genres("bookId","genreId")
+		values("inputBookId", "varGenreId"); 
+  	END LOOP;
+  	
+  	RETURN "inputBookId";
+
+END;]]></definition>
+</function>
+
+<function name="new_book"
+		window-func="false"
+		returns-setof="false"
+		behavior-type="CALLED ON NULL INPUT"
+		function-type="VOLATILE"
+		security-type="SECURITY INVOKER"
+		execution-cost="1"
+		row-amount="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<language name="plpgsql"/>
+	<return-type>
+	<type name="uuid" length="0"/>
+	</return-type>
+	<parameter name="authorIds">
+		<type name="uuid" length="0" dimension="1"/>
+	</parameter>
+	<parameter name="genreIds">
+		<type name="numeric" length="0" dimension="1"/>
+	</parameter>
+	<parameter name="userId">
+		<type name="uuid" length="0"/>
+	</parameter>
+	<parameter name="categoryId">
+		<type name="numeric" length="0"/>
+	</parameter>
+	<parameter name="publisherId">
+		<type name="uuid" length="0"/>
+	</parameter>
+	<parameter name="title">
+		<type name="text" length="0"/>
+	</parameter>
+	<parameter name="completed">
+		<type name="boolean" length="0"/>
+	</parameter>
+	<parameter name="ages">
+		<type name="numeric" length="0"/>
+	</parameter>
+	<parameter name="description">
+		<type name="text" length="0"/>
+	</parameter>
+	<parameter name="cover">
+		<type name="text" length="0"/>
+	</parameter>
+	<parameter name="type">
+		<type name="text" length="0"/>
+	</parameter>
+	<definition><![CDATA[declare 
+"bookId" uuid;
+
+begin
+
+INSERT INTO books (
+"userId",
+"categoryId",
+"publisherId",
+title,
+completed,
+ages,
+description,
+cover,
+type
+)
+VALUES (
+userId",
+"categoryId",
+"publisherId",
+title,
+completed,
+ages,
+description,
+cover,
+type
+) 
+RETURNING "bookId" INTO "bookId";
+
+select upsert_books_genres("bookId", array "genreIds" ::uuid[]);
+
+select upsert_authors("bookId", array "authorIds" ::uuid[]);
+
+return "bookId";
+
+end;]]></definition>
+</function>
+
+<view name="v_creations" layer="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1080" y="1620"/>
+	<reference>
+		<expression><![CDATA[b.*,
+count(*) filter (where c.published = true)::numeric as "publishedCount",
+count(*) filter (where c.published = false)::numeric as "draftCount",
+sum(v.count)::numeric as "viewCount"]]></expression>
+	</reference>
+	<reference>
+		<expression><![CDATA[books b
+inner join chapters c using ("bookId")
+inner join book_visits v using ("bookId")]]></expression>
+	</reference>
+	<reference>
+		<expression><![CDATA[group by 1]]></expression>
+	</reference>
+	<expression type="select-exp">0</expression>
+	<expression type="from-exp">1</expression>
+	<expression type="end-exp">2</expression>
+</view>
 
 <constraint name="books_userId_fk" type="fk-constr" comparison-type="MATCH FULL"
 	 upd-action="NO ACTION" del-action="CASCADE" ref-table="public.users" table="public.books">
@@ -1114,11 +1305,6 @@ end;]]></definition>
 	 src-required="false" dst-required="true"/>
 
 <permission>
-	<object name="public.books" type="table"/>
-	<roles names="public_read"/>
-	<privileges select="grant-op"/>
-</permission>
-<permission>
 	<object name="public.mv_most_view_books" type="view"/>
 	<roles names="public_read"/>
 	<privileges select="grant-op"/>
@@ -1140,11 +1326,6 @@ end;]]></definition>
 </permission>
 <permission>
 	<object name="public.categories" type="table"/>
-	<roles names="public_read"/>
-	<privileges select="grant-op"/>
-</permission>
-<permission>
-	<object name="public.books_genres" type="table"/>
 	<roles names="public_read"/>
 	<privileges select="grant-op"/>
 </permission>
@@ -1182,5 +1363,60 @@ end;]]></definition>
 	<object name="public.users" type="table"/>
 	<roles names="reader,writer"/>
 	<privileges update="true"/>
+</permission>
+<permission>
+	<object name="public.books" type="table"/>
+	<roles names="reader,writer,postgraphile"/>
+	<privileges insert="true" update="true"/>
+</permission>
+<permission>
+	<object name="public.books_genres" type="table"/>
+	<roles names="postgraphile,reader,writer"/>
+	<privileges insert="true" update="true"/>
+</permission>
+<permission>
+	<object name="public.books" type="table"/>
+	<roles names="basic_write"/>
+	<privileges insert="true" update="true"/>
+</permission>
+<permission>
+	<object name="public.books_genres" type="table"/>
+	<roles names="basic_write"/>
+	<privileges delete="true" insert="true" update="true"/>
+</permission>
+<permission>
+	<object name="public.chapters" type="table"/>
+	<roles names="basic_write"/>
+	<privileges delete="true" insert="true" update="true"/>
+</permission>
+<permission>
+	<object name="public.contents" type="table"/>
+	<roles names="basic_write"/>
+	<privileges delete="true" insert="true" update="true"/>
+</permission>
+<permission>
+	<object name="public.authors" type="table"/>
+	<roles names="basic_write"/>
+	<privileges delete="true" insert="true" update="true"/>
+</permission>
+<permission>
+	<object name="private.users" type="table"/>
+	<roles names="public_read"/>
+	<privileges select="true"/>
+</permission>
+<permission>
+	<object name="private.users" type="table"/>
+	<roles names="basic_write"/>
+	<privileges insert="true" update="true"/>
+</permission>
+<permission>
+	<object name="public.book_visits" type="table"/>
+	<roles names="basic_write"/>
+	<privileges insert="true" update="true"/>
+</permission>
+<permission>
+	<object name="public.v_creations" type="view"/>
+	<roles names="public_read"/>
+	<privileges select="grant-op"/>
 </permission>
 </dbmodel>

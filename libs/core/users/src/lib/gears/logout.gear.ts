@@ -1,5 +1,5 @@
 import { Router } from '@angular/router';
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { ApolloAddon } from '../addons';
 import { CurrentUserService } from '../states/current-user';
 import { SnackbarsService } from '@awread/global/packages';
@@ -12,6 +12,7 @@ export class LogoutGear {
     private router: Router,
     private snackbarService: SnackbarsService,
     private socialAuthService: SocialAuthService,
+    @Inject('persistStorage') private persistStorage
   ) { }
 
   logout(redirect = '/login') {
@@ -23,7 +24,13 @@ export class LogoutGear {
     try {
       this.socialAuthService.signOut(true);
     } catch (error) {
-
+      console.warn('social signout error', error);
+    }
+    try {
+      // Clear all
+      this.persistStorage.clearStore();
+    } catch (error) {
+      console.warn('persist state clear failed', error);
     }
   }
 }

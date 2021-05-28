@@ -1,13 +1,14 @@
 import { map, startWith, switchMap, takeUntil } from 'rxjs/operators';
 import { tap } from 'rxjs/operators';
-import { CategoryFacade, ChaptersFacade, GenresFacade } from '@awread/writer/web/feature-auth';
 import { CurrentUserFacade } from '@awread/core/users';
-import { BooksFacade } from '@awread/writer/web/feature-auth';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Directive, Injectable, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { combineLatest, of, Subject } from 'rxjs';
-
+import { CreationsFacade } from '@awread/core/creations';
+import { ChaptersFacade } from '@awread/core/chapters';
+import { CategoriesFacade } from '@awread/core/categories';
+import { GenresFacade } from '@awread/core/genres';
 @Injectable({
   providedIn: 'root',
 })
@@ -16,7 +17,7 @@ export class DetailPage implements OnInit, OnDestroy {
   bookForm: FormGroup;
   bookId: string;
   chapterEntity$: any;
-  chapterListByBookId$ = this.chaptersFacade.chapterListByBookId$;
+  chapters$ = this.chaptersFacade.chapters$;
   tabsHead = [
     { name: 'THÔNG TIN TRUYỆN', tabName: 'book' },
     { name: 'MỤC LỤC', tabName: 'toc' },
@@ -33,10 +34,10 @@ export class DetailPage implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
-    private booksFacade: BooksFacade,
+    private creationsFacade: CreationsFacade,
     private currentUserFacade: CurrentUserFacade,
     private chaptersFacade: ChaptersFacade,
-    private categoryFacade: CategoryFacade,
+    private categoriesFacade: CategoriesFacade,
     private genresFacade: GenresFacade,
     private router: Router,
     private cd: ChangeDetectorRef
@@ -52,7 +53,7 @@ export class DetailPage implements OnInit, OnDestroy {
     this.getAllChapters();
     this.initForm();
     this.updateForm();
-    this.categories$ = this.categoryFacade.selectAllCategoriesAkita();
+    this.categories$ = this.categoriesFacade.selectAllCategoriesAkita();
     this.genres$ = this.genresFacade.selectAllGenresAkita();
   }
 
@@ -63,22 +64,6 @@ export class DetailPage implements OnInit, OnDestroy {
       this.selectedTab = 'book';
     }
   }
-
-  // getAllGenres() {
-  //   return combineLatest([
-  //     this.genresFacade.selectAllGenresAkita(),
-  //     this.bookForm.get('genres').valueChanges.pipe(startWith('')),
-  //   ]).pipe(
-  //     map(([genres, genresValueForm]: [Genre[], string]) => {
-  //       if (genres && genres.length) {
-  //         return genres.filter((item) =>
-  //           item.name.toLowerCase().includes(genresValueForm.toLowerCase())
-  //         );
-  //       }
-  //       return [];
-  //     })
-  //   );
-  // }
 
   createNewChapterEvent() {
     this.router.navigate([
@@ -123,41 +108,41 @@ export class DetailPage implements OnInit, OnDestroy {
     if (this.bookId) {
       this.updateBook(book);
     } else {
-      this.booksFacade.addBook(book).subscribe(() => {
-        this.selectedTab = 'toc';
-        this.bookFormValueBefore = this.bookForm.value;
-        this.cd.detectChanges();
-      });
+      // this.creationsFacade.addBook(book).subscribe(() => {
+      //   this.selectedTab = 'toc';
+      //   this.bookFormValueBefore = this.bookForm.value;
+      //   this.cd.detectChanges();
+      // });
     }
   }
 
   private updateBook(book) {
     // const idsGenresAdd = this.genresListSelected; // dung de them genre khi user them genre ko co trong DB
-    if (JSON.stringify(this.bookFormValueBefore) !== JSON.stringify(this.bookForm.value)) {
-      const idsGenresRemove = this.booksFacade.getGenreIdsByBookIdAkita(this.bookId);
-      this.booksFacade.editBook(book, idsGenresRemove).subscribe(() => {
-        this.selectedTab = 'toc';
-        this.cd.detectChanges();
-      });
-      this.bookFormValueBefore = this.bookForm.value;
-    } else {
-      this.selectedTab = 'toc';
-    }
+    // if (JSON.stringify(this.bookFormValueBefore) !== JSON.stringify(this.bookForm.value)) {
+    //   const idsGenresRemove = this.creationsFacade.getGenreIdsByBookIdAkita(this.bookId);
+    //   this.creationsFacade.editBook(book, idsGenresRemove).subscribe(() => {
+    //     this.selectedTab = 'toc';
+    //     this.cd.detectChanges();
+    //   });
+    //   this.bookFormValueBefore = this.bookForm.value;
+    // } else {
+    //   this.selectedTab = 'toc';
+    // }
   }
 
   private bookSaveDatabase() {
-    const userid = this.currentUserFacade.getUserId();
-    const genres = this.bookForm.value.genreIds.map((id) => ({
-      genreid: id,
-      name: this.genresFacade.getNameGenreBaseIdAkita(id),
-    }));
-    const book = {
-      ...this.bookForm.value,
-      bookid: this.bookId,
-      genres,
-      userid, // this.genresListChip ??
-    };
-    return book;
+    // const userid = this.currentUserFacade.getUserId();
+    // const genres = this.bookForm.value.genreIds.map((id) => ({
+    //   genreid: id,
+    //   name: this.genresFacade.getNameGenreBaseIdAkita(id),
+    // }));
+    // const book = {
+    //   ...this.bookForm.value,
+    //   bookid: this.bookId,
+    //   genres,
+    //   userid, // this.genresListChip ??
+    // };
+    // return book;
   }
 
   cancelCreateBook(action: string) {
@@ -272,36 +257,36 @@ export class DetailPage implements OnInit, OnDestroy {
 
   private removeChapter(chapter, bookId: string) {
     const status = this.bookForm.get('status').value;
-    this.chaptersFacade
-      .removeChapter(chapter.chapterid, bookId, status)
-      .pipe(tap((res) => { }))
-      .subscribe((res) => {
-        console.log('remove chapter res: ', res);
-      });
+    // this.chaptersFacade
+    //   .removeChapter(chapter.chapterid, bookId, status)
+    //   .pipe(tap((res) => { }))
+    //   .subscribe((res) => {
+    //     console.log('remove chapter res: ', res);
+    //   });
   }
 
   private updateForm() {
-    if (this.bookId) {
-      this.booksFacade
-        .selectEntityBook(this.bookId)
-        .pipe(takeUntil(this.destroy$))
-        .subscribe((book) => {
-          if (book) {
-            this.selectedBookStatus = book.status;
-            this.bookForm.patchValue({
-              title: book.title ?? '',
-              description: book.description ?? '',
-              categoryid: book.categoryid ?? '',
-              genreIds: book.genreIds ?? [],
-              tags: book.tags ?? [],
-              completed: book.completed ?? false,
-              status: book.status ?? 'DRAFT',
-              audience: book.audience ?? 'none',
-            });
-            this.bookFormValueBefore = this.bookForm.value;
-          }
-        });
-    }
+    // if (this.bookId) {
+    //   this.creationsFacade
+    //     .selectEntityBook(this.bookId)
+    //     .pipe(takeUntil(this.destroy$))
+    //     .subscribe((book) => {
+    //       if (book) {
+    //         this.selectedBookStatus = book.status;
+    //         this.bookForm.patchValue({
+    //           title: book.title ?? '',
+    //           description: book.description ?? '',
+    //           categoryid: book.categoryid ?? '',
+    //           genreIds: book.genreIds ?? [],
+    //           tags: book.tags ?? [],
+    //           completed: book.completed ?? false,
+    //           status: book.status ?? 'DRAFT',
+    //           audience: book.audience ?? 'none',
+    //         });
+    //         this.bookFormValueBefore = this.bookForm.value;
+    //       }
+    //     });
+    // }
   }
 
   private initForm() {

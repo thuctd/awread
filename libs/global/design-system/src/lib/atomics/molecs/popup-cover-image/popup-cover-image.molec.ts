@@ -18,11 +18,12 @@ export class PopupCoverImageMolec implements OnInit {
   @Input() title = 'Chọn ảnh đại diện';
   @Input() status = 'pending';
   @Input() percentLoading = '50%';
+  @Input() sourceTarget = '';
   @Input() controlName = new FormControl('');
   @Output() eventChooseImage = new EventEmitter();
   @Output() submitEvent = new EventEmitter();
   icon = faTimes;
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

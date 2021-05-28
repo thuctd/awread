@@ -28,7 +28,6 @@ module.exports = {
     '<rootDir>/libs/reader/web/ui-author',
     '<rootDir>/libs/reader/web/ui-single',
     '<rootDir>/libs/reader/web/ui-market',
-    '<rootDir>/libs/global/powers',
     '<rootDir>/libs/core/books',
     '<rootDir>/libs/core/users',
     '<rootDir>/libs/core/sales',
@@ -46,5 +45,7 @@ module.exports = {
     '<rootDir>/libs/core/authors',
     '<rootDir>/libs/core/slider',
     '<rootDir>/libs/global/settings',
+    '<rootDir>/libs/core/creations',
+    '<rootDir>/libs/feature/upload-image',
   ],
 };
