@@ -104,7 +104,7 @@ export class CurrentUserApi {
         $firstname: String,
         $middlename: String,
         $lastname: String,
-        $avatar: String,
+        $avatar: Boolean,
         $dob: String,
         $bio: String,
         $websiteAddress: String,

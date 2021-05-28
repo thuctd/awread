@@ -28,7 +28,8 @@ export class WrtProfileTemplate implements OnInit {
   @Input() submitted: boolean;
   @Output() updateProfileEvent = new EventEmitter();
   @Output() ClickConnect = new EventEmitter();
-  constructor(public matDialog: MatDialog, private fb: FormBuilder) {}
+  @Input() imgSrc;
+  constructor(public matDialog: MatDialog, private fb: FormBuilder) { }
 
   ngOnInit(): void {
     // setTimeout(() => this.profileForm.patchValue({ username: 'ahihi' }), 5000);

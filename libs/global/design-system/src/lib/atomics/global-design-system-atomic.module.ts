@@ -130,6 +130,7 @@ import { InfoBookMolec } from './molecs/info-book/info-book.molec';
 import { SocialConnectBtnAtom } from './atoms/social-connect-btn/social-connect-btn.atom';
 import { RdProfileInfoPersonalItemAtom } from './atoms/rd-profile-info-personal-item/rd-profile-info-personal-item.atom';
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { CoreUsersModule } from '@awread/core/users';
 @NgModule({
   imports: [
     CommonModule,
@@ -146,6 +147,7 @@ import { ImageCropperModule } from 'ngx-image-cropper';
     CloseOnOutsideModule,
     NgImageSliderModule,
     ImageCropperModule,
+    CoreUsersModule
   ],
   exports: [
     MatDialogModule,
