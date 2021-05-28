@@ -50,6 +50,7 @@ export class BooksHomeApi {
       )
   }
 
+  //[NOTE]: Pagination Graphiql
   getLatestBooks(categoryId: string, offset: number) {
     return this.apollo.query({
       query: gql`
