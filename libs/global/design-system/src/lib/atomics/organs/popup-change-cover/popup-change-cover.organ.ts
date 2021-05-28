@@ -20,7 +20,6 @@ export class PopupChangeCoverOrgan implements OnInit {
   controlName = new FormControl('');
   status = 'pending';
   percentLoading = '10%';
-  sourceTarget;
   constructor(
     public matDialogRef: MatDialogRef<PopupChangeCoverOrgan>,
     private cd: ChangeDetectorRef,
@@ -29,21 +28,22 @@ export class PopupChangeCoverOrgan implements OnInit {
   ngOnInit(): void { }
 
   eventChooseImage($event) {
-    this.status = 'loading';
-    const [file] = $event.target.files
-    const reader = new FileReader();
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = e => {
-        this.sourceTarget = reader.result;
-        console.log('result', !!this.sourceTarget);
-        this.status = 'reposition';
-        setTimeout(() => {
-          this.cd.detectChanges();
-        }, 100);
-      };
-      reader.readAsDataURL(file);
-    }
+    // this.status = 'loading';
+    // const [file] = $event.target.files
+    // const reader = new FileReader();
+    // if (file) {
+    //   const reader = new FileReader();
+    //   reader.onload = e => {
+    //     console.log('result', !!this.sourceTarget);
+    //     this.status = 'reposition';
+    //     setTimeout(() => {
+    //       this.cd.detectChanges();
+    //     }, 100);
+    //   };
+    //   reader.readAsDataURL(file);
+    // }
+    this.status = 'reposition';
+
   }
 
   submitEvent(event) {

@@ -2,10 +2,15 @@
     <div class="flex absolute top-3 right-10">
         <atom-round-btn [title]="'Huỷ'" [color]="'bg-gray-200 text-grey-400'" class="mr-2" (submitEvent)="submitEvent.emit('close')" [color]="">
         </atom-round-btn>
-        <atom-round-btn [title]="'Lưu'" (submitEvent)="submitEvent.emit('save')"></atom-round-btn>
+        <atom-round-btn [title]="'Lưu'" (submitEvent)="submitEvent.emit(croppedImage)"></atom-round-btn>
     </div>
-    <div class="w-3/5 relative overflow-hidden rounded-md" [style.padding-top]="'40%'">
-        <img [src]="sourceTarget" class="absolute left-0 right-0 top-1/2 " style="transform: translateY(-50%);" alt="">
+    <div class="w-3/5 relative overflow-hidden rounded-md">
+        <!-- <img [src]="sourceTarget" class="absolute left-0 right-0 top-1/2 " style="transform: translateY(-50%);" alt=""> -->
+
+        <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="1 / 1" format="webp"
+            (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded($event)" (cropperReady)="cropperReady()" (loadImageFailed)="loadImageFailed()">
+        </image-cropper>
+
         <div class="absolute top-4 rounded border-white border-2 mx-auto px-2 py-1 left-1/2" style="transform: translateX(-50%);">
             <fa-icon [icon]="icon" class="text-white"></fa-icon>
             <span class="text-white text-sm ml-3">Di chuyển ảnh để thay đổi</span>
@@ -14,8 +19,8 @@
         </div>
     </div>
     <div class="w-1/4 overflow-hidden rounded-md">
-        <img [src]="sourceTarget" [alt]="sourceTarget">
+        <img [src]="croppedImage">
     </div>
 </div>
 
-<!-- <pre> img {{ sourceTarget }} </pre> -->
+<!-- <pre> img {{ imageChangedEvent }} </pre> -->

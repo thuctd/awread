@@ -129,7 +129,7 @@ import { ProfileInputAtom } from './atoms/profile-input/profile-input.atom';
 import { InfoBookMolec } from './molecs/info-book/info-book.molec';
 import { SocialConnectBtnAtom } from './atoms/social-connect-btn/social-connect-btn.atom';
 import { RdProfileInfoPersonalItemAtom } from './atoms/rd-profile-info-personal-item/rd-profile-info-personal-item.atom';
-
+import { ImageCropperModule } from 'ngx-image-cropper';
 @NgModule({
   imports: [
     CommonModule,
@@ -145,6 +145,7 @@ import { RdProfileInfoPersonalItemAtom } from './atoms/rd-profile-info-personal-
     DefaultCoverModule,
     CloseOnOutsideModule,
     NgImageSliderModule,
+    ImageCropperModule,
   ],
   exports: [
     MatDialogModule,
@@ -400,4 +401,4 @@ import { RdProfileInfoPersonalItemAtom } from './atoms/rd-profile-info-personal-
     RdProfileInfoPersonalItemAtom,
   ],
 })
-export class GlobalDesignSystemAtomicModule {}
+export class GlobalDesignSystemAtomicModule { }
