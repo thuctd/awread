@@ -81,7 +81,6 @@ export class ListPage implements OnInit, OnDestroy {
   filterBooks() {
     this.activatedRoute.parent.url.subscribe(([urlSegment]) => {
       const categoryId = urlSegment.parameterMap.get('categoryId');
-      const type = urlSegment.path;
       this.filteredBooks$ = this.booksFacade.getFilterBooks(categoryId);
     })
   }
