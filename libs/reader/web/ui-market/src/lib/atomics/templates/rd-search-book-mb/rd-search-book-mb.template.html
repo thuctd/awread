@@ -2,7 +2,7 @@
   <div (click)="submitSearchBtn.emit()">
     <fa-icon class="text-gray-light text-lg absolute cursor-pointer" [icon]="faIcon"></fa-icon>
   </div>
-  <input [formControl]="inputControl" class="pl-8 pt-0.5 focus:outline-none nunito font-semibold w-full text-gray-text">
+  <input #searchBox (input)="bindingUrl.emit(searchBox.value)" [formControl]="inputControl" class="pl-8 pt-0.5 focus:outline-none nunito font-semibold w-full text-gray-text">
   <ng-container *ngIf="items?.length; else noData">
     <!-- <div class="text-base border-b pb-3 text-gray-text font-bold">{{title}}</div> -->
     <div class="text-sm ml-4 py-2 text-gray-text font-semibold">{{items.length}} Tác phẩm</div>
