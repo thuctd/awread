@@ -1,0 +1,9 @@
+<section class="pl-32 bg-gray-50 h-screen">
+  <template-wrt-book-toc-tab
+    [bookId]="bookId"
+    [bookForm]="bookForm"
+    [chapters]="chapters$ | async"
+    (chapterActionEvent)="chapterActionEvent($event)"
+    (createNewChapterEvent)="createNewChapterEvent()"
+  ></template-wrt-book-toc-tab>
+</section>
