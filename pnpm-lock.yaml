@@ -93,6 +93,7 @@ specifiers:
   jest-preset-angular: ^8.4.0
   lint-staged: ^10.5.4
   ng-image-slider: ^2.6.4
+  ngx-image-cropper: ^3.3.5
   ngx-owl-carousel-o: ^5.0.0
   ngx-quill: ^13.2.0
   passport: ^0.4.1
@@ -162,6 +163,7 @@ dependencies:
   graphile-utils: 4.11.2
   graphql: 15.5.0
   ng-image-slider: 2.6.4_b0550eba7aa0167d56798f794764a5df
+  ngx-image-cropper: 3.3.5_43b5c28c75869dc532215c390eb0b633
   ngx-owl-carousel-o: 5.0.0_2659a02cbfe2691f14a09a95419ad827
   ngx-quill: 13.2.0_159876f472a378b874ada8bf0033d6ae
   passport: 0.4.1
@@ -4871,7 +4873,7 @@ packages:
       '@angular/common': 11.2.6_@angular+core@11.2.6+rxjs@6.6.6
       '@angular/core': 11.2.6_rxjs@6.6.6+zone.js@0.11.4
       '@angular/forms': 11.2.6_daf588f56cfc04c5b8a889bb8cd1a624
-      tslib: 2.1.0
+      tslib: 2.2.0
     dev: false
 
   /@ngneat/hot-toast/2.0.1_cd84579ce96adc927ef7f1e13fe14015:
@@ -15390,6 +15392,19 @@ packages:
     dependencies:
       '@angular/common': 11.2.6_@angular+core@11.2.6+rxjs@6.6.6
       '@angular/core': 11.2.6_rxjs@6.6.6+zone.js@0.11.4
+      tslib: 1.14.1
+    dev: false
+
+  /ngx-image-cropper/3.3.5_43b5c28c75869dc532215c390eb0b633:
+    resolution: {integrity: sha512-0yRVKG5XAbVo3rOaj/iFDlekGsxEqXKU9iXFbjyvHvRT2DFs+AjwtyvINsHCWw+4ed9yA4Y+wLIUNqzA0bfxLw==}
+    peerDependencies:
+      '@angular/common': '>=8.0.0'
+      '@angular/core': '>=8.0.0'
+      '@angular/platform-browser': '>=8.0.0'
+    dependencies:
+      '@angular/common': 11.2.6_@angular+core@11.2.6+rxjs@6.6.6
+      '@angular/core': 11.2.6_rxjs@6.6.6+zone.js@0.11.4
+      '@angular/platform-browser': 11.2.6_e55852a61278bb526b507ea446211084
       tslib: 1.14.1
     dev: false
 

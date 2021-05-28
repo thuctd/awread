@@ -14,8 +14,12 @@ export class UploadImageApi {
     const formData = new FormData();
     formData.append('file', blob);
     formData.append('type', type);
-    formData.append('id', id);
-    return this.httpClient.post(`${url}`, formData);
+    formData.append('name', id);
+    formData.append('extension', 'webp');
+    return this.httpClient.post(`${url}`, formData, {
+      reportProgress: true,
+      observe: 'events'
+    });
   }
 
 }

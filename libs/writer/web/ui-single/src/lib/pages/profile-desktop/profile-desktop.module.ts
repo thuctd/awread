@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 
 import { ProfileDesktopRoutingModule } from './profile-desktop-routing.module';
 import { ProfileDesktopPage } from './profile-desktop.page';
+import { CoreUsersModule } from '@awread/core/users';
 
 @NgModule({
   declarations: [ProfileDesktopPage],
@@ -13,6 +14,7 @@ import { ProfileDesktopPage } from './profile-desktop.page';
     ProfileDesktopRoutingModule,
     WriterWebUiSingleAtomicModule,
     ReactiveFormsModule,
+    CoreUsersModule
   ],
 })
-export class ProfileDesktopModule {}
+export class ProfileDesktopModule { }

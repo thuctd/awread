@@ -6,12 +6,12 @@ import { throwError } from 'rxjs';
 import { SnackbarsService } from '@awread/global/packages';
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-  constructor(private snackbarsService: SnackbarsService) {}
+  constructor(private snackbarsService: SnackbarsService) { }
   intercept(request: HttpRequest<any>, next: HttpHandler): any {
     return next.handle(request).pipe(
       tap(
         (event) => {
-          if (event instanceof HttpResponse && event.body.errors) {
+          if (event instanceof HttpResponse && event.body && event.body.errors) {
             event.body.errors.forEach((error) => {
               this.snackbarsService.showError(error.name ? `${error.name}: ${error.message}` : error.message);
             });

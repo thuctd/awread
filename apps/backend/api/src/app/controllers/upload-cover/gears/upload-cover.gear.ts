@@ -17,40 +17,52 @@ export class UploadCoverGear {
       case 'avatar':
         return {
           imageSizes: AvatarSizes,
-          prefix: `users/${id}`
+          prefix: `users`
         };
       case 'cover':
         return {
           imageSizes: CoverSizes,
-          prefix: `books/${id}`
+          prefix: `books`
         };
       default:
         return {
           imageSizes: null,
-          prefix: id ? `unknown/${id}` : `unknown`
+          prefix: id ? `unknown` : `unknown`
         };
     }
   }
 
-  private getFileName(file) {
-    const { originalname } = file;
-    const name = originalname.split('.')[originalname.split('.').length - 2];
-    const extension = originalname.split('.')[originalname.split('.').length - 1]
-    return {
-      name, extension
+  private getFileName(file, uploadInfo) {
+    if (file && file.originName) {
+      const { originalname } = file;
+      const name = originalname.split('.')[originalname.split('.').length - 2];
+      const extension = originalname.split('.')[originalname.split('.').length - 1]
+      console.log('file', file);
+      return {
+        name, extension
+      }
+    } else {
+      console.log('uploadInfo', uploadInfo.name, uploadInfo.extension);
+      return {
+        name: uploadInfo.name,
+        extension: uploadInfo.extension
+      }
     }
   }
 
   async upload(file, uploadInfo: UploadInfo) {
-    const { name, extension } = this.getFileName(file);
+    // console.log('file', file);
+    // console.log('uploadInfo', uploadInfo);
+    const { name, extension } = this.getFileName(file, uploadInfo);
     const imagePack = this.getImagePack(uploadInfo);
-    const multiVersionBuffersWebp = await this.sharpAddon.convertToMultiImageVersions(file.buffer, imagePack.imageSizes);
+    const content = file ? file.buffer : this.convertToBuffer(uploadInfo.file);
+    const multiVersionBuffersWebp = await this.sharpAddon.convertToMultiImageVersions(content, imagePack.imageSizes);
     const errors = await this.s3Addon.uploadMulti([
       ...multiVersionBuffersWebp,
       {
         extension,
         sizeName: 'origin',
-        buffer: file.buffer,
+        buffer: content,
       }
     ], this.bucketS3, name, imagePack.prefix);
     // console.log('result multi upload', result);
@@ -66,4 +78,11 @@ export class UploadCoverGear {
     }
   }
 
+  convertToBuffer(imageSource: string | Buffer) {
+    if (!(imageSource instanceof Buffer)) {
+      const uri = (imageSource as any).split(';base64,').pop();
+      imageSource = Buffer.from(uri, 'base64');
+    }
+    return imageSource;
+  }
 }

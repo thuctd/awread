@@ -1,14 +1,9 @@
 {
   "npmScope": "awread",
-  "affected": {
-    "defaultBase": "master"
-  },
+  "affected": { "defaultBase": "master" },
   "implicitDependencies": {
     "angular.json": "*",
-    "package.json": {
-      "dependencies": "*",
-      "devDependencies": "*"
-    },
+    "package.json": { "dependencies": "*", "devDependencies": "*" },
     "tsconfig.base.json": "*",
     ".eslintrc.json": "*",
     "nx.json": "*"
@@ -18,362 +13,64 @@
       "runner": "@nrwl/nx-cloud",
       "options": {
         "accessToken": "N2NlYmY4ZGQtYjJmNS00OTM4LWFjNDctZGMyNWI2ZmUxMjJifHJlYWQtd3JpdGU=",
-        "cacheableOperations": [
-          "build",
-          "test",
-          "lint",
-          "e2e"
-        ],
+        "cacheableOperations": ["build", "test", "lint", "e2e"],
         "canTrackAnalytics": false,
         "showUsageWarnings": true
       }
     }
   },
   "projects": {
-    "backend-api": {
-      "tags": [
-        "scope:shared"
-      ]
-    },
-    "backend-api-interfaces": {
-      "tags": [
-        "scope:shared"
-      ]
-    },
-    "writer-web": {
-      "tags": [
-        "scope:writer",
-        "scope:shared",
-        "type:app"
-      ]
-    },
-    "writer-web-e2e": {
-      "tags": [],
-      "implicitDependencies": [
-        "writer-web"
-      ]
-    },
-    "writer-web-feature-shell": {
-      "tags": [
-        "scope:writer",
-        "scope:shell",
-        "scope:shared",
-        "type:feature"
-      ]
-    },
-    "writer-web-shared": {
-      "tags": [
-        "scope:writer",
-        "scope:shared"
-      ]
-    },
-    "writer-phone": {
-      "tags": [
-        "scope:writer",
-        "scope:shared",
-        "type:app"
-      ]
-    },
-    "writer-phone-e2e": {
-      "tags": [],
-      "implicitDependencies": [
-        "writer-phone"
-      ]
-    },
-    "writer-phone-feature-shell": {
-      "tags": [
-        "scope:writer",
-        "scope:shell",
-        "scope:shared",
-        "type:feature"
-      ]
-    },
-    "writer-phone-shared": {
-      "tags": [
-        "scope:writer",
-        "scope:shared"
-      ]
-    },
-    "global-assets": {
-      "tags": [
-        "scope:shared",
-        "type:assets"
-      ]
-    },
-    "global-styles": {
-      "tags": [
-        "scope:shared",
-        "type:styles"
-      ]
-    },
-    "global-environments": {
-      "tags": [
-        "scope:shared",
-        "type:environments"
-      ]
-    },
-    "writer-web-ui-auth": {
-      "tags": [
-        "scope:writer",
-        "scope:ui-auth",
-        "scope:shared",
-        "type:ui"
-      ]
-    },
-    "writer-web-feature-auth": {
-      "tags": [
-        "scope:writer",
-        "scope:feature-auth",
-        "scope:shared",
-        "type:feature"
-      ]
-    },
-    "writer-web-ui-single": {
-      "tags": [
-        "scope:writer",
-        "scope:ui-single",
-        "scope:shared",
-        "type:ui"
-      ]
-    },
-    "global-design-system": {
-      "tags": [
-        "scope:shared"
-      ]
-    },
-    "writer-web-ui-creation": {
-      "tags": [
-        "scope:writer",
-        "scope:ui-creation",
-        "scope:shared",
-        "type:ui"
-      ]
-    },
-    "global-packages": {
-      "tags": [
-        "scope:shared"
-      ]
-    },
-    "backend-graphql": {
-      "tags": [
-        "scope:shared"
-      ]
-    },
-    "reader-web": {
-      "tags": [
-        "scope:reader",
-        "scope:shared",
-        "type:app"
-      ]
-    },
-    "reader-web-e2e": {
-      "tags": [],
-      "implicitDependencies": [
-        "reader-web"
-      ]
-    },
-    "reader-web-feature-shell": {
-      "tags": [
-        "scope:reader",
-        "scope:shell",
-        "scope:shared",
-        "type:feature"
-      ]
-    },
-    "reader-web-shared": {
-      "tags": [
-        "scope:reader",
-        "scope:shared"
-      ]
-    },
-    "reader-phone": {
-      "tags": [
-        "scope:reader",
-        "scope:shared",
-        "type:app"
-      ]
-    },
-    "reader-phone-e2e": {
-      "tags": [],
-      "implicitDependencies": [
-        "reader-phone"
-      ]
-    },
-    "reader-phone-feature-shell": {
-      "tags": [
-        "scope:reader",
-        "scope:shell",
-        "scope:shared",
-        "type:feature"
-      ]
-    },
-    "reader-phone-shared": {
-      "tags": [
-        "scope:reader",
-        "scope:shared"
-      ]
-    },
-    "reader-web-ui-auth": {
-      "tags": [
-        "scope:reader",
-        "scope:ui-auth",
-        "scope:shared",
-        "type:ui"
-      ]
-    },
-    "reader-web-ui-author": {
-      "tags": [
-        "scope:reader",
-        "scope:ui-author",
-        "scope:shared",
-        "type:ui"
-      ]
-    },
-    "reader-web-ui-single": {
-      "tags": [
-        "scope:reader",
-        "scope:ui-single",
-        "scope:shared",
-        "type:ui"
-      ]
-    },
-    "reader-web-ui-market": {
-      "tags": [
-        "scope:reader",
-        "scope:ui-market",
-        "scope:shared",
-        "type:ui"
-      ]
-    },
-    "core-books": {
-      "tags": [
-        "scope:core-books",
-        "scope:shared",
-        "type:core"
-      ]
-    },
-    "core-users": {
-      "tags": [
-        "scope:core-users",
-        "scope:shared",
-        "type:core"
-      ]
-    },
-    "core-sales": {
-      "tags": [
-        "scope:core-sales",
-        "scope:shared",
-        "type:core"
-      ]
-    },
-    "core-background": {
-      "tags": [
-        "scope:core-background",
-        "scope:shared",
-        "type:core"
-      ]
-    },
-    "core-analytics": {
-      "tags": [
-        "scope:core-analytics",
-        "scope:shared",
-        "type:core"
-      ]
-    },
-    "core-comments": {
-      "tags": [
-        "scope:core-comments",
-        "scope:shared",
-        "type:core"
-      ]
-    },
-    "core-reviews": {
-      "tags": [
-        "scope:core-reviews",
-        "scope:shared",
-        "type:core"
-      ]
-    },
-    "core-system": {
-      "tags": [
-        "scope:core-system",
-        "scope:shared",
-        "type:core"
-      ]
-    },
-    "core-news": {
-      "tags": [
-        "scope:core-news",
-        "scope:shared",
-        "type:core"
-      ]
-    },
-    "core-marketing": {
-      "tags": [
-        "scope:core-marketing",
-        "scope:shared",
-        "type:core"
-      ]
-    },
-    "core-chapters": {
-      "tags": [
-        "scope:core-chapters",
-        "scope:shared",
-        "type:core"
-      ]
-    },
-    "core-book-data": {
-      "tags": [
-        "scope:core-book-data",
-        "scope:shared",
-        "type:core"
-      ]
-    },
-    "core-categories": {
-      "tags": [
-        "scope:core-categories",
-        "scope:shared",
-        "type:core"
-      ]
-    },
-    "core-genres": {
-      "tags": [
-        "scope:core-genres",
-        "scope:shared",
-        "type:core"
-      ]
-    },
-    "core-authors": {
-      "tags": [
-        "scope:core-authors",
-        "scope:shared",
-        "type:core"
-      ]
-    },
-    "core-slider": {
-      "tags": [
-        "scope:core-slider",
-        "scope:shared",
-        "type:core"
-      ]
-    },
-    "global-settings": {
-      "tags": [
-        "scope:shared",
-        "type:global"
-      ]
-    },
-    "core-creations": {
-      "tags": [
-        "scope:core-creations",
-        "scope:shared",
-        "type:core"
-      ]
-    },
-    "feature-upload-image": {
-      "tags": [
-        "scope:shared"
-      ]
-    }
+    "backend-api": { "tags": ["scope:shared"] },
+    "backend-api-interfaces": { "tags": ["scope:shared"] },
+    "writer-web": { "tags": ["scope:writer", "scope:shared", "type:app"] },
+    "writer-web-e2e": { "tags": [], "implicitDependencies": ["writer-web"] },
+    "writer-web-feature-shell": { "tags": ["scope:writer", "scope:shell", "scope:shared", "type:feature"] },
+    "writer-web-shared": { "tags": ["scope:writer", "scope:shared"] },
+    "writer-phone": { "tags": ["scope:writer", "scope:shared", "type:app"] },
+    "writer-phone-e2e": { "tags": [], "implicitDependencies": ["writer-phone"] },
+    "writer-phone-feature-shell": { "tags": ["scope:writer", "scope:shell", "scope:shared", "type:feature"] },
+    "writer-phone-shared": { "tags": ["scope:writer", "scope:shared"] },
+    "global-assets": { "tags": ["scope:shared", "type:assets"] },
+    "global-styles": { "tags": ["scope:shared", "type:styles"] },
+    "global-environments": { "tags": ["scope:shared", "type:environments"] },
+    "writer-web-ui-auth": { "tags": ["scope:writer", "scope:ui-auth", "scope:shared", "type:ui"] },
+    "writer-web-feature-auth": { "tags": ["scope:writer", "scope:feature-auth", "scope:shared", "type:feature"] },
+    "writer-web-ui-single": { "tags": ["scope:writer", "scope:ui-single", "scope:shared", "type:ui"] },
+    "global-design-system": { "tags": ["scope:shared"] },
+    "writer-web-ui-creation": { "tags": ["scope:writer", "scope:ui-creation", "scope:shared", "type:ui"] },
+    "global-packages": { "tags": ["scope:shared"] },
+    "backend-graphql": { "tags": ["scope:shared"] },
+    "reader-web": { "tags": ["scope:reader", "scope:shared", "type:app"] },
+    "reader-web-e2e": { "tags": [], "implicitDependencies": ["reader-web"] },
+    "reader-web-feature-shell": { "tags": ["scope:reader", "scope:shell", "scope:shared", "type:feature"] },
+    "reader-web-shared": { "tags": ["scope:reader", "scope:shared"] },
+    "reader-phone": { "tags": ["scope:reader", "scope:shared", "type:app"] },
+    "reader-phone-e2e": { "tags": [], "implicitDependencies": ["reader-phone"] },
+    "reader-phone-feature-shell": { "tags": ["scope:reader", "scope:shell", "scope:shared", "type:feature"] },
+    "reader-phone-shared": { "tags": ["scope:reader", "scope:shared"] },
+    "reader-web-ui-auth": { "tags": ["scope:reader", "scope:ui-auth", "scope:shared", "type:ui"] },
+    "reader-web-ui-author": { "tags": ["scope:reader", "scope:ui-author", "scope:shared", "type:ui"] },
+    "reader-web-ui-single": { "tags": ["scope:reader", "scope:ui-single", "scope:shared", "type:ui"] },
+    "reader-web-ui-market": { "tags": ["scope:reader", "scope:ui-market", "scope:shared", "type:ui"] },
+    "core-books": { "tags": ["scope:core-books", "scope:shared", "type:core"] },
+    "core-users": { "tags": ["scope:core-users", "scope:shared", "type:core"] },
+    "core-sales": { "tags": ["scope:core-sales", "scope:shared", "type:core"] },
+    "core-background": { "tags": ["scope:core-background", "scope:shared", "type:core"] },
+    "core-analytics": { "tags": ["scope:core-analytics", "scope:shared", "type:core"] },
+    "core-comments": { "tags": ["scope:core-comments", "scope:shared", "type:core"] },
+    "core-reviews": { "tags": ["scope:core-reviews", "scope:shared", "type:core"] },
+    "core-system": { "tags": ["scope:core-system", "scope:shared", "type:core"] },
+    "core-news": { "tags": ["scope:core-news", "scope:shared", "type:core"] },
+    "core-marketing": { "tags": ["scope:core-marketing", "scope:shared", "type:core"] },
+    "core-chapters": { "tags": ["scope:core-chapters", "scope:shared", "type:core"] },
+    "core-book-data": { "tags": ["scope:core-book-data", "scope:shared", "type:core"] },
+    "core-categories": { "tags": ["scope:core-categories", "scope:shared", "type:core"] },
+    "core-genres": { "tags": ["scope:core-genres", "scope:shared", "type:core"] },
+    "core-authors": { "tags": ["scope:core-authors", "scope:shared", "type:core"] },
+    "core-slider": { "tags": ["scope:core-slider", "scope:shared", "type:core"] },
+    "global-settings": { "tags": ["scope:shared", "type:global"] },
+    "core-creations": { "tags": ["scope:core-creations", "scope:shared", "type:core"] },
+    "feature-upload-image": { "tags": ["scope:shared"] },
+    "core-setting": { "tags": ["scope:core-setting", "scope:shared", "type:core"] }
   }
 }
