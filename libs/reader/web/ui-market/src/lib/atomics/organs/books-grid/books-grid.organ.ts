@@ -32,6 +32,9 @@ export class BooksGridOrgan implements OnInit {
     },
   };
 
+  @Input() classLayout1 = 'col-span-5';
+  @Input() classLayout2 = 'col-span-6';
+
   constructor() {}
 
   ngOnInit(): void {}
