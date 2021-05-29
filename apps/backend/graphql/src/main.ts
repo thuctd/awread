@@ -6,6 +6,8 @@ import admin from 'firebase-admin';
 import firebaseConfig from './adminsdk.json';
 import { environment } from '@awread/global/environments';
 import ConnectionFilterPlugin from "postgraphile-plugin-connection-filter";
+import PgAggregatesPlugin from "@graphile/pg-aggregates";
+
 import cron from 'cron';
 
 const app = express();
@@ -49,7 +51,7 @@ const postgraphileOptions = {
   watchPg: true,
   graphiql: true,
   enhanceGraphiql: true,
-  appendPlugins: [ConnectionFilterPlugin],
+  appendPlugins: [ConnectionFilterPlugin, PgAggregatesPlugin],
   jwtSecret: 'hiepxanh',
   jwtPgTypeIdentifier: 'public.jwt_token',
   pgDefaultRole: 'anonymous',
