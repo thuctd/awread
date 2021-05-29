@@ -13,8 +13,8 @@
     aria-orientation="vertical" aria-labelledby="options-menu">
     <div *ngIf="previewLink.length != 0 " class="py-2 relative">
       <div class="flex">
-        <label [routerLink]="['/routePath']" class="block px-4 py-1 text-sm text-gray-700" role="menuitem">Liên kết bên ngoài
-          <a href="#" class="block py-2 text-xs text-green-primary cursor-pointer" role="menuitem">
+        <label class="block px-4 py-1 text-sm text-gray-700" role="menuitem">Liên kết bên ngoài
+          <a target="_blank" [href]="previewLink.join('/')" class="block py-2 text-xs text-green-primary cursor-pointer" role="menuitem">
             {{ previewLink.join('/') }} </a>
         </label>
       </div>

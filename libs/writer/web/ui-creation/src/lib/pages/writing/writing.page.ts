@@ -72,34 +72,17 @@ export class WritingPage implements OnInit {
   }
 
   private delete() {
-    // this.chaptersFacade
-    //   .updateChapter({
-    //     ...this.chapterForm.value,
-    //     chapterid: this.chapterId,
-    //     bookid: this.bookId,
-    //     updatedat: new Date(),
-    //   })
-    //   .subscribe();
+
   }
 
   private publish() {
-    // if (this.bookId) {
-    //   const chapterFormValue = this.chapterForm.value;
-    //   const isPublishedBook =
-    //     +this.chapterNumber === 1 && chapterFormValue.status === 'PUBLISHED';
-    //   const chapter = {
-    //     ...chapterFormValue,
-    //     bookid: this.bookId,
-    //     createdat: new Date(),
-    //     updatedat: new Date(),
-    //   };
-    //   this.chaptersFacade.createChapter(chapter, isPublishedBook).subscribe();
-    // } else {
-    // }
+
   }
 
   save() {
-
+    this.chaptersFacade.update(this.chapterForm.value).subscribe(value => {
+      console.log('value', value);
+    })
   }
 
   private initForm() {

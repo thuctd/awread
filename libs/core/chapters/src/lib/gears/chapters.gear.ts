@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { tap, map } from 'rxjs/operators';
 import { ChaptersApi } from '../apis/chapters.api';
 import { ChaptersStore } from '../states/chapters';
-
+import { SnackbarService } from '@awread/global/packages';
 @Injectable({ providedIn: 'root' })
 export class ChaptersGear {
 
   constructor(
     private chaptersApi: ChaptersApi,
-    private chaptersStore: ChaptersStore
+    private chaptersStore: ChaptersStore,
+    private SnackbarService: SnackbarService,
   ) {
   }
 
@@ -17,7 +18,7 @@ export class ChaptersGear {
       .pipe(
         map((chapter => ({
           ...chapter,
-          content: chapter['contentByChapterId'],
+          content: chapter['contentByChapterId'].content,
           book: chapter['bookByBookId']
         })
         ))
@@ -57,5 +58,17 @@ export class ChaptersGear {
       chapterLength = chapterLength - 1;
       return { ...item, chapterNumber: chapterLength + 1 };
     });
+  }
+
+  update(chapter) {
+    return this.chaptersApi.update(chapter).pipe(
+      tap(result => {
+        if (result.errors) {
+          result.errors.forEach(error => this.SnackbarService.showError(error.message));
+        } else {
+          this.SnackbarService.showSuccess('Lưu chương thành công');
+        }
+      })
+    )
   }
 }

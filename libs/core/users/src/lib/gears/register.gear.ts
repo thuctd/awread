@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { CreateUserCredential } from '../models';
 import firebase from 'firebase/app';
 import { AuthApi } from '../apis';
-import { SnackbarsService } from '@awread/global/packages';
+import { SnackbarService } from '@awread/global/packages';
 import { CurrentUserStore } from '../states/current-user';
 import { AuthRoutingGear } from './auth-routing.gear';
 import { MatDialog } from '@angular/material/dialog';
@@ -14,7 +14,7 @@ export class RegisterGear {
   constructor(
     private authApi: AuthApi,
     private currentUserStore: CurrentUserStore,
-    private snackbarService: SnackbarsService,
+    private snackbarService: SnackbarService,
     private authRoutingGear: AuthRoutingGear,
     private matDialog: MatDialog,
     private currentUserGear: CurrentUserGear,

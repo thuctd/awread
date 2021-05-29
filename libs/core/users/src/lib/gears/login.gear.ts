@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { SocialLoginCredential } from '../models';
 import { AuthApi } from '../apis';
 import { AuthRoutingGear } from './auth-routing.gear';
-import { SnackbarsService } from '@awread/global/packages';
+import { SnackbarService } from '@awread/global/packages';
 import { SocialAuthService, SocialUser } from "angularx-social-login";
 import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
 import { CurrentUserGear } from './current-user.gear';
@@ -13,7 +13,7 @@ export class LoginGear {
   constructor(
     private authApi: AuthApi,
     private authRoutingGear: AuthRoutingGear,
-    private snackbarService: SnackbarsService,
+    private snackbarService: SnackbarService,
     private socialAuthService: SocialAuthService,
     private currentUserGear: CurrentUserGear,
     private matDialog: MatDialog

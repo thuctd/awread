@@ -2,7 +2,7 @@ import { FormGroup, Validators } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { Directive, Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SnackbarsService } from '@awread/global/packages';
+import { SnackbarService } from '@awread/global/packages';
 import { AuthFacade } from '../facades';
 
 @Injectable({
@@ -23,7 +23,7 @@ export class LoginRegisterIpage {
     public authFacade: AuthFacade,
     public activatedRoute: ActivatedRoute,
     public fb: FormBuilder,
-    public snackbarService: SnackbarsService
+    public snackbarService: SnackbarService
   ) { }
 
   ngOnInit() {

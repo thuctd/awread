@@ -121,4 +121,30 @@ export class ChaptersApi {
       })
       .pipe(map((res) => res?.['data']?.['allChapters']?.['nodes']));
   }
+
+  update(chapter) {
+    return this.apollo.mutate({
+      mutation: gql`
+      mutation updateChapter($chapterId: UUID!, $title: String, $content: String, $published: Boolean) {
+        updateChapterByChapterId(
+          input: {chapterPatch: { title: $title, published: $published }, chapterId: $chapterId}
+        ) {
+          chapter {
+            title
+            published
+          }
+        }
+        updateContentByChapterId(
+          input: {contentPatch: {content: $content }, chapterId: $chapterId}
+        ) {
+          content {
+            chapterId
+          }
+        }
+      }
+
+      `,
+      variables: chapter
+    })
+  }
 }

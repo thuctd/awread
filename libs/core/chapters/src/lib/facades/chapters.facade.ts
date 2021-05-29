@@ -15,8 +15,8 @@ export class ChaptersFacade {
     return this.chaptersGear.getChapter(chapterId, bookId);
   }
 
-  getChapterEntityAkita(id: string) {
-    return this.chaptersQuery.getEntity(id);
+  update(chapter) {
+    return this.chaptersGear.update(chapter);
   }
 
   getChapterCountAkita() {
@@ -31,9 +31,6 @@ export class ChaptersFacade {
 
   selectAllChapterAkita() {
     return this.chaptersQuery.selectAll();
-  }
-  selectEntityChapterAkita(id: string) {
-    return this.chaptersQuery.selectEntity(id);
   }
 
   getAllChapters(bookId: string) {

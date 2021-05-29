@@ -7,7 +7,7 @@ import { createBookObject } from '../models';
 import { FirebaseFirestoreAddon } from '../addons';
 import { BooksApi } from '../apis';
 import { BooksStore } from '../states/books';
-import { SnackbarsService } from '@awread/global/packages';
+import { SnackbarService } from '@awread/global/packages';
 @Injectable({ providedIn: 'root' })
 export class BooksGear {
   constructor(
@@ -16,8 +16,8 @@ export class BooksGear {
     private firebaseFirestoreAddon: FirebaseFirestoreAddon,
     private transformBookDataGear: TransformBookDataGear,
     private router: Router,
-    private snackbarService: SnackbarsService
-  ) {}
+    private snackbarService: SnackbarService
+  ) { }
 
   updateBookByIdInAkita(id: string, book) {
     return this.booksStore.updateBookById(id, book);
