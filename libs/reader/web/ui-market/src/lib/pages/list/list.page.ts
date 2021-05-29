@@ -75,9 +75,7 @@ export class ListPage implements OnInit, OnDestroy {
   }
 
   filterItemsByCategory(categoryId) {
-    this.filteredBooks$ = this.booksFacade.getCategoryBooks(categoryId).pipe(
-      tap(res => console.log(res))
-    );
+    this.filteredBooks$ = this.booksFacade.getCategoryBooks(categoryId).pipe();
   }
 
   filterBooks() {

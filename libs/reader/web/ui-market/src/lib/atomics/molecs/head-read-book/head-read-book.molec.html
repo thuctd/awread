@@ -14,8 +14,8 @@
     </select>
   </div>
   <div class="float-right sm:pt-3 pt-4">
-    <atom-btn-switch-chapter *ngIf="chapters?.length - 1 != chapter.position" (btnClick)="nextChapterBook.emit(chapter.chapterId)" class="float-right sm:ml-2 ml-1 roboto"></atom-btn-switch-chapter>
-    <atom-btn-switch-chapter *ngIf="chapters[0]?.position !== chapter.position" [faIcon]="faIcon" [title]="'Trước'" [case]="false" (btnClick)="backChapterBook.emit($event)"
+    <atom-btn-switch-chapter *ngIf="chapters?.length - 1 != chapter?.position" (btnClick)="nextChapterBook.emit(chapter.chapterId)" class="float-right sm:ml-2 ml-1 roboto"></atom-btn-switch-chapter>
+    <atom-btn-switch-chapter *ngIf="!(chapter?.position == '0')" [faIcon]="faIcon" [title]="'Trước'" [case]="false" (btnClick)="backChapterBook.emit($event)"
       class="float-right flex flex-row-reverse roboto"></atom-btn-switch-chapter>
   </div>
   <div class="clear-both"></div>
