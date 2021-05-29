@@ -31,9 +31,9 @@ export class BooksHomeGear {
     );
   }
 
-  getLatestBooks(categoryId: string) {
+  getLatestBooks(categoryId: string, offset: number) {
     this.latestBooksStore.setLoading(true);
-    return this.booksHomeApi.getLatestBooks(categoryId).pipe(
+    return this.booksHomeApi.getLatestBooks(categoryId, offset).pipe(
       tap(books => this.latestBooksStore.set(books)),
       tap(() => this.latestBooksStore.setLoading(false))
     );

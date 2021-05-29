@@ -14,6 +14,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 })
 export class RdAuthorMainOrgan implements OnInit {
   @Input() numberProduct;
+  @Input() user;
   @Input() isFollow = true;
   @Input() isBlock = false;
 
