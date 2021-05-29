@@ -20,7 +20,7 @@ export class WrtDetailTocChapterInfoMolec implements OnInit {
     updatedAt: '',
   };
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

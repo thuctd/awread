@@ -24,21 +24,21 @@ const routes: Routes = [
                 : import('./pages/list-desktop/list-desktop.module').then((m) => m.ListDesktopModule),
           },
           {
-            path: 'writing',
+            path: 'list/:bookId/toc/:chapterId/writing',
             loadChildren: () =>
               window.innerWidth <= 768 && window?.haveMobile
                 ? import('./pages/writing-mobile/writing-mobile.module').then((m) => m.WritingMobileModule)
                 : import('./pages/writing-desktop/writing-desktop.module').then((m) => m.WritingDesktopModule),
           },
           {
-            path: 'detail-book',
+            path: 'list/:bookId/detail',
             loadChildren: () =>
               window.innerWidth <= 768 && window?.haveMobile
                 ? import('./pages/detail-book-mobile/detail-book-mobile.module').then((m) => m.DetailBookMobileModule)
                 : import('./pages/detail-book-desktop/detail-book-desktop.module').then((m) => m.DetailBookDesktopModule),
           },
           {
-            path: 'detail-toc',
+            path: 'list/:bookId/toc',
             loadChildren: () =>
               window.innerWidth <= 768 && window?.haveMobile
                 ? import('./pages/detail-toc-mobile/detail-toc-mobile.module').then((m) => m.DetailTocMobileModule)
@@ -54,4 +54,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class WriterWebUiCreationRoutingModule {}
+export class WriterWebUiCreationRoutingModule { }

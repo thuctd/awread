@@ -16,12 +16,11 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 })
 export class WrtDetailChapterItemMolec implements OnInit {
   @Input() chapterCouter = {};
-
   @Input() chapters = [];
   @Output() chapterActionEvent = new EventEmitter();
 
   faIcon = faPlus;
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

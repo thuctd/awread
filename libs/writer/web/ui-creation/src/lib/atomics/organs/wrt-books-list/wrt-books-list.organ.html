@@ -15,17 +15,15 @@
       <infinite-scroll #infiniteScroll (scrolled)="moreEvent.next()">
         <div *ngFor="let book of books ;" class="grid grid-cols-12 gap-6 bg-white pt-4">
           <div class="col-span-2 md:col-span-5 pl-8">
-            <molec-wrt-book-list-info [href]="['/detail-toc', { bookId: book.bookId }]" (openDetailBookEvent)="openDetailBook()" [book]="book">
+            <molec-wrt-book-list-info [href]="['/list', book.bookId, 'toc']" (openDetailBookEvent)="openDetailBook()" [book]="book">
             </molec-wrt-book-list-info>
           </div>
           <div class="col-span-2 md:col-span-4 text-center">
             <molec-wrt-book-list-chapter [book]="book"></molec-wrt-book-list-chapter>
           </div>
           <div class="col-span-2 md:col-span-3 pr-8">
-            <molec-wrt-book-list-act [bookId]="book.bookid"
-              (updateBookStatusEvent)="updateBookStatusEvent.emit($event)"
-              (addChapterEvent)="addChapterEvent.emit($event)"
-              (removeBookEvent)="removeBookEvent.emit($event)"></molec-wrt-book-list-act>
+            <molec-wrt-book-list-act [bookId]="book.bookid" (updateBookStatusEvent)="updateBookStatusEvent.emit($event)"
+              (addChapterEvent)="addChapterEvent.emit($event)" (removeBookEvent)="removeBookEvent.emit($event)"></molec-wrt-book-list-act>
           </div>
         </div>
       </infinite-scroll>

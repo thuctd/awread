@@ -28,15 +28,15 @@ export class WrtBookTocTabTemplate implements OnInit {
   };
 
   @Input() tabsHead = [
-    { name: 'THÔNG TIN TRUYỆN', href: '/detail-book', isActive: false },
+    { name: 'THÔNG TIN TRUYỆN', href: ['../detail'], isActive: false },
     { name: 'MỤC LỤC', href: null, isActive: true },
   ];
 
   @Output() chapterActionEvent = new EventEmitter();
   @Output() createNewChapterEvent = new EventEmitter();
-  constructor(public matDialog: MatDialog, private fb: FormBuilder) {}
+  constructor(public matDialog: MatDialog, private fb: FormBuilder) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   eventChooseImageCover(event) {
     this.matDialog.open(PopupChangeCoverOrgan, {

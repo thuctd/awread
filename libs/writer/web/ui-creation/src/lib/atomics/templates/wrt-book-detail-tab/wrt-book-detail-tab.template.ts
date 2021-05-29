@@ -25,7 +25,7 @@ export class WrtBookDetailTabTemplate implements OnInit {
 
   @Input() tabsHead = [
     { name: 'THÔNG TIN TRUYỆN', href: null, isActive: true },
-    { name: 'MỤC LỤC', href: '/detail-toc', isActive: false },
+    { name: 'MỤC LỤC', href: ['../toc'], isActive: false },
   ];
 
   @Output() genresEvent = new EventEmitter();
@@ -44,9 +44,9 @@ export class WrtBookDetailTabTemplate implements OnInit {
     srcImg: ['/global-assets/images/image.webp'],
   });
 
-  constructor(public matDialog: MatDialog, private fb: FormBuilder) {}
+  constructor(public matDialog: MatDialog, private fb: FormBuilder) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   eventChooseImageCover(event) {
     this.matDialog.open(PopupChangeCoverOrgan, {
