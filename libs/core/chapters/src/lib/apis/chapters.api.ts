@@ -76,6 +76,7 @@ export class ChaptersApi {
                 chapterId
                 bookId
                 title
+                position
               }
             }
           }
