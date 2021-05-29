@@ -17,7 +17,7 @@ export class HomeTagsOrgan implements OnInit {
   currentIndex = 0;
   prevIcon = `<img src="/global-assets/images/arrow_left.webp" alt="arrow_left">`;
   nextIcon = `<img src="/global-assets/images/arrow_right.webp" alt="arrow_right">`;
-  @Input() titlePage = 'Tags';
+  @Input() titlePage = 'Thể loại';
   @Input() loading: false | true = false;
   @Output() filterItemsByGenre = new EventEmitter();
   @Input() genres = [
@@ -45,10 +45,7 @@ export class HomeTagsOrgan implements OnInit {
       0: {
         items: 2,
       },
-      320: {
-        items: 2,
-      },
-      380: {
+      360: {
         items: 3,
       },
       600: {
