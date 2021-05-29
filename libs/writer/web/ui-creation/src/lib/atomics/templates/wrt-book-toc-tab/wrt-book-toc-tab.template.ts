@@ -33,7 +33,6 @@ export class WrtBookTocTabTemplate implements OnInit {
   ];
 
   @Output() chapterActionEvent = new EventEmitter();
-  @Output() createNewChapterEvent = new EventEmitter();
   constructor(public matDialog: MatDialog, private fb: FormBuilder) { }
 
   ngOnInit(): void { }

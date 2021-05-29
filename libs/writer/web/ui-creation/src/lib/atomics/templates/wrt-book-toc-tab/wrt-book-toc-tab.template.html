@@ -3,12 +3,7 @@
     <wrt-detail-upload-img [bookForm]="bookForm" (eventChooseImageCover)="eventChooseImageCover($event)"></wrt-detail-upload-img>
   </div>
   <div class="col-span-9">
-    <organ-wrt-book-toc-tab
-      [tabsHead]="tabsHead"
-      [chapterCouter]="chapterCouter"
-      [chapters]="chapters"
-      (chapterActionEvent)="chapterActionEvent.emit($event)"
-      (createNewChapterEvent)="createNewChapterEvent.emit()"
-    ></organ-wrt-book-toc-tab>
+    <organ-wrt-book-toc-tab [tabsHead]="tabsHead" [chapterCouter]="chapterCouter" [chapters]="chapters" (chapterActionEvent)="chapterActionEvent.emit($event)">
+    </organ-wrt-book-toc-tab>
   </div>
 </div>

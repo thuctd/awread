@@ -1,6 +1,6 @@
 import { tap, switchMap } from 'rxjs/operators';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ChangeDetectorRef, Directive, Injectable, OnInit } from '@angular/core';
 import { ChaptersFacade } from '@awread/core/chapters';
 import { MatDialog } from '@angular/material/dialog';
@@ -17,7 +17,8 @@ export class WritingPage implements OnInit {
     private activatedRoute: ActivatedRoute,
     private chaptersFacade: ChaptersFacade,
     private cd: ChangeDetectorRef,
-    private matDialog: MatDialog
+    private matDialog: MatDialog,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -40,6 +41,9 @@ export class WritingPage implements OnInit {
 
   chapterAction(action) {
     switch (action) {
+      case 'back':
+        this.router.navigate(['list', this.chapterForm.value.bookId, 'toc']);
+        break;
       case 'preview':
         this.openPreview();
         break;

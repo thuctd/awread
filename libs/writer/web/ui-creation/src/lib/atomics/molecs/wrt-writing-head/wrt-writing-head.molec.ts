@@ -27,6 +27,12 @@ export class WrtWritingHeadMolec implements OnInit {
 
   @Input() btns = [
     {
+      submitText: 'Quay lại',
+      isActive: false,
+      action: 'back',
+      hidden: false
+    },
+    {
       submitText: 'Xuất bản',
       isActive: true,
       action: 'publish',
@@ -57,7 +63,7 @@ export class WrtWritingHeadMolec implements OnInit {
   ngOnChanges(changes) {
     // console.log("changes", changes.chapterForm?.currentValue.value.published);
     if (changes.chapterForm?.currentValue.value.published) {
-      this.btns[0].hidden = true;
+      this.btns[1].hidden = true;
     }
   }
 

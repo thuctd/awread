@@ -27,17 +27,15 @@ export class WrtBookTocTabOrgan implements OnInit {
   @Input() formImg = this.fb.group({
     srcImg: [''],
   });
-  @Output() createNewChapterEvent = new EventEmitter();
   faIcon = faPlus;
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   chapterAction(type: string, chapter) {
     this.chapterActionEvent.emit({
       type,
-      chapterid: chapter.chapterid,
-      chapterNumber: chapter.chapterNumber,
+      chapter
     });
   }
 }

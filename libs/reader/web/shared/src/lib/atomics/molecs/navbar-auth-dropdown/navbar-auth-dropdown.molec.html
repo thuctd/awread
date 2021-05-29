@@ -16,7 +16,7 @@
     </div>
     <ul class=" bg-white">
         <li *ngFor="let item of menu" class="border-b border-grey-300 py-2 px-4">
-            <atom-link [title]="item.title" [href]="item.href"></atom-link>
+            <atom-link [title]="item.title" [routerLink]="item.href"></atom-link>
         </li>
     </ul>
     <button (click)="logoutEvent.emit()" class="py-2 px-4 bg-white w-full flex items-center focus:outline-none">

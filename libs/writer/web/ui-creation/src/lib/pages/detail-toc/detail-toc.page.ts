@@ -38,7 +38,7 @@ export class DetailTocPage implements OnInit, OnDestroy {
     private genresFacade: GenresFacade,
     private router: Router,
     private cd: ChangeDetectorRef
-  ) {}
+  ) { }
 
   get f() {
     return this.bookForm.controls;
@@ -66,7 +66,7 @@ export class DetailTocPage implements OnInit, OnDestroy {
 
   chapterActionEvent(data: { type: string; chapterid: string; chapterNumber: number }) {
     switch (data.type) {
-      case 'new-chapter':
+      case 'new':
         this.createChapter();
         return;
       case 'edit':
@@ -74,6 +74,9 @@ export class DetailTocPage implements OnInit, OnDestroy {
         return;
       case 'delete':
         this.removeChapter(data, this.bookId);
+        return;
+      default:
+
         return;
     }
   }
@@ -118,7 +121,7 @@ export class DetailTocPage implements OnInit, OnDestroy {
         })
       )
       .subscribe((res) => {
-        console.log('all chapters res: ', res);
+        // console.log('all chapters res: ', res);
       });
   }
 

@@ -6,7 +6,7 @@
   <ng-template #loaded>
     <ng-container *ngIf="books.length;else noData">
       <div class="text-right pb-10">
-        <atom-upload-story-btn [href]="['/detail-book']"></atom-upload-story-btn>
+        <atom-upload-story-btn [routerLink]="['/detail-book']"></atom-upload-story-btn>
       </div>
       <div class="mb-4">
         <molec-wrt-book-list-head></molec-wrt-book-list-head>
@@ -15,7 +15,7 @@
       <infinite-scroll #infiniteScroll (scrolled)="moreEvent.next()">
         <div *ngFor="let book of books ;" class="grid grid-cols-12 gap-6 bg-white pt-4">
           <div class="col-span-2 md:col-span-5 pl-8">
-            <molec-wrt-book-list-info [href]="['/list', book.bookId, 'toc']" (openDetailBookEvent)="openDetailBook()" [book]="book">
+            <molec-wrt-book-list-info [routerLink]="['/list', book.bookId, 'toc']" (openDetailBookEvent)="openDetailBook()" [book]="book">
             </molec-wrt-book-list-info>
           </div>
           <div class="col-span-2 md:col-span-4 text-center">
@@ -31,7 +31,7 @@
     </ng-container>
     <ng-template #noData>
       <div class="no-data flex justify-center items-center">
-        <atom-upload-story-btn [href]="['/detail-book']"></atom-upload-story-btn>
+        <atom-upload-story-btn [routerLink]="['/detail-book']"></atom-upload-story-btn>
         <p class="text-center pt-8">Không có truyện nào!</p>
       </div>
     </ng-template>
