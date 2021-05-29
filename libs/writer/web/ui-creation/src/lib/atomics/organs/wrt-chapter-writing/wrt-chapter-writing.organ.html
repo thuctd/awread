@@ -1,0 +1,14 @@
+<div class="pt-12 pl-24">
+  <wrt-writing-head
+    [chapterStatus]="chapterStatus"
+    (changeChapterStatusEvent)="changeChapterStatusEvent.emit($event)"
+    (saveChapterEvent)="saveChapterEvent.emit()"
+    (createNewChapterEvent)="createNewChapterEvent.emit()"
+    (copyToClipboard)="copyToClipboard.emit()"
+    (deletePart)="deletePart.emit()"
+    [chapterForm]="chapterForm"
+    [type]="type"
+    [shouldShowStatusUI]="shouldShowStatusUI"
+  ></wrt-writing-head>
+  <wrt-writing-content [chapterForm]="chapterForm" [submitted]="submitted"></wrt-writing-content>
+</div>

@@ -41,7 +41,10 @@ export class HomeDetailBookUpdateOrgan implements OnInit {
     },
   ];
 
+  activePage:number = 0;  
+
   @Output() emitBooks = new EventEmitter();
+  @Output() displayActivePage = new EventEmitter();
   @Output() emitAllBooks = new EventEmitter();
 
   counter = Array;

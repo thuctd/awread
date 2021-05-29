@@ -11,9 +11,7 @@ export class CurrentUserApi {
   constructor(
     private apollo: Apollo,
     private currentUserQuery: CurrentUserQuery,
-    private settingFacade: SettingFacade
   ) {
-    this.settingFacade.get().subscribe();
     // setInterval(function () {
     //   this.httpClient
     //     .get(`https://raw.githubusercontent.com/small-cosmos/awread-hq/master/news/index.json`)

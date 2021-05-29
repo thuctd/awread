@@ -8,7 +8,7 @@
   </ng-container>
   <div class="flex justify-between">
     <div>
-      <atom-btn-switch-chapter *ngIf="chapters[0]?.position !== chapter?.position" [faIcon]="faIcon" [title]="'Trước'" [case]="false"
+      <atom-btn-switch-chapter *ngIf="!(chapter?.position == '0')" [faIcon]="faIcon" [title]="'Trước'" [case]="false"
         (btnClick)="backChapterBook.emit($event)" class="flex flex-row-reverse roboto"></atom-btn-switch-chapter>
     </div>
     <div>

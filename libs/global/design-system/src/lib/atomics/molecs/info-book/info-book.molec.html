@@ -4,10 +4,11 @@
   <atom-rating *ngIf="displayUI.ui.isRating" class="mr-4"></atom-rating>
   <atom-icon-text class="mt-0.5" *ngIf="displayUI.ui.isIcon"></atom-icon-text>
 </div>
-<!-- <pre> {{ btns | json }} </pre> -->
-<div [title]="btns | json" *ngFor="let btn of btns | keyvalue:orderByPosition" class="leading-normal font-medium flex">
-  <base-btn (onBtnClicked)="submitEvent.emit($event)" [isSize]="displayUI.size.sizeBtn" [bookId]='book.bookId' [chapterId]="btn.key"
+<div *ngFor="let btn of btns | keyvalue:orderByPosition" class="leading-normal font-medium flex">
+  <base-btn (onBtnClicked)="submitEvent.emit($event)" [isSize]="displayUI.size.sizeBtn" [bookId]="book.bookId" [chapterId]="btn.key"
     [chapter]="btn.value.position">
   </base-btn>
+
   <rd-list-publication-date *ngIf="displayUI.ui.isDate" class="mt-0.5 ml-2" [publicationDate]="book.updatedAt"></rd-list-publication-date>
+
 </div>

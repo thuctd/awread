@@ -17,13 +17,14 @@ export class SettingApi {
           nodes {
             storage
             version
+            settingId
           }
         }
       }
       `
     })
       .pipe(
-        map(res => res.data?.['allMvSettings']?.['nodes'])
+        map(res => res.data?.['allMvSettings']?.['nodes']?.[0])
       )
   }
 

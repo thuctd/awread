@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'wrt-detail-tab-head',
@@ -8,32 +8,19 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
       :host {
         display: block;
       }
+      .shadow-b {
+        box-shadow: 0 4px 3px -1px rgba(0, 0, 0, 0.06);
+      }
     `,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WrtDetailTabHeadMolec implements OnInit {
-  @Input() tabs = [];
+  @Input() tabsHead = [];
 
-  currentTab = {
-    name: 'Thông tin truyện',
-    tab: 'toc',
-    type: 'create',
-    isActive: true,
-  };
+  @Output() clickedBtn = new EventEmitter();
+
   constructor() {}
 
-  ngOnInit(): void {
-    this.currentTab = this.tabs.find((tab) => tab.isActive);
-  }
-
-  toggleTabs(currentTab) {
-    this.currentTab = currentTab;
-    this.tabs.forEach((tab) => {
-      tab.isActive = false;
-      if (tab.name === currentTab.name) {
-        tab.isActive = true;
-      }
-    });
-  }
+  ngOnInit(): void {}
 }

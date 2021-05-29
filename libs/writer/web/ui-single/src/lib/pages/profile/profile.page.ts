@@ -76,5 +76,8 @@ export class ProfilePage implements OnInit {
       websiteAddress: [null],
       facebookAddress: [null],
     });
+    setTimeout(() => {
+      this.profileForm.get('dob').disable();
+    }, 100);
   }
 }
