@@ -15,7 +15,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 export class RdAuthorTemplate implements OnInit {
   @Input() isFollow = true;
   @Input() isBlock = false;
-  @Input() author;
+  @Input() user;
   @Input() books = [];
 
   @Input() items = [];
