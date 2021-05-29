@@ -32,6 +32,25 @@ export class HomeListBookUpdateMobileOrgan implements OnInit {
       sizeBtn: false,
     },
   };
+
+  @Input() tabs = [
+    {
+      name: 'Tất cả',
+      isNovel: false,
+    },
+    {
+      name: 'Truyện dài',
+      isNovel: false,
+    },
+    {
+      name: 'Truyện ngắn',
+      isNovel: false,
+    },
+    {
+      name: 'Tản văn',
+      isNovel: true,
+    },
+  ];
   constructor() {}
 
   ngOnInit(): void {}

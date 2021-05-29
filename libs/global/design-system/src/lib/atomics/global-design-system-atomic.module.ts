@@ -135,6 +135,7 @@ import { CoreUsersModule } from '@awread/core/users';
 import { RdDropdownMenuMbAtom } from './atoms/rd-dropdown-menu-mb/rd-dropdown-menu-mb.atom';
 import { RdIconTextItemAtom } from './atoms/rd-icon-text-item/rd-icon-text-item.atom';
 import { RdTextLinkMenuMbAtom } from './atoms/rd-text-link-menu-mb/rd-text-link-menu-mb.atom';
+import { MatSelectModule } from '@angular/material/select';
 @NgModule({
   imports: [
     CommonModule,
@@ -152,8 +153,10 @@ import { RdTextLinkMenuMbAtom } from './atoms/rd-text-link-menu-mb/rd-text-link-
     NgImageSliderModule,
     ImageCropperModule,
     CoreUsersModule,
+    MatSelectModule,
   ],
   exports: [
+    MatSelectModule,
     MatDialogModule,
     MatAutocompleteModule,
     MatFormFieldModule,

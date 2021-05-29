@@ -4,11 +4,11 @@
         <molec-rd-home-book-update-tab (emitBooks)="emitBooks.emit($event)" (emitAllBooks)="emitAllBooks.emit($event)" #tabHead class="col-span-6" [categories]="categories"></molec-rd-home-book-update-tab>
     </div>
     <div *ngFor="let tab of tabs">
-    <molec-rd-home-list-book-update
-      [isNovel]="tab.isNovel"
-      *ngIf="tabHead.currentName === tab.name"
-      [books]="books">
-    </molec-rd-home-list-book-update>
+      <molec-rd-home-list-book-update
+        [isNovel]="tab.isNovel"
+        *ngIf="tabHead.currentName === tab.name"
+        [books]="books">
+      </molec-rd-home-list-book-update>
     </div>
     <div class="flex justify-center items-center">
         <pagination [totalRecords]="30" [recordsPerPage]="10" (onPageChange)="displayActivePage.emit($event)"></pagination>

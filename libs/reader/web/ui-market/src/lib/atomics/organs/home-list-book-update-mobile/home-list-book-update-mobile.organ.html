@@ -1,12 +1,15 @@
 <section class="w-full max-w-screen-xl mx-auto">
   <div class="mb-4 flex justify-between px-2.5">
     <atom-title [title]="titlePage" class="uppercase"></atom-title>
-    <molec-rd-home-book-update-dropdown-mb></molec-rd-home-book-update-dropdown-mb>
+    <molec-rd-home-book-update-dropdown-mb #tabhead></molec-rd-home-book-update-dropdown-mb>
   </div>
-  <div class="grid grid-cols-12 mx-auto">
-    <div *ngFor="let book of books | slice:0:6" class="col-span-4 px-2">
-      <atom-img-m [size]="'s'" [bookId]="book.id" [srcImg]="book.imgUrl"></atom-img-m>
-      <molec-info-book [book]="book" [displayUI]="displayUI"></molec-info-book>
+  <div *ngFor="let tab of tabs">
+    <div class="grid grid-cols-12 mx-auto" *ngIf="tabhead.title == tab.name">
+      <div *ngFor="let book of books | slice:0:6" class="col-span-4 px-2">
+        <atom-img-m [size]="'s'" [bookId]="book.id" [srcImg]="book.imgUrl"></atom-img-m>
+        <molec-info-book *ngIf="tab.isNovel == false" [book]="book" [displayUI]="displayUI"></molec-info-book>
+        <list-info-prose [isBtn]="true" *ngIf="tab.isNovel == true" [book]="book"></list-info-prose>
+      </div>
     </div>
   </div>
   <pagination></pagination>
