@@ -24,16 +24,9 @@ export class WrtChapterWritingOrgan implements OnInit {
     title: ['', Validators.required],
     content: ['', Validators.required],
   });
-  @Input() chapterStatus: string;
-  @Input() submitted: boolean;
-  @Input() shouldShowStatusUI: boolean;
-  @Input() type: string;
-  @Output() changeChapterStatusEvent = new EventEmitter();
-  @Output() saveChapterEvent = new EventEmitter();
-  @Output() createNewChapterEvent = new EventEmitter();
-  @Output() copyToClipboard = new EventEmitter();
-  @Output() deletePart = new EventEmitter();
-  constructor(private fb: FormBuilder) {}
+  @Input() book;
+  @Output() chapterActionEvent = new EventEmitter();
+  constructor(private fb: FormBuilder) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

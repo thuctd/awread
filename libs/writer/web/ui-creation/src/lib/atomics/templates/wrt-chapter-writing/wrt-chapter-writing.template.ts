@@ -16,24 +16,12 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, EventEmitter, Output
 export class WrtChapterWritingTemplate implements OnInit {
   @Input() chapterForm: FormGroup = this.fb.group({
     bookImg: ['/global-assets/images/image.webp', [Validators.required]],
-    dirty: ['', Validators.required],
-    valueChanges: ['', Validators.required],
-    bookTitle: ['', Validators.required],
-    chapterNumber: ['', Validators.required],
-    status: ['', Validators.required],
     title: ['', Validators.required],
     content: ['', Validators.required],
   });
-  @Input() chapterStatus: string;
-  @Input() submitted: boolean;
-  @Input() shouldShowStatusUI = true;
-  @Input() type: string;
-  @Output() changeChapterStatusEvent = new EventEmitter();
-  @Output() saveChapterEvent = new EventEmitter();
-  @Output() createNewChapterEvent = new EventEmitter();
-  @Output() copyToClipboard = new EventEmitter();
-  @Output() deletePart = new EventEmitter();
-  constructor(private fb: FormBuilder) {}
+  @Input() book;
+  @Output() chapterActionEvent = new EventEmitter();
+  constructor(private fb: FormBuilder) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

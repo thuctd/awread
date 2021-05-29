@@ -29,6 +29,42 @@ export class ChaptersApi {
       .pipe(map((res) => res?.['data']?.['allChapters']?.['nodes']));
   }
 
+  getChapter(bookId: string, chapterId: string) {
+    return this.apollo
+      .query({
+        query: gql`
+          query DetailChapter($bookId: UUID!, $chapterId: UUID!) {
+            allChapters(condition: { bookId: $bookId, chapterId: $chapterId }) {
+              nodes {
+                bookId
+                chapterId
+                title
+                createdAt
+                updatedAt
+                published
+                position
+                bookByBookId {
+                  title
+                  cover
+                }
+                contentByChapterId {
+                  content
+                }
+              }
+            }
+          }
+        `,
+        variables: {
+          bookId,
+          chapterId,
+        },
+      })
+      .pipe(
+        retry(2),
+        map((res) => res?.['data']?.['allChapters']?.['nodes']?.[0])
+      );
+  }
+
   getChapterDetail(bookId: string, chapterId: string) {
     return this.apollo
       .query({

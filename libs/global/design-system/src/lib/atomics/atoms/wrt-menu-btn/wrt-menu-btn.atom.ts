@@ -17,14 +17,14 @@ export class WrtMenuBtnAtom implements OnInit {
   @Input() faIconComments = faEllipsisH;
   @Output() copyToClipboard = new EventEmitter();
   @Output() deletePart = new EventEmitter();
-  @Input() awreadLink = 'abcxyz';
+  @Input() previewLink = ['https://awread.vn', 'books', 'abc', 'chapters', 'xyz'];
   @Input() btn = {
     submitText: 'Copy',
     isActive: false,
   };
 
   isMenuOpen = false;
-  constructor() {}
+  constructor() { }
   toggleMenu($event) {
     $event.stopPropagation();
     this.isMenuOpen = !this.isMenuOpen;
@@ -34,5 +34,5 @@ export class WrtMenuBtnAtom implements OnInit {
     this.isMenuOpen = false;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

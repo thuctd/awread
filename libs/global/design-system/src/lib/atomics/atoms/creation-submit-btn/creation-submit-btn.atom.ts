@@ -17,8 +17,7 @@ export class CreationSubmitBtnAtom implements OnInit {
   @Input() submitText = 'Publish';
   @Input() active = true;
   @Input() faIcon;
+  constructor() { }
 
-  constructor() {}
-
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

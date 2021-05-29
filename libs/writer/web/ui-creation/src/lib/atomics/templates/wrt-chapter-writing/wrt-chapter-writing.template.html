@@ -1,14 +1,6 @@
 <section class="w-full max-w-screen-xl mx-auto bg-gray-100">
-  <organ-wrt-chapter-writing
-    (changeChapterStatusEvent)="changeChapterStatusEvent.emit($event)"
-    [chapterForm]="chapterForm"
-    [chapterStatus]="chapterStatus"
-    (saveChapterEvent)="saveChapterEvent.emit()"
-    (createNewChapterEvent)="createNewChapterEvent.emit()"
-    (copyToClipboard)="copyToClipboard.emit()"
-    (deletePart)="deletePart.emit()"
-    [submitted]="submitted"
-    [type]="type"
-    [shouldShowStatusUI]="shouldShowStatusUI"
-  ></organ-wrt-chapter-writing>
+  <!-- <pre> {{ book | json }} </pre>
+  <pre> {{ chapterForm.value | json}} </pre> -->
+  <organ-wrt-chapter-writing [chapterForm]="chapterForm" [book]="book" (chapterActionEvent)="chapterActionEvent.emit($event)">
+  </organ-wrt-chapter-writing>
 </section>

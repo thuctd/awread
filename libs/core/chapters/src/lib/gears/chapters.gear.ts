@@ -12,6 +12,18 @@ export class ChaptersGear {
   ) {
   }
 
+  getChapter(chapterId: string, bookId: string) {
+    return this.chaptersApi.getChapter(chapterId, bookId)
+      .pipe(
+        map((chapter => ({
+          ...chapter,
+          content: chapter['contentByChapterId'],
+          book: chapter['bookByBookId']
+        })
+        ))
+      )
+  }
+
   getAllChapters(bookId: string) {
     this.chaptersStore.setLoading(true);
     return this.chaptersApi.getAllChapters(bookId).pipe(

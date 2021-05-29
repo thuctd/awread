@@ -11,6 +11,10 @@ export class ChaptersFacade {
     private chaptersQuery: ChaptersQuery,
   ) { }
 
+  getChapter(chapterId: string, bookId: string) {
+    return this.chaptersGear.getChapter(chapterId, bookId);
+  }
+
   getChapterEntityAkita(id: string) {
     return this.chaptersQuery.getEntity(id);
   }

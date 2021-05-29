@@ -2,7 +2,7 @@ import { componentSetting } from './edit-angular-json';
 import { schematic, externalSchematic } from '@angular-devkit/schematics';
 import { Path, normalize, strings } from '@angular-devkit/core';
 import { classify } from '@nrwl/workspace/src/utils/strings';
-import { createEmptySection } from './create-empty-section';
+import { createEmptyFolder } from './create-empty-section';
 import { exportToLibIndex } from './export-to-index';
 import { insertCustomCode } from './insert-custom-code';
 import { addImportDeclarationToModule, addImportPathToModule } from './add-import-module';
@@ -30,7 +30,7 @@ export function createPageLazy(schema, pageName, type = 'page') {
       skipTests: true,
     }),
     ...addRoutesOfLazy(schema, pageName, type, page),
-    createEmptySection(page.folderPath),
+    // createEmptyFolder(page.folderPath),
     exportToLibIndex(schema.projectType, schema.projectRoot, `export * from './lib/pages/${pageName}/${pageName}.${type}';`),
     exportToLibIndex(schema.projectType, schema.projectRoot, `export * from './lib/pages/${pageName}/${pageName}.module';`),
   ]
