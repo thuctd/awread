@@ -1,5 +1,5 @@
 <header class="fixed z-999 bg-green-primary top-0 w-full pb-3" closeOnOutSide (clickedOutside)="onClick()">
-  <organ-navbar-mb [isLogin]="isLogin" [isMenu]="isMenu" (clickDisplaySearch)="displayMenu()"></organ-navbar-mb>
+  <organ-navbar-mb (logoutEvent)="logoutEvent.emit()" [user]="user" [isLogin]="isLogin" (clickDisplaySearch)="displayMenu()"></organ-navbar-mb>
   <div class="flex justify-center">
     <atom-search-navbar *ngIf="isSearch" class="w-4/5 mt-4"></atom-search-navbar>
   </div>

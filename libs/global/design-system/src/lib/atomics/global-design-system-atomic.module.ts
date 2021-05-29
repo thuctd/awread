@@ -132,6 +132,9 @@ import { RdProfileInfoPersonalItemAtom } from './atoms/rd-profile-info-personal-
 import { UploadStoryBtnAtom } from './atoms/upload-story-btn/upload-story-btn.atom';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { CoreUsersModule } from '@awread/core/users';
+import { RdDropdownMenuMbAtom } from './atoms/rd-dropdown-menu-mb/rd-dropdown-menu-mb.atom';
+import { RdIconTextItemAtom } from './atoms/rd-icon-text-item/rd-icon-text-item.atom';
+import { RdTextLinkMenuMbAtom } from './atoms/rd-text-link-menu-mb/rd-text-link-menu-mb.atom';
 @NgModule({
   imports: [
     CommonModule,
@@ -282,6 +285,9 @@ import { CoreUsersModule } from '@awread/core/users';
     SocialConnectBtnAtom,
     RdProfileInfoPersonalItemAtom,
     UploadStoryBtnAtom,
+    RdDropdownMenuMbAtom,
+    RdIconTextItemAtom,
+    RdTextLinkMenuMbAtom,
   ],
   declarations: [
     notReadyDirective,
@@ -404,6 +410,9 @@ import { CoreUsersModule } from '@awread/core/users';
     SocialConnectBtnAtom,
     RdProfileInfoPersonalItemAtom,
     UploadStoryBtnAtom,
+    RdDropdownMenuMbAtom,
+    RdIconTextItemAtom,
+    RdTextLinkMenuMbAtom,
   ],
 })
 export class GlobalDesignSystemAtomicModule {}

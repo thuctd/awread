@@ -1,0 +1,17 @@
+<div (click)="displayMenu()">
+  <fa-icon class="text-white text-2xl cursor-pointer ml-1.5" [icon]="bars"></fa-icon>
+</div>
+<section *ngIf="isMenu" class="absolute top-0 right-0 modal">
+  <div class="w-4/6 md:w-3/6 h-screen absolute right-0 bg-white br__menu" closeOnOutSide (clickedOutside)="onClick()">
+    <div (click)="displayMenu()" class="absolute top-1 right-2 cursor-pointer text-2xl text-gray-text">
+      <fa-icon [icon]="times"></fa-icon>
+    </div>
+    <div class="mx-8">
+      <molec-rd-head-menu-mb [isLogin]="isLogin" [user]="user"></molec-rd-head-menu-mb>
+      <molec-rd-content-menu-mb [isLogin]="isLogin" (clicked)="onClick()"></molec-rd-content-menu-mb>
+      <div class="flex justify-end pt-4">
+        <molec-rd-list-btns-menu-mb [isLogin]="isLogin" (logoutEvent)="logoutEvent.emit()"></molec-rd-list-btns-menu-mb>
+      </div>
+    </div>
+  </div>
+</section>

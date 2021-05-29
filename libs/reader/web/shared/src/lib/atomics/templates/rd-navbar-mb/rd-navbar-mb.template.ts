@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'template-rd-navbar-mb',
@@ -16,9 +16,10 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RdNavbarMbTemplate implements OnInit {
-  @Input() isLogin = false;
-  @Input() isMenu = false;
+  @Input() user = {};
+  @Input() isLogin;
   @Input() isSearch = false;
+  @Output() logoutEvent = new EventEmitter();
   constructor() {}
 
   ngOnInit(): void {}

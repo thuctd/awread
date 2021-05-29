@@ -1,0 +1,3 @@
+<atom-rd-base-btn-green (submitEvent)="openFormLogin($event)" class="mb-1" *ngIf="!isLogin" [title]="'Đăng nhập'"></atom-rd-base-btn-green>
+<atom-rd-base-btn-green (submitEvent)="openFormRegister($event)" *ngIf="!isLogin" [class2]="'px-5'" [title]="'Đăng ký'"></atom-rd-base-btn-green>
+<atom-rd-base-btn-green (click)="logoutEvent.emit()" *ngIf="isLogin" [title]="'Đăng xuất'"></atom-rd-base-btn-green>
