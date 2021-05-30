@@ -28,8 +28,8 @@ export class WritingPage implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getChapter();
     this.initForm();
+    this.getChapter();
 
   }
 

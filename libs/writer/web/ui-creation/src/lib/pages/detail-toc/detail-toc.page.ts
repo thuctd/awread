@@ -35,7 +35,7 @@ export class DetailTocPage implements OnInit {
 
   chapterActionEvent(data: { type: string; chapter: string; }) {
     switch (data.type) {
-      case 'new':
+      case 'create':
         this.createChapter();
         return;
       case 'edit':

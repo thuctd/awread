@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { CreationsApi } from '../apis';
 import { CreationsQuery, CreationsStore } from '../states/creations';
 import { CurrentUserFacade } from '@awread/core/users';
@@ -24,11 +24,13 @@ export class CreationsGear {
   }
 
   selectEntity(bookId) {
-    if (this.creationsQuery.hasEntity(bookId)) {
-      return this.creationsQuery.selectEntity(bookId);
-    } else {
-      return this.creationsApi.getOne(bookId);
-    }
+    return this.creationsApi.getOne(bookId).pipe(
+      map(book => ({
+        book,
+        genreIds: book?.['booksGenresByBookId']?.['nodes'],
+        authors: book?.['authorsByBookId']?.['nodes'] ? book?.['authorsByBookId']?.['nodes'].map(result => ({ userId: result.userId, name: result.userByUserId.name })) : []
+      }))
+    );
   }
 
   add(book) {

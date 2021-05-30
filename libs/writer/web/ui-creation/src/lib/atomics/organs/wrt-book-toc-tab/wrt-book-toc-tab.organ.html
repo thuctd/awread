@@ -4,7 +4,8 @@
       <wrt-detail-tab-head [tabsHead]="tabsHead"></wrt-detail-tab-head>
       <div class="py-4">
         <div class="mb-4 ml-4">
-          <cr-submit-btn class="w-44" (btnClicked)="chapterActionEvent.emit({ type: 'new' })" [faIcon]="faIcon" [submitText]="'Tạo chương mới'"></cr-submit-btn>
+          <cr-submit-btn class="w-44" (btnClicked)="chapterActionEvent.emit({ type: 'create' })" [faIcon]="faIcon" [submitText]="'Tạo chương mới'">
+          </cr-submit-btn>
         </div>
 
         <ng-container *ngIf="chapters.length;else noData">

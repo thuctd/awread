@@ -16,9 +16,32 @@ export class CreationsApi {
         query getAllBooks($bookId: UUID!) {
           allBooks(condition: { bookId: $bookId }) {
             nodes {
-              bookId
               title
+              bookId
+              categoryId
+              completed
+              publisherId
+              createdAt
+              description
               cover
+              published
+              type
+              age
+              updatedAt
+              userId
+              booksGenresByBookId {
+                nodes {
+                  genreId
+                }
+              }
+              authorsByBookId {
+                nodes {
+                  userId
+                  userByUserId {
+                    name
+                  }
+                }
+              }
             }
           }
         }
@@ -46,7 +69,7 @@ export class CreationsApi {
               cover
               published
               type
-              ages
+              age
               updatedAt
               userId,
               publishedCount,

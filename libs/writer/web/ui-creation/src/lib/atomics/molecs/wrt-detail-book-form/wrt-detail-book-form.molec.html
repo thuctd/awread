@@ -1,13 +1,14 @@
 <form [formGroup]="bookForm" class="px-3" autocomplete="off">
   <detail-input-form [inputControl]="bookForm.get('title')" [titleLabel]="formInformation.title.display" [placeholder]=" formInformation.title.display">
-    <div *ngIf="submitted && bookForm.controls.title.errors" class="invalid-feedback">
+    <div *ngIf="bookForm.controls.title.errors" class="invalid-feedback">
       <div *ngIf="bookForm.controls.title.errors.required">
         Tiêu đề không được để trống
       </div>
     </div>
   </detail-input-form>
 
-  <detail-textarea-form [inputControl]="bookForm.get('description')" [titleLabel]="formInformation.description.display" [placeholder]="formInformation.description.placeholder"></detail-textarea-form>
+  <detail-textarea-form [inputControl]="bookForm.get('description')" [titleLabel]="formInformation.description.display"
+    [placeholder]="formInformation.description.placeholder"></detail-textarea-form>
 
   <!-- <detail-input-form
     [inputControl]="bookForm.get('categorid')"
@@ -25,10 +26,11 @@
       <!-- <ng-select [formControlName]="bookForm.get('categoryname')" class="custom" [items]="items" bindLabel="name" placeholder="Thể loại" appendTo="body" multiple="true">
       </ng-select> -->
 
-      <ng-select class="custom" [items]="categories" bindValue="categoryid" [multiple]="false" bindLabel="name" placeholder="Danh mục" formControlName="categoryid">
+      <ng-select class="custom" [items]="categories" bindValue="categoryId" [multiple]="false" bindLabel="name" placeholder="Danh mục"
+        formControlName="categoryId">
       </ng-select>
-      <div *ngIf="submitted && bookForm.controls.categoryid.errors" class="invalid-feedback">
-        <div *ngIf="bookForm.controls.categoryid.errors.required">
+      <div *ngIf="bookForm.controls.categoryId.errors" class="invalid-feedback">
+        <div *ngIf="bookForm.controls.categoryId.errors.required">
           Danh mục không được để trống
         </div>
       </div>
@@ -45,9 +47,10 @@
       <!-- <ng-select [formControlName]="bookForm.get('categoryname')" class="custom" [items]="items" bindLabel="name" placeholder="Thể loại" appendTo="body" multiple="true">
       </ng-select> -->
 
-      <ng-select class="custom" [items]="genres" bindValue="genreid" [multiple]="true" bindLabel="name" formControlName="genreIds" placeholder="Thể loại" (add)="addItem($event)" (remove)="removeItem($event)">
+      <ng-select class="custom" [items]="genres" bindValue="genreId" [multiple]="true" bindLabel="name" formControlName="genreIds" placeholder="Thể loại"
+        (add)="addItem($event)" (remove)="removeItem($event)">
       </ng-select>
-      <div *ngIf="submitted && bookForm.controls.genreIds.errors" class="invalid-feedback">
+      <div *ngIf="bookForm.controls.genreIds.errors" class="invalid-feedback">
         <div *ngIf="bookForm.controls.genreIds.errors.required">
           Thể loại không được để trống
         </div>
@@ -56,10 +59,7 @@
   </div>
 
   <!-- Tags -->
-  <detail-input-form
-    [titleLabel]="formInformation.tags.display"
-    [placeholder]="formInformation.tags.placeholder"
-  ></detail-input-form>
+  <detail-input-form [titleLabel]="formInformation.tags.display" [placeholder]="formInformation.tags.placeholder"></detail-input-form>
 
   <!-- Tags -->
 
@@ -94,7 +94,7 @@
       <!-- <ng-select [formControlName]="bookForm.get('categoryname')" class="custom" [items]="items" bindLabel="name" placeholder="Thể loại" appendTo="body" multiple="true">
       </ng-select> -->
 
-      <ng-select class="custom" [items]="audiences" bindValue="id" bindLabel="name" formControlName="audience" placeholder="Đối tượng độc giả" >
+      <ng-select class="custom" [items]="audiences" bindValue="id" bindLabel="name" formControlName="audience" placeholder="Đối tượng độc giả">
       </ng-select>
     </div>
   </div>

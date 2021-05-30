@@ -26,7 +26,7 @@ export class BooksApi {
                 published
                 genres
                 type
-                ages
+                age
                 updatedAt
                 userId
               }
@@ -61,7 +61,7 @@ export class BooksApi {
             published
             genres
             type
-            ages
+            age
             updatedAt
             userId
           }
@@ -101,7 +101,7 @@ export class BooksApi {
             published
             genres
             type
-            ages
+            age
             updatedAt
             userId
           }
@@ -165,17 +165,17 @@ export class BooksApi {
           query allMvBooksLatestChapters($bookId: UUID!) {
             allMvBooksLatestChapters(condition: { bookId: $bookId }) {
               nodes {
-                ages
                 authors
                 bookId
                 categoryId
                 genres
-                type
                 completed
                 description
                 published
                 publisherId
                 title
+                type
+                age
                 updatedAt
                 userId
               }
@@ -192,7 +192,7 @@ export class BooksApi {
   getFilterBooks(filters, categoryId: string) {
     const genres = filters.genres;
     const completed = filters.completed === '0' ? false : true;
-    const type = filters.type;
+    const type = filters.type == 'composed' ? 0 : 1;
     const updatedAt = this.transformDate(filters.postingDate);
     let queryString = '';
     let mvBooks = '';

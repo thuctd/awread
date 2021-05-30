@@ -8,7 +8,6 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WrtDetailBookFormMolec implements OnInit {
-  @Input() submitted: boolean;
   @Input() genres;
   @Input() categories;
   @Input() bookForm: FormGroup = this.fb.group({
@@ -59,8 +58,6 @@ export class WrtDetailBookFormMolec implements OnInit {
     },
   };
 
-  @Input() inputControl = new FormControl();
-  @Output() btnSubmitEvent = new EventEmitter();
   @Output() genresEvent = new EventEmitter();
 
   @Output() saveChapterEvent = new EventEmitter();

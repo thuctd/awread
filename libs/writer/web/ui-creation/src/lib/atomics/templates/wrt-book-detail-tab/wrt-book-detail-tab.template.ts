@@ -22,10 +22,7 @@ export class WrtBookDetailTabTemplate implements OnInit {
   @Input() book;
   @Input() chapters;
 
-  @Input() tabsHead = [
-    { name: 'THÔNG TIN TRUYỆN', href: null, isActive: true },
-    { name: 'MỤC LỤC', href: ['../toc'], isActive: false },
-  ];
+  @Input() tabsHead = [];
 
   @Output() genresEvent = new EventEmitter();
   @Output() cancelCreateBook = new EventEmitter();

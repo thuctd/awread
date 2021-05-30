@@ -26,7 +26,7 @@ export class WrtBookDetailTabOrgan implements OnInit {
 
   @Input() tabsHead = [];
 
-  @Output() addorUpdateBook = new EventEmitter();
+  @Output() detailBookEvent = new EventEmitter();
 
   @Input() categories;
   @Input() genres;
