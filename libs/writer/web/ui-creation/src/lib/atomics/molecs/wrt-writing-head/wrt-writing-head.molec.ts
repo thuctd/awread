@@ -60,11 +60,5 @@ export class WrtWritingHeadMolec implements OnInit {
   ngOnInit(): void {
   }
 
-  ngOnChanges(changes) {
-    // console.log("changes", changes.chapterForm?.currentValue.value.published);
-    if (changes.chapterForm?.currentValue.value.published) {
-      this.btns[1].hidden = true;
-    }
-  }
 
 }

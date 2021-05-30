@@ -80,7 +80,10 @@ export class WritingPage implements OnInit {
   }
 
   private publish() {
-
+    this.chapterForm.patchValue({ published: true });
+    this.chaptersFacade.update(this.chapterForm.value).subscribe(value => {
+      console.log('value', value);
+    })
   }
 
   save() {
@@ -109,6 +112,7 @@ export class WritingPage implements OnInit {
       chapterId: chapter.chapterId,
       bookId: chapter.bookId
     });
+    this.chapterForm.updateValueAndValidity();
   }
 
 }
