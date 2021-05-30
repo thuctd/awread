@@ -62,9 +62,9 @@ export class WrtDetailBookFormMolec implements OnInit {
 
   @Output() saveChapterEvent = new EventEmitter();
   audiences = [
-    { name: 'None', id: 'none' },
-    { name: '13+', id: '13' },
-    { name: '18+', id: '18' },
+    { name: '6-12', id: "1" },
+    { name: '13-18', id: "2" },
+    { name: '18+', id: "3" },
   ];
   constructor(private fb: FormBuilder) { }
 

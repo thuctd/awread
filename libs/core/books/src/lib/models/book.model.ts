@@ -18,6 +18,7 @@ export interface Book {
   published: boolean;
   updatedat: Date;
   genres?: Genre[];
+  type: string;
 }
 
 export function Book(params: Partial<Book>) {

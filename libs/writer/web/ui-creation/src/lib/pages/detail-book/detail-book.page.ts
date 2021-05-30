@@ -105,8 +105,8 @@ export class DetailBookPage implements OnInit {
       audience: ['none'],
       completed: [false],
       published: [false],
-      type: 0,
-      age: 2
+      type: "0",
+      age: "2"
     });
   }
 
