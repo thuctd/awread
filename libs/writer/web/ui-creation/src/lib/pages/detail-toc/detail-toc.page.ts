@@ -16,6 +16,10 @@ import { GenresFacade } from '@awread/core/genres';
 export class DetailTocPage implements OnInit {
   chapters$ = this.chaptersFacade.chapters$;
   book;
+  tabsHead = [
+    { name: 'THÔNG TIN TRUYỆN', href: ['../detail'], isActive: false },
+    { name: 'MỤC LỤC', href: null, isActive: true },
+  ];
   constructor(
     private activatedRoute: ActivatedRoute,
     private creationsFacade: CreationsFacade,
@@ -36,7 +40,7 @@ export class DetailTocPage implements OnInit {
   }
 
 
-  chapterActionEvent(data: { type: string; chapterid: string; chapterNumber: number }) {
+  chapterActionEvent(data: { type: string; chapterid: string; }) {
     switch (data.type) {
       case 'new':
         this.createChapter();

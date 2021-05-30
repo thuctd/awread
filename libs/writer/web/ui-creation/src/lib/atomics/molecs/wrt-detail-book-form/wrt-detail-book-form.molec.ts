@@ -1,6 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import type { Category, Genre } from '@awread/writer/web/feature-auth';
 
 @Component({
   selector: 'wrt-detail-book-form',
@@ -10,8 +9,8 @@ import type { Category, Genre } from '@awread/writer/web/feature-auth';
 })
 export class WrtDetailBookFormMolec implements OnInit {
   @Input() submitted: boolean;
-  @Input() genres: Genre;
-  @Input() categories: Category[];
+  @Input() genres;
+  @Input() categories;
   @Input() bookForm: FormGroup = this.fb.group({
     title: ['', Validators.required],
     description: ['', Validators.required],
@@ -70,9 +69,9 @@ export class WrtDetailBookFormMolec implements OnInit {
     { name: '13+', id: '13' },
     { name: '18+', id: '18' },
   ];
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   addItem(e) {
     // console.log('add: ', e);

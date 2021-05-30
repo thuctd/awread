@@ -19,7 +19,6 @@ export class WrtChapterWritingOrgan implements OnInit {
     dirty: ['', Validators.required],
     valueChanges: ['', Validators.required],
     bookTitle: ['', Validators.required],
-    chapterNumber: ['', Validators.required],
     status: ['', Validators.required],
     title: ['', Validators.required],
     content: ['', Validators.required],

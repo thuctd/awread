@@ -2,7 +2,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PopupChangeCoverOrgan } from '@awread/global/design-system';
-import { Category, Genre } from '@awread/writer/web/feature-auth';
 
 @Component({
   selector: 'template-wrt-book-detail-tab',
@@ -18,8 +17,8 @@ import { Category, Genre } from '@awread/writer/web/feature-auth';
 })
 export class WrtBookDetailTabTemplate implements OnInit {
   @Input() submitted: boolean;
-  @Input() categories: Category[];
-  @Input() genres: Genre[];
+  @Input() categories;
+  @Input() genres;
   @Input() book;
   @Input() chapters;
 

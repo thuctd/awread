@@ -24,10 +24,7 @@ export class WrtBookTocTabTemplate implements OnInit {
     chapterCountComments: 0,
   };
 
-  @Input() tabsHead = [
-    { name: 'THÔNG TIN TRUYỆN', href: ['../detail'], isActive: false },
-    { name: 'MỤC LỤC', href: null, isActive: true },
-  ];
+  @Input() tabsHead = [];
 
   @Output() chapterActionEvent = new EventEmitter();
   constructor(public matDialog: MatDialog, private fb: FormBuilder) { }

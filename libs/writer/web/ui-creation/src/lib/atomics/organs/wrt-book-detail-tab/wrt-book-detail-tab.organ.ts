@@ -1,6 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { Category, Genre } from '@awread/writer/web/feature-auth';
 
 @Component({
   selector: 'organ-wrt-book-detail-tab',
@@ -29,14 +28,14 @@ export class WrtBookDetailTabOrgan implements OnInit {
 
   @Output() addorUpdateBook = new EventEmitter();
 
-  @Input() categories: Category[];
-  @Input() genres: Genre[];
+  @Input() categories;
+  @Input() genres;
   @Output() bookSubmitEvent = new EventEmitter();
   @Output() genresEvent = new EventEmitter();
   @Output() cancelCreateBook = new EventEmitter();
   @Output() confirmCreateBook = new EventEmitter();
   @Input() submitted: boolean;
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }
