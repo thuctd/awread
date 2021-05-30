@@ -13,9 +13,11 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WrtSocialMenuAtom implements OnInit {
-  @Input() title = 'Em là nhà';
+  @Input() book = {
+    title: ''
+  };
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

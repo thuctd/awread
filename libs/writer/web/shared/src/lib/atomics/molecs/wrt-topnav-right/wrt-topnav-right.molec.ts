@@ -1,5 +1,4 @@
 import { Component, OnInit, ChangeDetectionStrategy, EventEmitter, Output, Input } from '@angular/core';
-import type { User } from '@awread/writer/web/feature-auth';
 
 @Component({
   selector: 'wrt-topnav-right',
@@ -17,7 +16,7 @@ export class WrtTopnavRightMolec implements OnInit {
   @Input() user = [];
   @Output() searchEvent = new EventEmitter();
   @Output() signoutEvent = new EventEmitter();
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

@@ -32,6 +32,7 @@ specifiers:
   '@fortawesome/angular-fontawesome': ^0.8.2
   '@fortawesome/fontawesome-svg-core': ^1.2.35
   '@fortawesome/free-solid-svg-icons': ^5.15.3
+  '@graphile/pg-aggregates': ^0.1.0
   '@graphql-tools/webpack-loader': ^6.4.0
   '@nestjs/common': ^7.6.15
   '@nestjs/core': ^7.6.15
@@ -93,6 +94,7 @@ specifiers:
   jest-preset-angular: ^8.4.0
   lint-staged: ^10.5.4
   ng-image-slider: ^2.6.4
+  ngx-image-cropper: ^3.3.5
   ngx-owl-carousel-o: ^5.0.0
   ngx-quill: ^13.2.0
   passport: ^0.4.1
@@ -104,7 +106,7 @@ specifiers:
   postcss-import: ^14.0.1
   postcss-loader: ^5.2.0
   postcss-scss: ^3.0.5
-  postgraphile: ^4.11.0
+  postgraphile: ^4.12.1
   postgraphile-plugin-connection-filter: ^2.1.1
   prettier: ^2.2.1
   quill: ^1.3.7
@@ -141,6 +143,7 @@ dependencies:
   '@fortawesome/angular-fontawesome': 0.8.2_47fb87f1518eecfeca2566815808c153
   '@fortawesome/fontawesome-svg-core': 1.2.35
   '@fortawesome/free-solid-svg-icons': 5.15.3
+  '@graphile/pg-aggregates': 0.1.0_graphql@15.5.0
   '@graphql-tools/webpack-loader': 6.4.0_graphql@15.5.0
   '@nestjs/common': 7.6.15_1b0114c18e741c9e7837aac5d4abbde8
   '@nestjs/core': 7.6.15_addc498901482b108c9689926fe42327
@@ -162,13 +165,14 @@ dependencies:
   graphile-utils: 4.11.2
   graphql: 15.5.0
   ng-image-slider: 2.6.4_b0550eba7aa0167d56798f794764a5df
+  ngx-image-cropper: 3.3.5_43b5c28c75869dc532215c390eb0b633
   ngx-owl-carousel-o: 5.0.0_2659a02cbfe2691f14a09a95419ad827
   ngx-quill: 13.2.0_159876f472a378b874ada8bf0033d6ae
   passport: 0.4.1
   passport-facebook: 3.0.0
   passport-google-oauth: 2.0.0
   pg: 8.5.1
-  postgraphile: 4.11.0
+  postgraphile: 4.12.1
   postgraphile-plugin-connection-filter: 2.1.1
   quill: 1.3.7
   reflect-metadata: 0.1.13
@@ -4458,7 +4462,23 @@ packages:
     resolution: {integrity: sha512-Fakuk190EAKxWSa9YQyr/87g8mvAv8HBvk6yPCPuIoA3bYXF7n6kl0XSqKjSd5VfjEqhtnzQ6zJGzDf1Gv/tJg==}
     engines: {node: '>=8.6'}
     dependencies:
-      tslib: 2.1.0
+      tslib: 2.2.0
+    dev: false
+
+  /@graphile/pg-aggregates/0.1.0_graphql@15.5.0:
+    resolution: {integrity: sha512-/sk02GtxwoQR6DLpW1GUWrYoWCdpHd3Kd5bZYC8xt38iBYAfTI7/elj1qnVGWqZQTybRbCurA2bh/L0YmajGDw==}
+    peerDependencies:
+      graphile-build: ^4.12.0-alpha.0
+      graphile-build-pg: ^4.12.0-alpha.0
+      graphql: '>0.6.0 <16'
+    dependencies:
+      '@types/debug': 4.1.5
+      '@types/graphql': 14.5.0
+      debug: 4.3.1
+      graphile-utils: 4.12.1
+      graphql: 15.5.0
+    transitivePeerDependencies:
+      - supports-color
     dev: false
 
   /@graphql-tools/optimize/1.0.1_graphql@15.5.0:
@@ -4871,7 +4891,7 @@ packages:
       '@angular/common': 11.2.6_@angular+core@11.2.6+rxjs@6.6.6
       '@angular/core': 11.2.6_rxjs@6.6.6+zone.js@0.11.4
       '@angular/forms': 11.2.6_daf588f56cfc04c5b8a889bb8cd1a624
-      tslib: 2.1.0
+      tslib: 2.2.0
     dev: false
 
   /@ngneat/hot-toast/2.0.1_cd84579ce96adc927ef7f1e13fe14015:
@@ -6172,6 +6192,10 @@ packages:
       moment: 2.29.1
     dev: true
 
+  /@types/debug/4.1.5:
+    resolution: {integrity: sha512-Q1y515GcOdTHgagaVFhHnIFQ38ygs/kmxdNpvpou+raI9UO3YZcHDngBSYKQklcKlvA7iuQlmIKbzvmxcOE9CQ==}
+    dev: false
+
   /@types/duplexify/3.6.0:
     resolution: {integrity: sha512-5zOA53RUlzN74bvrSGwjudssD9F3a797sDZQkiYpUOxW+WHaXTCPz4/d5Dgi6FKnOqZ2CpaTo0DhgIfsXAOE/A==}
     dependencies:
@@ -6211,6 +6235,13 @@ packages:
     dependencies:
       '@types/node': 14.14.34
     dev: true
+
+  /@types/graphql/14.5.0:
+    resolution: {integrity: sha512-MOkzsEp1Jk5bXuAsHsUi6BVv0zCO+7/2PTiZMXWDSsMXvNU6w/PLMQT2vHn8hy2i0JqojPz1Sz6rsFjHtsU0lA==}
+    deprecated: This is a stub types definition. graphql provides its own type definitions, so you do not need this installed.
+    dependencies:
+      graphql: 15.5.0
+    dev: false
 
   /@types/hast/2.3.1:
     resolution: {integrity: sha512-viwwrB+6xGzw+G1eWpF9geV3fnsDgXqHG+cqgiHrvQfDUW5hzhCyV7Sy3UJxhfRFBsgky2SSW33qi/YrIkjX5Q==}
@@ -6261,10 +6292,10 @@ packages:
     resolution: {integrity: sha512-sqm9g7mHlPY/43fcSNrCYfOeX9zkTTK+euO5E6+CVijSMm5tTjkVdwdqRkY3ljjIAf8679vps5jKUoJBCLsMDA==}
     dev: false
 
-  /@types/jsonwebtoken/8.5.0:
-    resolution: {integrity: sha512-9bVao7LvyorRGZCw0VmH/dr7Og+NdjYSsKAxB43OQoComFbBgsEpoR9JW6+qSq/ogwVBg8GI2MfAlk4SYI4OLg==}
+  /@types/jsonwebtoken/8.5.1:
+    resolution: {integrity: sha512-rNAPdomlIUX0i0cg2+I+Q1wOUr531zHBQ+cV/28PJ39bSPKjahatZZ2LMuhiguETkCgLVzfruw/ZvNMNkKoSzw==}
     dependencies:
-      '@types/node': 14.14.34
+      '@types/node': 14.17.1
     dev: false
 
   /@types/long/4.0.1:
@@ -6319,6 +6350,10 @@ packages:
 
   /@types/node/14.14.37:
     resolution: {integrity: sha512-XYmBiy+ohOR4Lh5jE379fV2IU+6Jn4g5qASinhitfyO71b/sCo6MKsMLF5tc7Zf2CE8hViVQyYSobJNke8OvUw==}
+
+  /@types/node/14.17.1:
+    resolution: {integrity: sha512-/tpUyFD7meeooTRwl3sYlihx2BrJE7q9XF71EguPFIySj9B7qgnRtHsHTho+0AUm4m1SvWGm6uSncrR94q6Vtw==}
+    dev: false
 
   /@types/normalize-package-data/2.4.0:
     resolution: {integrity: sha512-f5j5b/Gf71L+dbqxIpQ4Z2WlmI/mPJ0fOkGGmFgtb6sAu97EPczzbS3/tJKxmcYDj55OX6ssqwDAWOHIYDRDGA==}
@@ -6478,10 +6513,10 @@ packages:
       source-map: 0.6.1
     dev: true
 
-  /@types/ws/7.4.0:
-    resolution: {integrity: sha512-Y29uQ3Uy+58bZrFLhX36hcI3Np37nqWE7ky5tjiDoy1GDZnIwVxS0CgF+s+1bXMzjKBFy+fqaRfb708iNzdinw==}
+  /@types/ws/7.4.4:
+    resolution: {integrity: sha512-d/7W23JAXPodQNbOZNXvl2K+bqAQrCMwlh/nuQsPSQk6Fq0opHoPrUw43aHsvSbIiQPr8Of2hkFbnz1XBFVyZQ==}
     dependencies:
-      '@types/node': 14.14.34
+      '@types/node': 14.17.1
     dev: false
 
   /@types/yargs-parser/20.2.0:
@@ -12150,8 +12185,8 @@ packages:
   /graceful-fs/4.2.6:
     resolution: {integrity: sha512-nTnJ528pbqxYanhpDYsi4Rd8MAeaBA67+RZ10CM1m3bTAVFEDcd5AuA4a6W5YkGZ1iNXHzZz8T6TBKLeBuNriQ==}
 
-  /graphile-build-pg/4.11.2_graphql@15.5.0+pg@8.5.1:
-    resolution: {integrity: sha512-kAI4urfd8h3ok4tXHIfKVghABMHfuHXnFUVuLb7qV7GJTLS4/vrkgYJVWmRF5z8RLo5TmFE4My07cEA8G1DxVQ==}
+  /graphile-build-pg/4.12.1_graphql@15.5.0+pg@8.6.0:
+    resolution: {integrity: sha512-Rd9QBtbyLJ425VUeHggFCvh3s3oKR58mUU6JYK0sQTRjYbxrE/eWDNAQZQLuWeemfSHvgS5W0EzppkHjkoiWiQ==}
     engines: {node: '>=8.6'}
     peerDependencies:
       pg: '>=6.1.0 <9'
@@ -12159,20 +12194,19 @@ packages:
       '@graphile/lru': 4.11.0
       chalk: 2.4.2
       debug: 4.3.1
-      graphile-build: 4.11.0_graphql@15.5.0
-      graphql-iso-date: 3.6.1_graphql@15.5.0
+      graphile-build: 4.12.0_graphql@15.5.0
       jsonwebtoken: 8.5.1
       lodash: 4.17.21
       lru-cache: 4.1.5
-      pg: 8.5.1
-      pg-sql2: 4.11.0_pg@8.5.1
+      pg: 8.6.0
+      pg-sql2: 4.12.1_pg@8.6.0
     transitivePeerDependencies:
       - graphql
       - supports-color
     dev: false
 
-  /graphile-build/4.11.0_graphql@15.5.0:
-    resolution: {integrity: sha512-cp+IU1Kt9YRFG3n6LUU7/0djYsG0zzyAEh6C1EU21/UbCYtUKDsl8HKy5fV3eqHKrxPzvUB40q8wdt96lPff3g==}
+  /graphile-build/4.12.0_graphql@15.5.0:
+    resolution: {integrity: sha512-P4urOvOf4C8uzuuCq8BjFb+qffQvWUnZamrEyRC/0BfKKPkZhQ/HYqe9M7JkwiH8uFekHaTXDBrdR+OPoZEdhw==}
     engines: {node: '>=8.6'}
     peerDependencies:
       graphql: '>=0.9 <0.14 || ^14.0.2 || ^15.4.0'
@@ -12181,7 +12215,7 @@ packages:
       chalk: 2.4.2
       debug: 4.3.1
       graphql: 15.5.0
-      graphql-parse-resolve-info: 4.11.0_graphql@15.5.0
+      graphql-parse-resolve-info: 4.12.0_graphql@15.5.0
       iterall: 1.3.0
       lodash: 4.17.21
       lru-cache: 5.1.1
@@ -12205,23 +12239,45 @@ packages:
       - supports-color
     dev: false
 
-  /graphql-iso-date/3.6.1_graphql@15.5.0:
-    resolution: {integrity: sha512-AwFGIuYMJQXOEAgRlJlFL4H1ncFM8n8XmoVDTNypNOZyQ8LFDG2ppMFlsS862BSTCDcSUfHp8PD3/uJhv7t59Q==}
+  /graphile-utils/4.12.1:
+    resolution: {integrity: sha512-+yfKs2W59lVgl/KcZrcGIZ3CQ/eyitZ+HHkbgAVRonA4PaWTSvaqLH4xNvvJu4X7sIGFxb4GWzCxTLnyjHRrmg==}
+    engines: {node: '>=8.6'}
     peerDependencies:
-      graphql: ^0.5.0 || ^0.6.0 || ^0.7.0 || ^0.8.0-b || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0
+      graphile-build: ^4.5.0
+      graphile-build-pg: ^4.5.0
     dependencies:
+      debug: 4.3.1
       graphql: 15.5.0
+      tslib: 2.2.0
+    transitivePeerDependencies:
+      - supports-color
     dev: false
 
-  /graphql-parse-resolve-info/4.11.0_graphql@15.5.0:
-    resolution: {integrity: sha512-vIylHwlhtUz7y4UkXlwGRNIf1O2GhONRsZPYcz8SP+zI5Klp0aiulM4sQ7aEVJNbrqvzGj6cxthJLm+sys0dog==}
+  /graphile-utils/4.12.1_a19bc962ed5ee17dbfa6bcf7f7a1f41a:
+    resolution: {integrity: sha512-+yfKs2W59lVgl/KcZrcGIZ3CQ/eyitZ+HHkbgAVRonA4PaWTSvaqLH4xNvvJu4X7sIGFxb4GWzCxTLnyjHRrmg==}
+    engines: {node: '>=8.6'}
+    peerDependencies:
+      graphile-build: ^4.5.0
+      graphile-build-pg: ^4.5.0
+    dependencies:
+      debug: 4.3.1
+      graphile-build: 4.12.0_graphql@15.5.0
+      graphile-build-pg: 4.12.1_graphql@15.5.0+pg@8.6.0
+      graphql: 15.5.0
+      tslib: 2.2.0
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
+  /graphql-parse-resolve-info/4.12.0_graphql@15.5.0:
+    resolution: {integrity: sha512-sQyJeWCzFQwLj8SdgrWeAQG46Nc+VLxof91/AtvEVdbvFCvb+S6OoA4OtIp5OpWBrFo+JzW6LIKifNHXtRKPpA==}
     engines: {node: '>=8.6'}
     peerDependencies:
       graphql: '>=0.9 <0.14 || ^14.0.2 || ^15.4.0'
     dependencies:
       debug: 4.3.1
       graphql: 15.5.0
-      tslib: 2.1.0
+      tslib: 2.2.0
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -12236,8 +12292,8 @@ packages:
       tslib: 2.1.0
     dev: false
 
-  /graphql-ws/4.2.1_graphql@15.5.0:
-    resolution: {integrity: sha512-j4RA5gl6tVUq/2iPzmbt7qbGj2WsdGq45jsmyxL/ek25cCm/yl198qAxXyLy418jhkFVMxf8VoAxUS7Zh4/k4Q==}
+  /graphql-ws/4.5.2_graphql@15.5.0:
+    resolution: {integrity: sha512-kowYwIq2SEJGaHMoKlgR5fgIAyFJbEdVpwjlct22eg6uuDkJK9Irv/b1XHdrFWny8KFssTd/+dUkDpT2vX9Log==}
     engines: {node: '>=10'}
     peerDependencies:
       graphql: '>=0.11 <=15'
@@ -15393,6 +15449,19 @@ packages:
       tslib: 1.14.1
     dev: false
 
+  /ngx-image-cropper/3.3.5_43b5c28c75869dc532215c390eb0b633:
+    resolution: {integrity: sha512-0yRVKG5XAbVo3rOaj/iFDlekGsxEqXKU9iXFbjyvHvRT2DFs+AjwtyvINsHCWw+4ed9yA4Y+wLIUNqzA0bfxLw==}
+    peerDependencies:
+      '@angular/common': '>=8.0.0'
+      '@angular/core': '>=8.0.0'
+      '@angular/platform-browser': '>=8.0.0'
+    dependencies:
+      '@angular/common': 11.2.6_@angular+core@11.2.6+rxjs@6.6.6
+      '@angular/core': 11.2.6_rxjs@6.6.6+zone.js@0.11.4
+      '@angular/platform-browser': 11.2.6_e55852a61278bb526b507ea446211084
+      tslib: 1.14.1
+    dev: false
+
   /ngx-owl-carousel-o/5.0.0_2659a02cbfe2691f14a09a95419ad827:
     resolution: {integrity: sha512-wMfGEMu/cI61jAJQfSS82fMxGfmvSgCdoQ2bZfHZlHwdD1poOpzYkzPu/yTPzdw84gG2kK+sXSawm0X4Mproxg==}
     peerDependencies:
@@ -16445,6 +16514,10 @@ packages:
     resolution: {integrity: sha512-3iBXuv7XKvxeMrIgym7njT+HlZkwZqqGX4Bu9cci8xHZNT+Um1gWKqCsAzcC0d95rcKMU5WBg6YRUcHyV0HZKQ==}
     dev: false
 
+  /pg-connection-string/2.5.0:
+    resolution: {integrity: sha512-r5o/V/ORTA6TmUnyWZR9nCj1klXCO2CEKNRlVuJptZe85QuhFayC7WeMic7ndayT5IRIR0S0xFxFi2ousartlQ==}
+    dev: false
+
   /pg-int8/1.0.1:
     resolution: {integrity: sha512-WCtabS6t3c8SkpDBUlb1kjOs7l66xsGdKpIPZsg4wR+B3+u9UAum2odSsF9tnvxg80h4ZxLWMy4pRjOsFIqQpw==}
     engines: {node: '>=4.0.0'}
@@ -16457,11 +16530,23 @@ packages:
       pg: 8.5.1
     dev: false
 
+  /pg-pool/3.3.0_pg@8.6.0:
+    resolution: {integrity: sha512-0O5huCql8/D6PIRFAlmccjphLYWC+JIzvUhSzXSpGaf+tjTZc4nn+Lr7mLXBbFJfvwbP0ywDv73EiaBsxn7zdg==}
+    peerDependencies:
+      pg: '>=8.0'
+    dependencies:
+      pg: 8.6.0
+    dev: false
+
   /pg-protocol/1.4.0:
     resolution: {integrity: sha512-El+aXWcwG/8wuFICMQjM5ZSAm6OWiJicFdNYo+VY3QP+8vI4SvLIWVe51PppTzMhikUJR+PsyIFKqfdXPz/yxA==}
 
-  /pg-sql2/4.11.0_pg@8.5.1:
-    resolution: {integrity: sha512-KUYJ3fNJaN10oSFT6B6MfqN29rZheW33sJ50Gq7wphWhiCUHCxPGxg262TF7ERLYTKkmNXIO0hU7D0ZYhmy7yw==}
+  /pg-protocol/1.5.0:
+    resolution: {integrity: sha512-muRttij7H8TqRNu/DxrAJQITO4Ac7RmX3Klyr/9mJEOBeIpgnF8f9jAfRz5d3XwQZl5qBjF9gLsUtMPJE0vezQ==}
+    dev: false
+
+  /pg-sql2/4.12.1_pg@8.6.0:
+    resolution: {integrity: sha512-3N6i0EIBYc3uKpGGJntZA7HG2cyphC2R3d00kOoc0H7MxeAP+5dN1VfHJjj9vFGlrUy40Ttq8z3UkNtWR6ySAA==}
     engines: {node: '>=8.6'}
     peerDependencies:
       pg: '>=6.1.0 <9'
@@ -16469,8 +16554,8 @@ packages:
       '@graphile/lru': 4.11.0
       '@types/pg': 7.14.11
       debug: 4.3.1
-      pg: 8.5.1
-      tslib: 2.1.0
+      pg: 8.6.0
+      tslib: 2.2.0
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -16499,6 +16584,24 @@ packages:
       pg-connection-string: 2.4.0
       pg-pool: 3.2.2_pg@8.5.1
       pg-protocol: 1.4.0
+      pg-types: 2.2.0
+      pgpass: 1.0.4
+    dev: false
+
+  /pg/8.6.0:
+    resolution: {integrity: sha512-qNS9u61lqljTDFvmk/N66EeGq3n6Ujzj0FFyNMGQr6XuEv4tgNTXvJQTfJdcvGit5p5/DWPu+wj920hAJFI+QQ==}
+    engines: {node: '>= 8.0.0'}
+    peerDependencies:
+      pg-native: '>=2.0.0'
+    peerDependenciesMeta:
+      pg-native:
+        optional: true
+    dependencies:
+      buffer-writer: 2.0.0
+      packet-reader: 1.0.0
+      pg-connection-string: 2.5.0
+      pg-pool: 3.3.0_pg@8.6.0
+      pg-protocol: 1.5.0
       pg-types: 2.2.0
       pgpass: 1.0.4
     dev: false
@@ -17140,18 +17243,18 @@ packages:
       source-map: 0.6.1
     dev: true
 
-  /postgraphile-core/4.11.2_graphql@15.5.0+pg@8.5.1:
-    resolution: {integrity: sha512-vedIJ3pHxS9z/drO/Vo95fFUmki4xKg8z4qC9/aV/f8fyye0wqpS8VoF98Ab0Dw743+bfDXC+aUeu+Dk8oQhiw==}
+  /postgraphile-core/4.12.1_graphql@15.5.0+pg@8.6.0:
+    resolution: {integrity: sha512-BukrJ3j+H4dtEaCCZOPjLZ6+DJnAYHPOvFpDC85w9T4xlpLFCx7/E8ZlZFm7z/P6f/s8SS8EpL7lazms6uB8FQ==}
     engines: {node: '>=8.6'}
     peerDependencies:
       graphql: '>=0.9 <0.14 || ^14.0.2 || ^15.4.0'
       pg: '>=6.1.0 <9'
     dependencies:
-      graphile-build: 4.11.0_graphql@15.5.0
-      graphile-build-pg: 4.11.2_graphql@15.5.0+pg@8.5.1
+      graphile-build: 4.12.0_graphql@15.5.0
+      graphile-build-pg: 4.12.1_graphql@15.5.0+pg@8.6.0
       graphql: 15.5.0
-      pg: 8.5.1
-      tslib: 2.1.0
+      pg: 8.6.0
+      tslib: 2.2.0
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -17161,40 +17264,40 @@ packages:
     engines: {node: '>=10'}
     dev: false
 
-  /postgraphile/4.11.0:
-    resolution: {integrity: sha512-PyOzULrRjb4TMaw+odIeA/dqxW+Rr9tXFIuf6tj9Cy6Nq9Y474ZV/sHap5lH8eRLJx0BqxS73v/+8+ITFUDB1A==}
+  /postgraphile/4.12.1:
+    resolution: {integrity: sha512-m7kxe3LIQ7SVXyOFVrizNm37DroeP+YtvpdMekkvYmXNUdca+DjqhQJhPngEFYxeSI0NtWdisdkLT/3eai8ntA==}
     engines: {node: '>=8.6'}
     hasBin: true
     dependencies:
       '@graphile/lru': 4.11.0
       '@types/json5': 0.0.30
-      '@types/jsonwebtoken': 8.5.0
+      '@types/jsonwebtoken': 8.5.1
       '@types/pg': 7.14.11
-      '@types/ws': 7.4.0
+      '@types/ws': 7.4.4
       body-parser: 1.19.0
       chalk: 2.4.2
       commander: 2.20.3
       debug: 4.3.1
       finalhandler: 1.1.2
-      graphile-utils: 4.11.2
+      graphile-build: 4.12.0_graphql@15.5.0
+      graphile-build-pg: 4.12.1_graphql@15.5.0+pg@8.6.0
+      graphile-utils: 4.12.1_a19bc962ed5ee17dbfa6bcf7f7a1f41a
       graphql: 15.5.0
-      graphql-ws: 4.2.1_graphql@15.5.0
+      graphql-ws: 4.5.2_graphql@15.5.0
       http-errors: 1.8.0
       iterall: 1.3.0
       json5: 2.2.0
       jsonwebtoken: 8.5.1
       parseurl: 1.3.3
-      pg: 8.5.1
-      pg-connection-string: 2.4.0
-      pg-sql2: 4.11.0_pg@8.5.1
-      postgraphile-core: 4.11.2_graphql@15.5.0+pg@8.5.1
+      pg: 8.6.0
+      pg-connection-string: 2.5.0
+      pg-sql2: 4.12.1_pg@8.6.0
+      postgraphile-core: 4.12.1_graphql@15.5.0+pg@8.6.0
       subscriptions-transport-ws: 0.9.18_graphql@15.5.0
       tslib: 2.1.0
-      ws: 7.4.4
+      ws: 7.4.6
     transitivePeerDependencies:
       - bufferutil
-      - graphile-build
-      - graphile-build-pg
       - pg-native
       - supports-color
       - utf-8-validate
@@ -21432,6 +21535,20 @@ packages:
         optional: true
       utf-8-validate:
         optional: true
+    dev: true
+
+  /ws/7.4.6:
+    resolution: {integrity: sha512-YmhHDO4MzaDLB+M9ym/mDA5z0naX8j7SIlT8f8z+I0VtzsRbekxEutHSme7NPS2qE8StCYQNUnfWdXta/Yu85A==}
+    engines: {node: '>=8.3.0'}
+    peerDependencies:
+      bufferutil: ^4.0.1
+      utf-8-validate: ^5.0.2
+    peerDependenciesMeta:
+      bufferutil:
+        optional: true
+      utf-8-validate:
+        optional: true
+    dev: false
 
   /xdg-basedir/4.0.0:
     resolution: {integrity: sha512-PSNhEJDejZYV7h50BohL09Er9VaIefr2LMAf3OEmpCkjOi34eYyQYAXUTjEQtZJTKcF0E2UKTh+osDLsgNim9Q==}

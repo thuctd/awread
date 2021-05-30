@@ -34,6 +34,7 @@ export class SearchFormMolec implements OnInit {
     title: 'Tình Trạng',
     widthClass: 'xl:w-60 md:w-48',
     options: [
+      { id: '', name: 'Tất cả' },
       { id: '0', name: 'Chưa hoàn thành' },
       { id: '1', name: 'Đã hoàn thành' },
     ],

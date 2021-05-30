@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="0,608" last-zoom="0.95" max-obj-count="27"
+<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="0,1045" last-zoom="0.95" max-obj-count="31"
 	 default-owner="postgres">
 <role name="public_read"
       inherit="true">
@@ -185,8 +185,8 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="lastname">
 		<type name="text" length="0"/>
 	</column>
-	<column name="avatar">
-		<type name="text" length="0"/>
+	<column name="avatar" default-value="false">
+		<type name="boolean" length="0"/>
 	</column>
 	<column name="facebook">
 		<type name="text" length="0"/>
@@ -340,7 +340,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="books_rank" layer="0" collapse-mode="2" max-obj-count="8" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="1400" y="1520"/>
+	<position x="1740" y="1460"/>
 	<column name="book_id" not-null="true" default-value="uuid_generate_v4 ()">
 		<type name="uuid" length="0"/>
 	</column>
@@ -1161,6 +1161,47 @@ inner join book_visits v using ("bookId")]]></expression>
 	<expression type="end-exp">2</expression>
 </view>
 
+<table name="settings" layer="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1400" y="1600"/>
+	<column name="storage" default-value="'https://awread-bucket.ss-hn-1.bizflycloud.vn'">
+		<type name="text" length="0"/>
+	</column>
+	<column name="version" default-value="'1.0.0'">
+		<type name="text" length="0"/>
+	</column>
+	<column name="settingId" not-null="true">
+		<type name="numeric" length="0"/>
+	</column>
+	<constraint name="settings_pk" type="pk-constr" table="public.settings">
+		<columns names="settingId" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<view name="mv_settings" layer="0" materialized="true" collapse-mode="2" max-obj-count="1" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1080" y="1740"/>
+	<reference table="public.settings"/>
+	<expression type="select-exp">0</expression>
+	<expression type="from-exp">0</expression>
+</view>
+
+<relationship name="rel_mv_settings_settings" type="reltv" layer="0"
+	 src-table="public.mv_settings"
+	 dst-table="public.settings"
+	 src-required="false" dst-required="false">
+	<label ref-type="name-label">
+		<position x="5.00637" y="-0.480037"/>
+	</label>
+</relationship>
+
+<genericsql name="insert_setting">
+	<definition><![CDATA[INSERT INTO settings("settingId", version, storage) 
+VALUES(1, '1.0.0', 'https://awread-bucket.ss-hn-1.bizflycloud.vn') ON CONFLICT do nothing;]]></definition>
+</genericsql>
+
 <constraint name="books_userId_fk" type="fk-constr" comparison-type="MATCH FULL"
 	 upd-action="NO ACTION" del-action="CASCADE" ref-table="public.users" table="public.books">
 	<columns names="userId" ref-type="src-columns"/>
@@ -1416,6 +1457,21 @@ inner join book_visits v using ("bookId")]]></expression>
 </permission>
 <permission>
 	<object name="public.v_creations" type="view"/>
+	<roles names="public_read"/>
+	<privileges select="grant-op"/>
+</permission>
+<permission>
+	<object name="public.settings" type="table"/>
+	<roles names="public_read"/>
+	<privileges select="grant-op"/>
+</permission>
+<permission>
+	<object name="public.mv_settings" type="view"/>
+	<roles names="public_read"/>
+	<privileges select="grant-op"/>
+</permission>
+<permission>
+	<object name="public.books" type="table"/>
 	<roles names="public_read"/>
 	<privileges select="grant-op"/>
 </permission>

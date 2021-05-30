@@ -1,8 +1,5 @@
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit, ChangeDetectionStrategy, Input, EventEmitter, Output, ChangeDetectorRef } from '@angular/core';
-import {} from '@awread/writer/web/feature-auth';
-import { MatDialog } from '@angular/material/dialog';
-import { WrtWritingPopupReadTemplate } from '../../templates';
 
 @Component({
   selector: 'wrt-writing-head',
@@ -17,77 +14,47 @@ import { WrtWritingPopupReadTemplate } from '../../templates';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WrtWritingHeadMolec implements OnInit {
-  _chapterStatus: string;
-  @Input() formActiveStatus = false;
-  @Output() changeChapterStatusEvent = new EventEmitter();
-  @Input() set chapterStatus(value) {
-    console.log('status: ', value);
-    if (value) {
-      this.selectedChapterStatus = value;
-      this._chapterStatus = value;
-    }
-  }
-
-  get chapterStatus() {
-    return this._chapterStatus;
-  }
+  @Input() book;
   @Input() chapterForm: FormGroup = this.fb.group({
     bookTitle: ['test', Validators.required],
-    chapterNumber: ['', Validators.required],
     bookImg: ['/global-assets/images/image.webp', Validators.required],
     status: ['', Validators.required],
   });
 
-  @Input() shouldShowStatusUI: true;
-  @Input() type: string;
   @Input() btns = [
+    {
+      submitText: 'Quay lại',
+      isActive: false,
+      action: 'back',
+      hidden: false
+    },
     {
       submitText: 'Xuất bản',
       isActive: true,
-      type: 'PUBLISHED',
+      action: 'publish',
+      hidden: false
     },
     {
-      submitText: 'Lưu nháp',
-      isActive: false,
-      type: 'DRAFT',
+      submitText: 'Lưu',
+      isActive: true,
+      action: 'save',
+      hidden: false
     },
-    // {
-    //   submitText: 'Xem trước',
-    //   isActive: false,
-    //   type: 'PREVIEW',
-    // },
+    {
+      submitText: 'Xem trước',
+      isActive: false,
+      action: 'preview',
+      hidden: false
+    },
   ];
-  selectedChapterStatus = 'DRAFT';
-  @Output() saveChapterEvent = new EventEmitter();
-  constructor(private fb: FormBuilder, private cd: ChangeDetectorRef, private matDialog: MatDialog) {}
+
+  @Output() chapterActionEvent = new EventEmitter();
+  constructor(
+    private fb: FormBuilder,
+  ) { }
 
   ngOnInit(): void {
-    this.chapterForm.valueChanges.subscribe(() => {
-      this.cd.detectChanges();
-    });
-  }
-  changeChapterStatus(status: string) {
-    if (status === 'PREVIEW') {
-      this.openPreview();
-      return;
-    }
-    this.changeChapterStatusEvent.emit(status);
   }
 
-  openPreview(): void {
-    this.openModalPreview(this.chapterForm.get('title').value, this.chapterForm.get('content').value);
-  }
 
-  openModalPreview(title: string, conent: string) {
-    const dialogRef = this.matDialog.open(WrtWritingPopupReadTemplate, {
-      width: '72rem',
-      height: '42.5rem',
-      data: {
-        title: title,
-        content: conent,
-      },
-    });
-
-    return dialogRef.afterClosed();
-  }
 }

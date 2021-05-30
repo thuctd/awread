@@ -10,12 +10,11 @@ export class CreationsApi {
     private apollo: Apollo
   ) { }
 
-
-  get(userId) {
+  getOne(bookId) {
     return this.apollo.query({
       query: gql`
-        query getAllBooks($userId: UUID!) {
-          allVCreations(condition: { isDeleted: false, userId: $userId }, orderBy: CREATED_AT_DESC) {
+        query getAllBooks($bookId: UUID!) {
+          allBooks(condition: { bookId: $bookId }) {
             nodes {
               title
               bookId
@@ -27,7 +26,50 @@ export class CreationsApi {
               cover
               published
               type
-              ages
+              age
+              updatedAt
+              userId
+              booksGenresByBookId {
+                nodes {
+                  genreId
+                }
+              }
+              authorsByBookId {
+                nodes {
+                  userId
+                  userByUserId {
+                    name
+                  }
+                }
+              }
+            }
+          }
+        }
+      `,
+      variables: { bookId },
+    }).pipe(
+      map(result => result?.['data']?.['allBooks']?.['nodes']?.[0])
+    )
+  }
+
+
+  get(userId) {
+    return this.apollo.query({
+      query: gql`
+        query getAllBooks($userId: UUID!) {
+          allVCreations(condition: { userId: $userId }, orderBy: CREATED_AT_DESC) {
+            nodes {
+              title
+              bookId
+              categoryId
+              completed
+              publisherId
+              createdAt
+              description
+              cover
+              published
+              type
+              age
               updatedAt
               userId,
               publishedCount,
@@ -41,44 +83,6 @@ export class CreationsApi {
     }).pipe(
       map(result => result?.['data']?.['allVCreations']?.['nodes'])
     )
-  }
-
-  getDetail(bookid: string) {
-    return this.apollo.query({
-      query: gql`
-        query getAllBooks($bookid: String) {
-          allBooks(condition: { bookid: $bookid, isdeleted: false }) {
-            nodes {
-              bookid
-              title
-              img
-              description
-              completed
-              status
-              audience
-              publishedat
-              updatedat
-              categoryByCategoryid {
-                categoryid
-                name
-              }
-              chaptersByBookid(orderBy: CREATEDAT_ASC) {
-                totalCount
-                nodes {
-                  chapterid
-                  title
-                  content
-                  status
-                  updatedat
-                  publishedat
-                }
-              }
-            }
-          }
-        }
-      `,
-      variables: { bookid },
-    });
   }
 
   add(book) {
@@ -103,43 +107,5 @@ export class CreationsApi {
     });
   }
 
-  updateStatus(bookId: string, status: string) {
-    return this.apollo.mutate({
-      mutation: gql`
-        mutation removeBook($bookId: String!, $status: BookStatus) {
-          updateBookByBookid(
-            input: { bookPatch: { status: $status }, bookid: $bookId }
-          ) {
-            book {
-              bookid
-            }
-          }
-        }
-      `,
-      variables: {
-        bookId,
-        status,
-      },
-    });
-  }
-
-  remove(bookId: string) {
-    return this.apollo.mutate({
-      mutation: gql`
-        mutation removeBook($bookId: String!) {
-          updateBookByBookid(
-            input: { bookPatch: { isdeleted: true }, bookid: $bookId }
-          ) {
-            book {
-              bookid
-            }
-          }
-        }
-      `,
-      variables: {
-        bookId,
-      },
-    });
-  }
 
 }

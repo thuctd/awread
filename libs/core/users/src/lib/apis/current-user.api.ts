@@ -1,17 +1,16 @@
-import { catchError, delay, map, repeat, retry, tap, timeout } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
-import { interval, Observable, of, throwError } from 'rxjs';
+import { SettingFacade } from '@awread/core/setting';
 import { CurrentUserQuery } from '../states/current-user';
 import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 @Injectable({ providedIn: 'root' })
 export class CurrentUserApi {
   // user$: Observable<any>;
   // user: any;
   constructor(
     private apollo: Apollo,
-    private httpClient: HttpClient,
-    private currentUserQuery: CurrentUserQuery
+    private currentUserQuery: CurrentUserQuery,
   ) {
     // setInterval(function () {
     //   this.httpClient
@@ -104,7 +103,7 @@ export class CurrentUserApi {
         $firstname: String,
         $middlename: String,
         $lastname: String,
-        $avatar: String,
+        $avatar: Boolean,
         $dob: String,
         $bio: String,
         $websiteAddress: String,

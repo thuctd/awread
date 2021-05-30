@@ -2,7 +2,7 @@ import { Router } from '@angular/router';
 import { Inject, Injectable } from '@angular/core';
 import { ApolloAddon } from '../addons';
 import { CurrentUserService } from '../states/current-user';
-import { SnackbarsService } from '@awread/global/packages';
+import { SnackbarService } from '@awread/global/packages';
 import { SocialAuthService } from 'angularx-social-login';
 @Injectable({ providedIn: 'root' })
 export class LogoutGear {
@@ -10,7 +10,7 @@ export class LogoutGear {
     private apolloAddon: ApolloAddon,
     private currentUserService: CurrentUserService,
     private router: Router,
-    private snackbarService: SnackbarsService,
+    private snackbarService: SnackbarService,
     private socialAuthService: SocialAuthService,
     @Inject('persistStorage') private persistStorage
   ) { }

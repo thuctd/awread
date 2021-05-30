@@ -3,7 +3,6 @@ import { Genre } from '@awread/core/genres';
 export interface Book {
   bookId: string
   cover: string;
-  type: 'collected' | 'composed';
   authorId: string;
   title: string;
   category: string;
@@ -19,6 +18,7 @@ export interface Book {
   published: boolean;
   updatedat: Date;
   genres?: Genre[];
+  type: string;
 }
 
 export function Book(params: Partial<Book>) {

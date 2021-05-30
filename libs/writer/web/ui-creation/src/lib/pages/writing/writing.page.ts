@@ -1,197 +1,145 @@
-import { tap, switchMap } from 'rxjs/operators';
+import { tap, switchMap, debounceTime } from 'rxjs/operators';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ChaptersFacade, BooksFacade } from '@awread/writer/web/feature-auth';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ChangeDetectorRef, Directive, Injectable, OnInit } from '@angular/core';
-import { of } from 'rxjs';
-
+import { ChaptersFacade } from '@awread/core/chapters';
+import { MatDialog } from '@angular/material/dialog';
+import { WrtWritingPopupReadTemplate } from '../../atomics/templates';
+import { CreationsFacade } from '@awread/core/creations';
+import { Location } from '@angular/common';
 @Injectable({
   providedIn: 'root',
 })
 @Directive()
 export class WritingPage implements OnInit {
-  chapterId: string;
+  bookId;
+  chapterId;
+  book;
   chapterForm: FormGroup;
-  bookId: string;
-  chapterStatus = 'DRAFT';
-  chapterNumber: any;
-  submitted = false;
-  type = 'create';
-  shouldShowStatusUI = false;
   constructor(
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
     private chaptersFacade: ChaptersFacade,
-    private booksFacade: BooksFacade,
-    private cd: ChangeDetectorRef
+    private creationsFacade: CreationsFacade,
+    private matDialog: MatDialog,
+    private router: Router,
+    private cd: ChangeDetectorRef,
+    private location: Location
   ) { }
 
   ngOnInit(): void {
-    this.chapterId = this.activatedRoute.snapshot.params['chapterId'];
-    this.bookId = this.activatedRoute.snapshot.params['bookId'];
-    this.chapterNumber = this.activatedRoute.snapshot.params['chapterNumber'];
-    this.type = this.chapterId ? 'edit' : 'create';
-    // this.shouldShowStatusUI = this.shouldShowStatus();
-    this.getChapterWhenReloadPageHere();
     this.initForm();
-    this.updateForm();
+    this.getChapter();
+
   }
-  private getChapterWhenReloadPageHere() {
+
+  getChapter() {
     this.activatedRoute.paramMap
       .pipe(
         switchMap((params) => {
-          const chapters = this.chaptersFacade.getAllAkita();
-          if (this.bookId && chapters.length) {
-            this.shouldShowStatusUI = this.shouldShowStatus();
-            // return this.chaptersFacade.selectAllChapterAkita();
-          } else if (this.bookId) {
-            return this.chaptersFacade.getAllChapters(this.bookId).pipe(
-              tap(() => {
-                this.shouldShowStatusUI = this.shouldShowStatus();
-                setTimeout(() => this.cd.detectChanges(), 0);
-              })
-            );
+          console.log('params', this.activatedRoute.snapshot);
+          this.chapterId = params.get('chapterId');
+          this.bookId = params.get('bookId');
+          if (this.chapterId == 'new') {
+            return this.creationsFacade.selectEntity(this.bookId);
+          } else {
+            return this.chaptersFacade.getChapter(this.bookId, this.chapterId);
           }
-          return of([]);
         }),
-        tap(() => { })
       )
-      .subscribe(() => { });
+      .subscribe((result) => {
+        console.log('result', result);
+        if (this.chapterId == 'new') {
+          this.book = result;
+          this.updateForm({ bookId: this.bookId, chapterId: this.chapterId, position: this.activatedRoute.snapshot.params['position'] });
+        } else {
+          this.book = result.book;
+          this.updateForm(result);
+        }
+      });
   }
 
-  chapterAction() {
-    this.submitted = true;
-    if (this.chapterForm.invalid) {
-      return;
-    }
-    const { title, content } = this.chapterForm.value;
-    if (!title.trim() || !content.trim()) {
-      return;
-    }
-    this.shouldShowStatusUI = this.shouldShowStatus();
-    if (this.chapterId) {
-      if (
-        this.chapterForm.dirty ||
-        this.chapterStatus !== this.chapterForm.get('status').value
-      ) {
-        this.editChapter();
-      }
-    } else {
-      this.createChapter();
+  chapterAction(action) {
+    switch (action) {
+      case 'back':
+        this.location.back();
+        break;
+      case 'preview':
+        this.openPreview();
+        break;
+      case 'save':
+        this.save();
+        break;
+      case 'delete':
+        this.delete();
+        break;
+      case 'publish':
+        this.publish();
+        break;
+      default:
+        console.warn('does not have this action', action);
+        break;
     }
   }
 
-  private editChapter() {
-    this.chaptersFacade
-      .updateChapter({
-        ...this.chapterForm.value,
-        chapterid: this.chapterId,
-        bookid: this.bookId,
-        updatedat: new Date(),
+  openPreview() {
+    const dialogRef = this.matDialog.open(WrtWritingPopupReadTemplate, {
+      width: '72rem',
+      height: '42.5rem',
+      data: {
+        title: this.chapterForm.value.title,
+        content: this.chapterForm.value.content,
+      },
+    });
+
+    return dialogRef.afterClosed();
+  }
+
+  private delete() {
+
+  }
+
+  private publish() {
+    this.chapterForm.patchValue({ published: true });
+    this.save();
+  }
+
+  save() {
+    if (this.chapterId == 'new') {
+      this.chaptersFacade.create(this.chapterForm.value).subscribe(value => {
+        console.log('value', value);
+        this.location.back();
       })
-      .subscribe();
-  }
-
-  private shouldShowStatus() {
-    const statusChapterCurrent =
-      this.chaptersFacade.getChapterEntityAkita(this.chapterId)?.status ??
-      'DRAFT';
-    console.log('chapters: ', this.chaptersFacade.getAllAkita());
-    const statusChapterBefore =
-      this.chaptersFacade
-        .getAllAkita()
-        .find((item) => +item.chapterNumber === +this.chapterNumber - 1)
-        ?.status ?? 'DRAFT';
-    const check =
-      (+this.chapterNumber === 1 && statusChapterCurrent !== 'PUBLISHED') ||
-      (+this.chapterNumber > 1 &&
-        statusChapterBefore === 'PUBLISHED' &&
-        statusChapterCurrent !== 'PUBLISHED');
-    return check;
-  }
-
-  private createChapter() {
-    if (this.bookId) {
-      const chapterFormValue = this.chapterForm.value;
-      const isPublishedBook =
-        +this.chapterNumber === 1 && chapterFormValue.status === 'PUBLISHED';
-      const chapter = {
-        ...chapterFormValue,
-        bookid: this.bookId,
-        createdat: new Date(),
-        updatedat: new Date(),
-      };
-      this.chaptersFacade.createChapter(chapter, isPublishedBook).subscribe();
     } else {
+      this.chaptersFacade.update(this.chapterForm.value).subscribe(value => {
+        console.log('value', value);
+      })
     }
-  }
-
-  saveChapter() {
-    this.chapterAction();
-  }
-
-  changeChapterStatusEvent(type: string) {
-    this.chapterForm.patchValue({ status: type });
   }
 
   private initForm() {
     this.chapterForm = this.fb.group({
-      title: ['', [Validators.required]],
-      content: ['', Validators.required],
-      status: ['DRAFT'],
-      bookTitle: [''],
-      // bookId: [''],
-      chapterNumber: [''],
-      bookImg: [''],
+      title: [null],
+      content: [null],
+      published: [false],
+      position: [null],
+      chapterId: [null],
+      bookId: [null]
     });
   }
 
-  private updateForm() {
-    if (this.chapterId) {
-      // edit chapter
-      this.updateFormChapterDetail();
-    } else {
-      // adđ chapter
-      this.updateFormCreateChapter();
-    }
-  }
-
-  private updateFormCreateChapter() {
-    this.booksFacade.selectEntityBook(this.bookId).subscribe((book) => {
-      if (book) {
-        this.chapterForm.patchValue({
-          bookTitle: book.title ?? '',
-          chapterNumber: this.chapterNumber ?? '',
-          bookImg: 'https://picsum.photos/200/300',
-        });
-      }
-    });
-  }
-  private updateFormChapterDetail() {
-    this.activatedRoute.paramMap
-      .pipe(
-        switchMap((params) => {
-          return this.chaptersFacade.getChapterDetail(
-            params.get('chapterId'),
-            params.get('bookId')
-          );
-        })
-      )
-      .subscribe((chapters) => {
-        this.patchValueFormChapter(chapters[0]);
-      });
-  }
-
-  private patchValueFormChapter(chapter) {
-    this.chapterStatus = chapter.status ?? 'DRAFT';
+  private updateForm(chapter) {
     this.chapterForm.patchValue({
       title: chapter.title ?? '',
       content: chapter.content ?? '',
-      status: chapter.status ?? 'DRAFT',
-      bookTitle: chapter['bookByBookid']['title'] ?? '',
-      // bookId: chapter['bookByBookid']['bookid'] ?? '',
-      chapterNumber: this.chapterNumber ?? '',
-      bookImg: 'https://picsum.photos/200/300',
+      published: chapter.published ?? false,
+      position: chapter.position ?? 0,
+      chapterId: chapter.chapterId,
+      bookId: chapter.bookId
     });
+    // this.cd.detectChanges();
   }
+
+
+
 }

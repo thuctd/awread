@@ -18,7 +18,7 @@ const initialState = {
   ui: {
     filters: {
       typeBook: '',
-      genres: [''],
+      genres: [],
       criteria: '',
       completed: '',
       postingDate: ''

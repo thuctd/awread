@@ -1,0 +1,19 @@
+<div class="inline-block self-start">
+  <h3 class=" font-bold text-gray-800">
+    {{ chapter.title | titlecase }}
+  </h3>
+  <div class="text-base mb-1 text-gray-700 break-words">
+    Chương {{ chapter.position }}
+  </div>
+  <div class="mb-1 whitespace-normal">
+    <div class="mb-1 whitespace-normal">
+      <span class="text-xs text-green-400">
+        {{ chapter.published ? 'Đã xuất bản' : 'Nháp' | titlecase }}
+      </span>
+      -
+      <span class="pr-16 flex-no-wrap text-xs text-gray-700">
+        {{ chapter.updatedAt ? (chapter.updatedAt | date :'dd-M-yy, h:mm a') : 'Unknown Date'}}
+      </span>
+    </div>
+  </div>
+</div>

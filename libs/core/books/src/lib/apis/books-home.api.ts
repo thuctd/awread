@@ -50,11 +50,12 @@ export class BooksHomeApi {
       )
   }
 
-  getLatestBooks(categoryId: string) {
+  //[NOTE]: Pagination Graphiql
+  getLatestBooks(categoryId: string, offset: number) {
     return this.apollo.query({
       query: gql`
-          query allMvBooksLatestChapters${categoryId ? `($categoryId: BigFloat)` : ''} {
-            allMvBooksLatestChapters(first: 10, condition: {published: true ${categoryId ? `, categoryId: $categoryId ` : ''}}) {
+          query allMvBooksLatestChapters ($offset: Int ${categoryId ? `,$categoryId: BigFloat` : ''}) {
+            allMvBooksLatestChapters(first: 10, offset: $offset condition: {published: true ${categoryId ? `, categoryId: $categoryId ` : ''}}) {
               nodes {
                 bookId
                 categoryId
@@ -66,7 +67,7 @@ export class BooksHomeApi {
             }
           }
         `,
-        variables: {categoryId}
+      variables: { categoryId, offset }
     }).pipe(
       map(res => res?.['data']?.['allMvBooksLatestChapters']?.['nodes'])
     )

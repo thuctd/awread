@@ -1,0 +1,9 @@
+<div class="bg-white relative w-full shadow-md p-2">
+  <wrt-detail-tab-head [tabsHead]="tabsHead">
+    <cr-submit-btn class="mx-2" (clickBtn)="detailBookEvent.emit('cancel')" [active]="false" [submitText]="'Hủy bỏ'"></cr-submit-btn>
+    <cr-submit-btn class="mx-2" (clickBtn)="detailBookEvent.emit('save')" [active]="false" [submitText]="'Lưu'"></cr-submit-btn>
+    <cr-submit-btn class="mx-2" (clickBtn)="detailBookEvent.emit('publish')" [active]="false" [submitText]="'Xuất bản'"></cr-submit-btn>
+  </wrt-detail-tab-head>
+  <wrt-detail-book-form class="px-2" [categories]="categories" [genres]="genres" [bookForm]="bookForm" (genresEvent)="genresEvent.emit($event)">
+  </wrt-detail-book-form>
+</div>

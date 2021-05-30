@@ -1,6 +1,12 @@
-<div>
-  <span class="text-sm f5-ns block font-medium mt-0">{{titleChapter}} </span>
-  <span class="text-xs f6-ns font-normal text-gray-500 measure lh-copy my-0">
-    Nháp (0 từ) <a (click)='submitEvent.emit()' class="outline-none cursor-pointer text-green-500">Đã lưu</a>
+<!-- <pre> {{ f.value | json }} </pre>
+<pre> {{ chapter | json }} </pre> -->
+
+<div class="text-sm block font-medium mt-0">
+  Chương {{ chapter?.position }}
+</div>
+<div class="text-xs f6-ns font-normal text-gray-500 measure lh-copy my-0">
+  <span>{{chapter?.published ? 'Đã xuất bản' : 'Đang nháp' }}</span>
+  <span>
+    ({{ chapter?.content && chapter?.content.length ? chapter?.content?.split(' ')?.length : 0 }} từ)
   </span>
 </div>

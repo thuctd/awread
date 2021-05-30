@@ -1,4 +1,3 @@
-import { Genre } from '@awread/writer/web/feature-auth';
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 
 @Component({
@@ -23,7 +22,7 @@ export class RdProfileInfoPersonalMolec implements OnInit {
     gender: '',
   };
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

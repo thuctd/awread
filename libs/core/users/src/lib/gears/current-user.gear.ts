@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import type { CurrentUser } from '../models';
 import { CurrentUserService, CurrentUserStore } from '../states/current-user';
 import { CurrentUserApi } from '../apis';
-import { SnackbarsService } from '@awread/global/packages';
+import { SnackbarService } from '@awread/global/packages';
 import { SocialAuthService, SocialUser } from "angularx-social-login";
 import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
 import { AuthRoutingGear } from './auth-routing.gear';
@@ -14,7 +14,7 @@ export class CurrentUserGear {
     private currentUserApi: CurrentUserApi,
     private currentUserService: CurrentUserService,
     private currentUserStore: CurrentUserStore,
-    private snackbarsService: SnackbarsService,
+    private snackbarService: SnackbarService,
     private socialAuthService: SocialAuthService,
     private authRoutingGear: AuthRoutingGear,
   ) { }
@@ -32,10 +32,10 @@ export class CurrentUserGear {
     return this.currentUserApi.update(user).pipe(
     ).subscribe(result => {
       if (result.data) {
-        this.snackbarsService.showSuccess('Cập nhật thông tin thành công!');
+        this.snackbarService.showSuccess('Cập nhật thông tin thành công!');
         this.currentUserStore.updateCurrentUserAkita(user);
       } else {
-        this.snackbarsService.showError(result.errors?.[0]['message']);
+        this.snackbarService.showError(result.errors?.[0]['message']);
       }
     })
   }
@@ -45,11 +45,11 @@ export class CurrentUserGear {
 
     ).subscribe(result => {
       if (result.data) {
-        this.snackbarsService.showSuccess('Cập nhật thông tin thành công!');
+        this.snackbarService.showSuccess('Cập nhật thông tin thành công!');
         this.currentUserStore.updateCurrentUserAkita(user);
         this.authRoutingGear.navigateAfterRegisterCompleted();
       } else {
-        this.snackbarsService.showError(result.errors?.[0]['message']);
+        this.snackbarService.showError(result.errors?.[0]['message']);
       }
     })
   }
@@ -76,7 +76,7 @@ export class CurrentUserGear {
 
     this.currentUserApi.linkSocial(credential).subscribe(result => {
       if (result) {
-        this.snackbarsService.showSuccess(`Thành công! Từ bây giờ bạn có thể đăng nhập bằng ${provider}`);
+        this.snackbarService.showSuccess(`Thành công! Từ bây giờ bạn có thể đăng nhập bằng ${provider}`);
       }
     })
   }

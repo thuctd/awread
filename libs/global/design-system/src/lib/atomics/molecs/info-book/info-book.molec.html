@@ -4,7 +4,6 @@
   <atom-rating *ngIf="displayUI.ui.isRating" class="mr-4"></atom-rating>
   <atom-icon-text class="mt-0.5" *ngIf="displayUI.ui.isIcon"></atom-icon-text>
 </div>
-<!-- <pre> {{ btns | json }} </pre> -->
 <div *ngFor="let btn of btns | keyvalue:orderByPosition" class="leading-normal font-medium flex">
   <base-btn (onBtnClicked)="submitEvent.emit($event)" [isSize]="displayUI.size.sizeBtn" [bookId]="book.bookId" [chapterId]="btn.key"
     [chapter]="btn.value.position">

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { CreationsApi } from '../apis';
-import { CreationsStore } from '../states/creations';
+import { CreationsQuery, CreationsStore } from '../states/creations';
 import { CurrentUserFacade } from '@awread/core/users';
 @Injectable({ providedIn: 'root' })
 export class CreationsGear {
@@ -10,6 +10,7 @@ export class CreationsGear {
     private creationsApi: CreationsApi,
     private creationsStore: CreationsStore,
     private currentUserFacade: CurrentUserFacade,
+    private creationsQuery: CreationsQuery,
   ) {
   }
 
@@ -22,8 +23,14 @@ export class CreationsGear {
       )
   }
 
-  getDetail(bookId: string) {
-    return this.creationsApi.getDetail(bookId);
+  selectEntity(bookId) {
+    return this.creationsApi.getOne(bookId).pipe(
+      map(book => ({
+        book,
+        genreIds: book?.['booksGenresByBookId']?.['nodes'],
+        authors: book?.['authorsByBookId']?.['nodes'] ? book?.['authorsByBookId']?.['nodes'].map(result => ({ userId: result.userId, name: result.userByUserId.name })) : []
+      }))
+    );
   }
 
   add(book) {
@@ -33,12 +40,5 @@ export class CreationsGear {
     return this.creationsApi.edit(book).pipe();
   }
 
-  updateStatus(bookId: string, status: string) {
-    return this.creationsApi.updateStatus(bookId, status);
-  }
-
-  remove(bookId: string) {
-    return this.creationsApi.remove(bookId).pipe();
-  }
 
 }

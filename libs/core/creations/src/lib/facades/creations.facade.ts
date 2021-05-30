@@ -17,8 +17,8 @@ export class CreationsFacade {
     return this.creationsGear.get();
   }
 
-  getDetail(bookId: string) {
-    return this.creationsGear.getDetail(bookId);
+  selectEntity(bookId) {
+    return this.creationsGear.selectEntity(bookId);
   }
 
   add(book) {
@@ -26,14 +26,6 @@ export class CreationsFacade {
   }
   edit(book, idsGenresRemove: string[]) {
     return this.creationsGear.edit(book, idsGenresRemove).pipe();
-  }
-
-  updateStatus(bookId: string, status: string) {
-    return this.creationsGear.updateStatus(bookId, status);
-  }
-
-  remove(bookId: string) {
-    return this.creationsGear.remove(bookId).pipe();
   }
 
 }

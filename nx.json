@@ -120,14 +120,6 @@
         "type:ui"
       ]
     },
-    "writer-web-feature-auth": {
-      "tags": [
-        "scope:writer",
-        "scope:feature-auth",
-        "scope:shared",
-        "type:feature"
-      ]
-    },
     "writer-web-ui-single": {
       "tags": [
         "scope:writer",
@@ -373,6 +365,13 @@
     "feature-upload-image": {
       "tags": [
         "scope:shared"
+      ]
+    },
+    "core-setting": {
+      "tags": [
+        "scope:core-setting",
+        "scope:shared",
+        "type:core"
       ]
     }
   }

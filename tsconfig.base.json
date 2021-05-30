@@ -54,9 +54,6 @@
       "@awread/writer/web/ui-auth": [
         "libs/writer/web/ui-auth/src/index.ts"
       ],
-      "@awread/writer/web/feature-auth": [
-        "libs/writer/web/feature-auth/src/index.ts"
-      ],
       "@awread/writer/web/ui-single": [
         "libs/writer/web/ui-single/src/index.ts"
       ],
@@ -149,6 +146,9 @@
       ],
       "@awread/feature/upload-image": [
         "libs/feature/upload-image/src/index.ts"
+      ],
+      "@awread/core/setting": [
+        "libs/core/setting/src/index.ts"
       ]
     }
   },

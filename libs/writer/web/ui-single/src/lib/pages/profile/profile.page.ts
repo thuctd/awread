@@ -1,6 +1,7 @@
 import { Directive, Injectable, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CurrentUserFacade } from '@awread/core/users';
+import { faTintSlash } from '@fortawesome/free-solid-svg-icons';
 
 @Injectable({
   providedIn: 'root',
@@ -11,6 +12,7 @@ export class ProfilePage implements OnInit {
   currentUser$ = this.currentUserFacade.currentUser$;
   profileFormValueBefore = '';
   submitted = false;
+  imgSrc = '/global-assets/images/bigImg.webp';
   constructor(
     private currentUserFacade: CurrentUserFacade,
     private fb: FormBuilder
@@ -50,6 +52,9 @@ export class ProfilePage implements OnInit {
       .subscribe((user) => {
         if (user) {
           this.updateProfileForm(user);
+          if (user.avatar == true) {
+            this.imgSrc = `https://awread-bucket.ss-hn-1.bizflycloud.vn/users/origin/${user.userId}.webp`;
+          }
         }
       });
   }
@@ -71,5 +76,8 @@ export class ProfilePage implements OnInit {
       websiteAddress: [null],
       facebookAddress: [null],
     });
+    setTimeout(() => {
+      this.profileForm.get('dob').disable();
+    }, 100);
   }
 }

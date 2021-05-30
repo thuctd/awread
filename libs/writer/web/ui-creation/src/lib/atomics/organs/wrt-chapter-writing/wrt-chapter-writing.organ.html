@@ -1,0 +1,5 @@
+<div class="pt-12 pl-24">
+  <!-- <pre> {{ chapterForm.value | json }} </pre> -->
+  <wrt-writing-head [chapterForm]="chapterForm" [book]="book" (chapterActionEvent)="chapterActionEvent.emit($event)"></wrt-writing-head>
+  <wrt-writing-content [chapterForm]="chapterForm"></wrt-writing-content>
+</div>

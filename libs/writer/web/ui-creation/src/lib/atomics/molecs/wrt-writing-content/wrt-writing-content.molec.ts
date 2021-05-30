@@ -22,8 +22,8 @@ export class WrtWritingContentMolec implements OnInit {
     title: ['', Validators.required],
     content: ['', Validators.required],
   });
-  @Input() submitted: boolean;
-  constructor(private fb: FormBuilder) {}
 
-  ngOnInit(): void {}
+  constructor(private fb: FormBuilder) { }
+
+  ngOnInit(): void { }
 }

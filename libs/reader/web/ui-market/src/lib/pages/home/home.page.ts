@@ -1,3 +1,4 @@
+import { ChangeDetectorRef } from '@angular/core';
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import { takeWhile, switchMap, retry, tap, takeUntil, debounceTime } from 'rxjs/operators';
 import { of, Subject, Observable } from 'rxjs';
@@ -27,13 +28,15 @@ export class HomePage implements OnInit, OnDestroy {
   isLoading$ = this.booksFacade.selectLoadingAkita();
   filteredBooks$;
   categoryBooks$;
+  categoryId = '';
   loading$ = false;
 
   constructor(
     private booksFacade: BooksFacade,
     private sliderFacede: SliderFacade,
     private genresFacade: GenresFacade,
-    private categoriesFacade: CategoriesFacade
+    private categoriesFacade: CategoriesFacade,
+    private cd: ChangeDetectorRef,
   ) { }
 
   ngOnInit(): void {
@@ -50,11 +53,14 @@ export class HomePage implements OnInit, OnDestroy {
   }
 
   filterItemsByCategory(category: Category) {
-    this.categoryBooks$ = this.booksFacade.getLatestBooks(category.categoryId).pipe(debounceTime(200));
+    this.categoryId = category.categoryId;
+    this.categoryBooks$ = this.booksFacade.getLatestBooks(category.categoryId, 0).pipe(debounceTime(200));
+    this.cd.detectChanges();
   }
 
   getAllLatestBooks() {
-    this.categoryBooks$ = this.booksFacade.getLatestBooks('').pipe(debounceTime(200));
+    this.categoryBooks$ = this.booksFacade.getLatestBooks('', 0).pipe(debounceTime(200));
+    this.cd.detectChanges();
   }
 
   private loadFirstByGenre() {
@@ -67,6 +73,10 @@ export class HomePage implements OnInit, OnDestroy {
         return this.booksFacade.getGenreBooks(items[0].genreId);
       })
     );
+  }
+
+  displayActivePage(activePageNumber:number){
+    this.categoryBooks$ = this.booksFacade.getLatestBooks(this.categoryId, activePageNumber).pipe(debounceTime(200));   
   }
 
   ngOnDestroy(): void {

@@ -834,34 +834,6 @@
         }
       }
     },
-    "writer-web-feature-auth": {
-      "projectType": "library",
-      "root": "libs/writer/web/feature-auth",
-      "sourceRoot": "libs/writer/web/feature-auth/src",
-      "prefix": "awread",
-      "architect": {
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/writer/web/feature-auth/src/**/*.ts"
-            ]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/writer/web/feature-auth/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      },
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        }
-      }
-    },
     "writer-web-ui-single": {
       "projectType": "library",
       "root": "libs/writer/web/ui-single",
@@ -2433,6 +2405,33 @@
           ],
           "options": {
             "jestConfig": "libs/feature/upload-image/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "core-setting": {
+      "projectType": "library",
+      "root": "libs/core/setting",
+      "sourceRoot": "libs/core/setting/src",
+      "prefix": "awread",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/core/setting/src/**/*.ts",
+              "libs/core/setting/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/core/setting"
+          ],
+          "options": {
+            "jestConfig": "libs/core/setting/jest.config.js",
             "passWithNoTests": true
           }
         }

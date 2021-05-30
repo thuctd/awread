@@ -1,3 +1,4 @@
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter, Input } from '@angular/core';
 
 @Component({
@@ -13,10 +14,15 @@ import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter, Input
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WrtInfoBookAtom implements OnInit {
-  @Output() submitEvent = new EventEmitter();
-  @Input() titleChapter = 'Ngày em hạnh phúc!';
+  @Input() f;
+  @Input() chapter = {
+    title: '',
+    content: '',
+    position: '0',
+    published: true
+  }
 
-  constructor() {}
+  constructor(private fb: FormBuilder) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }
