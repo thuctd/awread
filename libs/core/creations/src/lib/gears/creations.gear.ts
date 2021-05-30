@@ -27,7 +27,7 @@ export class CreationsGear {
     return this.creationsApi.getOne(bookId).pipe(
       map(book => ({
         book,
-        genreIds: book?.['booksGenresByBookId']?.['nodes'],
+        genreIds: book?.['booksGenresByBookId']?.['nodes'] ? book?.['booksGenresByBookId']?.['nodes'].map(result => (result.genreId)) : [],
         authors: book?.['authorsByBookId']?.['nodes'] ? book?.['authorsByBookId']?.['nodes'].map(result => ({ userId: result.userId, name: result.userByUserId.name })) : []
       }))
     );

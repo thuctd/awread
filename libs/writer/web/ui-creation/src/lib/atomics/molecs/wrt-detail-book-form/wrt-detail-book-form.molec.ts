@@ -61,7 +61,7 @@ export class WrtDetailBookFormMolec implements OnInit {
   @Output() genresEvent = new EventEmitter();
 
   @Output() saveChapterEvent = new EventEmitter();
-  audiences = [
+  ages = [
     { name: '6-12', id: "1" },
     { name: '13-18', id: "2" },
     { name: '18+', id: "3" },

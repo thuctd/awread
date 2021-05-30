@@ -10,7 +10,7 @@ export class GenresApi {
     return this.apollo.query({
       query: gql`
         query allGenres {
-          allGenres(first: 7) {
+          allGenres {
             nodes {
               genreId
               name
@@ -20,8 +20,8 @@ export class GenresApi {
         }
       `,
     }).pipe(
-        map(res => res?.['data']?.['allGenres']?.['nodes'])
-      );;
+      map(res => res?.['data']?.['allGenres']?.['nodes'])
+    );;
   }
 
   getGenreById(genreId: string) {
@@ -41,8 +41,8 @@ export class GenresApi {
         genreId
       }
     }).pipe(
-        map(res => res?.['data']?.['allGenres']?.['nodes'])
-      );;;
+      map(res => res?.['data']?.['allGenres']?.['nodes'])
+    );;;
   }
 
 }
