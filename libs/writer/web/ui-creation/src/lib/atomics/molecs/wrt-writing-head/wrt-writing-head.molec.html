@@ -8,7 +8,7 @@
 
 
       <wrt-social-menu [book]="book"></wrt-social-menu>
-      <wrt-info-book [chapter]="chapterForm.value"></wrt-info-book>
+      <wrt-info-book [f]="chapterForm" [chapter]="chapterForm.valueChanges | async "></wrt-info-book>
     </div>
     <!-- img  -->
     <div class="absolute -top-6 -left-28">

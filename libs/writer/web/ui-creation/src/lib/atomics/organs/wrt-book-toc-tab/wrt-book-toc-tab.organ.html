@@ -8,7 +8,7 @@
         </div>
 
         <ng-container *ngIf="chapters.length;else noData">
-          <molec-wrt-detail-chapter-item [chapters]="chapters" [chapterCouter]="chapterCouter" (chapterActionEvent)="chapterAction($event, chapter)">
+          <molec-wrt-detail-chapter-item [chapters]="chapters" [chapterCouter]="chapterCouter" (chapterActionEvent)="chapterActionEvent.emit($event)">
           </molec-wrt-detail-chapter-item>
         </ng-container>
 

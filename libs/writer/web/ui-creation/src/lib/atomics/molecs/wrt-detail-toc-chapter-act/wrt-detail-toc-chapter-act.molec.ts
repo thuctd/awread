@@ -16,7 +16,11 @@ export class WrtDetailTocChapterActMolec implements OnInit {
   @Input() chapter;
   @Output() chapterActionEvent = new EventEmitter();
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
+
+  emit(event) {
+    this.chapterActionEvent.emit({ type: event, chapter: this.chapter })
+  }
 }

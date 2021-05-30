@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { tap, map } from 'rxjs/operators';
 import { ChaptersApi } from '../apis/chapters.api';
-import { ChaptersStore } from '../states/chapters';
+import { ChaptersQuery, ChaptersStore } from '../states/chapters';
 import { SnackbarService } from '@awread/global/packages';
+import { Order } from '@datorama/akita';
 @Injectable({ providedIn: 'root' })
 export class ChaptersGear {
 
@@ -10,7 +11,17 @@ export class ChaptersGear {
     private chaptersApi: ChaptersApi,
     private chaptersStore: ChaptersStore,
     private SnackbarService: SnackbarService,
+    private chaptersQuery: ChaptersQuery,
   ) {
+  }
+
+  getLatestPosition() {
+    const [latestChapter] = this.chaptersQuery.getAll({ sortBy: 'position', sortByOrder: Order.DESC, limitTo: 1 });
+    if (latestChapter) {
+      return +latestChapter.position + 1;
+    } else {
+      return 0;
+    }
   }
 
   getChapter(chapterId: string, bookId: string) {
@@ -67,6 +78,31 @@ export class ChaptersGear {
           result.errors.forEach(error => this.SnackbarService.showError(error.message));
         } else {
           this.SnackbarService.showSuccess('Lưu chương thành công');
+        }
+      })
+    )
+  }
+
+  create(chapter) {
+    return this.chaptersApi.create(chapter).pipe(
+      tap(result => {
+        if (result.errors) {
+          result.errors.forEach(error => this.SnackbarService.showError(error.message));
+        } else {
+          this.SnackbarService.showSuccess('Tạo chương mới thành công');
+        }
+      })
+    )
+  }
+
+  delete(chapterId) {
+    return this.chaptersApi.delete(chapterId).pipe(
+      tap(result => {
+        if (result.errors) {
+          result.errors.forEach(error => this.SnackbarService.showError(error.message));
+        } else {
+          this.SnackbarService.showSuccess('Đã xóa chương');
+          this.chaptersStore.remove(chapterId);
         }
       })
     )

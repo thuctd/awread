@@ -11,7 +11,7 @@ export class ChaptersApi {
       .query({
         query: gql`
           query BookChapters($bookId: UUID!) {
-            allChapters(condition: { bookId: $bookId }, orderBy: POSITION_ASC) {
+            allChapters(condition: { bookId: $bookId, isDeleted: false }, orderBy: POSITION_ASC) {
               nodes {
                 bookId
                 chapterId
@@ -107,7 +107,7 @@ export class ChaptersApi {
       .query({
         query: gql`
           query getPageChapter($bookId: UUID, $offset: Int) {
-            allChapters(condition: { bookId: $bookId }, first: 1, offset: $offset, orderBy: POSITION_ASC) {
+            allChapters(condition: { bookId: $bookId, isDeleted: false }, first: 1, offset: $offset, orderBy: POSITION_ASC) {
               nodes {
                 chapterId
                 bookId
@@ -145,6 +145,40 @@ export class ChaptersApi {
 
       `,
       variables: chapter
+    })
+  }
+
+  create(chapter) {
+    return this.apollo.mutate({
+      mutation: gql`
+      mutation newChapter($bookId: UUID!, $title: String, $content: String, $published: Boolean, $position: BigFloat) {
+        newChapter(
+          input: { bookId: $bookId, title: $title, content: $content, published: $published, position: $position }
+        )  {
+          uuid
+        }
+      }
+
+      `,
+      variables: chapter
+    })
+  }
+
+  delete(chapterId) {
+    return this.apollo.mutate({
+      mutation: gql`
+      mutation delete($chapterId: UUID!) {
+          updateChapterByChapterId(
+          input: {chapterPatch: { isDeleted: true }, chapterId: $chapterId}
+        ) {
+          chapter {
+            chapterId
+            isDeleted
+          }
+        }
+      }
+      `,
+      variables: { chapterId }
     })
   }
 }

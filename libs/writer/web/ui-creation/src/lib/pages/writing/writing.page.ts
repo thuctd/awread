@@ -1,48 +1,68 @@
-import { tap, switchMap } from 'rxjs/operators';
+import { tap, switchMap, debounceTime } from 'rxjs/operators';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ChangeDetectorRef, Directive, Injectable, OnInit } from '@angular/core';
 import { ChaptersFacade } from '@awread/core/chapters';
 import { MatDialog } from '@angular/material/dialog';
 import { WrtWritingPopupReadTemplate } from '../../atomics/templates';
+import { CreationsFacade } from '@awread/core/creations';
+import { Location } from '@angular/common';
 @Injectable({
   providedIn: 'root',
 })
 @Directive()
 export class WritingPage implements OnInit {
+  bookId;
+  chapterId;
   book;
   chapterForm: FormGroup;
   constructor(
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
     private chaptersFacade: ChaptersFacade,
-    private cd: ChangeDetectorRef,
+    private creationsFacade: CreationsFacade,
     private matDialog: MatDialog,
-    private router: Router
+    private router: Router,
+    private cd: ChangeDetectorRef,
+    private location: Location
   ) { }
 
   ngOnInit(): void {
     this.getChapter();
     this.initForm();
+
   }
 
   getChapter() {
     this.activatedRoute.paramMap
       .pipe(
-        switchMap((params) => this.chaptersFacade.getChapter(params.get('bookId'), params.get('chapterId'))),
+        switchMap((params) => {
+          console.log('params', this.activatedRoute.snapshot);
+          this.chapterId = params.get('chapterId');
+          this.bookId = params.get('bookId');
+          if (this.chapterId == 'new') {
+            return this.creationsFacade.selectEntity(this.bookId);
+          } else {
+            return this.chaptersFacade.getChapter(this.bookId, this.chapterId);
+          }
+        }),
       )
-      .subscribe((chapter) => {
-        console.log('chapter', chapter);
-        this.updateForm(chapter);
-        this.book = chapter.book;
-        this.cd.detectChanges();
+      .subscribe((result) => {
+        console.log('result', result);
+        if (this.chapterId == 'new') {
+          this.book = result;
+          this.updateForm({ bookId: this.bookId, chapterId: this.chapterId, position: this.activatedRoute.snapshot.params['position'] });
+        } else {
+          this.book = result.book;
+          this.updateForm(result);
+        }
       });
   }
 
   chapterAction(action) {
     switch (action) {
       case 'back':
-        this.router.navigate(['list', this.chapterForm.value.bookId, 'toc']);
+        this.location.back();
         break;
       case 'preview':
         this.openPreview();
@@ -81,15 +101,20 @@ export class WritingPage implements OnInit {
 
   private publish() {
     this.chapterForm.patchValue({ published: true });
-    this.chaptersFacade.update(this.chapterForm.value).subscribe(value => {
-      console.log('value', value);
-    })
+    this.save();
   }
 
   save() {
-    this.chaptersFacade.update(this.chapterForm.value).subscribe(value => {
-      console.log('value', value);
-    })
+    if (this.chapterId == 'new') {
+      this.chaptersFacade.create(this.chapterForm.value).subscribe(value => {
+        console.log('value', value);
+        this.location.back();
+      })
+    } else {
+      this.chaptersFacade.update(this.chapterForm.value).subscribe(value => {
+        console.log('value', value);
+      })
+    }
   }
 
   private initForm() {
@@ -108,11 +133,13 @@ export class WritingPage implements OnInit {
       title: chapter.title ?? '',
       content: chapter.content ?? '',
       published: chapter.published ?? false,
-      position: chapter.position,
+      position: chapter.position ?? 0,
       chapterId: chapter.chapterId,
       bookId: chapter.bookId
     });
-    this.chapterForm.updateValueAndValidity();
+    // this.cd.detectChanges();
   }
+
+
 
 }

@@ -14,6 +14,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter, Input
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WrtInfoBookAtom implements OnInit {
+  @Input() f;
   @Input() chapter = {
     title: '',
     content: '',

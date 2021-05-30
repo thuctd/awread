@@ -1,5 +1,5 @@
 <section class="pl-32 bg-gray-50 h-screen">
-  <template-wrt-book-toc-tab [tabsHead]="tabsHead" [book]="book" [chapters]="chapters$ | async" (chapterActionEvent)="chapterActionEvent($event)"
+  <template-wrt-book-toc-tab [tabsHead]="tabsHead" [book]="book$ | async" [chapters]="chapters$ | async" (chapterActionEvent)="chapterActionEvent($event)"
     (eventChooseImageCover)="eventChooseImageCover()">
   </template-wrt-book-toc-tab>
 </section>

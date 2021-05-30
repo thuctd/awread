@@ -11,26 +11,24 @@ export class ChaptersFacade {
     private chaptersQuery: ChaptersQuery,
   ) { }
 
+  getLatestPosition() {
+    return this.chaptersGear.getLatestPosition();
+  }
+
   getChapter(chapterId: string, bookId: string) {
     return this.chaptersGear.getChapter(chapterId, bookId);
+  }
+
+  create(chapter) {
+    return this.chaptersGear.create(chapter);
   }
 
   update(chapter) {
     return this.chaptersGear.update(chapter);
   }
 
-  getChapterCountAkita() {
-    return this.chaptersQuery.getCount();
-  }
-
-  getAllAkita() {
-    return this.chaptersQuery.getAll();
-  }
-
-  deleteChapterInAkita(bookId: string) { }
-
-  selectAllChapterAkita() {
-    return this.chaptersQuery.selectAll();
+  delete(chapterId) {
+    return this.chaptersGear.delete(chapterId);
   }
 
   getAllChapters(bookId: string) {

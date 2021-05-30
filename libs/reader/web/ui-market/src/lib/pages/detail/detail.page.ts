@@ -73,10 +73,7 @@ export class DetailPage implements OnInit, OnDestroy {
         takeUntil(this.destroy$),
         switchMap((params) => {
           const bookId = params.get('bookId');
-          const chapters = this.chaptersFacade.getAllAkita();
-          if (this.bookId === bookId && bookId && chapters.length) {
-            return this.chaptersFacade.selectAllChapterAkita();
-          }
+
           if (bookId) {
             return this.chaptersFacade.getAllChapters(bookId);
           }

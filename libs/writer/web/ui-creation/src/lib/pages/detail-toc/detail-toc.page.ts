@@ -1,21 +1,18 @@
 import { map, startWith, switchMap, takeUntil } from 'rxjs/operators';
-import { tap } from 'rxjs/operators';
 import { CurrentUserFacade } from '@awread/core/users';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Directive, Injectable, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { combineLatest, of, Subject } from 'rxjs';
 import { CreationsFacade } from '@awread/core/creations';
 import { ChaptersFacade } from '@awread/core/chapters';
-import { CategoriesFacade } from '@awread/core/categories';
-import { GenresFacade } from '@awread/core/genres';
 @Injectable({
   providedIn: 'root',
 })
 @Directive()
 export class DetailTocPage implements OnInit {
   chapters$ = this.chaptersFacade.chapters$;
-  book;
+  book$;
+  bookId;
   tabsHead = [
     { name: 'THÔNG TIN TRUYỆN', href: ['../detail'], isActive: false },
     { name: 'MỤC LỤC', href: null, isActive: true },
@@ -23,12 +20,8 @@ export class DetailTocPage implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private creationsFacade: CreationsFacade,
-    private currentUserFacade: CurrentUserFacade,
     private chaptersFacade: ChaptersFacade,
-    private categoriesFacade: CategoriesFacade,
-    private genresFacade: GenresFacade,
     private router: Router,
-    private cd: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
@@ -40,7 +33,7 @@ export class DetailTocPage implements OnInit {
   }
 
 
-  chapterActionEvent(data: { type: string; chapterid: string; }) {
+  chapterActionEvent(data: { type: string; chapter: string; }) {
     switch (data.type) {
       case 'new':
         this.createChapter();
@@ -49,7 +42,7 @@ export class DetailTocPage implements OnInit {
         this.editChapter(data);
         return;
       case 'delete':
-        this.removeChapter(data);
+        this.delete(data.chapter);
         return;
       default:
 
@@ -58,16 +51,18 @@ export class DetailTocPage implements OnInit {
   }
 
   private createChapter() {
-    // this.router.navigate(['list', chapter.bookId, 'toc', chapter.chapterId]);
+    const position = this.chaptersFacade.getLatestPosition();
+    this.router.navigate(['list', this.bookId, 'toc', 'new', 'writing', { position }]);
   }
 
   private getAllChapters() {
     return this.activatedRoute.paramMap
       .pipe(
         switchMap((params) => {
-          const bookId = params.get('bookId');
-          if (bookId) {
-            return this.chaptersFacade.getAllChapters(bookId);
+          this.bookId = params.get('bookId');
+          if (this.bookId) {
+            this.book$ = this.creationsFacade.selectEntity(this.bookId);
+            return this.chaptersFacade.getAllChapters(this.bookId);
           }
           return of([]);
         })
@@ -81,13 +76,7 @@ export class DetailTocPage implements OnInit {
     this.router.navigate(['list', chapter.bookId, 'toc', chapter.chapterId]);
   }
 
-  private removeChapter(chapter) {
-    // const status = this.bookForm.get('status').value;
-    // this.chaptersFacade
-    //   .removeChapter(chapter.chapterid, bookId, status)
-    //   .pipe(tap((res) => { }))
-    //   .subscribe((res) => {
-    //     console.log('remove chapter res: ', res);
-    //   });
+  private delete(chapter) {
+    this.chaptersFacade.delete(chapter.chapterId).subscribe(v => console.log('delete ', v))
   }
 }
