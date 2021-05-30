@@ -20,7 +20,7 @@ export class WrtBookDetailTabTemplate implements OnInit {
   @Input() submitted: boolean;
   @Input() categories: Category[];
   @Input() genres: Genre[];
-  @Input() bookId: string;
+  @Input() book;
   @Input() chapters;
 
   @Input() tabsHead = [

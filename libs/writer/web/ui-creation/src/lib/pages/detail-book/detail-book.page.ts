@@ -18,7 +18,7 @@ export class DetailBookPage implements OnInit, OnDestroy {
   bookId: string;
   chapterEntity$: any;
   chapters$ = this.chaptersFacade.chapters$;
-
+  book;
   selectedTab = 'toc';
   selectedBookStatus = 'DRAFT';
   genresListSelected = [];
@@ -38,7 +38,7 @@ export class DetailBookPage implements OnInit, OnDestroy {
     private genresFacade: GenresFacade,
     private router: Router,
     private cd: ChangeDetectorRef
-  ) {}
+  ) { }
 
   get f() {
     return this.bookForm.controls;

@@ -14,9 +14,9 @@ import { FormBuilder } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WrtDetailUploadImgMolec implements OnInit {
-  @Input() bookForm = this.fb.group({
-    img: [''],
-  });
+  @Input() book = {
+    cover: 'https://picsum.photos/200/300'
+  }
 
   @Input() btn = {
     name: 'Chỉnh sửa ảnh bìa',
@@ -25,7 +25,7 @@ export class WrtDetailUploadImgMolec implements OnInit {
 
   @Output() eventChooseImageCover = new EventEmitter();
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

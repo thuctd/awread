@@ -17,10 +17,7 @@ import { PopupChangeCoverOrgan } from '@awread/global/design-system';
 })
 export class WrtBookTocTabTemplate implements OnInit {
   @Input() chapters;
-  @Input() bookId;
-  @Input() bookForm: FormGroup = this.fb.group({
-    img: ['/global-assets/images/image.webp'],
-  });
+  @Input() book;
 
   @Input() chapterCouter = {
     chapterCountView: 0,
