@@ -1,7 +1,7 @@
 import { Genre } from "@awread/core/genres";
 export interface GenreBook {
   bookId: string;
-  cover: string;
+  cover: boolean;
   genreIds: Genre[];
   title: string;
   userId: string;

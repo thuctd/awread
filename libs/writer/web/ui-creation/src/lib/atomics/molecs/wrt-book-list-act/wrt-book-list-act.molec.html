@@ -1,8 +1,7 @@
 <div class="mb-2 text-right">
-  <list-social-menu
-    (bookActionEvent)="bookActionEvent($event)"
-  ></list-social-menu>
+  <list-social-menu [actions]="actions" (bookActionEvent)="bookEvent.emit({ type: $event, bookId: bookId })"></list-social-menu>
 </div>
 <div class="flex justify-items-end justify-end">
-  <list-social-btn (socialBtn)="updateBookStatus(btn.type)" *ngFor="let btn of btns" [faIcon]="btn.faIcon" [titleButton]="btn.titleButton"></list-social-btn>
+  <list-social-btn (socialBtn)="bookEvent.emit({ type: btn.type, bookId: bookId })" *ngFor="let btn of btns" [faIcon]="btn.faIcon"
+    [titleButton]="btn.titleButton"></list-social-btn>
 </div>

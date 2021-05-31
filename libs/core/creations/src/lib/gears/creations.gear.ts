@@ -4,6 +4,7 @@ import { CreationsApi } from '../apis';
 import { CreationsQuery, CreationsStore } from '../states/creations';
 import { CurrentUserFacade } from '@awread/core/users';
 import { SnackbarService } from '@awread/global/packages';
+import { of } from 'rxjs';
 
 
 @Injectable({ providedIn: 'root' })
@@ -16,6 +17,10 @@ export class CreationsGear {
     private creationsQuery: CreationsQuery,
     private SnackbarService: SnackbarService,
   ) {
+  }
+
+  generateUuid() {
+    return this.creationsApi.generateUuid();
   }
 
   get() {
@@ -45,6 +50,7 @@ export class CreationsGear {
     return this.creationsApi.create({
       ...book,
       userId: this.currentUserFacade.getUserId(),
+      authorIds: [this.currentUserFacade.getUserId()]
     })
       .pipe(
         tap(result => {
@@ -67,6 +73,19 @@ export class CreationsGear {
             result.errors.forEach(error => this.SnackbarService.showError(error.message));
           } else {
             this.SnackbarService.showSuccess('Lưu truyện thành công');
+          }
+        })
+      )
+  }
+
+  delete(bookId) {
+    return this.creationsApi.delete(bookId)
+      .pipe(
+        tap(result => {
+          if (result.errors) {
+            result.errors.forEach(error => this.SnackbarService.showError(error.message));
+          } else {
+            this.SnackbarService.showSuccess('Đã xóa truyện');
           }
         })
       )

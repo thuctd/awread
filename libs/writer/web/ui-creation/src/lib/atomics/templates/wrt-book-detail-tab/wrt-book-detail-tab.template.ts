@@ -3,6 +3,8 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
 import { MatDialog } from '@angular/material/dialog';
 import { PopupChangeCoverOrgan } from '@awread/global/design-system';
 
+import { faChartLine, faShareAlt, faAngleDown, faPlusCircle, faPlusSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
+
 @Component({
   selector: 'template-wrt-book-detail-tab',
   templateUrl: './wrt-book-detail-tab.template.html',
@@ -35,6 +37,39 @@ export class WrtBookDetailTabTemplate implements OnInit {
     categoryid: [null, Validators.required],
     srcImg: ['/global-assets/images/image.webp'],
   });
+
+  @Input() btns = [
+    {
+      titleButton: 'Thống kê',
+      faIcon: faChartLine,
+      type: 'static',
+    },
+    {
+      titleButton: 'Chia sẻ',
+      faIcon: faShareAlt,
+      type: 'share',
+    },
+  ];
+
+  @Input() actions = [
+
+    {
+      name: 'Thêm chương',
+      type: 'create-chapter',
+      icon: faPlusCircle,
+    },
+    {
+      name: 'Chỉnh sửa',
+      type: 'edit',
+      icon: faPlusSquare,
+    },
+    {
+      name: 'Xóa',
+      type: 'delete',
+      icon: faTrash,
+    },
+  ];
+
 
   constructor(public matDialog: MatDialog, private fb: FormBuilder) { }
 

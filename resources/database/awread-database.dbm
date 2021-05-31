@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="0,163" last-zoom="0.95" max-obj-count="31"
+<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="0,478" last-zoom="0.95" max-obj-count="31"
 	 default-owner="postgres">
 <role name="public_read"
       inherit="true">
@@ -107,8 +107,8 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="description">
 		<type name="text" length="0"/>
 	</column>
-	<column name="cover">
-		<type name="text" length="0"/>
+	<column name="cover" default-value="false">
+		<type name="boolean" length="0"/>
 	</column>
 	<column name="createdAt">
 		<type name="timestamp with time zone" length="0" with-timezone="true"/>
@@ -879,7 +879,7 @@ end;]]></definition>
 <view name="v_show_privileges" layer="0" collapse-mode="2" max-obj-count="3" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="1680" y="1940"/>
+	<position x="1740" y="1680"/>
 	<reference>
 		<expression><![CDATA[  grantee,
         string_agg(relname, ', ' ORDER BY relname) AS rel_names,
@@ -925,7 +925,7 @@ end;]]></definition>
 <view name="v_show_role" layer="0" collapse-mode="2" max-obj-count="3" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="1900" y="1940"/>
+	<position x="1740" y="1760"/>
 	<reference>
 		<expression><![CDATA[
       r.rolname, 
@@ -1081,7 +1081,7 @@ END;]]></definition>
 		<type name="text" length="0"/>
 	</parameter>
 	<parameter name="cover">
-		<type name="text" length="0"/>
+		<type name="boolean" length="0"/>
 	</parameter>
 	<parameter name="type">
 		<type name="numeric" length="0"/>
@@ -1089,12 +1089,18 @@ END;]]></definition>
 	<parameter name="published">
 		<type name="boolean" length="0"/>
 	</parameter>
+	<parameter name="bookId">
+		<type name="uuid" length="0"/>
+	</parameter>
 	<definition><![CDATA[declare 
-"bookId" uuid;
+--"bookId" uuid;
+result1 uuid;
+result2 uuid;
 
 begin
 
 INSERT INTO books (
+"bookId",
 "userId",
 "categoryId",
 "publisherId",
@@ -1107,6 +1113,7 @@ cover,
 type
 )
 VALUES (
+"bookId",
 "userId",
 "categoryId",
 "publisherId",
@@ -1117,12 +1124,13 @@ age,
 description,
 cover,
 type
-) 
-RETURNING "bookId" INTO "bookId";
+); 
+--RETURNING "bookId" INTO "bookId";
 
-select upsert_books_genres("bookId", array "genreIds" ::uuid[]);
 
-select upsert_authors("bookId", array "authorIds" ::uuid[]);
+select * from upsert_books_genres("bookId", "genreIds" ::numeric[]) into result1;
+
+select * from upsert_authors("bookId", "authorIds" ::uuid[]) into result2;
 
 return "bookId";
 
@@ -1243,6 +1251,9 @@ VALUES(1, '1.0.0', 'https://awread-bucket.ss-hn-1.bizflycloud.vn') ON CONFLICT d
 	<parameter name="published">
 		<type name="boolean" length="0"/>
 	</parameter>
+	<parameter name="cover">
+		<type name="boolean" length="0"/>
+	</parameter>
 	<definition><![CDATA[declare 
 
 "ibookId" uuid := "bookId";
@@ -1280,6 +1291,25 @@ select * from upsert_authors("bookId", "authorIds" ::uuid[]) into result2;
 
 return "ibookId";
 
+end;]]></definition>
+</function>
+
+<function name="generate_uuid"
+		window-func="false"
+		returns-setof="false"
+		behavior-type="CALLED ON NULL INPUT"
+		function-type="VOLATILE"
+		security-type="SECURITY INVOKER"
+		execution-cost="1"
+		row-amount="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<language name="plpgsql"/>
+	<return-type>
+	<type name="uuid" length="0"/>
+	</return-type>
+	<definition><![CDATA[begin 
+return uuid_generate_v4();
 end;]]></definition>
 </function>
 

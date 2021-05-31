@@ -13,6 +13,12 @@ export class CreationsFacade {
   ) {
   }
 
+
+  generateUuid() {
+    return this.creationsGear.generateUuid();
+  }
+
+
   get() {
     return this.creationsGear.get();
   }
@@ -24,8 +30,13 @@ export class CreationsFacade {
   create(book) {
     return this.creationsGear.create(book);
   }
+
   update(book) {
     return this.creationsGear.update(book);
+  }
+
+  delete(bookId) {
+    return this.creationsGear.delete(bookId);
   }
 
 }

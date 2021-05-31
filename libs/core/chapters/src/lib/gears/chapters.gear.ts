@@ -24,6 +24,19 @@ export class ChaptersGear {
     }
   }
 
+  fetchLatestChapterPosition(bookId) {
+    return this.chaptersApi.getLatestPosition(bookId).pipe(
+      map(([latestChapter]) => {
+        console.log('latestChapter', latestChapter);
+        if (latestChapter) {
+          return +latestChapter.position + 1;
+        } else {
+          return 0;
+        }
+      })
+    )
+  }
+
   getChapter(chapterId: string, bookId: string) {
     return this.chaptersApi.getChapter(chapterId, bookId)
       .pipe(

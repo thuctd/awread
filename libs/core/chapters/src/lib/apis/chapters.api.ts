@@ -6,12 +6,35 @@ import { Apollo, gql } from 'apollo-angular';
 export class ChaptersApi {
   constructor(private apollo: Apollo) { }
 
+  getLatestPosition(bookId) {
+    return this.apollo
+      .query({
+        query: gql`
+          query BookChapters($bookId: UUID!) {
+            allChapters(condition: { bookId: $bookId, isDeleted: false }, orderBy: POSITION_DESC, first: 1) {
+              nodes {
+                bookId
+                chapterId
+                title
+                createdAt
+                updatedAt
+                published
+                position
+              }
+            }
+          }
+        `,
+        variables: { bookId },
+      })
+      .pipe(map((res) => res?.['data']?.['allChapters']?.['nodes']));
+  }
+
   getAllChapters(bookId) {
     return this.apollo
       .query({
         query: gql`
           query BookChapters($bookId: UUID!) {
-            allChapters(condition: { bookId: $bookId, isDeleted: false }, orderBy: POSITION_ASC) {
+            allChapters(condition: { bookId: $bookId, isDeleted: false }, orderBy: POSITION_DESC) {
               nodes {
                 bookId
                 chapterId
@@ -144,7 +167,11 @@ export class ChaptersApi {
       }
 
       `,
-      variables: chapter
+      variables: {
+        ...chapter,
+        title: chapter.title ?? 'Untitle',
+        content: chapter.content ?? 'No Content',
+      }
     })
   }
 
@@ -160,7 +187,11 @@ export class ChaptersApi {
       }
 
       `,
-      variables: chapter
+      variables: {
+        ...chapter,
+        title: chapter.title ?? 'Untitle',
+        content: chapter.content ?? 'No Content',
+      }
     })
   }
 

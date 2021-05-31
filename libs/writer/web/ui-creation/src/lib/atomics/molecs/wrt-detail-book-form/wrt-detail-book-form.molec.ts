@@ -66,9 +66,12 @@ export class WrtDetailBookFormMolec implements OnInit {
     { name: '13-18', id: "2" },
     { name: '18+', id: "3" },
   ];
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {
+  }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+
+  }
 
   addItem(e) {
     // console.log('add: ', e);
