@@ -13,12 +13,13 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RdAuthorBookItemMolec implements OnInit {
-  @Input() category = 'Hành động, phiêu lưu';
+  @Input() items = [{
+    id: '',
+    name: ''
+  }];
   @Input() book;
-  @Input() isText = true;
-  @Input() isSize = true;
 
-  @Input() displayUI = {
+  @Input() displayUIMobile = {
     ui: {
       isAuthor: true,
       isRating: true,
@@ -31,7 +32,19 @@ export class RdAuthorBookItemMolec implements OnInit {
     },
   };
 
-  constructor() { }
+  @Input() displayUIDesktop = {
+    ui: {
+      isAuthor: true,
+      isRating: true,
+      isIcon: true,
+      isDate: true,
+    },
+    size: {
+      sizeTitle: 'm',
+      sizeBtn: true,
+    },
+  };
 
-  ngOnInit(): void { }
+  constructor() {}
+  ngOnInit(): void {}
 }

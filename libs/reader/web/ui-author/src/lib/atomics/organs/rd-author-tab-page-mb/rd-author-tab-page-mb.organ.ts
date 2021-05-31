@@ -13,8 +13,9 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RdAuthorTabPageMbOrgan implements OnInit {
-  @Input() numberProduct = '5';
+  @Input() numberProduct = '';
   @Input() followers = '10';
+  @Input() books = [];
   @Output() moreBooks = new EventEmitter();
   tabs = [
     { name: `${this.numberProduct} Tác phẩm`, isActive: true },
@@ -25,5 +26,6 @@ export class RdAuthorTabPageMbOrgan implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
+  
 }

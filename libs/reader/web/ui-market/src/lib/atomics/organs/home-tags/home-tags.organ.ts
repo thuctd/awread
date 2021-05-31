@@ -1,4 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter, ViewChild, ElementRef, ViewChildren } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 
 @Component({
@@ -8,6 +9,10 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeTagsOrgan implements OnInit {
+  @ViewChild('widgetsContent', { static: true }) widgetsContent: ElementRef<any>;
+  @Input() arrowLeftIcon = faChevronLeft;
+  @Input() arrowRightIcon = faChevronRight;
+  @Input() isDisplay: true | false = true;
   currentGenre = null;
   currentIndex = 0;
   prevIcon = `<img src="/global-assets/images/arrow_left.webp" alt="arrow_left">`;
@@ -23,7 +28,7 @@ export class HomeTagsOrgan implements OnInit {
   ];
 
   @Input() items = [];
- 
+
   @Input() customOptions: OwlOptions = {
     autoplay: true,
     autoplayTimeout: 2000,
@@ -61,15 +66,26 @@ export class HomeTagsOrgan implements OnInit {
     },
   };
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void { 
-
-
-  }
+  ngOnInit(): void {}
 
   setActiveGenre(genre, index) {
     this.currentGenre = genre;
     this.currentIndex = index;
+  }
+
+  public scrollRight(): void {
+    this.widgetsContent.nativeElement.scrollTo({
+      left: this.widgetsContent.nativeElement.scrollLeft + 150,
+      behavior: 'smooth',
+    });
+  }
+
+  public scrollLeft(): void {
+    this.widgetsContent.nativeElement.scrollTo({
+      left: this.widgetsContent.nativeElement.scrollLeft - 150,
+      behavior: 'smooth',
+    });
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 
 @Component({
@@ -15,7 +15,8 @@ export class HomeListBookUpdateMobileOrgan implements OnInit {
   @Input() srcImg = '/global-assets/images/image.webp';
   @Input() altImg = 'Placeholder';
   @Input() books = [];
-
+  @Input() categories = [];
+  
   @Input() displayUI = {
     ui: {
       isAuthor: false,
@@ -28,6 +29,9 @@ export class HomeListBookUpdateMobileOrgan implements OnInit {
       sizeBtn: false,
     },
   };
+
+  @Output() emitBooks = new EventEmitter();
+  @Output() emitAllBooks = new EventEmitter();
   constructor() {}
 
   @Input() customOptions: OwlOptions = {

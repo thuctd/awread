@@ -1,3 +1,6 @@
-<header class="fixed z-999 h-16 bg-green-primary top-0 w-full shadow-md">
-  <organ-navbar-mb [isLogin]="isLogin" [isMenu]="isMenu" [isSearch]="isSearch"></organ-navbar-mb>
+<header class="fixed z-999 bg-green-primary top-0 w-full pb-3" closeOnOutSide (clickedOutside)="onClick()">
+  <organ-navbar-mb [isLogin]="isLogin" [isMenu]="isMenu" (clickDisplaySearch)="displayMenu()"></organ-navbar-mb>
+  <div class="flex justify-center">
+    <atom-search-navbar [control]="searchControl" (searchEvent)="eventSearch.emit($event)" *ngIf="isSearch" class="w-4/5 mt-4" class="w-4/5 mt-4"></atom-search-navbar>
+  </div>
 </header>

@@ -2,5 +2,5 @@
   [ngClass]="size === 's' ? 'w-12 h-12' : size === 'm' ? 'w-20 h-20' : size === 'l' ? 'w-20 h-20 sm:w-24 sm:h-24' : 'w-64 h-64'"
   class="focus:outline-none relative overflow-hidden">
     <img *ngIf="src" class="border rounded-full object-cover w-full cursor-pointer absolute" src="{{src}}" />
-    <img class="border rounded-full object-cover w-full cursor-pointer absolute" src="/global-assets/images/avatar-mrmrs.webp" />
+    <img *ngIf="!src" class="border rounded-full object-cover w-full cursor-pointer absolute" src="/global-assets/images/avatar-mrmrs.webp" />
 </div>

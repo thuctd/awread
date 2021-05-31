@@ -15,6 +15,8 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, EventEmitter, Output
 export class RdAuthorMbTemplate implements OnInit {
   @Input() isFollow = true;
   @Input() isBlock = false;
+  @Input() user;
+  @Input() books = [];
   @Output() moreBooks = new EventEmitter();
 
   constructor() {}

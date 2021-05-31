@@ -1,4 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'template-rd-navbar-mb',
@@ -8,7 +9,6 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
       :host {
         display: block;
       }
-
       .z-999 {
         z-index: 999;
       }
@@ -20,7 +20,17 @@ export class RdNavbarMbTemplate implements OnInit {
   @Input() isLogin = false;
   @Input() isMenu = false;
   @Input() isSearch = false;
-  constructor() { }
+  @Input() searchControl = new FormControl('');
+  @Output() eventSearch = new EventEmitter();
+  constructor() {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
+
+  displayMenu() {
+    this.isSearch = !this.isSearch;
+  }
+
+  onClick() {
+    this.isSearch = false;
+  }
 }

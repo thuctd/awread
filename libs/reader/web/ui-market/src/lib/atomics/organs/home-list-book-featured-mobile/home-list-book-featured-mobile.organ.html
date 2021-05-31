@@ -10,7 +10,7 @@
             <div class="mx-2 sm:mx-5 mb-4">
               <atom-img-m [size]="'s'" [bookId]="book.bookId" [srcImg]="book.cover"></atom-img-m>
               <!-- <molec-home-info-book-update [book]="book"></molec-home-info-book-update> -->
-              <molec-info-book [book]="book" [displayUI]="displayUI"></molec-info-book>
+              <molec-info-book [book]="book" [displayUI]="displayUI" [btns]="book.newestChapters"></molec-info-book>
             </div>
           </ng-template>
         </ng-container>

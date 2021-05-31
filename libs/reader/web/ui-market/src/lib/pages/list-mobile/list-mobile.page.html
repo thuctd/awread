@@ -1,1 +1,1 @@
-<p>list-mobile works!</p>
+<template-mb-list [items]="categoryList$ | async" [titlePage]="titlePage" [books]="filteredBooks$ | async" [topBooks]="topBookList$ | async" (emitChangeBooks)="switchTab($event)"></template-mb-list>

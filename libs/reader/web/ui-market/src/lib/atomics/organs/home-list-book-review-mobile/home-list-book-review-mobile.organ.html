@@ -4,13 +4,13 @@
         <div *ngFor="let book of books | slice:0:1; let i = index" class="flex justify-center mb-10">
             <div class="mx-4">
                 <div class="relative flex flex-row">
-                  <atom-img-m [size]="'l'" [bookId]="book.id" [srcImg]="book.imgUrl"></atom-img-m>
+                  <atom-img-m [size]="'l'" [bookId]="book.bookId" [srcImg]="book.cover"></atom-img-m>
                   <div class="absolute top--04">
                     <rd-home-icon-rating></rd-home-icon-rating>
                   </div>
                   <div class="ml-3">
                     <!-- <home-info-book-review [isSize]="false" [size]="'s'"></home-info-book-review> -->
-                    <molec-info-book [displayUI]="displayUI"></molec-info-book>
+                    <molec-info-book [displayUI]="displayUI" [book]="book" [btns]="book.newestChapters"></molec-info-book>
                   </div>
                 </div>
             </div>
@@ -25,7 +25,7 @@
                     </div>
                     <div class="w-full">
                       <!-- <home-info-book-review [book]="book" [isSize]="false" [size]="'s'"></home-info-book-review> -->
-                      <molec-info-book [book]="book" [displayUI]="displayUI"></molec-info-book>
+                      <molec-info-book [book]="book" [displayUI]="displayUI" [btns]="book.newestChapters"></molec-info-book>
                     </div>
                   </div>
                 </div>

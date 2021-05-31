@@ -24,7 +24,6 @@ export class BooksApi {
                 description
                 cover
                 published
-                genres
                 type
                 age
                 updatedAt

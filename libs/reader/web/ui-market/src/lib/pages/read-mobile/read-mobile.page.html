@@ -1,1 +1,1 @@
-<template-read-mobile></template-read-mobile>
+<template-read-mobile [breadcrumbs]="breadcrumbs" [chapters]="bookChapters$ | async" (nextChapterBook)="onChangeNextChapter(chapter)" (backChapterBook)="onChangeBackChapter(chapter)" [books]="topBookList$ | async" [chapter]="chapter"></template-read-mobile>
