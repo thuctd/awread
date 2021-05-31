@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="0,425" last-zoom="0.95" max-obj-count="31"
+<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="0,981" last-zoom="0.95" max-obj-count="31"
 	 default-owner="postgres">
 <role name="public_read"
       inherit="true">
@@ -1181,8 +1181,8 @@ left join book_visits v using ("bookId")]]></expression>
 	<column name="version">
 		<type name="text" length="0"/>
 	</column>
-	<column name="settingId" not-null="true">
-		<type name="numeric" length="0"/>
+	<column name="settingId" not-null="true" default-value="uuid_generate_v4()">
+		<type name="uuid" length="0"/>
 	</column>
 	<constraint name="settings_pk" type="pk-constr" table="public.settings">
 		<columns names="settingId" ref-type="src-columns"/>
@@ -1206,11 +1206,6 @@ left join book_visits v using ("bookId")]]></expression>
 		<position x="5.00637" y="-0.480037"/>
 	</label>
 </relationship>
-
-<genericsql name="insert_setting">
-	<definition><![CDATA[INSERT INTO settings("settingId", version, storage) 
-VALUES(1, '1.0.0', 'https://awread-bucket.ss-hn-1.bizflycloud.vn') ON CONFLICT do nothing;]]></definition>
-</genericsql>
 
 <function name="edit_book"
 		window-func="false"
