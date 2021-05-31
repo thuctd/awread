@@ -11,25 +11,28 @@ export class ChaptersFacade {
     private chaptersQuery: ChaptersQuery,
   ) { }
 
-  getChapterEntityAkita(id: string) {
-    return this.chaptersQuery.getEntity(id);
+  getLatestPosition() {
+    return this.chaptersGear.getLatestPosition();
   }
 
-  getChapterCountAkita() {
-    return this.chaptersQuery.getCount();
+  fetchLatestChapterPosition(bookId) {
+    return this.chaptersGear.fetchLatestChapterPosition(bookId);
   }
 
-  getAllAkita() {
-    return this.chaptersQuery.getAll();
+  getChapter(chapterId: string, bookId: string) {
+    return this.chaptersGear.getChapter(chapterId, bookId);
   }
 
-  deleteChapterInAkita(bookId: string) { }
-
-  selectAllChapterAkita() {
-    return this.chaptersQuery.selectAll();
+  create(chapter) {
+    return this.chaptersGear.create(chapter);
   }
-  selectEntityChapterAkita(id: string) {
-    return this.chaptersQuery.selectEntity(id);
+
+  update(chapter) {
+    return this.chaptersGear.update(chapter);
+  }
+
+  delete(chapterId) {
+    return this.chaptersGear.delete(chapterId);
   }
 
   getAllChapters(bookId: string) {

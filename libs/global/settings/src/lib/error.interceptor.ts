@@ -1,19 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpErrorResponse, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
-import { catchError, first, switchMap, tap } from 'rxjs/operators';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { throwError } from 'rxjs';
-import { SnackbarsService } from '@awread/global/packages';
+import { SnackbarService } from '@awread/global/packages';
+import { tap } from 'rxjs/operators';
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-  constructor(private snackbarsService: SnackbarsService) { }
+  constructor(private snackbarService: SnackbarService) { }
   intercept(request: HttpRequest<any>, next: HttpHandler): any {
     return next.handle(request).pipe(
       tap(
         (event) => {
           if (event instanceof HttpResponse && event.body && event.body.errors) {
             event.body.errors.forEach((error) => {
-              this.snackbarsService.showError(error.name ? `${error.name}: ${error.message}` : error.message);
+              this.snackbarService.showError(error.name ? `${error.name}: ${error.message}` : error.message);
             });
           }
         },
@@ -22,10 +20,10 @@ export class ErrorInterceptor implements HttpInterceptor {
             console.log('errorResponse.error', errorResponse.error);
             if (errorResponse.error.error) {
               const error = errorResponse.error.error;
-              this.snackbarsService.showError(error.name ? `${error.name}: ${error.message}` : error.message);
+              this.snackbarService.showError(error.name ? `${error.name}: ${error.message}` : error.message);
             } else if (errorResponse.error.errors) {
               errorResponse.error.errors.forEach((error) => {
-                this.snackbarsService.showError(error.name ? `${error.name}: ${error.message}` : error.message);
+                this.snackbarService.showError(error.name ? `${error.name}: ${error.message}` : error.message);
               });
             }
           }

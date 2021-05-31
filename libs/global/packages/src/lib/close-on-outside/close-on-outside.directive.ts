@@ -21,6 +21,6 @@ export class CloseOnOutsideDirective {
     this.clickedOutside.emit();
   }
   constructor(private elementRef: ElementRef) {
-    console.log('click outside here');
+    // console.log('click outside here');
   }
 }

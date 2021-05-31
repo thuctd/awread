@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from "apollo-angular";
+import { of } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Creation } from '../models';
 
 @Injectable({ providedIn: 'root' })
 export class CreationsApi {
@@ -10,12 +10,26 @@ export class CreationsApi {
     private apollo: Apollo
   ) { }
 
+  generateUuid() {
+    return this.apollo.mutate({
+      mutation: gql`
+        mutation generateUuid {
+          generateUuid(input: {}) {
+            uuid
+          }
+        }
+      `
+    })
+      .pipe(
+        map(res => res?.['data']?.['generateUuid']?.['uuid'])
+      );
+  }
 
-  get(userId) {
+  getOne(bookId) {
     return this.apollo.query({
       query: gql`
-        query getAllBooks($userId: UUID!) {
-          allVCreations(condition: { isDeleted: false, userId: $userId }, orderBy: CREATED_AT_DESC) {
+        query getAllBooks($bookId: UUID!) {
+          allBooks(condition: { bookId: $bookId }) {
             nodes {
               title
               bookId
@@ -23,12 +37,57 @@ export class CreationsApi {
               completed
               publisherId
               createdAt
+              publishedAt
+              updatedAt
               description
               cover
               published
               type
-              ages
+              age
+              userId
+              booksGenresByBookId {
+                nodes {
+                  genreId
+                }
+              }
+              authorsByBookId {
+                nodes {
+                  userId
+                  userByUserId {
+                    name
+                  }
+                }
+              }
+            }
+          }
+        }
+      `,
+      variables: { bookId },
+    }).pipe(
+      map(result => result?.['data']?.['allBooks']?.['nodes']?.[0])
+    )
+  }
+
+
+  get(userId) {
+    return this.apollo.query({
+      query: gql`
+        query getAllBooks($userId: UUID!) {
+          allVCreations(condition: { userId: $userId, isDeleted: false }, orderBy: UPDATED_AT_DESC) {
+            nodes {
+              title
+              bookId
+              categoryId
+              completed
+              publisherId
+              createdAt
+              publishedAt
               updatedAt
+              description
+              cover
+              published
+              type
+              age
               userId,
               publishedCount,
               draftCount,
@@ -43,103 +102,115 @@ export class CreationsApi {
     )
   }
 
-  getDetail(bookid: string) {
-    return this.apollo.query({
-      query: gql`
-        query getAllBooks($bookid: String) {
-          allBooks(condition: { bookid: $bookid, isdeleted: false }) {
-            nodes {
-              bookid
-              title
-              img
-              description
-              completed
-              status
-              audience
-              publishedat
-              updatedat
-              categoryByCategoryid {
-                categoryid
-                name
-              }
-              chaptersByBookid(orderBy: CREATEDAT_ASC) {
-                totalCount
-                nodes {
-                  chapterid
-                  title
-                  content
-                  status
-                  updatedat
-                  publishedat
-                }
-              }
+  create(book) {
+    return this.apollo.mutate({
+      mutation: gql`
+      mutation newBook (
+        $bookId: UUID!,
+        $userId: UUID!,
+        $title: String,
+        $description: String,
+        $age: BigFloat,
+        $completed: Boolean,
+        $published: Boolean,
+        $cover: Boolean,
+        $publisherId: UUID,
+        $categoryId: BigFloat,
+        $authorIds: [UUID],
+        $genreIds: [BigFloat],
+        $type: BigFloat
+      ) {
+          newBook(
+            input: {
+              bookId: $bookId,
+              userId: $userId,
+              title: $title,
+              age: $age,
+              authorIds: $authorIds,
+              categoryId: $categoryId,
+              completed: $completed,
+              published: $published,
+              cover: $cover,
+              description: $description,
+              genreIds: $genreIds,
+              publisherId: $publisherId,
+              type: $type
             }
-          }
-        }
-      `,
-      variables: { bookid },
-    });
-  }
-
-  add(book) {
-    console.log('edit book: ', book, Creation(book));
-    return this.apollo.mutate({
-      mutation: gql`
-      `,
-      variables: {
-        ...Creation(book)
-      },
-    });
-  }
-
-  edit(book) {
-    console.log('edit book: ', book, Creation(book));
-    return this.apollo.mutate({
-      mutation: gql`
-      `,
-      variables: {
-        ...Creation(book)
-      },
-    });
-  }
-
-  updateStatus(bookId: string, status: string) {
-    return this.apollo.mutate({
-      mutation: gql`
-        mutation removeBook($bookId: String!, $status: BookStatus) {
-          updateBookByBookid(
-            input: { bookPatch: { status: $status }, bookid: $bookId }
-          ) {
-            book {
-              bookid
-            }
+          )  {
+            uuid
           }
         }
       `,
       variables: {
-        bookId,
-        status,
+        ...book,
+        title: book.title ?? 'Untitle',
       },
     });
   }
 
-  remove(bookId: string) {
+  update(book) {
     return this.apollo.mutate({
       mutation: gql`
-        mutation removeBook($bookId: String!) {
-          updateBookByBookid(
-            input: { bookPatch: { isdeleted: true }, bookid: $bookId }
-          ) {
-            book {
-              bookid
-            }
+       mutation editBook (
+        $bookId: UUID!,
+        $userId: UUID!,
+        $title: String,
+        $description: String,
+        $age: BigFloat,
+        $completed: Boolean,
+        $published: Boolean,
+        $cover: Boolean,
+        $publisherId: UUID,
+        $categoryId: BigFloat,
+        $authorIds: [UUID],
+        $genreIds: [BigFloat],
+        $type: BigFloat
+      ) {
+          editBook(
+            input: {
+              bookId: $bookId,
+              userId: $userId,
+              title: $title,
+              age: $age,
+              authorIds: $authorIds,
+              categoryId: $categoryId,
+              completed: $completed,
+              published: $published,
+              cover: $cover,
+              description: $description,
+              genreIds: $genreIds,
+              publisherId: $publisherId,
+              type: $type
+            } 
+          )  {
+            uuid
           }
         }
       `,
       variables: {
-        bookId,
+        ...book,
+        title: book.title ?? 'Untitle',
       },
     });
   }
+
+
+  delete(bookId) {
+    return this.apollo.mutate({
+      mutation: gql`
+       mutation deleteBook (
+        $bookId: UUID!
+      ) {
+        updateBookByBookId(input: {bookPatch: {isDeleted: true}, bookId: $bookId}) {
+          book {
+            bookId
+          }
+        }
+        }
+      `,
+      variables: { bookId },
+    });
+  }
+
 
 }

@@ -13,27 +13,30 @@ export class CreationsFacade {
   ) {
   }
 
+
+  generateUuid() {
+    return this.creationsGear.generateUuid();
+  }
+
+
   get() {
     return this.creationsGear.get();
   }
 
-  getDetail(bookId: string) {
-    return this.creationsGear.getDetail(bookId);
+  selectEntity(bookId) {
+    return this.creationsGear.selectEntity(bookId);
   }
 
-  add(book) {
-    return this.creationsGear.add(book).pipe();
-  }
-  edit(book, idsGenresRemove: string[]) {
-    return this.creationsGear.edit(book, idsGenresRemove).pipe();
+  create(book) {
+    return this.creationsGear.create(book);
   }
 
-  updateStatus(bookId: string, status: string) {
-    return this.creationsGear.updateStatus(bookId, status);
+  update(book) {
+    return this.creationsGear.update(book);
   }
 
-  remove(bookId: string) {
-    return this.creationsGear.remove(bookId).pipe();
+  delete(bookId) {
+    return this.creationsGear.delete(bookId);
   }
 
 }

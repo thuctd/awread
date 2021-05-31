@@ -1,5 +1,5 @@
 <div autocomplete="off">
-  <img [src]="bookForm.get('img').value" alt="" class="w-full rounded-lg shadow mb-4 ng-star-inserted" />
+  <img [src]="book?.cover" alt="" class="w-full rounded-lg shadow mb-4 ng-star-inserted" />
   <normal-login-btn [active]="btn.isActive" [name]="btn.name" (btnClicked)="eventChooseImageCover.emit()"></normal-login-btn>
 </div>
 <wrt-detail-link-btns></wrt-detail-link-btns>

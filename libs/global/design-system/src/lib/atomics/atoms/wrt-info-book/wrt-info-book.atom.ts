@@ -14,10 +14,15 @@ import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter, Input
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WrtInfoBookAtom implements OnInit {
-  @Input() selectedChapterStatus = 'DRAFT';
-  @Input() chapterForm: FormGroup = this.fb.group({});
+  @Input() f;
+  @Input() chapter = {
+    title: '',
+    content: '',
+    position: '0',
+    published: true
+  }
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

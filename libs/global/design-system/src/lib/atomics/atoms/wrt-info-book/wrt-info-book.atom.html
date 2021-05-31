@@ -1,10 +1,12 @@
+<!-- <pre> {{ f.value | json }} </pre>
+<pre> {{ chapter | json }} </pre> -->
+
 <div class="text-sm block font-medium mt-0">
-  Chương {{chapterForm.get('chapterNumber').value}}
+  Chương {{ chapter?.position }}
 </div>
 <div class="text-xs f6-ns font-normal text-gray-500 measure lh-copy my-0">
-  <span class="capitalize">{{selectedChapterStatus === 'DRAFT' ? 'Lưu nháp' : 'Xuất bản'}}</span>
+  <span>{{chapter?.published ? 'Đã xuất bản' : 'Đang nháp' }}</span>
   <span>
-    ({{ chapterForm?.value?.content ? chapterForm?.value?.content?.split(' ')?.length : 0 }} words)
+    ({{ chapter?.content && chapter?.content.length ? chapter?.content?.split(' ')?.length : 0 }} từ)
   </span>
-  <!-- <a class="link text-green-500 cursor-pointer" (click)="saveChapterEvent.emit()">Lưu</a> -->
 </div>

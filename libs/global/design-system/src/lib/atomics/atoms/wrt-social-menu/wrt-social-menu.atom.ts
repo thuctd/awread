@@ -1,4 +1,3 @@
-import { FormGroup, FormBuilder } from '@angular/forms';
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 
 @Component({
@@ -14,11 +13,11 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WrtSocialMenuAtom implements OnInit {
-  @Input() chapterForm: FormGroup = this.fb.group({
-    bookTitle: ['test', ''],
-  });
+  @Input() book = {
+    title: ''
+  };
 
-  constructor(private fb: FormBuilder) {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

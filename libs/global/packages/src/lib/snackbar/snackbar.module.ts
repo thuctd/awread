@@ -15,4 +15,4 @@ import { HotToastModule } from '@ngneat/hot-toast';
   exports: [
   ]
 })
-export class SnackbarsModule { }
+export class SnackbarModule { }

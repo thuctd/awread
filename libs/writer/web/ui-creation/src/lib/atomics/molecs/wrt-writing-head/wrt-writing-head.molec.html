@@ -1,50 +1,31 @@
 <div class="w-full justify-between items-center flex bg-white rounded-lg pt-1 pb-2 px-2 relative">
   <div class="flex w-1/3 pl-1">
     <div class="text-gray-500 pl-8" [formGroup]="chapterForm">
-      <wrt-social-menu [chapterForm]="chapterForm"></wrt-social-menu>
-      <wrt-info-book [chapterForm]="chapterForm" [selectedChapterStatus]="selectedChapterStatus"></wrt-info-book>
+
+
+      <!-- <pre> {{ book | json }} </pre>
+      <pre> {{ chapterForm.value | json }} </pre> -->
+
+
+      <wrt-social-menu [book]="book"></wrt-social-menu>
+      <wrt-info-book [f]="chapterForm" [chapter]="chapterForm.valueChanges | async "></wrt-info-book>
     </div>
     <!-- img  -->
     <div class="absolute -top-6 -left-28">
-      <img [src]="chapterForm.get('bookImg').value" class="rounded-full border-green-500 border-8 w-36 h-36 inline-block" alt="avatar"/>
+      <img [src]="book?.cover || 'https://picsum.photos/200/300'" class="rounded-full border-green-500 border-8 w-36 h-36 inline-block" alt="avatar" />
     </div>
     <!-- <wrt-book-img [chapterForm]="chapterForm"></wrt-book-img> -->
   </div>
   <div class="w-2/3">
     <div class="flex justify-end">
-      <ng-container *ngIf="shouldShowStatusUI;else showAction">
-        <cr-submit-btn *ngFor="let btn of btns"
-          (btnClicked)="selectedChapterStatus = btn.type;changeChapterStatus(btn.type)"
-          [active]="selectedChapterStatus === btn.type"
-          [submitText]="btn.submitText"
-          class="ml-2"
-        ></cr-submit-btn>
-      </ng-container>
-      <ng-template #showAction>
-        <div *ngIf="type === 'edit'; else create">
-          <button mat-flat-button (click)="saveChapterEvent.emit()"
-            [ngClass]="{'bg-green-400': chapterForm.dirty && chapterForm.valid , 'bg-gray-400': !chapterForm.dirty || chapterForm.invalid}"
-            class="text-sm md:text-xs lg:text-base xl:text-base text-white cursor-pointer rounded-md border-green-400 focus:shadow-outline focus:outline-none py-2 px-4"
-            type="button">Lưu
-          </button>
-        </div>
-        <ng-template #create>
-          <button mat-flat-button (click)="createNewChapterEvent.emit()"
-            [ngClass]="{'bg-green-400': chapterForm.dirty && chapterForm.valid , 'bg-gray-400': !chapterForm.dirty || chapterForm.invalid}"
-            class="text-sm md:text-xs lg:text-base xl:text-base text-white cursor-pointer rounded-md border-green-400 focus:shadow-outline focus:outline-none py-2 px-4"
-            type="button">Thêm chương
-          </button>
-        </ng-template>
-      </ng-template>
-      <div class="ml-2">
-        <button mat-flat-button (click)="openPreview()"
-          class="bg-gray-400 text-sm md:text-xs lg:text-base xl:text-base text-white cursor-pointer rounded-md border-green-400 focus:shadow-outline focus:outline-none py-2 px-4"
-          type="button">Xem trước
-        </button>
-      </div>
-      <wrt-menu-btn class="mt-1 ml-4 lg:mr-10 xl:mr-12"
-        (copyToClipboard)="copyToClipboard.emit()"
-        (deletePart)="deletePart.emit()"
-      ></wrt-menu-btn>
+      <!-- <pre> {{ btns | json }} </pre> -->
+      <cr-submit-btn class="ml-2" *ngFor="let btn of btns" (btnClicked)="chapterActionEvent.emit(btn.action)" [active]="btn.isActive"
+        [submitText]="btn.submitText" [isHidden]="chapterForm.value.published == true && btn.action == 'publish' ">
+      </cr-submit-btn>
+      <!-- <pre> {{ chapterForm.value.chapterId }} </pre> -->
+      <wrt-menu-btn
+        [previewLink]="chapterForm.value.chapterId ? ['https://awread.vn', 'books', chapterForm.value.bookId, 'chapters', chapterForm.value.chapterId ] : []"
+        class="mt-1 ml-4 lg:mr-10 xl:mr-12" (chapterActionEvent)="chapterActionEvent.emit('copy')" (deletePart)="chapterActionEvent.emit('delete')">
+      </wrt-menu-btn>
+    </div>
   </div>
-</div>

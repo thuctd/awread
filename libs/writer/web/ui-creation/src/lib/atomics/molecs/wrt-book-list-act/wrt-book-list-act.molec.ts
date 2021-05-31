@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
-import { faChartLine, faShareAlt } from '@fortawesome/free-solid-svg-icons';
+import { faChartLine, faShareAlt, faAngleDown, faPlusCircle, faPlusSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'molec-wrt-book-list-act',
@@ -14,43 +14,43 @@ import { faChartLine, faShareAlt } from '@fortawesome/free-solid-svg-icons';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WrtBookListActMolec implements OnInit {
-  @Output() addChapterEvent = new EventEmitter();
-  @Output() removeBookEvent = new EventEmitter();
-  @Output() editBookEvent = new EventEmitter();
-  @Output() updateBookStatusEvent = new EventEmitter();
+  @Output() bookEvent = new EventEmitter();
   @Input() bookId: string;
   @Input() btns = [
     {
       titleButton: 'Thống kê',
       faIcon: faChartLine,
-      type: 'STATS',
+      type: 'static',
     },
     {
       titleButton: 'Chia sẻ',
       faIcon: faShareAlt,
-      type: 'SHARE',
+      type: 'share',
     },
   ];
 
-  constructor() {}
+  @Input() actions = [
 
-  ngOnInit(): void {}
+    {
+      name: 'Thêm chương',
+      type: 'create-chapter',
+      icon: faPlusCircle,
+    },
+    {
+      name: 'Chỉnh sửa',
+      type: 'edit',
+      icon: faPlusSquare,
+    },
+    {
+      name: 'Xóa',
+      type: 'delete',
+      icon: faTrash,
+    },
 
-  updateBookStatus(status: string) {
-    this.updateBookStatusEvent.emit({ bookId: this.bookId, type: status });
-  }
+  ];
 
-  bookActionEvent(type: string) {
-    switch (type) {
-      case 'new-chapter':
-        this.addChapterEvent.emit(this.bookId);
-        break;
-      case 'edit':
-        this.editBookEvent.emit(this.bookId);
-        break;
-      case 'delete':
-        this.removeBookEvent.emit(this.bookId);
-        break;
-    }
-  }
+  constructor() { }
+
+  ngOnInit(): void { }
+
 }

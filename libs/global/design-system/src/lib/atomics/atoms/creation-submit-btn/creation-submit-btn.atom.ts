@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, EventEmitter, Output, Input } from '@angular/core';
+import { faLeaf } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'cr-submit-btn',
@@ -17,8 +18,12 @@ export class CreationSubmitBtnAtom implements OnInit {
   @Input() submitText = 'Publish';
   @Input() active = true;
   @Input() faIcon;
+  @Input() isHidden = false;
+  constructor() { }
 
-  constructor() {}
+  ngOnInit(): void { }
 
-  ngOnInit(): void {}
+  wtf(event) {
+    this.btnClicked.emit('fuck');
+  }
 }

@@ -13,7 +13,6 @@ module.exports = {
     '<rootDir>/libs/global/styles',
     '<rootDir>/libs/global/environments',
     '<rootDir>/libs/writer/web/ui-auth',
-    '<rootDir>/libs/writer/web/feature-auth',
     '<rootDir>/libs/writer/web/ui-single',
     '<rootDir>/libs/global/design-system',
     '<rootDir>/libs/writer/web/ui-creation',

@@ -1,8 +1,3 @@
 <section class="w-full max-w-screen-xl mx-auto">
-  <organ-wrt-books-list class="ml-32" [books]="books" [loading]="loading" (updateBookStatusEvent)="updateBookStatusEvent.emit($event)"
-    (addChapterEvent)="addChapterEvent.emit($event)" (removeBookEvent)="removeBookEvent.emit($event)"></organ-wrt-books-list>
+  <organ-wrt-books-list [data]="data" class="ml-32" [books]="books" [loading]="loading" (bookEvent)="bookEvent.emit($event)"></organ-wrt-books-list>
 </section>
-
-
-
-

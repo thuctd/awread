@@ -1,20 +1,10 @@
 <div class="grid grid-cols-12 gap-16 py-12 px-6">
   <div class="col-span-3 ml-2">
-    <wrt-detail-upload-img [bookForm]="bookForm" (eventChooseImageCover)="eventChooseImageCover($event)"></wrt-detail-upload-img>
+    <wrt-detail-upload-img [book]="bookForm.value" (eventChooseImageCover)="eventChooseImageCover($event)"></wrt-detail-upload-img>
   </div>
   <div class="col-span-9">
-    <organ-wrt-book-detail-tab
-      [bookId]="bookId"
-      [tabsHead]="tabsHead"
-      [bookForm]="bookForm"
-      [submitted]="submitted"
-      [categories]="categories"
-      [genres]="genres"
-      (addorUpdateBook)="addorUpdateBook.emit()"
-      (genresEvent)="genresEvent.emit($event)"
-      (cancelCreateBook)="cancelCreateBook.emit()"
-      (confirmCreateBook)="confirmCreateBook.emit()"
-    >
+    <organ-wrt-book-detail-tab [tabsHead]="tabsHead" [bookForm]="bookForm" [categories]="categories" [genres]="genres"
+      (detailBookEvent)="detailBookEvent.emit($event)">
     </organ-wrt-book-detail-tab>
   </div>
 </div>

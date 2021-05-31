@@ -53,8 +53,8 @@ export class ReadPage implements OnInit {
       link: ['/']
     },
     {
-      title: this.chapter.book.type,
-      link: ['/', this.chapter.book.type, { categoryId: this.chapter.book.categoryId }]
+      title: this.chapter.book.type == '0' ? 'composed' : 'collected',
+      link: ['/', this.chapter.book.type == '0' ? 'composed' : 'collected', { categoryId: this.chapter.book.categoryId }]
     },
     {
       title: this.chapter.book.title,

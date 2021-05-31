@@ -129,7 +129,6 @@ import { ProfileInputAtom } from './atoms/profile-input/profile-input.atom';
 import { InfoBookMolec } from './molecs/info-book/info-book.molec';
 import { SocialConnectBtnAtom } from './atoms/social-connect-btn/social-connect-btn.atom';
 import { RdProfileInfoPersonalItemAtom } from './atoms/rd-profile-info-personal-item/rd-profile-info-personal-item.atom';
-import { UploadStoryBtnAtom } from './atoms/upload-story-btn/upload-story-btn.atom';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { CoreUsersModule } from '@awread/core/users';
 import { RdDropdownMenuMbAtom } from './atoms/rd-dropdown-menu-mb/rd-dropdown-menu-mb.atom';
@@ -287,7 +286,6 @@ import { MatSelectModule } from '@angular/material/select';
     InfoBookMolec,
     SocialConnectBtnAtom,
     RdProfileInfoPersonalItemAtom,
-    UploadStoryBtnAtom,
     RdDropdownMenuMbAtom,
     RdIconTextItemAtom,
     RdTextLinkMenuMbAtom,
@@ -412,7 +410,6 @@ import { MatSelectModule } from '@angular/material/select';
     InfoBookMolec,
     SocialConnectBtnAtom,
     RdProfileInfoPersonalItemAtom,
-    UploadStoryBtnAtom,
     RdDropdownMenuMbAtom,
     RdIconTextItemAtom,
     RdTextLinkMenuMbAtom,

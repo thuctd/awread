@@ -1,22 +1,10 @@
 <div class="bg-white relative w-full shadow-md p-2">
   <wrt-detail-tab-head [tabsHead]="tabsHead">
-    <cr-submit-btn class="mx-2" (clickBtn)="cancelCreateBook.emit()" [active]="false" [submitText]="'Hủy bỏ'"></cr-submit-btn>
-    <cr-submit-btn class="mx-2" (clickBtn)="confirmCreateBook.emit()" [active]="false" [submitText]="'Tiếp tục'"></cr-submit-btn>
+    <cr-submit-btn class="mx-2" (btnClicked)="detailBookEvent.emit('cancel')" [active]="false" [submitText]="'Hủy bỏ'"></cr-submit-btn>
+    <cr-submit-btn class="mx-2" (btnClicked)="detailBookEvent.emit('save')" [active]="true" [submitText]="'Lưu'"></cr-submit-btn>
+    <cr-submit-btn [hidden]="bookForm.value.published" class="mx-2" (btnClicked)="detailBookEvent.emit('publish')" [active]="true" [submitText]="'Xuất bản'">
+    </cr-submit-btn>
   </wrt-detail-tab-head>
-  <wrt-detail-book-form
-    class="px-2"
-    [submitted]="submitted"
-    [categories]="categories"
-    [genres]="genres"
-    (btnSubmitEvent)="bookSubmitEvent.emit()"
-    [bookForm]="bookForm"
-    (genresEvent)="genresEvent.emit($event)"
-  ></wrt-detail-book-form>
+  <wrt-detail-book-form class="px-2" [categories]="categories" [genres]="genres" [bookForm]="bookForm">
+  </wrt-detail-book-form>
 </div>
-<div class="text-right pt-4">
-  <button (click)="addorUpdateBook.emit()"
-    class="text-sm md:text-xs lg:text-base xl:text-base bg-green-400 text-white cursor-pointer rounded-md border-green-400 focus:shadow-outline focus:outline-none py-2 px-4">
-    {{bookId ? 'Cập nhật' : 'Đăng truyện'}}
-  </button>
-</div>
-

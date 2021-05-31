@@ -4,7 +4,7 @@ import { HotToastService } from '@ngneat/hot-toast';
 @Injectable({
   providedIn: 'any',
 })
-export class SnackbarsService {
+export class SnackbarService {
   constructor(private toast: HotToastService) { }
 
   showSuccess(message: string) {

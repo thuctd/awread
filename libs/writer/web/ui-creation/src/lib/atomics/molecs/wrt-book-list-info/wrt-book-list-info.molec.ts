@@ -17,6 +17,7 @@ import { WrtDetailPopupBookTemplate } from '../../templates';
 })
 export class WrtBookListInfoMolec implements OnInit {
   @Input() book = {
+    bookId: '',
     title: '',
     categoryId: '',
     viewCount: '',
@@ -25,8 +26,8 @@ export class WrtBookListInfoMolec implements OnInit {
   @Input() faIcon = faStar;
   @Input() srcImg = '/global-assets/images/image.webp';
   @Input() faIcon2 = faComments;
-  @Output() openDetailBookEvent = new EventEmitter();
-  constructor(private matDialog: MatDialog) {}
+  @Output() bookEvent = new EventEmitter();
+  constructor(private matDialog: MatDialog) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

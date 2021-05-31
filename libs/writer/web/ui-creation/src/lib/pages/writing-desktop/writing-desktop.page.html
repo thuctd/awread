@@ -1,10 +1,2 @@
-<template-wrt-chapter-writing
-  class="bg-gray-50 px-40"
-  (changeChapterStatusEvent)="changeChapterStatusEvent($event)"
-  (saveChapterEvent)="saveChapter()"
-  [chapterForm]="chapterForm"
-  [chapterStatus]="chapterStatus"
-  [submitted]="submitted"
-  [type]="type"
-  [shouldShowStatusUI]="shouldShowStatusUI"
-></template-wrt-chapter-writing>
+<template-wrt-chapter-writing class="bg-gray-50 px-40" [book]="book" (chapterActionEvent)="chapterAction($event)" [chapterForm]="chapterForm">
+</template-wrt-chapter-writing>

@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="0,920" last-zoom="0.95" max-obj-count="28"
+<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="0,425" last-zoom="0.95" max-obj-count="31"
 	 default-owner="postgres">
 <role name="public_read"
       inherit="true">
@@ -70,7 +70,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</element>
 </opclass>
 
-<table name="books" layer="0" collapse-mode="2" max-obj-count="16" z-value="0">
+<table name="books" layer="0" collapse-mode="2" max-obj-count="18" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
 	<appended-sql><![CDATA[-- create index title_gin_idx on public.books
@@ -86,7 +86,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="categoryId" not-null="true">
 		<type name="numeric" length="0"/>
 	</column>
-	<column name="publisherId" not-null="true">
+	<column name="publisherId">
 		<type name="uuid" length="0"/>
 	</column>
 	<column name="title" not-null="true">
@@ -101,23 +101,26 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="published" not-null="true" default-value="false">
 		<type name="boolean" length="0"/>
 	</column>
-	<column name="ages" not-null="true" default-value="2">
+	<column name="age" not-null="true" default-value="2">
 		<type name="numeric" length="0"/>
 	</column>
 	<column name="description">
 		<type name="text" length="0"/>
 	</column>
-	<column name="cover">
-		<type name="text" length="0"/>
+	<column name="cover" default-value="false">
+		<type name="boolean" length="0"/>
 	</column>
 	<column name="createdAt">
 		<type name="timestamp with time zone" length="0" with-timezone="true"/>
 	</column>
-	<column name="type" default-value="'composed'">
-		<type name="text" length="0"/>
+	<column name="type" default-value="0">
+		<type name="numeric" length="0"/>
 	</column>
 	<column name="isDeleted" default-value="false">
 		<type name="boolean" length="0"/>
+	</column>
+	<column name="publishedAt">
+		<type name="timestamp" length="0"/>
 	</column>
 	<constraint name="books_pk" type="pk-constr" table="public.books">
 		<columns names="bookId" ref-type="src-columns"/>
@@ -232,7 +235,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</constraint>
 </table>
 
-<table name="chapters" layer="0" collapse-mode="2" max-obj-count="8" z-value="0">
+<table name="chapters" layer="0" collapse-mode="2" max-obj-count="10" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
 	<position x="1760" y="660"/>
@@ -255,6 +258,12 @@ CAUTION: Do not modify this file unless you know what you are doing.
 		<type name="timestamp" length="0"/>
 	</column>
 	<column name="updatedAt" not-null="true" default-value="now()">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="isDeleted" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="publishedAt">
 		<type name="timestamp" length="0"/>
 	</column>
 	<constraint name="chapters_pk" type="pk-constr" table="public.chapters">
@@ -468,11 +477,11 @@ end;]]></definition>
 				'position', position
 	    		)) as "newestChapters",
 				rank() over (partition by "bookId" order by position desc) as RANK
-			from chapters
+			from chapters   where chapters."isDeleted" = false 
 		) z
 		where rank <= 2
 	) x using ("bookId")
-	inner join (
+	left join (
 		select 
 		"bookId",
 		"genreId",
@@ -482,7 +491,7 @@ end;]]></definition>
 		)) as genres
 		from books_genres natural join genres
 	) k  USING ("bookId")
-	inner join (
+	left join (
 		select 
 		  "bookId",
 		  "userId" as "authorId",
@@ -529,7 +538,7 @@ end;]]></definition>
 	</reference>
 	<reference>
 		<expression><![CDATA[ mv_books_latest_chapters
-inner join 
+left join 
 	book_visits using ("bookId")]]></expression>
 	</reference>
 	<expression type="select-exp">0</expression>
@@ -562,37 +571,20 @@ inner join
 	<parameter name="bookId">
 		<type name="uuid" length="0"/>
 	</parameter>
-	<definition><![CDATA[/*
-declare 
-"newChapterId" numeric;
-begin
-
-insert into categories("categoryId", name)
-values(
-(chapter ->> 'categoryId')::numeric,
-(chapter ->> 'title')::text
-) returning "categoryId" into "newChapterId";
-*/
-
-
-declare 
+	<parameter name="content">
+		<type name="text" length="0"/>
+	</parameter>
+	<definition><![CDATA[declare 
 "newChapterId" uuid;
-"inputBookId" uuid := "bookId";
-"inputTitle" text := title;
-"inputPosition" numeric := position;
-"inputPublished" boolean := published;
-"inputContent" text := content;
 begin
 
 insert into chapters("bookId", title, position, published)
-values("inputBookId", "inputTitle", "inputPosition", "inputPublished") 
+values("bookId", "title", "position", "published") 
 returning "chapterId"
 into "newChapterId";
 
-
-
 insert into contents("chapterId", content)
-values("newChapterId", "inputContent");
+values("newChapterId", content);
 
 return "newChapterId";
 end;]]></definition>
@@ -893,7 +885,7 @@ end;]]></definition>
 <view name="v_show_privileges" layer="0" collapse-mode="2" max-obj-count="3" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="1680" y="1940"/>
+	<position x="1740" y="1680"/>
 	<reference>
 		<expression><![CDATA[  grantee,
         string_agg(relname, ', ' ORDER BY relname) AS rel_names,
@@ -939,7 +931,7 @@ end;]]></definition>
 <view name="v_show_role" layer="0" collapse-mode="2" max-obj-count="3" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="1900" y="1940"/>
+	<position x="1740" y="1760"/>
 	<reference>
 		<expression><![CDATA[
       r.rolname, 
@@ -1006,7 +998,7 @@ BEGIN
   	FOREACH "varUserId" IN ARRAY "authorIds"
   	LOOP
 		insert into authors("bookId","userId")
-		values("inputBookId", "varUserId"); 
+		values("inputBookId", "varUserId") on conflict do nothing;
   	END LOOP;
   	
   	RETURN "inputBookId";
@@ -1045,7 +1037,7 @@ BEGIN
   	FOREACH "varGenreId" IN ARRAY "genreIds"
   	LOOP
 		insert into books_genres("bookId","genreId")
-		values("inputBookId", "varGenreId"); 
+		values("inputBookId", "varGenreId") on conflict do nothing;
   	END LOOP;
   	
   	RETURN "inputBookId";
@@ -1067,6 +1059,9 @@ END;]]></definition>
 	<return-type>
 	<type name="uuid" length="0"/>
 	</return-type>
+	<parameter name="bookId">
+		<type name="uuid" length="0"/>
+	</parameter>
 	<parameter name="authorIds">
 		<type name="uuid" length="0" dimension="1"/>
 	</parameter>
@@ -1088,50 +1083,65 @@ END;]]></definition>
 	<parameter name="completed">
 		<type name="boolean" length="0"/>
 	</parameter>
-	<parameter name="ages">
+	<parameter name="age">
 		<type name="numeric" length="0"/>
 	</parameter>
 	<parameter name="description">
 		<type name="text" length="0"/>
 	</parameter>
 	<parameter name="cover">
-		<type name="text" length="0"/>
+		<type name="boolean" length="0"/>
 	</parameter>
 	<parameter name="type">
-		<type name="text" length="0"/>
+		<type name="numeric" length="0"/>
+	</parameter>
+	<parameter name="published">
+		<type name="boolean" length="0"/>
 	</parameter>
 	<definition><![CDATA[declare 
-"bookId" uuid;
+--"bookId" uuid;
+result1 uuid;
+result2 uuid;
 
 begin
 
 INSERT INTO books (
+"bookId",
 "userId",
 "categoryId",
 "publisherId",
 title,
 completed,
-ages,
+published,
+age,
 description,
 cover,
-type
+type,
+"publishedAt"
 )
 VALUES (
-userId",
+"bookId",
+"userId",
 "categoryId",
 "publisherId",
 title,
 completed,
-ages,
+published,
+age,
 description,
 cover,
-type
-) 
-RETURNING "bookId" INTO "bookId";
+type,
+case 
+  when "published" = true then now()
+    else null
+  end
+); 
+--RETURNING "bookId" INTO "bookId";
 
-select upsert_books_genres("bookId", array "genreIds" ::uuid[]);
 
-select upsert_authors("bookId", array "authorIds" ::uuid[]);
+select * from upsert_books_genres("bookId", "genreIds" ::numeric[]) into result1;
+
+select * from upsert_authors("bookId", "authorIds" ::uuid[]) into result2;
 
 return "bookId";
 
@@ -1150,8 +1160,8 @@ sum(v.count)::numeric as "viewCount"]]></expression>
 	</reference>
 	<reference>
 		<expression><![CDATA[books b
-inner join chapters c using ("bookId")
-inner join book_visits v using ("bookId")]]></expression>
+left join chapters c using ("bookId")
+left join book_visits v using ("bookId")]]></expression>
 	</reference>
 	<reference>
 		<expression><![CDATA[group by 1]]></expression>
@@ -1161,16 +1171,22 @@ inner join book_visits v using ("bookId")]]></expression>
 	<expression type="end-exp">2</expression>
 </view>
 
-<table name="settings" layer="0" collapse-mode="2" max-obj-count="2" z-value="0">
+<table name="settings" layer="0" collapse-mode="2" max-obj-count="3" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
 	<position x="1400" y="1600"/>
-	<column name="storage" default-value="'https://awread-bucket.ss-hn-1.bizflycloud.vn'">
+	<column name="storage">
 		<type name="text" length="0"/>
 	</column>
-	<column name="version" default-value="'1.0.0'">
+	<column name="version">
 		<type name="text" length="0"/>
 	</column>
+	<column name="settingId" not-null="true">
+		<type name="numeric" length="0"/>
+	</column>
+	<constraint name="settings_pk" type="pk-constr" table="public.settings">
+		<columns names="settingId" ref-type="src-columns"/>
+	</constraint>
 </table>
 
 <view name="mv_settings" layer="0" materialized="true" collapse-mode="2" max-obj-count="1" z-value="0">
@@ -1190,6 +1206,127 @@ inner join book_visits v using ("bookId")]]></expression>
 		<position x="5.00637" y="-0.480037"/>
 	</label>
 </relationship>
+
+<genericsql name="insert_setting">
+	<definition><![CDATA[INSERT INTO settings("settingId", version, storage) 
+VALUES(1, '1.0.0', 'https://awread-bucket.ss-hn-1.bizflycloud.vn') ON CONFLICT do nothing;]]></definition>
+</genericsql>
+
+<function name="edit_book"
+		window-func="false"
+		returns-setof="false"
+		behavior-type="CALLED ON NULL INPUT"
+		function-type="VOLATILE"
+		security-type="SECURITY INVOKER"
+		execution-cost="1"
+		row-amount="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<language name="plpgsql"/>
+	<return-type>
+	<type name="uuid" length="0"/>
+	</return-type>
+	<parameter name="bookId">
+		<type name="uuid" length="0"/>
+	</parameter>
+	<parameter name="authorIds">
+		<type name="uuid" length="0" dimension="1"/>
+	</parameter>
+	<parameter name="genreIds">
+		<type name="numeric" length="0" dimension="1"/>
+	</parameter>
+	<parameter name="userId">
+		<type name="uuid" length="0"/>
+	</parameter>
+	<parameter name="categoryId">
+		<type name="numeric" length="0"/>
+	</parameter>
+	<parameter name="publisherId">
+		<type name="uuid" length="0"/>
+	</parameter>
+	<parameter name="title">
+		<type name="text" length="0"/>
+	</parameter>
+	<parameter name="completed">
+		<type name="boolean" length="0"/>
+	</parameter>
+	<parameter name="age">
+		<type name="numeric" length="0"/>
+	</parameter>
+	<parameter name="description">
+		<type name="text" length="0"/>
+	</parameter>
+	<parameter name="type">
+		<type name="numeric" length="0"/>
+	</parameter>
+	<parameter name="published">
+		<type name="boolean" length="0"/>
+	</parameter>
+	<parameter name="cover">
+		<type name="boolean" length="0"/>
+	</parameter>
+	<definition><![CDATA[declare 
+
+"ibookId" uuid := "bookId";
+"iuserId" uuid := "userId";
+"ipublisherId" uuid := "publisherId";
+"icategoryId" numeric := "categoryId";
+iage numeric := age;
+itype numeric := type;
+ititle text := title;
+idescription text := description;
+icompleted boolean := completed;
+ipublished boolean := published;
+
+result1 uuid;
+result2 uuid;
+begin
+
+update public.books
+set 
+"userId" = "iuserId",
+"categoryId" = "icategoryId",
+"publisherId" = "ipublisherId",
+age = iage,
+type = itype,
+title = ititle,
+description = idescription,
+completed = icompleted,
+published = ipublished ,
+"publishedAt" =  case 
+           when "ipublished" = true then now()
+           else null
+        end
+where books."bookId" = "ibookId";
+
+
+select * from upsert_books_genres("bookId", "genreIds" ::numeric[]) into result1;
+
+select * from upsert_authors("bookId", "authorIds" ::uuid[]) into result2;
+
+return "ibookId";
+
+end;]]></definition>
+</function>
+
+<function name="generate_uuid"
+		window-func="false"
+		returns-setof="false"
+		behavior-type="CALLED ON NULL INPUT"
+		function-type="VOLATILE"
+		security-type="SECURITY INVOKER"
+		execution-cost="1"
+		row-amount="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<language name="plpgsql"/>
+	<return-type>
+	<type name="uuid" length="0"/>
+	</return-type>
+	<definition><![CDATA[begin 
+return uuid_generate_v4();
+end;]]></definition>
+</function>
 
 <constraint name="books_userId_fk" type="fk-constr" comparison-type="MATCH FULL"
 	 upd-action="NO ACTION" del-action="CASCADE" ref-table="public.users" table="public.books">
@@ -1282,7 +1419,7 @@ inner join book_visits v using ("bookId")]]></expression>
 <relationship name="rel_books_publishers" type="relfk" layer="0"
 	 src-table="public.books"
 	 dst-table="public.publishers" reference-fk="books_publisherId_fk"
-	 src-required="false" dst-required="true"/>
+	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_users_users" type="relfk" layer="0"
 	 src-table="private.users"
@@ -1312,7 +1449,11 @@ inner join book_visits v using ("bookId")]]></expression>
 <relationship name="rel_book_visits_chapters" type="relfk" layer="0"
 	 src-table="public.book_visits"
 	 dst-table="public.chapters" reference-fk="book_visits_chapterId_fk"
-	 src-required="false" dst-required="true"/>
+	 src-required="false" dst-required="true">
+	<label ref-type="name-label">
+		<position x="1.15419" y="4.36115"/>
+	</label>
+</relationship>
 
 <relationship name="rel_book_visits_users" type="relfk" layer="0"
 	 src-table="public.book_visits"
@@ -1410,11 +1551,6 @@ inner join book_visits v using ("bookId")]]></expression>
 	<privileges insert="true" update="true"/>
 </permission>
 <permission>
-	<object name="public.books_genres" type="table"/>
-	<roles names="basic_write"/>
-	<privileges delete="true" insert="true" update="true"/>
-</permission>
-<permission>
 	<object name="public.chapters" type="table"/>
 	<roles names="basic_write"/>
 	<privileges delete="true" insert="true" update="true"/>
@@ -1451,6 +1587,21 @@ inner join book_visits v using ("bookId")]]></expression>
 </permission>
 <permission>
 	<object name="public.settings" type="table"/>
+	<roles names="public_read"/>
+	<privileges select="grant-op"/>
+</permission>
+<permission>
+	<object name="public.mv_settings" type="view"/>
+	<roles names="public_read"/>
+	<privileges select="grant-op"/>
+</permission>
+<permission>
+	<object name="public.books" type="table"/>
+	<roles names="public_read"/>
+	<privileges select="grant-op"/>
+</permission>
+<permission>
+	<object name="public.books_genres" type="table"/>
 	<roles names="public_read"/>
 	<privileges select="grant-op"/>
 </permission>

@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { LoginRegisterPage } from '@awread/writer/web/feature-auth';
+import { LoginRegisterPage } from '../login-register/login-register.page';
 
 @Component({
   selector: 'page-login-register-desktop',
@@ -14,4 +14,4 @@ import { LoginRegisterPage } from '@awread/writer/web/feature-auth';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LoginRegisterDesktopPage extends LoginRegisterPage {}
+export class LoginRegisterDesktopPage extends LoginRegisterPage { }

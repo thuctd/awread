@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, EventEmitter, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faBackward } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'organ-wrt-book-toc-tab',
@@ -27,17 +27,18 @@ export class WrtBookTocTabOrgan implements OnInit {
   @Input() formImg = this.fb.group({
     srcImg: [''],
   });
-  @Output() createNewChapterEvent = new EventEmitter();
-  faIcon = faPlus;
-  constructor(private fb: FormBuilder) {}
+  faIcon = {
+    faPlus,
+    faBackward
+  }
+  constructor(private fb: FormBuilder) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   chapterAction(type: string, chapter) {
     this.chapterActionEvent.emit({
       type,
-      chapterid: chapter.chapterid,
-      chapterNumber: chapter.chapterNumber,
+      chapter
     });
   }
 }
