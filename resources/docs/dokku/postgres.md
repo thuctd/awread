@@ -46,6 +46,10 @@ dokku config backend-graphql --all
 
 dokku postgres:enter awread_database
 
+# psql
+
+psql -U postgres
+
 # drop
 
 DROP DATABASE awread_database WITH (FORCE);
