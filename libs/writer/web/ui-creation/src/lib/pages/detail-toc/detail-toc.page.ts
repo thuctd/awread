@@ -5,6 +5,7 @@ import { Directive, Injectable, OnInit, ChangeDetectorRef, OnDestroy } from '@an
 import { combineLatest, of, Subject } from 'rxjs';
 import { CreationsFacade } from '@awread/core/creations';
 import { ChaptersFacade } from '@awread/core/chapters';
+import { Location } from '@angular/common';
 @Injectable({
   providedIn: 'root',
 })
@@ -22,6 +23,7 @@ export class DetailTocPage implements OnInit {
     private creationsFacade: CreationsFacade,
     private chaptersFacade: ChaptersFacade,
     private router: Router,
+    private location: Location,
   ) { }
 
   ngOnInit(): void {
@@ -45,7 +47,7 @@ export class DetailTocPage implements OnInit {
         this.delete(data.chapter);
         return;
       default:
-
+        this.router.navigate(['list'])
         return;
     }
   }

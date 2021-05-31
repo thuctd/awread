@@ -22,4 +22,8 @@ export class CreationSubmitBtnAtom implements OnInit {
   constructor() { }
 
   ngOnInit(): void { }
+
+  wtf(event) {
+    this.btnClicked.emit('fuck');
+  }
 }

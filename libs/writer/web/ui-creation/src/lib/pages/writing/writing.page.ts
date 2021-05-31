@@ -95,8 +95,9 @@ export class WritingPage implements OnInit {
     return dialogRef.afterClosed();
   }
 
-  private delete() {
 
+  private delete() {
+    this.chaptersFacade.delete(this.chapterForm.value.chapterId).subscribe(v => console.log('delete ', v));
   }
 
   private publish() {
@@ -130,8 +131,8 @@ export class WritingPage implements OnInit {
 
   private updateForm(chapter) {
     this.chapterForm.patchValue({
-      title: chapter.title ?? '',
-      content: chapter.content ?? '',
+      title: chapter.title ?? null,
+      content: chapter.content ?? null,
       published: chapter.published ?? false,
       position: chapter.position ?? 0,
       chapterId: chapter.chapterId,

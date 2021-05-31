@@ -1,6 +1,22 @@
 <form [formGroup]="bookForm" class="px-3" autocomplete="off">
+
+  <!-- <pre> form dirty {{ bookForm.value | json  }} </pre>
+  <pre> form dirty {{ bookForm.dirty }} </pre>
+  <pre> form invalid {{ bookForm.invalid }} </pre>
+  <pre> form touched {{ bookForm.touched }} </pre>
+  <pre> form status {{ bookForm.status }} </pre>
+  <pre> =============  </pre>
+  <pre> categoryId pending {{ bookForm.controls.categoryId.pending }} </pre>
+  <pre> categoryId invalid {{ bookForm.controls.categoryId.invalid }} </pre>
+  <pre> categoryId valid {{ bookForm.controls.categoryId.valid }} </pre>
+  <pre> categoryId touched {{ bookForm.controls.categoryId.touched }} </pre>
+  <pre> categoryId dirty {{ bookForm.controls.categoryId.dirty }} </pre>
+  <pre> categoryId pristine {{ bookForm.controls.categoryId.pristine }} </pre>
+  <pre> categoryId status {{ bookForm.controls.categoryId.status }} </pre>
+  <pre> categoryId category show error {{ bookForm.controls.categoryId.errors }} {{ bookForm.controls.categoryId.touched }} {{ bookForm.controls.categoryId.errors && bookForm.controls.categoryId.touched }} </pre> -->
+
   <detail-input-form [inputControl]="bookForm.get('title')" [titleLabel]="formInformation.title.display" [placeholder]=" formInformation.title.display">
-    <div *ngIf="bookForm.controls.title.errors" class="invalid-feedback">
+    <div *ngIf="bookForm.controls.title.errors && bookForm.controls.title.touched" class="invalid-feedback">
       <div *ngIf="bookForm.controls.title.errors.required">
         Tiêu đề không được để trống
       </div>
@@ -29,7 +45,8 @@
       <ng-select class="custom" [items]="categories" bindValue="categoryId" [multiple]="false" bindLabel="name" placeholder="Danh mục"
         formControlName="categoryId">
       </ng-select>
-      <div *ngIf="bookForm.controls.categoryId.errors" class="invalid-feedback">
+
+      <div *ngIf="bookForm.controls.categoryId.errors && bookForm.controls.categoryId.touched" class="invalid-feedback">
         <div *ngIf="bookForm.controls.categoryId.errors.required">
           Danh mục không được để trống
         </div>
@@ -40,12 +57,16 @@
   <div class="md:flex mb-6">
     <div class="xl:w-96 lg:w-80 md:w-64">
       <label class="block text-gray-500 md:mt-2 font-bold md:text-left mb-1 md:mb-0 text-xl" for="inline-full-name">
-        {{formInformation.genres.display}}
+        {{ formInformation.genres.display }}
+        <pre> {{ genres | json }} </pre>
+        <pre> {{ bookForm.value.genreIds | json }} </pre>
       </label>
     </div>
     <div class="md:w-full">
       <!-- <ng-select [formControlName]="bookForm.get('categoryname')" class="custom" [items]="items" bindLabel="name" placeholder="Thể loại" appendTo="body" multiple="true">
       </ng-select> -->
+
+
 
       <ng-select class="custom" [items]="genres" bindValue="genreId" [multiple]="true" bindLabel="name" formControlName="genreIds" placeholder="Thể loại"
         (add)="addItem($event)" (remove)="removeItem($event)">
@@ -59,7 +80,7 @@
   </div>
 
   <!-- Tags -->
-  <detail-input-form [titleLabel]="formInformation.tags.display" [placeholder]="formInformation.tags.placeholder"></detail-input-form>
+  <!-- <detail-input-form [titleLabel]="formInformation.tags.display" [placeholder]="formInformation.tags.placeholder"></detail-input-form> -->
 
   <!-- Tags -->
 
@@ -94,7 +115,7 @@
       <!-- <ng-select [formControlName]="bookForm.get('categoryname')" class="custom" [items]="items" bindLabel="name" placeholder="Thể loại" appendTo="body" multiple="true">
       </ng-select> -->
 
-      <ng-select class="custom" [items]="audiences" bindValue="id" bindLabel="name" formControlName="age" placeholder="Đối tượng độc giả">
+      <ng-select class="custom" [items]="ages" bindValue="id" bindLabel="name" formControlName="age" placeholder="Đối tượng độc giả">
       </ng-select>
     </div>
   </div>

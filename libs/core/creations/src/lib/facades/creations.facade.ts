@@ -13,6 +13,12 @@ export class CreationsFacade {
   ) {
   }
 
+
+  generateUuid() {
+    return this.creationsGear.generateUuid();
+  }
+
+
   get() {
     return this.creationsGear.get();
   }
@@ -21,11 +27,16 @@ export class CreationsFacade {
     return this.creationsGear.selectEntity(bookId);
   }
 
-  add(book) {
-    return this.creationsGear.add(book).pipe();
+  create(book) {
+    return this.creationsGear.create(book);
   }
-  edit(book, idsGenresRemove: string[]) {
-    return this.creationsGear.edit(book, idsGenresRemove).pipe();
+
+  update(book) {
+    return this.creationsGear.update(book);
+  }
+
+  delete(bookId) {
+    return this.creationsGear.delete(bookId);
   }
 
 }

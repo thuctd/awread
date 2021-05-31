@@ -1,5 +1,5 @@
 <section class="pl-32 bg-gray-50 h-screen">
-  <template-wrt-book-detail-tab [tabsHead]="tabsHead" [book]="book" [bookForm]="bookForm" [categories]="categories$ | async" [genres]="genres$ | async"
-    (genresEvent)="genresEvent($event)" (detailBookEvent)="detailBookAction($event)">
+  <template-wrt-book-detail-tab [tabsHead]="tabsHead" [bookForm]="bookForm" [categories]="categories$ | async" [genres]="genres$ | async"
+    (detailBookEvent)="detailBookAction($event)">
   </template-wrt-book-detail-tab>
 </section>

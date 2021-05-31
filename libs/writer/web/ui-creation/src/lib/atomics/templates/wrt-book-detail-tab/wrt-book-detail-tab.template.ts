@@ -3,6 +3,8 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
 import { MatDialog } from '@angular/material/dialog';
 import { PopupChangeCoverOrgan } from '@awread/global/design-system';
 
+import { faChartLine, faShareAlt, faAngleDown, faPlusCircle, faPlusSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
+
 @Component({
   selector: 'template-wrt-book-detail-tab',
   templateUrl: './wrt-book-detail-tab.template.html',
@@ -16,7 +18,6 @@ import { PopupChangeCoverOrgan } from '@awread/global/design-system';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WrtBookDetailTabTemplate implements OnInit {
-  @Input() submitted: boolean;
   @Input() categories;
   @Input() genres;
   @Input() book;
@@ -24,10 +25,7 @@ export class WrtBookDetailTabTemplate implements OnInit {
 
   @Input() tabsHead = [];
 
-  @Output() genresEvent = new EventEmitter();
-  @Output() cancelCreateBook = new EventEmitter();
-  @Output() confirmCreateBook = new EventEmitter();
-  @Output() addorUpdateBook = new EventEmitter();
+  @Output() detailBookEvent = new EventEmitter();
 
   @Input() bookForm: FormGroup = this.fb.group({
     img: ['/global-assets/images/image.webp'],
@@ -40,6 +38,39 @@ export class WrtBookDetailTabTemplate implements OnInit {
     srcImg: ['/global-assets/images/image.webp'],
   });
 
+  @Input() btns = [
+    {
+      titleButton: 'Thống kê',
+      faIcon: faChartLine,
+      type: 'static',
+    },
+    {
+      titleButton: 'Chia sẻ',
+      faIcon: faShareAlt,
+      type: 'share',
+    },
+  ];
+
+  @Input() actions = [
+
+    {
+      name: 'Thêm chương',
+      type: 'create-chapter',
+      icon: faPlusCircle,
+    },
+    {
+      name: 'Chỉnh sửa',
+      type: 'edit',
+      icon: faPlusSquare,
+    },
+    {
+      name: 'Xóa',
+      type: 'delete',
+      icon: faTrash,
+    },
+  ];
+
+
   constructor(public matDialog: MatDialog, private fb: FormBuilder) { }
 
   ngOnInit(): void { }
@@ -49,5 +80,9 @@ export class WrtBookDetailTabTemplate implements OnInit {
       width: '55rem',
       height: '33rem',
     });
+  }
+
+  wtf(event) {
+    this.detailBookEvent.emit(event);
   }
 }

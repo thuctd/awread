@@ -1,9 +1,9 @@
 <div class="grid grid-cols-10 gap-2">
-  <div (click)="openDetailBookEvent.emit()" class="col-span-3 cursor-pointer">
+  <div (click)="bookEvent.emit({ type: 'preview', bookId: book.bookId })" class="col-span-3 cursor-pointer">
     <detail-upload-img [srcImg]="srcImg"></detail-upload-img>
     <span [hidden]="srcImg" class="text-xs sm:text-sm">Không có ảnh bìa</span>
   </div>
-  <div class="col-span-7">
+  <div class="col-span-7" (click)="bookEvent.emit({ type: 'detail', bookId: book.bookId })">
     <div class="self-start">
       <div [routerLink]="href" class="text-sm cursor-pointer break-word md:text-base font-bold mb-1 text-gray-600">
         {{ book.title }}
@@ -27,7 +27,7 @@
       <!-- <list-rating-book></list-rating-book> -->
     </div>
     <div class="self-start mt-2 flex">
-      <atom-icon-text class="mr-6" [title]="book.viewCount"></atom-icon-text>
+      <atom-icon-text class="mr-6" [title]="book.viewCount || 0"></atom-icon-text>
       <atom-icon-text [icon]="faIcon2" [title]="0"></atom-icon-text>
     </div>
     <!-- <div class="self-start mt-2 flex">
