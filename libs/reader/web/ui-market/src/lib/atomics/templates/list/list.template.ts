@@ -49,10 +49,8 @@ export class ListTemplate implements OnInit {
   @Output() eventSearch = new EventEmitter();
   @Output() changeCategoryBooks = new EventEmitter();
   @Output() filterBooksEvent = new EventEmitter();
-  @Output() nativeProse = new EventEmitter();
+  @Output() moreBooks = new EventEmitter();
   @Output() nativeTopBook = new EventEmitter();
-  @Output() nativeLongBook = new EventEmitter();
-  @Output() nativeShortBook = new EventEmitter();
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {}

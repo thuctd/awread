@@ -1,3 +1,4 @@
+import { debounceTime } from 'rxjs/operators';
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import { tap } from 'rxjs/operators';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -83,6 +84,13 @@ export class ListPage implements OnInit, OnDestroy {
       const categoryId = urlSegment.parameterMap.get('categoryId');
       this.filteredBooks$ = this.booksFacade.getFilterBooks(categoryId);
     })
+  }
+
+  moreBooks(offset: number) {
+    offset = offset + 1;    
+    this.booksFacade.getLatestBooks('1', 0).pipe(debounceTime(200)).subscribe(res => {
+      console.log(res);      
+    });
   }
 
   private updateForm() {

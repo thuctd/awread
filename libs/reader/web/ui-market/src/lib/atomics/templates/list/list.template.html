@@ -32,7 +32,7 @@
         </ng-container>
       </div>
       <div [ngClass]="filterbook === false ? 'pt-12' : 'pt-28'">
-        <list-detail-long-book (moreEvent)="nativeLongBook.emit($event)" [longbooks]="categoryBooks" [display]="display" [categoryId]="selectedTabCategoryId">
+        <list-detail-long-book (moreEvent)="moreBooks.emit($event)" [longbooks]="categoryBooks" [display]="display" [categoryId]="selectedTabCategoryId">
         </list-detail-long-book>
       </div>
     </div>

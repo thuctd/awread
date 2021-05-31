@@ -20,7 +20,6 @@ export class ListDetailLongBookOrgan implements OnInit {
   @Input() chapters = [];
   @Input() display: 'grid' | 'list' = 'grid';
   @Input() moreContent = 'Xem thêm';
-
   @Input() faIcon = faAngleDown;
   @Output() moreEvent = new EventEmitter();
 
