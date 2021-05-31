@@ -15,11 +15,11 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
 export class PaginationAtom implements OnInit, OnChanges {
   @Input() totalRecords = 0;
   @Input() recordsPerPage = 0;
-
-  @Output() onPageChange: EventEmitter<number> = new EventEmitter();
   public pages: number[] = [];
   activePage: number;
 
+  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
+  @Output() onPageChange = new EventEmitter();
   constructor() { }
 
   ngOnInit(): void { }
@@ -28,7 +28,7 @@ export class PaginationAtom implements OnInit, OnChanges {
     const pageCount = this.getPageCount();
     this.pages = this.getArrayOfPage(pageCount);
     this.activePage = 0;
-    this.onPageChange.emit(1);
+    this.onPageChange.emit(0);
   }
 
   private getPageCount(): number {

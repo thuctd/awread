@@ -52,6 +52,7 @@ export class BooksHomeApi {
 
   //[NOTE]: Pagination Graphiql
   getLatestBooks(categoryId: string, offset: number) {
+    console.log('offset', offset);
     return this.apollo.query({
       query: gql`
           query allMvBooksLatestChapters ($offset: Int ${categoryId ? `,$categoryId: BigFloat` : ''}) {

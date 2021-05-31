@@ -75,8 +75,10 @@ export class HomePage implements OnInit, OnDestroy {
     );
   }
 
-  displayActivePage(activePageNumber:number){
-    this.categoryBooks$ = this.booksFacade.getLatestBooks(this.categoryId, activePageNumber).pipe(debounceTime(200));   
+  displayActivePage(activePageNumber: number) {
+    console.log('number', activePageNumber);
+    this.categoryBooks$ = this.booksFacade.getLatestBooks(this.categoryId, activePageNumber).pipe(debounceTime(200));
+    this.cd.detectChanges();
   }
 
   ngOnDestroy(): void {

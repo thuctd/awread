@@ -44,7 +44,7 @@
       </div>
     </ng-template>
     <div class="flex justify-end pt-4">
-      <atom-text-link (click)="moreEvent.emit($event)" [text]="moreContent" [class]="'text-base text-gray-400 uppercase font-bold'"></atom-text-link>
+      <atom-text-link (submitEvent)="moreEvent.emit($event)" [text]="moreContent" [class]="'text-base text-gray-400 uppercase font-bold'"></atom-text-link>
     </div>
   </ng-container>
   <ng-template #noData>
