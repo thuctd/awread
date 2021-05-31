@@ -217,7 +217,7 @@ export class BooksApi {
     }
 
     queryString = `query ${mvBooks}($categoryId: BigFloat, $completed: Boolean ${filters.completed ? `, $type: String` : ''}) {
-              ${mvBooks}(first: 20, condition: { categoryId: $categoryId, ${filters.completed ? ` type: $type,` : ''} completed: $completed }, orderBy: PUBLISHED_AT_DESC,
+              ${mvBooks}(first: 20, condition: { categoryId: $categoryId, ${filters.completed ? ` type: $type,` : ''} completed: $completed }, orderBy: PUBLISHED_DESC,
                 filter: { publishedAt: {greaterThan: "${publishedAt}"} ${genres.length ? `, genres: {containsAnyKeys: ${JSON.stringify(genres)}}` : ''}}) {
                 nodes {
                   bookId
