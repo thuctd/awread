@@ -1,9 +1,9 @@
 <molec-rd-author-tabs class="roboto w-2/5 text-xl" [tabs]="tabs"></molec-rd-author-tabs>
 <div class="bg-white pb-20">
-  <div class="grid grid-cols-12 pt-12" >
+  <div class="grid grid-cols-12 pt-12">
     <div class="col-span-5 mx-auto">
       <detail-upload-img></detail-upload-img>
-      <atom-btn-rectangle [class]="'w-54 py-1.5 rounded-lg'" [text]="'Chỉnh sửa ảnh bìa'" (clickBtn)="eventChooseImageCover($event)"></atom-btn-rectangle>
+      <atom-btn-rectangle [class]="'w-54 py-1.5 rounded-lg'" [text]="'Chỉnh sửa ảnh bìa'" (btnClicked)="eventChooseImageCover($event)"></atom-btn-rectangle>
     </div>
     <div class="col-span-7 relative" *ngIf="mode === 'display';else edit">
       <molec-rd-profile-info-personal [currentUser]="currentUser" class="pt-2"></molec-rd-profile-info-personal>
@@ -14,14 +14,9 @@
     </div>
     <ng-template #edit>
       <div class="col-span-6">
-        <organ-profile-form
-          (updateProfileEvent)="updateProfileEvent.emit()"
-          (updateProfileEvent)="changeDisplay(actions[0])"
-          (clickConnectFb)="clickConnect.emit()"
-          (clickConnectGb)="clickConnect.emit()"
-          [profileForm]="profileForm"
-          [submitted]="submitted"
-        ></organ-profile-form>
+        <organ-profile-form (updateProfileEvent)="updateProfileEvent.emit()" (updateProfileEvent)="changeDisplay(actions[0])"
+          (clickConnectFb)="clickConnect.emit()" (clickConnectGb)="clickConnect.emit()" [profileForm]="profileForm" [submitted]="submitted">
+        </organ-profile-form>
       </div>
     </ng-template>
   </div>

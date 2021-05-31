@@ -95,8 +95,9 @@ export class WritingPage implements OnInit {
     return dialogRef.afterClosed();
   }
 
-  private delete() {
 
+  private delete() {
+    this.chaptersFacade.delete(this.chapterForm.value.chapterId).subscribe(v => console.log('delete ', v));
   }
 
   private publish() {

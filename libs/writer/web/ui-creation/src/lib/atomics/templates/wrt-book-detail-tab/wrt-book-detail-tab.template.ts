@@ -16,7 +16,6 @@ import { PopupChangeCoverOrgan } from '@awread/global/design-system';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WrtBookDetailTabTemplate implements OnInit {
-  @Input() submitted: boolean;
   @Input() categories;
   @Input() genres;
   @Input() book;
@@ -24,10 +23,7 @@ export class WrtBookDetailTabTemplate implements OnInit {
 
   @Input() tabsHead = [];
 
-  @Output() genresEvent = new EventEmitter();
-  @Output() cancelCreateBook = new EventEmitter();
-  @Output() confirmCreateBook = new EventEmitter();
-  @Output() addorUpdateBook = new EventEmitter();
+  @Output() detailBookEvent = new EventEmitter();
 
   @Input() bookForm: FormGroup = this.fb.group({
     img: ['/global-assets/images/image.webp'],
@@ -49,5 +45,9 @@ export class WrtBookDetailTabTemplate implements OnInit {
       width: '55rem',
       height: '33rem',
     });
+  }
+
+  wtf(event) {
+    this.detailBookEvent.emit(event);
   }
 }

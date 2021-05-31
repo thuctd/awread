@@ -85,25 +85,84 @@ export class CreationsApi {
     )
   }
 
-  add(book) {
-    console.log('edit book: ', book, Creation(book));
+  create(book) {
     return this.apollo.mutate({
       mutation: gql`
+      mutation createBook (
+        $userId: UUID!,
+        $title: String,
+        $cover: String,
+        $description: String,
+        $age: BigFloat,
+        $completed: Boolean,
+        $completed: Boolean,
+        $publisherId: UUID,
+        $categoryId: BigFloat,
+        $authorIds: UUID[],
+        $genreIds: BigFloat[],
+        $type: BigFloat
+      ) {
+          newBook(
+            input: {
+              userId: $userId,
+              title: $title,
+              age: $age,
+              authorIds: $authorIds,
+              categoryId: $categoryId,
+              completed: $completed,,
+              cover: $cover,
+              description: $description,
+              genreIds: $genreIds,
+              publisherId: $publisherId,
+              type: $type
+              }
+          ) {
+            uuid
+          }
+        }
       `,
-      variables: {
-        ...Creation(book)
-      },
+      variables: book,
     });
   }
 
-  edit(book) {
-    console.log('edit book: ', book, Creation(book));
+  update(book) {
     return this.apollo.mutate({
       mutation: gql`
+       mutation editBook (
+        $bookId: UUID!,
+        $userId: UUID!,
+        $title: String,
+        $description: String,
+        $age: BigFloat,
+        $completed: Boolean,
+        $published: Boolean,
+        $publisherId: UUID,
+        $categoryId: BigFloat,
+        $authorIds: [UUID],
+        $genreIds: [BigFloat],
+        $type: BigFloat
+      ) {
+          editBook(
+            input: {
+              bookId: $bookId,
+              userId: $userId,
+              title: $title,
+              age: $age,
+              authorIds: $authorIds,
+              categoryId: $categoryId,
+              completed: $completed,
+              published: $published,
+              description: $description,
+              genreIds: $genreIds,
+              publisherId: $publisherId,
+              type: $type
+            } 
+          )  {
+            uuid
+          }
+        }
       `,
-      variables: {
-        ...Creation(book)
-      },
+      variables: book,
     });
   }
 

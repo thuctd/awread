@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="0,1045" last-zoom="0.95" max-obj-count="31"
+<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="0,163" last-zoom="0.95" max-obj-count="31"
 	 default-owner="postgres">
 <role name="public_read"
       inherit="true">
@@ -86,7 +86,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="categoryId" not-null="true">
 		<type name="numeric" length="0"/>
 	</column>
-	<column name="publisherId" not-null="true">
+	<column name="publisherId">
 		<type name="uuid" length="0"/>
 	</column>
 	<column name="title" not-null="true">
@@ -101,7 +101,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="published" not-null="true" default-value="false">
 		<type name="boolean" length="0"/>
 	</column>
-	<column name="ages" not-null="true" default-value="2">
+	<column name="age" not-null="true" default-value="2">
 		<type name="numeric" length="0"/>
 	</column>
 	<column name="description">
@@ -113,8 +113,8 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="createdAt">
 		<type name="timestamp with time zone" length="0" with-timezone="true"/>
 	</column>
-	<column name="type" default-value="'composed'">
-		<type name="text" length="0"/>
+	<column name="type" default-value="0">
+		<type name="numeric" length="0"/>
 	</column>
 	<column name="isDeleted" default-value="false">
 		<type name="boolean" length="0"/>
@@ -232,7 +232,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</constraint>
 </table>
 
-<table name="chapters" layer="0" collapse-mode="2" max-obj-count="8" z-value="0">
+<table name="chapters" layer="0" collapse-mode="2" max-obj-count="9" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
 	<position x="1760" y="660"/>
@@ -256,6 +256,9 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</column>
 	<column name="updatedAt" not-null="true" default-value="now()">
 		<type name="timestamp" length="0"/>
+	</column>
+	<column name="isDeleted" default-value="false">
+		<type name="boolean" length="0"/>
 	</column>
 	<constraint name="chapters_pk" type="pk-constr" table="public.chapters">
 		<columns names="chapterId" ref-type="src-columns"/>
@@ -468,7 +471,7 @@ end;]]></definition>
 				'position', position
 	    		)) as "newestChapters",
 				rank() over (partition by "bookId" order by position desc) as RANK
-			from chapters
+			from chapters   where chapters."isDeleted" = false 
 		) z
 		where rank <= 2
 	) x using ("bookId")
@@ -562,37 +565,20 @@ inner join
 	<parameter name="bookId">
 		<type name="uuid" length="0"/>
 	</parameter>
-	<definition><![CDATA[/*
-declare 
-"newChapterId" numeric;
-begin
-
-insert into categories("categoryId", name)
-values(
-(chapter ->> 'categoryId')::numeric,
-(chapter ->> 'title')::text
-) returning "categoryId" into "newChapterId";
-*/
-
-
-declare 
+	<parameter name="content">
+		<type name="text" length="0"/>
+	</parameter>
+	<definition><![CDATA[declare 
 "newChapterId" uuid;
-"inputBookId" uuid := "bookId";
-"inputTitle" text := title;
-"inputPosition" numeric := position;
-"inputPublished" boolean := published;
-"inputContent" text := content;
 begin
 
 insert into chapters("bookId", title, position, published)
-values("inputBookId", "inputTitle", "inputPosition", "inputPublished") 
+values("bookId", "title", "position", "published") 
 returning "chapterId"
 into "newChapterId";
 
-
-
 insert into contents("chapterId", content)
-values("newChapterId", "inputContent");
+values("newChapterId", content);
 
 return "newChapterId";
 end;]]></definition>
@@ -1088,7 +1074,7 @@ END;]]></definition>
 	<parameter name="completed">
 		<type name="boolean" length="0"/>
 	</parameter>
-	<parameter name="ages">
+	<parameter name="age">
 		<type name="numeric" length="0"/>
 	</parameter>
 	<parameter name="description">
@@ -1098,7 +1084,10 @@ END;]]></definition>
 		<type name="text" length="0"/>
 	</parameter>
 	<parameter name="type">
-		<type name="text" length="0"/>
+		<type name="numeric" length="0"/>
+	</parameter>
+	<parameter name="published">
+		<type name="boolean" length="0"/>
 	</parameter>
 	<definition><![CDATA[declare 
 "bookId" uuid;
@@ -1111,18 +1100,20 @@ INSERT INTO books (
 "publisherId",
 title,
 completed,
-ages,
+published,
+age,
 description,
 cover,
 type
 )
 VALUES (
-userId",
+"userId",
 "categoryId",
 "publisherId",
 title,
 completed,
-ages,
+published,
+age,
 description,
 cover,
 type
@@ -1201,6 +1192,96 @@ inner join book_visits v using ("bookId")]]></expression>
 	<definition><![CDATA[INSERT INTO settings("settingId", version, storage) 
 VALUES(1, '1.0.0', 'https://awread-bucket.ss-hn-1.bizflycloud.vn') ON CONFLICT do nothing;]]></definition>
 </genericsql>
+
+<function name="edit_book"
+		window-func="false"
+		returns-setof="false"
+		behavior-type="CALLED ON NULL INPUT"
+		function-type="VOLATILE"
+		security-type="SECURITY INVOKER"
+		execution-cost="1"
+		row-amount="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<language name="plpgsql"/>
+	<return-type>
+	<type name="uuid" length="0"/>
+	</return-type>
+	<parameter name="bookId">
+		<type name="uuid" length="0"/>
+	</parameter>
+	<parameter name="authorIds">
+		<type name="uuid" length="0" dimension="1"/>
+	</parameter>
+	<parameter name="genreIds">
+		<type name="numeric" length="0" dimension="1"/>
+	</parameter>
+	<parameter name="userId">
+		<type name="uuid" length="0"/>
+	</parameter>
+	<parameter name="categoryId">
+		<type name="numeric" length="0"/>
+	</parameter>
+	<parameter name="publisherId">
+		<type name="uuid" length="0"/>
+	</parameter>
+	<parameter name="title">
+		<type name="text" length="0"/>
+	</parameter>
+	<parameter name="completed">
+		<type name="boolean" length="0"/>
+	</parameter>
+	<parameter name="age">
+		<type name="numeric" length="0"/>
+	</parameter>
+	<parameter name="description">
+		<type name="text" length="0"/>
+	</parameter>
+	<parameter name="type">
+		<type name="numeric" length="0"/>
+	</parameter>
+	<parameter name="published">
+		<type name="boolean" length="0"/>
+	</parameter>
+	<definition><![CDATA[declare 
+
+"ibookId" uuid := "bookId";
+"iuserId" uuid := "userId";
+"ipublisherId" uuid := "publisherId";
+"icategoryId" numeric := "categoryId";
+iage numeric := age;
+itype numeric := type;
+ititle text := title;
+idescription text := description;
+icompleted boolean := completed;
+ipublished boolean := published;
+
+result1 uuid;
+result2 uuid;
+begin
+
+update public.books
+set 
+"userId" = "iuserId",
+"categoryId" = "icategoryId",
+"publisherId" = "ipublisherId",
+age = iage,
+type = itype,
+title = ititle,
+description = idescription,
+completed = icompleted,
+published = ipublished 
+where books."bookId" = "ibookId";
+
+
+select * from upsert_books_genres("bookId", "genreIds" ::numeric[]) into result1;
+
+select * from upsert_authors("bookId", "authorIds" ::uuid[]) into result2;
+
+return "ibookId";
+
+end;]]></definition>
+</function>
 
 <constraint name="books_userId_fk" type="fk-constr" comparison-type="MATCH FULL"
 	 upd-action="NO ACTION" del-action="CASCADE" ref-table="public.users" table="public.books">
@@ -1293,7 +1374,7 @@ VALUES(1, '1.0.0', 'https://awread-bucket.ss-hn-1.bizflycloud.vn') ON CONFLICT d
 <relationship name="rel_books_publishers" type="relfk" layer="0"
 	 src-table="public.books"
 	 dst-table="public.publishers" reference-fk="books_publisherId_fk"
-	 src-required="false" dst-required="true"/>
+	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_users_users" type="relfk" layer="0"
 	 src-table="private.users"
@@ -1323,7 +1404,11 @@ VALUES(1, '1.0.0', 'https://awread-bucket.ss-hn-1.bizflycloud.vn') ON CONFLICT d
 <relationship name="rel_book_visits_chapters" type="relfk" layer="0"
 	 src-table="public.book_visits"
 	 dst-table="public.chapters" reference-fk="book_visits_chapterId_fk"
-	 src-required="false" dst-required="true"/>
+	 src-required="false" dst-required="true">
+	<label ref-type="name-label">
+		<position x="1.15419" y="4.36115"/>
+	</label>
+</relationship>
 
 <relationship name="rel_book_visits_users" type="relfk" layer="0"
 	 src-table="public.book_visits"

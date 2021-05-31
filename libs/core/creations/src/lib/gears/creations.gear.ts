@@ -3,6 +3,9 @@ import { map, tap } from 'rxjs/operators';
 import { CreationsApi } from '../apis';
 import { CreationsQuery, CreationsStore } from '../states/creations';
 import { CurrentUserFacade } from '@awread/core/users';
+import { SnackbarService } from '@awread/global/packages';
+
+
 @Injectable({ providedIn: 'root' })
 export class CreationsGear {
 
@@ -11,6 +14,7 @@ export class CreationsGear {
     private creationsStore: CreationsStore,
     private currentUserFacade: CurrentUserFacade,
     private creationsQuery: CreationsQuery,
+    private SnackbarService: SnackbarService,
   ) {
   }
 
@@ -25,19 +29,47 @@ export class CreationsGear {
 
   selectEntity(bookId) {
     return this.creationsApi.getOne(bookId).pipe(
-      map(book => ({
-        book,
-        genreIds: book?.['booksGenresByBookId']?.['nodes'] ? book?.['booksGenresByBookId']?.['nodes'].map(result => (result.genreId)) : [],
-        authors: book?.['authorsByBookId']?.['nodes'] ? book?.['authorsByBookId']?.['nodes'].map(result => ({ userId: result.userId, name: result.userByUserId.name })) : []
-      }))
+      map(book => {
+        const authors = book?.['authorsByBookId']?.['nodes'] ? book?.['authorsByBookId']?.['nodes'].map(result => ({ userId: result.userId, name: result.userByUserId.name })) : [];
+        return {
+          book,
+          genreIds: book?.['booksGenresByBookId']?.['nodes'] ? book?.['booksGenresByBookId']?.['nodes'].map(result => (result.genreId)) : [],
+          authors: authors,
+          authorIds: authors.map(result => (result.userId))
+        };
+      })
     );
   }
 
-  add(book) {
-    return this.creationsApi.add(book).pipe();
+  create(book) {
+    return this.creationsApi.create({
+      ...book,
+      userId: this.currentUserFacade.getUserId(),
+    })
+      .pipe(
+        tap(result => {
+          if (result.errors) {
+            result.errors.forEach(error => this.SnackbarService.showError(error.message));
+          } else {
+            this.SnackbarService.showSuccess('Tạo truyện mới thành công');
+          }
+        })
+      )
   }
-  edit(book, idsGenresRemove: string[]) {
-    return this.creationsApi.edit(book).pipe();
+  update(book) {
+    return this.creationsApi.update({
+      ...book,
+      userId: this.currentUserFacade.getUserId(),
+    })
+      .pipe(
+        tap(result => {
+          if (result.errors) {
+            result.errors.forEach(error => this.SnackbarService.showError(error.message));
+          } else {
+            this.SnackbarService.showSuccess('Lưu truyện thành công');
+          }
+        })
+      )
   }
 
 

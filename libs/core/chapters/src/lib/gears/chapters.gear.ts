@@ -72,27 +72,29 @@ export class ChaptersGear {
   }
 
   update(chapter) {
-    return this.chaptersApi.update(chapter).pipe(
-      tap(result => {
-        if (result.errors) {
-          result.errors.forEach(error => this.SnackbarService.showError(error.message));
-        } else {
-          this.SnackbarService.showSuccess('Lưu chương thành công');
-        }
-      })
-    )
+    return this.chaptersApi.update(chapter)
+      .pipe(
+        tap(result => {
+          if (result.errors) {
+            result.errors.forEach(error => this.SnackbarService.showError(error.message));
+          } else {
+            this.SnackbarService.showSuccess('Lưu chương thành công');
+          }
+        })
+      )
   }
 
   create(chapter) {
-    return this.chaptersApi.create(chapter).pipe(
-      tap(result => {
-        if (result.errors) {
-          result.errors.forEach(error => this.SnackbarService.showError(error.message));
-        } else {
-          this.SnackbarService.showSuccess('Tạo chương mới thành công');
-        }
-      })
-    )
+    return this.chaptersApi.create(chapter)
+      .pipe(
+        tap(result => {
+          if (result.errors) {
+            result.errors.forEach(error => this.SnackbarService.showError(error.message));
+          } else {
+            this.SnackbarService.showSuccess('Tạo chương mới thành công');
+          }
+        })
+      )
   }
 
   delete(chapterId) {

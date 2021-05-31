@@ -8,6 +8,7 @@ import { ChaptersFacade } from '@awread/core/chapters';
 import { CategoriesFacade } from '@awread/core/categories';
 import { GenresFacade } from '@awread/core/genres';
 import { switchMap } from 'rxjs/operators';
+import { Location } from '@angular/common';
 @Injectable({
   providedIn: 'root',
 })
@@ -15,22 +16,14 @@ import { switchMap } from 'rxjs/operators';
 export class DetailBookPage implements OnInit {
   bookForm: FormGroup;
   bookId: string;
-  chapterEntity$: any;
+  categories$;
+  genres$;
   chapters$ = this.chaptersFacade.chapters$;
-  book;
-  selectedTab = 'toc';
-  selectedBookStatus = 'DRAFT';
-  genresListSelected = [];
   tabsHead = [
     { name: 'THÔNG TIN TRUYỆN', href: null, isActive: true },
     { name: 'MỤC LỤC', href: ['../toc'], isActive: false },
   ];
-  categories$;
-  genres$;
-  bookFormValueBefore = ''; // dùng để check xem giá trị trước với giá trị bookform hiện tại có khớp nhau hay ko?
-  type: string;
-  submitted = false;
-  destroy$ = new Subject();
+
   constructor(
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
@@ -39,24 +32,39 @@ export class DetailBookPage implements OnInit {
     private chaptersFacade: ChaptersFacade,
     private categoriesFacade: CategoriesFacade,
     private genresFacade: GenresFacade,
-    private router: Router,
+    private location: Location,
     private cd: ChangeDetectorRef
   ) { }
 
   detailBookAction(event) {
     switch (event) {
       case 'cancel':
-
+        this.location.back();
         break;
       case 'publish':
-
+        this.bookForm.patchValue({ published: true });
+        this.save();
         break;
       case 'save':
-
+        this.save();
         break;
 
       default:
+        console.log('event', event);
         break;
+    }
+  }
+
+  save() {
+    if (this.bookId == 'new') {
+      this.creationsFacade.create(this.bookForm.value).subscribe(value => {
+        console.log('value', value);
+        this.location.back();
+      })
+    } else {
+      this.creationsFacade.update(this.bookForm.value).subscribe(value => {
+        console.log('value', value);
+      })
     }
   }
 
@@ -67,14 +75,13 @@ export class DetailBookPage implements OnInit {
     this.genres$ = this.genresFacade.selectAllGenresAkita();
   }
 
-  genresEvent(genres) {
-    this.genresListSelected = genres;
-  }
-
   getBook() {
     return this.activatedRoute.paramMap
       .pipe(
-        switchMap((params) => this.creationsFacade.selectEntity(params.get('bookId')))
+        switchMap((params) => {
+          this.bookId = params.get('bookId');
+          return this.creationsFacade.selectEntity(this.bookId);
+        })
       )
       .subscribe((res) => {
         console.log('book Data', res);
@@ -82,12 +89,14 @@ export class DetailBookPage implements OnInit {
       });
   }
 
-  updateForm({ book, genreIds, authors }) {
+  updateForm({ book, genreIds, authors, authorIds }) {
     this.bookForm.patchValue({
+      bookId: this.bookId,
       title: book.title,
       description: book.description,
       categoryId: book.categoryId,
       genreIds: genreIds,
+      authorIds: authorIds,
       completed: book.completed,
       published: book.published,
       type: book.type,
@@ -97,10 +106,13 @@ export class DetailBookPage implements OnInit {
 
   private initForm() {
     this.bookForm = this.fb.group({
+      bookId: [''],
       title: ['', Validators.required],
       description: [null],
       categoryId: [null],
       genreIds: [[]],
+      authorIds: [[]],
+      publisherId: [null],
       completed: [false],
       published: [false],
       type: "0",
