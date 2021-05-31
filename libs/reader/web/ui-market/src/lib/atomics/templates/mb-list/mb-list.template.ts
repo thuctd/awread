@@ -1,4 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'template-mb-list',
@@ -13,12 +14,16 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MbListTemplate implements OnInit {
+  isMenu = true;
+  @Input() titlePage;
   @Input() books = [];
   @Input() topBooks = [];
+  @Input() items = [];
+  @Output() emitChangeBooks = new EventEmitter();
 
-  constructor() { }
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private cd: ChangeDetectorRef,) { }
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

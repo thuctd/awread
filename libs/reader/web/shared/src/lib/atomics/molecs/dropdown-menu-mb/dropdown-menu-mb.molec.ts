@@ -22,11 +22,11 @@ export class DropdownMenuMbMolec implements OnInit {
   @Input() items = [
     {
       title: 'Truyện tự sáng tác',
-      href: '/composed',
+      href: ['/', 'composed', { categoryId: '' }],
     },
     {
       title: 'Truyện sưu tầm',
-      href: '/collected',
+      href: ['/', 'collected', { categoryId: '' }],
     },
   ];
 
