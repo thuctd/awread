@@ -1,4 +1,4 @@
-<template-rd-navbar-mb class="pb-20" [searchControl]="searchControl"
+<template-rd-navbar-mb [user]="user$ | async" [isLogin]="isLogin$ | async" (logoutEvent)="logout()" class="pb-20" [searchControl]="searchControl"
     (eventSearch)="navigateToSearch()"></template-rd-navbar-mb>
 <router-outlet></router-outlet>
 <template-footer></template-footer>

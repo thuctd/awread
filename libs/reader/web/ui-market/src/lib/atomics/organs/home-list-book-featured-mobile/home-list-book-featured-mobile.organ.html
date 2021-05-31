@@ -2,19 +2,11 @@
   <div class="mb-4 px-2.5">
     <atom-title [title]="titlePage" class="uppercase"></atom-title>
   </div>
-  <div class="w-full leanding-normal tracking-wide px-1 relative flex justify-center">
-    <div class="container w-full overflow-hidden">
-      <owl-carousel-o [options]="customOptions" class="carousel1">
-        <ng-container>
-          <ng-template carouselSlide *ngFor="let book of books">
-            <div class="mx-2 sm:mx-5 mb-4">
-              <atom-img-m [size]="'s'" [bookId]="book.bookId" [srcImg]="book.cover"></atom-img-m>
-              <!-- <molec-home-info-book-update [book]="book"></molec-home-info-book-update> -->
-              <molec-info-book [book]="book" [displayUI]="displayUI" [btns]="book.newestChapters"></molec-info-book>
-            </div>
-          </ng-template>
-        </ng-container>
-      </owl-carousel-o>
+  <div class="grid grid-cols-12 mx-auto">
+    <div *ngFor="let book of books | slice:0:3" class="col-span-4 px-2">
+      <atom-img-m [size]="'s'" [bookId]="book.bookId" [srcImg]="book.cover"></atom-img-m>
+      <molec-info-book [book]="book" [displayUI]="displayUI" [btns]="book.newestChapters"></molec-info-book>
     </div>
   </div>
+  <pagination></pagination>
 </section>

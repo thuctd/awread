@@ -1,4 +1,4 @@
-<section class="max-w-screen-xl mx-auto px-6 xl:px-0">
+<section class="max-w-screen-xl mx-auto">
   <molec-rd-search-book-title (bindingUrl)="bindingUrl.emit($event)" [inputControl]="searchControl"></molec-rd-search-book-title>
   <ng-container *ngIf="items?.length; else noData">
     <molec-rd-search-book-header [number]="items.length" class="pt-8 pb-4"></molec-rd-search-book-header>

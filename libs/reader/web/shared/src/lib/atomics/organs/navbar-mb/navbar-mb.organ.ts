@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, EventEmitter, Output } from '@angular/core';
-import { faBars, faBell, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'organ-navbar-mb',
@@ -14,12 +14,11 @@ import { faBars, faBell, faSearch } from '@fortawesome/free-solid-svg-icons';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavbarMbOrgan implements OnInit {
+  @Input() user = {};
   @Input() search = faSearch;
-  @Input() bell = faBell;
-  @Input() bars = faBars;
   @Input() isLogin = true;
-  @Input() isMenu = false;
   @Output() clickDisplaySearch = new EventEmitter();
+  @Output() logoutEvent = new EventEmitter();
 
   constructor() {}
 

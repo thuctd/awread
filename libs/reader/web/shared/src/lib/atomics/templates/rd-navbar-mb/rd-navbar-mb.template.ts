@@ -17,11 +17,12 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RdNavbarMbTemplate implements OnInit {
-  @Input() isLogin = false;
-  @Input() isMenu = false;
+  @Input() user = {};
+  @Input() isLogin;
   @Input() isSearch = false;
   @Input() searchControl = new FormControl('');
   @Output() eventSearch = new EventEmitter();
+  @Output() logoutEvent = new EventEmitter();
   constructor() {}
 
   ngOnInit(): void {}

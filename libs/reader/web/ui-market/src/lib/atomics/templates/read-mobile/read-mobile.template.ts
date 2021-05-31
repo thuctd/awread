@@ -13,6 +13,7 @@ import { Component, OnInit, ChangeDetectionStrategy, EventEmitter, Output, Input
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ReadMobileTemplate implements OnInit {
+    @Input() loading;
   @Input() chapters = [];
   @Input() breadcrumbs = [];
   @Output() nextChapterBook = new EventEmitter();

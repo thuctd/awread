@@ -22,17 +22,22 @@ export class RdHomeBookUpdateDropdownMbMolec implements OnInit {
   @Input() categories = [
     {
       id: 1,
-      name: 'Truyện dài',
+      name: 'Tất cả',
     },
     {
       id: 2,
-      name: 'Truyện ngắn',
+      name: 'Truyện dài',
     },
     {
       id: 3,
+      name: 'Truyện ngắn',
+    },
+    {
+      id: 4,
       name: 'Tản văn',
     },
   ];
+
   @Input() isDropdown = false;
   @Output() emitBooks = new EventEmitter();
   @Output() emitAllBooks = new EventEmitter();
