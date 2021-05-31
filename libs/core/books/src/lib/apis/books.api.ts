@@ -20,13 +20,14 @@ export class BooksApi {
                 categoryId
                 completed
                 publisherId
-                createdAt
                 description
                 cover
                 published
                 genres
                 type
                 age
+                publishedAt
+                createdAt
                 updatedAt
                 userId
               }
@@ -55,13 +56,14 @@ export class BooksApi {
             categoryId
             completed
             publisherId
-            createdAt
             description
             cover
             published
             genres
             type
             age
+            publishedAt
+            createdAt
             updatedAt
             userId
           }
@@ -95,13 +97,14 @@ export class BooksApi {
             categoryId
             completed
             publisherId
-            createdAt
             description
             cover
             published
             genres
             type
             age
+            publishedAt
+            createdAt
             updatedAt
             userId
           }
@@ -148,6 +151,8 @@ export class BooksApi {
                 genres
                 type
                 newestChapters
+                publishedAt
+                createdAt
                 updatedAt
                 views
               }
@@ -176,6 +181,8 @@ export class BooksApi {
                 title
                 type
                 age
+                createdAt
+                publishedAt
                 updatedAt
                 userId
               }
@@ -193,7 +200,7 @@ export class BooksApi {
     const genres = filters.genres;
     const completed = filters.completed === '0' ? false : true;
     const type = filters.type == 'composed' ? 0 : 1;
-    const updatedAt = this.transformDate(filters.postingDate);
+    const publishedAt = this.transformDate(filters.postingDate);
     let queryString = '';
     let mvBooks = '';
 
@@ -210,13 +217,15 @@ export class BooksApi {
     }
 
     queryString = `query ${mvBooks}($categoryId: BigFloat, $completed: Boolean ${filters.completed ? `, $type: String` : ''}) {
-              ${mvBooks}(first: 20, condition: { categoryId: $categoryId, ${filters.completed ? ` type: $type,` : ''} completed: $completed }, orderBy: PUBLISHED_DESC,
-                filter: { updatedAt: {greaterThan: "${updatedAt}"} ${genres.length ? `, genres: {containsAnyKeys: ${JSON.stringify(genres)}}` : ''}}) {
+              ${mvBooks}(first: 20, condition: { categoryId: $categoryId, ${filters.completed ? ` type: $type,` : ''} completed: $completed }, orderBy: PUBLISHED_AT_DESC,
+                filter: { publishedAt: {greaterThan: "${publishedAt}"} ${genres.length ? `, genres: {containsAnyKeys: ${JSON.stringify(genres)}}` : ''}}) {
                 nodes {
                   bookId
                   title
                   categoryId
                   newestChapters
+                  createdAt
+                  publishedAt
                   updatedAt
                   authors
                 }

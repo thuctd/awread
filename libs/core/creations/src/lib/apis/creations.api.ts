@@ -37,12 +37,13 @@ export class CreationsApi {
               completed
               publisherId
               createdAt
+              publishedAt
+              updatedAt
               description
               cover
               published
               type
               age
-              updatedAt
               userId
               booksGenresByBookId {
                 nodes {
@@ -72,7 +73,7 @@ export class CreationsApi {
     return this.apollo.query({
       query: gql`
         query getAllBooks($userId: UUID!) {
-          allVCreations(condition: { userId: $userId, isDeleted: false }, orderBy: CREATED_AT_DESC) {
+          allVCreations(condition: { userId: $userId, isDeleted: false }, orderBy: UPDATED_AT_DESC) {
             nodes {
               title
               bookId
@@ -80,12 +81,13 @@ export class CreationsApi {
               completed
               publisherId
               createdAt
+              publishedAt
+              updatedAt
               description
               cover
               published
               type
               age
-              updatedAt
               userId,
               publishedCount,
               draftCount,
