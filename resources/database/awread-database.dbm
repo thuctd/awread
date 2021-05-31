@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="0,478" last-zoom="0.95" max-obj-count="31"
+<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="0,425" last-zoom="0.95" max-obj-count="31"
 	 default-owner="postgres">
 <role name="public_read"
       inherit="true">
@@ -70,7 +70,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</element>
 </opclass>
 
-<table name="books" layer="0" collapse-mode="2" max-obj-count="16" z-value="0">
+<table name="books" layer="0" collapse-mode="2" max-obj-count="18" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
 	<appended-sql><![CDATA[-- create index title_gin_idx on public.books
@@ -118,6 +118,9 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</column>
 	<column name="isDeleted" default-value="false">
 		<type name="boolean" length="0"/>
+	</column>
+	<column name="publishedAt">
+		<type name="timestamp" length="0"/>
 	</column>
 	<constraint name="books_pk" type="pk-constr" table="public.books">
 		<columns names="bookId" ref-type="src-columns"/>
@@ -232,7 +235,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</constraint>
 </table>
 
-<table name="chapters" layer="0" collapse-mode="2" max-obj-count="9" z-value="0">
+<table name="chapters" layer="0" collapse-mode="2" max-obj-count="10" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
 	<position x="1760" y="660"/>
@@ -259,6 +262,9 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</column>
 	<column name="isDeleted" default-value="false">
 		<type name="boolean" length="0"/>
+	</column>
+	<column name="publishedAt">
+		<type name="timestamp" length="0"/>
 	</column>
 	<constraint name="chapters_pk" type="pk-constr" table="public.chapters">
 		<columns names="chapterId" ref-type="src-columns"/>
@@ -475,7 +481,7 @@ end;]]></definition>
 		) z
 		where rank <= 2
 	) x using ("bookId")
-	inner join (
+	left join (
 		select 
 		"bookId",
 		"genreId",
@@ -485,7 +491,7 @@ end;]]></definition>
 		)) as genres
 		from books_genres natural join genres
 	) k  USING ("bookId")
-	inner join (
+	left join (
 		select 
 		  "bookId",
 		  "userId" as "authorId",
@@ -532,7 +538,7 @@ end;]]></definition>
 	</reference>
 	<reference>
 		<expression><![CDATA[ mv_books_latest_chapters
-inner join 
+left join 
 	book_visits using ("bookId")]]></expression>
 	</reference>
 	<expression type="select-exp">0</expression>
@@ -992,7 +998,7 @@ BEGIN
   	FOREACH "varUserId" IN ARRAY "authorIds"
   	LOOP
 		insert into authors("bookId","userId")
-		values("inputBookId", "varUserId"); 
+		values("inputBookId", "varUserId") on conflict do nothing;
   	END LOOP;
   	
   	RETURN "inputBookId";
@@ -1031,7 +1037,7 @@ BEGIN
   	FOREACH "varGenreId" IN ARRAY "genreIds"
   	LOOP
 		insert into books_genres("bookId","genreId")
-		values("inputBookId", "varGenreId"); 
+		values("inputBookId", "varGenreId") on conflict do nothing;
   	END LOOP;
   	
   	RETURN "inputBookId";
@@ -1053,6 +1059,9 @@ END;]]></definition>
 	<return-type>
 	<type name="uuid" length="0"/>
 	</return-type>
+	<parameter name="bookId">
+		<type name="uuid" length="0"/>
+	</parameter>
 	<parameter name="authorIds">
 		<type name="uuid" length="0" dimension="1"/>
 	</parameter>
@@ -1089,9 +1098,6 @@ END;]]></definition>
 	<parameter name="published">
 		<type name="boolean" length="0"/>
 	</parameter>
-	<parameter name="bookId">
-		<type name="uuid" length="0"/>
-	</parameter>
 	<definition><![CDATA[declare 
 --"bookId" uuid;
 result1 uuid;
@@ -1110,7 +1116,8 @@ published,
 age,
 description,
 cover,
-type
+type,
+"publishedAt"
 )
 VALUES (
 "bookId",
@@ -1123,7 +1130,11 @@ published,
 age,
 description,
 cover,
-type
+type,
+case 
+  when "published" = true then now()
+    else null
+  end
 ); 
 --RETURNING "bookId" INTO "bookId";
 
@@ -1149,8 +1160,8 @@ sum(v.count)::numeric as "viewCount"]]></expression>
 	</reference>
 	<reference>
 		<expression><![CDATA[books b
-inner join chapters c using ("bookId")
-inner join book_visits v using ("bookId")]]></expression>
+left join chapters c using ("bookId")
+left join book_visits v using ("bookId")]]></expression>
 	</reference>
 	<reference>
 		<expression><![CDATA[group by 1]]></expression>
@@ -1164,10 +1175,10 @@ inner join book_visits v using ("bookId")]]></expression>
 	<schema name="public"/>
 	<role name="postgres"/>
 	<position x="1400" y="1600"/>
-	<column name="storage" default-value="'https://awread-bucket.ss-hn-1.bizflycloud.vn'">
+	<column name="storage">
 		<type name="text" length="0"/>
 	</column>
-	<column name="version" default-value="'1.0.0'">
+	<column name="version">
 		<type name="text" length="0"/>
 	</column>
 	<column name="settingId" not-null="true">
@@ -1281,7 +1292,11 @@ type = itype,
 title = ititle,
 description = idescription,
 completed = icompleted,
-published = ipublished 
+published = ipublished ,
+"publishedAt" =  case 
+           when "ipublished" = true then now()
+           else null
+        end
 where books."bookId" = "ibookId";
 
 
@@ -1536,11 +1551,6 @@ end;]]></definition>
 	<privileges insert="true" update="true"/>
 </permission>
 <permission>
-	<object name="public.books_genres" type="table"/>
-	<roles names="basic_write"/>
-	<privileges delete="true" insert="true" update="true"/>
-</permission>
-<permission>
 	<object name="public.chapters" type="table"/>
 	<roles names="basic_write"/>
 	<privileges delete="true" insert="true" update="true"/>
@@ -1587,6 +1597,11 @@ end;]]></definition>
 </permission>
 <permission>
 	<object name="public.books" type="table"/>
+	<roles names="public_read"/>
+	<privileges select="grant-op"/>
+</permission>
+<permission>
+	<object name="public.books_genres" type="table"/>
 	<roles names="public_read"/>
 	<privileges select="grant-op"/>
 </permission>
