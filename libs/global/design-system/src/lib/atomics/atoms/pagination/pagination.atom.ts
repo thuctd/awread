@@ -16,7 +16,7 @@ export class PaginationAtom implements OnInit, OnChanges {
   @Input() totalRecords = 0;
   @Input() recordsPerPage = 0;
 
-  @Output() onPageChange: EventEmitter<number> = new EventEmitter();
+  @Output() onPageChange = new EventEmitter();
   public pages: number[] = [];
   activePage: number;
 

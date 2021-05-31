@@ -49,8 +49,6 @@ export class DetailPage implements OnInit, OnDestroy {
     this.getAllChapters();
   }
 
-
-  // BUG: breadcrumb truyen vao ; bi bien doi
   getbreadcrumbs() {
     return [{
       title: 'Home',
