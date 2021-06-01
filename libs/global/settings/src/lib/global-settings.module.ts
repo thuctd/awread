@@ -46,7 +46,10 @@ import { ErrorInterceptor } from "./error.interceptor";
     {
       provide: 'SocialAuthServiceConfig',
       useValue: {
-        autoLogin: false,
+        autoLogin: true,
+        onError: (error) => {
+          console.warn('error on social login:', error);
+        },
         providers: [
           {
             id: GoogleLoginProvider.PROVIDER_ID,
