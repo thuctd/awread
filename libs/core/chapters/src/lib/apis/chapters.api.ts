@@ -34,7 +34,7 @@ export class ChaptersApi {
       .query({
         query: gql`
           query BookChapters($bookId: UUID!) {
-            allChapters(condition: { bookId: $bookId, isDeleted: false }, orderBy: POSITION_DESC) {
+            allChapters(condition: { bookId: $bookId, isDeleted: false }, orderBy: POSITION_ASC) {
               nodes {
                 bookId
                 chapterId
