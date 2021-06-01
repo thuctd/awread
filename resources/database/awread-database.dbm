@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="0,729" last-zoom="0.95" max-obj-count="28"
+<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="0,603" last-zoom="0.95" max-obj-count="27"
 	 default-owner="postgres">
 <role name="public_read"
       inherit="true">
@@ -120,7 +120,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="isDeleted" default-value="false">
 		<type name="boolean" length="0"/>
 	</column>
-	<column name="publishedAt">
+	<column name="publishedAt" default-value="now()">
 		<type name="timestamp" length="0"/>
 	</column>
 	<constraint name="books_pk" type="pk-constr" table="public.books">
@@ -1352,6 +1352,54 @@ insert into private.users("userId", "passwordHash") values(
 	    );
 
 return "userId";
+
+end;]]></definition>
+</function>
+
+<function name="forgot_password_hash"
+		window-func="false"
+		returns-setof="false"
+		behavior-type="CALLED ON NULL INPUT"
+		function-type="VOLATILE"
+		security-type="SECURITY INVOKER"
+		execution-cost="1"
+		row-amount="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<language name="plpgsql"/>
+	<return-type>
+	<type name="smallint" length="0"/>
+	</return-type>
+	<parameter name="email">
+		<type name="text" length="0"/>
+	</parameter>
+	<definition><![CDATA[declare 
+"forgotToken" public.jwt_token;
+"account" public.users;
+"passwordHash" text;
+begin
+
+select * into account
+  from public.users
+  where
+	public.users.email = email;
+
+	select "passwordHash" into "accountPasswordHash"
+	from private.users
+	where account."userId" = "userId";
+
+	"matchPassword"  := "accountPasswordHash" = crypt(password, "accountPasswordHash" );
+
+  	if "matchPassword" then
+		"accessToken" := (account."userId", account.role, extract(epoch from (now() + interval '3 months')))::public.jwt_token;
+    	return query select "accessToken", account, "matchPassword";
+  	elsif account is not null then 
+		return query select "accessToken", account, "matchPassword";
+	else 
+    	return query select "accessToken", account, "matchPassword";
+  	end if;
+
+"forgotToken" := (account."userId", 'forgotToken', extract(epoch from (now() + interval '5 minutes')))::public.jwt_token;
 
 end;]]></definition>
 </function>

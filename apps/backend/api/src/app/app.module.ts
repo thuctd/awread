@@ -5,10 +5,10 @@ import { UploadCoverController } from './controllers/upload-cover/upload-cover.c
 import { SharpAddon, S3Addon } from './controllers/upload-cover/addons';
 import { UploadCoverGear } from './controllers/upload-cover/gears';
 import { UploadCoverFacade } from './controllers/upload-cover/facades';
-import { EmailController } from './controllers/email/email.controller';
-import { NodeMailerAddon } from './controllers/email/addons';
-import { ForgotPasswordGear } from './controllers/email/gears';
-import { ForgotPasswordFacade } from './controllers/email/facades';
+import { EmailController } from './controllers/forgot-password/email.controller';
+import { NodeMailerAddon } from './controllers/forgot-password/addons';
+import { ForgotPasswordGear } from './controllers/forgot-password/gears';
+import { ForgotPasswordFacade } from './controllers/forgot-password/facades';
 @Module({
   imports: [],
   controllers: [AppController, UploadCoverController, EmailController],

@@ -4,10 +4,12 @@ on:
     inputs:
       logLevel:
         description: 'Log level'
-        required: true
         default: 'warning'
-      tags:
-        description: 'Test scenario tags'
+        required: true
+      name:
+        description: 'build or restart'
+        default: 'build'
+        required: true
   push:
     branches:
       - reader-web
@@ -22,7 +24,23 @@ on:
       - reopened
       - synchronize
 jobs:
-  deploy:
+  restart:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.name=='restart'
+    steps:
+      - name: executing remote ssh commands using ssh key
+        uses: appleboy/ssh-action@master
+        with:
+          host: awread.vn
+          username: root
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            curl -X POST -H 'Content-type: application/json' --data '{"text":"Restarting reader web"}' https://hooks.slack.com/services/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
+            dokku ps:restart reader-web
+            curl -X POST -H 'Content-type: application/json' --data '{"text":"Restart completed"}' https://hooks.slack.com/services/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
+
+  build:
     runs-on: ubuntu-latest
     timeout-minutes: 60
     if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
