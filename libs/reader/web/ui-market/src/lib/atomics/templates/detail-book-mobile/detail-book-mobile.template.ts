@@ -13,10 +13,11 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DetailBookMobileTemplate implements OnInit {
+  @Input() items = [];
   @Input() book = {
     title: 'Ngày ấy vì ai mà đổi thay',
-    auth: 'Cẩm Thương',
-    type: 'Hoang tưởng, kinh dị',
+    authors: [''],
+    genres: [''],
     status: 'Đang tiến hành',
     publishedAt: '2020',
     country: '(chủ yếu dành cho truyện sưu tầm)'

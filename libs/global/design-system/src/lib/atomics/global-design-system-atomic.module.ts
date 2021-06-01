@@ -288,7 +288,7 @@ import { MatSelectModule } from '@angular/material/select';
     RdProfileInfoPersonalItemAtom,
     RdDropdownMenuMbAtom,
     RdIconTextItemAtom,
-    RdTextLinkMenuMbAtom,
+    RdTextLinkMenuMbAtom
   ],
   declarations: [
     notReadyDirective,
@@ -415,4 +415,4 @@ import { MatSelectModule } from '@angular/material/select';
     RdTextLinkMenuMbAtom,
   ],
 })
-export class GlobalDesignSystemAtomicModule {}
+export class GlobalDesignSystemAtomicModule { }

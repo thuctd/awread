@@ -1,5 +1,11 @@
 <section class="px-4">
-  <organ-content-book class="pb-8"></organ-content-book>
-  <organ-comment-book-read class="pb-4"></organ-comment-book-read>
-  <list-detail-top-book [books]='topBooks' (moreEvent)='nativeTopBook.emit($event)' class="border-t px-4"></list-detail-top-book>
+  <ng-container *ngIf="!loading; else noData">
+    <organ-content-book [chapters]="chapters" [chapter]="chapter" (backChapterBook)="backChapterBook.emit($event)"
+      (nextChapterBook)="nextChapterBook.emit($event)" class="pb-8"></organ-content-book>
+    <organ-comment-book-read class="pb-4"></organ-comment-book-read>
+    <list-detail-top-book [books]="books" (moreEvent)="nativeTopBook.emit($event)" class="border-t px-4"></list-detail-top-book>
+  </ng-container>
 </section>
+<ng-template #noData>
+  <div class="pt-8 text-xs">Truyện đang được tải mong các bạn chờ trong giây lát...</div>
+</ng-template>

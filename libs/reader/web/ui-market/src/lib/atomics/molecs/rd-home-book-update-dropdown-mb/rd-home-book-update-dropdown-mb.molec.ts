@@ -1,5 +1,5 @@
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'molec-rd-home-book-update-dropdown-mb',
@@ -19,7 +19,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 export class RdHomeBookUpdateDropdownMbMolec implements OnInit {
   @Input() title = 'Tất cả';
   faIcon = faAngleDown;
-  @Input() items = [
+  @Input() categories = [
     {
       id: 1,
       name: 'Tất cả',
@@ -39,6 +39,8 @@ export class RdHomeBookUpdateDropdownMbMolec implements OnInit {
   ];
 
   @Input() isDropdown = false;
+  @Output() emitBooks = new EventEmitter();
+  @Output() emitAllBooks = new EventEmitter();
 
   constructor() {}
 
@@ -50,9 +52,5 @@ export class RdHomeBookUpdateDropdownMbMolec implements OnInit {
 
   onClick() {
     this.isDropdown = false;
-  }
-
-  getValueDropdown(event: any) {
-    this.title = event.target.outerText;
   }
 }

@@ -16,6 +16,7 @@ export class RdAuthorMainMbOrgan implements OnInit {
   @Input() excerpt = `Chào chúng cậu tớ là Cẩm Thương ...`;
   @Input() isFollow = true;
   @Input() isBlock = true;
+  @Input() user;
 
   constructor() {}
 

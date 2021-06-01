@@ -8,6 +8,7 @@ export class LoginGuard implements CanActivate {
   constructor(private afAuth: AngularFireAuth, private router: Router) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    console.log('login guard');
     if (localStorage.getItem('accessToken')) {
       return of(true);
     }

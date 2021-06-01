@@ -24,8 +24,11 @@ export class HomeMobileTemplate implements OnInit {
   @Input() getFeatureBooks = [];
   @Input() genres = [];
   @Input() bookByGenre = [];
-  @Output() filterItemsByGenre = new EventEmitter();
+  @Input() categories = [];
   @Input() loading: boolean;
+  @Output() emitBooks = new EventEmitter();
+  @Output() emitAllBooks = new EventEmitter();
+  @Output() filterItemsByGenre = new EventEmitter();
 
   constructor() { }
 

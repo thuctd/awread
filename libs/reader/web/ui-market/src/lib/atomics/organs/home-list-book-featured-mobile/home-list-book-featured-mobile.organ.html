@@ -4,8 +4,8 @@
   </div>
   <div class="grid grid-cols-12 mx-auto">
     <div *ngFor="let book of books | slice:0:3" class="col-span-4 px-2">
-      <atom-img-m [size]="'s'" [bookId]="book.id" [srcImg]="book.imgUrl"></atom-img-m>
-      <molec-info-book [book]="book" [displayUI]="displayUI"></molec-info-book>
+      <atom-img-m [size]="'s'" [bookId]="book.bookId" [srcImg]="book.cover"></atom-img-m>
+      <molec-info-book [book]="book" [displayUI]="displayUI" [btns]="book.newestChapters"></molec-info-book>
     </div>
   </div>
   <pagination></pagination>

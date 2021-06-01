@@ -22,7 +22,6 @@
     <ng-template #list_content>
       <div class="grid grid-cols-12 gap-10 place-content-center">
         <div *ngFor="let book of longbooks| slice:0:10;" class="col-span-2 md:col-span-6">
-          <!-- <pre> {{ book | json }} </pre> -->
           <div [ngSwitch]="categoryId">
             <div *ngSwitchCase="'1'">
               <organ-books-grid [book]="book" [chapters]="book.newestChapters"></organ-books-grid>
@@ -45,7 +44,7 @@
       </div>
     </ng-template>
     <div class="flex justify-end pt-4">
-      <atom-text-link (click)="moreEvent.emit()" [text]="moreContent" [class]="'text-base text-gray-400 uppercase font-bold'"></atom-text-link>
+      <atom-text-link (click)="moreEvent.emit($event)" [text]="moreContent" [class]="'text-base text-gray-400 uppercase font-bold'"></atom-text-link>
     </div>
   </ng-container>
   <ng-template #noData>

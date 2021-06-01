@@ -17,26 +17,13 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 export class RdSearchBookMbTemplate implements OnInit {
   @Input() title = 'Cô gái năm ấy chúng ta theo đuổi';
   @Input() faIcon = faSearch;
-  @Output() submitSearchBtn = new EventEmitter();
   @Input() inputControl = new FormControl();
-  @Input() items = [
-    {
-      title: 'Cô gái chúng ta cùng theo đuổi năm nào',
-      bookId: '1',
-      authors: [],
-      updatedAt: '2021-05-03',
-      category: 'Hành động',
-    },
-    {
-      title: 'Cô gái chúng ta cùng theo đuổi năm nào',
-      bookId: '1',
-      authors: [],
-      updatedAt: '2021-05-03',
-      category: 'zui zẻ',
-    },
-  ];
+  @Input() items = [];
 
-  constructor() {}
+  @Output() submitSearchBtn = new EventEmitter();
+  @Output() bindingUrl = new EventEmitter();
 
-  ngOnInit(): void {}
+  constructor() { }
+
+  ngOnInit(): void { }
 }

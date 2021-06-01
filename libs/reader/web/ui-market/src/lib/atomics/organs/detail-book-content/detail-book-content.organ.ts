@@ -14,11 +14,13 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
 })
 export class DetailBookContentOrgan implements OnInit {
   @Input() book = {
+    bookId: '1',
+    chapterId: '1',
+    cover: '1',
     title: 'Ngày ấy vì ai mà đổi thay',
-    authorId: '1',
-    auth: 'Cẩm Thương',
-    genres: 'Hoang tưởng, kinh dị',
-    status: 'Đang tiến hành',
+    authors: [],
+    genres: [],
+    completed: true,
     publishedAt: '2020',
     country: '(chủ yếu dành cho truyện sưu tầm)'
   };

@@ -13,7 +13,10 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RdAuthorBookItemMolec implements OnInit {
-  @Input() category = 'Hành động, phiêu lưu';
+  @Input() items = [{
+    id: '',
+    name: ''
+  }];
   @Input() book;
 
   @Input() displayUIMobile = {

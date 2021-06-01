@@ -26,12 +26,7 @@ export class InfoBookMolec implements OnInit {
     },
   };
 
-  @Input() book = {
-    title: 'Cô gái chúng ta cùng theo đuổi năm nào',
-    bookId: '1',
-    authors: [],
-    updatedAt: '2021-05-03'
-  };
+  @Input() book;
 
   @Input() btns = [
     {

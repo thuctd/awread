@@ -1,6 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { forkJoin } from 'rxjs';
 import { RdAuthorPopupListFollowersTemplate } from '../../templates/rd-author-popup-list-followers/rd-author-popup-list-followers.template';
 @Component({
   selector: 'molec-rd-author-detail',
@@ -17,8 +16,8 @@ import { RdAuthorPopupListFollowersTemplate } from '../../templates/rd-author-po
 export class RdAuthorDetailMolec implements OnInit {
   @Input() numberProduct = '5';
   @Input() numberFollow = '10';
-  @Input() authorId = '123456zxcasdwqe_zxxzc';
   @Input() user = {
+    userId: '',
     name: '',
     lastname: '',
     middlename: '',

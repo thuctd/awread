@@ -1,3 +1,4 @@
+import { FormControl } from '@angular/forms';
 import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
@@ -19,6 +20,8 @@ export class RdNavbarMbTemplate implements OnInit {
   @Input() user = {};
   @Input() isLogin;
   @Input() isSearch = false;
+  @Input() searchControl = new FormControl('');
+  @Output() eventSearch = new EventEmitter();
   @Output() logoutEvent = new EventEmitter();
   constructor() {}
 
