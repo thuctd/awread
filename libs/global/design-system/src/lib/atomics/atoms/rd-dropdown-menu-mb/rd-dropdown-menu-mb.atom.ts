@@ -24,18 +24,18 @@ export class RdDropdownMenuMbAtom implements OnInit {
     dropdown: [
       {
         title: 'Truyện tự sáng tác',
-        href: '/composed',
+        href: ['/composed', { categoryId: '' }],
       },
       {
         title: 'Truyện sưu tầm',
-        href: '/collected',
+        href: ['/collected', { categoryId: '' }],
       },
     ],
   };
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   displayMenu() {
     this.isDisplayMenu = !this.isDisplayMenu;

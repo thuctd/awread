@@ -30,12 +30,11 @@ export class WrtBookDetailTabOrgan implements OnInit {
 
   @Input() categories;
   @Input() genres;
-  @Output() bookSubmitEvent = new EventEmitter();
-  @Output() genresEvent = new EventEmitter();
-  @Output() cancelCreateBook = new EventEmitter();
-  @Output() confirmCreateBook = new EventEmitter();
-  @Input() submitted: boolean;
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void { }
+
+  wtf(event) {
+    this.detailBookEvent.emit('save');
+  }
 }

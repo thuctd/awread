@@ -49,16 +49,14 @@ export class DetailPage implements OnInit, OnDestroy {
     this.getAllChapters();
   }
 
-
-  // BUG: breadcrumb truyen vao ; bi bien doi
   getbreadcrumbs() {
     return [{
-      title: 'Home',
+      title: 'Trang chủ',
       link: ['/']
     },
     {
-      title: this.book.type == '0' ? 'composed' : 'collected',
-      link: ['/', this.book.type == '0' ? 'composed' : 'collected', { categoryId: this.book.categoryId }]
+      title: this.book.type == '0' ? 'Truyện tự sáng tác' : 'Truyện sưu tầm',
+      link: ['/', this.book.type == '0' ? 'Truyện tự sáng tác' : 'Truyện sưu tầm', { categoryId: this.book.categoryId }]
     },
     {
       title: this.book.title,

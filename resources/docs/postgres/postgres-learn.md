@@ -44,6 +44,8 @@ WHERE relkind = 'm';
 DROP MATERIALIZED VIEW mv_most_view_books, mv_books_latest_chapters, mv_settings CASCADE;
 drop v_creations cascade;
 
+ALTER TABLE books ALTER COLUMN cover TYPE boolean using cover::boolean;
+
 ALTER TABLE books
 ALTER COLUMN type DROP DEFAULT,
 ALTER COLUMN type TYPE numeric USING type::numeric,

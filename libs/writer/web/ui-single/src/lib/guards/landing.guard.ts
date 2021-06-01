@@ -11,10 +11,13 @@ export class LandingGuard implements CanActivate {
   ) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    console.log('landing guard');
     if (localStorage.getItem('accessToken')) {
+      console.log('have accessToken', localStorage.getItem('accessToken'));
       this.authFacade.routeDefaultPage();
       return of(false);
     }
+    console.log('no accessToken, allow to go', route, state);
     return of(true);
   }
 }

@@ -1,13 +1,16 @@
 import { CurrentUserFacade } from '@awread/core/users';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Directive, Injectable, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { Directive, Injectable, OnInit, ChangeDetectorRef, OnDestroy, Input } from '@angular/core';
 import { combineLatest, of, Subject } from 'rxjs';
 import { CreationsFacade } from '@awread/core/creations';
 import { ChaptersFacade } from '@awread/core/chapters';
 import { CategoriesFacade } from '@awread/core/categories';
 import { GenresFacade } from '@awread/core/genres';
 import { switchMap } from 'rxjs/operators';
+import { Location } from '@angular/common';
+import { SnackbarService } from '@awread/global/packages';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -15,82 +18,112 @@ import { switchMap } from 'rxjs/operators';
 export class DetailBookPage implements OnInit {
   bookForm: FormGroup;
   bookId: string;
-  chapterEntity$: any;
+  categories$ = this.categoriesFacade.selectAllCategoriesAkita();
+  genres$ = this.genresFacade.selectAllGenresAkita();
   chapters$ = this.chaptersFacade.chapters$;
-  book;
-  selectedTab = 'toc';
-  selectedBookStatus = 'DRAFT';
-  genresListSelected = [];
   tabsHead = [
     { name: 'THÔNG TIN TRUYỆN', href: null, isActive: true },
     { name: 'MỤC LỤC', href: ['../toc'], isActive: false },
   ];
-  categories$;
-  genres$;
-  bookFormValueBefore = ''; // dùng để check xem giá trị trước với giá trị bookform hiện tại có khớp nhau hay ko?
-  type: string;
-  submitted = false;
-  destroy$ = new Subject();
+
   constructor(
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
     private creationsFacade: CreationsFacade,
-    private currentUserFacade: CurrentUserFacade,
+    private cd: ChangeDetectorRef,
     private chaptersFacade: ChaptersFacade,
     private categoriesFacade: CategoriesFacade,
     private genresFacade: GenresFacade,
+    private location: Location,
+    private snackbarService: SnackbarService,
     private router: Router,
-    private cd: ChangeDetectorRef
   ) { }
-
-  detailBookAction(event) {
-    switch (event) {
-      case 'cancel':
-
-        break;
-      case 'publish':
-
-        break;
-      case 'save':
-
-        break;
-
-      default:
-        break;
-    }
-  }
 
   ngOnInit(): void {
     this.initForm();
     this.getBook();
-    this.categories$ = this.categoriesFacade.selectAllCategoriesAkita();
-    this.genres$ = this.genresFacade.selectAllGenresAkita();
-  }
-
-  genresEvent(genres) {
-    this.genresListSelected = genres;
   }
 
   getBook() {
     return this.activatedRoute.paramMap
       .pipe(
-        switchMap((params) => this.creationsFacade.selectEntity(params.get('bookId')))
+        switchMap((params) => {
+          this.bookId = params.get('bookId');
+          if (this.bookId == 'new') {
+            return of(null);
+          } else {
+            return this.creationsFacade.selectEntity(this.bookId);
+          }
+        })
       )
       .subscribe((res) => {
         console.log('book Data', res);
-        this.updateForm(res);
+        if (res) {
+          this.updateForm(res);
+        } else {
+          this.newBookForm();
+        }
       });
   }
 
-  updateForm({ book, genreIds, authors }) {
+  detailBookAction(event) {
+    switch (event) {
+      case 'cancel':
+        this.router.navigate(['list']);
+        break;
+      case 'publish':
+        this.bookForm.patchValue({ published: true });
+        this.save();
+        break;
+      case 'save':
+        this.save();
+        break;
+
+      default:
+        console.log('event', event);
+        break;
+    }
+  }
+
+  save() {
+    if (this.bookId == 'new') {
+      if (this.bookForm.invalid) {
+        this.bookForm.get('title').setValue(this.bookForm.value.title, { emitEvent: true });
+        this.bookForm.get('categoryId').setValue(this.bookForm.value.categoryId, { emitEvent: true });
+        this.bookForm.markAllAsTouched();
+        return this.snackbarService.showWarning('Vui lòng điền đủ thông tin');
+      }
+
+      this.creationsFacade.create(this.bookForm.value).subscribe(value => {
+        console.log('value', value);
+        this.location.back();
+      })
+    } else {
+      this.creationsFacade.update(this.bookForm.value).subscribe(value => {
+        console.log('value', value);
+      })
+    }
+  }
+
+  newBookForm() {
+    console.log('this.creationsFacade.generateUuid()', this.creationsFacade.generateUuid());
+    this.creationsFacade.generateUuid().subscribe(uuid => {
+      this.bookForm.patchValue({ bookId: uuid });
+      console.log('this form', this.bookForm.value);
+    });
+  }
+
+  updateForm({ book, genreIds, authors, authorIds }) {
     this.bookForm.patchValue({
-      title: book.title,
+      bookId: this.bookId,
+      title: book.title ?? null,
       description: book.description,
       categoryId: book.categoryId,
-      genreIds: book.genreIds,
-      audience: book.audience,
+      genreIds: genreIds,
+      authorIds: authorIds,
       completed: book.completed,
       published: book.published,
+      cover: book.cover,
       type: book.type,
       age: book.age,
     })
@@ -98,13 +131,16 @@ export class DetailBookPage implements OnInit {
 
   private initForm() {
     this.bookForm = this.fb.group({
-      title: ['', Validators.required],
+      bookId: [null],
+      title: [null, [Validators.required]],
       description: [null],
-      categoryId: [null],
+      categoryId: [null, [Validators.required]],
       genreIds: [[]],
-      audience: ['none'],
+      authorIds: [[]],
+      publisherId: [null],
       completed: [false],
       published: [false],
+      cover: [false],
       type: "0",
       age: "2"
     });

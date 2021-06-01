@@ -24,6 +24,19 @@ export class ChaptersGear {
     }
   }
 
+  fetchLatestChapterPosition(bookId) {
+    return this.chaptersApi.getLatestPosition(bookId).pipe(
+      map(([latestChapter]) => {
+        console.log('latestChapter', latestChapter);
+        if (latestChapter) {
+          return +latestChapter.position + 1;
+        } else {
+          return 0;
+        }
+      })
+    )
+  }
+
   getChapter(chapterId: string, bookId: string) {
     return this.chaptersApi.getChapter(chapterId, bookId)
       .pipe(
@@ -72,27 +85,29 @@ export class ChaptersGear {
   }
 
   update(chapter) {
-    return this.chaptersApi.update(chapter).pipe(
-      tap(result => {
-        if (result.errors) {
-          result.errors.forEach(error => this.SnackbarService.showError(error.message));
-        } else {
-          this.SnackbarService.showSuccess('Lưu chương thành công');
-        }
-      })
-    )
+    return this.chaptersApi.update(chapter)
+      .pipe(
+        tap(result => {
+          if (result.errors) {
+            result.errors.forEach(error => this.SnackbarService.showError(error.message));
+          } else {
+            this.SnackbarService.showSuccess('Lưu chương thành công');
+          }
+        })
+      )
   }
 
   create(chapter) {
-    return this.chaptersApi.create(chapter).pipe(
-      tap(result => {
-        if (result.errors) {
-          result.errors.forEach(error => this.SnackbarService.showError(error.message));
-        } else {
-          this.SnackbarService.showSuccess('Tạo chương mới thành công');
-        }
-      })
-    )
+    return this.chaptersApi.create(chapter)
+      .pipe(
+        tap(result => {
+          if (result.errors) {
+            result.errors.forEach(error => this.SnackbarService.showError(error.message));
+          } else {
+            this.SnackbarService.showSuccess('Tạo chương mới thành công');
+          }
+        })
+      )
   }
 
   delete(chapterId) {

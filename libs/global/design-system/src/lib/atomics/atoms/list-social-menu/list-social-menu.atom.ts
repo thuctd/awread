@@ -21,14 +21,14 @@ export class ListSocialMenuAtom implements OnInit {
   @Input() actions = [
     {
       name: 'Thêm chương',
-      type: 'new-chapter',
+      type: 'create-chapter',
       icon: faPlusCircle,
     },
-    // {
-    //   name: 'Chỉnh sửa',
-    //   type: 'edit',
-    //   icon: faPlusSquare,
-    // },
+    {
+      name: 'Chỉnh sửa',
+      type: 'edit',
+      icon: faPlusSquare,
+    },
     {
       name: 'Xóa',
       type: 'delete',

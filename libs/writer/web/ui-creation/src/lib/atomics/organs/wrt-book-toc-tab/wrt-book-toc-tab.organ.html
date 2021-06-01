@@ -3,8 +3,10 @@
     <div class="col-span-2 md:col-span-12">
       <wrt-detail-tab-head [tabsHead]="tabsHead"></wrt-detail-tab-head>
       <div class="py-4">
-        <div class="mb-4 ml-4">
-          <cr-submit-btn class="w-44" (btnClicked)="chapterActionEvent.emit({ type: 'create' })" [faIcon]="faIcon" [submitText]="'Tạo chương mới'">
+        <div class="mb-4 ml-4 flex">
+          <cr-submit-btn [active]="false" class="pr-5" (btnClicked)="chapterActionEvent.emit({ type: 'back' })" [submitText]="'Quay lại'">
+          </cr-submit-btn>
+          <cr-submit-btn class="" (btnClicked)="chapterActionEvent.emit({ type: 'create' })" [faIcon]="faIcon.faPlus" [submitText]="'Tạo chương mới'">
           </cr-submit-btn>
         </div>
 

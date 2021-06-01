@@ -9,7 +9,7 @@ import { SnackbarService } from '@awread/global/packages';
 @Directive()
 export class LoginRegisterPage extends LoginRegisterIpage {
     constructor(
-        public dialogRef: MatDialogRef<LoginRegisterIpage>,
+        @Optional() public dialogRef: MatDialogRef<LoginRegisterIpage>,
         public authFacade: AuthFacade,
         public activatedRoute: ActivatedRoute,
         public fb: FormBuilder,

@@ -17,7 +17,7 @@ export class GenresGear {
     this.genresStore.setLoading(true);
     return this.genresApi.getAllGenres().pipe(
       map((result) => this.genresStore.set(result)),
-      tap(() => { this.genresStore.setLoading(false) })
+      tap(() => { this.genresStore.setLoading(false) }),
     );
   }
 

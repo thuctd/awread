@@ -1,6 +1,8 @@
 import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { WrtDetailPopupBookTemplate } from '@awread/writer/web/ui-creation';
+import { faChartLine, faShareAlt, faAngleDown, faPlusCircle, faPlusSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
+
 
 @Component({
   selector: 'organ-wrt-books-list',
@@ -23,27 +25,42 @@ import { WrtDetailPopupBookTemplate } from '@awread/writer/web/ui-creation';
 export class WrtBooksListOrgan implements OnInit {
   @Input() books = [];
   @Input() loading: boolean;
-  @Output() moreEvent = new EventEmitter();
-  @Output() addChapterEvent = new EventEmitter();
-  @Output() removeBookEvent = new EventEmitter();
-  @Output() updateBookStatusEvent = new EventEmitter();
+  @Output() bookEvent = new EventEmitter();
+  @Input() data = {
+    btns: [
+      {
+        titleButton: 'Thống kê',
+        faIcon: faChartLine,
+        type: 'static',
+      },
+      {
+        titleButton: 'Chia sẻ',
+        faIcon: faShareAlt,
+        type: 'share',
+      },
+    ],
+    actions: [
 
-  demoNumber = 10;
+      {
+        name: 'Thêm chương',
+        type: 'create-chapter',
+        icon: faPlusCircle,
+      },
+      {
+        name: 'Chỉnh sửa',
+        type: 'edit',
+        icon: faPlusSquare,
+      },
+      {
+        name: 'Xóa',
+        type: 'delete',
+        icon: faTrash,
+      },
+    ]
+  };
 
-  counter = Array;
+  constructor(private matDialog: MatDialog) { }
 
-  constructor(private matDialog: MatDialog) {}
+  ngOnInit(): void { }
 
-  ngOnInit(): void {}
-
-  numberReturn(length) {
-    return new Array(length);
-  }
-
-  openDetailBook(): void {
-    this.matDialog.open(WrtDetailPopupBookTemplate, {
-      width: '55rem',
-      height: '33rem',
-    });
-  }
 }
