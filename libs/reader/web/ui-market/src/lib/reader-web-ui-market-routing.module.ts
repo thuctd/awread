@@ -91,6 +91,13 @@ const routes: Routes = [
                 : import('./pages/news-detail-desktop/news-detail-desktop.module').then((m) => m.NewsDetailDesktopModule),
           },
           {
+            path: 'top-books',
+            loadChildren: () =>
+              window.innerWidth <= 768 && window?.haveMobile
+                ? import('./pages/top-books-mobile/top-books-mobile.module').then((m) => m.TopBooksMobileModule)
+                : import('./pages/top-books-desktop/top-books-desktop.module').then((m) => m.TopBooksDesktopModule),
+          },
+          {
             path: '',
             pathMatch: 'full',
             redirectTo: '',

@@ -1,0 +1,27 @@
+<section class="w-full max-w-screen-xl mx-auto px-6 xl:px-10 pt-36 relative">
+  <div class="border-b border-gray-300">
+    <atom-title [title]="'TOP PHỔ BIẾN'"></atom-title>
+  </div>
+  <div class="mt-8 relative">
+    <div [ngClass]="filterbook === false ? 'hidden pt-12' : ''" class="bg-white shadow-md py-4 absolute top-16 rounded-sm z-40 w-full">
+      <molec-search-form (filterBooksEvent)="filterBooksEvent.emit()" [filters]="filtersForm" [genres]="genres"></molec-search-form>
+    </div>
+    <div class="absolute top-0 right-0">
+      <div class="inline-flex">
+        <div class="rounded-md text-sm leading-none border-gray-200 mt-1" *ngFor="let action of actions">
+          <atom-btn-icon class="{{action.class}}" [icon]="action.faIcon"
+            [ngClass]="display === action.display ? 'bg-green-primary text-white': 'bg-white text-green-primary'"
+            (eventChangesDisplay)="changeDisplay(action.display)">
+          </atom-btn-icon>
+        </div>
+        <div class="pl-8">
+          <atom-btn-rectangle (click)="changeDisplayFilter()" [text]="'Lọc truyện'" [class]="'py-1.5 px-4 rounded-lg roboto'" (btnClicked)="eventSearch.emit()">
+          </atom-btn-rectangle>
+        </div>
+      </div>
+    </div>
+    <div [ngClass]="filterbook === false ? 'pt-12' : 'pt-36'">
+      <organ-list-top-book [display]="display" [books]="books"></organ-list-top-book>
+    </div>
+  </div>
+</section>
