@@ -12,8 +12,8 @@ import cron from 'cron';
 
 const app = express();
 const FIREBASE_URL = environment.firebase.databaseURL;
-const DATABASE_URL = process.env.DATABASE_URL || environment.postgres.DATABASE_URL;
-const SCHEMA = environment.postgres.SCHEMA;
+const DATABASE_URL = process.env.DATABASE_URL || "postgres://postgres:admin@localhost:5432/awread_database";
+const SCHEMA = 'public';
 
 import { AuthController } from './app/auth.controller';
 const authController = new AuthController();
