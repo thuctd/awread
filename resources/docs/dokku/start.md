@@ -63,3 +63,7 @@ dokku apps:unlock APP
 # log:
 
 dokku logs backend-graphql -t
+
+# configs:
+
+dokku config:show reader-web

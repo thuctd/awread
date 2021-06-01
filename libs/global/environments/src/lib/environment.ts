@@ -12,10 +12,5 @@ export const environment = {
     storageBucket: 'awready-beta.appspot.com',
     messagingSenderId: '158126895088',
     appId: '1:158126895088:web:070f0e8433ec012b0a3735',
-  },
-  postgres: {
-    DATABASE_URL:
-      'postgres://postgres:admin@localhost:5432/awread_database',
-    SCHEMA: 'public',
-  },
+  }
 };

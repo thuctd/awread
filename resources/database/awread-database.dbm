@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="0,981" last-zoom="0.95" max-obj-count="31"
+<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="0,729" last-zoom="0.95" max-obj-count="28"
 	 default-owner="postgres">
 <role name="public_read"
       inherit="true">
@@ -25,7 +25,8 @@ CAUTION: Do not modify this file unless you know what you are doing.
       inherit="true">
 </role>
 
-<role name="basic_write">
+<role name="basic_write"
+      inherit="true">
 </role>
 
 <database name="awread_database" is-template="false" allow-conns="true">
@@ -1323,6 +1324,38 @@ return uuid_generate_v4();
 end;]]></definition>
 </function>
 
+<function name="reset_password"
+		window-func="false"
+		returns-setof="false"
+		behavior-type="CALLED ON NULL INPUT"
+		function-type="VOLATILE"
+		security-type="SECURITY INVOKER"
+		execution-cost="1"
+		row-amount="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<language name="plpgsql"/>
+	<return-type>
+	<type name="uuid" length="0"/>
+	</return-type>
+	<parameter name="userId">
+		<type name="uuid" length="0"/>
+	</parameter>
+	<parameter name="password">
+		<type name="text" length="0"/>
+	</parameter>
+	<definition><![CDATA[begin
+
+insert into private.users("userId", "passwordHash") values(
+			"userId",
+			crypt(password, gen_salt('bf'))
+	    );
+
+return "userId";
+
+end;]]></definition>
+</function>
+
 <constraint name="books_userId_fk" type="fk-constr" comparison-type="MATCH FULL"
 	 upd-action="NO ACTION" del-action="CASCADE" ref-table="public.users" table="public.books">
 	<columns names="userId" ref-type="src-columns"/>
@@ -1522,28 +1555,13 @@ end;]]></definition>
 </permission>
 <permission>
 	<object name="public.users" type="table"/>
-	<roles names="public_read"/>
-	<privileges select="grant-op"/>
-</permission>
-<permission>
-	<object name="public.users" type="table"/>
 	<roles names="reader,writer"/>
 	<privileges update="true"/>
 </permission>
 <permission>
-	<object name="public.books" type="table"/>
-	<roles names="reader,writer,postgraphile"/>
-	<privileges insert="true" update="true"/>
-</permission>
-<permission>
 	<object name="public.books_genres" type="table"/>
-	<roles names="postgraphile,reader,writer"/>
-	<privileges insert="true" update="true"/>
-</permission>
-<permission>
-	<object name="public.books" type="table"/>
 	<roles names="basic_write"/>
-	<privileges insert="true" update="true"/>
+	<privileges delete="true" insert="true" update="true"/>
 </permission>
 <permission>
 	<object name="public.chapters" type="table"/>
@@ -1591,13 +1609,13 @@ end;]]></definition>
 	<privileges select="grant-op"/>
 </permission>
 <permission>
-	<object name="public.books" type="table"/>
-	<roles names="public_read"/>
-	<privileges select="grant-op"/>
+	<object name="public.users" type="table"/>
+	<roles names="basic_write"/>
+	<privileges insert="true" update="true"/>
 </permission>
 <permission>
-	<object name="public.books_genres" type="table"/>
-	<roles names="public_read"/>
-	<privileges select="grant-op"/>
+	<object name="public.books" type="table"/>
+	<roles names="basic_write"/>
+	<privileges insert="true" update="true"/>
 </permission>
 </dbmodel>
