@@ -92,8 +92,9 @@ export class BooksFacade {
     return this.booksGear.getAuthorBooks(authors);
   }
 
-  getTopBooks() {
-    return this.booksGear.getTopBooks();
+  getTopBooks(limit?: number) {
+    const size = limit === undefined ? 3 : limit + 12;
+    return this.booksGear.getTopBooks(size);
   }
 
   getGoodBooks() {

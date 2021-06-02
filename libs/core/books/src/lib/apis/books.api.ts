@@ -137,12 +137,12 @@ export class BooksApi {
       .pipe(map((res) => res?.['data']?.['allVRandomBooks']?.['nodes']));
   }
 
-  getTopBooks() {
+  getTopBooks(first?: number) {
     return this.apollo
       .query({
         query: gql`
-          query getTopBooks {
-            allMvMostViewBooks(first: 5 orderBy: VIEWS_DESC condition: {isDeleted: false, published: true}) {
+          query getTopBooks ($first: Int) {
+            allMvMostViewBooks(first: $first orderBy: VIEWS_DESC condition: {isDeleted: false, published: true}) {
               nodes {
                 bookId
                 title
@@ -155,11 +155,14 @@ export class BooksApi {
                 updatedAt
                 views
               }
+              pageInfo {
+                hasNextPage
+              }
             }
           }
-        `,
+        `,variables: {first}
       })
-      .pipe(map((res) => res?.['data']?.['allMvMostViewBooks']?.['nodes']));
+      .pipe();
   }
 
   getBookById(bookId: string) {

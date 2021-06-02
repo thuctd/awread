@@ -87,7 +87,7 @@ export class DetailPage implements OnInit, OnDestroy {
     return this.activatedRoute.paramMap
       .pipe(
         takeUntil(this.destroy$),
-        switchMap((params) => {
+        switchMap(() => {
           if (this.bookId) {
             return this.chaptersFacade.getAllChapters(this.bookId).pipe(
               tap(chapters => {
@@ -107,7 +107,7 @@ export class DetailPage implements OnInit, OnDestroy {
     return this.activatedRoute.paramMap
       .pipe(
         takeUntil(this.destroy$),
-        switchMap((params) => {
+        switchMap(() => {
           if (this.bookId) {
             return this.chaptersFacade.getAllChapters(this.bookId).pipe(
               tap(chapters => {
@@ -128,7 +128,7 @@ export class DetailPage implements OnInit, OnDestroy {
   }
 
   nativeTopBook() {
-    this.router.navigate(['/top-book']);
+    this.router.navigate(['/top-books']);
   }
 
   ngOnDestroy(): void {

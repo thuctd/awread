@@ -93,6 +93,10 @@ export class ListPage implements OnInit, OnDestroy {
     });
   }
 
+  nativeTopBook() {
+    this.router.navigate(['/top-books']);
+  }
+
   private updateForm() {
     this.activatedRoute.parent.url.subscribe(([urlSegment]) => {
       this.filtersForm.patchValue({

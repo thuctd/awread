@@ -4,12 +4,12 @@ import { Book } from '../../models';
 
 export interface TopBooksState extends EntityState<Book>, ActiveState { 
   hasMore: boolean;
-  page: number;
+  sizePage: number;
 }
 
 const initialState = {
   hasMore: true,
-  page: 1
+  sizePage: 0
 }
 
 @Injectable({ providedIn: 'root' })
@@ -21,7 +21,7 @@ export class TopBooksStore extends EntityStore<TopBooksState> {
     // this.createUIStore().setInitialEntityState();
   }
 
-    updatePage(page: { hasMore: boolean, page: number }) {
+    updatePage(page: { hasMore: boolean, sizePage: number }) {
     this.update(page);
   }
 }

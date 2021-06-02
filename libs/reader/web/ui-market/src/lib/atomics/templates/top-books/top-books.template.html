@@ -21,7 +21,7 @@
       </div>
     </div>
     <div [ngClass]="filterbook === false ? 'pt-12' : 'pt-36'">
-      <organ-list-top-book [display]="display" [books]="books"></organ-list-top-book>
+      <organ-list-top-book (moreEvent)="moreBooks.emit($event)" [display]="display" [books]="books"></organ-list-top-book>
     </div>
   </div>
 </section>
