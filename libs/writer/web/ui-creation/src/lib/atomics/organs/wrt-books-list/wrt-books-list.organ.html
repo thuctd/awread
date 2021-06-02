@@ -31,10 +31,10 @@
 
     </ng-container>
     <ng-template #noData>
-      <div class="no-data flex justify-center items-center">
-        <cr-submit-btn class="w-full" (btnClicked)="bookEvent.emit({ type: 'create' })" [faIcon]="faIcon" [submitText]="'Đăng truyện'">
+      <div class="no-data flex flex-col items-center">
+        <div class="text-center py-8">Bạn chưa có truyện nào, vui lòng ấn nút "Đăng truyện" để thêm truyện mới.</div>
+        <cr-submit-btn (btnClicked)="bookEvent.emit({ type: 'create' })" [faIcon]="faIcon" [submitText]="'Đăng truyện'">
         </cr-submit-btn>
-        <p class="text-center pt-8">Không có truyện nào!</p>
       </div>
     </ng-template>
   </ng-template>
