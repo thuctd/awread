@@ -15,4 +15,15 @@ export class PgAddon {
         const [user] = users.rows;
         return user;
     }
+
+    async pgGetUserByUserId(userId) {
+        const users = await this.pool.query(`select * from users where "userId" = '${userId}'`);
+        const [user] = users.rows;
+        return user;
+    }
+
+    async createNewPassword(userId, password) {
+        const action = await this.pool.query(`select * from reset_password('${userId}', '${password}')`);
+        return action.rows[0];
+    }
 }

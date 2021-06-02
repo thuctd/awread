@@ -22,15 +22,16 @@ export class ForgotWebTemplate implements OnInit {
 
   @Output() submitEvent = new EventEmitter();
 
-  constructor(public dialog: MatDialog, @Optional() public dialogRef: MatDialogRef<ForgotWebTemplate>) {}
+  constructor(public dialog: MatDialog, @Optional() public dialogRef: MatDialogRef<ForgotWebTemplate>) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   onClick(): void {
     this.dialogRef.close();
   }
 
   openFormCheckMail($event): void {
+    this.submitEvent.emit(this.emailFormControl.value);
     const dialogRef = this.dialog.open(CheckMailWebTemplate, {
       width: '32rem',
       height: '25rem',

@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter, Input } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 
 @Component({
@@ -14,16 +14,15 @@ import { FormControl, Validators } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WrtForgotPasswordTemplate implements OnInit {
-  isSentEmail = false;
+  @Input() isSentEmail = false;
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
   @Output() forgotSubmit = new EventEmitter();
   @Output() closeEvent = new EventEmitter();
   // @Output() submitEvent = new EventEmitter();
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
   forgotSubmitEvent() {
-    this.isSentEmail = true;
     this.forgotSubmit.emit(this.emailFormControl.value);
   }
 }

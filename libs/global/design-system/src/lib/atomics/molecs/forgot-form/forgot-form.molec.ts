@@ -1,5 +1,5 @@
 import { FormControl } from '@angular/forms';
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 
@@ -18,7 +18,8 @@ import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 export class ForgotFormMolec implements OnInit {
   icons = { faEnvelope };
   @Input() emailFormControl: FormControl = new FormControl('');
-  constructor(private fb: FormBuilder) {}
+  @Output() enter = new EventEmitter();
+  constructor(private fb: FormBuilder) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }
