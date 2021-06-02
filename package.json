@@ -28,7 +28,7 @@
     "design-story": "nx run global-design-system:storybook",
     "fb-emu": "firebase emulators:start",
     "nx-migrate": "npx @nrwl/tao@latest migrate @nrwl/workspace@latest",
-    "start-tunnel": "ssh -L localhost:5433:172.17.0.2:5432 hiepxanh@awread.vn",
+    "tunnel": "ssh -L localhost:5433:172.17.0.2:5432 hiepxanh@awread.vn",
     "reader-local": "set GRAPHQL_URI=localhost:5000 && nx serve reader-web --ssl=true",
     "writer-local": "set GRAPHQL_URI=localhost:5000 && nx serve writer-web --ssl=true",
     "backend-debug": "nx serve backend-graphql --inspect --port=7777"
@@ -75,6 +75,7 @@
     "firebase-admin": "^9.5.0",
     "graphile-utils": "^4.11.2",
     "graphql": "^15.5.0",
+    "jsonwebtoken": "^8.5.1",
     "ng-image-slider": "^2.6.4",
     "ngx-image-cropper": "^3.3.5",
     "ngx-owl-carousel-o": "^5.0.0",
