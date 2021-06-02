@@ -14,17 +14,17 @@ export class ForgotPasswordApi {
   }
 
   send(email) {
-    const url = `http://localhost:3333/api/forgot-password/send-email?email=${email}`;
+    const url = `/api/forgot-password/send-email?email=${email}`;
     return this.httpClient.get(`${url}`);
   }
 
   check(token, userId) {
-    const url = `http://localhost:3333/api/forgot-password/check-token`;
+    const url = `/api/forgot-password/check-token`;
     return this.httpClient.post(`${url}`, { token, userId });
   }
 
   updateNewPassword(token, userId, password) {
-    const url = `http://localhost:3333/api/forgot-password/new-password`;
+    const url = `/api/forgot-password/new-password`;
     return this.httpClient.post(`${url}`, { token, userId, password });
   }
 }
