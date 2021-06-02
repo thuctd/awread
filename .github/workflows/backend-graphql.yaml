@@ -2,12 +2,12 @@ name: 'backend-graphql'
 on:
   workflow_dispatch:
     inputs:
-      logLevel:
-        description: 'Log level'
-        default: 'warning'
+      environment:
+        description: 'Target environment to deploy'
+        default: 'staging'
         required: true
       name:
-        description: 'build or restart'
+        description: 'build or restart or test'
         default: 'build'
         required: true
   push:
@@ -15,21 +15,25 @@ on:
       - backend-graphql
 
 jobs:
-  printInputs:
+  test:
     runs-on: ubuntu-latest
+    if: github.event.inputs.name =='test'
     steps:
       - run: |
-          echo "Log level: ${{ github.event.inputs.logLevel }}"
+          echo "environment: ${{ github.event.inputs.environment }}"
           echo "Tags: ${{ github.event.inputs.name }}"
           echo "Tags: ${{ github.event.inputs.name == 'restart' }}"
           echo "Tags: ${{ github.event.inputs.name == 'build' }}"
           echo "Tags: ${{ github.event_name }}"
           echo "Tags: ${{ github.event_name == 'workflow_dispatch' }}"
+          echo "Tags: SSH_KEY ${{ SSH_KEY }}"
+          echo "staging is true ${{ github.event.inputs.name == 'test' && 'staging' || 'production' }}"
+          echo "production is true ${{ github.event.inputs.name == 'test' && 'production' || 'staging' }}"
 
   restart:
     runs-on: ubuntu-latest
     timeout-minutes: 60
-    if: github.event_name == 'workflow_dispatch' && github.event.inputs.name=='restart'
+    if: github.event.inputs.name =='restart'
     steps:
       - name: executing remote ssh commands using ssh key
         uses: appleboy/ssh-action@master
@@ -45,7 +49,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 60
-    if: github.event_name == 'push' || github.event.inputs.name == 'build'
+    if: (github.event_name == 'push' || github.event.inputs.name == 'build')
     steps:
       - name: using action checkout
         uses: actions/checkout@v2

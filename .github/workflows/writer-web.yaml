@@ -2,9 +2,9 @@ name: 'writer-web'
 on:
   workflow_dispatch:
     inputs:
-      logLevel:
-        description: 'Log level'
-        default: 'warning'
+      environment:
+        description: 'Target environment to deploy'
+        default: 'staging'
         required: true
       name:
         description: 'build or restart'
