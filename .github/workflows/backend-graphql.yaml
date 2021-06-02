@@ -26,7 +26,6 @@ jobs:
           echo "Tags: ${{ github.event.inputs.name == 'build' }}"
           echo "Tags: ${{ github.event_name }}"
           echo "Tags: ${{ github.event_name == 'workflow_dispatch' }}"
-          echo "Tags: SSH_KEY ${{ SSH_KEY }}"
           echo "staging is true ${{ github.event.inputs.name == 'test' && 'staging' || 'production' }}"
           echo "production is true ${{ github.event.inputs.name == 'test' && 'production' || 'staging' }}"
 
