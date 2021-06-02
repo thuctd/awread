@@ -1,8 +1,8 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'template-rd-news-detail',
-  templateUrl: './rd-news-detail.template.html',
+  selector: 'organ-rd-news-detail-content',
+  templateUrl: './rd-news-detail-content.organ.html',
   styles: [
     `
       :host {
@@ -12,9 +12,12 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RdNewsDetailTemplate implements OnInit {
-  @Input() newsDetail = [];
+export class RdNewsDetailContentOrgan implements OnInit {
+  @Input() content = `Đây là nội dung`;
+
   constructor() {}
+
+  @Output() ShareClicked = new EventEmitter();
 
   ngOnInit(): void {}
 }

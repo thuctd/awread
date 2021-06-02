@@ -6,7 +6,9 @@ import { HttpClient } from '@angular/common/http';
 export class NewsApi {
   constructor(private http: HttpClient, private apollo: Apollo) {}
 
+  url = 'https://raw.githubusercontent.com/thanhtung060201/thanhtung/master/testAPI.json';
+
   get() {
-    return this.http.get(`https://raw.githubusercontent.com/thanhtung060201/thanhtung/master/ccc.json`);
+    return this.http.get(this.url);
   }
 }

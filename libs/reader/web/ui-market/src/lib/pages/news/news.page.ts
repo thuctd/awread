@@ -1,5 +1,6 @@
-import { NewsFacade } from '@awread/core/news';
+import { News, NewsFacade } from '@awread/core/news';
 import { Directive, Injectable } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -7,14 +8,12 @@ import { Directive, Injectable } from '@angular/core';
 @Directive()
 export class NewsPage {
   news$ = this.newsFacade.news$;
+  newsDetail$ = this.newsFacade.newsDetail$;
   // bienNewThuong = [];
   constructor(private newsFacade: NewsFacade) {}
 
   ngOnInit(): void {
-    this.newsFacade.get().subscribe((data) => {
-      console.log('Apidata', data);
-    });
-
+    this.newsFacade.get().subscribe((data) => {});
     // this.news$.subscribe((value) => {
     //   console.log('localData', value);
     //   this.bienNewThuong = value;

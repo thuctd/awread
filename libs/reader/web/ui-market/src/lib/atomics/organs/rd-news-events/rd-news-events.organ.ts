@@ -13,16 +13,14 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RdNewsEventsOrgan implements OnInit {
-  @Input() event1 = {
-    srcImg: '/global-assets/images/Rectangle-487.webp',
-    altImg: 'image',
-    title: 'Siêu ưu đãi ngày hè hàng ngàn truyện hay miến phí',
-  };
-  @Input() event2 = {
-    srcImg: '/global-assets/images/Rectangle-488.webp',
-    altImg: 'image',
-    title: 'Nạp càng nhiều - Tặng càng nhiều',
-  };
+  @Input() banners = [
+    {
+      blogId: '',
+      title: '',
+      image: '',
+      position: '',
+    },
+  ];
 
   constructor() {}
 

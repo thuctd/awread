@@ -13,31 +13,13 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RdNewsAwreadListMolec implements OnInit {
-  @Input() items = [
+  @Input() newsMiddle = [
     {
-      title: 'Hình như SHIB đang giảm',
-      src: '/global-assets/images/Rectangle-487.webp',
-      excerpt: 'Từ ngày em đến ....',
-    },
-    {
-      title: 'Hình như BAKE đang giảm',
-      src: '/global-assets/images/Rectangle-487.webp',
-      excerpt: 'Từ ngày em đến ....',
-    },
-    {
-      title: 'Hình như ALICE đang giảm',
-      src: '/global-assets/images/Rectangle-487.webp',
-      excerpt: 'Từ ngày em đến ....',
-    },
-    {
-      title: 'Hình như SHIB đang giảm',
-      src: '/global-assets/images/Rectangle-487.webp',
-      excerpt: 'Từ ngày em đến ....',
-    },
-    {
-      title: 'Hình như SHIB đang giảm',
-      src: '/global-assets/images/Rectangle-487.webp',
-      excerpt: 'Từ ngày em đến ....',
+      blogId: '',
+      title: '',
+      updatedAt: '',
+      description: '',
+      image: '',
     },
   ];
 

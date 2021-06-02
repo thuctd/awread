@@ -1,11 +1,15 @@
 <div class="w-full">
   <div class="uppercase text-base xl:text-xl font-bold text-gray-text mb-4">{{title}}</div>
-  <molec-rd-news-awread-hot></molec-rd-news-awread-hot>
-  <div class="grid grid-cols-12 gap-10 pt-8 pb-4">
-    <div class="col-span-4" *ngFor="let item of newsGrids">
-      <atom-rd-news-awread-item [newsGrid]="item"></atom-rd-news-awread-item>
-    </div>
+  <div *ngFor="let item of newsMiddle">
+    <molec-rd-news-awread-hot *ngIf="item.position == 'top'"
+      [blogId]="item.blogId"
+      [title]="item.title"
+      [status]="item.status"
+      [date]="item.updatedAt"
+      [description]="item.description"
+      [srcImg]="item.image"
+      ></molec-rd-news-awread-hot>
   </div>
-  <molec-rd-news-awread-list></molec-rd-news-awread-list>
+  <molec-rd-news-awread-list [newsMiddle]="newsMiddle"></molec-rd-news-awread-list>
 </div>
 

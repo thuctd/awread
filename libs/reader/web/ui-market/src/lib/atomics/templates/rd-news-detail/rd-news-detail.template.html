@@ -1,11 +1,13 @@
 <section class="w-full max-w-screen-xl mx-auto px-4 md:px-28">
-  <atom-title class="border-b border-gray-400 pb-3 block lg:hidden" [title]="'Tin tức'"></atom-title>
-  <molec-rd-news-event-item class="pt-4"></molec-rd-news-event-item>
-  <div class="flex items-center py-8 border-b border-gray-400">
-    <atom-rd-news-date [isDisplay]="true"></atom-rd-news-date>
-    <atom-social-share-fb-btn (ShareClicked)="ShareClicked.emit()" class="pl-4"></atom-social-share-fb-btn>
+  <div class="block md:hidden">
+    <atom-title class="border-b border-gray-400 pb-3" [title]="'Tin tức'"></atom-title>
   </div>
-  <excerpt class="py-4" [class]="'text-sm'" [excerpt]="excerpt"></excerpt>
+  <organ-rd-news-detail-content></organ-rd-news-detail-content>
   <atom-title class="border-b border-gray-400 pb-3" [title]="'Tin khác'"></atom-title>
   <molec-rd-news-awread-list class="pt-4"></molec-rd-news-awread-list>
 </section>
+
+<pre>{{ newsDetail | json}}</pre>
+
+
+
