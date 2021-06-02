@@ -29,5 +29,7 @@ export class ContentBookOrgan implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void { 
+    // const element = document.getElementById('content');
+  }
 }

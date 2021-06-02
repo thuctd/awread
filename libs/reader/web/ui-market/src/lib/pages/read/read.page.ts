@@ -54,7 +54,7 @@ export class ReadPage implements OnInit {
     },
     {
       title: this.chapter.book.type == '0' ? 'Truyện tự sáng tác' : 'Truyện sưu tầm',
-      link: ['/', this.chapter.book.type == '0' ? 'Truyện tự sáng tác' : 'Truyện sưu tầm', { categoryId: this.chapter.book.categoryId }]
+      link: ['/', this.chapter.book.type == '0' ? 'composed' : 'collected', { categoryId: this.chapter.book.categoryId }]
     },
     {
       title: this.chapter.book.title,

@@ -56,7 +56,7 @@ export class DetailPage implements OnInit, OnDestroy {
     },
     {
       title: this.book.type == '0' ? 'Truyện tự sáng tác' : 'Truyện sưu tầm',
-      link: ['/', this.book.type == '0' ? 'Truyện tự sáng tác' : 'Truyện sưu tầm', { categoryId: this.book.categoryId }]
+      link: ['/', this.book.type == '0' ? 'composed' : 'collected', { categoryId: this.book.categoryId }]
     },
     {
       title: this.book.title,

@@ -34,7 +34,8 @@ export class ChaptersApi {
       .query({
         query: gql`
           query BookChapters($bookId: UUID!) {
-            allChapters(condition: { bookId: $bookId, isDeleted: false }, orderBy: POSITION_ASC) {
+            #Note: Tạm ứng điều kiện để hiện thị chính xác UI allChapters(condition: { bookId: $bookId, isDeleted: false, published: true } orderBy: POSITION_ASC) {
+            allChapters(condition: { bookId: $bookId, isDeleted: false } orderBy: POSITION_ASC) {
               nodes {
                 bookId
                 chapterId

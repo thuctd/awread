@@ -33,7 +33,6 @@ export class HomeListBookUpdateMobileOrgan implements OnInit {
   };
 
   @Output() emitBooks = new EventEmitter();
-  @Output() emitAllBooks = new EventEmitter();
 
   @Input() tabs = [
     {

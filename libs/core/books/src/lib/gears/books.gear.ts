@@ -63,7 +63,7 @@ export class BooksGear {
   getTopBooks() {
     this.topBooksStore.setLoading(true);
     return this.booksApi.getTopBooks().pipe(
-      tap(books => this.topBooksStore.set(books)),
+      tap(books => this.topBooksStore.add(books)),
       tap(() => this.topBooksStore.setLoading(false)),
     );
   }

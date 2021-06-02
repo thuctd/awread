@@ -85,7 +85,7 @@ export class BooksApi {
         query: gql`
       query allMvBooksLatestChapters {
         allMvBooksLatestChapters(
-              filter: {authors: {containsAnyKeys: ${JSON.stringify(authorIds)} }}, condition: { published: true }
+              filter: {authors: {containsAnyKeys: ${JSON.stringify(authorIds)} }}, condition: { published: true, isDeleted: false }
         ) {
           nodes {
             title
@@ -119,7 +119,7 @@ export class BooksApi {
       .query({
         query: gql`
           query allVRandomBooks($genreId: String!) {
-            allVRandomBooks(filter: { genres: { containsKey: $genreId } }, first: 20) {
+            allVRandomBooks(condition: {isDeleted: false, published: true} filter: { genres: { containsKey: $genreId } }, first: 20) {
               nodes {
                 bookId
                 categoryId
@@ -142,7 +142,7 @@ export class BooksApi {
       .query({
         query: gql`
           query getTopBooks {
-            allMvMostViewBooks(first: 3, orderBy: VIEWS_DESC) {
+            allMvMostViewBooks(first: 5 orderBy: VIEWS_DESC condition: {isDeleted: false, published: true}) {
               nodes {
                 bookId
                 title
@@ -167,7 +167,7 @@ export class BooksApi {
       .query({
         query: gql`
           query allMvBooksLatestChapters($bookId: UUID!) {
-            allMvBooksLatestChapters(condition: { bookId: $bookId }) {
+            allMvBooksLatestChapters(condition: { bookId: $bookId } ) {
               nodes {
                 authors
                 bookId
@@ -231,8 +231,6 @@ export class BooksApi {
                 }
               }
             }`;
-    console.log(queryString);
-
     return this.apollo.query({
       query: gql`
           ${queryString}
