@@ -34,7 +34,7 @@ export class BooksFacade {
     public booksQuery: BooksQuery,
     private booksHomeGear: BooksHomeGear,
     private composedQuery: ComposedQuery,
-    private topBooksQuery: TopBooksQuery,
+    public topBooksQuery: TopBooksQuery,
     private collectedQuery: CollectedQuery,
     private goodBooksQuery: GoodBooksQuery,
     private genreBooksQuery: GenreBooksQuery,
@@ -92,9 +92,8 @@ export class BooksFacade {
     return this.booksGear.getAuthorBooks(authors);
   }
 
-  getTopBooks(limit?: number) {
-    const size = limit === undefined ? 3 : limit + 12;
-    return this.booksGear.getTopBooks(size);
+  getTopBooks() {
+    return this.booksGear.getTopBooks(this.booksQuery.getCurrentFilter(), this.topBooksQuery.getSizePage() + 12);
   }
 
   getGoodBooks() {

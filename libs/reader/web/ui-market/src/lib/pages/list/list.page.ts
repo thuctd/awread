@@ -1,5 +1,4 @@
 import { debounceTime } from 'rxjs/operators';
-/* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import { tap } from 'rxjs/operators';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ChangeDetectorRef, Injectable } from '@angular/core';
@@ -10,7 +9,6 @@ import { PersistNgFormPlugin } from '@datorama/akita';
 import { BooksFacade } from '@awread/core/books';
 import { GenresFacade } from '@awread/core/genres';
 import { CategoriesFacade } from '@awread/core/categories';
-import { DatePipe } from '@angular/common';
 
 @UntilDestroy()
 @Injectable({
@@ -76,7 +74,7 @@ export class ListPage implements OnInit, OnDestroy {
   }
 
   filterItemsByCategory(categoryId) {
-    this.filteredBooks$ = this.booksFacade.getCategoryBooks(categoryId).pipe();
+    this.filteredBooks$ = this.booksFacade.getCategoryBooks(categoryId);
   }
 
   filterBooks() {
@@ -86,16 +84,15 @@ export class ListPage implements OnInit, OnDestroy {
     })
   }
 
-  moreBooks(offset: number) {
-    offset = offset + 1;    
-    this.booksFacade.getLatestBooks('1', 0).pipe(debounceTime(200)).subscribe(res => {
-      console.log(res);      
-    });
-  }
-
   nativeTopBook() {
     this.router.navigate(['/top-books']);
   }
+
+  onMoreBooks() {
+    this.fetchBooks();
+  }
+
+  private fetchBooks() { }
 
   private updateForm() {
     this.activatedRoute.parent.url.subscribe(([urlSegment]) => {

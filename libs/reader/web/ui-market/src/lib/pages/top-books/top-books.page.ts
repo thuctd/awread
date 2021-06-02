@@ -4,7 +4,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { Injectable, OnInit, Directive } from '@angular/core';
 import { BooksFacade } from '@awread/core/books';
-import { TopBooksQuery } from 'libs/core/books/src/lib/states/top-books';
+import { GenresFacade } from '@awread/core/genres';
 
 @UntilDestroy()
 @Injectable({
@@ -14,29 +14,35 @@ import { TopBooksQuery } from 'libs/core/books/src/lib/states/top-books';
 export class TopBooksPage implements OnInit {
   topBooks$: Observable<any>;
   isLoading$: Observable<boolean>;
+  genres$ = this.genresFacade.genres$;
   filtersForm: FormGroup;
   persistForm: PersistNgFormPlugin;
 
   constructor(
     private fb: FormBuilder,
-    private topBooksQuery: TopBooksQuery,
     private booksFacade: BooksFacade,
+    private genresFacade: GenresFacade,
   ) { }
 
   ngOnInit(): void {
     this.fetchBooks();
     this.initForm();
-    this.topBooks$ = this.topBooksQuery.selectAll();
-    this.isLoading$ = this.topBooksQuery.selectLoading();
+    this.topBooks$ = this.booksFacade.topBooksQuery.selectAll();
+    this.isLoading$ = this.booksFacade.topBooksQuery.selectLoading();
+    this.genresFacade.getAllGenres().subscribe();
   }
 
-  onMoreBooks() {    
+  onMoreBooks() {
     this.fetchBooks();
   }
 
+  filterBooks() {
+    this.booksFacade.getTopBooks();
+  }
+
   private fetchBooks() {
-    if (this.topBooksQuery.getHasMore()) {
-      this.booksFacade.getTopBooks(this.topBooksQuery.getSizePage()).subscribe();
+    if (this.booksFacade.topBooksQuery.getHasMore()) {
+      this.booksFacade.getTopBooks().subscribe();
     }
   }
 

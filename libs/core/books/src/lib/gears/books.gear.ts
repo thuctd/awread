@@ -60,12 +60,12 @@ export class BooksGear {
     return this.booksApi.getBookById(bookId);
   }
 
-  getTopBooks(limit?: number) {
+  getTopBooks(filters, limit?: number) {
     let hasMore;
     this.topBooksStore.setLoading(true);
-    return this.booksApi.getTopBooks(limit).pipe(
+    return this.booksApi.getTopBooks(filters, limit).pipe(
       map(res => {
-        hasMore = res?.['data']?.['allMvMostViewBooks']?.['pageInfo']?.hasNextPage;   
+        hasMore = res?.['data']?.['allMvMostViewBooks']?.['pageInfo']?.hasNextPage;
         this.topBooksStore.add(res?.['data']?.['allMvMostViewBooks']?.['nodes']);
       }),
       tap(() => this.topBooksStore.updatePage({ hasMore: hasMore, sizePage: limit })),
@@ -73,8 +73,8 @@ export class BooksGear {
     );
   }
 
-  getFilterBooks(filters, cateogyrId: string) {
-    return this.booksApi.getFilterBooks(filters, cateogyrId).pipe(
+  getFilterBooks(filters, categoryId: string) {
+    return this.booksApi.getFilterBooks(filters, categoryId).pipe(
       tap(books => this.categoryBooksStore.set(books)),
     );;
   }

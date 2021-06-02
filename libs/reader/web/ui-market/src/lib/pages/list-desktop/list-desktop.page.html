@@ -1,4 +1,4 @@
 <section>
-    <template-list (nativeTopBook)="nativeTopBook()" (moreBooks)="moreBooks($event)" [titlePage]="titlePage" (filterBooksEvent)="filterBooks()" [filtersForm]="filtersForm" [genres]="genreList$ | async" [topBookList]="topBookList$ | async" [tabsHead]="categoryList$ | async" [selectedTabCategoryId]="selectedCategoryId"
+    <template-list (nativeTopBook)="nativeTopBook()" (moreBooks)="onMoreBooks()" [titlePage]="titlePage" (filterBooksEvent)="filterBooks()" [filtersForm]="filtersForm" [genres]="genreList$ | async" [topBookList]="topBookList$ | async" [tabsHead]="categoryList$ | async" [selectedTabCategoryId]="selectedCategoryId"
         (switchTabEvent)="switchTab($event)" (changeCategoryBooks)="filterItemsByCategory($event)" [categoryBooks]="filteredBooks$ | async"></template-list>
 </section>

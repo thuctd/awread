@@ -137,7 +137,7 @@ export class BooksApi {
       .pipe(map((res) => res?.['data']?.['allVRandomBooks']?.['nodes']));
   }
 
-  getTopBooks(first?: number) {
+  getTopBooks(filters, first?: number) {
     return this.apollo
       .query({
         query: gql`
@@ -160,7 +160,7 @@ export class BooksApi {
               }
             }
           }
-        `,variables: {first}
+        `, variables: { first }
       })
       .pipe();
   }
@@ -218,8 +218,8 @@ export class BooksApi {
       mvBooks = 'allVRandomBooks';
     }
 
-    queryString = `query ${mvBooks}($categoryId: BigFloat, $completed: Boolean ${filters.completed ? `, $type: String` : ''}) {
-              ${mvBooks}(first: 20, condition: { categoryId: $categoryId, ${filters.completed ? ` type: $type,` : ''} completed: $completed },
+    queryString = `query ${mvBooks}( $published: Boolean = true ${categoryId ? `$categoryId: BigFloat` : ''} ${filters.completed ? `$completed: Boolean` : ''} ${filters.type ? `, $type: BigFloat` : ''}) {
+              ${mvBooks}(first: 20, condition: { published: $published ${categoryId ? `categoryId: $categoryId, ` : ''} ${filters.type ? ` type: $type, ` : ''} ${filters.completed ? `completed: $completed` : ''}},
               ${filters.criteria === '0' ? `orderBy: PUBLISHED_DESC, ` : ''}
               filter: { updatedAt: {greaterThan: "${publishedAt}"} ${genres.length ? `, genres: {containsAnyKeys: ${JSON.stringify(genres)}}` : ''}}) {
                 nodes {
