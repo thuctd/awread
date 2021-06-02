@@ -29,7 +29,7 @@ export class TitlePageMenuMolec implements OnInit {
   }
 
   onClick() {
-    this.isMenuOpen = false;
+    this.isMenuOpen = !this.isMenuOpen;
   }
 
   ngOnInit(): void { }

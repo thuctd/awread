@@ -7,7 +7,7 @@
   <div *ngIf="isMenuOpen" class="absolute right-0 top-4 mt-2 w-32 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
     <div class="text-left">
       <div *ngFor="let item of items">
-        <a (click)="toggleMenu($event)" (click)="emitChangeBooks.emit(item.categoryId)"
+        <a (click)="onClick()" (click)="emitChangeBooks.emit(item.categoryId)"
           class="font-semibold outline-none block cursor-pointer px-4 py-1 text-sm text-gray-text hover:bg-gray-100 hover:text-gray-900 border-b border-gray-400">
           {{item.name | titlecase}}</a>
       </div>
