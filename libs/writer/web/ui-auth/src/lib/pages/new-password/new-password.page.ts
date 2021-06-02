@@ -1,4 +1,3 @@
-import { AngularFireAuth } from '@angular/fire/auth';
 import { ActivatedRoute } from '@angular/router';
 import { ChangeDetectorRef, Directive, Injectable, OnInit } from '@angular/core';
 import { ForgotPasswordFacade } from '@awread/core/users';
