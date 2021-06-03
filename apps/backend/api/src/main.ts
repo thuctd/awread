@@ -11,8 +11,11 @@ import { environment } from '@awread/global/environments';
 import { buildEnvironment } from '@awread/global/environments';
 
 async function bootstrap() {
-  console.log('environment, buildenvironment', environment, buildEnvironment, process.env);
-  console.log('WTF why NODE_ENV??', process.env.NODE_ENV, buildEnvironment.NODE_ENV)
+  console.log('process.env', process.env.CYPRESS_INSTALL_BINARY);
+  console.log('process.env', process.env.DOKKU_LETSENCRYPT_EMAIL);
+  console.log('process.env', process.env.NODE_ENV);
+  console.log('environment, buildenvironment', environment, buildEnvironment);
+  console.log('WTF why NODE_ENV??', process.env.NODE_ENV, buildEnvironment.NODE_ENV);
   const app = await NestFactory.create(AppModule, { cors: true });
   app.enableCors();
   const globalPrefix = 'api';
