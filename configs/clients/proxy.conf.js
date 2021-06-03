@@ -6,26 +6,28 @@ let apiTarget;
 let logLevel;
 switch (process.env) {
     case process.env.NODE_ENV == 'production':
-        graphqlTarget = process.env.GRAPHQL_URI;
-        apiTarget = process.env.API_URI;
+        graphqlTarget = 'http://backend-graphql.web';
+        apiTarget = 'http://backend-api.web';
         logLevel = 'info';
         break;
     case process.env.NODE_ENV == 'next':
-        graphqlTarget = process.env.GRAPHQL_URI;
-        apiTarget = process.env.API_URI;
+        graphqlTarget = 'http://backend-graphql.web';
+        apiTarget = 'http://backend-api.web';
         logLevel = 'info';
         break;
     case process.env.NODE_ENV == 'test':
-        graphqlTarget = process.env.GRAPHQL_URI;
-        apiTarget = process.env.API_URI;
+        graphqlTarget = 'http://backend-graphql.web';
+        apiTarget = 'http://backend-api.web';
         logLevel = 'debug';
         break;
     default:
-        graphqlTarget = 'https://backend-graphql.awread.vn';
-        apiTarget = 'https://backend-api.awread.vn';
+        graphqlTarget = 'https://backend-graphql.next.awread.vn';
+        apiTarget = 'https://backend-api.next.awread.vn';
         logLevel = 'debug';
         break;
 }
+
+// console.log('APP: process env', process.env);
 
 module.exports = [
     {

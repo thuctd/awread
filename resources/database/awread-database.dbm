@@ -1585,11 +1585,6 @@ end;]]></definition>
 	<privileges select="true"/>
 </permission>
 <permission>
-	<object name="private.users" type="table"/>
-	<roles names="basic_write"/>
-	<privileges insert="true" update="true"/>
-</permission>
-<permission>
 	<object name="public.book_visits" type="table"/>
 	<roles names="basic_write"/>
 	<privileges insert="true" update="true"/>
@@ -1621,6 +1616,11 @@ end;]]></definition>
 </permission>
 <permission>
 	<object name="public.books" type="table"/>
+	<roles names="public_read"/>
+	<privileges select="grant-op"/>
+</permission>
+<permission>
+	<object name="public.users" type="table"/>
 	<roles names="public_read"/>
 	<privileges select="grant-op"/>
 </permission>
