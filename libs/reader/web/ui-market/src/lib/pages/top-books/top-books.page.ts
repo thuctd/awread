@@ -2,7 +2,7 @@ import { Observable } from 'rxjs';
 import { PersistNgFormPlugin } from '@datorama/akita';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { UntilDestroy } from '@ngneat/until-destroy';
-import { Injectable, OnInit, Directive, HostListener } from '@angular/core';
+import { Injectable, OnInit, Directive, HostListener, ChangeDetectorRef } from '@angular/core';
 import { BooksFacade } from '@awread/core/books';
 import { GenresFacade } from '@awread/core/genres';
 
@@ -15,17 +15,19 @@ export class TopBooksPage implements OnInit {
   topBooks$: Observable<any>;
   isLoading$: Observable<boolean>;
   genres$ = this.genresFacade.genres$;
-  totalBook: number;
+  totalBook$: any;
 
   constructor(
     private fb: FormBuilder,
     private booksFacade: BooksFacade,
     private genresFacade: GenresFacade,
+    private cd: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
     this.fetchBooks();
     this.topBooks$ = this.booksFacade.topBooksQuery.selectAll();
+    this.totalBook$ = this.booksFacade.topBooksQuery.selectTotalBook();
     this.isLoading$ = this.booksFacade.topBooksQuery.selectLoading();
     this.genresFacade.getAllGenres().subscribe();
   }

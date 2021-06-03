@@ -23,17 +23,7 @@ const routes: Routes = [
     component: AuthLayout,
     canActivate: [LandingGuard],
     children: [
-      {
-        path: 'new-password',
-        loadChildren: () =>
-          window.innerWidth <= 768 && window?.haveMobile
-            ? import(
-              './pages/new-password-mobile/new-password-mobile.module'
-            ).then((m) => m.NewPasswordMobileModule)
-            : import(
-              './pages/new-password-desktop/new-password-desktop.module'
-            ).then((m) => m.NewPasswordDesktopModule),
-      },
+
       {
         path: 'login',
         data: { mode: 'login' },
@@ -58,19 +48,31 @@ const routes: Routes = [
               './pages/login-register-desktop/login-register-desktop.module'
             ).then((m) => m.LoginRegisterDesktopModule),
       },
-      {
-        path: 'forgot',
-        loadChildren: () =>
-          window.innerWidth <= 768 && window?.haveMobile
-            ? import('./pages/forgot-mobile/forgot-mobile.module').then(
-              (m) => m.ForgotMobileModule
-            )
-            : import('./pages/forgot-desktop/forgot-desktop.module').then(
-              (m) => m.ForgotDesktopModule
-            ),
-      },
+
       { path: '', pathMatch: 'full', redirectTo: 'login' },
     ],
+  },
+  {
+    path: 'forgot',
+    loadChildren: () =>
+      window.innerWidth <= 768 && window?.haveMobile
+        ? import('./pages/forgot-mobile/forgot-mobile.module').then(
+          (m) => m.ForgotMobileModule
+        )
+        : import('./pages/forgot-desktop/forgot-desktop.module').then(
+          (m) => m.ForgotDesktopModule
+        ),
+  },
+  {
+    path: 'new-password',
+    loadChildren: () =>
+      window.innerWidth <= 768 && window?.haveMobile
+        ? import(
+          './pages/new-password-mobile/new-password-mobile.module'
+        ).then((m) => m.NewPasswordMobileModule)
+        : import(
+          './pages/new-password-desktop/new-password-desktop.module'
+        ).then((m) => m.NewPasswordDesktopModule),
   },
 ];
 

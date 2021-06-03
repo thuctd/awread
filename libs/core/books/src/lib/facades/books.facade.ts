@@ -81,7 +81,8 @@ export class BooksFacade {
   }
 
   getCategoryBooks(categoryId: string) {
-    return this.booksGear.getCategoryBooks(categoryId);
+    // const limit = this.categoryBooksQuery.getSizePage() === undefined ? 12 : this.categoryBooksQuery.getSizePage();
+    return this.booksGear.getCategoryBooks(categoryId, this.categoryBooksQuery.getSizePage() + 12);
   }
 
   getLatestBooks(cateogoryId: string, offset: number) {

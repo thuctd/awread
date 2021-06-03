@@ -10,9 +10,9 @@ frontend.web.1: name of container serving frontend;
 
 # network
 
-- create: docker network create mynetwork;
-- connect app: docker network connect mynetwork backend.web.1;
-- inspect: docker network inspect mynetwork;
+- create: docker network create graphql-network;
+- connect app: docker network connect graphql-network backend.web.1;
+- inspect: docker network inspect graphql-network;
 
 # network tool
 

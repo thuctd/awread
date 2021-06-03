@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter, Input } from '@angular/core';
 
 @Component({
   selector: 'wrt-template-new-password',
@@ -14,7 +14,8 @@ import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter } from
 })
 export class WrtNewPasswordTemplate implements OnInit {
   @Output() updateNewPassword = new EventEmitter();
-  constructor() {}
+  @Input() fail;
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

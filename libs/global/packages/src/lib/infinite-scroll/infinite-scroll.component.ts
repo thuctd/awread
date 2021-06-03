@@ -5,8 +5,8 @@ import { Component, OnInit, Output, EventEmitter, ElementRef, ViewChild, Input, 
   template: `<ng-content></ng-content><div #anchor></div>`,
   styles: [`
   :host {
-    /* display: block;
-    height: 80vh; */
+    display: block;
+    /* height: 80vh; */
     height: -moz-calc(100vh - 10rem);
     height: -webkit-calc(100vh - 10rem);
     height: calc(100vh - 10rem);
@@ -20,7 +20,7 @@ export class InfiniteScrollComponent implements OnInit, OnDestroy {
     rootMargin: '0px 0px 200px 0px',
   };
   @Output() scrolled = new EventEmitter();
-  @ViewChild('anchor', {static: true}) anchor: ElementRef<HTMLElement>;
+  @ViewChild('anchor', { static: true }) anchor: ElementRef<HTMLElement>;
 
   private observer: IntersectionObserver;
 

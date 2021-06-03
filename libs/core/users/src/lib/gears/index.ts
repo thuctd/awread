@@ -1,3 +1,4 @@
+export * from './forgot-password.gear';
 export * from './register.gear';
 export * from './logout.gear';
 export * from './login.gear';

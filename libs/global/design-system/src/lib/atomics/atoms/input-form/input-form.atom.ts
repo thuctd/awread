@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input, ElementRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, ElementRef, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 @Component({
@@ -19,6 +19,7 @@ export class InputFormAtom implements OnInit {
   @Input() inputControl: FormControl = new FormControl('');
   @Input() faIcon = faEnvelope;
   @Input() id = this.placeholder.replace(/\s/g, '-') + Math.random();
+  @Output() enter = new EventEmitter();
   constructor(
     private fb: FormBuilder,
     private elementRef: ElementRef,

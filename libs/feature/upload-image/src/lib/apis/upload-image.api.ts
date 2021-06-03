@@ -10,7 +10,7 @@ export class UploadImageApi {
   ) { }
 
   up(blob, type: 'cover' | 'avatar', id: string) {
-    const url = `http://localhost:3333/api/upload-cover`;
+    const url = `/api/upload-cover`;
     const formData = new FormData();
     formData.append('file', blob);
     formData.append('type', type);

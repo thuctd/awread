@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="0,729" last-zoom="0.95" max-obj-count="28"
+<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="0,600" last-zoom="0.95" max-obj-count="28"
 	 default-owner="postgres">
 <role name="public_read"
       inherit="true">
@@ -120,7 +120,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="isDeleted" default-value="false">
 		<type name="boolean" length="0"/>
 	</column>
-	<column name="publishedAt">
+	<column name="publishedAt" default-value="now()">
 		<type name="timestamp" length="0"/>
 	</column>
 	<constraint name="books_pk" type="pk-constr" table="public.books">
@@ -1345,12 +1345,13 @@ end;]]></definition>
 		<type name="text" length="0"/>
 	</parameter>
 	<definition><![CDATA[begin
-
 insert into private.users("userId", "passwordHash") values(
 			"userId",
 			crypt(password, gen_salt('bf'))
-	    );
-
+	    )
+ON CONFLICT ON CONSTRAINT user_pk DO 
+   UPDATE SET "passwordHash" = crypt(password, gen_salt('bf'));
+   
 return "userId";
 
 end;]]></definition>
@@ -1584,11 +1585,6 @@ end;]]></definition>
 	<privileges select="true"/>
 </permission>
 <permission>
-	<object name="private.users" type="table"/>
-	<roles names="basic_write"/>
-	<privileges insert="true" update="true"/>
-</permission>
-<permission>
 	<object name="public.book_visits" type="table"/>
 	<roles names="basic_write"/>
 	<privileges insert="true" update="true"/>
@@ -1617,5 +1613,15 @@ end;]]></definition>
 	<object name="public.books" type="table"/>
 	<roles names="basic_write"/>
 	<privileges insert="true" update="true"/>
+</permission>
+<permission>
+	<object name="public.books" type="table"/>
+	<roles names="public_read"/>
+	<privileges select="grant-op"/>
+</permission>
+<permission>
+	<object name="public.users" type="table"/>
+	<roles names="public_read"/>
+	<privileges select="grant-op"/>
 </permission>
 </dbmodel>

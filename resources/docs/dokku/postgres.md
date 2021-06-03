@@ -5,16 +5,12 @@
 
 - Ubuntu/Debian:
   sudo apt install postgresql-contrib
-
-- Redhat/Centos
-  sudo dnf install postgresql10-contrib
-
-Fedora
-
-- sudo dnf install postgresql-contrib
+  (or sudo dnf install postgresql-contrib)
 
 # list all exntension:
 
+- start
+  dokku postgres:start awread_database
 - go into container
   dokku postgres:enter awread_database
 - get info
@@ -36,6 +32,7 @@ docker exec -it dokku.postgres.awread_database bash
 # create a postgres service with the name railsdatabase
 
 dokku postgres:create awread_database --image postgres --image-version latest
+dokku postgres:upgrade awread_database --image postgres --image-version latest
 dokku postgres:link awread_database backend-graphql
 dokku postgres:restart awread_database
 get database
@@ -57,3 +54,16 @@ DROP DATABASE awread_database WITH (FORCE);
 # list database
 
 \l
+
+# backup:
+
+https://github.com/dokku/dokku-postgres/issues/219#issuecomment-821836597
+docker pull postgres:13.2
+dokku ps:stop $app
+dokku postgres:export $db > /tmp/live-export
+dokku postgres:unlink $db $app
+dokku postgres:destroy $db
+dokku postgres:create $db --image-version 13.2
+dokku postgres:import $db < /tmp/live-export
+dokku postgres:link $db $app
+dokku ps:start live

@@ -19,7 +19,13 @@ import { FormControl } from '@angular/forms';
 })
 export class NavbarReaderTemplate implements OnInit {
   @Input() user = {};
-  @Input() items = [];
+  @Input() background;
+  @Input() items = [
+    {
+      bookId: '1',
+      title: 'Tôi lạc quan'
+    }
+  ];
   @Input() searchControl = new FormControl();
   @Output() eventSearch = new EventEmitter();
   @Output() logoutEvent = new EventEmitter();

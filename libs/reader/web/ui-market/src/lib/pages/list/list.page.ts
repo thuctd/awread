@@ -1,7 +1,7 @@
 import { debounceTime } from 'rxjs/operators';
 import { tap } from 'rxjs/operators';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ChangeDetectorRef, Injectable } from '@angular/core';
+import { ChangeDetectorRef, Injectable, HostListener } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Directive, OnInit, OnDestroy } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
@@ -17,13 +17,14 @@ import { Observable } from 'rxjs';
 })
 @Directive()
 export class ListPage implements OnInit, OnDestroy {
+  debugCount$ = this.booksFacade.categoryBooksQuery.selectCount();
   filtersForm: FormGroup;
   persistForm: PersistNgFormPlugin;
   isLoading$: Observable<boolean>;
   categoryList$ = this.categoriesFacade.categories$;
   topBookList$ = this.booksFacade.topBooks$;
   genreList$ = this.genresFacade.genres$;
-  filteredBooks$;
+  filteredBooks$ = this.booksFacade.categoryBooks$;
   typeBook: 'collected' | 'composed';
   selectedCategoryId: string;
   titlePage: string;
@@ -77,13 +78,13 @@ export class ListPage implements OnInit, OnDestroy {
   }
 
   filterItemsByCategory(categoryId) {
-    this.filteredBooks$ = this.booksFacade.getCategoryBooks(categoryId);
+    this.booksFacade.getCategoryBooks(categoryId).subscribe();
   }
 
   filterBooks() {
     this.activatedRoute.parent.url.subscribe(([urlSegment]) => {
       const categoryId = urlSegment.parameterMap.get('categoryId');
-      this.filteredBooks$ = this.booksFacade.getFilterBooks(categoryId);
+      this.booksFacade.getFilterBooks(categoryId).subscribe();
     })
   }
 
@@ -91,11 +92,18 @@ export class ListPage implements OnInit, OnDestroy {
     this.router.navigate(['/top-books']);
   }
 
+  @HostListener('window:scroll', ['$event'])
   onMoreBooks() {
-    this.fetchBooks();
+    if (window.innerHeight + window.scrollY === document.body.scrollHeight) {
+      this.fetchBooks();
+    }
   }
 
-  private fetchBooks() { }
+  private fetchBooks() {
+    if (this.booksFacade.categoryBooksQuery.getHasMore()) {
+      this.booksFacade.getCategoryBooks(this.selectedCategoryId).subscribe();
+    }
+  }
 
   private updateForm() {
     this.activatedRoute.parent.url.subscribe(([urlSegment]) => {

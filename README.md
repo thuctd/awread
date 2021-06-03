@@ -1,7 +1,9 @@
 ## Development Environment setup
+
 ```
 npm i -g nx
 ```
+
 ```
 npm i
 ```
@@ -17,12 +19,13 @@ nx serve writer-web --hmr
 1. Always checkout a new branch from `develop`.
 
 2. Branch name should have the following format:
-  if you start coding
+   if you start coding
    > [your-name]/[your-project]
-Example: hiep/writer-web,quy/writer-web,phuong/writer-web,quyen/api,quyen/database
+   > Example: hiep/writer-web,quy/writer-web,phuong/writer-web,quyen/api,quyen/database
 
-  if you fixing issue
-   > [prefix]/[issue code]-[description]
+if you fixing issue
+
+> [prefix]/[issue code]-[description]
 
 In which:
 
@@ -35,9 +38,9 @@ Examples: `feature/BK-1308-dashboard`, `feature/bk-1306`, `fix/BK-1062-remove-ph
 3. Upon completing a task, create a merge request to `develop` branch. Add other members as reviewers.
    (Optional) Include screenshot(s) of the completed view.
 
-4. Create merge request from `develop` to `deployment/staging`. Then run command to deploy staging.
+4. Create merge request from `develop` to `deployment/next`. Then run command to deploy next.
 
-5. If a feature is ready for production, merge from `deployment/staging` to `deployment/production` and run command to deploy production for new feature.
+5. If a feature is ready for production, merge from `deployment/next` to `deployment/production` and run command to deploy production for new feature.
 
 ## Coding Convention
 
@@ -45,6 +48,7 @@ Examples: `feature/BK-1308-dashboard`, `feature/bk-1306`, `fix/BK-1062-remove-ph
 - (Recommended) Install editorconfig and prettier plugins on IDE of choice.
 
 ## VS Code plugin
+
 - tailwind itellisense (read more)[https://tailwindcss.com/docs/intellisense] (download)[vscode:extension/bradlc.vscode-tailwindcss]
 
 test

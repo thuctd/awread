@@ -40,12 +40,13 @@ export class BooksApi {
       .pipe(map((res) => res?.['data']?.['searchBooks']?.['mvBooksLatestChapters']));
   }
 
-  getCategoryBooks(categoryId?: string) {
+  getCategoryBooks(categoryId?: string, first?: number) {
+    console.log('limit', first);
     return this.apollo
       .query({
         query: gql`
-         query allMvBooksLatestChapters${categoryId ? `($categoryId: BigFloat)` : ''} {
-        allMvBooksLatestChapters (first: 10, condition: {published: true ${categoryId ? `, categoryId: $categoryId ` : ''}} ){
+         query allMvBooksLatestChapters($first: Int ${categoryId ? `, $categoryId: BigFloat` : ''}) {
+        allMvBooksLatestChapters (first: $first, condition: {published: true ${categoryId ? `, categoryId: $categoryId ` : ''}} ){
           nodes {
             title
             authors
@@ -69,7 +70,7 @@ export class BooksApi {
         }
       }
       `,
-        variables: { categoryId },
+        variables: { categoryId, first },
       })
       .pipe(map((res) => res?.['data']?.['allMvBooksLatestChapters']?.['nodes']));
   }

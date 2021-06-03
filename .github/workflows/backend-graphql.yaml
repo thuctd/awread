@@ -2,12 +2,12 @@ name: 'backend-graphql'
 on:
   workflow_dispatch:
     inputs:
-      logLevel:
-        description: 'Log level'
-        default: 'warning'
+      environment:
+        description: 'Target environment to deploy'
+        default: 'next'
         required: true
       name:
-        description: 'build or restart'
+        description: 'build or restart or test'
         default: 'build'
         required: true
   push:
@@ -15,26 +15,30 @@ on:
       - backend-graphql
 
 jobs:
-  printInputs:
+  test:
     runs-on: ubuntu-latest
+    if: github.event.inputs.name =='test'
     steps:
       - run: |
-          echo "Log level: ${{ github.event.inputs.logLevel }}"
+          echo "environment: ${{ github.event.inputs.environment }}"
           echo "Tags: ${{ github.event.inputs.name }}"
           echo "Tags: ${{ github.event.inputs.name == 'restart' }}"
           echo "Tags: ${{ github.event.inputs.name == 'build' }}"
           echo "Tags: ${{ github.event_name }}"
           echo "Tags: ${{ github.event_name == 'workflow_dispatch' }}"
+          echo "next is true ${{ github.event.inputs.name == 'test' && 'next' || 'production' }}"
+          echo "production is true ${{ github.event.inputs.name == 'test' && 'production' || 'next' }}"
+          echo "ssh://dokku@${{ github.event.inputs.environment == 'production' && secrets.PRODUCTION_URL || secrets.NEXT_URL }}:22/backend-graphql"
 
   restart:
     runs-on: ubuntu-latest
     timeout-minutes: 60
-    if: github.event_name == 'workflow_dispatch' && github.event.inputs.name=='restart'
+    if: github.event.inputs.name =='restart'
     steps:
       - name: executing remote ssh commands using ssh key
         uses: appleboy/ssh-action@master
         with:
-          host: awread.vn
+          host: ${{ github.event.inputs.environment == 'production' && secrets.PRODUCTION_URL || secrets.NEXT_URL }}
           username: root
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
@@ -45,7 +49,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 60
-    if: github.event_name == 'push' || github.event.inputs.name == 'build'
+    if: (github.event_name == 'push' || github.event.inputs.name == 'build')
     steps:
       - name: using action checkout
         uses: actions/checkout@v2
@@ -68,7 +72,7 @@ jobs:
         with:
           # specify `--force` as a flag for git pushes
           git_push_flags: '--force'
-          git_remote_url: 'ssh://dokku@awread.vn:22/backend-graphql'
+          git_remote_url: "ssh://dokku@${{ github.event.inputs.environment == 'production' && secrets.PRODUCTION_URL || secrets.NEXT_URL }}:22/backend-graphql"
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
 
       - name: noti on failure
@@ -95,7 +99,7 @@ jobs:
       - name: executing remote ssh commands using ssh key
         uses: appleboy/ssh-action@master
         with:
-          host: awread.vn
+          host: ${{ github.event.inputs.environment == 'production' && secrets.PRODUCTION_URL || secrets.NEXT_URL }}
           username: root
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |

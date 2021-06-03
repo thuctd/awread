@@ -17,14 +17,16 @@ export class NodeMailerAddon {
         })
     }
 
-    async send() {
+    async send(content, title = 'Khôi phục mật khẩu tài khoản awread.vn') {
         // send mail with defined transport object
         const info = await this.transporter.sendMail({
             from: 'info@awread.vn', // sender address
             to: "hiepxanh@gmail.com", // list of receivers
-            subject: "Hello ✔", // Subject line
-            text: "Hello world?", // plain text body
-            html: "<b>Hello world?</b>", // html body
+            subject: title, // Subject line
+            // text: "Hello world?", // plain text body
+            // html: "<b>Hello world?</b>", // html body
+            text: content,
+            html: content
         });
 
         console.log("Message sent: %s", info.messageId);
@@ -33,6 +35,7 @@ export class NodeMailerAddon {
         // Preview only available when sending through an Ethereal account
         console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
         // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+        return info.messageId;
 
     }
 }

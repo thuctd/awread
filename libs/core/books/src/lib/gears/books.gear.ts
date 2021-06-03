@@ -22,10 +22,12 @@ export class BooksGear {
     private booksApi: BooksApi,
   ) { }
 
-  getCategoryBooks(categoryId?: string) {
+  getCategoryBooks(categoryId: string = '', limit: number = 9) {
     this.categoryBooksStore.setLoading(true);
-    return this.booksApi.getCategoryBooks(categoryId).pipe(
-      tap(books => this.categoryBooksStore.set(books)),
+    let hasMore, total;
+    return this.booksApi.getCategoryBooks(categoryId, limit).pipe(
+      tap(books => this.categoryBooksStore.add(books)),
+      tap(() => this.categoryBooksStore.updatePage({ hasMore: true, sizePage: limit, total: 999 })),
       tap(() => this.categoryBooksStore.setLoading(false))
     );
   }
@@ -61,7 +63,6 @@ export class BooksGear {
   }
 
   getTopBooks(limit?: number) {
-    console.log(limit);    
     let hasMore, total;
     this.topBooksStore.setLoading(true);
     return this.booksApi.getTopBooks(limit).pipe(

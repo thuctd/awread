@@ -20,7 +20,7 @@ export class TopBooksQuery extends QueryEntity<TopBooksState> {
     return this.getValue().sizePage;
   }
 
-  getTotalBook() {
-    return this.getValue().total;
+  selectTotalBook() {
+    return this.select(state => state.total);
   }
 }
