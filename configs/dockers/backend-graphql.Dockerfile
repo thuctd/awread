@@ -1,7 +1,6 @@
 # // INPUT: update this
 ARG application=backend-graphql
 ARG applicationPath=backend/graphql
-ARG NODE_ENV
 
 FROM node:14-alpine as builder
 ENV CYPRESS_INSTALL_BINARY=0
@@ -20,7 +19,6 @@ RUN echo applicationPath is: $applicationPath
 FROM builder as build-backend-graphql
 ARG application
 ARG applicationPath
-ARG NODE_ENV
 COPY libs ./libs
 COPY apps ./apps
 
@@ -30,7 +28,6 @@ RUN pnpm build $application -- --prod
 FROM build-backend-graphql as backend-graphql
 ARG application
 ARG applicationPath
-ARG NODE_ENV
 # //INPUT: we expose this only for testing purpose
 EXPOSE 80
 # //INPUT: update this
