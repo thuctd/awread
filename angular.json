@@ -30,14 +30,14 @@
                 }
               ]
             },
-            "stage": {
+            "next": {
               "optimization": true,
               "extractLicenses": true,
               "inspect": false,
               "fileReplacements": [
                 {
                   "replace": "libs/global/environments/src/lib/environment.ts",
-                  "with": "libs/global/environments/src/lib/environment.stage.ts"
+                  "with": "libs/global/environments/src/lib/environment.next.ts"
                 }
               ]
             },
@@ -463,11 +463,11 @@
                 }
               ]
             },
-            "stage": {
+            "next": {
               "fileReplacements": [
                 {
                   "replace": "libs/global/environments/src/lib/environment.ts",
-                  "with": "libs/global/environments/src/lib/environment.stage.ts"
+                  "with": "libs/global/environments/src/lib/environment.next.ts"
                 }
               ],
               "optimization": true,
@@ -531,8 +531,8 @@
             "production": {
               "browserTarget": "writer-phone:build:production"
             },
-            "stage": {
-              "browserTarget": "writer-phone:build:stage"
+            "next": {
+              "browserTarget": "writer-phone:build:next"
             },
             "test": {
               "browserTarget": "writer-phone:build:test"
@@ -1062,14 +1062,14 @@
                 }
               ]
             },
-            "stage": {
+            "next": {
               "optimization": true,
               "extractLicenses": true,
               "inspect": false,
               "fileReplacements": [
                 {
                   "replace": "libs/global/environments/src/lib/environment.ts",
-                  "with": "libs/global/environments/src/lib/environment.stage.ts"
+                  "with": "libs/global/environments/src/lib/environment.next.ts"
                 }
               ]
             },

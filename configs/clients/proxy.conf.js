@@ -10,7 +10,7 @@ switch (process.env) {
         apiTarget = process.env.API_URI;
         logLevel = 'info';
         break;
-    case process.env.ENVIRONMENT == 'staging':
+    case process.env.ENVIRONMENT == 'next':
         graphqlTarget = process.env.GRAPHQL_URI;
         apiTarget = process.env.API_URI;
         logLevel = 'info';
