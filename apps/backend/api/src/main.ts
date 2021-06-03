@@ -12,6 +12,7 @@ import { buildEnvironment } from '@awread/global/environments';
 
 async function bootstrap() {
   console.log('environment, buildenvironment', environment, buildEnvironment, process.env);
+  console.log('WTF why NODE_ENV??', process.env.NODE_ENV, buildEnvironment.NODE_ENV)
   const app = await NestFactory.create(AppModule, { cors: true });
   app.enableCors();
   const globalPrefix = 'api';
