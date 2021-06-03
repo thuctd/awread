@@ -1,4 +1,4 @@
-<div class="w-full cursor-pointer">
+<div class="w-full cursor-pointer px-2">
 <img [routerLink]="['/news', blogId]" class="w-full h-32 md:h-64" [src]="srcImg">
-  <atom-rd-news-title class="pt-4" [title]="title" [class]="'uppercase font-semibold text-base md:text-lg'"></atom-rd-news-title>
+  <atom-rd-news-title class="pt-4" [blogId]="blogId" [title]="title" [class]="'uppercase font-semibold text-base md:text-lg'"></atom-rd-news-title>
 </div>

@@ -1,6 +1,6 @@
-<molec-rd-news-event-item></molec-rd-news-event-item>
-<div class="flex items-center py-8 border-b border-gray-400">
-  <atom-rd-news-date class="pt-1.5" [isDisplay]="true"></atom-rd-news-date>
+<molec-rd-news-event-item [srcImg]="newsDetail.image" [title]="newsDetail.title"></molec-rd-news-event-item>
+<div class="flex items-center pt-4 pb-8 border-b border-gray-400">
+  <atom-rd-news-date [date]="newsDetail.updatedAt" class="pt-1.5" [isDisplay]="true"></atom-rd-news-date>
   <atom-social-share-fb-btn (ShareClicked)="ShareClicked.emit()" class="pl-4"></atom-social-share-fb-btn>
 </div>
-<excerpt class="py-4" [class]="'text-sm'" [excerpt]="content"></excerpt>
+<excerpt class="py-4" [class]="'text-sm'" [excerpt]="newsDetail.content"></excerpt>

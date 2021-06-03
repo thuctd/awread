@@ -10,27 +10,24 @@ import { of, Observable } from 'rxjs';
 @Directive()
 export class NewsDetailPage implements OnInit {
   news$ = this.newsFacade.news$;
-  new: Observable<any>;
-  newId: string;
-  constructor(
-    private activatedRoute: ActivatedRoute,
-    private newsFacade: NewsFacade,
-  ) {}
+  newsDetail: Observable<any>;
+  blogId: string;
+  constructor(private activatedRoute: ActivatedRoute, private newsFacade: NewsFacade) {}
 
   ngOnInit(): void {
     this.newsFacade.get().subscribe();
-    this.newId = this.activatedRoute.snapshot.params['newsId']; 
+    this.blogId = this.activatedRoute.snapshot.params['newsId'];
     this.loadBlogId();
   }
 
   private loadBlogId() {
-    this.new = this.news$.pipe(
-      takeWhile(val => val !== undefined && this.newId !== undefined, false),
+    this.newsDetail = this.news$.pipe(
+      takeWhile((val) => val !== undefined && this.blogId !== undefined, false),
       switchMap((items) => {
         if (!items.length) {
           return of([]);
         }
-        return this.newsFacade.selectEntity(this.newId);
+        return this.newsFacade.selectEntity(this.blogId);
       })
     );
   }

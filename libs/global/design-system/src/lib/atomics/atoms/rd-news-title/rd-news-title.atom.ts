@@ -13,7 +13,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RdNewsTitleAtom implements OnInit {
-  @Input() newsId = 'bvxz_324988seQ6x';
+  @Input() blogId;
   @Input() title = 'Title';
   @Input() class = '';
 

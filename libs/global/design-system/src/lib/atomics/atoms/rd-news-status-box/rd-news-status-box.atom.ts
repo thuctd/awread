@@ -13,8 +13,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RdNewsStatusBoxAtom implements OnInit {
-  @Input() bgColor: 'red-400';
-  @Input() text: 'hot';
+  @Input() text = 'hot';
 
   constructor() {}
 

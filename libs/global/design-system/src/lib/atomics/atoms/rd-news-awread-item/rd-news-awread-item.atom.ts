@@ -20,6 +20,8 @@ export class RdNewsAwreadItemAtom implements OnInit {
   @Input() description = '';
   @Input() mode: 'grid' | 'list' = 'grid';
 
+  @Input() class = '';
+
   constructor() {}
 
   ngOnInit(): void {}

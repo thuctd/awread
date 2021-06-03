@@ -1,9 +1,9 @@
 <div class="w-full">
   <div *ngIf="mode === 'grid';else list">
     <a [routerLink]="['/news', blogId]" class="outline-none">
-      <img class="w-36 h-28" [src]="srcImg">
+      <img class="w-full h-28" [src]="srcImg">
     </a>
-    <atom-rd-news-title class="mt-2" [class]="'font-semibold'" [title]="title"></atom-rd-news-title>
+    <atom-rd-news-title class="mt-2" [class]="class" [blogId]="blogId" [title]="title"></atom-rd-news-title>
   </div>
   <ng-template #list>
     <div class="flex">
@@ -13,7 +13,7 @@
         </a>
       </div>
       <div class="w-3/5 sm:w-2/3 pl-4">
-        <atom-rd-news-title [title]="title"></atom-rd-news-title>
+        <atom-rd-news-title [class]="class" [blogId]="blogId" [title]="title"></atom-rd-news-title>
         <atom-rd-news-date [date]="date" class="my-1 sm:my-3"></atom-rd-news-date>
         <excerpt [excerpt]="description"></excerpt>
       </div>

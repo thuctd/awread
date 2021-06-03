@@ -10,6 +10,13 @@
       [srcImg]="item.image"
       ></molec-rd-news-awread-hot>
   </div>
-  <molec-rd-news-awread-list [newsMiddle]="newsMiddle"></molec-rd-news-awread-list>
+  <div class="grid grid-cols-3 gap-x-8 py-10">
+    <div *ngFor="let item of newsMiddle">
+      <atom-rd-news-awread-item [class]="'font-semibold text-sm'" class="col-span-1" *ngIf="item.position == 'middle'" [blogId]="item.blogId" [title]="item.title" [srcImg]="item.image" [date]="item.updatedAt" [description]="item.description" [mode]="'grid'"></atom-rd-news-awread-item>
+    </div>
+  </div>
+  <div *ngFor="let item of newsMiddle">
+    <atom-rd-news-awread-item [class]="'font-semibold text-sm'" *ngIf="item.position == 'bottom'" [blogId]="item.blogId" [title]="item.title" [srcImg]="item.image" [date]="item.updatedAt" [description]="item.description" [mode]="'list'"></atom-rd-news-awread-item>
+  </div>
 </div>
 

@@ -73,7 +73,6 @@ import { RdNewsAwreadOrgan } from './organs/rd-news-awread/rd-news-awread.organ'
 import { RdNewsBookItemMolec } from './molecs/rd-news-book-item/rd-news-book-item.molec';
 import { RdNewsAwreadHotMolec } from './molecs/rd-news-awread-hot/rd-news-awread-hot.molec';
 import { RdNewsEventItemMolec } from './molecs/rd-news-event-item/rd-news-event-item.molec';
-import { RdNewsAwreadListMolec } from './molecs/rd-news-awread-list/rd-news-awread-list.molec';
 import { RdNewsMbTemplate } from './templates/rd-news-mb/rd-news-mb.template';
 import { RdNewsDetailTemplate } from './templates/rd-news-detail/rd-news-detail.template';
 import { CoreCategoriesModule } from '@awread/core/categories';
@@ -154,7 +153,6 @@ import { RdNewsDetailContentOrgan } from './organs/rd-news-detail-content/rd-new
     RdNewsBookItemMolec,
     RdNewsAwreadHotMolec,
     RdNewsEventItemMolec,
-    RdNewsAwreadListMolec,
     RdNewsMbTemplate,
     RdNewsDetailTemplate,
     RdNewsDetailContentOrgan,
@@ -229,7 +227,6 @@ import { RdNewsDetailContentOrgan } from './organs/rd-news-detail-content/rd-new
     RdNewsBookItemMolec,
     RdNewsAwreadHotMolec,
     RdNewsEventItemMolec,
-    RdNewsAwreadListMolec,
     RdNewsMbTemplate,
     RdNewsDetailTemplate,
     RdNewsDetailContentOrgan,

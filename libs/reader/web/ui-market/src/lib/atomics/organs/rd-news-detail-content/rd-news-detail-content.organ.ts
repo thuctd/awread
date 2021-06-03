@@ -13,6 +13,12 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RdNewsDetailContentOrgan implements OnInit {
+  @Input() newsDetail = {
+    title: '',
+    image: '',
+    updatedAt: '',
+    content: '',
+  };
   @Input() content = `Đây là nội dung`;
 
   constructor() {}
