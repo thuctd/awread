@@ -2,7 +2,8 @@
 ARG application=writer-web
 ARG applicationPath=writer/web
 ARG GRAPHQL_URI=backend-graphql.web.1
-ARG NODE_ENV=production
+ARG API_URI=backend-api.web.1
+ARG NODE_ENV
 
 FROM node:14-alpine as builder
 ENV CYPRESS_INSTALL_BINARY=0
