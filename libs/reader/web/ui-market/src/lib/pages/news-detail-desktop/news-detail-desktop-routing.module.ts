@@ -3,10 +3,15 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { NewsDetailDesktopPage } from './news-detail-desktop.page';
 
-const routes: Routes = [{ path: '', component: NewsDetailDesktopPage }];
+
+
+const routes: Routes = [
+  { path: '', component: NewsDetailDesktopPage }
+  
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
-export class NewsDetailDesktopRoutingModule {}
+export class NewsDetailDesktopRoutingModule { }
