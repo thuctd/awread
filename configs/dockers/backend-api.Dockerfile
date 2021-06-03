@@ -24,7 +24,7 @@ ARG NODE_ENV
 COPY libs ./libs
 COPY apps ./apps
 
-RUN pnpm build $application -- --configuration=$NODE_ENV --no-progress
+RUN pnpm build $application -- --configuration=${NODE_ENV} --no-progress
 
 # //INPUT: update this
 FROM build-backend-api as backend-api
