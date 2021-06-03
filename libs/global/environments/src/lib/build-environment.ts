@@ -1,6 +1,6 @@
 
 interface ENV {
-    ENVIRONMENT: undefined | string;
+    NODE_ENV: undefined | string;
     GRAPHQL_URI: undefined | string;
     DATABASE: undefined | string;
 }
@@ -8,14 +8,14 @@ interface ENV {
 // this $ENV is direct import from webpack.config.js
 declare const process: { env: ENV };
 let env: ENV = {
-    ENVIRONMENT: undefined,
+    NODE_ENV: undefined,
     GRAPHQL_URI: undefined,
     DATABASE: undefined,
 };
 try {
     env = {
-        ENVIRONMENT: process.env.ENVIRONMENT ?? 'development',
-        GRAPHQL_URI: process.env.GRAPHQL_URI ?? 'https://backend-graphql.awread.vn',
+        NODE_ENV: process.env.NODE_ENV ?? 'development',
+        GRAPHQL_URI: process.env.GRAPHQL_URI ?? 'https://backend-graphql.next.awread.vn',
         DATABASE: process.env.DATABASE,
     };
 } catch (error) {
