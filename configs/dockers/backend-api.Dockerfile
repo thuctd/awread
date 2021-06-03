@@ -1,6 +1,7 @@
 # // INPUT: update this
 ARG application=backend-api
 ARG applicationPath=backend/api
+ARG NODE_ENV
 
 FROM node:14-alpine as builder
 ENV CYPRESS_INSTALL_BINARY=0
@@ -19,6 +20,7 @@ RUN echo applicationPath is: $applicationPath
 FROM builder as build-backend-api
 ARG application
 ARG applicationPath
+ARG NODE_ENV
 COPY libs ./libs
 COPY apps ./apps
 

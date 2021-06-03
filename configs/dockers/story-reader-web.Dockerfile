@@ -1,6 +1,7 @@
 # // INPUT: update this
 ARG application=reader-web
 ARG applicationPath=reader/web
+ARG NODE_ENV
 
 FROM node:14-alpine as builder
 ENV CYPRESS_INSTALL_BINARY=0
