@@ -46,7 +46,7 @@
     "@angular/platform-browser": "11.2.6",
     "@angular/platform-browser-dynamic": "11.2.6",
     "@angular/router": "11.2.6",
-    "@apollo/client": "^3.3.16",
+    "@apollo/client": "^3.3.19",
     "@aws-sdk/client-s3": "^3.9.0",
     "@datorama/akita": "^6.1.2",
     "@datorama/akita-ngdevtools": "^6.0.0",
