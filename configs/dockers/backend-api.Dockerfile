@@ -2,9 +2,9 @@
 ARG application=backend-api
 ARG applicationPath=backend/api
 
-
 FROM node:14-alpine as builder
-ENV NODE_ENV=${production}
+
+ENV NODE_ENV=${NODE_ENV}
 ENV CYPRESS_INSTALL_BINARY=0
 
 WORKDIR /batcave

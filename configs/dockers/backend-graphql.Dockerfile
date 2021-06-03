@@ -1,10 +1,12 @@
 # // INPUT: update this
 ARG application=backend-graphql
 ARG applicationPath=backend/graphql
-ARG NODE_ENV
 
 FROM node:14-alpine as builder
+
+ENV NODE_ENV=${NODE_ENV}
 ENV CYPRESS_INSTALL_BINARY=0
+
 WORKDIR /batcave
 RUN npm i -g pnpm
 COPY decorate-angular-cli.js package.json pnpm-lock.yaml ./
