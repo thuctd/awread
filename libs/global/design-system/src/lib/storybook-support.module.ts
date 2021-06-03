@@ -11,7 +11,7 @@ try {
   console.log('__ISSTORYBOOK__', __ISSTORYBOOK__);
 } catch (error) {
   isStorybook = false;
-  console.log('is website, not storybook', isStorybook);
+  // console.log('is website, not storybook', isStorybook);
 }
 
 @NgModule({

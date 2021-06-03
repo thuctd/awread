@@ -1,4 +1,1 @@
-<wrt-template-forgot-password
-  (forgotSubmit)="forgotSubmitEvent($event)"
-  (closeEvent)="closeEvent()"
-></wrt-template-forgot-password>
+<wrt-template-forgot-password [isSentEmail]="isSentEmail" (forgotSubmit)="forgotSubmitEvent($event)" (closeEvent)="closeEvent()"></wrt-template-forgot-password>

@@ -2,9 +2,9 @@ name: 'reader-web'
 on:
   workflow_dispatch:
     inputs:
-      logLevel:
-        description: 'Log level'
-        default: 'warning'
+      environment:
+        description: 'Target environment to deploy'
+        default: 'next'
         required: true
       name:
         description: 'build or restart'

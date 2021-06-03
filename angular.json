@@ -30,14 +30,14 @@
                 }
               ]
             },
-            "stage": {
+            "next": {
               "optimization": true,
               "extractLicenses": true,
               "inspect": false,
               "fileReplacements": [
                 {
                   "replace": "libs/global/environments/src/lib/environment.ts",
-                  "with": "libs/global/environments/src/lib/environment.stage.ts"
+                  "with": "libs/global/environments/src/lib/environment.next.ts"
                 }
               ]
             },
@@ -121,8 +121,12 @@
             "tsConfig": "apps/writer/web/tsconfig.app.json",
             "aot": true,
             "assets": [
-              "apps/writer/web/src/favicon.ico",
               "apps/writer/web/src/assets",
+              {
+                "glob": "favicon.ico",
+                "input": "libs/global/assets/src/global-assets",
+                "output": "."
+              },
               {
                 "glob": "**/*",
                 "input": "libs/global/assets/src/global-assets",
@@ -153,12 +157,35 @@
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "libs/global/environments/src/lib/domains/environment.ts",
-                  "with": "libs/global/environments/src/lib/domains/environment.writer.ts"
-                },
-                {
                   "replace": "libs/global/environments/src/lib/environment.ts",
                   "with": "libs/global/environments/src/lib/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            },
+            "next": {
+              "fileReplacements": [
+                {
+                  "replace": "libs/global/environments/src/lib/environment.ts",
+                  "with": "libs/global/environments/src/lib/environment.next.ts"
                 }
               ],
               "optimization": true,
@@ -192,6 +219,9 @@
           "configurations": {
             "production": {
               "browserTarget": "writer-web:build:production"
+            },
+            "next": {
+              "browserTarget": "writer-web:build:next"
             }
           }
         },
@@ -243,25 +273,6 @@
           "configurations": {
             "ci": {
               "quiet": true
-            }
-          }
-        },
-        "deploy": {
-          "builder": "@angular/fire:deploy",
-          "project": "writer-web-story",
-          "options": {
-            "buildTarget": "writer-web:build",
-            "firebaseProject": "awready-beta"
-          },
-          "configurations": {
-            "production": {
-              "buildTarget": "writer-web:build",
-              "firebaseProject": "awread-2020"
-            },
-            "storybook": {
-              "buildTarget": "writer-web:build-storybook",
-              "firebaseProject": "awready-beta",
-              "siteTarget": "writer-web-story"
             }
           }
         }
@@ -463,11 +474,11 @@
                 }
               ]
             },
-            "stage": {
+            "next": {
               "fileReplacements": [
                 {
                   "replace": "libs/global/environments/src/lib/environment.ts",
-                  "with": "libs/global/environments/src/lib/environment.stage.ts"
+                  "with": "libs/global/environments/src/lib/environment.next.ts"
                 }
               ],
               "optimization": true,
@@ -531,8 +542,8 @@
             "production": {
               "browserTarget": "writer-phone:build:production"
             },
-            "stage": {
-              "browserTarget": "writer-phone:build:stage"
+            "next": {
+              "browserTarget": "writer-phone:build:next"
             },
             "test": {
               "browserTarget": "writer-phone:build:test"
@@ -587,24 +598,6 @@
           "configurations": {
             "ci": {
               "quiet": true
-            }
-          }
-        },
-        "deploy": {
-          "builder": "@angular/fire:deploy",
-          "options": {
-            "buildTarget": "writer-phone:build",
-            "firebaseProject": "awready-beta"
-          },
-          "configurations": {
-            "production": {
-              "buildTarget": "writer-phone:build",
-              "firebaseProject": "awread-2020"
-            },
-            "storybook": {
-              "buildTarget": "writer-phone:build-storybook",
-              "firebaseProject": "awready-beta",
-              "siteTarget": "writer-phone-story"
             }
           }
         }
@@ -1062,14 +1055,14 @@
                 }
               ]
             },
-            "stage": {
+            "next": {
               "optimization": true,
               "extractLicenses": true,
               "inspect": false,
               "fileReplacements": [
                 {
                   "replace": "libs/global/environments/src/lib/environment.ts",
-                  "with": "libs/global/environments/src/lib/environment.stage.ts"
+                  "with": "libs/global/environments/src/lib/environment.next.ts"
                 }
               ]
             },
@@ -1128,8 +1121,12 @@
             "tsConfig": "apps/reader/web/tsconfig.app.json",
             "aot": true,
             "assets": [
-              "apps/reader/web/src/favicon.ico",
               "apps/reader/web/src/assets",
+              {
+                "glob": "favicon.ico",
+                "input": "libs/global/assets/src/global-assets",
+                "output": "."
+              },
               {
                 "glob": "google40ce3f532fbe065a.html",
                 "input": "libs/global/assets/src/global-assets/files",
@@ -1164,12 +1161,35 @@
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "libs/global/environments/src/lib/domains/environment.ts",
-                  "with": "libs/global/environments/src/lib/domains/environment.reader.ts"
-                },
-                {
                   "replace": "libs/global/environments/src/lib/environment.ts",
                   "with": "libs/global/environments/src/lib/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            },
+            "next": {
+              "fileReplacements": [
+                {
+                  "replace": "libs/global/environments/src/lib/environment.ts",
+                  "with": "libs/global/environments/src/lib/environment.next.ts"
                 }
               ],
               "optimization": true,
@@ -1203,6 +1223,9 @@
           "configurations": {
             "production": {
               "browserTarget": "reader-web:build:production"
+            },
+            "next": {
+              "browserTarget": "reader-web:build:next"
             }
           }
         },
@@ -1258,24 +1281,6 @@
           "configurations": {
             "ci": {
               "quiet": true
-            }
-          }
-        },
-        "deploy": {
-          "builder": "@angular/fire:deploy",
-          "options": {
-            "buildTarget": "reader-web:build",
-            "firebaseProject": "awready-beta"
-          },
-          "configurations": {
-            "production": {
-              "buildTarget": "reader-web:build",
-              "firebaseProject": "awread-2020"
-            },
-            "storybook": {
-              "buildTarget": "reader-web:build-storybook",
-              "firebaseProject": "awready-beta",
-              "siteTarget": "reader-web-story"
             }
           }
         }
@@ -1534,24 +1539,6 @@
           "configurations": {
             "ci": {
               "quiet": true
-            }
-          }
-        },
-        "deploy": {
-          "builder": "@angular/fire:deploy",
-          "options": {
-            "buildTarget": "reader-phone:build",
-            "firebaseProject": "awready-beta"
-          },
-          "configurations": {
-            "production": {
-              "buildTarget": "reader-phone:build",
-              "firebaseProject": "awread-2020"
-            },
-            "storybook": {
-              "buildTarget": "reader-phone:build-storybook",
-              "firebaseProject": "awready-beta",
-              "siteTarget": "reader-phone-story"
             }
           }
         }

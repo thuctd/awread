@@ -1,24 +1,39 @@
 import { Router } from '@angular/router';
-import { Directive, Injectable, OnInit } from '@angular/core';
-
+import { ChangeDetectorRef, Directive, Injectable, OnInit } from '@angular/core';
+import { MatDialog, MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ForgotPasswordFacade } from '@awread/core/users';
+import { SnackbarService } from '@awread/global/packages';
 @Injectable({
   providedIn: 'root',
 })
 @Directive()
 export class ForgotPage implements OnInit {
+  isSentEmail = false;
   constructor(
-    // private forgotPasswordFacade: ForgotPasswordFacade,
-    private router: Router
+    public dialog: MatDialog,
+    private router: Router,
+    private forgotPasswordFacade: ForgotPasswordFacade,
+    private snackbarService: SnackbarService,
+    private cd: ChangeDetectorRef,
   ) { }
 
   ngOnInit(): void { }
   forgotSubmitEvent(email: string) {
-    // console.log('email: ', email);
-    window.localStorage.setItem('email_reset_password', email);
+    console.log('email: ', email);
+    this.forgotPasswordFacade.send(email).subscribe((result: any) => {
+      if (result.success) {
+        this.isSentEmail = true;
+        this.cd.detectChanges();
+      } else {
+        this.snackbarService.showWarning(result.message);
+      }
+      console.log('result', result);
+    })
     // this.forgotPasswordFacade.sendLinkResetPassword(email);
   }
   closeEvent() {
-    // console.log('send link reset password ok!');
-    this.router.navigate(['login']);
+    console.log('send link reset password ok!');
+    this.router.navigate(['/login']);
   }
+
 }
