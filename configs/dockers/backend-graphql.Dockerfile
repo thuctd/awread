@@ -22,7 +22,7 @@ ARG applicationPath
 COPY libs ./libs
 COPY apps ./apps
 
-RUN pnpm build $application -- --prod
+RUN pnpm build $application -- --configuration=$NODE_ENV --no-progress
 
 # //INPUT: update this
 FROM build-backend-graphql as backend-graphql

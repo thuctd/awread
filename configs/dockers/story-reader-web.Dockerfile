@@ -1,7 +1,6 @@
 # // INPUT: update this
 ARG application=reader-web
 ARG applicationPath=reader/web
-ARG NODE_ENV=production
 
 FROM node:14-alpine as builder
 ENV CYPRESS_INSTALL_BINARY=0
@@ -16,7 +15,6 @@ COPY configs/tailwind configs/tailwind
 FROM builder as build-story-reader-web
 ARG application
 ARG applicationPath
-ARG NODE_ENV
 COPY .storybook ./.storybook
 COPY libs ./libs
 COPY apps ./apps
@@ -28,7 +26,6 @@ RUN pnpm nx build-storybook $application -- -c ci
 FROM nginx:stable-alpine as story-reader-web
 ARG application
 ARG applicationPath
-ARG NODE_ENV
 EXPOSE 80
 WORKDIR /app
 # //INPUT: update this

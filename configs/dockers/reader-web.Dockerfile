@@ -3,7 +3,6 @@ ARG application=reader-web
 ARG applicationPath=reader/web
 ARG GRAPHQL_URI=backend-graphql.web.1
 ARG API_URI=backend-api.web.1
-ARG NODE_ENV
 
 FROM node:14-alpine as builder
 ENV CYPRESS_INSTALL_BINARY=0
@@ -19,7 +18,6 @@ FROM builder as build-reader-web
 ARG application
 ARG applicationPath
 ARG GRAPHQL_URI
-ARG NODE_ENV
 COPY libs ./libs
 COPY apps ./apps
 RUN pnpm build $application -- --configuration=$NODE_ENV --no-progress
@@ -31,7 +29,6 @@ FROM nginx:stable-alpine as reader-web
 ARG application
 ARG applicationPath
 ARG GRAPHQL_URI
-ARG NODE_ENV
 EXPOSE 80
 WORKDIR /app
 # //INPUT: update this
