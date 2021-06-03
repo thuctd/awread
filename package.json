@@ -29,7 +29,7 @@
     "fb-emu": "firebase emulators:start",
     "nx-migrate": "npx @nrwl/tao@latest migrate @nrwl/workspace@latest",
     "prod-tunnel": "ssh -L localhost:5433:172.17.0.2:5432 hiepxanh@awread.vn",
-    "next-tunnel": "ssh -L localhost:5434:172.17.0.2:5432 kshiepxanh@awread-next",
+    "next-tunnel": "ssh -L localhost:5434:172.17.0.3:5432 hiepxanh@awread-next",
     "reader-local": "set GRAPHQL_URI=localhost:5000 && nx serve reader-web --ssl=true",
     "writer-local": "set GRAPHQL_URI=localhost:5000 && nx serve writer-web --ssl=true",
     "backend-debug": "nx serve backend-graphql --inspect --port=7777"
