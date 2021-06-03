@@ -1,7 +1,7 @@
 # // INPUT: update this
-ARG application=backend-graphql
-ARG applicationPath=backend/graphql
-ARG NODE_ENV=production
+ARG application=backend-api
+ARG applicationPath=backend/api
+ARG NODE_ENV
 
 FROM node:14-alpine as builder
 ENV CYPRESS_INSTALL_BINARY=0
@@ -11,16 +11,13 @@ COPY decorate-angular-cli.js package.json pnpm-lock.yaml ./
 RUN pnpm install --frozen-lockfile
 COPY *.js tsconfig*.json angular.json nx.json ./
 COPY configs/tailwind configs/tailwind
-# COPY configs/post-deploy/backend-graphql.Procfile ./Procfile
-# COPY configs/post-deploy/backend-graphql.app.json ./app.json
-# COPY configs/post-deploy/backend-graphql.sh ./backend-graphql.sh
 
 # RUN ls
-# RUN echo application is: $application
-# RUN echo applicationPath is: $applicationPath
+RUN echo application is: $application
+RUN echo applicationPath is: $applicationPath
 
 # //INPUT: update this
-FROM builder as build-backend-graphql
+FROM builder as build-backend-api
 ARG application
 ARG applicationPath
 ARG NODE_ENV
@@ -30,12 +27,12 @@ COPY apps ./apps
 RUN pnpm build $application -- --prod
 
 # //INPUT: update this
-FROM build-backend-graphql as backend-graphql
+FROM build-backend-api as backend-api
 ARG application
 ARG applicationPath
 ARG NODE_ENV
 # //INPUT: we expose this only for testing purpose
 EXPOSE 80
 # //INPUT: update this
-COPY --from=build-backend-graphql /batcave/dist/apps/$applicationPath .
+COPY --from=build-backend-api /batcave/dist/apps/$applicationPath .
 CMD ["node", "main.js"]
