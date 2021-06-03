@@ -1,10 +1,12 @@
 # // INPUT: update this
 ARG application=backend-api
 ARG applicationPath=backend/api
-ENV NODE_ENV=${production}
+
 
 FROM node:14-alpine as builder
+ENV NODE_ENV=${production}
 ENV CYPRESS_INSTALL_BINARY=0
+
 WORKDIR /batcave
 RUN npm i -g pnpm
 COPY decorate-angular-cli.js package.json pnpm-lock.yaml ./
