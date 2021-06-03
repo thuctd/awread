@@ -8,7 +8,7 @@ import { ActivatedRoute } from '@angular/router';
 @Directive()
 export class NewsPage {
   news$ = this.newsFacade.news$;
-  newsDetail$ = this.newsFacade.newsDetail$;
+  // newsDetail$ = this.newsFacade.newsDetail$;
   // bienNewThuong = [];
   constructor(private newsFacade: NewsFacade) {}
 

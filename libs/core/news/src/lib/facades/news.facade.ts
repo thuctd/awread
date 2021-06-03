@@ -6,7 +6,6 @@ import { NewsStore } from '../states/news/news.store';
 @Injectable({ providedIn: 'root' })
 export class NewsFacade {
   news$ = this.newsQuery.selectAll();
-  newsDetail$ = this.newsQuery.selectEntity(1);
 
   constructor(private newsGear: NewsGear, private newsStore: NewsStore, private newsQuery: NewsQuery) {}
 
@@ -14,7 +13,7 @@ export class NewsFacade {
     return this.newsGear.get();
   }
 
-  selectEntityNews(blogId: string) {
+  selectEntity(blogId) {
     return this.newsQuery.selectEntity(blogId);
   }
 }

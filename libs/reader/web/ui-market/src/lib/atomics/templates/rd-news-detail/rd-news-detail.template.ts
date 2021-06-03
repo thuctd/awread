@@ -13,7 +13,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RdNewsDetailTemplate implements OnInit {
-  @Input() newsDetail = [];
+  @Input() newsDetail;
   constructor() {}
 
   ngOnInit(): void {}
