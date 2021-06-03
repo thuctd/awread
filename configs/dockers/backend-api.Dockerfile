@@ -1,7 +1,7 @@
 # // INPUT: update this
 ARG application=backend-api
 ARG applicationPath=backend/api
-ENV NODE_ENV=production
+ARG NODE_ENV=production
 
 FROM node:14-alpine as builder
 ENV CYPRESS_INSTALL_BINARY=0
