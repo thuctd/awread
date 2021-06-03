@@ -15,6 +15,8 @@ COPY configs/tailwind configs/tailwind
 # RUN ls
 RUN echo application is: $application
 RUN echo applicationPath is: $applicationPath
+RUN echo NODE_ENV is: $NODE_ENV
+RUN echo NODE_ENV is: ${NODE_ENV}
 
 # //INPUT: update this
 FROM builder as build-backend-api
