@@ -123,8 +123,8 @@ export class DetailPage implements OnInit, OnDestroy {
       });
   }
 
-  nativeBooksAuthor() {
-    this.router.navigate(['/author', this.authorId]);
+  nativeBooksAuthor() { 
+    this.router.navigate(['/', this.authorId, 'books']);
   }
 
   nativeTopBook() {

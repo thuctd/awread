@@ -2,6 +2,6 @@
   <organ-comment-book-read class="col-span-8"></organ-comment-book-read>
   <div class="lg:hidden xl:block xl:col-span-1"></div>
   <div class="col-span-4 lg:col-span-4 xl:col-span-3 mt-10">
-    <list-detail-top-book [books]="books"></list-detail-top-book>
+    <list-detail-top-book (moreEvent)="nativeTopBook.emit($event)" [books]="books"></list-detail-top-book>
   </div>
 </section>

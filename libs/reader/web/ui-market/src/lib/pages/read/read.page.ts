@@ -82,9 +82,13 @@ export class ReadPage implements OnInit {
       tap(res => {
         this.router.navigate(['/books', res[0].bookId, 'chapters', res[0].chapterId]);
       })
-    ).subscribe(res => {
+    ).subscribe(() => {
       this.loading = false;
     });
     this.cd.detectChanges();
+  }
+
+  nativeTopBook() {
+    this.router.navigate(['/top-books']);
   }
 }

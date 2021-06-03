@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'organ-comment',
@@ -14,6 +14,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 })
 export class CommentOrgan implements OnInit {
   @Input() books = [];
+  @Output() nativeTopBook = new EventEmitter();
   constructor() { }
 
   ngOnInit(): void {
