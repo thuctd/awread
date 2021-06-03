@@ -60,15 +60,17 @@ export class BooksGear {
     return this.booksApi.getBookById(bookId);
   }
 
-  getTopBooks(filters, limit?: number) {
-    let hasMore;
+  getTopBooks(limit?: number) {
+    console.log(limit);    
+    let hasMore, total;
     this.topBooksStore.setLoading(true);
-    return this.booksApi.getTopBooks(filters, limit).pipe(
+    return this.booksApi.getTopBooks(limit).pipe(
       map(res => {
         hasMore = res?.['data']?.['allMvMostViewBooks']?.['pageInfo']?.hasNextPage;
+        total = res?.['data']?.['allMvMostViewBooks']?.totalCount;
         this.topBooksStore.add(res?.['data']?.['allMvMostViewBooks']?.['nodes']);
       }),
-      tap(() => this.topBooksStore.updatePage({ hasMore: hasMore, sizePage: limit })),
+      tap(() => this.topBooksStore.updatePage({ hasMore: hasMore, sizePage: limit, total: total })),
       tap(() => this.topBooksStore.setLoading(false))
     );
   }

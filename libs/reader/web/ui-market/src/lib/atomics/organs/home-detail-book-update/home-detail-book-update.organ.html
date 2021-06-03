@@ -5,6 +5,7 @@
     </div>
     <div *ngFor="let tab of tabs">
       <molec-rd-home-list-book-update
+        [loading]="loading"
         [isNovel]="tab.isNovel"
         *ngIf="tabHead.currentName === tab.name"
         [books]="books">

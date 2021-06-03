@@ -13,6 +13,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DetailInfoLineLinkAtom implements OnInit {
+  @Input() isRouterLink: true | false = true;
   @Input() color: true | false = true;
   @Input() title = 'Tác giả';
   @Input() items = [{

@@ -1,5 +1,4 @@
 import { faThLarge, faList } from '@fortawesome/free-solid-svg-icons';
-import { FormGroup, FormBuilder } from '@angular/forms';
 import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
@@ -17,13 +16,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
 export class TopBooksTemplate implements OnInit {
   display = 'grid';
   filterbook = false;
-  @Input() filtersForm: FormGroup = this.fb.group({
-    typeBook: [''],
-    genres: [''],
-    criteria: [''],
-    status: [''],
-    postingDate: [''],
-  });
+  @Input() totalBook;
   @Input() genres = [];
   @Input() actions = [
     {
@@ -40,10 +33,9 @@ export class TopBooksTemplate implements OnInit {
   @Input() books = [];
   @Output() eventSearch = new EventEmitter();
   @Output() changeCategoryBooks = new EventEmitter();
-  @Output() filterBooksEvent = new EventEmitter();
   @Output() moreBooks = new EventEmitter();
   @Output() nativeTopBook = new EventEmitter();
-  constructor(private fb: FormBuilder) { }
+  constructor() { }
 
   ngOnInit(): void {
   }

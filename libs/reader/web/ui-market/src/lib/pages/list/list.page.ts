@@ -9,6 +9,7 @@ import { PersistNgFormPlugin } from '@datorama/akita';
 import { BooksFacade } from '@awread/core/books';
 import { GenresFacade } from '@awread/core/genres';
 import { CategoriesFacade } from '@awread/core/categories';
+import { Observable } from 'rxjs';
 
 @UntilDestroy()
 @Injectable({
@@ -18,6 +19,7 @@ import { CategoriesFacade } from '@awread/core/categories';
 export class ListPage implements OnInit, OnDestroy {
   filtersForm: FormGroup;
   persistForm: PersistNgFormPlugin;
+  isLoading$: Observable<boolean>;
   categoryList$ = this.categoriesFacade.categories$;
   topBookList$ = this.booksFacade.topBooks$;
   genreList$ = this.genresFacade.genres$;
@@ -41,6 +43,7 @@ export class ListPage implements OnInit, OnDestroy {
     this.updateForm();
     this.booksFacade.getTopBooks().subscribe();
     this.genresFacade.getAllGenres().subscribe();
+    this.isLoading$ = this.booksFacade.categoryBooksQuery.selectLoading();
     this.watchRouting();
   }
 

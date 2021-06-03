@@ -3,12 +3,15 @@
     <atom-title [title]="'TOP PHỔ BIẾN'"></atom-title>
   </div>
   <div class="mt-8 relative">
-    <div class="absolute top-0 right-0">
-      <div class="inline-flex">
-        <div class="rounded-md text-sm leading-none border-gray-200 mt-1" *ngFor="let action of actions">
+    <div class="grid grid-cols-6 gap-4">
+      <div class="col-start-1 col-end-3">
+        <atom-title [isUppercase]="false" [title]="'999 Truyện'"></atom-title>
+          <!-- <pre>{{totalBook}}</pre> -->
+      </div>
+      <div class="col-end-9 col-span-2">
+        <div class="inline-flex rounded-md text-sm leading-none border-gray-200 mt-1" *ngFor="let action of actions">
           <atom-btn-icon class="{{action.class}}" [icon]="action.faIcon"
-            [ngClass]="display === action.display ? 'bg-green-primary text-white': 'bg-white text-green-primary'"
-            (eventChangesDisplay)="changeDisplay(action.display)">
+            [ngClass]="display === action.display ? 'bg-green-primary text-white': 'bg-white text-green-primary'" (eventChangesDisplay)="changeDisplay(action.display)">
           </atom-btn-icon>
         </div>
       </div>

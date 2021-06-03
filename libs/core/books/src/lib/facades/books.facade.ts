@@ -39,9 +39,9 @@ export class BooksFacade {
     private goodBooksQuery: GoodBooksQuery,
     private genreBooksQuery: GenreBooksQuery,
     private authorBooksQuery: AuthorBooksQuery,
-    private latestBooksQuery: LatestBooksQuery,
+    public latestBooksQuery: LatestBooksQuery,
     private featureBooksQuery: FeatureBooksQuery,
-    private categoryBooksQuery: CategoryBooksQuery,
+    public categoryBooksQuery: CategoryBooksQuery,
   ) { }
 
   selectLoadingAkita() {
@@ -93,7 +93,8 @@ export class BooksFacade {
   }
 
   getTopBooks() {
-    return this.booksGear.getTopBooks(this.booksQuery.getCurrentFilter(), this.topBooksQuery.getSizePage() + 12);
+    const limit = this.topBooksQuery.getSizePage() === undefined ? 12 : this.topBooksQuery.getSizePage();
+    return this.booksGear.getTopBooks(limit + 12);
   }
 
   getGoodBooks() {

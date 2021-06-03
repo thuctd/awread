@@ -1,2 +1,2 @@
 
-<template-top-books [genres]="genres$ | async" (filterBooksEvent)="filterBooks()" (moreBooks)="onMoreBooks()" [books]="topBooks$ | async"></template-top-books>
+<template-top-books [totalBook]="totalBook" [genres]="genres$ | async" (filterBooksEvent)="filterBooks()" (moreBooks)="onMoreBooks()" [books]="topBooks$ | async"></template-top-books>

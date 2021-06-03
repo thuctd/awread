@@ -80,9 +80,10 @@ import { CoreCategoriesModule } from '@awread/core/categories';
 import { TopBooksTemplate } from './templates/top-books/top-books.template';
 import { ListTopBookOrgan } from './organs/list-top-book/list-top-book.organ';
 import { TopBooksMbTemplate } from './templates/top-books-mb/top-books-mb.template';
+import { InfiniteScrollModule, LoaderModule } from '@awread/global/packages';
 
 @NgModule({
-  imports: [CommonModule, StorybookSupportModule, GlobalDesignSystemAtomicModule, CarouselModule, ReaderWebUiAuthorAtomicModule, CoreCategoriesModule],
+  imports: [CommonModule, StorybookSupportModule, GlobalDesignSystemAtomicModule, CarouselModule, ReaderWebUiAuthorAtomicModule, CoreCategoriesModule, InfiniteScrollModule, LoaderModule],
   exports: [
     ReaderWebUiAuthorAtomicModule,
     CommonModule,

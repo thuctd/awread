@@ -5,8 +5,8 @@ import { Component, OnInit, Output, EventEmitter, ElementRef, ViewChild, Input, 
   template: `<ng-content></ng-content><div #anchor></div>`,
   styles: [`
   :host {
-    display: block;
-    /* height: 80vh; */
+    /* display: block;
+    height: 80vh; */
     height: -moz-calc(100vh - 10rem);
     height: -webkit-calc(100vh - 10rem);
     height: calc(100vh - 10rem);

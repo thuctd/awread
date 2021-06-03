@@ -69,9 +69,7 @@ export class BooksApi {
         }
       }
       `,
-        variables: {
-          categoryId,
-        },
+        variables: { categoryId },
       })
       .pipe(map((res) => res?.['data']?.['allMvBooksLatestChapters']?.['nodes']));
   }
@@ -137,7 +135,7 @@ export class BooksApi {
       .pipe(map((res) => res?.['data']?.['allVRandomBooks']?.['nodes']));
   }
 
-  getTopBooks(filters, first?: number) {
+  getTopBooks(first?: number) {
     return this.apollo
       .query({
         query: gql`
@@ -158,6 +156,7 @@ export class BooksApi {
               pageInfo {
                 hasNextPage
               }
+              totalCount
             }
           }
         `, variables: { first }

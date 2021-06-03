@@ -62,4 +62,5 @@ export class PaginationAtom implements OnInit, OnChanges {
       this.onPageChange.emit(this.activePage);
     }
   }
+  
 }
