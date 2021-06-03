@@ -21,5 +21,4 @@ try {
 } catch (error) {
     console.log();
 }
-// export const buildEnvironment = $ENV;
 export const buildEnvironment = env;

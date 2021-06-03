@@ -1,6 +1,6 @@
 <section class="bg-gray-primary">
-  <template-navbar-reader [user]="user$ | async" [isLogin]="isLogin$ | async" [items]="results$ | async" [searchControl]="searchControl"
-    (eventSearch)="navigateToSearch()" (logoutEvent)="logout()">
+  <template-navbar-reader [background]="background" [user]="user$ | async" [isLogin]="isLogin$ | async" [items]="results$ | async"
+    [searchControl]="searchControl" (eventSearch)="navigateToSearch()" (logoutEvent)="logout()">
   </template-navbar-reader>
   <router-outlet></router-outlet>
   <template-footer></template-footer>

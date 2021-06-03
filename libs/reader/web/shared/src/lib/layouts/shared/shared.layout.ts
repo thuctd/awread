@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged, startWith, switchMap, map } from 'rxjs/operators';
 import { BooksFacade } from '@awread/core/books';
 import { AuthFacade, CurrentUserFacade } from '@awread/core/users';
+import { domainEnvironment, environment } from '@awread/global/environments';
+
 @UntilDestroy()
 @Injectable({
   providedIn: 'root',
@@ -16,7 +18,7 @@ export class SharedLayout implements OnInit {
   searchControl: FormControl = new FormControl('');
   search$;
   results$;
-
+  background = environment.next ? 'linear-gradient(145deg,#dd0031,#c3002f)' : '';
   get hasSearchTermInput(): boolean {
     return !!this.searchControl.value;
   }
@@ -27,7 +29,9 @@ export class SharedLayout implements OnInit {
     private cd: ChangeDetectorRef,
     private authFacade: AuthFacade,
     private currentUserFacade: CurrentUserFacade,
-  ) { }
+  ) {
+    console.log('backgound', this.background, environment, domainEnvironment);
+  }
 
   ngOnInit(): void {
     this.searchControl.valueChanges.pipe(debounceTime(100), distinctUntilChanged())

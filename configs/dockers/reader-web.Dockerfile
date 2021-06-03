@@ -21,7 +21,7 @@ ARG GRAPHQL_URI
 ARG NODE_ENV
 COPY libs ./libs
 COPY apps ./apps
-RUN pnpm build $application -- --prod --no-progress
+RUN pnpm build $application -- --configuration=$NODE_ENV --no-progress
 
 # RUN echo application is: $application
 # RUN echo applicationPath is: $applicationPath

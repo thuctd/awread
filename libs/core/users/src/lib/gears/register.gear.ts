@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { CreateUserCredential } from '../models';
-import firebase from 'firebase/app';
 import { AuthApi } from '../apis';
 import { SnackbarService } from '@awread/global/packages';
 import { CurrentUserStore } from '../states/current-user';
@@ -10,7 +9,6 @@ import { CurrentUserGear } from './current-user.gear';
 
 @Injectable({ providedIn: 'root' })
 export class RegisterGear {
-  userCredential: firebase.auth.UserCredential | null = null;
   constructor(
     private authApi: AuthApi,
     private currentUserStore: CurrentUserStore,
