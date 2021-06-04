@@ -101,21 +101,17 @@ export class WritingPage implements OnInit {
 
   private publish() {
     this.chapterForm.patchValue({ published: true });
-    if (this.book.published == false) {
-      this.save(true, true);
-    } else {
-      this.save(true);
-    }
+    this.save(true);
   }
 
-  save(published = false, changeBookStatus = false) {
+  save(publishThisChapter = false) {
+    const publishThisBook = this.book.published == false && publishThisChapter == true;
     if (this.chapterId == 'new') {
-      this.chaptersFacade.create(this.chapterForm.value, published, changeBookStatus).subscribe(value => {
+      this.chaptersFacade.create(this.chapterForm.value, publishThisChapter, publishThisBook).subscribe(value => {
         console.log('value', value);
-        this.location.back();
       })
     } else {
-      this.chaptersFacade.update(this.chapterForm.value).subscribe(value => {
+      this.chaptersFacade.update(this.chapterForm.value, publishThisBook).subscribe(value => {
         console.log('value', value);
       })
     }

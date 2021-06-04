@@ -87,7 +87,7 @@ export class ChaptersGear {
     });
   }
 
-  update(chapter) {
+  update(chapter, publishThisBook = false) {
     return this.chaptersApi.update(chapter)
       .pipe(
         tap(result => {
@@ -96,20 +96,31 @@ export class ChaptersGear {
           } else {
             this.SnackbarService.showSuccess('Lưu chương thành công');
           }
+        }),
+        mergeMap(result => {
+          if (result.errors) {
+            result.errors.forEach(error => this.SnackbarService.showError(error.message));
+            return of(result.errors);
+          } else {
+            if (publishThisBook) {
+              return this.creationsFacade.publish(chapter.bookId);
+            } else {
+              return of(result);
+            }
+          }
         })
       )
   }
 
-  create(chapter, published = false, changeBookStatus = false) {
+  create(chapter, publishThisChapter = false, publishThisBook = false) {
     return this.chaptersApi.create(chapter)
       .pipe(
         tap(result => {
           if (result.errors) {
             result.errors.forEach(error => this.SnackbarService.showError(error.message));
           } else {
-            if (published) {
-              this.SnackbarService.showSuccess('Đã xuất bản');
-              this.SnackbarService.showSuccess('Cần 5 phút để cập nhật lên awread.vn');
+            if (publishThisChapter) {
+              this.SnackbarService.showSuccess('Đã xuất bản chương mới');
             } else {
               this.SnackbarService.showSuccess('Tạo chương mới thành công');
             }
@@ -120,7 +131,7 @@ export class ChaptersGear {
             result.errors.forEach(error => this.SnackbarService.showError(error.message));
             return of(result.errors);
           } else {
-            if (changeBookStatus) {
+            if (publishThisBook) {
               return this.creationsFacade.publish(chapter.bookId);
             } else {
               return of(result);

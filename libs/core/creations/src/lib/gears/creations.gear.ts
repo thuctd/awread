@@ -5,6 +5,7 @@ import { CreationsQuery, CreationsStore } from '../states/creations';
 import { CurrentUserFacade } from '@awread/core/users';
 import { SnackbarService } from '@awread/global/packages';
 import { of } from 'rxjs';
+import { Location } from '@angular/common';
 
 
 @Injectable({ providedIn: 'root' })
@@ -14,7 +15,7 @@ export class CreationsGear {
     private creationsApi: CreationsApi,
     private creationsStore: CreationsStore,
     private currentUserFacade: CurrentUserFacade,
-    private creationsQuery: CreationsQuery,
+    private location: Location,
     private SnackbarService: SnackbarService,
   ) {
   }
@@ -86,7 +87,8 @@ export class CreationsGear {
           if (result.errors) {
             result.errors.forEach(error => this.SnackbarService.showError(error.message));
           } else {
-            this.SnackbarService.showSuccess('Xuất bản truyện thành công');
+            this.SnackbarService.showSuccess('Xuất bản truyện thành công, cần 5 phút để cập nhật lên awread.vn');
+            this.location.back();
           }
         })
       )
