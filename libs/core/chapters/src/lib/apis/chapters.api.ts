@@ -70,6 +70,7 @@ export class ChaptersApi {
                 bookByBookId {
                   title
                   cover
+                  published
                 }
                 contentByChapterId {
                   content

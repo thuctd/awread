@@ -9,7 +9,7 @@
         {{ book.title }}
       </div>
       <div *ngIf="book.categoryId;else noCategory" class="text-xs font-medium text-green-500">
-        {{ book.categoryId | categoryName }}
+        {{ book.categoryId | categoryName }} - {{ book.published ? 'Đã xuất bản' : 'Bản thảo' }}
       </div>
       <ng-template #noCategory>
         <div class="text-xs font-medium text-green-500">-</div>

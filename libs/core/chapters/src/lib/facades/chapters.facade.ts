@@ -23,8 +23,8 @@ export class ChaptersFacade {
     return this.chaptersGear.getChapter(chapterId, bookId);
   }
 
-  create(chapter) {
-    return this.chaptersGear.create(chapter);
+  create(chapter, published, changeBookStatus) {
+    return this.chaptersGear.create(chapter, published, changeBookStatus);
   }
 
   update(chapter) {

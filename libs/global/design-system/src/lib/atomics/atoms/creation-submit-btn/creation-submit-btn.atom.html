@@ -1,4 +1,4 @@
-<button [hidden]="isHidden" mat-flat-button (click)="btnClicked.emit()" [ngClass]="active ? 'bg-green-400' : 'bg-gray-400'"
+<button *ngIf="isHidden != true" mat-flat-button (click)="btnClicked.emit()" [ngClass]="active ? 'bg-green-400' : 'bg-gray-400'"
   class="text-sm md:text-xs lg:text-base xl:text-base text-white cursor-pointer rounded-md border-green-400 focus:shadow-outline focus:outline-none py-2 px-4"
   type="button">
   <span *ngIf="faIcon" class="ml-2 text-xs text-white">

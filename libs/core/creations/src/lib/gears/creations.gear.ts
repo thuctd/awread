@@ -62,6 +62,7 @@ export class CreationsGear {
         })
       )
   }
+
   update(book) {
     return this.creationsApi.update({
       ...book,
@@ -73,6 +74,19 @@ export class CreationsGear {
             result.errors.forEach(error => this.SnackbarService.showError(error.message));
           } else {
             this.SnackbarService.showSuccess('Lưu truyện thành công');
+          }
+        })
+      )
+  }
+
+  publish(bookId) {
+    return this.creationsApi.publish(bookId)
+      .pipe(
+        tap(result => {
+          if (result.errors) {
+            result.errors.forEach(error => this.SnackbarService.showError(error.message));
+          } else {
+            this.SnackbarService.showSuccess('Xuất bản truyện thành công');
           }
         })
       )
