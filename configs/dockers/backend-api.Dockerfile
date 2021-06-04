@@ -2,9 +2,12 @@
 ARG application=backend-api
 ARG applicationPath=backend/api
 
+
 FROM node:14-alpine as builder
 ENV CYPRESS_INSTALL_BINARY=0
-
+RUN --mount=type=bind,source=/root/.pnpm-store/v3,target=/root/.pnpm-store/v3
+RUN --mount=type=bind,source=/usr/local/bin/pnpm,target=/usr/local/bin/pnpm
+RUN --mount=type=bind,source=/usr/local/lib/node_modules,target=/usr/local/lib/node_modules
 WORKDIR /batcave
 RUN npm i -g pnpm
 COPY decorate-angular-cli.js package.json pnpm-lock.yaml ./
@@ -12,11 +15,10 @@ RUN pnpm install --frozen-lockfile --prod
 COPY *.js tsconfig*.json angular.json nx.json ./
 COPY configs/tailwind configs/tailwind
 
-
-
 # //INPUT: update this
 FROM builder as build-backend-api
-ENV NODE_ENV=${NODE_ENV}
+# //NOTE: NODE_ENV is coming from server environment in build process, not coming from container environment
+ENV NODE_ENV=${NODE_ENV} 
 ARG application
 ARG applicationPath
 
