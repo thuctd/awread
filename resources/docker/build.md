@@ -1,4 +1,6 @@
-docker build -t backend-graphql:v2 -f configs/Dockerfile.backend-graphql .
+docker build -t backend-graphql:v2 -f ./configs/dockers/backend-graphql.Dockerfile .
+docker build -t backend-api:v2 -f ./configs/dockers/backend-api.Dockerfile .
+docker build -t reader-web:v2 -f ./configs/dockers/reader-web.Dockerfile .
 
 DOCKER_BUILDKIT=1 docker build -t awread/backend-graphql . -f ./configs/dockers/backend-graphql.Dockerfile --network="host"
 DOCKER_BUILDKIT=1 docker build -t awread/backend-graphql . -f ./configs/dockers/backend-graphql.Dockerfile

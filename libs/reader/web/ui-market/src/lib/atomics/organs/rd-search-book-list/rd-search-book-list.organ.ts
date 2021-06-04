@@ -14,11 +14,11 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 })
 export class RdSearchBookListOrgan implements OnInit {
   @Input() category = 'Phiêu lưu, hài hước, hành động';
-  @Input() published: boolean;
   @Input() book = {
     bookId: '',
     title: 'Em là nhà',
-    cover: ''
+    cover: '',
+    completed: true
   }
   @Input() chapters = [];
 

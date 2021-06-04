@@ -45,7 +45,7 @@ export class BooksApi {
       .query({
         query: gql`
          query allMvBooksLatestChapters($first: Int ${categoryId ? `, $categoryId: BigFloat` : ''}) {
-        allMvBooksLatestChapters (first: $first, condition: {published: true ${categoryId ? `, categoryId: $categoryId ` : ''}} ){
+        allMvBooksLatestChapters (first: $first, condition: {completed: true, isDeleted: false ${categoryId ? `, categoryId: $categoryId ` : ''}} ){
           nodes {
             title
             authors

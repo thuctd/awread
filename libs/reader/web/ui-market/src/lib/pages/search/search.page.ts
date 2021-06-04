@@ -48,7 +48,7 @@ export class SearchPage implements OnInit {
       map(query => query.search),
       debounceTime(300),
       distinctUntilChanged(),
-      switchMap((term: string) => this.booksFacade.searchBookApi(term).pipe(tap(res => console.log(res)))),
+      switchMap((term: string) => this.booksFacade.searchBookApi(term)),
     );
     this.cd.detectChanges();
   }

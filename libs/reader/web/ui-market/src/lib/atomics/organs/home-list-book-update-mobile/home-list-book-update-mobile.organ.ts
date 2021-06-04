@@ -1,4 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'organ-home-list-book-update-mobile',
   templateUrl: './home-list-book-update-mobile.organ.html',
@@ -7,18 +8,27 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
       :host {
         display: block;
       }
+      @media only screen and (max-width: 400px) {
+        .px-2 {
+          padding-left: 0.4rem;
+          padding-right: 0.4rem;
+        }
+      }
     `,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeListBookUpdateMobileOrgan implements OnInit {
-  @Input() counter = Array;
+  @ViewChild('widgetsContent', { static: true }) widgetsContent: ElementRef<any>;
+  @Input() arrowLeftIcon = faChevronLeft;
+  @Input() arrowRightIcon = faChevronRight;
+
   @Input() titlePage = 'Truyện mới cập nhật';
   @Input() srcImg = '/global-assets/images/image.webp';
   @Input() altImg = 'Placeholder';
   @Input() books = [];
   @Input() categories = [];
-  
+
   @Input() displayUI = {
     ui: {
       isAuthor: false,
@@ -52,7 +62,22 @@ export class HomeListBookUpdateMobileOrgan implements OnInit {
       isNovel: true,
     },
   ];
+
   constructor() {}
 
   ngOnInit(): void {}
+
+  public scrollRight(): void {
+    this.widgetsContent.nativeElement.scrollTo({
+      left: this.widgetsContent.nativeElement.scrollLeft + 145,
+      behavior: 'smooth',
+    });
+  }
+
+  public scrollLeft(): void {
+    this.widgetsContent.nativeElement.scrollTo({
+      left: this.widgetsContent.nativeElement.scrollLeft - 145,
+      behavior: 'smooth',
+    });
+  }
 }

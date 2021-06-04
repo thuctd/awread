@@ -113,7 +113,7 @@ export class BooksFacade {
 
   searchBookApi(term: string) {
     if (term === '') {
-      return this.booksGear.getTopBooks();
+      return this.booksGear.getCategoryBooks();
     } else {
       return this.booksGear.searhBookByTermApi(term);
     }

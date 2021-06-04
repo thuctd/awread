@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
-import { tap, map } from 'rxjs/operators';
+import { tap, map, mergeMap } from 'rxjs/operators';
 import { ChaptersApi } from '../apis/chapters.api';
 import { ChaptersQuery, ChaptersStore } from '../states/chapters';
 import { SnackbarService } from '@awread/global/packages';
 import { Order } from '@datorama/akita';
+import { CreationsFacade } from '@awread/core/creations';
+import { of } from 'rxjs';
 @Injectable({ providedIn: 'root' })
 export class ChaptersGear {
 
@@ -12,6 +14,7 @@ export class ChaptersGear {
     private chaptersStore: ChaptersStore,
     private SnackbarService: SnackbarService,
     private chaptersQuery: ChaptersQuery,
+    private creationsFacade: CreationsFacade,
   ) {
   }
 
@@ -97,14 +100,31 @@ export class ChaptersGear {
       )
   }
 
-  create(chapter) {
+  create(chapter, published = false, changeBookStatus = false) {
     return this.chaptersApi.create(chapter)
       .pipe(
         tap(result => {
           if (result.errors) {
             result.errors.forEach(error => this.SnackbarService.showError(error.message));
           } else {
-            this.SnackbarService.showSuccess('Tạo chương mới thành công');
+            if (published) {
+              this.SnackbarService.showSuccess('Đã xuất bản');
+              this.SnackbarService.showSuccess('Cần 5 phút để cập nhật lên awread.vn');
+            } else {
+              this.SnackbarService.showSuccess('Tạo chương mới thành công');
+            }
+          }
+        }),
+        mergeMap(result => {
+          if (result.errors) {
+            result.errors.forEach(error => this.SnackbarService.showError(error.message));
+            return of(result.errors);
+          } else {
+            if (changeBookStatus) {
+              return this.creationsFacade.publish(chapter.bookId);
+            } else {
+              return of(result);
+            }
           }
         })
       )

@@ -21,6 +21,7 @@ export class WrtBookListInfoMolec implements OnInit {
     title: '',
     categoryId: '',
     viewCount: '',
+    published: false
   };
   @Input() href = [];
   @Input() faIcon = faStar;

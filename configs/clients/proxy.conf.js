@@ -4,30 +4,51 @@
 let graphqlTarget;
 let apiTarget;
 let logLevel;
-switch (process.env) {
-    case process.env.NODE_ENV == 'production':
-        graphqlTarget = 'http://backend-graphql.web';
-        apiTarget = 'http://backend-api.web';
+switch (true) {
+    case process.env.ENVIRONMENT == 'production':
+        graphqlTarget = process.env.GRAPHQL_URI;
+        apiTarget = process.env.API_URI;
         logLevel = 'info';
         break;
-    case process.env.NODE_ENV == 'next':
-        graphqlTarget = 'http://backend-graphql.web';
-        apiTarget = 'http://backend-api.web';
+    case process.env.ENVIRONMENT == 'next':
+        graphqlTarget = process.env.GRAPHQL_URI;
+        apiTarget = process.env.API_URI;
         logLevel = 'info';
         break;
-    case process.env.NODE_ENV == 'test':
-        graphqlTarget = 'http://backend-graphql.web';
-        apiTarget = 'http://backend-api.web';
+    case process.env.ENVIRONMENT == 'test':
+        graphqlTarget = process.env.GRAPHQL_URI;
+        apiTarget = process.env.API_URI;
         logLevel = 'debug';
+        console.log('test');
+        break;
+    case process.env.ENVIRONMENT == 'local':
+        graphqlTarget = 'http://localhost:5000';
+        apiTarget = 'http://localhost:3333';
+        logLevel = 'debug';
+        console.log('local');
         break;
     default:
         graphqlTarget = 'https://backend-graphql.next.awread.vn';
         apiTarget = 'https://backend-api.next.awread.vn';
         logLevel = 'debug';
+        console.log('default');
         break;
 }
 
-// console.log('APP: process env', process.env);
+console.log(`
+process.env.ENVIRONMENT == 'production': (${process.env.ENVIRONMENT == 'production'}) (${process.env.ENVIRONMENT})
+process.env.ENVIRONMENT == 'next': (${process.env.ENVIRONMENT == 'next'}) (${process.env.ENVIRONMENT})
+process.env.ENVIRONMENT == 'test': (${process.env.ENVIRONMENT == 'test'}) (${process.env.ENVIRONMENT})
+process.env.ENVIRONMENT == 'local': (${process.env.ENVIRONMENT == 'local'}) (${process.env.ENVIRONMENT})
+`)
+
+console.log(`
+process.env.ENVIRONMENT (${process.env.ENVIRONMENT})
+graphqlTarget (${graphqlTarget})
+apiTarget (${apiTarget})
+`)
+
+// console.log(`env: ENVIRONMENT (${process.env.ENVIRONMENT}), api (${process.env.API_URI}), graphql (${process.env.GRAPHQL_URI})`);
 
 module.exports = [
     {

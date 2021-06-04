@@ -20,3 +20,5 @@ https://www.digitalocean.com/community/tutorials/how-to-use-cron-to-automate-tas
 sudo apt install cron
 
 ```
+
+/var/spool/cron/crontabs/

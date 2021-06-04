@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="0,600" last-zoom="0.95" max-obj-count="28"
+<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="0,594" last-zoom="0.95" max-obj-count="30"
 	 default-owner="postgres">
 <role name="public_read"
       inherit="true">
@@ -1621,6 +1621,11 @@ end;]]></definition>
 </permission>
 <permission>
 	<object name="public.users" type="table"/>
+	<roles names="public_read"/>
+	<privileges select="grant-op"/>
+</permission>
+<permission>
+	<object name="public.books_genres" type="table"/>
 	<roles names="public_read"/>
 	<privileges select="grant-op"/>
 </permission>

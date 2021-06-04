@@ -119,7 +119,7 @@ app.use(postgraphile(DATABASE_URL, SCHEMA, postgraphileOptions));
 const port = process.env.PORT || 5000;
 const server = app.listen(port, () => {
   console.log('environment, buildenvironment', environment, buildEnvironment);
-  console.log('database url:', DATABASE_URL);
+  // console.log('process.env', process.env);
   console.log(`Listening at http://localhost:${port}/graphiql`);
   // console.log(`process env`, process.env);
   startCronJob();

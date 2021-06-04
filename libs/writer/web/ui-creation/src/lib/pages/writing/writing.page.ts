@@ -49,11 +49,10 @@ export class WritingPage implements OnInit {
       )
       .subscribe((result) => {
         console.log('result', result);
+        this.book = result.book;
         if (this.chapterId == 'new') {
-          this.book = result;
           this.updateForm({ bookId: this.bookId, chapterId: this.chapterId, position: this.activatedRoute.snapshot.params['position'] });
         } else {
-          this.book = result.book;
           this.updateForm(result);
         }
       });
@@ -102,12 +101,16 @@ export class WritingPage implements OnInit {
 
   private publish() {
     this.chapterForm.patchValue({ published: true });
-    this.save();
+    if (this.book.published == false) {
+      this.save(true, true);
+    } else {
+      this.save(true);
+    }
   }
 
-  save() {
+  save(published = false, changeBookStatus = false) {
     if (this.chapterId == 'new') {
-      this.chaptersFacade.create(this.chapterForm.value).subscribe(value => {
+      this.chaptersFacade.create(this.chapterForm.value, published, changeBookStatus).subscribe(value => {
         console.log('value', value);
         this.location.back();
       })

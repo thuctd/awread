@@ -27,11 +27,11 @@ export class BooksGear {
     let hasMore, total;
     return this.booksApi.getCategoryBooks(categoryId, limit).pipe(
       map((res) => {
-        console.log(res);
         hasMore = res?.['data']?.['allMvBooksLatestChapters']?.['pageInfo']?.hasNextPage;
         total = res?.['data']?.['allMvBooksLatestChapters']?.totalCount;
-        this.categoryBooksStore.set(res?.['data']?.['allMvBooksLatestChapters']?.['nodes']);
+        return res?.['data']?.['allMvBooksLatestChapters']?.['nodes'];
       }),
+      tap((res) => this.categoryBooksStore.set(res)),
       tap(() => this.categoryBooksStore.updatePage({ hasMore: hasMore, sizePage: limit, total: total })),
       tap(() => this.categoryBooksStore.setLoading(false))
     );

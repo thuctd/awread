@@ -12,15 +12,13 @@ import { buildEnvironment } from '@awread/global/environments';
 
 async function bootstrap() {
   console.log('environment, buildenvironment', environment, buildEnvironment);
+  // console.log('process.env', process.env);
+  console.log('NODE_ENV', process.env['NODE' + '_ENV']);
+
   const app = await NestFactory.create(AppModule, { cors: true });
   app.enableCors();
-  const environmentPrefix = buildEnvironment.ENVIRONMENT;
   const globalPrefix = 'api';
-  if (environmentPrefix == 'production') {
-    app.setGlobalPrefix(`${globalPrefix}`);
-  } else {
-    app.setGlobalPrefix(`${environmentPrefix}/${globalPrefix}`);
-  }
+  app.setGlobalPrefix(`${globalPrefix}`);
   const port = process.env.PORT || 3333;
   await app.listen(port, () => {
     Logger.log('Listening at http://localhost:' + port + '/' + globalPrefix);
