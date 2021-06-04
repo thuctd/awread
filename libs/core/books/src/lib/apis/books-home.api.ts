@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
-import { map } from 'rxjs/operators';
+import { map, delay } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class BooksHomeApi {
@@ -50,7 +50,6 @@ export class BooksHomeApi {
       )
   }
 
-  //[NOTE]: Pagination Graphiql
   getLatestBooks(categoryId: string, offset: number) {
     return this.apollo.query({
       query: gql`
@@ -69,6 +68,7 @@ export class BooksHomeApi {
         `,
       variables: { categoryId, offset }
     }).pipe(
+      delay(500),
       map(res => res?.['data']?.['allMvBooksLatestChapters']?.['nodes'])
     )
   }

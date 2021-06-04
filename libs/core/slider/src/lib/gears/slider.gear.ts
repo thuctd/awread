@@ -16,13 +16,8 @@ export class SliderGear {
   getAllSlider() {
     return this.sliderApi.getAllSlider().pipe(
       tap((res) => {
-        console.log('Events: ', res);
         this.sliderStore.set(res);
       }),
-      catchError((err) => {
-        console.error('An error occurred:', err);
-        return throwError(err);
-      })
     );
   }
 

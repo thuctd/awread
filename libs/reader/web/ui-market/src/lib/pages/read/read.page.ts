@@ -49,11 +49,11 @@ export class ReadPage implements OnInit {
 
   getbreadcrumbs() {
     return [{
-      title: 'Home',
+      title: 'Trang chủ',
       link: ['/']
     },
     {
-      title: this.chapter.book.type == '0' ? 'composed' : 'collected',
+      title: this.chapter.book.type == '0' ? 'Truyện tự sáng tác' : 'Truyện sưu tầm',
       link: ['/', this.chapter.book.type == '0' ? 'composed' : 'collected', { categoryId: this.chapter.book.categoryId }]
     },
     {
@@ -82,9 +82,13 @@ export class ReadPage implements OnInit {
       tap(res => {
         this.router.navigate(['/books', res[0].bookId, 'chapters', res[0].chapterId]);
       })
-    ).subscribe(res => {
+    ).subscribe(() => {
       this.loading = false;
     });
     this.cd.detectChanges();
+  }
+
+  nativeTopBook() {
+    this.router.navigate(['/top-books']);
   }
 }

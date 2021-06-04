@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { tap, map } from 'rxjs/operators';
+import { tap, map, delay } from 'rxjs/operators';
 import { BooksHomeApi } from '../apis';
 import { FeatureBooksStore } from '../states/feature-books';
 import { GoodBooksStore } from '../states/good-books';

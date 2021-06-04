@@ -51,11 +51,11 @@ export class DetailPage implements OnInit, OnDestroy {
 
   getbreadcrumbs() {
     return [{
-      title: 'Home',
+      title: 'Trang chủ',
       link: ['/']
     },
     {
-      title: this.book.type == '0' ? 'composed' : 'collected',
+      title: this.book.type == '0' ? 'Truyện tự sáng tác' : 'Truyện sưu tầm',
       link: ['/', this.book.type == '0' ? 'composed' : 'collected', { categoryId: this.book.categoryId }]
     },
     {
@@ -87,7 +87,7 @@ export class DetailPage implements OnInit, OnDestroy {
     return this.activatedRoute.paramMap
       .pipe(
         takeUntil(this.destroy$),
-        switchMap((params) => {
+        switchMap(() => {
           if (this.bookId) {
             return this.chaptersFacade.getAllChapters(this.bookId).pipe(
               tap(chapters => {
@@ -107,7 +107,7 @@ export class DetailPage implements OnInit, OnDestroy {
     return this.activatedRoute.paramMap
       .pipe(
         takeUntil(this.destroy$),
-        switchMap((params) => {
+        switchMap(() => {
           if (this.bookId) {
             return this.chaptersFacade.getAllChapters(this.bookId).pipe(
               tap(chapters => {
@@ -123,12 +123,12 @@ export class DetailPage implements OnInit, OnDestroy {
       });
   }
 
-  nativeBooksAuthor() {
-    this.router.navigate(['/author', this.authorId]);
+  nativeBooksAuthor() { 
+    this.router.navigate(['/', this.authorId, 'books']);
   }
 
   nativeTopBook() {
-    this.router.navigate(['/top-book']);
+    this.router.navigate(['/top-books']);
   }
 
   ngOnDestroy(): void {

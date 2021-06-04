@@ -25,7 +25,7 @@ export class HomePage implements OnInit, OnDestroy {
   categories$ = this.categoriesFacade.categories$;
   genres$ = this.genresFacade.genres$;
   imageObject$ = this.sliderFacede.slider$;
-  isLoading$ = this.booksFacade.selectLoadingAkita();
+  isLoading$: Observable<boolean>;
   filteredBooks$;
   categoryBooks$;
   categoryId = '';
@@ -44,6 +44,7 @@ export class HomePage implements OnInit, OnDestroy {
     this.sliderFacede.getAllSlider().subscribe();
     this.booksFacade.getGoodBooks().subscribe();
     this.booksFacade.getFeatureBooks().subscribe();
+    this.isLoading$ = this.booksFacade.latestBooksQuery.selectLoading();
     this.loadFirstByGenre();
     this.getAllLatestBooks();
   }
@@ -75,8 +76,9 @@ export class HomePage implements OnInit, OnDestroy {
     );
   }
 
-  displayActivePage(activePageNumber:number){
-    this.categoryBooks$ = this.booksFacade.getLatestBooks(this.categoryId, activePageNumber).pipe(debounceTime(200));   
+  displayActivePage(activePageNumber: number) {
+    this.categoryBooks$ = this.booksFacade.getLatestBooks(this.categoryId, activePageNumber).pipe(debounceTime(200));
+    this.cd.detectChanges();
   }
 
   ngOnDestroy(): void {
