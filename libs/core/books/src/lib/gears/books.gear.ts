@@ -26,8 +26,12 @@ export class BooksGear {
     this.categoryBooksStore.setLoading(true);
     let hasMore, total;
     return this.booksApi.getCategoryBooks(categoryId, limit).pipe(
-      tap(books => this.categoryBooksStore.add(books)),
-      tap(() => this.categoryBooksStore.updatePage({ hasMore: true, sizePage: limit, total: 999 })),
+      map((res) => {
+        hasMore = res?.['data']?.['allMvBooksLatestChapters']?.['pageInfo']?.hasNextPage;
+        total = res?.['data']?.['allMvBooksLatestChapters']?.totalCount;
+        this.categoryBooksStore.set(res?.['data']?.['allMvBooksLatestChapters']?.['nodes']);
+      }),
+      tap(() => this.categoryBooksStore.updatePage({ hasMore: hasMore, sizePage: limit, total: total })),
       tap(() => this.categoryBooksStore.setLoading(false))
     );
   }
@@ -62,7 +66,7 @@ export class BooksGear {
     return this.booksApi.getBookById(bookId);
   }
 
-  getTopBooks(limit?: number) {
+  getTopBooks(limit: number = 12) {
     let hasMore, total;
     this.topBooksStore.setLoading(true);
     return this.booksApi.getTopBooks(limit).pipe(

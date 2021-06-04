@@ -77,8 +77,8 @@ export class ListPage implements OnInit, OnDestroy {
     this.cd.detectChanges();
   }
 
-  filterItemsByCategory(categoryId) {
-    this.booksFacade.getCategoryBooks(categoryId).subscribe();
+  filterItemsByCategory(categoryId: string) {
+    this.booksFacade.getCategoryBooks(categoryId, 0).subscribe();
   }
 
   filterBooks() {
@@ -92,11 +92,8 @@ export class ListPage implements OnInit, OnDestroy {
     this.router.navigate(['/top-books']);
   }
 
-  @HostListener('window:scroll', ['$event'])
   onMoreBooks() {
-    if (window.innerHeight + window.scrollY === document.body.scrollHeight) {
-      this.fetchBooks();
-    }
+    this.fetchBooks();
   }
 
   private fetchBooks() {

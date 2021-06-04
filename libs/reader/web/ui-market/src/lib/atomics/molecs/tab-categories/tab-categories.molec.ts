@@ -14,7 +14,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
 })
 export class TabCategoriesMolec implements OnInit {
   @Input() isLoadedPage: true | false = true;
-  @Input() tab = { id: '1', name: 'Truyện dài', type: 'longbook', isActive: true };
+  @Input() tab = { categoryId: '1', name: 'Truyện dài', type: 'longbook', isActive: true };
 
   @Input() selectedTab = 'longbook';
   @Output() switchTabEvent = new EventEmitter();

@@ -35,12 +35,14 @@ export class ReadPage implements OnInit {
 
     this.activatedRoute.paramMap
       .pipe(
+        tap(() => this.loading = true),
         switchMap((params) => this.chaptersFacade.getChapterDetail(params.get('bookId'), params.get('chapterId'))),
       )
       .subscribe((chapters) => {
         this.chapter = chapters[0];
         this.chaptersFacade.getAllChapters(chapters[0].bookId).subscribe();
         this.breadcrumbs = this.getbreadcrumbs();
+        this.loading = false;
       });
 
 

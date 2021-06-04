@@ -80,9 +80,9 @@ export class BooksFacade {
     return this.booksGear.getGenreBooks(genreId);
   }
 
-  getCategoryBooks(categoryId: string) {
-    // const limit = this.categoryBooksQuery.getSizePage() === undefined ? 12 : this.categoryBooksQuery.getSizePage();
-    return this.booksGear.getCategoryBooks(categoryId, this.categoryBooksQuery.getSizePage() + 12);
+  getCategoryBooks(categoryId: string, limit?: number) {
+    const size = limit === 0 ? 12 : this.categoryBooksQuery.getSizePage() + 12;   
+    return this.booksGear.getCategoryBooks(categoryId, size);
   }
 
   getLatestBooks(cateogoryId: string, offset: number) {
@@ -94,8 +94,7 @@ export class BooksFacade {
   }
 
   getTopBooks() {
-    const limit = this.topBooksQuery.getSizePage() === undefined ? 12 : this.topBooksQuery.getSizePage();
-    return this.booksGear.getTopBooks(limit + 12);
+    return this.booksGear.getTopBooks(this.topBooksQuery.getSizePage() + 12);
   }
 
   getGoodBooks() {

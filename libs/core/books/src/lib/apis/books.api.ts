@@ -41,7 +41,6 @@ export class BooksApi {
   }
 
   getCategoryBooks(categoryId?: string, first?: number) {
-    console.log('limit', first);
     return this.apollo
       .query({
         query: gql`
@@ -67,12 +66,16 @@ export class BooksApi {
             updatedAt
             userId
           }
+          pageInfo {
+            hasNextPage
+          }
+          totalCount
         }
       }
       `,
         variables: { categoryId, first },
       })
-      .pipe(map((res) => res?.['data']?.['allMvBooksLatestChapters']?.['nodes']));
+      .pipe();
   }
 
   getAuthorBooks(authorIds: string[]) {

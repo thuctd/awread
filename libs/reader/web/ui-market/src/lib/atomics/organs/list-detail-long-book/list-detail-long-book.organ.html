@@ -1,9 +1,4 @@
-
-<div class="flex justify-center items-center loading" *ngIf="loading;else loaded">
-  <awread-loading></awread-loading>
-</div>
-<ng-template #loaded>
-  <infinite-scroll #infiniteScroll (scrolled)="moreEvent.emit()">
+<infinite-scroll class="block" #infiniteScroll (scrolled)="moreEvent.emit()">
   <section class="mx-auto">
     <div class="grid grid-cols-12 gap-10 lg:gap-x-10 xl:gap-x-14 place-content-center" *ngIf="!(display === 'grid');else list_content">
       <div *ngFor="let book of longbooks;" class="col-span-2 md:col-span-4">
@@ -48,5 +43,4 @@
       </div>
     </ng-template>
   </section>
-  </infinite-scroll>
-</ng-template>
+</infinite-scroll>

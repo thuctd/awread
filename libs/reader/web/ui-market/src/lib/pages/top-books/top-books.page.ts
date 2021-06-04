@@ -34,7 +34,7 @@ export class TopBooksPage implements OnInit {
 
   @HostListener('window:scroll', ['$event'])
   onMoreBooks() {
-    if (window.innerHeight + window.scrollY + 500 >= document.body.scrollHeight) {
+    if (window.innerHeight + window.scrollY + 600 >= document.body.scrollHeight) {
       this.fetchBooks();
     }
   }

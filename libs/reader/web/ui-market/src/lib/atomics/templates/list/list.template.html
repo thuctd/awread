@@ -26,7 +26,7 @@
         <ng-container *ngFor="let tab of tabsHead">
           <div class="col-span-2 md:col-span-4"
             [ngClass]="selectedTabCategoryId === tab.categoryId ? 'border-b-2 border-green-primary text-green-primary' : 'text-gray-text'">
-            <molec-tab-categories (changeCategoryBooks)="changeCategoryBooks.emit(tab)" (switchTabEvent)="switchTabEvent.emit(tab.categoryId)" [tab]="tab">
+            <molec-tab-categories (switchTabEvent)="switchTabEvent.emit($event)" [tab]="tab">
             </molec-tab-categories>
           </div>
         </ng-container>

@@ -42,7 +42,7 @@ export class ListTemplate implements OnInit {
   ];
   @Input() titlePage: string;
   @Input() tabsHead = [
-    { categoryId: 1, name: 'Truyện dài', type: 'longbook', isActive: true },
+    { categoryId: '1', name: 'Truyện dài', type: 'longbook', isActive: true },
   ];
 
   @Input() selectedTabCategoryId = '1';
