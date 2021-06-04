@@ -23,8 +23,8 @@ ARG applicationPath
 # RUN ls
 RUN echo application is: $application
 RUN echo applicationPath is: $applicationPath
-RUN echo NODE_ENV is: $NODE_ENV
-RUN echo NODE_ENV is: ${NODE_ENV}
+RUN echo NODE_ENV reset: $NODE_ENV
+RUN echo NODE_ENV reset: ${NODE_ENV}
 
 COPY libs ./libs
 COPY apps ./apps
