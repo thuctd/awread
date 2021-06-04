@@ -80,10 +80,8 @@ export class ChaptersGear {
   }
 
   private transformDataChapters(chapters) {
-    let chapterLength = chapters.length;
     return chapters.map((item, index) => {
-      chapterLength = chapterLength - 1;
-      return { ...item, chapterNumber: chapterLength + 1 };
+      return { ...item, position: +item.position + 1 };
     });
   }
 
