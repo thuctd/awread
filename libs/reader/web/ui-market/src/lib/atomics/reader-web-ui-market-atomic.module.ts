@@ -77,9 +77,13 @@ import { RdNewsAwreadListMolec } from './molecs/rd-news-awread-list/rd-news-awre
 import { RdNewsMbTemplate } from './templates/rd-news-mb/rd-news-mb.template';
 import { RdNewsDetailTemplate } from './templates/rd-news-detail/rd-news-detail.template';
 import { CoreCategoriesModule } from '@awread/core/categories';
+import { TopBooksTemplate } from './templates/top-books/top-books.template';
+import { ListTopBookOrgan } from './organs/list-top-book/list-top-book.organ';
+import { TopBooksMbTemplate } from './templates/top-books-mb/top-books-mb.template';
+import { InfiniteScrollModule, LoaderModule } from '@awread/global/packages';
 
 @NgModule({
-  imports: [CommonModule, StorybookSupportModule, GlobalDesignSystemAtomicModule, CarouselModule, ReaderWebUiAuthorAtomicModule, CoreCategoriesModule],
+  imports: [CommonModule, StorybookSupportModule, GlobalDesignSystemAtomicModule, CarouselModule, ReaderWebUiAuthorAtomicModule, CoreCategoriesModule, InfiniteScrollModule, LoaderModule],
   exports: [
     ReaderWebUiAuthorAtomicModule,
     CommonModule,
@@ -156,6 +160,9 @@ import { CoreCategoriesModule } from '@awread/core/categories';
     RdNewsAwreadListMolec,
     RdNewsMbTemplate,
     RdNewsDetailTemplate,
+    TopBooksTemplate,
+    ListTopBookOrgan,
+    TopBooksMbTemplate,
   ],
   declarations: [
     ListInfoProseMolec,
@@ -230,6 +237,9 @@ import { CoreCategoriesModule } from '@awread/core/categories';
     RdNewsAwreadListMolec,
     RdNewsMbTemplate,
     RdNewsDetailTemplate,
+    TopBooksTemplate,
+    ListTopBookOrgan,
+    TopBooksMbTemplate,
   ],
 })
 export class ReaderWebUiMarketAtomicModule {}

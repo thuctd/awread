@@ -28,7 +28,7 @@ export class PaginationAtom implements OnInit, OnChanges {
     const pageCount = this.getPageCount();
     this.pages = this.getArrayOfPage(pageCount);
     this.activePage = 0;
-    this.onPageChange.emit(1);
+    this.onPageChange.emit(0);
   }
 
   private getPageCount(): number {
@@ -62,4 +62,5 @@ export class PaginationAtom implements OnInit, OnChanges {
       this.onPageChange.emit(this.activePage);
     }
   }
+  
 }

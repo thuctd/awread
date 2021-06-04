@@ -12,4 +12,15 @@ export class CategoryBooksQuery extends QueryEntity<CategoryBooksState> {
     // this.createUIQuery();
   }
 
+  getHasMore() {
+    return this.getValue().hasMore
+  }
+
+  getSizePage() {
+    return this.getValue().sizePage;
+  }
+
+  selectTotalBook() {
+    return this.select(state => state.total);
+  }
 }

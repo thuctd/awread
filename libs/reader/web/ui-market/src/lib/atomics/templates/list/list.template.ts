@@ -17,6 +17,7 @@ import { faList, faThLarge } from '@fortawesome/free-solid-svg-icons';
 export class ListTemplate implements OnInit {
   display = 'grid';
   filterbook = false;
+  @Input() loading;
   @Input() filtersForm: FormGroup = this.fb.group({
     typeBook: [''],
     genres: [''],

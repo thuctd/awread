@@ -1,5 +1,4 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
-import { faAngleRight, faHome } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'template-detail-book',

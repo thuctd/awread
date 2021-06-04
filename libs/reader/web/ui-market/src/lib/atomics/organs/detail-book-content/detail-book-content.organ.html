@@ -6,6 +6,6 @@
     <molec-detail-book-info-actions></molec-detail-book-info-actions>
     <molec-detail-book-info [book]="book"></molec-detail-book-info>
     <div class="flex justify-center mt-4 sm:justify-start sm:mt-0">
-      <molec-detail-book-option-buttons (chapterLastEvent)='chapterLastEvent.emit($event)' (chapterFistEvent)='chapterFistEvent.emit($event)'></molec-detail-book-option-buttons>
+      <molec-detail-book-option-buttons (chapterLastEvent)="chapterLastEvent.emit($event)" (chapterFistEvent)="chapterFistEvent.emit($event)"></molec-detail-book-option-buttons>
     </div>
 </div>

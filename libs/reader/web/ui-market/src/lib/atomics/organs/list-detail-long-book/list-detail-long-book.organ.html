@@ -1,8 +1,12 @@
-<!-- <pre> {{ longbooks[0] | json }} </pre> -->
-<section class="mx-auto">
-  <ng-container *ngIf="longbooks?.length; else noData">
+
+<div class="flex justify-center items-center loading" *ngIf="loading;else loaded">
+  <awread-loading></awread-loading>
+</div>
+<ng-template #loaded>
+  <infinite-scroll #infiniteScroll (scrolled)="moreEvent.emit()">
+  <section class="mx-auto">
     <div class="grid grid-cols-12 gap-10 lg:gap-x-10 xl:gap-x-14 place-content-center" *ngIf="!(display === 'grid');else list_content">
-      <div *ngFor="let book of longbooks| slice:0:9;" class="col-span-2 md:col-span-4">
+      <div *ngFor="let book of longbooks;" class="col-span-2 md:col-span-4">
         <div>
           <atom-img-m [srcImg]="book.cover" [bookId]="book.bookId"></atom-img-m>
           <div [ngSwitch]="categoryId">
@@ -21,7 +25,7 @@
     </div>
     <ng-template #list_content>
       <div class="grid grid-cols-12 gap-10 place-content-center">
-        <div *ngFor="let book of longbooks| slice:0:10;" class="col-span-2 md:col-span-6">
+        <div *ngFor="let book of longbooks;" class="col-span-2 md:col-span-6">
           <div [ngSwitch]="categoryId">
             <div *ngSwitchCase="'1'">
               <organ-books-grid [book]="book" [chapters]="book.newestChapters"></organ-books-grid>
@@ -43,11 +47,6 @@
         </div>
       </div>
     </ng-template>
-    <div class="flex justify-end pt-4">
-      <atom-text-link (click)="moreEvent.emit($event)" [text]="moreContent" [class]="'text-base text-gray-400 uppercase font-bold'"></atom-text-link>
-    </div>
-  </ng-container>
-  <ng-template #noData>
-    <div class="pt-12 text-xl">Truyện đang được tải, mong các bạn chờ trong giây lát...</div>
-  </ng-template>
-</section>
+  </section>
+  </infinite-scroll>
+</ng-template>
