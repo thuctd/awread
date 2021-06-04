@@ -1,8 +1,8 @@
 <form [formGroup]="form">
     <p>Nhập họ tên</p>
-    <input-form [inputControl]="form.get('lastname')" [placeholder]="'Nhập họ'" [faIcon]="icons.faUser"></input-form>
+    <input-form [inputControl]="form.get('firstname')" [placeholder]="'Nhập họ'" [faIcon]="icons.faUser"></input-form>
     <input-form [inputControl]="form.get('middlename')" [placeholder]="'Nhập tên đệm'" [faIcon]="icons.faUser"></input-form>
-    <input-form [inputControl]="form.get('firstname')" [placeholder]="'Nhập tên'" [faIcon]="icons.faUser"></input-form>
+    <input-form [inputControl]="form.get('lastname')" [placeholder]="'Nhập tên'" [faIcon]="icons.faUser"></input-form>
     <p>Cá nhân hóa trải nghiệm với thể loại ưa thích</p>
     <check-btn [text]="'chưa'"></check-btn>
     <check-btn [text]="'làm'"></check-btn>
