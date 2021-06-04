@@ -25,5 +25,7 @@ NODE_ENV=next
 
 ctrl + X then enter
 
+restart server => to make it work
+
 mkdir /tmp/.pnpm-store
 mkdir /tmp/.pnpm-store/v3
