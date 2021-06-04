@@ -21,7 +21,7 @@ module.exports = {
           light: "#BFBFBF",
         },
         green: {
-          primary: "#5ABD8C",
+          primary: process.env.ENVIRONMENT === 'next' ? "#8276F4" : "#5ABD8C",
           dark: "#9BB9B4",
         },
         pink: {

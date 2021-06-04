@@ -27,10 +27,10 @@
     "help": "nx help",
     "design-story": "nx run global-design-system:storybook",
     "nx-migrate": "npx @nrwl/tao@latest migrate @nrwl/workspace@latest",
-    "prod-tunnel": "ssh -L localhost:5433:dokku-postgres-awread-database:5432 hiepxanh@awread.vn",
+    "prod-tunnel": "ssh -L localhost:5433:172.17.0.2:5432 hiepxanh@awread.vn",
     "next-tunnel": "ssh -L localhost:5434:dokku-postgres-awread-database:5432 hiepxanh@awread-next",
-    "reader-local": "set GRAPHQL_URI=localhost:5000 && nx serve reader-web --ssl=true",
-    "writer-local": "set GRAPHQL_URI=localhost:5000 && nx serve writer-web --ssl=true",
+    "reader-local": "export ENVIRONMENT=local || set ENVIRONMENT=local&& nx serve reader-web --ssl=true",
+    "writer-local": "export ENVIRONMENT=local || set ENVIRONMENT=local&& nx serve writer-web --ssl=true --port=5200",
     "backend-debug": "nx serve backend-graphql --inspect --port=7777"
   },
   "private": true,
