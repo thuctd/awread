@@ -17,6 +17,7 @@ export class TopBooksTemplate implements OnInit {
   display = 'grid';
   filterbook = false;
   @Input() totalBook;
+  @Input() loading;
   @Input() genres = [];
   @Input() actions = [
     {
