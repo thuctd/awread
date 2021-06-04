@@ -1,0 +1,22 @@
+<div class="py-4">
+  <ng-container *ngIf="books?.length; else noData">
+    <infinite-scroll #infiniteScroll (window:scroll)="moreEvent.emit()">
+      <div class="grid grid-cols-12 gap-10 lg:gap-x-10 xl:gap-x-14 place-items-center" *ngIf="!(display === 'grid');else list_content">
+        <div *ngFor="let book of books;" class="col-span-2 md:col-span-3">
+          <atom-img-m [srcImg]="book.cover" [bookId]="book.bookId"></atom-img-m>
+          <molec-info-book class="w-54" [book]="book" [btns]="book.newestChapters"></molec-info-book>
+        </div>
+      </div>
+      <ng-template #list_content>
+        <div class="grid grid-cols-12 gap-10 place-content-center">
+          <div *ngFor="let book of books;" class="col-span-2 md:col-span-4">
+            <organ-books-grid [book]="book" [chapters]="book.newestChapters"></organ-books-grid>
+          </div>
+        </div>
+      </ng-template>
+    </infinite-scroll>
+  </ng-container>
+  <ng-template #noData>
+    <div class="pt-12 text-xl">Truyện đang được tải, mong các bạn chờ trong giây lát...</div>
+  </ng-template>
+</div>

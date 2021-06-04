@@ -116,9 +116,9 @@ export function createFiles() {
   production: true,
 };
 `);
-    tree.create(`libs/global/environments/src/lib/environment.stage.ts`, `export const environment = {
+    tree.create(`libs/global/environments/src/lib/environment.next.ts`, `export const environment = {
   production: true,
-  stage: true,
+  next: true,
 };
 `);
     tree.create(`libs/global/environments/src/lib/environment.test.ts`, `export const environment = {
@@ -375,12 +375,12 @@ function updateEnviroment(projectName) {
       "replace": libRoot + "/lib/environment.ts",
       "with": libRoot + "/lib/environment.prod.ts"
     });
-    p.architect.build.configurations.stage = {
+    p.architect.build.configurations.next = {
       ...p.architect.build.configurations.production,
       fileReplacements: [
         {
           "replace": libRoot + "/lib/environment.ts",
-          "with": libRoot + "/lib/environment.stage.ts"
+          "with": libRoot + "/lib/environment.next.ts"
         }
       ]
     };
@@ -396,12 +396,12 @@ function updateEnviroment(projectName) {
     if (p.architect.serve.configurations?.production) {
       const buildPrefix = p.architect.serve.configurations.production.browserTarget.split(":");
       buildPrefix.pop();
-      const stageData = p.architect.serve.configurations['stage'] ?? {};
-      p.architect.serve.configurations['stage'] = {
-        ...stageData,
-        browserTarget: `${buildPrefix.join(':')}:stage`
+      const nextData = p.architect.serve.configurations['next'] ?? {};
+      p.architect.serve.configurations['next'] = {
+        ...nextData,
+        browserTarget: `${buildPrefix.join(':')}:next`
       }
-      const testData = p.architect.serve.configurations['stage'] ?? {};
+      const testData = p.architect.serve.configurations['next'] ?? {};
       p.architect.serve.configurations['test'] = {
         ...testData,
         browserTarget: `${buildPrefix.join(':')}:test`

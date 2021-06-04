@@ -21,7 +21,7 @@ export class TitlePageMenuMolec implements OnInit {
   @Input() items = [];
   @Output() bookActionEvent = new EventEmitter();
   @Output() emitChangeBooks = new EventEmitter();
-  isMenuOpen = false;
+  isMenuOpen = true;
   constructor() { }
   toggleMenu($event) {
     $event.stopPropagation();
@@ -29,7 +29,7 @@ export class TitlePageMenuMolec implements OnInit {
   }
 
   onClick() {
-    this.isMenuOpen = false;
+    this.isMenuOpen = !this.isMenuOpen; 
   }
 
   ngOnInit(): void { }

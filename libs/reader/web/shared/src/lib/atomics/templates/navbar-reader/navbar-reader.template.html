@@ -1,5 +1,5 @@
-<header class="fixed z-999 bg-green-primary top-0 w-full shadow-md roboto">
-    <organ-navbar-desktop [user]="user" [items]='items' (logoutEvent)="logoutEvent.emit()" (eventSearch)='eventSearch.emit()' [searchControl]='searchControl'
+<header [title]="background" [style.background]="background" class="fixed z-999 bg-green-primary top-0 w-full shadow-md roboto">
+    <organ-navbar-desktop [user]="user" [items]="items" (logoutEvent)="logoutEvent.emit()" (eventSearch)="eventSearch.emit()" [searchControl]="searchControl"
         [isLogin]="isLogin">
     </organ-navbar-desktop>
 </header>

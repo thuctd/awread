@@ -34,14 +34,14 @@ export class BooksFacade {
     public booksQuery: BooksQuery,
     private booksHomeGear: BooksHomeGear,
     private composedQuery: ComposedQuery,
-    private topBooksQuery: TopBooksQuery,
+    public topBooksQuery: TopBooksQuery,
     private collectedQuery: CollectedQuery,
     private goodBooksQuery: GoodBooksQuery,
     private genreBooksQuery: GenreBooksQuery,
     private authorBooksQuery: AuthorBooksQuery,
-    private latestBooksQuery: LatestBooksQuery,
+    public latestBooksQuery: LatestBooksQuery,
     private featureBooksQuery: FeatureBooksQuery,
-    private categoryBooksQuery: CategoryBooksQuery,
+    public categoryBooksQuery: CategoryBooksQuery,
   ) { }
 
   selectLoadingAkita() {
@@ -81,7 +81,8 @@ export class BooksFacade {
   }
 
   getCategoryBooks(categoryId: string) {
-    return this.booksGear.getCategoryBooks(categoryId);
+    // const limit = this.categoryBooksQuery.getSizePage() === undefined ? 12 : this.categoryBooksQuery.getSizePage();
+    return this.booksGear.getCategoryBooks(categoryId, this.categoryBooksQuery.getSizePage() + 12);
   }
 
   getLatestBooks(cateogoryId: string, offset: number) {
@@ -93,7 +94,8 @@ export class BooksFacade {
   }
 
   getTopBooks() {
-    return this.booksGear.getTopBooks();
+    const limit = this.topBooksQuery.getSizePage() === undefined ? 12 : this.topBooksQuery.getSizePage();
+    return this.booksGear.getTopBooks(limit + 12);
   }
 
   getGoodBooks() {

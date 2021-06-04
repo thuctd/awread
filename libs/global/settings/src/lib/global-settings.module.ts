@@ -3,8 +3,6 @@ import { CommonModule } from "@angular/common";
 
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
-import { AngularFireModule } from "@angular/fire";
-import { AngularFireAuthModule } from "@angular/fire/auth";
 import { environment } from "@awread/global/environments";
 
 import { APOLLO_OPTIONS } from "apollo-angular";
@@ -25,8 +23,6 @@ import { ErrorInterceptor } from "./error.interceptor";
   imports: [
     CommonModule,
     BrowserAnimationsModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule,
     HttpClientModule,
     environment.production ? [] : AkitaNgDevtools.forRoot(),
     SocialLoginModule,

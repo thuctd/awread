@@ -2,14 +2,15 @@
 ARG application=writer-web
 ARG applicationPath=writer/web
 ARG GRAPHQL_URI=backend-graphql.web.1
-ARG NODE_ENV=production
+ARG API_URI=backend-api.web.1
+ARG NODE_ENV
 
 FROM node:14-alpine as builder
 ENV CYPRESS_INSTALL_BINARY=0
 WORKDIR /batcave
 RUN npm i -g pnpm
 COPY decorate-angular-cli.js package.json pnpm-lock.yaml ./
-RUN pnpm install --frozen-lockfile
+RUN pnpm install --frozen-lockfile --prod
 COPY *.js tsconfig*.json angular.json nx.json ./
 COPY configs/tailwind configs/tailwind
 # RUN LS
@@ -21,7 +22,7 @@ ARG NODE_ENV
 ARG GRAPHQL_URI
 COPY libs ./libs
 COPY apps ./apps
-RUN pnpm build $application -- --prod --no-progress
+RUN pnpm build $application -- --configuration=$NODE_ENV --no-progress
 
 # RUN echo application is: $application
 # RUN echo applicationPath is: $applicationPath

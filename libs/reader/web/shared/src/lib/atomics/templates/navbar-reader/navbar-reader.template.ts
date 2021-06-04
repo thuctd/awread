@@ -19,6 +19,7 @@ import { FormControl } from '@angular/forms';
 })
 export class NavbarReaderTemplate implements OnInit {
   @Input() user = {};
+  @Input() background;
   @Input() items = [
     {
       bookId: '1',

@@ -2,7 +2,6 @@
 // import { setContext } from '@apollo/client/link/context';
 import { DefaultOptions, InMemoryCache } from '@apollo/client/core';
 import { HttpLink } from 'apollo-angular/http';
-import { environment } from '@awread/global/environments';
 
 const defaultOptions: DefaultOptions = {
   watchQuery: {
@@ -16,11 +15,10 @@ const defaultOptions: DefaultOptions = {
 };
 
 export function createApollo(httpLink: HttpLink) {
-  console.log('environment variable', environment);
   return {
     cache: new InMemoryCache(),
     link: httpLink.create({
-      uri: environment.uri,
+      uri: '/graphql',
     }),
     defaultOptions,
   };

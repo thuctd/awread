@@ -1,14 +1,16 @@
 # // INPUT: update this
 ARG application=reader-web
 ARG applicationPath=reader/web
-ARG NODE_ENV=production
+ARG GRAPHQL_URI=backend-graphql.web.1
+ARG API_URI=backend-api.web.1
+ARG NODE_ENV
 
 FROM node:14-alpine as builder
 ENV CYPRESS_INSTALL_BINARY=0
 WORKDIR /batcave
 RUN npm i -g pnpm
 COPY decorate-angular-cli.js package.json pnpm-lock.yaml ./
-RUN pnpm install --frozen-lockfile
+RUN pnpm install --frozen-lockfile --prod
 COPY *.js tsconfig*.json angular.json nx.json ./
 COPY configs/tailwind configs/tailwind
 # RUN LS
@@ -16,10 +18,11 @@ COPY configs/tailwind configs/tailwind
 FROM builder as build-reader-web
 ARG application
 ARG applicationPath
+ARG GRAPHQL_URI
 ARG NODE_ENV
 COPY libs ./libs
 COPY apps ./apps
-RUN pnpm build $application -- --prod --no-progress
+RUN pnpm build $application -- --configuration=$NODE_ENV --no-progress
 
 # RUN echo application is: $application
 # RUN echo applicationPath is: $applicationPath
@@ -27,6 +30,7 @@ RUN pnpm build $application -- --prod --no-progress
 FROM nginx:stable-alpine as reader-web
 ARG application
 ARG applicationPath
+ARG GRAPHQL_URI
 ARG NODE_ENV
 EXPOSE 80
 WORKDIR /app

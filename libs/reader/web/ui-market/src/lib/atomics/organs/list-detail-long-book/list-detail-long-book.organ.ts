@@ -18,6 +18,7 @@ export class ListDetailLongBookOrgan implements OnInit {
   @Input() categoryId = '1';
   @Input() longbooks = [];
   @Input() chapters = [];
+  @Input() loading;
   @Input() display: 'grid' | 'list' = 'grid';
   @Input() moreContent = 'Xem thêm';
   @Input() faIcon = faAngleDown;

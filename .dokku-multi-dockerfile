@@ -3,3 +3,11 @@ story-reader-web=configs/dockers/story-reader-web.Dockerfile
 writer-web=configs/dockers/writer-web.Dockerfile
 reader-web=configs/dockers/reader-web.Dockerfile
 backend-graphql=configs/dockers/backend-graphql.Dockerfile
+backend-api=configs/dockers/backend-api.Dockerfile
+
+next-story-writer-web=configs/dockers/story-writer-web.Dockerfile
+next-story-reader-web=configs/dockers/story-reader-web.Dockerfile
+next-writer-web=configs/dockers/writer-web.Dockerfile
+next-reader-web=configs/dockers/reader-web.Dockerfile
+next-backend-graphql=configs/dockers/backend-graphql.Dockerfile
+next-backend-api=configs/dockers/backend-api.Dockerfile

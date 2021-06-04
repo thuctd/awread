@@ -21,19 +21,19 @@ export class RdHomeBookUpdateDropdownMbMolec implements OnInit {
   faIcon = faAngleDown;
   @Input() categories = [
     {
-      id: 1,
+      categoryId: '',
       name: 'Tất cả',
     },
     {
-      id: 2,
-      name: 'Truyện dài',
-    },
-    {
-      id: 3,
+      categoryId: '1',
       name: 'Truyện ngắn',
     },
     {
-      id: 4,
+      categoryId: '2',
+      name: 'Truyện dài',
+    },
+    {
+      categoryId: '3',
       name: 'Tản văn',
     },
   ];

@@ -8,15 +8,17 @@ export class JwtokenAddon {
     }
 
     hashToken(secret, userId) {
-        const token = jwt.sign({ userId }, secret, {
-            // expiresIn: 3600 // 1 hour
-            expiresIn: 300 // 5 mins
+        const token = jwt.sign({
+            userId,
+            // exp: Math.floor(Date.now() / 1000) + (60 * 5),
+        }, secret, {
+            expiresIn: '5m' // 5 min
         })
         return token
     }
 
-    decodeToken(secret, token) {
-        return jwt.decode(token, secret);
+    verifyToken(secret, token) {
+        return jwt.verify(token, secret);
     }
 
 }

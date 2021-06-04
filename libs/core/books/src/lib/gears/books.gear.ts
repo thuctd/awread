@@ -22,10 +22,12 @@ export class BooksGear {
     private booksApi: BooksApi,
   ) { }
 
-  getCategoryBooks(categoryId?: string) {
+  getCategoryBooks(categoryId: string = '', limit: number = 9) {
     this.categoryBooksStore.setLoading(true);
-    return this.booksApi.getCategoryBooks(categoryId).pipe(
-      tap(books => this.categoryBooksStore.set(books)),
+    let hasMore, total;
+    return this.booksApi.getCategoryBooks(categoryId, limit).pipe(
+      tap(books => this.categoryBooksStore.add(books)),
+      tap(() => this.categoryBooksStore.updatePage({ hasMore: true, sizePage: limit, total: 999 })),
       tap(() => this.categoryBooksStore.setLoading(false))
     );
   }
@@ -60,16 +62,22 @@ export class BooksGear {
     return this.booksApi.getBookById(bookId);
   }
 
-  getTopBooks() {
+  getTopBooks(limit?: number) {
+    let hasMore, total;
     this.topBooksStore.setLoading(true);
-    return this.booksApi.getTopBooks().pipe(
-      tap(books => this.topBooksStore.set(books)),
-      tap(() => this.topBooksStore.setLoading(false)),
+    return this.booksApi.getTopBooks(limit).pipe(
+      map(res => {
+        hasMore = res?.['data']?.['allMvMostViewBooks']?.['pageInfo']?.hasNextPage;
+        total = res?.['data']?.['allMvMostViewBooks']?.totalCount;
+        this.topBooksStore.add(res?.['data']?.['allMvMostViewBooks']?.['nodes']);
+      }),
+      tap(() => this.topBooksStore.updatePage({ hasMore: hasMore, sizePage: limit, total: total })),
+      tap(() => this.topBooksStore.setLoading(false))
     );
   }
 
-  getFilterBooks(filters, cateogyrId: string) {
-    return this.booksApi.getFilterBooks(filters, cateogyrId).pipe(
+  getFilterBooks(filters, categoryId: string) {
+    return this.booksApi.getFilterBooks(filters, categoryId).pipe(
       tap(books => this.categoryBooksStore.set(books)),
     );;
   }
