@@ -47,19 +47,15 @@ export class HomeListBookUpdateMobileOrgan implements OnInit {
   @Input() tabs = [
     {
       name: 'Tất cả',
-      isNovel: false,
     },
     {
       name: 'Truyện dài',
-      isNovel: false,
     },
     {
       name: 'Truyện ngắn',
-      isNovel: false,
     },
     {
       name: 'Tản văn',
-      isNovel: true,
     },
   ];
 

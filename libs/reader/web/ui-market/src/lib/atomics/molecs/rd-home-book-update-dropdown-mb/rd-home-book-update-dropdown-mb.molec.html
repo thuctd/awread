@@ -6,7 +6,7 @@
   </div>
   <div *ngIf="isDropdown" class="z-10 bg-gray py-1 absolute top-7 rounded-sm w-full">
     <div *ngFor="let item of categories" class="text-sm text-gray-text py-1 pl-4 border-b border-gray-200">
-      <a (click)="emitBooks.emit(item)" class="outline-none cursor-pointer">
+      <a (click)="changeTitle($event)" (click)="emitBooks.emit(item)" class="outline-none cursor-pointer">
         {{item.name}}
       </a>
     </div>

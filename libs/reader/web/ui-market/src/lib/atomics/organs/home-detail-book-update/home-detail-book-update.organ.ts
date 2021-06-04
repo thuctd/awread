@@ -22,26 +22,22 @@ export class HomeDetailBookUpdateOrgan implements OnInit {
     {
       name: 'Tất cả',
       isActive: true,
-      isNovel: false,
     },
     {
       name: 'Truyện dài',
       isActive: false,
-      isNovel: false,
     },
     {
       name: 'Truyện ngắn',
       isActive: false,
-      isNovel: false,
     },
     {
       name: 'Tản văn',
       isActive: false,
-      isNovel: true,
     },
   ];
 
-  activePage:number = 0;  
+  activePage = 0;
 
   @Output() emitBooks = new EventEmitter();
   @Output() displayActivePage = new EventEmitter();

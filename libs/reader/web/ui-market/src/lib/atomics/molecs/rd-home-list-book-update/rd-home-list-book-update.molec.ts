@@ -22,7 +22,6 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
 export class RdHomeListBookUpdateMolec implements OnInit {
   // @Input() isInfoNovel: true | false = false;
   @Input() loading: false | true = true;
-  @Input() isNovel = true;
   @Input() books = [];
   @Output() displayActivePage = new EventEmitter();
 
