@@ -14,7 +14,7 @@ async function bootstrap() {
   console.log('environment, buildenvironment', environment, buildEnvironment);
   console.log('NODE_ENV', process.env.NODE_ENV, buildEnvironment.NODE_ENV);
   console.log('ENVIRONMENT', process.env.ENVIRONMENT);
-  console.log('WTF why NODE_ENV??', process.env);
+  console.log('WTF why NODE_ENV??', process.env, typeof process.env);
 
   const app = await NestFactory.create(AppModule, { cors: true });
   app.enableCors();
