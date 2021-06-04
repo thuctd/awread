@@ -13,8 +13,7 @@ RUN pnpm install --frozen-lockfile --prod
 COPY *.js tsconfig*.json angular.json nx.json ./
 COPY configs/tailwind configs/tailwind
 
-# //INPUT: update this
-FROM builder as build-${application}
+FROM builder as build-backend-api
 # //NOTE: NODE_ENV is coming from server environment in build process, not coming from container environment
 ARG application
 ARG applicationPath
@@ -30,7 +29,7 @@ COPY apps ./apps
 
 RUN pnpm build $application -- --configuration=${NODE_ENV} --no-progress
 
-# //INPUT: update this
+
 FROM build-backend-api as backend-api
 ARG application
 ARG applicationPath

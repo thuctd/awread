@@ -36,3 +36,7 @@ restart application
 # setup docker file
 
 dokku docker-options:add backend-api build --build-arg NODE_ENV=next
+dokku docker-options:add backend-graphql build --build-arg NODE_ENV=next
+dokku docker-options:add reader-web build --build-arg NODE_ENV=next
+dokku docker-options:add writer-web build --build-arg NODE_ENV=next
+dokku
