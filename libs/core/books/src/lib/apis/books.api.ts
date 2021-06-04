@@ -40,12 +40,13 @@ export class BooksApi {
       .pipe(map((res) => res?.['data']?.['searchBooks']?.['mvBooksLatestChapters']));
   }
 
-  getCategoryBooks(categoryId?: string) {
+  getCategoryBooks(categoryId?: string, first?: number) {
+    console.log('limit', first);
     return this.apollo
       .query({
         query: gql`
-         query allMvBooksLatestChapters${categoryId ? `($categoryId: BigFloat)` : ''} {
-        allMvBooksLatestChapters (first: 10, condition: {published: true ${categoryId ? `, categoryId: $categoryId ` : ''}} ){
+         query allMvBooksLatestChapters($first: Int ${categoryId ? `, $categoryId: BigFloat` : ''}) {
+        allMvBooksLatestChapters (first: $first, condition: {published: true ${categoryId ? `, categoryId: $categoryId ` : ''}} ){
           nodes {
             title
             authors
@@ -69,9 +70,7 @@ export class BooksApi {
         }
       }
       `,
-        variables: {
-          categoryId,
-        },
+        variables: { categoryId, first },
       })
       .pipe(map((res) => res?.['data']?.['allMvBooksLatestChapters']?.['nodes']));
   }
@@ -85,7 +84,7 @@ export class BooksApi {
         query: gql`
       query allMvBooksLatestChapters {
         allMvBooksLatestChapters(
-              filter: {authors: {containsAnyKeys: ${JSON.stringify(authorIds)} }}, condition: { published: true }
+              filter: {authors: {containsAnyKeys: ${JSON.stringify(authorIds)} }}, condition: { published: true, isDeleted: false }
         ) {
           nodes {
             title
@@ -119,7 +118,7 @@ export class BooksApi {
       .query({
         query: gql`
           query allVRandomBooks($genreId: String!) {
-            allVRandomBooks(filter: { genres: { containsKey: $genreId } }, first: 20) {
+            allVRandomBooks(condition: {isDeleted: false, published: true} filter: { genres: { containsKey: $genreId } }, first: 20) {
               nodes {
                 bookId
                 categoryId
@@ -137,12 +136,12 @@ export class BooksApi {
       .pipe(map((res) => res?.['data']?.['allVRandomBooks']?.['nodes']));
   }
 
-  getTopBooks() {
+  getTopBooks(first?: number) {
     return this.apollo
       .query({
         query: gql`
-          query getTopBooks {
-            allMvMostViewBooks(first: 3, orderBy: VIEWS_DESC) {
+          query getTopBooks ($first: Int) {
+            allMvMostViewBooks(first: $first orderBy: VIEWS_DESC condition: {isDeleted: false, published: true}) {
               nodes {
                 bookId
                 title
@@ -155,11 +154,15 @@ export class BooksApi {
                 updatedAt
                 views
               }
+              pageInfo {
+                hasNextPage
+              }
+              totalCount
             }
           }
-        `,
+        `, variables: { first }
       })
-      .pipe(map((res) => res?.['data']?.['allMvMostViewBooks']?.['nodes']));
+      .pipe();
   }
 
   getBookById(bookId: string) {
@@ -167,7 +170,7 @@ export class BooksApi {
       .query({
         query: gql`
           query allMvBooksLatestChapters($bookId: UUID!) {
-            allMvBooksLatestChapters(condition: { bookId: $bookId }) {
+            allMvBooksLatestChapters(condition: { bookId: $bookId } ) {
               nodes {
                 authors
                 bookId
@@ -215,9 +218,10 @@ export class BooksApi {
       mvBooks = 'allVRandomBooks';
     }
 
-    queryString = `query ${mvBooks}($categoryId: BigFloat, $completed: Boolean ${filters.completed ? `, $type: String` : ''}) {
-              ${mvBooks}(first: 20, condition: { categoryId: $categoryId, ${filters.completed ? ` type: $type,` : ''} completed: $completed }, orderBy: PUBLISHED_DESC,
-                filter: { publishedAt: {greaterThan: "${publishedAt}"} ${genres.length ? `, genres: {containsAnyKeys: ${JSON.stringify(genres)}}` : ''}}) {
+    queryString = `query ${mvBooks}( $published: Boolean = true ${categoryId ? `$categoryId: BigFloat` : ''} ${filters.completed ? `$completed: Boolean` : ''} ${filters.type ? `, $type: BigFloat` : ''}) {
+              ${mvBooks}(first: 20, condition: { published: $published ${categoryId ? `categoryId: $categoryId, ` : ''} ${filters.type ? ` type: $type, ` : ''} ${filters.completed ? `completed: $completed` : ''}},
+              ${filters.criteria === '0' ? `orderBy: PUBLISHED_DESC, ` : ''}
+              filter: { updatedAt: {greaterThan: "${publishedAt}"} ${genres.length ? `, genres: {containsAnyKeys: ${JSON.stringify(genres)}}` : ''}}) {
                 nodes {
                   bookId
                   title

@@ -1,8 +1,7 @@
 import { debounceTime } from 'rxjs/operators';
-/* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import { tap } from 'rxjs/operators';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ChangeDetectorRef, Injectable } from '@angular/core';
+import { ChangeDetectorRef, Injectable, HostListener } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Directive, OnInit, OnDestroy } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
@@ -10,7 +9,7 @@ import { PersistNgFormPlugin } from '@datorama/akita';
 import { BooksFacade } from '@awread/core/books';
 import { GenresFacade } from '@awread/core/genres';
 import { CategoriesFacade } from '@awread/core/categories';
-import { DatePipe } from '@angular/common';
+import { Observable } from 'rxjs';
 
 @UntilDestroy()
 @Injectable({
@@ -18,12 +17,14 @@ import { DatePipe } from '@angular/common';
 })
 @Directive()
 export class ListPage implements OnInit, OnDestroy {
+  debugCount$ = this.booksFacade.categoryBooksQuery.selectCount();
   filtersForm: FormGroup;
   persistForm: PersistNgFormPlugin;
+  isLoading$: Observable<boolean>;
   categoryList$ = this.categoriesFacade.categories$;
   topBookList$ = this.booksFacade.topBooks$;
   genreList$ = this.genresFacade.genres$;
-  filteredBooks$;
+  filteredBooks$ = this.booksFacade.categoryBooks$;
   typeBook: 'collected' | 'composed';
   selectedCategoryId: string;
   titlePage: string;
@@ -43,6 +44,7 @@ export class ListPage implements OnInit, OnDestroy {
     this.updateForm();
     this.booksFacade.getTopBooks().subscribe();
     this.genresFacade.getAllGenres().subscribe();
+    this.isLoading$ = this.booksFacade.categoryBooksQuery.selectLoading();
     this.watchRouting();
   }
 
@@ -76,21 +78,31 @@ export class ListPage implements OnInit, OnDestroy {
   }
 
   filterItemsByCategory(categoryId) {
-    this.filteredBooks$ = this.booksFacade.getCategoryBooks(categoryId).pipe();
+    this.booksFacade.getCategoryBooks(categoryId).subscribe();
   }
 
   filterBooks() {
     this.activatedRoute.parent.url.subscribe(([urlSegment]) => {
       const categoryId = urlSegment.parameterMap.get('categoryId');
-      this.filteredBooks$ = this.booksFacade.getFilterBooks(categoryId);
+      this.booksFacade.getFilterBooks(categoryId).subscribe();
     })
   }
 
-  moreBooks(offset: number) {
-    offset = offset + 1;    
-    this.booksFacade.getLatestBooks('1', 0).pipe(debounceTime(200)).subscribe(res => {
-      console.log(res);      
-    });
+  nativeTopBook() {
+    this.router.navigate(['/top-books']);
+  }
+
+  @HostListener('window:scroll', ['$event'])
+  onMoreBooks() {
+    if (window.innerHeight + window.scrollY === document.body.scrollHeight) {
+      this.fetchBooks();
+    }
+  }
+
+  private fetchBooks() {
+    if (this.booksFacade.categoryBooksQuery.getHasMore()) {
+      this.booksFacade.getCategoryBooks(this.selectedCategoryId).subscribe();
+    }
   }
 
   private updateForm() {

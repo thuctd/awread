@@ -1,3 +1,3 @@
-<template-home (displayActivePage)="displayActivePage($event)" [sliders]="imageObject$ | async" [getGoodBooks]="goodBookList$ | async" [getLatestBooks]="categoryBooks$ | async"
+<template-home (displayActivePage)="displayActivePage($event)" [sliders]="imageObject$ | async" [getGoodBooks]="goodBookList$ | async" [getLatestBooks]="categoryBooks$ | async" [loading]="isLoading$ | async"
     [getFeatureBooks]="featureBookList$ | async" [genres]="genres$ | async" (filterItemsByGenre)="filterItemsByGenre($event)" [genreBooks]="filteredBooks$ | async" [categories]="categories$ | async" (emitBooks)="filterItemsByCategory($event)" (emitAllBooks)="getAllLatestBooks()">
 </template-home>

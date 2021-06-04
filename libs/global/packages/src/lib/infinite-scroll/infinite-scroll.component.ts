@@ -20,7 +20,7 @@ export class InfiniteScrollComponent implements OnInit, OnDestroy {
     rootMargin: '0px 0px 200px 0px',
   };
   @Output() scrolled = new EventEmitter();
-  @ViewChild('anchor', {static: true}) anchor: ElementRef<HTMLElement>;
+  @ViewChild('anchor', { static: true }) anchor: ElementRef<HTMLElement>;
 
   private observer: IntersectionObserver;
 
