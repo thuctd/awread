@@ -11,12 +11,8 @@ import { environment } from '@awread/global/environments';
 import { buildEnvironment } from '@awread/global/environments';
 
 async function bootstrap() {
-  console.log('environment', environment);
-  console.log('buildenvironment', buildEnvironment);
-  console.log('NODE_ENV', process.env.NODE_ENV, buildEnvironment.NODE_ENV);
+  console.log('environment, buildenvironment', environment, buildEnvironment, process.env);
   console.log('NODE_ENV', process.env['NODE' + '_ENV']);
-  console.log('ENVIRONMENT', process.env.ENVIRONMENT);
-  console.log('process.env', process.env);
 
   const app = await NestFactory.create(AppModule, { cors: true });
   app.enableCors();
