@@ -14,7 +14,7 @@ COPY *.js tsconfig*.json angular.json nx.json ./
 COPY configs/tailwind configs/tailwind
 
 # //INPUT: update this
-FROM builder as build-backend-api
+FROM builder as build-${application}
 # //NOTE: NODE_ENV is coming from server environment in build process, not coming from container environment
 ARG application
 ARG applicationPath
