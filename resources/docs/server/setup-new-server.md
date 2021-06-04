@@ -24,3 +24,6 @@ DOCKER_BUILDKIT=1
 NODE_ENV=next
 
 ctrl + X then enter
+
+mkdir /tmp/.pnpm-store
+mkdir /tmp/.pnpm-store/v3
