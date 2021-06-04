@@ -1,12 +1,13 @@
 <div class="px-1 pt-2">
-    <infinite-scroll #infiniteScroll (scrolled)="moreEvent.emit()">
-        <div *ngFor="let book of books;" class="grid grid-cols-12 gap-4 py-2">
-            <div class="col-span-4">
-                <atom-img-m [size]="'s'" [bookId]="book.bookId" [srcImg]="book.cover"></atom-img-m>
-            </div>
-            <div class="col-span-8">
-                <molec-info-book [book]="book" [btns]="book.newestChapters"></molec-info-book>
-            </div>
-        </div>
-    </infinite-scroll>
+  <div *ngFor="let book of books;" class="grid grid-cols-12 gap-4 py-2">
+    <div class="col-span-4">
+      <atom-img-m [size]="'s'" [bookId]="book.bookId" [srcImg]="book.cover"></atom-img-m>
+    </div>
+    <div class="col-span-8">
+      <molec-info-book [book]="book" [btns]="book.newestChapters"></molec-info-book>
+    </div>
+  </div>
+  <div class="ml-2 pb-2">
+    <atom-text-link (submitEvent)="moreEvent.emit()" [text]="moreBook" [class]="'text-sm text-green-primary italic font-bold'"></atom-text-link>
+  </div>
 </div>

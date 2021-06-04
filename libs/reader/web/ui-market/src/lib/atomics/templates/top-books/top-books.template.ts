@@ -15,7 +15,6 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
 })
 export class TopBooksTemplate implements OnInit {
   display = 'grid';
-  filterbook = false;
   @Input() totalBook;
   @Input() loading;
   @Input() genres = [];
@@ -41,12 +40,4 @@ export class TopBooksTemplate implements OnInit {
   ngOnInit(): void {
   }
 
-  changeDisplay(mode: string) {
-    console.log(mode);
-    this.display = mode;
-  }
-
-  changeDisplayFilter() {
-    this.filterbook = !this.filterbook;
-  }
 }
