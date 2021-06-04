@@ -7,7 +7,7 @@ FROM node:14-alpine as builder
 ENV CYPRESS_INSTALL_BINARY=0
 RUN --mount=type=cache,target=/root/.pnpm-store/v3
 RUN --mount=type=cache,target=/usr/local/bin/pnpm
-RUN --mount=type=cachetarget=/usr/local/lib/node_modules
+RUN --mount=type=cache,target=/usr/local/lib/node_modules
 WORKDIR /batcave
 RUN npm i -g pnpm
 COPY decorate-angular-cli.js package.json pnpm-lock.yaml ./

@@ -2,21 +2,18 @@
 ARG application=backend-graphql
 ARG applicationPath=backend/graphql
 
+
 FROM node:14-alpine as builder
-
-ENV NODE_ENV=${NODE_ENV}
 ENV CYPRESS_INSTALL_BINARY=0
-
+RUN --mount=type=cache,target=/root/.pnpm-store/v3
+RUN --mount=type=cache,target=/usr/local/bin/pnpm
+RUN --mount=type=cache,target=/usr/local/lib/node_modules
 WORKDIR /batcave
 RUN npm i -g pnpm
 COPY decorate-angular-cli.js package.json pnpm-lock.yaml ./
 RUN pnpm install --frozen-lockfile --prod
 COPY *.js tsconfig*.json angular.json nx.json ./
 COPY configs/tailwind configs/tailwind
-
-# RUN ls
-RUN echo application is: $application
-RUN echo applicationPath is: $applicationPath
 
 # //INPUT: update this
 FROM builder as build-backend-graphql
