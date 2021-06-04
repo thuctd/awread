@@ -12,3 +12,6 @@ set | more
 
 export NODE_ENV=next
 echo $NODE_ENV
+
+dokku enter backend-api web echo hi
+dokku enter backend-api web printenv

@@ -13,7 +13,7 @@ https://cloud.google.com/compute/docs/ip-addresses/reserve-static-external-ip-ad
 
 https://dokku.com/docs/deployment/builders/dockerfiles/
 
-# enable build kit
+# enable build kit and NODE_ENV
 
 export DOCKER_BUILDKIT=1
 
@@ -27,5 +27,12 @@ ctrl + X then enter
 
 restart server => to make it work
 
-mkdir /tmp/.pnpm-store
-mkdir /tmp/.pnpm-store/v3
+# update NODE_ENV in global
+
+dokku config:set NODE_ENV=next --global
+
+restart application
+
+# setup docker file
+
+dokku docker-options:add backend-api build --build-arg NODE_ENV=next
