@@ -17,7 +17,7 @@ FROM builder as build-backend-api
 # //NOTE: NODE_ENV is coming from server environment in build process, not coming from container environment
 ARG application
 ARG applicationPath
-ARG NODE_ENV=next
+ARG NODE_ENV=production
 ENV NODE_ENV $NODE_ENV
 # RUN ls
 RUN echo application is: $application
