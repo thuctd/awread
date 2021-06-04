@@ -38,4 +38,4 @@ ARG NODE_ENV
 EXPOSE 80
 # //INPUT: update this
 COPY --from=build-backend-api /batcave/dist/apps/$applicationPath .
-CMD ["export NODE_ENV=${NODE_ENV}", "node", "main.js"]
+CMD ["set NODE_ENV=",${NODE_ENV},"&&", "node", "main.js"]
