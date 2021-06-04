@@ -5,9 +5,9 @@ ARG applicationPath=backend/api
 
 FROM node:14-alpine as builder
 ENV CYPRESS_INSTALL_BINARY=0
-RUN --mount=type=bind,source=/root/.pnpm-store/v3,target=/root/.pnpm-store/v3
-RUN --mount=type=bind,source=/usr/local/bin/pnpm,target=/usr/local/bin/pnpm
-RUN --mount=type=bind,source=/usr/local/lib/node_modules,target=/usr/local/lib/node_modules
+RUN --mount=type=bind,source=/root/.pnpm-store/v3,target=/root/.pnpm-store/v3; exit 0
+RUN --mount=type=bind,source=/usr/local/bin/pnpm,target=/usr/local/bin/pnpm; exit 0
+RUN --mount=type=bind,source=/usr/local/lib/node_modules,target=/usr/local/lib/node_modules; exit 0
 WORKDIR /batcave
 RUN npm i -g pnpm
 COPY decorate-angular-cli.js package.json pnpm-lock.yaml ./
