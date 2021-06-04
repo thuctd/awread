@@ -33,6 +33,7 @@ RUN pnpm build $application -- --configuration=${NODE_ENV} --no-progress
 FROM build-backend-api as backend-api
 ARG application
 ARG applicationPath
+ARG NODE_ENV
 # //INPUT: we expose this only for testing purpose
 EXPOSE 80
 # //INPUT: update this
