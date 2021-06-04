@@ -2,6 +2,7 @@ import { Directive, Injectable, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CurrentUserFacade } from '@awread/core/users';
 import { faTintSlash } from '@fortawesome/free-solid-svg-icons';
+import { SnackbarService } from '@awread/global/packages';
 
 @Injectable({
   providedIn: 'root',
@@ -13,10 +14,7 @@ export class ProfilePage implements OnInit {
   profileFormValueBefore = '';
   submitted = false;
   imgSrc = '/global-assets/images/bigImg.webp';
-  constructor(
-    private currentUserFacade: CurrentUserFacade,
-    private fb: FormBuilder
-  ) { }
+  constructor(private currentUserFacade: CurrentUserFacade, private fb: FormBuilder, private snackbarService: SnackbarService) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -24,7 +22,15 @@ export class ProfilePage implements OnInit {
   }
 
   updateProfile() {
-    this.currentUserFacade.updateCurrentUser(this.profileForm.value);
+    if (this.profileForm.invalid) {
+      this.profileForm.get('name').setValue(this.profileForm.value.name, { emitEvent: true });
+      this.profileForm.get('email').setValue(this.profileForm.value.email, { emitEvent: true });
+      this.profileForm.get('age').setValue(this.profileForm.value.age, { emitEvent: true });
+      this.profileForm.markAllAsTouched();
+      return this.snackbarService.showWarning('Vui lòng điền đủ thông tin');
+    } else {
+      this.currentUserFacade.updateCurrentUser(this.profileForm.value);
+    }
   }
 
   private updateProfileForm(user) {
@@ -43,32 +49,30 @@ export class ProfilePage implements OnInit {
       bio: user.bio,
       websiteAddress: user.websiteAddress,
       facebookAddress: user.facebookAddress,
-
     });
     this.profileFormValueBefore = this.profileForm.value;
   }
   private getCurrentUser() {
-    this.currentUserFacade.getCurrentUser()
-      .subscribe((user) => {
-        if (user) {
-          this.updateProfileForm(user);
-          if (user.avatar == true) {
-            this.imgSrc = `https://awread-bucket.ss-hn-1.bizflycloud.vn/users/origin/${user.userId}.webp`;
-          }
+    this.currentUserFacade.getCurrentUser().subscribe((user) => {
+      if (user) {
+        this.updateProfileForm(user);
+        if (user.avatar == true) {
+          this.imgSrc = `https://awread-bucket.ss-hn-1.bizflycloud.vn/users/origin/${user.userId}.webp`;
         }
-      });
+      }
+    });
   }
 
   private initForm() {
     this.profileForm = this.fb.group({
       username: [null],
-      email: [null],
+      email: [null, [Validators.required, Validators.email]],
       phone: [null],
-      name: [null],
+      name: [null, [Validators.required]],
       firstname: [null],
       middlename: [null],
       lastname: [null],
-      age: [null],
+      age: [null, [Validators.required]],
       avatar: [null],
       dob: [null],
       gender: [null],

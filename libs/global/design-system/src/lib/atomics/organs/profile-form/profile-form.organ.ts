@@ -18,20 +18,10 @@ export class ProfileFormOrgan implements OnInit {
     title: 'Kết nối bằng google',
     image: '/global-assets/images/google.webp',
   };
-  @Output() clickConnectFb = new EventEmitter();
-  @Output() clickConnectGg = new EventEmitter();
+  @Output() clickConnect = new EventEmitter();
   @Input() link = '/forgot';
   @Input() submitText = 'Lưu';
-  @Input() profileForm: FormGroup = this.fb.group({
-    email: ['', [Validators.required]],
-    phone: ['', [Validators.required]],
-    dob: ['', [Validators.required]],
-    gender: ['', [Validators.required]],
-    fullname: ['', [Validators.required]],
-    username: ['', [Validators.required]],
-    website: ['', [Validators.required]],
-    introduce: ['', [Validators.required]],
-  });
+  @Input() profileForm: FormGroup = this.fb.group({});
   @Input() submitted: boolean;
   @Output() updateProfileEvent = new EventEmitter();
   constructor(private fb: FormBuilder) {}
