@@ -13,30 +13,36 @@ https://cloud.google.com/compute/docs/ip-addresses/reserve-static-external-ip-ad
 
 https://dokku.com/docs/deployment/builders/dockerfiles/
 
-# enable build kit and NODE_ENV
-
-export DOCKER_BUILDKIT=1
+# enable build kit and ENVIRONMENT
 
 touch /etc/environment
 nano /etc/environment
 
 DOCKER_BUILDKIT=1
-NODE_ENV=next
 
 ctrl + X then enter
 
 restart server => to make it work
 
-# update NODE_ENV in global
+# update ENVIRONMENT in global
 
-dokku config:set NODE_ENV=next --global
+dokku config:set ENVIRONMENT=next --global
+(or: dokku config:set ENVIRONMENT=production --global)
 
 restart application
 
-# setup docker file
+# setup docker file in global
 
-dokku docker-options:add backend-api build --build-arg ENVIRONMENT=next
-dokku docker-options:add backend-graphql build --build-arg ENVIRONMENT=next
-dokku docker-options:add reader-web build --build-arg ENVIRONMENT=next
-dokku docker-options:add writer-web build --build-arg ENVIRONMENT=next
-dokku
+- for the next server
+  dokku docker-options:add backend-api build --build-arg ENVIRONMENT=next
+  dokku docker-options:add backend-graphql build --build-arg ENVIRONMENT=next
+  dokku docker-options:add reader-web build --build-arg ENVIRONMENT=next
+  dokku docker-options:add writer-web build --build-arg ENVIRONMENT=next
+  dokku
+
+- for the production server
+  dokku docker-options:add backend-api build --build-arg ENVIRONMENT=production
+  dokku docker-options:add backend-graphql build --build-arg ENVIRONMENT=production
+  dokku docker-options:add reader-web build --build-arg ENVIRONMENT=production
+  dokku docker-options:add writer-web build --build-arg ENVIRONMENT=production
+  dokku
