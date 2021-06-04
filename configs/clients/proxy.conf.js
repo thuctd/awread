@@ -5,17 +5,17 @@ let graphqlTarget;
 let apiTarget;
 let logLevel;
 switch (process.env) {
-    case process.env.NODE_ENV == 'production':
+    case process.env.ENVIRONMENT == 'production':
         graphqlTarget = process.env.GRAPHQL_URI;
         apiTarget = process.env.API_URI;
         logLevel = 'info';
         break;
-    case process.env.NODE_ENV == 'next':
+    case process.env.ENVIRONMENT == 'next':
         graphqlTarget = process.env.GRAPHQL_URI;
         apiTarget = process.env.API_URI;
         logLevel = 'info';
         break;
-    case process.env.NODE_ENV == 'test':
+    case process.env.ENVIRONMENT == 'test':
         graphqlTarget = process.env.GRAPHQL_URI;
         apiTarget = process.env.API_URI;
         logLevel = 'debug';
@@ -27,7 +27,7 @@ switch (process.env) {
         break;
 }
 
-console.log('APP: process env', process.env, process.env.NODE_ENV);
+console.log('APP: process env', process.env, process.env.ENVIRONMENT);
 
 module.exports = [
     {

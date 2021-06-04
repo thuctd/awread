@@ -12,7 +12,7 @@ export class ForgotPasswordController {
     @Get('send-email')
     async forgotPassword(@Query() query) {
         console.log('query', query);
-        return await this.ForgotPasswordFacade.sendMail(query.email);
+        return await this.ForgotPasswordFacade.sendMail(query);
     }
 
     @Post('new-password')

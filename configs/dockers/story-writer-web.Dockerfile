@@ -14,20 +14,20 @@ COPY *.js tsconfig*.json angular.json nx.json ./
 COPY configs/tailwind configs/tailwind
 
 FROM builder as build-story-writer-web
-# //NOTE: NODE_ENV is coming from server environment in build process, not coming from container environment
+# //NOTE: ENVIRONMENT is coming from server environment in build process, not coming from container environment
 ARG application
 ARG applicationPath
-ARG NODE_ENV=production
-ENV NODE_ENV $NODE_ENV
+ARG ENVIRONMENT=production
+ENV ENVIRONMENT $ENVIRONMENT
 # RUN ls
 RUN echo application is: $application
 RUN echo applicationPath is: $applicationPath
-RUN echo NODE_ENV reset: $NODE_ENV
+RUN echo ENVIRONMENT reset: $ENVIRONMENT
 
 COPY libs ./libs
 COPY apps ./apps
 
-RUN pnpm build $application -- --configuration=${NODE_ENV} --no-progress
+RUN pnpm build $application -- --configuration=${ENVIRONMENT} --no-progress
 
 
 FROM nginx:stable-alpine as story-writer-web
