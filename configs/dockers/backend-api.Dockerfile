@@ -16,15 +16,18 @@ COPY configs/tailwind configs/tailwind
 # //INPUT: update this
 FROM builder as build-backend-api
 # //NOTE: NODE_ENV is coming from server environment in build process, not coming from container environment
-ENV NODE_ENV=${NODE_ENV} 
 ARG application
 ARG applicationPath
+ARG NODE_ENV 
+
+ENV NODE_ENV $NODE_ENV
+ARG ENVIRONMENT 
 
 # RUN ls
 RUN echo application is: $application
 RUN echo applicationPath is: $applicationPath
+RUN echo ENVIRONMENT reset: $ENVIRONMENT
 RUN echo NODE_ENV reset: $NODE_ENV
-RUN echo NODE_ENV reset: ${NODE_ENV}
 
 COPY libs ./libs
 COPY apps ./apps
