@@ -14,7 +14,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 })
 export class LinkAtom implements OnInit {
   @Input() title = 'title';
-  @Input() href = 'composed';
+  @Input() link = 'composed';
 
   constructor() {}
 
