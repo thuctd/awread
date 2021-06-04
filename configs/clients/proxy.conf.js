@@ -27,7 +27,7 @@ switch (process.env) {
         break;
 }
 
-console.log('APP: process env', process.env, process.env.NODE_ENV, process.env.ENVIRONMENT);
+console.log('APP: process env', process.env, process.env.NODE_ENV);
 
 module.exports = [
     {
