@@ -135,6 +135,7 @@ import { RdDropdownMenuMbAtom } from './atoms/rd-dropdown-menu-mb/rd-dropdown-me
 import { RdIconTextItemAtom } from './atoms/rd-icon-text-item/rd-icon-text-item.atom';
 import { RdTextLinkMenuMbAtom } from './atoms/rd-text-link-menu-mb/rd-text-link-menu-mb.atom';
 import { MatSelectModule } from '@angular/material/select';
+import { StatusBookAtom } from './atoms/status-book/status-book.atom';
 @NgModule({
   imports: [
     CommonModule,
@@ -288,7 +289,8 @@ import { MatSelectModule } from '@angular/material/select';
     RdProfileInfoPersonalItemAtom,
     RdDropdownMenuMbAtom,
     RdIconTextItemAtom,
-    RdTextLinkMenuMbAtom
+    RdTextLinkMenuMbAtom,
+    StatusBookAtom
   ],
   declarations: [
     notReadyDirective,
@@ -413,6 +415,7 @@ import { MatSelectModule } from '@angular/material/select';
     RdDropdownMenuMbAtom,
     RdIconTextItemAtom,
     RdTextLinkMenuMbAtom,
+    StatusBookAtom,
   ],
 })
 export class GlobalDesignSystemAtomicModule { }
