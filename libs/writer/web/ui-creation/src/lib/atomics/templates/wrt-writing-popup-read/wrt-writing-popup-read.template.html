@@ -2,12 +2,12 @@
     <div class="px-12">
         <div class="sticky top-0 z-40 lg:z-50 w-full max-w-8xl mx-auto bg-white text-center border-b border-gray-200">
             <div class="py-2">
-                <p class="text-base md:text-xl font-bold mb-1 break-words block text-gray-600">{{data.title === "" ? "Chưa có tiêu đề chương?" : data.title}}</p>
+                <p class="text-base md:text-xl font-bold mb-1 break-words block text-gray-600">{{data.title == "" ? "Chưa có tiêu đề chương?" : data.title}}</p>
             </div>
         </div>
         <div class="py-4">
-            <div class="leading-8 text-gray-600">
-                <div id="content" style="overflow-wrap: break-word;"></div>
+            <div class="leading-8 text-gray-600 text-justify">
+                <div id="content" class="break-words"></div>
             </div>
         </div>
     </div>
