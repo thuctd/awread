@@ -15,4 +15,8 @@ export class WrtEditerAtom implements OnInit {
   ngOnInit(): void {
   }
 
+  formatOnCreate(editor) {
+    editor.format('align', 'justify')
+  }
+
 }

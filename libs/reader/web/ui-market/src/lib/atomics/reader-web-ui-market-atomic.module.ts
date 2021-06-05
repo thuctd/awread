@@ -86,6 +86,7 @@ import { RdIntroductionContentMbMolec } from './molecs/rd-introduction-content-m
 import { RdIntroductionFounderMbOrgan } from './organs/rd-introduction-founder-mb/rd-introduction-founder-mb.organ';
 import { RdIntroductionHotlineMbOrgan } from './organs/rd-introduction-hotline-mb/rd-introduction-hotline-mb.organ';
 import { RdNewsShareExperienceMolec } from './molecs/rd-news-share-experience/rd-news-share-experience.molec';
+import { QuillModule } from 'ngx-quill';
 
 @NgModule({
   imports: [
@@ -97,6 +98,7 @@ import { RdNewsShareExperienceMolec } from './molecs/rd-news-share-experience/rd
     CoreCategoriesModule,
     InfiniteScrollModule,
     LoaderModule,
+    QuillModule,
   ],
   exports: [
     CommonModule,
