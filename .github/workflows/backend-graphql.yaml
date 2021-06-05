@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.inputs.name =='test'
     env:
-      SERVER_URL: "{{ github.event.inputs.environment == 'production' && secrets.PRODUCTION_URL || secrets.NEXT_URL }}"
+      SERVER_URL: "${{ github.event.inputs.environment == 'production' && secrets.PRODUCTION_URL || secrets.NEXT_URL }}"
       APP: backend-graphql
     steps:
       - run: |
@@ -40,7 +40,7 @@ jobs:
     timeout-minutes: 60
     if: github.event.inputs.name =='restart'
     env:
-      SERVER_URL: github.event.inputs.environment == 'production' && secrets.PRODUCTION_URL || secrets.NEXT_URL
+      SERVER_URL: "${{ github.event.inputs.environment == 'production' && secrets.PRODUCTION_URL || secrets.NEXT_URL }}"
       APP: backend-graphql
     steps:
       - name: executing remote ssh commands using ssh key
@@ -58,7 +58,7 @@ jobs:
     timeout-minutes: 60
     if: (github.event_name == 'push' || github.event.inputs.name == 'build')
     env:
-      SERVER_URL: github.event.inputs.environment == 'production' && secrets.PRODUCTION_URL || secrets.NEXT_URL
+      SERVER_URL: "${{ github.event.inputs.environment == 'production' && secrets.PRODUCTION_URL || secrets.NEXT_URL }}"
       APP: backend-graphql
     steps:
       - name: using action checkout
