@@ -1,6 +1,6 @@
 <div class="grid grid-cols-10 gap-2">
   <div (click)="bookEvent.emit({ type: 'preview', bookId: book.bookId })" class="col-span-3 cursor-pointer">
-    <detail-upload-img [srcImg]="srcImg"></detail-upload-img>
+    <detail-upload-img [srcImg]="book| coverSize: 'l'"></detail-upload-img>
     <span [hidden]="srcImg" class="text-xs sm:text-sm">Không có ảnh bìa</span>
   </div>
   <div class="col-span-7" (click)="bookEvent.emit({ type: 'detail', bookId: book.bookId })">

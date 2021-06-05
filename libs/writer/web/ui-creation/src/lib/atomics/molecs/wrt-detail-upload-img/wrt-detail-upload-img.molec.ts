@@ -15,7 +15,8 @@ import { FormBuilder } from '@angular/forms';
 })
 export class WrtDetailUploadImgMolec implements OnInit {
   @Input() book = {
-    cover: 'https://picsum.photos/200/300'
+    cover: 'https://picsum.photos/200/300',
+    bookId: ''
   }
 
   @Input() btn = {

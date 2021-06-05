@@ -5,7 +5,7 @@
     <!-- <pre> status {{ status }} </pre> -->
 
     <atom-process-bar *ngIf="status == 'loading'" class="w-full px-11" [percentLoading]="percentLoading"></atom-process-bar>
-    <atom-popup-cover-image-align [imageChangedEvent]="imageChangedEvent" *ngIf="status == 'reposition'" class="w-full"
+    <atom-popup-cover-image-align [aspectRatio]="aspectRatio" [imageChangedEvent]="imageChangedEvent" *ngIf="status == 'reposition'" class="w-full"
         (submitEvent)="submitEvent.emit($event)">
     </atom-popup-cover-image-align>
 

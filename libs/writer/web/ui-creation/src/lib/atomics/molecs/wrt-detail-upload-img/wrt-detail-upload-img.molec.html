@@ -1,5 +1,5 @@
 <div autocomplete="off">
-  <img [src]="book?.cover || '/global-assets/images/default-cover.jpg'" alt="" class="w-full rounded-lg shadow mb-4 ng-star-inserted" />
+  <img [src]="book | coverSize: 'origin'" alt="" class="w-full rounded-lg shadow mb-4 ng-star-inserted" />
   <normal-login-btn [isHidden]="isHiddenUploadBtn" [active]="btn.isActive" [name]="btn.name" (btnClicked)="eventChooseImageCover.emit()"></normal-login-btn>
 </div>
 <wrt-detail-link-btns></wrt-detail-link-btns>

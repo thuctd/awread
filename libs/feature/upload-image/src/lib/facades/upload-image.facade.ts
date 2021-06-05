@@ -11,7 +11,7 @@ export class UploadImageFacade {
   uploadAvatar(blob, userId) {
     return this.uploadImageGear.uploadAvatar(blob, userId);
   }
-  uploadCover(blob, bookId: string) {
+  uploadCover(blob, bookId) {
     return this.uploadImageGear.uploadCover(blob, bookId);
   }
 

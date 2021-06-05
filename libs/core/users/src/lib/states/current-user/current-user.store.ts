@@ -4,11 +4,13 @@ import { Store, StoreConfig } from '@datorama/akita';
 
 export interface CurrentUserState {
   userId: string;
+  updatedAt: string;
 }
 
 export function createInitialState(): CurrentUserState {
   return {
     userId: null,
+    updatedAt: null,
   };
 }
 

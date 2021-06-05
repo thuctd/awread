@@ -27,7 +27,6 @@ export class WrtProfileTemplate implements OnInit {
   });
   @Input() submitted: boolean;
   @Output() submitEvent = new EventEmitter();
-  @Input() imgSrc;
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {

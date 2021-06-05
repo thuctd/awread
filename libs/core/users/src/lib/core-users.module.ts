@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AvatarPipe } from './pipes/avatar.pipe';
+import { AvatarSizePipe } from './pipes/avatar-size.pipe';
 
 @NgModule({
   imports: [CommonModule],
-  providers: [AvatarPipe],
-  declarations: [AvatarPipe],
-  exports: [AvatarPipe]
+  declarations: [AvatarSizePipe],
+  exports: [AvatarSizePipe]
 })
 export class CoreUsersModule { }

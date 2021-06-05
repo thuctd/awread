@@ -72,7 +72,7 @@ export class DetailBookPage implements OnInit {
       case 'cancel':
         this.router.navigate(['list']);
         break;
-      case 'upload-cover':
+      case 'upload-image':
         this.uploadCover(event.data);
         break;
       case 'save':
@@ -86,13 +86,25 @@ export class DetailBookPage implements OnInit {
   }
 
   uploadCover(data) {
-    this.matDialog.open(PopupChangeCoverOrgan, {
+    const dialogRef = this.matDialog.open(PopupChangeCoverOrgan, {
       width: '55rem',
       height: '33rem',
+      data: {
+        id: this.bookForm.value.bookId,
+        mode: 'book-cover'
+      }
+    });
+    dialogRef.afterClosed().subscribe(({ success }) => {
+      if (success) {
+        this.bookForm.patchValue({ cover: true, updatedAt: new Date() });
+        console.log('this.bookForm', this.bookForm.value);
+        this.cd.detectChanges();
+      }
     });
   }
 
   save() {
+    this.bookForm.patchValue({ updatedAt: new Date() })
     if (this.bookId == 'new') {
       if (this.bookForm.invalid) {
         this.bookForm.get('title').setValue(this.bookForm.value.title, { emitEvent: true });
@@ -135,9 +147,10 @@ export class DetailBookPage implements OnInit {
       authorIds: authorIds,
       completed: book.completed,
       published: book.published,
-      cover: book.cover,
+      cover: book.cover ?? false,
       type: book.type,
       age: book.age,
+      updatedAt: book.updatedAt
     })
   }
 
@@ -154,7 +167,8 @@ export class DetailBookPage implements OnInit {
       published: [false],
       cover: [false],
       type: "0",
-      age: "2"
+      age: "2",
+      updatedAt: [null]
     });
   }
 

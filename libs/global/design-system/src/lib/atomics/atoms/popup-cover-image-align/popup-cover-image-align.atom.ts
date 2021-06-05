@@ -22,7 +22,7 @@ export class PopupCoverImageAlignAtom implements OnInit {
   @Input() sourceTarget = '/global-assets/images/bigImg.webp';
   @Output() submitEvent = new EventEmitter();
   icon = faArrowsAlt;
-
+  @Input() aspectRatio;
   @Input() imageChangedEvent;
   croppedImage: any = '';
 

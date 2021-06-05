@@ -1,4 +1,4 @@
-import { Directive, Injectable, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Directive, Injectable, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthFacade, CurrentUserFacade } from '@awread/core/users';
@@ -13,12 +13,12 @@ export class ProfileIPage implements OnInit {
   currentUser$ = this.currentUserFacade.currentUser$;
   profileFormValueBefore = '';
   submitted = false;
-  imgSrc = '/global-assets/images/bigImg.webp';
   constructor(
     private currentUserFacade: CurrentUserFacade,
     private fb: FormBuilder,
     private matDialog: MatDialog,
     private authFacade: AuthFacade,
+    private cd: ChangeDetectorRef,
   ) { }
 
   ngOnInit(): void {
@@ -56,13 +56,16 @@ export class ProfileIPage implements OnInit {
       width: '55rem',
       height: '33rem',
       data: {
-        userId: this.currentUserFacade.getUserId(),
+        id: this.currentUserFacade.getUserId(),
         mode: 'avatar'
       }
     });
     dialogRef.afterClosed().subscribe(({ success }) => {
       if (success) {
-        this.currentUserFacade.updateCurrentUser({ avatar: true })
+        const now = new Date();
+        this.currentUserFacade.updateCurrentUser({ avatar: true, updatedAt: now });
+        this.profileForm.patchValue({ updatedAt: now });
+        this.cd.detectChanges();
       }
     });
   }
@@ -73,6 +76,7 @@ export class ProfileIPage implements OnInit {
 
   private updateProfileForm(user) {
     this.profileForm.patchValue({
+      userId: user.userId,
       username: user.username,
       email: user.email,
       phone: user.phone,
@@ -87,6 +91,7 @@ export class ProfileIPage implements OnInit {
       bio: user.bio,
       websiteAddress: user.websiteAddress,
       facebookAddress: user.facebookAddress,
+      updatedAt: user.updatedAt,
 
     });
     this.profileFormValueBefore = this.profileForm.value;
@@ -96,15 +101,13 @@ export class ProfileIPage implements OnInit {
       .subscribe((user) => {
         if (user) {
           this.updateProfileForm(user);
-          if (user.avatar == true) {
-            this.imgSrc = `https://awread-bucket.ss-hn-1.bizflycloud.vn/users/origin/${user.userId}.webp`;
-          }
         }
       });
   }
 
   private initForm() {
     this.profileForm = this.fb.group({
+      userId: [null],
       username: [null],
       email: [null],
       phone: [null],
@@ -119,6 +122,7 @@ export class ProfileIPage implements OnInit {
       bio: [null],
       websiteAddress: [null],
       facebookAddress: [null],
+      updatedAt: [null]
     });
     setTimeout(() => {
       this.profileForm.get('dob').disable();

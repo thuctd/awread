@@ -3,6 +3,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, ChangeDetectorRef, I
 import { FormControl } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { UploadImageFacade } from '@awread/feature/upload-image';
+import { SnackbarService } from '@awread/global/packages';
 @Component({
   selector: 'organ-popup-change-cover',
   templateUrl: './popup-change-cover.organ.html',
@@ -21,16 +22,20 @@ export class PopupChangeCoverOrgan implements OnInit {
   controlName = new FormControl('');
   status = 'pending';
   percentLoading = '10%';
+  aspectRatio;
   constructor(
     public matDialogRef: MatDialogRef<PopupChangeCoverOrgan>,
     private cd: ChangeDetectorRef,
     private uploadImageFacade: UploadImageFacade,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private snackbarService: SnackbarService,
   ) { }
 
   ngOnInit(): void {
     if (this.data.mode == 'avatar') {
       this.title = 'Chọn ảnh đại diện';
+    } else {
+      this.aspectRatio = 288 / 384;
     }
   }
 
@@ -42,8 +47,15 @@ export class PopupChangeCoverOrgan implements OnInit {
     console.log(croppedImage);
     this.status = 'loading';
     if (croppedImage) {
+      let upload$;
+      if (this.data.mode == 'avatar') {
+        upload$ = this.uploadImageFacade.uploadAvatar(croppedImage, this.data.id);
+      } else {
+        upload$ = this.uploadImageFacade.uploadCover(croppedImage, this.data.id);
+        this.cd.detectChanges();
+      }
       //save image
-      this.uploadImageFacade.uploadAvatar(croppedImage, this.data.userId).subscribe(event => {
+      upload$.subscribe(event => {
         console.log('event', event);
         if (event.type === HttpEventType.DownloadProgress) {
           console.log("download progress");
@@ -56,11 +68,13 @@ export class PopupChangeCoverOrgan implements OnInit {
         if (event instanceof HttpResponse) {
           if (event.ok) {
             this.matDialogRef.close({ success: event.ok });
-
+          } else {
+            this.snackbarService.showError('Đăng ảnh thất bại');
           }
         }
       }, error => {
         console.warn('upload image failed', error);
+        this.snackbarService.showError('Đăng ảnh thất bại');
       })
     } else {
 
