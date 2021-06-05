@@ -1,7 +1,5 @@
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { PopupChangeCoverOrgan } from '@awread/global/design-system';
 
 import { faChartLine, faShareAlt, faAngleDown, faPlusCircle, faPlusSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
 
@@ -71,18 +69,8 @@ export class WrtBookDetailTabTemplate implements OnInit {
   ];
 
 
-  constructor(public matDialog: MatDialog, private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void { }
 
-  eventChooseImageCover(event) {
-    this.matDialog.open(PopupChangeCoverOrgan, {
-      width: '55rem',
-      height: '33rem',
-    });
-  }
-
-  wtf(event) {
-    this.detailBookEvent.emit(event);
-  }
 }

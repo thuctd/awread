@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="0,594" last-zoom="0.95" max-obj-count="30"
+<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="0,592" last-zoom="0.95" max-obj-count="30"
 	 default-owner="postgres">
 <role name="public_read"
       inherit="true">
@@ -475,7 +475,7 @@ end;]]></definition>
 				"chapterId",
 				to_jsonb(jsonb_build_object(
 				'chapterId', "chapterId",
-				'position', position
+				'position', position + 1
 	    		)) as "newestChapters",
 				rank() over (partition by "bookId" order by position desc) as RANK
 			from chapters   where chapters."isDeleted" = false 

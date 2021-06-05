@@ -9,6 +9,8 @@ import { CategoriesFacade } from '@awread/core/categories';
 import { GenresFacade } from '@awread/core/genres';
 import { switchMap } from 'rxjs/operators';
 import { SnackbarService } from '@awread/global/packages';
+import { MatDialog } from '@angular/material/dialog';
+import { PopupChangeCoverOrgan } from '@awread/global/design-system';
 
 @Injectable({
   providedIn: 'root',
@@ -35,6 +37,7 @@ export class DetailBookPage implements OnInit {
     private genresFacade: GenresFacade,
     private snackbarService: SnackbarService,
     private router: Router,
+    public matDialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
@@ -65,14 +68,13 @@ export class DetailBookPage implements OnInit {
   }
 
   detailBookAction(event) {
-    switch (event) {
+    switch (event.type) {
       case 'cancel':
         this.router.navigate(['list']);
         break;
-      // case 'publish':
-      //   this.bookForm.patchValue({ published: true });
-      //   this.save(true);
-      //   break;
+      case 'upload-cover':
+        this.uploadCover(event.data);
+        break;
       case 'save':
         this.save();
         break;
@@ -81,6 +83,13 @@ export class DetailBookPage implements OnInit {
         console.log('event', event);
         break;
     }
+  }
+
+  uploadCover(data) {
+    this.matDialog.open(PopupChangeCoverOrgan, {
+      width: '55rem',
+      height: '33rem',
+    });
   }
 
   save() {

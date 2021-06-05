@@ -24,7 +24,7 @@ export class WrtDetailUploadImgMolec implements OnInit {
   };
 
   @Output() eventChooseImageCover = new EventEmitter();
-
+  @Input() isHiddenUploadBtn;
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void { }
