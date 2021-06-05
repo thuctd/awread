@@ -159,6 +159,10 @@
                 {
                   "replace": "libs/global/environments/src/lib/environment.ts",
                   "with": "libs/global/environments/src/lib/environment.prod.ts"
+                },
+                {
+                  "replace": "libs/global/environments/src/lib/domains/environment.ts",
+                  "with": "libs/global/environments/src/lib/domains/environment.writer.ts"
                 }
               ],
               "optimization": true,
@@ -186,6 +190,10 @@
                 {
                   "replace": "libs/global/environments/src/lib/environment.ts",
                   "with": "libs/global/environments/src/lib/environment.next.ts"
+                },
+                {
+                  "replace": "libs/global/environments/src/lib/domains/environment.ts",
+                  "with": "libs/global/environments/src/lib/domains/environment.writer.ts"
                 }
               ],
               "optimization": true,
@@ -1163,6 +1171,10 @@
                 {
                   "replace": "libs/global/environments/src/lib/environment.ts",
                   "with": "libs/global/environments/src/lib/environment.prod.ts"
+                },
+                {
+                  "replace": "libs/global/environments/src/lib/domains/environment.ts",
+                  "with": "libs/global/environments/src/lib/domains/environment.reader.ts"
                 }
               ],
               "optimization": true,
@@ -1190,6 +1202,10 @@
                 {
                   "replace": "libs/global/environments/src/lib/environment.ts",
                   "with": "libs/global/environments/src/lib/environment.next.ts"
+                },
+                {
+                  "replace": "libs/global/environments/src/lib/domains/environment.ts",
+                  "with": "libs/global/environments/src/lib/domains/environment.reader.ts"
                 }
               ],
               "optimization": true,

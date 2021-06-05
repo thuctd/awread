@@ -35,6 +35,10 @@ switch (true) {
         break;
 }
 
+graphqlTarget = graphqlTarget ?? 'https://backend-graphql.next.awread.vn';
+apiTarget = apiTarget ?? 'https://backend-api.next.awread.vn';
+logLevel = logLevel ?? 'debug';
+
 console.log(`
 process.env.ENVIRONMENT == 'production': (${process.env.ENVIRONMENT == 'production'}) (${process.env.ENVIRONMENT})
 process.env.ENVIRONMENT == 'next': (${process.env.ENVIRONMENT == 'next'}) (${process.env.ENVIRONMENT})
