@@ -8,7 +8,7 @@
         <atom-img-m [bookId]="book.bookId" [srcImg]="book.cover"></atom-img-m>
         <!-- <home-info-book-featured [isInfoNovel]="isInfoNovel" [book]="book" [btns]="book.newestChapters"></home-info-book-featured> -->
         <molec-info-book [book]="book" [btns]="book.newestChapters" *ngIf="!isNovel"></molec-info-book>
-        <list-info-prose [book]="book" [isBtn]="true" *ngIf="isNovel"></list-info-prose>
+        <list-info-prose [book]="book" [isBtn]="true" *ngIf="isNovel" [chapters]="book.newestChapters"></list-info-prose>
       </div>
     </div>
   </ng-container>

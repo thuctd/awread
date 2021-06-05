@@ -22,7 +22,7 @@ export class HomeListBookUpdateMobileOrgan implements OnInit {
   @ViewChild('widgetsContent', { static: true }) widgetsContent: ElementRef<any>;
   @Input() arrowLeftIcon = faChevronLeft;
   @Input() arrowRightIcon = faChevronRight;
-
+  @Input() loading;
   @Input() titlePage = 'Truyện mới cập nhật';
   @Input() srcImg = '/global-assets/images/image.webp';
   @Input() altImg = 'Placeholder';
@@ -63,9 +63,9 @@ export class HomeListBookUpdateMobileOrgan implements OnInit {
     },
   ];
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   public scrollRight(): void {
     this.widgetsContent.nativeElement.scrollTo({

@@ -1,3 +1,4 @@
+import { SearchBooksQuery } from './../states/search-books/search-books.query';
 import { Injectable } from '@angular/core';
 import { BooksHomeGear } from '../gears/books-home.gear';
 import { BooksGear } from '../gears/books.gear';
@@ -38,10 +39,11 @@ export class BooksFacade {
     private collectedQuery: CollectedQuery,
     private goodBooksQuery: GoodBooksQuery,
     private genreBooksQuery: GenreBooksQuery,
-    private authorBooksQuery: AuthorBooksQuery,
+    public authorBooksQuery: AuthorBooksQuery,
     public latestBooksQuery: LatestBooksQuery,
     private featureBooksQuery: FeatureBooksQuery,
     public categoryBooksQuery: CategoryBooksQuery,
+    public searchBooksQuery: SearchBooksQuery,
   ) { }
 
   selectLoadingAkita() {
@@ -80,9 +82,9 @@ export class BooksFacade {
     return this.booksGear.getGenreBooks(genreId);
   }
 
-  getCategoryBooks(categoryId: string) {
-    // const limit = this.categoryBooksQuery.getSizePage() === undefined ? 12 : this.categoryBooksQuery.getSizePage();
-    return this.booksGear.getCategoryBooks(categoryId, this.categoryBooksQuery.getSizePage() + 12);
+  getCategoryBooks(categoryId: string, limit?: number) {
+    const size = limit === 0 ? 12 : this.categoryBooksQuery.getSizePage() + 12;
+    return this.booksGear.getCategoryBooks(categoryId, size);
   }
 
   getLatestBooks(cateogoryId: string, offset: number) {
@@ -90,12 +92,11 @@ export class BooksFacade {
   }
 
   getAuthorBooks(authors) {
-    return this.booksGear.getAuthorBooks(authors);
+    return this.booksGear.getAuthorBooks(authors, this.authorBooksQuery.getSizePage() + 12);
   }
 
   getTopBooks() {
-    const limit = this.topBooksQuery.getSizePage() === undefined ? 12 : this.topBooksQuery.getSizePage();
-    return this.booksGear.getTopBooks(limit + 12);
+    return this.booksGear.getTopBooks(this.topBooksQuery.getSizePage() + 12);
   }
 
   getGoodBooks() {

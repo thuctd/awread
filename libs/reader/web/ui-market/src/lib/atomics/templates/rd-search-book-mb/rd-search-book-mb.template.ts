@@ -19,6 +19,7 @@ export class RdSearchBookMbTemplate implements OnInit {
   @Input() faIcon = faSearch;
   @Input() inputControl = new FormControl();
   @Input() items = [];
+  @Input() loading;
 
   @Output() submitSearchBtn = new EventEmitter();
   @Output() bindingUrl = new EventEmitter();

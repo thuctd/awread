@@ -18,6 +18,7 @@ export class HomeMobileTemplate implements OnInit {
     height: '200px',
     space: 1,
   };
+  @Input() loadingBooksCategory;
   @Input() sliders = [];
   @Input() getGoodBooks = [];
   @Input() getLatestBooks = [];

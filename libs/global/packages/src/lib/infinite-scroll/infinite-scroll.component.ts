@@ -5,7 +5,7 @@ import { Component, OnInit, Output, EventEmitter, ElementRef, ViewChild, Input, 
   template: `<ng-content></ng-content><div #anchor></div>`,
   styles: [`
   :host {
-    display: block;
+    /* display: block; */
     /* height: 80vh; */
     height: -moz-calc(100vh - 10rem);
     height: -webkit-calc(100vh - 10rem);
@@ -31,14 +31,14 @@ export class InfiniteScrollComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    console.log('host', this.host, this.anchor);
+    // console.log('host', this.host, this.anchor);
     const options = {
       root: this.isHostScrollable() ? this.host.nativeElement : null,
       ...this.options
     };
 
     this.observer = new IntersectionObserver(([entry]) => {
-      console.log('entry', entry.isIntersecting, entry);
+      // console.log('entry', entry.isIntersecting, entry);
       if (entry.isIntersecting) {
         this.scrolled.emit();
       }

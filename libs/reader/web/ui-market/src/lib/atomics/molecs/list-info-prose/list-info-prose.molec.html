@@ -3,9 +3,12 @@
   <div class="roboto">
     <atom-author class="my-2" [title]="'Tác giả'" [items]="book.authors"></atom-author>
     <div *ngIf="!isBtn">
-      <excerpt></excerpt>
-      <atom-text-link (click)="moreEvent.emit()" [text]="moreContent" [class]="'text-xs text-green-primary'"></atom-text-link>
+      <excerpt [excerpt]="book?.description === null? 'Hiện tại truyện chưa có phần giới thiệu' : book.description"></excerpt>
+      <!-- <atom-text-link (click)="moreEvent.emit()" [text]="moreContent" [class]="'text-xs text-green-primary'"></atom-text-link> -->
     </div>
-    <a *ngIf="isBtn" [routerLink]="" class="outline-none border border-green-primary px-2 sm:px-4 py-1 text-green-primary rounded-full hover:text-white hover:bg-green-primary text-xs sm:text-base">Đọc</a>
+    <div *ngFor="let chapter of chapters | keyvalue | slice:0:1" class="leading-normal font-medium flex mt-2">
+      <a [routerLink]="['/books', book.bookId, 'chapters', chapter.key]"
+        class="outline-none border border-green-primary px-2 sm:px-4 py-1 text-green-primary rounded-full hover:text-white hover:bg-green-primary text-xs sm:text-base">Đọc</a>
+    </div>
   </div>
 </div>

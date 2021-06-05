@@ -26,23 +26,35 @@ export class BooksGear {
     this.categoryBooksStore.setLoading(true);
     let hasMore, total;
     return this.booksApi.getCategoryBooks(categoryId, limit).pipe(
-      tap(books => this.categoryBooksStore.add(books)),
-      tap(() => this.categoryBooksStore.updatePage({ hasMore: true, sizePage: limit, total: 999 })),
+      map((res) => {
+        hasMore = res?.['data']?.['allMvBooksLatestChapters']?.['pageInfo']?.hasNextPage;
+        total = res?.['data']?.['allMvBooksLatestChapters']?.totalCount;
+        return res?.['data']?.['allMvBooksLatestChapters']?.['nodes'];
+      }),
+      tap((res) => this.categoryBooksStore.set(res)),
+      tap(() => this.categoryBooksStore.updatePage({ hasMore: hasMore, sizePage: limit, total: total })),
       tap(() => this.categoryBooksStore.setLoading(false))
     );
   }
 
-  getAuthorBooks(authors) {
+  getAuthorBooks(authors, limit: number = 12) {
     const isCheck = typeof (authors);
     let authorIds: string[];
+    let hasMore, total;
     if (isCheck === 'string') {
       authorIds = authors.split();
     } else {
       authorIds = Object.keys(authors ?? {});
     }
     this.authorBooksStore.setLoading(true);
-    return this.booksApi.getAuthorBooks(authorIds).pipe(
+    return this.booksApi.getAuthorBooks(authorIds, limit).pipe(
+      map((res) => {
+        hasMore = res?.['data']?.['allMvBooksLatestChapters']?.['pageInfo']?.hasNextPage;
+        total = res?.['data']?.['allMvBooksLatestChapters']?.totalCount;
+        return res?.['data']?.['allMvBooksLatestChapters']?.['nodes'];
+      }),
       tap(books => this.authorBooksStore.set(books)),
+      tap(() => this.authorBooksStore.updatePage({ hasMore: hasMore, sizePage: limit, total: total })),
       tap(() => this.authorBooksStore.setLoading(false))
     );
   }
@@ -62,7 +74,7 @@ export class BooksGear {
     return this.booksApi.getBookById(bookId);
   }
 
-  getTopBooks(limit?: number) {
+  getTopBooks(limit: number = 12) {
     let hasMore, total;
     this.topBooksStore.setLoading(true);
     return this.booksApi.getTopBooks(limit).pipe(
