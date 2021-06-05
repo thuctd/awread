@@ -19,6 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.inputs.name =='test'
     env:
+      username: "${{ github.event.inputs.environment == 'production' && 'root' || 'hiepxanh' }}"
       SERVER_URL: "${{ github.event.inputs.environment == 'production' && secrets.PRODUCTION_URL || secrets.NEXT_URL }}"
       APP: story-reader-web
     steps:
@@ -40,6 +41,7 @@ jobs:
     timeout-minutes: 60
     if: github.event.inputs.name =='restart'
     env:
+      username: "${{ github.event.inputs.environment == 'production' && 'root' || 'hiepxanh' }}"
       SERVER_URL: "${{ github.event.inputs.environment == 'production' && secrets.PRODUCTION_URL || secrets.NEXT_URL }}"
       APP: story-reader-web
     steps:
@@ -47,7 +49,7 @@ jobs:
         uses: appleboy/ssh-action@master
         with:
           host: ${{ env.SERVER_URL }}
-          username: root
+          username: ${{ env.username }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             dokku ps:restart ${{ env.APP }}
@@ -58,6 +60,7 @@ jobs:
     timeout-minutes: 60
     if: (github.event_name == 'push' || github.event.inputs.name == 'build')
     env:
+      username: "${{ github.event.inputs.environment == 'production' && 'root' || 'hiepxanh' }}"
       SERVER_URL: "${{ github.event.inputs.environment == 'production' && secrets.PRODUCTION_URL || secrets.NEXT_URL }}"
       APP: story-reader-web
     steps:
