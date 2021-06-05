@@ -13,17 +13,14 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RdNewsAwreadItemAtom implements OnInit {
-  @Input() newsId = 'bvxz_324988seQ6x';
-  @Input() newsGrid = {
-    title: 'Thông báo lịch phát hành truyện mới',
-    src: '/global-assets/images/Rectangle-487.webp',
-  };
-  @Input() newsList = {
-    title: 'Hình như SHIB đang giảm',
-    src: '/global-assets/images/Rectangle-487.webp',
-    excerpt: 'Từ ngày em đến ....',
-  };
+  @Input() blogId;
+  @Input() title = 'Thông báo lịch phát hành truyện mới';
+  @Input() srcImg = '/global-assets/images/Rectangle-487.webp';
+  @Input() date = '';
+  @Input() description = '';
   @Input() mode: 'grid' | 'list' = 'grid';
+
+  @Input() class = '';
 
   constructor() {}
 

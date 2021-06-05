@@ -58,7 +58,7 @@ export class RdContentMenuMbMolec implements OnInit {
       },
       {
         title: 'Tin tức',
-        href: '/',
+        href: '/news',
       },
     ],
   };

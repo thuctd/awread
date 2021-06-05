@@ -1,27 +1,27 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 
 @Component({
-  selector: 'organ-rd-news-events',
-  templateUrl: './rd-news-events.organ.html',
+  selector: 'molec-rd-news-share-experience',
+  templateUrl: './rd-news-share-experience.molec.html',
   styles: [
     `
       :host {
         display: block;
       }
+      :host .bg-green-light {
+        background-color: #b1dac6;
+      }
     `,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RdNewsEventsOrgan implements OnInit {
-  @Input() banners = [
+export class RdNewsShareExperienceMolec implements OnInit {
+  @Input() newsRight = [
     {
       blogId: '',
       title: '',
-      image: '',
-      position: '',
     },
   ];
-
   constructor() {}
 
   ngOnInit(): void {}

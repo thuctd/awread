@@ -13,17 +13,12 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RdNewsAwreadHotMolec implements OnInit {
-  @Input() newsId = 'bvxz_324988seQ6x';
+  @Input() blogId;
   @Input() srcImg = '/global-assets/images/Rectangle-492.webp';
-
-  @Input() content = {
-    title: 'Giá Coin giảm không phanhh',
-    excerpt: 'Nhiều thanh niên nhày cầu',
-  };
-  @Input() status = {
-    bgColor: 'red-400',
-    text: 'hot',
-  };
+  @Input() status = 'HOT';
+  @Input() title = 'Giá Coin giảm không phanhh';
+  @Input() description = 'Nhiều thanh niên nhảy cầu';
+  @Input() date = '';
 
   constructor() {}
 

@@ -1,13 +1,14 @@
-<a [routerLink]="['/news', newsId]" class="outline-none w-full border-b border-gray-500 pt-4 pb-20 grid grid-cols-10">
+<a [routerLink]="['/news', blogId]" class="outline-none w-full border-b border-gray-500 pt-4 pb-20 grid grid-cols-10">
   <div class="col-span-3">
-    <atom-circle-image [size]="'l'"></atom-circle-image>
+    <div class="focus:outline-none">
+      <img class="border rounded-full object-cover h-24 cursor-pointer" src="{{srcImg}}" />
+    </div>
   </div>
-  <div class="col-span-7 lg:pl-8 xl:pl-2">
-    <atom-rd-news-date [date]="item.date"></atom-rd-news-date>
-    <atom-rd-news-status-box class="my-6" [bgColor]="item.status.bgColor" [text]="item.status.text"></atom-rd-news-status-box>
+  <div class="col-span-7 pl-4">
+    <atom-rd-news-date [date]="date"></atom-rd-news-date>
+    <atom-rd-news-status-box class="my-6" [text]="status"></atom-rd-news-status-box>
     <div class="font-semibold text-gray-text hover:text-green-primary transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-100">
-      <span class="uppercase mr-1">[{{item.description.title}}]</span>
-      <span>{{item.description.content}}</span>
+      {{ title }}
     </div>
   </div>
 </a>

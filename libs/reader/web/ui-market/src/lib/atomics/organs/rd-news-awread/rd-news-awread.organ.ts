@@ -14,24 +14,16 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 })
 export class RdNewsAwreadOrgan implements OnInit {
   @Input() title = 'tin mới Awread';
-  @Input() newsGrids = [
+  @Input() newsMiddle = [
     {
-      title: 'Tìm kiếm tài năng mới',
-      src: '/global-assets/images/Rectangle-487.webp',
-    },
-    {
-      title: 'Thông báo lịch phát hành truyện mới',
-      src: '/global-assets/images/Rectangle-487.webp',
-    },
-    {
-      title: 'Thông báo lịch phát hành truyện mới',
-      src: '/global-assets/images/Rectangle-487.webp',
+      blogId: '',
+      title: '',
+      status: '',
+      description: '',
+      updatedAt: '',
+      image: '',
     },
   ];
-  item = {
-    title: 'Thông báo lịch phát hành truyện mới',
-    src: '/global-assets/images/Rectangle-487.webp',
-  };
 
   constructor() {}
 

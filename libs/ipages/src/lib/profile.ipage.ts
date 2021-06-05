@@ -71,7 +71,9 @@ export class ProfileIPage implements OnInit {
   }
 
   updateProfile() {
-    this.currentUserFacade.updateCurrentUser(this.profileForm.value);
+    if (this.profileForm.valid) {
+      this.currentUserFacade.updateCurrentUser(this.profileForm.value);
+    }
   }
 
   private updateProfileForm(user) {

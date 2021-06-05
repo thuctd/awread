@@ -1,8 +1,8 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { NewsPage } from '../news/news.page';
+import { NewsDetailPage } from '../news-detail/news-detail.page';
 
 @Component({
-  selector: 'ui-news-detail-mobile',
+  selector: 'page-news-detail-mobile',
   templateUrl: './news-detail-mobile.page.html',
   styles: [
     `
@@ -13,4 +13,4 @@ import { NewsPage } from '../news/news.page';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NewsDetailMobilePage extends NewsPage { }
+export class NewsDetailMobilePage extends NewsDetailPage {}
