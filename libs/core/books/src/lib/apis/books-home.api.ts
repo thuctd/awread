@@ -18,6 +18,7 @@ export class BooksHomeApi {
               newestChapters
               updatedAt
               views
+              cover
             }
           }
         }
@@ -54,7 +55,17 @@ export class BooksHomeApi {
     return this.apollo.query({
       query: gql`
           query allMvBooksLatestChapters ($offset: Int ${categoryId ? `,$categoryId: BigFloat` : ''}) {
-            allMvBooksLatestChapters(first: 10, offset: $offset condition: {published: true, isDeleted: false ${categoryId ? `, categoryId: $categoryId ` : ''}}) {
+            allMvBooksLatestChapters(
+              first: 10,
+              offset: $offset,
+              orderBy: PUBLISHED_DESC,
+              condition: {
+                published: true,
+                isDeleted: false ${categoryId ? `, 
+                categoryId: $categoryId ` : ''
+        }
+              }
+            ) {
               nodes {
                 bookId
                 categoryId
@@ -62,6 +73,7 @@ export class BooksHomeApi {
                 title
                 updatedAt
                 authors
+                cover
               }
             }
           }

@@ -160,6 +160,7 @@ export class BooksApi {
                 createdAt
                 updatedAt
                 views
+                cover
               }
               pageInfo {
                 hasNextPage
@@ -194,6 +195,7 @@ export class BooksApi {
                 publishedAt
                 updatedAt
                 userId
+                cover
               }
             }
           }
@@ -238,6 +240,7 @@ export class BooksApi {
                   publishedAt
                   updatedAt
                   authors
+                  cover
                 }
               }
             }`;
