@@ -81,9 +81,22 @@ import { TopBooksTemplate } from './templates/top-books/top-books.template';
 import { ListTopBookOrgan } from './organs/list-top-book/list-top-book.organ';
 import { TopBooksMbTemplate } from './templates/top-books-mb/top-books-mb.template';
 import { InfiniteScrollModule, LoaderModule } from '@awread/global/packages';
+import { RdIntroductionMbTemplate } from './templates/rd-introduction-mb/rd-introduction-mb.template';
+import { RdIntroductionContentMbMolec } from './molecs/rd-introduction-content-mb/rd-introduction-content-mb.molec';
+import { RdIntroductionFounderMbOrgan } from './organs/rd-introduction-founder-mb/rd-introduction-founder-mb.organ';
+import { RdIntroductionHotlineMbOrgan } from './organs/rd-introduction-hotline-mb/rd-introduction-hotline-mb.organ';
 
 @NgModule({
-  imports: [CommonModule, StorybookSupportModule, GlobalDesignSystemAtomicModule, CarouselModule, ReaderWebUiAuthorAtomicModule, CoreCategoriesModule, InfiniteScrollModule, LoaderModule],
+  imports: [
+    CommonModule,
+    StorybookSupportModule,
+    GlobalDesignSystemAtomicModule,
+    CarouselModule,
+    ReaderWebUiAuthorAtomicModule,
+    CoreCategoriesModule,
+    InfiniteScrollModule,
+    LoaderModule,
+  ],
   exports: [
     ReaderWebUiAuthorAtomicModule,
     CommonModule,
@@ -163,6 +176,10 @@ import { InfiniteScrollModule, LoaderModule } from '@awread/global/packages';
     TopBooksTemplate,
     ListTopBookOrgan,
     TopBooksMbTemplate,
+    RdIntroductionMbTemplate,
+    RdIntroductionContentMbMolec,
+    RdIntroductionFounderMbOrgan,
+    RdIntroductionHotlineMbOrgan,
   ],
   declarations: [
     ListInfoProseMolec,
@@ -240,6 +257,10 @@ import { InfiniteScrollModule, LoaderModule } from '@awread/global/packages';
     TopBooksTemplate,
     ListTopBookOrgan,
     TopBooksMbTemplate,
+    RdIntroductionMbTemplate,
+    RdIntroductionContentMbMolec,
+    RdIntroductionFounderMbOrgan,
+    RdIntroductionHotlineMbOrgan,
   ],
 })
 export class ReaderWebUiMarketAtomicModule {}
