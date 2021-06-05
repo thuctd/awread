@@ -94,8 +94,8 @@ export class DetailBookPage implements OnInit {
         mode: 'book-cover'
       }
     });
-    dialogRef.afterClosed().subscribe(({ success }) => {
-      if (success) {
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result.success) {
         this.bookForm.patchValue({ cover: true, updatedAt: new Date() });
         console.log('this.bookForm', this.bookForm.value);
         this.cd.detectChanges();

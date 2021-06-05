@@ -60,8 +60,8 @@ export class ProfileIPage implements OnInit {
         mode: 'avatar'
       }
     });
-    dialogRef.afterClosed().subscribe(({ success }) => {
-      if (success) {
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result.success) {
         const now = new Date();
         this.currentUserFacade.updateCurrentUser({ avatar: true, updatedAt: now });
         this.profileForm.patchValue({ updatedAt: now });
