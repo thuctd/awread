@@ -9,7 +9,8 @@
       <organ-detail-book-top-mobile (chapterLastEvent)="chapterLastEvent.emit($event)" (chapterFistEvent)="chapterFistEvent.emit($event)" [book]="book"
         class="px-4"></organ-detail-book-top-mobile>
     </div>
-    <molec-detail-book-introduce [description]="book?.description === null? 'Hiện tại truyện của có phần giới thiệu' : book.description" class="pt-2 pb-4 px-4">
+    <molec-detail-book-introduce [description]="book?.description === null? 'Hiện tại truyện chưa có phần giới thiệu' : book.description"
+      class="pt-2 pb-4 px-4">
     </molec-detail-book-introduce>
     <organ-detail-book-chapter [chapters]="chapters" class="px-4"></organ-detail-book-chapter>
     <organ-detail-book-reviews class="p-4"></organ-detail-book-reviews>
