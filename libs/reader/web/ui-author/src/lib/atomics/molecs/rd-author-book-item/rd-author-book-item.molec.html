@@ -1,5 +1,5 @@
 <div class="w-full flex flex-row lg:flex-col">
-  <atom-img-m [srcImg]="book.cover" [bookId]="book.bookId" [size]="'other'" [sizeImg]="'w-27 h-36 md:w-54 md:h-72'"></atom-img-m>
+  <atom-img-m [srcImg]="book | coverSize" [bookId]="book.bookId" [size]="'other'" [sizeImg]="'w-27 h-36 md:w-54 md:h-72'"></atom-img-m>
   <!-- <molec-rd-author-info-book-item [book]="book" [isSize]="isSize" class="px-4 sm:px-12 lg:px-0 roboto"></molec-rd-author-info-book-item> -->
   <div class="md:hidden">
     <molec-info-book class="px-3 w-48" [displayUI]="displayUIMobile" [book]="book" [btns]="book.newestChapters"></molec-info-book>

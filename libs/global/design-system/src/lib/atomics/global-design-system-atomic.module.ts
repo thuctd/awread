@@ -134,6 +134,7 @@ import { RdIconTextItemAtom } from './atoms/rd-icon-text-item/rd-icon-text-item.
 import { RdTextLinkMenuMbAtom } from './atoms/rd-text-link-menu-mb/rd-text-link-menu-mb.atom';
 import { MatSelectModule } from '@angular/material/select';
 import { CoreUsersModule } from '@awread/core/users';
+import { CoreBooksModule } from '@awread/core/books';
 import { RdNewsShareExperienceItemAtom } from './atoms/rd-news-share-experience-item/rd-news-share-experience-item.atom';
 @NgModule({
   imports: [
@@ -152,10 +153,12 @@ import { RdNewsShareExperienceItemAtom } from './atoms/rd-news-share-experience-
     NgImageSliderModule,
     ImageCropperModule,
     MatSelectModule,
-    CoreUsersModule
+    CoreUsersModule,
+    CoreBooksModule
   ],
   exports: [
     CoreUsersModule,
+    CoreBooksModule,
     MatSelectModule,
     MatDialogModule,
     MatAutocompleteModule,

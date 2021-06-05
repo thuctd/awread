@@ -99,7 +99,6 @@ import { RdNewsShareExperienceMolec } from './molecs/rd-news-share-experience/rd
     LoaderModule,
   ],
   exports: [
-    ReaderWebUiAuthorAtomicModule,
     CommonModule,
     ListInfoProseMolec,
     ListDetailLongBookOrgan,

@@ -1,7 +1,7 @@
 <div class="mx-auto relative">
   <div class="grid grid-cols-12 sm:grid-cols-11 gap-2 place-content-center">
     <div [class]="classLayout1">
-      <atom-img-m [size]="'m'" [srcImg]="book.cover" [bookId]="book.bookId"></atom-img-m>
+      <atom-img-m [size]="'m'" [srcImg]="book | coverSize: 'm'" [bookId]="book.bookId"></atom-img-m>
     </div>
     <div [class]="classLayout2">
       <!-- <molec-info-book-grid [bookId]="book.bookId" [title]="book.title" [btns]="chapters"></molec-info-book-grid> -->

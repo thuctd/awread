@@ -13,7 +13,7 @@ export class CoverSizePipe implements PipeTransform {
     }
     //LEARN: Pipe tool
     transform(book, ...args: any[]): any {
-        const size = args[0];
+        const size = args[0] ?? 'xl';
         console.log('size', size, book, args);
         if (book && book.bookId) {
             return `${this.settingFacade.getStorage()}/books/${size ?? 'origin'}/${book?.bookId}.webp?updatedAt=${book?.updatedAt}`;

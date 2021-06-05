@@ -5,7 +5,7 @@
   <ng-container *ngIf="books?.length; else noData">
     <div class="grid md:grid-cols-8 xl:grid-cols-10 sm:gap-x-6 lg:gap-x-10 xl:gap-x-12 place-content-center">
       <div *ngFor="let book of books;" class="col-span-2 md:col-span-2 py-2">
-        <atom-img-m [bookId]="book.bookId" [srcImg]="book.cover"></atom-img-m>
+        <atom-img-m [bookId]="book.bookId" [srcImg]="book | coverSize"></atom-img-m>
         <!-- <home-info-book-featured [isInfoNovel]="isInfoNovel" [book]="book" [btns]="book.newestChapters"></home-info-book-featured> -->
         <molec-info-book [book]="book" [btns]="book.newestChapters" *ngIf="!isNovel"></molec-info-book>
         <list-info-prose [book]="book" [isBtn]="true" *ngIf="isNovel" [chapters]="book.newestChapters"></list-info-prose>

@@ -40,9 +40,9 @@ import { RdAuthorPopupListFollowersMbTemplate } from './templates/rd-author-popu
 import { RdAuthorPopupNotiReportMbTemplate } from './templates/rd-author-popup-noti-report-mb/rd-author-popup-noti-report-mb.template';
 import { RdAuthorPopupUnfollowMbTemplate } from './templates/rd-author-popup-unfollow-mb/rd-author-popup-unfollow-mb.template';
 import { RdAuthorProductMbTemplate } from './templates/rd-author-product-mb/rd-author-product-mb.template';
-
 @NgModule({
   declarations: [
+
     RdAuthorDetailMolec,
     RdAuthorMainOrgan,
     RdAuthorProductOrgan,
@@ -81,7 +81,14 @@ import { RdAuthorProductMbTemplate } from './templates/rd-author-product-mb/rd-a
     RdAuthorPopupUnfollowMbTemplate,
     RdAuthorProductMbTemplate,
   ],
-  imports: [CommonModule, GlobalDesignSystemAtomicModule, StorybookSupportModule, ReaderWebSharedAtomicModule, InfiniteScrollModule, LoaderModule],
+  imports: [
+    CommonModule,
+    GlobalDesignSystemAtomicModule,
+    StorybookSupportModule,
+    ReaderWebSharedAtomicModule,
+    InfiniteScrollModule,
+    LoaderModule
+  ],
   exports: [
     ReaderWebSharedAtomicModule,
     RdAuthorDetailMolec,

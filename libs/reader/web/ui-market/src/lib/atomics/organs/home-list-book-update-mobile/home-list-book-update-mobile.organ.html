@@ -17,7 +17,7 @@
             <div class="flex justify-center">
               <div *ngFor="let book of books | keyvalue">
                 <div [ngClass]="book.key % 2 == 1 ? 'hidden' : 'block'" class="px-2">
-                  <atom-img-m [size]="'s'" [bookId]="book.value.bookId" [srcImg]="book.value.cover"></atom-img-m>
+                  <atom-img-m [size]="'s'" [bookId]="book.value.bookId" [srcImg]="book | coverSize: 's'"></atom-img-m>
                   <div *ngIf="book.value.categoryId == 1 || book.value.categoryId == 2">
                     <molec-info-book class="w-27" [book]="book.value" [displayUI]="displayUI" [btns]="book.value.newestChapters"></molec-info-book>
                   </div>
@@ -30,7 +30,7 @@
             <div class="flex mt-1">
               <div *ngFor="let book of books | keyvalue">
                 <div [ngClass]="book.key % 2 == 0 ? 'hidden' : 'block'" class="px-2">
-                  <atom-img-m [size]="'s'" [bookId]="book.value.bookId" [srcImg]="book.value.cover"></atom-img-m>
+                  <atom-img-m [size]="'s'" [bookId]="book.value.bookId" [srcImg]="book | coverSize: 's'"></atom-img-m>
                   <div *ngIf="book.value.categoryId == 1 || book.value.categoryId == 2">
                     <molec-info-book class="w-27" [book]="book.value" [displayUI]="displayUI" [btns]="book.value.newestChapters"></molec-info-book>
                   </div>
