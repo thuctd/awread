@@ -67,6 +67,7 @@ export class HomeListBookUpdateMobileOrgan implements OnInit {
 
   ngOnInit(): void { }
 
+  //NOTE: Chức năng đang gây lỗi nên hiện tại đang ẩn
   public scrollRight(): void {
     this.widgetsContent.nativeElement.scrollTo({
       left: this.widgetsContent.nativeElement.scrollLeft + 145,
