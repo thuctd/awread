@@ -9,13 +9,13 @@
       <molec-rd-profile-info-personal [currentUser]="currentUser" class="pt-2"></molec-rd-profile-info-personal>
       <div class="absolute top-0 right-12 flex cursor-pointer">
         <img class="h-5" src="/global-assets/images/ic_border_color_24px.webp" alt="">
-        <div (click)="changeDisplay(actions[1])" class="roboto font-medium text-gray-400 ml-2">Chỉnh sửa hồ sơ</div>
+        <div (click)="changeModeEdit(actions[1])" class="roboto font-medium text-gray-400 ml-2">Chỉnh sửa hồ sơ</div>
       </div>
     </div>
     <ng-template #edit>
       <div class="col-span-6">
-        <organ-profile-form (updateProfileEvent)="updateProfileEvent.emit()" (updateProfileEvent)="changeDisplay(actions[0])"
-          (clickConnectFb)="clickConnect.emit()" (clickConnectGb)="clickConnect.emit()" [profileForm]="profileForm" [submitted]="submitted">
+        <organ-profile-form (updateProfileEvent)="updateProfileEvent.emit()" (updateProfileEvent)="updateForm(actions[0])"
+          (clickConnect)="clickConnect.emit($event)" [profileForm]="profileForm" [submitted]="submitted">
         </organ-profile-form>
       </div>
     </ng-template>
