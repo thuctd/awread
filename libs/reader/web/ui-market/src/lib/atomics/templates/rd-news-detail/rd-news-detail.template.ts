@@ -23,6 +23,7 @@ export class RdNewsDetailTemplate implements OnInit {
       description: '',
     },
   ];
+  @Output() shareClicked = new EventEmitter();
   constructor() {}
 
   ngOnInit(): void {}

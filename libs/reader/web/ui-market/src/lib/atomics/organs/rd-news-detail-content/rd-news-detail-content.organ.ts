@@ -23,7 +23,7 @@ export class RdNewsDetailContentOrgan implements OnInit {
 
   constructor() {}
 
-  @Output() ShareClicked = new EventEmitter();
+  @Output() shareClicked = new EventEmitter();
 
   ngOnInit(): void {}
 }

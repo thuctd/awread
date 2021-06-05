@@ -58,7 +58,7 @@ export class RdContentMenuMbMolec implements OnInit {
       },
       {
         title: 'Tin tức',
-        href: '/',
+        href: '/news',
       },
     ],
   };
@@ -68,7 +68,7 @@ export class RdContentMenuMbMolec implements OnInit {
     href: '/',
   };
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }
