@@ -7,9 +7,9 @@
       <atom-title [title]="titlePage" class="uppercase"></atom-title>
       <molec-rd-home-book-update-dropdown-mb #tabhead (emitBooks)="emitBooks.emit($event)"></molec-rd-home-book-update-dropdown-mb>
     </div>
-    <div (click)="scrollLeft()" class="cursor-pointer absolute top-72 -left-2 z-40">
+    <!-- <div (click)="scrollLeft()" class="cursor-pointer absolute top-72 -left-2 z-40">
       <fa-icon class="text-gray-text text-sm md:text-base" [icon]="arrowLeftIcon"></fa-icon>
-    </div>
+    </div> -->
     <div #widgetsContent class="flex overflow-hidden justify-center">
       <div *ngFor="let tab of tabs">
         <div class="flex justify-center overflow-hidden" *ngIf="tabhead.title == tab.name">
@@ -18,7 +18,7 @@
               <div *ngFor="let book of books | keyvalue">
                 <div [ngClass]="book.key % 2 == 1 ? 'hidden' : 'block'" class="px-2">
                   <atom-img-m [size]="'s'" [bookId]="book.value.bookId" [srcImg]="book | coverSize: 's'"></atom-img-m>
-                  <div *ngIf="book.value.categoryId == 1 || book.value.categoryId == 2">
+                  <div *ngIf="book.value.categoryId == 1 || book.value.categoryId == 2" class="pb-2">
                     <molec-info-book class="w-27" [book]="book.value" [displayUI]="displayUI" [btns]="book.value.newestChapters"></molec-info-book>
                   </div>
                   <div *ngIf="book.value.categoryId == 3">
@@ -31,7 +31,7 @@
               <div *ngFor="let book of books | keyvalue">
                 <div [ngClass]="book.key % 2 == 0 ? 'hidden' : 'block'" class="px-2">
                   <atom-img-m [size]="'s'" [bookId]="book.value.bookId" [srcImg]="book | coverSize: 's'"></atom-img-m>
-                  <div *ngIf="book.value.categoryId == 1 || book.value.categoryId == 2">
+                  <div *ngIf="book.value.categoryId == 1 || book.value.categoryId == 2" class="pb-2">
                     <molec-info-book class="w-27" [book]="book.value" [displayUI]="displayUI" [btns]="book.value.newestChapters"></molec-info-book>
                   </div>
                   <div *ngIf="book.value.categoryId == 3">
@@ -43,9 +43,9 @@
           </div>
         </div>
       </div>
-      <div (click)="scrollRight()" class="cursor-pointer absolute top-72 -right-2">
+      <!-- <div (click)="scrollRight()" class="cursor-pointer absolute top-72 -right-2">
         <fa-icon class="text-gray-text text-sm md:text-base" [icon]="arrowRightIcon"></fa-icon>
-      </div>
+      </div> -->
     </div>
   </section>
 </ng-template>
