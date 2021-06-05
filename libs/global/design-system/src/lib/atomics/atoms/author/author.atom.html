@@ -1,4 +1,4 @@
 <div class="flex flex-wrap">
-  <div *ngIf="title" class="text-xs sm:text-sm text-gray-text mr-1">{{title}}: </div>
+  <!-- <div *ngIf="title" class="text-xs sm:text-sm text-gray-text mr-1">{{title}}: </div> -->
   <a *ngFor="let item of items | keyvalue; let inx = index" [routerLink]="['/', item.key]" class="text-xs sm:text-sm cursor-pointer outline-none roboto {{color}}"><span class="text-gray-icon text-xs hover:text-green-primary duration-300" class="relative mx-2 font-lg" *ngIf="inx !== 0">-</span>{{item.value.name}}</a>
 </div>

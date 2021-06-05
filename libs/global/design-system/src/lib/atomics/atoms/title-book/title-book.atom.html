@@ -1,3 +1,5 @@
-<div class="mx-auto h-7 sm:h-10">
+<div class="mx-auto h-10 sm:h-12 overflow-hidden overflow-ellipsis">
   <a [routerLink]="['/books', bookId]" [ngClass]=" size === 's' ? 'text-sm' : size === 'm' ? 'text-sm md:text-base' : size === 'l' ? 'text-sm md:text-lg' : 'text-base md:text-xl'"  class="text-justify font-bold mb-1 break-words cursor-pointer block outline-none text-gray-text transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-100 nunito"> {{ titleBook }} </a>
 </div>
+
+<!-- Truyện dài quá 2 dòng chưa có dấu ... -->

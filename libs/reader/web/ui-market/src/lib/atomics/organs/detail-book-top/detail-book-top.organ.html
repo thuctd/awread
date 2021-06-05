@@ -3,7 +3,7 @@
         <div class="col-span-4 p-1">
             <atom-detail-image [book]="book"></atom-detail-image>
         </div>
-        <div class="col-span-8 pl-6">
+        <div class="col-span-8 pl-6 lg:pr-12 xl:pr-20">
             <organ-detail-book-content (chapterLastEvent)="chapterLastEvent.emit($event)" (chapterFistEvent)="chapterFistEvent.emit($event)" [book]="book"></organ-detail-book-content>
         </div>
     </div>
