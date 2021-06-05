@@ -6,18 +6,18 @@ let apiTarget;
 let logLevel;
 switch (true) {
     case process.env.ENVIRONMENT == 'production':
-        graphqlTarget = process.env.GRAPHQL_URI;
-        apiTarget = process.env.API_URI;
+        graphqlTarget = process.env.GRAPHQL_URI ?? 'https://backend-graphql.awread.vn';
+        apiTarget = process.env.API_URI ?? 'https://backend-api.awread.vn';
         logLevel = 'info';
         break;
     case process.env.ENVIRONMENT == 'next':
-        graphqlTarget = process.env.GRAPHQL_URI;
-        apiTarget = process.env.API_URI;
+        graphqlTarget = process.env.GRAPHQL_URI ?? 'https://backend-graphql.next.awread.vn';
+        apiTarget = process.env.API_URI ?? 'https://backend-api.next.awread.vn';
         logLevel = 'info';
         break;
     case process.env.ENVIRONMENT == 'test':
-        graphqlTarget = process.env.GRAPHQL_URI;
-        apiTarget = process.env.API_URI;
+        graphqlTarget = process.env.GRAPHQL_URI ?? 'https://backend-graphql.next.awread.vn';
+        apiTarget = process.env.API_URI ?? 'https://backend-api.next.awread.vn';
         logLevel = 'debug';
         console.log('test');
         break;
@@ -35,9 +35,6 @@ switch (true) {
         break;
 }
 
-graphqlTarget = graphqlTarget ?? 'https://backend-graphql.next.awread.vn';
-apiTarget = apiTarget ?? 'https://backend-api.next.awread.vn';
-logLevel = logLevel ?? 'debug';
 
 console.log(`
 process.env.ENVIRONMENT == 'production': (${process.env.ENVIRONMENT == 'production'}) (${process.env.ENVIRONMENT})

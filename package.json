@@ -31,6 +31,10 @@
     "next-tunnel": "ssh -L localhost:5434:172.17.0.2:5432 hiepxanh@awread-next",
     "local-reader": "export ENVIRONMENT=local || set ENVIRONMENT=local&& nx serve reader-web",
     "local-writer": "export ENVIRONMENT=local || set ENVIRONMENT=local&& nx serve writer-web --port=5200",
+    "next-reader": "export ENVIRONMENT=next || set ENVIRONMENT=next&& nx serve reader-web",
+    "next-writer": "export ENVIRONMENT=next || set ENVIRONMENT=next&& nx serve writer-web --port=5200",
+    "prod-reader": "export ENVIRONMENT=production || set ENVIRONMENT=production&& nx serve reader-web",
+    "prod-writer": "export ENVIRONMENT=production || set ENVIRONMENT=production&& nx serve writer-web --port=5200",
     "backend-debug": "nx serve backend-graphql --inspect --port=7777",
     "postinstall": "ngcc --properties es2015 browser module main"
   },
