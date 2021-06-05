@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.inputs.name =='test'
     env:
-      SERVER_URL: github.event.inputs.environment == 'production' && secrets.PRODUCTION_URL || secrets.NEXT_URL
+      SERVER_URL: "{{ github.event.inputs.environment == 'production' && secrets.PRODUCTION_URL || secrets.NEXT_URL }}"
       APP: backend-graphql
     steps:
       - run: |
