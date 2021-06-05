@@ -6,6 +6,9 @@
       <excerpt></excerpt>
       <atom-text-link (click)="moreEvent.emit()" [text]="moreContent" [class]="'text-xs text-green-primary'"></atom-text-link>
     </div>
-    <a *ngIf="isBtn" [routerLink]="" class="outline-none border border-green-primary px-2 sm:px-4 py-1 text-green-primary rounded-full hover:text-white hover:bg-green-primary text-xs sm:text-base">Đọc</a>
+    <div *ngFor="let chapter of chapters | keyvalue | slice:0:1" class="leading-normal font-medium flex">
+      <a *ngIf="isBtn" [routerLink]="['books', book.bookId, 'chapters', chapter.key]"
+        class="outline-none border border-green-primary px-2 sm:px-4 py-1 text-green-primary rounded-full hover:text-white hover:bg-green-primary text-xs sm:text-base">Đọc</a>
+    </div>
   </div>
 </div>

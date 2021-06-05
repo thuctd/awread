@@ -20,7 +20,8 @@ export class DetailBookMobileTemplate implements OnInit {
     genres: [''],
     status: 'Đang tiến hành',
     publishedAt: '2020',
-    country: '(chủ yếu dành cho truyện sưu tầm)'
+    country: '(chủ yếu dành cho truyện sưu tầm)',
+    description: ''
   };
   @Input() chapters = [
     {

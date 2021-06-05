@@ -15,6 +15,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
 })
 export class MbListTemplate implements OnInit {
   @Input() titlePage;
+  @Input() loading;
   @Input() books = [];
   @Input() topBooks = [];
   @Input() items = [];

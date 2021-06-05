@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'template-rd-author',
@@ -15,10 +15,11 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 export class RdAuthorTemplate implements OnInit {
   @Input() isFollow = true;
   @Input() isBlock = false;
+  @Input() total;
   @Input() user;
   @Input() books = [];
-
   @Input() items = [];
+  @Output() emitMoreBooks = new EventEmitter();
   constructor() { }
 
   ngOnInit(): void { }

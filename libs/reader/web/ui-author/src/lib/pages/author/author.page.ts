@@ -13,6 +13,7 @@ export class AuthorPage implements OnInit {
   user: any;
   authorBooks = this.booksFacade.authorBooks$;
   breadcrumbs;
+  totalBook$: any;
 
   constructor(
     private router: Router,
@@ -24,13 +25,14 @@ export class AuthorPage implements OnInit {
 
   ngOnInit(): void {
     this.userId = this.activatedRoute.snapshot.params['userId'];
+    this.totalBook$ = this.booksFacade.authorBooksQuery.selectTotalBook();
     this.activatedRoute.paramMap.pipe(
       map(params => params.get('userId')),
       switchMap(id => this.authorFacade.getDetailAuthor(id)),
       tap(author => this.booksFacade.getAuthorBooks(author[0].userId).subscribe())
     ).subscribe(users => {
       this.user = users[0];
-      console.log(this.user);      
+      console.log(this.user);
       this.breadcrumbs = this.getbreadcrumbs()
     })
   }

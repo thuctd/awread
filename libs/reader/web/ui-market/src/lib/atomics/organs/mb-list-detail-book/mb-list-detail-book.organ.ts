@@ -14,6 +14,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
 })
 export class MbDetailBookOrgan implements OnInit {
   @Input() books = [];
+  @Input() loading;
   @Input() moreBook = 'Xem thêm...';
   @Input() btnTitle = 'Top phổ biến';
   @Output() moreEvent = new EventEmitter();
@@ -32,7 +33,7 @@ export class MbDetailBookOrgan implements OnInit {
     },
   };
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

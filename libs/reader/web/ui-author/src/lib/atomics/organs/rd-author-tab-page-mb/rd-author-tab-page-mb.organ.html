@@ -1,5 +1,5 @@
 <div class="w-full mx-auto">
-  <molec-rd-author-tabs #tabHead [tabs]="tabs" class="mb-6 border-b"></molec-rd-author-tabs>
+  <molec-rd-author-tabs #tabHead [total]="numberProduct" [tabs]="tabs" class="mb-6 border-b"></molec-rd-author-tabs>
   <molec-rd-author-list-product-mb [books]="books" (moreEvent)="moreBooks.emit($event)" *ngIf="tabHead.currentTab.name === tabs[0].name"></molec-rd-author-list-product-mb>
   <organ-rd-author-list-followers *ngIf="tabHead.currentTab.name === tabs[1].name"></organ-rd-author-list-followers>
 </div>

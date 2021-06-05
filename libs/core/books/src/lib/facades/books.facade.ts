@@ -39,7 +39,7 @@ export class BooksFacade {
     private collectedQuery: CollectedQuery,
     private goodBooksQuery: GoodBooksQuery,
     private genreBooksQuery: GenreBooksQuery,
-    private authorBooksQuery: AuthorBooksQuery,
+    public authorBooksQuery: AuthorBooksQuery,
     public latestBooksQuery: LatestBooksQuery,
     private featureBooksQuery: FeatureBooksQuery,
     public categoryBooksQuery: CategoryBooksQuery,
@@ -92,7 +92,7 @@ export class BooksFacade {
   }
 
   getAuthorBooks(authors) {
-    return this.booksGear.getAuthorBooks(authors);
+    return this.booksGear.getAuthorBooks(authors, this.authorBooksQuery.getSizePage() + 12);
   }
 
   getTopBooks() {

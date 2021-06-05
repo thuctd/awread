@@ -13,25 +13,12 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RdAuthorAvatarItemGridMolec implements OnInit {
-  @Input() instagram = {
-    icon: 'instagram-icon',
-    text: 'Camthuong95',
-    alt: 'instagram',
-  };
-  @Input() facebook = {
-    icon: 'facebook-icon',
-    text: 'Camthuong95',
-    alt: 'facebook',
-  };
-  @Input() globe = {
-    icon: 'globe',
-    text: 'https://awreadbook.com',
-    alt: 'globe',
-  };
+  @Input() facebook = 'Camthuong95';
+  @Input() globe = 'https://awreadbook.com';
 
   @Input() srcAvatar = '/global-assets/images/avatar-mrmrs.webp';
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

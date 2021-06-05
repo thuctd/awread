@@ -3,7 +3,7 @@
     <atom-slider [imageObject]="sliders"></atom-slider>
   </section>
   <section>
-    <organ-home-list-book-update-mobile [categories]="categories" (emitBooks)="emitBooks.emit($event)" [books]="getLatestBooks" class="px-4"></organ-home-list-book-update-mobile>
+    <organ-home-list-book-update-mobile [loading]="loadingBooksCategory" [categories]="categories" (emitBooks)="emitBooks.emit($event)" [books]="getLatestBooks" class="px-4"></organ-home-list-book-update-mobile>
   </section>
   <section class="bg-red-50 pt-2 px-4">
     <organ-home-list-book-featured-mobile [books]="getFeatureBooks"></organ-home-list-book-featured-mobile>

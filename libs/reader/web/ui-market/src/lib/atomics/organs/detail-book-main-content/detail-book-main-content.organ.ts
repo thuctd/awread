@@ -14,7 +14,9 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
 })
 export class DetailBookMainContentOrgan implements OnInit {
   @Input() chapters = [];
-  @Input() book = {};
+  @Input() book = {
+    description: '',
+  };
   @Output() chapterFistEvent = new EventEmitter();
   @Output() chapterLastEvent = new EventEmitter();
   constructor() { }

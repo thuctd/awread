@@ -40,4 +40,7 @@ export class TopBooksTemplate implements OnInit {
   ngOnInit(): void {
   }
 
+  changeDisplay(mode: string) {
+    this.display = mode;
+  }
 }

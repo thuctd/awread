@@ -16,10 +16,11 @@ export class RdAuthorMbTemplate implements OnInit {
   @Input() isFollow = true;
   @Input() isBlock = false;
   @Input() user;
+  @Input() total;
   @Input() books = [];
   @Output() moreBooks = new EventEmitter();
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }
