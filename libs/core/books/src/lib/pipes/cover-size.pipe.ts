@@ -14,8 +14,8 @@ export class CoverSizePipe implements PipeTransform {
     //LEARN: Pipe tool
     transform(book, ...args: any[]): any {
         const size = args[0] ?? 'xl';
-        console.log('size', size, book, args);
-        if (book && book.bookId) {
+        // console.log('size', size, book, args);
+        if (book && book.bookId && book.cover == true) {
             return `${this.settingFacade.getStorage()}/books/${size ?? 'origin'}/${book?.bookId}.webp?updatedAt=${book?.updatedAt}`;
         }
         return '/global-assets/images/default-cover.jpg';

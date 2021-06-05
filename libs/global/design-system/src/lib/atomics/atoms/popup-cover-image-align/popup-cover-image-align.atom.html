@@ -7,9 +7,9 @@
     <div class="w-3/5 flex justify-center items-center relative overflow-hidden rounded-md">
         <!-- <img [src]="sourceTarget" class="absolute left-0 right-0 top-1/2 " style="transform: translateY(-50%);" alt=""> -->
         <div class="w-4/5">
-            <image-cropper [cropperMaxWidth]="900" [containWithinAspectRatio]="true" [resizeToWidth]="600" [imageChangedEvent]="imageChangedEvent"
-                [maintainAspectRatio]="true" [aspectRatio]=" aspectRatio || 1 / 1" format="webp" (imageCropped)="imageCropped($event)"
-                (imageLoaded)="imageLoaded($event)" (cropperReady)="cropperReady()" (loadImageFailed)="loadImageFailed()">
+            <image-cropper [containWithinAspectRatio]="true" [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true"
+                [aspectRatio]=" aspectRatio || 1 / 1" format="webp" (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded($event)"
+                (cropperReady)="cropperReady()" (loadImageFailed)="loadImageFailed()">
             </image-cropper>
         </div>
 
