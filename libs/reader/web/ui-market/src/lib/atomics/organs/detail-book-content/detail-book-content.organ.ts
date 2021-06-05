@@ -8,9 +8,9 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
       :host {
         display: block;
       }
-    `
+    `,
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DetailBookContentOrgan implements OnInit {
   @Input() book = {
@@ -22,14 +22,13 @@ export class DetailBookContentOrgan implements OnInit {
     genres: [],
     completed: true,
     publishedAt: '2020',
-    country: '(chủ yếu dành cho truyện sưu tầm)'
+    country: '(chủ yếu dành cho truyện sưu tầm)',
+    categoryId: '',
   };
   @Output() chapterFistEvent = new EventEmitter();
   @Output() chapterLastEvent = new EventEmitter();
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

@@ -53,7 +53,7 @@ export class RdProfileTabTemplateTemplate implements OnInit {
 
   ngOnInit(): void { }
 
-  changeDisplay(mode: any) {
+  changeModeEdit(mode: any) {
     this.mode = mode;
     window.scroll({
       top: 0,

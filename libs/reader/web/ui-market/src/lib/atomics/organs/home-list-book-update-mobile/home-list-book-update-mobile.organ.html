@@ -18,8 +18,9 @@
               <div *ngFor="let book of books | keyvalue">
                 <div [ngClass]="book.key % 2 == 1 ? 'hidden' : 'block'" class="px-2">
                   <atom-img-m [size]="'s'" [bookId]="book.value.bookId" [srcImg]="book.value.cover"></atom-img-m>
-                  <molec-info-book *ngIf="tab.isNovel == false" [book]="book.value" [displayUI]="displayUI" [btns]="book.value.newestChapters"></molec-info-book>
-                  <list-info-prose [isBtn]="true" *ngIf="tab.isNovel == true" [book]="book.value"></list-info-prose>
+                  <molec-info-book class="w-27" *ngIf="tab.isNovel == false" [book]="book.value" [displayUI]="displayUI" [btns]="book.value.newestChapters">
+                  </molec-info-book>
+                  <list-info-prose class="w-27" [isBtn]="true" *ngIf="tab.isNovel == true" [book]="book.value"></list-info-prose>
                 </div>
               </div>
             </div>
@@ -27,7 +28,8 @@
               <div *ngFor="let book of books | keyvalue">
                 <div [ngClass]="book.key % 2 == 0 ? 'hidden' : 'block'" class="px-2">
                   <atom-img-m [size]="'s'" [bookId]="book.value.bookId" [srcImg]="book.value.cover"></atom-img-m>
-                  <molec-info-book *ngIf="tab.isNovel == false" [book]="book.value" [displayUI]="displayUI" [btns]="book.value.newestChapters"></molec-info-book>
+                  <molec-info-book *ngIf="tab.isNovel == false" [book]="book.value" [displayUI]="displayUI" [btns]="book.value.newestChapters">
+                  </molec-info-book>
                   <list-info-prose [isBtn]="true" *ngIf="tab.isNovel == true" [book]="book.value"></list-info-prose>
                 </div>
               </div>

@@ -14,7 +14,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 })
 export class NavLinkAtom implements OnInit {
   @Input() title = 'Trang chủ';
-  @Input() href = '/home';
+  @Input() link = '/';
   @Input() color = 'text-white';
   @Input() isRouter: false | true = true;
   constructor() {}

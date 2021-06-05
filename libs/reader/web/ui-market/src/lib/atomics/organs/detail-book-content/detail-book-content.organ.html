@@ -6,6 +6,11 @@
     <molec-detail-book-info-actions></molec-detail-book-info-actions>
     <molec-detail-book-info [book]="book"></molec-detail-book-info>
     <div class="flex justify-center mt-4 sm:justify-start sm:mt-0">
-      <molec-detail-book-option-buttons (chapterLastEvent)="chapterLastEvent.emit($event)" (chapterFistEvent)="chapterFistEvent.emit($event)"></molec-detail-book-option-buttons>
+      <div *ngIf="book.categoryId == '1' || book.categoryId == '2'">
+        <molec-detail-book-option-buttons (chapterLastEvent)="chapterLastEvent.emit($event)" (chapterFistEvent)="chapterFistEvent.emit($event)"></molec-detail-book-option-buttons>
+      </div>
+      <div *ngIf="book.categoryId == '3'">
+        <a class="outline-none inline-block px-6 py-3 no-underline text-sm font-normal text-center bg-green-primary rounded-md sm:rounded-lg transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 cursor-pointer text-white">Đọc</a>
+      </div>
     </div>
 </div>
