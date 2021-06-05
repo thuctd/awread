@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="0,592" last-zoom="0.95" max-obj-count="30"
+<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="0,1041" last-zoom="0.95" max-obj-count="30"
 	 default-owner="postgres">
 <role name="public_read"
       inherit="true">
@@ -389,7 +389,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</constraint>
 </table>
 
-<function name="set_updateAt"
+<function name="set_updated_at"
 		window-func="false"
 		returns-setof="false"
 		behavior-type="CALLED ON NULL INPUT"
@@ -441,18 +441,6 @@ end;]]></definition>
 		</idxelement>
 </index>
 
-<trigger name="book_updated_at" firing-type="BEFORE" per-line="true" constraint="false"
-	 ins-event="false" del-event="false" upd-event="true" trunc-event="false"
-	 table="public.books">
-		<function signature="public.&quot;set_updateAt&quot;()"/>
-</trigger>
-
-<trigger name="person_updated_at" firing-type="BEFORE" per-line="false" constraint="false"
-	 ins-event="false" del-event="false" upd-event="true" trunc-event="false"
-	 table="public.users">
-		<function signature="public.&quot;set_updateAt&quot;()"/>
-</trigger>
-
 <view name="mv_books_latest_chapters" layer="0" materialized="true" collapse-mode="2" max-obj-count="3" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
@@ -475,10 +463,10 @@ end;]]></definition>
 				"chapterId",
 				to_jsonb(jsonb_build_object(
 				'chapterId', "chapterId",
-				'position', position + 1
+				'position', position
 	    		)) as "newestChapters",
 				rank() over (partition by "bookId" order by position desc) as RANK
-			from chapters   where chapters."isDeleted" = false 
+			from chapters   where chapters."isDeleted" = false and chapters.published
 		) z
 		where rank <= 2
 	) x using ("bookId")
@@ -1273,7 +1261,7 @@ ititle text := title;
 idescription text := description;
 icompleted boolean := completed;
 ipublished boolean := published;
-
+icover boolean := cover;
 result1 uuid;
 result2 uuid;
 begin
@@ -1289,6 +1277,7 @@ title = ititle,
 description = idescription,
 completed = icompleted,
 published = ipublished ,
+cover = icover ,
 "publishedAt" =  case 
            when "ipublished" = true then now()
            else null
@@ -1356,6 +1345,18 @@ return "userId";
 
 end;]]></definition>
 </function>
+
+<trigger name="book_updated_trigger" firing-type="BEFORE" per-line="true" constraint="false"
+	 ins-event="true" del-event="false" upd-event="true" trunc-event="false"
+	 table="public.books">
+		<function signature="public.set_updated_at()"/>
+</trigger>
+
+<trigger name="users_update_trigger" firing-type="BEFORE" per-line="true" constraint="false"
+	 ins-event="true" del-event="false" upd-event="true" trunc-event="false"
+	 table="public.users">
+		<function signature="public.set_updated_at()"/>
+</trigger>
 
 <constraint name="books_userId_fk" type="fk-constr" comparison-type="MATCH FULL"
 	 upd-action="NO ACTION" del-action="CASCADE" ref-table="public.users" table="public.books">
