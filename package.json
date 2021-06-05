@@ -31,7 +31,8 @@
     "next-tunnel": "ssh -L localhost:5434:172.17.0.2:5432 hiepxanh@awread-next",
     "local-reader": "export ENVIRONMENT=local || set ENVIRONMENT=local&& nx serve reader-web",
     "local-writer": "export ENVIRONMENT=local || set ENVIRONMENT=local&& nx serve writer-web --port=5200",
-    "backend-debug": "nx serve backend-graphql --inspect --port=7777"
+    "backend-debug": "nx serve backend-graphql --inspect --port=7777",
+    "postinstall": "ngcc --properties es2015 browser module main"
   },
   "private": true,
   "dependencies": {
@@ -80,7 +81,6 @@
     "@nrwl/cypress": "11.5.2",
     "@nrwl/eslint-plugin-nx": "11.5.2",
     "@nrwl/express": "11.5.2",
-    "@nrwl/jest": "11.5.2",
     "@nrwl/nest": "11.5.2",
     "@nrwl/node": "11.5.2",
     "@nrwl/nx-cloud": "11.2.0",
@@ -132,8 +132,12 @@
     "zone.js": "^0.11.4"
   },
   "devDependencies": {
+    "@angular-devkit/build-angular": "~0.1102.0",
+    "@angular/compiler-cli": "^11.2.0",
+    "@angular/language-service": "^11.2.0",
     "@commitlint/cli": "^12.0.1",
     "@commitlint/config-conventional": "^12.0.1",
+    "@nrwl/jest": "11.5.2",
     "@types/cron": "^1.7.2",
     "@types/express": "^4.17.11",
     "@types/jest": "^26.0.21",

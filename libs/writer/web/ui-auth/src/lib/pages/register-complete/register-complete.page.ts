@@ -1,5 +1,5 @@
 import { Directive, Injectable, OnInit } from '@angular/core';
-import { RegisterCompleteIpage } from '@awread/core/users';
+import { RegisterCompleteIpage } from '@awread/ipages';
 
 @Injectable({
   providedIn: 'root',

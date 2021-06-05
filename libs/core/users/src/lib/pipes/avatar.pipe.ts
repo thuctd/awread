@@ -1,13 +1,14 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { CurrentUserQuery } from '../states/current-user';
 import { SettingFacade } from '@awread/core/setting';
+import { CurrentUserFacade } from '../facades';
+
 @Pipe({
     name: 'avatarSize'
 })
 export class AvatarPipe implements PipeTransform {
 
     constructor(
-        private currentUserQuery: CurrentUserQuery,
+        private currentUserFacade: CurrentUserFacade,
         private settingFacade: SettingFacade,
     ) {
 
@@ -17,7 +18,7 @@ export class AvatarPipe implements PipeTransform {
         const [size] = args;
         // console.log('size', size);
         if (value) {
-            return `${this.settingFacade.getStorage()}/users/${size ?? 'origin'}/${this.currentUserQuery.getUserId()}.webp`;
+            return `${this.settingFacade.getStorage()}/users/${size ?? 'origin'}/${this.currentUserFacade.currentUserQuery.getUserId()}.webp`;
         }
         return '/global-assets/images/bigImg.webp';
     }

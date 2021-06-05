@@ -1,7 +1,7 @@
 import { FormBuilder } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
 import { Directive, Injectable, OnInit } from '@angular/core';
-import { AuthFacade, CurrentUserFacade } from '../facades';
+import { AuthFacade, CurrentUserFacade } from '@awread/core/users';
 
 @Injectable({
     providedIn: 'root',

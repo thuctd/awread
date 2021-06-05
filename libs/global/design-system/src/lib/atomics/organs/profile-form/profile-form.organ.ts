@@ -18,8 +18,6 @@ export class ProfileFormOrgan implements OnInit {
     title: 'Kết nối bằng google',
     image: '/global-assets/images/google.webp',
   };
-  @Output() clickConnectFb = new EventEmitter();
-  @Output() clickConnectGg = new EventEmitter();
   @Input() link = '/forgot';
   @Input() submitText = 'Lưu';
   @Input() profileForm: FormGroup = this.fb.group({
@@ -33,8 +31,8 @@ export class ProfileFormOrgan implements OnInit {
     introduce: ['', [Validators.required]],
   });
   @Input() submitted: boolean;
-  @Output() updateProfileEvent = new EventEmitter();
-  constructor(private fb: FormBuilder) {}
+  @Output() submitEvent = new EventEmitter();
+  constructor(private fb: FormBuilder) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

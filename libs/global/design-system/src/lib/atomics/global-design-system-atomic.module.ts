@@ -130,11 +130,12 @@ import { InfoBookMolec } from './molecs/info-book/info-book.molec';
 import { SocialConnectBtnAtom } from './atoms/social-connect-btn/social-connect-btn.atom';
 import { RdProfileInfoPersonalItemAtom } from './atoms/rd-profile-info-personal-item/rd-profile-info-personal-item.atom';
 import { ImageCropperModule } from 'ngx-image-cropper';
-import { CoreUsersModule } from '@awread/core/users';
 import { RdDropdownMenuMbAtom } from './atoms/rd-dropdown-menu-mb/rd-dropdown-menu-mb.atom';
 import { RdIconTextItemAtom } from './atoms/rd-icon-text-item/rd-icon-text-item.atom';
 import { RdTextLinkMenuMbAtom } from './atoms/rd-text-link-menu-mb/rd-text-link-menu-mb.atom';
 import { MatSelectModule } from '@angular/material/select';
+import { CoreUsersModule } from '@awread/core/users';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -151,10 +152,11 @@ import { MatSelectModule } from '@angular/material/select';
     CloseOnOutsideModule,
     NgImageSliderModule,
     ImageCropperModule,
-    CoreUsersModule,
     MatSelectModule,
+    CoreUsersModule
   ],
   exports: [
+    CoreUsersModule,
     MatSelectModule,
     MatDialogModule,
     MatAutocompleteModule,

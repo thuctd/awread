@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { PopupChangeCoverOrgan } from '@awread/global/design-system';
@@ -29,8 +29,7 @@ export class RdProfileTabTemplateTemplate implements OnInit {
   });
   @Input() currentUser = {};
   @Input() submitted: boolean;
-  @Output() updateProfileEvent = new EventEmitter();
-  @Output() clickConnect = new EventEmitter();
+  @Output() submitEvent = new EventEmitter();
   @Input() mode: 'display' | 'edit' = 'display';
   @Input() actions = ['display', 'edit'];
   @Input() tabs = [
@@ -50,16 +49,9 @@ export class RdProfileTabTemplateTemplate implements OnInit {
   @Input() classActive = 'border-b-2 border-green-primary text-green-primary';
   @Input() classNormal = 'text-gray-text font-medium';
 
-  constructor(public matDialog: MatDialog, private fb: FormBuilder) {}
+  constructor(public matDialog: MatDialog, private fb: FormBuilder, private cd: ChangeDetectorRef) { }
 
-  ngOnInit(): void {}
-
-  eventChooseImageCover(event) {
-    this.matDialog.open(PopupChangeCoverOrgan, {
-      width: '55rem',
-      height: '33rem',
-    });
-  }
+  ngOnInit(): void { }
 
   changeDisplay(mode: any) {
     this.mode = mode;
@@ -68,5 +60,6 @@ export class RdProfileTabTemplateTemplate implements OnInit {
       left: 0,
       behavior: 'smooth',
     });
+    this.cd.detectChanges();
   }
 }

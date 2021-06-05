@@ -2,8 +2,8 @@ import { FormGroup, Validators } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { Directive, Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthFacade } from '@awread/core/users';
 import { SnackbarService } from '@awread/global/packages';
-import { AuthFacade } from '../facades';
 
 @Injectable({
   providedIn: 'root',

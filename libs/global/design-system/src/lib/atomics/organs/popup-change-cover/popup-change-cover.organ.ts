@@ -1,8 +1,7 @@
 import { HttpEventType, HttpResponse } from '@angular/common/http';
-import { Component, OnInit, ChangeDetectionStrategy, Input, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, ChangeDetectorRef, Inject } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
-import { CurrentUserFacade } from '@awread/core/users';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { UploadImageFacade } from '@awread/feature/upload-image';
 @Component({
   selector: 'organ-popup-change-cover',
@@ -26,10 +25,14 @@ export class PopupChangeCoverOrgan implements OnInit {
     public matDialogRef: MatDialogRef<PopupChangeCoverOrgan>,
     private cd: ChangeDetectorRef,
     private uploadImageFacade: UploadImageFacade,
-    private currentUserFacade: CurrentUserFacade,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    if (this.data.mode == 'avatar') {
+      this.title = 'Chọn ảnh đại diện';
+    }
+  }
 
   eventChooseImage($event) {
     this.status = 'reposition';
@@ -40,7 +43,7 @@ export class PopupChangeCoverOrgan implements OnInit {
     this.status = 'loading';
     if (croppedImage) {
       //save image
-      this.uploadImageFacade.uploadAvatar(croppedImage).subscribe(event => {
+      this.uploadImageFacade.uploadAvatar(croppedImage, this.data.userId).subscribe(event => {
         console.log('event', event);
         if (event.type === HttpEventType.DownloadProgress) {
           console.log("download progress");
@@ -52,10 +55,12 @@ export class PopupChangeCoverOrgan implements OnInit {
         }
         if (event instanceof HttpResponse) {
           if (event.ok) {
-            this.matDialogRef.close();
-            this.currentUserFacade.updateCurrentUser({ avatar: true })
+            this.matDialogRef.close({ success: event.ok });
+
           }
         }
+      }, error => {
+        console.warn('upload image failed', error);
       })
     } else {
 

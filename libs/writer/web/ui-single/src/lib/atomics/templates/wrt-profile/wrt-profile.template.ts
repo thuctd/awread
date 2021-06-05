@@ -26,18 +26,11 @@ export class WrtProfileTemplate implements OnInit {
     introduce: ['', [Validators.required]],
   });
   @Input() submitted: boolean;
-  @Output() updateProfileEvent = new EventEmitter();
-  @Output() ClickConnect = new EventEmitter();
+  @Output() submitEvent = new EventEmitter();
   @Input() imgSrc;
-  constructor(public matDialog: MatDialog, private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
     // setTimeout(() => this.profileForm.patchValue({ username: 'ahihi' }), 5000);
-  }
-  openChangeCover($event) {
-    this.matDialog.open(PopupChangeCoverOrgan, {
-      width: '55rem',
-      height: '33rem',
-    });
   }
 }
