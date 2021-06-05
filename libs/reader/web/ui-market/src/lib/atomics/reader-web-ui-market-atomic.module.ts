@@ -81,6 +81,7 @@ import { TopBooksTemplate } from './templates/top-books/top-books.template';
 import { ListTopBookOrgan } from './organs/list-top-book/list-top-book.organ';
 import { TopBooksMbTemplate } from './templates/top-books-mb/top-books-mb.template';
 import { InfiniteScrollModule, LoaderModule } from '@awread/global/packages';
+import { RdNewsShareExperienceMolec } from './molecs/rd-news-share-experience/rd-news-share-experience.molec';
 
 @NgModule({
   imports: [
@@ -172,6 +173,7 @@ import { InfiniteScrollModule, LoaderModule } from '@awread/global/packages';
     TopBooksTemplate,
     ListTopBookOrgan,
     TopBooksMbTemplate,
+    RdNewsShareExperienceMolec,
   ],
   declarations: [
     ListInfoProseMolec,
@@ -249,6 +251,7 @@ import { InfiniteScrollModule, LoaderModule } from '@awread/global/packages';
     TopBooksTemplate,
     ListTopBookOrgan,
     TopBooksMbTemplate,
+    RdNewsShareExperienceMolec,
   ],
 })
 export class ReaderWebUiMarketAtomicModule {}

@@ -1,0 +1,11 @@
+<div class="bg-green-light pt-3 px-3 pb-10">
+  <div class="border-4 border-white relative pt-4 pb-10">
+    <img class="ml-1" src="/global-assets/images/label_important_24px.webp" alt="">
+    <div class="absolute top-6 left-6">
+      <img src="/global-assets/images/G-óc-chia-sẻ-kinh-nghiệm.webp" alt="">
+    </div>
+  </div>
+  <div *ngFor="let item of newsRight">
+    <atom-rd-news-share-experience-item *ngIf="item.position == 'right'" [blogId]="item.blogId" [title]="item.title" class="mt-8"></atom-rd-news-share-experience-item>
+  </div>
+</div>

@@ -108,7 +108,6 @@ import { NavItemAtom } from './atoms/nav-item/nav-item.atom';
 import { BtnIconAtom } from './atoms/btn-icon/btn-icon.atom';
 import { BreadcrumbAtom } from './atoms/breadcrumb/breadcrumb.atom';
 import { SocialLoginBtnAtom } from './atoms/social-login-btn/social-login-btn.atom';
-import { AdvertisAtom } from './atoms/advertis/advertis.atom';
 import { RdNewsStatusBoxAtom } from './atoms/rd-news-status-box/rd-news-status-box.atom';
 import { RdNewsDateAtom } from './atoms/rd-news-date/rd-news-date.atom';
 import { RdNewsTitleAtom } from './atoms/rd-news-title/rd-news-title.atom';
@@ -135,6 +134,7 @@ import { RdDropdownMenuMbAtom } from './atoms/rd-dropdown-menu-mb/rd-dropdown-me
 import { RdIconTextItemAtom } from './atoms/rd-icon-text-item/rd-icon-text-item.atom';
 import { RdTextLinkMenuMbAtom } from './atoms/rd-text-link-menu-mb/rd-text-link-menu-mb.atom';
 import { MatSelectModule } from '@angular/material/select';
+import { RdNewsShareExperienceItemAtom } from './atoms/rd-news-share-experience-item/rd-news-share-experience-item.atom';
 @NgModule({
   imports: [
     CommonModule,
@@ -265,7 +265,6 @@ import { MatSelectModule } from '@angular/material/select';
     BtnIconAtom,
     BreadcrumbAtom,
     SocialLoginBtnAtom,
-    AdvertisAtom,
     RdNewsStatusBoxAtom,
     RdNewsDateAtom,
     RdNewsTitleAtom,
@@ -288,7 +287,8 @@ import { MatSelectModule } from '@angular/material/select';
     RdProfileInfoPersonalItemAtom,
     RdDropdownMenuMbAtom,
     RdIconTextItemAtom,
-    RdTextLinkMenuMbAtom
+    RdTextLinkMenuMbAtom,
+    RdNewsShareExperienceItemAtom,
   ],
   declarations: [
     notReadyDirective,
@@ -389,7 +389,6 @@ import { MatSelectModule } from '@angular/material/select';
     BtnIconAtom,
     BreadcrumbAtom,
     SocialLoginBtnAtom,
-    AdvertisAtom,
     RdNewsStatusBoxAtom,
     RdNewsDateAtom,
     RdNewsTitleAtom,
@@ -413,6 +412,7 @@ import { MatSelectModule } from '@angular/material/select';
     RdDropdownMenuMbAtom,
     RdIconTextItemAtom,
     RdTextLinkMenuMbAtom,
+    RdNewsShareExperienceItemAtom,
   ],
 })
-export class GlobalDesignSystemAtomicModule { }
+export class GlobalDesignSystemAtomicModule {}
