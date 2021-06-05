@@ -1,6 +1,6 @@
 <div class="grid grid-cols-12 gap-4 place-items-center">
   <div *ngFor="let book of books" class="col-span-12">
-    <molec-rd-author-book-item [isText]="false" [isSize]="1" [book]="book"></molec-rd-author-book-item>
+    <molec-rd-author-book-item [isText]="false" [isSize]="1" [book]="book" [items]="book.genres"></molec-rd-author-book-item>
   </div>
 </div>
 <div>
