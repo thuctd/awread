@@ -48,7 +48,7 @@ export class ListPage implements OnInit {
         break;
       case 'create-chapter':
         this.chaptersFacade.fetchLatestChapterPosition(event.bookId).subscribe(position => {
-          this.router.navigate(['list', event.bookId, 'toc', 'new', 'writing', { position }]);
+          this.router.navigate(['list', event.bookId, 'toc', 'new', 'writing', { position: position }]);
         })
         break;
       case 'edit':
