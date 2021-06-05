@@ -29,8 +29,8 @@
     "nx-migrate": "npx @nrwl/tao@latest migrate @nrwl/workspace@latest",
     "prod-tunnel": "ssh -L localhost:5433:172.17.0.2:5432 hiepxanh@awread.vn",
     "next-tunnel": "ssh -L localhost:5434:172.17.0.2:5432 hiepxanh@awread-next",
-    "reader-local": "export ENVIRONMENT=local || set ENVIRONMENT=local&& nx serve reader-web --ssl=true",
-    "writer-local": "export ENVIRONMENT=local || set ENVIRONMENT=local&& nx serve writer-web --ssl=true --port=5200",
+    "local-reader": "export ENVIRONMENT=local || set ENVIRONMENT=local&& nx serve reader-web",
+    "local-writer": "export ENVIRONMENT=local || set ENVIRONMENT=local&& nx serve writer-web --port=5200",
     "backend-debug": "nx serve backend-graphql --inspect --port=7777"
   },
   "private": true,
