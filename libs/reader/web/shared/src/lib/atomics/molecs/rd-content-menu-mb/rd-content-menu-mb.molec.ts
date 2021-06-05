@@ -50,7 +50,7 @@ export class RdContentMenuMbMolec implements OnInit {
     dropdown: [
       {
         title: 'Về chúng tôi',
-        href: '/',
+        href: '/introduction',
       },
       {
         title: 'Tham gia cùng chúng tôi',
@@ -68,7 +68,7 @@ export class RdContentMenuMbMolec implements OnInit {
     href: '/',
   };
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }
