@@ -16,26 +16,26 @@
           <div class="flex flex-col justify-center items-center">
             <div class="flex justify-center">
               <div *ngFor="let book of books | keyvalue">
-                <div [ngClass]="book.key % 2 == 1 ? 'hidden' : 'block'" class="px-2">
-                  <atom-img-m [size]="'s'" [bookId]="book.value.bookId" [srcImg]="book | coverSize: 's'"></atom-img-m>
-                  <div *ngIf="book.value.categoryId == 1 || book.value.categoryId == 2">
-                    <molec-info-book class="w-27" [book]="book.value" [displayUI]="displayUI" [btns]="book.value.newestChapters"></molec-info-book>
+                <div *ngIf="bookValue as bookValue" [ngClass]="book.key % 2 == 1 ? 'hidden' : 'block'" class="px-2">
+                  <atom-img-m [size]="'s'" [bookId]="bookValue.bookId" [srcImg]="bookValue | coverSize: 's'"></atom-img-m>
+                  <div *ngIf="bookValue.categoryId == 1 || bookValue.categoryId == 2">
+                    <molec-info-book class="w-27" [book]="bookValue" [displayUI]="displayUI" [btns]="bookValue.newestChapters"></molec-info-book>
                   </div>
-                  <div *ngIf="book.value.categoryId == 3">
-                    <list-info-prose class="w-27" [isBtn]="true" [book]="book.value"></list-info-prose>
+                  <div *ngIf="bookValue.categoryId == 3">
+                    <list-info-prose class="w-27" [isBtn]="true" [book]="bookValue"></list-info-prose>
                   </div>
                 </div>
               </div>
             </div>
             <div class="flex mt-1">
               <div *ngFor="let book of books | keyvalue">
-                <div [ngClass]="book.key % 2 == 0 ? 'hidden' : 'block'" class="px-2">
-                  <atom-img-m [size]="'s'" [bookId]="book.value.bookId" [srcImg]="book | coverSize: 's'"></atom-img-m>
-                  <div *ngIf="book.value.categoryId == 1 || book.value.categoryId == 2">
-                    <molec-info-book class="w-27" [book]="book.value" [displayUI]="displayUI" [btns]="book.value.newestChapters"></molec-info-book>
+                <div *ngIf="bookValue as bookValue" [ngClass]="book.key % 2 == 0 ? 'hidden' : 'block'" class="px-2">
+                  <atom-img-m [size]="'s'" [bookId]="bookValue.bookId" [srcImg]="bookValue | coverSize: 's'"></atom-img-m>
+                  <div *ngIf="bookValue.categoryId == 1 || bookValue.categoryId == 2">
+                    <molec-info-book class="w-27" [book]="bookValue" [displayUI]="displayUI" [btns]="bookValue.newestChapters"></molec-info-book>
                   </div>
-                  <div *ngIf="book.value.categoryId == 3">
-                    <list-info-prose class="w-27" [isBtn]="true" [book]="book.value"></list-info-prose>
+                  <div *ngIf="bookValue.categoryId == 3">
+                    <list-info-prose class="w-27" [isBtn]="true" [book]="bookValue"></list-info-prose>
                   </div>
                 </div>
               </div>
