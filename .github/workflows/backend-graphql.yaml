@@ -21,7 +21,7 @@ jobs:
     env:
       SERVER_URL: github.event.inputs.environment == 'production' && secrets.PRODUCTION_URL || secrets.NEXT_URL
       APP: backend-graphql
-      SSH_TO: '${{ env.SERVER_URL }}:22/${{ env.APP }}'
+      SSH_TO: '${{ SERVER_URL }}:22/${{ APP }}'
     steps:
       - run: |
           echo "environment: ${{ github.event.inputs.environment }}"
