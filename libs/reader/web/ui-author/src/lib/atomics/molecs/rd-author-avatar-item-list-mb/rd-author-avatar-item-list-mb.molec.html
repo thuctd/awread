@@ -4,9 +4,9 @@
     <div class="text-xs mt-3 font-semibold text-gray-text">{{user?.lastname + ' ' + user?.middlename + ' ' + user?.firstname}}</div>
   </div>
   <div class="col-span-6 mt-1">
-    <div class="w-full">
+    <div class="w-full flex justify-between">
       <div class="uppercase mb-2.5 float-left font-bold text-gray-text">{{user?.name}}</div>
-      <div class="float-right" (click)="openDiaLogMenu($event)">
+      <div (click)="openDiaLogMenu($event)">
         <fa-icon class="cursor-pointer" [icon]="faIcon"></fa-icon>
       </div>
     </div>

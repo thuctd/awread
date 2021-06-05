@@ -63,7 +63,7 @@ export class RdProfileTabTemplateTemplate implements OnInit {
     });
   }
 
-  changeDisplay(mode: any) {
+  updateForm(mode: any) {
     if (this.profileForm.invalid) {
       return;
     } else {
@@ -74,5 +74,9 @@ export class RdProfileTabTemplateTemplate implements OnInit {
         behavior: 'smooth',
       });
     }
+  }
+
+  changeModeEdit(mode: any) {
+    this.mode = mode;
   }
 }
