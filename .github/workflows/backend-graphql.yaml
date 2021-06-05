@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       environment:
-        description: 'Target environment to deploy'
+        description: 'next or production'
         default: 'next'
         required: true
       name:
@@ -31,7 +31,7 @@ jobs:
           echo "Tags: ${{ github.event_name == 'workflow_dispatch' }}"
           echo "next is true ${{ github.event.inputs.name == 'test' && 'next' || 'production' }}"
           echo "production is true ${{ github.event.inputs.name == 'test' && 'production' || 'next' }}"
-          echo "ssh://dokku@${{ github.event.inputs.environment == 'production' && secrets.PRODUCTION_URL || secrets.NEXT_URL }}:22/${ APP }"
+          echo "ssh://dokku@${{ env.SERVER_URL }}:22/${ env.APP }"
 
   restart:
     runs-on: ubuntu-latest
@@ -44,12 +44,12 @@ jobs:
       - name: executing remote ssh commands using ssh key
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ SERVER_URL }}
+          host: ${{ env.SERVER_URL }}
           username: root
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             dokku ps:restart backend-graphql
-            curl -X POST -H 'Content-type: application/json' --data '{"text":"${ SERVER_URL }: Restart ${ APP }"}' https://hooks.slack.com/services/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
+            curl -X POST -H 'Content-type: application/json' --data '{"text":"${ env.SERVER_URL }: Restart ${ env.APP }"}' https://hooks.slack.com/services/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
 
   build:
     runs-on: ubuntu-latest
@@ -69,7 +69,7 @@ jobs:
         with:
           # specify `--force` as a flag for git pushes
           git_push_flags: '--force'
-          git_remote_url: 'ssh://dokku@${ SERVER_URL }:22/${ APP }'
+          git_remote_url: 'ssh://dokku@${ env.SERVER_URL }:22/${ APP }'
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
 
       - name: noti on failure
@@ -81,7 +81,7 @@ jobs:
         with:
           channel: '#general'
           status: ${{ job.status }}
-          failure_text: '${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) build failed at https://${ APP }.${ SERVER_URL }'
+          failure_text: '${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) build failed at https://${ env.APP }.${ env.SERVER_URL }'
 
       - name: noti on success
         uses: edge/simple-slack-notify@master
@@ -91,15 +91,15 @@ jobs:
         with:
           channel: '#general'
           status: ${{ job.status }}
-          success_text: '${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER})  https://${ APP }.${ SERVER_URL } ready'
+          success_text: '${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER})  https://${ env.APP }.${ env.SERVER_URL } ready'
 
       - name: executing remote ssh commands using ssh key
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ SERVER_URL }}
+          host: ${{ env.SERVER_URL }}
           username: root
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             dokku ps:restart reader-web
             dokku ps:restart writer-web
-            curl -X POST -H 'Content-type: application/json' --data '{"text":"Restart client completed"}' https://hooks.slack.com/services/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
+            curl -X POST -H 'Content-type: application/json' --data '{"text":"${env.SERVER_URL }:Restart client completed"}' https://hooks.slack.com/services/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
