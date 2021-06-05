@@ -54,7 +54,7 @@ export class DetailTocPage implements OnInit {
 
   private createChapter() {
     const position = this.chaptersFacade.getLatestPosition();
-    this.router.navigate(['list', this.bookId, 'toc', 'new', 'writing', { position }]);
+    this.router.navigate(['list', this.bookId, 'toc', 'new', 'writing', { position: position }]);
   }
 
   private getAllChapters() {
