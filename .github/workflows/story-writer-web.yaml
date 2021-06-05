@@ -1,163 +1,96 @@
-name: 'storybook: writer-web'
+name: 'story-writer-web'
 on:
   workflow_dispatch:
     inputs:
       environment:
-        description: 'Target environment to deploy'
+        description: 'next or production'
         default: 'next'
         required: true
       name:
-        description: 'build or restart'
+        description: 'build or restart or test'
         default: 'build'
         required: true
   push:
     branches:
       - story-writer-web
-  pull_request:
-    branches:
-      - story-writer-web
-    types:
-      # more on https://github.community/t/pull-request-action-does-not-run-on-merge/16092/8
-      # need this to trigger close PR
-      - closed
-      - opened
-      - reopened
-      - synchronize
+
 jobs:
+  test:
+    runs-on: ubuntu-latest
+    if: github.event.inputs.name =='test'
+    env:
+      SERVER_URL: "${{ github.event.inputs.environment == 'production' && secrets.PRODUCTION_URL || secrets.NEXT_URL }}"
+      APP: story-writer-web
+    steps:
+      - run: |
+          echo "environment: ${{ github.event.inputs.environment }}"
+          echo "Tags: ${{ github.event.inputs.name }}"
+          echo "Tags: ${{ github.event.inputs.name == 'restart' }}"
+          echo "Tags: ${{ github.event.inputs.name == 'build' }}"
+          echo "Tags: ${{ github.event_name }}"
+          echo "Tags: ${{ github.event_name == 'workflow_dispatch' }}"
+          echo "next is true ${{ github.event.inputs.name == 'test' && 'next' || 'production' }}"
+          echo "production is true ${{ github.event.inputs.name == 'test' && 'production' || 'next' }}"
+          echo "ssh://dokku@${{ env.SERVER_URL }}:22/${{ env.APP }}"
+          echo "${{ env.SERVER_URL }}: Restart ${{ env.APP }}"
+      - run: echo "Hello $env.SERVER_URL $middle_name $env.APP, today is Monday!"
+
   restart:
     runs-on: ubuntu-latest
     timeout-minutes: 60
-    if: github.event_name == 'workflow_dispatch' && github.event.inputs.name=='restart'
+    if: github.event.inputs.name =='restart'
+    env:
+      SERVER_URL: "${{ github.event.inputs.environment == 'production' && secrets.PRODUCTION_URL || secrets.NEXT_URL }}"
+      APP: story-writer-web
     steps:
       - name: executing remote ssh commands using ssh key
         uses: appleboy/ssh-action@master
         with:
-          host: awread.vn
+          host: ${{ env.SERVER_URL }}
           username: root
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            curl -X POST -H 'Content-type: application/json' --data '{"text":"Restarting story-writer web"}' https://hooks.slack.com/services/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
-            dokku ps:restart story-writer-web
-            curl -X POST -H 'Content-type: application/json' --data '{"text":"Restart completed"}' https://hooks.slack.com/services/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
-  deploy:
+            dokku ps:restart ${{ env.APP }}
+            curl -X POST -H 'Content-type: application/json' --data '{"text":"${{ env.SERVER_URL }}: Restart ${{ env.APP }}"}' https://hooks.slack.com/services/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
+
+  build:
     runs-on: ubuntu-latest
     timeout-minutes: 60
+    if: (github.event_name == 'push' || github.event.inputs.name == 'build')
     env:
-      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL  }}
-    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+      SERVER_URL: "${{ github.event.inputs.environment == 'production' && secrets.PRODUCTION_URL || secrets.NEXT_URL }}"
+      APP: story-writer-web
     steps:
       - name: using action checkout
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      # - name: Set Git config
-      #   run: |
-      #     git config --local user.email "actions@github.com"
-      #     git config --local user.name "Github Actions"
-      # - name: get latest code from develop
-      #   run: |
-      #     git fetch --unshallow
-      #     git pull
-      #     git merge --no-ff origin/develop -m "Auto-merge develop to get latest code"
-      #     git push
-      #     git push origin story-writer-web:develop
+
       - name: Using dokku
         uses: dokku/github-action@master
         with:
           # specify `--force` as a flag for git pushes
           git_push_flags: '--force'
-          git_remote_url: 'ssh://dokku@awread.vn:22/story-writer-web'
+          git_remote_url: 'ssh://dokku@${{ env.SERVER_URL }}:22/${{ env.APP }}'
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-  # review_app:
-  #   runs-on: ubuntu-latest
-  #   timeout-minutes: 60
-  #   env:
-  #     SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL  }}
-  #   # only run when a pull request is opened
-  #   if: github.event_name == 'pull_request' && (github.event.action == 'opened' || github.event.action == 'synchronize')
-  #   steps:
-  #     - name: Using dokku
-  #       uses: actions/checkout@v2
-  #       with:
-  #         fetch-depth: 0
-  #     - name: noti building
-  #       uses: edge/simple-slack-notify@master
-  #       if: always()
-  #       with:
-  #         username: 'Bạch Tuộc Nướng'
-  #         text: '${{ github.event.pull_request.user.login }} đang nướng bạch con tuộc số: #${{ github.event.pull_request.number }}-${{ github.event.pull_request.title }}'
-  #         channel: '#build-storybook'
-  #         fields: |
-  #           [{ "title": "Từ bếp", "value": "${{ github.event.pull_request.head.ref }}", "short": true },
-  #           { "title": "Đến bếp", "value": "${{ github.event.pull_request.base.ref }}", "short": true }]
-  #     - name: Push to dokku
-  #       uses: dokku/github-action@master
-  #       with:
-  #         # create a review app
-  #         command: review-apps:create
-  #         git_push_flags: '--force'
-  #         git_remote_url: 'ssh://dokku@awread.vn:22/story-writer-web'
-  #         ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
-  #         # specify a name for the review app
-  #         review_app_name: review-story-writer-web-${{ github.event.pull_request.number }}
-  #     - name: Slack Notification
-  #       uses: edge/simple-slack-notify@master
-  #       if: always()
-  #       with:
-  #         channel: '#build-storybook'
-  #         status: ${{ job.status }}
-  #         success_text: '${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) bạch tuộc con chín rồi, mau ăn thôi: http://review-story-writer-web-${{ github.event.pull_request.number }}.awread.vn'
-  #         failure_text: '${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) bạch tuộc con nướng thành than... :('
-  #         cancelled_text: '${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) đổi ý không nướng bạch con tuộc ăn nữa!'
-  #         fields: |
-  #           [{ "title": "chi tiết PR", "value": "${{ github.event.pull_request.html_url }}", "short": true }]
+      - name: noti on failure
+        uses: edge/simple-slack-notify@master
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL_CHANNEL_BOTNET  }}
+        # if: always()
+        if: failure()
+        with:
+          channel: '#general'
+          status: ${{ job.status }}
+          failure_text: '${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) build failed at https://${{ env.APP }}.${{ env.SERVER_URL }}'
 
-  # destroy_review_app:
-  #   runs-on: ubuntu-latest
-  #   timeout-minutes: 60
-  #   env:
-  #     SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL  }}
-  #   # only run when a pull request is closed
-  #   if: github.event_name == 'pull_request' && github.event.action == 'closed'
-  #   steps:
-  #     - name: noti building
-  #       uses: edge/simple-slack-notify@master
-  #       with:
-  #         username: 'Bạch Tuộc Nướng'
-  #         text: 'Bắt đầu đi dọn dẹp mâm #${{ github.event.pull_request.number }}, không ăn ở đây nữa nha!!! http://review-story-writer-web-${{ github.event.pull_request.number }}.awread.vn'
-  #         channel: '#build-storybook'
-  #         fields: |
-  #           [{ "title": "github.event.pull_request.merged", "value": "${{ github.event.pull_request.merged }}", "short": true },
-  #           { "title": "github.event.action", "value": "${{ github.event.action }}", "short": true }]
-  #     - name: Destroy the review app
-  #       uses: dokku/github-action@master
-  #       with:
-  #         # destroy a review app
-  #         command: review-apps:destroy
-  #         git_remote_url: 'ssh://dokku@awread.vn:22/story-writer-web'
-  #         # specify a name for the review app
-  #         review_app_name: review-story-writer-web-${{ github.event.pull_request.number }}
-  #         ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
-  #     - name: noti on merged
-  #       if: github.event.pull_request.merged
-  #       uses: edge/simple-slack-notify@master
-  #       with:
-  #         username: 'Bạch Tuộc Nướng'
-  #         text: 'Dọn đồ nướng cất đi và đem mực nướng còn thừa về develop'
-  #         channel: '#build-storybook'
-  #     - name: merge this branch to develop
-  #       if: github.event.pull_request.merged
-  #       uses: actions/checkout@v2
-  #     - name: Set Git config
-  #       run: |
-  #         git config --local user.email "actions@github.com"
-  #         git config --local user.name "Github Actions"
-  #     - name: checkout develop then merge
-  #       if: github.event.pull_request.merged
-  #       run: |
-  #         git fetch --unshallow
-  #         git checkout develop
-  #         git pull
-  #         git merge --no-ff origin/story-writer-web -m "Auto-merge story-writer-web back to develop"
-  #         git push origin develop
+      - name: noti on success
+        uses: edge/simple-slack-notify@master
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL_CHANNEL_BOTNET  }}
+        if: success()
+        with:
+          channel: '#general'
+          status: ${{ job.status }}
+          success_text: '${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER})  https://${{ env.APP }}.${{ env.SERVER_URL }} ready'

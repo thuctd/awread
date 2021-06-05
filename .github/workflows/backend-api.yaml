@@ -1,4 +1,4 @@
-name: 'backend-graphql'
+name: 'backend-api'
 on:
   workflow_dispatch:
     inputs:
@@ -12,7 +12,7 @@ on:
         required: true
   push:
     branches:
-      - backend-graphql
+      - backend-api
 
 jobs:
   test:
@@ -20,7 +20,7 @@ jobs:
     if: github.event.inputs.name =='test'
     env:
       SERVER_URL: "${{ github.event.inputs.environment == 'production' && secrets.PRODUCTION_URL || secrets.NEXT_URL }}"
-      APP: backend-graphql
+      APP: backend-api
     steps:
       - run: |
           echo "environment: ${{ github.event.inputs.environment }}"
@@ -41,7 +41,7 @@ jobs:
     if: github.event.inputs.name =='restart'
     env:
       SERVER_URL: "${{ github.event.inputs.environment == 'production' && secrets.PRODUCTION_URL || secrets.NEXT_URL }}"
-      APP: backend-graphql
+      APP: backend-api
     steps:
       - name: executing remote ssh commands using ssh key
         uses: appleboy/ssh-action@master
@@ -59,7 +59,7 @@ jobs:
     if: (github.event_name == 'push' || github.event.inputs.name == 'build')
     env:
       SERVER_URL: "${{ github.event.inputs.environment == 'production' && secrets.PRODUCTION_URL || secrets.NEXT_URL }}"
-      APP: backend-graphql
+      APP: backend-api
     steps:
       - name: using action checkout
         uses: actions/checkout@v2
