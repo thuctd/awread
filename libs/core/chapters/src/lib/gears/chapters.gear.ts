@@ -21,7 +21,7 @@ export class ChaptersGear {
   getLatestPosition() {
     const [latestChapter] = this.chaptersQuery.getAll({ sortBy: 'position', sortByOrder: Order.DESC, limitTo: 1 });
     if (latestChapter) {
-      return +latestChapter.position + 1;
+      return +latestChapter.position;
     } else {
       return 0;
     }
@@ -32,7 +32,7 @@ export class ChaptersGear {
       map(([latestChapter]) => {
         console.log('latestChapter', latestChapter);
         if (latestChapter) {
-          return +latestChapter.position + 1;
+          return +latestChapter.position;
         } else {
           return 0;
         }

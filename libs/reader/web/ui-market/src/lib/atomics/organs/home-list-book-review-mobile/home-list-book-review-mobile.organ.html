@@ -19,7 +19,7 @@
       <div class="grid grid-cols-2 gap-8 sm:gap-12 mb-6">
         <div *ngFor="let book of books | slice:1:5; let i = index" class="w-full rounded relative">
           <div class="mx-4">
-            <atom-img-m [size]="'m'" [bookId]="book.id" [srcImg]="book | coverSize: 'm'"></atom-img-m>
+            <atom-img-m [size]="'m'" [bookId]="book.bookId" [srcImg]="book | coverSize: 'm'"></atom-img-m>
             <div class="absolute -top-1.5">
               <rd-home-icon-rating [topBook]="i + 2"></rd-home-icon-rating>
             </div>

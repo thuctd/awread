@@ -42,8 +42,10 @@ export class DetailPage implements OnInit, OnDestroy {
         })
       )),
     ).subscribe(book => {
+      // console.log('book', book, this.bookId);
       this.book = book[0];
       this.breadcrumbs = this.getbreadcrumbs();
+      this.cd.detectChanges();
     })
     this.booksFacade.getTopBooks().subscribe();
     this.getAllChapters();
@@ -123,7 +125,7 @@ export class DetailPage implements OnInit, OnDestroy {
       });
   }
 
-  nativeBooksAuthor() { 
+  nativeBooksAuthor() {
     this.router.navigate(['/', this.authorId, 'books']);
   }
 
