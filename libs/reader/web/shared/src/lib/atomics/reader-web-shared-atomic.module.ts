@@ -13,6 +13,7 @@ import { NavbarButtonsOrgan } from './organs/navbar-buttons/navbar-buttons.organ
 import { DownloadAppMolec } from './molecs/download-app/download-app.molec';
 import { LinkAppOrgan } from './organs/link-app/link-app.organ';
 import { InformationAppOrgan } from './organs/information-app/information-app.organ';
+import { InfoMolec } from './molecs/info/info.molec';
 import { FooterTemplate } from './templates/footer/footer.template';
 import { NavbarMbOrgan } from './organs/navbar-mb/navbar-mb.organ';
 import { RdNavbarMbTemplate } from './templates/rd-navbar-mb/rd-navbar-mb.template';
@@ -36,6 +37,7 @@ import { RdContentMenuMbMolec } from './molecs/rd-content-menu-mb/rd-content-men
     DownloadAppMolec,
     LinkAppOrgan,
     InformationAppOrgan,
+    InfoMolec,
     FooterTemplate,
     NavbarMbOrgan,
     RdNavbarMbTemplate,
@@ -59,6 +61,7 @@ import { RdContentMenuMbMolec } from './molecs/rd-content-menu-mb/rd-content-men
     DownloadAppMolec,
     LinkAppOrgan,
     InformationAppOrgan,
+    InfoMolec,
     FooterTemplate,
     NavbarMbOrgan,
     RdNavbarMbTemplate,

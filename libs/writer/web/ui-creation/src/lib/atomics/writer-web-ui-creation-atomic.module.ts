@@ -33,9 +33,10 @@ import { WrtBookListChapterMolec } from './molecs/wrt-book-list-chapter/wrt-book
 import { WrtBookListActMolec } from './molecs/wrt-book-list-act/wrt-book-list-act.molec';
 import { WrtBookListHeadMolec } from './molecs/wrt-book-list-head/wrt-book-list-head.molec';
 import { WrtDetailChapterItemMolec } from './molecs/wrt-detail-chapter-item/wrt-detail-chapter-item.molec';
-
+import { CoreBooksModule } from '@awread/core/books';
 @NgModule({
   imports: [
+    CoreBooksModule,
     CommonModule,
     StorybookSupportModule,
     GlobalDesignSystemAtomicModule,
@@ -49,6 +50,7 @@ import { WrtDetailChapterItemMolec } from './molecs/wrt-detail-chapter-item/wrt-
     CoreCategoriesModule,
   ],
   exports: [
+    CoreBooksModule,
     MatDialogModule,
     CommonModule,
     WrtDetailTabHeadMolec,
@@ -108,4 +110,4 @@ import { WrtDetailChapterItemMolec } from './molecs/wrt-detail-chapter-item/wrt-
     WrtDetailChapterItemMolec,
   ],
 })
-export class WriterWebUiCreationAtomicModule {}
+export class WriterWebUiCreationAtomicModule { }

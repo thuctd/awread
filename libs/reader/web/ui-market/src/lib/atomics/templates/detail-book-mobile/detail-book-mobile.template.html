@@ -1,11 +1,19 @@
-<section class="mx-auto">
-  <atom-breadcrumb class="pl-2 my-2" [items]="items"></atom-breadcrumb>
-  <atom-title-book [titleBook]="book?.title" [size]="'l'" class="border-t py-2 px-4"></atom-title-book>
-  <div class="bg-gray-primary">
-    <organ-detail-book-top-mobile (chapterLastEvent)="chapterLastEvent.emit($event)" (chapterFistEvent)="chapterFistEvent.emit($event)" [book]="book" class="px-4"></organ-detail-book-top-mobile>
-  </div>
-  <molec-detail-book-introduce class="pt-6 pb-10 px-4"></molec-detail-book-introduce>
-  <organ-detail-book-chapter [chapters]="chapters" class="px-4"></organ-detail-book-chapter>
-  <organ-detail-book-reviews class="p-4"></organ-detail-book-reviews>
-  <list-detail-top-book [books]="topBooks" (moreEvent)="nativeTopBook.emit($event)" class="border-t px-4"></list-detail-top-book>
-</section>
+<div class="flex justify-center items-center pt-12" *ngIf="!book;else loaded">
+  <awread-loading></awread-loading>
+</div>
+<ng-template #loaded>
+  <section class="mx-auto">
+    <atom-breadcrumb class="pl-2 my-2" [items]="items"></atom-breadcrumb>
+    <atom-title-book [titleBook]="book?.title" [size]="'l'" class="border-t py-2 px-4"></atom-title-book>
+    <div class="bg-gray-primary">
+      <organ-detail-book-top-mobile (chapterLastEvent)="chapterLastEvent.emit($event)" (chapterFistEvent)="chapterFistEvent.emit($event)" [book]="book"
+        class="px-4"></organ-detail-book-top-mobile>
+    </div>
+    <molec-detail-book-introduce [description]="book?.description === null? 'Hiện tại truyện chưa có phần giới thiệu' : book.description"
+      class="pt-2 pb-4 px-4">
+    </molec-detail-book-introduce>
+    <organ-detail-book-chapter [chapters]="chapters" class="px-4"></organ-detail-book-chapter>
+    <organ-detail-book-reviews class="p-4"></organ-detail-book-reviews>
+    <list-detail-top-book [books]="topBooks" (moreEvent)="nativeTopBook.emit($event)" class="border-t px-4"></list-detail-top-book>
+  </section>
+</ng-template>

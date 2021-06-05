@@ -14,7 +14,6 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 })
 export class RdNewsDateAtom implements OnInit {
   @Input() isDisplay = false;
-  @Input() firstDate = 'April 05 2021';
   @Input() date = 'May 05 2021';
   @Input() isColor: true | false = true;
 

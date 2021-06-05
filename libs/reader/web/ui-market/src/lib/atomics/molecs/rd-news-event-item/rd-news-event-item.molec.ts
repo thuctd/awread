@@ -13,11 +13,11 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RdNewsEventItemMolec implements OnInit {
-  @Input() item = {
-    srcImg: '/global-assets/images/Rectangle-487.webp',
-    title: 'Siêu ưu đãi ngày hè hàng ngàn truyện hay miến phí',
-  };
-  @Input() newsId = 'bvxz_324988seQ6x';
+  @Input() title = 'Siêu ưu đãi ngày hè hàng ngàn truyện hay miến phí';
+  @Input() srcImg = '/global-assets/images/Rectangle-487.webp';
+
+  @Input() blogId;
+  @Input() class = '';
 
   constructor() {}
 

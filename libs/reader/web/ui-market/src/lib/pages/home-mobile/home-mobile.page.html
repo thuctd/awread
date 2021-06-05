@@ -9,4 +9,5 @@
   [bookByGenre]="filteredBooks$ | async"
   [categories]="categories$ | async"
   (emitBooks)="filterItemsByCategory($event)"
+  [loadingBooksCategory]="isLoading$ | async"
 ></template-home-mobile>

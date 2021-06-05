@@ -10,8 +10,8 @@ export class ForgotPasswordFacade {
 
     }
 
-    sendMail(email) {
-        return this.forgotPasswordGear.send(email);
+    sendMail(param) {
+        return this.forgotPasswordGear.send(param);
     }
 
     newPassword(param) {

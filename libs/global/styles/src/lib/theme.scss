@@ -42,7 +42,10 @@ $datepicker-theme: mat-light-theme($candy-app-primary, $candy-app-accent);
 // Apply the theme to your component
 @include mat-datepicker-theme($datepicker-theme);
 
-@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+// I want to disable this
+
+// @import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
 mat-dialog-container#modal-component {
   //   border: 3px solid #262626;
   border-radius: 11px;

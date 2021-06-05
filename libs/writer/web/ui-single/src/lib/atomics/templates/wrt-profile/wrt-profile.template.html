@@ -1,6 +1,8 @@
 <section class="w-full mx-auto max-w-screen-xl flex py-5 pl-28">
-  <organ-profile-form (updateProfileEvent)="updateProfileEvent.emit()" (ClickConnect)="ClickConnectSocial.emit($event)"
-    [profileForm]="profileForm" [submitted]="submitted" class="w-1/2 pr-24">
+  <organ-profile-form (submitEvent)="submitEvent.emit($event)" [profileForm]="profileForm" [submitted]="submitted" class="w-1/2 pr-24">
   </organ-profile-form>
-  <wrt-profile-image [imgSrc]="imgSrc" class="w-1/2" (eventChangeImg)="openChangeCover($event)"></wrt-profile-image>
+  <ng-container *ngIf="profileForm.valueChanges | async as profileValue">
+    <wrt-profile-image (eventChangeImg)="submitEvent.emit($event)" [imgSrc]="profileValue | avatarSize: 'origin'" class="w-1/2">
+    </wrt-profile-image>
+  </ng-container>
 </section>

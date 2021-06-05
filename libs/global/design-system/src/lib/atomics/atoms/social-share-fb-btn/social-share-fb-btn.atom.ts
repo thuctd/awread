@@ -13,7 +13,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter } from
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SocialShareFbBtnAtom implements OnInit {
-  @Output() ShareClicked = new EventEmitter();
+  @Output() shareClicked = new EventEmitter();
 
   constructor() {}
 

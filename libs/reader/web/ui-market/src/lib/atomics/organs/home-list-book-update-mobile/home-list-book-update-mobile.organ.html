@@ -1,46 +1,51 @@
-<section class="w-full max-w-screen-xl mx-auto relative">
-  <div class="mb-4 flex justify-between px-2.5">
-    <atom-title [title]="titlePage" class="uppercase"></atom-title>
-    <molec-rd-home-book-update-dropdown-mb #tabhead (emitBooks)="emitBooks.emit($event)"></molec-rd-home-book-update-dropdown-mb>
-  </div>
-  <div (click)="scrollLeft()" class="cursor-pointer absolute top-72 -left-2 z-40">
-    <fa-icon class="text-gray-text text-sm md:text-base" [icon]="arrowLeftIcon"></fa-icon>
-  </div>
-  <div #widgetsContent class="flex overflow-hidden justify-center">
-    <div *ngFor="let tab of tabs">
-      <div class="flex justify-center overflow-hidden" *ngIf="tabhead.title == tab.name">
-        <div class="flex flex-col justify-center items-center">
-          <div class="flex justify-center">
-            <div *ngFor="let book of books | keyvalue">
-              <div [ngClass]="book.key % 2 == 1 ? 'hidden' : 'block'" class="px-2">
-                <atom-img-m [size]="'s'" [bookId]="book.value.bookId" [srcImg]="book.value.cover"></atom-img-m>
-                <div *ngIf="book.value.categoryId == 1 || book.value.categoryId == 2">
-                  <molec-info-book class="w-27" [book]="book.value" [displayUI]="displayUI" [btns]="book.value.newestChapters"></molec-info-book>
-                </div>
-                <div *ngIf="book.value.categoryId == 3">
-                  <list-info-prose class="w-27" [isBtn]="true" [book]="book.value"></list-info-prose>
+<div class="flex justify-center items-center loading" *ngIf="loading;else loaded">
+  <awread-loading></awread-loading>
+</div>
+<ng-template #loaded>
+  <section class="w-full max-w-screen-xl mx-auto relative">
+    <div class="mb-4 flex justify-between px-2.5">
+      <atom-title [title]="titlePage" class="uppercase"></atom-title>
+      <molec-rd-home-book-update-dropdown-mb #tabhead (emitBooks)="emitBooks.emit($event)"></molec-rd-home-book-update-dropdown-mb>
+    </div>
+    <div (click)="scrollLeft()" class="cursor-pointer absolute top-72 -left-2 z-40">
+      <fa-icon class="text-gray-text text-sm md:text-base" [icon]="arrowLeftIcon"></fa-icon>
+    </div>
+    <div #widgetsContent class="flex overflow-hidden justify-center">
+      <div *ngFor="let tab of tabs">
+        <div class="flex justify-center overflow-hidden" *ngIf="tabhead.title == tab.name">
+          <div class="flex flex-col justify-center items-center">
+            <div class="flex justify-center">
+              <div *ngFor="let book of books | keyvalue">
+                <div [ngClass]="book.key % 2 == 1 ? 'hidden' : 'block'" class="px-2">
+                  <atom-img-m [size]="'s'" [bookId]="book.value.bookId" [srcImg]="book | coverSize: 's'"></atom-img-m>
+                  <div *ngIf="book.value.categoryId == 1 || book.value.categoryId == 2">
+                    <molec-info-book class="w-27" [book]="book.value" [displayUI]="displayUI" [btns]="book.value.newestChapters"></molec-info-book>
+                  </div>
+                  <div *ngIf="book.value.categoryId == 3">
+                    <list-info-prose class="w-27" [isBtn]="true" [book]="book.value"></list-info-prose>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="flex mt-1">
-            <div *ngFor="let book of books | keyvalue">
-              <div [ngClass]="book.key % 2 == 0 ? 'hidden' : 'block'" class="px-2">
-                <atom-img-m [size]="'s'" [bookId]="book.value.bookId" [srcImg]="book.value.cover"></atom-img-m>
-                <div *ngIf="book.value.categoryId == 1 || book.value.categoryId == 2">
-                  <molec-info-book class="w-27" [book]="book.value" [displayUI]="displayUI" [btns]="book.value.newestChapters"></molec-info-book>
-                </div>
-                <div *ngIf="book.value.categoryId == 3">
-                  <list-info-prose class="w-27" [isBtn]="true" [book]="book.value"></list-info-prose>
+            <div class="flex mt-1">
+              <div *ngFor="let book of books | keyvalue">
+                <div [ngClass]="book.key % 2 == 0 ? 'hidden' : 'block'" class="px-2">
+                  <atom-img-m [size]="'s'" [bookId]="book.value.bookId" [srcImg]="book | coverSize: 's'"></atom-img-m>
+                  <div *ngIf="book.value.categoryId == 1 || book.value.categoryId == 2">
+                    <molec-info-book class="w-27" [book]="book.value" [displayUI]="displayUI" [btns]="book.value.newestChapters"></molec-info-book>
+                  </div>
+                  <div *ngIf="book.value.categoryId == 3">
+                    <list-info-prose class="w-27" [isBtn]="true" [book]="book.value"></list-info-prose>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+      <div (click)="scrollRight()" class="cursor-pointer absolute top-72 -right-2">
+        <fa-icon class="text-gray-text text-sm md:text-base" [icon]="arrowRightIcon"></fa-icon>
+      </div>
     </div>
-  </div>
-  <div (click)="scrollRight()" class="cursor-pointer absolute top-72 -right-2">
-    <fa-icon class="text-gray-text text-sm md:text-base" [icon]="arrowRightIcon"></fa-icon>
-  </div>
-</section>
+  </section>
+</ng-template>

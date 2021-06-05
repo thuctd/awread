@@ -16,30 +16,20 @@ import { PopupChangeCoverOrgan } from '@awread/global/design-system';
 })
 export class WrtProfileTemplate implements OnInit {
   @Input() profileForm: FormGroup = this.fb.group({
-    name: ['', [Validators.required]],
-    email: ['', [Validators.required, Validators.email]],
-    phone: [''],
-    dob: [''],
-    age: ['', [Validators.required]],
-    gender: [''],
-    fullname: [''],
-    username: [''],
-    website: [''],
-    introduce: [''],
+    email: ['', [Validators.required]],
+    phone: ['', [Validators.required]],
+    dob: ['', [Validators.required]],
+    gender: ['', [Validators.required]],
+    fullname: ['', [Validators.required]],
+    username: ['', [Validators.required]],
+    website: ['', [Validators.required]],
+    introduce: ['', [Validators.required]],
   });
   @Input() submitted: boolean;
-  @Output() updateProfileEvent = new EventEmitter();
-  @Output() ClickConnectSocial = new EventEmitter();
-  @Input() imgSrc;
-  constructor(public matDialog: MatDialog, private fb: FormBuilder) {}
+  @Output() submitEvent = new EventEmitter();
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
     // setTimeout(() => this.profileForm.patchValue({ username: 'ahihi' }), 5000);
-  }
-  openChangeCover($event) {
-    this.matDialog.open(PopupChangeCoverOrgan, {
-      width: '55rem',
-      height: '33rem',
-    });
   }
 }

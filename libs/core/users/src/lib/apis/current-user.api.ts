@@ -45,7 +45,8 @@ export class CurrentUserApi {
               gender
               bio
               websiteAddress
-              facebookAddress 
+              facebookAddress
+              updatedAt
             }
           }
         }

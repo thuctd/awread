@@ -373,6 +373,11 @@
         "scope:shared",
         "type:core"
       ]
+    },
+    "ipages": {
+      "tags": [
+        "scope:shared"
+      ]
     }
   }
 }

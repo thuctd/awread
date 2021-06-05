@@ -212,5 +212,22 @@ export class CreationsApi {
     });
   }
 
+  publish(bookId) {
+    return this.apollo.mutate({
+      mutation: gql`
+       mutation deleteBook (
+        $bookId: UUID!
+      ) {
+        updateBookByBookId(input: {bookPatch: {published: true}, bookId: $bookId}) {
+          book {
+            bookId
+          }
+        }
+        }
+      `,
+      variables: { bookId },
+    });
+  }
+
 
 }

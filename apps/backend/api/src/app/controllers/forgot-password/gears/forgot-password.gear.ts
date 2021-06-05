@@ -14,8 +14,8 @@ export class ForgotPasswordGear {
 
     }
 
-    generateLink(token, userId) {
-        return `${process.env.NODE_ENV == 'production' ? 'https://awread.vn' : 'http://localhost:4200'}/new-password;token=${token};userId=${userId}`;
+    generateLink(token, userId, domain) {
+        return `${domain ? domain : 'https://awread.vn'}/new-password;token=${token};userId=${userId}`;
 
     }
 
@@ -24,13 +24,13 @@ export class ForgotPasswordGear {
         `;
     }
 
-    async send(email) {
+    async send({ email, domain }) {
         if (!email) return { message: 'no email', success: false };
         const user = await this.pgAddon.pgGetUserByEmail(email);
         if (!user) { return { message: 'user not found', success: false } }
         const secret = `${user.userId}-${(new Date(user.createdAt)).getTime()}`;
         const token = this.jwtokenAddon.hashToken(secret, user.userId);
-        const generateLink = this.generateLink(token, user.userId);
+        const generateLink = this.generateLink(token, user.userId, domain);
         const content = `
         Bạn đã quên mật khẩu của mình phải không?
         Đừng lo lắng, hãy bấm vào link này để reset mật khẩu nha!

@@ -8,8 +8,9 @@ import { ChaptersFacade } from '@awread/core/chapters';
 import { CategoriesFacade } from '@awread/core/categories';
 import { GenresFacade } from '@awread/core/genres';
 import { switchMap } from 'rxjs/operators';
-import { Location } from '@angular/common';
 import { SnackbarService } from '@awread/global/packages';
+import { MatDialog } from '@angular/material/dialog';
+import { PopupChangeCoverOrgan } from '@awread/global/design-system';
 
 @Injectable({
   providedIn: 'root',
@@ -22,8 +23,8 @@ export class DetailBookPage implements OnInit {
   genres$ = this.genresFacade.selectAllGenresAkita();
   chapters$ = this.chaptersFacade.chapters$;
   tabsHead = [
-    { name: 'THÔNG TIN TRUYỆN', href: null, isActive: true },
-    { name: 'MỤC LỤC', href: ['../toc'], isActive: false },
+    { name: 'THÔNG TIN TRUYỆN', href: null, isActive: true, isHidden: false },
+    { name: 'MỤC LỤC', href: ['../toc'], isActive: false, isHidden: false },
   ];
 
   constructor(
@@ -34,9 +35,9 @@ export class DetailBookPage implements OnInit {
     private chaptersFacade: ChaptersFacade,
     private categoriesFacade: CategoriesFacade,
     private genresFacade: GenresFacade,
-    private location: Location,
     private snackbarService: SnackbarService,
     private router: Router,
+    public matDialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
@@ -57,23 +58,22 @@ export class DetailBookPage implements OnInit {
         })
       )
       .subscribe((res) => {
-        console.log('book Data', res);
-        if (res) {
-          this.updateForm(res);
-        } else {
+        console.log('book Data', res, this.activatedRoute);
+        if (!res) {
           this.newBookForm();
+        } else {
+          this.updateForm(res);
         }
       });
   }
 
   detailBookAction(event) {
-    switch (event) {
+    switch (event.type) {
       case 'cancel':
         this.router.navigate(['list']);
         break;
-      case 'publish':
-        this.bookForm.patchValue({ published: true });
-        this.save();
+      case 'upload-image':
+        this.uploadCover(event.data);
         break;
       case 'save':
         this.save();
@@ -85,7 +85,26 @@ export class DetailBookPage implements OnInit {
     }
   }
 
+  uploadCover(data) {
+    const dialogRef = this.matDialog.open(PopupChangeCoverOrgan, {
+      width: '55rem',
+      height: '33rem',
+      data: {
+        id: this.bookForm.value.bookId,
+        mode: 'book-cover'
+      }
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result?.success) {
+        this.bookForm.patchValue({ cover: true, updatedAt: new Date() });
+        console.log('this.bookForm', this.bookForm.value);
+        this.cd.detectChanges();
+      }
+    });
+  }
+
   save() {
+    this.bookForm.patchValue({ updatedAt: new Date() })
     if (this.bookId == 'new') {
       if (this.bookForm.invalid) {
         this.bookForm.get('title').setValue(this.bookForm.value.title, { emitEvent: true });
@@ -95,8 +114,8 @@ export class DetailBookPage implements OnInit {
       }
 
       this.creationsFacade.create(this.bookForm.value).subscribe(value => {
-        console.log('value', value);
-        this.location.back();
+        console.log('value', value, this.bookId);
+        this.router.navigate(['/list', this.bookForm.value.bookId, 'toc'], { replaceUrl: true });
       })
     } else {
       this.creationsFacade.update(this.bookForm.value).subscribe(value => {
@@ -106,7 +125,9 @@ export class DetailBookPage implements OnInit {
   }
 
   newBookForm() {
-    console.log('this.creationsFacade.generateUuid()', this.creationsFacade.generateUuid());
+    // console.log('route', this.activatedRoute, this.tabsHead);
+    this.tabsHead[1].isHidden = true;
+    this.cd.detectChanges();
     this.creationsFacade.generateUuid().subscribe(uuid => {
       this.bookForm.patchValue({ bookId: uuid });
       console.log('this form', this.bookForm.value);
@@ -114,6 +135,9 @@ export class DetailBookPage implements OnInit {
   }
 
   updateForm({ book, genreIds, authors, authorIds }) {
+    // console.log('route', this.activatedRoute, this.tabsHead);
+    this.tabsHead[1].isHidden = false;
+    this.cd.detectChanges();
     this.bookForm.patchValue({
       bookId: this.bookId,
       title: book.title ?? null,
@@ -123,9 +147,10 @@ export class DetailBookPage implements OnInit {
       authorIds: authorIds,
       completed: book.completed,
       published: book.published,
-      cover: book.cover,
+      cover: book.cover ?? false,
       type: book.type,
       age: book.age,
+      updatedAt: book.updatedAt
     })
   }
 
@@ -142,7 +167,8 @@ export class DetailBookPage implements OnInit {
       published: [false],
       cover: [false],
       type: "0",
-      age: "2"
+      age: "2",
+      updatedAt: [null]
     });
   }
 

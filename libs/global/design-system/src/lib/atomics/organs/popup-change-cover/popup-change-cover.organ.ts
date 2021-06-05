@@ -1,9 +1,9 @@
 import { HttpEventType, HttpResponse } from '@angular/common/http';
-import { Component, OnInit, ChangeDetectionStrategy, Input, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, ChangeDetectorRef, Inject } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
-import { CurrentUserFacade } from '@awread/core/users';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { UploadImageFacade } from '@awread/feature/upload-image';
+import { SnackbarService } from '@awread/global/packages';
 @Component({
   selector: 'organ-popup-change-cover',
   templateUrl: './popup-change-cover.organ.html',
@@ -22,14 +22,22 @@ export class PopupChangeCoverOrgan implements OnInit {
   controlName = new FormControl('');
   status = 'pending';
   percentLoading = '10%';
+  aspectRatio;
   constructor(
     public matDialogRef: MatDialogRef<PopupChangeCoverOrgan>,
     private cd: ChangeDetectorRef,
     private uploadImageFacade: UploadImageFacade,
-    private currentUserFacade: CurrentUserFacade,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private snackbarService: SnackbarService,
   ) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    if (this.data.mode == 'avatar') {
+      this.title = 'Chọn ảnh đại diện';
+    } else {
+      this.aspectRatio = 288 / 384;
+    }
+  }
 
   eventChooseImage($event) {
     this.status = 'reposition';
@@ -39,8 +47,15 @@ export class PopupChangeCoverOrgan implements OnInit {
     console.log(croppedImage);
     this.status = 'loading';
     if (croppedImage) {
+      let upload$;
+      if (this.data.mode == 'avatar') {
+        upload$ = this.uploadImageFacade.uploadAvatar(croppedImage, this.data.id);
+      } else {
+        upload$ = this.uploadImageFacade.uploadCover(croppedImage, this.data.id);
+        this.cd.detectChanges();
+      }
       //save image
-      this.uploadImageFacade.uploadAvatar(croppedImage).subscribe(event => {
+      upload$.subscribe(event => {
         console.log('event', event);
         if (event.type === HttpEventType.DownloadProgress) {
           console.log("download progress");
@@ -52,10 +67,14 @@ export class PopupChangeCoverOrgan implements OnInit {
         }
         if (event instanceof HttpResponse) {
           if (event.ok) {
-            this.matDialogRef.close();
-            this.currentUserFacade.updateCurrentUser({ avatar: true })
+            this.matDialogRef.close({ success: event.ok });
+          } else {
+            this.snackbarService.showError('Đăng ảnh thất bại');
           }
         }
+      }, error => {
+        console.warn('upload image failed', error);
+        this.snackbarService.showError('Đăng ảnh thất bại');
       })
     } else {
 

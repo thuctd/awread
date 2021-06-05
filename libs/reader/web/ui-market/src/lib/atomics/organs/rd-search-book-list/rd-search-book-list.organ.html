@@ -3,5 +3,5 @@
     <organ-books-grid [classLayout1]="'col-span-3'" [classLayout2]="'col-span-8'" [book]="book" [chapters]="chapters"></organ-books-grid>
   </div>
   <div class="col-span-3 text-sm text-gray-text pl-10 roboto">{{category}}</div>
-  <div class="col-span-3 text-sm text-gray-text flex justify-end mr-1.5 roboto">{{published === true ? "Hoàn thành" : "Chưa hoàn thiện"}}</div>
+  <div class="col-span-3 text-sm text-gray-text flex justify-end mr-1.5 roboto">{{book.completed === true ? "Hoàn thành" : "Chưa hoàn thiện"}}</div>
 </div>

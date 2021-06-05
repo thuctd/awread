@@ -1,1 +1,1 @@
-<div class="bg-{{bgColor}} w-12 text-center uppercase rounded text-sm py-0.5 text-white font-normal transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-100">{{text}}</div>
+<div [ngClass]="text === 'HOT' ? 'bg-red-500': 'bg-blue-300'" class="w-12 text-center uppercase rounded text-sm py-0.5 text-white font-normal transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-100">{{text}}</div>

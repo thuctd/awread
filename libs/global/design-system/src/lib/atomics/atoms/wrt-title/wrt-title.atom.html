@@ -1,7 +1,7 @@
 <div class="w-4/5 mx-auto">
   <input
     [formControl]="inputControl"
-    [value]="inputControl.value"
+    [value]="inputControl.value | titlecase"
     placeholder="Tên chương"
     class="sm:text-base text-gray-700 font-medium input__chapter text-center py-4 mb-2 w-full"
   />

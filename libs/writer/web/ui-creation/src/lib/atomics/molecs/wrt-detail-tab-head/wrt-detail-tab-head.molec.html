@@ -1,7 +1,9 @@
 <div class="flex justify-between mb-4 shadow-b">
   <div class="flex">
+    <!-- <pre> {{ tabsHead | json }} </pre> -->
     <div *ngFor="let tab of tabsHead" class="text-center">
-      <a [routerLink]="tab.href" (click)="clickedBtn.emit()" [ngClass]="tab.isActive ? 'text-green-400 border-b-4 border-green-400' : 'text-gray-400'"
+      <a *ngIf="tab.isHidden != true" [routerLink]="tab.href" (click)="clickedBtn.emit()"
+        [ngClass]="tab.isActive ? 'text-green-400 border-b-4 border-green-400' : 'text-gray-400'"
         class="outline-none inline-block font-bold py-4 px-5 cursor-pointer md:text-lg xl:text-xl">
         {{ tab.name }}
       </a>

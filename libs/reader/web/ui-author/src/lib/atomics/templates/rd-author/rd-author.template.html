@@ -1,7 +1,12 @@
-<section class="max-w-screen-xl m-auto">
-  <div class="px-8 xl:px-0">
-    <atom-breadcrumb [items]="items"></atom-breadcrumb>
-    <organ-rd-author-main [isFollow]="isFollow" [isBlock]="isBlock" [numberProduct]="books.length" class="mb-4" [user]="user"></organ-rd-author-main>
-    <organ-rd-author-product [books]="books"></organ-rd-author-product>
-  </div>
-</section>
+<div class="flex justify-center items-center pt-48" *ngIf="!user;else loaded">
+  <awread-loading></awread-loading>
+</div>
+<ng-template #loaded>
+  <section class="max-w-screen-xl m-auto">
+    <div class="px-8 xl:px-0">
+      <atom-breadcrumb [items]="items"></atom-breadcrumb>
+      <organ-rd-author-main [isFollow]="isFollow" [isBlock]="isBlock" [numberProduct]="total" class="mb-4" [user]="user"></organ-rd-author-main>
+      <organ-rd-author-product [books]="books" [isMore]="false" (emitMoreBooks)="emitMoreBooks.emit($event)"></organ-rd-author-product>
+    </div>
+  </section>
+</ng-template>

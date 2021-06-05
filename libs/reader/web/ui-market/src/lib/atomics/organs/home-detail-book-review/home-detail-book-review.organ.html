@@ -6,7 +6,7 @@
         <div class="flex justify-end">
           <div class="w-full">
             <div class="relative w-72">
-              <atom-img-m [bookId]="book.bookId" [srcImg]="book.imgUrl" [size]="'xxl'">
+              <atom-img-m [bookId]="book.bookId" [srcImg]="book | coverSize: 'xxl'" [size]="'xxl'">
               </atom-img-m>
               <div class="absolute top--04">
                 <rd-home-icon-rating [topBook]="i + 1"></rd-home-icon-rating>
@@ -22,7 +22,7 @@
       <div class="grid grid-cols-2 gap-10 mb-6">
         <div *ngFor="let book of books | slice:1:5; let i = index">
           <div class="relative">
-            <atom-img-m [bookId]="book.bookId" [srcImg]="book.cover"></atom-img-m>
+            <atom-img-m [bookId]="book.bookId" [srcImg]="book | coverSize"></atom-img-m>
             <div class="absolute -top-1.5">
               <rd-home-icon-rating [topBook]="i + 2"></rd-home-icon-rating>
             </div>

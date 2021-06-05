@@ -1,6 +1,7 @@
 <div class="uppercase text-base xl:text-xl font-bold text-gray-text mb-4">{{title}}</div>
-<div *ngFor="let item of items">
-  <molec-rd-news-book-item [item]="item"></molec-rd-news-book-item>
+<div *ngFor="let item of newsLeft">
+  <molec-rd-news-book-item *ngIf="item.position === 'left'" [blogId]="item.blogId" [title]="item.title" [date]="item.updatedAt" [status]="item.status" [srcImg]="item.image"></molec-rd-news-book-item>
 </div>
+
 
 

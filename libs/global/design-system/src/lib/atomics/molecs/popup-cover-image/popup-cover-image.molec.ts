@@ -19,6 +19,7 @@ export class PopupCoverImageMolec implements OnInit {
   @Input() status = 'pending';
   @Input() percentLoading = '50%';
   @Input() imageChangedEvent = '';
+  @Input() aspectRatio;
   @Input() controlName = new FormControl('');
   @Output() eventChooseImage = new EventEmitter();
   @Output() submitEvent = new EventEmitter();

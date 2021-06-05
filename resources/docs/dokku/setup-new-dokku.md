@@ -92,3 +92,9 @@ https://stackoverflow.com/a/55486859/5992468
 - Finally for buba website
   dokku letsencrypt backend-graphql
   dokku letsencrypt backend-api
+
+# setup docker file
+
+dokku docker-options:add backend-api build --build-arg NODE_ENV=next
+dokku docker-options:add backend-api build --build-arg FOO=0
+dokku docker-options:add backend-api build --build-arg BAR=1

@@ -28,6 +28,7 @@
 
 sudo docker container ls
 docker exec -it dokku.postgres.awread_database bash
+docker exec -it backend-api.web.1 sh
 
 # create a postgres service with the name railsdatabase
 

@@ -1,3 +1,4 @@
+import { tap } from 'rxjs/operators';
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import { FormControl } from '@angular/forms';
 import { ChangeDetectorRef, Directive, Injectable, OnInit } from '@angular/core';
@@ -5,6 +6,7 @@ import { debounceTime, map, switchMap, distinctUntilChanged } from 'rxjs/operato
 import { ActivatedRoute, Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { BooksFacade } from '@awread/core/books';
+import { Observable } from 'rxjs';
 
 @UntilDestroy()
 @Injectable({
@@ -13,6 +15,7 @@ import { BooksFacade } from '@awread/core/books';
 @Directive()
 export class SearchPage implements OnInit {
   searchControl: FormControl = new FormControl();
+  isLoading$: Observable<boolean>;
   results$;
 
   constructor(
@@ -25,6 +28,7 @@ export class SearchPage implements OnInit {
   ngOnInit(): void {
     this.syncUrlSearchText();
     this.watchingSearchTerm();
+    this.isLoading$ = this.booksFacade.searchBooksQuery.selectLoading();
   }
 
   bindingUrlSeach(term: string) {

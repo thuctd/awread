@@ -3,7 +3,7 @@
     <div class="grid grid-cols-12 gap-10 lg:gap-x-10 xl:gap-x-14 place-content-center" *ngIf="!(display === 'grid');else list_content">
       <div *ngFor="let book of longbooks;" class="col-span-2 md:col-span-4">
         <div>
-          <atom-img-m [srcImg]="book.cover" [bookId]="book.bookId"></atom-img-m>
+          <atom-img-m [srcImg]="book | coverSize" [bookId]="book.bookId"></atom-img-m>
           <div [ngSwitch]="categoryId">
             <div *ngSwitchCase="'1'">
               <molec-info-book [book]="book" [btns]="book.newestChapters" [displayUI]="displayUI"></molec-info-book>
@@ -31,10 +31,10 @@
             <div *ngSwitchDefault>
               <div class="grid grid-cols-11 gap-2 place-content-center">
                 <div class="col-span-5">
-                  <atom-img-m [size]="'m'" [srcImg]="book.cover" [bookId]="book.bookId"></atom-img-m>
+                  <atom-img-m [size]="'m'" [srcImg]="book | coverSize: 'm'" [bookId]="book.bookId"></atom-img-m>
                 </div>
                 <div class="col-span-6 -mt-2.5">
-                  <list-info-prose [book]="book"></list-info-prose>
+                  <list-info-prose [book]="book" [chapters]="book.newestChapters"></list-info-prose>
                 </div>
               </div>
             </div>

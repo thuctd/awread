@@ -18,9 +18,10 @@ interface TabHead {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RdAuthorTabsMolec implements OnInit {
+  @Input() total = '';
   @Input() tabs = [
     {
-      name: 'Tác phẩm',
+      name: `${this.total} Tác phẩm`,
       isActive: true,
       faIcon: null,
       href: null,
@@ -40,7 +41,7 @@ export class RdAuthorTabsMolec implements OnInit {
   @Output() toggleTab = new EventEmitter();
 
   currentTab = { name: null, isActive: false };
-  constructor() {}
+  constructor() { }
 
   ngOnInit(): void {
     this.currentTab = this.tabs.find((tab) => tab.isActive);

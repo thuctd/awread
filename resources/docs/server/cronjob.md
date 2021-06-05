@@ -17,6 +17,12 @@ https://crontab.guru/
 https://www.digitalocean.com/community/tutorials/how-to-use-cron-to-automate-tasks-ubuntu-1804
 
 ```
+sudo apt update
 sudo apt install cron
+sudo systemctl enable cron
+crontab -e
+
 
 ```
+
+/var/spool/cron/crontabs/
