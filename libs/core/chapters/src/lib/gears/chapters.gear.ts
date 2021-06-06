@@ -40,13 +40,13 @@ export class ChaptersGear {
     )
   }
 
-  getChapter(chapterId: string, bookId: string) {
-    return this.chaptersApi.getChapter(chapterId, bookId)
+  getChapter(bookId: string, chapterId: string) {
+    return this.chaptersApi.getChapter(bookId, chapterId)
       .pipe(
         map((chapter => ({
           ...chapter,
-          content: chapter['contentByChapterId'].content,
-          book: chapter['bookByBookId']
+          content: chapter?.['contentByChapterId'].content,
+          book: chapter?.['bookByBookId']
         })
         ))
       )
@@ -132,7 +132,7 @@ export class ChaptersGear {
             if (publishThisBook) {
               return this.creationsFacade.publish(chapter.bookId);
             } else {
-              return of(result);
+              return of(result?.data?.['newChapter']?.['uuid']);
             }
           }
         })

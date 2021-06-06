@@ -19,8 +19,9 @@
   <div class="w-2/3">
     <div class="flex justify-end">
       <!-- <pre> {{ btns | json }} </pre> -->
-      <cr-submit-btn class="ml-2" *ngFor="let btn of btns" (btnClicked)="chapterActionEvent.emit(btn.action)" [active]="btn.isActive"
-        [submitText]="btn.submitText" [isHidden]="chapterForm.value.published == true && btn.action == 'publish' ">
+      <pre> {{ chapterForm.value.publishing }} </pre>
+      <cr-submit-btn [disabled]="chapterForm.value.publishing == true" class="ml-2" *ngFor="let btn of btns" (btnClicked)="chapterActionEvent.emit(btn.action)"
+        [active]="btn.isActive" [submitText]="btn.submitText" [isHidden]="chapterForm.value.published == true && btn.action == 'publish' ">
       </cr-submit-btn>
       <!-- <pre> {{ chapterForm.value.chapterId }} </pre> -->
       <wrt-menu-btn

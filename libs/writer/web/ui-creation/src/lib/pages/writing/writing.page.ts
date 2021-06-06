@@ -51,11 +51,15 @@ export class WritingPage implements OnInit {
         console.log('result', result);
         this.book = result.book;
         if (this.chapterId == 'new') {
-          this.updateForm({ bookId: this.bookId, chapterId: this.chapterId, position: this.activatedRoute.snapshot.params['position'] });
+          this.newBookForm();
         } else {
           this.updateForm(result);
         }
       });
+  }
+
+  newBookForm() {
+    this.updateForm({ bookId: this.bookId, chapterId: this.chapterId, position: this.activatedRoute.snapshot.params['position'] });
   }
 
   chapterAction(action) {
@@ -105,17 +109,22 @@ export class WritingPage implements OnInit {
   }
 
   save(publishThisChapter = false) {
+    this.chapterForm.patchValue({ publishing: true });
     const publishThisBook = this.book.published == false && publishThisChapter == true;
     if (this.chapterId == 'new') {
-      this.chaptersFacade.create(this.chapterForm.value, publishThisChapter, publishThisBook).subscribe(value => {
-        console.log('value', value);
+      this.chaptersFacade.create(this.chapterForm.value, publishThisChapter, publishThisBook).subscribe(uuid => {
+        this.chapterForm.patchValue({ publishing: false });
+        this.chapterId = uuid;
+        this.router.navigate(['/list', this.chapterForm.value.bookId, 'toc', this.chapterId, 'writing'], { replaceUrl: true });
       })
     } else {
       this.chaptersFacade.update(this.chapterForm.value, publishThisBook).subscribe(value => {
         console.log('value', value);
+        this.chapterForm.patchValue({ publishing: false });
       })
     }
   }
+
 
   private initForm() {
     this.chapterForm = this.fb.group({
@@ -124,7 +133,8 @@ export class WritingPage implements OnInit {
       published: [false],
       position: [null],
       chapterId: [null],
-      bookId: [null]
+      bookId: [null],
+      publishing: [false]
     });
   }
 

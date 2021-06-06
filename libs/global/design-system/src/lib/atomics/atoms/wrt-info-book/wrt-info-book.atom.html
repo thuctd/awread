@@ -1,12 +1,14 @@
 <!-- <pre> {{ f.value | json }} </pre>
 <pre> {{ chapter | json }} </pre> -->
 
-<div *ngIf="chapter" class="text-sm block font-medium mt-0">
-  Chương {{ +chapter.position == 0 ? 'Mở đầu' : chapter.position }}
-</div>
-<div class="text-xs f6-ns font-normal text-gray-500 measure lh-copy my-0">
-  <span>{{chapter.published ? 'Đã xuất bản' : 'Đang nháp' }}</span>
-  <span>
-    ({{ chapter.content && chapter.content.length ? chapter.content?.split(' ')?.length : 0 }} từ)
-  </span>
-</div>
+<ng-container *ngIf="chapter">
+  <div class="text-sm block font-medium mt-0">
+    Chương {{ +chapter.position == 0 ? 'Mở đầu' : chapter.position }}
+  </div>
+  <div class="text-xs f6-ns font-normal text-gray-500 measure lh-copy my-0">
+    <span>{{chapter.published ? 'Đã xuất bản' : 'Đang nháp' }}</span>
+    <span>
+      ({{ chapter.content && chapter.content.length ? chapter.content?.split(' ')?.length : 0 }} từ)
+    </span>
+  </div>
+</ng-container>

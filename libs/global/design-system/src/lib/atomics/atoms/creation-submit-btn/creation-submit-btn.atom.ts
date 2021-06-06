@@ -19,6 +19,7 @@ export class CreationSubmitBtnAtom implements OnInit {
   @Input() active = true;
   @Input() faIcon;
   @Input() isHidden = false;
+  @Input() disabled = false;
   constructor() { }
 
   ngOnInit(): void { }
