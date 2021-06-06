@@ -26,6 +26,8 @@ export class RdNewsMbTemplate implements OnInit {
   @Input() classActive = 'border rounded-xl border-green-primary text-green-primary pt-2';
   @Input() classNormal = 'border rounded-xl border-gray-text text-green-primary pt-2';
 
+  @Input() news = [];
+
   constructor() {}
 
   ngOnInit(): void {}

@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       environment:
-        description: 'Target environment to deploy'
+        description: 'next or production'
         default: 'next'
         required: true
       name:
@@ -18,6 +18,10 @@ jobs:
   test:
     runs-on: ubuntu-latest
     if: github.event.inputs.name =='test'
+    env:
+      username: "${{ github.event.inputs.environment == 'production' && 'root' || 'hiepxanh' }}"
+      SERVER_URL: "${{ github.event.inputs.environment == 'production' && secrets.PRODUCTION_URL || secrets.NEXT_URL }}"
+      APP: backend-graphql
     steps:
       - run: |
           echo "environment: ${{ github.event.inputs.environment }}"
@@ -28,51 +32,49 @@ jobs:
           echo "Tags: ${{ github.event_name == 'workflow_dispatch' }}"
           echo "next is true ${{ github.event.inputs.name == 'test' && 'next' || 'production' }}"
           echo "production is true ${{ github.event.inputs.name == 'test' && 'production' || 'next' }}"
-          echo "ssh://dokku@${{ github.event.inputs.environment == 'production' && secrets.PRODUCTION_URL || secrets.NEXT_URL }}:22/backend-graphql"
+          echo "ssh://dokku@${{ env.SERVER_URL }}:22/${{ env.APP }}"
+          echo "${{ env.SERVER_URL }}: Restart ${{ env.APP }}"
+      - run: echo "Hello $env.SERVER_URL $middle_name $env.APP, today is Monday!"
 
   restart:
     runs-on: ubuntu-latest
     timeout-minutes: 60
     if: github.event.inputs.name =='restart'
+    env:
+      username: "${{ github.event.inputs.environment == 'production' && 'root' || 'hiepxanh' }}"
+      SERVER_URL: "${{ github.event.inputs.environment == 'production' && secrets.PRODUCTION_URL || secrets.NEXT_URL }}"
+      APP: backend-graphql
     steps:
       - name: executing remote ssh commands using ssh key
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ github.event.inputs.environment == 'production' && secrets.PRODUCTION_URL || secrets.NEXT_URL }}
-          username: root
+          host: ${{ env.SERVER_URL }}
+          username: ${{ env.username }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            curl -X POST -H 'Content-type: application/json' --data '{"text":"Restarting client web"}' https://hooks.slack.com/services/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
-            dokku ps:restart backend-graphql
-            curl -X POST -H 'Content-type: application/json' --data '{"text":"Restart completed"}' https://hooks.slack.com/services/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
+            dokku ps:restart ${{ env.APP }}
+            curl -X POST -H 'Content-type: application/json' --data '{"text":"${{ env.SERVER_URL }}: Restart ${{ env.APP }}"}' https://hooks.slack.com/services/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
 
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 60
     if: (github.event_name == 'push' || github.event.inputs.name == 'build')
+    env:
+      username: "${{ github.event.inputs.environment == 'production' && 'root' || 'hiepxanh' }}"
+      SERVER_URL: "${{ github.event.inputs.environment == 'production' && secrets.PRODUCTION_URL || secrets.NEXT_URL }}"
+      APP: backend-graphql
     steps:
       - name: using action checkout
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      # - name: Set Git config
-      #   run: |
-      #     git config --local user.email "actions@github.com"
-      #     git config --local user.name "Github Actions"
-      # - name: get latest code from develop
-      #   run: |
-      #     git fetch --unshallow
-      #     git pull
-      #     git merge --no-ff origin/develop -m "Auto-merge develop to get latest code"
-      #     git push
-      #     git push origin backend-graphql:develop
 
       - name: Using dokku
         uses: dokku/github-action@master
         with:
           # specify `--force` as a flag for git pushes
           git_push_flags: '--force'
-          git_remote_url: "ssh://dokku@${{ github.event.inputs.environment == 'production' && secrets.PRODUCTION_URL || secrets.NEXT_URL }}:22/backend-graphql"
+          git_remote_url: 'ssh://dokku@${{ env.SERVER_URL }}:22/${{ env.APP }}'
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
 
       - name: noti on failure
@@ -84,7 +86,7 @@ jobs:
         with:
           channel: '#general'
           status: ${{ job.status }}
-          failure_text: '${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) build thất bại cho trang https://backend-graphql.awread.vn'
+          failure_text: '${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) build failed at https://${{ env.APP }}.${{ env.SERVER_URL }}'
 
       - name: noti on success
         uses: edge/simple-slack-notify@master
@@ -94,16 +96,15 @@ jobs:
         with:
           channel: '#general'
           status: ${{ job.status }}
-          success_text: '${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER})  https://backend-graphql.awread.vn sẵn sàng'
+          success_text: '${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER})  https://${{ env.APP }}.${{ env.SERVER_URL }} ready'
 
       - name: executing remote ssh commands using ssh key
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ github.event.inputs.environment == 'production' && secrets.PRODUCTION_URL || secrets.NEXT_URL }}
-          username: root
+          host: ${{ env.SERVER_URL }}
+          username: ${{ env.username }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            curl -X POST -H 'Content-type: application/json' --data '{"text":"Restarting client web"}' https://hooks.slack.com/services/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
             dokku ps:restart reader-web
             dokku ps:restart writer-web
-            curl -X POST -H 'Content-type: application/json' --data '{"text":"Restart completed"}' https://hooks.slack.com/services/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
+            curl -X POST -H 'Content-type: application/json' --data '{"text":"${{ env.SERVER_URL  }}: Restart client completed"}' https://hooks.slack.com/services/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

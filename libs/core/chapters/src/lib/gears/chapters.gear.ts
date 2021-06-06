@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
-import { tap, map } from 'rxjs/operators';
+import { tap, map, mergeMap } from 'rxjs/operators';
 import { ChaptersApi } from '../apis/chapters.api';
 import { ChaptersQuery, ChaptersStore } from '../states/chapters';
 import { SnackbarService } from '@awread/global/packages';
 import { Order } from '@datorama/akita';
+import { CreationsFacade } from '@awread/core/creations';
+import { of } from 'rxjs';
 @Injectable({ providedIn: 'root' })
 export class ChaptersGear {
 
@@ -12,13 +14,14 @@ export class ChaptersGear {
     private chaptersStore: ChaptersStore,
     private SnackbarService: SnackbarService,
     private chaptersQuery: ChaptersQuery,
+    private creationsFacade: CreationsFacade,
   ) {
   }
 
   getLatestPosition() {
     const [latestChapter] = this.chaptersQuery.getAll({ sortBy: 'position', sortByOrder: Order.DESC, limitTo: 1 });
     if (latestChapter) {
-      return +latestChapter.position + 1;
+      return +latestChapter.position;
     } else {
       return 0;
     }
@@ -29,7 +32,7 @@ export class ChaptersGear {
       map(([latestChapter]) => {
         console.log('latestChapter', latestChapter);
         if (latestChapter) {
-          return +latestChapter.position + 1;
+          return +latestChapter.position;
         } else {
           return 0;
         }
@@ -77,14 +80,12 @@ export class ChaptersGear {
   }
 
   private transformDataChapters(chapters) {
-    let chapterLength = chapters.length;
     return chapters.map((item, index) => {
-      chapterLength = chapterLength - 1;
-      return { ...item, chapterNumber: chapterLength + 1 };
+      return { ...item, position: +item.position + 1 };
     });
   }
 
-  update(chapter) {
+  update(chapter, publishThisBook = false) {
     return this.chaptersApi.update(chapter)
       .pipe(
         tap(result => {
@@ -93,18 +94,46 @@ export class ChaptersGear {
           } else {
             this.SnackbarService.showSuccess('Lưu chương thành công');
           }
+        }),
+        mergeMap(result => {
+          if (result.errors) {
+            result.errors.forEach(error => this.SnackbarService.showError(error.message));
+            return of(result.errors);
+          } else {
+            if (publishThisBook) {
+              return this.creationsFacade.publish(chapter.bookId);
+            } else {
+              return of(result);
+            }
+          }
         })
       )
   }
 
-  create(chapter) {
+  create(chapter, publishThisChapter = false, publishThisBook = false) {
     return this.chaptersApi.create(chapter)
       .pipe(
         tap(result => {
           if (result.errors) {
             result.errors.forEach(error => this.SnackbarService.showError(error.message));
           } else {
-            this.SnackbarService.showSuccess('Tạo chương mới thành công');
+            if (publishThisChapter) {
+              this.SnackbarService.showSuccess('Đã xuất bản chương mới');
+            } else {
+              this.SnackbarService.showSuccess('Tạo chương mới thành công');
+            }
+          }
+        }),
+        mergeMap(result => {
+          if (result.errors) {
+            result.errors.forEach(error => this.SnackbarService.showError(error.message));
+            return of(result.errors);
+          } else {
+            if (publishThisBook) {
+              return this.creationsFacade.publish(chapter.bookId);
+            } else {
+              return of(result);
+            }
           }
         })
       )

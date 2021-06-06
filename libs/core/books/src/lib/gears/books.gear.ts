@@ -29,24 +29,32 @@ export class BooksGear {
       map((res) => {
         hasMore = res?.['data']?.['allMvBooksLatestChapters']?.['pageInfo']?.hasNextPage;
         total = res?.['data']?.['allMvBooksLatestChapters']?.totalCount;
-        this.categoryBooksStore.set(res?.['data']?.['allMvBooksLatestChapters']?.['nodes']);
+        return res?.['data']?.['allMvBooksLatestChapters']?.['nodes'];
       }),
+      tap((res) => this.categoryBooksStore.set(res)),
       tap(() => this.categoryBooksStore.updatePage({ hasMore: hasMore, sizePage: limit, total: total })),
       tap(() => this.categoryBooksStore.setLoading(false))
     );
   }
 
-  getAuthorBooks(authors) {
+  getAuthorBooks(authors, limit: number = 12) {
     const isCheck = typeof (authors);
     let authorIds: string[];
+    let hasMore, total;
     if (isCheck === 'string') {
       authorIds = authors.split();
     } else {
       authorIds = Object.keys(authors ?? {});
     }
     this.authorBooksStore.setLoading(true);
-    return this.booksApi.getAuthorBooks(authorIds).pipe(
+    return this.booksApi.getAuthorBooks(authorIds, limit).pipe(
+      map((res) => {
+        hasMore = res?.['data']?.['allMvBooksLatestChapters']?.['pageInfo']?.hasNextPage;
+        total = res?.['data']?.['allMvBooksLatestChapters']?.totalCount;
+        return res?.['data']?.['allMvBooksLatestChapters']?.['nodes'];
+      }),
       tap(books => this.authorBooksStore.set(books)),
+      tap(() => this.authorBooksStore.updatePage({ hasMore: hasMore, sizePage: limit, total: total })),
       tap(() => this.authorBooksStore.setLoading(false))
     );
   }

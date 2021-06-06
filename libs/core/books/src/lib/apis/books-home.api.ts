@@ -10,7 +10,7 @@ export class BooksHomeApi {
     return this.apollo.query({
       query: gql`
         query allMvMostViewBooks {
-          allMvMostViewBooks(first: 10, orderBy: VIEWS_DESC, condition: {published: true}) {
+          allMvMostViewBooks(first: 10, orderBy: VIEWS_DESC, condition: {published: true, isDeleted: false}) {
             nodes {
               bookId
               title
@@ -18,6 +18,7 @@ export class BooksHomeApi {
               newestChapters
               updatedAt
               views
+              cover
             }
           }
         }
@@ -32,7 +33,7 @@ export class BooksHomeApi {
     return this.apollo.query({
       query: gql`
         query allMvMostViewBooks {
-          allMvMostViewBooks(first: 6, condition: {published: true}) {
+          allMvMostViewBooks(first: 6, condition: {published: true, isDeleted: false}) {
             nodes {
               bookId
               categoryId
@@ -54,7 +55,17 @@ export class BooksHomeApi {
     return this.apollo.query({
       query: gql`
           query allMvBooksLatestChapters ($offset: Int ${categoryId ? `,$categoryId: BigFloat` : ''}) {
-            allMvBooksLatestChapters(first: 10, offset: $offset condition: {published: true ${categoryId ? `, categoryId: $categoryId ` : ''}}) {
+            allMvBooksLatestChapters(
+              first: 10,
+              offset: $offset,
+              orderBy: PUBLISHED_DESC,
+              condition: {
+                published: true,
+                isDeleted: false ${categoryId ? `, 
+                categoryId: $categoryId ` : ''
+        }
+              }
+            ) {
               nodes {
                 bookId
                 categoryId
@@ -62,6 +73,7 @@ export class BooksHomeApi {
                 title
                 updatedAt
                 authors
+                cover
               }
             }
           }

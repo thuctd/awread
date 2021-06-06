@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'organ-rd-author-product',
@@ -14,6 +14,8 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 })
 export class RdAuthorProductOrgan implements OnInit {
   @Input() books = [];
+  @Input() isMore: false | true = true;
+  @Output() emitMoreBooks = new EventEmitter();
 
   constructor() { }
 

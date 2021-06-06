@@ -9,7 +9,16 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfileInfoFormMolec implements OnInit {
-  @Input() profileForm: FormGroup = this.fb.group({});
+  @Input() profileForm: FormGroup = this.fb.group({
+    firstName: ['', [Validators.required]],
+    middlename: ['', [Validators.required]],
+    lastname: ['', [Validators.required]],
+    email: ['', [Validators.required]],
+    phone: ['', [Validators.required]],
+    age: ['', [Validators.required]],
+    dob: ['', [Validators.required]],
+    gender: ['', [Validators.required]],
+  });
   @Input() submitted: boolean;
   @Input() inputControl = new FormControl('');
 

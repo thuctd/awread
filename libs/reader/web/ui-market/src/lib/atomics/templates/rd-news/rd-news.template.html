@@ -1,8 +1,8 @@
 <section class="w-full max-w-screen-xl mx-auto px-8">
-  <organ-rd-news-events></organ-rd-news-events>
+  <organ-rd-news-events [banners]="news"></organ-rd-news-events>
   <div class="w-full grid grid-cols-10 gap-12 mt-10">
-    <organ-rd-news-book class="col-span-3"></organ-rd-news-book>
-    <organ-rd-news-awread class="col-span-5"></organ-rd-news-awread>
-    <atom-advertis class="col-span-2"></atom-advertis>
+    <organ-rd-news-book [newsLeft]="news" class="col-span-3"></organ-rd-news-book>
+    <organ-rd-news-awread [newsMiddle]="news" class="col-span-5"></organ-rd-news-awread>
+    <molec-rd-news-share-experience [newsRight]="news" class="col-span-2 mt-11"></molec-rd-news-share-experience>
   </div>
 </section>

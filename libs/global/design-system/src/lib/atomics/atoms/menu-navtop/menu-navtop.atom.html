@@ -1,13 +1,13 @@
 <section>
   <a (click)="toggleMenu($event)" closeOnOutSide (clickedOutside)="isMenuOpen = false" class="outline-none cursor-pointer ml-56">
-    <img [src]="user.avatar | avatarSize:'l' || '/global-assets/images/avatar-mrmrs.webp'" class="rounded-full h-8 w-8 inline-block" alt="avatar" />
+    <img [src]="user.avatar | avatarSize:'s' || '/global-assets/images/avatar-mrmrs.webp'" class="rounded-full h-8 w-8 inline-block" alt="avatar" />
     <div class="inline-block pl-2"> {{ user.lastname ? user.lastname : user.name?.split(' ')[0] }} </div>
   </a>
   <div *ngIf="isMenuOpen" class="flex flex-col z-50 right55 top-20 absolute">
     <div id="frist_div" class="w-80 h-12 bg-green-500 rounded-b-none  rounded-2xl shadow"></div>
     <div class="w-80 h-12 bg-white border-gray-400 border-b shadow">
       <div class="w-full">
-        <img [src]="user.avatar | avatarSize:'l' || '/global-assets/images/avatar-mrmrs.webp'"
+        <img [src]="user.avatar | avatarSize:'s' || '/global-assets/images/avatar-mrmrs.webp'"
           class="bg-green-500 p-1 left-5 top-5 rounded-full h-16 w-16 inline-block absolute" alt="IMG_User" />
         <div class="text-sm pl-20 ml-3 mt-1 text-gray-700">{{user.lastname ? user.lastname : user.name }} </div>
         <div class="text-xs pl-20 ml-3 text-gray-text">{{ user.email }}</div>

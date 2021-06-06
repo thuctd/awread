@@ -31,6 +31,10 @@ export class CreationsFacade {
     return this.creationsGear.create(book);
   }
 
+  publish(bookId) {
+    return this.creationsGear.publish(bookId);
+  }
+
   update(book) {
     return this.creationsGear.update(book);
   }

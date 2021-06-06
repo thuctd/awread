@@ -29,6 +29,9 @@ export class CurrentUserGear {
   }
 
   update(user: CurrentUser) {
+    if (user.updatedAt) {
+      this.currentUserStore.update({ updatedAt: user.updatedAt });
+    }
     return this.currentUserApi.update(user).pipe(
     ).subscribe(result => {
       if (result.data) {

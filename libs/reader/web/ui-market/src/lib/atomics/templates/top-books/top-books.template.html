@@ -2,21 +2,27 @@
   <div class="border-b border-gray-300">
     <atom-title [title]="'TOP PHỔ BIẾN'"></atom-title>
   </div>
-  <div class="mt-8 relative">
-    <div class="grid grid-cols-6 gap-4">
-      <div class="col-start-1 col-end-3">
-        <atom-title [isUppercase]="false" [title]="totalBook +' Truyện'"></atom-title>
-      </div>
-      <div class="col-end-9 col-span-2">
-        <div class="inline-flex rounded-md text-sm leading-none border-gray-200 mt-1" *ngFor="let action of actions">
-          <atom-btn-icon class="{{action.class}}" [icon]="action.faIcon"
-            [ngClass]="display === action.display ? 'bg-green-primary text-white': 'bg-white text-green-primary'" (eventChangesDisplay)="changeDisplay(action.display)">
-          </atom-btn-icon>
+  <div class="flex justify-center items-center pt-48" *ngIf="loading;else loaded">
+    <awread-loading></awread-loading>
+  </div>
+  <ng-template #loaded>
+    <div class="mt-8">
+      <div class="grid grid-cols-6 gap-4">
+        <div class="col-start-1 col-end-3">
+          <atom-title [isUppercase]="false" [title]="totalBook +' Truyện'"></atom-title>
+        </div>
+        <div class="col-end-9 col-span-2">
+          <div class="inline-flex rounded-md text-sm leading-none border-gray-200 mt-1" *ngFor="let action of actions">
+            <atom-btn-icon class="{{action.class}}" [icon]="action.faIcon"
+              [ngClass]="display === action.display ? 'bg-green-primary text-white': 'bg-white text-green-primary'"
+              (eventChangesDisplay)="changeDisplay(action.display)">
+            </atom-btn-icon>
+          </div>
         </div>
       </div>
+      <div class="pt-4">
+        <organ-list-top-book (moreEvent)="moreBooks.emit($event)" [display]="display" [books]="books"></organ-list-top-book>
+      </div>
     </div>
-    <div [ngClass]="filterbook === false ? 'pt-12' : 'pt-36'">
-      <organ-list-top-book (moreEvent)="moreBooks.emit($event)" [display]="display" [books]="books"></organ-list-top-book>
-    </div>
-  </div>
+  </ng-template>
 </section>

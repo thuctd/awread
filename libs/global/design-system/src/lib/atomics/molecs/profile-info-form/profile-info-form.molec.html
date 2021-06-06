@@ -18,35 +18,24 @@
       class="border rounded-full border-gray-200 py-2 w-3/5 focus:outline-none px-4 focus:ring-1 focus:ring-gray-300 focus:border-gray-300" />
   </div>
 
-  <div class="mb-4">
-    <div class="flex items-center justify-between">
-     <label class="text-gray-400 w-2/5">Email</label>
-     <input formControlName="email" placeholder="Email"
+  <div class="mb-4 flex items-center">
+    <label class="text-gray-400 w-2/5">Email</label>
+    <input formControlName="email" placeholder="Email"
       class="border rounded-full border-gray-200 py-2 w-3/5 focus:outline-none px-4 focus:ring-1 focus:ring-gray-300 focus:border-gray-300" />
-    </div>
-
-    <!-- Loi required -->
-    <div class="flex">
-      <div class="w-2/5"></div>
-      <div *ngIf="profileForm.controls.email.errors && profileForm.controls.email.touched" class="invalid-feedback ml-6 w-3/5">
-        <div *ngIf="profileForm.controls.email.errors.required">
-          Email không được để trống
-        </div>
-      </div>
-    </div>
-
-    <!-- Loi email -->
-    <div class="flex">
-      <div class="w-2/5"></div>
-      <div *ngIf="profileForm.controls.email.errors && profileForm.controls.email.touched" class="invalid-feedback ml-6 w-3/5">
-        <div *ngIf="profileForm.controls.email.errors.email">
-          Email không hợp lệ
-        </div>
-      </div>
-    </div>
   </div>
 
-
+  <!-- Loi required -->
+  <div *ngIf="submitted && profileForm.controls.email.errors" class="invalid-feedback">
+    <div *ngIf="profileForm.controls.email.errors.required">
+      Email không được để trống
+    </div>
+  </div>
+  <!-- Loi email -->
+  <div *ngIf="submitted && profileForm.controls.email.errors" class="invalid-feedback">
+    <div *ngIf="profileForm.controls.email.errors.email">
+      Email không hợp lệ
+    </div>
+  </div>
 
   <div class="mb-4 flex items-center">
     <label class="text-gray-400 w-2/5">Số điện thoại</label>
@@ -54,21 +43,10 @@
       class="border rounded-full border-gray-200 py-2 w-3/5 focus:outline-none px-4 focus:ring-1 focus:ring-gray-300 focus:border-gray-300" />
   </div>
 
-  <div class="mb-4">
-    <div class="flex items-center justify-between">
-     <label class="text-gray-400 w-2/5">Tuổi</label>
-     <input formControlName="age" placeholder="Tuổi"
+  <div class="mb-4 flex items-center">
+    <label class="text-gray-400 w-2/5">Tuổi</label>
+    <input formControlName="age" placeholder="Tuổi"
       class="border rounded-full border-gray-200 py-2 w-3/5 focus:outline-none px-4 focus:ring-1 focus:ring-gray-300 focus:border-gray-300" />
-    </div>
-
-    <div class="flex">
-      <div class="w-2/5"></div>
-      <div *ngIf="profileForm.controls.age.errors && profileForm.controls.age.touched" class="invalid-feedback ml-6 w-3/5">
-        <div *ngIf="profileForm.controls.age.errors.required">
-          Tuổi không được để trống
-        </div>
-      </div>
-    </div>
   </div>
 
   <div class="mb-4 flex items-center">

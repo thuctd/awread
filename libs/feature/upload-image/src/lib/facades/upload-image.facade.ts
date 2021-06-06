@@ -8,10 +8,10 @@ export class UploadImageFacade {
     private uploadImageGear: UploadImageGear,
   ) {
   }
-  uploadAvatar(blob) {
-    return this.uploadImageGear.uploadAvatar(blob);
+  uploadAvatar(blob, userId) {
+    return this.uploadImageGear.uploadAvatar(blob, userId);
   }
-  uploadCover(blob, bookId: string) {
+  uploadCover(blob, bookId) {
     return this.uploadImageGear.uploadCover(blob, bookId);
   }
 

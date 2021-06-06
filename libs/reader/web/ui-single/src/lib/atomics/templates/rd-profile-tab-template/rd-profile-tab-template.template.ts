@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { PopupChangeCoverOrgan } from '@awread/global/design-system';
@@ -18,21 +18,18 @@ import { faCog, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 })
 export class RdProfileTabTemplateTemplate implements OnInit {
   @Input() profileForm: FormGroup = this.fb.group({
-    name: ['', [Validators.required]],
-    email: ['', [Validators.required, Validators.email]],
-    phone: [''],
-    dob: [''],
-    age: ['', [Validators.required]],
-    gender: [''],
-    fullname: [''],
-    username: [''],
-    website: [''],
-    introduce: [''],
+    email: ['', [Validators.required]],
+    phone: ['', [Validators.required]],
+    dob: ['', [Validators.required]],
+    gender: ['', [Validators.required]],
+    fullname: ['', [Validators.required]],
+    username: ['', [Validators.required]],
+    website: ['', [Validators.required]],
+    introduce: ['', [Validators.required]],
   });
   @Input() currentUser = {};
   @Input() submitted: boolean;
-  @Output() updateProfileEvent = new EventEmitter();
-  @Output() clickConnect = new EventEmitter();
+  @Output() submitEvent = new EventEmitter();
   @Input() mode: 'display' | 'edit' = 'display';
   @Input() actions = ['display', 'edit'];
   @Input() tabs = [
@@ -52,31 +49,17 @@ export class RdProfileTabTemplateTemplate implements OnInit {
   @Input() classActive = 'border-b-2 border-green-primary text-green-primary';
   @Input() classNormal = 'text-gray-text font-medium';
 
-  constructor(public matDialog: MatDialog, private fb: FormBuilder) {}
+  constructor(public matDialog: MatDialog, private fb: FormBuilder, private cd: ChangeDetectorRef) { }
 
-  ngOnInit(): void {}
-
-  eventChooseImageCover(event) {
-    this.matDialog.open(PopupChangeCoverOrgan, {
-      width: '55rem',
-      height: '33rem',
-    });
-  }
-
-  updateForm(mode: any) {
-    if (this.profileForm.invalid) {
-      return;
-    } else {
-      this.mode = mode;
-      window.scroll({
-        top: 0,
-        left: 0,
-        behavior: 'smooth',
-      });
-    }
-  }
+  ngOnInit(): void { }
 
   changeModeEdit(mode: any) {
     this.mode = mode;
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth',
+    });
+    this.cd.detectChanges();
   }
 }

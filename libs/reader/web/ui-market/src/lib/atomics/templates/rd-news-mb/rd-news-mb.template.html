@@ -5,6 +5,17 @@
     [classActive]="classActive"
     [classNormal]="classNormal">
   </molec-rd-author-tabs>
-  <molec-rd-news-awread-list *ngIf="tabHead.currentTab.name === tabs[0].name"></molec-rd-news-awread-list>
-  <molec-rd-news-awread-list *ngIf="tabHead.currentTab.name === tabs[1].name"></molec-rd-news-awread-list>
+  <div *ngIf="tabHead.currentTab.name === tabs[0].name">
+    <div *ngFor="let item of news">
+      <atom-rd-news-awread-item class="py-4" *ngIf="item.position == 'left'" [blogId]="item.blogId" [title]="item.title" [srcImg]="item.image" [date]="item.updatedAt" [description]="item.description" [mode]="'list'"></atom-rd-news-awread-item>
+    </div>
+  </div>
+  <div *ngIf="tabHead.currentTab.name === tabs[1].name">
+    <div *ngFor="let item of news">
+      <atom-rd-news-awread-item class="py-4" *ngIf="item.position == 'bottom' || item.position == 'top'" [blogId]="item.blogId" [title]="item.title" [srcImg]="item.image" [date]="item.updatedAt" [description]="item.description" [mode]="'list'"></atom-rd-news-awread-item>
+    </div>
+  </div>
+  <div class="flex justify-center items-center pt-4">
+    <pagination></pagination>
+  </div>
 </section>

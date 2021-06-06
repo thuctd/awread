@@ -9,10 +9,6 @@ export class NewsGear {
   constructor(private newsApi: NewsApi, private newsStore: NewsStore) {}
 
   get() {
-    // return this.newsApi.get().pipe(
-    //   tap((value) => console.log('news', value)),
-    //   tap((value: any) => this.newsStore.set(value))
-    // );
     const fakeData = {};
 
     return this.newsApi.get().pipe(

@@ -1,23 +1,16 @@
 <section class="flex flex-col" [formGroup]="profileForm">
   <atom-title [class]="'font-medium text-sm text-gray-500'" [title]="'Chỉnh sửa hồ sơ'" [isUppercase]="false"></atom-title>
-
-  <div class="my-4">
-    <div class="flex items-center justify-between">
-      <label class="text-gray-400 w-2/5">Tên hiển thị</label>
-      <input formControlName="name" placeholder="Tên hiển thị"
+  <div class="my-4 flex items-center justify-between">
+    <label class="text-gray-400 w-2/5">Tên hiển thị</label>
+    <input formControlName="name" placeholder="Tên hiển thị"
       class="border rounded-full border-gray-200 text-gray-700 focus:outline-none px-4 py-2 w-3/5 focus:ring-1 focus:ring-gray-300 focus:border-gray-300" />
-    </div>
-
-    <div class="flex">
-      <div class="w-2/5"></div>
-      <div *ngIf="profileForm.controls.name.errors && profileForm.controls.name.touched" class="invalid-feedback ml-6 w-3/5">
-        <div *ngIf="profileForm.controls.name.errors.required">
-          Tên hiển thị không được để trống
-        </div>
-      </div>
-    </div>
   </div>
 
+  <div *ngIf="submitted && profileForm.controls.name.errors" class="text-red-600 mt-1">
+    <div *ngIf="profileForm.controls.name.errors.required">
+      Tên là không được để trống
+    </div>
+  </div>
   <div class="mb-4 flex items-center justify-between">
     <label class="text-gray-400 w-2/5">Tên tài khoản</label>
     <input formControlName="username" placeholder="Tên tài khoản"

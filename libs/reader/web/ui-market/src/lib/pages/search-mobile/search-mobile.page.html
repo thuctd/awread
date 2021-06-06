@@ -1,1 +1,1 @@
-<template-rd-search-book-mb (bindingUrl)="bindingUrlSeach($event)" [inputControl]="searchControl" [items]="results$ | async"></template-rd-search-book-mb>
+<template-rd-search-book-mb [loading]="isLoading$ | async" (bindingUrl)="bindingUrlSeach($event)" [inputControl]="searchControl" [items]="results$ | async"></template-rd-search-book-mb>

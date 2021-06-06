@@ -73,19 +73,34 @@ import { RdNewsAwreadOrgan } from './organs/rd-news-awread/rd-news-awread.organ'
 import { RdNewsBookItemMolec } from './molecs/rd-news-book-item/rd-news-book-item.molec';
 import { RdNewsAwreadHotMolec } from './molecs/rd-news-awread-hot/rd-news-awread-hot.molec';
 import { RdNewsEventItemMolec } from './molecs/rd-news-event-item/rd-news-event-item.molec';
-import { RdNewsAwreadListMolec } from './molecs/rd-news-awread-list/rd-news-awread-list.molec';
 import { RdNewsMbTemplate } from './templates/rd-news-mb/rd-news-mb.template';
 import { RdNewsDetailTemplate } from './templates/rd-news-detail/rd-news-detail.template';
 import { CoreCategoriesModule } from '@awread/core/categories';
+import { RdNewsDetailContentOrgan } from './organs/rd-news-detail-content/rd-news-detail-content.organ';
 import { TopBooksTemplate } from './templates/top-books/top-books.template';
 import { ListTopBookOrgan } from './organs/list-top-book/list-top-book.organ';
 import { TopBooksMbTemplate } from './templates/top-books-mb/top-books-mb.template';
 import { InfiniteScrollModule, LoaderModule } from '@awread/global/packages';
+import { RdIntroductionMbTemplate } from './templates/rd-introduction-mb/rd-introduction-mb.template';
+import { RdIntroductionContentMbMolec } from './molecs/rd-introduction-content-mb/rd-introduction-content-mb.molec';
+import { RdIntroductionFounderMbOrgan } from './organs/rd-introduction-founder-mb/rd-introduction-founder-mb.organ';
+import { RdIntroductionHotlineMbOrgan } from './organs/rd-introduction-hotline-mb/rd-introduction-hotline-mb.organ';
+import { RdNewsShareExperienceMolec } from './molecs/rd-news-share-experience/rd-news-share-experience.molec';
+import { QuillModule } from 'ngx-quill';
 
 @NgModule({
-  imports: [CommonModule, StorybookSupportModule, GlobalDesignSystemAtomicModule, CarouselModule, ReaderWebUiAuthorAtomicModule, CoreCategoriesModule, InfiniteScrollModule, LoaderModule],
-  exports: [
+  imports: [
+    CommonModule,
+    StorybookSupportModule,
+    GlobalDesignSystemAtomicModule,
+    CarouselModule,
     ReaderWebUiAuthorAtomicModule,
+    CoreCategoriesModule,
+    InfiniteScrollModule,
+    LoaderModule,
+    QuillModule,
+  ],
+  exports: [
     CommonModule,
     ListInfoProseMolec,
     ListDetailLongBookOrgan,
@@ -157,12 +172,17 @@ import { InfiniteScrollModule, LoaderModule } from '@awread/global/packages';
     RdNewsBookItemMolec,
     RdNewsAwreadHotMolec,
     RdNewsEventItemMolec,
-    RdNewsAwreadListMolec,
     RdNewsMbTemplate,
     RdNewsDetailTemplate,
+    RdNewsDetailContentOrgan,
     TopBooksTemplate,
     ListTopBookOrgan,
     TopBooksMbTemplate,
+    RdIntroductionMbTemplate,
+    RdIntroductionContentMbMolec,
+    RdIntroductionFounderMbOrgan,
+    RdIntroductionHotlineMbOrgan,
+    RdNewsShareExperienceMolec,
   ],
   declarations: [
     ListInfoProseMolec,
@@ -234,12 +254,17 @@ import { InfiniteScrollModule, LoaderModule } from '@awread/global/packages';
     RdNewsBookItemMolec,
     RdNewsAwreadHotMolec,
     RdNewsEventItemMolec,
-    RdNewsAwreadListMolec,
     RdNewsMbTemplate,
     RdNewsDetailTemplate,
+    RdNewsDetailContentOrgan,
     TopBooksTemplate,
     ListTopBookOrgan,
     TopBooksMbTemplate,
+    RdIntroductionMbTemplate,
+    RdIntroductionContentMbMolec,
+    RdIntroductionFounderMbOrgan,
+    RdIntroductionHotlineMbOrgan,
+    RdNewsShareExperienceMolec,
   ],
 })
-export class ReaderWebUiMarketAtomicModule {}
+export class ReaderWebUiMarketAtomicModule { }

@@ -15,14 +15,14 @@ export class LogoutGear {
     @Inject('persistStorage') private persistStorage
   ) { }
 
-  logout(redirect = '/login') {
+  async logout(redirect = '/login') {
     this.apolloAddon.logout();
     this.currentUserService.logout();
     window.localStorage.clear();
     this.router.navigate([redirect]);
     this.snackbarService.showSuccess('Tạm biệt!');
     try {
-      this.socialAuthService.signOut(true);
+      await this.socialAuthService.signOut(true);
     } catch (error) {
       console.warn('social signout error', error);
     }

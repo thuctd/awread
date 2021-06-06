@@ -1,1 +1,3 @@
-<template-read-mobile [loading]="loading" [breadcrumbs]="breadcrumbs" [chapters]="bookChapters$ | async" (nextChapterBook)="onChangeNextChapter(chapter)" (backChapterBook)="onChangeBackChapter(chapter)" [books]="topBookList$ | async" [chapter]="chapter"></template-read-mobile>
+<template-read-mobile (nativeTopBook)="nativeTopBook()" [loading]="loading" [breadcrumbs]="breadcrumbs" [chapters]="bookChapters$ | async"
+  (nextChapterBook)="onChangeNextChapter(chapter)" (backChapterBook)="onChangeBackChapter(chapter)" [books]="topBookList$ | async" [chapter]="chapter">
+</template-read-mobile>

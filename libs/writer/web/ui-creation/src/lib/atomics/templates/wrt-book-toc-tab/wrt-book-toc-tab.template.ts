@@ -1,7 +1,5 @@
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { PopupChangeCoverOrgan } from '@awread/global/design-system';
 
 @Component({
   selector: 'template-wrt-book-toc-tab',
@@ -27,14 +25,8 @@ export class WrtBookTocTabTemplate implements OnInit {
   @Input() tabsHead = [];
 
   @Output() chapterActionEvent = new EventEmitter();
-  constructor(public matDialog: MatDialog, private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void { }
 
-  eventChooseImageCover(event) {
-    this.matDialog.open(PopupChangeCoverOrgan, {
-      width: '55rem',
-      height: '33rem',
-    });
-  }
 }

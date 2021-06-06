@@ -16,7 +16,8 @@ export class NormalLoginBtn implements OnInit {
   @Output() btnClicked = new EventEmitter();
   @Input() name = 'Đăng nhập';
   @Input() active = false;
-  constructor() {}
+  @Input() isHidden = false;
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

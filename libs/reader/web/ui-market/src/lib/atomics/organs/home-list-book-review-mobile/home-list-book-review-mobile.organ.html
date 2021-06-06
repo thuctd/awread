@@ -1,36 +1,36 @@
 <div class="w-full max-w-screen-xl mx-auto mt-4">
-    <atom-title [title]="titlePage" class="uppercase"></atom-title>
-    <div class="justify-center flex flex-col mt-8">
-        <div *ngFor="let book of books | slice:0:1; let i = index" class="flex justify-center mb-10">
-            <div class="mx-4">
-                <div class="relative flex flex-row">
-                  <atom-img-m [size]="'l'" [bookId]="book.bookId" [srcImg]="book.cover"></atom-img-m>
-                  <div class="absolute top--04">
-                    <rd-home-icon-rating></rd-home-icon-rating>
-                  </div>
-                  <div class="ml-3">
-                    <!-- <home-info-book-review [isSize]="false" [size]="'s'"></home-info-book-review> -->
-                    <molec-info-book [displayUI]="displayUI" [book]="book" [btns]="book.newestChapters"></molec-info-book>
-                  </div>
-                </div>
-            </div>
+  <atom-title [title]="titlePage" class="uppercase"></atom-title>
+  <div class="justify-center flex flex-col mt-8">
+    <div *ngFor="let book of books | slice:0:1; let i = index" class="flex justify-center mb-10">
+      <div class="mx-4">
+        <div class="relative flex flex-row">
+          <atom-img-m [size]="'l'" [bookId]="book.bookId" [srcImg]="book | coverSize: 'l'"></atom-img-m>
+          <div class="absolute top--04">
+            <rd-home-icon-rating></rd-home-icon-rating>
+          </div>
+          <div class="ml-3">
+            <!-- <home-info-book-review [isSize]="false" [size]="'s'"></home-info-book-review> -->
+            <molec-info-book [displayUI]="displayUI" [book]="book" [btns]="book.newestChapters"></molec-info-book>
+          </div>
         </div>
-        <div class="flex justify-center w-full">
-            <div class="grid grid-cols-2 gap-8 sm:gap-12 mb-6">
-                <div *ngFor="let book of books | slice:1:5; let i = index" class="w-full rounded relative">
-                  <div class="mx-4">
-                    <atom-img-m [size]="'m'" [bookId]="book.id" [srcImg]="book.imgUrl"></atom-img-m>
-                    <div class="absolute -top-1.5">
-                        <rd-home-icon-rating [topBook]="i + 2"></rd-home-icon-rating>
-                    </div>
-                    <div class="w-full">
-                      <!-- <home-info-book-review [book]="book" [isSize]="false" [size]="'s'"></home-info-book-review> -->
-                      <molec-info-book [book]="book" [displayUI]="displayUI" [btns]="book.newestChapters"></molec-info-book>
-                    </div>
-                  </div>
-                </div>
-            </div>
-        </div>
-        <div class="clear-none"></div>
+      </div>
     </div>
+    <div class="flex justify-center w-full">
+      <div class="grid grid-cols-2 gap-8 sm:gap-12 mb-6">
+        <div *ngFor="let book of books | slice:1:5; let i = index" class="w-full rounded relative">
+          <div class="mx-4">
+            <atom-img-m [size]="'m'" [bookId]="book.bookId" [srcImg]="book | coverSize: 'm'"></atom-img-m>
+            <div class="absolute -top-1.5">
+              <rd-home-icon-rating [topBook]="i + 2"></rd-home-icon-rating>
+            </div>
+            <div class="w-full">
+              <!-- <home-info-book-review [book]="book" [isSize]="false" [size]="'s'"></home-info-book-review> -->
+              <molec-info-book [book]="book" [displayUI]="displayUI" [btns]="book.newestChapters"></molec-info-book>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="clear-none"></div>
+  </div>
 </div>

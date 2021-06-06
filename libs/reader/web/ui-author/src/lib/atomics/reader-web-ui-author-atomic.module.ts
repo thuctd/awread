@@ -1,3 +1,4 @@
+import { InfiniteScrollModule, LoaderModule } from '@awread/global/packages';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GlobalDesignSystemAtomicModule, StorybookSupportModule } from '@awread/global/design-system';
@@ -39,9 +40,9 @@ import { RdAuthorPopupListFollowersMbTemplate } from './templates/rd-author-popu
 import { RdAuthorPopupNotiReportMbTemplate } from './templates/rd-author-popup-noti-report-mb/rd-author-popup-noti-report-mb.template';
 import { RdAuthorPopupUnfollowMbTemplate } from './templates/rd-author-popup-unfollow-mb/rd-author-popup-unfollow-mb.template';
 import { RdAuthorProductMbTemplate } from './templates/rd-author-product-mb/rd-author-product-mb.template';
-
 @NgModule({
   declarations: [
+
     RdAuthorDetailMolec,
     RdAuthorMainOrgan,
     RdAuthorProductOrgan,
@@ -80,7 +81,14 @@ import { RdAuthorProductMbTemplate } from './templates/rd-author-product-mb/rd-a
     RdAuthorPopupUnfollowMbTemplate,
     RdAuthorProductMbTemplate,
   ],
-  imports: [CommonModule, GlobalDesignSystemAtomicModule, StorybookSupportModule, ReaderWebSharedAtomicModule],
+  imports: [
+    CommonModule,
+    GlobalDesignSystemAtomicModule,
+    StorybookSupportModule,
+    ReaderWebSharedAtomicModule,
+    InfiniteScrollModule,
+    LoaderModule
+  ],
   exports: [
     ReaderWebSharedAtomicModule,
     RdAuthorDetailMolec,
@@ -122,4 +130,4 @@ import { RdAuthorProductMbTemplate } from './templates/rd-author-product-mb/rd-a
     RdAuthorProductMbTemplate,
   ],
 })
-export class ReaderWebUiAuthorAtomicModule {}
+export class ReaderWebUiAuthorAtomicModule { }

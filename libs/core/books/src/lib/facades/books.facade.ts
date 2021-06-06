@@ -1,3 +1,4 @@
+import { SearchBooksQuery } from './../states/search-books/search-books.query';
 import { Injectable } from '@angular/core';
 import { BooksHomeGear } from '../gears/books-home.gear';
 import { BooksGear } from '../gears/books.gear';
@@ -38,10 +39,11 @@ export class BooksFacade {
     private collectedQuery: CollectedQuery,
     private goodBooksQuery: GoodBooksQuery,
     private genreBooksQuery: GenreBooksQuery,
-    private authorBooksQuery: AuthorBooksQuery,
+    public authorBooksQuery: AuthorBooksQuery,
     public latestBooksQuery: LatestBooksQuery,
     private featureBooksQuery: FeatureBooksQuery,
     public categoryBooksQuery: CategoryBooksQuery,
+    public searchBooksQuery: SearchBooksQuery,
   ) { }
 
   selectLoadingAkita() {
@@ -81,7 +83,7 @@ export class BooksFacade {
   }
 
   getCategoryBooks(categoryId: string, limit?: number) {
-    const size = limit === 0 ? 12 : this.categoryBooksQuery.getSizePage() + 12;   
+    const size = limit === 0 ? 12 : this.categoryBooksQuery.getSizePage() + 12;
     return this.booksGear.getCategoryBooks(categoryId, size);
   }
 
@@ -90,7 +92,7 @@ export class BooksFacade {
   }
 
   getAuthorBooks(authors) {
-    return this.booksGear.getAuthorBooks(authors);
+    return this.booksGear.getAuthorBooks(authors, this.authorBooksQuery.getSizePage() + 12);
   }
 
   getTopBooks() {

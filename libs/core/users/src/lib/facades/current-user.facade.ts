@@ -7,7 +7,7 @@ export class CurrentUserFacade {
   currentUser$ = this.currentUserQuery.select();
   constructor(
     private currentUserGear: CurrentUserGear,
-    private currentUserQuery: CurrentUserQuery
+    public currentUserQuery: CurrentUserQuery
   ) { }
 
   getCurrentUser() {

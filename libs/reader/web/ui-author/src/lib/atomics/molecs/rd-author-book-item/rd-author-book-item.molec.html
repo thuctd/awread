@@ -1,5 +1,5 @@
 <div class="w-full flex flex-row lg:flex-col">
-  <atom-img-m [srcImg]="book.cover" [bookId]="book.bookId" [size]="'other'" [sizeImg]="'w-27 h-36 md:w-54 md:h-72'"></atom-img-m>
+  <atom-img-m [srcImg]="book | coverSize" [bookId]="book.bookId" [size]="'other'" [sizeImg]="'w-27 h-36 md:w-54 md:h-72'"></atom-img-m>
   <!-- <molec-rd-author-info-book-item [book]="book" [isSize]="isSize" class="px-4 sm:px-12 lg:px-0 roboto"></molec-rd-author-info-book-item> -->
   <div class="md:hidden">
     <molec-info-book class="px-3 w-48" [displayUI]="displayUIMobile" [book]="book" [btns]="book.newestChapters"></molec-info-book>
@@ -8,14 +8,13 @@
     <molec-info-book [displayUI]="displayUIDesktop" [book]="book" [btns]="book.newestChapters"></molec-info-book>
   </div>
   <div class="lg:hidden block text-gray-text">
-    <div class="text-xs sm:text-base mb-4 font-semibold ">Thể loại</div>
-
+    <div class="text-xs sm:text-base mb-4 font-semibold">Thể loại</div>
     <div class="text-small sm:text-sm font-semibold">
-        <a [ngClass]='color ? "text-green-primary" : "text-gray-text"' *ngFor="let item of items | keyvalue; let inx = index" [routerLink]="['/', item.key]"
-          routerLinkActive="router-link-active" class="inline-block outline-none cursor-pointer"><span
-            class="text-gray-icon text-xs hover:text-green-primary duration-300" class="relative mx-2 font-lg" *ngIf="inx !== 0">-</span>
-          {{item.value.name}}
-        </a>
+      <a [ngClass]='color ? "text-green-primary" : "text-gray-text"' *ngFor="let item of items | keyvalue; let inx = index" [routerLink]="['/', item.key]"
+        routerLinkActive="router-link-active" class="inline-block outline-none cursor-pointer"><span
+          class="text-gray-icon text-xs hover:text-green-primary duration-300" class="relative mx-1 font-lg" *ngIf="inx !== 0">-</span>
+        {{item.value.name}}
+      </a>
     </div>
   </div>
 </div>

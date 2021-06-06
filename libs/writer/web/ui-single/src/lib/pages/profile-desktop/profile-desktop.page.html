@@ -1,5 +1,4 @@
 <div class="bg-gray-100">
-  <profile [imgSrc]="profileForm.value.avatar | avatarSize:'origin'" [submitted]="submitted" [profileForm]="profileForm" (updateProfileEvent)="updateProfile()"
-    class="bg-white h-screen w-full">
+  <profile [submitted]="submitted" [profileForm]="profileForm" (submitEvent)="submitEvent($event)" class="bg-white h-screen w-full">
   </profile>
 </div>

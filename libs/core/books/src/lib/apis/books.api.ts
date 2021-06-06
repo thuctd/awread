@@ -45,7 +45,7 @@ export class BooksApi {
       .query({
         query: gql`
          query allMvBooksLatestChapters($first: Int ${categoryId ? `, $categoryId: BigFloat` : ''}) {
-        allMvBooksLatestChapters (first: $first, condition: {published: true ${categoryId ? `, categoryId: $categoryId ` : ''}} ){
+        allMvBooksLatestChapters (first: $first, condition: {completed: true, isDeleted: false ${categoryId ? `, categoryId: $categoryId ` : ''}} ){
           nodes {
             title
             authors
@@ -78,16 +78,16 @@ export class BooksApi {
       .pipe();
   }
 
-  getAuthorBooks(authorIds: string[]) {
+  getAuthorBooks(authorIds: string[], first?: number) {
     //NOTE: console.log(`containsAnyKeys: ${['id1', 'id2']}`); // containsAnyKeys: id1,id2
     //NOTE: console.log(`containsAnyKeys: ${JSON.stringify(['id1', 'id2'])}`); // containsAnyKeys: ["id1","id2"]
     //NOTE: JSON.stringify() is important
     return this.apollo
       .query({
         query: gql`
-      query allMvBooksLatestChapters {
+      query allMvBooksLatestChapters ($first: Int) {
         allMvBooksLatestChapters(
-              filter: {authors: {containsAnyKeys: ${JSON.stringify(authorIds)} }}, condition: { published: true, isDeleted: false }
+                  first: $first filter: {authors: {containsAnyKeys: ${JSON.stringify(authorIds)} }} condition: { published: true, isDeleted: false }
         ) {
           nodes {
             title
@@ -109,11 +109,15 @@ export class BooksApi {
             updatedAt
             userId
           }
+          pageInfo {
+              hasNextPage
+          }
+          totalCount
         }
       }
-      `,
+      `, variables: { first },
       })
-      .pipe(map((res) => res?.['data']?.['allMvBooksLatestChapters']?.['nodes']));
+      .pipe();
   }
 
   getGenreBooks(genreId: string) {
@@ -156,6 +160,7 @@ export class BooksApi {
                 createdAt
                 updatedAt
                 views
+                cover
               }
               pageInfo {
                 hasNextPage
@@ -190,6 +195,7 @@ export class BooksApi {
                 publishedAt
                 updatedAt
                 userId
+                cover
               }
             }
           }
@@ -234,6 +240,7 @@ export class BooksApi {
                   publishedAt
                   updatedAt
                   authors
+                  cover
                 }
               }
             }`;

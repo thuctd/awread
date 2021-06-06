@@ -1,9 +1,10 @@
+// console.log('TAILWIND PURGE:', process.env.ENVIRONMENT === 'production' || process.env.ENVIRONMENT === 'next');
 module.exports = {
   prefix: '',
   purge: {
-    enabled: process.env.NODE_ENV === 'production',
+    enabled: process.env.ENVIRONMENT === 'production' || process.env.ENVIRONMENT === 'next',
     content: [
-      './libs/**/*.{html,ts}'
+      './libs/**/*.{html,scss,ts}'
     ]
   },
   darkMode: false, // or 'media' or 'class'
@@ -21,7 +22,7 @@ module.exports = {
           light: "#BFBFBF",
         },
         green: {
-          primary: "#5ABD8C",
+          primary: process.env.ENVIRONMENT === 'next' ? "#8276F4" : "#5ABD8C",
           dark: "#9BB9B4",
         },
         pink: {

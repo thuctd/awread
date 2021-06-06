@@ -54,7 +54,7 @@ export class DetailTocPage implements OnInit {
 
   private createChapter() {
     const position = this.chaptersFacade.getLatestPosition();
-    this.router.navigate(['list', this.bookId, 'toc', 'new', 'writing', { position }]);
+    this.router.navigate(['list', this.bookId, 'toc', 'new', 'writing', { position: position }]);
   }
 
   private getAllChapters() {
@@ -63,7 +63,9 @@ export class DetailTocPage implements OnInit {
         switchMap((params) => {
           this.bookId = params.get('bookId');
           if (this.bookId) {
-            this.book$ = this.creationsFacade.selectEntity(this.bookId);
+            this.book$ = this.creationsFacade.selectEntity(this.bookId).pipe(
+              map(fullBook => fullBook.book),
+            );
             return this.chaptersFacade.getAllChapters(this.bookId);
           }
           return of([]);
