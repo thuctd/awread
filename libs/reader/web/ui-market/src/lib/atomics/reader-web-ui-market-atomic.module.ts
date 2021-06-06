@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GlobalDesignSystemAtomicModule, StorybookSupportModule } from '@awread/global/design-system';
 import { ReaderWebUiAuthorAtomicModule } from '@awread/reader/web/ui-author';
-import { ListInfoProseMolec } from './molecs/list-info-prose/list-info-prose.molec';
 import { ListDetailLongBookOrgan } from './organs/list-detail-long-book/list-detail-long-book.organ';
 import { ListDetailTopBookOrgan } from './organs/list-detail-top-book/list-detail-top-book.organ';
 import { ListTemplate } from './templates/list/list.template';
@@ -102,7 +101,6 @@ import { QuillModule } from 'ngx-quill';
   ],
   exports: [
     CommonModule,
-    ListInfoProseMolec,
     ListDetailLongBookOrgan,
     ListDetailTopBookOrgan,
     ListTemplate,
@@ -185,7 +183,6 @@ import { QuillModule } from 'ngx-quill';
     RdNewsShareExperienceMolec,
   ],
   declarations: [
-    ListInfoProseMolec,
     ListDetailLongBookOrgan,
     ListDetailTopBookOrgan,
     ListTemplate,
@@ -267,4 +264,4 @@ import { QuillModule } from 'ngx-quill';
     RdNewsShareExperienceMolec,
   ],
 })
-export class ReaderWebUiMarketAtomicModule { }
+export class ReaderWebUiMarketAtomicModule {}

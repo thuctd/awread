@@ -53,4 +53,8 @@ export class RdHomeBookUpdateDropdownMbMolec implements OnInit {
   onClick() {
     this.isDropdown = false;
   }
+
+  changeTitle(event) {
+    this.title = event.target.innerText;
+  }
 }

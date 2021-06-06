@@ -1,6 +1,8 @@
 <section class="px-0 sm:px-6 lg:px-8 w-full max-w-screen-xl mx-auto mt-4 py-6 relative">
   <div class="flex">
-    <atom-title [title]='titlePage' class="mt-2 mr-2 sm:mr-4" [isUppercase]='false'></atom-title>
+    <div class="mt-2 mr-2 sm:mr-4 whitespace-nowrap">
+      <atom-title [title]='titlePage' [isUppercase]='false'></atom-title>
+    </div>
     <div *ngIf="isDisplay" (click)="scrollLeft()" class="bg-white rounded-full w-6 h-6 md:w-8 md:h-8 flex justify-center items-center mt-2 shadow cursor-pointer">
       <fa-icon class="text-gray-text p-3 text-sm md:text-base" [icon]="arrowLeftIcon"></fa-icon>
     </div>

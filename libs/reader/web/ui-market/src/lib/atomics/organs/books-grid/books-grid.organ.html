@@ -5,8 +5,14 @@
     </div>
     <div [class]="classLayout2">
       <!-- <molec-info-book-grid [bookId]="book.bookId" [title]="book.title" [btns]="chapters"></molec-info-book-grid> -->
-      <molec-info-book [book]="book" [btns]="chapters" [displayUI]="displayUI"></molec-info-book>
+      <!-- <molec-info-book [book]="book" [btns]="chapters" [displayUI]="displayUI"></molec-info-book> -->
       <!-- <pre> {{ chapters | json }} </pre> -->
+      <div *ngIf="book.categoryId == '1' || book.categoryId == '2'">
+        <molec-info-book [book]="book" [btns]="chapters" [displayUI]="displayUI"></molec-info-book>
+      </div>
+      <div *ngIf="book.categoryId == '3'">
+        <list-info-prose [chapters]="book.newestChapters" [book]="book" [isBtn]="true"></list-info-prose>
+      </div>
     </div>
   </div>
 </div>

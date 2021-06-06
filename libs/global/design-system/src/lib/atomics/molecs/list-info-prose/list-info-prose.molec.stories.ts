@@ -1,13 +1,13 @@
 import { ListInfoProseMolec } from './list-info-prose.molec';
-import { ReaderWebUiMarketAtomicModule } from '../../reader-web-ui-market-atomic.module';
+import { GlobalDesignSystemAtomicModule } from '../../global-design-system-atomic.module';
 
 export default {
-  title: 'Market/Molecs/List Info Prose'
+  title: 'Design System/Molecs/List Info Prose'
 }
 
 export const primary = () => ({
   moduleMetadata: {
-    imports: [ReaderWebUiMarketAtomicModule]
+    imports: [GlobalDesignSystemAtomicModule]
   },
   component: ListInfoProseMolec,
   props: {

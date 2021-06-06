@@ -9,18 +9,16 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
       :host {
         display: block;
       }
+      .invalid-feedback {
+        color: red;
+        margin-top: 0.25rem;
+      }
     `,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfileEditFormMolec implements OnInit {
-  @Input() profileForm: FormGroup = this.fb.group({
-    name: ['', [Validators.required]],
-    username: ['', [Validators.required]],
-    websiteAddress: ['', [Validators.required]],
-    facebookAddress: ['', [Validators.required]],
-    bio: ['', ''],
-  });
+  @Input() profileForm: FormGroup = this.fb.group({});
   @Input() submitted: boolean;
 
   constructor(private fb: FormBuilder) {}

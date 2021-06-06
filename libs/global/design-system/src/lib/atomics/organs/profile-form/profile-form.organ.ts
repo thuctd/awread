@@ -20,19 +20,10 @@ export class ProfileFormOrgan implements OnInit {
   };
   @Input() link = '/forgot';
   @Input() submitText = 'Lưu';
-  @Input() profileForm: FormGroup = this.fb.group({
-    email: ['', [Validators.required]],
-    phone: ['', [Validators.required]],
-    dob: ['', [Validators.required]],
-    gender: ['', [Validators.required]],
-    fullname: ['', [Validators.required]],
-    username: ['', [Validators.required]],
-    website: ['', [Validators.required]],
-    introduce: ['', [Validators.required]],
-  });
+  @Input() profileForm: FormGroup = this.fb.group({});
   @Input() submitted: boolean;
   @Output() submitEvent = new EventEmitter();
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }

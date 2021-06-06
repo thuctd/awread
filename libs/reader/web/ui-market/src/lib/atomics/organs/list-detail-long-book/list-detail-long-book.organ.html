@@ -12,7 +12,7 @@
               <molec-info-book [book]="book" [btns]="book.newestChapters" [displayUI]="displayUI"></molec-info-book>
             </div>
             <div *ngSwitchDefault>
-              <list-info-prose [book]="book"></list-info-prose>
+              <list-info-prose [chapters]="book.newestChapters" [book]="book"></list-info-prose>
             </div>
           </div>
         </div>
