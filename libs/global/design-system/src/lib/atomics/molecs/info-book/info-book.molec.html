@@ -7,7 +7,7 @@
 <atom-status-book class="mb-0.5" *ngIf="displayUI.ui.isStatus" [completed]="book.completed"></atom-status-book>
 <div *ngFor="let btn of btns | keyvalue:orderByPosition" class="leading-normal font-medium flex">
   <base-btn (onBtnClicked)="submitEvent.emit($event)" [isSize]="displayUI.size.sizeBtn" [bookId]="book.bookId" [chapterId]="btn.key"
-    [chapter]="btn.value.position">
+    [chapterPosition]="btn.value.position">
   </base-btn>
   <rd-list-publication-date *ngIf="displayUI.ui.isDate" class="mt-0.5 ml-2" [publicationDate]="book.updatedAt"></rd-list-publication-date>
 </div>

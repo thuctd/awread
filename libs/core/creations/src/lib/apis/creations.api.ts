@@ -13,15 +13,15 @@ export class CreationsApi {
   generateUuid() {
     return this.apollo.mutate({
       mutation: gql`
-        mutation generateUuid {
-          generateUuid(input: {}) {
+        mutation generateBookId {
+          generateBookId(input: {}) {
             uuid
           }
         }
       `
     })
       .pipe(
-        map(res => res?.['data']?.['generateUuid']?.['uuid'])
+        map(res => res?.['data']?.['generateBookId']?.['uuid'])
       );
   }
 
@@ -215,13 +215,11 @@ export class CreationsApi {
   publish(bookId) {
     return this.apollo.mutate({
       mutation: gql`
-       mutation deleteBook (
+       mutation publishBook (
         $bookId: UUID!
       ) {
-        updateBookByBookId(input: {bookPatch: {published: true}, bookId: $bookId}) {
-          book {
-            bookId
-          }
+        publishBook(input: {bookId: $bookId}) {
+            uuid
         }
         }
       `,

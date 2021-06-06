@@ -160,7 +160,7 @@ export class DetailBookPage implements OnInit {
       title: [null, [Validators.required]],
       description: [null],
       categoryId: [null, [Validators.required]],
-      genreIds: [[]],
+      genreIds: [[], [Validators.required]],
       authorIds: [[]],
       publisherId: [null],
       completed: [false],

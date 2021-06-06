@@ -8,7 +8,8 @@
   </div>
   <!-- <pre> {{ btns | json }} </pre> -->
   <div *ngFor="let btn of btns | keyvalue" class="flex">
-    <base-btn class="mr-2" (onBtnClicked)="submitEvent.emit($event)" [isSize]="true" [bookId]="bookId" [chapterId]="btn.key" [chapter]="btn.value.position">
+    <base-btn class="mr-2" (onBtnClicked)="submitEvent.emit($event)" [isSize]="true" [bookId]="bookId" [chapterId]="btn.key"
+      [chapterPosition]="btn.value.position">
     </base-btn>
     <rd-list-publication-date></rd-list-publication-date>
   </div>
