@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthFacade, CurrentUserFacade } from '@awread/core/users';
 import { PopupChangeCoverOrgan } from '@awread/global/design-system';
-
+import { SnackbarService } from '@awread/global/packages';
 @Injectable({
   providedIn: 'root',
 })
@@ -19,7 +19,8 @@ export class ProfileIPage implements OnInit {
     private matDialog: MatDialog,
     private authFacade: AuthFacade,
     private cd: ChangeDetectorRef,
-  ) { }
+    private snackbarService: SnackbarService
+  ) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -57,8 +58,8 @@ export class ProfileIPage implements OnInit {
       height: '33rem',
       data: {
         id: this.currentUserFacade.getUserId(),
-        mode: 'avatar'
-      }
+        mode: 'avatar',
+      },
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result?.success) {
@@ -71,7 +72,12 @@ export class ProfileIPage implements OnInit {
   }
 
   updateProfile() {
-    if (this.profileForm.valid) {
+    if (this.profileForm.invalid) {
+      this.profileForm.get('name').setValue(this.profileForm.value.name, { emitEvent: true });
+      this.profileForm.get('email').setValue(this.profileForm.value.email, { emitEvent: true });
+      this.profileForm.markAllAsTouched();
+      return this.snackbarService.showWarning('Vui lòng điền đủ thông tin');
+    } else {
       this.currentUserFacade.updateCurrentUser(this.profileForm.value);
     }
   }
@@ -94,26 +100,24 @@ export class ProfileIPage implements OnInit {
       websiteAddress: user.websiteAddress,
       facebookAddress: user.facebookAddress,
       updatedAt: user.updatedAt,
-
     });
     this.profileFormValueBefore = this.profileForm.value;
   }
   private getCurrentUser() {
-    this.currentUserFacade.getCurrentUser()
-      .subscribe((user) => {
-        if (user) {
-          this.updateProfileForm(user);
-        }
-      });
+    this.currentUserFacade.getCurrentUser().subscribe((user) => {
+      if (user) {
+        this.updateProfileForm(user);
+      }
+    });
   }
 
   private initForm() {
     this.profileForm = this.fb.group({
       userId: [null],
       username: [null],
-      email: [null],
+      email: [null, [Validators.required, Validators.email]],
       phone: [null],
-      name: [null],
+      name: [null, [Validators.required]],
       firstname: [null],
       middlename: [null],
       lastname: [null],
@@ -124,7 +128,7 @@ export class ProfileIPage implements OnInit {
       bio: [null],
       websiteAddress: [null],
       facebookAddress: [null],
-      updatedAt: [null]
+      updatedAt: [null],
     });
     setTimeout(() => {
       this.profileForm.get('dob').disable();

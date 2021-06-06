@@ -1,8 +1,8 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 
 @Component({
-  selector: 'atom-link',
-  templateUrl: './link.atom.html',
+  selector: 'atom-status-book',
+  templateUrl: './status-book.atom.html',
   styles: [
     `
       :host {
@@ -12,9 +12,8 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LinkAtom implements OnInit {
-  @Input() title = 'title';
-  @Input() link = '';
+export class StatusBookAtom implements OnInit {
+  @Input() completed: boolean;
 
   constructor() {}
 

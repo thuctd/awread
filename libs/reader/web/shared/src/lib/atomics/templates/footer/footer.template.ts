@@ -8,11 +8,6 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
       :host {
         display: block;
       }
-      @media only screen and (min-width: 640px) {
-        .robotoDesktop {
-          font-family: 'Roboto', sans-serif !important;
-        }
-      }
     `,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,

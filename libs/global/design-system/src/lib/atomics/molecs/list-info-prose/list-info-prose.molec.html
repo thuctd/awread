@@ -1,0 +1,15 @@
+<div class="sm:mt-2">
+  <atom-title-book [bookId]="book.bookId" [titleBook]="book.title" [size]="'m'"></atom-title-book>
+  <div class="roboto">
+    <atom-author [title]="'Tác giả'" [items]="book.authors"></atom-author>
+    <div *ngIf="!isBtn">
+      <!-- <excerpt [excerpt]="book?.description === null? 'Hiện tại truyện chưa có phần giới thiệu' : book.description"></excerpt> -->
+      <p class="leading-5 break-words text-left text-gray-text text-xs">{{book?.description === null? 'Hiện tại truyện chưa có phần giới thiệu' : book.description}}</p>
+      <!-- <atom-text-link (click)="moreEvent.emit()" [text]="moreContent" [class]="'text-xs text-green-primary'"></atom-text-link> -->
+    </div>
+    <div *ngFor="let chapter of chapters | keyvalue | slice:0:1" class="leading-normal font-medium flex mt-1">
+      <a [routerLink]="['/books', book.bookId, 'chapters', chapter.key]"
+        class="outline-none border border-green-primary px-2 sm:px-4 py-0.5 sm:py-1 text-green-primary rounded-full hover:text-white hover:bg-green-primary text-xs sm:text-base">Đọc</a>
+    </div>
+  </div>
+</div>

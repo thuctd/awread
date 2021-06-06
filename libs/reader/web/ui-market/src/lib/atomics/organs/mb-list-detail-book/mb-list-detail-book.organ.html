@@ -3,12 +3,17 @@
 </div>
 <ng-template #loaded>
   <div class="px-1 pt-2">
-    <div *ngFor="let book of books;" class="grid grid-cols-12 gap-4 py-2">
+    <div *ngFor="let book of books | keyvalue" class="grid grid-cols-12 gap-4 py-2">
       <div class="col-span-4">
-        <atom-img-m [size]="'s'" [bookId]="book.bookId" [srcImg]="book | coverSize: 's'"></atom-img-m>
+        <atom-img-m [size]="'s'" [bookId]="book.value.bookId" [srcImg]="book.value | coverSize: 's'"></atom-img-m>
       </div>
       <div class="col-span-8">
-        <molec-info-book [book]="book" [btns]="book.newestChapters"></molec-info-book>
+        <div *ngIf="book.value.categoryId == 1 || book.value.categoryId == 2">
+          <molec-info-book [displayUI]="displayUI" [book]="book.value" [btns]="book.value.newestChapters"></molec-info-book>
+        </div>
+        <div *ngIf="book.value.categoryId == 3">
+          <list-info-prose [chapters]="book.value.newestChapters" [book]="book.value"></list-info-prose>
+        </div>
       </div>
     </div>
     <div class="ml-2 pb-2">

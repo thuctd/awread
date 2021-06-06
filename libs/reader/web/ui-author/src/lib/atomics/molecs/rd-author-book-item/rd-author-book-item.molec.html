@@ -2,10 +2,21 @@
   <atom-img-m [srcImg]="book | coverSize" [bookId]="book.bookId" [size]="'other'" [sizeImg]="'w-27 h-36 md:w-54 md:h-72'"></atom-img-m>
   <!-- <molec-rd-author-info-book-item [book]="book" [isSize]="isSize" class="px-4 sm:px-12 lg:px-0 roboto"></molec-rd-author-info-book-item> -->
   <div class="md:hidden">
-    <molec-info-book class="px-3 w-48" [displayUI]="displayUIMobile" [book]="book" [btns]="book.newestChapters"></molec-info-book>
+    <!-- <molec-info-book class="px-3 w-48" [displayUI]="displayUIMobile" [book]="book" [btns]="book.newestChapters"></molec-info-book> -->
+    <div *ngIf="book.categoryId == '1' || book.categoryId == '2'">
+      <molec-info-book class="px-3 w-48" [book]="book" [btns]="chapters" [displayUI]="displayUIMobile" [btns]="book.newestChapters"></molec-info-book>
+    </div>
+    <div *ngIf="book.categoryId == '3'">
+      <list-info-prose class="px-3 w-48" [chapters]="book.newestChapters" [book]="book" [isBtn]="true"></list-info-prose>
+    </div>
   </div>
   <div class="hidden md:block">
-    <molec-info-book [displayUI]="displayUIDesktop" [book]="book" [btns]="book.newestChapters"></molec-info-book>
+    <div *ngIf="book.categoryId == '1' || book.categoryId == '2'">
+      <molec-info-book [displayUI]="displayUIDesktop" [book]="book" [btns]="chapters" [btns]="book.newestChapters"></molec-info-book>
+    </div>
+    <div *ngIf="book.categoryId == '3'">
+      <list-info-prose [chapters]="book.newestChapters" [book]="book" [isBtn]="true"></list-info-prose>
+    </div>
   </div>
   <div class="lg:hidden block text-gray-text">
     <div class="text-xs sm:text-base mb-4 font-semibold">Thể loại</div>
@@ -18,3 +29,6 @@
     </div>
   </div>
 </div>
+
+
+

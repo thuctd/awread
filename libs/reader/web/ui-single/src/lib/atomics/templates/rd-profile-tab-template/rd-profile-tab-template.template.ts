@@ -18,14 +18,16 @@ import { faCog, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 })
 export class RdProfileTabTemplateTemplate implements OnInit {
   @Input() profileForm: FormGroup = this.fb.group({
-    email: ['', [Validators.required]],
-    phone: ['', [Validators.required]],
-    dob: ['', [Validators.required]],
-    gender: ['', [Validators.required]],
-    fullname: ['', [Validators.required]],
-    username: ['', [Validators.required]],
-    website: ['', [Validators.required]],
-    introduce: ['', [Validators.required]],
+    name: ['', [Validators.required]],
+    email: ['', [Validators.required, Validators.email]],
+    phone: [''],
+    dob: [''],
+    age: [''],
+    gender: [''],
+    fullname: [''],
+    username: [''],
+    website: [''],
+    introduce: [''],
   });
   @Input() currentUser = {};
   @Input() submitted: boolean;
@@ -49,17 +51,25 @@ export class RdProfileTabTemplateTemplate implements OnInit {
   @Input() classActive = 'border-b-2 border-green-primary text-green-primary';
   @Input() classNormal = 'text-gray-text font-medium';
 
-  constructor(public matDialog: MatDialog, private fb: FormBuilder, private cd: ChangeDetectorRef) { }
+  constructor(public matDialog: MatDialog, private fb: FormBuilder, private cd: ChangeDetectorRef) {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   changeModeEdit(mode: any) {
     this.mode = mode;
-    window.scroll({
-      top: 0,
-      left: 0,
-      behavior: 'smooth',
-    });
-    this.cd.detectChanges();
+  }
+
+  updateForm(mode: any) {
+    if (this.profileForm.invalid) {
+      return;
+    } else {
+      this.mode = mode;
+      window.scroll({
+        top: 0,
+        left: 0,
+        behavior: 'smooth',
+      });
+      this.cd.detectChanges();
+    }
   }
 }
