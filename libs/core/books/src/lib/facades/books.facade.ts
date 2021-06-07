@@ -92,7 +92,7 @@ export class BooksFacade {
   }
 
   getAuthorBooks(authors) {
-    return this.booksGear.getAuthorBooks(authors, this.authorBooksQuery.getSizePage() + 12);
+    return this.booksGear.getAuthorBooks(authors, this.authorBooksQuery.getSizePage() + 10);
   }
 
   getTopBooks() {

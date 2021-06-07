@@ -14,7 +14,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
 })
 export class RdAuthorProductOrgan implements OnInit {
   @Input() books = [];
-  @Input() isMore: false | true = true;
+  @Input() hasMore: false | true = true;
   @Output() emitMoreBooks = new EventEmitter();
 
   constructor() { }
