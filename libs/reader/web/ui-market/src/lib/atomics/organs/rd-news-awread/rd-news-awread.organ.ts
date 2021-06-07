@@ -13,7 +13,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RdNewsAwreadOrgan implements OnInit {
-  @Input() title = 'tin mới Awread';
+  @Input() title = 'tin mới';
   @Input() newsMiddle = [
     {
       blogId: '',
@@ -25,7 +25,7 @@ export class RdNewsAwreadOrgan implements OnInit {
     },
   ];
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }
