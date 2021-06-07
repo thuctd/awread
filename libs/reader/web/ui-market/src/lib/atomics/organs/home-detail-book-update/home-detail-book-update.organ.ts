@@ -18,6 +18,8 @@ export class HomeDetailBookUpdateOrgan implements OnInit {
   @Input() books = [];
   @Input() loading;
   @Input() categories = [];
+  @Input() eventResetPagination;
+  @Input() totalBook;
   @Input() tabs = [
     {
       name: 'Tất cả',
@@ -41,13 +43,9 @@ export class HomeDetailBookUpdateOrgan implements OnInit {
     },
   ];
 
-  activePage:number = 0;  
-
   @Output() emitBooks = new EventEmitter();
   @Output() displayActivePage = new EventEmitter();
   @Output() emitAllBooks = new EventEmitter();
-
-  counter = Array;
 
   constructor() {}
 

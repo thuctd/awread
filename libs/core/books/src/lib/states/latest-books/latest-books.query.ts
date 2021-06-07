@@ -12,4 +12,11 @@ export class LatestBooksQuery extends QueryEntity<LatestBooksState> {
     // this.createUIQuery();
   }
 
+  getHasMore() {
+    return this.getValue().hasMore
+  }
+
+  selectTotalBook() {
+    return this.select(state => state.total);
+  }
 }

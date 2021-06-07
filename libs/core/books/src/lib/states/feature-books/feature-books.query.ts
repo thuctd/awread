@@ -12,4 +12,11 @@ export class FeatureBooksQuery extends QueryEntity<FeatureBooksState> {
     // this.createUIQuery();
   }
 
+  getHasMore() {
+    return this.getValue().hasMore
+  }
+
+  selectTotalBook() {
+    return this.select(state => state.total);
+  }
 }

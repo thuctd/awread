@@ -41,7 +41,7 @@ export class BooksFacade {
     private genreBooksQuery: GenreBooksQuery,
     public authorBooksQuery: AuthorBooksQuery,
     public latestBooksQuery: LatestBooksQuery,
-    private featureBooksQuery: FeatureBooksQuery,
+    public featureBooksQuery: FeatureBooksQuery,
     public categoryBooksQuery: CategoryBooksQuery,
     public searchBooksQuery: SearchBooksQuery,
   ) { }
@@ -103,8 +103,8 @@ export class BooksFacade {
     return this.booksHomeGear.getGoodBooks();
   }
 
-  getFeatureBooks() {
-    return this.booksHomeGear.getFeatureBooks();
+  getFeatureBooks(offset: number) {
+    return this.booksHomeGear.getFeatureBooks(offset);
   }
 
   getFilterBooks(categoryId: string) {

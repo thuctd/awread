@@ -29,11 +29,11 @@ export class BooksHomeApi {
       );
   }
 
-  getFeatureBooks() {
+  getFeatureBooks(offset: number) {
     return this.apollo.query({
       query: gql`
-        query allMvMostViewBooks {
-          allMvMostViewBooks(first: 6, condition: {published: true, isDeleted: false}) {
+        query allMvMostViewBooks($offset: Int) {
+          allMvMostViewBooks(first: 6 offset: $offset condition: {published: true, isDeleted: false}) {
             nodes {
               bookId
               categoryId
@@ -42,13 +42,16 @@ export class BooksHomeApi {
               updatedAt
               cover
             }
+            pageInfo {
+              hasNextPage
+            }
+            totalCount
           }
         }
       `,
+      variables: { offset }
     })
-      .pipe(
-        map(res => res?.['data']?.['allMvMostViewBooks']?.['nodes'])
-      )
+      .pipe()
   }
 
   getLatestBooks(categoryId: string, offset: number) {
@@ -75,13 +78,16 @@ export class BooksHomeApi {
                 authors
                 cover
               }
+              pageInfo {
+                hasNextPage
+              }
+              totalCount
             }
           }
         `,
       variables: { categoryId, offset }
     }).pipe(
-      delay(500),
-      map(res => res?.['data']?.['allMvBooksLatestChapters']?.['nodes'])
+      delay(500)
     )
   }
 }

@@ -23,6 +23,7 @@ export class HomeListBookUpdateMobileOrgan implements OnInit {
   @Input() arrowLeftIcon = faChevronLeft;
   @Input() arrowRightIcon = faChevronRight;
   @Input() loading;
+  @Input() totalBook;
   @Input() titlePage = 'Truyện mới cập nhật';
   @Input() srcImg = '/global-assets/images/image.webp';
   @Input() altImg = 'Placeholder';
@@ -62,23 +63,10 @@ export class HomeListBookUpdateMobileOrgan implements OnInit {
       isNovel: true,
     },
   ];
+  @Output() displayActivePage = new EventEmitter();
 
   constructor() { }
 
   ngOnInit(): void { }
 
-  //NOTE: Chức năng đang gây lỗi nên hiện tại đang ẩn
-  public scrollRight(): void {
-    this.widgetsContent.nativeElement.scrollTo({
-      left: this.widgetsContent.nativeElement.scrollLeft + 145,
-      behavior: 'smooth',
-    });
-  }
-
-  public scrollLeft(): void {
-    this.widgetsContent.nativeElement.scrollTo({
-      left: this.widgetsContent.nativeElement.scrollLeft - 145,
-      behavior: 'smooth',
-    });
-  }
 }
