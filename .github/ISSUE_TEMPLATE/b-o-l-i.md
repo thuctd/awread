@@ -1,11 +1,14 @@
 ---
 name: Báo lỗi
-about: Vui lòng điền đủ label + project
+about: Ứng dụng hoạt động không đúng chức năng
 title: ''
-labels: ''
+labels: bug
 assignees: ''
 
 ---
+
+** LƯU Ý**
+Vui lòng điền đủ label: reader-web, writer-web,design
 
 **Mô tả bug**
 Một cách rõ ràng và cụ thể bug lỗi cái gì? ở đâu? 
