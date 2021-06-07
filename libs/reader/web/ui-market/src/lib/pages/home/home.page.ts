@@ -1,6 +1,6 @@
 import { ChangeDetectorRef } from '@angular/core';
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
-import { takeWhile, switchMap, retry, tap, takeUntil, debounceTime } from 'rxjs/operators';
+import { takeWhile, switchMap, retry, tap, takeUntil, debounceTime, map } from 'rxjs/operators';
 import { of, Subject, Observable } from 'rxjs';
 import { Directive, Injectable, OnInit, OnDestroy } from '@angular/core';
 import { Genre } from '@awread/core/genres';
@@ -23,7 +23,7 @@ export class HomePage implements OnInit, OnDestroy {
   featureBookList$ = this.booksFacade.featureBooks$;
   genreBooks$ = this.booksFacade.genreBooks$;
   categories$ = this.categoriesFacade.categories$;
-  genres$ = this.genresFacade.genres$;
+  genres$ = this.genresFacade.genres$.pipe(map(genres => genres.filter(genre => ['Lãng mạn', 'Hài hước', 'Tình cảm', 'Thanh xuân', 'Gia đình'].includes(genre.name))));
   imageObject$ = this.sliderFacede.slider$;
   isLoading$: Observable<boolean>;
   filteredBooks$;

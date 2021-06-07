@@ -6,7 +6,7 @@
       [value]="defaultChapter?.chapterId">
       <option [selected]="defaultChapter?.chapterId == chapter?.chapterId" *ngFor="let chapter of chapters" [value]="chapter.chapterId" class="cursor-pointer"
         (click)="selectionChange.emit(chapter)">
-        Chương {{ +chapter.position == 0 ? 'Mở đầu' : chapter.position }}
+        Chương {{ +chapter.position + 1 }}
       </option>
     </select>
   </div>

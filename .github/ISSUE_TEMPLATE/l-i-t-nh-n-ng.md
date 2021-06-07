@@ -1,11 +1,16 @@
 ---
-name: Báo lỗi
-about: App không chạy thì bấm vào đây
+name: Lỗi tính năng
+about: Lỗi về mặt chức năng, logic không hoạt động hoặc hoạt động không đúng yêu cầu
 title: ''
-labels: ''
+labels: logic-bug
 assignees: ''
 
 ---
+
+** LƯU Ý**
+Vui lòng điền đủ label:
+- Khu vực lỗi là reader hay writer: reader-web, writer-web
+- Nếu lỗi chỉ ở bản mobile của reader: reader-web-mobile
 
 **Mô tả bug**
 Một cách rõ ràng và cụ thể bug lỗi cái gì? ở đâu? 

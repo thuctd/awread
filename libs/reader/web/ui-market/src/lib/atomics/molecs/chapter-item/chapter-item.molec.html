@@ -2,7 +2,7 @@
   <a class="outline-none focus:outline-none" [routerLink]="['/books', chapter.bookId,'chapters', chapter.chapterId]">
     <div class="justify-between flex ">
       <div class="flex w-4/5">
-        <p class="w-1/4 font-medium text-sm text-gray-text">Chương {{ +chapter.position == 0 ? 'Mở đầu' : chapter.position }}</p>
+        <p class="w-1/4 font-medium text-sm text-gray-text">Chương {{ +chapter.position + 1 }}</p>
         <a class="font-medium text-sm cursor-pointer outline-none text-gray-text">{{chapter.title | titlecase}}</a>
       </div>
       <atom-chapter-price [value]="chapter.price || 'Miễn phí'"></atom-chapter-price>
