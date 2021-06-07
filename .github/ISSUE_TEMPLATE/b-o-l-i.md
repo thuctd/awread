@@ -1,6 +1,6 @@
 ---
 name: Báo lỗi
-about: App không chạy thì bấm vào đây
+about: Vui lòng điền đủ label + project
 title: ''
 labels: ''
 assignees: ''
