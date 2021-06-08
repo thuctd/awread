@@ -1,4 +1,11 @@
-import { Component, OnInit, ChangeDetectionStrategy, EventEmitter, Output, Input } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  EventEmitter,
+  Output,
+  Input,
+} from '@angular/core';
 
 @Component({
   selector: 'navbar',
@@ -14,9 +21,10 @@ import { Component, OnInit, ChangeDetectionStrategy, EventEmitter, Output, Input
 })
 export class WrtNavbarTemplate implements OnInit {
   @Input() user = [];
+  @Input() routes = [];
   @Output() searchEvent = new EventEmitter();
   @Output() signoutEvent = new EventEmitter();
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }
