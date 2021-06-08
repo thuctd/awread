@@ -4,7 +4,7 @@
     </div>
     <ng-template #loaded>
         <div class="mb-4">
-            <atom-title [title]="titlePage" class="uppercase"></atom-title>
+            <atom-title-page-link [title]="page.name" [href]="page.href" class="uppercase"></atom-title-page-link>
         </div>
         <div class="grid grid-cols-12 sm:gap-x-8 lg:gap-x-12 xl:gap-x-24 place-content-center mb-4 px-0 xl:px-32">
             <div *ngFor="let book of books;" class="col-span-2 md:col-span-4 mx-auto py-4">

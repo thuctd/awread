@@ -138,6 +138,7 @@ import { CoreBooksModule } from '@awread/core/books';
 import { RdNewsShareExperienceItemAtom } from './atoms/rd-news-share-experience-item/rd-news-share-experience-item.atom';
 import { StatusBookAtom } from './atoms/status-book/status-book.atom';
 import { ListInfoProseMolec } from './molecs/list-info-prose/list-info-prose.molec';
+import { TitlePageLinkAtom } from './atoms/title-page-link/title-page-link.atom';
 @NgModule({
   imports: [
     CommonModule,
@@ -297,6 +298,7 @@ import { ListInfoProseMolec } from './molecs/list-info-prose/list-info-prose.mol
     RdNewsShareExperienceItemAtom,
     StatusBookAtom,
     ListInfoProseMolec,
+    TitlePageLinkAtom,
   ],
   declarations: [
     notReadyDirective,
@@ -423,6 +425,7 @@ import { ListInfoProseMolec } from './molecs/list-info-prose/list-info-prose.mol
     RdNewsShareExperienceItemAtom,
     StatusBookAtom,
     ListInfoProseMolec,
+    TitlePageLinkAtom,
   ],
 })
 export class GlobalDesignSystemAtomicModule { }

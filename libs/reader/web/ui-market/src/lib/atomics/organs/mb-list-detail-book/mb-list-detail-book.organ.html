@@ -14,5 +14,5 @@
   </div>
 </div>
 <div class="ml-2 pb-2">
-  <atom-text-link (submitEvent)="moreEvent.emit()" [text]="moreBook" [class]="'text-sm text-green-primary italic font-bold'"></atom-text-link>
+  <atom-text-link *ngIf="hasMore" (submitEvent)="moreEvent.emit()" [text]="moreBook" [class]="'text-sm text-green-primary italic font-bold'"></atom-text-link>
 </div>

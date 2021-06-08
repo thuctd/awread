@@ -14,7 +14,10 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
 })
 export class HomeDetailBookUpdateOrgan implements OnInit {
   @Input() isInfoNovel: true | false = false;
-  @Input() titlePage = 'Truyện mới cập nhật';
+  @Input() page = {
+    name: 'TRUYỆN MỚI CẬP NHẬT',
+    href: ['/latest-books']
+  };
   @Input() books = [];
   @Input() loading;
   @Input() categories = [];

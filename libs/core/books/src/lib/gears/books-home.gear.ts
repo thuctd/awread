@@ -15,30 +15,38 @@ export class BooksHomeGear {
     private booksHomeApi: BooksHomeApi
   ) { }
 
-  getGoodBooks() {
+  getGoodBooks(limit: number = 12) {
     this.goodBooksStore.setLoading(true);
-    return this.booksHomeApi.getGoodBooks().pipe(
-      tap(books => this.goodBooksStore.set(books)),
-      tap(() => this.goodBooksStore.setLoading(false))
-    );
-  }
-
-  getFeatureBooks(offset: number) {
-    this.featureBooksStore.setLoading(true);
     let hasMore, total;
-    return this.booksHomeApi.getFeatureBooks(offset).pipe(
+    return this.booksHomeApi.getGoodBooks(limit).pipe(
       map((res) => {
         hasMore = res?.['data']?.['allMvMostViewBooks']?.['pageInfo']?.hasNextPage;
         total = res?.['data']?.['allMvMostViewBooks']?.totalCount;
         return res?.['data']?.['allMvMostViewBooks']?.['nodes'];
       }),
-      tap(books => this.featureBooksStore.set(books)),
+      tap(books => this.goodBooksStore.set(books)),
+      tap(() => this.goodBooksStore.updatePage({ hasMore: hasMore, sizePage: limit,total: total })),
+      tap(() => this.goodBooksStore.setLoading(false))
+    );
+  }
+
+  getFeatureBooks(offset: number, isCheck?: boolean) {
+    this.featureBooksStore.setLoading(true);
+    const first = isCheck ? 12 : 6;
+    let hasMore, total;
+    return this.booksHomeApi.getFeatureBooks(offset, first).pipe(
+      map((res) => {
+        hasMore = res?.['data']?.['allMvMostViewBooks']?.['pageInfo']?.hasNextPage;
+        total = res?.['data']?.['allMvMostViewBooks']?.totalCount;
+        return res?.['data']?.['allMvMostViewBooks']?.['nodes'];
+      }),
+      tap(books => { if(isCheck) { this.featureBooksStore.add(books) } else { this.featureBooksStore.set(books)}}),
       tap(() => this.featureBooksStore.updatePage({ hasMore: hasMore, total: total })),
       tap(() => this.featureBooksStore.setLoading(false))
     );
   }
 
-  getLatestBooks(categoryId: string, offset: number) {
+  getLatestBooks(categoryId: string, offset: number, isCheck?: boolean) {
     this.latestBooksStore.setLoading(true);
     let hasMore, total;
     return this.booksHomeApi.getLatestBooks(categoryId, offset).pipe(
@@ -47,7 +55,7 @@ export class BooksHomeGear {
         total = res?.['data']?.['allMvBooksLatestChapters']?.totalCount;
         return res?.['data']?.['allMvBooksLatestChapters']?.['nodes'];
       }),
-      tap(books => this.latestBooksStore.set(books)),
+      tap(books => { if(isCheck) { this.latestBooksStore.add(books) } else { this.latestBooksStore.set(books)}}),
       tap(() => this.latestBooksStore.updatePage({ hasMore: hasMore, total: total })),
       tap(() => this.latestBooksStore.setLoading(false))
     );

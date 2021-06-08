@@ -1,10 +1,7 @@
 import { Observable } from 'rxjs';
-import { PersistNgFormPlugin } from '@datorama/akita';
-import { FormGroup, FormBuilder } from '@angular/forms';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { Injectable, OnInit, Directive, HostListener, ChangeDetectorRef } from '@angular/core';
 import { BooksFacade } from '@awread/core/books';
-import { GenresFacade } from '@awread/core/genres';
 
 @UntilDestroy()
 @Injectable({
@@ -14,13 +11,11 @@ import { GenresFacade } from '@awread/core/genres';
 export class TopBooksPage implements OnInit {
   topBooks$: Observable<any>;
   isLoading$: Observable<boolean>;
-  genres$ = this.genresFacade.genres$;
+  hasMore$: Observable<boolean>;
   totalBook$: any;
 
   constructor(
-    private fb: FormBuilder,
     private booksFacade: BooksFacade,
-    private genresFacade: GenresFacade,
     private cd: ChangeDetectorRef
   ) { }
 
@@ -28,20 +23,16 @@ export class TopBooksPage implements OnInit {
     this.fetchBooks();
     this.topBooks$ = this.booksFacade.topBooksQuery.selectAll();
     this.totalBook$ = this.booksFacade.topBooksQuery.selectTotalBook();
+    this.hasMore$ = this.booksFacade.topBooksQuery.selectHasMore();
     this.isLoading$ = this.booksFacade.topBooksQuery.selectLoading();
-    this.genresFacade.getAllGenres().subscribe();
   }
 
   @HostListener('window:scroll', ['$event'])
   onMoreBooks() {
-    const height = window.innerWidth <= 768 ? 660 : 450;
+    const height = window.innerWidth <= 768 ? 630 : 400;
     if (window.innerHeight + window.scrollY + height >= document.body.scrollHeight) {
       this.fetchBooks();
     }
-  }
-
-  filterBooks() {
-    this.booksFacade.getTopBooks();
   }
 
   private fetchBooks() {

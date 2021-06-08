@@ -1,5 +1,4 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
-import { OwlOptions } from 'ngx-owl-carousel-o';
 
 @Component({
   selector: 'organ-home-list-book-featured-mobile',
@@ -14,7 +13,10 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeListBookFeaturedMobileOrgan implements OnInit {
-  @Input() titlePage = 'Truyện nổi bật';
+  @Input() page = {
+    name: 'Truyện nổi bật',
+    href: ['/feature-books']
+  };
   @Input() counter = Array;
   @Input() srcImg = '/global-assets/images/image.webp';
   @Input() altImg = 'Placeholder';

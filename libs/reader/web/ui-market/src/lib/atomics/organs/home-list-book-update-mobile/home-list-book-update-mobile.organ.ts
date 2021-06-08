@@ -23,7 +23,10 @@ export class HomeListBookUpdateMobileOrgan implements OnInit, OnChanges {
   @Input() arrowRightIcon = faChevronRight;
   @Input() loading;
   @Input() totalBook;
-  @Input() titlePage = 'Truyện mới cập nhật';
+  @Input() page = {
+    name: 'TRUYỆN MỚI CẬP NHẬT',
+    href: ['/latest-books']
+  };
   @Input() books = [];
   @Input() categories = [];
   activePage: number = 1;

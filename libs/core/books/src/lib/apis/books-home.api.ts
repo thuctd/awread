@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
-import { map, delay } from 'rxjs/operators';
+import { map, delay, first } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class BooksHomeApi {
   constructor(private apollo: Apollo) { }
 
-  getGoodBooks() {
+  getGoodBooks(first: number) {    
     return this.apollo.query({
       query: gql`
-        query allMvMostViewBooks {
-          allMvMostViewBooks(first: 10, orderBy: VIEWS_DESC, condition: {published: true, isDeleted: false}) {
+        query allMvMostViewBooks($first: Int) {
+          allMvMostViewBooks(first: $first, orderBy: VIEWS_DESC, condition: {published: true, isDeleted: false}) {
             nodes {
               bookId
               title
@@ -20,21 +20,23 @@ export class BooksHomeApi {
               views
               cover
             }
+            pageInfo {
+              hasNextPage
+            }
+            totalCount
           }
         }
-      `,
+      `, variables: {first}
     })
-      .pipe(
-        map(res => res?.['data']?.['allMvMostViewBooks']?.['nodes'])
-      );
+      .pipe();
   }
 
-  getFeatureBooks(offset: number) {
+  getFeatureBooks(offset: number, first: number) {
     offset = offset * 6;
     return this.apollo.query({
       query: gql`
-        query allMvMostViewBooks($offset: Int) {
-          allMvMostViewBooks(first: 6 offset: $offset condition: {published: true, isDeleted: false}) {
+        query allMvMostViewBooks($offset: Int, $first: Int) {
+          allMvMostViewBooks(first: $first offset: $offset condition: {published: true, isDeleted: false}) {
             nodes {
               bookId
               categoryId
@@ -50,7 +52,7 @@ export class BooksHomeApi {
           }
         }
       `,
-      variables: { offset }
+      variables: { offset, first }
     })
       .pipe()
   }
@@ -60,7 +62,7 @@ export class BooksHomeApi {
     if (window.innerWidth <= 768) {
         first = 6
         offset = offset * 6; 
-    }
+    }    
     return this.apollo.query({
       query: gql`
           query allMvBooksLatestChapters ($first: Int $offset: Int ${categoryId ? `,$categoryId: BigFloat` : ''}) {
@@ -92,8 +94,6 @@ export class BooksHomeApi {
           }
         `,
       variables: { categoryId, offset, first }
-    }).pipe(
-      delay(500)
-    )
+    }).pipe()
   }
 }

@@ -13,7 +13,10 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeDetailBookFeaturedOrgan implements OnInit {
-  @Input() titlePage = 'Truyện nổi bật';
+  @Input() page = {
+    name: 'Truyện nổi bật',
+    href: ['/feature-books']
+  };
   @Input() books = [];
   @Input() displayUI = {
     ui: {

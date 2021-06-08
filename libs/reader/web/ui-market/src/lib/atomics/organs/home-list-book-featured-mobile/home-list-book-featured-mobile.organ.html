@@ -1,6 +1,6 @@
 <section class="w-full mx-auto">
   <div class="mb-4 px-2.5">
-    <atom-title [title]="titlePage" class="uppercase"></atom-title>
+    <atom-title-page-link [title]="page.name" [href]="page.href" class="uppercase col-span-6"></atom-title-page-link>
   </div>
   <div class="flex justify-center items-center" *ngIf="loading;else loaded">
     <awread-loading></awread-loading>

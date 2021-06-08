@@ -37,7 +37,7 @@ export class BooksFacade {
     private composedQuery: ComposedQuery,
     public topBooksQuery: TopBooksQuery,
     private collectedQuery: CollectedQuery,
-    private goodBooksQuery: GoodBooksQuery,
+    public goodBooksQuery: GoodBooksQuery,
     private genreBooksQuery: GenreBooksQuery,
     public authorBooksQuery: AuthorBooksQuery,
     public latestBooksQuery: LatestBooksQuery,
@@ -87,8 +87,8 @@ export class BooksFacade {
     return this.booksGear.getCategoryBooks(categoryId, size);
   }
 
-  getLatestBooks(cateogoryId: string, offset: number) {
-    return this.booksHomeGear.getLatestBooks(cateogoryId, offset);
+  getLatestBooks(cateogoryId: string, offset: number, isCheck?: boolean) {
+    return this.booksHomeGear.getLatestBooks(cateogoryId, offset, isCheck);
   }
 
   getAuthorBooks(authors) {
@@ -100,11 +100,11 @@ export class BooksFacade {
   }
 
   getGoodBooks() {
-    return this.booksHomeGear.getGoodBooks();
+    return this.booksHomeGear.getGoodBooks(this.goodBooksQuery.getSizePage() + 12);
   }
 
-  getFeatureBooks(offset: number) {
-    return this.booksHomeGear.getFeatureBooks(offset);
+  getFeatureBooks(offset: number, isCheck?: boolean) {
+    return this.booksHomeGear.getFeatureBooks(offset, isCheck);
   }
 
   getFilterBooks(categoryId: string) {

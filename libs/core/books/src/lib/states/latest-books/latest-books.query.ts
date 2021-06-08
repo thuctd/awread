@@ -19,4 +19,8 @@ export class LatestBooksQuery extends QueryEntity<LatestBooksState> {
   selectTotalBook() {
     return this.select(state => state.total);
   }
+
+  selectHasMore() {
+    return this.select(state => state.hasMore);
+  }
 }
