@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter, ViewChild, ElementRef, OnChanges } from '@angular/core';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'organ-home-list-book-update-mobile',
@@ -18,18 +18,16 @@ import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomeListBookUpdateMobileOrgan implements OnInit {
-  @ViewChild('widgetsContent', { static: true }) widgetsContent: ElementRef<any>;
+export class HomeListBookUpdateMobileOrgan implements OnInit, OnChanges {
   @Input() arrowLeftIcon = faChevronLeft;
   @Input() arrowRightIcon = faChevronRight;
   @Input() loading;
   @Input() totalBook;
   @Input() titlePage = 'Truyện mới cập nhật';
-  @Input() srcImg = '/global-assets/images/image.webp';
-  @Input() altImg = 'Placeholder';
   @Input() books = [];
   @Input() categories = [];
-
+  activePage: number = 1;
+  @Output() onPageChange: EventEmitter<number> = new EventEmitter();
   @Input() displayUI = {
     ui: {
       isAuthor: false,
@@ -69,4 +67,13 @@ export class HomeListBookUpdateMobileOrgan implements OnInit {
 
   ngOnInit(): void { }
 
+  ngOnChanges(): any {  
+      this.activePage = 1;  
+      this.onPageChange.emit(1);  
+  }  
+
+  onClickPage(pageNumber: number): void {
+    this.activePage = pageNumber;
+    this.onPageChange.emit(this.activePage);
+  }
 }

@@ -87,7 +87,6 @@ export class PaginationAtom implements OnInit, OnChanges {
     return pageArrayMiddle;
   }
   onClickPage(pageNumber: number | string, i: number) {
-    console.log('number: ', pageNumber);
     if (pageNumber < 1) return;
     if (pageNumber > this.pageCount) return;
     if (this.pageCount <= 10) {

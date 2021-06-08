@@ -2,14 +2,19 @@
   <div class="mb-4 px-2.5">
     <atom-title [title]="titlePage" class="uppercase"></atom-title>
   </div>
-  <div class="grid grid-cols-12 place-items-center">
-    <div *ngFor="let book of books" class="col-span-4 mx-auto py-2">
-          <atom-img-m [size]="'s'" [bookId]="book.bookId" [srcImg]="book | coverSize: 's'"></atom-img-m>
-          <!-- <molec-home-info-book-update [book]="book"></molec-home-info-book-update> -->
-          <molec-info-book class="w-27" [book]="book" [displayUI]="displayUI"></molec-info-book>
-    </div>
+  <div class="flex justify-center items-center" *ngIf="loading;else loaded">
+    <awread-loading></awread-loading>
   </div>
+  <ng-template #loaded>
+    <div class="grid grid-cols-12 place-items-center">
+      <div *ngFor="let book of books" class="col-span-4 mx-auto py-2">
+        <atom-img-m [size]="'s'" [bookId]="book.bookId" [srcImg]="book | coverSize: 's'"></atom-img-m>
+        <!-- <molec-home-info-book-update [book]="book"></molec-home-info-book-update> -->
+        <molec-info-book class="w-27" [book]="book" [displayUI]="displayUI"></molec-info-book>
+      </div>
+    </div>
+  </ng-template>
   <div class="flex justify-center items-center">
-    <pagination [totalRecords]="totalBook" [recordsPerPage]="3" (onPageChange)="displayActivePageFeature.emit($event)"></pagination>
+    <pagination [totalRecords]="totalBook - 6" [recordsPerPage]="6" (onPageChange)="displayActivePageFeature.emit($event)"></pagination>
   </div>
 </section>

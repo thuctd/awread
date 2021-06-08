@@ -13,7 +13,7 @@
       </li>
       <li *ngFor="let item of pages; index as i">
         <a (click)="onClickPage(item , i)" [ngClass]="activePage === item ? 'bg-green-primary text-white' : 'text-gray-500'" class="outline-none first:ml-0 text-xs font-semibold cursor-pointer flex w-6 h-6 md:w-8 md:h-8 mx-1 p-0 rounded-full items-center justify-center leading-tight relative bg-gray-100 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 hover:bg-green-primary hover:text-white" href="javascript:void(0);">
-          {{item}}
+          {{item === '...' ? '...' : item - 1}}
         </a>
       </li>
       <li *ngIf="activePage < pages.length" (click)="onClickArrow(activePage + 1)">

@@ -17,6 +17,6 @@
         </div>
     </ng-template>
     <div class="flex justify-center items-center">
-        <pagination [totalRecords]="totalBook" [recordsPerPage]="6" (onPageChange)="displayActivePageFeature.emit($event)"></pagination>
+        <pagination [totalRecords]="totalBook - 6" [recordsPerPage]="6" (onPageChange)="displayActivePageFeature.emit($event)"></pagination>
     </div>
 </section>
