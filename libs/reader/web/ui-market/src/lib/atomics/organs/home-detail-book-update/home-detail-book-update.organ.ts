@@ -21,7 +21,7 @@ export class HomeDetailBookUpdateOrgan implements OnInit {
   @Input() books = [];
   @Input() loading;
   @Input() categories = [];
-  @Input() eventResetPagination;
+  @Input() currentPage;
   @Input() totalBook;
   @Input() tabs = [
     {
@@ -47,7 +47,7 @@ export class HomeDetailBookUpdateOrgan implements OnInit {
   ];
 
   @Output() emitBooks = new EventEmitter();
-  @Output() displayActivePage = new EventEmitter();
+  @Output() pageChange = new EventEmitter();
   @Output() emitAllBooks = new EventEmitter();
 
   constructor() { }

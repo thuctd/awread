@@ -35,13 +35,13 @@ export class HomeTemplate implements OnInit {
   @Input() genres = [];
   @Input() genreBooks = [];
   @Input() totalBook;
-  @Input() eventResetPagination;
+  @Input() currentPage;
   @Input() totalBookFeatured;
   @Input() isLoadingFeature;
   @Output() emitBooks = new EventEmitter();
   @Output() emitAllBooks = new EventEmitter();
   @Output() filterItemsByGenre = new EventEmitter();
-  @Output() displayActivePage = new EventEmitter();
+  @Output() pageChange = new EventEmitter();
   @Output() displayActivePageFeature = new EventEmitter();
 
   constructor() { }

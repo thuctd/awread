@@ -1,4 +1,5 @@
-import { SearchBooksQuery } from './../states/search-books/search-books.query';
+import { LatestBooksStore } from './../states/latest-books';
+import { SearchBooksQuery } from './../states/search-books';
 import { Injectable } from '@angular/core';
 import { BooksHomeGear } from '../gears/books-home.gear';
 import { BooksGear } from '../gears/books.gear';
@@ -44,7 +45,12 @@ export class BooksFacade {
     public featureBooksQuery: FeatureBooksQuery,
     public categoryBooksQuery: CategoryBooksQuery,
     public searchBooksQuery: SearchBooksQuery,
+    private latestBooksStore: LatestBooksStore,
   ) { }
+
+  setCurrentPageLatestBook(pageNumber) {
+    this.latestBooksStore.setCurentPage(pageNumber);
+  }
 
   selectLoadingAkita() {
     return this.booksQuery.selectLoading();

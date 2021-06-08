@@ -30,7 +30,7 @@ export class HomePage implements OnInit, OnDestroy {
   featureBookList$;
   isLoadingFeature$: Observable<boolean>;
   totalBookFeature$: Observable<number>;
-  eventResetPagination: Subject<void> = new Subject<void>();
+  currentPage$ = this.booksFacade.latestBooksQuery.select(state => state.currentPage);
   filteredBooks$;
   categoryId = '';
   loading$ = false;
@@ -61,20 +61,18 @@ export class HomePage implements OnInit, OnDestroy {
   }
 
   filterItemsByCategory(category: Category) {
-    this.eventResetPagination.next();
-    this.categoryId = category.categoryId;
+    this.booksFacade.setCurrentPageLatestBook(1);
     this.categoryBooks$ = this.booksFacade.getLatestBooks(category.categoryId, 0).pipe(debounceTime(200));
+    this.categoryId = category.categoryId;
     this.cd.detectChanges();
   }
 
   getAllLatestBooks() {
     this.categoryBooks$ = this.booksFacade.getLatestBooks('', 0).pipe(debounceTime(200));
-    this.cd.detectChanges();
   }
 
   getAllFeatureBooks() {
     this.featureBookList$ = this.booksFacade.getFeatureBooks(0).pipe(debounceTime(200));
-    this.cd.detectChanges();
   }
 
   private loadFirstByGenre() {
@@ -89,14 +87,13 @@ export class HomePage implements OnInit, OnDestroy {
     );
   }
 
-  displayActivePage(activePageNumber: number) {
+  pageChange(activePageNumber: number) {
+    this.booksFacade.setCurrentPageLatestBook(activePageNumber);
     this.categoryBooks$ = this.booksFacade.getLatestBooks(this.categoryId, activePageNumber).pipe(debounceTime(200));
-    this.cd.detectChanges();
   }
 
   displayActivePageFeature(activePageNumber: number) {
     this.featureBookList$ = this.booksFacade.getFeatureBooks(activePageNumber).pipe(debounceTime(200));
-    this.cd.detectChanges();
   }
 
   ngOnDestroy(): void {

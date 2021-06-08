@@ -9,7 +9,6 @@
     </molec-rd-home-list-book-update>
   </div>
   <div class="flex justify-center items-center">
-    <pagination [totalRecords]="totalBook - 10" [recordsPerPage]="10" [eventResetPagination]="eventResetPagination"
-      (pageChange)="displayActivePage.emit($event)"></pagination>
+    <pagination [totalRecords]="totalBook - 10" [recordsPerPage]="10" [currentPage]="currentPage" (pageChange)="pageChange.emit($event)"></pagination>
   </div>
 </section>

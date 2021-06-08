@@ -1,7 +1,6 @@
-<template-home [totalBook]="totalBookLatest$ | async" [eventResetPagination]="eventResetPagination.asObservable()"
-  (displayActivePage)="displayActivePage($event)" [isLoadingFeature]="isLoadingFeature$ | async" [totalBookFeatured]="totalBookFeature$ | async"
-  (displayActivePageFeature)="displayActivePageFeature($event)" [sliders]="imageObject$ | async" [getGoodBooks]="goodBookList$ | async"
-  [getLatestBooks]="categoryBooks$ | async" [loading]="isLoadingLatest$ | async" [getFeatureBooks]="featureBookList$ | async" [genres]="genres$ | async"
-  (filterItemsByGenre)="filterItemsByGenre($event)" [genreBooks]="filteredBooks$ | async" [categories]="categories$ | async"
-  (emitBooks)="filterItemsByCategory($event)" (emitAllBooks)="getAllLatestBooks()">
+<template-home [totalBook]="totalBookLatest$ | async" [currentPage]="currentPage$ | async" (pageChange)="pageChange($event)"
+  [isLoadingFeature]="isLoadingFeature$ | async" [totalBookFeatured]="totalBookFeature$ | async" (displayActivePageFeature)="displayActivePageFeature($event)"
+  [sliders]="imageObject$ | async" [getGoodBooks]="goodBookList$ | async" [getLatestBooks]="categoryBooks$ | async" [loading]="isLoadingLatest$ | async"
+  [getFeatureBooks]="featureBookList$ | async" [genres]="genres$ | async" (filterItemsByGenre)="filterItemsByGenre($event)"
+  [genreBooks]="filteredBooks$ | async" [categories]="categories$ | async" (emitBooks)="filterItemsByCategory($event)" (emitAllBooks)="getAllLatestBooks()">
 </template-home>

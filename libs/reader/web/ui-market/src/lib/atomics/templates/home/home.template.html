@@ -3,9 +3,9 @@
     <atom-slider [imageObject]="sliders"></atom-slider>
   </section>
   <section>
-    <home-detail-book-update [totalBook]="totalBook" [loading]="loading" [eventResetPagination]="eventResetPagination"
-      (displayActivePage)="displayActivePage.emit($event)" (emitBooks)="emitBooks.emit($event)" (emitAllBooks)="emitAllBooks.emit($event)"
-      [books]="getLatestBooks" [categories]="categories"></home-detail-book-update>
+    <home-detail-book-update [totalBook]="totalBook" [loading]="loading" [currentPage]="currentPage" (pageChange)="pageChange.emit($event)"
+      (emitBooks)="emitBooks.emit($event)" (emitAllBooks)="emitAllBooks.emit($event)" [books]="getLatestBooks" [categories]="categories">
+    </home-detail-book-update>
   </section>
   <section class="bg-pink-light">
     <home-detail-book-featured [loading]="isLoadingFeature" [totalBook]="totalBookFeatured" (displayActivePageFeature)="displayActivePageFeature.emit($event)"
