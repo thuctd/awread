@@ -37,8 +37,8 @@ export class DetailBookPage implements OnInit {
     private genresFacade: GenresFacade,
     private snackbarService: SnackbarService,
     private router: Router,
-    public matDialog: MatDialog,
-  ) { }
+    public matDialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -91,36 +91,41 @@ export class DetailBookPage implements OnInit {
       height: '33rem',
       data: {
         id: this.bookForm.value.bookId,
-        mode: 'book-cover'
-      }
+        mode: 'book-cover',
+      },
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result?.success) {
-        this.bookForm.patchValue({ cover: true, updatedAt: new Date() });
-        console.log('this.bookForm', this.bookForm.value);
-        this.cd.detectChanges();
+        setTimeout(() => {
+          // wait 1 second for server ready
+          this.bookForm.patchValue({ cover: true, updatedAt: new Date() });
+          console.log('this.bookForm', this.bookForm.value);
+          this.cd.detectChanges();
+        }, 1000);
       }
     });
   }
 
   save() {
-    this.bookForm.patchValue({ updatedAt: new Date() })
+    this.bookForm.patchValue({ updatedAt: new Date() });
     if (this.bookId == 'new') {
       if (this.bookForm.invalid) {
         this.bookForm.get('title').setValue(this.bookForm.value.title, { emitEvent: true });
-        this.bookForm.get('categoryId').setValue(this.bookForm.value.categoryId, { emitEvent: true });
+        this.bookForm
+          .get('categoryId')
+          .setValue(this.bookForm.value.categoryId, { emitEvent: true });
         this.bookForm.markAllAsTouched();
         return this.snackbarService.showWarning('Vui lòng điền đủ thông tin');
       }
 
-      this.creationsFacade.create(this.bookForm.value).subscribe(value => {
+      this.creationsFacade.create(this.bookForm.value).subscribe((value) => {
         console.log('value', value, this.bookId);
         this.router.navigate(['/list', this.bookForm.value.bookId, 'toc'], { replaceUrl: true });
-      })
+      });
     } else {
-      this.creationsFacade.update(this.bookForm.value).subscribe(value => {
+      this.creationsFacade.update(this.bookForm.value).subscribe((value) => {
         console.log('value', value);
-      })
+      });
     }
   }
 
@@ -128,7 +133,7 @@ export class DetailBookPage implements OnInit {
     // console.log('route', this.activatedRoute, this.tabsHead);
     this.tabsHead[1].isHidden = true;
     this.cd.detectChanges();
-    this.creationsFacade.generateUuid().subscribe(uuid => {
+    this.creationsFacade.generateUuid().subscribe((uuid) => {
       this.bookForm.patchValue({ bookId: uuid });
       console.log('this form', this.bookForm.value);
     });
@@ -150,8 +155,8 @@ export class DetailBookPage implements OnInit {
       cover: book.cover ?? false,
       type: book.type,
       age: book.age,
-      updatedAt: book.updatedAt
-    })
+      updatedAt: book.updatedAt,
+    });
   }
 
   private initForm() {
@@ -166,10 +171,9 @@ export class DetailBookPage implements OnInit {
       completed: [false],
       published: [false],
       cover: [false],
-      type: "0",
-      age: "2",
-      updatedAt: [null]
+      type: '0',
+      age: '2',
+      updatedAt: [null],
     });
   }
-
 }
