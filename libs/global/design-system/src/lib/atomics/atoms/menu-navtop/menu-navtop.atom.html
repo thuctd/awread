@@ -3,24 +3,24 @@
     <img [src]="user.avatar | avatarSize:'s' || '/global-assets/images/avatar-mrmrs.webp'" class="rounded-full h-8 w-8 inline-block" alt="avatar" />
     <div class="inline-block pl-2"> {{ user.lastname ? user.lastname : user.name?.split(' ')[0] }} </div>
   </a>
-  <div *ngIf="isMenuOpen" class="flex flex-col z-50 right55 top-20 absolute">
-    <div id="frist_div" class="w-80 h-12 bg-green-500 rounded-b-none  rounded-2xl shadow"></div>
-    <div class="w-80 h-12 bg-white border-gray-400 border-b shadow">
-      <div class="w-full">
+  <div *ngIf="isMenuOpen" class="flex flex-col z-50 right-28 top-20 absolute">
+    <div id="frist_div" class="w-72 h-12 bg-green-500 rounded-b-none  rounded-2xl shadow"></div>
+    <div class="w-72 h-12 bg-white color-border border-b shadow">
+      <a [routerLink]="['/profile']" class="outline-none w-full">
         <img [src]="user.avatar | avatarSize:'s' || '/global-assets/images/avatar-mrmrs.webp'"
           class="bg-green-500 p-1 left-5 top-5 rounded-full h-16 w-16 inline-block absolute" alt="IMG_User" />
-        <div class="text-sm pl-20 ml-3 mt-1 text-gray-700">{{user.lastname ? user.lastname : user.name }} </div>
+        <div class="text-sm pl-20 ml-3 mt-1 text-gray-700">{{user.name ? user.name : user.lastname }} </div>
         <div class="text-xs pl-20 ml-3 text-gray-text">{{ user.email }}</div>
-      </div>
+      </a>
     </div>
-    <div class="w-80 h-12 bg-white rounded-t-none shadow border-gray-400 border-b">
+    <!-- <div class="w-80 h-12 bg-white rounded-t-none shadow border-gray-400 border-b">
       <div class="py-2 flex pl-10 ml-1">
         <fa-icon [icon]="faIcon.faInfoCircle" class="text-2xl cursor-pointer"></fa-icon>
         <a class="outline-none text-xs text-gray-700 sm:text-sm block link dim font-medium black ml-6 mt-1 cursor-pointer" [routerLink]="['/profile']"
           routerLinkActive="router-link-active">Hồ sơ</a>
       </div>
-    </div>
-    <div class="w-80 h-12 bg-white rounded-t-none rounded-lg shadow">
+    </div> -->
+    <div class="w-72 h-12 bg-white rounded-t-none rounded-lg shadow">
       <div class="py-2 flex pl-10 ml-1">
         <fa-icon [icon]="faIcon.faSignOutAlt" class="text-2xl cursor-pointer"></fa-icon>
         <a (click)="signoutEvent.emit(); isMenuOpen = false"
