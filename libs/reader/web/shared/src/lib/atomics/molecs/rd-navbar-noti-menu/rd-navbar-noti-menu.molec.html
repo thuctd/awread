@@ -1,4 +1,4 @@
-<div class="relative" closeOnOutSide (clickedOutside)="onClick()">
+<div class="relative" closeOnOutSide (clickedOutside)="clickOutside.emit()">
   <div (click)="clicked.emit()">
     <fa-icon class="text-white text-2xl cursor-pointer px-1.5" [icon]="bell"></fa-icon>
   </div>

@@ -1,9 +1,10 @@
-<header class="fixed z-999 bg-green-primary top-0 w-full pb-3" closeOnOutSide (clickedOutside)="onClick()">
+<header class="fixed z-999 bg-green-primary top-0 w-full pb-3" closeOnOutSide (clickedOutside)="closeSearch()">
   <organ-navbar-mb (logoutEvent)="logoutEvent.emit()"
     [user]="user" [isLogin]="isLogin"
     [isMenuNoti]="isMenuNoti"
     (clickDisplaySearch)="displaySearch()"
     (clickDisplayMenuNoti)="displayMenuNoti()"
+    (clickOutside)="closeMenuNoti()"
   >
   </organ-navbar-mb>
   <div class="flex justify-center">

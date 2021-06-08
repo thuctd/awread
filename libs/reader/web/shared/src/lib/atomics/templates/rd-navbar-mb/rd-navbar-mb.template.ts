@@ -1,5 +1,12 @@
 import { FormControl } from '@angular/forms';
-import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  Input,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 
 @Component({
   selector: 'template-rd-navbar-mb',
@@ -29,20 +36,24 @@ export class RdNavbarMbTemplate implements OnInit {
   ngOnInit(): void {}
 
   displaySearch() {
-    if(this.isMenuNoti == true) {
+    if (this.isMenuNoti == true) {
       return;
     }
     this.isSearch = !this.isSearch;
   }
 
   displayMenuNoti() {
-    if(this.isSearch == true) {
-      return
+    if (this.isSearch == true) {
+      return;
     }
     this.isMenuNoti = !this.isMenuNoti;
   }
 
-  onClick() {
+  closeSearch() {
     this.isSearch = false;
+  }
+
+  closeMenuNoti() {
+    this.isMenuNoti = false;
   }
 }
