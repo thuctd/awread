@@ -3,9 +3,9 @@
     <atom-title-page-link [title]="page.name" [href]="page.href" class="uppercase col-span-6"></atom-title-page-link>
     <molec-rd-home-book-update-dropdown-mb #tabhead (emitBooks)="emitBooks.emit($event)"></molec-rd-home-book-update-dropdown-mb>
   </div>
-  <!-- <div *ngIf="activePage" (click)="onClickPage(activePage - 1)" class="cursor-pointer absolute top-72 -left-2 z-40">
+  <div *ngIf="currentPage" (click)="onClickPage(currentPage - 1)" class="cursor-pointer absolute top-72 -left-2 z-40">
     <fa-icon class="text-gray-text text-sm md:text-base" [icon]="arrowLeftIcon"></fa-icon>
-  </div> -->
+  </div>
   <div class="flex justify-center items-center loading" *ngIf="loading;else loaded">
     <awread-loading></awread-loading>
   </div>
@@ -45,10 +45,10 @@
       </div>
     </div>
   </ng-template>
-  <!-- <div (click)="onClickPage(activePage + 1)" class="cursor-pointer absolute top-72 -right-2">
+  <div (click)="onClickPage(currentPage + 1)" class="cursor-pointer absolute top-72 -right-2">
     <fa-icon class="text-gray-text text-sm md:text-base" [icon]="arrowRightIcon"></fa-icon>
-  </div> -->
-  <div class="flex justify-center items-center">
-    <pagination [totalRecords]="totalBook - 6" [recordsPerPage]="6" (onPageChange)="displayActivePage.emit($event)"></pagination>
   </div>
+  <!-- <div class="flex justify-center items-center">
+    <pagination [totalRecords]="totalBook - 6" [recordsPerPage]="6" (onPageChange)="onClickPage.emit($event)"></pagination>
+  </div> -->
 </section>

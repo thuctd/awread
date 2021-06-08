@@ -18,7 +18,7 @@ import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomeListBookUpdateMobileOrgan implements OnInit, OnChanges {
+export class HomeListBookUpdateMobileOrgan implements OnInit {
   @Input() arrowLeftIcon = faChevronLeft;
   @Input() arrowRightIcon = faChevronRight;
   @Input() loading;
@@ -29,8 +29,8 @@ export class HomeListBookUpdateMobileOrgan implements OnInit, OnChanges {
   };
   @Input() books = [];
   @Input() categories = [];
-  activePage: number = 1;
-  @Output() onPageChange: EventEmitter<number> = new EventEmitter();
+  @Input() currentPage = 1;
+  @Output() pageChange = new EventEmitter();
   @Input() displayUI = {
     ui: {
       isAuthor: false,
@@ -70,13 +70,8 @@ export class HomeListBookUpdateMobileOrgan implements OnInit, OnChanges {
 
   ngOnInit(): void { }
 
-  ngOnChanges(): any {  
-      this.activePage = 1;  
-      this.onPageChange.emit(1);  
-  }  
 
   onClickPage(pageNumber: number): void {
-    this.activePage = pageNumber;
-    this.onPageChange.emit(this.activePage);
+    this.pageChange.emit(pageNumber);
   }
 }

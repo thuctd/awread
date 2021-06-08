@@ -28,10 +28,11 @@ export class HomeMobileTemplate implements OnInit {
   @Input() bookByGenre = [];
   @Input() categories = [];
   @Input() loading: boolean;
+  @Input() currentPage = 1;
   @Output() emitBooks = new EventEmitter();
   @Output() emitAllBooks = new EventEmitter();
   @Output() filterItemsByGenre = new EventEmitter();
-  @Output() displayActivePage = new EventEmitter();
+  @Output() pageChange = new EventEmitter();
   @Input() isLoadingFeature;
   @Input() totalBookFeatured;
   @Output() displayActivePageFeature = new EventEmitter();

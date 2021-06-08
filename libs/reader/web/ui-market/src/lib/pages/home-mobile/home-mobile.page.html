@@ -1,4 +1,4 @@
-<template-home-mobile [totalBook]="totalBookLatest$ | async" (pageChange)="pageChange($event)" [loading]="loading$"
+<template-home-mobile [totalBook]="totalBookLatest$ | async" [currentPage]="currentPage$ | async" (pageChange)="pageChange($event)" [loading]="loading$"
   [isLoadingFeature]="isLoadingFeature$ | async" [totalBookFeatured]="totalBookFeature$ | async" (displayActivePageFeature)="displayActivePageFeature($event)"
   [getGoodBooks]="goodBookList$ | async" [getLatestBooks]="categoryBooks$ | async" [getFeatureBooks]="featureBookList$ | async" [sliders]="imageObject$ | async"
   [genres]="genres$ | async" (filterItemsByGenre)="filterItemsByGenre($event)" [bookByGenre]="filteredBooks$ | async" [categories]="categories$ | async"
