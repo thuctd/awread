@@ -1,1 +1,7 @@
-git branch -d $(git branch --merged | cut -c 3- | grep -v master)
+1 - List all your remote branches:
+
+git branch -r
+
+2 - Clear
+
+git fetch --all --prune
