@@ -27,7 +27,7 @@ const routes: Routes = [
                   ),
           },
           {
-            path: ':bookId/toc/:chapterId/writing',
+            path: 'list/:bookId/toc/:chapterId/writing',
             loadChildren: () =>
               window.innerWidth <= 768 && window?.haveMobile
                 ? import('./pages/writing-mobile/writing-mobile.module').then(
@@ -38,7 +38,7 @@ const routes: Routes = [
                   ),
           },
           {
-            path: ':bookId/detail',
+            path: 'list/:bookId/detail',
             loadChildren: () =>
               window.innerWidth <= 768 && window?.haveMobile
                 ? import('./pages/detail-book-mobile/detail-book-mobile.module').then(
@@ -49,7 +49,7 @@ const routes: Routes = [
                   ),
           },
           {
-            path: ':bookId/toc',
+            path: 'list/:bookId/toc',
             loadChildren: () =>
               window.innerWidth <= 768 && window?.haveMobile
                 ? import('./pages/detail-toc-mobile/detail-toc-mobile.module').then(
@@ -59,6 +59,7 @@ const routes: Routes = [
                     (m) => m.DetailTocDesktopModule
                   ),
           },
+          { path: 'list', pathMatch: 'full', redirectTo: '' },
         ],
       },
     ],
