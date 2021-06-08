@@ -27,8 +27,9 @@ export class BooksHomeApi {
           }
         }
       `, variables: {first}
-    })
-      .pipe();
+    }).pipe(
+      delay(300)
+    );
   }
 
   getFeatureBooks(offset: number, first: number) {
@@ -53,8 +54,9 @@ export class BooksHomeApi {
         }
       `,
       variables: { offset, first }
-    })
-      .pipe()
+    }).pipe(
+      delay(300)
+    );
   }
 
   getLatestBooks(categoryId: string, offset: number) {
@@ -94,6 +96,8 @@ export class BooksHomeApi {
           }
         `,
       variables: { categoryId, offset, first }
-    }).pipe()
+    }).pipe(
+      delay(300)
+    );
   }
 }
