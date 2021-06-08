@@ -30,7 +30,7 @@ export class HomePage implements OnInit, OnDestroy {
   featureBookList$;
   isLoadingFeature$: Observable<boolean>;
   totalBookFeature$: Observable<number>;
-  eventPagination: Subject<void> = new Subject<void>();
+  eventResetPagination: Subject<void> = new Subject<void>();
   filteredBooks$;
   categoryId = '';
   loading$ = false;
@@ -61,7 +61,7 @@ export class HomePage implements OnInit, OnDestroy {
   }
 
   filterItemsByCategory(category: Category) {
-    // this.eventPagination.next();
+    this.eventResetPagination.next();
     this.categoryId = category.categoryId;
     this.categoryBooks$ = this.booksFacade.getLatestBooks(category.categoryId, 0).pipe(debounceTime(200));
     this.cd.detectChanges();

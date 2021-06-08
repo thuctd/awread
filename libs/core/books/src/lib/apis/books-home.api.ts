@@ -6,7 +6,7 @@ import { map, delay, first } from 'rxjs/operators';
 export class BooksHomeApi {
   constructor(private apollo: Apollo) { }
 
-  getGoodBooks(first: number) {    
+  getGoodBooks(first: number) {
     return this.apollo.query({
       query: gql`
         query allMvMostViewBooks($first: Int) {
@@ -26,7 +26,7 @@ export class BooksHomeApi {
             totalCount
           }
         }
-      `, variables: {first}
+      `, variables: { first }
     }).pipe(
       delay(300)
     );
@@ -62,9 +62,13 @@ export class BooksHomeApi {
   getLatestBooks(categoryId: string, offset: number) {
     let first = 10;
     if (window.innerWidth <= 768) {
-        first = 6
-        offset = offset * 6; 
-    }    
+      first = 6
+      offset = offset * 6;
+    } else {
+      offset = offset * 10;
+    }
+    console.log('offset: ', offset);
+
     return this.apollo.query({
       query: gql`
           query allMvBooksLatestChapters ($first: Int $offset: Int ${categoryId ? `,$categoryId: BigFloat` : ''}) {
@@ -74,7 +78,7 @@ export class BooksHomeApi {
               orderBy: PUBLISHED_DESC,
               condition: {
                 published: true,
-                isDeleted: false ${categoryId ? `, 
+                isDeleted: false ${categoryId ? `,
                 categoryId: $categoryId ` : ''
         }
               }

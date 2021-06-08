@@ -50,7 +50,7 @@ export class HomeDetailBookUpdateOrgan implements OnInit {
   @Output() displayActivePage = new EventEmitter();
   @Output() emitAllBooks = new EventEmitter();
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }
