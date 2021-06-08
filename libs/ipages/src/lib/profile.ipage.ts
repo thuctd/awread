@@ -63,10 +63,13 @@ export class ProfileIPage implements OnInit {
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result?.success) {
-        const now = new Date();
-        this.currentUserFacade.updateCurrentUser({ avatar: true, updatedAt: now });
-        this.profileForm.patchValue({ updatedAt: now });
-        this.cd.detectChanges();
+        setTimeout(() => {
+          // wait 1s for server ready
+          const now = new Date();
+          this.currentUserFacade.updateCurrentUser({ avatar: true, updatedAt: now });
+          this.profileForm.patchValue({ updatedAt: now });
+          this.cd.detectChanges();
+        }, 1000);
       }
     });
   }
