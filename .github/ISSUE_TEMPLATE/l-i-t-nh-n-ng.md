@@ -1,14 +1,16 @@
 ---
-name: Báo lỗi
-about: Ứng dụng hoạt động không đúng chức năng
+name: Lỗi tính năng
+about: Lỗi về mặt chức năng, logic không hoạt động hoặc hoạt động không đúng yêu cầu
 title: ''
-labels: bug
+labels: logic-bug
 assignees: ''
 
 ---
 
 ** LƯU Ý**
-Vui lòng điền đủ label: reader-web, writer-web,design
+Vui lòng điền đủ label:
+- Khu vực lỗi là reader hay writer: reader-web, writer-web
+- Nếu lỗi chỉ ở bản mobile của reader: reader-web-mobile
 
 **Mô tả bug**
 Một cách rõ ràng và cụ thể bug lỗi cái gì? ở đâu? 
