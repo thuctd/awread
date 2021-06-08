@@ -1,5 +1,11 @@
 <header class="fixed z-999 bg-green-primary top-0 w-full pb-3" closeOnOutSide (clickedOutside)="onClick()">
-  <organ-navbar-mb (logoutEvent)="logoutEvent.emit()" [user]="user" [isLogin]="isLogin" (clickDisplaySearch)="displayMenu()"></organ-navbar-mb>
+  <organ-navbar-mb (logoutEvent)="logoutEvent.emit()"
+    [user]="user" [isLogin]="isLogin"
+    [isMenuNoti]="isMenuNoti"
+    (clickDisplaySearch)="displaySearch()"
+    (clickDisplayMenuNoti)="displayMenuNoti()"
+  >
+  </organ-navbar-mb>
   <div class="flex justify-center">
     <atom-search-navbar [control]="searchControl" (searchEvent)="eventSearch.emit($event)" *ngIf="isSearch" class="w-4/5 mt-4" class="w-4/5 mt-4"></atom-search-navbar>
   </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { faBell } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -17,12 +17,13 @@ export class RdNavbarNotiMenuMolec implements OnInit {
   @Input() bell = faBell;
 
   @Input() isMenu = false;
+  @Output() clicked = new EventEmitter();
 
   constructor() {}
 
   ngOnInit(): void {}
 
-  displayMenu() {
-    this.isMenu = !this.isMenu;
+  onClick() {
+    this.isMenu = false;
   }
 }

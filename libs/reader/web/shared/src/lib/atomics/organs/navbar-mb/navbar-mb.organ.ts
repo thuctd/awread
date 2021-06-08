@@ -15,10 +15,12 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 })
 export class NavbarMbOrgan implements OnInit {
   @Input() user = {};
+  @Input() isMenuNoti = false;
 
   @Input() search = faSearch;
   @Input() isLogin = true;
   @Output() clickDisplaySearch = new EventEmitter();
+  @Output() clickDisplayMenuNoti = new EventEmitter();
   @Output() logoutEvent = new EventEmitter();
 
   constructor() { }

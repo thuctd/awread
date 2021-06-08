@@ -1,5 +1,5 @@
-<div class="relative">
-  <div (click)="displayMenu()">
+<div class="relative" closeOnOutSide (clickedOutside)="onClick()">
+  <div (click)="clicked.emit()">
     <fa-icon class="text-white text-2xl cursor-pointer px-1.5" [icon]="bell"></fa-icon>
   </div>
   <div *ngIf="isMenu" class="text-xs text-gray-500 shadow absolute w-24 px-2 -left-16 rounded-lg bg-white"s>
