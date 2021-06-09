@@ -29,6 +29,7 @@ WORKDIR /batcave
 COPY libs ./libs
 COPY apps ./apps
 
+RUN ngcc
 RUN pnpm build $application -- --configuration=${ENVIRONMENT} --no-progress
 
 
