@@ -1,2 +1,7 @@
 <div class="flex items-center justify-center text-xs text-gray-500 mt-4">
-<div>{{suggestText}} <a class="text-green-500 outline-none" [routerLink]="[link]">{{title}}</a></div>
+    <div>
+        {{suggestText}}
+        <a *ngIf="link" class="text-green-500 outline-none cursor-pointer" [routerLink]="link" (click)="btnClicked.emit()"> {{title }} </a>
+        <a *ngIf="!link" class="text-green-500 outline-none cursor-pointer" (click)="btnClicked.emit()"> {{title }} </a>
+    </div>
+</div>

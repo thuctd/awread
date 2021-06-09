@@ -1,11 +1,6 @@
 import { Router } from '@angular/router';
 import { ChangeDetectorRef, Directive, Injectable, OnInit } from '@angular/core';
-import {
-  MatDialog,
-  MatDialogModule,
-  MatDialogRef,
-  MAT_DIALOG_DATA,
-} from '@angular/material/dialog';
+import { MatDialog, MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ForgotPasswordFacade } from '@awread/core/users';
 import { SnackbarService } from '@awread/global/packages';
 @Injectable({
@@ -25,9 +20,11 @@ export class ForgotPage implements OnInit {
   ngOnInit(): void {}
   forgotSubmitEvent(email: string) {
     console.log('email: ', email);
+    this.snackbarService.showSuccess('Đang gửi đường dẫn khôi phục mật khẩu...');
     this.forgotPasswordFacade.send(email).subscribe((result: any) => {
       if (result.success == true) {
         this.isSentEmail = true;
+        this.snackbarService.showSuccess('Đã gửi');
         this.cd.detectChanges();
       } else {
         const message = result.message.includes('not found')
@@ -39,6 +36,7 @@ export class ForgotPage implements OnInit {
     });
     // this.forgotPasswordFacade.sendLinkResetPassword(email);
   }
+
   closeEvent() {
     console.log('send link reset password ok!');
     this.router.navigate(['/login']);
