@@ -22,6 +22,7 @@ export class HomeDetailBookUpdateOrgan implements OnInit {
   @Input() loading;
   @Input() categories = [];
   @Input() currentPage;
+  @Input() eventResetPage;
   @Input() totalBook;
   @Input() tabs = [
     {

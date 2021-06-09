@@ -12,11 +12,11 @@ export class FeatureBooksPage implements OnInit, OnChanges {
   featureBooks$: Observable<any>;
   isLoading$: Observable<boolean>;
   hasMore$: Observable<boolean>;
-  activePage: number = 0;
+  activePage = 0;
   totalBook$: any;
   title = 'TRUYỆN NỔI BẬT';
 
-constructor(
+  constructor(
     private booksFacade: BooksFacade,
     private cd: ChangeDetectorRef
   ) { }
@@ -29,21 +29,20 @@ constructor(
     this.hasMore$ = this.booksFacade.featureBooksQuery.selectHasMore();
   }
 
-  ngOnChanges(): any {  
-    this.activePage = 0;  
-  } 
+  ngOnChanges(): any {
+    this.activePage = 0;
+  }
 
   @HostListener('window:scroll', ['$event'])
   onMoreBooks() {
-    const height = window.innerWidth <= 768 ? 630 : 400;
-    if (window.innerHeight + window.scrollY + height >= document.body.scrollHeight) {
+    if (window.innerHeight + window.scrollY + 696 >= document.body.scrollHeight) {
       this.fetchBooks();
     }
   }
 
   private fetchBooks() {
     if (this.booksFacade.featureBooksQuery.getHasMore()) {
-      this.activePage = this.activePage + 1;     
+      this.activePage = this.activePage + 1;
       this.booksFacade.getFeatureBooks(this.activePage, true).subscribe();
     }
   }

@@ -37,12 +37,13 @@ export class HomeTemplate implements OnInit {
   @Input() totalBook;
   @Input() currentPage;
   @Input() totalBookFeatured;
+  @Input() eventResetPage;
   @Input() isLoadingFeature;
   @Output() emitBooks = new EventEmitter();
   @Output() emitAllBooks = new EventEmitter();
   @Output() filterItemsByGenre = new EventEmitter();
   @Output() pageChange = new EventEmitter();
-  @Output() displayActivePageFeature = new EventEmitter();
+  @Output() pageChangeFeature = new EventEmitter();
 
   constructor() { }
 

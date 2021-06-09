@@ -87,20 +87,24 @@ export class PaginationAtom implements OnInit, OnChanges {
     if (pageNumber < 1) return;
     if (pageNumber > this.pageCount) return;
     if (this.pageCount <= 10) {
+      this.currentPage = +this.pages[i];
       this.pageChange.emit(+this.pages[i]);
     }
     else {
       if (i >= 4) {
         const theNextPageNumber = this.pages[i - 1] === "..." ? +this.pages[i] : +this.pages[i - 1] + 1;
         this.pages = (this.pageCount - theNextPageNumber < 4) ? this.getArrayOfPageFirst(this.pageCount, this.pageCount - 4) : this.getArrayOfPageMiddle(this.pageCount, theNextPageNumber - 1);
+        this.currentPage = theNextPageNumber;
         this.pageChange.emit(theNextPageNumber);
       }
       else if (i <= 2) {
         const theNextPageNumber = this.pages[i + 1] === "..." ? +this.pages[i] : +this.pages[i + 1] - 1;
         this.pages = theNextPageNumber < 5 ? this.getArrayOfPageFirst(this.pageCount, 1) : this.getArrayOfPageMiddle(this.pageCount, theNextPageNumber - 1)
+        this.currentPage = theNextPageNumber;
         this.pageChange.emit(theNextPageNumber);
       }
       else {
+        this.currentPage = +this.pages[i];
         this.pageChange.emit(+this.pages[i]);
       }
     }

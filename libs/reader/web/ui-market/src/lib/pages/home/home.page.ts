@@ -30,9 +30,13 @@ export class HomePage implements OnInit, OnDestroy {
   featureBookList$;
   isLoadingFeature$: Observable<boolean>;
   totalBookFeature$: Observable<number>;
-  currentPage$ = this.booksFacade.latestBooksQuery.select(state => state.currentPage);
+  currentPageLatest$ = this.booksFacade.latestBooksQuery.select(state => state.currentPage);
+  hasMoreLatest$ = this.booksFacade.latestBooksQuery.select(state => state.hasMore);
+  currentPageFeature$ = this.booksFacade.featureBooksQuery.select(state => state.currentPage);
+  hasMoreFeature$ = this.booksFacade.featureBooksQuery.select(state => state.hasMore);
   filteredBooks$;
   categoryId = '';
+  eventResetPage: Subject<void> = new Subject<void>();
   loading$ = false;
 
   constructor(
@@ -61,7 +65,8 @@ export class HomePage implements OnInit, OnDestroy {
   }
 
   filterItemsByCategory(category: Category) {
-    this.booksFacade.setCurrentPageLatestBook(1);
+    // this.booksFacade.setCurrentPageLatestBook(1);
+    this.eventResetPage.next();
     this.categoryBooks$ = this.booksFacade.getLatestBooks(category.categoryId, 0).pipe(debounceTime(200));
     this.categoryId = category.categoryId;
     this.cd.detectChanges();
@@ -90,9 +95,11 @@ export class HomePage implements OnInit, OnDestroy {
   pageChange(activePageNumber: number) {
     this.booksFacade.setCurrentPageLatestBook(activePageNumber);
     this.categoryBooks$ = this.booksFacade.getLatestBooks(this.categoryId, activePageNumber).pipe(debounceTime(200));
+    this.cd.detectChanges();
   }
 
-  displayActivePageFeature(activePageNumber: number) {
+  pageChangeFeature(activePageNumber: number) {
+    this.booksFacade.setCurrentPageFeatureBook(activePageNumber);
     this.featureBookList$ = this.booksFacade.getFeatureBooks(activePageNumber).pipe(debounceTime(200));
   }
 

@@ -8,7 +8,7 @@
     </home-detail-book-update>
   </section>
   <section class="bg-pink-light">
-    <home-detail-book-featured [loading]="isLoadingFeature" [totalBook]="totalBookFeatured" (displayActivePageFeature)="displayActivePageFeature.emit($event)"
+    <home-detail-book-featured [loading]="isLoadingFeature" [totalBook]="totalBookFeatured" (pageChange)="pageChangeFeature.emit($event)"
       [books]="getFeatureBooks"></home-detail-book-featured>
   </section>
   <section>

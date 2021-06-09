@@ -12,11 +12,11 @@ export class LatestBooksPage implements OnInit, OnChanges {
   latestBooks$: Observable<any>;
   isLoading$: Observable<boolean>;
   hasMore$: Observable<boolean>;
-  activePage:number = 0;
+  activePage = 0;
   totalBook$: any;
   title = 'TRUYỆN MỚI CẬP NHẬT';
 
-constructor(
+  constructor(
     private booksFacade: BooksFacade,
     private cd: ChangeDetectorRef
   ) { }
@@ -29,21 +29,20 @@ constructor(
     this.hasMore$ = this.booksFacade.latestBooksQuery.selectHasMore();
   }
 
-  ngOnChanges(): any {  
-    this.activePage = 0;  
-  } 
+  ngOnChanges(): any {
+    this.activePage = 0;
+  }
 
   @HostListener('window:scroll', ['$event'])
   onMoreBooks() {
-    const height = window.innerWidth <= 768 ? 630 : 400;
-    if (window.innerHeight + window.scrollY + height >= document.body.scrollHeight) {
+    if (window.innerHeight + window.scrollY + 696 >= document.body.scrollHeight) {
       this.fetchBooks();
     }
   }
 
   private fetchBooks() {
     if (this.booksFacade.latestBooksQuery.getHasMore()) {
-      this.activePage = this.activePage + 1;     
+      this.activePage = this.activePage + 1;
       this.booksFacade.getLatestBooks('', this.activePage, true).subscribe();
     }
   }

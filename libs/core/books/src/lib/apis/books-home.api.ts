@@ -67,7 +67,6 @@ export class BooksHomeApi {
     } else {
       offset = offset * 10;
     }
-    console.log('offset: ', offset);
 
     return this.apollo.query({
       query: gql`

@@ -8,7 +8,7 @@ import { BooksQuery, BooksStore } from '../states/books';
 import { CategoryBooksQuery } from '../states/category-books';
 import { CollectedQuery } from '../states/collected';
 import { ComposedQuery } from '../states/composed';
-import { FeatureBooksQuery } from '../states/feature-books';
+import { FeatureBooksQuery, FeatureBooksStore } from '../states/feature-books';
 import { GenreBooksQuery } from '../states/genre-books';
 import { GoodBooksQuery } from '../states/good-books';
 import { LatestBooksQuery } from '../states/latest-books';
@@ -46,10 +46,15 @@ export class BooksFacade {
     public categoryBooksQuery: CategoryBooksQuery,
     public searchBooksQuery: SearchBooksQuery,
     private latestBooksStore: LatestBooksStore,
+    private featureBooksStore: FeatureBooksStore,
   ) { }
 
   setCurrentPageLatestBook(pageNumber) {
     this.latestBooksStore.setCurentPage(pageNumber);
+  }
+
+  setCurrentPageFeatureBook(pageNumber) {
+    this.featureBooksStore.setCurentPage(pageNumber);
   }
 
   selectLoadingAkita() {
