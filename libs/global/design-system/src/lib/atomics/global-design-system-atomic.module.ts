@@ -138,6 +138,8 @@ import { CoreBooksModule } from '@awread/core/books';
 import { RdNewsShareExperienceItemAtom } from './atoms/rd-news-share-experience-item/rd-news-share-experience-item.atom';
 import { StatusBookAtom } from './atoms/status-book/status-book.atom';
 import { ListInfoProseMolec } from './molecs/list-info-prose/list-info-prose.molec';
+import { TitlePageLinkAtom } from './atoms/title-page-link/title-page-link.atom';
+import { WrtRememberForgotMolec } from './molecs/wrt-remember-forgot/wrt-remember-forgot.molec';
 @NgModule({
   imports: [
     CommonModule,
@@ -149,14 +151,14 @@ import { ListInfoProseMolec } from './molecs/list-info-prose/list-info-prose.mol
     MatNativeDateModule,
     MatInputModule,
     NgSelectModule,
-    QuillModule.forRoot(),
+    QuillModule,
     DefaultCoverModule,
     CloseOnOutsideModule,
     NgImageSliderModule,
     ImageCropperModule,
     MatSelectModule,
     CoreUsersModule,
-    CoreBooksModule
+    CoreBooksModule,
   ],
   exports: [
     CoreUsersModule,
@@ -297,6 +299,8 @@ import { ListInfoProseMolec } from './molecs/list-info-prose/list-info-prose.mol
     RdNewsShareExperienceItemAtom,
     StatusBookAtom,
     ListInfoProseMolec,
+    TitlePageLinkAtom,
+    WrtRememberForgotMolec,
   ],
   declarations: [
     notReadyDirective,
@@ -423,6 +427,8 @@ import { ListInfoProseMolec } from './molecs/list-info-prose/list-info-prose.mol
     RdNewsShareExperienceItemAtom,
     StatusBookAtom,
     ListInfoProseMolec,
+    TitlePageLinkAtom,
+    WrtRememberForgotMolec,
   ],
 })
-export class GlobalDesignSystemAtomicModule { }
+export class GlobalDesignSystemAtomicModule {}

@@ -1,14 +1,22 @@
 <section class="px-4 sm:px-6 lg:px-8 w-full md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl mx-auto mt-4 md:mt-12 py-4">
-    <div class="mb-4">
-        <atom-title [title]="titlePage" class="uppercase"></atom-title>
+    <div class="flex justify-center items-center" *ngIf="loading;else loaded">
+        <awread-loading></awread-loading>
     </div>
-    <div class="grid grid-cols-12 sm:gap-x-8 lg:gap-x-12 xl:gap-x-24 place-content-center mb-4 px-0 xl:px-32">
-        <div *ngFor="let book of books;" class="col-span-2 md:col-span-4 mx-auto py-4">
-            <atom-img-m [size]="'xxl'" [bookId]="book.bookId" [srcImg]="book | coverSize: 'xxl'"></atom-img-m>
-            <div>
-                <!-- <home-info-book-featured [btns]="book.newestChapters" [book]="book" [size]="'l'"></home-info-book-featured> -->
-                <molec-info-book [btns]="book.newestChapters" [book]="book" [displayUI]="displayUI"></molec-info-book>
+    <ng-template #loaded>
+        <div class="mb-4">
+            <atom-title-page-link [title]="page.name" [href]="page.href" class="uppercase"></atom-title-page-link>
+        </div>
+        <div class="grid grid-cols-12 sm:gap-x-8 lg:gap-x-12 xl:gap-x-24 place-content-center mb-4 px-0 xl:px-32">
+            <div *ngFor="let book of books;" class="col-span-2 md:col-span-4 mx-auto py-4">
+                <atom-img-m [size]="'xxl'" [bookId]="book.bookId" [srcImg]="book | coverSize: 'xxl'"></atom-img-m>
+                <div>
+                    <!-- <home-info-book-featured [btns]="book.newestChapters" [book]="book" [size]="'l'"></home-info-book-featured> -->
+                    <molec-info-book [btns]="book.newestChapters" [book]="book" [displayUI]="displayUI"></molec-info-book>
+                </div>
             </div>
         </div>
+    </ng-template>
+    <div class="flex justify-center items-center">
+        <pagination [totalRecords]="totalBook - 6" [recordsPerPage]="6" (onPageChange)="displayActivePageFeature.emit($event)"></pagination>
     </div>
 </section>

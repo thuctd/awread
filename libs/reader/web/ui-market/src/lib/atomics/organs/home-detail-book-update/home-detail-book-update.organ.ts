@@ -14,10 +14,15 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
 })
 export class HomeDetailBookUpdateOrgan implements OnInit {
   @Input() isInfoNovel: true | false = false;
-  @Input() titlePage = 'Truyện mới cập nhật';
+  @Input() page = {
+    name: 'TRUYỆN MỚI CẬP NHẬT',
+    href: ['/latest-books']
+  };
   @Input() books = [];
   @Input() loading;
   @Input() categories = [];
+  @Input() eventResetPagination;
+  @Input() totalBook;
   @Input() tabs = [
     {
       name: 'Tất cả',
@@ -41,13 +46,9 @@ export class HomeDetailBookUpdateOrgan implements OnInit {
     },
   ];
 
-  activePage:number = 0;  
-
   @Output() emitBooks = new EventEmitter();
   @Output() displayActivePage = new EventEmitter();
   @Output() emitAllBooks = new EventEmitter();
-
-  counter = Array;
 
   constructor() {}
 

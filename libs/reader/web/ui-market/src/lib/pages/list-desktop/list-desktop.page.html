@@ -1,3 +1,3 @@
 <section>
-    <template-list [loading]="isLoading$ | async" (nativeTopBook)="nativeTopBook()" (moreBooks)="onMoreBooks()" [titlePage]="titlePage" (filterBooksEvent)="filterBooks()" [filtersForm]="filtersForm" [genres]="genreList$ | async" [topBookList]="topBookList$ | async" [tabsHead]="categoryList$ | async" [selectedTabCategoryId]="selectedCategoryId" (switchTabEvent)="switchTab($event)" [categoryBooks]="filteredBooks$ | async"></template-list>
+    <template-list [loading]="isLoading$ | async" (moreBooks)="onMoreBooks()" [titlePage]="titlePage" (filterBooksEvent)="filterBooks()" [filtersForm]="filtersForm" [genres]="genreList$ | async" [topBookList]="topBookList$ | async" [tabsHead]="categoryList$ | async" [selectedTabCategoryId]="selectedCategoryId" (switchTabEvent)="switchTab($event)" [categoryBooks]="filteredBooks$ | async"></template-list>
 </section>

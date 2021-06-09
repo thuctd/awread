@@ -92,6 +92,10 @@ https://stackoverflow.com/a/55486859/5992468
 - Finally for buba website
   dokku letsencrypt backend-graphql
   dokku letsencrypt backend-api
+  dokku letsencrypt:auto-renew backend-api
+
+- auto renew
+  dokku letsencrypt:cron-job --add
 
 # setup docker file
 

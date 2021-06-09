@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { GlobalDesignSystemAtomicModule, StorybookSupportModule } from '@awread/global/design-system';
+import {
+  GlobalDesignSystemAtomicModule,
+  StorybookSupportModule,
+} from '@awread/global/design-system';
 import { WrtTabHeadMolec } from './molecs/wrt-tab-head/wrt-tab-head.molec';
-import { WrtRememberForgotMolec } from './molecs/wrt-remember-forgot/wrt-remember-forgot.molec';
 import { WrtActionBtnsMolec } from './molecs/wrt-action-btns/wrt-action-btns.molec';
 import { WrtLoginOrgan } from './organs/wrt-login/wrt-login.organ';
 import { WrtRegisterOrgan } from './organs/wrt-register/wrt-register.organ';
@@ -24,7 +26,6 @@ import { WrtRegisterCompleteFormMolec } from './molecs/wrt-register-complete-for
   exports: [
     CommonModule,
     WrtTabHeadMolec,
-    WrtRememberForgotMolec,
     WrtActionBtnsMolec,
     WrtLoginOrgan,
     WrtRegisterOrgan,
@@ -44,7 +45,6 @@ import { WrtRegisterCompleteFormMolec } from './molecs/wrt-register-complete-for
   ],
   declarations: [
     WrtTabHeadMolec,
-    WrtRememberForgotMolec,
     WrtActionBtnsMolec,
     WrtLoginOrgan,
     WrtRegisterOrgan,

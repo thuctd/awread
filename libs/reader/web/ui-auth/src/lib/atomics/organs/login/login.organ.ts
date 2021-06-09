@@ -1,4 +1,11 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  Input,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { RegisterMobileTemplate } from '../../templates/register-mobile/register-mobile.template';
@@ -17,6 +24,7 @@ import { RegisterWebTemplate } from '../../templates/register-web/register-web.t
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginOrgan implements OnInit {
+  @Input() forgotLink = '/forgot';
   @Input() authForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', Validators.required],
@@ -26,6 +34,10 @@ export class LoginOrgan implements OnInit {
   constructor(private fb: FormBuilder, private matDialog: MatDialog) {}
 
   ngOnInit(): void {}
+
+  closeAllDidalog() {
+    this.matDialog.closeAll();
+  }
 
   openFormRegister($event): void {
     this.matDialog.open(RegisterWebTemplate, {

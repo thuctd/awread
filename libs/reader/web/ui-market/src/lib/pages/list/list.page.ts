@@ -95,6 +95,7 @@ export class ListPage implements OnInit, OnDestroy {
 
   onMoreBooks() {
     this.fetchBooks();
+    this.cd.detectChanges();
   }
 
   private fetchBooks() {
