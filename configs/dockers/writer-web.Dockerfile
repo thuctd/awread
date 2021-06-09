@@ -24,7 +24,8 @@ RUN echo application is: $application
 RUN echo applicationPath is: $applicationPath
 RUN echo ENVIRONMENT reset: $ENVIRONMENT
 
-COPY --from=builder node_modules ./node_modules
+WORKDIR /batcave
+COPY --from=builder /batcave/node_modules ./node_modules
 COPY libs ./libs
 COPY apps ./apps
 
