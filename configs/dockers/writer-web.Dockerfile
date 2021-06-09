@@ -12,7 +12,6 @@ COPY decorate-angular-cli.js package.json pnpm-lock.yaml ./
 RUN pnpm install --frozen-lockfile --prod
 COPY *.js tsconfig*.json angular.json nx.json ./
 COPY configs/tailwind configs/tailwind
-RUN pnpx ngcc --properties es2015 browser module main --create-ivy-entry-points
 
 FROM builder as build-writer-web
 # //NOTE: ENVIRONMENT is coming from server environment in build process, not coming from container environment
@@ -25,11 +24,9 @@ RUN echo application is: $application
 RUN echo applicationPath is: $applicationPath
 RUN echo ENVIRONMENT reset: $ENVIRONMENT
 
-WORKDIR /batcave
 COPY libs ./libs
 COPY apps ./apps
 
-RUN pnpx ngcc
 RUN pnpm build $application -- --configuration=${ENVIRONMENT} --no-progress
 
 
