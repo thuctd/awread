@@ -16,4 +16,6 @@ echo $NODE_ENV
 dokku enter backend-api web echo hi
 dokku enter backend-api web printenv
 
+# go into container
+
 dokku enter writer-web web sh
