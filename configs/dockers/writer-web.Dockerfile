@@ -26,8 +26,7 @@ RUN echo ENVIRONMENT reset: $ENVIRONMENT
 
 COPY libs ./libs
 COPY apps ./apps
-RUN --mount=type=cache,target=/batcave/node_modules
-WORKDIR /batcave
+
 RUN pnpm build $application -- --configuration=${ENVIRONMENT} --no-progress
 
 
