@@ -1,5 +1,6 @@
+import { switchMap } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { Directive, Injectable, OnInit } from '@angular/core';
+import { Directive, Injectable, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CreationsFacade } from '@awread/core/creations';
 import { MatDialog } from '@angular/material/dialog';
 import { WrtDetailPopupBookTemplate } from '../../atomics/templates';
@@ -14,18 +15,21 @@ import { ChaptersFacade } from '@awread/core/chapters';
 export class ListPage implements OnInit {
   creations$ = this.creationsFacade.creations$;
   loading$ = this.creationsFacade.loading$;
+  searchTerm$ = this.creationsFacade.searchCreationsQuery.searchTerm$;
   constructor(
     private router: Router,
     private creationsFacade: CreationsFacade,
     private matDialog: MatDialog,
     private snackbarService: SnackbarService,
     private chaptersFacade: ChaptersFacade,
+    private cd: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
     this.creationsFacade.get().subscribe(value => {
       console.log('value', value);
     });
+    this.watchingSearchTerm();
   }
 
   bookEvent(event) {
@@ -66,12 +70,19 @@ export class ListPage implements OnInit {
     }
   }
 
-
-
   openPreview(): void {
     this.matDialog.open(WrtDetailPopupBookTemplate, {
       width: '55rem',
       height: '33rem',
     });
+  }
+
+  watchingSearchTerm() {
+    this.creations$ = this.searchTerm$.pipe(
+      switchMap(value => {
+        return this.creationsFacade.searchCreationByTerm(value);
+      })
+    );
+    this.cd.detectChanges();
   }
 }

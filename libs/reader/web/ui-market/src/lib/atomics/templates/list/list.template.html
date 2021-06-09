@@ -38,7 +38,7 @@
     </div>
     <div class="lg:hidden xl:block lg:col-span-1"></div>
     <div class="col-span-2 md:col-span-3">
-      <list-detail-top-book (moreEvent)="nativeTopBook.emit($event)" [ngClass]="filterbook === false ? 'pt-12' : 'pt-32'" [books]="topBookList">
+      <list-detail-top-book (moreEvent)="filterTopBooks()" [ngClass]="filterbook === false ? 'pt-12' : 'pt-32'" [books]="topBookList">
       </list-detail-top-book>
     </div>
   </div>

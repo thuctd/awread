@@ -22,4 +22,8 @@ export class AuthorBooksQuery extends QueryEntity<AuthorBooksState> {
   selectTotalBook() {
     return this.select(state => state.total);
   }
+
+  selectHasMore() {
+    return this.select(state => state.hasMore);
+  }
 }

@@ -1,8 +1,8 @@
-import { Component, OnInit, ChangeDetectionStrategy, Output, Input, EventEmitter } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'template-top-books-mb',
-  templateUrl: './top-books-mb.template.html',
+  selector: 'template-books-mb',
+  templateUrl: './books-mb.template.html',
   styles: [
     `
       :host {
@@ -12,9 +12,10 @@ import { Component, OnInit, ChangeDetectionStrategy, Output, Input, EventEmitter
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TopBooksMbTemplate implements OnInit {
+export class BooksMbTemplate implements OnInit {
   isMenu = false;
   @Input() titlePage;
+  @Input() hasMore;
   @Input() books = [];
   @Input() topBooks = [];
   @Input() items = [];

@@ -1,5 +1,5 @@
 <div class="w-full max-w-screen-xl mx-auto mt-4">
-  <atom-title [title]="titlePage" class="uppercase"></atom-title>
+  <atom-title-page-link [title]="page.name" [href]="page.href" class="uppercase col-span-6"></atom-title-page-link>
   <div class="justify-center flex flex-col mt-8">
     <div *ngFor="let book of books | slice:0:1; let i = index" class="flex justify-center mb-10">
       <div class="mx-4">

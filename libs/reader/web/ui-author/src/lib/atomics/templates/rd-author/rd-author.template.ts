@@ -19,6 +19,7 @@ export class RdAuthorTemplate implements OnInit {
   @Input() user;
   @Input() books = [];
   @Input() items = [];
+  @Input() hasMore;
   @Output() emitMoreBooks = new EventEmitter();
   constructor() { }
 

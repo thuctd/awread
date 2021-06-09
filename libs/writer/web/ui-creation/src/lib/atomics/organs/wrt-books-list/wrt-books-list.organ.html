@@ -3,7 +3,7 @@
     <awread-loading></awread-loading>
   </div>
   <ng-template #loaded>
-    <ng-container *ngIf="books.length;else noData">
+    <ng-container *ngIf="books?.length;else noData">
       <div class="text-right pb-10">
         <cr-submit-btn class="w-full" (btnClicked)="bookEvent.emit({ type: 'create' })" [faIcon]="faIcon" [submitText]="'Đăng truyện'">
         </cr-submit-btn>

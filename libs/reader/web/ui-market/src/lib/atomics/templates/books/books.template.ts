@@ -2,8 +2,8 @@ import { faThLarge, faList } from '@fortawesome/free-solid-svg-icons';
 import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'template-top-books',
-  templateUrl: './top-books.template.html',
+  selector: 'template-books',
+  templateUrl: './books.template.html',
   styles: [
     `
       :host {
@@ -13,11 +13,12 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TopBooksTemplate implements OnInit {
+export class BooksTemplate implements OnInit {
   display = 'grid';
+  @Input() titlePage;
   @Input() totalBook;
   @Input() loading;
-  @Input() genres = [];
+  @Input() isMoreOffset;
   @Input() actions = [
     {
       faIcon: faThLarge,
@@ -31,8 +32,6 @@ export class TopBooksTemplate implements OnInit {
     },
   ];
   @Input() books = [];
-  @Output() eventSearch = new EventEmitter();
-  @Output() changeCategoryBooks = new EventEmitter();
   @Output() moreBooks = new EventEmitter();
   @Output() nativeTopBook = new EventEmitter();
   constructor() { }
@@ -43,4 +42,5 @@ export class TopBooksTemplate implements OnInit {
   changeDisplay(mode: string) {
     this.display = mode;
   }
+
 }

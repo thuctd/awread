@@ -1,3 +1,4 @@
+import { SearchBooksStore } from './../../../../books/src/lib/states/search-books/search-books.store';
 import { Injectable } from '@angular/core';
 import { map, tap } from 'rxjs/operators';
 import { CreationsApi } from '../apis';
@@ -14,6 +15,7 @@ export class CreationsGear {
   constructor(
     private creationsApi: CreationsApi,
     private creationsStore: CreationsStore,
+    private searchBooksStore: SearchBooksStore,
     private currentUserFacade: CurrentUserFacade,
     private location: Location,
     private SnackbarService: SnackbarService,
@@ -30,6 +32,15 @@ export class CreationsGear {
       .pipe(
         tap(value => this.creationsStore.setLoading(false)),
         tap(value => this.creationsStore.set(value))
+      )
+  }
+
+  searchCreationByTerm(searchTerm: string) {
+    this.searchBooksStore.setLoading(true);
+    return this.creationsApi.searchCreationByTerm(this.currentUserFacade.getUserId(), searchTerm)
+      .pipe(
+        tap(value => this.searchBooksStore.setLoading(false)),
+        tap(value => this.searchBooksStore.set(value))
       )
   }
 
