@@ -24,6 +24,7 @@ RUN echo application is: $application
 RUN echo applicationPath is: $applicationPath
 RUN echo ENVIRONMENT reset: $ENVIRONMENT
 
+COPY node_modules ./node_modules
 COPY libs ./libs
 COPY apps ./apps
 
