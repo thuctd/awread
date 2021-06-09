@@ -3,7 +3,7 @@
     <logo [isLogged]="'true'"></logo>
   </div>
   <div class="flex justify-end items-center w-4/6">
-    <wrt-topnav-right [user]="user" (searchEvent)="searchEvent.emit($event)" (signoutEvent)="signoutEvent.emit()"></wrt-topnav-right>
+    <wrt-topnav-right [user]="user" [searchControl]="searchControl" (searchEvent)="searchEvent.emit($event)" (signoutEvent)="signoutEvent.emit()"></wrt-topnav-right>
   </div>
 </section>
 

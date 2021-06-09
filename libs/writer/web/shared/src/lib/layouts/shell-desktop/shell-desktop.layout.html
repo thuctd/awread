@@ -1,5 +1,6 @@
 <navbar
   [user]="currentUser$ | async"
+  [searchControl]="searchControl"
   (signoutEvent)="logout()"
   (searchEvent)="searchEvent($event)"
 >
