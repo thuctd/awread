@@ -51,7 +51,7 @@ export class ListTemplate implements OnInit {
   @Output() changeCategoryBooks = new EventEmitter();
   @Output() filterBooksEvent = new EventEmitter();
   @Output() moreBooks = new EventEmitter();
-  @Output() nativeTopBook = new EventEmitter();
+  
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {}
@@ -62,5 +62,11 @@ export class ListTemplate implements OnInit {
 
   changeDisplayFilter() {
     this.filterbook = !this.filterbook;
+  }
+
+  filterTopBooks() {
+    this.filtersForm.controls['criteria'].setValue('1');
+    this.filtersForm.controls['postingDate'].setValue(7);
+    this.filterbook = true;
   }
 }

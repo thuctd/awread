@@ -17,17 +17,21 @@ import { CategoriesFacade } from '@awread/core/categories';
 export class HomePage implements OnInit, OnDestroy {
   destroy$ = new Subject();
   bookList$ = this.booksFacade.books$;
+  imageObject$ = this.sliderFacede.slider$;
   goodBookList$ = this.booksFacade.goodBooks$;
   categoryBookList$ = this.booksFacade.categoryBooks$;
   genreBookList$ = this.booksFacade.genreBooks$;
-  featureBookList$ = this.booksFacade.featureBooks$;
   genreBooks$ = this.booksFacade.genreBooks$;
   categories$ = this.categoriesFacade.categories$;
   genres$ = this.genresFacade.genres$.pipe(map(genres => genres.filter(genre => ['Lãng mạn', 'Hài hước', 'Tình cảm', 'Thanh xuân', 'Gia đình'].includes(genre.name))));
-  imageObject$ = this.sliderFacede.slider$;
-  isLoading$: Observable<boolean>;
-  filteredBooks$;
   categoryBooks$;
+  isLoadingLatest$: Observable<boolean>;
+  totalBookLatest$: Observable<number>;
+  featureBookList$;
+  isLoadingFeature$: Observable<boolean>;
+  totalBookFeature$: Observable<number>;
+  eventPagination: Subject<void> = new Subject<void>();
+  filteredBooks$;
   categoryId = '';
   loading$ = false;
 
@@ -43,10 +47,13 @@ export class HomePage implements OnInit, OnDestroy {
     this.genresFacade.getAllGenres().subscribe();
     this.sliderFacede.getAllSlider().subscribe();
     this.booksFacade.getGoodBooks().subscribe();
-    this.booksFacade.getFeatureBooks().subscribe();
-    this.isLoading$ = this.booksFacade.latestBooksQuery.selectLoading();
+    this.isLoadingLatest$ = this.booksFacade.latestBooksQuery.selectLoading();
+    this.isLoadingFeature$ = this.booksFacade.featureBooksQuery.selectLoading();
+    this.totalBookLatest$ = this.booksFacade.latestBooksQuery.selectTotalBook();
+    this.totalBookFeature$ = this.booksFacade.featureBooksQuery.selectTotalBook();
     this.loadFirstByGenre();
     this.getAllLatestBooks();
+    this.getAllFeatureBooks();
   }
 
   filterItemsByGenre(genre: Genre) {
@@ -54,6 +61,7 @@ export class HomePage implements OnInit, OnDestroy {
   }
 
   filterItemsByCategory(category: Category) {
+    // this.eventPagination.next();
     this.categoryId = category.categoryId;
     this.categoryBooks$ = this.booksFacade.getLatestBooks(category.categoryId, 0).pipe(debounceTime(200));
     this.cd.detectChanges();
@@ -61,6 +69,11 @@ export class HomePage implements OnInit, OnDestroy {
 
   getAllLatestBooks() {
     this.categoryBooks$ = this.booksFacade.getLatestBooks('', 0).pipe(debounceTime(200));
+    this.cd.detectChanges();
+  }
+
+  getAllFeatureBooks() {
+    this.featureBookList$ = this.booksFacade.getFeatureBooks(0).pipe(debounceTime(200));
     this.cd.detectChanges();
   }
 
@@ -78,6 +91,11 @@ export class HomePage implements OnInit, OnDestroy {
 
   displayActivePage(activePageNumber: number) {
     this.categoryBooks$ = this.booksFacade.getLatestBooks(this.categoryId, activePageNumber).pipe(debounceTime(200));
+    this.cd.detectChanges();
+  }
+
+  displayActivePageFeature(activePageNumber: number) {
+    this.featureBookList$ = this.booksFacade.getFeatureBooks(activePageNumber).pipe(debounceTime(200));
     this.cd.detectChanges();
   }
 

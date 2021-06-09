@@ -1,15 +1,15 @@
-import { TopBooksMbTemplate } from './top-books-mb.template';
+import { BooksTemplate } from './books.template';
 import { ReaderWebUiMarketAtomicModule } from '../../reader-web-ui-market-atomic.module';
 
 export default {
-  title: 'Market/Templates/Top Books Mb'
+  title: 'Market/Templates/Books'
 }
 
 export const primary = () => ({
   moduleMetadata: {
     imports: [ReaderWebUiMarketAtomicModule]
   },
-  component: TopBooksMbTemplate,
+  component: BooksTemplate,
   props: {
 
   }

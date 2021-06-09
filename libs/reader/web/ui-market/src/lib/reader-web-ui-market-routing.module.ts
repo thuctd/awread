@@ -8,7 +8,8 @@ declare const window: Window & { haveMobile: boolean };
 const routes: Routes = [
   {
     path: '',
-    component: window.innerWidth <= 768 && window?.haveMobile ? SharedMobileLayout : SharedDesktopLayout,
+    component:
+      window.innerWidth <= 768 && window?.haveMobile ? SharedMobileLayout : SharedDesktopLayout,
     children: [
       {
         path: '',
@@ -19,7 +20,9 @@ const routes: Routes = [
             loadChildren: () =>
               window.innerWidth <= 768 && window?.haveMobile
                 ? import('./pages/home-mobile/home-mobile.module').then((m) => m.HomeMobileModule)
-                : import('./pages/home-desktop/home-desktop.module').then((m) => m.HomeDesktopModule),
+                : import('./pages/home-desktop/home-desktop.module').then(
+                    (m) => m.HomeDesktopModule
+                  ),
           },
 
           {
@@ -27,22 +30,30 @@ const routes: Routes = [
             loadChildren: () =>
               window.innerWidth <= 768 && window?.haveMobile
                 ? import('./pages/read-mobile/read-mobile.module').then((m) => m.ReadMobileModule)
-                : import('./pages/read-desktop/read-desktop.module').then((m) => m.ReadDesktopModule),
+                : import('./pages/read-desktop/read-desktop.module').then(
+                    (m) => m.ReadDesktopModule
+                  ),
           },
 
           {
             path: 'books/:bookId',
             loadChildren: () =>
               window.innerWidth <= 768 && window?.haveMobile
-                ? import('./pages/detail-mobile/detail-mobile.module').then((m) => m.DetailMobileModule)
-                : import('./pages/detail-desktop/detail-desktop.module').then((m) => m.DetailDesktopModule),
+                ? import('./pages/detail-mobile/detail-mobile.module').then(
+                    (m) => m.DetailMobileModule
+                  )
+                : import('./pages/detail-desktop/detail-desktop.module').then(
+                    (m) => m.DetailDesktopModule
+                  ),
           },
           {
             path: 'composed',
             loadChildren: () =>
               window.innerWidth <= 768 && window?.haveMobile
                 ? import('./pages/list-mobile/list-mobile.module').then((m) => m.ListMobileModule)
-                : import('./pages/list-desktop/list-desktop.module').then((m) => m.ListDesktopModule),
+                : import('./pages/list-desktop/list-desktop.module').then(
+                    (m) => m.ListDesktopModule
+                  ),
           },
 
           {
@@ -50,30 +61,44 @@ const routes: Routes = [
             loadChildren: () =>
               window.innerWidth <= 768 && window?.haveMobile
                 ? import('./pages/list-mobile/list-mobile.module').then((m) => m.ListMobileModule)
-                : import('./pages/list-desktop/list-desktop.module').then((m) => m.ListDesktopModule),
+                : import('./pages/list-desktop/list-desktop.module').then(
+                    (m) => m.ListDesktopModule
+                  ),
           },
           {
             path: 'search',
             loadChildren: () =>
               window.innerWidth <= 768 && window?.haveMobile
-                ? import('./pages/search-mobile/search-mobile.module').then((m) => m.SearchMobileModule)
-                : import('./pages/search-desktop/search-desktop.module').then((m) => m.SearchDesktopModule),
+                ? import('./pages/search-mobile/search-mobile.module').then(
+                    (m) => m.SearchMobileModule
+                  )
+                : import('./pages/search-desktop/search-desktop.module').then(
+                    (m) => m.SearchDesktopModule
+                  ),
           },
 
           {
             path: 'introduction',
             loadChildren: () =>
               window.innerWidth <= 768 && window?.haveMobile
-                ? import('./pages/introduction-mobile/introduction-mobile.module').then((m) => m.IntroductionMobileModule)
-                : import('./pages/introduction-desktop/introduction-desktop.module').then((m) => m.IntroductionDesktopModule),
+                ? import('./pages/introduction-mobile/introduction-mobile.module').then(
+                    (m) => m.IntroductionMobileModule
+                  )
+                : import('./pages/introduction-desktop/introduction-desktop.module').then(
+                    (m) => m.IntroductionDesktopModule
+                  ),
           },
 
           {
             path: 'community',
             loadChildren: () =>
               window.innerWidth <= 768 && window?.haveMobile
-                ? import('./pages/community-mobile/community-mobile.module').then((m) => m.CommunityMobileModule)
-                : import('./pages/community-desktop/community-desktop.module').then((m) => m.CommunityDesktopModule),
+                ? import('./pages/community-mobile/community-mobile.module').then(
+                    (m) => m.CommunityMobileModule
+                  )
+                : import('./pages/community-desktop/community-desktop.module').then(
+                    (m) => m.CommunityDesktopModule
+                  ),
           },
 
           {
@@ -81,21 +106,64 @@ const routes: Routes = [
             loadChildren: () =>
               window.innerWidth <= 768 && window?.haveMobile
                 ? import('./pages/news-mobile/news-mobile.module').then((m) => m.NewsMobileModule)
-                : import('./pages/news-desktop/news-desktop.module').then((m) => m.NewsDesktopModule),
+                : import('./pages/news-desktop/news-desktop.module').then(
+                    (m) => m.NewsDesktopModule
+                  ),
           },
           {
             path: 'news/:newsId',
             loadChildren: () =>
               window.innerWidth <= 768 && window?.haveMobile
-                ? import('./pages/news-detail-mobile/news-detail-mobile.module').then((m) => m.NewsDetailMobileModule)
-                : import('./pages/news-detail-desktop/news-detail-desktop.module').then((m) => m.NewsDetailDesktopModule),
+                ? import('./pages/news-detail-mobile/news-detail-mobile.module').then(
+                    (m) => m.NewsDetailMobileModule
+                  )
+                : import('./pages/news-detail-desktop/news-detail-desktop.module').then(
+                    (m) => m.NewsDetailDesktopModule
+                  ),
           },
           {
             path: 'top-books',
             loadChildren: () =>
               window.innerWidth <= 768 && window?.haveMobile
-                ? import('./pages/top-books-mobile/top-books-mobile.module').then((m) => m.TopBooksMobileModule)
-                : import('./pages/top-books-desktop/top-books-desktop.module').then((m) => m.TopBooksDesktopModule),
+                ? import('./pages/top-books-mobile/top-books-mobile.module').then(
+                    (m) => m.TopBooksMobileModule
+                  )
+                : import('./pages/top-books-desktop/top-books-desktop.module').then(
+                    (m) => m.TopBooksDesktopModule
+                  ),
+          },
+          {
+            path: 'latest-books',
+            loadChildren: () =>
+              window.innerWidth <= 768 && window?.haveMobile
+                ? import('./pages/latest-books-mobile/latest-books-mobile.module').then(
+                    (m) => m.LatestBooksMobileModule
+                  )
+                : import('./pages/latest-books-desktop/latest-books-desktop.module').then(
+                    (m) => m.LatestBooksDesktopModule
+                  ),
+          },
+          {
+            path: 'good-books',
+            loadChildren: () =>
+              window.innerWidth <= 768 && window?.haveMobile
+                ? import('./pages/good-books-mobile/good-books-mobile.module').then(
+                    (m) => m.GoodBooksMobileModule
+                  )
+                : import('./pages/good-books-desktop/good-books-desktop.module').then(
+                    (m) => m.GoodBooksDesktopModule
+                  ),
+          },
+          {
+            path: 'feature-books',
+            loadChildren: () =>
+              window.innerWidth <= 768 && window?.haveMobile
+                ? import('./pages/feature-books-mobile/feature-books-mobile.module').then(
+                    (m) => m.FeatureBooksMobileModule
+                  )
+                : import('./pages/feature-books-desktop/feature-books-desktop.module').then(
+                    (m) => m.FeatureBooksDesktopModule
+                  ),
           },
           {
             path: '',
@@ -112,4 +180,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class ReaderWebUiMarketRoutingModule { }
+export class ReaderWebUiMarketRoutingModule {}

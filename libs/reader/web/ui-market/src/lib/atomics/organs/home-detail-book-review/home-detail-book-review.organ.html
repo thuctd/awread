@@ -1,5 +1,5 @@
 <div class="px-4 sm:px-6 lg:px-8 w-full md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl mx-auto mt-4 md:mt-12">
-  <atom-title [title]="titlePage" class="uppercase"></atom-title>
+  <atom-title-page-link [title]="page.name" [href]="page.href" class="uppercase"></atom-title-page-link>
   <div class="justify-center flex mt-16">
     <div *ngFor="let book of books | slice:0:1; let i = index">
       <ng-container *ngIf="i === 0;else noNumberOne">

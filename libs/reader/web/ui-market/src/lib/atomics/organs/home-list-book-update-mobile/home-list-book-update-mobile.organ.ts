@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter, ViewChild, ElementRef, OnChanges } from '@angular/core';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'organ-home-list-book-update-mobile',
@@ -18,17 +18,19 @@ import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomeListBookUpdateMobileOrgan implements OnInit {
-  @ViewChild('widgetsContent', { static: true }) widgetsContent: ElementRef<any>;
+export class HomeListBookUpdateMobileOrgan implements OnInit, OnChanges {
   @Input() arrowLeftIcon = faChevronLeft;
   @Input() arrowRightIcon = faChevronRight;
   @Input() loading;
-  @Input() titlePage = 'Truyện mới cập nhật';
-  @Input() srcImg = '/global-assets/images/image.webp';
-  @Input() altImg = 'Placeholder';
+  @Input() totalBook;
+  @Input() page = {
+    name: 'TRUYỆN MỚI CẬP NHẬT',
+    href: ['/latest-books']
+  };
   @Input() books = [];
   @Input() categories = [];
-
+  activePage: number = 1;
+  @Output() onPageChange: EventEmitter<number> = new EventEmitter();
   @Input() displayUI = {
     ui: {
       isAuthor: false,
@@ -62,23 +64,19 @@ export class HomeListBookUpdateMobileOrgan implements OnInit {
       isNovel: true,
     },
   ];
+  @Output() displayActivePage = new EventEmitter();
 
   constructor() { }
 
   ngOnInit(): void { }
 
-  //NOTE: Chức năng đang gây lỗi nên hiện tại đang ẩn
-  public scrollRight(): void {
-    this.widgetsContent.nativeElement.scrollTo({
-      left: this.widgetsContent.nativeElement.scrollLeft + 145,
-      behavior: 'smooth',
-    });
-  }
+  ngOnChanges(): any {  
+      this.activePage = 1;  
+      this.onPageChange.emit(1);  
+  }  
 
-  public scrollLeft(): void {
-    this.widgetsContent.nativeElement.scrollTo({
-      left: this.widgetsContent.nativeElement.scrollLeft - 145,
-      behavior: 'smooth',
-    });
+  onClickPage(pageNumber: number): void {
+    this.activePage = pageNumber;
+    this.onPageChange.emit(this.activePage);
   }
 }
