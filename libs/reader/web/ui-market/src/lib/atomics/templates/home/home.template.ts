@@ -1,4 +1,11 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  Input,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 
 @Component({
   selector: 'template-home',
@@ -40,12 +47,11 @@ export class HomeTemplate implements OnInit {
   @Input() eventResetPage;
   @Input() isLoadingFeature;
   @Output() emitBooks = new EventEmitter();
-  @Output() emitAllBooks = new EventEmitter();
   @Output() filterItemsByGenre = new EventEmitter();
   @Output() pageChange = new EventEmitter();
   @Output() pageChangeFeature = new EventEmitter();
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }

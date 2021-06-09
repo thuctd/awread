@@ -14,10 +14,8 @@ import { GoodBooksQuery } from '../states/good-books';
 import { LatestBooksQuery } from '../states/latest-books';
 import { TopBooksQuery } from '../states/top-books';
 
-
 @Injectable({ providedIn: 'root' })
 export class BooksFacade {
-
   books$ = this.booksQuery.selectAll();
   topBooks$ = this.topBooksQuery.selectAll();
   composed$ = this.composedQuery.selectAll();
@@ -46,8 +44,8 @@ export class BooksFacade {
     public categoryBooksQuery: CategoryBooksQuery,
     public searchBooksQuery: SearchBooksQuery,
     private latestBooksStore: LatestBooksStore,
-    private featureBooksStore: FeatureBooksStore,
-  ) { }
+    private featureBooksStore: FeatureBooksStore
+  ) {}
 
   setCurrentPageLatestBook(pageNumber) {
     this.latestBooksStore.setCurentPage(pageNumber);
@@ -98,8 +96,12 @@ export class BooksFacade {
     return this.booksGear.getCategoryBooks(categoryId, size);
   }
 
-  getLatestBooks(cateogoryId: string, offset: number, isCheck?: boolean) {
-    return this.booksHomeGear.getLatestBooks(cateogoryId, offset, isCheck);
+  getLatestBooks(isAdd?) {
+    return this.booksHomeGear.getLatestBooks(isAdd);
+  }
+
+  setCurrentCategory(categoryId) {
+    this.latestBooksStore.update({ currentCategoryId: categoryId });
   }
 
   getAuthorBooks(authors) {

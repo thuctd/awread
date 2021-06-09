@@ -1,6 +1,13 @@
 import { BooksFacade } from '@awread/core/books';
 import { UntilDestroy } from '@ngneat/until-destroy';
-import { Injectable, OnInit, Directive, ChangeDetectorRef, HostListener, OnChanges } from '@angular/core';
+import {
+  Injectable,
+  OnInit,
+  Directive,
+  ChangeDetectorRef,
+  HostListener,
+  OnChanges,
+} from '@angular/core';
 import { Observable } from 'rxjs';
 
 @UntilDestroy()
@@ -16,10 +23,7 @@ export class LatestBooksPage implements OnInit, OnChanges {
   totalBook$: any;
   title = 'TRUYỆN MỚI CẬP NHẬT';
 
-  constructor(
-    private booksFacade: BooksFacade,
-    private cd: ChangeDetectorRef
-  ) { }
+  constructor(private booksFacade: BooksFacade, private cd: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.fetchBooks();
@@ -43,8 +47,7 @@ export class LatestBooksPage implements OnInit, OnChanges {
   private fetchBooks() {
     if (this.booksFacade.latestBooksQuery.getHasMore()) {
       this.activePage = this.activePage + 1;
-      this.booksFacade.getLatestBooks('', this.activePage, true).subscribe();
+      this.booksFacade.getLatestBooks(true).subscribe();
     }
   }
-
 }

@@ -1,10 +1,14 @@
-<div class="flex justify-center items-center loading" *ngIf="loading;else loaded">
-  <awread-loading></awread-loading>
-</div>
-<ng-template #loaded>
-  <ng-container *ngIf="books?.length; else noData">
+<div class="relative">
+  <!-- <div class="absolute flex justify-center items-center loading  w-full z-10" *ngIf="loading else loaded"> -->
+  <!-- <h1> {{ loading }} </h1> -->
+  <div class="absolute flex justify-center items-center loading  w-full z-10" *ngIf="loading">
+    <awread-loading class="transform -translate-y-2/4"></awread-loading>
+  </div>
+  <!-- <ng-template #loaded> -->
+  <!-- <h1> {{ books.length }} </h1> -->
+  <ng-container>
     <div class="grid md:grid-cols-8 xl:grid-cols-10 sm:gap-x-6 lg:gap-x-10 xl:gap-x-12 place-content-center">
-      <div *ngFor="let book of books | keyvalue" class="col-span-2 md:col-span-2 py-2">
+      <div *ngFor="let book of books | keyvalue; trackBy: trackByFn" class="col-span-2 md:col-span-2 py-2">
         <atom-img-m [bookId]="book.value.bookId" [srcImg]="book.value | coverSize"></atom-img-m>
         <div *ngIf="book.value.categoryId == 1 || book.value.categoryId == 2">
           <molec-info-book [book]="book.value" [btns]="book.value.newestChapters"></molec-info-book>
@@ -21,5 +25,5 @@
       Truyện đang được tải, mong các bạn chờ trong giây lát...
     </div>
   </ng-template>
-</ng-template>
-
+  <!-- </ng-template> -->
+</div>
