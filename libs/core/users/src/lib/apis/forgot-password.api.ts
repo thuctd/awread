@@ -1,20 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Apollo, gql } from "apollo-angular";
+import { Apollo, gql } from 'apollo-angular';
 
 @Injectable({ providedIn: 'root' })
 export class ForgotPasswordApi {
+  constructor(private apollo: Apollo, private httpClient: HttpClient) {}
 
-  constructor(
-    private apollo: Apollo,
-    private httpClient: HttpClient,
-  ) { }
-
-  get() {
-  }
+  get() {}
 
   send(email) {
-    const url = `/api/forgot-password/send-email?email=${email}`;
+    const url = `/api/forgot-password/send-email?email=${email}&origin=${window.location.origin}`;
     return this.httpClient.get(`${url}`);
   }
 
@@ -25,6 +20,10 @@ export class ForgotPasswordApi {
 
   updateNewPassword(token, userId, password) {
     const url = `/api/forgot-password/new-password`;
-    return this.httpClient.post(`${url}`, { token, userId, password });
+    return this.httpClient.post(`${url}`, {
+      token,
+      userId,
+      password,
+    });
   }
 }

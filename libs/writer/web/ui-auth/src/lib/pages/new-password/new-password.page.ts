@@ -1,6 +1,7 @@
 import { ActivatedRoute } from '@angular/router';
 import { ChangeDetectorRef, Directive, Injectable, OnInit } from '@angular/core';
 import { ForgotPasswordFacade } from '@awread/core/users';
+import { Location } from '@angular/common';
 
 @Injectable({
   providedIn: 'root',
@@ -13,8 +14,8 @@ export class NewPasswordPage implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private forgotPasswordFacade: ForgotPasswordFacade,
-    private cd: ChangeDetectorRef,
-  ) { }
+    private cd: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
     this.token = this.route.snapshot.params['token'];
@@ -28,7 +29,7 @@ export class NewPasswordPage implements OnInit {
   }
 
   checkTokenValid(token, userId) {
-    this.forgotPasswordFacade.check(token, userId).subscribe(result => {
+    this.forgotPasswordFacade.check(token, userId).subscribe((result) => {
       console.log('result', result);
       if (result['message'].includes('expired') && result['success'] == false) {
         this.fail = 'expired';
@@ -42,17 +43,18 @@ export class NewPasswordPage implements OnInit {
   }
 
   updateNewPassword(password: string) {
-    this.forgotPasswordFacade.updateNewPassword(this.token, this.userId, password).subscribe(result => {
-      console.log('result', result);
-      if (result['message'].includes('expired') && result['success'] == false) {
-        this.fail = 'expired';
-      } else if (result['success'] == false) {
-        this.fail = 'missing';
-      } else {
-        this.fail = 'success';
-      }
-      this.cd.detectChanges();
-    });
-
+    this.forgotPasswordFacade
+      .updateNewPassword(this.token, this.userId, password)
+      .subscribe((result) => {
+        console.log('result', result);
+        if (result['message'].includes('expired') && result['success'] == false) {
+          this.fail = 'expired';
+        } else if (result['success'] == false) {
+          this.fail = 'missing';
+        } else {
+          this.fail = 'success';
+        }
+        this.cd.detectChanges();
+      });
   }
 }
