@@ -28,7 +28,6 @@ export class ShellLayout implements OnInit {
         this.creationsFacade.updateSearchTerm(term);
       });
   }
-  searchEvent(term: string) { }
 
   logout() {
     this.authFacade.logout();
