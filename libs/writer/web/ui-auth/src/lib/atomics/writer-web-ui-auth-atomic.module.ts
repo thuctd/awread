@@ -21,8 +21,13 @@ import { WrtNewPasswordFormMolec } from './molecs/wrt-new-password-form/wrt-new-
 import { WrtAccountCompleteOrgan } from './organs/wrt-account-complete/wrt-account-complete.organ';
 import { WrtNewPasswordOrgan } from './organs/wrt-new-password/wrt-new-password.organ';
 import { WrtRegisterCompleteFormMolec } from './molecs/wrt-register-complete-form/wrt-register-complete-form.molec';
+import { MatStepperModule } from '@angular/material/stepper';
+import { RegisterCompleteTemplate } from './templates/register-complete/register-complete.template';
+import { RegisterCompleteDesktopOrgan } from './organs/register-complete-desktop/register-complete-desktop.organ';
+import { RegisterCompleteMobileOrgan } from './organs/register-complete-mobile/register-complete-mobile.organ';
+
 @NgModule({
-  imports: [CommonModule, GlobalDesignSystemAtomicModule, StorybookSupportModule],
+  imports: [CommonModule, GlobalDesignSystemAtomicModule, StorybookSupportModule, MatStepperModule],
   exports: [
     CommonModule,
     WrtTabHeadMolec,
@@ -42,6 +47,9 @@ import { WrtRegisterCompleteFormMolec } from './molecs/wrt-register-complete-for
     WrtAccountCompleteOrgan,
     WrtNewPasswordOrgan,
     WrtRegisterCompleteFormMolec,
+    RegisterCompleteTemplate,
+    RegisterCompleteDesktopOrgan,
+    RegisterCompleteMobileOrgan,
   ],
   declarations: [
     WrtTabHeadMolec,
@@ -61,6 +69,9 @@ import { WrtRegisterCompleteFormMolec } from './molecs/wrt-register-complete-for
     WrtAccountCompleteOrgan,
     WrtNewPasswordOrgan,
     WrtRegisterCompleteFormMolec,
+    RegisterCompleteTemplate,
+    RegisterCompleteDesktopOrgan,
+    RegisterCompleteMobileOrgan,
   ],
 })
 export class WriterWebUiAuthAtomicModule {}

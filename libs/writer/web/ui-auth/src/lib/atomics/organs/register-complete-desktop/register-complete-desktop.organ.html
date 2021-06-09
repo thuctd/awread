@@ -1,0 +1,36 @@
+<mat-horizontal-stepper #stepper>
+    <mat-step [label]="'Thông tin cơ bản'" [state]="'auth'" [stepControl]="firstFormGroup" errorMessage="Thông tin cơ bản là cần thiết">
+        <form [formGroup]="firstFormGroup">
+            <mat-form-field>
+                <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
+            </mat-form-field>
+            <div>
+                <p>Go to a different step to see the error state</p>
+                <button mat-button matStepperNext>Next</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step [label]="'Trải nghiệm'" [state]="'exp'" [stepControl]="secondFormGroup" errorMessage="Lựa chọn trải nghiệm là cần thiết">
+        <form [formGroup]="secondFormGroup">
+            <mat-form-field>
+                <input matInput placeholder="Ex. 1 Main St, New York, NY" formControlName="secondCtrl" required>
+            </mat-form-field>
+            <div>
+                <p>Go to a different step to see the error state</p>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button matStepperNext>Next</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step [label]="'Hoàn thiện'" [state]="'done'">
+        <p>You are now done.</p>
+        <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button (click)="stepper.reset()">Reset</button>
+        </div>
+    </mat-step>
+    <ng-template matStepperIcon="edit">
+        <fa-icon class="text-white" [icon]="icons.faCheck"></fa-icon>
+    </ng-template>
+
+</mat-horizontal-stepper>

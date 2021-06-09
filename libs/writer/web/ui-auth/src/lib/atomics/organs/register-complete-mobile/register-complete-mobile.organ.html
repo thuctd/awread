@@ -1,0 +1,49 @@
+<mat-vertical-stepper #stepper>
+    <mat-step [label]="'Name1'" [state]="'nam'" [stepControl]="firstFormGroup" errorMessage="Name is required.">
+        <form [formGroup]="firstFormGroup">
+            <ng-template matStepLabel>Fill out your name</ng-template>
+            <mat-form-field>
+                <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
+            </mat-form-field>
+            <div>
+                <p>Go to a different step to see the error state</p>
+                <button mat-button matStepperNext>Next</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step [label]="'Fill U AD'" [state]="'fill'" [stepControl]="secondFormGroup" errorMessage="Address is required.">
+        <form [formGroup]="secondFormGroup">
+            <ng-template matStepLabel>Fill out your address</ng-template>
+            <mat-form-field>
+                <input matInput placeholder="Ex. 1 Main St, New York, NY" formControlName="secondCtrl" required>
+            </mat-form-field>
+            <div>
+                <p>Go to a different step to see the error state</p>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button matStepperNext>Next</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step [label]="'Don'" [state]="'don'">
+        <p>You are now done.</p>
+        <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button (click)="stepper.reset()">Reset</button>
+        </div>
+    </mat-step>
+
+    <ng-template matStepperIcon="nam">
+        <mat-icon>fuck</mat-icon>
+    </ng-template>
+    <ng-template matStepperIcon="fill">
+        <mat-icon>fuck</mat-icon>
+    </ng-template>
+    <ng-template matStepperIcon="don">
+        <mat-icon>fuck</mat-icon>
+    </ng-template>
+    <ng-template matStepperIcon="edit">
+        <!-- <mat-icon></mat-icon> -->
+        <fa-icon class="text-white" [icon]="icons.faCheck"></fa-icon>
+    </ng-template>
+
+</mat-vertical-stepper>

@@ -56,7 +56,7 @@ const routes: Routes = [
           ),
   },
   {
-    path: 'register-completed',
+    path: 'register-complete',
     loadChildren: () =>
       window.innerWidth <= 768 && window?.haveMobile
         ? import('./pages/register-complete-mobile/register-complete-mobile.module').then(

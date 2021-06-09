@@ -1,0 +1,10 @@
+<wrt-template-auth-background>
+    <div [ngSwitch]="isMobile">
+        <div *ngSwitchCase="true">
+            <organ-register-complete-mobile></organ-register-complete-mobile>
+        </div>
+        <div *ngSwitchDefault>
+            <organ-register-complete-desktop></organ-register-complete-desktop>
+        </div>
+    </div>
+</wrt-template-auth-background>
