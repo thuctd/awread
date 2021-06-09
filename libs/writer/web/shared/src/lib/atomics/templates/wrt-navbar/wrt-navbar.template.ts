@@ -15,10 +15,11 @@ import { Component, OnInit, ChangeDetectionStrategy, EventEmitter, Output, Input
 })
 export class WrtNavbarTemplate implements OnInit {
   @Input() user = [];
+  @Input() routes = [];
   @Output() signoutEvent = new EventEmitter();
-  @Input() searchControl: FormControl = new FormControl("");
-  
-  constructor() { }
+  @Input() searchControl: FormControl = new FormControl('');
 
-  ngOnInit(): void { }
+  constructor() {}
+
+  ngOnInit(): void {}
 }

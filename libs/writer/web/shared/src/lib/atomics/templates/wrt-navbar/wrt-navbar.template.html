@@ -1,4 +1,4 @@
-<wrt-navleft></wrt-navleft>
+<wrt-navleft [routes]="routes"></wrt-navleft>
 <section class="">
   <wrt-navtop [searchControl]="searchControl" [user]="user" (signoutEvent)="signoutEvent.emit()"></wrt-navtop>
   <ng-content></ng-content>

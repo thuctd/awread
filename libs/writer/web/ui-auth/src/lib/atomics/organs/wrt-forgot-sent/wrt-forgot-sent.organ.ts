@@ -1,4 +1,11 @@
-import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter, Input } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  Output,
+  EventEmitter,
+  Input,
+} from '@angular/core';
 
 @Component({
   selector: 'wrt-forgot-sent',
@@ -17,8 +24,9 @@ export class WrtForgotSentOrgan implements OnInit {
   description: string;
   @Input() email: string;
   @Output() submitEvent = new EventEmitter();
+  @Output() resend = new EventEmitter();
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
     this.description = `Chúng tôi đã gửi đường dẫn đặt lại mật khẩu của bạn tới địa chỉ ${this.email}, hãy chắc chắn bạn đã kiểm tra thư mục spam.`;

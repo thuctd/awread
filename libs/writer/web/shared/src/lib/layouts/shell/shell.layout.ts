@@ -13,13 +13,33 @@ import { Directive, Injectable, OnInit } from '@angular/core';
 export class ShellLayout implements OnInit {
   isLogin: boolean;
   currentUser$ = this.currentUserFacade.currentUser$;
-  searchControl: FormControl = new FormControl("");
+  searchControl: FormControl = new FormControl('');
 
   constructor(
     private currentUserFacade: CurrentUserFacade,
     private creationsFacade: CreationsFacade,
     private authFacade: AuthFacade
-  ) { }
+  ) {}
+
+  routes = [
+    // {
+    //   name: 'dashboard',
+    //   iconUrl: '/global-assets/images/Dashboard.webp',
+    //   linkTo: '/dashboard',
+    // },
+    {
+      name: 'user',
+      iconUrl: '/global-assets/images/user.webp',
+      iconUrl2: '/global-assets/images/user-2.webp',
+      linkTo: '/profile',
+    },
+    {
+      name: 'books',
+      iconUrl: '/global-assets/images/books.webp',
+      iconUrl2: '/global-assets/images/books-2.webp',
+      linkTo: '/',
+    },
+  ];
 
   ngOnInit(): void {
     this.searchControl.valueChanges
