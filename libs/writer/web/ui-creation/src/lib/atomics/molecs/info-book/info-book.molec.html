@@ -1,5 +1,5 @@
 <div class="mb-8">
-    <atom-title-book [titleBook]='title' [size]='titleBook.size'></atom-title-book>
+    <div class="text-justify font-bold mb-1 break-words block outline-none text-gray-text transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-100 nunito">{{title}}</div>
     <div class="flex py-1">
         <atom-icon-text *ngFor="let icon of icons" [icon]='icon.fa' [title]='icon.text' class="mr-4"></atom-icon-text>
     </div>
@@ -7,7 +7,7 @@
         <cr-submit-btn *ngFor="let btn of btns" [submitText]='btn.title' [active]='btn.active' class="mr-4"></cr-submit-btn>
     </div>
     <div class="ml-0">
-        <excerpt [excerpt]='contentBook' [class]="'text-gray-text text-sm'"></excerpt>
+        <excerpt [excerpt]='description' [class]="'text-gray-text text-sm'"></excerpt>
         <atom-text-link (click)="moreEvent.emit()" [text]="moreContent" [class]="'text-base text-green-400'"></atom-text-link>
     </div>
 </div>

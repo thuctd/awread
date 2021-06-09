@@ -1,7 +1,9 @@
 <div class="flex">
   <div (click)="bookEvent.emit({ type: 'detail', bookId: book.bookId })" class="cursor-pointer">
     <!-- <detail-upload-img [srcImg]="book| coverSize: 'l'"></detail-upload-img> -->
-    <atom-img-m [size]="'m'" [srcImg]="book | coverSize: 'm'"></atom-img-m>
+    <div class="w-36 h-48 mb-2 focus:outline-none relative overflow-hidden">
+      <img [src]="book | coverSize:'origin'" class="object-cover w-full cursor-pointer absolute">
+    </div>
     <span [hidden]="srcImg" class="text-xs sm:text-sm">Không có ảnh bìa</span>
   </div>
   <div class="cursor-pointer ml-4">

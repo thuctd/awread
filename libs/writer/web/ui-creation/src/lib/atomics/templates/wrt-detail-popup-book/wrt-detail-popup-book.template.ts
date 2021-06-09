@@ -1,5 +1,10 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-
+import { Component, OnInit, ChangeDetectionStrategy, Inject, Optional } from '@angular/core';
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+export interface DialogDataInfoBookList {
+  title: string;
+  description: string;
+  srcImg: any;
+}
 @Component({
   selector: 'wrt-template-detail-popup-book',
   templateUrl: './wrt-detail-popup-book.template.html',
@@ -13,7 +18,10 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WrtDetailPopupBookTemplate implements OnInit {
-  constructor() {}
+  constructor(
+    @Optional() public dialogRef: MatDialogRef<WrtDetailPopupBookTemplate>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogDataInfoBookList
+  ) {}
 
   ngOnInit(): void {}
 }
