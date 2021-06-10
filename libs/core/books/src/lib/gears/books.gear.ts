@@ -31,7 +31,7 @@ export class BooksGear {
         total = res?.['data']?.['allMvBooksLatestChapters']?.totalCount;
         return res?.['data']?.['allMvBooksLatestChapters']?.['nodes'];
       }),
-      tap((res) => this.categoryBooksStore.add(res)),
+      tap((res) => this.categoryBooksStore.set(res)),
       tap(() => this.categoryBooksStore.updatePage({ hasMore: hasMore, sizePage: limit, total: total })),
       tap(() => this.categoryBooksStore.setLoading(false))
     );
