@@ -228,8 +228,8 @@ export class BooksApi {
     }
 
     queryString = `query ${mvBooks}( $published: Boolean = true ${categoryId ? `$categoryId: BigFloat` : ''} ${filters.completed ? `$completed: Boolean` : ''} ${filters.type ? `, $type: BigFloat` : ''}) {
-              ${mvBooks}(first: 20, condition: { published: $published ${categoryId ? `categoryId: $categoryId, ` : ''} ${filters.type ? ` type: $type, ` : ''} ${filters.completed ? `completed: $completed` : ''}},
-              ${filters.criteria === '0' ? `orderBy: PUBLISHED_DESC, ` : ''}
+              ${mvBooks}(first: 20, condition: { published: $published ${categoryId ? `,categoryId: $categoryId` : ''} ${filters.type ? `,type: $type` : ''} ${filters.completed ? `,completed: $completed` : ''}},
+              ${filters.criteria === '0' ? `orderBy: PUBLISHED_DESC ` : ''}
               filter: { updatedAt: {greaterThan: "${publishedAt}"} ${genres.length ? `, genres: {containsAnyKeys: ${JSON.stringify(genres)}}` : ''}}) {
                 nodes {
                   bookId
