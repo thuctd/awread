@@ -15,7 +15,7 @@ export class MenuNavtopAtom implements OnInit {
     avatar: '/global-assets/images/logoAwread.webp',
     name: '',
     email: '',
-    lastname: '',
+    firstname: '',
   };
   @Output() signoutEvent = new EventEmitter();
   constructor() {}

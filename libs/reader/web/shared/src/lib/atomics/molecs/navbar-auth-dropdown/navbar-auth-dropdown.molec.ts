@@ -17,7 +17,7 @@ export class NavbarAuthDropdownMolec implements OnInit {
   @Output() logoutEvent = new EventEmitter();
   @Input() user = {
     name: 'BlackCu',
-    lastname: 'BlackCu',
+    firstname: 'BlackCu',
   };
   menu = [
     // {
