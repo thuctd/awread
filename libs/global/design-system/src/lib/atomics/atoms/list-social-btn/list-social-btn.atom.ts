@@ -1,4 +1,11 @@
-import { Component, OnInit, ChangeDetectionStrategy, Output, Input, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  Output,
+  Input,
+  EventEmitter,
+} from '@angular/core';
 import { faChartLine } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -8,6 +15,9 @@ import { faChartLine } from '@fortawesome/free-solid-svg-icons';
     `
       :host {
         display: block;
+      }
+      :host .w-23 {
+        width: 5.75rem;
       }
     `,
   ],
