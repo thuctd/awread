@@ -1,7 +1,7 @@
 <section>
   <a (click)="toggleMenu($event)" closeOnOutSide (clickedOutside)="isMenuOpen = false" class="outline-none cursor-pointer ml-56">
     <img [src]="user | avatarSize:'s'" class="rounded-full h-8 w-8 inline-block" alt="avatar" />
-    <div class="inline-block pl-2"> {{ user.lastname ? user.lastname : user.name?.split(' ')[0] }} </div>
+    <div class="inline-block pl-2"> {{ user.lastname ? user.lastname : user.name }} </div>
   </a>
   <div *ngIf="isMenuOpen" class="flex flex-col z-50 right-28 top-20 absolute">
     <div id="frist_div" class="w-72 h-12 bg-green-500 rounded-b-none  rounded-2xl shadow"></div>

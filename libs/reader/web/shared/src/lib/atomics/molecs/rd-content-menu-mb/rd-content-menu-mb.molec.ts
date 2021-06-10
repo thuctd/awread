@@ -65,7 +65,7 @@ export class RdContentMenuMbMolec implements OnInit {
 
   @Input() setting = {
     text: 'Cài đặt',
-    href: '/',
+    href: '/single/profile',
   };
 
   constructor() {}

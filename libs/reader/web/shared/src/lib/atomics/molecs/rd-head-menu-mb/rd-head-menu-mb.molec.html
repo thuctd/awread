@@ -9,7 +9,7 @@
     </div>
   </div>
   <div class="flex flex-col items-center">
-    <atom-circle-image class="w-16 mb-1"></atom-circle-image>
+    <atom-circle-image [src]="user | avatarSize:'origin'" [size]="'m'" class="mb-1"></atom-circle-image>
     <div class="text-gray-700 text-sm font-semibold">{{ user.name ? user.name : user.lastname }}</div>
   </div>
 </div>

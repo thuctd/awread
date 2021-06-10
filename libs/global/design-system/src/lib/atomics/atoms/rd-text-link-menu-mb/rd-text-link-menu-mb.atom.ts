@@ -14,7 +14,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, EventEmitter, Output
 })
 export class RdTextLinkMenuMbAtom implements OnInit {
   @Input() text = 'Trang chủ';
-  @Input() href = '';
+  @Input() link = '';
   @Output() clicked = new EventEmitter();
 
   constructor() {}

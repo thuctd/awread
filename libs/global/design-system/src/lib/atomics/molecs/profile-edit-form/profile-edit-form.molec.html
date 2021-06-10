@@ -1,11 +1,11 @@
-<section class="flex flex-col" [formGroup]="profileForm">
+<section class="flex flex-col text-sm md:text-base" [formGroup]="profileForm ">
   <atom-title [class]="'font-medium text-sm text-gray-500'" [title]="'Chỉnh sửa hồ sơ'" [isUppercase]="false"></atom-title>
 
   <div class="my-4">
     <div class="flex items-center justify-between">
       <label class="text-gray-400 w-2/5">Tên hiển thị</label>
       <input formControlName="name" placeholder="Tên hiển thị"
-      class="border rounded-full border-gray-200 text-gray-700 focus:outline-none px-4 py-2 w-3/5 focus:ring-1 focus:ring-gray-300 focus:border-gray-300" />
+      class="border rounded-full border-gray-200 text-gray-700 focus:outline-none px-2 md:px-4 py-1 md:py-2 w-3/5 focus:ring-1 focus:ring-gray-300 focus:border-gray-300" />
     </div>
 
     <div class="flex">
@@ -21,21 +21,21 @@
   <div class="mb-4 flex items-center justify-between">
     <label class="text-gray-400 w-2/5">Tên tài khoản</label>
     <input formControlName="username" placeholder="Tên tài khoản"
-      class="border rounded-full border-gray-200 text-gray-700 focus:outline-none px-4 py-2 w-3/5 focus:ring-1 focus:ring-gray-300 focus:border-gray-300" />
+      class="border rounded-full border-gray-200 text-gray-700 focus:outline-none px-2 md:px-4 py-1 md:py-2 w-3/5 focus:ring-1 focus:ring-gray-300 focus:border-gray-300" />
   </div>
   <div class="mb-4 flex items-center justify-between">
     <label class="text-gray-400 w-2/5">Liên kết</label>
     <input formControlName="websiteAddress" placeholder="Liên kết"
-      class="border rounded-full border-gray-200 text-gray-700 focus:outline-none px-4 py-2 w-3/5 focus:ring-1 focus:ring-gray-300 focus:border-gray-300" />
+      class="border rounded-full border-gray-200 text-gray-700 focus:outline-none px-2 md:px-4 py-1 md:py-2 w-3/5 focus:ring-1 focus:ring-gray-300 focus:border-gray-300" />
   </div>
   <div class="mb-4 flex items-center justify-between">
     <label class="text-gray-400 w-2/5">Facebook</label>
     <input formControlName="facebookAddress" placeholder="Facebook"
-      class="border rounded-full border-gray-200 text-gray-700 focus:outline-none px-4 py-2 w-3/5 focus:ring-1 focus:ring-gray-300 focus:border-gray-300" />
+      class="border rounded-full border-gray-200 text-gray-700 focus:outline-none px-2 md:px-4 py-1 md:py-2 w-3/5 focus:ring-1 focus:ring-gray-300 focus:border-gray-300" />
   </div>
   <div class="mb-4 flex items-center justify-between">
     <label class="text-gray-400 w-2/5">Tiểu sử</label>
     <textarea formControlName="bio" placeholder="Tiểu sử"
-      class="border rounded-xl border-gray-200 text-gray-700 focus:outline-none px-4 py-2 h-20 float-right w-3/5 focus:ring-1 focus:ring-gray-300 focus:border-gray-300"></textarea>
+      class="border rounded-xl border-gray-200 text-gray-700 focus:outline-none px-2 md:px-4 py-1 md:py-2 h-20 float-right w-3/5 focus:ring-1 focus:ring-gray-300 focus:border-gray-300"></textarea>
   </div>
 </section>
