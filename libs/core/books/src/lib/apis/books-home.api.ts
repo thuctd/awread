@@ -27,9 +27,7 @@ export class BooksHomeApi {
           }
         }
       `, variables: {first}
-    }).pipe(
-      delay(300)
-    );
+    }).pipe();
   }
 
   getFeatureBooks(offset: number, first: number) {
@@ -54,9 +52,7 @@ export class BooksHomeApi {
         }
       `,
       variables: { offset, first }
-    }).pipe(
-      delay(300)
-    );
+    }).pipe();
   }
 
   getLatestBooks(categoryId: string, offset: number) {
@@ -71,7 +67,6 @@ export class BooksHomeApi {
             allMvBooksLatestChapters(
               first: $first,
               offset: $offset,
-              orderBy: PUBLISHED_DESC,
               condition: {
                 published: true,
                 isDeleted: false ${categoryId ? `, 
@@ -96,8 +91,6 @@ export class BooksHomeApi {
           }
         `,
       variables: { categoryId, offset, first }
-    }).pipe(
-      delay(300)
-    );
+    }).pipe();
   }
 }
