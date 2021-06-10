@@ -21,7 +21,7 @@ export class RdAuthorTemplate implements OnInit {
   @Input() items = [];
   @Input() hasMore;
   @Output() emitMoreBooks = new EventEmitter();
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }

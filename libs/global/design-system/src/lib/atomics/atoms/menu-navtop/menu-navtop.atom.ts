@@ -12,7 +12,7 @@ export class MenuNavtopAtom implements OnInit {
   @Input() isMenuOpen = false;
 
   @Input() user = {
-    avatar: '/global-assets/images/avatar-mrmrs.webp',
+    avatar: '/global-assets/images/logoAwread.webp',
     name: '',
     email: '',
     lastname: '',

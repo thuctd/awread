@@ -2,7 +2,7 @@
 <div class="bg-white pb-20">
   <div class="grid grid-cols-12 pt-12">
     <div class="col-span-5 mx-auto">
-      <detail-upload-img></detail-upload-img>
+      <detail-upload-img [srcImg]="currentUser | avatarSize:'origin'"></detail-upload-img>
       <atom-btn-rectangle *ngIf="mode !== 'display'" [class]="'w-54 py-1.5 rounded-lg'" [text]="'Chỉnh sửa ảnh bìa'"
         (btnClicked)="submitEvent.emit('change-image')">
       </atom-btn-rectangle>
@@ -23,3 +23,4 @@
   </div>
 </div>
 
+<!-- <pre>{{currentUser | json}}</pre> -->
