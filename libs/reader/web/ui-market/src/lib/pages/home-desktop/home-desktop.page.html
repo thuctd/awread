@@ -1,8 +1,13 @@
-<!-- <h1 class="pt-40"> {{ isLoadingLatest$ | async }} </h1> -->
+<!-- <h1 class="pt-40"> {{ isLoadingLatest$ | async }} </h1>
+
+<home-detail-book-update [totalBook]="totalBookLatest$ | async" [loading]="isLoadingLatest$ | async" [currentPage]="currentPageLatest$ | async"
+  (pageChange)="pageChange($event)" (emitBooks)="filterItemsByCategory($event)" [books]="latestBooks$ | async" [categories]="categories$ | async">
+</home-detail-book-update> -->
+
 
 <template-home [totalBook]="totalBookLatest$ | async" [currentPage]="currentPageLatest$ | async" (pageChange)="pageChange($event)"
   [isLoadingFeature]="isLoadingFeature$ | async" [totalBookFeatured]="totalBookFeature$ | async" (pageChangeFeature)="pageChangeFeature($event)"
-  [sliders]="imageObject$ | async" [getGoodBooks]="goodBookList$ | async" [getLatestBooks]="latestBooks$ | async" [loading]="isLoadingLatest$ | async"
+  [sliders]="imageObject$ | async" [getGoodBooks]="goodBookList$ | async" [getLatestBooks]="latestBooks$ | async" [isLoadingLatest]="isLoadingLatest$ | async"
   [getFeatureBooks]="featureBookList$ | async" [genres]="genres$ | async" (filterItemsByGenre)="filterItemsByGenre($event)" [genreBooks]="genreBooks$ | async"
   [categories]="categories$ | async" (emitBooks)="filterItemsByCategory($event)">
 </template-home>

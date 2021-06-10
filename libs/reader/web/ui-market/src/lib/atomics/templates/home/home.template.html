@@ -3,8 +3,9 @@
     <atom-slider [imageObject]="sliders"></atom-slider>
   </section>
   <!-- <h1> {{ getLatestBooks }} </h1> -->
+  <!-- <pre> LOADING: {{ isLoadingLatest }} </pre> -->
   <section>
-    <home-detail-book-update [totalBook]="totalBook" [loading]="loading" [currentPage]="currentPage" (pageChange)="pageChange.emit($event)"
+    <home-detail-book-update [totalBook]="totalBook" [loading]="isLoadingLatest" [currentPage]="currentPage" (pageChange)="pageChange.emit($event)"
       (emitBooks)="emitBooks.emit($event)" [books]="getLatestBooks" [categories]="categories">
     </home-detail-book-update>
   </section>

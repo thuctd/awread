@@ -1,11 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Input,
-  Output,
-  EventEmitter,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'template-home',
@@ -32,7 +25,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeTemplate implements OnInit {
-  @Input() loading: boolean;
+  @Input() isLoadingLatest;
   @Input() books = [];
   @Input() categories = [];
   @Input() sliders = [];
@@ -54,4 +47,8 @@ export class HomeTemplate implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+
+  // ngOnChanges(changes) {
+  //   console.log('changes', changes);
+  // }
 }

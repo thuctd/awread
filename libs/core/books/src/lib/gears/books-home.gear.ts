@@ -33,13 +33,13 @@ export class BooksHomeGear {
   }
 
   getFeatureBooks(isCheck?: boolean) {
-    this.featureBooksStore.setLoading(true);
     const first = isCheck ? 12 : 6;
     let hasMore, total;
     // return this.booksHomeApi.getFeatureBooks(offset, first).pipe(
     return this.featureBooksQuery
       .select((state) => state.currentPage)
       .pipe(
+        tap(() => this.featureBooksStore.setLoading(true)),
         switchMap((currentPage) => this.booksHomeApi.getFeatureBooks(currentPage, first)),
         map((res) => {
           hasMore = res?.['data']?.['allMvMostViewBooks']?.['pageInfo']?.hasNextPage;
@@ -59,31 +59,30 @@ export class BooksHomeGear {
   }
 
   getLatestBooks(isAdd?) {
-    let hasMore, total;
-    // return this.booksHomeApi.getLatestBooks(categoryId, offset).pipe(
     return combineLatest([
       this.latestBooksQuery.select((state) => state.currentCategoryId),
       this.latestBooksQuery.select((state) => state.currentPage),
     ]).pipe(
       tap(() => this.latestBooksStore.setLoading(true)),
-      tap(([currentCategoryId, currentPage]) =>
-        console.log('currentCategoryId, currentPage', currentCategoryId, currentPage)
-      ),
-      mergeMap(([currentCategoryId, currentPage]) => this.booksHomeApi.getLatestBooks(currentCategoryId, currentPage)),
-      // delay(3000),
+      // tap(([currentCategoryId, currentPage]) =>
+      //   console.log('currentCategoryId, currentPage', currentCategoryId, currentPage)
+      // ),
+      switchMap(([currentCategoryId, currentPage]) => this.booksHomeApi.getLatestBooks(currentCategoryId, currentPage)),
+
       map((res) => {
-        hasMore = res?.['data']?.['allMvBooksLatestChapters']?.['pageInfo']?.hasNextPage;
-        total = res?.['data']?.['allMvBooksLatestChapters']?.totalCount;
+        const hasMore = res?.['data']?.['allMvBooksLatestChapters']?.['pageInfo']?.hasNextPage;
+        const total = res?.['data']?.['allMvBooksLatestChapters']?.totalCount;
+        this.latestBooksStore.updatePage({ hasMore, total });
         return res?.['data']?.['allMvBooksLatestChapters']?.['nodes'];
       }),
       tap((books) => {
+        // console.log('books', books);
         if (isAdd) {
           this.latestBooksStore.add(books);
         } else {
           this.latestBooksStore.set(books);
         }
       }),
-      tap(() => this.latestBooksStore.updatePage({ hasMore: hasMore, total: total })),
       tap(() => this.latestBooksStore.setLoading(false))
     );
   }

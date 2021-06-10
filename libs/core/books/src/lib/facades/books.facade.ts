@@ -43,9 +43,9 @@ export class BooksFacade {
     public featureBooksQuery: FeatureBooksQuery,
     public categoryBooksQuery: CategoryBooksQuery,
     public searchBooksQuery: SearchBooksQuery,
-    private latestBooksStore: LatestBooksStore,
-    private featureBooksStore: FeatureBooksStore,
-    private genreBooksStore: GenreBooksStore
+    public latestBooksStore: LatestBooksStore,
+    public featureBooksStore: FeatureBooksStore,
+    public genreBooksStore: GenreBooksStore
   ) {}
 
   setCurrentPageLatestBook(pageNumber) {
@@ -61,30 +61,6 @@ export class BooksFacade {
 
   selectLoadingAkita() {
     return this.booksQuery.selectLoading();
-  }
-
-  setLoading(isLoading = false) {
-    this.booksStore.setLoading(isLoading);
-  }
-
-  setBookIdActiveAkita(bookid: string) {
-    return this.booksStore.setActive(bookid);
-  }
-
-  getBookIdActiveAkita() {
-    return this.booksQuery.getActiveId();
-  }
-
-  selectEntityBook(id: string) {
-    return this.booksQuery.selectEntity(id);
-  }
-
-  selectAllBookAkita() {
-    return this.booksQuery.selectAll();
-  }
-
-  getAllAkita() {
-    return this.booksQuery.getAll();
   }
 
   getDetailBook(bookId: string) {

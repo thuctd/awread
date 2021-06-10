@@ -4,72 +4,78 @@ import { map, delay, first } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class BooksHomeApi {
-  constructor(private apollo: Apollo) { }
+  constructor(private apollo: Apollo) {}
 
   getGoodBooks(first: number) {
-    return this.apollo.query({
-      query: gql`
-        query allMvMostViewBooks($first: Int) {
-          allMvMostViewBooks(first: $first, orderBy: VIEWS_DESC, condition: {published: true, isDeleted: false}) {
-            nodes {
-              bookId
-              title
-              categoryId
-              newestChapters
-              updatedAt
-              views
-              cover
+    return this.apollo
+      .query({
+        query: gql`
+          query allMvMostViewBooks($first: Int) {
+            allMvMostViewBooks(first: $first, orderBy: VIEWS_DESC, condition: { published: true, isDeleted: false }) {
+              nodes {
+                bookId
+                title
+                categoryId
+                newestChapters
+                updatedAt
+                views
+                cover
+              }
+              pageInfo {
+                hasNextPage
+              }
+              totalCount
             }
-            pageInfo {
-              hasNextPage
-            }
-            totalCount
           }
-        }
-      `, variables: { first }
-    }).pipe(
-      delay(300)
-    );
+        `,
+        variables: { first },
+      })
+      .pipe
+      // delay(300)
+      ();
   }
 
   getFeatureBooks(offset: number, first: number) {
     offset = offset * 6;
-    return this.apollo.query({
-      query: gql`
-        query allMvMostViewBooks($offset: Int, $first: Int) {
-          allMvMostViewBooks(first: $first offset: $offset condition: {published: true, isDeleted: false}) {
-            nodes {
-              bookId
-              categoryId
-              newestChapters
-              title
-              updatedAt
-              cover
+    return this.apollo
+      .query({
+        query: gql`
+          query allMvMostViewBooks($offset: Int, $first: Int) {
+            allMvMostViewBooks(first: $first, offset: $offset, condition: { published: true, isDeleted: false }) {
+              nodes {
+                bookId
+                categoryId
+                newestChapters
+                title
+                updatedAt
+                cover
+              }
+              pageInfo {
+                hasNextPage
+              }
+              totalCount
             }
-            pageInfo {
-              hasNextPage
-            }
-            totalCount
           }
-        }
-      `,
-      variables: { offset, first }
-    }).pipe(
-      delay(300)
-    );
+        `,
+        variables: { offset, first },
+      })
+      .pipe
+      // delay(300)
+      ();
   }
 
   getLatestBooks(categoryId: string, offset: number) {
     let first = 10;
     if (window.innerWidth <= 768) {
-      first = 6
+      first = 6;
       offset = offset * 6;
     } else {
       offset = offset * 10;
     }
 
-    return this.apollo.query({
-      query: gql`
+    return this.apollo
+      .query({
+        query: gql`
           query allMvBooksLatestChapters ($first: Int $offset: Int ${categoryId ? `,$categoryId: BigFloat` : ''}) {
             allMvBooksLatestChapters(
               first: $first,
@@ -77,9 +83,12 @@ export class BooksHomeApi {
               orderBy: PUBLISHED_DESC,
               condition: {
                 published: true,
-                isDeleted: false ${categoryId ? `,
-                categoryId: $categoryId ` : ''
-        }
+                isDeleted: false ${
+                  categoryId
+                    ? `,
+                categoryId: $categoryId `
+                    : ''
+                }
               }
             ) {
               nodes {
@@ -98,9 +107,10 @@ export class BooksHomeApi {
             }
           }
         `,
-      variables: { categoryId, offset, first }
-    }).pipe(
-      delay(300)
-    );
+        variables: { categoryId, offset, first },
+      })
+      .pipe
+      // delay(300)
+      ();
   }
 }

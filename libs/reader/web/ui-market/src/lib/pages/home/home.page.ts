@@ -1,9 +1,8 @@
 import { ChangeDetectorRef } from '@angular/core';
 import { takeWhile, switchMap, retry, tap, takeUntil, map } from 'rxjs/operators';
-import { of, Subject, Observable } from 'rxjs';
+import { of, Subject, Observable, interval } from 'rxjs';
 import { Directive, Injectable, OnInit, OnDestroy } from '@angular/core';
 import { Genre } from '@awread/core/genres';
-import { Category } from '@awread/core/categories';
 import { BooksFacade } from '@awread/core/books';
 import { GenresFacade } from '@awread/core/genres';
 import { SliderFacade } from '@awread/core/slider';
@@ -57,10 +56,8 @@ export class HomePage implements OnInit, OnDestroy {
     this.booksFacade.setCurrentGenreGenreBook(genre.genreId);
   }
 
-  filterItemsByCategory(category: Category) {
-    this.booksFacade.setCurrentPageLatestBook(1);
+  filterItemsByCategory(category) {
     this.booksFacade.setCurrentCategory(category.categoryId);
-    this.cd.detectChanges();
   }
 
   private loadGenreBookFirstByGenre() {
