@@ -99,6 +99,7 @@ export class HomePage implements OnInit, OnDestroy {
   }
 
   pageChangeFeature(activePageNumber: number) {
+    this.booksFacade.setCurrentPageFeatureBook(activePageNumber);
     this.featureBookList$ = this.booksFacade
       .getFeatureBooks(activePageNumber)
       .pipe(debounceTime(200));

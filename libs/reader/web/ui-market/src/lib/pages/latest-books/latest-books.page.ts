@@ -39,7 +39,7 @@ export class LatestBooksPage implements OnInit, OnChanges {
 
   @HostListener('window:scroll', ['$event'])
   onMoreBooks() {
-    if (window.innerHeight + window.scrollY + 696 >= document.body.scrollHeight) {
+    if (window.innerHeight + window.scrollY + 800 >= document.body.scrollHeight) {
       this.fetchBooks();
     }
   }
