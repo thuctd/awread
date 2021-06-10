@@ -61,7 +61,7 @@ export class NavbarMenuOrgan implements OnInit {
 
   navCreateBook = {
     title: 'Đăng truyện',
-    href: '/home',
+    href: 'https://w.awread.vn',
   };
 
   navPublic = {
