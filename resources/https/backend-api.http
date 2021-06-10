@@ -1,0 +1,4 @@
+get http://backend-api.next.awread.vn/api
+
+get https://backend-api.next.awread.vn/api
+

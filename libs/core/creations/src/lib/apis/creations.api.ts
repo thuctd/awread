@@ -10,6 +10,40 @@ export class CreationsApi {
     private apollo: Apollo
   ) { }
 
+  searchCreationByTerm(userId, likeInsensitive: string) {
+    likeInsensitive = `%${likeInsensitive}%`;
+    return this.apollo.query({
+      query: gql`
+        query getAllBooks($userId: UUID!, $likeInsensitive: String) {
+          allVCreations(condition: { userId: $userId, isDeleted: false }, orderBy: UPDATED_AT_DESC, filter: {title: {likeInsensitive: $likeInsensitive}}) {
+            nodes {
+              title
+              bookId
+              categoryId
+              completed
+              publisherId
+              createdAt
+              publishedAt
+              updatedAt
+              description
+              cover
+              published
+              type
+              age
+              userId,
+              publishedCount,
+              draftCount,
+              viewCount
+            }
+          }
+        }
+      `,
+      variables: { userId, likeInsensitive },
+    }).pipe(
+      map(result => result?.['data']?.['allVCreations']?.['nodes'])
+    )
+  }
+
   generateUuid() {
     return this.apollo.mutate({
       mutation: gql`

@@ -25,14 +25,14 @@ export class RdIntroductionBoxHotlineMolec implements OnInit {
     },
     {
       title: 'Vị trí công ty:',
-      content: 'Hà nội',
+      content: 'Sơn La',
     },
     {
       title: 'Đối tượng:',
       content: 'Việt Nam',
     },
   ];
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

@@ -28,7 +28,7 @@ export class RdIntroductionHotlineMbOrgan implements OnInit {
     },
     {
       title: 'Vị trí công ty:',
-      content: 'Hà nội',
+      content: 'Sơn La',
     },
     {
       title: 'Đối tượng:',
@@ -36,7 +36,7 @@ export class RdIntroductionHotlineMbOrgan implements OnInit {
     },
   ];
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

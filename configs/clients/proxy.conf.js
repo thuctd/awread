@@ -22,14 +22,14 @@ switch (true) {
         console.log('test');
         break;
     case process.env.ENVIRONMENT == 'local':
-        graphqlTarget = 'http://localhost:5000';
-        apiTarget = 'http://localhost:3333';
+        graphqlTarget = process.env.GRAPHQL_URI ?? 'http://localhost:5000';
+        apiTarget = process.env.API_URI ?? 'http://localhost:3333';
         logLevel = 'debug';
         console.log('local');
         break;
     default:
-        graphqlTarget = 'https://backend-graphql.next.awread.vn';
-        apiTarget = 'https://backend-api.next.awread.vn';
+        graphqlTarget = process.env.GRAPHQL_URI ?? 'https://backend-graphql.next.awread.vn';
+        apiTarget = process.env.API_URI ?? 'https://backend-api.next.awread.vn';
         logLevel = 'debug';
         console.log('default');
         break;
