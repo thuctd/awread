@@ -71,10 +71,10 @@ export class NavbarMenuOrgan implements OnInit {
         page: '/introduction',
         title: 'Về chúng tôi',
       },
-      {
-        page: '/community',
-        title: 'Tham gia với chúng tôi',
-      },
+      // {
+      //   page: '/community',
+      //   title: 'Tham gia với chúng tôi',
+      // },
       {
         page: '/news',
         title: 'Tin tức',
@@ -82,7 +82,7 @@ export class NavbarMenuOrgan implements OnInit {
     ],
   };
   @Input() color = 'text-white';
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }

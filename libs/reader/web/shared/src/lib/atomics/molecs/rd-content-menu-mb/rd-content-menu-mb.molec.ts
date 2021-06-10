@@ -52,10 +52,10 @@ export class RdContentMenuMbMolec implements OnInit {
         title: 'Về chúng tôi',
         href: '/introduction',
       },
-      {
-        title: 'Tham gia cùng chúng tôi',
-        href: '/',
-      },
+      // {
+      //   title: 'Tham gia cùng chúng tôi',
+      //   href: '/',
+      // },
       {
         title: 'Tin tức',
         href: '/news',

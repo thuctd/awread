@@ -49,12 +49,12 @@ export class RdProfileTabTemplateTemplate implements OnInit {
       faIcon: faUserCircle,
       href: null,
     },
-    {
-      name: 'Cài đặt',
-      isActive: false,
-      faIcon: faCog,
-      href: '/single/setting',
-    },
+    // {
+    //   name: 'Cài đặt',
+    //   isActive: false,
+    //   faIcon: faCog,
+    //   href: '/single/setting',
+    // },
   ];
 
   @Input() tabsMobile = [
@@ -64,24 +64,24 @@ export class RdProfileTabTemplateTemplate implements OnInit {
       faIcon: faUserCircle,
       href: null,
     },
-    {
-      name: 'Truyện đã lưu',
-      isActive: false,
-      faIcon: faBookmark,
-      href: '/',
-    },
-    {
-      name: 'Lịch sử đọc',
-      isActive: false,
-      faIcon: faClock,
-      href: '/',
-    },
-    {
-      name: 'Cài đặt',
-      isActive: false,
-      faIcon: faCog,
-      href: '/single/setting',
-    },
+    // {
+    //   name: 'Truyện đã lưu',
+    //   isActive: false,
+    //   faIcon: faBookmark,
+    //   href: '/',
+    // },
+    // {
+    //   name: 'Lịch sử đọc',
+    //   isActive: false,
+    //   faIcon: faClock,
+    //   href: '/',
+    // },
+    // {
+    //   name: 'Cài đặt',
+    //   isActive: false,
+    //   faIcon: faCog,
+    //   href: '/single/setting',
+    // },
   ];
   @Input() class2 = 'flex justify-start items-center';
   @Input() classActive = 'col-span-12 text-green-primary';

@@ -20,22 +20,22 @@ export class NavbarAuthDropdownMolec implements OnInit {
     lastname: 'BlackCu',
   };
   menu = [
-    {
-      href: '/',
-      title: 'Thông báo',
-    },
-    {
-      href: '/',
-      title: 'Hộp thư',
-    },
-    {
-      href: '/',
-      title: 'Nạp coin',
-    },
-    {
-      href: '/',
-      title: 'Thư viện',
-    },
+    // {
+    //   href: '/',
+    //   title: 'Thông báo',
+    // },
+    // {
+    //   href: '/',
+    //   title: 'Hộp thư',
+    // },
+    // {
+    //   href: '/',
+    //   title: 'Nạp coin',
+    // },
+    // {
+    //   href: '/',
+    //   title: 'Thư viện',
+    // },
     {
       href: '/single/profile',
       title: 'Cài đặt tài khoản',
