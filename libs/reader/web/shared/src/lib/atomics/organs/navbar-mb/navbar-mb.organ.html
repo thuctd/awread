@@ -4,7 +4,7 @@
     <div (click)="clickDisplaySearch.emit()" class="bg-white w-7 h-7 rounded-full border mr-1.5 cursor-pointer flex justify-center items-center">
       <fa-icon class="text-green-primary text-lg" [icon]="search"></fa-icon>
     </div>
-    <molec-rd-navbar-noti-menu *ngIf="isLogin"></molec-rd-navbar-noti-menu>
+    <molec-rd-navbar-noti-menu (clickOutside)="clickOutside.emit()" (clicked)="clickDisplayMenuNoti.emit()" *ngIf="isLogin" [isMenu]="isMenuNoti"></molec-rd-navbar-noti-menu>
     <molec-rd-menu-mb [isLogin]="isLogin" [user]="user" (logoutEvent)="logoutEvent.emit()"></molec-rd-menu-mb>
   </div>
 </div>

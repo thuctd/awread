@@ -15,26 +15,48 @@ export class BooksHomeGear {
     private booksHomeApi: BooksHomeApi
   ) { }
 
-  getGoodBooks() {
+  getGoodBooks(limit: number = 12) {
     this.goodBooksStore.setLoading(true);
-    return this.booksHomeApi.getGoodBooks().pipe(
+    let hasMore, total;
+    return this.booksHomeApi.getGoodBooks(limit).pipe(
+      map((res) => {
+        hasMore = res?.['data']?.['allMvMostViewBooks']?.['pageInfo']?.hasNextPage;
+        total = res?.['data']?.['allMvMostViewBooks']?.totalCount;
+        return res?.['data']?.['allMvMostViewBooks']?.['nodes'];
+      }),
       tap(books => this.goodBooksStore.set(books)),
+      tap(() => this.goodBooksStore.updatePage({ hasMore: hasMore, sizePage: limit,total: total })),
       tap(() => this.goodBooksStore.setLoading(false))
     );
   }
 
-  getFeatureBooks() {
+  getFeatureBooks(offset: number, isCheck?: boolean) {
     this.featureBooksStore.setLoading(true);
-    return this.booksHomeApi.getFeatureBooks().pipe(
-      tap(books => this.featureBooksStore.set(books)),
+    const first = isCheck ? 12 : 6;
+    let hasMore, total;
+    return this.booksHomeApi.getFeatureBooks(offset, first).pipe(
+      map((res) => {
+        hasMore = res?.['data']?.['allMvMostViewBooks']?.['pageInfo']?.hasNextPage;
+        total = res?.['data']?.['allMvMostViewBooks']?.totalCount;
+        return res?.['data']?.['allMvMostViewBooks']?.['nodes'];
+      }),
+      tap(books => { if(isCheck) { this.featureBooksStore.add(books) } else { this.featureBooksStore.set(books)}}),
+      tap(() => this.featureBooksStore.updatePage({ hasMore: hasMore, total: total })),
       tap(() => this.featureBooksStore.setLoading(false))
     );
   }
 
-  getLatestBooks(categoryId: string, offset: number) {
+  getLatestBooks(categoryId: string, offset: number, isCheck?: boolean) {
     this.latestBooksStore.setLoading(true);
+    let hasMore, total;
     return this.booksHomeApi.getLatestBooks(categoryId, offset).pipe(
-      tap(books => this.latestBooksStore.set(books)),
+      map((res) => {
+        hasMore = res?.['data']?.['allMvBooksLatestChapters']?.['pageInfo']?.hasNextPage;
+        total = res?.['data']?.['allMvBooksLatestChapters']?.totalCount;
+        return res?.['data']?.['allMvBooksLatestChapters']?.['nodes'];
+      }),
+      tap(books => { if(isCheck) { this.latestBooksStore.add(books) } else { this.latestBooksStore.set(books)}}),
+      tap(() => this.latestBooksStore.updatePage({ hasMore: hasMore, total: total })),
       tap(() => this.latestBooksStore.setLoading(false))
     );
   }

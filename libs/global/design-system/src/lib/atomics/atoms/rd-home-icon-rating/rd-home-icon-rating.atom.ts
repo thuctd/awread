@@ -13,7 +13,7 @@ import { faBookmark } from '@fortawesome/free-solid-svg-icons';
         right: 1.15rem;
       }
 
-      @media only screen and (min-width: 414px) and (max-width: 768px) {
+      @media only screen and (max-width: 768px) {
         :host .right-45 {
           right: 0.9rem;
         }

@@ -1,3 +1,4 @@
+import { SearchCreationsStore, SearchCreationsQuery } from './../states/search-creations';
 import { Injectable } from '@angular/core';
 import { CreationsGear } from '../gears';
 import { CreationsQuery, CreationsService } from '../states/creations';
@@ -8,11 +9,12 @@ export class CreationsFacade {
   loading$ = this.creationsQuery.selectLoading();
   constructor(
     private creationsGear: CreationsGear,
-    private creationsQuery: CreationsQuery,
+    public creationsQuery: CreationsQuery,
+    public searchCreationsQuery: SearchCreationsQuery,
+    private searchCreationsStore: SearchCreationsStore,
     private creationsService: CreationsService,
   ) {
   }
-
 
   generateUuid() {
     return this.creationsGear.generateUuid();
@@ -43,4 +45,15 @@ export class CreationsFacade {
     return this.creationsGear.delete(bookId);
   }
 
+  searchCreationByTerm(searchTerm: string) {
+    if (searchTerm === '') {
+      return this.creationsGear.get();
+    } else {
+      return this.creationsGear.searchCreationByTerm(searchTerm);
+    }
+  }
+
+  updateSearchTerm(searchTerm: string) {
+    this.searchCreationsStore.update({ searchTerm });
+  }
 }

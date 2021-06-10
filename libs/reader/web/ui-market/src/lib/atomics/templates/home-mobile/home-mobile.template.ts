@@ -18,8 +18,9 @@ export class HomeMobileTemplate implements OnInit {
     height: '200px',
     space: 1,
   };
-  @Input() loadingBooksCategory;
+  @Input() loadingBooksLatest;
   @Input() sliders = [];
+  @Input() totalBook;
   @Input() getGoodBooks = [];
   @Input() getLatestBooks = [];
   @Input() getFeatureBooks = [];
@@ -30,6 +31,10 @@ export class HomeMobileTemplate implements OnInit {
   @Output() emitBooks = new EventEmitter();
   @Output() emitAllBooks = new EventEmitter();
   @Output() filterItemsByGenre = new EventEmitter();
+  @Output() displayActivePage = new EventEmitter();
+  @Input() isLoadingFeature;
+  @Input() totalBookFeatured;
+  @Output() displayActivePageFeature = new EventEmitter();
 
   constructor() { }
 

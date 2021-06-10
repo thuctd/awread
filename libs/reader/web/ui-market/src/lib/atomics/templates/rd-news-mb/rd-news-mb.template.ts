@@ -19,7 +19,7 @@ export class RdNewsMbTemplate implements OnInit {
       isActive: true,
     },
     {
-      name: 'Tin mới Awread',
+      name: 'Tin mới',
       isActive: false,
     },
   ];
@@ -28,7 +28,7 @@ export class RdNewsMbTemplate implements OnInit {
 
   @Input() news = [];
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

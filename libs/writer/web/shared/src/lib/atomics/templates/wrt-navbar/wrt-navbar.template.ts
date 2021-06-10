@@ -1,11 +1,5 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  EventEmitter,
-  Output,
-  Input,
-} from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { Component, OnInit, ChangeDetectionStrategy, EventEmitter, Output, Input } from '@angular/core';
 
 @Component({
   selector: 'navbar',
@@ -22,8 +16,9 @@ import {
 export class WrtNavbarTemplate implements OnInit {
   @Input() user = [];
   @Input() routes = [];
-  @Output() searchEvent = new EventEmitter();
   @Output() signoutEvent = new EventEmitter();
+  @Input() searchControl: FormControl = new FormControl('');
+
   constructor() {}
 
   ngOnInit(): void {}

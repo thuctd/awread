@@ -25,7 +25,7 @@ export class RdAuthorBookItemMolec implements OnInit {
     ui: {
       isAuthor: true,
       isRating: true,
-      isStatus: true,
+      isStatus: false,
       isIcon: true,
       isDate: true,
     },

@@ -10,7 +10,7 @@
   <ng-template #noRouter>
     <a [ngClass]='color ? "text-green-primary" : "text-gray-text"' *ngFor="let item of items | keyvalue; let inx = index"
       routerLinkActive="router-link-active" class="inline-block outline-none"><span
-        class="text-gray-icon text-xs hover:text-green-primary duration-300" class="relative mx-2 font-lg" *ngIf="inx !== 0">-</span>
+        class="text-gray-icon text-xs hover:text-green-primary duration-300" class="relative font-lg" *ngIf="inx !== 0">,</span>
       {{item.value.name}}
     </a>
   </ng-template>

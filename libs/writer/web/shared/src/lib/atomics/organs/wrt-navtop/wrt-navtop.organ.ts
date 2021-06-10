@@ -1,3 +1,4 @@
+import { FormControl } from '@angular/forms';
 import { Component, OnInit, ChangeDetectionStrategy, EventEmitter, Output, Input } from '@angular/core';
 
 @Component({
@@ -14,8 +15,8 @@ import { Component, OnInit, ChangeDetectionStrategy, EventEmitter, Output, Input
 })
 export class WrtNavtopOrgan implements OnInit {
   @Input() user = [];
-  @Output() searchEvent = new EventEmitter();
   @Output() signoutEvent = new EventEmitter();
+  @Input() searchControl: FormControl = new FormControl("");
   constructor() { }
 
   ngOnInit(): void { }
