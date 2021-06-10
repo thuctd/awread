@@ -41,7 +41,7 @@ export class HomePage implements OnInit, OnDestroy {
     private genresFacade: GenresFacade,
     private categoriesFacade: CategoriesFacade,
     private cd: ChangeDetectorRef
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.booksFacade.getGoodBooks().pipe(takeUntil(this.destroy$)).subscribe();
@@ -57,7 +57,9 @@ export class HomePage implements OnInit, OnDestroy {
   }
 
   filterItemsByCategory(category) {
+    this.booksFacade.setCurrentPageLatestBook(0);
     this.booksFacade.setCurrentCategory(category.categoryId);
+    this.cd.detectChanges();
   }
 
   private loadGenreBookFirstByGenre() {

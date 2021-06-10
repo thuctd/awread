@@ -5,12 +5,14 @@ import { Book } from '../../models';
 export interface FeatureBooksState extends EntityState<Book>, ActiveState {
   hasMore: boolean;
   total: number;
+  sizePage: number;
   currentPage: number;
 }
 
 const initialState = {
   hasMore: true,
   total: 0,
+  sizePage: 0,
   currentPage: 1
 }
 
@@ -23,7 +25,7 @@ export class FeatureBooksStore extends EntityStore<FeatureBooksState> {
     // this.createUIStore().setInitialEntityState();
   }
 
-  updatePage(page: { hasMore: boolean, total: number }) {
+  updatePage(page: { hasMore: boolean, total: number, sizePage: number }) {
     this.update(page);
   }
 

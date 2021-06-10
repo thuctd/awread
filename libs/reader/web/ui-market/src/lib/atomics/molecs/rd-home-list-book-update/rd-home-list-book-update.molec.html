@@ -8,7 +8,7 @@
   <!-- <h1> {{ books.length }} </h1> -->
   <ng-container>
     <div class="grid md:grid-cols-8 xl:grid-cols-10 sm:gap-x-6 lg:gap-x-10 xl:gap-x-12 place-content-center">
-      <div *ngFor="let book of books | keyvalue; trackBy: trackByFn" class="col-span-2 md:col-span-2 py-2">
+      <div *ngFor="let book of books | keyvalue | slice:0:10; trackBy: trackByFn" class="col-span-2 md:col-span-2 py-2">
         <atom-img-m [bookId]="book.value.bookId" [srcImg]="book.value | coverSize"></atom-img-m>
         <div *ngIf="book.value.categoryId == 1 || book.value.categoryId == 2">
           <molec-info-book [book]="book.value" [btns]="book.value.newestChapters"></molec-info-book>

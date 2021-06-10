@@ -46,7 +46,7 @@ export class BooksFacade {
     public latestBooksStore: LatestBooksStore,
     public featureBooksStore: FeatureBooksStore,
     public genreBooksStore: GenreBooksStore
-  ) {}
+  ) { }
 
   setCurrentPageLatestBook(pageNumber) {
     this.latestBooksStore.setCurentPage(pageNumber);
@@ -76,8 +76,12 @@ export class BooksFacade {
     return this.booksGear.getCategoryBooks(categoryId, size);
   }
 
-  getLatestBooks(isAdd?) {
-    return this.booksHomeGear.getLatestBooks(isAdd);
+  getLatestBooks(isCheck?: boolean) {
+    if (isCheck) {
+      return this.booksHomeGear.getLatestBooks(this.latestBooksQuery.getSizePage() + 10, isCheck);
+    } else {
+      return this.booksHomeGear.getLatestBooks();
+    }
   }
 
   setCurrentCategory(categoryId) {
@@ -97,7 +101,11 @@ export class BooksFacade {
   }
 
   getFeatureBooks(isCheck?: boolean) {
-    return this.booksHomeGear.getFeatureBooks(isCheck);
+    if (isCheck) {
+      return this.booksHomeGear.getFeatureBooks(this.featureBooksQuery.getSizePage() + 12, isCheck);
+    } else {
+      return this.booksHomeGear.getFeatureBooks();
+    }
   }
 
   getFilterBooks(categoryId: string) {

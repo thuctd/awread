@@ -1,5 +1,5 @@
 import { BooksFacade } from '@awread/core/books';
-import { UntilDestroy } from '@ngneat/until-destroy';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import {
   Injectable,
   OnInit,
@@ -23,10 +23,11 @@ export class LatestBooksPage implements OnInit, OnChanges {
   totalBook$: any;
   title = 'TRUYỆN MỚI CẬP NHẬT';
 
-  constructor(private booksFacade: BooksFacade, private cd: ChangeDetectorRef) {}
+  constructor(private booksFacade: BooksFacade, private cd: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.fetchBooks();
+    this.booksFacade.getLatestBooks(true).pipe(untilDestroyed(this)).subscribe();
     this.latestBooks$ = this.booksFacade.latestBooksQuery.selectAll();
     this.totalBook$ = this.booksFacade.latestBooksQuery.selectTotalBook();
     this.isLoading$ = this.booksFacade.latestBooksQuery.selectLoading();
@@ -46,7 +47,7 @@ export class LatestBooksPage implements OnInit, OnChanges {
 
   private fetchBooks() {
     if (this.booksFacade.latestBooksQuery.getHasMore()) {
-      this.activePage = this.activePage + 1;
+      // this.activePage = this.activePage + 1;
       this.booksFacade.getLatestBooks(true).subscribe();
     }
   }

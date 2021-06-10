@@ -15,7 +15,7 @@ export class FeatureBooksPage implements OnInit {
   totalBook$: any;
   title = 'TRUYỆN NỔI BẬT';
 
-  constructor(private booksFacade: BooksFacade, private cd: ChangeDetectorRef) {}
+  constructor(private booksFacade: BooksFacade, private cd: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.booksFacade.getFeatureBooks(true).pipe(untilDestroyed(this)).subscribe();
@@ -34,8 +34,9 @@ export class FeatureBooksPage implements OnInit {
 
   private fetchBooks() {
     if (this.booksFacade.featureBooksQuery.getHasMore()) {
-      const nextPage = this.booksFacade.featureBooksQuery.getValue().currentPage + 1;
-      this.booksFacade.setCurrentPageFeatureBook(nextPage);
+      // const nextPage = this.booksFacade.featureBooksQuery.getValue().currentPage + 1;
+      // this.booksFacade.setCurrentPageFeatureBook(nextPage);
+      this.booksFacade.getFeatureBooks(true).subscribe();
     }
   }
 }
