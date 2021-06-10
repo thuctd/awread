@@ -10,6 +10,7 @@ WORKDIR /batcave
 RUN npm i -g pnpm
 COPY decorate-angular-cli.js package.json pnpm-lock.yaml ./
 RUN pnpm install --frozen-lockfile --prod
+RUN pnpm ngcc --properties es2015 browser module main --create-ivy-entry-points
 COPY *.js tsconfig*.json angular.json nx.json ./
 COPY configs/tailwind configs/tailwind
 
