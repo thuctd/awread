@@ -1,5 +1,8 @@
 <div class="py-2">
   <nav class="block">
+
+    <pre> {{ pages | json }} {{ currentPage }} </pre>
+
     <ul class="flex pl-0 rounded list-none justify-center md:flex-wrap">
       <li *ngIf="currentPage > 1" (click)="onClickArrow(currentPage - 1)">
         <a href="javascript:void(0);"

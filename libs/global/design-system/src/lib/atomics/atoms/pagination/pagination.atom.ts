@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter, OnChanges, ChangeDetectorRef, AfterViewInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter, OnChanges, SimpleChanges, AfterViewInit } from '@angular/core';
 
 @Component({
   selector: 'pagination',
@@ -17,20 +17,26 @@ export class PaginationAtom implements OnInit, OnChanges {
   @Input() recordsPerPage = 0;
   @Input() eventResetPagination;
   @Output() pageChange = new EventEmitter<number>();
-  public pages: Array<string | number> = [];
+  pages: Array<string | number> = [];
   pageCount = 0;
-  @Input() currentPage = 1;
+  @Input() tabName;
+  currentPage = 1;
 
-  constructor(
-  ) { }
+  constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit(): void { }
 
-  }
 
   ngOnChanges(changes: SimpleChanges): void {
+    console.log('changes', changes);
     this.pageCount = this.getPageCount();
-    this.pages = this.pageCount <= 10 ? this.getArrayShort(this.pageCount, 1) : this.getArrayOfPageFirst(this.pageCount, 1);
+    this.pages =
+      this.pageCount <= 10 ? this.getArrayShort(this.pageCount, 1) : this.getArrayOfPageFirst(this.pageCount, 1);
+
+    if (changes.tabName && changes.tabName.currentValue !== changes.tabName.previousValue) {
+      this.currentPage = 1;
+    }
+
   }
 
   private getPageCount(): number {
@@ -56,16 +62,15 @@ export class PaginationAtom implements OnInit, OnChanges {
     const pageArray: Array<string | number> = [];
     if (pageStart === 1) {
       for (let i = 1; i <= 5; i++) {
-        pageArray.push(i)
+        pageArray.push(i);
       }
-      pageArray.push("...");
+      pageArray.push('...');
       pageArray.push(pageCount);
-    }
-    else {
+    } else {
       pageArray.push(1);
-      pageArray.push("...")
+      pageArray.push('...');
       for (let i = pageStart; i <= pageCount; i++) {
-        pageArray.push(i)
+        pageArray.push(i);
       }
     }
     return pageArray;
@@ -74,12 +79,12 @@ export class PaginationAtom implements OnInit, OnChanges {
   private getArrayOfPageMiddle(pageCount: number, pageStart: number): Array<string | number> {
     const pageArrayMiddle: Array<string | number> = [];
     pageArrayMiddle.push(1);
-    pageArrayMiddle.push("...")
+    pageArrayMiddle.push('...');
     for (let i = 1; i <= 3; i++) {
       pageArrayMiddle.push(pageStart);
       pageStart++;
     }
-    pageArrayMiddle.push("...");
+    pageArrayMiddle.push('...');
     pageArrayMiddle.push(pageCount);
     return pageArrayMiddle;
   }
@@ -89,30 +94,37 @@ export class PaginationAtom implements OnInit, OnChanges {
     if (this.pageCount <= 10) {
       this.currentPage = +this.pages[i];
       this.pageChange.emit(+this.pages[i]);
-    }
-    else {
+    } else {
       if (i >= 4) {
-        const theNextPageNumber = this.pages[i - 1] === "..." ? +this.pages[i] : +this.pages[i - 1] + 1;
-        this.pages = (this.pageCount - theNextPageNumber < 4) ? this.getArrayOfPageFirst(this.pageCount, this.pageCount - 4) : this.getArrayOfPageMiddle(this.pageCount, theNextPageNumber - 1);
+        const theNextPageNumber = this.pages[i - 1] === '...' ? +this.pages[i] : +this.pages[i - 1] + 1;
+        this.pages =
+          this.pageCount - theNextPageNumber < 4
+            ? this.getArrayOfPageFirst(this.pageCount, this.pageCount - 4)
+            : this.getArrayOfPageMiddle(this.pageCount, theNextPageNumber - 1);
+        this.currentPage = theNextPageNumber;
+        this.pages = [...this.pages];
+        console.log('pages', this.pages);
+        this.pageChange.emit(theNextPageNumber);
+      } else if (i <= 2) {
+        const theNextPageNumber = this.pages[i + 1] === '...' ? +this.pages[i] : +this.pages[i + 1] - 1;
+        this.pages =
+          theNextPageNumber < 5
+            ? this.getArrayOfPageFirst(this.pageCount, 1)
+            : this.getArrayOfPageMiddle(this.pageCount, theNextPageNumber - 1);
         this.currentPage = theNextPageNumber;
         this.pageChange.emit(theNextPageNumber);
-      }
-      else if (i <= 2) {
-        const theNextPageNumber = this.pages[i + 1] === "..." ? +this.pages[i] : +this.pages[i + 1] - 1;
-        this.pages = theNextPageNumber < 5 ? this.getArrayOfPageFirst(this.pageCount, 1) : this.getArrayOfPageMiddle(this.pageCount, theNextPageNumber - 1)
-        this.currentPage = theNextPageNumber;
-        this.pageChange.emit(theNextPageNumber);
-      }
-      else {
+      } else {
         this.currentPage = +this.pages[i];
         this.pageChange.emit(+this.pages[i]);
       }
     }
   }
   onClickArrow(pageNumber: number) {
-    if (pageNumber < 1) { return; }
-    else if (pageNumber > +this.pageCount) { return; }
-    else {
+    if (pageNumber < 1) {
+      return;
+    } else if (pageNumber > +this.pageCount) {
+      return;
+    } else {
       for (let i = 0; i < this.pages.length; i++) {
         if (pageNumber == +this.pages[i]) {
           this.onClickPage(pageNumber, i);

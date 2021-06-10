@@ -7,7 +7,9 @@
     <molec-rd-home-list-book-update [loading]="loading" [isNovel]="tab.isNovel" *ngIf="tabHead.currentName === tab.name" [books]="books">
     </molec-rd-home-list-book-update>
   </div>
+  <!-- <molec-rd-home-list-book-update [loading]="loading" [isNovel]="tabs[0].isNovel" *ngIf="tabHead.currentName === tabs[0].name" [books]="books">
+  </molec-rd-home-list-book-update> -->
   <div class="flex justify-center items-center">
-    <pagination [totalRecords]="totalBook - 10" [recordsPerPage]="10" [currentPage]="currentPage" (pageChange)="pageChange.emit($event)"></pagination>
+    <pagination [tabName]="tabHead.currentName" [totalRecords]="totalBook - 10" [recordsPerPage]="10" (pageChange)="pageChange.emit($event)"></pagination>
   </div>
 </section>

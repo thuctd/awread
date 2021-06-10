@@ -7,8 +7,8 @@
 	],
 	"settings": {
 		"[typescript]": {
-			// "editor.defaultFormatter": "vscode.typescript-language-features"
-			"editor.defaultFormatter": "esbenp.prettier-vscode"
+			"editor.defaultFormatter": "vscode.typescript-language-features"
+			// "editor.defaultFormatter": "esbenp.prettier-vscode"
 		},
 		"editor.formatOnSave": true,
 		"editor.formatOnPaste": true,

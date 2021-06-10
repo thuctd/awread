@@ -10,4 +10,8 @@
 	"html.format.wrapLineLength": 160,
 	// "window.zoomLevel": 3,
 	// "json.format.enable": false,
+	"[typescript]": {
+		"editor.defaultFormatter": "vscode.typescript-language-features"
+		// "editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
 }
