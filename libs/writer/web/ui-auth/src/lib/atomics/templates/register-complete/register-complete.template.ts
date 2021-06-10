@@ -14,6 +14,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 })
 export class RegisterCompleteTemplate implements OnInit {
   @Input() isMobile = false;
+  @Input() genres = [];
   constructor() {}
 
   ngOnInit(): void {}

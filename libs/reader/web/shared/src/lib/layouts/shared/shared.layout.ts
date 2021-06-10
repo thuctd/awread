@@ -6,6 +6,7 @@ import { debounceTime, distinctUntilChanged, startWith, switchMap, map } from 'r
 import { BooksFacade } from '@awread/core/books';
 import { AuthFacade, CurrentUserFacade } from '@awread/core/users';
 import { domainEnvironment, environment } from '@awread/global/environments';
+import { GenresFacade } from '@awread/core/genres';
 
 @UntilDestroy()
 @Injectable({
@@ -29,14 +30,17 @@ export class SharedLayout implements OnInit {
     private cd: ChangeDetectorRef,
     private authFacade: AuthFacade,
     private currentUserFacade: CurrentUserFacade,
+    private genresFacade: GenresFacade
   ) {
     console.log('backgound', this.background, environment, domainEnvironment);
   }
 
   ngOnInit(): void {
-    this.searchControl.valueChanges.pipe(debounceTime(100), distinctUntilChanged())
+    this.genresFacade.getAllGenres().subscribe();
+    this.searchControl.valueChanges
+      .pipe(debounceTime(100), distinctUntilChanged())
       .subscribe((term) => {
-        this.search$ = term
+        this.search$ = term;
       });
     this.watchingSearchTerm();
     this.currentUserFacade.getCurrentUser().subscribe();
@@ -63,4 +67,3 @@ export class SharedLayout implements OnInit {
     this.router.navigate(['/search'], { queryParams: { search: this.search$ } });
   }
 }
-

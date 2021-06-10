@@ -25,6 +25,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { RegisterCompleteTemplate } from './templates/register-complete/register-complete.template';
 import { RegisterCompleteDesktopOrgan } from './organs/register-complete-desktop/register-complete-desktop.organ';
 import { RegisterCompleteMobileOrgan } from './organs/register-complete-mobile/register-complete-mobile.organ';
+import { RegisterCompleteBackgroundTemplate } from './templates/register-complete-background/register-complete-background.template';
 
 @NgModule({
   imports: [CommonModule, GlobalDesignSystemAtomicModule, StorybookSupportModule, MatStepperModule],
@@ -50,6 +51,7 @@ import { RegisterCompleteMobileOrgan } from './organs/register-complete-mobile/r
     RegisterCompleteTemplate,
     RegisterCompleteDesktopOrgan,
     RegisterCompleteMobileOrgan,
+    RegisterCompleteBackgroundTemplate,
   ],
   declarations: [
     WrtTabHeadMolec,
@@ -72,6 +74,7 @@ import { RegisterCompleteMobileOrgan } from './organs/register-complete-mobile/r
     RegisterCompleteTemplate,
     RegisterCompleteDesktopOrgan,
     RegisterCompleteMobileOrgan,
+    RegisterCompleteBackgroundTemplate,
   ],
 })
 export class WriterWebUiAuthAtomicModule {}

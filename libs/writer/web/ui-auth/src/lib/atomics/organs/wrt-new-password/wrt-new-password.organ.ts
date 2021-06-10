@@ -25,7 +25,7 @@ export class WrtNewPasswordOrgan implements OnInit {
   );
 
   passwordMatchValidator(g: FormGroup) {
-    return g.get('password').value === g.get('confirmpassword').value ? null : { mismatch: true };
+    return g.get('password').value === g.get('confirmpassword').value ? null : { missmatch: true };
   }
   constructor(private fb: FormBuilder) {}
   ngOnInit(): void {}

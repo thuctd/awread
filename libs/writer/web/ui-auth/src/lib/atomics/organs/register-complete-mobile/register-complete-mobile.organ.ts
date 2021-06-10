@@ -14,6 +14,7 @@ import { faCheck } from '@fortawesome/free-solid-svg-icons';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegisterCompleteMobileOrgan implements OnInit {
+  @Input() genres = [];
   @Input() isLinear = false;
   @Input() firstFormGroup = this.fb.group({
     firstCtrl: ['', Validators.required],

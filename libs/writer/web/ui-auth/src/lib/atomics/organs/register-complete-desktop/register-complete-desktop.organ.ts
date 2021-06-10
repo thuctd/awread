@@ -1,6 +1,7 @@
+import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'organ-register-complete-desktop',
   templateUrl: './register-complete-desktop.organ.html',
@@ -12,17 +13,45 @@ import { faCheck } from '@fortawesome/free-solid-svg-icons';
     `,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [
+    {
+      provide: STEPPER_GLOBAL_OPTIONS,
+      useValue: { showError: true },
+    },
+  ],
 })
 export class RegisterCompleteDesktopOrgan implements OnInit {
   @Input() isLinear = false;
-  @Input() firstFormGroup = this.fb.group({
-    firstCtrl: ['', Validators.required],
+  icons = { faCheck, faExclamationCircle };
+  @Input() genres = [];
+  @Input() thirdForm = this.fb.group({
+    age: ['2'],
+    genreIds: [[]],
   });
-  @Input() secondFormGroup = this.fb.group({
-    secondCtrl: ['', Validators.required],
+
+  @Input() secondForm = this.fb.group({
+    name: ['', Validators.required],
+    firstname: [''],
+    middlename: [''],
+    lastname: [''],
   });
-  icons = { faCheck };
+
+  @Input() firstForm = this.fb.group(
+    {
+      username: ['', [Validators.required]],
+      email: ['', []],
+      phone: ['', []],
+      password: ['', [Validators.required, Validators.minLength(4)]],
+      confirmpassword: ['', [Validators.required, Validators.minLength(4)]],
+    },
+    { validator: this.passwordMatchValidator }
+  );
+
   constructor(private fb: FormBuilder) {}
+
+  passwordMatchValidator(g) {
+    return g.get('password').value === g.get('confirmpassword').value ? null : { missmatch: true };
+  }
 
   ngOnInit(): void {}
 }

@@ -1,5 +1,6 @@
 import { CurrentUserFacade, AuthFacade } from '@awread/core/users';
 import { Directive, Injectable, OnInit } from '@angular/core';
+import { GenresFacade } from '@awread/core/genres';
 
 @Injectable({
   providedIn: 'root',
@@ -27,9 +28,15 @@ export class ShellLayout implements OnInit {
       linkTo: '/',
     },
   ];
-  constructor(private currentUserFacade: CurrentUserFacade, private authFacade: AuthFacade) {}
+  constructor(
+    private currentUserFacade: CurrentUserFacade,
+    private authFacade: AuthFacade,
+    private genresFacade: GenresFacade
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.genresFacade.getAllGenres().subscribe();
+  }
   searchEvent(term: string) {}
 
   logout() {
