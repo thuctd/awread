@@ -3,6 +3,6 @@
 <template-home [totalBook]="totalBookLatest$ | async" [currentPage]="currentPageLatest$ | async" (pageChange)="pageChange($event)"
   [isLoadingFeature]="isLoadingFeature$ | async" [totalBookFeatured]="totalBookFeature$ | async" (pageChangeFeature)="pageChangeFeature($event)"
   [sliders]="imageObject$ | async" [getGoodBooks]="goodBookList$ | async" [getLatestBooks]="latestBooks$ | async" [loading]="isLoadingLatest$ | async"
-  [getFeatureBooks]="featureBookList$ | async" [genres]="genres$ | async" (filterItemsByGenre)="filterItemsByGenre($event)"
-  [genreBooks]="filteredBooks$ | async" [categories]="categories$ | async" (emitBooks)="filterItemsByCategory($event)">
+  [getFeatureBooks]="featureBookList$ | async" [genres]="genres$ | async" (filterItemsByGenre)="filterItemsByGenre($event)" [genreBooks]="genreBooks$ | async"
+  [categories]="categories$ | async" (emitBooks)="filterItemsByCategory($event)">
 </template-home>

@@ -9,7 +9,7 @@ import { CategoryBooksQuery } from '../states/category-books';
 import { CollectedQuery } from '../states/collected';
 import { ComposedQuery } from '../states/composed';
 import { FeatureBooksQuery, FeatureBooksStore } from '../states/feature-books';
-import { GenreBooksQuery } from '../states/genre-books';
+import { GenreBooksQuery, GenreBooksStore } from '../states/genre-books';
 import { GoodBooksQuery } from '../states/good-books';
 import { LatestBooksQuery } from '../states/latest-books';
 import { TopBooksQuery } from '../states/top-books';
@@ -44,11 +44,15 @@ export class BooksFacade {
     public categoryBooksQuery: CategoryBooksQuery,
     public searchBooksQuery: SearchBooksQuery,
     private latestBooksStore: LatestBooksStore,
-    private featureBooksStore: FeatureBooksStore
+    private featureBooksStore: FeatureBooksStore,
+    private genreBooksStore: GenreBooksStore
   ) {}
 
   setCurrentPageLatestBook(pageNumber) {
     this.latestBooksStore.setCurentPage(pageNumber);
+  }
+  setCurrentGenreGenreBook(genreId) {
+    this.genreBooksStore.setCurrentGenre(genreId);
   }
 
   setCurrentPageFeatureBook(pageNumber) {
@@ -116,8 +120,8 @@ export class BooksFacade {
     return this.booksHomeGear.getGoodBooks(this.goodBooksQuery.getSizePage() + 12);
   }
 
-  getFeatureBooks(offset: number, isCheck?: boolean) {
-    return this.booksHomeGear.getFeatureBooks(offset, isCheck);
+  getFeatureBooks(isCheck?: boolean) {
+    return this.booksHomeGear.getFeatureBooks(isCheck);
   }
 
   getFilterBooks(categoryId: string) {

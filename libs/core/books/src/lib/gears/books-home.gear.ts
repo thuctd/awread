@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { combineLatest } from 'rxjs';
 import { tap, map, delay, withLatestFrom, switchMap, mergeMap } from 'rxjs/operators';
 import { BooksHomeApi } from '../apis';
-import { FeatureBooksStore } from '../states/feature-books';
+import { FeatureBooksQuery, FeatureBooksStore } from '../states/feature-books';
 import { GoodBooksStore } from '../states/good-books';
 import { LatestBooksQuery, LatestBooksStore } from '../states/latest-books';
 
@@ -13,7 +13,8 @@ export class BooksHomeGear {
     private featureBooksStore: FeatureBooksStore,
     private goodBooksStore: GoodBooksStore,
     private booksHomeApi: BooksHomeApi,
-    private latestBooksQuery: LatestBooksQuery
+    private latestBooksQuery: LatestBooksQuery,
+    private featureBooksQuery: FeatureBooksQuery
   ) {}
 
   getGoodBooks(limit: number = 12) {
@@ -26,33 +27,35 @@ export class BooksHomeGear {
         return res?.['data']?.['allMvMostViewBooks']?.['nodes'];
       }),
       tap((books) => this.goodBooksStore.set(books)),
-      tap(() =>
-        this.goodBooksStore.updatePage({ hasMore: hasMore, sizePage: limit, total: total })
-      ),
+      tap(() => this.goodBooksStore.updatePage({ hasMore: hasMore, sizePage: limit, total: total })),
       tap(() => this.goodBooksStore.setLoading(false))
     );
   }
 
-  getFeatureBooks(offset: number, isCheck?: boolean) {
+  getFeatureBooks(isCheck?: boolean) {
     this.featureBooksStore.setLoading(true);
     const first = isCheck ? 12 : 6;
     let hasMore, total;
-    return this.booksHomeApi.getFeatureBooks(offset, first).pipe(
-      map((res) => {
-        hasMore = res?.['data']?.['allMvMostViewBooks']?.['pageInfo']?.hasNextPage;
-        total = res?.['data']?.['allMvMostViewBooks']?.totalCount;
-        return res?.['data']?.['allMvMostViewBooks']?.['nodes'];
-      }),
-      tap((books) => {
-        if (isCheck) {
-          this.featureBooksStore.add(books);
-        } else {
-          this.featureBooksStore.set(books);
-        }
-      }),
-      tap(() => this.featureBooksStore.updatePage({ hasMore: hasMore, total: total })),
-      tap(() => this.featureBooksStore.setLoading(false))
-    );
+    // return this.booksHomeApi.getFeatureBooks(offset, first).pipe(
+    return this.featureBooksQuery
+      .select((state) => state.currentPage)
+      .pipe(
+        switchMap((currentPage) => this.booksHomeApi.getFeatureBooks(currentPage, first)),
+        map((res) => {
+          hasMore = res?.['data']?.['allMvMostViewBooks']?.['pageInfo']?.hasNextPage;
+          total = res?.['data']?.['allMvMostViewBooks']?.totalCount;
+          return res?.['data']?.['allMvMostViewBooks']?.['nodes'];
+        }),
+        tap((books) => {
+          if (isCheck) {
+            this.featureBooksStore.add(books);
+          } else {
+            this.featureBooksStore.set(books);
+          }
+        }),
+        tap(() => this.featureBooksStore.updatePage({ hasMore: hasMore, total: total })),
+        tap(() => this.featureBooksStore.setLoading(false))
+      );
   }
 
   getLatestBooks(isAdd?) {
@@ -66,9 +69,7 @@ export class BooksHomeGear {
       tap(([currentCategoryId, currentPage]) =>
         console.log('currentCategoryId, currentPage', currentCategoryId, currentPage)
       ),
-      mergeMap(([currentCategoryId, currentPage]) =>
-        this.booksHomeApi.getLatestBooks(currentCategoryId, currentPage)
-      ),
+      mergeMap(([currentCategoryId, currentPage]) => this.booksHomeApi.getLatestBooks(currentCategoryId, currentPage)),
       // delay(3000),
       map((res) => {
         hasMore = res?.['data']?.['allMvBooksLatestChapters']?.['pageInfo']?.hasNextPage;
