@@ -26,6 +26,7 @@ export class ListPage implements OnInit, OnDestroy {
   genreList$ = this.genresFacade.genres$;
   filteredBooks$ = this.booksFacade.categoryBooks$;
   typeBook: 'collected' | 'composed';
+  loading: boolean;
   selectedCategoryId: string;
   titlePage: string;
   constructor(
@@ -77,9 +78,14 @@ export class ListPage implements OnInit, OnDestroy {
     this.cd.detectChanges();
   }
 
-  //TODO: Anh Hiệp ơi! Hộ trợ em cái này với ạ, kiểu nhưu khi kích chuyển tabs ấy em muốn nó scroll về ban đầu ạ.
   filterItemsByCategory(categoryId: string) {
-    this.booksFacade.getCategoryBooks(categoryId, 0).subscribe();
+    this.loading = true;
+    this.booksFacade.getCategoryBooks(categoryId, 0).subscribe(
+      () => {
+        this.loading = false;
+        this.cd.detectChanges();
+      }
+    );
   }
 
   filterBooks() {
@@ -95,13 +101,13 @@ export class ListPage implements OnInit, OnDestroy {
 
   onMoreBooks() {
     this.fetchBooks();
-    this.cd.detectChanges();
   }
 
   private fetchBooks() {
     if (this.booksFacade.categoryBooksQuery.getHasMore()) {
       this.booksFacade.getCategoryBooks(this.selectedCategoryId).subscribe();
     }
+    this.cd.detectChanges();
   }
 
   private updateForm() {
