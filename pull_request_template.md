@@ -1,3 +1,5 @@
+**Lưu ý: Nhớ chọn project và milestone**
+
 **Mô tả một cách rõ ràng và cụ thể PR này sửa những tính năng gì**
 - sửa tính năng hiển thị xx
 - bổ xung thêm giao diện yy
@@ -8,6 +10,6 @@
 - fixes #xxx, #yyy
 - closes #zzz
 
- 
+
 
 
