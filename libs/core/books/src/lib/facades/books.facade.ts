@@ -78,7 +78,7 @@ export class BooksFacade {
 
   getLatestBooks(isCheck?: boolean) {
     if (isCheck) {
-      return this.booksHomeGear.getLatestBooks(this.latestBooksQuery.getSizePage() + 10, isCheck);
+      return this.booksHomeGear.getLatestBooks(this.latestBooksQuery.getSizePage() + 30, isCheck);
     } else {
       return this.booksHomeGear.getLatestBooks();
     }

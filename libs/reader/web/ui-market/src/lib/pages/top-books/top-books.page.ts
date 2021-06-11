@@ -27,7 +27,7 @@ export class TopBooksPage implements OnInit {
     this.isLoading$ = this.booksFacade.topBooksQuery.selectLoading();
   }
 
-  @HostListener('window:scroll', ['$event'])
+  // @HostListener('window:scroll', ['$event'])
   onMoreBooks() {
     if (window.innerHeight + window.scrollY + 800 >= document.body.scrollHeight) {
       this.fetchBooks();

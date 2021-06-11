@@ -28,7 +28,7 @@ export class GoodBooksPage implements OnInit {
     this.hasNextPage$ = this.booksFacade.goodBooksQuery.selecthasNextPage();
   }
 
-  @HostListener('window:scroll', ['$event'])
+  // @HostListener('window:scroll', ['$event'])
   onMoreBooks() {
     if (window.innerHeight + window.scrollY + 800 >= document.body.scrollHeight) {
       this.fetchBooks();
