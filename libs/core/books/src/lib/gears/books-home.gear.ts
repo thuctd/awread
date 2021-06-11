@@ -1,24 +1,22 @@
 import { Injectable } from '@angular/core';
 import { combineLatest, of } from 'rxjs';
-import { tap, map, switchMap } from 'rxjs/operators';
 import { BooksHomeApi } from '../apis';
 import { FeatureBooksQuery, FeatureBooksStore } from '../states/feature-books';
 import { GoodBooksStore } from '../states/good-books';
 import { LatestBooksQuery, LatestBooksStore } from '../states/latest-books';
-import { paginationCombo, paginationPageInfo } from '@awread/global/tools';
-import { PaginationBooksGear } from './pagination-books.gear';
-import { InfinityScrollBooksGear } from './infinity-scroll-books.gear';
+import { paginationCombo } from '@awread/global/tools';
+import { GenreBooksQuery, GenreBooksStore } from '../states/genre-books';
 @Injectable({ providedIn: 'root' })
 export class BooksHomeGear {
   constructor(
+    private booksHomeApi: BooksHomeApi,
     private latestBooksStore: LatestBooksStore,
     private featureBooksStore: FeatureBooksStore,
     private goodBooksStore: GoodBooksStore,
-    private booksHomeApi: BooksHomeApi,
+    private genreBooksStore: GenreBooksStore,
     private latestBooksQuery: LatestBooksQuery,
     private featureBooksQuery: FeatureBooksQuery,
-    private paginationBooksGear: PaginationBooksGear,
-    private infinitySrollBooksGear: InfinityScrollBooksGear,
+    private genreBooksQuery: GenreBooksQuery,
   ) { }
 
   getGoodBooks(limit = 5) {
@@ -44,4 +42,13 @@ export class BooksHomeGear {
       paginationCombo(this.latestBooksStore, ([currentCategoryId, currentPage]) => this.booksHomeApi.getLatestBooks(currentPage, limit, currentCategoryId)),
     );
   }
+
+  getGenreBooks(limit = 10) {
+    return this.genreBooksQuery
+      .select((state) => state.currentGenreId)
+      .pipe(
+        paginationCombo(this.genreBooksStore, (currentGenreId) => this.booksHomeApi.getGenreBooks(currentGenreId, limit)),
+      );
+  }
+
 }

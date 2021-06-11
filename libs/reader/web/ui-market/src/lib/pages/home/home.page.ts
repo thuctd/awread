@@ -13,6 +13,7 @@ import { CategoriesFacade } from '@awread/core/categories';
 })
 @Directive()
 export class HomePage implements OnInit, OnDestroy {
+  defaultGenre = 'Tình cảm';
   destroy$ = new Subject();
   imageObject$ = this.sliderFacede.slider$;
   categories$ = this.categoriesFacade.categories$;
@@ -47,6 +48,7 @@ export class HomePage implements OnInit, OnDestroy {
     this.booksFacade.getGoodBooks().pipe(takeUntil(this.destroy$)).subscribe();
     this.booksFacade.getLatestBooks().pipe(takeUntil(this.destroy$)).subscribe();
     this.booksFacade.getFeatureBooks().pipe(takeUntil(this.destroy$)).subscribe();
+    this.booksFacade.getGenreBooks().pipe(takeUntil(this.destroy$)).subscribe();
     this.genresFacade.getAllGenres().pipe(takeUntil(this.destroy$)).subscribe();
     this.sliderFacede.getAllSlider().pipe(takeUntil(this.destroy$)).subscribe();
     this.loadGenreBookFirstByGenre().pipe(takeUntil(this.destroy$)).subscribe();
@@ -65,11 +67,12 @@ export class HomePage implements OnInit, OnDestroy {
   private loadGenreBookFirstByGenre() {
     return this.genres$.pipe(
       takeWhile((val) => val !== undefined, false),
-      switchMap((items) => {
+      tap((items) => {
         if (!items.length) {
           return of([]);
         }
-        return this.booksFacade.getGenreBooks(items[0].genreId);
+        const genre = items.find(item => item.name.includes(this.defaultGenre));
+        this.booksFacade.setCurrentGenreGenreBook(genre.genreId);
       })
     );
   }

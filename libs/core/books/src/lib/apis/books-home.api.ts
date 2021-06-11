@@ -15,7 +15,7 @@ export class BooksHomeApi {
               first: $first,
               orderBy: VIEWS_DESC,
               condition: {
-                published: true,
+                published: true
                 isDeleted: false
               }) {
               nodes {
@@ -48,7 +48,7 @@ export class BooksHomeApi {
               first: $first,
               offset: $offset,
               condition: {
-                published: true,
+                published: true
                 isDeleted: false
               }) {
               nodes {
@@ -80,8 +80,8 @@ export class BooksHomeApi {
               first: $first
               offset: $offset
               condition: {
-                published: true,
-                isDeleted: false,
+                published: true
+                isDeleted: false
                 categoryId: $categoryId
               }
             ) {
@@ -109,4 +109,38 @@ export class BooksHomeApi {
       })
       .pipe(map(res => res?.['data']?.['allMvBooksLatestChapters']));
   }
+
+
+
+  getGenreBooks(genreId: string, first = 10) {
+    return this.apollo
+      .query({
+        query: gql`
+          query allVRandomBooks($genreId: String!, $first: Int) {
+            allVRandomBooks(
+              condition: {isDeleted: false, published: true}
+              filter: { genres: { containsKey: $genreId } }
+              first: $first
+            ) {
+              nodes {
+                bookId
+                categoryId
+                genres
+                type
+                title
+                userId
+                cover
+              }
+              pageInfo {
+                hasNextPage
+              }
+              totalCount
+            }
+          }
+        `,
+        variables: { genreId, first },
+      })
+      .pipe(map((res) => res?.['data']?.['allVRandomBooks']));
+  }
+
 }

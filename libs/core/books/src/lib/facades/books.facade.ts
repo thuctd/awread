@@ -67,8 +67,8 @@ export class BooksFacade {
     return this.booksGear.getBookById(bookId);
   }
 
-  getGenreBooks(genreId: string) {
-    return this.booksGear.getGenreBooks(genreId);
+  getGenreBooks() {
+    return this.booksHomeGear.getGenreBooks();
   }
 
   getCategoryBooks(a?) {
