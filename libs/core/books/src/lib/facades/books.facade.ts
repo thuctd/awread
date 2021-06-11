@@ -100,9 +100,9 @@ export class BooksFacade {
     return this.booksHomeGear.getGoodBooks(this.goodBooksQuery.getSizePage() + 12);
   }
 
-  getFeatureBooks(isCheck?: boolean) {
-    if (isCheck) {
-      return this.booksHomeGear.getFeatureBooks(this.featureBooksQuery.getSizePage() + 12, isCheck);
+  getFeatureBooks(isPushToArray?: boolean) {
+    if (isPushToArray) {
+      return this.booksHomeGear.getFeatureBooks(this.featureBooksQuery.getSizePage() + 12, isPushToArray);
     } else {
       return this.booksHomeGear.getFeatureBooks();
     }

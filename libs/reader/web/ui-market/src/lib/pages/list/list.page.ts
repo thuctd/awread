@@ -104,7 +104,7 @@ export class ListPage implements OnInit, OnDestroy {
   }
 
   private fetchBooks() {
-    if (this.booksFacade.categoryBooksQuery.getHasMore()) {
+    if (this.booksFacade.categoryBooksQuery.gethasNextPage()) {
       this.booksFacade.getCategoryBooks(this.selectedCategoryId).subscribe();
     }
     this.cd.detectChanges();

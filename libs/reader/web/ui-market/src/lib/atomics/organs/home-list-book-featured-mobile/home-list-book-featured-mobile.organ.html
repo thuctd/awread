@@ -16,7 +16,7 @@
         <molec-info-book class="w-27" [book]="book" [displayUI]="displayUI"></molec-info-book>
       </div>
     </div>
-    <div *ngIf="hasMore" (click)="onClickPage(currentPage + 1)" class="cursor-pointer absolute top-60 -right-2">
+    <div *ngIf="hasNextPage" (click)="onClickPage(currentPage + 1)" class="cursor-pointer absolute top-60 -right-2">
       <fa-icon class="text-gray-text text-sm md:text-base" [icon]="arrowRightIcon"></fa-icon>
     </div>
   </ng-template>

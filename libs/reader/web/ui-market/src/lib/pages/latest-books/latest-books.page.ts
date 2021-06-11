@@ -18,7 +18,7 @@ import { Observable } from 'rxjs';
 export class LatestBooksPage implements OnInit, OnChanges {
   latestBooks$: Observable<any>;
   isLoading$: Observable<boolean>;
-  hasMore$: Observable<boolean>;
+  hasNextPage$: Observable<boolean>;
   activePage = 0;
   totalBook$: any;
   title = 'TRUYỆN MỚI CẬP NHẬT';
@@ -31,7 +31,7 @@ export class LatestBooksPage implements OnInit, OnChanges {
     this.latestBooks$ = this.booksFacade.latestBooksQuery.selectAll();
     this.totalBook$ = this.booksFacade.latestBooksQuery.selectTotalBook();
     this.isLoading$ = this.booksFacade.latestBooksQuery.selectLoading();
-    this.hasMore$ = this.booksFacade.latestBooksQuery.selectHasMore();
+    this.hasNextPage$ = this.booksFacade.latestBooksQuery.selecthasNextPage();
   }
 
   ngOnChanges(): any {
@@ -46,7 +46,7 @@ export class LatestBooksPage implements OnInit, OnChanges {
   }
 
   private fetchBooks() {
-    if (this.booksFacade.latestBooksQuery.getHasMore()) {
+    if (this.booksFacade.latestBooksQuery.gethasNextPage()) {
       // this.activePage = this.activePage + 1;
       this.booksFacade.getLatestBooks(true).subscribe();
     }

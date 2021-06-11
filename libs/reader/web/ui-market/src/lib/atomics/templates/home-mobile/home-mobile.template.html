@@ -3,13 +3,13 @@
     <atom-slider [imageObject]="sliders"></atom-slider>
   </section>
   <section class="">
-    <organ-home-list-book-update-mobile [hasMore]="hasMoreLatest" [currentPage]="currentPageLatest" (pageChange)="pageChange.emit($event)"
-      [totalBook]="totalBook" [loading]="loadingBooksLatest" [categories]="categories" (emitBooks)="emitBooks.emit($event)" [books]="getLatestBooks"
+    <organ-home-list-book-update-mobile [hasNextPage]="hasNextPageLatest" [currentPage]="currentPageLatest" (pageChange)="pageChange.emit($event)"
+      [totalBook]="totalBookLatest" [loading]="loadingBooksLatest" [categories]="categories" (emitBooks)="emitBooks.emit($event)" [books]="getLatestBooks"
       class="px-4">
     </organ-home-list-book-update-mobile>
   </section>
   <section class="bg-red-50 pt-2 px-4">
-    <organ-home-list-book-featured-mobile [hasMore]="hasMoreFeature" [currentPage]="currentPageFeature" [loading]="isLoadingFeature"
+    <organ-home-list-book-featured-mobile [hasNextPage]="hasNextPageFeature" [currentPage]="currentPageFeature" [loading]="isLoadingFeature"
       [totalBook]="totalBookFeatured" (pageChange)="displayActivePageFeature.emit($event)" [books]="getFeatureBooks"></organ-home-list-book-featured-mobile>
   </section>
   <section>

@@ -42,7 +42,7 @@ export class HomeListBookFeaturedMobileOrgan implements OnInit {
 
   @Input() totalBook;
   @Input() loading;
-  @Input() hasMore;
+  @Input() hasNextPage;
 
   constructor() { }
 

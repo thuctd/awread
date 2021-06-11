@@ -11,8 +11,8 @@ export class AuthorBooksQuery extends QueryEntity<AuthorBooksState> {
     // this.createUIQuery();
   }
 
-  getHasMore() {
-    return this.getValue().hasMore
+  gethasNextPage() {
+    return this.getValue().hasNextPage
   }
 
   getSizePage() {
@@ -20,10 +20,10 @@ export class AuthorBooksQuery extends QueryEntity<AuthorBooksState> {
   }
 
   selectTotalBook() {
-    return this.select(state => state.total);
+    return this.select(state => state.totalCount);
   }
 
-  selectHasMore() {
-    return this.select(state => state.hasMore);
+  selecthasNextPage() {
+    return this.select(state => state.hasNextPage);
   }
 }

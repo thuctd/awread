@@ -20,7 +20,7 @@ export class HomeMobileTemplate implements OnInit {
   };
   @Input() loadingBooksLatest;
   @Input() sliders = [];
-  @Input() totalBook;
+  @Input() totalBookLatest;
   @Input() getGoodBooks = [];
   @Input() getLatestBooks = [];
   @Input() getFeatureBooks = [];
@@ -36,8 +36,8 @@ export class HomeMobileTemplate implements OnInit {
   @Output() pageChange = new EventEmitter();
   @Input() isLoadingFeature;
   @Input() totalBookFeatured;
-  @Input() hasMoreLatest;
-  @Input() hasMoreFeature;
+  @Input() hasNextPageLatest;
+  @Input() hasNextPageFeature;
   @Output() displayActivePageFeature = new EventEmitter();
 
   constructor() { }

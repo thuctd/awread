@@ -15,7 +15,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
 export class BooksMbTemplate implements OnInit {
   isMenu = false;
   @Input() titlePage;
-  @Input() hasMore;
+  @Input() hasNextPage;
   @Input() books = [];
   @Input() topBooks = [];
   @Input() items = [];

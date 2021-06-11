@@ -6,8 +6,7 @@
     <div class="px-8 xl:px-0">
       <atom-breadcrumb [items]="items"></atom-breadcrumb>
       <organ-rd-author-main [isFollow]="isFollow" [isBlock]="isBlock" [numberProduct]="total" class="mb-4" [user]="user"></organ-rd-author-main>
-      <organ-rd-author-product [hasMore]="false" [books]="books" (emitMoreBooks)="emitMoreBooks.emit($event)"></organ-rd-author-product>
+      <organ-rd-author-product [hasNextPage]="false" [books]="books" (emitMoreBooks)="emitMoreBooks.emit($event)"></organ-rd-author-product>
     </div>
   </section>
 </ng-template>
-

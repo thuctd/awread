@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 export class FeatureBooksPage implements OnInit {
   featureBooks$: Observable<any>;
   isLoading$: Observable<boolean>;
-  hasMore$: Observable<boolean>;
+  hasNextPage$: Observable<boolean>;
   totalBook$: any;
   title = 'TRUYỆN NỔI BẬT';
 
@@ -22,7 +22,7 @@ export class FeatureBooksPage implements OnInit {
     this.featureBooks$ = this.booksFacade.featureBooksQuery.selectAll();
     this.totalBook$ = this.booksFacade.featureBooksQuery.selectTotalBook();
     this.isLoading$ = this.booksFacade.featureBooksQuery.selectLoading();
-    this.hasMore$ = this.booksFacade.featureBooksQuery.selectHasMore();
+    this.hasNextPage$ = this.booksFacade.featureBooksQuery.selecthasNextPage();
   }
 
   @HostListener('window:scroll', ['$event'])
@@ -33,7 +33,7 @@ export class FeatureBooksPage implements OnInit {
   }
 
   private fetchBooks() {
-    if (this.booksFacade.featureBooksQuery.getHasMore()) {
+    if (this.booksFacade.featureBooksQuery.gethasNextPage()) {
       // const nextPage = this.booksFacade.featureBooksQuery.getValue().currentPage + 1;
       // this.booksFacade.setCurrentPageFeatureBook(nextPage);
       this.booksFacade.getFeatureBooks(true).subscribe();

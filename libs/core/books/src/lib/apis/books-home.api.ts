@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
+import { map } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class BooksHomeApi {
@@ -29,7 +30,7 @@ export class BooksHomeApi {
         `,
         variables: { first },
       })
-      .pipe();
+      .pipe(map(res => res?.['data']?.['allMvMostViewBooks']));
   }
 
   getFeatureBooks(offset: number, first: number, isCheck: boolean) {
@@ -57,11 +58,12 @@ export class BooksHomeApi {
         `,
         variables: { offset, first },
       })
-      .pipe();
+      .pipe(map(res => res?.['data']?.['allMvMostViewBooks']));
   }
 
   getLatestBooks(categoryId: string, offset: number, first: number, isCheck: boolean) {
     offset = window.innerWidth <= 768 ? offset * 6 : offset * 10;
+    console.log(first);
     return this.apollo
       .query({
         query: gql`
@@ -96,6 +98,6 @@ export class BooksHomeApi {
         `,
         variables: { categoryId, offset, first },
       })
-      .pipe();
+      .pipe(map(res => res?.['data']?.['allMvBooksLatestChapters']));
   }
 }

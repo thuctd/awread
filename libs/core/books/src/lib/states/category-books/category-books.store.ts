@@ -2,15 +2,15 @@ import { Injectable } from '@angular/core';
 import { EntityState, EntityStore, StoreConfig, ActiveState } from '@datorama/akita';
 import { Book } from '../../models';
 export interface CategoryBooksState extends EntityState<Book>, ActiveState {
-  hasMore: boolean;
+  hasNextPage: boolean;
   sizePage: number;
-  total: number;
+  totalCount: number;
 }
 
 const initialState = {
-  hasMore: true,
+  hasNextPage: true,
   sizePage: 0,
-  total: 0,
+  totalCount: 0,
 }
 
 @Injectable({ providedIn: 'root' })
@@ -22,7 +22,7 @@ export class CategoryBooksStore extends EntityStore<CategoryBooksState> {
     // this.createUIStore().setInitialEntityState();
   }
 
-  updatePage(page: { hasMore: boolean, sizePage: number, total: number }) {
+  updatePage(page: { hasNextPage: boolean, sizePage: number, totalCount: number }) {
     this.update(page);
   }
 

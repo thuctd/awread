@@ -60,7 +60,8 @@
       "@awread/core/creations": ["libs/core/creations/src/index.ts"],
       "@awread/feature/upload-image": ["libs/feature/upload-image/src/index.ts"],
       "@awread/core/setting": ["libs/core/setting/src/index.ts"],
-      "@awread/ipages": ["libs/ipages/src/index.ts"]
+      "@awread/ipages": ["libs/ipages/src/index.ts"],
+      "@awread/global/tools": ["libs/global/tools/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

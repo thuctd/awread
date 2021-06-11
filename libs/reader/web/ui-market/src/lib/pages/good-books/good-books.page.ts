@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 export class GoodBooksPage implements OnInit {
   goodBooks$: Observable<any>;
   isLoading$: Observable<boolean>;
-  hasMore$: Observable<boolean>;
+  hasNextPage$: Observable<boolean>;
   totalBook$: any;
   title = 'TOP TRUYỆN ĐƯỢC ĐÁNH GIÁ TÍCH CỰC';
 
@@ -25,7 +25,7 @@ export class GoodBooksPage implements OnInit {
     this.goodBooks$ = this.booksFacade.goodBooksQuery.selectAll();
     this.totalBook$ = this.booksFacade.goodBooksQuery.selectTotalBook();
     this.isLoading$ = this.booksFacade.goodBooksQuery.selectLoading();
-    this.hasMore$ = this.booksFacade.goodBooksQuery.selectHasMore();
+    this.hasNextPage$ = this.booksFacade.goodBooksQuery.selecthasNextPage();
   }
 
   @HostListener('window:scroll', ['$event'])
@@ -36,7 +36,7 @@ export class GoodBooksPage implements OnInit {
   }
 
   private fetchBooks() {
-    if (this.booksFacade.goodBooksQuery.getHasMore()) {
+    if (this.booksFacade.goodBooksQuery.gethasNextPage()) {
       this.booksFacade.getGoodBooks().subscribe();
     }
   }

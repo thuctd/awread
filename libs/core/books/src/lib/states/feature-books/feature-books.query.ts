@@ -12,8 +12,8 @@ export class FeatureBooksQuery extends QueryEntity<FeatureBooksState> {
     // this.createUIQuery();
   }
 
-  getHasMore() {
-    return this.getValue().hasMore
+  gethasNextPage() {
+    return this.getValue().hasNextPage
   }
 
   getSizePage() {
@@ -21,10 +21,10 @@ export class FeatureBooksQuery extends QueryEntity<FeatureBooksState> {
   }
 
   selectTotalBook() {
-    return this.select(state => state.total);
+    return this.select(state => state.totalCount);
   }
 
-  selectHasMore() {
-    return this.select(state => state.hasMore);
+  selecthasNextPage() {
+    return this.select(state => state.hasNextPage);
   }
 }

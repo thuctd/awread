@@ -28,7 +28,7 @@ export class HomeListBookUpdateMobileOrgan implements OnInit {
     href: ['/latest-books']
   };
   @Input() books = [];
-  @Input() hasMore;
+  @Input() hasNextPage;
   @Input() categories = [];
   @Input() currentPage = 1;
   @Output() pageChange = new EventEmitter();

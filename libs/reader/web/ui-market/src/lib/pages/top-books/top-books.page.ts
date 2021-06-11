@@ -11,7 +11,7 @@ import { BooksFacade } from '@awread/core/books';
 export class TopBooksPage implements OnInit {
   topBooks$: Observable<any>;
   isLoading$: Observable<boolean>;
-  hasMore$: Observable<boolean>;
+  hasNextPage$: Observable<boolean>;
   totalBook$: any;
 
   constructor(
@@ -23,7 +23,7 @@ export class TopBooksPage implements OnInit {
     this.fetchBooks();
     this.topBooks$ = this.booksFacade.topBooksQuery.selectAll();
     this.totalBook$ = this.booksFacade.topBooksQuery.selectTotalBook();
-    this.hasMore$ = this.booksFacade.topBooksQuery.selectHasMore();
+    this.hasNextPage$ = this.booksFacade.topBooksQuery.selecthasNextPage();
     this.isLoading$ = this.booksFacade.topBooksQuery.selectLoading();
   }
 
@@ -35,7 +35,7 @@ export class TopBooksPage implements OnInit {
   }
 
   private fetchBooks() {
-    if (this.booksFacade.topBooksQuery.getHasMore()) {
+    if (this.booksFacade.topBooksQuery.gethasNextPage()) {
       this.booksFacade.getTopBooks().subscribe();
     }
   }

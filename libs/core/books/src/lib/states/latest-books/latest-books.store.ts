@@ -3,16 +3,16 @@ import { EntityState, EntityStore, StoreConfig, ActiveState } from '@datorama/ak
 import { Book } from '../../models';
 
 export interface LatestBooksState extends EntityState<Book>, ActiveState {
-  hasMore: boolean;
-  total: number;
+  hasNextPage: boolean;
+  totalCount: number;
   sizePage: number;
   currentPage: number;
   currentCategoryId: string;
 }
 
 const initialState = {
-  hasMore: true,
-  total: 0,
+  hasNextPage: true,
+  totalCount: 0,
   sizePage: 0,
   currentPage: 1,
   currentCategoryId: '',
@@ -27,7 +27,7 @@ export class LatestBooksStore extends EntityStore<LatestBooksState> {
     // this.createUIStore().setInitialEntityState();
   }
 
-  updatePage(page: { hasMore: boolean; total: number, sizePage: number }) {
+  updatePage(page: { hasNextPage: boolean; totalCount: number, sizePage: number }) {
     this.update(page);
   }
 

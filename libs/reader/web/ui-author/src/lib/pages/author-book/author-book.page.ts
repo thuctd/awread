@@ -16,7 +16,7 @@ export class AuthorBookPage implements OnInit {
   isLoading$: Observable<boolean>;
   breadcrumbs;
   totalBook$: any;
-  isHasMore$: Observable<boolean>;
+  ishasNextPage$: Observable<boolean>;
 
   constructor(
     private router: Router,
@@ -30,7 +30,7 @@ export class AuthorBookPage implements OnInit {
     this.userId = this.activatedRoute.snapshot.params['userId'];
     this.isLoading$ = this.booksFacade.authorBooksQuery.selectLoading();
     this.totalBook$ = this.booksFacade.authorBooksQuery.selectTotalBook();
-    this.isHasMore$ = this.booksFacade.authorBooksQuery.selectHasMore();
+    this.ishasNextPage$ = this.booksFacade.authorBooksQuery.selecthasNextPage();
     this.activatedRoute.paramMap.pipe(
       map(params => params.get('userId')),
       switchMap(id => this.authorFacade.getDetailAuthor(id)),
@@ -62,7 +62,7 @@ export class AuthorBookPage implements OnInit {
   }
 
   private fetchBooks() {
-    if (this.booksFacade.authorBooksQuery.getHasMore()) {
+    if (this.booksFacade.authorBooksQuery.gethasNextPage()) {
       this.booksFacade.getAuthorBooks(this.userId).subscribe();
     }
   }

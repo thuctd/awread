@@ -31,9 +31,9 @@ export class HomePage implements OnInit, OnDestroy {
   totalBookLatest$ = this.booksFacade.latestBooksQuery.selectTotalBook();
   totalBookFeature$ = this.booksFacade.featureBooksQuery.selectTotalBook();
   currentPageLatest$ = this.booksFacade.latestBooksQuery.select((state) => state.currentPage);
-  hasMoreLatest$ = this.booksFacade.latestBooksQuery.select((state) => state.hasMore);
+  hasNextPageLatest$ = this.booksFacade.latestBooksQuery.select((state) => state.hasNextPage);
   currentPageFeature$ = this.booksFacade.featureBooksQuery.select((state) => state.currentPage);
-  hasMoreFeature$ = this.booksFacade.featureBooksQuery.select((state) => state.hasMore);
+  hasNextPageFeature$ = this.booksFacade.featureBooksQuery.select((state) => state.hasNextPage);
 
   constructor(
     private booksFacade: BooksFacade,
@@ -57,7 +57,7 @@ export class HomePage implements OnInit, OnDestroy {
   }
 
   filterItemsByCategory(category) {
-    this.booksFacade.setCurrentPageLatestBook(0);
+    this.booksFacade.setCurrentPageLatestBook(1);
     this.booksFacade.setCurrentCategory(category.categoryId);
     this.cd.detectChanges();
   }
