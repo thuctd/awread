@@ -21,28 +21,27 @@ export class BooksHomeGear {
     private infinitySrollBooksGear: InfinityScrollBooksGear,
   ) { }
 
-  getGoodBooks(limit: number = 12) {
+  getGoodBooks(limit = 5) {
     return of(true)
       .pipe(
         paginationCombo(this.goodBooksStore, () => this.booksHomeApi.getGoodBooks(limit))
       );
   }
 
-  getFeatureBooks(limit: number = 12, isCheck?: boolean) {
-    const first = isCheck ? limit : 6;
+  getFeatureBooks(limit = 6) {
     return this.featureBooksQuery
       .select((state) => state.currentPage)
       .pipe(
-        paginationCombo(this.featureBooksStore, (currentPage) => this.booksHomeApi.getFeatureBooks(currentPage, first, isCheck)),
+        paginationCombo(this.featureBooksStore, (currentPage) => this.booksHomeApi.getFeatureBooks(currentPage, limit)),
       );
   }
 
-  getLatestBooks(limit: number = window.innerWidth <= 768 ? 6 : 10, isAdd?) {
+  getLatestBooks(limit = 10) {
     return combineLatest([
       this.latestBooksQuery.select((state) => state.currentCategoryId),
       this.latestBooksQuery.select((state) => state.currentPage),
     ]).pipe(
-      paginationCombo(this.latestBooksStore, ([currentCategoryId, currentPage]) => this.booksHomeApi.getLatestBooks(currentCategoryId, currentPage, limit, isAdd)),
+      paginationCombo(this.latestBooksStore, ([currentCategoryId, currentPage]) => this.booksHomeApi.getLatestBooks(currentPage, limit, currentCategoryId)),
     );
   }
 }

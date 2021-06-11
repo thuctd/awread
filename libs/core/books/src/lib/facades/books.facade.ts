@@ -71,17 +71,12 @@ export class BooksFacade {
     return this.booksGear.getGenreBooks(genreId);
   }
 
-  getCategoryBooks(categoryId: string, limit?: number) {
-    const size = limit === 0 ? 12 : this.categoryBooksQuery.getSizePage() + 12;
-    return this.booksGear.getCategoryBooks(categoryId, size);
+  getCategoryBooks(a?) {
+    return this.booksGear.getCategoryBooks();
   }
 
-  getLatestBooks(isCheck?: boolean) {
-    if (isCheck) {
-      return this.booksHomeGear.getLatestBooks(this.latestBooksQuery.getSizePage() + 30, isCheck);
-    } else {
-      return this.booksHomeGear.getLatestBooks();
-    }
+  getLatestBooks(a?) {
+    return this.booksHomeGear.getLatestBooks();
   }
 
   setCurrentCategory(categoryId) {
@@ -100,12 +95,8 @@ export class BooksFacade {
     return this.booksHomeGear.getGoodBooks(this.goodBooksQuery.getSizePage() + 12);
   }
 
-  getFeatureBooks(isPushToArray?: boolean) {
-    if (isPushToArray) {
-      return this.booksHomeGear.getFeatureBooks(this.featureBooksQuery.getSizePage() + 12, isPushToArray);
-    } else {
-      return this.booksHomeGear.getFeatureBooks();
-    }
+  getFeatureBooks(a?) {
+    return this.booksHomeGear.getFeatureBooks();
   }
 
   getFilterBooks(categoryId: string) {

@@ -13,7 +13,7 @@ const initialState = {
   hasNextPage: true,
   totalCount: 0,
   sizePage: 0,
-  currentPage: 1
+  currentPage: 0
 }
 
 @Injectable({ providedIn: 'root' })

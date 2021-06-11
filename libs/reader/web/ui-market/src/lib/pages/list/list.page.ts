@@ -80,7 +80,7 @@ export class ListPage implements OnInit, OnDestroy {
 
   filterItemsByCategory(categoryId: string) {
     this.loading = true;
-    this.booksFacade.getCategoryBooks(categoryId, 0).subscribe(
+    this.booksFacade.getCategoryBooks(categoryId).subscribe(
       () => {
         this.loading = false;
         this.cd.detectChanges();
