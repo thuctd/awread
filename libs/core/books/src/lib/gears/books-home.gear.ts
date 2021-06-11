@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
-import { combineLatest } from 'rxjs';
+import { combineLatest, of } from 'rxjs';
 import { tap, map, switchMap } from 'rxjs/operators';
 import { BooksHomeApi } from '../apis';
 import { FeatureBooksQuery, FeatureBooksStore } from '../states/feature-books';
 import { GoodBooksStore } from '../states/good-books';
 import { LatestBooksQuery, LatestBooksStore } from '../states/latest-books';
-import { paginationPageInfo } from '@awread/global/tools';
+import { paginationCombo, paginationPageInfo } from '@awread/global/tools';
+import { PaginationBooksGear } from './pagination-books.gear';
+import { InfinityScrollBooksGear } from './infinity-scroll-books.gear';
 @Injectable({ providedIn: 'root' })
 export class BooksHomeGear {
   constructor(
@@ -14,16 +16,16 @@ export class BooksHomeGear {
     private goodBooksStore: GoodBooksStore,
     private booksHomeApi: BooksHomeApi,
     private latestBooksQuery: LatestBooksQuery,
-    private featureBooksQuery: FeatureBooksQuery
+    private featureBooksQuery: FeatureBooksQuery,
+    private paginationBooksGear: PaginationBooksGear,
+    private infinitySrollBooksGear: InfinityScrollBooksGear,
   ) { }
 
   getGoodBooks(limit: number = 12) {
-    this.goodBooksStore.setLoading(true);
-    return this.booksHomeApi.getGoodBooks(limit).pipe(
-      paginationPageInfo(this.goodBooksStore),
-      tap((books) => this.goodBooksStore.set(books)),
-      tap(() => this.goodBooksStore.setLoading(false))
-    );
+    return of(true)
+      .pipe(
+        paginationCombo(this.goodBooksStore, () => this.booksHomeApi.getGoodBooks(limit))
+      );
   }
 
   getFeatureBooks(limit: number = 12, isCheck?: boolean) {
@@ -31,11 +33,7 @@ export class BooksHomeGear {
     return this.featureBooksQuery
       .select((state) => state.currentPage)
       .pipe(
-        tap(() => this.featureBooksStore.setLoading(true)),
-        switchMap((currentPage) => this.booksHomeApi.getFeatureBooks(currentPage, first, isCheck)),
-        paginationPageInfo(this.featureBooksStore),
-        tap((books) => this.featureBooksStore.set(books)),
-        tap(() => this.featureBooksStore.setLoading(false))
+        paginationCombo(this.featureBooksStore, (currentPage) => this.booksHomeApi.getFeatureBooks(currentPage, first, isCheck)),
       );
   }
 
@@ -44,18 +42,7 @@ export class BooksHomeGear {
       this.latestBooksQuery.select((state) => state.currentCategoryId),
       this.latestBooksQuery.select((state) => state.currentPage),
     ]).pipe(
-      tap(() => this.latestBooksStore.setLoading(true)),
-      switchMap(([currentCategoryId, currentPage]) => this.booksHomeApi.getLatestBooks(currentCategoryId, currentPage, limit, isAdd)),
-      paginationPageInfo(this.latestBooksStore),
-      tap((books) => {
-        console.log('books', books);
-        if (isAdd) {
-          this.latestBooksStore.add(books);
-        } else {
-          this.latestBooksStore.set(books);
-        }
-      }),
-      tap(() => this.latestBooksStore.setLoading(false))
+      paginationCombo(this.latestBooksStore, ([currentCategoryId, currentPage]) => this.booksHomeApi.getLatestBooks(currentCategoryId, currentPage, limit, isAdd)),
     );
   }
 }
