@@ -7,7 +7,7 @@ import { NewsStore } from '../states/news/news.store';
 export class NewsFacade {
   news$ = this.newsQuery.selectAll();
 
-  constructor(private newsGear: NewsGear, private newsStore: NewsStore, private newsQuery: NewsQuery) {}
+  constructor(private newsGear: NewsGear, private newsStore: NewsStore, public newsQuery: NewsQuery) {}
 
   getAllNews() {
     return this.newsGear.getAllNews();

@@ -1,2 +1,9 @@
 
+
 <template-rd-news-detail [content]="content$ | async" [newsDetail]="newsDetail$ | async" [newsOthers]="news$ | async" class="pt-40"></template-rd-news-detail>
+
+
+<pre> {{ content$ | async }} </pre>
+<pre> {{ newsDetail$ | async | json }} </pre>
+<pre> {{ news$ | async | json }} </pre>
+

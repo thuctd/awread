@@ -14,23 +14,19 @@ export class NewsDetailPage implements OnInit {
   news$ = this.newsFacade.news$;
   content$: Observable<any>;
   newsDetail$: Observable<any>;
-  newsId: string;
   constructor(private activatedRoute: ActivatedRoute, private newsFacade: NewsFacade, private cd: ChangeDetectorRef) {}
 
   ngOnInit(): void {
-    this.loadNewsId();
-    this.newsFacade.getAllNews().subscribe();
-    this.getDetail();
+    if (this.newsFacade.newsQuery.getCount() == 0) {
+      this.newsFacade.getAllNews().subscribe();
+    }
+    this.activatedRoute.params.subscribe((params) => {
+      this.getDetail(params['newsId']);
+    });
   }
 
-  getDetail() {
-    this.newsDetail$ = this.newsFacade.selectEntity(this.newsId);
-    this.newsDetail$.subscribe();
-  }
-
-  loadNewsId() {
-    this.newsId = this.activatedRoute.snapshot.params['newsId'];
-    this.content$ = this.newsFacade.getContentNews(this.newsId);
-    this.content$.subscribe();
+  getDetail(id) {
+    this.content$ = this.newsFacade.getContentNews(id);
+    this.newsDetail$ = this.newsFacade.selectEntity(id);
   }
 }

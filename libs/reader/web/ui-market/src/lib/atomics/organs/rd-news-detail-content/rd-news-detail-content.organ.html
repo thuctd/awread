@@ -1,4 +1,5 @@
-<img class="w-full h-32 md:h-64" src="{{newsDetail.image}}">
+<ng-container *ngIf="newsDetail">
+  <img class="w-full h-32 md:h-64" src="{{newsDetail.image}}">
 <div class="outline-none hover:text-green-primary text-sm sm:text-base uppercase font-semibold mt-2">
     {{newsDetail.title}}
 </div>
@@ -7,3 +8,4 @@
   <atom-social-share-fb-btn (shareClicked)="shareClicked.emit()" class="pl-4"></atom-social-share-fb-btn>
 </div>
 <excerpt class="py-4" [class]="'text-sm'" [excerpt]="content"></excerpt>
+</ng-container>
