@@ -107,10 +107,9 @@ export class BooksHomeApi {
           first,
         },
       })
-      .pipe(map(res => res?.['data']?.['allMvBooksLatestChapters']));
+      .pipe(
+        map(res => res?.['data']?.['allMvBooksLatestChapters']));
   }
-
-
 
   getGenreBooks(genreId: string, first = 10) {
     return this.apollo

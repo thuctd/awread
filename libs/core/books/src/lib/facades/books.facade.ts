@@ -75,7 +75,7 @@ export class BooksFacade {
     return this.booksGear.getCategoryBooks();
   }
 
-  getLatestBooks(a?) {
+  getLatestBooks() {
     return this.booksHomeGear.getLatestBooks();
   }
 

@@ -1,4 +1,4 @@
-import { BooksFacade } from '@awread/core/books';
+import { BooksFacade, ListBooksFacade } from '@awread/core/books';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import {
   Injectable,
@@ -23,15 +23,15 @@ export class LatestBooksPage implements OnInit, OnChanges {
   totalBook$: any;
   title = 'TRUYỆN MỚI CẬP NHẬT';
 
-  constructor(private booksFacade: BooksFacade, private cd: ChangeDetectorRef) { }
+  constructor(private listBooksFacade: ListBooksFacade, private booksFacade: BooksFacade, private cd: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.fetchBooks();
-    this.booksFacade.getLatestBooks(true).pipe(untilDestroyed(this)).subscribe();
+    this.listBooksFacade.getLatestBookByCursor().pipe(untilDestroyed(this)).subscribe();
     this.latestBooks$ = this.booksFacade.latestBooksQuery.selectAll();
     this.totalBook$ = this.booksFacade.latestBooksQuery.selectTotalBook();
     this.isLoading$ = this.booksFacade.latestBooksQuery.selectLoading();
-    this.hasNextPage$ = this.booksFacade.latestBooksQuery.selecthasNextPage();
+    this.hasNextPage$ = this.booksFacade.latestBooksQuery.selectHasNextPage();
   }
 
   ngOnChanges(): any {
@@ -39,17 +39,16 @@ export class LatestBooksPage implements OnInit, OnChanges {
   }
 
   // @HostListener('window:scroll', ['$event'])
-  onMoreBooks() {
-    console.log('fetching...')
+  onMoreBooks(event) {
+    console.log('fetching...', event);
     // if (window.innerHeight + window.scrollY + 800 >= document.body.scrollHeight) {
-    // this.fetchBooks();
+    this.fetchBooks();
     // }
   }
 
   private fetchBooks() {
-    if (this.booksFacade.latestBooksQuery.gethasNextPage()) {
-      // this.activePage = this.activePage + 1;
-      this.booksFacade.getLatestBooks(true).subscribe();
+    if (this.booksFacade.latestBooksQuery.getHasNextPage()) {
+      this.listBooksFacade.getLatestBookByCursor('add').pipe(untilDestroyed(this)).subscribe();
     }
   }
 }

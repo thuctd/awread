@@ -2,37 +2,42 @@ import { interval, MonoTypeOperatorFunction, Observable, OperatorFunction, pipe 
 import { map, switchMap, take, tap } from "rxjs/operators";
 import { EntityStore } from '@datorama/akita';
 export function log<T>(source$: Observable<T>): Observable<T> {
-    return source$.pipe(tap(v => console.log(`log: ${v}`)));
+    return source$.pipe(tap(v => console.log(`log:`, v)));
 }
 
 export function lon<T>(name: string): MonoTypeOperatorFunction<T> {
-    return pipe(tap(v => console.log(`logWithName(${name}): ${v}`)));
+    return pipe(tap(v => console.log(`logWithName(${name}):`, v)));
+}
+
+export interface PageInfo {
+    endCursor: string;
+    hasNextPage: boolean;
+    hasPreviousPage: boolean;
+    startCursor: string;
 }
 
 export interface GraphileResult {
-    pageInfo: {
-        hasNextPage: boolean
-    },
-    totalCount: number,
-    nodes: any[]
+    pageInfo: PageInfo,
+    totalCount: number;
+    nodes: any[];
 }
 
-export function paginationPageInfo<T>(akitaEntityStore): OperatorFunction<GraphileResult, any[]> {
+export function updatePageInfo<T>(akitaEntityStore): OperatorFunction<GraphileResult, any[]> {
     return source$ => source$.pipe(
         map((graphileResponse) => {
             console.log('graphileResponse', graphileResponse);
-            akitaEntityStore.update({ hasNextPage: graphileResponse.pageInfo.hasNextPage, totalCount: graphileResponse.totalCount });
+            akitaEntityStore.update({ pageInfo: graphileResponse.pageInfo, totalCount: graphileResponse.totalCount });
             return graphileResponse.nodes;
         }),
     );
 }
 
-export function paginationCombo<T>(akitaEntityStore, fn): OperatorFunction<T, any[]> {
+export function pageInfoToAkita<T>(akitaEntityStore, fn, action: 'set' | 'add' | 'upsert' = 'set'): OperatorFunction<T, any[]> {
     return source$ => source$.pipe(
         tap(() => akitaEntityStore.setLoading(true)),
         switchMap(fn),
-        paginationPageInfo(akitaEntityStore),
-        tap((books) => akitaEntityStore.set(books)),
+        updatePageInfo(akitaEntityStore),
+        tap((books) => akitaEntityStore[action](books)),
         tap(() => akitaEntityStore.setLoading(false))
     );
 }

@@ -4,7 +4,7 @@ import { BooksHomeApi } from '../apis';
 import { FeatureBooksQuery, FeatureBooksStore } from '../states/feature-books';
 import { GoodBooksStore } from '../states/good-books';
 import { LatestBooksQuery, LatestBooksStore } from '../states/latest-books';
-import { paginationCombo } from '@awread/global/tools';
+import { pageInfoToAkita } from '@awread/global/tools';
 import { GenreBooksQuery, GenreBooksStore } from '../states/genre-books';
 @Injectable({ providedIn: 'root' })
 export class BooksHomeGear {
@@ -22,7 +22,7 @@ export class BooksHomeGear {
   getGoodBooks(limit = 5) {
     return of(true)
       .pipe(
-        paginationCombo(this.goodBooksStore, () => this.booksHomeApi.getGoodBooks(limit))
+        pageInfoToAkita(this.goodBooksStore, () => this.booksHomeApi.getGoodBooks(limit))
       );
   }
 
@@ -30,7 +30,7 @@ export class BooksHomeGear {
     return this.featureBooksQuery
       .select((state) => state.currentPage)
       .pipe(
-        paginationCombo(this.featureBooksStore, (currentPage) => this.booksHomeApi.getFeatureBooks(currentPage, limit)),
+        pageInfoToAkita(this.featureBooksStore, (currentPage) => this.booksHomeApi.getFeatureBooks(currentPage, limit)),
       );
   }
 
@@ -39,7 +39,7 @@ export class BooksHomeGear {
       this.latestBooksQuery.select((state) => state.currentCategoryId),
       this.latestBooksQuery.select((state) => state.currentPage),
     ]).pipe(
-      paginationCombo(this.latestBooksStore, ([currentCategoryId, currentPage]) => this.booksHomeApi.getLatestBooks(currentPage, limit, currentCategoryId)),
+      pageInfoToAkita(this.latestBooksStore, ([currentCategoryId, currentPage]) => this.booksHomeApi.getLatestBooks(currentPage, limit, currentCategoryId)),
     );
   }
 
@@ -47,7 +47,7 @@ export class BooksHomeGear {
     return this.genreBooksQuery
       .select((state) => state.currentGenreId)
       .pipe(
-        paginationCombo(this.genreBooksStore, (currentGenreId) => this.booksHomeApi.getGenreBooks(currentGenreId, limit)),
+        pageInfoToAkita(this.genreBooksStore, (currentGenreId) => this.booksHomeApi.getGenreBooks(currentGenreId, limit)),
       );
   }
 

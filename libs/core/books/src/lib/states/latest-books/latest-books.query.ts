@@ -12,9 +12,7 @@ export class LatestBooksQuery extends QueryEntity<LatestBooksState> {
     // this.createUIQuery();
   }
 
-  gethasNextPage() {
-    return this.getValue().hasNextPage
-  }
+
 
   getSizePage() {
     return this.getValue().sizePage;
@@ -24,7 +22,19 @@ export class LatestBooksQuery extends QueryEntity<LatestBooksState> {
     return this.select(state => state.totalCount);
   }
 
-  selecthasNextPage() {
-    return this.select(state => state.hasNextPage);
+  getHasNextPage() {
+    return this.getValue().pageInfo.hasNextPage;
+  }
+
+  selectHasNextPage() {
+    return this.select(state => state.pageInfo.hasNextPage);
+  }
+
+  selectEndCursor() {
+    return this.select(state => state.pageInfo.endCursor);
+  }
+
+  getEndCursor() {
+    return this.getValue().pageInfo.endCursor;
   }
 }
