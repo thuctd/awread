@@ -1,9 +1,8 @@
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { NewsFacade } from '@awread/core/news';
-import { map, switchMap, takeWhile, tap, takeUntil } from 'rxjs/operators';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Injectable, OnInit, Directive, ChangeDetectorRef, OnDestroy } from '@angular/core';
-import { of, Observable, Subject } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { Injectable, OnInit, Directive, ChangeDetectorRef } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @UntilDestroy()
 @Injectable({
