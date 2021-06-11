@@ -9,11 +9,15 @@ export class NewsFacade {
 
   constructor(private newsGear: NewsGear, private newsStore: NewsStore, private newsQuery: NewsQuery) {}
 
-  get() {
-    return this.newsGear.get();
+  getAllNews() {
+    return this.newsGear.getAllNews();
   }
 
-  selectEntity(blogId) {
-    return this.newsQuery.selectEntity(blogId);
+  getContentNews(newsId) {
+    return this.newsGear.getContentNews(newsId);
+  }
+
+  selectEntity(newsId) {
+    return this.newsQuery.selectEntity(newsId);
   }
 }

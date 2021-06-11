@@ -10,35 +10,27 @@ import { of, Observable, Subject } from 'rxjs';
   providedIn: 'root',
 })
 @Directive()
-export class NewsDetailPage implements OnInit, OnDestroy {
+export class NewsDetailPage implements OnInit {
   news$ = this.newsFacade.news$;
-  newsDetail: Observable<any>;
-  destroy$ = new Subject();
-  blogId: string;
+  content$: Observable<any>;
+  newsDetail$: Observable<any>;
+  newsId: string;
   constructor(private activatedRoute: ActivatedRoute, private newsFacade: NewsFacade, private cd: ChangeDetectorRef) {}
 
   ngOnInit(): void {
-    this.blogId = this.activatedRoute.snapshot.params['newsId'];
-    this.loadBlogId();
-    this.newsFacade.get().subscribe();
+    this.loadNewsId();
+    this.newsFacade.getAllNews().subscribe();
+    this.getDetail();
   }
 
-  loadBlogId() {
-    this.newsDetail = this.news$.pipe(
-      takeWhile((val) => val !== undefined && this.blogId !== undefined, false),
-      takeUntil(this.destroy$),
-      switchMap((items) => {
-        if (!items.length) {
-          return of([]);
-        }
-        return this.newsFacade.selectEntity(this.blogId);
-      })
-    );
-    this.cd.detectChanges();
+  getDetail() {
+    this.newsDetail$ = this.newsFacade.selectEntity(this.newsId);
+    this.newsDetail$.subscribe();
   }
 
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
+  loadNewsId() {
+    this.newsId = this.activatedRoute.snapshot.params['newsId'];
+    this.content$ = this.newsFacade.getContentNews(this.newsId);
+    this.content$.subscribe();
   }
 }

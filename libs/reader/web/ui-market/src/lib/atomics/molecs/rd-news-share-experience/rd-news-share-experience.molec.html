@@ -6,6 +6,6 @@
     </div>
   </div>
   <div *ngFor="let item of newsRight">
-    <atom-rd-news-share-experience-item *ngIf="item.position == 'right'" [blogId]="item.blogId" [title]="item.title" class="mt-8"></atom-rd-news-share-experience-item>
+    <atom-rd-news-share-experience-item *ngIf="item.position == 'right'" [newsId]="item.newsId" [title]="item.title" class="mt-8"></atom-rd-news-share-experience-item>
   </div>
 </div>

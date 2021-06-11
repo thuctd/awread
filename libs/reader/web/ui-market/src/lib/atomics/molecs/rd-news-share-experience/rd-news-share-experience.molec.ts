@@ -18,7 +18,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 export class RdNewsShareExperienceMolec implements OnInit {
   @Input() newsRight = [
     {
-      blogId: '',
+      newsId: '',
       title: '',
     },
   ];

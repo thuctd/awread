@@ -29,41 +29,46 @@ export class DetailPage implements OnInit, OnDestroy {
     private booksFacade: BooksFacade,
     private chaptersFacade: ChaptersFacade,
     private cd: ChangeDetectorRef
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.bookId = this.activatedRoute.snapshot.params['bookId'];
-    this.activatedRoute.paramMap.pipe(
-      map(params => params.get('bookId')),
-      switchMap(id => this.booksFacade.getDetailBook(id).pipe(
-        tap(book => {
-          this.authorId = book[0]['userId'];
-          this.booksFacade.getAuthorBooks(book[0].authors).subscribe();
-        })
-      )),
-    ).subscribe(book => {
-      // console.log('book', book, this.bookId);
-      this.book = book[0];
-      this.breadcrumbs = this.getbreadcrumbs();
-      this.cd.detectChanges();
-    })
+    this.activatedRoute.paramMap
+      .pipe(
+        map((params) => params.get('bookId')),
+        switchMap((id) =>
+          this.booksFacade.getDetailBook(id).pipe(
+            tap((book) => {
+              this.authorId = book[0]['userId'];
+              this.booksFacade.getAuthorBooks(book[0].authors).subscribe();
+            })
+          )
+        )
+      )
+      .subscribe((book) => {
+        // console.log('book', book, this.bookId);
+        this.book = book[0];
+        this.breadcrumbs = this.getbreadcrumbs();
+        this.cd.detectChanges();
+      });
     this.booksFacade.getTopBooks().subscribe();
     this.getAllChapters();
   }
 
   getbreadcrumbs() {
-    return [{
-      title: 'Trang chủ',
-      link: ['/']
-    },
-    {
-      title: this.book.type == '0' ? 'Truyện tự sáng tác' : 'Truyện sưu tầm',
-      link: ['/', this.book.type == '0' ? 'composed' : 'collected', { categoryId: this.book.categoryId }]
-    },
-    {
-      title: this.book.title,
-      link: ['/', 'books', this.bookId]
-    }
+    return [
+      {
+        title: 'Trang chủ',
+        link: ['/'],
+      },
+      {
+        title: this.book.type == '0' ? 'Truyện tự sáng tác' : 'Truyện sưu tầm',
+        link: ['/', this.book.type == '0' ? 'composed' : 'collected', { categoryId: this.book.categoryId }],
+      },
+      {
+        title: this.book.title,
+        link: ['/', 'books', this.bookId],
+      },
     ];
   }
 
@@ -92,8 +97,8 @@ export class DetailPage implements OnInit, OnDestroy {
         switchMap(() => {
           if (this.bookId) {
             return this.chaptersFacade.getAllChapters(this.bookId).pipe(
-              tap(chapters => {
-                return this.router.navigate(['/books', this.bookId, 'chapters', chapters[0].chapterId])
+              tap((chapters) => {
+                return this.router.navigate(['/books', this.bookId, 'chapters', chapters[0].chapterId]);
               })
             );
           }
@@ -112,8 +117,13 @@ export class DetailPage implements OnInit, OnDestroy {
         switchMap(() => {
           if (this.bookId) {
             return this.chaptersFacade.getAllChapters(this.bookId).pipe(
-              tap(chapters => {
-                return this.router.navigate(['/books', this.bookId, 'chapters', chapters[chapters.length - 1].chapterId])
+              tap((chapters) => {
+                return this.router.navigate([
+                  '/books',
+                  this.bookId,
+                  'chapters',
+                  chapters[chapters.length - 1].chapterId,
+                ]);
               })
             );
           }

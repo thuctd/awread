@@ -13,7 +13,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RdNewsAwreadItemAtom implements OnInit {
-  @Input() blogId;
+  @Input() newsId;
   @Input() title = 'Thông báo lịch phát hành truyện mới';
   @Input() srcImg = '/global-assets/images/Rectangle-487.webp';
   @Input() date = '';
