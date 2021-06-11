@@ -2,9 +2,9 @@
   <div class="flex justify-center mb-4">
     <img [src]="book | coverSize: 'l'" class="block shadow-0 w-48 h-64 border-12 border-white focus:outline-none" />
   </div>
-  <div class="absolute top-0 right-0">
+  <!-- <div class="absolute top-0 right-0">
     <molec-detail-book-bookmark-donate></molec-detail-book-bookmark-donate>
-  </div>
+  </div> -->
   <organ-detail-book-content (chapterLastEvent)="chapterLastEvent.emit($event)" (chapterFistEvent)="chapterFistEvent.emit($event)" [book]="book" class="px-3">
   </organ-detail-book-content>
 </div>

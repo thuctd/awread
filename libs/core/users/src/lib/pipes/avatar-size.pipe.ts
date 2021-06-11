@@ -28,6 +28,6 @@ export class AvatarSizePipe implements PipeTransform {
         user?.updatedAt
       }`;
     }
-    return '/global-assets/images/bigImg.webp';
+    return '/global-assets/images/logoAwread.webp';
   }
 }

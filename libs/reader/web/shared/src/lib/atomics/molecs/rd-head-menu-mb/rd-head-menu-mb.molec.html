@@ -1,15 +1,15 @@
 <div *ngIf="!isLogin" class="flex justify-center border-b py-3">
   <logo class="pt-4"></logo>
 </div>
-<div *ngIf="isLogin" class="flex justify-between relative border-b pt-8 pb-3">
-  <div class="flex flex-col justify-end">
+<div *ngIf="isLogin" class="flex justify-center relative border-b pt-8 pb-3">
+  <!-- <div class="flex flex-col justify-end">
     <atom-rd-icon-text-item [value]="vip.value" [class]="'-ml-0.5'"></atom-rd-icon-text-item>
     <div class="ml-0.5">
       <atom-rd-icon-text-item [srcImg]="coin.srcImg" [key]="coin.key" [value]="coin.value"></atom-rd-icon-text-item>
     </div>
-  </div>
+  </div> -->
   <div class="flex flex-col items-center">
-    <atom-circle-image class="w-16 mb-1"></atom-circle-image>
-    <div class="text-gray-700 text-sm font-semibold">{{ user.name ? user.name : user.lastname }}</div>
+    <atom-circle-image [src]="user | avatarSize:'origin'" [size]="'m'" class="mb-1"></atom-circle-image>
+    <div class="text-gray-700 text-sm font-semibold">{{ user.name ? user.name : user.firstname }}</div>
   </div>
 </div>

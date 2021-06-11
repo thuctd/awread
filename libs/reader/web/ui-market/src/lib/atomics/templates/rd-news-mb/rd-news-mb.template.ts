@@ -23,12 +23,12 @@ export class RdNewsMbTemplate implements OnInit {
       isActive: false,
     },
   ];
-  @Input() classActive = 'border rounded-xl border-green-primary text-green-primary pt-2';
-  @Input() classNormal = 'border rounded-xl border-gray-text text-green-primary pt-2';
+  @Input() classActive = 'col-span-6 border rounded-xl border-green-primary text-green-primary pt-2';
+  @Input() classNormal = 'col-span-6 border rounded-xl border-gray-text text-green-primary pt-2';
 
   @Input() news = [];
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }

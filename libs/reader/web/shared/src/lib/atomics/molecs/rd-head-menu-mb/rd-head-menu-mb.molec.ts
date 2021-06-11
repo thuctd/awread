@@ -16,7 +16,7 @@ export class RdHeadMenuMbMolec implements OnInit {
   @Input() isLogin = true;
   @Input() user = {
     name: '',
-    lastname: '',
+    firstname: '',
   };
   @Input() vip = {
     srcImg: '/global-assets/images/Group-868.webp',

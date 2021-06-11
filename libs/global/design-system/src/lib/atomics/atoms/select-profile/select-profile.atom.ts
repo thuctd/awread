@@ -1,9 +1,9 @@
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 
 @Component({
-  selector: 'input-form-profile',
-  templateUrl: './input-form-profile.atom.html',
+  selector: 'atom-select-profile',
+  templateUrl: './select-profile.atom.html',
   styles: [
     `
       :host {
@@ -13,11 +13,26 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InputFormProfileAtom implements OnInit {
+export class SelectProfileAtom implements OnInit {
   @Input() profileForm: FormGroup = this.fb.group({});
   @Input() item = {
     title: '',
     formControlName: '',
+    class: '',
+    options: [
+      {
+        value: '0',
+        text: '',
+      },
+      {
+        value: '1',
+        text: '',
+      },
+      {
+        value: '2',
+        text: '',
+      },
+    ],
   };
 
   constructor(private fb: FormBuilder) {}
