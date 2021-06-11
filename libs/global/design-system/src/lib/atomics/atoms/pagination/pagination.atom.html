@@ -1,7 +1,9 @@
 <div class="py-2">
   <nav class="block">
 
-    <pre> {{ pages | json }} {{ currentPage }} </pre>
+    <pre> {{ pages | json }} {{ currentPage }} {{ pages.length }} {{ pageCount }} </pre>
+    <pre> "currentPage > 1 {{ currentPage > 1 }} </pre>
+    <pre> currentPage < pageCount {{ currentPage < pageCount }} </pre>
 
     <ul class="flex pl-0 rounded list-none justify-center md:flex-wrap">
       <li *ngIf="currentPage > 1" (click)="onClickArrow(currentPage - 1)">
@@ -21,7 +23,7 @@
           {{item}}
         </a>
       </li>
-      <li *ngIf="currentPage < pages.length" (click)="onClickArrow(currentPage + 1)">
+      <li *ngIf="currentPage < pageCount" (click)="onClickArrow(currentPage + 1)">
         <a href="javascript:void(0);"
           class="relative inline-flex items-center cursor-pointer w-6 h-6 md:w-8 md:h-8 px-1 ml-1 rounded-full text-white bg-gray-300 text-sm font-medium transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 hover:bg-green-primary hover:text-white">
           <span class="sr-only">Next</span>
