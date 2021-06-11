@@ -17,6 +17,7 @@ export class MbDetailBookOrgan implements OnInit {
   @Input() loading;
   @Input() moreBook = 'Xem thêm...';
   @Input() btnTitle = 'Top phổ biến';
+  @Input() hasMore;
   @Output() moreEvent = new EventEmitter();
   counter = Array;
 

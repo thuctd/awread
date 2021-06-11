@@ -76,9 +76,7 @@ import { RdNewsMbTemplate } from './templates/rd-news-mb/rd-news-mb.template';
 import { RdNewsDetailTemplate } from './templates/rd-news-detail/rd-news-detail.template';
 import { CoreCategoriesModule } from '@awread/core/categories';
 import { RdNewsDetailContentOrgan } from './organs/rd-news-detail-content/rd-news-detail-content.organ';
-import { TopBooksTemplate } from './templates/top-books/top-books.template';
 import { ListTopBookOrgan } from './organs/list-top-book/list-top-book.organ';
-import { TopBooksMbTemplate } from './templates/top-books-mb/top-books-mb.template';
 import { InfiniteScrollModule, LoaderModule } from '@awread/global/packages';
 import { RdIntroductionMbTemplate } from './templates/rd-introduction-mb/rd-introduction-mb.template';
 import { RdIntroductionContentMbMolec } from './molecs/rd-introduction-content-mb/rd-introduction-content-mb.molec';
@@ -86,6 +84,8 @@ import { RdIntroductionFounderMbOrgan } from './organs/rd-introduction-founder-m
 import { RdIntroductionHotlineMbOrgan } from './organs/rd-introduction-hotline-mb/rd-introduction-hotline-mb.organ';
 import { RdNewsShareExperienceMolec } from './molecs/rd-news-share-experience/rd-news-share-experience.molec';
 import { QuillModule } from 'ngx-quill';
+import { BooksTemplate } from './templates/books/books.template';
+import { BooksMbTemplate } from './templates/books-mb/books-mb.template';
 
 @NgModule({
   imports: [
@@ -173,14 +173,14 @@ import { QuillModule } from 'ngx-quill';
     RdNewsMbTemplate,
     RdNewsDetailTemplate,
     RdNewsDetailContentOrgan,
-    TopBooksTemplate,
     ListTopBookOrgan,
-    TopBooksMbTemplate,
     RdIntroductionMbTemplate,
     RdIntroductionContentMbMolec,
     RdIntroductionFounderMbOrgan,
     RdIntroductionHotlineMbOrgan,
     RdNewsShareExperienceMolec,
+    BooksTemplate,
+    BooksMbTemplate,
   ],
   declarations: [
     ListDetailLongBookOrgan,
@@ -254,14 +254,14 @@ import { QuillModule } from 'ngx-quill';
     RdNewsMbTemplate,
     RdNewsDetailTemplate,
     RdNewsDetailContentOrgan,
-    TopBooksTemplate,
     ListTopBookOrgan,
-    TopBooksMbTemplate,
     RdIntroductionMbTemplate,
     RdIntroductionContentMbMolec,
     RdIntroductionFounderMbOrgan,
     RdIntroductionHotlineMbOrgan,
     RdNewsShareExperienceMolec,
+    BooksTemplate,
+    BooksMbTemplate,
   ],
 })
 export class ReaderWebUiMarketAtomicModule {}

@@ -29,7 +29,8 @@ export class WrtNewPasswordOrgan implements OnInit {
   }
   constructor(private fb: FormBuilder) {}
   ngOnInit(): void {}
-  updatePassworEvent() {
+
+  updatePasswordEvent() {
     // console.log('this.form', this.form);
     const formValue = this.form.value;
     if (formValue.password !== formValue.confirmpassword) {

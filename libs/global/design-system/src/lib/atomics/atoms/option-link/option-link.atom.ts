@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'option-link',
@@ -13,9 +13,10 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OptionLinkAtom implements OnInit {
-  constructor() {}
   @Input() suggestText;
   @Input() link;
   @Input() title;
+  @Output() btnClicked = new EventEmitter();
+  constructor() {}
   ngOnInit(): void {}
 }

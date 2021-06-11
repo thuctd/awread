@@ -41,7 +41,8 @@ export class ForgotPasswordGear {
     return {
       message: 'done',
       success: true,
-      result: await this.nodeMailerAddon.send(content),
+      result: await this.nodeMailerAddon.send(content, email),
+      target: email,
     };
   }
 

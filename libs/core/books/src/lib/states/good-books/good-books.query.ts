@@ -12,4 +12,19 @@ export class GoodBooksQuery extends QueryEntity<GoodBooksState> {
     // this.createUIQuery();
   }
 
+  getHasMore() {
+    return this.getValue().hasMore
+  }
+
+  getSizePage() {
+    return this.getValue().sizePage;
+  }
+
+  selectTotalBook() {
+    return this.select(state => state.total);
+  }
+
+  selectHasMore() {
+    return this.select(state => state.hasMore);
+  }
 }

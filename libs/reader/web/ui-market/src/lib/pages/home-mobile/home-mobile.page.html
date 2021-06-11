@@ -1,5 +1,10 @@
 <template-home-mobile
+  [totalBook]="totalBookLatest$ | async"
+  (displayActivePage)="displayActivePage($event)"
   [loading]="loading$"
+  [isLoadingFeature]="isLoadingFeature$ | async"
+  [totalBookFeatured]="totalBookFeature$ | async"
+  (displayActivePageFeature)="displayActivePageFeature($event)"
   [getGoodBooks]="goodBookList$ | async"
   [getLatestBooks]="categoryBooks$ | async"
   [getFeatureBooks]="featureBookList$ | async"
@@ -9,5 +14,5 @@
   [bookByGenre]="filteredBooks$ | async"
   [categories]="categories$ | async"
   (emitBooks)="filterItemsByCategory($event)"
-  [loadingBooksCategory]="isLoading$ | async"
+  [loadingBooksLatest]="isLoadingLatest$ | async"
 ></template-home-mobile>

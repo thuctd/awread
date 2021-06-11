@@ -23,4 +23,8 @@ export class TopBooksQuery extends QueryEntity<TopBooksState> {
   selectTotalBook() {
     return this.select(state => state.total);
   }
+
+  selectHasMore() {
+    return this.select(state => state.hasMore);
+  }
 }
