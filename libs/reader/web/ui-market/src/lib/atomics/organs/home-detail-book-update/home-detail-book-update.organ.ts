@@ -1,4 +1,11 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  Input,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 
 @Component({
   selector: 'home-detail-book-update',
@@ -16,12 +23,13 @@ export class HomeDetailBookUpdateOrgan implements OnInit {
   @Input() isInfoNovel: true | false = false;
   @Input() page = {
     name: 'TRUYỆN MỚI CẬP NHẬT',
-    href: ['/latest-books']
+    href: ['/latest-books'],
   };
   @Input() books = [];
   @Input() loading;
   @Input() categories = [];
-  @Input() eventResetPagination;
+  @Input() currentPage;
+  @Input() eventResetPage;
   @Input() totalBook;
   @Input() tabs = [
     {
@@ -47,8 +55,7 @@ export class HomeDetailBookUpdateOrgan implements OnInit {
   ];
 
   @Output() emitBooks = new EventEmitter();
-  @Output() displayActivePage = new EventEmitter();
-  @Output() emitAllBooks = new EventEmitter();
+  @Output() pageChange = new EventEmitter();
 
   constructor() {}
 

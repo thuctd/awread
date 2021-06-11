@@ -1,15 +1,15 @@
-<section class="w-full max-w-screen-xl mx-auto relative">
+<section class="w-full mx-auto relative">
   <div class="mb-4 flex justify-between px-2.5">
     <atom-title-page-link [title]="page.name" [href]="page.href" class="uppercase col-span-6"></atom-title-page-link>
     <molec-rd-home-book-update-dropdown-mb #tabhead (emitBooks)="emitBooks.emit($event)"></molec-rd-home-book-update-dropdown-mb>
   </div>
-  <!-- <div *ngIf="activePage" (click)="onClickPage(activePage - 1)" class="cursor-pointer absolute top-72 -left-2 z-40">
-    <fa-icon class="text-gray-text text-sm md:text-base" [icon]="arrowLeftIcon"></fa-icon>
-  </div> -->
-  <div class="flex justify-center items-center loading" *ngIf="loading;else loaded">
+  <div class="flex justify-center items-center" *ngIf="loading;else loaded">
     <awread-loading></awread-loading>
   </div>
   <ng-template #loaded>
+    <div *ngIf="currentPage > 1" (click)="onClickPage(currentPage - 1)" class="cursor-pointer absolute top-72 -left-2 z-40">
+      <fa-icon class="text-gray-text text-sm md:text-base" [icon]="arrowLeftIcon"></fa-icon>
+    </div>
     <div #widgetsContent class="flex overflow-hidden justify-center">
       <div *ngFor="let tab of tabs">
         <div class="flex justify-center overflow-hidden" *ngIf="tabhead.title == tab.name">
@@ -44,11 +44,8 @@
         </div>
       </div>
     </div>
+    <div *ngIf="hasMore" (click)="onClickPage(currentPage + 1)" class="cursor-pointer absolute top-72 -right-2">
+      <fa-icon class="text-gray-text text-sm md:text-base" [icon]="arrowRightIcon"></fa-icon>
+    </div>
   </ng-template>
-  <!-- <div (click)="onClickPage(activePage + 1)" class="cursor-pointer absolute top-72 -right-2">
-    <fa-icon class="text-gray-text text-sm md:text-base" [icon]="arrowRightIcon"></fa-icon>
-  </div> -->
-  <div class="flex justify-center items-center">
-    <pagination [totalRecords]="totalBook - 6" [recordsPerPage]="6" (onPageChange)="displayActivePage.emit($event)"></pagination>
-  </div>
 </section>

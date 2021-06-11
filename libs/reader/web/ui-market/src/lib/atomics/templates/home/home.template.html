@@ -2,11 +2,16 @@
   <section class="pt-40">
     <atom-slider [imageObject]="sliders"></atom-slider>
   </section>
+  <!-- <h1> {{ getLatestBooks }} </h1> -->
+  <!-- <pre> LOADING: {{ isLoadingLatest }} </pre> -->
   <section>
-    <home-detail-book-update [totalBook]="totalBook" [loading]="loading" [eventResetPagination]="eventResetPagination" (displayActivePage)="displayActivePage.emit($event)" (emitBooks)="emitBooks.emit($event)" (emitAllBooks)="emitAllBooks.emit($event)" [books]="getLatestBooks" [categories]="categories"></home-detail-book-update>
+    <home-detail-book-update [totalBook]="totalBook" [loading]="isLoadingLatest" [currentPage]="currentPage" (pageChange)="pageChange.emit($event)"
+      (emitBooks)="emitBooks.emit($event)" [books]="getLatestBooks" [categories]="categories">
+    </home-detail-book-update>
   </section>
   <section class="bg-pink-light">
-    <home-detail-book-featured [loading]="isLoadingFeature" [totalBook]="totalBookFeatured" (displayActivePageFeature)="displayActivePageFeature.emit($event)" [books]="getFeatureBooks"></home-detail-book-featured>
+    <home-detail-book-featured [loading]="isLoadingFeature" [totalBook]="totalBookFeatured" (pageChange)="pageChangeFeature.emit($event)"
+      [books]="getFeatureBooks"></home-detail-book-featured>
   </section>
   <section>
     <home-detail-book-review [books]="getGoodBooks"></home-detail-book-review>

@@ -16,6 +16,10 @@ export class FeatureBooksQuery extends QueryEntity<FeatureBooksState> {
     return this.getValue().hasMore
   }
 
+  getSizePage() {
+    return this.getValue().sizePage;
+  }
+
   selectTotalBook() {
     return this.select(state => state.total);
   }

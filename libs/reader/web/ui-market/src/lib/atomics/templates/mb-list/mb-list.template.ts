@@ -18,6 +18,7 @@ export class MbListTemplate implements OnInit {
   @Input() loading;
   @Input() books = [];
   @Input() topBooks = [];
+  @Input() hasMore;
   @Input() items = [];
   @Output() emitMoreBooks = new EventEmitter();
   @Output() emitChangeBooks = new EventEmitter();

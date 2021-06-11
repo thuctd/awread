@@ -32,9 +32,9 @@ export class HomeDetailBookFeaturedOrgan implements OnInit {
   };
   @Input() totalBook;
   @Input() loading;
-  @Output() displayActivePageFeature = new EventEmitter();
+  @Output() pageChange = new EventEmitter();
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

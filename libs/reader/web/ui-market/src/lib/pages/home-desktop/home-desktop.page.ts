@@ -9,8 +9,8 @@ import { HomePage } from '../home/home.page';
       :host {
         display: block;
       }
-    `
+    `,
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomeDesktopPage extends HomePage { }
+export class HomeDesktopPage extends HomePage {}
