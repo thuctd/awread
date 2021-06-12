@@ -25,7 +25,7 @@ export class HomeListBookUpdateMobileOrgan implements OnInit {
   @Input() totalBook;
   @Input() page = {
     name: 'TRUYỆN MỚI CẬP NHẬT',
-    href: ['/latest-books']
+    href: ['/index', 'latest-books'],
   };
   @Input() books = [];
   @Input() hasNextPage;

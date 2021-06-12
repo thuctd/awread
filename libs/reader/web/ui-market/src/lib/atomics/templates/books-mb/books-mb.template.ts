@@ -14,12 +14,13 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
 })
 export class BooksMbTemplate implements OnInit {
   isMenu = false;
+  @Input() loading;
   @Input() titlePage;
   @Input() hasNextPage;
   @Input() books = [];
   @Input() topBooks = [];
   @Input() items = [];
-  @Output() emitChangeBooks = new EventEmitter();
+  @Output() moreBooks = new EventEmitter();
 
   constructor() { }
 

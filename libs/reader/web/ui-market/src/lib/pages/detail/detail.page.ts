@@ -130,7 +130,7 @@ export class DetailPage implements OnInit, OnDestroy {
   }
 
   nativeTopBook() {
-    this.router.navigate(['/top-books']);
+    this.router.navigate(['/index', 'top-books']);
   }
 
   ngOnDestroy(): void {

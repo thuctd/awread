@@ -23,7 +23,7 @@ export class HomeDetailBookUpdateOrgan implements OnInit {
   @Input() isInfoNovel: true | false = false;
   @Input() page = {
     name: 'TRUYỆN MỚI CẬP NHẬT',
-    href: ['/latest-books'],
+    href: ['/index', 'latest-books'],
   };
   @Input() books = [];
   @Input() loading;
@@ -57,7 +57,7 @@ export class HomeDetailBookUpdateOrgan implements OnInit {
   @Output() emitBooks = new EventEmitter();
   @Output() pageChange = new EventEmitter();
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

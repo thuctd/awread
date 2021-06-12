@@ -9,6 +9,78 @@ export class ListBooksApi {
     private apollo: Apollo
   ) { }
 
+  getGoodBookByCursor(after: string | undefined = undefined, first = 10) {
+    return this.apollo
+      .query({
+        query: gql`
+          query allMvMostViewBooks($after: Cursor, $first: Int) {
+            allMvMostViewBooks(
+              first: $first
+              after: $after
+              condition: {
+                published: true
+                isDeleted: false
+              }) {
+              nodes {
+                bookId
+                title
+                categoryId
+                newestChapters
+                updatedAt
+                views
+                cover
+              }
+              pageInfo {
+                endCursor
+                hasNextPage
+              }
+              totalCount
+            }
+          }
+        `,
+        variables: {
+          after,
+          first,
+        },
+      })
+      .pipe(map(res => res?.['data']?.['allMvMostViewBooks']));
+  }
+
+  getFeaturetBookByCursor(after: string | undefined = undefined, first = 10) {
+    return this.apollo
+      .query({
+        query: gql`
+          query allMvMostViewBooks($after: Cursor, $first: Int) {
+            allMvMostViewBooks(
+              first: $first
+              after: $after
+              condition: {
+                published: true
+                isDeleted: false
+              }) {
+              nodes {
+                bookId
+                categoryId
+                newestChapters
+                title
+                updatedAt
+                cover
+              }
+              pageInfo {
+                endCursor
+                hasNextPage
+              }
+              totalCount
+            }
+          }
+        `,
+        variables: {
+          after,
+          first,
+        },
+      })
+      .pipe(map(res => res?.['data']?.['allMvMostViewBooks']));
+  }
 
   getLatestBookByCursor(after: string | undefined = undefined, first = 10) {
     return this.apollo
@@ -49,4 +121,35 @@ export class ListBooksApi {
         map(res => res?.['data']?.['allMvBooksLatestChapters']));
   }
 
+
+  getTopBookByCursor(after: string | undefined = undefined, first = 10) {
+    return this.apollo
+      .query({
+        query: gql`
+          query getTopBooks ($after: Cursor, $first: Int) {
+            allMvMostViewBooks(first: $first after: $after condition: {isDeleted: false, published: true}) {
+              nodes {
+                bookId
+                title
+                categoryId
+                genres
+                type
+                newestChapters
+                publishedAt
+                createdAt
+                updatedAt
+                views
+                cover
+              }
+              pageInfo {
+                endCursor
+                hasNextPage
+              }
+              totalCount
+            }
+          }
+        `, variables: { after, first }
+      })
+      .pipe(map(res => res?.['data']?.['allMvMostViewBooks']));
+  }
 }

@@ -9,8 +9,20 @@ export class ListBooksFacade {
   ) {
   }
 
+  getTopBookByCursor(action?) {
+    return this.listBooksGear.getTopBookByCursor(action);
+  }
+
+  getGoodBookByCursor(action?) {
+    return this.listBooksGear.getGoodBookByCursor(action);
+  }
+
   getLatestBookByCursor(action?) {
     return this.listBooksGear.getLatestBookByCursor(action);
+  }
+
+  getFeaturetBookByCursor(action?) {
+    return this.listBooksGear.getFeaturetBookByCursor(action);
   }
 
 }

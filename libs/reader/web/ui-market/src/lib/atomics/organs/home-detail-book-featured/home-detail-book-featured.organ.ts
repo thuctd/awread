@@ -15,7 +15,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
 export class HomeDetailBookFeaturedOrgan implements OnInit {
   @Input() page = {
     name: 'Truyện nổi bật',
-    href: ['/feature-books']
+    href: ['/index', 'feature-books'],
   };
   @Input() books = [];
   @Input() displayUI = {

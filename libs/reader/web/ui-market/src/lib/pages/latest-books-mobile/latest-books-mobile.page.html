@@ -1,2 +1,3 @@
-<template-books-mb [titlePage]="title" [hasNextPage]="hasNextPage$ |async" [books]="latestBooks$ | async" (onMoreBooks)="onMoreBooks($event)">
+<template-books-mb [titlePage]="title" [loading]="isLoading$ | async" [hasNextPage]="hasNextPage$ |async" [books]="books$ | async"
+  (moreBooks)="onMoreBooks($event)">
 </template-books-mb>

@@ -96,7 +96,7 @@ export class ListPage implements OnInit, OnDestroy {
   }
 
   nativeTopBook() {
-    this.router.navigate(['/top-books']);
+    this.router.navigate(['/index', 'top-books']);
   }
 
   onMoreBooks() {

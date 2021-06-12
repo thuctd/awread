@@ -18,7 +18,7 @@ export class HomeListBookFeaturedMobileOrgan implements OnInit {
   @Input() arrowRightIcon = faChevronRight;
   @Input() page = {
     name: 'Truyện nổi bật',
-    href: ['/feature-books']
+    href: ['/index', 'feature-books'],
   };
   @Output() pageChange = new EventEmitter();
   @Input() counter = Array;
