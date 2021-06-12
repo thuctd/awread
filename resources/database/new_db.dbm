@@ -1438,23 +1438,29 @@ end;]]></definition>
 	<role name="postgres"/>
 	<language name="plpgsql"/>
 	<return-type>
-	<type name="public.jwt_token" length="0"/>
+	<parameter name="accessToken">
+		<type name="public.jwt_token" length="0"/>
+	</parameter>
+	<parameter name="user">
+		<type name="public.users" length="0"/>
+	</parameter>
 	</return-type>
 	<definition><![CDATA[declare
-"currentUser" public.users;
+"accessToken" public.jwt_token;
+"account" public.users;
 begin
 
-	select * into "currentUser"
+	select * into "account"
 	from public.users
 	where  "userId" = nullif(current_setting('jwt.claims.userId', true), '')::uuid;
 
-	if "currentUser" is not null then
-			return (account."userId", account.role, extract(epoch from (now() + interval '3 months')))::public.jwt_token;
+	if "account"  is null then
+		return query select "accessToken", "account";
 		else 
-		return  null;
+		"accessToken" := (account."userId", account.role, extract(epoch from (now() + interval '3 months')))::public.jwt_token;
+		return query select "accessToken", "account";
 		end if;
 
-return null;
 end;]]></definition>
 </function>
 
