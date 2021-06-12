@@ -1,5 +1,5 @@
 <div class="w-full">
-  <div class="uppercase text-base xl:text-xl font-bold text-gray-text mb-4">{{title}}</div>
+  <div class="uppercase text-base xl:text-2xl font-bold text-gray-text mb-4">{{title}}</div>
   <div *ngFor="let item of newsMiddle">
     <molec-rd-news-awread-hot *ngIf="item.position == 'top'"
       [newsId]="item.newsId"
@@ -10,13 +10,15 @@
       [srcImg]="item.image"
       ></molec-rd-news-awread-hot>
   </div>
-  <div class="grid grid-cols-3 gap-x-8 py-10">
+  <!-- <div class="grid grid-cols-3 gap-x-8 py-10">
     <div *ngFor="let item of newsMiddle">
       <atom-rd-news-awread-item [class]="'font-semibold text-sm'" class="col-span-1" *ngIf="item.position == 'middle'" [newsId]="item.newsId" [title]="item.title" [srcImg]="item.image" [date]="item.updatedAt" [description]="item.description" [mode]="'grid'"></atom-rd-news-awread-item>
     </div>
-  </div>
-  <div *ngFor="let item of newsMiddle">
-    <atom-rd-news-awread-item [class]="'font-semibold text-sm'" *ngIf="item.position == 'bottom'" [newsId]="item.newsId" [title]="item.title" [srcImg]="item.image" [date]="item.updatedAt" [description]="item.description" [mode]="'list'"></atom-rd-news-awread-item>
+  </div> -->
+  <div class="pt-8">
+    <div *ngFor="let item of newsMiddle">
+      <atom-rd-news-awread-item [class]="'font-semibold text-sm'" *ngIf="item.position == 'bottom'" [newsId]="item.newsId" [title]="item.title" [srcImg]="item.image" [date]="item.updatedAt" [description]="item.description" [mode]="'list'"></atom-rd-news-awread-item>
+    </div>
   </div>
 </div>
 

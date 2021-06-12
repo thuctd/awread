@@ -15,7 +15,7 @@
       <div class="w-3/5 sm:w-2/3 pl-4">
         <atom-rd-news-title [class]="class" [newsId]="newsId" [title]="title"></atom-rd-news-title>
         <atom-rd-news-date [date]="date" class="my-1 sm:my-3"></atom-rd-news-date>
-        <excerpt [excerpt]="description"></excerpt>
+        <p class="text-gray-text text-xs leading-5 break-words text-justify">{{description}}</p>
       </div>
     </div>
   </ng-template>

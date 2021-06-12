@@ -15,7 +15,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 export class RdNewsMbTemplate implements OnInit {
   @Input() tabs = [
     {
-      name: 'Điểm tin sách',
+      name: 'Góc chia sẻ kinh nghiệm',
       isActive: true,
     },
     {
