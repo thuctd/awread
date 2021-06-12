@@ -70,8 +70,8 @@ export class HomeListBookUpdateMobileOrgan implements OnInit {
 
   ngOnInit(): void { }
 
-
   onClickPage(pageNumber: number): void {
-    this.pageChange.emit(pageNumber);
+    this.currentPage = pageNumber;
+    this.pageChange.emit(this.currentPage);
   }
 }

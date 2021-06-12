@@ -1,4 +1,4 @@
-<infinite-scroll class="block" #infiniteScroll (scrollIsIntersecting)="moreEvent.emit()">
+<infinite-scroll #infiniteScroll (scrollIsIntersecting)="moreEvent.emit()">
   <section class="mx-auto">
     <div class="grid grid-cols-12 gap-10 lg:gap-x-10 xl:gap-x-14 place-content-center" *ngIf="!(display === 'list');else grid_content">
       <div *ngFor="let book of longbooks;" class="col-span-2 md:col-span-4">

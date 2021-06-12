@@ -3,7 +3,7 @@
     <atom-slider [imageObject]="sliders"></atom-slider>
   </section>
   <section class="">
-    <organ-home-list-book-update-mobile [hasNextPage]="hasNextPageLatest" [currentPage]="currentPageLatest" (pageChange)="pageChange.emit($event)"
+    <organ-home-list-book-update-mobile [hasNextPage]="hasNextPageLatest" [currentPage]="currentPageLatest" (pageChange)="pageChangeLatest.emit($event)"
       [totalBook]="totalBookLatest" [loading]="loadingBooksLatest" [categories]="categories" (emitBooks)="emitBooks.emit($event)" [books]="getLatestBooks"
       class="px-4">
     </organ-home-list-book-update-mobile>

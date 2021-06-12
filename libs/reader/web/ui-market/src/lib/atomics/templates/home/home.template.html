@@ -2,8 +2,6 @@
   <section class="pt-40">
     <atom-slider [imageObject]="sliders"></atom-slider>
   </section>
-  <!-- <h1> {{ getLatestBooks }} </h1> -->
-  <!-- <pre> LOADING: {{ isLoadingLatest }} </pre> -->
   <section>
     <home-detail-book-update [totalBook]="totalBookLatest" [loading]="isLoadingLatest" [currentPage]="currentPage" (pageChange)="pageChange.emit($event)"
       (emitBooks)="emitBooks.emit($event)" [books]="getLatestBooks" [categories]="categories">

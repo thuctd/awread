@@ -25,4 +25,12 @@ export class ListBooksFacade {
     return this.listBooksGear.getFeaturetBookByCursor(action);
   }
 
+  getCategoryBookByCursor(categoryId, action?) {
+    return this.listBooksGear.getCategoryBookByCursor(categoryId, action);
+  }
+
+  getAuthorBookByCursor(authors, action?) {
+    return this.listBooksGear.getAuthorBookByCursor(authors, action);
+  }
+
 }

@@ -11,6 +11,7 @@ export class AuthorBooksQuery extends QueryEntity<AuthorBooksState> {
     // this.createUIQuery();
   }
 
+
   gethasNextPage() {
     return this.getValue().hasNextPage
   }
@@ -23,7 +24,19 @@ export class AuthorBooksQuery extends QueryEntity<AuthorBooksState> {
     return this.select(state => state.totalCount);
   }
 
-  selecthasNextPage() {
-    return this.select(state => state.hasNextPage);
+  getHasNextPage() {
+    return this.getValue().pageInfo.hasNextPage;
+  }
+
+  selectHasNextPage() {
+    return this.select(state => state.pageInfo.hasNextPage);
+  }
+
+  selectEndCursor() {
+    return this.select(state => state.pageInfo.endCursor);
+  }
+
+  getEndCursor() {
+    return this.getValue().pageInfo.endCursor;
   }
 }

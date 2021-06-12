@@ -5,7 +5,7 @@
 </home-detail-book-update> -->
 
 
-<template-home [totalBookLatest]="totalBookLatest$ | async" [currentPage]="currentPageLatest$ | async" (pageChange)="pageChange($event)"
+<template-home [totalBookLatest]="totalBookLatest$ | async" [currentPage]="currentPageLatest$ | async" (pageChange)="pageChangeLatest($event)"
   [isLoadingFeature]="isLoadingFeature$ | async" [totalBookFeatured]="totalBookFeature$ | async" (pageChangeFeature)="pageChangeFeature($event)"
   [sliders]="imageObject$ | async" [getGoodBooks]="goodBookList$ | async" [getLatestBooks]="latestBooks$ | async" [isLoadingLatest]="isLoadingLatest$ | async"
   [getFeatureBooks]="featureBookList$ | async" [genres]="genres$ | async" (filterItemsByGenre)="filterItemsByGenre($event)" [genreBooks]="genreBooks$ | async"

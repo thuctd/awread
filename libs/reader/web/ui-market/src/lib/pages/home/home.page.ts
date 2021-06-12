@@ -77,7 +77,7 @@ export class HomePage implements OnInit, OnDestroy {
     );
   }
 
-  pageChange(activePageNumber: number) {
+  pageChangeLatest(activePageNumber: number) {
     this.booksFacade.setCurrentPageLatestBook(activePageNumber);
   }
 

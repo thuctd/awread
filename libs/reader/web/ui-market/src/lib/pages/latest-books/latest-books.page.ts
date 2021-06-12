@@ -6,6 +6,7 @@ import {
   OnInit,
   Directive,
   ChangeDetectorRef,
+  HostListener,
 } from '@angular/core';
 import { Observable } from 'rxjs';
 
