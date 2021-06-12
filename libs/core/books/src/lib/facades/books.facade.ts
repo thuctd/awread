@@ -12,11 +12,10 @@ import { GenreBooksQuery } from '../states/genre-books';
 import { GoodBooksQuery } from '../states/good-books';
 import { LatestBooksQuery } from '../states/latest-books';
 import { TopBooksQuery } from '../states/top-books';
-
+import { SearchBooksStore } from '../states/search-books';
 
 @Injectable({ providedIn: 'root' })
 export class BooksFacade {
-
   books$ = this.booksQuery.selectAll();
   topBooks$ = this.topBooksQuery.selectAll();
   composed$ = this.composedQuery.selectAll();
@@ -44,7 +43,8 @@ export class BooksFacade {
     public featureBooksQuery: FeatureBooksQuery,
     public categoryBooksQuery: CategoryBooksQuery,
     public searchBooksQuery: SearchBooksQuery,
-  ) { }
+    private searchBooksStore: SearchBooksStore
+  ) {}
 
   selectLoadingAkita() {
     return this.booksQuery.selectLoading();
@@ -117,5 +117,13 @@ export class BooksFacade {
     } else {
       return this.booksGear.searhBookByTermApi(term);
     }
+  }
+
+  setSearchBook(value) {
+    this.searchBooksStore.set(value);
+  }
+
+  setSearchBookLoading(value) {
+    this.searchBooksStore.setLoading(value);
   }
 }
