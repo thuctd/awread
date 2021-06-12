@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.4-alpha" use-changelog="false" last-position="79,988" last-zoom="1" max-obj-count="32"
+<dbmodel pgmodeler-ver="0.9.4-alpha" use-changelog="false" last-position="79,538" last-zoom="1" max-obj-count="32"
 	 default-schema="public" default-owner="postgres"
 	 layers="Default layer"
 	 active-layers="0"
@@ -1441,20 +1441,17 @@ end;]]></definition>
 	<type name="public.jwt_token" length="0"/>
 	</return-type>
 	<definition><![CDATA[declare
-"accessToken" public.jwt_token;
 "currentUser" public.users;
 begin
 
 	select * into "currentUser"
 	from public.users
 	where  "userId" = nullif(current_setting('jwt.claims.userId', true), '')::uuid;
-	return "currentUser";
 
-	if "matchPassword" then
-			"accessToken" := (account."userId", account.role, extract(epoch from (now() + interval '3 months')))::public.jwt_token;
-			return "accessToken";
+	if "currentUser" is not null then
+			return (account."userId", account.role, extract(epoch from (now() + interval '3 months')))::public.jwt_token;
 		else 
-			return null;
+		return  null;
 		end if;
 
 return null;
