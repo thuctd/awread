@@ -61,13 +61,13 @@ export class AuthorBookPage implements OnInit {
     ];
   }
 
-  onMoreBooks() {
+  moreBooks() {
     this.fetchBooks();
   }
 
   private fetchBooks() {
-    if (this.booksFacade.authorBooksQuery.gethasNextPage()) {
-      this.booksFacade.getAuthorBooks(this.userId).subscribe();
+    if (this.booksFacade.authorBooksQuery.getHasNextPage()) {
+      this.listBooksFacade.getAuthorBookByCursor(this.userId, 'add').pipe(untilDestroyed(this)).subscribe();
     }
   }
 

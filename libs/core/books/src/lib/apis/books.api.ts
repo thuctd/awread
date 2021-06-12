@@ -116,7 +116,7 @@ export class BooksApi {
       }
       `, variables: { first },
       })
-      .pipe(map((res) => res?.['data']?.['allMvBooksLatestChapters']?.['nodes']));
+      .pipe();
   }
 
   getGenreBooks(genreId: string) {

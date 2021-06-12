@@ -16,6 +16,7 @@ export class RdAuthorProductOrgan implements OnInit {
   @Input() books = [];
   @Input() hasNextPage: false | true = true;
   @Output() emitMoreBooks = new EventEmitter();
+  @Input() userId;
 
   constructor() { }
 

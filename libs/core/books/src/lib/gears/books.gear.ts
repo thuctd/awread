@@ -33,6 +33,7 @@ export class BooksGear {
   getAuthorBooks(authors, limit: number = 12) {
     const isCheck = typeof (authors);
     let authorIds: string[];
+    let hasNextPage, totalCount;
     if (isCheck === 'string') {
       authorIds = authors.split();
     } else {
@@ -40,7 +41,13 @@ export class BooksGear {
     }
     this.authorBooksStore.setLoading(true);
     return this.booksApi.getAuthorBooks(authorIds, limit).pipe(
+      map((res) => {
+        hasNextPage = res?.['data']?.['allMvBooksLatestChapters']?.['pageInfo']?.hasNextPage;
+        totalCount = res?.['data']?.['allMvBooksLatestChapters']?.totalCount;
+        return res?.['data']?.['allMvBooksLatestChapters']?.['nodes'];
+      }),
       tap(books => this.authorBooksStore.set(books)),
+      tap(() => this.authorBooksStore.updatePage({ hasNextPage: hasNextPage, totalCount: totalCount, sizePage: limit })),
       tap(() => this.authorBooksStore.setLoading(false))
     );
   }

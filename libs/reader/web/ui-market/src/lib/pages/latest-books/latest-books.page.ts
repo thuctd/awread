@@ -58,7 +58,6 @@ export class LatestBooksPage implements OnInit {
           this.hasNextPage$ = this.booksFacade.featureBooksQuery.selectHasNextPage();
           break;
         case 'latest-books':
-          console.log(params.get('booktype'));
           this.title = "TRUYỆN MỚI CẬP NHẬT"
           this.listBooksFacade.getLatestBookByCursor().pipe(untilDestroyed(this)).subscribe();
           this.books$ = this.booksFacade.latestBooksQuery.selectAll();
@@ -92,7 +91,6 @@ export class LatestBooksPage implements OnInit {
           break;
         case 'feature-books':
           if (this.booksFacade.featureBooksQuery.getHasNextPage()) {
-            console.log('asd');
             this.listBooksFacade.getFeaturetBookByCursor('add').pipe(untilDestroyed(this)).subscribe();
           }
           break;

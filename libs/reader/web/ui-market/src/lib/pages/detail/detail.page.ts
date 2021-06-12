@@ -42,7 +42,6 @@ export class DetailPage implements OnInit, OnDestroy {
         })
       )),
     ).subscribe(book => {
-      // console.log('book', book, this.bookId);
       this.book = book[0];
       this.breadcrumbs = this.getbreadcrumbs();
       this.cd.detectChanges();
