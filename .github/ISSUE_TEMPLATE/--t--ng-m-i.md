@@ -2,8 +2,8 @@
 name: Ý tưởng mới
 about: Bạn nghĩ đây là một tính năng hay ho và nên thêm vào dự án
 title: ''
-labels: idea
-assignees: ''
+labels: Cần design, idea
+assignees: thor-thao
 
 ---
 

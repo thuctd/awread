@@ -31,6 +31,7 @@ export class RdTabItemAtom implements OnInit {
   @Input() tabName = 'tab name';
   @Input() active = false;
   @Input() isTooltip = false;
+  @Input() class2 = 'flex justify-center items-center';
 
   constructor() {}
 

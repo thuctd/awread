@@ -14,7 +14,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 })
 export class CircleImageAtom implements OnInit {
   @Input() size: 's' | 'm' | 'l' | 'xl' = 'm';
-  @Input() src = '/global-assets/images/avatar-mrmrs.webp';
+  @Input() src = '/global-assets/images/logoAwread.webp';
   constructor() {}
 
   ngOnInit(): void {}

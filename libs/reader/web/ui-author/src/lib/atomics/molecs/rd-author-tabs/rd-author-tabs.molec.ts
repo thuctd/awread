@@ -34,14 +34,15 @@ export class RdAuthorTabsMolec implements OnInit {
     },
   ];
   @Input() faIcon;
-  @Input() classActive = 'border-b-2 border-green-primary text-green-primary';
-  @Input() classNormal = 'text-gray-text';
+  @Input() class2 = 'flex justify-center items-center';
+  @Input() classActive = 'col-span-6 border-b-2 border-green-primary text-green-primary';
+  @Input() classNormal = 'col-span-6 text-gray-text';
 
   @Input() selectedTab: string;
   @Output() toggleTab = new EventEmitter();
 
   currentTab = { name: null, isActive: false };
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
     this.currentTab = this.tabs.find((tab) => tab.isActive);

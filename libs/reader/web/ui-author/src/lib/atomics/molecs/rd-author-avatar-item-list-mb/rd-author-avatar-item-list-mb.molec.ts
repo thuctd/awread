@@ -16,13 +16,7 @@ import { RdAuthorPopupMenuMbTemplate } from '../../templates/rd-author-popup-men
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RdAuthorAvatarItemListMbMolec implements OnInit {
-  @Input() user = {
-    name: '',
-    lastname: '',
-    middlename: '',
-    firstname: '',
-    excerpt: ''
-  }
+  @Input() user;
   @Input() faIcon = faEllipsisH;
   @Input() isFollow = true;
   @Input() isBlock = true;

@@ -5,6 +5,7 @@
   <div class="w-full mx-auto">
     <atom-title [isUppercase]="false" [title]="'Tác giả'" class="border-b py-1.5 border-gray-200"></atom-title>
     <molec-rd-author-avatar-item-list-mb [user]="user" [isFollow]="isFollow" [isBlock]="isBlock" class="my-2"></molec-rd-author-avatar-item-list-mb>
-    <excerpt [excerpt]="excerpt"></excerpt>
+    <!-- <excerpt [excerpt]="excerpt"></excerpt> -->
+    <p [innerHTML]="user?.bio" class="whitespace-pre-wrap text-justify leading-5 break-words text-gray-text text-xs"></p>
   </div>
 </ng-template>

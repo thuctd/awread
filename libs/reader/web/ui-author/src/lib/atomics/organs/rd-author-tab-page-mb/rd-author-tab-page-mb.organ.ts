@@ -19,13 +19,12 @@ export class RdAuthorTabPageMbOrgan implements OnInit {
   @Output() moreBooks = new EventEmitter();
   tabs = [
     { name: `${this.numberProduct} Tác phẩm`, isActive: true },
-    {
-      name: `${this.followers} Người theo dõi`,
-    },
+    // {
+    //   name: `${this.followers} Người theo dõi`,
+    // },
   ];
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void { }
-
+  ngOnInit(): void {}
 }

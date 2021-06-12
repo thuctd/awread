@@ -140,6 +140,7 @@ import { StatusBookAtom } from './atoms/status-book/status-book.atom';
 import { ListInfoProseMolec } from './molecs/list-info-prose/list-info-prose.molec';
 import { TitlePageLinkAtom } from './atoms/title-page-link/title-page-link.atom';
 import { WrtRememberForgotMolec } from './molecs/wrt-remember-forgot/wrt-remember-forgot.molec';
+import { SelectProfileAtom } from './atoms/select-profile/select-profile.atom';
 @NgModule({
   imports: [
     CommonModule,
@@ -301,6 +302,7 @@ import { WrtRememberForgotMolec } from './molecs/wrt-remember-forgot/wrt-remembe
     ListInfoProseMolec,
     TitlePageLinkAtom,
     WrtRememberForgotMolec,
+    SelectProfileAtom,
   ],
   declarations: [
     notReadyDirective,
@@ -429,6 +431,7 @@ import { WrtRememberForgotMolec } from './molecs/wrt-remember-forgot/wrt-remembe
     ListInfoProseMolec,
     TitlePageLinkAtom,
     WrtRememberForgotMolec,
+    SelectProfileAtom,
   ],
 })
 export class GlobalDesignSystemAtomicModule {}

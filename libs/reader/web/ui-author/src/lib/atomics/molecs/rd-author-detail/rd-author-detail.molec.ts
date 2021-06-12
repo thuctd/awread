@@ -22,12 +22,12 @@ export class RdAuthorDetailMolec implements OnInit {
     lastname: '',
     middlename: '',
     firstname: '',
-    excerpt: ''
-  }
+    bio: '',
+  };
   @Input() isFollow = true;
   @Input() isBlock = false;
 
-  constructor(private matDialog: MatDialog) { }
+  constructor(private matDialog: MatDialog) {}
 
   ngOnInit(): void {}
 

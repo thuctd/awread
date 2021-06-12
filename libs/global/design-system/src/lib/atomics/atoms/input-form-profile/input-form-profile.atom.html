@@ -1,5 +1,5 @@
-<div>
-  <label class="text-gray-text float-left">{{ key }}</label>
-  <div class="float-right"><input class="border rounded-full border-gray-400 focus:outline-none px-2 w-72" [formControl]="control" ></div>
-  <div class="clear-both"></div>
+<div [formGroup]="profileForm" class="flex items-center justify-between">
+  <label class="text-gray-400 w-2/5">{{item.title}}</label>
+  <input [formControlName]="item.formControlName" [placeholder]="item.title"
+  class="border rounded-full border-gray-200 text-gray-700 focus:outline-none px-2 md:px-4 py-1 md:py-2 w-3/5 focus:ring-1 focus:ring-gray-300 focus:border-gray-300" />
 </div>

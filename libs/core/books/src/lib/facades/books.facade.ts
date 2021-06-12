@@ -13,6 +13,7 @@ import { GenreBooksQuery, GenreBooksStore } from '../states/genre-books';
 import { GoodBooksQuery } from '../states/good-books';
 import { LatestBooksQuery } from '../states/latest-books';
 import { TopBooksQuery } from '../states/top-books';
+import { SearchBooksStore } from '../states/search-books';
 
 @Injectable({ providedIn: 'root' })
 export class BooksFacade {
@@ -45,7 +46,8 @@ export class BooksFacade {
     public searchBooksQuery: SearchBooksQuery,
     public latestBooksStore: LatestBooksStore,
     public featureBooksStore: FeatureBooksStore,
-    public genreBooksStore: GenreBooksStore
+    public genreBooksStore: GenreBooksStore,
+    private searchBooksStore: SearchBooksStore
   ) { }
 
   setCurrentPageLatestBook(pageNumber) {
@@ -109,5 +111,13 @@ export class BooksFacade {
     } else {
       return this.booksGear.searhBookByTermApi(term);
     }
+  }
+
+  setSearchBook(value) {
+    this.searchBooksStore.set(value);
+  }
+
+  setSearchBookLoading(value) {
+    this.searchBooksStore.setLoading(value);
   }
 }

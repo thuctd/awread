@@ -17,25 +17,25 @@ export class NavbarAuthDropdownMolec implements OnInit {
   @Output() logoutEvent = new EventEmitter();
   @Input() user = {
     name: 'BlackCu',
-    lastname: 'BlackCu',
+    firstname: 'BlackCu',
   };
   menu = [
-    {
-      href: '/',
-      title: 'Thông báo',
-    },
-    {
-      href: '/',
-      title: 'Hộp thư',
-    },
-    {
-      href: '/',
-      title: 'Nạp coin',
-    },
-    {
-      href: '/',
-      title: 'Thư viện',
-    },
+    // {
+    //   href: '/',
+    //   title: 'Thông báo',
+    // },
+    // {
+    //   href: '/',
+    //   title: 'Hộp thư',
+    // },
+    // {
+    //   href: '/',
+    //   title: 'Nạp coin',
+    // },
+    // {
+    //   href: '/',
+    //   title: 'Thư viện',
+    // },
     {
       href: '/single/profile',
       title: 'Cài đặt tài khoản',

@@ -20,6 +20,24 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 export class ProfileEditFormMolec implements OnInit {
   @Input() profileForm: FormGroup = this.fb.group({});
   @Input() submitted: boolean;
+  @Input() items = [
+    {
+      title: 'Tên hiển thị',
+      formControlName: 'name',
+    },
+    {
+      title: 'Tên tài khoản',
+      formControlName: 'username',
+    },
+    {
+      title: 'Liên kết',
+      formControlName: 'websiteAddress',
+    },
+    {
+      title: 'Facebook',
+      formControlName: 'facebookAddress',
+    },
+  ];
 
   constructor(private fb: FormBuilder) {}
 

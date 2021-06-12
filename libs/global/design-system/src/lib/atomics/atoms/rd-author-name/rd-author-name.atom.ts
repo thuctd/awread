@@ -14,7 +14,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 })
 export class RdAuthorNameAtom implements OnInit {
   @Input() name = 'Cẩm Thương';
-  @Input() fullName = 'Hà Cẩm Thương';
+  @Input() fullName = '';
 
   constructor() {}
 
