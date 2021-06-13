@@ -16,7 +16,7 @@ export class RdAuthorTabPageMbOrgan implements OnInit {
   @Input() numberProduct = '';
   @Input() followers = '10';
   @Input() books = [];
-  @Output() moreBooks = new EventEmitter();
+  @Output() navigateBooksByAuthor = new EventEmitter();
   tabs = [
     { name: `${this.numberProduct} Tác phẩm`, isActive: true },
     // {
@@ -24,7 +24,7 @@ export class RdAuthorTabPageMbOrgan implements OnInit {
     // },
   ];
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

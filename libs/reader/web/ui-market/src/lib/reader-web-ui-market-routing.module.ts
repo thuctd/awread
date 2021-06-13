@@ -65,11 +65,11 @@ const routes: Routes = [
             loadChildren: () =>
               window.innerWidth <= 768 && window?.haveMobile
                 ? import('./pages/introduction-mobile/introduction-mobile.module').then(
-                    (m) => m.IntroductionMobileModule
-                  )
+                  (m) => m.IntroductionMobileModule
+                )
                 : import('./pages/introduction-desktop/introduction-desktop.module').then(
-                    (m) => m.IntroductionDesktopModule
-                  ),
+                  (m) => m.IntroductionDesktopModule
+                ),
           },
 
           {
@@ -93,44 +93,19 @@ const routes: Routes = [
               window.innerWidth <= 768 && window?.haveMobile
                 ? import('./pages/news-detail-mobile/news-detail-mobile.module').then((m) => m.NewsDetailMobileModule)
                 : import('./pages/news-detail-desktop/news-detail-desktop.module').then(
-                    (m) => m.NewsDetailDesktopModule
-                  ),
+                  (m) => m.NewsDetailDesktopModule
+                ),
           },
           {
-            path: 'top-books',
-            loadChildren: () =>
-              window.innerWidth <= 768 && window?.haveMobile
-                ? import('./pages/top-books-mobile/top-books-mobile.module').then((m) => m.TopBooksMobileModule)
-                : import('./pages/top-books-desktop/top-books-desktop.module').then((m) => m.TopBooksDesktopModule),
-          },
-          {
-            path: 'latest-books',
+            path: 'index/:booktype',
             loadChildren: () =>
               window.innerWidth <= 768 && window?.haveMobile
                 ? import('./pages/latest-books-mobile/latest-books-mobile.module').then(
-                    (m) => m.LatestBooksMobileModule
-                  )
+                  (m) => m.LatestBooksMobileModule
+                )
                 : import('./pages/latest-books-desktop/latest-books-desktop.module').then(
-                    (m) => m.LatestBooksDesktopModule
-                  ),
-          },
-          {
-            path: 'good-books',
-            loadChildren: () =>
-              window.innerWidth <= 768 && window?.haveMobile
-                ? import('./pages/good-books-mobile/good-books-mobile.module').then((m) => m.GoodBooksMobileModule)
-                : import('./pages/good-books-desktop/good-books-desktop.module').then((m) => m.GoodBooksDesktopModule),
-          },
-          {
-            path: 'feature-books',
-            loadChildren: () =>
-              window.innerWidth <= 768 && window?.haveMobile
-                ? import('./pages/feature-books-mobile/feature-books-mobile.module').then(
-                    (m) => m.FeatureBooksMobileModule
-                  )
-                : import('./pages/feature-books-desktop/feature-books-desktop.module').then(
-                    (m) => m.FeatureBooksDesktopModule
-                  ),
+                  (m) => m.LatestBooksDesktopModule
+                ),
           },
           {
             path: '',
@@ -147,4 +122,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class ReaderWebUiMarketRoutingModule {}
+export class ReaderWebUiMarketRoutingModule { }

@@ -21,7 +21,7 @@ export class AuthorPage implements OnInit {
     private authorFacade: AuthorFacade,
     private booksFacade: BooksFacade,
     private cd: ChangeDetectorRef
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.userId = this.activatedRoute.snapshot.params['userId'];
@@ -34,7 +34,6 @@ export class AuthorPage implements OnInit {
       )
       .subscribe((users) => {
         this.user = users[0];
-        console.log(this.user);
         this.breadcrumbs = this.getbreadcrumbs();
       });
   }
@@ -56,7 +55,7 @@ export class AuthorPage implements OnInit {
     ];
   }
 
-  onMoreBooksByAuthor() {
+  navigateBooksByAuthor() {
     this.router.navigate([this.userId, 'books']);
   }
 }

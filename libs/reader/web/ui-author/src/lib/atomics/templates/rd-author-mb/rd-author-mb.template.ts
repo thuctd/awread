@@ -18,7 +18,7 @@ export class RdAuthorMbTemplate implements OnInit {
   @Input() user;
   @Input() total;
   @Input() books = [];
-  @Output() moreBooks = new EventEmitter();
+  @Output() navigateBooksByAuthor = new EventEmitter();
 
   constructor() { }
 
