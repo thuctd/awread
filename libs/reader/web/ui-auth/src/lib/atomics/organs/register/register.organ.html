@@ -6,6 +6,7 @@
     <!-- <molec-interrogatory [text]="text" [textLink]="textLink" (submitEvent)="openFormLoginMobile($event)"></molec-interrogatory> -->
   </div>
   <!-- <molec-register-form class="mt-4" #registerForm [form]="authForm"></molec-register-form> -->
-  <molec-submit class="mt-8" (btnClicked)="auth.emit()" [noSocial]="true" [active]="true" [text]="'Đăng ký'">
+
+  <molec-submit *ngIf="false" class="mt-8" (btnClicked)="auth.emit()" [active]="true" [text]="'Đăng ký'">
   </molec-submit>
 </section>
