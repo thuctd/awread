@@ -25,45 +25,84 @@ export class CurrentUserApi {
         query: gql`
           mutation thisUser {
             thisUser(input: {}) {
-              user {
-                userId
-                username
-                email
-                phone
-                name
-                firstname
-                middlename
-                lastname
-                age
-                avatar
-                dob
-                gender
-                bio
-                websiteAddress
-                facebookAddress
-                updatedAt
+              results {
+                users {
+                  userId
+                  username
+                  email
+                  phone
+                  name
+                  updatedAt
+                  avatar
+                }
+                personals {
+                  firstname
+                  middlename
+                  lastname
+                  age
+                  dob
+                  gender
+                  bio
+                  websiteAddress
+                  facebookAddress
+                }
               }
             }
           }
         `,
       })
-      .pipe(map((res) => res.data?.['thisUser']?.['user']));
+      .pipe(
+        map((res) => ({
+          ...res.data?.['thisUser']?.['results']?.[0]?.['users'],
+          ...res.data?.['thisUser']?.['results']?.[0]?.['personals'],
+        }))
+      );
   }
 
-  updateName(user) {
+  updatePersonal(user) {
     return this.apollo.mutate({
       mutation: gql`
-        mutation updateUserByUserId($userId: UUID!, $firstname: String, $middlename: String, $lastname: String) {
+        mutation updateUserByUserId(
+          $userId: UUID!
+          $firstname: String
+          $middlename: String
+          $lastname: String
+          $dob: String
+          $bio: String
+          $websiteAddress: String
+          $facebookAddress: String
+          $zaloAddress: String
+          $age: BigFloat
+          $gender: BigFloat
+        ) {
           updateUserByUserId(
             input: {
               userId: $userId
-              userPatch: { firstname: $firstname, middlename: $middlename, lastname: $lastname }
+              userPatch: {
+                firstname: $firstname
+                middlename: $middlename
+                lastname: $lastname
+                dob: $dob
+                bio: $bio
+                websiteAddress: $websiteAddress
+                facebookAddress: $facebookAddress
+                zaloAddress: $zaloAddress
+                age: $age
+                gender: $gender
+              }
             }
           ) {
             user {
               firstname
               middlename
               lastname
+              dob
+              bio
+              websiteAddress
+              facebookAddress
+              zaloAddress
+              age
+              gender
             }
           }
         }
@@ -75,62 +114,29 @@ export class CurrentUserApi {
     });
   }
 
-  update(user) {
+  updateUser(user) {
     return this.apollo.mutate({
       mutation: gql`
         mutation updateUserByUserId(
           $userId: UUID!
-          $age: BigFloat
-          $gender: BigFloat
           $username: String
           $email: String
           $phone: String
           $name: String
-          $firstname: String
-          $middlename: String
-          $lastname: String
           $avatar: Boolean
-          $dob: String
-          $bio: String
-          $websiteAddress: String
-          $facebookAddress: String
         ) {
           updateUserByUserId(
             input: {
               userId: $userId
-              userPatch: {
-                age: $age
-                gender: $gender
-                username: $username
-                email: $email
-                phone: $phone
-                name: $name
-                firstname: $firstname
-                middlename: $middlename
-                lastname: $lastname
-                avatar: $avatar
-                dob: $dob
-                bio: $bio
-                websiteAddress: $websiteAddress
-                facebookAddress: $facebookAddress
-              }
+              userPatch: { username: $username, email: $email, phone: $phone, name: $name, avatar: $avatar }
             }
           ) {
             user {
-              age
-              gender
               username
               email
               phone
               name
-              firstname
-              middlename
-              lastname
               avatar
-              dob
-              bio
-              websiteAddress
-              facebookAddress
             }
           }
         }

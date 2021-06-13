@@ -66,7 +66,7 @@ export class ProfileIPage implements OnInit {
         setTimeout(() => {
           // wait 1s for server ready
           const now = new Date();
-          this.currentUserFacade.updateCurrentUser({ avatar: true, updatedAt: now });
+          this.currentUserFacade.updateUser({ avatar: true, updatedAt: now });
           this.profileForm.patchValue({ updatedAt: now });
           this.cd.detectChanges();
         }, 1000);
@@ -81,7 +81,7 @@ export class ProfileIPage implements OnInit {
       this.profileForm.markAllAsTouched();
       return this.snackbarService.showWarning('Vui lòng điền đủ thông tin');
     } else {
-      this.currentUserFacade.updateCurrentUser(this.profileForm.value);
+      this.currentUserFacade.updateUser(this.profileForm.value);
     }
   }
 

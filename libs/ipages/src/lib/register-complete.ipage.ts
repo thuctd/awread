@@ -24,9 +24,7 @@ export class RegisterCompleteIpage implements OnInit {
     this.updateForm();
   }
 
-  completeRegister() {
-    this.currentUserFacade.updateName(this.formComplete.value);
-  }
+  completeRegister() {}
 
   linkSocialEvent(event) {
     this.authFacade.linkSocial(event);

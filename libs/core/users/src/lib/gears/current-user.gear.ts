@@ -4,8 +4,8 @@ import type { CurrentUser } from '../models';
 import { CurrentUserService, CurrentUserStore } from '../states/current-user';
 import { CurrentUserApi } from '../apis';
 import { SnackbarService } from '@awread/global/packages';
-import { SocialAuthService, SocialUser } from "angularx-social-login";
-import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
+import { SocialAuthService, SocialUser } from 'angularx-social-login';
+import { FacebookLoginProvider, GoogleLoginProvider } from 'angularx-social-login';
 import { AuthRoutingGear } from './auth-routing.gear';
 
 @Injectable({ providedIn: 'root' })
@@ -16,45 +16,48 @@ export class CurrentUserGear {
     private currentUserStore: CurrentUserStore,
     private snackbarService: SnackbarService,
     private socialAuthService: SocialAuthService,
-    private authRoutingGear: AuthRoutingGear,
-  ) { }
+    private authRoutingGear: AuthRoutingGear
+  ) {}
 
   getCurrentUser() {
     return this.currentUserApi.getCurrentUser().pipe(
-      tap(result => {
+      tap((result) => {
         // console.log('result', result);
         this.currentUserStore.update(result);
       })
-    )
+    );
   }
 
-  update(user: CurrentUser) {
+  updateUser(user: CurrentUser) {
     if (user.updatedAt) {
       this.currentUserStore.update({ updatedAt: user.updatedAt });
     }
-    return this.currentUserApi.update(user).pipe(
-    ).subscribe(result => {
-      if (result.data) {
-        this.snackbarService.showSuccess('Cập nhật thông tin thành công!');
-        this.currentUserStore.updateCurrentUserAkita(user);
-      } else {
-        this.snackbarService.showError(result.errors?.[0]['message']);
-      }
-    })
+    return this.currentUserApi
+      .updateUser(user)
+      .pipe()
+      .subscribe((result) => {
+        if (result.data) {
+          this.snackbarService.showSuccess('Cập nhật thông tin tài khoản!');
+          this.currentUserStore.updateCurrentUserAkita(user);
+        } else {
+          this.snackbarService.showError(result.errors?.[0]['message']);
+        }
+      });
   }
 
-  updateName(user) {
-    return this.currentUserApi.updateName(user).pipe(
-
-    ).subscribe(result => {
-      if (result.data) {
-        this.snackbarService.showSuccess('Cập nhật thông tin thành công!');
-        this.currentUserStore.updateCurrentUserAkita(user);
-        this.authRoutingGear.navigateAfterRegisterCompleted();
-      } else {
-        this.snackbarService.showError(result.errors?.[0]['message']);
-      }
-    })
+  updatePersonal(user) {
+    return this.currentUserApi
+      .updatePersonal(user)
+      .pipe()
+      .subscribe((result) => {
+        if (result.data) {
+          this.snackbarService.showSuccess('Cập nhật thông tin cá nhân!');
+          this.currentUserStore.updateCurrentUserAkita(user);
+          this.authRoutingGear.navigateAfterRegisterCompleted();
+        } else {
+          this.snackbarService.showError(result.errors?.[0]['message']);
+        }
+      });
   }
 
   async linkSocial(provider) {
@@ -72,15 +75,15 @@ export class CurrentUserGear {
 
     const credential = {
       provider,
-      providerId: socialUser.id
-    }
+      providerId: socialUser.id,
+    };
 
     console.log('login result', socialUser);
 
-    this.currentUserApi.linkSocial(credential).subscribe(result => {
+    this.currentUserApi.linkSocial(credential).subscribe((result) => {
       if (result) {
         this.snackbarService.showSuccess(`Thành công! Từ bây giờ bạn có thể đăng nhập bằng ${provider}`);
       }
-    })
+    });
   }
 }

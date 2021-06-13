@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.4-alpha" use-changelog="false" last-position="79,538" last-zoom="1" max-obj-count="32"
+<dbmodel pgmodeler-ver="0.9.4-alpha" use-changelog="false" last-position="0,717" last-zoom="1" max-obj-count="32"
 	 default-schema="public" default-owner="postgres"
 	 layers="Default layer"
 	 active-layers="0"
@@ -802,15 +802,24 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<role name="postgres"/>
 	<language name="plpgsql"/>
 	<return-type>
-	<type name="public.users" length="0"/>
+	<parameter name="users">
+		<type name="public.users" length="0"/>
+	</parameter>
+	<parameter name="personals">
+		<type name="public.personals" length="0"/>
+	</parameter>
 	</return-type>
 	<definition><![CDATA[declare 
 	"currentUser" public.users;
+	"currentPersonal" public.personals;
 	begin
 		select * into "currentUser"
 		from public.users
 		where  "userId" = nullif(current_setting('jwt.claims.userId', true), '')::uuid;
-		return "currentUser";
+			select * into "currentPersonal"
+		from public.personals
+		where  "userId" = nullif(current_setting('jwt.claims.userId', true), '')::uuid;
+		return query select "currentUser", "currentPersonal";
 	end;
 	]]></definition>
 </function>

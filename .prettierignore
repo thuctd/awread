@@ -2,3 +2,5 @@
 
 /dist
 /coverage
+# Ignore all HTML files:
+# *.ts
