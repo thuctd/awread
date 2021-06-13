@@ -7,10 +7,6 @@ import { RegisterCompleteDesktopPage } from './register-complete-desktop.page';
 
 @NgModule({
   declarations: [RegisterCompleteDesktopPage],
-  imports: [
-    CommonModule,
-    RegisterCompleteDesktopRoutingModule,
-    WriterWebUiAuthAtomicModule,
-  ],
+  imports: [CommonModule, RegisterCompleteDesktopRoutingModule, WriterWebUiAuthAtomicModule],
 })
-export class RegisterCompleteDesktopModule { }
+export class RegisterCompleteDesktopModule {}

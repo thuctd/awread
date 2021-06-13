@@ -1,9 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  GlobalDesignSystemAtomicModule,
-  StorybookSupportModule,
-} from '@awread/global/design-system';
+import { GlobalDesignSystemAtomicModule, StorybookSupportModule } from '@awread/global/design-system';
 import { WrtTabHeadMolec } from './molecs/wrt-tab-head/wrt-tab-head.molec';
 import { WrtActionBtnsMolec } from './molecs/wrt-action-btns/wrt-action-btns.molec';
 import { WrtLoginOrgan } from './organs/wrt-login/wrt-login.organ';
@@ -26,8 +23,15 @@ import { RegisterCompleteTemplate } from './templates/register-complete/register
 import { RegisterCompleteDesktopOrgan } from './organs/register-complete-desktop/register-complete-desktop.organ';
 import { RegisterCompleteMobileOrgan } from './organs/register-complete-mobile/register-complete-mobile.organ';
 import { RegisterCompleteBackgroundTemplate } from './templates/register-complete-background/register-complete-background.template';
+import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 
 @NgModule({
+  providers: [
+    {
+      provide: STEPPER_GLOBAL_OPTIONS,
+      useValue: { showError: true },
+    },
+  ],
   imports: [CommonModule, GlobalDesignSystemAtomicModule, StorybookSupportModule, MatStepperModule],
   exports: [
     CommonModule,
