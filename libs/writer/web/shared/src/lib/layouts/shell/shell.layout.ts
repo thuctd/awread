@@ -19,7 +19,9 @@ export class ShellLayout implements OnInit {
   constructor(
     private currentUserFacade: CurrentUserFacade,
     private creationsFacade: CreationsFacade,
-    private authFacade: AuthFacade
+    private authFacade: AuthFacade,
+    private genresFacade: GenresFacade
+
   ) {}
 
   routes = [
@@ -42,11 +44,6 @@ export class ShellLayout implements OnInit {
     },
   ];
 
-  constructor(
-    private currentUserFacade: CurrentUserFacade,
-    private authFacade: AuthFacade,
-    private genresFacade: GenresFacade
-  ) {}
 
   ngOnInit(): void {
     this.genresFacade.getAllGenres().subscribe();

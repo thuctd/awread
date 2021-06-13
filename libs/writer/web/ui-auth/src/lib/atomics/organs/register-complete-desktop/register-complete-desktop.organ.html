@@ -1,4 +1,6 @@
-<mat-horizontal-stepper #stepper>
+
+<div class="stepper-process-bar" [style.width]="'calc(' + widthProcess + '% + '+ expandedWidth +'px)'"></div>
+<mat-horizontal-stepper #stepper class="rounded-md" (selectionChange)="selectionChange($event)">
     <mat-step [label]="'Tài khoản'" [state]="'auth'" [stepControl]="firstForm" errorMessage="username password là bắt buộc">
         <molec-register-form [form]="firstForm"></molec-register-form>
         <div>
@@ -13,7 +15,7 @@
     <mat-step [label]="'Thông tin'" [state]="'exp'" [stepControl]="secondForm" errorMessage="Tên hiển thị là bắt buộc">
         <div [formGroup]="secondForm">
             <input-form required [inputControl]="secondForm.get('name')" [placeholder]="'Tên hiển thị'"></input-form>
-            <input-form [inputControl]="secondForm.get('firstname')" [placeholder]="'Tên'"></input-form>
+            <input-form [inputControl]="secondForm.get('firstname')" [placeholder]="'Tên====='"></input-form>
             <input-form [inputControl]="secondForm.get('middlename')" [placeholder]="'Tên đệm'"></input-form>
             <input-form [inputControl]="secondForm.get('lastname')" [placeholder]="'Họ'"></input-form>
             <div class="flex">
