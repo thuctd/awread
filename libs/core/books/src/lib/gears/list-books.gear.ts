@@ -31,42 +31,42 @@ export class ListBooksGear {
   ) {
   }
 
-  getTopBookByCursor(action, first = 18) {
+  getTopBookByCursor(action, first = 20) {
     return of(this.topBooksQuery.getEndCursor())
       .pipe(
         pageInfoToAkita(this.topBooksStore, (cursor) => this.listBooksApi.getTopBookByCursor(cursor, first), action)
       )
   }
 
-  getGoodBookByCursor(action, first = 18) {
+  getGoodBookByCursor(action, first = 20) {
     return of(this.goodBooksQuery.getEndCursor())
       .pipe(
         pageInfoToAkita(this.goodBooksStore, (cursor) => this.listBooksApi.getGoodBookByCursor(cursor, first), action)
       )
   }
 
-  getLatestBookByCursor(action, first = 18) {
+  getLatestBookByCursor(action, first = 20) {
     return of(this.latestBooksQuery.getEndCursor())
       .pipe(
         pageInfoToAkita(this.latestBooksStore, (cursor) => this.listBooksApi.getLatestBookByCursor(cursor, first), action)
       )
   }
 
-  getFeaturetBookByCursor(action, first = 18) {
+  getFeaturetBookByCursor(action, first = 20) {
     return of(this.featureBooksQuery.getEndCursor())
       .pipe(
         pageInfoToAkita(this.featureBooksStore, (cursor) => this.listBooksApi.getFeaturetBookByCursor(cursor, first), action)
       )
   }
 
-  getCategoryBookByCursor(categoryId, action, first = 18) {
+  getCategoryBookByCursor(categoryId, action, first = 20) {
     return of(this.categoryBooksQuery.getEndCursor())
       .pipe(
         pageInfoToAkita(this.categoryBooksStore, (cursor) => this.listBooksApi.getCategoryBookByCursor(categoryId, cursor, first), action)
       )
   }
 
-  getAuthorBookByCursor(authors, action, first = 18) {
+  getAuthorBookByCursor(authors, action, first = 20) {
     return of(this.authorBooksQuery.getEndCursor())
       .pipe(
         pageInfoToAkita(this.authorBooksStore, (cursor) => this.listBooksApi.getAuthorBookByCursor(authors, cursor, first), action)
