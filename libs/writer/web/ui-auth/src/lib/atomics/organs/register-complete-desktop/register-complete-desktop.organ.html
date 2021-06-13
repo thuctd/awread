@@ -1,29 +1,28 @@
 <mat-horizontal-stepper #stepper>
-    <mat-step [label]="'Tài khoản'" [state]="'auth'" [stepControl]="firstForm" errorMessage="username password là bắt buộc">
-        <molec-register-form [form]="firstForm"></molec-register-form>
+    <mat-step [label]="'Tài khoản'" [state]="'auth'" [stepControl]="requireForm" errorMessage="tên hiển thị, username, password là bắt buộc">
+        <molec-register-form [form]="requireForm"></molec-register-form>
         <div>
-            <!-- <pre> {{ firstForm.hasError('missmatch') }} </pre> -->
-            <!-- <pre> {{ firstForm.errors | json }} </pre> -->
-            <p *ngIf="firstForm.hasError('missmatch')" class="text-red-600">Mật khẩu không khớp</p>
+            <!-- <pre> {{ requireForm.hasError('missmatch') }} </pre> -->
+            <!-- <pre> {{ requireForm.errors | json }} </pre> -->
+            <p *ngIf="requireForm.hasError('missmatch')" class="text-red-600">Mật khẩu không khớp</p>
             <div class="flex">
                 <button matStepperNext class="rounded text-white bg-green-primary border border-solid border-gray-light"> Tiếp </button>
             </div>
         </div>
     </mat-step>
-    <mat-step [label]="'Thông tin'" [state]="'exp'" [stepControl]="secondForm" errorMessage="Tên hiển thị là bắt buộc">
-        <div [formGroup]="secondForm">
-            <input-form required [inputControl]="secondForm.get('name')" [placeholder]="'Tên hiển thị'"></input-form>
-            <input-form [inputControl]="secondForm.get('firstname')" [placeholder]="'Tên'"></input-form>
-            <input-form [inputControl]="secondForm.get('middlename')" [placeholder]="'Tên đệm'"></input-form>
-            <input-form [inputControl]="secondForm.get('lastname')" [placeholder]="'Họ'"></input-form>
+    <mat-step [label]="'Thông tin'" [state]="'exp'" [stepControl]="optionalForm">
+        <div [formGroup]="optionalForm">
+            <input-form [inputControl]="optionalForm.get('firstname')" [placeholder]="'Tên'"></input-form>
+            <input-form [inputControl]="optionalForm.get('middlename')" [placeholder]="'Tên đệm'"></input-form>
+            <input-form [inputControl]="optionalForm.get('lastname')" [placeholder]="'Họ'"></input-form>
             <div class="flex">
                 <button matStepperPrevious class="rounded text-gray bg-white border border-solid border-gray-light"> Quay lại </button>
                 <button matStepperNext class="rounded text-white bg-green-primary border border-solid border-gray-light"> Tiếp </button>
             </div>
         </div>
     </mat-step>
-    <mat-step [label]="'Trải nghiệm'" [state]="'exp'" [stepControl]="thirdForm" errorMessage="Tùy biến ứng dụng theo ý của bạn">
-        <form [formGroup]="thirdForm">
+    <mat-step [label]="'Trải nghiệm'" [state]="'exp'" [stepControl]="experienceForm" errorMessage="Tùy biến ứng dụng theo ý của bạn">
+        <form [formGroup]="experienceForm">
             <div class="mb-6 flex items-center">
                 <label class="text-gray-400 w-2/5"> Giới hạn nội dung</label>
                 <div class="w-3/5">
@@ -50,9 +49,9 @@
         </form>
     </mat-step>
     <mat-step [label]="'Hoàn thiện'" [state]="'done'">
-        <p>{{ firstForm.value | json }}</p>
-        <p>{{ secondForm.value | json }}</p>
-        <p>{{ thirdForm.value | json }}</p>
+        <p>{{ requireForm.value | json }}</p>
+        <p>{{ optionalForm.value | json }}</p>
+        <p>{{ experienceForm.value | json }}</p>
         <p>You are now done.</p>
         <div class="flex">
             <button matStepperNext class="rounded text-white bg-green-primary border border-solid border-gray-light"> Tiếp </button>

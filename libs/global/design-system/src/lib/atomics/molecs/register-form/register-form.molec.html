@@ -1,6 +1,8 @@
 <div [formGroup]="form">
   <input-form required [inputControl]="form.get('username')" [placeholder]="'Username để đăng nhập'" [faIcon]="icons.faUser">
   </input-form>
+  <input-form [inputControl]="form.get('name')" [placeholder]="'Tên hiển thị'" [faIcon]="icons.faEnvelope">
+  </input-form>
   <input-form [inputControl]="form.get('email')" [placeholder]="'Email để khôi phục mật khẩu và đăng nhập (tùy chọn)'" [faIcon]="icons.faEnvelope">
   </input-form>
   <input-form [inputControl]="form.get('phone')" [placeholder]="'Số điện thoại để đăng nhập (tùy chọn)'" [faIcon]="icons.faPhone"></input-form>

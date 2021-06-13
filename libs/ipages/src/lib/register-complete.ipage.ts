@@ -28,7 +28,7 @@ export class RegisterCompleteIpage implements OnInit {
   requireForm = this.fb.group(
     {
       username: ['', [Validators.required]],
-      name: [''],
+      name: ['', [Validators.required]],
       email: ['', []],
       phone: ['', []],
       password: ['', [Validators.required, Validators.minLength(4)]],
