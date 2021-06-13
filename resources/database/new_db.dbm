@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.4-alpha" use-changelog="false" last-position="0,717" last-zoom="1" max-obj-count="32"
+<dbmodel pgmodeler-ver="0.9.4-alpha" use-changelog="false" last-position="0,716" last-zoom="1" max-obj-count="32"
 	 default-schema="public" default-owner="postgres"
 	 layers="Default layer"
 	 active-layers="0"
@@ -367,7 +367,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</constraint>
 </table>
 
-<table name="personals" layers="0" collapse-mode="2" max-obj-count="14" z-value="0">
+<table name="personals" layers="0" collapse-mode="2" max-obj-count="15" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
 	<position x="480" y="1180"/>
@@ -406,6 +406,9 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</column>
 	<column name="code" default-value="'+84'">
 		<type name="text" length="0"/>
+	</column>
+	<column name="genreIds">
+		<type name="numeric" length="0" dimension="1"/>
 	</column>
 	<constraint name="personals_pk" type="pk-constr" table="public.personals">
 		<columns names="userId" ref-type="src-columns"/>
