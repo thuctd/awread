@@ -1,10 +1,8 @@
 <div class="flex">
   <div (click)="bookEvent.emit({ type: 'detail', bookId: book.bookId })" class="cursor-pointer">
-    <!-- <detail-upload-img [srcImg]="book| coverSize: 'l'"></detail-upload-img> -->
     <div class="w-36 h-48 mb-2 focus:outline-none relative overflow-hidden">
       <img [src]="book | coverSize:'origin'" class="object-cover w-full cursor-pointer absolute">
     </div>
-    <span [hidden]="srcImg" class="text-xs sm:text-sm">Không có ảnh bìa</span>
   </div>
   <div class="cursor-pointer ml-4">
     <div (click)="bookEvent.emit({ type: 'detail', bookId: book.bookId })" class="self-start">
@@ -29,9 +27,9 @@
     </div>
     <div class="self-start mt-2 flex">
       <button (click)="bookEvent.emit({ type: 'preview', bookId: book.bookId })"
-        class="transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-100 focus:outline-none text-green-500 inline-block border border-solid border-green-500 bg-white text-xs px-2 py-1.5 rounded hover:bg-green-500 hover:text-white"> Xem thử
+        class="transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-100 focus:outline-none text-green-500 inline-block border border-solid border-green-500 bg-white text-xs px-2 py-1.5 rounded hover:bg-green-500 hover:text-white">
+        Xem thử
       </button>
     </div>
   </div>
 </div>
-
