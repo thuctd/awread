@@ -28,8 +28,8 @@ export class CurrentUserApi {
   getCurrentUser() {
     return this.apollo.query({
       query: gql`
-        mutation currentUser {
-          currentUser(input: {}) {
+        mutation thisUser {
+          thisUser(input: {}) {
             user {
               userId
               username
