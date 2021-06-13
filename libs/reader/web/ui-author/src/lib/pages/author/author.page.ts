@@ -30,10 +30,10 @@ export class AuthorPage implements OnInit {
       .pipe(
         map((params) => params.get('userId')),
         switchMap((id) => this.authorFacade.getDetailAuthor(id)),
-        tap((author) => this.booksFacade.getAuthorBooks(author[0].userId).subscribe())
+        tap((user) => this.booksFacade.getAuthorBooks(user.userId).subscribe())
       )
-      .subscribe((users) => {
-        this.user = users[0];
+      .subscribe((user) => {
+        this.user = user;
         this.breadcrumbs = this.getbreadcrumbs();
       });
   }
@@ -49,7 +49,7 @@ export class AuthorPage implements OnInit {
         link: ['/', this.user.userId],
       },
       {
-        title: this.user.userByUserId.name,
+        title: this.user.name,
         link: ['/', this.user.userId],
       },
     ];

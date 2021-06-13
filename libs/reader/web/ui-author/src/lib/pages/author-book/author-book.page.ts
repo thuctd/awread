@@ -34,9 +34,9 @@ export class AuthorBookPage implements OnInit {
     this.activatedRoute.paramMap.pipe(
       map(params => params.get('userId')),
       switchMap(id => this.authorFacade.getDetailAuthor(id)),
-      tap(author => this.listBooksFacade.getAuthorBookByCursor(author[0].userId, 'add').pipe(untilDestroyed(this)).subscribe())
-    ).subscribe(users => {
-      this.user = users[0];
+      tap(user => this.listBooksFacade.getAuthorBookByCursor(user.userId, 'add').pipe(untilDestroyed(this)).subscribe())
+    ).subscribe(user => {
+      this.user = user;
       this.breadcrumbs = this.getbreadcrumbs();
     })
     this.authorBooks$ = this.booksFacade.authorBooksQuery.selectAll();
@@ -55,7 +55,7 @@ export class AuthorBookPage implements OnInit {
       link: ['/', this.user.userId]
     },
     {
-      title: this.user.userByUserId.name,
+      title: this.user.name,
       link: ['/', this.user.userId]
     }
     ];
