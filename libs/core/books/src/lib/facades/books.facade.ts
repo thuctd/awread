@@ -94,7 +94,7 @@ export class BooksFacade {
   }
 
   getGoodBooks() {
-    return this.booksHomeGear.getGoodBooks(this.goodBooksQuery.getSizePage() + 12);
+    return this.booksHomeGear.getGoodBooks();
   }
 
   getFeatureBooks(a?) {

@@ -12,8 +12,8 @@ export class BooksHomeApi {
         query: gql`
           query allMvMostViewBooks($first: Int) {
             allMvMostViewBooks(
-              first: $first,
-              orderBy: VIEWS_DESC,
+              first: $first
+              orderBy: VIEWS_DESC
               condition: {
                 published: true
                 isDeleted: false
