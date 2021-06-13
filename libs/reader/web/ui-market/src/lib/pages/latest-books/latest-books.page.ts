@@ -75,7 +75,7 @@ export class LatestBooksPage implements OnInit {
   }
 
   onMoreBooks(event) {
-    this.snackbarService.showSuccess('fetching more', 1000);
+    // this.snackbarService.showSuccess('fetching more', 1000);
     this.fetchBooks();
   }
 

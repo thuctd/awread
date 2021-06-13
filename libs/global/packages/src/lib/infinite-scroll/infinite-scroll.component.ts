@@ -12,7 +12,7 @@ import { Component, OnInit, Output, EventEmitter, ElementRef, ViewChild, Input, 
 
 export class InfiniteScrollComponent implements OnInit, OnDestroy {
   @Input() options = {
-    rootMargin: '0px 0px 300px 0px',
+    rootMargin: '0px 0px 600px 0px',
   };
   @Input() customStyle = `
         display: block;
