@@ -87,7 +87,7 @@ export class ChaptersGear {
 
   private transformDataChapters(chapters) {
     return chapters.map((item, index) => {
-      return { ...item };
+      return { ...item, position: +item.position };
     });
   }
 

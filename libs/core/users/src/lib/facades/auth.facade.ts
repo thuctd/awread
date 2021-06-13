@@ -6,7 +6,7 @@ import { CurrentUserQuery } from '../states/current-user';
 @Injectable({ providedIn: 'root' })
 export class AuthFacade {
   currentUser$ = this.currentUserQuery.select();
-  isLogin$ = this.currentUserQuery.select(state => !!state.userId);
+  isLogin$ = this.currentUserQuery.select((state) => !!state.userId);
   get currentUser() {
     return this.currentUserQuery.getValue();
   }
@@ -17,11 +17,19 @@ export class AuthFacade {
     private registerGear: RegisterGear,
     private currentUserQuery: CurrentUserQuery,
     private currentUserGear: CurrentUserGear,
-    private authRoutingGear: AuthRoutingGear,
-  ) { }
+    private authRoutingGear: AuthRoutingGear
+  ) {}
+
+  connectProviderAndGoToRegister(provider) {
+    this.registerGear.connectProviderAndGoToRegister(provider);
+  }
 
   logout(redirectLink?) {
     this.logoutGear.logout(redirectLink);
+  }
+
+  async connectSocialNewAccount(provider) {
+    return this.currentUserGear.connectSocialNewAccount(provider);
   }
 
   linkSocial(provider) {
@@ -29,7 +37,7 @@ export class AuthFacade {
   }
 
   updateUser(user) {
-    return this.currentUserGear.update(user);
+    return this.currentUserGear.updateUser(user);
   }
 
   loginEmail(credential) {
@@ -40,11 +48,11 @@ export class AuthFacade {
     this.loginGear.loginSocial(providerType);
   }
 
-  registerEmail(basicCredential: CreateUserCredential) {
-    this.registerGear.registerEmail(basicCredential);
-  }
-
   routeDefaultPage() {
     this.authRoutingGear.navigateAfterLoginComplete();
+  }
+
+  createNewAccount(requiredForm, optionalForm, experienceForm) {
+    this.registerGear.connectProviderAndGoToRegister;
   }
 }
