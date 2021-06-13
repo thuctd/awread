@@ -29,28 +29,23 @@ export class DetailPage implements OnInit, OnDestroy {
     private booksFacade: BooksFacade,
     private chaptersFacade: ChaptersFacade,
     private cd: ChangeDetectorRef
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.bookId = this.activatedRoute.snapshot.params['bookId'];
-    this.activatedRoute.paramMap
-      .pipe(
-        map((params) => params.get('bookId')),
-        switchMap((id) =>
-          this.booksFacade.getDetailBook(id).pipe(
-            tap((book) => {
-              this.authorId = book[0]['userId'];
-              this.booksFacade.getAuthorBooks(book[0].authors).subscribe();
-            })
-          )
-        )
-      )
-      .subscribe((book) => {
-        // console.log('book', book, this.bookId);
-        this.book = book[0];
-        this.breadcrumbs = this.getbreadcrumbs();
-        this.cd.detectChanges();
-      });
+    this.activatedRoute.paramMap.pipe(
+      map(params => params.get('bookId')),
+      switchMap(id => this.booksFacade.getDetailBook(id).pipe(
+        tap(book => {
+          this.authorId = book[0]['userId'];
+          this.booksFacade.getAuthorBooks(book[0].authors).subscribe();
+        })
+      )),
+    ).subscribe(book => {
+      this.book = book[0];
+      this.breadcrumbs = this.getbreadcrumbs();
+      this.cd.detectChanges();
+    })
     this.booksFacade.getTopBooks().subscribe();
     this.getAllChapters();
   }
@@ -140,7 +135,7 @@ export class DetailPage implements OnInit, OnDestroy {
   }
 
   nativeTopBook() {
-    this.router.navigate(['/top-books']);
+    this.router.navigate(['/index', 'top-books']);
   }
 
   ngOnDestroy(): void {

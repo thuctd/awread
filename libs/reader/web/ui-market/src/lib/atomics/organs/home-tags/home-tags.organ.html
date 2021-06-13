@@ -3,7 +3,8 @@
     <div class="mt-2 mr-2 sm:mr-4 whitespace-nowrap">
       <atom-title [title]='titlePage' [isUppercase]='false'></atom-title>
     </div>
-    <div [ngClass]="genres.length * 180 > maxWidth ? 'block' : 'hidden'" (click)="scrollLeft()" class="bg-white rounded-full w-6 h-6 md:w-8 md:h-8 flex justify-center items-center mt-2 shadow cursor-pointer">
+    <div [ngClass]="genres.length * 180 > maxWidth ? 'block' : 'hidden'" (click)="scrollLeft()"
+      class="bg-white rounded-full w-6 h-6 md:w-8 md:h-8 flex justify-center items-center mt-2 shadow cursor-pointer">
       <fa-icon class="text-gray-text p-3 text-sm md:text-base" [icon]="arrowLeftIcon"></fa-icon>
     </div>
     <div #widgetsContent class="flex mt-1.5 sm:mt-1 mx-2 sm:mx-6 overflow-x-hidden">
@@ -11,7 +12,8 @@
         (emitEvent)="filterItemsByGenre.emit(genre)">
       </rd-home-tab-category>
     </div>
-    <div [ngClass]="genres.length * 180 > maxWidth ? 'block' : 'hidden'" (click)="scrollRight()" class="bg-white rounded-full w-6 h-6 md:w-8 md:h-8 flex justify-center items-center mt-2 shadow cursor-pointer">
+    <div [ngClass]="genres.length * 180 > maxWidth ? 'block' : 'hidden'" (click)="scrollRight()"
+      class="bg-white rounded-full w-6 h-6 md:w-8 md:h-8 flex justify-center items-center mt-2 shadow cursor-pointer">
       <fa-icon class="text-gray-text p-3 text-sm md:text-base" [icon]="arrowRightIcon"></fa-icon>
     </div>
   </div>
@@ -34,11 +36,6 @@
             </ng-template>
           </ng-container>
         </owl-carousel-o>
-        <div class="spinner" *ngIf="loading">
-          <div class="bounce1"></div>
-          <div class="bounce2"></div>
-          <div class="bounce3"></div>
-        </div>
       </div>
     </div>
   </div>

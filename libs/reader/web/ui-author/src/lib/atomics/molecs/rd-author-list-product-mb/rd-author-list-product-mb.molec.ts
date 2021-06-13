@@ -16,11 +16,12 @@ export class RdAuthorListProductMbMolec implements OnInit {
   @Input() authorId = '123456zxcasdwqe_zxxzc';
   @Input() books = [];
   @Input() class = 'text-sm text-green-primary';
-  @Input() moreBook = 'Xem thêm...';
+  @Input() moreBook = 'Chuyển đến tác phẩm';
   @Input() btnTitle = 'Top phổ biến';
-  @Output() moreEvent = new EventEmitter();
+  @Output() moreBooks = new EventEmitter();
+  @Output() navigateBooksByAuthor = new EventEmitter();
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

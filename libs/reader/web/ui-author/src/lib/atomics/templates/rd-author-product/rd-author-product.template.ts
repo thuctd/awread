@@ -16,7 +16,7 @@ export class RdAuthorProductTemplate implements OnInit {
   @Input() items = [];
   @Input() books = [];
   @Input() loading;
-  @Input() hasMore;
+  @Input() hasNextPage;
   @Output() emitMoreBooks = new EventEmitter();
 
   constructor() { }

@@ -48,5 +48,6 @@ module.exports = {
     '<rootDir>/libs/feature/upload-image',
     '<rootDir>/libs/core/setting',
     '<rootDir>/libs/ipages',
+    '<rootDir>/libs/global/tools',
   ],
 };

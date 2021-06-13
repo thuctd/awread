@@ -1,9 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  GlobalDesignSystemAtomicModule,
-  StorybookSupportModule,
-} from '@awread/global/design-system';
+import { GlobalDesignSystemAtomicModule, StorybookSupportModule } from '@awread/global/design-system';
 import { WrtTabHeadMolec } from './molecs/wrt-tab-head/wrt-tab-head.molec';
 import { WrtActionBtnsMolec } from './molecs/wrt-action-btns/wrt-action-btns.molec';
 import { WrtLoginOrgan } from './organs/wrt-login/wrt-login.organ';
@@ -21,8 +18,21 @@ import { WrtNewPasswordFormMolec } from './molecs/wrt-new-password-form/wrt-new-
 import { WrtAccountCompleteOrgan } from './organs/wrt-account-complete/wrt-account-complete.organ';
 import { WrtNewPasswordOrgan } from './organs/wrt-new-password/wrt-new-password.organ';
 import { WrtRegisterCompleteFormMolec } from './molecs/wrt-register-complete-form/wrt-register-complete-form.molec';
+import { MatStepperModule } from '@angular/material/stepper';
+import { RegisterCompleteTemplate } from './templates/register-complete/register-complete.template';
+import { RegisterCompleteDesktopOrgan } from './organs/register-complete-desktop/register-complete-desktop.organ';
+import { RegisterCompleteMobileOrgan } from './organs/register-complete-mobile/register-complete-mobile.organ';
+import { RegisterCompleteBackgroundTemplate } from './templates/register-complete-background/register-complete-background.template';
+import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
+
 @NgModule({
-  imports: [CommonModule, GlobalDesignSystemAtomicModule, StorybookSupportModule],
+  providers: [
+    {
+      provide: STEPPER_GLOBAL_OPTIONS,
+      useValue: { showError: true },
+    },
+  ],
+  imports: [CommonModule, GlobalDesignSystemAtomicModule, StorybookSupportModule, MatStepperModule],
   exports: [
     CommonModule,
     WrtTabHeadMolec,
@@ -42,6 +52,10 @@ import { WrtRegisterCompleteFormMolec } from './molecs/wrt-register-complete-for
     WrtAccountCompleteOrgan,
     WrtNewPasswordOrgan,
     WrtRegisterCompleteFormMolec,
+    RegisterCompleteTemplate,
+    RegisterCompleteDesktopOrgan,
+    RegisterCompleteMobileOrgan,
+    RegisterCompleteBackgroundTemplate,
   ],
   declarations: [
     WrtTabHeadMolec,
@@ -61,6 +75,10 @@ import { WrtRegisterCompleteFormMolec } from './molecs/wrt-register-complete-for
     WrtAccountCompleteOrgan,
     WrtNewPasswordOrgan,
     WrtRegisterCompleteFormMolec,
+    RegisterCompleteTemplate,
+    RegisterCompleteDesktopOrgan,
+    RegisterCompleteMobileOrgan,
+    RegisterCompleteBackgroundTemplate,
   ],
 })
 export class WriterWebUiAuthAtomicModule {}

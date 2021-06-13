@@ -1,11 +1,12 @@
 <section>
   <div class="hidden sm:block">
-    <molec-interrogatory [text]="text" [textLink]="textLink" (submitEvent)="openFormLogin($event)"></molec-interrogatory>
+    <!-- <molec-interrogatory [text]="text" [textLink]="textLink" (submitEvent)="openFormLogin($event)"></molec-interrogatory> -->
   </div>
   <div class="sm:hidden block">
-    <molec-interrogatory [text]="text" [textLink]="textLink" (submitEvent)="openFormLoginMobile($event)"></molec-interrogatory>
+    <!-- <molec-interrogatory [text]="text" [textLink]="textLink" (submitEvent)="openFormLoginMobile($event)"></molec-interrogatory> -->
   </div>
-  <molec-register-form class="mt-4" #registerForm [form]="authForm"></molec-register-form>
-  <molec-submit class="mt-8" (btnClicked)="auth.emit()" [noSocial]="true" [active]="registerForm.form.valid" [text]="'Đăng ký'">
+  <!-- <molec-register-form class="mt-4" #registerForm [form]="authForm"></molec-register-form> -->
+
+  <molec-submit *ngIf="false" class="mt-8" (btnClicked)="auth.emit()" [active]="true" [text]="'Đăng ký'">
   </molec-submit>
 </section>

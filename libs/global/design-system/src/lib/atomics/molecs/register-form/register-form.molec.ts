@@ -23,7 +23,7 @@ export class RegisterFormMolec implements OnInit {
     email: ['', []],
     phone: ['', []],
     password: ['', [Validators.required]],
-    confirmPassword: ['', [Validators.required]],
+    confirmpassword: ['', [Validators.required]],
   });
   constructor(private fb: FormBuilder) {}
 

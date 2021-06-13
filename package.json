@@ -25,8 +25,8 @@
     "help": "nx help",
     "design-story": "nx run global-design-system:storybook",
     "nx-migrate": "npx @nrwl/tao@latest migrate @nrwl/workspace@latest",
-    "prod-tunnel": "ssh -L localhost:5433:172.17.0.2:5432 hiepxanh@awread.vn",
-    "next-tunnel": "ssh -L localhost:5434:172.17.0.2:5432 hiepxanh@awread-next",
+    "next-tunnel": "ssh -L localhost:5433:172.17.0.2:5432 hiepxanh@awread-next",
+    "prod-tunnel": "ssh -L localhost:5434:172.17.0.2:5432 hiepxanh@awread.vn",
     "prod-tunnel-graphql": "ssh -L localhost:4900:172.17.0.9:80 hiepxanh@awread.vn",
     "prod-writer-proxy": "export GRAPHQL_URI=http://localhost:4900 || set GRAPHQL_URI=http://localhost:4900&& nx serve writer-web -o --port=4200",
     "local-reader": "export ENVIRONMENT=local || set ENVIRONMENT=local&& nx serve reader-web -o --port=2000",
@@ -35,7 +35,8 @@
     "next-writer": "export ENVIRONMENT=next || set ENVIRONMENT=next&& nx serve writer-web -o --port=3200",
     "prod-reader": "export ENVIRONMENT=production || set ENVIRONMENT=production&& nx serve reader-web -o --port=4000",
     "prod-writer": "export ENVIRONMENT=production || set ENVIRONMENT=production&& nx serve writer-web -o --port=4200",
-    "backend-debug": "nx serve backend-graphql --inspect --port=7777"
+    "backend-debug": "nx serve backend-graphql --inspect --port=7777",
+    "postinstall": "ngcc --properties es2015 browser module main"
   },
   "private": true,
   "dependencies": {
@@ -138,8 +139,8 @@
     "@angular-devkit/build-angular": "~0.1102.0",
     "@angular/compiler-cli": "^11.2.0",
     "@angular/language-service": "^11.2.0",
-    "@commitlint/cli": "^12.0.1",
-    "@commitlint/config-conventional": "^12.0.1",
+    "@commitlint/cli": "^12.1.4",
+    "@commitlint/config-conventional": "^12.1.4",
     "@nrwl/jest": "11.5.2",
     "@types/cron": "^1.7.2",
     "@types/express": "^4.17.11",
