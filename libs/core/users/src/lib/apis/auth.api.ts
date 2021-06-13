@@ -18,7 +18,6 @@ export class AuthApi {
                 matchPassword
                 user {
                   name
-                  firstname
                   userId
                 }
               }
@@ -60,7 +59,6 @@ export class AuthApi {
                 accessToken
                 user {
                   name
-                  firstname
                   userId
                 }
               }

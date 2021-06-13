@@ -60,25 +60,43 @@ export class CurrentUserGear {
       });
   }
 
-  async linkSocial(provider) {
+  async connectSocialNewAccount(provider) {
     let socialUser: SocialUser;
-    switch (provider) {
-      case 'google':
-        socialUser = await this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID);
-        break;
-      case 'facebook':
-        socialUser = await this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID);
-        break;
-      default:
-        break;
+    try {
+      await this.socialAuthService.signOut();
+    } catch (error) {
+      console.log();
+    }
+
+    try {
+      switch (provider) {
+        case 'google':
+          socialUser = await this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID);
+          break;
+        case 'facebook':
+          socialUser = await this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID);
+          break;
+        default:
+          break;
+      }
+    } catch (error) {
+      console.warn('social login error', error);
+      throw error;
     }
 
     const credential = {
       provider,
       providerId: socialUser.id,
+      socialUser,
     };
 
     console.log('login result', socialUser);
+
+    return credential;
+  }
+
+  async linkSocial(provider) {
+    const credential = await this.connectSocialNewAccount(provider);
 
     this.currentUserApi.linkSocial(credential).subscribe((result) => {
       if (result) {

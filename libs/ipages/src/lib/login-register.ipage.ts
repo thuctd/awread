@@ -2,7 +2,7 @@ import { FormGroup, Validators } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { Directive, Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthFacade } from '@awread/core/users';
+import { AuthFacade, CurrentUserFacade } from '@awread/core/users';
 import { SnackbarService } from '@awread/global/packages';
 
 @Injectable({
@@ -20,10 +20,11 @@ export class LoginRegisterIpage {
 
   currentUser$ = this.authFacade.currentUser$;
   constructor(
-    public authFacade: AuthFacade,
-    public activatedRoute: ActivatedRoute,
-    public fb: FormBuilder,
-    public snackbarService: SnackbarService
+    private authFacade: AuthFacade,
+    private activatedRoute: ActivatedRoute,
+    private fb: FormBuilder,
+    private snackbarService: SnackbarService,
+    private currentUserFacade: CurrentUserFacade
   ) {}
 
   ngOnInit() {
@@ -37,12 +38,14 @@ export class LoginRegisterIpage {
     // this.router.navigate(['register']);
   }
 
-  register() {
-    const { password, confirmpassword } = this.registerForm.value;
-    if (password !== confirmpassword) {
-      return this.snackbarService.showError('Mật khẩu không khớp. Vui lòng thử lại!');
-    }
-    this.authFacade.registerEmail(this.registerForm.value);
+  register(provider) {
+    console.log('register by', provider);
+    this.authFacade.register(provider);
+    // const { password, confirmpassword } = this.registerForm.value;
+    // if (password !== confirmpassword) {
+    //   return this.snackbarService.showError('Mật khẩu không khớp. Vui lòng thử lại!');
+    // }
+    // this.authFacade.registerEmail(this.registerForm.value);
   }
 
   login(provider: 'email' | 'facebook' | 'google' | 'apple') {

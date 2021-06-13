@@ -20,8 +20,16 @@ export class AuthFacade {
     private authRoutingGear: AuthRoutingGear
   ) {}
 
+  register(provider) {
+    this.registerGear.register(provider);
+  }
+
   logout(redirectLink?) {
     this.logoutGear.logout(redirectLink);
+  }
+
+  async connectSocialNewAccount(provider) {
+    return this.currentUserGear.connectSocialNewAccount(provider);
   }
 
   linkSocial(provider) {

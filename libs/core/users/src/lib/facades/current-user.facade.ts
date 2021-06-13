@@ -5,6 +5,7 @@ import { CurrentUserQuery } from '../states/current-user';
 @Injectable({ providedIn: 'root' })
 export class CurrentUserFacade {
   currentUser$ = this.currentUserQuery.select();
+
   constructor(private currentUserGear: CurrentUserGear, public currentUserQuery: CurrentUserQuery) {}
 
   getCurrentUser() {
@@ -21,5 +22,9 @@ export class CurrentUserFacade {
 
   getUserId() {
     return this.currentUserQuery.getUserId();
+  }
+
+  getRegisterSocialUser() {
+    return this.currentUserQuery.getValue().registerCredential.socialUser;
   }
 }
