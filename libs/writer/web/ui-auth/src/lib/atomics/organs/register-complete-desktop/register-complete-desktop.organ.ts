@@ -47,6 +47,32 @@ export class RegisterCompleteDesktopOrgan implements OnInit {
     { validator: this.passwordMatchValidator }
   );
 
+  @Input() experienceForm = this.fb.group({
+    age: ['2'],
+    genreIds: [[]],
+  });
+
+  @Input() optionalForm = this.fb.group({
+    firstname: [''],
+    middlename: [''],
+    lastname: [''],
+    facebook: [''],
+    google: [''],
+    apple: [''],
+  });
+
+  @Input() requireForm = this.fb.group(
+    {
+      username: ['', [Validators.required]],
+      name: [''],
+      email: ['', []],
+      phone: ['', []],
+      password: ['', [Validators.required, Validators.minLength(4)]],
+      confirmpassword: ['', [Validators.required, Validators.minLength(4)]],
+    },
+    { validator: this.passwordMatchValidator }
+  );
+
   constructor(private fb: FormBuilder) {}
 
   passwordMatchValidator(g) {

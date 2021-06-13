@@ -24,7 +24,7 @@ export class LoginRegisterIpage {
     public activatedRoute: ActivatedRoute,
     public fb: FormBuilder,
     public snackbarService: SnackbarService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.initForm();
@@ -38,8 +38,8 @@ export class LoginRegisterIpage {
   }
 
   register() {
-    const { password, confirmPassword } = this.registerForm.value;
-    if (password !== confirmPassword) {
+    const { password, confirmpassword } = this.registerForm.value;
+    if (password !== confirmpassword) {
       return this.snackbarService.showError('Mật khẩu không khớp. Vui lòng thử lại!');
     }
     this.authFacade.registerEmail(this.registerForm.value);
@@ -71,7 +71,7 @@ export class LoginRegisterIpage {
       email: ['', []],
       phone: ['', []],
       password: ['', Validators.required],
-      confirmPassword: ['', Validators.required],
+      confirmpassword: ['', Validators.required],
     });
   }
 }

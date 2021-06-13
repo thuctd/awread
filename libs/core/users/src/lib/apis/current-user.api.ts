@@ -124,11 +124,23 @@ export class CurrentUserApi {
           $phone: String
           $name: String
           $avatar: Boolean
+          $facebook: String
+          $google: String
+          $apple: String
         ) {
           updateUserByUserId(
             input: {
               userId: $userId
-              userPatch: { username: $username, email: $email, phone: $phone, name: $name, avatar: $avatar }
+              userPatch: {
+                username: $username
+                email: $email
+                phone: $phone
+                name: $name
+                avatar: $avatar
+                facebook: $facebook
+                google: $google
+                apple: $apple
+              }
             }
           ) {
             user {
@@ -137,6 +149,9 @@ export class CurrentUserApi {
               phone
               name
               avatar
+              facebook
+              google
+              apple
             }
           }
         }
@@ -154,9 +169,9 @@ export class CurrentUserApi {
       mutation updateUserByUserId($userId: UUID!, $providerId: String) {
         updateUserByUserId(
           input: {
-            userId: $userId,
+            userId: $userId
             userPatch: {
-              ${credential.provider}: $providerId,
+              ${credential.provider}: $providerId
             }
           }
         ) {
