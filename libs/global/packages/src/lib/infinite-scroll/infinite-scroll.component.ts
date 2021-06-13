@@ -38,23 +38,32 @@ export class InfiniteScrollComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.addCustomStyle();
+    this.observerTarget();
+  }
+
+  addCustomStyle() {
     console.log('host', this.host, this.anchor, this.usingWindowScroll);
     this.renderer.addClass(this.host.nativeElement, this.customClass);
     this.renderer.setAttribute(this.host.nativeElement, 'style', this.customStyle);
     if (this.usingWindowScroll == true) {
       this.renderer.setAttribute(this.host.nativeElement, 'style', '');
     }
+  }
 
+  observerTarget() {
     const options = {
       root: this.isHostScrollable() ? this.host.nativeElement : null,
       ...this.options
     };
+    this.observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        console.log('entry', entry.isIntersecting, entry);
+        if (entry.isIntersecting) {
+          this.scrollIsIntersecting.emit();
+        }
+      });
 
-    this.observer = new IntersectionObserver(([entry]) => {
-      console.log('entry', entry.isIntersecting, entry);
-      if (entry.isIntersecting) {
-        this.scrollIsIntersecting.emit();
-      }
     }, options);
 
     this.observer.observe(this.anchor.nativeElement);

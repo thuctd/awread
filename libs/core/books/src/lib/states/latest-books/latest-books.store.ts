@@ -13,7 +13,7 @@ const initialState = {
   currentPage: 1,
   pageInfo: {
     endCursor: undefined,
-    hasNextPage: undefined,
+    hasNextPage: true,
     hasPreviousPage: undefined,
     startCursor: undefined,
   }

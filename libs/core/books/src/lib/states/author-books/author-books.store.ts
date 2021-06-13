@@ -9,7 +9,7 @@ export interface AuthorBooksState extends EntityState<Book>, ActiveState {
 const initialState = {
   pageInfo: {
     endCursor: undefined,
-    hasNextPage: undefined,
+    hasNextPage: true,
     hasPreviousPage: undefined,
     startCursor: undefined,
   }
