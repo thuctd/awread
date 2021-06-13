@@ -6,26 +6,35 @@ import { CurrentUserStore } from '../states/current-user';
 import { AuthRoutingGear } from './auth-routing.gear';
 import { MatDialog } from '@angular/material/dialog';
 import { CurrentUserGear } from './current-user.gear';
-
+import { SocialAuthService, SocialUser } from 'angularx-social-login';
+import { FacebookLoginProvider, GoogleLoginProvider } from 'angularx-social-login';
+import { Router } from '@angular/router';
 @Injectable({ providedIn: 'root' })
 export class RegisterGear {
   constructor(
     private authApi: AuthApi,
     private currentUserStore: CurrentUserStore,
     private snackbarService: SnackbarService,
-    private authRoutingGear: AuthRoutingGear,
     private matDialog: MatDialog,
     private currentUserGear: CurrentUserGear,
-  ) { }
+    private router: Router
+  ) {}
 
-
-  async registerEmail(credential: CreateUserCredential) {
-    this.authApi.registerUser(credential).subscribe(result => {
+  createNewAccount(requiredForm, optionalForm, experienceForm) {
+    this.authApi.registerUser(requiredForm).subscribe((result) => {
       if (result.case == 'success') {
         this.registerSuccess(result);
+        this.updatePersonal(optionalForm, experienceForm);
       } else {
         this.registerFail(result);
       }
+    });
+  }
+
+  updatePersonal(optionalForm, experienceForm) {
+    this.currentUserGear.updatePersonal({
+      ...optionalForm,
+      ...experienceForm,
     });
   }
 
@@ -34,7 +43,6 @@ export class RegisterGear {
     localStorage.setItem('accessToken', result?.accessToken);
     this.currentUserGear.getCurrentUser().subscribe();
     this.currentUserStore.update({ userId: result.userId });
-    this.authRoutingGear.navigateAfterCreateAccount();
     this.matDialog.closeAll();
   }
 
@@ -55,7 +63,21 @@ export class RegisterGear {
         break;
     }
     this.snackbarService.showError(`Tài khoản đã tồn tại với ${text} là: ${result.duplicateValue}`);
-
   }
 
+  async connectProviderAndGoToRegister(provider) {
+    let credential;
+    switch (provider) {
+      case 'facebook':
+        credential = await this.currentUserGear.connectSocialNewAccount(provider);
+        break;
+      case 'google':
+        credential = await this.currentUserGear.connectSocialNewAccount(provider);
+        break;
+      default:
+        break;
+    }
+    this.currentUserStore.update({ registerCredential: credential });
+    this.router.navigateByUrl('/register');
+  }
 }

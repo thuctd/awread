@@ -23,18 +23,18 @@ const routes: Routes = [
                 (m) => m.LoginRegisterDesktopModule
               ),
       },
-      {
-        path: 'register',
-        canActivate: [LandingGuard],
-        loadChildren: () =>
-          window.innerWidth <= 768 && window?.haveMobile
-            ? import('./pages/login-register-mobile/login-register-mobile.module').then(
-                (m) => m.LoginRegisterMobileModule
-              )
-            : import('./pages/login-register-desktop/login-register-desktop.module').then(
-                (m) => m.LoginRegisterDesktopModule
-              ),
-      },
+      // {
+      //   path: 'register',
+      //   canActivate: [LandingGuard],
+      //   loadChildren: () =>
+      //     window.innerWidth <= 768 && window?.haveMobile
+      //       ? import('./pages/login-register-mobile/login-register-mobile.module').then(
+      //           (m) => m.LoginRegisterMobileModule
+      //         )
+      //       : import('./pages/login-register-desktop/login-register-desktop.module').then(
+      //           (m) => m.LoginRegisterDesktopModule
+      //         ),
+      // },
     ],
   },
   {
@@ -48,15 +48,11 @@ const routes: Routes = [
     path: 'new-password',
     loadChildren: () =>
       window.innerWidth <= 768 && window?.haveMobile
-        ? import('./pages/new-password-mobile/new-password-mobile.module').then(
-            (m) => m.NewPasswordMobileModule
-          )
-        : import('./pages/new-password-desktop/new-password-desktop.module').then(
-            (m) => m.NewPasswordDesktopModule
-          ),
+        ? import('./pages/new-password-mobile/new-password-mobile.module').then((m) => m.NewPasswordMobileModule)
+        : import('./pages/new-password-desktop/new-password-desktop.module').then((m) => m.NewPasswordDesktopModule),
   },
   {
-    path: 'register-completed',
+    path: 'register',
     loadChildren: () =>
       window.innerWidth <= 768 && window?.haveMobile
         ? import('./pages/register-complete-mobile/register-complete-mobile.module').then(

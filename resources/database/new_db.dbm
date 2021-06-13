@@ -3,8 +3,13 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.4-alpha" use-changelog="false" last-position="0,0" last-zoom="1" max-obj-count="30"
-	 default-owner="postgres">
+<dbmodel pgmodeler-ver="0.9.4-alpha" use-changelog="false" last-position="0,716" last-zoom="1" max-obj-count="32"
+	 default-schema="public" default-owner="postgres"
+	 layers="Default layer"
+	 active-layers="0"
+	 layer-name-colors="#000000"
+	 layer-rect-colors="#b4b4b4"
+	 show-layer-names="false" show-layer-rects="false">
 <role name="public_read"
       inherit="true">
 </role>
@@ -35,18 +40,21 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <schema name="public" layers="0" fill-color="#e1e1e1" sql-disabled="true">
 </schema>
 
-<extension name="pgcrypto">
-</extension>
-
-<extension name="pg_trgm">
-</extension>
-
-<extension name="uuid-ossp">
-</extension>
-
 <schema name="private" layers="0" rect-visible="true" fill-color="#e1e1e1">
 	<role name="postgres"/>
 </schema>
+
+<extension name="pgcrypto">
+	<schema name="public"/>
+</extension>
+
+<extension name="pg_trgm">
+	<schema name="public"/>
+</extension>
+
+<extension name="uuid-ossp">
+	<schema name="public"/>
+</extension>
 
 <usertype name="jwt_token" configuration="composite">
 	<schema name="public"/>
@@ -146,7 +154,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</constraint>
 </table>
 
-<table name="users" layers="0" collapse-mode="2" max-obj-count="26" z-value="0">
+<table name="users" layers="0" collapse-mode="2" max-obj-count="14" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
 	<position x="460" y="800"/>
@@ -171,24 +179,6 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="updatedAt" default-value="now()">
 		<type name="timestamp with time zone" length="0" with-timezone="true"/>
 	</column>
-	<column name="phone">
-		<type name="text" length="0"/>
-	</column>
-	<column name="code" default-value="+84">
-		<type name="text" length="0"/>
-	</column>
-	<column name="age" default-value="2">
-		<type name="numeric" length="0"/>
-	</column>
-	<column name="firstname">
-		<type name="text" length="0"/>
-	</column>
-	<column name="middlename">
-		<type name="text" length="0"/>
-	</column>
-	<column name="lastname">
-		<type name="text" length="0"/>
-	</column>
 	<column name="avatar" default-value="false">
 		<type name="boolean" length="0"/>
 	</column>
@@ -201,19 +191,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="google">
 		<type name="text" length="0"/>
 	</column>
-	<column name="websiteAddress">
-		<type name="text" length="0"/>
-	</column>
-	<column name="facebookAddress">
-		<type name="text" length="0"/>
-	</column>
-	<column name="dob">
-		<type name="text" length="0"/>
-	</column>
-	<column name="gender">
-		<type name="numeric" length="0"/>
-	</column>
-	<column name="bio">
+	<column name="phone">
 		<type name="text" length="0"/>
 	</column>
 	<constraint name="users_pk" type="pk-constr" table="public.users">
@@ -389,16 +367,48 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</constraint>
 </table>
 
-
-<table name="personals" layers="0" collapse-mode="2" max-obj-count="2" z-value="0">
+<table name="personals" layers="0" collapse-mode="2" max-obj-count="15" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="500" y="1380"/>
+	<position x="480" y="1180"/>
 	<column name="userId" not-null="true">
 		<type name="uuid" length="0"/>
 	</column>
-	<column name="age">
+	<column name="bio">
 		<type name="text" length="0"/>
+	</column>
+	<column name="gender">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="dob">
+		<type name="text" length="0"/>
+	</column>
+	<column name="facebookAddress">
+		<type name="text" length="0"/>
+	</column>
+	<column name="websiteAddress">
+		<type name="text" length="0"/>
+	</column>
+	<column name="zaloAddress">
+		<type name="text" length="0"/>
+	</column>
+	<column name="lastname">
+		<type name="text" length="0"/>
+	</column>
+	<column name="middlename">
+		<type name="text" length="0"/>
+	</column>
+	<column name="firstname">
+		<type name="text" length="0"/>
+	</column>
+	<column name="age" default-value="2">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="code" default-value="'+84'">
+		<type name="text" length="0"/>
+	</column>
+	<column name="genreIds">
+		<type name="numeric" length="0" dimension="1"/>
 	</column>
 	<constraint name="personals_pk" type="pk-constr" table="public.personals">
 		<columns names="userId" ref-type="src-columns"/>
@@ -782,7 +792,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	end;]]></definition>
 </function>
 
-<function name="current_user"
+<function name="this_user"
 		window-func="false"
 		returns-setof="false"
 		behavior-type="CALLED ON NULL INPUT"
@@ -795,15 +805,24 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<role name="postgres"/>
 	<language name="plpgsql"/>
 	<return-type>
-	<type name="public.users" length="0"/>
+	<parameter name="users">
+		<type name="public.users" length="0"/>
+	</parameter>
+	<parameter name="personals">
+		<type name="public.personals" length="0"/>
+	</parameter>
 	</return-type>
 	<definition><![CDATA[declare 
 	"currentUser" public.users;
+	"currentPersonal" public.personals;
 	begin
 		select * into "currentUser"
 		from public.users
 		where  "userId" = nullif(current_setting('jwt.claims.userId', true), '')::uuid;
-		return "currentUser";
+			select * into "currentPersonal"
+		from public.personals
+		where  "userId" = nullif(current_setting('jwt.claims.userId', true), '')::uuid;
+		return query select "currentUser", "currentPersonal";
 	end;
 	]]></definition>
 </function>
@@ -960,9 +979,9 @@ CAUTION: Do not modify this file unless you know what you are doing.
         WHERE m.member = r.oid) as memberof
 	, r.rolreplication
 	]]></expression>
-		</reference>
-		<reference>
-			<expression><![CDATA[pg_catalog.pg_roles r
+	</reference>
+	<reference>
+		<expression><![CDATA[pg_catalog.pg_roles r
 	]]></expression>
 	</reference>
 	<reference>
@@ -1173,9 +1192,9 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	count(*) filter (where c.published = true)::numeric as "publishedCount",
 	count(*) filter (where c.published = false)::numeric as "draftCount",
 	sum(v.count)::numeric as "viewCount"]]></expression>
-		</reference>
-		<reference>
-			<expression><![CDATA[books b
+	</reference>
+	<reference>
+		<expression><![CDATA[books b
 	left join chapters c using ("bookId")
 	left join book_visits v using ("bookId")]]></expression>
 	</reference>
@@ -1418,6 +1437,44 @@ end;]]></definition>
 	end;]]></definition>
 </function>
 
+<function name="refresh_token"
+		window-func="false"
+		returns-setof="false"
+		behavior-type="CALLED ON NULL INPUT"
+		function-type="VOLATILE"
+		security-type="SECURITY INVOKER"
+		parallel-type="PARALLEL UNSAFE"
+		execution-cost="1"
+		row-amount="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<language name="plpgsql"/>
+	<return-type>
+	<parameter name="accessToken">
+		<type name="public.jwt_token" length="0"/>
+	</parameter>
+	<parameter name="user">
+		<type name="public.users" length="0"/>
+	</parameter>
+	</return-type>
+	<definition><![CDATA[declare
+"accessToken" public.jwt_token;
+"account" public.users;
+begin
+
+	select * into "account"
+	from public.users
+	where  "userId" = nullif(current_setting('jwt.claims.userId', true), '')::uuid;
+
+	if "account"  is null then
+		return query select "accessToken", "account";
+		else 
+		"accessToken" := (account."userId", account.role, extract(epoch from (now() + interval '3 months')))::public.jwt_token;
+		return query select "accessToken", "account";
+		end if;
+
+end;]]></definition>
+</function>
 
 <constraint name="books_userId_fk" type="fk-constr" comparison-type="MATCH FULL"
 	 upd-action="NO ACTION" del-action="CASCADE" ref-table="public.users" table="public.books">
@@ -1491,16 +1548,16 @@ end;]]></definition>
 	<columns names="userId" ref-type="dst-columns"/>
 </constraint>
 
-<constraint name="contents_chapterId_fk" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="CASCADE" del-action="CASCADE" ref-table="public.chapters" table="public.contents">
-	<columns names="chapterId" ref-type="src-columns"/>
-	<columns names="chapterId" ref-type="dst-columns"/>
-</constraint>
-
 <constraint name="personal_userId_fk" type="fk-constr" comparison-type="MATCH FULL"
 	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.users" table="public.personals">
 	<columns names="userId" ref-type="src-columns"/>
 	<columns names="userId" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="contents_chapterId_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="CASCADE" del-action="CASCADE" ref-table="public.chapters" table="public.contents">
+	<columns names="chapterId" ref-type="src-columns"/>
+	<columns names="chapterId" ref-type="dst-columns"/>
 </constraint>
 
 <relationship name="rel_books_users" type="relfk" layers="0"
@@ -1697,5 +1754,15 @@ end;]]></definition>
 	<object name="public.books_genres" type="table"/>
 	<roles names="public_read"/>
 	<privileges select="grant-op"/>
+</permission>
+<permission>
+	<object name="public.personals" type="table"/>
+	<roles names="public_read"/>
+	<privileges select="grant-op"/>
+</permission>
+<permission>
+	<object name="public.personals" type="table"/>
+	<roles names="basic_write"/>
+	<privileges delete="grant-op" insert="grant-op" update="grant-op"/>
 </permission>
 </dbmodel>

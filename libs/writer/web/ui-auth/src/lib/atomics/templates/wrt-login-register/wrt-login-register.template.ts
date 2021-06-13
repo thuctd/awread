@@ -24,7 +24,7 @@ export class WrtLoginRegisterTemplate implements OnInit {
     email: ['', []],
     phone: ['', []],
     password: ['', Validators.required],
-    confirmPassword: ['', Validators.required],
+    confirmpassword: ['', Validators.required],
   });
   // @Input() tabs: TabHead[];
   @Input() tabs = [
@@ -34,7 +34,7 @@ export class WrtLoginRegisterTemplate implements OnInit {
   @Input() selectedTab = 'login';
   @Output() regiterEvent = new EventEmitter();
   @Output() auth = new EventEmitter();
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
     console.log('mode: ', this.selectedTab);

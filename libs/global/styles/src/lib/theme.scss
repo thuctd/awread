@@ -41,6 +41,7 @@ $datepicker-theme: mat-light-theme($candy-app-primary, $candy-app-accent);
 
 // Apply the theme to your component
 @include mat-datepicker-theme($datepicker-theme);
+@include mat-stepper-theme($datepicker-theme);
 
 // I want to disable this
 
