@@ -1,0 +1,70 @@
+<mat-vertical-stepper #stepper>
+    <mat-step [label]="'Tài khoản'" [state]="'auth'" [stepControl]="firstForm" errorMessage="username password là bắt buộc">
+        <molec-register-form [form]="firstForm"></molec-register-form>
+        <div>
+            <!-- <pre> {{ firstForm.hasError('missmatch') }} </pre> -->
+            <!-- <pre> {{ firstForm.errors | json }} </pre> -->
+            <p *ngIf="firstForm.hasError('missmatch')" class="text-red-600">Mật khẩu không khớp</p>
+            <div class="flex">
+                <button matStepperNext class="rounded text-white bg-green-primary border border-solid border-gray-light"> Tiếp </button>
+            </div>
+        </div>
+    </mat-step>
+    <mat-step [label]="'Thông tin'" [state]="'exp'" [stepControl]="secondForm" errorMessage="Tên hiển thị là bắt buộc">
+        <div [formGroup]="secondForm">
+            <input-form required [inputControl]="secondForm.get('name')" [placeholder]="'Tên hiển thị'"></input-form>
+            <input-form [inputControl]="secondForm.get('firstname')" [placeholder]="'Tên'"></input-form>
+            <input-form [inputControl]="secondForm.get('middlename')" [placeholder]="'Tên đệm'"></input-form>
+            <input-form [inputControl]="secondForm.get('lastname')" [placeholder]="'Họ'"></input-form>
+            <div class="flex">
+                <button matStepperPrevious class="rounded text-gray bg-white border border-solid border-gray-light"> Quay lại </button>
+                <button matStepperNext class="rounded text-white bg-green-primary border border-solid border-gray-light"> Tiếp </button>
+            </div>
+        </div>
+    </mat-step>
+    <mat-step [label]="'Trải nghiệm'" [state]="'exp'" [stepControl]="thirdForm" errorMessage="Tùy biến ứng dụng theo ý của bạn">
+        <form [formGroup]="thirdForm">
+            <div class="mb-6 flex items-center">
+                <label class="text-gray-400 w-2/5"> Giới hạn nội dung</label>
+                <div class="w-3/5">
+                    <select formControlName="age"
+                        class="border rounded-full border-gray-200 bg-white pl-4 pr-8 py-2 outline-none focus:outline-none focus:ring-1 focus:ring-gray-300 focus:border-gray-300">
+                        <option value="1" class="py-1">6-13</option>
+                        <option value="2" class="py-1">13-18</option>
+                        <option value="3" class="py-1">18+</option>
+                    </select>
+                </div>
+            </div>
+            <div class="mb-6 flex items-center">
+                <label class="text-gray-400 w-2/5"> Gợi ý truyện theo sở thích</label>
+            </div>
+            <div class="md:w-3/5">
+                <ng-select class="custom" [items]="genres" bindValue="genreId" [multiple]="true" bindLabel="name" formControlName="genreIds"
+                    placeholder="Thể loại">
+                </ng-select>
+            </div>
+            <div class="flex">
+                <button matStepperPrevious class="rounded text-gray bg-white border border-solid border-gray-light"> Quay lại </button>
+                <button matStepperNext class="rounded text-white bg-green-primary border border-solid border-gray-light"> Tiếp </button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step [label]="'Hoàn thiện'" [state]="'done'">
+        <p>{{ firstForm.value | json }}</p>
+        <p>{{ secondForm.value | json }}</p>
+        <p>{{ thirdForm.value | json }}</p>
+        <p>You are now done.</p>
+        <div class="flex">
+            <button matStepperNext class="rounded text-white bg-green-primary border border-solid border-gray-light"> Tiếp </button>
+            <button (click)="stepper.reset()" class="rounded text-gray bg-white border border-solid border-gray-light"> Reset </button>
+        </div>
+
+    </mat-step>
+    <ng-template matStepperIcon="edit">
+        <fa-icon class="text-white" [icon]="icons.faCheck"></fa-icon>
+    </ng-template>
+    <ng-template matStepperIcon="error">
+        <fa-icon class="text-red" [icon]="icons.faExclamationCircle"></fa-icon>
+    </ng-template>
+
+</mat-vertical-stepper>

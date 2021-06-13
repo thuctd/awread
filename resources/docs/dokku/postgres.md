@@ -46,7 +46,7 @@ dokku postgres:enter awread_database
 
 # psql
 
-psql -U postgres
+psql -U postgres -d awread_database
 
 # drop
 

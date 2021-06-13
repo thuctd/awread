@@ -1,4 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { RegisterCompletePage } from '../register-complete/register-complete.page';
 
 @Component({
   selector: 'page-register-complete-mobile',
@@ -12,4 +13,4 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RegisterCompleteMobilePage {}
+export class RegisterCompleteMobilePage extends RegisterCompletePage {}

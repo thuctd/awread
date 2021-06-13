@@ -1,10 +1,13 @@
 <div [formGroup]="form">
-  <input-form [inputControl]="form.get('username')" [placeholder]="'Username để đăng nhập (bắt buộc)'" [faIcon]="icons.faUser">
+  <input-form required [inputControl]="form.get('username')" [placeholder]="'Username để đăng nhập'" [faIcon]="icons.faUser">
   </input-form>
-  <input-form [inputControl]="form.get('email')" [placeholder]="'Email để khôi phục mật khẩu và đăng nhập'" [faIcon]="icons.faEnvelope">
+  <input-form [inputControl]="form.get('name')" [placeholder]="'Tên hiển thị'" [faIcon]="icons.faEnvelope">
   </input-form>
-  <input-form [inputControl]="form.get('phone')" [placeholder]="'Số điện thoại để đăng nhập'" [faIcon]="icons.faPhone"></input-form>
-  <input-form [type]="type" [inputControl]="form.get('password')" [placeholder]="'Mật khẩu (bắt buộc)'" [faIcon]="icons.faLock">
+  <input-form [inputControl]="form.get('email')" [placeholder]="'Email để khôi phục mật khẩu và đăng nhập (tùy chọn)'" [faIcon]="icons.faEnvelope">
   </input-form>
-  <input-form [type]="type" [inputControl]="form.get('confirmPassword')" [placeholder]="'Xác nhận mật khẩu (bắt buộc)'" [faIcon]="icons.faLock"></input-form>
+  <input-form [inputControl]="form.get('phone')" [placeholder]="'Số điện thoại để đăng nhập (tùy chọn)'" [faIcon]="icons.faPhone"></input-form>
+  <input-form required [type]="type" [inputControl]="form.get('password')" [placeholder]="'Mật khẩu'" [faIcon]="icons.faLock">
+  </input-form>
+  <input-form required [type]="type" [inputControl]="form.get('confirmpassword')" [placeholder]="'Xác nhận mật khẩu'" [faIcon]="icons.faLock">
+  </input-form>
 </div>
