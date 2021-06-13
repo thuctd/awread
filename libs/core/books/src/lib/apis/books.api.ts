@@ -254,6 +254,7 @@ export class BooksApi {
                   }
                 }
               }`;
+    console.log(queryString)
     return this.apollo.query({
       query: gql`
           ${queryString}
