@@ -40,12 +40,7 @@ export class LoginRegisterIpage {
 
   register(provider) {
     console.log('register by', provider);
-    this.authFacade.register(provider);
-    // const { password, confirmpassword } = this.registerForm.value;
-    // if (password !== confirmpassword) {
-    //   return this.snackbarService.showError('Mật khẩu không khớp. Vui lòng thử lại!');
-    // }
-    // this.authFacade.registerEmail(this.registerForm.value);
+    this.authFacade.connectProviderAndGoToRegister(provider);
   }
 
   login(provider: 'email' | 'facebook' | 'google' | 'apple') {

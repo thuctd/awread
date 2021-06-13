@@ -55,7 +55,8 @@ export class RegisterCompleteIpage implements OnInit {
   linkSocialEvent(event) {}
 
   private updateForm() {
-    const socialUser = this.currentUserFacade.getRegisterSocialUser();
+    const socialCredential = this.currentUserFacade.getRegisterCredential();
+    const socialUser = socialCredential.socialUser;
     console.log('socialUser', socialUser);
     if (socialUser) {
       this.requireForm.patchValue({
@@ -65,6 +66,7 @@ export class RegisterCompleteIpage implements OnInit {
       this.optionalForm.patchValue({
         firstname: socialUser.firstName ?? '',
         lastname: socialUser.lastName ?? '',
+        [socialCredential.provider]: socialCredential.providerId,
       });
     }
   }
@@ -76,5 +78,7 @@ export class RegisterCompleteIpage implements OnInit {
     }
   }
 
-  completeRegister() {}
+  completeRegister() {
+    this.authFacade.createNewAccount(this.requireForm, this.optionalForm, this.experienceForm);
+  }
 }

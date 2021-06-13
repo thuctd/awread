@@ -20,8 +20,8 @@ export class AuthFacade {
     private authRoutingGear: AuthRoutingGear
   ) {}
 
-  register(provider) {
-    this.registerGear.register(provider);
+  connectProviderAndGoToRegister(provider) {
+    this.registerGear.connectProviderAndGoToRegister(provider);
   }
 
   logout(redirectLink?) {
@@ -48,11 +48,11 @@ export class AuthFacade {
     this.loginGear.loginSocial(providerType);
   }
 
-  registerEmail(basicCredential: CreateUserCredential) {
-    this.registerGear.registerEmail(basicCredential);
-  }
-
   routeDefaultPage() {
     this.authRoutingGear.navigateAfterLoginComplete();
+  }
+
+  createNewAccount(requiredForm, optionalForm, experienceForm) {
+    this.registerGear.connectProviderAndGoToRegister;
   }
 }

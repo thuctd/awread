@@ -24,7 +24,7 @@ export class CurrentUserFacade {
     return this.currentUserQuery.getUserId();
   }
 
-  getRegisterSocialUser() {
-    return this.currentUserQuery.getValue().registerCredential.socialUser;
+  getRegisterCredential() {
+    return this.currentUserQuery.getValue().registerCredential;
   }
 }
