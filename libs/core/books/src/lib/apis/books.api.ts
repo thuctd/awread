@@ -45,12 +45,13 @@ export class BooksApi {
       .query({
         query: gql`
          query allMvBooksLatestChapters($first: Int ${categoryId ? `, $categoryId: BigFloat` : ''}) {
-        allMvBooksLatestChapters (first: $first, condition: {completed: true, isDeleted: false ${categoryId ? `, categoryId: $categoryId ` : ''}} ){
+        allMvBooksLatestChapters (
+          first: $first
+          condition: {completed: true, isDeleted: false ${categoryId ? `, categoryId: $categoryId ` : ''}} ){
           nodes {
             title
             authors
             newestChapters
-            genres
             bookId
             categoryId
             completed
@@ -66,19 +67,15 @@ export class BooksApi {
             updatedAt
             userId
           }
-          pageInfo {
-            hasNextPage
-          }
-          totalCount
         }
       }
       `,
         variables: { categoryId, first },
       })
-      .pipe();
+      .pipe(map((res) => res?.['data']?.['allMvBooksLatestChapters']?.['nodes']));
   }
 
-  getAuthorBooks(authorIds: string[], first?: number) {
+  getAuthorBooks(authorIds: string[], first: number = 10) {
     //NOTE: console.log(`containsAnyKeys: ${['id1', 'id2']}`); // containsAnyKeys: id1,id2
     //NOTE: console.log(`containsAnyKeys: ${JSON.stringify(['id1', 'id2'])}`); // containsAnyKeys: ["id1","id2"]
     //NOTE: JSON.stringify() is important
@@ -87,7 +84,9 @@ export class BooksApi {
         query: gql`
       query allMvBooksLatestChapters ($first: Int) {
         allMvBooksLatestChapters(
-                  first: $first filter: {authors: {containsAnyKeys: ${JSON.stringify(authorIds)} }} condition: { published: true, isDeleted: false }
+                  first: $first
+                  filter: {authors: {containsAnyKeys: ${JSON.stringify(authorIds)} }}
+                  condition: { published: true, isDeleted: false }
         ) {
           nodes {
             title
@@ -125,7 +124,9 @@ export class BooksApi {
       .query({
         query: gql`
           query allVRandomBooks($genreId: String!) {
-            allVRandomBooks(condition: {isDeleted: false, published: true} filter: { genres: { containsKey: $genreId } }, first: 20) {
+            allVRandomBooks(
+              condition: {isDeleted: false, published: true}
+              filter: { genres: { containsKey: $genreId } }, first: 20) {
               nodes {
                 bookId
                 categoryId
@@ -148,7 +149,10 @@ export class BooksApi {
       .query({
         query: gql`
           query getTopBooks ($first: Int) {
-            allMvMostViewBooks(first: $first orderBy: VIEWS_DESC condition: {isDeleted: false, published: true}) {
+            allMvMostViewBooks(
+              first: $first
+              orderBy: VIEWS_DESC
+              condition: {isDeleted: false, published: true}) {
               nodes {
                 bookId
                 title
@@ -227,10 +231,12 @@ export class BooksApi {
       mvBooks = 'allVRandomBooks';
     }
 
-    queryString = `query ${mvBooks}( $published: Boolean = true ${categoryId ? `$categoryId: BigFloat` : ''} ${filters.completed ? `$completed: Boolean` : ''} ${filters.type ? `, $type: BigFloat` : ''}) {
-              ${mvBooks}(first: 20, condition: { published: $published ${categoryId ? `categoryId: $categoryId, ` : ''} ${filters.type ? ` type: $type, ` : ''} ${filters.completed ? `completed: $completed` : ''}},
-              ${filters.criteria === '0' ? `orderBy: PUBLISHED_DESC, ` : ''}
-              filter: { updatedAt: {greaterThan: "${publishedAt}"} ${genres.length ? `, genres: {containsAnyKeys: ${JSON.stringify(genres)}}` : ''}}) {
+    queryString = `query ${mvBooks}($published: Boolean = true ${categoryId ? `$categoryId: BigFloat` : ''} ${filters.completed ? `$completed: Boolean` : ''} ${filters.type ? `, $type: BigFloat` : ''}) {
+              ${mvBooks}(
+                first: 20,
+                condition: { published: $published ${categoryId ? `,categoryId: $categoryId` : ''} ${filters.type ? `,type: $type` : ''} ${filters.completed ? `,completed: $completed` : ''}},
+              ${filters.criteria === '0' ? `orderBy: PUBLISHED_DESC ` : ''}
+                filter: { updatedAt: {greaterThan: "${publishedAt}"} ${genres.length ? `, genres: {containsAnyKeys: ${JSON.stringify(genres)}}` : ''}}) {
                 nodes {
                   bookId
                   title

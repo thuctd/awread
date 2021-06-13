@@ -5,7 +5,7 @@
   <section class="max-w-screen-xl mx-auto">
     <div class="px-8 xl:px-0">
       <atom-breadcrumb [items]="items"></atom-breadcrumb>
-      <organ-rd-author-product [hasMore]="hasMore" [books]="books" (emitMoreBooks)="emitMoreBooks.emit($event)"></organ-rd-author-product>
+      <organ-rd-author-product [hasNextPage]="hasNextPage" [books]="books" (emitMoreBooks)="emitMoreBooks.emit($event)"></organ-rd-author-product>
     </div>
   </section>
 </ng-template>

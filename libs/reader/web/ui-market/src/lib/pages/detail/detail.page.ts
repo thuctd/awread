@@ -42,7 +42,6 @@ export class DetailPage implements OnInit, OnDestroy {
         })
       )),
     ).subscribe(book => {
-      // console.log('book', book, this.bookId);
       this.book = book[0];
       this.breadcrumbs = this.getbreadcrumbs();
       this.cd.detectChanges();
@@ -130,7 +129,7 @@ export class DetailPage implements OnInit, OnDestroy {
   }
 
   nativeTopBook() {
-    this.router.navigate(['/top-books']);
+    this.router.navigate(['/index', 'top-books']);
   }
 
   ngOnDestroy(): void {

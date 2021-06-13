@@ -91,6 +91,6 @@ export class ReadPage implements OnInit {
   }
 
   nativeTopBook() {
-    this.router.navigate(['/top-books']);
+    this.router.navigate(['/index', 'top-books']);
   }
 }

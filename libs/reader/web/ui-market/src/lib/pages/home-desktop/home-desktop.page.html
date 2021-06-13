@@ -1,20 +1,13 @@
-<template-home
-  [totalBook]="totalBookLatest$ | async"
-  [eventResetPagination]="eventPagination.asObservable()"
-  (displayActivePage)="displayActivePage($event)"
-  [isLoadingFeature]="isLoadingFeature$ | async"
-  [totalBookFeatured]="totalBookFeature$ | async"
-  (displayActivePageFeature)="displayActivePageFeature($event)"
-  [sliders]="imageObject$ | async"
-  [getGoodBooks]="goodBookList$ | async"
-  [getLatestBooks]="categoryBooks$ | async"
-  [loading]="isLoadingLatest$ | async"
-  [getFeatureBooks]="featureBookList$ | async"
-  [genres]="genres$ | async"
-  (filterItemsByGenre)="filterItemsByGenre($event)"
-  [genreBooks]="filteredBooks$ | async"
-  [categories]="categories$ | async"
-  (emitBooks)="filterItemsByCategory($event)"
-  (emitAllBooks)="getAllLatestBooks()"
->
+<!-- <h1 class="pt-40"> {{ isLoadingLatest$ | async }} </h1>
+
+<home-detail-book-update [totalBook]="totalBookLatest$ | async" [loading]="isLoadingLatest$ | async" [currentPage]="currentPageLatest$ | async"
+  (pageChange)="pageChange($event)" (emitBooks)="filterItemsByCategory($event)" [books]="latestBooks$ | async" [categories]="categories$ | async">
+</home-detail-book-update> -->
+
+
+<template-home [totalBookLatest]="totalBookLatest$ | async" [currentPage]="currentPageLatest$ | async" (pageChange)="pageChangeLatest($event)"
+  [isLoadingFeature]="isLoadingFeature$ | async" [totalBookFeatured]="totalBookFeature$ | async" (pageChangeFeature)="pageChangeFeature($event)"
+  [sliders]="imageObject$ | async" [getGoodBooks]="goodBookList$ | async" [getLatestBooks]="latestBooks$ | async" [isLoadingLatest]="isLoadingLatest$ | async"
+  [getFeatureBooks]="featureBookList$ | async" [genres]="genres$ | async" (filterItemsByGenre)="filterItemsByGenre($event)" [genreBooks]="genreBooks$ | async"
+  [categories]="categories$ | async" (emitBooks)="filterItemsByCategory($event)">
 </template-home>

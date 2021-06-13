@@ -1,4 +1,11 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  Input,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 interface TabHead {
   name: string;
   isActive: boolean;
@@ -29,7 +36,6 @@ export class RdHomeBookUpdateTabMolec implements OnInit {
 
   @Input() selectedTab: string;
   @Output() emitBooks = new EventEmitter();
-  @Output() emitAllBooks = new EventEmitter();
 
   constructor() {}
 

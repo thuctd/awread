@@ -1,10 +1,8 @@
 import { ChangeDetectorRef } from '@angular/core';
-/* eslint-disable @nrwl/nx/enforce-module-boundaries */
-import { takeWhile, switchMap, retry, tap, takeUntil, debounceTime, map } from 'rxjs/operators';
-import { of, Subject, Observable } from 'rxjs';
+import { takeWhile, switchMap, retry, tap, takeUntil, map } from 'rxjs/operators';
+import { of, Subject, Observable, interval } from 'rxjs';
 import { Directive, Injectable, OnInit, OnDestroy } from '@angular/core';
 import { Genre } from '@awread/core/genres';
-import { Category } from '@awread/core/categories';
 import { BooksFacade } from '@awread/core/books';
 import { GenresFacade } from '@awread/core/genres';
 import { SliderFacade } from '@awread/core/slider';
@@ -15,92 +13,79 @@ import { CategoriesFacade } from '@awread/core/categories';
 })
 @Directive()
 export class HomePage implements OnInit, OnDestroy {
+  defaultGenre = 'Tình cảm';
   destroy$ = new Subject();
-  bookList$ = this.booksFacade.books$;
   imageObject$ = this.sliderFacede.slider$;
-  goodBookList$ = this.booksFacade.goodBooks$;
-  categoryBookList$ = this.booksFacade.categoryBooks$;
-  genreBookList$ = this.booksFacade.genreBooks$;
-  genreBooks$ = this.booksFacade.genreBooks$;
   categories$ = this.categoriesFacade.categories$;
-  genres$ = this.genresFacade.genres$.pipe(map(genres => genres.filter(genre => ['Lãng mạn', 'Hài hước', 'Tình cảm', 'Thanh xuân', 'Gia đình'].includes(genre.name))));
-  categoryBooks$;
-  isLoadingLatest$: Observable<boolean>;
-  totalBookLatest$: Observable<number>;
-  featureBookList$;
-  isLoadingFeature$: Observable<boolean>;
-  totalBookFeature$: Observable<number>;
-  eventPagination: Subject<void> = new Subject<void>();
-  filteredBooks$;
-  categoryId = '';
-  loading$ = false;
+  genres$ = this.genresFacade.genres$.pipe(
+    map((genres) =>
+      genres.filter((genre) => ['Lãng mạn', 'Hài hước', 'Tình cảm', 'Thanh xuân', 'Gia đình'].includes(genre.name))
+    )
+  );
+
+  goodBookList$ = this.booksFacade.goodBooks$;
+  latestBooks$ = this.booksFacade.latestBooks$;
+  featureBookList$ = this.booksFacade.featureBooks$;
+  genreBooks$ = this.booksFacade.genreBooks$;
+  isLoadingLatest$ = this.booksFacade.latestBooksQuery.selectLoading();
+  isLoadingFeature$ = this.booksFacade.featureBooksQuery.selectLoading();
+  totalBookLatest$ = this.booksFacade.latestBooksQuery.selectTotalBook();
+  totalBookFeature$ = this.booksFacade.featureBooksQuery.selectTotalBook();
+  currentPageLatest$ = this.booksFacade.latestBooksQuery.select((state) => state.currentPage);
+  hasNextPageLatest$ = this.booksFacade.latestBooksQuery.select((state) => state.hasNextPage);
+  currentPageFeature$ = this.booksFacade.featureBooksQuery.select((state) => state.currentPage);
+  hasNextPageFeature$ = this.booksFacade.featureBooksQuery.select((state) => state.hasNextPage);
 
   constructor(
     private booksFacade: BooksFacade,
     private sliderFacede: SliderFacade,
     private genresFacade: GenresFacade,
     private categoriesFacade: CategoriesFacade,
-    private cd: ChangeDetectorRef,
+    private cd: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
-    this.genresFacade.getAllGenres().subscribe();
-    this.sliderFacede.getAllSlider().subscribe();
-    this.booksFacade.getGoodBooks().subscribe();
-    this.isLoadingLatest$ = this.booksFacade.latestBooksQuery.selectLoading();
-    this.isLoadingFeature$ = this.booksFacade.featureBooksQuery.selectLoading();
-    this.totalBookLatest$ = this.booksFacade.latestBooksQuery.selectTotalBook();
-    this.totalBookFeature$ = this.booksFacade.featureBooksQuery.selectTotalBook();
-    this.loadFirstByGenre();
-    this.getAllLatestBooks();
-    this.getAllFeatureBooks();
+    this.booksFacade.getGoodBooks().pipe(takeUntil(this.destroy$)).subscribe();
+    this.booksFacade.getLatestBooks().pipe(takeUntil(this.destroy$)).subscribe();
+    this.booksFacade.getFeatureBooks().pipe(takeUntil(this.destroy$)).subscribe();
+    this.booksFacade.getGenreBooks().pipe(takeUntil(this.destroy$)).subscribe();
+    this.genresFacade.getAllGenres().pipe(takeUntil(this.destroy$)).subscribe();
+    this.sliderFacede.getAllSlider().pipe(takeUntil(this.destroy$)).subscribe();
+    this.loadGenreBookFirstByGenre().pipe(takeUntil(this.destroy$)).subscribe();
   }
 
   filterItemsByGenre(genre: Genre) {
-    this.filteredBooks$ = this.booksFacade.getGenreBooks(genre.genreId);
+    this.booksFacade.setCurrentGenreGenreBook(genre.genreId);
   }
 
-  filterItemsByCategory(category: Category) {
-    // this.eventPagination.next();
-    this.categoryId = category.categoryId;
-    this.categoryBooks$ = this.booksFacade.getLatestBooks(category.categoryId, 0).pipe(debounceTime(200));
+  filterItemsByCategory(category) {
+    this.booksFacade.setCurrentPageLatestBook(1);
+    this.booksFacade.setCurrentCategory(category.categoryId);
     this.cd.detectChanges();
   }
 
-  getAllLatestBooks() {
-    this.categoryBooks$ = this.booksFacade.getLatestBooks('', 0).pipe(debounceTime(200));
-    this.cd.detectChanges();
-  }
-
-  getAllFeatureBooks() {
-    this.featureBookList$ = this.booksFacade.getFeatureBooks(0).pipe(debounceTime(200));
-    this.cd.detectChanges();
-  }
-
-  private loadFirstByGenre() {
-    this.filteredBooks$ = this.genres$.pipe(
-      takeWhile(val => val !== undefined, false),
-      switchMap((items) => {
+  private loadGenreBookFirstByGenre() {
+    return this.genres$.pipe(
+      takeWhile((val) => val !== undefined, false),
+      tap((items) => {
         if (!items.length) {
           return of([]);
         }
-        return this.booksFacade.getGenreBooks(items[0].genreId);
+        const genre = items.find(item => item.name.includes(this.defaultGenre));
+        this.booksFacade.setCurrentGenreGenreBook(genre.genreId);
       })
     );
   }
 
-  displayActivePage(activePageNumber: number) {
-    this.categoryBooks$ = this.booksFacade.getLatestBooks(this.categoryId, activePageNumber).pipe(debounceTime(200));
-    this.cd.detectChanges();
+  pageChangeLatest(activePageNumber: number) {
+    this.booksFacade.setCurrentPageLatestBook(activePageNumber);
   }
 
-  displayActivePageFeature(activePageNumber: number) {
-    this.featureBookList$ = this.booksFacade.getFeatureBooks(activePageNumber).pipe(debounceTime(200));
-    this.cd.detectChanges();
+  pageChangeFeature(activePageNumber: number) {
+    this.booksFacade.setCurrentPageFeatureBook(activePageNumber);
   }
 
   ngOnDestroy(): void {
     this.destroy$.next();
-    this.destroy$.complete();
   }
 }

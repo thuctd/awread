@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'organ-home-list-book-featured-mobile',
@@ -13,11 +14,15 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeListBookFeaturedMobileOrgan implements OnInit {
+  @Input() arrowLeftIcon = faChevronLeft;
+  @Input() arrowRightIcon = faChevronRight;
   @Input() page = {
     name: 'Truyện nổi bật',
-    href: ['/feature-books']
+    href: ['/index', 'feature-books'],
   };
+  @Output() pageChange = new EventEmitter();
   @Input() counter = Array;
+  @Input() currentPage;
   @Input() srcImg = '/global-assets/images/image.webp';
   @Input() altImg = 'Placeholder';
   @Input() books = [];
@@ -37,10 +42,13 @@ export class HomeListBookFeaturedMobileOrgan implements OnInit {
 
   @Input() totalBook;
   @Input() loading;
-  @Output() displayActivePageFeature = new EventEmitter();
+  @Input() hasNextPage;
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
+  onClickPage(pageNumber: number): void {
+    this.pageChange.emit(pageNumber);
+  }
 }

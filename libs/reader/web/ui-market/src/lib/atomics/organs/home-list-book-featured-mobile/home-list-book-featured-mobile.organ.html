@@ -1,4 +1,4 @@
-<section class="w-full mx-auto">
+<section class="w-full mx-auto relative">
   <div class="mb-4 px-2.5">
     <atom-title-page-link [title]="page.name" [href]="page.href" class="uppercase col-span-6"></atom-title-page-link>
   </div>
@@ -6,15 +6,17 @@
     <awread-loading></awread-loading>
   </div>
   <ng-template #loaded>
+    <div *ngIf="currentPage > 1" (click)="onClickPage(currentPage - 1)" class="cursor-pointer absolute top-60 -left-2 z-40">
+      <fa-icon class="text-gray-text text-sm md:text-base" [icon]="arrowLeftIcon"></fa-icon>
+    </div>
     <div class="grid grid-cols-12 place-items-center">
       <div *ngFor="let book of books" class="col-span-4 mx-auto py-2">
         <atom-img-m [size]="'s'" [bookId]="book.bookId" [srcImg]="book | coverSize: 's'"></atom-img-m>
-        <!-- <molec-home-info-book-update [book]="book"></molec-home-info-book-update> -->
         <molec-info-book class="w-27" [book]="book" [displayUI]="displayUI"></molec-info-book>
       </div>
     </div>
+    <div *ngIf="hasNextPage" (click)="onClickPage(currentPage + 1)" class="cursor-pointer absolute top-60 -right-2">
+      <fa-icon class="text-gray-text text-sm md:text-base" [icon]="arrowRightIcon"></fa-icon>
+    </div>
   </ng-template>
-  <div class="flex justify-center items-center">
-    <pagination [totalRecords]="totalBook - 6" [recordsPerPage]="6" (onPageChange)="displayActivePageFeature.emit($event)"></pagination>
-  </div>
 </section>
