@@ -15,7 +15,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 export class RdNewsEventsOrgan implements OnInit {
   @Input() banners = [
     {
-      blogId: '',
+      newsId: '',
       title: '',
       image: '',
       position: '',

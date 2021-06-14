@@ -11,14 +11,20 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
       :host .bg-green-light {
         background-color: #b1dac6;
       }
+      :host .text {
+        font-size: 1.45rem;
+      }
+      :host .w-84 {
+        width: 20.5rem;
+      }
     `,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RdNewsShareExperienceMolec implements OnInit {
-  @Input() newsRight = [
+  @Input() newsLeft = [
     {
-      blogId: '',
+      newsId: '',
       title: '',
     },
   ];

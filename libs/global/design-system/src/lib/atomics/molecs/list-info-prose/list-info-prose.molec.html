@@ -1,7 +1,7 @@
 <div class="sm:mt-2">
   <atom-title-book [bookId]="book.bookId" [titleBook]="book.title" [size]="'m'"></atom-title-book>
   <div class="roboto">
-    <atom-author [title]="'Tác giả'" [items]="book.authors"></atom-author>
+    <atom-author class="leading-4" [title]="'Tác giả'" [items]="book.authors"></atom-author>
     <div *ngIf="!isBtn">
       <!-- <excerpt [excerpt]="book?.description === null? 'Hiện tại truyện chưa có phần giới thiệu' : book.description"></excerpt> -->
       <p class="leading-5 break-words text-left text-gray-text text-xs">{{book?.description === null? 'Hiện tại truyện chưa có phần giới thiệu' : book.description}}</p>

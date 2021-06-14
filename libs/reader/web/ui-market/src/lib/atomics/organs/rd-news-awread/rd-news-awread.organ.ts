@@ -16,7 +16,7 @@ export class RdNewsAwreadOrgan implements OnInit {
   @Input() title = 'Tin mới';
   @Input() newsMiddle = [
     {
-      blogId: '',
+      newsId: '',
       title: '',
       status: '',
       description: '',
@@ -25,7 +25,7 @@ export class RdNewsAwreadOrgan implements OnInit {
     },
   ];
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }
