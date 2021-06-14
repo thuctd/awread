@@ -4,13 +4,16 @@
         <organ-step-require [requireForm]="requireForm"></organ-step-require>
     </mat-step>
     <mat-step [label]="'Thông tin'" [state]="'exp'" [stepControl]="optionalForm" errorMessage="Tên hiển thị là bắt buộc">
-        <organ-step-optional [optionalForm]="optionalForm"></organ-step-optional>
+        <organ-step-optional (linkSocialEvent)="linkSocialEvent.emit($event)" [optionalForm]="optionalForm"></organ-step-optional>
     </mat-step>
     <mat-step [label]="'Trải nghiệm'" [state]="'exp'" [stepControl]="experienceForm" errorMessage="Tùy biến ứng dụng theo ý của bạn">
         <organ-step-experience [isMobile] [genres]="genres" [experienceForm]="experienceForm"></organ-step-experience>
     </mat-step>
     <mat-step [label]="'Hoàn thiện'" [state]="'done'">
-        <organ-step-complete [stepper]="stepper" [requireForm]="requireForm" [optionalForm]="optionalForm" [experienceForm]="experienceForm">
+        {{ requireForm.value | json }}
+        <organ-step-complete (completeEvent)="completeEvent.emit($event)" [stepper]="stepper" [formValid]="requireForm.valid"
+            [requireFormData]="requireForm.valueChanges | async" [optionalFormData]="optionalForm.valueChanges | async"
+            [experienceFormData]="experienceForm.valueChanges | async">
         </organ-step-complete>
     </mat-step>
     <ng-template matStepperIcon="edit">

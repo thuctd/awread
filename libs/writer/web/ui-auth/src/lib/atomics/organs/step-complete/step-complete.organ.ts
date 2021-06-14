@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'organ-step-complete',
@@ -13,13 +13,16 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StepCompleteOrgan implements OnInit {
-  @Input() requireForm;
-  @Input() optionalForm;
-  @Input() experienceForm;
+  @Input() formValid;
+  @Input() requireFormData;
+  @Input() optionalFormData;
+  @Input() experienceFormData;
   @Input() stepper;
-  constructor() { }
+  @Output() completeEvent = new EventEmitter();
+  constructor(private cd: ChangeDetectorRef) { }
 
   ngOnInit(): void {
+    this.cd.detectChanges();
   }
 
 }

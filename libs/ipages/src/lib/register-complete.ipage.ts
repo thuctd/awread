@@ -51,8 +51,6 @@ export class RegisterCompleteIpage implements OnInit {
     return g.get('password').value === g.get('confirmpassword').value ? null : { missmatch: true };
   }
 
-  linkSocialEvent(event) { }
-
   private updateForm() {
     const socialCredential = this.currentUserFacade.getRegisterCredential();
     console.log('socialCredential', socialCredential);
@@ -70,14 +68,18 @@ export class RegisterCompleteIpage implements OnInit {
     }
   }
 
-  async connectSocialNewAccount(provider: 'facebook' | 'google' | 'apple') {
+  async linkSocialEvent(provider: 'facebook' | 'google' | 'apple') {
+    console.log('provider: ', provider);
     const credential = await this.authFacade.connectSocialNewAccount(provider);
     if (credential.providerId) {
       this.optionalForm.get(credential.provider).patchValue(credential.providerId);
     }
+    return;
   }
 
-  completeRegister() {
-    this.authFacade.createNewAccount(this.requireForm, this.optionalForm, this.experienceForm);
+  completeEvent() {
+
+    console.log('complete')
+    // this.authFacade.createNewAccount(this.requireForm, this.optionalForm, this.experienceForm);
   }
 }

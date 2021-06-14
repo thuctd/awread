@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input, EventEmitter } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, EventEmitter, Output } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 import { faCheck, faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 @Component({
@@ -53,6 +53,9 @@ export class RegisterCompleteMobileOrgan implements OnInit {
     },
     { validator: this.passwordMatchValidator }
   );
+
+  @Output() linkSocialEvent = new EventEmitter();
+  @Output() completeEvent = new EventEmitter();
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void { }

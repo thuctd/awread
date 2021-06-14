@@ -1,5 +1,5 @@
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { faCheck, faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 @Component({
@@ -105,7 +105,10 @@ export class RegisterCompleteDesktopOrgan implements OnInit {
     { validator: this.passwordMatchValidator }
   );
 
-  constructor(private fb: FormBuilder) { }
+  @Output() linkSocialEvent = new EventEmitter();
+  @Output() completeEvent = new EventEmitter();
+
+  constructor(private fb: FormBuilder, private cd: ChangeDetectorRef) { }
   passwordMatchValidator(g) {
     return g.get('password').value === g.get('confirmpassword').value ? null : { missmatch: true };
   }
@@ -117,6 +120,8 @@ export class RegisterCompleteDesktopOrgan implements OnInit {
     } else {
       this.expandedWidth = 20;
     }
+    this.cd.detectChanges();
+    console.log('step change', event);
   }
 
   ngOnInit(): void {

@@ -1,10 +1,12 @@
 <template-register-complete-background>
     <div [ngSwitch]="isMobile">
         <div *ngSwitchCase="true">
-            <organ-register-complete-mobile [isMobile]="isMobile" [genres]="genres"></organ-register-complete-mobile>
+            <organ-register-complete-mobile (completeEvent)="completeEvent.emit($event)" (linkSocialEvent)="linkSocialEvent.emit($event)" [isMobile]="isMobile"
+                [genres]="genres"></organ-register-complete-mobile>
         </div>
         <div *ngSwitchDefault>
-            <organ-register-complete-desktop [genres]="genres"></organ-register-complete-desktop>
+            <organ-register-complete-desktop (completeEvent)="completeEvent.emit($event)" (linkSocialEvent)="linkSocialEvent.emit($event)" [genres]="genres">
+            </organ-register-complete-desktop>
         </div>
     </div>
 </template-register-complete-background>
