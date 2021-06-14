@@ -16,6 +16,14 @@ export class ShellLayout implements OnInit {
   currentUser$ = this.currentUserFacade.currentUser$;
   searchControl: FormControl = new FormControl('');
 
+  constructor(
+    private currentUserFacade: CurrentUserFacade,
+    private creationsFacade: CreationsFacade,
+    private authFacade: AuthFacade,
+    private genresFacade: GenresFacade
+
+  ) { }
+
   routes = [
     // {
     //   name: 'dashboard',
@@ -36,12 +44,6 @@ export class ShellLayout implements OnInit {
     },
   ];
 
-  constructor(
-    private currentUserFacade: CurrentUserFacade,
-    private authFacade: AuthFacade,
-    private genresFacade: GenresFacade,
-    private creationsFacade: CreationsFacade
-  ) {}
 
   ngOnInit(): void {
     this.genresFacade.getAllGenres().subscribe();
@@ -51,7 +53,7 @@ export class ShellLayout implements OnInit {
         this.creationsFacade.updateSearchTerm(term);
       });
   }
-  searchEvent(term: string) {}
+  searchEvent(term: string) { }
 
   logout() {
     this.authFacade.logout();
