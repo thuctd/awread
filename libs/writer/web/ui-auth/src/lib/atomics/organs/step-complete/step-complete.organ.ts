@@ -13,16 +13,14 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StepCompleteOrgan implements OnInit {
-  @Input() formValid;
-  @Input() requireFormData;
-  @Input() optionalFormData;
-  @Input() experienceFormData;
+  @Input() requireForm;
+  @Input() optionalForm;
+  @Input() experienceForm;
   @Input() stepper;
   @Output() completeEvent = new EventEmitter();
-  constructor(private cd: ChangeDetectorRef) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.cd.detectChanges();
   }
 
 }

@@ -9,9 +9,8 @@
         <organ-step-experience [isMobile] [genres]="genres" [experienceForm]="experienceForm"></organ-step-experience>
     </mat-step>
     <mat-step [label]="'Hoàn thiện'" [state]="'done'">
-        <organ-step-complete (completeEvent)="completeEvent.emit($event)" [stepper]="stepper" [formValid]="requireForm.valid"
-            [requireFormData]="requireForm.valueChanges | async" [optionalFormData]="optionalForm.valueChanges | async"
-            [experienceFormData]="experienceForm.valueChanges | async">
+        <organ-step-complete (completeEvent)="completeEvent.emit($event)" [stepper]="stepper" [requireForm]="requireForm" [optionalForm]="optionalForm"
+            [experienceForm]="experienceForm">
         </organ-step-complete>
     </mat-step>
     <ng-template matStepperIcon="edit">

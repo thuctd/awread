@@ -66,20 +66,28 @@ export class RegisterCompleteIpage implements OnInit {
         [socialCredential.provider]: socialCredential.providerId,
       });
     }
+    this.currentUserFacade.setSocialCredential();
   }
 
   async linkSocialEvent(provider: 'facebook' | 'google' | 'apple') {
     console.log('provider: ', provider);
     const credential = await this.authFacade.connectSocialNewAccount(provider);
     if (credential.providerId) {
-      this.optionalForm.get(credential.provider).patchValue(credential.providerId);
+      const socialUser = credential.socialUser;
+      this.optionalForm.patchValue({
+        firstname: socialUser.firstName ?? '',
+        lastname: socialUser.lastName ?? '',
+        [credential.provider]: credential.providerId,
+      }, { emitEvent: true });
+      this.optionalForm.updateValueAndValidity();
+      console.log('after update: ', this.optionalForm.value);
     }
     return;
   }
 
   completeEvent() {
 
-    console.log('complete')
+    console.log('complete', this.requireForm.value, this.optionalForm.value, this.experienceForm.value);
     // this.authFacade.createNewAccount(this.requireForm, this.optionalForm, this.experienceForm);
   }
 }
