@@ -67,10 +67,11 @@ export class RegisterCompleteIpage implements OnInit {
       });
     }
     this.currentUserFacade.setSocialCredential();
+    this.currentUserFacade.reset();
   }
 
   async linkSocialEvent(provider: 'facebook' | 'google' | 'apple') {
-    console.log('provider: ', provider);
+    // console.log('provider: ', provider);
     const credential = await this.authFacade.connectSocialNewAccount(provider);
     if (credential.providerId) {
       const socialUser = credential.socialUser;
@@ -80,14 +81,13 @@ export class RegisterCompleteIpage implements OnInit {
         [credential.provider]: credential.providerId,
       }, { emitEvent: true });
       this.optionalForm.updateValueAndValidity();
-      console.log('after update: ', this.optionalForm.value);
+      // console.log('after update: ', this.optionalForm.value);
     }
     return;
   }
 
   completeEvent() {
-
     console.log('complete', this.requireForm.value, this.optionalForm.value, this.experienceForm.value);
-    // this.authFacade.createNewAccount(this.requireForm, this.optionalForm, this.experienceForm);
+    this.authFacade.createNewAccount(this.requireForm.value, this.optionalForm.value, this.experienceForm.value);
   }
 }

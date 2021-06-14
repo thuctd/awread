@@ -17,7 +17,7 @@ export class CurrentUserGear {
     private snackbarService: SnackbarService,
     private socialAuthService: SocialAuthService,
     private authRoutingGear: AuthRoutingGear
-  ) {}
+  ) { }
 
   getCurrentUser() {
     return this.currentUserApi.getCurrentUser().pipe(
@@ -45,9 +45,9 @@ export class CurrentUserGear {
       });
   }
 
-  updatePersonal(user) {
+  updatePersonal(user, action: 'create' | 'update' = 'update') {
     return this.currentUserApi
-      .updatePersonal(user)
+      .updatePersonal(user, action)
       .pipe()
       .subscribe((result) => {
         if (result.data) {

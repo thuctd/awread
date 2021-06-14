@@ -121,7 +121,7 @@ export class RegisterCompleteDesktopOrgan implements OnInit {
       this.expandedWidth = 20;
     }
     this.cd.detectChanges();
-    console.log('step change', this.requireForm, this.optionalForm, this.experienceForm,);
+    // console.log('step change', this.requireForm, this.optionalForm, this.experienceForm,);
   }
 
   ngOnInit(): void {

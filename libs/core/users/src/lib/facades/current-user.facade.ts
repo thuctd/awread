@@ -31,4 +31,8 @@ export class CurrentUserFacade {
   setSocialCredential(value?) {
     this.currentUserStore.update({ registerCredential: value })
   }
+
+  reset() {
+    this.currentUserStore.reset();
+  }
 }
