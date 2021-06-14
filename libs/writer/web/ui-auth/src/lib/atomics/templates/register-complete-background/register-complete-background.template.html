@@ -1,4 +1,4 @@
-<div class="container-wrapper">
+<div [ngClass]="isMobile ? 'container-bg-mobile' : 'container-bg'" class="container-wrapper">
 
     <!-- <h1>SVG Animated Birds</h1> -->
     <div [ngSwitch]="isMobile">
