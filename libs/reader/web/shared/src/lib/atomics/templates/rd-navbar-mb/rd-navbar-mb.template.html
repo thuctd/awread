@@ -2,12 +2,15 @@
   <organ-navbar-mb (logoutEvent)="logoutEvent.emit()"
     [user]="user" [isLogin]="isLogin"
     [isMenuNoti]="isMenuNoti"
-    (clickDisplaySearch)="displaySearch()"
-    (clickDisplayMenuNoti)="displayMenuNoti()"
+    (clickDisplay)="display($event)"
     (clickOutside)="closeMenuNoti()"
   >
   </organ-navbar-mb>
   <div class="flex justify-center">
-    <atom-search-navbar [control]="searchControl" (searchEvent)="eventSearch.emit($event)" *ngIf="isSearch" class="w-4/5 mt-4" class="w-4/5 mt-4"></atom-search-navbar>
+    <atom-search-navbar [control]="searchControl" *ngIf="isSearch"
+      (searchEventMb)="eventSearchMb.emit($event)"
+      (searchEvent)="eventSearch.emit($event)"
+      (searchEvent)="closeSearch()"
+      class="w-4/5 mt-4"></atom-search-navbar>
   </div>
 </header>

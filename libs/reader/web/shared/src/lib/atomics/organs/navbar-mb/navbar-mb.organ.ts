@@ -26,12 +26,11 @@ export class NavbarMbOrgan implements OnInit {
 
   @Input() search = faSearch;
   @Input() isLogin = true;
-  @Output() clickDisplaySearch = new EventEmitter();
-  @Output() clickDisplayMenuNoti = new EventEmitter();
+  @Output() clickDisplay = new EventEmitter();
   @Output() logoutEvent = new EventEmitter();
   @Output() clickOutside = new EventEmitter();
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

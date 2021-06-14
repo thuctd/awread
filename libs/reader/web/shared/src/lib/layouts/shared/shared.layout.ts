@@ -19,6 +19,7 @@ export class SharedLayout implements OnInit {
   searchControl: FormControl = new FormControl('');
   search$;
   results$;
+  isSearch;
   background = environment.next ? 'linear-gradient(145deg,#dd0031,#c3002f)' : '';
   get hasSearchTermInput(): boolean {
     return !!this.searchControl.value;
@@ -65,5 +66,15 @@ export class SharedLayout implements OnInit {
       return false;
     }
     this.router.navigate(['/search'], { queryParams: { search: this.search$ } });
+  }
+
+  navigateToSearchMb(event) {
+    if (event.keyCode == 13) {
+      if (!this.searchControl.value) {
+        return false;
+      }
+      this.router.navigate(['/search'], { queryParams: { search: this.search$ } });
+      this.isSearch = false;
+    }
   }
 }
