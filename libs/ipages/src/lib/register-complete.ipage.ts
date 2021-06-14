@@ -25,15 +25,14 @@ export class RegisterCompleteIpage implements OnInit {
     apple: [''],
   });
 
-  requireForm = this.fb.group(
-    {
-      username: ['', [Validators.required]],
-      name: ['', [Validators.required]],
-      email: ['', []],
-      phone: ['', []],
-      password: ['', [Validators.required, Validators.minLength(4)]],
-      confirmpassword: ['', [Validators.required, Validators.minLength(4)]],
-    },
+  requireForm = this.fb.group({
+    username: ['', [Validators.required]],
+    name: ['', [Validators.required]],
+    email: ['', []],
+    phone: ['', []],
+    password: ['', [Validators.required, Validators.minLength(4)]],
+    confirmpassword: ['', [Validators.required, Validators.minLength(4)]],
+  },
     { validator: this.passwordMatchValidator }
   );
 
@@ -42,7 +41,7 @@ export class RegisterCompleteIpage implements OnInit {
     private authFacade: AuthFacade,
     private genresFacade: GenresFacade,
     private currentUserFacade: CurrentUserFacade
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.genresFacade.getAllGenres().subscribe();
@@ -52,7 +51,7 @@ export class RegisterCompleteIpage implements OnInit {
     return g.get('password').value === g.get('confirmpassword').value ? null : { missmatch: true };
   }
 
-  linkSocialEvent(event) {}
+  linkSocialEvent(event) { }
 
   private updateForm() {
     const socialCredential = this.currentUserFacade.getRegisterCredential();

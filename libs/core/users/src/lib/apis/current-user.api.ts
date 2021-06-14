@@ -62,7 +62,7 @@ export class CurrentUserApi {
   updatePersonal(user) {
     return this.apollo.mutate({
       mutation: gql`
-        mutation updateUserByUserId(
+        mutation updatePersonalByUserId(
           $userId: UUID!
           $firstname: String
           $middlename: String
@@ -75,7 +75,7 @@ export class CurrentUserApi {
           $age: BigFloat
           $gender: BigFloat
         ) {
-          updateUserByUserId(
+          updatePersonalByUserId(
             input: {
               userId: $userId
               userPatch: {
