@@ -1,5 +1,6 @@
 <div [formGroup]="optionalForm">
-    <wrt-action-btns (auth)="linkSocialEvent.emit($event)" [title]="'Liên kết tài khoản mạng xã hội để đăng nhập nhanh hơn!'"> </wrt-action-btns>
+    <wrt-action-btns [position]="'justify-start'" (auth)="linkSocialEvent.emit($event)" [title]="'Liên kết tài khoản mạng xã hội để đăng nhập nhanh hơn!'">
+    </wrt-action-btns>
 
     <input-form [inputControl]="optionalForm.get('firstname')" [placeholder]="'Tên'"></input-form>
     <input-form [inputControl]="optionalForm.get('middlename')" [placeholder]="'Tên đệm'"></input-form>
