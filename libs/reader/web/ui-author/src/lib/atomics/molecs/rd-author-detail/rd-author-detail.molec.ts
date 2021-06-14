@@ -22,14 +22,15 @@ export class RdAuthorDetailMolec implements OnInit {
     lastname: '',
     middlename: '',
     firstname: '',
-    excerpt: ''
-  }
+    bio: '',
+    username: ''
+  };
   @Input() isFollow = true;
   @Input() isBlock = false;
 
   constructor(private matDialog: MatDialog) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   openDiaLogFollowers($event) {
     this.matDialog.open(RdAuthorPopupListFollowersTemplate, {

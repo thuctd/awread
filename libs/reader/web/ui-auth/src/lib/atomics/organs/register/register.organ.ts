@@ -23,7 +23,7 @@ export class RegisterOrgan implements OnInit {
     displayName: ['', [Validators.required]],
     email: ['', [Validators.required, Validators.email]],
     password: ['', Validators.required],
-    confirmPassword: ['', Validators.required],
+    confirmpassword: ['', Validators.required],
   });
   @Output() auth = new EventEmitter();
 

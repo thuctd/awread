@@ -1,2 +1,3 @@
+export * from './list-books.gear';
 export * from './books.gear';
-export * from './transform-book-data.gear';
+export * from './books-home.gear';

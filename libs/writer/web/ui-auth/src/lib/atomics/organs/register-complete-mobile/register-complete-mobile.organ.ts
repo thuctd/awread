@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, EventEmitter } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 import { faCheck, faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 @Component({
@@ -26,24 +26,25 @@ import { faCheck, faExclamationCircle } from '@fortawesome/free-solid-svg-icons'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegisterCompleteMobileOrgan implements OnInit {
-  @Input() isLinear = false;
-  icons = { faCheck, faExclamationCircle };
   @Input() genres = [];
-  @Input() thirdForm = this.fb.group({
+  @Input() experienceForm = this.fb.group({
     age: ['2'],
     genreIds: [[]],
   });
 
-  @Input() secondForm = this.fb.group({
-    name: ['', Validators.required],
+  @Input() optionalForm = this.fb.group({
     firstname: [''],
     middlename: [''],
     lastname: [''],
+    facebook: [''],
+    google: [''],
+    apple: [''],
   });
 
-  @Input() firstForm = this.fb.group(
+  @Input() requireForm = this.fb.group(
     {
       username: ['', [Validators.required]],
+      name: ['', [Validators.required]],
       email: ['', []],
       phone: ['', []],
       password: ['', [Validators.required, Validators.minLength(4)]],
@@ -51,12 +52,11 @@ export class RegisterCompleteMobileOrgan implements OnInit {
     },
     { validator: this.passwordMatchValidator }
   );
+  constructor(private fb: FormBuilder) { }
 
-  constructor(private fb: FormBuilder) {}
-
+  ngOnInit(): void { }
   passwordMatchValidator(g) {
     return g.get('password').value === g.get('confirmpassword').value ? null : { missmatch: true };
   }
 
-  ngOnInit(): void {}
 }

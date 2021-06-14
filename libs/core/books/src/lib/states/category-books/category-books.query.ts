@@ -12,8 +12,8 @@ export class CategoryBooksQuery extends QueryEntity<CategoryBooksState> {
     // this.createUIQuery();
   }
 
-  getHasMore() {
-    return this.getValue().hasMore
+  gethasNextPage() {
+    return this.getValue().hasNextPage
   }
 
   getSizePage() {
@@ -21,6 +21,22 @@ export class CategoryBooksQuery extends QueryEntity<CategoryBooksState> {
   }
 
   selectTotalBook() {
-    return this.select(state => state.total);
+    return this.select(state => state.totalCount);
+  }
+
+  getHasNextPage() {
+    return this.getValue().pageInfo.hasNextPage;
+  }
+
+  selectHasNextPage() {
+    return this.select(state => state.pageInfo.hasNextPage);
+  }
+
+  selectEndCursor() {
+    return this.select(state => state.pageInfo.endCursor);
+  }
+
+  getEndCursor() {
+    return this.getValue().pageInfo.endCursor;
   }
 }

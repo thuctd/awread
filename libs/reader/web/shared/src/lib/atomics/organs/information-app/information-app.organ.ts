@@ -47,11 +47,11 @@ export class InformationAppOrgan implements OnInit {
     },
     {
       provider: 'zalo',
-      href: '',
+      href: 'http://zalo.me/1839376602979178212?src=qr',
     },
     {
       provider: 'instagram',
-      href: 'https://www.instagram.com/awread2021/',
+      href: 'https://www.instagram.com/awreadbook/',
     },
   ];
 

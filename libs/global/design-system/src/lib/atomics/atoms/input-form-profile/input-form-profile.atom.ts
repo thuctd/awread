@@ -1,4 +1,4 @@
-import { FormControl } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 
 @Component({
@@ -14,10 +14,13 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputFormProfileAtom implements OnInit {
-  @Input() key = 'Name';
-  @Input() control = new FormControl();
+  @Input() profileForm: FormGroup = this.fb.group({});
+  @Input() item = {
+    title: '',
+    formControlName: '',
+  };
 
-  constructor() {}
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {}
 }

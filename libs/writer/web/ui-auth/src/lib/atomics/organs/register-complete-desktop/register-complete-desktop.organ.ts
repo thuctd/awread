@@ -73,21 +73,24 @@ export class RegisterCompleteDesktopOrgan implements OnInit {
   widthProcess = 0;
   expandedWidth = 20;
   @Input() genres = [];
-  @Input() thirdForm = this.fb.group({
+  @Input() experienceForm = this.fb.group({
     age: ['2'],
     genreIds: [[]],
   });
 
-  @Input() secondForm = this.fb.group({
-    name: ['', Validators.required],
+  @Input() optionalForm = this.fb.group({
     firstname: [''],
     middlename: [''],
     lastname: [''],
+    facebook: [''],
+    google: [''],
+    apple: [''],
   });
 
-  @Input() firstForm = this.fb.group(
+  @Input() requireForm = this.fb.group(
     {
       username: ['', [Validators.required]],
+      name: ['', [Validators.required]],
       email: ['', []],
       phone: ['', []],
       password: ['', [Validators.required, Validators.minLength(4)]],

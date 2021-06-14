@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { GenresQuery } from '../states/genres';
-import { pipeName } from '../../../../tools/pipe-name.tool';
+import { pipeName } from '@awread/global/tools';
 @Pipe({
   name: 'genreName'
 })

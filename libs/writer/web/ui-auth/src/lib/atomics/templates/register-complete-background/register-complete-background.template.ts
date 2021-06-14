@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 
 @Component({
   selector: 'template-register-complete-background',
@@ -14,6 +14,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegisterCompleteBackgroundTemplate implements OnInit {
+  @Input() isMobile: boolean;
   constructor() {}
 
   ngOnInit(): void {}

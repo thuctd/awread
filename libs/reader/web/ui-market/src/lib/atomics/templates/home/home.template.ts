@@ -25,7 +25,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeTemplate implements OnInit {
-  @Input() loading: boolean;
+  @Input() isLoadingLatest;
   @Input() books = [];
   @Input() categories = [];
   @Input() sliders = [];
@@ -34,17 +34,21 @@ export class HomeTemplate implements OnInit {
   @Input() getFeatureBooks = [];
   @Input() genres = [];
   @Input() genreBooks = [];
-  @Input() totalBook;
-  @Input() eventResetPagination;
+  @Input() totalBookLatest;
+  @Input() currentPage;
   @Input() totalBookFeatured;
+  @Input() eventResetPage;
   @Input() isLoadingFeature;
   @Output() emitBooks = new EventEmitter();
-  @Output() emitAllBooks = new EventEmitter();
   @Output() filterItemsByGenre = new EventEmitter();
-  @Output() displayActivePage = new EventEmitter();
-  @Output() displayActivePageFeature = new EventEmitter();
+  @Output() pageChange = new EventEmitter();
+  @Output() pageChangeFeature = new EventEmitter();
 
   constructor() { }
 
   ngOnInit(): void { }
+
+  // ngOnChanges(changes) {
+  //   console.log('changes', changes);
+  // }
 }

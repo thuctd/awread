@@ -18,7 +18,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
 })
 export class NavbarBtnLoggedAtom implements OnInit {
   @Input() user = {
-    lastname: 'BlackCu',
+    firstname: 'BlackCu',
     name: 'Hi',
   };
   @Output() submitEvent = new EventEmitter();

@@ -22,7 +22,7 @@ export class ShellLayout implements OnInit {
     private authFacade: AuthFacade,
     private genresFacade: GenresFacade
 
-  ) {}
+  ) { }
 
   routes = [
     // {
@@ -49,12 +49,11 @@ export class ShellLayout implements OnInit {
     this.genresFacade.getAllGenres().subscribe();
     this.searchControl.valueChanges
       .pipe(debounceTime(300), distinctUntilChanged(), untilDestroyed(this))
-    .subscribe((term) => {
-      this.creationsFacade.updateSearchTerm(term);
-    });
+      .subscribe((term) => {
+        this.creationsFacade.updateSearchTerm(term);
+      });
   }
-  searchEvent(term: string) {}
-
+  searchEvent(term: string) { }
 
   logout() {
     this.authFacade.logout();

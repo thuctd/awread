@@ -18,19 +18,20 @@ import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomeListBookUpdateMobileOrgan implements OnInit, OnChanges {
+export class HomeListBookUpdateMobileOrgan implements OnInit {
   @Input() arrowLeftIcon = faChevronLeft;
   @Input() arrowRightIcon = faChevronRight;
   @Input() loading;
   @Input() totalBook;
   @Input() page = {
     name: 'TRUYỆN MỚI CẬP NHẬT',
-    href: ['/latest-books']
+    href: ['/index', 'latest-books'],
   };
   @Input() books = [];
+  @Input() hasNextPage;
   @Input() categories = [];
-  activePage: number = 1;
-  @Output() onPageChange: EventEmitter<number> = new EventEmitter();
+  @Input() currentPage = 1;
+  @Output() pageChange = new EventEmitter();
   @Input() displayUI = {
     ui: {
       isAuthor: false,
@@ -64,19 +65,13 @@ export class HomeListBookUpdateMobileOrgan implements OnInit, OnChanges {
       isNovel: true,
     },
   ];
-  @Output() displayActivePage = new EventEmitter();
 
   constructor() { }
 
   ngOnInit(): void { }
 
-  ngOnChanges(): any {  
-      this.activePage = 1;  
-      this.onPageChange.emit(1);  
-  }  
-
   onClickPage(pageNumber: number): void {
-    this.activePage = pageNumber;
-    this.onPageChange.emit(this.activePage);
+    this.currentPage = pageNumber;
+    this.pageChange.emit(this.currentPage);
   }
 }

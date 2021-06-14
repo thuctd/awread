@@ -1,3 +1,3 @@
-<molec-register-form [form]="authForm"></molec-register-form>
-<normal-login-btn [active]="authForm.valid" [name]="'Đăng ký'" (btnClicked)="regiterEvent.emit()"></normal-login-btn>
-<!-- <wrt-action-btns (auth)="regiterEvent.emit($event)" [title]="'Đăng ký với'"> </wrt-action-btns> -->
+<!-- <molec-register-form [form]="authForm"></molec-register-form> -->
+<normal-login-btn [active]="true" [name]="'Đăng ký'" (btnClicked)="regiterEvent.emit('email')"></normal-login-btn>
+<wrt-action-btns (auth)="regiterEvent.emit($event)" [title]="'Đăng ký với'"> </wrt-action-btns>

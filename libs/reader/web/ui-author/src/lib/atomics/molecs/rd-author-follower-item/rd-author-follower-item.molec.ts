@@ -15,7 +15,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 })
 export class RdAuthorFollowerItemMolec implements OnInit {
   @Input() image = {
-    srcImg: '/global-assets/images/avatar-mrmrs.webp',
+    srcImg: '/global-assets/images/logoAwread.webp',
     alt: 'avatar',
   };
 

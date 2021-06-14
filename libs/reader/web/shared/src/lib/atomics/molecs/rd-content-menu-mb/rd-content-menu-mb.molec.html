@@ -1,6 +1,6 @@
-<atom-rd-text-link-menu-mb (clicked)="clicked.emit()" [text]="home.text" [href]="home.href" class="border-b py-3"></atom-rd-text-link-menu-mb>
+<atom-rd-text-link-menu-mb (clicked)="clicked.emit()" [text]="home.text" [link]="home.href" class="border-b py-3"></atom-rd-text-link-menu-mb>
 <atom-rd-dropdown-menu-mb (clickCloseMenu)="clicked.emit()" [items]="book"></atom-rd-dropdown-menu-mb>
-<atom-rd-text-link-menu-mb (clicked)="clicked.emit()" [text]="createBook.text" [href]="createBook.href" class="border-b py-3"></atom-rd-text-link-menu-mb>
-<atom-rd-text-link-menu-mb (clicked)="clicked.emit()" [text]="coin.text" [href]="coin.href" class="border-b py-3"></atom-rd-text-link-menu-mb>
+<!-- <atom-rd-text-link-menu-mb (clicked)="clicked.emit()" [text]="createBook.text" [link]="createBook.href" class="border-b py-3"></atom-rd-text-link-menu-mb> -->
+<!-- <atom-rd-text-link-menu-mb (clicked)="clicked.emit()" [text]="coin.text" [link]="coin.href" class="border-b py-3"></atom-rd-text-link-menu-mb> -->
 <atom-rd-dropdown-menu-mb (clickCloseMenu)="clicked.emit()" [items]="public"></atom-rd-dropdown-menu-mb>
-<atom-rd-text-link-menu-mb (clicked)="clicked.emit()" [text]="setting.text" [href]="setting.href" *ngIf="isLogin" class="border-b py-3"></atom-rd-text-link-menu-mb>
+<atom-rd-text-link-menu-mb (clicked)="clicked.emit()" [text]="setting.text" [link]="setting.href" *ngIf="isLogin" class="border-b py-3"></atom-rd-text-link-menu-mb>
