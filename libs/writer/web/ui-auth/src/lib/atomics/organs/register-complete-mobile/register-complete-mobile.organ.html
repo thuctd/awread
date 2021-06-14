@@ -1,12 +1,12 @@
 <mat-vertical-stepper #stepper class="rounded-md nunito">
-    <mat-step [label]="'Tài khoản'" [state]="'auth'" [stepControl]="requireForm" errorMessage="Tên hiển thị, username password là bắt buộc">
+    <mat-step [label]="'Tài khoản'" [state]="'auth'" [stepControl]="requireForm" errorMessage="Thiếu thông tin">
         <organ-step-require [requireForm]="requireForm"></organ-step-require>
     </mat-step>
     <mat-step [label]="'Thông tin'" [state]="'exp'" [stepControl]="optionalForm" errorMessage="Tên hiển thị là bắt buộc">
         <organ-step-optional [optionalForm]="optionalForm"></organ-step-optional>
     </mat-step>
     <mat-step [label]="'Trải nghiệm'" [state]="'exp'" [stepControl]="experienceForm" errorMessage="Tùy biến ứng dụng theo ý của bạn">
-        <organ-step-experience [genres]="genres" [experienceForm]="experienceForm"></organ-step-experience>
+        <organ-step-experience [isMobile] [genres]="genres" [experienceForm]="experienceForm"></organ-step-experience>
     </mat-step>
     <mat-step [label]="'Hoàn thiện'" [state]="'done'">
         <organ-step-complete [stepper]="stepper" [requireForm]="requireForm" [optionalForm]="optionalForm" [experienceForm]="experienceForm">

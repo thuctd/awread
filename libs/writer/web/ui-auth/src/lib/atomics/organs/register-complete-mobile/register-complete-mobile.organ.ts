@@ -20,7 +20,7 @@ import { faCheck, faExclamationCircle } from '@fortawesome/free-solid-svg-icons'
         box-shadow: 0px 0px 4px rgba(0,0,0,0.15);
         width: 65vw;
         right: 0;
-    }
+      }
     `,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -15,6 +15,11 @@ import { faCheck, faExclamationCircle } from '@fortawesome/free-solid-svg-icons'
         position:relative;
         border-radius: 0.375rem;
       }
+      
+      mat-horizontal-stepper {
+        height: 56vh;
+      }
+
       .stepper-process-bar{
         position:absolute;
         top:0;
@@ -24,6 +29,7 @@ import { faCheck, faExclamationCircle } from '@fortawesome/free-solid-svg-icons'
         background: rgba(90, 189, 140, 1);
         transform: skew(-30deg);
       }
+
       ::ng-deep mat-horizontal-stepper .mat-horizontal-stepper-header-container{background: rgba(90, 189, 140, 0.4);}
       ::ng-deep mat-horizontal-stepper .mat-stepper-horizontal-line{display: none !important}
       ::ng-deep mat-horizontal-stepper .mat-step-icon{font-size:12px; color: rgba(90, 189, 140, 1); background: white;}
@@ -65,7 +71,7 @@ import { faCheck, faExclamationCircle } from '@fortawesome/free-solid-svg-icons'
       provide: STEPPER_GLOBAL_OPTIONS,
       useValue: { showError: true },
     },
-  ], 
+  ],
 })
 export class RegisterCompleteDesktopOrgan implements OnInit {
   @Input() isLinear = false;
@@ -99,16 +105,16 @@ export class RegisterCompleteDesktopOrgan implements OnInit {
     { validator: this.passwordMatchValidator }
   );
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) { }
   passwordMatchValidator(g) {
     return g.get('password').value === g.get('confirmpassword').value ? null : { missmatch: true };
   }
 
-  selectionChange(event){
+  selectionChange(event) {
     this.widthProcess = 25 * (event.selectedIndex + 1);
-    if(event.selectedIndex == 3){
+    if (event.selectedIndex == 3) {
       this.expandedWidth = 40;
-    }else{
+    } else {
       this.expandedWidth = 20;
     }
   }
