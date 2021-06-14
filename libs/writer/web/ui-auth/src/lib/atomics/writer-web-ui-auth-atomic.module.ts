@@ -24,6 +24,10 @@ import { RegisterCompleteDesktopOrgan } from './organs/register-complete-desktop
 import { RegisterCompleteMobileOrgan } from './organs/register-complete-mobile/register-complete-mobile.organ';
 import { RegisterCompleteBackgroundTemplate } from './templates/register-complete-background/register-complete-background.template';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
+import { StepRequireOrgan } from './organs/step-require/step-require.organ';
+import { StepOptionalOrgan } from './organs/step-optional/step-optional.organ';
+import { StepExperienceOrgan } from './organs/step-experience/step-experience.organ';
+import { StepCompleteOrgan } from './organs/step-complete/step-complete.organ';
 
 @NgModule({
   providers: [
@@ -56,6 +60,10 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
     RegisterCompleteDesktopOrgan,
     RegisterCompleteMobileOrgan,
     RegisterCompleteBackgroundTemplate,
+    StepRequireOrgan,
+    StepOptionalOrgan,
+    StepExperienceOrgan,
+    StepCompleteOrgan,
   ],
   declarations: [
     WrtTabHeadMolec,
@@ -79,6 +87,10 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
     RegisterCompleteDesktopOrgan,
     RegisterCompleteMobileOrgan,
     RegisterCompleteBackgroundTemplate,
+    StepRequireOrgan,
+    StepOptionalOrgan,
+    StepExperienceOrgan,
+    StepCompleteOrgan,
   ],
 })
 export class WriterWebUiAuthAtomicModule {}

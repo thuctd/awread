@@ -26,6 +26,7 @@ import { faCheck, faExclamationCircle } from '@fortawesome/free-solid-svg-icons'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegisterCompleteMobileOrgan implements OnInit {
+  icons = { faCheck, faExclamationCircle };
   @Input() genres = [];
   @Input() experienceForm = this.fb.group({
     age: ['2'],

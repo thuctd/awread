@@ -1,63 +1,16 @@
 <mat-vertical-stepper #stepper class="rounded-md nunito">
     <mat-step [label]="'Tài khoản'" [state]="'auth'" [stepControl]="requireForm" errorMessage="Tên hiển thị, username password là bắt buộc">
-        <molec-register-form [form]="requireForm"></molec-register-form>
-        <div>
-            <!-- <pre> {{ requireForm.hasError('missmatch') }} </pre> -->
-            <!-- <pre> {{ requireForm.errors | json }} </pre> -->
-            <p *ngIf="requireForm.hasError('missmatch')" class="text-red-600 nunito text-sm mb-2">Mật khẩu không khớp</p>
-            <div class="flex">
-                <button matStepperNext class="rounded-md text-white bg-green-primary px-5 py-2 nunito text-sm"> Tiếp </button>
-            </div>
-        </div>
+        <organ-step-require [requireForm]="requireForm"></organ-step-require>
     </mat-step>
     <mat-step [label]="'Thông tin'" [state]="'exp'" [stepControl]="optionalForm" errorMessage="Tên hiển thị là bắt buộc">
-        <div [formGroup]="optionalForm">
-            <input-form [inputControl]="optionalForm.get('firstname')" [placeholder]="'Tên'"></input-form>
-            <input-form [inputControl]="optionalForm.get('middlename')" [placeholder]="'Tên đệm'"></input-form>
-            <input-form [inputControl]="optionalForm.get('lastname')" [placeholder]="'Họ'"></input-form>
-            <div class="flex">
-                <button matStepperPrevious class="rounded-md border border-gray-200 bg-white px-5 py-2 nunito text-sm mr-3"> Quay lại </button>
-                <button matStepperNext class="rounded-md text-white bg-green-primary px-5 py-2 nunito text-sm"> Tiếp </button>
-            </div>
-        </div>
+        <organ-step-optional [optionalForm]="optionalForm"></organ-step-optional>
     </mat-step>
     <mat-step [label]="'Trải nghiệm'" [state]="'exp'" [stepControl]="experienceForm" errorMessage="Tùy biến ứng dụng theo ý của bạn">
-        <form [formGroup]="experienceForm">
-            <div class="mb-6 flex items-center">
-                <label class="text-gray-400 text-sm w-2/5 mr-2"> Giới hạn nội dung</label>
-                <div class="w-3/5">
-                    <select formControlName="age"
-                        class="border rounded-full border-gray-200 bg-white pl-4 pr-8 py-2 outline-none focus:outline-none focus:ring-1 focus:ring-gray-300 focus:border-gray-300">
-                        <option value="1" class="py-1">6-13</option>
-                        <option value="2" class="py-1">13-18</option>
-                        <option value="3" class="py-1">18+</option>
-                    </select>
-                </div>
-            </div>
-            <div class="mb-6 flex items-center">
-                <label class="text-gray-400 text-sm w-2/5 mr-2"> Gợi ý truyện theo sở thích</label>
-                <div class="w-3/5">
-                    <ng-select class="custom py-1 px-3 border border-gray-200 border-solid rounded-full" [items]="genres" bindValue="genreId" [multiple]="true"
-                        bindLabel="name" formControlName="genreIds" placeholder="Thể loại">
-                    </ng-select>
-                </div>
-            </div>
-            <div class="flex">
-                <button matStepperPrevious class="rounded-md border border-gray-200 bg-white px-5 py-2 nunito text-sm mr-3"> Quay lại </button>
-                <button matStepperNext class="rounded-md text-white bg-green-primary px-5 py-2 nunito text-sm"> Tiếp </button>
-            </div>
-        </form>
+        <organ-step-experience [genres]="genres" [experienceForm]="experienceForm"></organ-step-experience>
     </mat-step>
     <mat-step [label]="'Hoàn thiện'" [state]="'done'">
-        <p>{{ requireForm.value | json }}</p>
-        <p>{{ optionalForm.value | json }}</p>
-        <p>{{ experienceForm.value | json }}</p>
-        <p>You are now done.</p>
-        <div class="flex">
-            <button matStepperNext class="rounded-md text-white bg-green-primary px-5 py-2 nunito text-sm mr-3"> Tiếp </button>
-            <button (click)="stepper.reset()" class="rounded-md bg-white border border-solid border-gray-200 px-5 py-2 nunito text-sm"> Reset </button>
-        </div>
-
+        <organ-step-complete [stepper]="stepper" [requireForm]="requireForm" [optionalForm]="optionalForm" [experienceForm]="experienceForm">
+        </organ-step-complete>
     </mat-step>
     <ng-template matStepperIcon="edit">
         <fa-icon class="text-white" [icon]="icons.faCheck"></fa-icon>
