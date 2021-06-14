@@ -1,79 +1,21 @@
-<template-register-complete-background [isMobile]="isMobile">
+<!-- <wrt-template-auth-background>
     <div [ngSwitch]="isMobile">
         <div *ngSwitchCase="true">
+            <organ-register-complete-mobile></organ-register-complete-mobile>
         </div>
         <div *ngSwitchDefault>
-            <mat-horizontal-stepper #stepper>
-                <mat-step [label]="'Tài khoản'" [state]="'auth'" [stepControl]="requireForm" errorMessage="tên hiển thị, username, password là bắt buộc">
-                    <molec-register-form [form]="requireForm"></molec-register-form>
-                    <div>
-                        <!-- <pre> {{ requireForm.hasError('missmatch') }} </pre> -->
-                        <!-- <pre> {{ requireForm.errors | json }} </pre> -->
-                        <p *ngIf="requireForm.hasError('missmatch')" class="text-red-600">Mật khẩu không khớp</p>
-                        <div class="flex">
-                            <button matStepperNext class="rounded text-white bg-green-primary border border-solid border-gray-light"> Tiếp </button>
-                        </div>
-                    </div>
-                </mat-step>
-                <mat-step [label]="'Thông tin'" [state]="'exp'" [stepControl]="optionalForm">
-                    <div [formGroup]="optionalForm">
-                        <input-form [inputControl]="optionalForm.get('firstname')" [placeholder]="'Tên'"></input-form>
-                        <input-form [inputControl]="optionalForm.get('middlename')" [placeholder]="'Tên đệm'"></input-form>
-                        <input-form [inputControl]="optionalForm.get('lastname')" [placeholder]="'Họ'"></input-form>
-                        <div class="flex">
-                            <button matStepperPrevious class="rounded text-gray bg-white border border-solid border-gray-light"> Quay lại </button>
-                            <button matStepperNext class="rounded text-white bg-green-primary border border-solid border-gray-light"> Tiếp </button>
-                            <wrt-action-btns (auth)="social.emit($event)"> </wrt-action-btns>
-                        </div>
-                    </div>
-                </mat-step>
-                <mat-step [label]="'Trải nghiệm'" [state]="'exp'" [stepControl]="experienceForm" errorMessage="Tùy biến ứng dụng theo ý của bạn">
-                    <form [formGroup]="experienceForm">
-                        <div class="mb-6 flex items-center">
-                            <label class="text-gray-400 w-2/5"> Giới hạn nội dung</label>
-                            <div class="w-3/5">
-                                <select formControlName="age"
-                                    class="border rounded-full border-gray-200 bg-white pl-4 pr-8 py-2 outline-none focus:outline-none focus:ring-1 focus:ring-gray-300 focus:border-gray-300">
-                                    <option value="1" class="py-1">6-13</option>
-                                    <option value="2" class="py-1">13-18</option>
-                                    <option value="3" class="py-1">18+</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="mb-6 flex items-center">
-                            <label class="text-gray-400 w-2/5"> Gợi ý truyện theo sở thích</label>
-                        </div>
-                        <div class="md:w-3/5">
-                            <ng-select class="custom" [items]="genres" bindValue="genreId" [multiple]="true" bindLabel="name" formControlName="genreIds"
-                                placeholder="Thể loại">
-                            </ng-select>
-                        </div>
-                        <div class="flex">
-                            <button matStepperPrevious class="rounded text-gray bg-white border border-solid border-gray-light"> Quay lại </button>
-                            <button matStepperNext class="rounded text-white bg-green-primary border border-solid border-gray-light"> Tiếp </button>
-                        </div>
-                    </form>
-                </mat-step>
-                <mat-step [label]="'Hoàn thiện'" [state]="'done'">
-                    <p>{{ requireForm.value | json }}</p>
-                    <p>{{ optionalForm.value | json }}</p>
-                    <p>{{ experienceForm.value | json }}</p>
-                    <p>You are now done.</p>
-                    <div class="flex">
-                        <button (auth)="complete.emit($event)" matStepperNext class="rounded text-white bg-green-primary border border-solid border-gray-light">
-                            Xong
-                        </button>
-                        <button (click)="stepper.reset()" class="rounded text-gray bg-white border border-solid border-gray-light"> Reset </button>
-                    </div>
+            <organ-register-complete-desktop></organ-register-complete-desktop>
+        </div>
+    </div>
+</wrt-template-auth-background> -->
 
-                </mat-step>
-                <ng-template matStepperIcon="edit">
-                    <fa-icon class="text-white" [icon]="icons.faCheck"></fa-icon>
-                </ng-template>
-                <ng-template matStepperIcon="error">
-                    <fa-icon class="text-red" [icon]="icons.faExclamationCircle"></fa-icon>
-                </ng-template>
-            </mat-horizontal-stepper>
+<template-register-complete-background>
+    <div [ngSwitch]="isMobile">
+        <div *ngSwitchCase="true">
+            <organ-register-complete-mobile [genres]="genres"></organ-register-complete-mobile>
+        </div>
+        <div *ngSwitchDefault>
+            <organ-register-complete-desktop [genres]="genres"></organ-register-complete-desktop>
         </div>
     </div>
 </template-register-complete-background>

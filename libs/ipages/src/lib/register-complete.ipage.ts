@@ -55,9 +55,9 @@ export class RegisterCompleteIpage implements OnInit {
 
   private updateForm() {
     const socialCredential = this.currentUserFacade.getRegisterCredential();
-    const socialUser = socialCredential.socialUser;
-    console.log('socialUser', socialUser);
-    if (socialUser) {
+    console.log('socialCredential', socialCredential);
+    if (socialCredential) {
+      const socialUser = socialCredential.socialUser;
       this.requireForm.patchValue({
         name: socialUser.name,
         email: socialUser.email,
