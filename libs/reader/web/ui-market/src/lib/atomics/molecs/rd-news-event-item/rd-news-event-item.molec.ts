@@ -16,7 +16,7 @@ export class RdNewsEventItemMolec implements OnInit {
   @Input() title = 'Siêu ưu đãi ngày hè hàng ngàn truyện hay miến phí';
   @Input() srcImg = '/global-assets/images/Rectangle-487.webp';
 
-  @Input() blogId;
+  @Input() newsId;
   @Input() class = '';
 
   constructor() {}

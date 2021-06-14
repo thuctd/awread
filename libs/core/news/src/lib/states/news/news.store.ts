@@ -22,7 +22,7 @@ const initialState = {
 // export interface NewsUIState extends EntityState<NewsUI>, ActiveState {}
 
 @Injectable({ providedIn: 'root' })
-@StoreConfig({ name: ' news', resettable: true, idKey: 'blogId' })
+@StoreConfig({ name: ' news', resettable: true, idKey: 'newsId' })
 export class NewsStore extends EntityStore<NewsState> {
   // ui: EntityUIStore<NewsUIState>;
   constructor() {

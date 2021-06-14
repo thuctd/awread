@@ -19,7 +19,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RdNewsShareExperienceItemAtom implements OnInit {
-  @Input() blogId;
+  @Input() newsId;
   @Input() title = 'Chia sẻ kinh nghiệm';
   constructor() {}
 

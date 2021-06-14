@@ -8,17 +8,17 @@ import { environment } from '@awread/global/environments';
 export class NewsGear {
   constructor(private newsApi: NewsApi, private newsStore: NewsStore) {}
 
-  get() {
+  getAllNews() {
     const fakeData = {};
 
     return this.newsApi.get().pipe(
       tap((data: any) => {
-        if (environment) {
-          this.newsStore.set(data);
-        } else {
-          this.newsStore.set(fakeData);
-        }
+        this.newsStore.set(data);
       })
     );
+  }
+
+  getContentNews(newsId) {
+    return this.newsApi.getContentNews(newsId);
   }
 }

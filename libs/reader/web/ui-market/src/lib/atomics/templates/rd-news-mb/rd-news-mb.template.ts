@@ -15,7 +15,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 export class RdNewsMbTemplate implements OnInit {
   @Input() tabs = [
     {
-      name: 'Điểm tin sách',
+      name: 'Góc chia sẻ kinh nghiệm',
       isActive: true,
     },
     {
@@ -24,7 +24,7 @@ export class RdNewsMbTemplate implements OnInit {
     },
   ];
   @Input() classActive = 'col-span-6 border rounded-xl border-green-primary text-green-primary pt-2';
-  @Input() classNormal = 'col-span-6 border rounded-xl border-gray-text text-green-primary pt-2';
+  @Input() classNormal = 'col-span-6 border rounded-xl border-gray-text text-green-text pt-2';
 
   @Input() news = [];
 

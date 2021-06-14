@@ -13,16 +13,9 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RdNewsDetailTemplate implements OnInit {
-  @Input() newsDetail = {};
-  @Input() newsOthers = [
-    {
-      blogId: '',
-      title: '',
-      image: '',
-      updatedAt: '',
-      description: '',
-    },
-  ];
+  @Input() content;
+  @Input() newsDetail;
+  @Input() newsOthers = [];
   @Output() shareClicked = new EventEmitter();
   constructor() {}
 

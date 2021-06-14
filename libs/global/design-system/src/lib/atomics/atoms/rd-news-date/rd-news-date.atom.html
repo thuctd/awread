@@ -2,5 +2,5 @@
   <div *ngIf="isDisplay" class="flex">
     <img class="pr-4 -mt-1.5" src="/global-assets/images/insert_invitation_24px.webp" alt="">
   </div>
-  <div [ngClass]="isColor ? 'text-gray-text' : 'text-white'" class="italic font-light text-xs">{{date}}</div>
+  <div *ngIf="date" [ngClass]="isColor ? 'text-gray-text' : 'text-white'" class="italic font-light text-xs">{{date}}</div>
 </div>
