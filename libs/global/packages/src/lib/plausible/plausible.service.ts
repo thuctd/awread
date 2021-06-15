@@ -9,7 +9,7 @@ export class PlausibleService {
     plausible = Plausible({
         domain: 'awread.vn',
         apiHost: '/plausible',
-        // trackLocalhost: true
+        trackLocalhost: true
     });
     enableAutoPageviews = this.plausible.enableAutoPageviews;
     trackEvent = this.plausible.trackEvent;
@@ -18,10 +18,11 @@ export class PlausibleService {
         private http: HttpClient
     ) {
         if (environment.production) {
-            // console.log('starting plausible', this.plausible);
-            this.enableAutoPageviews();
+            console.log('starting plausible', this.plausible);
+            this.http.get('/plausible').subscribe(res => console.log('res', res));
+            this.http.get('/plausible/api').subscribe(res => console.log('res', res));
         } else {
-            // console.log('no tracking');
+            this.enableAutoPageviews();
             this.trackEvent = (eventName, options, eventData) => { };
             this.trackPageview = (eventData, options) => { };
         }
