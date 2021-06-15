@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HotToastService } from '@ngneat/hot-toast';
 
 @Injectable({
-  providedIn: 'any',
+  providedIn: 'root',
 })
 export class SnackbarService {
   constructor(private toast: HotToastService) { }

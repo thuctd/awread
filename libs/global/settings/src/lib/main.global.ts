@@ -1,14 +1,7 @@
 import { environment } from '@awread/global/environments';
 import { debounceTime } from 'rxjs/operators';
 import { persistState } from '@datorama/akita';
-import Plausible from 'plausible-tracker'
-
-if (environment.production) {
-  const plausible = Plausible({
-    domain: 'awread.vn',
-    apiHost: '/plausible'
-  })
-}
+import { PlausibleService } from '@awread/global/packages';
 
 
 const storage = persistState({

@@ -43,9 +43,7 @@ api(${api})
 plausible(${plausible})
 `)
 
-// console.log(`env: ENVIRONMENT (${process.env.ENVIRONMENT}), api (${process.env.API_URI}), graphql (${process.env.GRAPHQL_URI})`);
-
-module.exports = [
+const list = [
     {
         context: [
             `/graphql`,
@@ -63,8 +61,11 @@ module.exports = [
         "logLevel": logLevel,
         "secure": false, // because we using http not https
         "changeOrigin": true, // because we not using the same origin
-    },
-    {
+    }
+];
+
+if (process.env.ENVIRONMENT == 'production') {
+    list.push({
         context: [
             `/plausible`,
         ],
@@ -72,5 +73,7 @@ module.exports = [
         "logLevel": logLevel,
         "secure": false, // because we using http not https
         "changeOrigin": true, // because we not using the same origin
-    },
-]
+    });
+}
+
+module.exports = list;
