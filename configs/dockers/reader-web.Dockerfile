@@ -27,7 +27,7 @@ RUN echo ENVIRONMENT reset: $ENVIRONMENT
 
 COPY libs ./libs
 COPY apps ./apps
-
+RUN pnpm ngcc --properties es2015 browser module main --create-ivy-entry-points
 RUN pnpm build $application -- --configuration=${ENVIRONMENT} --no-progress
 
 
