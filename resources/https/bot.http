@@ -6,4 +6,4 @@ Content-type: application/json
 }
 
 
-GET https://awread.vn/plausible/api
+GET https://awread.vn/plausible
