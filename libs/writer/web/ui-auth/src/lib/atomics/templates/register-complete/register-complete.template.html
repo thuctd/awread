@@ -1,14 +1,8 @@
-<template-register-complete-background>
-    <div [ngSwitch]="isMobile">
-        <div *ngSwitchCase="true">
-            <organ-register-complete-mobile [requireForm]="requireForm" [optionalForm]="optionalForm" [experienceForm]="experienceForm"
-                (completeEvent)="completeEvent.emit($event)" (linkSocialEvent)="linkSocialEvent.emit($event)" [isMobile]="isMobile" [genres]="genres">
-            </organ-register-complete-mobile>
-        </div>
-        <div *ngSwitchDefault>
-            <organ-register-complete-desktop [requireForm]="requireForm" [optionalForm]="optionalForm" [experienceForm]="experienceForm"
-                (completeEvent)="completeEvent.emit($event)" (linkSocialEvent)="linkSocialEvent.emit($event)" [genres]="genres">
-            </organ-register-complete-desktop>
-        </div>
-    </div>
+<template-register-complete-background [isMobile]="isMobile">
+    <organ-register-complete-mobile mobile [requireForm]="requireForm" [optionalForm]="optionalForm" [experienceForm]="experienceForm"
+        (completeEvent)="completeEvent.emit($event)" (linkSocialEvent)="linkSocialEvent.emit($event)" [genres]="genres">
+    </organ-register-complete-mobile>
+    <organ-register-complete-desktop desktop [requireForm]="requireForm" [optionalForm]="optionalForm" [experienceForm]="experienceForm"
+        (completeEvent)="completeEvent.emit($event)" (linkSocialEvent)="linkSocialEvent.emit($event)" [genres]="genres">
+    </organ-register-complete-desktop>
 </template-register-complete-background>
