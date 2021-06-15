@@ -18,11 +18,11 @@ export class PlausibleService {
         private http: HttpClient
     ) {
         if (environment.production) {
+            this.enableAutoPageviews();
             console.log('starting plausible', this.plausible);
             this.http.get('/plausible').subscribe(res => console.log('res', res));
             this.http.get('/plausible/api').subscribe(res => console.log('res', res));
         } else {
-            this.enableAutoPageviews();
             this.trackEvent = (eventName, options, eventData) => { };
             this.trackPageview = (eventData, options) => { };
         }
