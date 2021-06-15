@@ -15,10 +15,6 @@ import { faCheck, faExclamationCircle } from '@fortawesome/free-solid-svg-icons'
         position:relative;
         border-radius: 0.375rem;
       }
-      
-      mat-horizontal-stepper {
-        height: 56vh;
-      }
 
       .stepper-process-bar{
         position:absolute;
