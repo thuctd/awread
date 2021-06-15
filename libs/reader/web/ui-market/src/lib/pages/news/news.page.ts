@@ -13,7 +13,7 @@ export class NewsPage {
   constructor(private newsFacade: NewsFacade) {}
 
   ngOnInit(): void {
-    this.newsFacade.get().subscribe((data) => {});
+    this.newsFacade.getAllNews().subscribe((data) => {});
     // this.news$.subscribe((value) => {
     //   console.log('localData', value);
     //   this.bienNewThuong = value;

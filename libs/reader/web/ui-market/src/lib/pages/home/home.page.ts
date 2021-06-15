@@ -13,6 +13,7 @@ import { CategoriesFacade } from '@awread/core/categories';
 })
 @Directive()
 export class HomePage implements OnInit, OnDestroy {
+  defaultGenre = 'Tình cảm';
   destroy$ = new Subject();
   imageObject$ = this.sliderFacede.slider$;
   categories$ = this.categoriesFacade.categories$;
@@ -31,9 +32,9 @@ export class HomePage implements OnInit, OnDestroy {
   totalBookLatest$ = this.booksFacade.latestBooksQuery.selectTotalBook();
   totalBookFeature$ = this.booksFacade.featureBooksQuery.selectTotalBook();
   currentPageLatest$ = this.booksFacade.latestBooksQuery.select((state) => state.currentPage);
-  hasMoreLatest$ = this.booksFacade.latestBooksQuery.select((state) => state.hasMore);
+  hasNextPageLatest$ = this.booksFacade.latestBooksQuery.select((state) => state.hasNextPage);
   currentPageFeature$ = this.booksFacade.featureBooksQuery.select((state) => state.currentPage);
-  hasMoreFeature$ = this.booksFacade.featureBooksQuery.select((state) => state.hasMore);
+  hasNextPageFeature$ = this.booksFacade.featureBooksQuery.select((state) => state.hasNextPage);
 
   constructor(
     private booksFacade: BooksFacade,
@@ -47,6 +48,7 @@ export class HomePage implements OnInit, OnDestroy {
     this.booksFacade.getGoodBooks().pipe(takeUntil(this.destroy$)).subscribe();
     this.booksFacade.getLatestBooks().pipe(takeUntil(this.destroy$)).subscribe();
     this.booksFacade.getFeatureBooks().pipe(takeUntil(this.destroy$)).subscribe();
+    this.booksFacade.getGenreBooks().pipe(takeUntil(this.destroy$)).subscribe();
     this.genresFacade.getAllGenres().pipe(takeUntil(this.destroy$)).subscribe();
     this.sliderFacede.getAllSlider().pipe(takeUntil(this.destroy$)).subscribe();
     this.loadGenreBookFirstByGenre().pipe(takeUntil(this.destroy$)).subscribe();
@@ -57,7 +59,7 @@ export class HomePage implements OnInit, OnDestroy {
   }
 
   filterItemsByCategory(category) {
-    this.booksFacade.setCurrentPageLatestBook(0);
+    this.booksFacade.setCurrentPageLatestBook(1);
     this.booksFacade.setCurrentCategory(category.categoryId);
     this.cd.detectChanges();
   }
@@ -65,16 +67,17 @@ export class HomePage implements OnInit, OnDestroy {
   private loadGenreBookFirstByGenre() {
     return this.genres$.pipe(
       takeWhile((val) => val !== undefined, false),
-      switchMap((items) => {
+      tap((items) => {
         if (!items.length) {
           return of([]);
         }
-        return this.booksFacade.getGenreBooks(items[0].genreId);
+        const genre = items.find(item => item.name.includes(this.defaultGenre));
+        this.booksFacade.setCurrentGenreGenreBook(genre.genreId);
       })
     );
   }
 
-  pageChange(activePageNumber: number) {
+  pageChangeLatest(activePageNumber: number) {
     this.booksFacade.setCurrentPageLatestBook(activePageNumber);
   }
 

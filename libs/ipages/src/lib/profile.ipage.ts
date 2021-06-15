@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Directive, Injectable, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { GenresFacade } from '@awread/core/genres';
 import { AuthFacade, CurrentUserFacade } from '@awread/core/users';
 import { PopupChangeCoverOrgan } from '@awread/global/design-system';
 import { SnackbarService } from '@awread/global/packages';
@@ -9,28 +10,52 @@ import { SnackbarService } from '@awread/global/packages';
 })
 @Directive()
 export class ProfileIPage implements OnInit {
-  profileForm: FormGroup;
+  experienceForm = this.fb.group({
+    age: ['2'],
+    genreIds: [[]],
+  });
+
+  optionalForm = this.fb.group({
+    firstname: [''],
+    middlename: [''],
+    lastname: [''],
+    facebook: [''],
+    google: [''],
+    apple: [''],
+  });
+
+  requireForm = this.fb.group({
+    username: ['', [Validators.required]],
+    name: ['', [Validators.required]],
+    email: ['', []],
+    phone: ['', []],
+    avatar: [false]
+  });
+
   currentUser$ = this.currentUserFacade.currentUser$;
-  profileFormValueBefore = '';
-  submitted = false;
+  genres$ = this.genresFacade.genres$;
   constructor(
     private currentUserFacade: CurrentUserFacade,
     private fb: FormBuilder,
     private matDialog: MatDialog,
     private authFacade: AuthFacade,
     private cd: ChangeDetectorRef,
-    private snackbarService: SnackbarService
-  ) {}
+    private snackbarService: SnackbarService,
+    private genresFacade: GenresFacade,
+  ) { }
 
   ngOnInit(): void {
-    this.initForm();
+    this.genresFacade.getAllGenres().subscribe();
     this.getCurrentUser();
   }
 
   submitEvent(event) {
     switch (event) {
-      case 'save-form':
-        this.updateProfile();
+      case 'save-user':
+        this.saveUser();
+        break;
+      case 'save-personal':
+        this.saveUser();
         break;
       case 'change-image':
         this.openChangeCover();
@@ -66,27 +91,35 @@ export class ProfileIPage implements OnInit {
         setTimeout(() => {
           // wait 1s for server ready
           const now = new Date();
-          this.currentUserFacade.updateCurrentUser({ avatar: true, updatedAt: now });
-          this.profileForm.patchValue({ updatedAt: now });
+          this.currentUserFacade.updateUser({ avatar: true, updatedAt: now });
+          this.requireForm.patchValue({ avatar: true, updatedAt: now });
           this.cd.detectChanges();
         }, 1000);
       }
     });
   }
 
-  updateProfile() {
-    if (this.profileForm.invalid) {
-      this.profileForm.get('name').setValue(this.profileForm.value.name, { emitEvent: true });
-      this.profileForm.get('email').setValue(this.profileForm.value.email, { emitEvent: true });
-      this.profileForm.markAllAsTouched();
+  saveUser() {
+    if (this.requireForm.invalid) {
+      this.requireForm.get('name').setValue(this.requireForm.value.name, { emitEvent: true });
+      this.requireForm.get('email').setValue(this.requireForm.value.email, { emitEvent: true });
+      this.requireForm.markAllAsTouched();
       return this.snackbarService.showWarning('Vui lòng điền đủ thông tin');
     } else {
-      this.currentUserFacade.updateCurrentUser(this.profileForm.value);
+      this.currentUserFacade.updateUser(this.requireForm.value);
+      this.currentUserFacade.updatePersonal(this.requireForm.value);
     }
   }
 
-  private updateProfileForm(user) {
-    this.profileForm.patchValue({
+  savePersonal() {
+    this.currentUserFacade.updatePersonal({
+      ...this.experienceForm.value,
+      ...this.optionalForm.value
+    });
+  }
+
+  private updateForm(user) {
+    this.requireForm.patchValue({
       userId: user.userId,
       username: user.username,
       email: user.email,
@@ -104,37 +137,13 @@ export class ProfileIPage implements OnInit {
       facebookAddress: user.facebookAddress,
       updatedAt: user.updatedAt,
     });
-    this.profileFormValueBefore = this.profileForm.value;
   }
   private getCurrentUser() {
     this.currentUserFacade.getCurrentUser().subscribe((user) => {
       if (user) {
-        this.updateProfileForm(user);
+        this.updateForm(user);
       }
     });
   }
 
-  private initForm() {
-    this.profileForm = this.fb.group({
-      userId: [null],
-      username: [null],
-      email: [null, [Validators.required, Validators.email]],
-      phone: [null],
-      name: [null, [Validators.required]],
-      firstname: [null],
-      middlename: [null],
-      lastname: [null],
-      age: [null],
-      avatar: [null],
-      dob: [null],
-      gender: [null],
-      bio: [null],
-      websiteAddress: [null],
-      facebookAddress: [null],
-      updatedAt: [null],
-    });
-    setTimeout(() => {
-      this.profileForm.get('dob').disable();
-    }, 100);
-  }
 }

@@ -42,7 +42,6 @@ export class DetailPage implements OnInit, OnDestroy {
         })
       )),
     ).subscribe(book => {
-      // console.log('book', book, this.bookId);
       this.book = book[0];
       this.breadcrumbs = this.getbreadcrumbs();
       this.cd.detectChanges();
@@ -52,18 +51,19 @@ export class DetailPage implements OnInit, OnDestroy {
   }
 
   getbreadcrumbs() {
-    return [{
-      title: 'Trang chủ',
-      link: ['/']
-    },
-    {
-      title: this.book.type == '0' ? 'Truyện tự sáng tác' : 'Truyện sưu tầm',
-      link: ['/', this.book.type == '0' ? 'composed' : 'collected', { categoryId: this.book.categoryId }]
-    },
-    {
-      title: this.book.title,
-      link: ['/', 'books', this.bookId]
-    }
+    return [
+      {
+        title: 'Trang chủ',
+        link: ['/'],
+      },
+      {
+        title: this.book.type == '0' ? 'Truyện tự sáng tác' : 'Truyện sưu tầm',
+        link: ['/', this.book.type == '0' ? 'composed' : 'collected', { categoryId: this.book.categoryId }],
+      },
+      {
+        title: this.book.title,
+        link: ['/', 'books', this.bookId],
+      },
     ];
   }
 
@@ -92,8 +92,8 @@ export class DetailPage implements OnInit, OnDestroy {
         switchMap(() => {
           if (this.bookId) {
             return this.chaptersFacade.getAllChapters(this.bookId).pipe(
-              tap(chapters => {
-                return this.router.navigate(['/books', this.bookId, 'chapters', chapters[0].chapterId])
+              tap((chapters) => {
+                return this.router.navigate(['/books', this.bookId, 'chapters', chapters[0].chapterId]);
               })
             );
           }
@@ -112,8 +112,13 @@ export class DetailPage implements OnInit, OnDestroy {
         switchMap(() => {
           if (this.bookId) {
             return this.chaptersFacade.getAllChapters(this.bookId).pipe(
-              tap(chapters => {
-                return this.router.navigate(['/books', this.bookId, 'chapters', chapters[chapters.length - 1].chapterId])
+              tap((chapters) => {
+                return this.router.navigate([
+                  '/books',
+                  this.bookId,
+                  'chapters',
+                  chapters[chapters.length - 1].chapterId,
+                ]);
               })
             );
           }
@@ -130,7 +135,7 @@ export class DetailPage implements OnInit, OnDestroy {
   }
 
   nativeTopBook() {
-    this.router.navigate(['/top-books']);
+    this.router.navigate(['/index', 'top-books']);
   }
 
   ngOnDestroy(): void {

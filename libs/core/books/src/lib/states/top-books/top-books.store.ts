@@ -1,17 +1,19 @@
+import { PageInfo } from '@awread/global/tools';
 import { Injectable } from '@angular/core';
 import { EntityState, EntityStore, StoreConfig, ActiveState } from '@datorama/akita';
 import { Book } from '../../models';
 
-export interface TopBooksState extends EntityState<Book>, ActiveState { 
-  hasMore: boolean;
-  sizePage: number;
-  total: number;
+export interface TopBooksState extends EntityState<Book>, ActiveState {
+  pageInfo: PageInfo;
 }
 
 const initialState = {
-  hasMore: true,
-  sizePage: 0,
-  total: 0,
+  pageInfo: {
+    endCursor: undefined,
+    hasNextPage: true,
+    hasPreviousPage: undefined,
+    startCursor: undefined,
+  }
 }
 
 @Injectable({ providedIn: 'root' })
@@ -23,7 +25,11 @@ export class TopBooksStore extends EntityStore<TopBooksState> {
     // this.createUIStore().setInitialEntityState();
   }
 
-  updatePage(page: { hasMore: boolean, sizePage: number, total: number }) {
+  updatePage(page: { hasNextPage: boolean, totalCount: number, sizePage: number }) {
     this.update(page);
+  }
+
+  setCursor(cursor) {
+    this.update({ cursor });
   }
 }

@@ -13,6 +13,7 @@ import { GenreBooksQuery, GenreBooksStore } from '../states/genre-books';
 import { GoodBooksQuery } from '../states/good-books';
 import { LatestBooksQuery } from '../states/latest-books';
 import { TopBooksQuery } from '../states/top-books';
+import { SearchBooksStore } from '../states/search-books';
 
 @Injectable({ providedIn: 'root' })
 export class BooksFacade {
@@ -45,7 +46,8 @@ export class BooksFacade {
     public searchBooksQuery: SearchBooksQuery,
     public latestBooksStore: LatestBooksStore,
     public featureBooksStore: FeatureBooksStore,
-    public genreBooksStore: GenreBooksStore
+    public genreBooksStore: GenreBooksStore,
+    private searchBooksStore: SearchBooksStore
   ) { }
 
   setCurrentPageLatestBook(pageNumber) {
@@ -67,21 +69,16 @@ export class BooksFacade {
     return this.booksGear.getBookById(bookId);
   }
 
-  getGenreBooks(genreId: string) {
-    return this.booksGear.getGenreBooks(genreId);
+  getGenreBooks() {
+    return this.booksHomeGear.getGenreBooks();
   }
 
-  getCategoryBooks(categoryId: string, limit?: number) {
-    const size = limit === 0 ? 12 : this.categoryBooksQuery.getSizePage() + 12;
-    return this.booksGear.getCategoryBooks(categoryId, size);
+  getCategoryBooks(a?) {
+    return this.booksGear.getCategoryBooks();
   }
 
-  getLatestBooks(isCheck?: boolean) {
-    if (isCheck) {
-      return this.booksHomeGear.getLatestBooks(this.latestBooksQuery.getSizePage() + 10, isCheck);
-    } else {
-      return this.booksHomeGear.getLatestBooks();
-    }
+  getLatestBooks() {
+    return this.booksHomeGear.getLatestBooks();
   }
 
   setCurrentCategory(categoryId) {
@@ -97,15 +94,11 @@ export class BooksFacade {
   }
 
   getGoodBooks() {
-    return this.booksHomeGear.getGoodBooks(this.goodBooksQuery.getSizePage() + 12);
+    return this.booksHomeGear.getGoodBooks();
   }
 
-  getFeatureBooks(isCheck?: boolean) {
-    if (isCheck) {
-      return this.booksHomeGear.getFeatureBooks(this.featureBooksQuery.getSizePage() + 12, isCheck);
-    } else {
-      return this.booksHomeGear.getFeatureBooks();
-    }
+  getFeatureBooks(a?) {
+    return this.booksHomeGear.getFeatureBooks();
   }
 
   getFilterBooks(categoryId: string) {
@@ -118,5 +111,13 @@ export class BooksFacade {
     } else {
       return this.booksGear.searhBookByTermApi(term);
     }
+  }
+
+  setSearchBook(value) {
+    this.searchBooksStore.set(value);
+  }
+
+  setSearchBookLoading(value) {
+    this.searchBooksStore.setLoading(value);
   }
 }

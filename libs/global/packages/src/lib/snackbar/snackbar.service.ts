@@ -7,27 +7,30 @@ import { HotToastService } from '@ngneat/hot-toast';
 export class SnackbarService {
   constructor(private toast: HotToastService) { }
 
-  showSuccess(message: string) {
+  showSuccess(message: string, duration?) {
     this.toast.success(message, {
       style: {
         padding: '20px'
-      }
+      },
+      duration
     });
   }
 
-  showError(message: string) {
+  showError(message: string, duration?) {
     this.toast.error(message, {
       style: {
         padding: '20px'
-      }
+      },
+      duration
     });
   }
 
-  showWarning(message: string) {
+  showWarning(message: string, duration?) {
     this.toast.warning(message, {
       style: {
         padding: '20px'
-      }
+      },
+      duration
     });
   }
 

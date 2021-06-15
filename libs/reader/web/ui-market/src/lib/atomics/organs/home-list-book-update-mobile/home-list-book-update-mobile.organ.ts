@@ -25,10 +25,10 @@ export class HomeListBookUpdateMobileOrgan implements OnInit {
   @Input() totalBook;
   @Input() page = {
     name: 'TRUYỆN MỚI CẬP NHẬT',
-    href: ['/latest-books']
+    href: ['/index', 'latest-books'],
   };
   @Input() books = [];
-  @Input() hasMore;
+  @Input() hasNextPage;
   @Input() categories = [];
   @Input() currentPage = 1;
   @Output() pageChange = new EventEmitter();
@@ -70,8 +70,8 @@ export class HomeListBookUpdateMobileOrgan implements OnInit {
 
   ngOnInit(): void { }
 
-
   onClickPage(pageNumber: number): void {
-    this.pageChange.emit(pageNumber);
+    this.currentPage = pageNumber;
+    this.pageChange.emit(this.currentPage);
   }
 }

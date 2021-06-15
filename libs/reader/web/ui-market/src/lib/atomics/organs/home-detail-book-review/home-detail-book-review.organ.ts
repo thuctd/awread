@@ -18,7 +18,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 export class HomeDetailBookReviewOrgan implements OnInit {
   @Input() page = {
     name: 'Top truyện được đánh giá tích cực',
-    href: ['/good-books']
+    href: ['/index', 'good-books'],
   };
   @Input() books = [];
   @Input() book = {
@@ -39,7 +39,7 @@ export class HomeDetailBookReviewOrgan implements OnInit {
     },
   };
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

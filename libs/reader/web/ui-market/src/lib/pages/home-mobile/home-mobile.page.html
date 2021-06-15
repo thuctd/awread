@@ -1,7 +1,7 @@
-<template-home-mobile [hasMoreLatest]="hasMoreLatest$ | async" [hasMoreFeature]="hasMoreFeature$ | async" [totalBook]="totalBookLatest$ | async"
-  [currentPageLatest]="currentPageLatest$ | async" [currentPageFeature]="currentPageFeature$ | async" (pageChange)="pageChange($event)"
-  [loading]="isLoadingLatest$" [isLoadingFeature]="isLoadingFeature$ | async" [totalBookFeatured]="totalBookFeature$ | async"
-  (displayActivePageFeature)="pageChangeFeature($event)" [getGoodBooks]="goodBookList$ | async" [getLatestBooks]="latestBooks$ | async"
-  [getFeatureBooks]="featureBookList$ | async" [sliders]="imageObject$ | async" [genres]="genres$ | async" (filterItemsByGenre)="filterItemsByGenre($event)"
-  [bookByGenre]="genreBooks$ | async" [categories]="categories$ | async" (emitBooks)="filterItemsByCategory($event)"
-  [loadingBooksLatest]="isLoadingLatest$ | async"></template-home-mobile>
+<template-home-mobile [totalBookLatest]="totalBookLatest$ | async" [currentPageLatest]="currentPageLatest$ | async"
+  [currentPageFeature]="currentPageFeature$ | async" (pageChangeLatest)="pageChangeLatest($event)" [loading]="isLoadingLatest$"
+  [hasNextPageFeature]="currentPageFeature$ | async" [hasNextPageLatest]="currentPageLatest$ | async" [isLoadingFeature]="isLoadingFeature$ | async"
+  [totalBookFeatured]="totalBookFeature$ | async" (displayActivePageFeature)="pageChangeFeature($event)" [getGoodBooks]="goodBookList$ | async"
+  [getLatestBooks]="latestBooks$ | async" [getFeatureBooks]="featureBookList$ | async" [sliders]="imageObject$ | async" [genres]="genres$ | async"
+  (filterItemsByGenre)="filterItemsByGenre($event)" [bookByGenre]="genreBooks$ | async" [categories]="categories$ | async"
+  (emitBooks)="filterItemsByCategory($event)" [loadingBooksLatest]="isLoadingLatest$ | async"></template-home-mobile>

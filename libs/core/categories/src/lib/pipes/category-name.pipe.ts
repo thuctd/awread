@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { CategoriesQuery } from '../states/categories';
-import { pipeName } from '../../../../tools/pipe-name.tool';
+import { pipeName } from '@awread/global/tools';
 @Pipe({
   name: 'categoryName'
 })

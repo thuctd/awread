@@ -21,7 +21,7 @@ export class AuthorPage implements OnInit {
     private authorFacade: AuthorFacade,
     private booksFacade: BooksFacade,
     private cd: ChangeDetectorRef
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.userId = this.activatedRoute.snapshot.params['userId'];
@@ -30,11 +30,10 @@ export class AuthorPage implements OnInit {
       .pipe(
         map((params) => params.get('userId')),
         switchMap((id) => this.authorFacade.getDetailAuthor(id)),
-        tap((author) => this.booksFacade.getAuthorBooks(author[0].userId).subscribe())
+        tap((user) => this.booksFacade.getAuthorBooks(user.userId).subscribe())
       )
-      .subscribe((users) => {
-        this.user = users[0];
-        console.log(this.user);
+      .subscribe((user) => {
+        this.user = user;
         this.breadcrumbs = this.getbreadcrumbs();
       });
   }
@@ -50,13 +49,13 @@ export class AuthorPage implements OnInit {
         link: ['/', this.user.userId],
       },
       {
-        title: this.user.userByUserId.name,
+        title: this.user.name,
         link: ['/', this.user.userId],
       },
     ];
   }
 
-  onMoreBooksByAuthor() {
+  navigateBooksByAuthor() {
     this.router.navigate([this.userId, 'books']);
   }
 }

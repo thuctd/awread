@@ -1,6 +1,6 @@
 export interface News {
   // id: string;
-  blogId: string;
+  newsId: string;
 }
 
 export function News(params: Partial<News>) {

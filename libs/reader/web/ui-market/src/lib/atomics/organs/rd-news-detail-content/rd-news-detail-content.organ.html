@@ -1,6 +1,12 @@
-<molec-rd-news-event-item [srcImg]="newsDetail.image" [title]="newsDetail.title"></molec-rd-news-event-item>
-<div class="flex items-center pt-4 pb-8 border-b border-gray-400">
-  <atom-rd-news-date [date]="newsDetail.updatedAt" class="pt-1.5" [isDisplay]="true"></atom-rd-news-date>
-  <atom-social-share-fb-btn (shareClicked)="shareClicked.emit()" class="pl-4"></atom-social-share-fb-btn>
-</div>
-<excerpt class="py-4" [class]="'text-sm'" [excerpt]="newsDetail.content"></excerpt>
+<ng-container *ngIf="newsDetail">
+  <img class="w-full h-32 md:h-64" src="{{newsDetail.image}}">
+  <div class="outline-none hover:text-green-primary text-sm sm:text-base uppercase font-semibold mt-2">
+    {{newsDetail.title}}
+  </div>
+  <div class="flex items-center py-4 border-b border-gray-400">
+    <atom-rd-news-date [date]="newsDetail.updatedAt" class="pt-1.5" [isDisplay]="true"></atom-rd-news-date>
+    <!-- <atom-social-share-fb-btn (shareClicked)="shareClicked.emit()" class="pl-4"></atom-social-share-fb-btn> -->
+  </div>
+  <p class="detail-book-introduce whitespace-pre-wrap text-justify break-words pt-2 text-gray-text text-sm leading-8 font-light py-4"
+    [innerHTML]="content"></p>
+</ng-container>

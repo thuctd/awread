@@ -1,10 +1,14 @@
 <section>
   <div class="flex justify-between">
-    <atom-rd-author-name [name]="user?.name" [fullName]="user?.lastname + ' ' + user?.middlename + ' ' + user?.firstname"></atom-rd-author-name>
+    <!-- <pre> {{ user | json }} </pre> -->
+    <atom-rd-author-name [name]="user?.username" [fullName]="user.name">
+    </atom-rd-author-name>
     <!-- <molec-rd-author-list-btns [isFollow]="isFollow" [isBlock]="isBlock" class="sm:mr-0 md:mr-10 lg:mr-20" [class]="'px-5 py-2 rounded-lg'"></molec-rd-author-list-btns> -->
   </div>
   <div class="flex my-4">
-    <a [routerLink]="['/', user?.userId ,'books']"  class="text-gray-text outline-none font-bold transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-100 mr-32">{{numberProduct}} Tác phẩm</a>
+    <a [routerLink]="['/', user?.userId ,'books']"
+      class="text-gray-text outline-none font-bold transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-100 mr-32">{{numberProduct}}
+      Tác phẩm</a>
     <!-- <button (click)="openDiaLogFollowers($event)" class="text-gray-text focus:outline-none font-bold transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-100">{{numberFollow}} Người theo dõi</button> -->
   </div>
   <!-- <excerpt [class]="'text-gray-text text-sm'" [excerpt]="user?.bio"></excerpt> -->

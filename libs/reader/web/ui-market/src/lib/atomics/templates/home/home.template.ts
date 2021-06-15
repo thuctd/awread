@@ -34,7 +34,7 @@ export class HomeTemplate implements OnInit {
   @Input() getFeatureBooks = [];
   @Input() genres = [];
   @Input() genreBooks = [];
-  @Input() totalBook;
+  @Input() totalBookLatest;
   @Input() currentPage;
   @Input() totalBookFeatured;
   @Input() eventResetPage;
@@ -44,9 +44,9 @@ export class HomeTemplate implements OnInit {
   @Output() pageChange = new EventEmitter();
   @Output() pageChangeFeature = new EventEmitter();
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   // ngOnChanges(changes) {
   //   console.log('changes', changes);

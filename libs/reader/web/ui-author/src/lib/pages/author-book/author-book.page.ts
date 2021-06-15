@@ -1,10 +1,12 @@
 import { switchMap, map, tap } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Injectable, OnInit, ChangeDetectorRef, Directive } from '@angular/core';
-import { BooksFacade } from '@awread/core/books';
+import { BooksFacade, ListBooksFacade } from '@awread/core/books';
 import { AuthorFacade } from '@awread/core/authors';
 import { Observable } from 'rxjs';
+import { untilDestroyed, UntilDestroy } from '@ngneat/until-destroy';
 
+@UntilDestroy()
 @Injectable({
   providedIn: 'root',
 })
@@ -12,33 +14,35 @@ import { Observable } from 'rxjs';
 export class AuthorBookPage implements OnInit {
   userId: string;
   user: any;
-  authorBooks = this.booksFacade.authorBooks$;
-  isLoading$: Observable<boolean>;
   breadcrumbs;
   totalBook$: any;
-  isHasMore$: Observable<boolean>;
+  authorBooks$;
+  isLoading$: Observable<boolean>;
+  hasNextPage$: Observable<boolean>;
 
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private authorFacade: AuthorFacade,
     private booksFacade: BooksFacade,
+    private listBooksFacade: ListBooksFacade,
     private cd: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
     this.userId = this.activatedRoute.snapshot.params['userId'];
-    this.isLoading$ = this.booksFacade.authorBooksQuery.selectLoading();
-    this.totalBook$ = this.booksFacade.authorBooksQuery.selectTotalBook();
-    this.isHasMore$ = this.booksFacade.authorBooksQuery.selectHasMore();
     this.activatedRoute.paramMap.pipe(
       map(params => params.get('userId')),
       switchMap(id => this.authorFacade.getDetailAuthor(id)),
-      tap(author => this.booksFacade.getAuthorBooks(author[0].userId).subscribe())
-    ).subscribe(users => {
-      this.user = users[0];
+      tap(user => this.listBooksFacade.getAuthorBookByCursor(user.userId, 'add').pipe(untilDestroyed(this)).subscribe())
+    ).subscribe(user => {
+      this.user = user;
       this.breadcrumbs = this.getbreadcrumbs();
     })
+    this.authorBooks$ = this.booksFacade.authorBooksQuery.selectAll();
+    this.totalBook$ = this.booksFacade.authorBooksQuery.selectTotalBook();
+    this.isLoading$ = this.booksFacade.authorBooksQuery.selectLoading();
+    this.hasNextPage$ = this.booksFacade.authorBooksQuery.selectHasNextPage();
   }
 
   getbreadcrumbs() {
@@ -51,19 +55,19 @@ export class AuthorBookPage implements OnInit {
       link: ['/', this.user.userId]
     },
     {
-      title: this.user.userByUserId.name,
+      title: this.user.name,
       link: ['/', this.user.userId]
     }
     ];
   }
 
-  onMoreBooks() {
+  moreBooks() {
     this.fetchBooks();
   }
 
   private fetchBooks() {
-    if (this.booksFacade.authorBooksQuery.getHasMore()) {
-      this.booksFacade.getAuthorBooks(this.userId).subscribe();
+    if (this.booksFacade.authorBooksQuery.getHasNextPage()) {
+      this.listBooksFacade.getAuthorBookByCursor(this.userId, 'add').pipe(untilDestroyed(this)).subscribe();
     }
   }
 
