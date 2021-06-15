@@ -95,3 +95,15 @@ dokku network:report plausible
 # setup on website
 
 <script async defer data-domain="awread.vn" src="https://plausible.awread.vn/js/plausible.js"></script>
+
+# set console
+
+dokku config:set plausible ADMIN_USER_EMAIL=hiepxanh@gmail.com \
+ ADMIN_USER_NAME=hiepxanh \
+ ADMIN_USER_PWD=Dream@3103
+dokku config:set --no-restart plausible GOOGLE_CLIENT_ID=265413764260-sqgbeot6gpv6u7dp6moov7jp2blkvp3i.apps.googleusercontent.com
+dokku config:set --no-restart plausible GOOGLE_CLIENT_SECRET=7qz_hZtCZmhEu56VY-xFAOZp
+
+- not working, must open incognito, google have serious problem with cache data.
+  dokku config:set --no-restart plausible GOOGLE_CLIENT_ID=265413764260-c8nlda77oa2eosf8p73pn0u2kostho3l.apps.googleusercontent.com
+  dokku config:set --no-restart plausible GOOGLE_CLIENT_SECRET=NeUT6Rxhf3QkFUKzMg6yAkVf
