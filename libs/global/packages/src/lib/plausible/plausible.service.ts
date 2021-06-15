@@ -1,7 +1,7 @@
 import { environment } from '@awread/global/environments';
 import { Injectable } from '@angular/core';
 import Plausible from 'plausible-tracker'
-
+import { HttpClient } from '@angular/common/http';
 @Injectable({
     providedIn: 'root'
 })
@@ -13,10 +13,13 @@ export class PlausibleService {
     enableAutoPageviews = this.plausible.enableAutoPageviews;
     trackEvent = this.plausible.trackEvent;
     trackPageview = this.plausible.trackPageview;
-    constructor() {
+    constructor(
+        private http: HttpClient
+    ) {
         if (environment.production) {
             console.log('starting plausible', this.plausible);
             this.enableAutoPageviews();
+            this.http.get('/plausible').subscribe(res => console.log('res', res));
         } else {
             console.log('no tracking');
             this.trackEvent = (eventName, options, eventData) => { };
