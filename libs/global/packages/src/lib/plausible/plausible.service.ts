@@ -9,7 +9,6 @@ export class PlausibleService {
     plausible = Plausible({
         domain: 'awread.vn',
         apiHost: '/plausible',
-        trackLocalhost: true
     });
     enableAutoPageviews = this.plausible.enableAutoPageviews;
     trackEvent = this.plausible.trackEvent;
