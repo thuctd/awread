@@ -1,35 +1,28 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable no-undef */
 // eslint-disable-next-line no-undef
-let graphqlTarget;
-let apiTarget;
-let logLevel;
+// https://backend-graphql.awread.vn
+let graphql = process.env.GRAPHQL_URL ?? 'http://backend-graphql.web.1';
+let api = process.env.API_URL ?? 'http://backend-graphql.web.1';
+let plausible = process.env.PLAUSIBLE_URL ?? 'http://plausible.web.1';
+let logLevel = 'info';
+
 switch (true) {
     case process.env.ENVIRONMENT == 'production':
-        graphqlTarget = process.env.GRAPHQL_URI ?? 'https://backend-graphql.awread.vn';
-        apiTarget = process.env.API_URI ?? 'https://backend-api.awread.vn';
-        logLevel = 'info';
         break;
     case process.env.ENVIRONMENT == 'next':
-        graphqlTarget = process.env.GRAPHQL_URI ?? 'https://backend-graphql.next.awread.vn';
-        apiTarget = process.env.API_URI ?? 'https://backend-api.next.awread.vn';
-        logLevel = 'info';
         break;
     case process.env.ENVIRONMENT == 'test':
-        graphqlTarget = process.env.GRAPHQL_URI ?? 'https://backend-graphql.next.awread.vn';
-        apiTarget = process.env.API_URI ?? 'https://backend-api.next.awread.vn';
-        logLevel = 'debug';
-        console.log('test');
         break;
     case process.env.ENVIRONMENT == 'local':
-        graphqlTarget = process.env.GRAPHQL_URI ?? 'http://localhost:5000';
-        apiTarget = process.env.API_URI ?? 'http://localhost:3333';
+        graphql = 'http://localhost:5000';
+        api = 'http://localhost:3333';
         logLevel = 'debug';
         console.log('local');
         break;
     default:
-        graphqlTarget = process.env.GRAPHQL_URI ?? 'https://backend-graphql.next.awread.vn';
-        apiTarget = process.env.API_URI ?? 'https://backend-api.next.awread.vn';
+        graphql = 'https://backend-graphql.next.awread.vn';
+        api = 'https://backend-api.next.awread.vn';
         logLevel = 'debug';
         console.log('default');
         break;
@@ -45,8 +38,9 @@ process.env.ENVIRONMENT == 'local': (${process.env.ENVIRONMENT == 'local'}) (${p
 
 console.log(`
 process.env.ENVIRONMENT (${process.env.ENVIRONMENT})
-graphqlTarget (${graphqlTarget})
-apiTarget (${apiTarget})
+graphql(${graphql})
+api(${api})
+plausible(${plausible})
 `)
 
 // console.log(`env: ENVIRONMENT (${process.env.ENVIRONMENT}), api (${process.env.API_URI}), graphql (${process.env.GRAPHQL_URI})`);
@@ -56,7 +50,7 @@ module.exports = [
         context: [
             `/graphql`,
         ],
-        "target": graphqlTarget,
+        "target": graphql,
         "logLevel": logLevel,
         "secure": false, // because we using http not https
         "changeOrigin": true, // because we not using the same origin
@@ -65,7 +59,16 @@ module.exports = [
         context: [
             `/api`,
         ],
-        "target": apiTarget,
+        "target": api,
+        "logLevel": logLevel,
+        "secure": false, // because we using http not https
+        "changeOrigin": true, // because we not using the same origin
+    },
+    {
+        context: [
+            `/plausible`,
+        ],
+        "target": plausible,
         "logLevel": logLevel,
         "secure": false, // because we using http not https
         "changeOrigin": true, // because we not using the same origin
