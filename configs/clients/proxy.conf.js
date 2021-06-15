@@ -4,7 +4,6 @@
 // https://backend-graphql.awread.vn
 let graphql = process.env.GRAPHQL_URL ?? 'http://backend-graphql.web.1';
 let api = process.env.API_URL ?? 'http://backend-graphql.web.1';
-let plausible = process.env.PLAUSIBLE_URL ?? 'http://plausible.web.1';
 let logLevel = 'info';
 
 switch (true) {
@@ -40,9 +39,10 @@ console.log(`
 process.env.ENVIRONMENT (${process.env.ENVIRONMENT})
 graphql(${graphql})
 api(${api})
-plausible(${plausible})
 `)
 
+// https://angular.io/guide/build
+// .For example, you can specify the following pathRewrite value to the proxy configuration to remove "api" from the end of a path.
 const list = [
     {
         context: [
@@ -63,17 +63,5 @@ const list = [
         "changeOrigin": true, // because we not using the same origin
     }
 ];
-
-if (process.env.ENVIRONMENT == 'production') {
-    list.push({
-        context: [
-            `/plausible`,
-        ],
-        "target": plausible,
-        "logLevel": logLevel,
-        "secure": false, // because we using http not https
-        "changeOrigin": true, // because we not using the same origin
-    });
-}
 
 module.exports = list;
