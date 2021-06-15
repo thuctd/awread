@@ -21,6 +21,7 @@ export class PlausibleService {
             this.enableAutoPageviews();
             this.http.get('/plausible').subscribe(res => console.log('res', res));
         } else {
+            this.http.get('/api').subscribe(res => console.log('res', res));
             console.log('no tracking');
             this.trackEvent = (eventName, options, eventData) => { };
             this.trackPageview = (eventData, options) => { };

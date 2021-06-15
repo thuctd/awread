@@ -4,3 +4,6 @@ Content-type: application/json
 {
     "text":"Lol"
 }
+
+
+GET https://awread.vn/plausible/api
