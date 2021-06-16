@@ -61,9 +61,10 @@ export class LoginGear {
 
   loginSuccess(result) {
     localStorage.setItem('accessToken', result?.accessToken);
-    this.snackbarService.showSuccess(`Chúc bạn một ngày tốt lành! ${result.user.firstname ?? result.user.name ?? ''}`);
-    this.currentUserGear.getCurrentUser().subscribe();
-    this.authRoutingGear.navigateAfterLoginComplete();
+    this.currentUserGear.getCurrentUser().subscribe(() => {
+      this.snackbarService.showSuccess(`Chúc bạn một ngày tốt lành! ${result.user.firstname ?? result.user.name ?? ''}`);
+      this.authRoutingGear.navigateAfterLoginComplete();
+    });
     this.matDialog.closeAll();
   }
 

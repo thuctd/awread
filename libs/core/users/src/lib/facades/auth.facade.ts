@@ -18,7 +18,7 @@ export class AuthFacade {
     private currentUserQuery: CurrentUserQuery,
     private currentUserGear: CurrentUserGear,
     private authRoutingGear: AuthRoutingGear
-  ) {}
+  ) { }
 
   connectProviderAndGoToRegister(provider) {
     this.registerGear.connectProviderAndGoToRegister(provider);
@@ -53,6 +53,6 @@ export class AuthFacade {
   }
 
   createNewAccount(requiredForm, optionalForm, experienceForm) {
-    this.registerGear.connectProviderAndGoToRegister;
+    this.registerGear.createNewAccount(requiredForm, optionalForm, experienceForm);
   }
 }

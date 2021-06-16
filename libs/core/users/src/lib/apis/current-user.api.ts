@@ -59,10 +59,13 @@ export class CurrentUserApi {
       );
   }
 
-  updatePersonal(user) {
+  updatePersonal(personal, action: 'create' | 'update' = 'update') {
+    const userId = this.currentUserQuery.getUserId();
+    const mutation = action == 'create' ? 'createPersonal' : 'updatePersonalByUserId';
+    const inputPatch = action == 'create' ? 'personal' : 'personalPatch';
     return this.apollo.mutate({
       mutation: gql`
-        mutation updatePersonalByUserId(
+        mutation ${mutation}(
           $userId: UUID!
           $firstname: String
           $middlename: String
@@ -75,10 +78,11 @@ export class CurrentUserApi {
           $age: BigFloat
           $gender: BigFloat
         ) {
-          updatePersonalByUserId(
+          ${mutation}(
             input: {
-              userId: $userId
-              userPatch: {
+              ${action == 'create' ? '' : 'userId: $userId'}
+              ${inputPatch}: {
+                userId: $userId
                 firstname: $firstname
                 middlename: $middlename
                 lastname: $lastname
@@ -92,7 +96,7 @@ export class CurrentUserApi {
               }
             }
           ) {
-            user {
+            personal {
               firstname
               middlename
               lastname
@@ -108,8 +112,8 @@ export class CurrentUserApi {
         }
       `,
       variables: {
-        ...user,
-        userId: this.currentUserQuery.getUserId(),
+        ...personal,
+        userId,
       },
     });
   }

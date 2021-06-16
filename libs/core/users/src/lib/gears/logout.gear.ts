@@ -15,12 +15,16 @@ export class LogoutGear {
     @Inject('persistStorage') private persistStorage
   ) { }
 
-  async logout(redirect = '/login') {
+  async logout(redirect: string | 'no-redirect' = '/login') {
     this.apolloAddon.logout();
     this.currentUserService.logout();
     window.localStorage.clear();
-    this.router.navigate([redirect]);
-    this.snackbarService.showSuccess('Tạm biệt!');
+    if (redirect == 'no-redirect') {
+      console.log();
+    } else {
+      this.router.navigate([redirect]);
+      this.snackbarService.showSuccess('Tạm biệt!');
+    }
     try {
       await this.socialAuthService.signOut(true);
     } catch (error) {

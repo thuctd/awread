@@ -7,6 +7,6 @@
   </div>
   <!-- <molec-register-form class="mt-4" #registerForm [form]="authForm"></molec-register-form> -->
 
-  <molec-submit *ngIf="false" class="mt-8" (btnClicked)="auth.emit()" [active]="true" [text]="'Đăng ký'">
+  <molec-submit class="mt-8" (btnClicked)="auth.emit($event)" [active]="true" [text]="'Đăng ký'">
   </molec-submit>
 </section>

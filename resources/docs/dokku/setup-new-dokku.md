@@ -48,7 +48,7 @@ dokku network:rebuildall
 - export first
   dokku postgres:export awread_database > /tmp/awread-database.dump
 
-- pull image to kick start
+- pull image to kick start #docker
   docker pull postgres:latest
   dokku postgres:upgrade awread_database --image postgres --image-version latest
 

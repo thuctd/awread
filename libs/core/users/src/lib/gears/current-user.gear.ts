@@ -17,7 +17,7 @@ export class CurrentUserGear {
     private snackbarService: SnackbarService,
     private socialAuthService: SocialAuthService,
     private authRoutingGear: AuthRoutingGear
-  ) {}
+  ) { }
 
   getCurrentUser() {
     return this.currentUserApi.getCurrentUser().pipe(
@@ -37,7 +37,7 @@ export class CurrentUserGear {
       .pipe()
       .subscribe((result) => {
         if (result.data) {
-          this.snackbarService.showSuccess('Cập nhật thông tin tài khoản!');
+          this.snackbarService.showSuccess('Cập nhật thông tin tài khoản thành công!');
           this.currentUserStore.updateCurrentUserAkita(user);
         } else {
           this.snackbarService.showError(result.errors?.[0]['message']);
@@ -45,17 +45,22 @@ export class CurrentUserGear {
       });
   }
 
-  updatePersonal(user) {
+  updatePersonal(user, action: 'create' | 'update' = 'update') {
     return this.currentUserApi
-      .updatePersonal(user)
+      .updatePersonal(user, action)
       .pipe()
       .subscribe((result) => {
         if (result.data) {
-          this.snackbarService.showSuccess('Cập nhật thông tin cá nhân!');
+          this.snackbarService.showSuccess('Cập nhật thông tin cá nhân thành công!');
           this.currentUserStore.updateCurrentUserAkita(user);
           this.authRoutingGear.navigateAfterRegisterCompleted();
         } else {
-          this.snackbarService.showError(result.errors?.[0]['message']);
+          const message = result.errors?.[0]['message'];
+          if (message.includes('because no values you can update were found')) {
+            this.updatePersonal(user, 'create');
+          } else {
+            this.snackbarService.showError(result.errors?.[0]['message']);
+          }
         }
       });
   }
