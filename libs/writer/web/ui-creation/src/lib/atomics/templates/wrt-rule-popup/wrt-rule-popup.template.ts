@@ -1,9 +1,8 @@
 import { CurrentUserFacade } from '@awread/core/users';
 import { PersistNgFormPlugin } from '@datorama/akita';
-import { SnackbarService } from '@awread/global/packages';
 import { MatDialogRef } from '@angular/material/dialog';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'template-wrt-rule-popup',
