@@ -37,7 +37,7 @@ export class CurrentUserGear {
       .pipe()
       .subscribe((result) => {
         if (result.data) {
-          this.snackbarService.showSuccess('Cập nhật thông tin tài khoản!');
+          this.snackbarService.showSuccess('Cập nhật thông tin tài khoản thành công!');
           this.currentUserStore.updateCurrentUserAkita(user);
         } else {
           this.snackbarService.showError(result.errors?.[0]['message']);
@@ -51,7 +51,7 @@ export class CurrentUserGear {
       .pipe()
       .subscribe((result) => {
         if (result.data) {
-          this.snackbarService.showSuccess('Cập nhật thông tin cá nhân!');
+          this.snackbarService.showSuccess('Cập nhật thông tin cá nhân thành công!');
           this.currentUserStore.updateCurrentUserAkita(user);
           this.authRoutingGear.navigateAfterRegisterCompleted();
         } else {
