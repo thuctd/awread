@@ -34,9 +34,9 @@ export class CreationLayout implements OnInit {
 
   private checkWriter() {
     const role = this.currentUserFacade.currentUserQuery.getRole();
-    // if (role == 'reader') {
-    this.openPreview();
-    // }
+    if (role == 'reader') {
+      this.openPreview();
+    }
   }
 
   openPreview(): void {
