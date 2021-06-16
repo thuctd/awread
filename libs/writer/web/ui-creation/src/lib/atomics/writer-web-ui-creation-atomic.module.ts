@@ -34,6 +34,9 @@ import { WrtBookListActMolec } from './molecs/wrt-book-list-act/wrt-book-list-ac
 import { WrtBookListHeadMolec } from './molecs/wrt-book-list-head/wrt-book-list-head.molec';
 import { WrtDetailChapterItemMolec } from './molecs/wrt-detail-chapter-item/wrt-detail-chapter-item.molec';
 import { CoreBooksModule } from '@awread/core/books';
+import { WrtFormRuleMolec } from './molecs/wrt-form-rule/wrt-form-rule.molec';
+import { WrtRulePopupOrgan } from './organs/wrt-rule-popup/wrt-rule-popup.organ';
+import { WrtRulePopupTemplate } from './templates/wrt-rule-popup/wrt-rule-popup.template';
 @NgModule({
   imports: [
     CoreBooksModule,
@@ -79,6 +82,9 @@ import { CoreBooksModule } from '@awread/core/books';
     WrtBookListActMolec,
     WrtBookListHeadMolec,
     WrtDetailChapterItemMolec,
+    WrtFormRuleMolec,
+    WrtRulePopupOrgan,
+    WrtRulePopupTemplate,
   ],
   declarations: [
     WrtDetailTabHeadMolec,
@@ -108,6 +114,9 @@ import { CoreBooksModule } from '@awread/core/books';
     WrtBookListActMolec,
     WrtBookListHeadMolec,
     WrtDetailChapterItemMolec,
+    WrtFormRuleMolec,
+    WrtRulePopupOrgan,
+    WrtRulePopupTemplate,
   ],
 })
 export class WriterWebUiCreationAtomicModule { }

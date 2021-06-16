@@ -12,7 +12,7 @@ export class SnackbarService {
       style: {
         padding: '20px'
       },
-      duration
+      duration: 2000
     });
   }
 
@@ -21,7 +21,7 @@ export class SnackbarService {
       style: {
         padding: '20px'
       },
-      duration
+      duration: 2000
     });
   }
 
@@ -30,7 +30,7 @@ export class SnackbarService {
       style: {
         padding: '20px'
       },
-      duration
+      duration: 2000
     });
   }
 

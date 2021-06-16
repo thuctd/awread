@@ -1,3 +1,5 @@
+import { WrtRulePopupTemplate } from './../../atomics/templates/wrt-rule-popup/wrt-rule-popup.template';
+import { MatDialog } from '@angular/material/dialog';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { CurrentUserFacade } from '@awread/core/users';
 import { CategoriesFacade } from '@awread/core/categories';
@@ -20,6 +22,7 @@ export class CreationLayout implements OnInit {
     private currentUserFacade: CurrentUserFacade,
     private categoriesFacade: CategoriesFacade,
     private genresFacade: GenresFacade,
+    private matDialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
@@ -31,8 +34,16 @@ export class CreationLayout implements OnInit {
 
   private checkWriter() {
     const role = this.currentUserFacade.currentUserQuery.getRole();
-    if (role == 'reader') {
-      console.log('bat material dialog hien dieu khoan cho writer');
-    }
+    // if (role == 'reader') {
+    this.openPreview();
+    // }
+  }
+
+  openPreview(): void {
+    this.matDialog.open(WrtRulePopupTemplate, {
+      width: '33rem',
+      height: '50rem',
+      disableClose: true
+    });
   }
 }
