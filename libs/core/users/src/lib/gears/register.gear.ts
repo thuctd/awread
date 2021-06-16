@@ -29,7 +29,7 @@ export class RegisterGear {
             tap(value => console.log('hello new user', value)),
           )
           .subscribe(value => {
-            this.updatePersonal(optionalForm, experienceForm);
+            this.createPersonal(optionalForm, experienceForm);
           });
       } else {
         this.registerFail(result);
@@ -37,7 +37,7 @@ export class RegisterGear {
     });
   }
 
-  updatePersonal(optionalForm, experienceForm) {
+  createPersonal(optionalForm, experienceForm) {
     return this.currentUserGear.updatePersonal({
       ...optionalForm,
       ...experienceForm,
