@@ -1,3 +1,11 @@
+.container-bg {
+  background-image: linear-gradient(to bottom, rgba(255, 168, 76, 0.6) 0%, rgba(255, 123, 13, 0.6) 100%), url('/global-assets/images/bird-bg.webp');
+}
+
+.container-bg-mobile {
+  background-image: linear-gradient(to bottom, rgba(255, 168, 76, 0.6) 0%, rgba(255, 123, 13, 0.6) 100%), url('/global-assets/images/bird-bg-small.webp');
+}
+
 .container-wrapper {
   z-index: 1;
   position: relative;
@@ -7,20 +15,16 @@
   justify-content: center;
   min-height: 100vh;
   //   min-height: 35rem;
-  background-image: linear-gradient(
-      to bottom,
-      rgba(255, 168, 76, 0.6) 0%,
-      rgba(255, 123, 13, 0.6) 100%
-    ),
-    url('https://images.unsplash.com/photo-1446824505046-e43605ffb17f');
+  // background-image: linear-gradient(to bottom, rgba(255, 168, 76, 0.6) 0%, rgba(255, 123, 13, 0.6) 100%),
+  //   url('/global-assets/images/bird-bg.webp');
   background-blend-mode: soft-light;
   background-size: cover;
   background-position: center center;
-  padding: 2rem;
+  padding: 1.5rem;
 }
 
 .bird {
-  background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/174479/bird-cells-new.svg);
+  background-image: url('/global-assets/images/bird-cells-new.svg');
   background-size: auto 100%;
   width: 88px;
   height: 125px;
@@ -53,7 +57,7 @@
 
 .bird-container {
   position: absolute;
-  top: 20%;
+  top: 5%;
   left: -10%;
   transform: scale(0) translateX(-10vw);
   will-change: transform;
