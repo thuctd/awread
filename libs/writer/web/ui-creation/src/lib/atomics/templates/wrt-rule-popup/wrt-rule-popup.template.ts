@@ -1,4 +1,4 @@
-import { CurrentUserFacade } from './../../../../../../../../core/users/src/lib/facades/current-user.facade';
+import { CurrentUserFacade } from '@awread/core/users';
 import { PersistNgFormPlugin } from '@datorama/akita';
 import { SnackbarService } from '@awread/global/packages';
 import { MatDialogRef } from '@angular/material/dialog';
@@ -25,7 +25,7 @@ export class WrtRulePopupTemplate implements OnInit {
   </br>(2) Chính sách bảo mật của chúng tôi.Chúng tôi có thể sửa đổi và cập nhật các Điều khoản Dịch vụ này bất cứ lúc nào. Sửa đổi và cập nhật sẽ có hiệu lực sau 3 ngày kể từ khi chúng được đăng. Không có điều khoản nào trong các Điều khoản Dịch vụ này được coi là trao quyền cho bên thứ ba nào.`;
 
   constructor(private fb: FormBuilder, public dialogRef: MatDialogRef<WrtRulePopupTemplate>,
-    private snackbarService: SnackbarService, private currentUserFacade: CurrentUserFacade) { }
+    private currentUserFacade: CurrentUserFacade) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -33,11 +33,7 @@ export class WrtRulePopupTemplate implements OnInit {
 
   eventSubmit(): void {
     const terms = this.form.get('terms').value;
-    if (!terms) {
-      return this.snackbarService.showWarning('Để trở thành một Writer bạn phải đồng ý các điều khoản từ Awread');
-    }
-    console.log('Chấp thuận điều khoản vay nợ chứ bro: ', terms)
-    this.dialogRef.close();
+    this.dialogRef.close(terms);
   }
 
   private initForm() {
