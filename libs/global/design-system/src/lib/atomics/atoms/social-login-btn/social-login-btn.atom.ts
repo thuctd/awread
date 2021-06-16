@@ -21,12 +21,11 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SocialLoginBtnAtom implements OnInit {
-  @Input() isColor = true;
   @Input() startText = 'Đăng nhập bằng ';
   @Input() name = 'Facebook';
   @Output() socialBtnClicked = new EventEmitter();
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

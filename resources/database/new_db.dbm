@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.4-alpha" use-changelog="false" last-position="0,716" last-zoom="1" max-obj-count="32"
+<dbmodel pgmodeler-ver="0.9.4-alpha" use-changelog="false" last-position="0,707" last-zoom="1" max-obj-count="32"
 	 default-schema="public" default-owner="postgres"
 	 layers="Default layer"
 	 active-layers="0"
@@ -678,16 +678,28 @@ CAUTION: Do not modify this file unless you know what you are doing.
 		<type name="public.jwt_token" length="0"/>
 	</parameter>
 	</return-type>
-	<parameter name="username">
+	<parameter name="email">
 		<type name="text" length="0"/>
 	</parameter>
 	<parameter name="password">
 		<type name="text" length="0"/>
 	</parameter>
-	<parameter name="email">
+	<parameter name="phone">
 		<type name="text" length="0"/>
 	</parameter>
-	<parameter name="phone">
+	<parameter name="username">
+		<type name="text" length="0"/>
+	</parameter>
+	<parameter name="name">
+		<type name="text" length="0"/>
+	</parameter>
+	<parameter name="facebook">
+		<type name="text" length="0"/>
+	</parameter>
+	<parameter name="google">
+		<type name="text" length="0"/>
+	</parameter>
+	<parameter name="apple">
 		<type name="text" length="0"/>
 	</parameter>
 	<definition><![CDATA[declare 
@@ -708,13 +720,21 @@ CAUTION: Do not modify this file unless you know what you are doing.
 		if account IS NULL then 
 
 			insert into public.users(
+				email,
+				phone,			
 				username,
-				email,
-				phone
+				name,
+				facebook,
+				google,
+				apple
 			) values (
-				username, 
 				email,
-				phone
+				phone,			
+				username,
+				name,
+				facebook,
+				google,
+				apple
 			)
 			returning * into account;	
 

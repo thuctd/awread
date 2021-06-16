@@ -1,0 +1,14 @@
+<div [formGroup]="optionalForm">
+    <wrt-action-btns [position]="'justify-start'" (auth)="linkSocialEvent.emit($event)" [title]="'Liên kết tài khoản mạng xã hội để đăng nhập nhanh hơn!'">
+    </wrt-action-btns>
+
+    <input-form [inputControl]="optionalForm.get('firstname')" [placeholder]="'Tên'"></input-form>
+    <input-form [inputControl]="optionalForm.get('middlename')" [placeholder]="'Tên đệm'"></input-form>
+    <input-form [inputControl]="optionalForm.get('lastname')" [placeholder]="'Họ'"></input-form>
+
+
+    <div class="flex justify-end">
+        <button matStepperPrevious class="rounded-md border border-gray-20 bg-white px-5 py-2 nunito text-sm mr-3"> Quay lại </button>
+        <button matStepperNext class="rounded-md text-white bg-green-primary px-5 py-2 nunito text-sm"> Tiếp </button>
+    </div>
+</div>
