@@ -1,0 +1,23 @@
+<mat-vertical-stepper #stepper class="rounded-md nunito">
+    <mat-step [label]="'Tài khoản'" [state]="'auth'" [stepControl]="requireForm" errorMessage="Thiếu thông tin">
+        <organ-step-require [requireForm]="requireForm"></organ-step-require>
+    </mat-step>
+    <mat-step [label]="'Thông tin'" [state]="'exp'" [stepControl]="optionalForm" errorMessage="Tên hiển thị là bắt buộc">
+        <organ-step-optional (linkSocialEvent)="linkSocialEvent.emit($event)" [optionalForm]="optionalForm"></organ-step-optional>
+    </mat-step>
+    <mat-step [label]="'Trải nghiệm'" [state]="'exp'" [stepControl]="experienceForm" errorMessage="Tùy biến ứng dụng theo ý của bạn">
+        <organ-step-experience [isMobile] [genres]="genres" [experienceForm]="experienceForm"></organ-step-experience>
+    </mat-step>
+    <mat-step [label]="'Hoàn thiện'" [state]="'done'">
+        <organ-step-complete (completeEvent)="completeEvent.emit($event)" [stepper]="stepper" [requireForm]="requireForm" [optionalForm]="optionalForm"
+            [experienceForm]="experienceForm">
+        </organ-step-complete>
+    </mat-step>
+    <ng-template matStepperIcon="edit">
+        <fa-icon class="text-white" [icon]="icons.faCheck"></fa-icon>
+    </ng-template>
+    <ng-template matStepperIcon="error">
+        <fa-icon class="text-red" [icon]="icons.faExclamationCircle"></fa-icon>
+    </ng-template>
+
+</mat-vertical-stepper>
