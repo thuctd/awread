@@ -12,7 +12,7 @@ import { SnackbarService } from '@awread/global/packages';
 export class ProfileIPage implements OnInit {
   experienceForm = this.fb.group({
     gender: [''],
-    age: [[]],
+    ages: [[]],
     genreIds: [[]],
   });
 
@@ -160,7 +160,7 @@ export class ProfileIPage implements OnInit {
     })
     this.experienceForm.patchValue({
       gender: user.gender ?? Number,
-      age: user.age ?? [],
+      ages: user.ages ?? [],
       genreIds: user.genreIds ?? [],
     })
   }

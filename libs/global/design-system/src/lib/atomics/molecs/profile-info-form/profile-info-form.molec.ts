@@ -78,7 +78,7 @@ export class ProfileInfoFormMolec implements OnInit {
     },
     {
       title: 'Giới hạn nội dung',
-      formControlName: 'age',
+      formControlName: 'ages',
       id: 'id',
       name: 'name'
     }

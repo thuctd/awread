@@ -39,7 +39,7 @@ export class CurrentUserApi {
                   firstname
                   middlename
                   lastname
-                  age
+                  ages
                   dob
                   gender
                   bio
@@ -76,7 +76,7 @@ export class CurrentUserApi {
           $websiteAddress: String
           $facebookAddress: String
           $zaloAddress: String
-          $age: [BigFloat]
+          $ages: [BigFloat]
           $gender: BigFloat
           $genreIds: [BigFloat]
         ) {
@@ -93,7 +93,7 @@ export class CurrentUserApi {
                 websiteAddress: $websiteAddress
                 facebookAddress: $facebookAddress
                 zaloAddress: $zaloAddress
-                age: $age
+                ages: $ages
                 gender: $gender
                 genreIds: $genreIds
               }
@@ -108,7 +108,7 @@ export class CurrentUserApi {
               websiteAddress
               facebookAddress
               zaloAddress
-              age
+              ages
               gender
               genreIds
             }
