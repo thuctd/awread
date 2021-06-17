@@ -30,10 +30,25 @@ export class RdNavbarMbTemplate implements OnInit {
   @Input() isMenuNoti = false;
   @Input() searchControl = new FormControl('');
   @Output() eventSearch = new EventEmitter();
+  @Output() eventSearchMb = new EventEmitter();
   @Output() logoutEvent = new EventEmitter();
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
+
+  display(display) {
+    switch (display) {
+      case 'search':
+        this.displaySearch();
+        break;
+      case 'menuNoti':
+        this.displayMenuNoti();
+        break;
+      default:
+        console.warn('', display);
+        break;
+    }
+  }
 
   displaySearch() {
     if (this.isMenuNoti == true) {
