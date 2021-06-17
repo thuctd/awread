@@ -141,6 +141,7 @@ import { ListInfoProseMolec } from './molecs/list-info-prose/list-info-prose.mol
 import { TitlePageLinkAtom } from './atoms/title-page-link/title-page-link.atom';
 import { WrtRememberForgotMolec } from './molecs/wrt-remember-forgot/wrt-remember-forgot.molec';
 import { SelectProfileAtom } from './atoms/select-profile/select-profile.atom';
+import { BlockCopyPasteDirective } from './directives/block-copy-paste/block-copy-paste.directive';
 @NgModule({
   imports: [
     CommonModule,
@@ -172,6 +173,7 @@ import { SelectProfileAtom } from './atoms/select-profile/select-profile.atom';
     MatNativeDateModule,
     MatInputModule,
     NgSelectModule,
+    BlockCopyPasteDirective,
     notReadyDirective,
     NgImageSliderModule,
     CloseOnOutsideModule,
@@ -305,6 +307,7 @@ import { SelectProfileAtom } from './atoms/select-profile/select-profile.atom';
     SelectProfileAtom,
   ],
   declarations: [
+    BlockCopyPasteDirective,
     notReadyDirective,
     RdBaseBtnGreenAtom,
     TabBtnAtom,
@@ -434,4 +437,4 @@ import { SelectProfileAtom } from './atoms/select-profile/select-profile.atom';
     SelectProfileAtom,
   ],
 })
-export class GlobalDesignSystemAtomicModule {}
+export class GlobalDesignSystemAtomicModule { }
