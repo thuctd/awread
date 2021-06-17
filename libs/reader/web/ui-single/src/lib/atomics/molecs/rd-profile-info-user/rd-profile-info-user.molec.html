@@ -1,0 +1,10 @@
+<div class="border-b border-gray-400 w-full pb-4 mb-8 relative">
+  <div class="absolute -top-8 md:-top-4 right-0 md:right-12 flex cursor-pointer">
+    <img class="h-5" src="/global-assets/images/ic_border_color_24px.webp" alt="">
+    <div (click)="clicked.emit()" class="font-semibold text-gray-400 ml-2 text-sm md:text-base">Chỉnh sửa tài khoản</div>
+  </div>
+  <atom-rd-profile-info-personal-item [key]="'Tên hiển thị'" [value]="currentUser.name"></atom-rd-profile-info-personal-item>
+  <atom-rd-profile-info-personal-item [key]="'Tên tài khoản'" [value]="currentUser.username"></atom-rd-profile-info-personal-item>
+  <atom-rd-profile-info-personal-item [key]="'Email'" [value]="currentUser.email"></atom-rd-profile-info-personal-item>
+  <atom-rd-profile-info-personal-item [key]="'Số điện thoại'" [value]="currentUser.phone"></atom-rd-profile-info-personal-item>
+</div>

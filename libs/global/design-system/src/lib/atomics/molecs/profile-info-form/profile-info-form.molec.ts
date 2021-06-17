@@ -9,9 +9,10 @@ import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfileInfoFormMolec implements OnInit {
+  class = 'text-sm md:text-base cursor-pointer rounded-full text-white border-green-primary font-semibold py-1 md:py-2 px-6'
   @Input() faIcon = faChevronDown;
   @Input() genres = [];
-  @Input() age = [
+  @Input() ages = [
     {
       id: '1',
       name: '6-13',
@@ -41,7 +42,7 @@ export class ProfileInfoFormMolec implements OnInit {
   });
   @Input() experienceForm: FormGroup = this.fb.group({
     gender: [''],
-    age: ['2'],
+    ages: ['2'],
     genreIds: [[]],
   });
   @Input() submitted: boolean;

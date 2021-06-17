@@ -1,18 +1,8 @@
 <section>
-  <molec-profile-edit-form [requireForm]="requireForm"></molec-profile-edit-form>
-  <div class="my-4 flex items-center">
-    <div class="w-1/3 hidden md:block"></div>
-    <div class="w-full flex justify-center md:justify-start md:w-2/3 md:pl-10">
-      <atom-btn-rectangle [class]="class" [text]="'Lưu'" (btnClicked)="saveForm()" (btnClicked)="submitEvent.emit('save-user')"></atom-btn-rectangle>
-    </div>
-  </div>
-  <molec-profile-info-form (submitEvent)="submitEvent.emit($event)" [age]="age" [genres]="genres" [optionalForm]="optionalForm" [experienceForm]="experienceForm" class="mb-4"></molec-profile-info-form>
-  <div class="mt-4 flex items-center">
-    <div class="w-1/3 hidden md:block"></div>
-    <div class="w-full flex justify-center md:justify-start md:w-2/3">
-      <atom-btn-rectangle [class]="class" [text]="'Lưu'" (btnClicked)="saveForm()" (btnClicked)="submitEvent.emit('save-personal')"></atom-btn-rectangle>
-    </div>
-  </div>
+  <molec-profile-edit-form [requireForm]="requireForm" (submitEvent)="submitEvent.emit('save-user')"></molec-profile-edit-form>
+
+  <molec-profile-info-form (submitEvent)="submitEvent.emit($event)" [ages]="ages" [genres]="genres" [optionalForm]="optionalForm" [experienceForm]="experienceForm" class="mb-4"></molec-profile-info-form>
+
   <!-- <molec-profile-change-password-form class="mb-2"></molec-profile-change-password-form> -->
 
   <!-- <span class="text-gray-400">Nếu bạn quên mật khẩu, bạn có thể đặt lại mật khẩu</span>

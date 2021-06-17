@@ -27,7 +27,7 @@ import { faCog, faUserCircle, faBookmark, faClock, faArrowLeft } from '@fortawes
 export class RdProfileTabTemplateTemplate implements OnInit {
   @Input() faIcon = faArrowLeft;
   @Input() genres = [];
-  @Input() age = [];
+  @Input() ages = [];
   @Input() requireForm: FormGroup = this.fb.group({
     username: ['', [Validators.required]],
     name: ['', [Validators.required]],
@@ -46,14 +46,14 @@ export class RdProfileTabTemplateTemplate implements OnInit {
   });
   @Input() experienceForm: FormGroup = this.fb.group({
     gender: [''],
-    age: ['2'],
+    ages: ['2'],
     genreIds: [[]],
   });
   @Input() currentUser = {};
   @Input() submitted: boolean;
   @Output() submitEvent = new EventEmitter();
-  @Input() mode: 'display' | 'edit' = 'display';
-  @Input() actions = ['display', 'edit'];
+  @Input() mode: 'display' | 'editUser' | 'editPersonal' = 'display';
+  @Input() actions = ['display', 'editUser', 'editPersonal'];
   @Input() tabsDesktop = [
     {
       name: 'Hồ sơ của tôi',
@@ -105,5 +105,19 @@ export class RdProfileTabTemplateTemplate implements OnInit {
 
   changeModeEdit(mode: any) {
     this.mode = mode;
+  }
+
+  saveForm(mode: any) {
+    if (this.requireForm.invalid) {
+      return;
+    } else {
+      this.mode = mode
+      window.scroll({
+        top: 0,
+        left: 0,
+        behavior: 'smooth',
+      });
+      this.cd.detectChanges();
+    }
   }
 }

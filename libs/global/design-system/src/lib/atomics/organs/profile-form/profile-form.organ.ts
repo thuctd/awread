@@ -15,8 +15,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Output, Input, EventEmitter
 })
 export class ProfileFormOrgan implements OnInit {
   @Input() genres = [];
-  @Input() age = [];
-  class = 'text-sm md:text-base cursor-pointer rounded-full text-white border-green-primary font-semibold py-1 md:py-2 px-6'
+  @Input() ages = [];
   @Input() link = '/forgot';
   @Input() submitText = 'Lưu';
   @Input() requireForm: FormGroup = this.fb.group({
@@ -37,7 +36,7 @@ export class ProfileFormOrgan implements OnInit {
   });
   @Input() experienceForm: FormGroup = this.fb.group({
     gender: [''],
-    age: ['2'],
+    ages: ['2'],
     genreIds: [[]],
   });
   @Input() submitted: boolean;
@@ -45,17 +44,4 @@ export class ProfileFormOrgan implements OnInit {
   constructor(private fb: FormBuilder, private cd: ChangeDetectorRef) { }
 
   ngOnInit(): void { }
-
-  saveForm() {
-    if (this.requireForm.invalid) {
-      return;
-    } else {
-      window.scroll({
-        top: 0,
-        left: 0,
-        behavior: 'smooth',
-      });
-      this.cd.detectChanges();
-    }
-  }
 }

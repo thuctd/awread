@@ -39,7 +39,7 @@ export class ProfileIPage implements OnInit {
 
   currentUser$ = this.currentUserFacade.currentUser$;
   genres$ = this.genresFacade.genres$;
-  age = [
+  ages = [
     {
       id: '1',
       name: '6-13',

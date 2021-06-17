@@ -19,7 +19,7 @@
 
   <div [formGroup]="experienceForm">
     <atom-select-multiple [profileForm]="experienceForm" [array]="genres" [selectMultiple]="selectMultiples[0]"></atom-select-multiple>
-    <atom-select-multiple [profileForm]="experienceForm" [array]="age" [selectMultiple]="selectMultiples[1]"></atom-select-multiple>
+    <atom-select-multiple [profileForm]="experienceForm" [array]="ages" [selectMultiple]="selectMultiples[1]"></atom-select-multiple>
   </div>
 
   <div class="mb-4 flex items-center" [formGroup]="optionalForm">
@@ -43,6 +43,13 @@
     <atom-social-connect-btn (clickConnect)="submitEvent.emit('google')" [bg]="'bg-red'" [title]="connectGg.title" [image]="connectGg.image" [bg]="'bg-red'">
     </atom-social-connect-btn>
     <div class="text-gray-text text-sm md:text-base">Kết nối với Facebook hay Google để đăng nhập nhanh hơn</div>
+  </div>
+
+  <div class="mt-4 flex items-center">
+    <div class="w-1/3 hidden md:block"></div>
+    <div class="w-full flex justify-center md:justify-start md:w-2/3">
+      <atom-btn-rectangle [class]="class" [text]="'Lưu'" (btnClicked)="submitEvent.emit('save-personal')"></atom-btn-rectangle>
+    </div>
   </div>
 
 </section>

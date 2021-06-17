@@ -1,5 +1,5 @@
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'molec-profile-edit-form',
@@ -25,6 +25,8 @@ export class ProfileEditFormMolec implements OnInit {
     phone: [''],
     avatar: [false]
   });
+  class = 'text-sm md:text-base cursor-pointer rounded-full text-white border-green-primary font-semibold py-1 md:py-2 px-6'
+  @Output() submitEvent = new EventEmitter();
   @Input() submitted: boolean;
   @Input() items = [
     {

@@ -16,7 +16,7 @@ import { PopupChangeCoverOrgan } from '@awread/global/design-system';
 })
 export class WrtProfileTemplate implements OnInit {
   @Input() genres = [];
-  @Input() age = [];
+  @Input() ages = [];
   @Input() requireForm: FormGroup = this.fb.group({
     username: ['', [Validators.required]],
     name: ['', [Validators.required]],
@@ -35,7 +35,7 @@ export class WrtProfileTemplate implements OnInit {
   });
   @Input() experienceForm: FormGroup = this.fb.group({
     gender: [''],
-    age: ['2'],
+    ages: ['2'],
   });
   @Input() currentUser = {};
   @Output() submitEvent = new EventEmitter();
