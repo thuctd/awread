@@ -18,7 +18,13 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfileEditFormMolec implements OnInit {
-  @Input() profileForm: FormGroup = this.fb.group({});
+  @Input() requireForm: FormGroup = this.fb.group({
+    username: ['', [Validators.required]],
+    name: ['', [Validators.required]],
+    email: ['', [Validators.required, Validators.email]],
+    phone: [''],
+    avatar: [false]
+  });
   @Input() submitted: boolean;
   @Input() items = [
     {
@@ -30,16 +36,16 @@ export class ProfileEditFormMolec implements OnInit {
       formControlName: 'username',
     },
     {
-      title: 'Liên kết',
-      formControlName: 'websiteAddress',
+      title: 'Email',
+      formControlName: 'email',
     },
     {
-      title: 'Facebook',
-      formControlName: 'facebookAddress',
+      title: 'Số điện thoại',
+      formControlName: 'phone',
     },
   ];
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

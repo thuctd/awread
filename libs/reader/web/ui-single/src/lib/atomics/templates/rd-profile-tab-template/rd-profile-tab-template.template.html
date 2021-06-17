@@ -13,7 +13,7 @@
   <div class="grid grid-cols-12 pt-12">
     <div class="col-span-12 md:col-span-5 mx-auto pb-10 md:pb-0">
       <detail-upload-img [srcImg]="currentUser | avatarSize:'origin'"></detail-upload-img>
-      <atom-btn-rectangle *ngIf="mode !== 'display'" [class]="'w-54 py-1.5 rounded-lg'" [text]="'Chỉnh sửa ảnh bìa'"
+      <atom-btn-rectangle *ngIf="mode !== 'display'" [class]="'w-54 py-1.5 rounded-lg'" [text]="'Chỉnh sửa ảnh hồ sơ'"
         (btnClicked)="submitEvent.emit('change-image')">
       </atom-btn-rectangle>
     </div>
@@ -25,8 +25,18 @@
       </div>
     </div>
     <ng-template #edit>
-      <div class="col-span-12 md:col-span-6">
-        <organ-profile-form (submitEvent)="submitEvent.emit($event)" (submitEvent)="updateForm(actions[0])" [profileForm]="profileForm" [submitted]="submitted">
+      <div class="col-span-12 md:col-span-6 relative">
+        <div class="absolute top-0 right-0 flex cursor-pointer">
+          <fa-icon class="text-gray-text pr-1" [icon]="faIcon"></fa-icon>
+          <div (click)="changeModeEdit(actions[0])" class="roboto text-gray-400 ml-2 text-sm md:text-base">Quay lại</div>
+        </div>
+        <organ-profile-form (submitEvent)="submitEvent.emit($event)"
+          class="mt-2"
+          [age]="age"
+          [genres]="genres"
+          [requireForm]="requireForm"
+          [optionalForm]="optionalForm"
+          [experienceForm]="experienceForm">
         </organ-profile-form>
       </div>
     </ng-template>

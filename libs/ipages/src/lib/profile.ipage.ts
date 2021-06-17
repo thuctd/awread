@@ -11,7 +11,8 @@ import { SnackbarService } from '@awread/global/packages';
 @Directive()
 export class ProfileIPage implements OnInit {
   experienceForm = this.fb.group({
-    age: ['2'],
+    gender: [''],
+    age: [[]],
     genreIds: [[]],
   });
 
@@ -19,6 +20,10 @@ export class ProfileIPage implements OnInit {
     firstname: [''],
     middlename: [''],
     lastname: [''],
+    bio: [''],
+    websiteAddress: [''],
+    facebookAddress: [''],
+    dob: [''],
     facebook: [''],
     google: [''],
     apple: [''],
@@ -27,13 +32,27 @@ export class ProfileIPage implements OnInit {
   requireForm = this.fb.group({
     username: ['', [Validators.required]],
     name: ['', [Validators.required]],
-    email: ['', []],
-    phone: ['', []],
+    email: ['', [Validators.required, Validators.email]],
+    phone: [''],
     avatar: [false]
   });
 
   currentUser$ = this.currentUserFacade.currentUser$;
   genres$ = this.genresFacade.genres$;
+  age = [
+    {
+      id: '1',
+      name: '6-13',
+    },
+    {
+      id: '2',
+      name: '13-18',
+    },
+    {
+      id: '3',
+      name: '18+',
+    },
+  ];
   constructor(
     private currentUserFacade: CurrentUserFacade,
     private fb: FormBuilder,
@@ -55,7 +74,7 @@ export class ProfileIPage implements OnInit {
         this.saveUser();
         break;
       case 'save-personal':
-        this.saveUser();
+        this.savePersonal();
         break;
       case 'change-image':
         this.openChangeCover();
@@ -102,19 +121,19 @@ export class ProfileIPage implements OnInit {
   saveUser() {
     if (this.requireForm.invalid) {
       this.requireForm.get('name').setValue(this.requireForm.value.name, { emitEvent: true });
+      this.requireForm.get('username').setValue(this.requireForm.value.username, { emitEvent: true });
       this.requireForm.get('email').setValue(this.requireForm.value.email, { emitEvent: true });
       this.requireForm.markAllAsTouched();
       return this.snackbarService.showWarning('Vui lòng điền đủ thông tin');
     } else {
       this.currentUserFacade.updateUser(this.requireForm.value);
-      this.currentUserFacade.updatePersonal(this.requireForm.value);
     }
   }
 
   savePersonal() {
     this.currentUserFacade.updatePersonal({
+      ...this.optionalForm.value,
       ...this.experienceForm.value,
-      ...this.optionalForm.value
     });
   }
 
@@ -125,18 +144,25 @@ export class ProfileIPage implements OnInit {
       email: user.email,
       phone: user.phone,
       name: user.name,
-      firstname: user.firstname,
-      middlename: user.middlename,
-      lastname: user.lastname,
-      age: user.age,
       avatar: user.avatar,
-      dob: user.dob,
-      gender: user.gender,
-      bio: user.bio,
-      websiteAddress: user.websiteAddress,
-      facebookAddress: user.facebookAddress,
       updatedAt: user.updatedAt,
     });
+    this.optionalForm.patchValue({
+      firstname: user.firstname ?? '',
+      middlename: user.middlename ?? '',
+      lastname: user.lastname ?? '',
+      dob: user.dob ?? '',
+      bio: user.bio ?? '',
+      websiteAddress: user.websiteAddress ?? '',
+      facebookAddress: user.facebookAddress ?? '',
+      facebook: [''],
+      google: [''],
+    })
+    this.experienceForm.patchValue({
+      gender: user.gender ?? Number,
+      age: user.age ?? [],
+      genreIds: user.genreIds ?? [],
+    })
   }
   private getCurrentUser() {
     this.currentUserFacade.getCurrentUser().subscribe((user) => {

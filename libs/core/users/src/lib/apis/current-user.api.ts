@@ -45,6 +45,7 @@ export class CurrentUserApi {
                   bio
                   websiteAddress
                   facebookAddress
+                  genreIds
                 }
               }
             }
@@ -75,8 +76,9 @@ export class CurrentUserApi {
           $websiteAddress: String
           $facebookAddress: String
           $zaloAddress: String
-          $age: BigFloat
+          $age: [BigFloat]
           $gender: BigFloat
+          $genreIds: [BigFloat]
         ) {
           ${mutation}(
             input: {
@@ -93,6 +95,7 @@ export class CurrentUserApi {
                 zaloAddress: $zaloAddress
                 age: $age
                 gender: $gender
+                genreIds: $genreIds
               }
             }
           ) {
@@ -107,6 +110,7 @@ export class CurrentUserApi {
               zaloAddress
               age
               gender
+              genreIds
             }
           }
         }

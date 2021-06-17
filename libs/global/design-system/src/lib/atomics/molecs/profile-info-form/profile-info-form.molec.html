@@ -1,48 +1,57 @@
-<section class="flex flex-col text-sm md:text-base" [formGroup]="profileForm">
+<section class="flex flex-col text-sm md:text-base">
   <atom-title [class]="'font-medium text-xl text-gray-500'" [title]="'Thông tin cá nhân'" [isUppercase]="false"></atom-title>
 
-  <div class="mb-4" *ngFor="let item of inputFormItems | slice:0:3">
-    <input-form-profile [profileForm]="profileForm" [item]="item"></input-form-profile>
-  </div>
-
-  <div class="mb-4">
-    <input-form-profile [profileForm]="profileForm" [item]="inputFormItems[3]"></input-form-profile>
-    <!-- Loi required -->
-    <div class="flex">
-      <div class="w-2/5"></div>
-      <div *ngIf="profileForm.controls.email.errors && profileForm.controls.email.touched" class="invalid-feedback ml-6 w-3/5">
-        <div *ngIf="profileForm.controls.email.errors.required">
-          Email không được để trống
-        </div>
-      </div>
+  <div [formGroup]="optionalForm" class="pt-4">
+    <div *ngFor="let item of inputFormItems | slice:0:3" class="mb-4">
+      <input-form-profile [profileForm]="optionalForm" [item]="item"></input-form-profile>
     </div>
-    <!-- Loi email -->
-    <div class="flex">
-      <div class="w-2/5"></div>
-      <div *ngIf="profileForm.controls.email.errors && profileForm.controls.email.touched" class="invalid-feedback ml-6 w-3/5">
-        <div *ngIf="profileForm.controls.email.errors.email">
-          Email không hợp lệ
-        </div>
-      </div>
+
+    <div class="mb-4 flex items-center justify-between">
+      <label class="text-gray-400 w-2/5">Tiểu sử</label>
+      <textarea formControlName="bio" placeholder="Tiểu sử"
+      class="border rounded-xl border-gray-200 text-gray-700 focus:outline-none px-2 md:px-4 py-1 md:py-2 h-20 float-right w-3/5 focus:ring-1 focus:ring-gray-300 focus:border-gray-300"></textarea>
+    </div>
+
+    <div *ngFor="let item of inputFormItems | slice:3" class="mb-4">
+      <input-form-profile [profileForm]="optionalForm" [item]="item"></input-form-profile>
     </div>
   </div>
 
-  <input-form-profile class="mb-4" [profileForm]="profileForm" [item]="inputFormItems[4]"></input-form-profile>
+  <div [formGroup]="experienceForm">
+    <atom-select-multiple [profileForm]="experienceForm" [array]="genres" [selectMultiple]="selectMultiples[0]"></atom-select-multiple>
+    <atom-select-multiple [profileForm]="experienceForm" [array]="age" [selectMultiple]="selectMultiples[1]"></atom-select-multiple>
+  </div>
 
-  <div class="mb-4 flex items-center">
+  <div class="mb-4 flex items-center" [formGroup]="optionalForm">
     <label class="text-gray-400 w-2/5">Năm sinh</label>
     <div class="w-3/5">
       <mat-form-field class="w-2/3" appearance="outline">
         <input formControlName="dob" placeholder="Choose a date" matInput [matDatepicker]="picker"
-          class="focus:ring-1 focus:ring-gray-300 focus:border-gray-300">
+        class="focus:ring-1 focus:ring-gray-300 focus:border-gray-300">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker disabled="false"></mat-datepicker>
       </mat-form-field>
     </div>
   </div>
 
-  <div *ngFor="let item of selectItems">
-    <atom-select-profile [profileForm]="profileForm" [item]="item"></atom-select-profile>
+  <div [formGroup]="experienceForm">
+    <atom-select-profile [profileForm]="experienceForm" [item]="selectItems"></atom-select-profile>
   </div>
-  <div *ngIf="profileForm.value.age == 3" class="text text-gray-400 text-center md:text-left">Tôi đã đủ 18 tuổi và tôi đồng ý việc cho phép hiển thị truyện có nội dung nhạy cảm</div>
+
+  <div [formGroup]="optionalForm">
+    <atom-social-connect-btn (clickConnect)="submitEvent.emit('facebook')" [bg]="'bg-blue'"></atom-social-connect-btn>
+    <atom-social-connect-btn (clickConnect)="submitEvent.emit('google')" [bg]="'bg-red'" [title]="connectGg.title" [image]="connectGg.image" [bg]="'bg-red'">
+    </atom-social-connect-btn>
+    <div class="text-gray-text text-sm md:text-base">Kết nối với Facebook hay Google để đăng nhập nhanh hơn</div>
+  </div>
+
 </section>
+
+
+
+
+
+
+
+
+

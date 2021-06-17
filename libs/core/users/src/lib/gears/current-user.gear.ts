@@ -53,7 +53,7 @@ export class CurrentUserGear {
         if (result.data) {
           this.snackbarService.showSuccess('Cập nhật thông tin cá nhân thành công!');
           this.currentUserStore.updateCurrentUserAkita(user);
-          this.authRoutingGear.navigateAfterRegisterCompleted();
+          // this.authRoutingGear.navigateAfterRegisterCompleted();
         } else {
           const message = result.errors?.[0]['message'];
           if (message.includes('because no values you can update were found')) {

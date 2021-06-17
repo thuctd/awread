@@ -1,8 +1,15 @@
 <section class="w-full mx-auto max-w-screen-xl flex py-5 pl-28">
-  <organ-profile-form (submitEvent)="submitEvent.emit($event)" [profileForm]="profileForm" [submitted]="submitted" class="w-1/2 pr-24">
+  <organ-profile-form
+    [age]="age"
+    [genres]="genres"
+    (submitEvent)="submitEvent.emit($event)"
+    [requireForm]="requireForm"
+    [optionalForm]="optionalForm"
+    [experienceForm]="experienceForm"
+    class="w-1/2 pr-24">
   </organ-profile-form>
-  <ng-container *ngIf="profileForm.valueChanges | async as profileValue">
-    <wrt-profile-image (eventChangeImg)="submitEvent.emit($event)" [imgSrc]="profileValue | avatarSize: 'origin'" class="w-1/2">
-    </wrt-profile-image>
-  </ng-container>
+  <wrt-profile-image (eventChangeImg)="submitEvent.emit($event)" [imgSrc]="currentUser | avatarSize: 'origin'" class="w-1/2">
+  </wrt-profile-image>
 </section>
+
+

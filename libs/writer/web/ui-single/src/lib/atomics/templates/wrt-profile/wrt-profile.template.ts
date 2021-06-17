@@ -15,17 +15,29 @@ import { PopupChangeCoverOrgan } from '@awread/global/design-system';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WrtProfileTemplate implements OnInit {
-  @Input() profileForm: FormGroup = this.fb.group({
-    email: ['', [Validators.required]],
-    phone: ['', [Validators.required]],
-    dob: ['', [Validators.required]],
-    gender: ['', [Validators.required]],
-    fullname: ['', [Validators.required]],
+  @Input() genres = [];
+  @Input() age = [];
+  @Input() requireForm: FormGroup = this.fb.group({
     username: ['', [Validators.required]],
-    website: ['', [Validators.required]],
-    introduce: ['', [Validators.required]],
+    name: ['', [Validators.required]],
+    email: ['', [Validators.required, Validators.email]],
+    phone: [''],
+    avatar: [false]
   });
-  @Input() submitted: boolean;
+  @Input() optionalForm: FormGroup = this.fb.group({
+    firstname: [''],
+    middlename: [''],
+    lastname: [''],
+    bio: [''],
+    websiteAddress: [''],
+    facebookAddress: [''],
+    dob: [''],
+  });
+  @Input() experienceForm: FormGroup = this.fb.group({
+    gender: [''],
+    age: ['2'],
+  });
+  @Input() currentUser = {};
   @Output() submitEvent = new EventEmitter();
   constructor(private fb: FormBuilder) { }
 

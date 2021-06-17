@@ -17,7 +17,8 @@ export class RegisterGear {
     private currentUserStore: CurrentUserStore,
     private snackbarService: SnackbarService,
     private currentUserGear: CurrentUserGear,
-    private router: Router
+    private router: Router,
+    private authRoutingGear: AuthRoutingGear
   ) { }
 
   createNewAccount(requiredForm, optionalForm, experienceForm) {
@@ -30,6 +31,7 @@ export class RegisterGear {
           )
           .subscribe(value => {
             this.createPersonal(optionalForm, experienceForm);
+            this.authRoutingGear.navigateAfterRegisterCompleted();
           });
       } else {
         this.registerFail(result);

@@ -13,14 +13,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RdProfileInfoPersonalMolec implements OnInit {
-  @Input() currentUser = {
-    name: '',
-    username: '',
-    email: '',
-    phone: '',
-    dob: '',
-    gender: '',
-  };
+  @Input() currentUser;
 
   constructor() { }
 
