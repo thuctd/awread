@@ -43,8 +43,8 @@ export class CreationLayout implements OnInit {
 
   openPreview(): void {
     const dialogRef = this.matDialog.open(WrtRulePopupTemplate, {
-      width: '33rem',
-      height: '50rem',
+      width: '38rem',
+      height: '60rem',
     });
 
     dialogRef.afterClosed().subscribe((res) => {
