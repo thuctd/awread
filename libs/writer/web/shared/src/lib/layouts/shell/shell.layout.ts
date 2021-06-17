@@ -25,11 +25,6 @@ export class ShellLayout implements OnInit {
   ) { }
 
   routes = [
-    // {
-    //   name: 'dashboard',
-    //   iconUrl: '/global-assets/images/Dashboard.webp',
-    //   linkTo: '/dashboard',
-    // },
     {
       name: 'user',
       iconUrl: '/global-assets/images/user.webp',
@@ -41,6 +36,12 @@ export class ShellLayout implements OnInit {
       iconUrl: '/global-assets/images/books.webp',
       iconUrl2: '/global-assets/images/books-2.webp',
       linkTo: '/',
+    },
+    {
+      name: 'analytic',
+      iconUrl: '/global-assets/images/analytic.webp',
+      iconUrl2: '/global-assets/images/analytic-2.webp',
+      linkTo: '/analytic',
     },
   ];
 
