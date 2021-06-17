@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.4-alpha" use-changelog="false" last-position="0,707" last-zoom="1" max-obj-count="32"
+<dbmodel pgmodeler-ver="0.9.4-alpha" use-changelog="false" last-position="0,717" last-zoom="1" max-obj-count="32"
 	 default-schema="public" default-owner="postgres"
 	 layers="Default layer"
 	 active-layers="0"
@@ -401,8 +401,8 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="firstname">
 		<type name="text" length="0"/>
 	</column>
-	<column name="age" default-value="2">
-		<type name="numeric" length="0"/>
+	<column name="ages">
+		<type name="numeric" length="0" dimension="1"/>
 	</column>
 	<column name="code" default-value="'+84'">
 		<type name="text" length="0"/>
