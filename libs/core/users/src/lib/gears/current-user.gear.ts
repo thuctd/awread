@@ -1,4 +1,4 @@
-import { tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import type { CurrentUser } from '../models';
 import { CurrentUserService, CurrentUserStore } from '../states/current-user';
@@ -6,17 +6,16 @@ import { CurrentUserApi } from '../apis';
 import { SnackbarService } from '@awread/global/packages';
 import { SocialAuthService, SocialUser } from 'angularx-social-login';
 import { FacebookLoginProvider, GoogleLoginProvider } from 'angularx-social-login';
-import { AuthRoutingGear } from './auth-routing.gear';
+import { Location } from '@angular/common';
 
 @Injectable({ providedIn: 'root' })
 export class CurrentUserGear {
   constructor(
     private currentUserApi: CurrentUserApi,
-    private currentUserService: CurrentUserService,
     private currentUserStore: CurrentUserStore,
     private snackbarService: SnackbarService,
     private socialAuthService: SocialAuthService,
-    private authRoutingGear: AuthRoutingGear
+    private location: Location
   ) { }
 
   getCurrentUser() {
@@ -111,9 +110,12 @@ export class CurrentUserGear {
   }
 
   agreeBecomeWriter() {
-    return this.currentUserApi
-      .agreeBecomeWriter()
-      .pipe()
-      .subscribe();
+    return this.currentUserApi.updateRole('writer').subscribe(role => {
+      this.currentUserStore.update({ role });
+      this.currentUserApi.refreshToken().subscribe(token => {
+        localStorage.setItem('accessToken', token);
+        location.reload();
+      });
+    })
   }
 }
