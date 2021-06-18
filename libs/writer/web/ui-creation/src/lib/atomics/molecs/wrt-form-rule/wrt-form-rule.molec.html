@@ -1,0 +1,9 @@
+<form [formGroup]="form">
+  <div class="pb-4">
+    <p class="text-left text-gray-text text-xs md:text-base pb-4" [innerHtml]="rules"></p>
+    <check-btn [control]="form.get('terms')" [text]="title"></check-btn>
+  </div>
+  <div class="flex justify-center items-center">
+    <normal-login-btn class="w-24" (btnClicked)="eventSubmit.emit()" [active]="true" [name]="'Gửi'"></normal-login-btn>
+  </div>
+</form>

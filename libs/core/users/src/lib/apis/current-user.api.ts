@@ -191,4 +191,21 @@ export class CurrentUserApi {
       },
     });
   }
+
+  agreeBecomeWriter() {
+    return this.apollo.mutate({
+      mutation: gql`
+      mutation refreshToken($clientMutationId: String) {
+          refreshToken(input: {clientMutationId: $clientMutationId}) {
+            results {
+              accessToken
+            }
+          }
+        }
+      `,
+      variables: {
+        clientMutationId: this.currentUserQuery.getUserId(),
+      },
+    });
+  }
 }

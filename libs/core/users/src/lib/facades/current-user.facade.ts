@@ -8,6 +8,10 @@ export class CurrentUserFacade {
 
   constructor(private currentUserGear: CurrentUserGear, public currentUserQuery: CurrentUserQuery, private currentUserStore: CurrentUserStore) { }
 
+  agreeBecomeWriter() {
+    return this.currentUserGear.agreeBecomeWriter();
+  }
+
   getCurrentUser() {
     return this.currentUserGear.getCurrentUser();
   }

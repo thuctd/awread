@@ -1,7 +1,10 @@
+import { WrtRulePopupTemplate } from './../../atomics/templates/wrt-rule-popup/wrt-rule-popup.template';
+import { MatDialog } from '@angular/material/dialog';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { CurrentUserFacade } from '@awread/core/users';
 import { CategoriesFacade } from '@awread/core/categories';
 import { GenresFacade } from '@awread/core/genres';
+import { SnackbarService } from '@awread/global/packages';
 
 @Component({
   selector: 'awread-creation',
@@ -19,7 +22,9 @@ export class CreationLayout implements OnInit {
   constructor(
     private currentUserFacade: CurrentUserFacade,
     private categoriesFacade: CategoriesFacade,
+    private snackbarService: SnackbarService,
     private genresFacade: GenresFacade,
+    private matDialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
@@ -32,7 +37,22 @@ export class CreationLayout implements OnInit {
   private checkWriter() {
     const role = this.currentUserFacade.currentUserQuery.getRole();
     if (role == 'reader') {
-      console.log('bat material dialog hien dieu khoan cho writer');
+      this.openPreview();
     }
+  }
+
+  openPreview(): void {
+    const dialogRef = this.matDialog.open(WrtRulePopupTemplate, {
+      width: '38rem',
+      height: '60rem',
+    });
+
+    dialogRef.afterClosed().subscribe((res) => {
+      if (res) {
+        this.currentUserFacade.agreeBecomeWriter();
+      } else {
+        this.snackbarService.showSuccess('Chúc bạn một ngày tốt lành!');
+      }
+    });
   }
 }
