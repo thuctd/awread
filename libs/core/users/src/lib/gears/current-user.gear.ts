@@ -55,12 +55,12 @@ export class CurrentUserGear {
           this.currentUserStore.updateCurrentUserAkita(user);
           // this.authRoutingGear.navigateAfterRegisterCompleted();
         } else {
-          const message = result.errors?.[0]['message'];
-          if (message.includes('because no values you can update were found')) {
-            this.updatePersonal(user, 'create');
-          } else {
-            this.snackbarService.showError(result.errors?.[0]['message']);
-          }
+          this.snackbarService.showError(result.errors?.[0]['message']);
+        }
+      }, error => {
+        console.warn('error', error.message);
+        if (error.message.includes('because no values you can update were found')) {
+          this.updatePersonal(user, 'create');
         }
       });
   }
