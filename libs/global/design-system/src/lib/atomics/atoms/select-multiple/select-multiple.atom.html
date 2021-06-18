@@ -1,5 +1,5 @@
 <div [formGroup]="profileForm" class="mb-4 flex items-center">
-  <label class="text-gray-400 w-2/5">{{selectMultiple.title}}</label>
+  <label class="text-gray-400 text-sm sm:text-base w-2/5">{{selectMultiple.title}}</label>
   <div class="relative w-3/5">
     <ng-select [items]="array"
       [formControlName]="selectMultiple.formControlName"
@@ -7,7 +7,7 @@
       [bindValue]="selectMultiple.id"
       [bindLabel]="selectMultiple.name"
       [multiple]="true"
-      [placeholder]="selectMultiple.title">
+      [placeholder]="selectMultiple.placeholder">
       <ng-template ng-option-tmp let-item="item" let-index="index" let-item$="item$">
         <div class="flex">
           <div class="ml-1.5 mt-0.5">
