@@ -9,3 +9,5 @@ export * from './lib/snackbar/snackbar.service';
 export * from './lib/progress-spinner/loader.module';
 export * from './lib/modal/modal.component';
 export * from './lib/plausible/plausible.service';
+export * from './lib/not-found/not-found.module';
+export * from './lib/not-found/not-found.component';

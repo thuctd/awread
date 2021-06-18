@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { GlobalSettingsModule } from '@awread/global/settings';
-import { ReaderWebSharedModule, SharedDesktopLayout, SharedMobileLayout, NotFoundPage } from '@awread/reader/web/shared';
+import { ReaderWebSharedModule, SharedDesktopLayout, SharedMobileLayout } from '@awread/reader/web/shared';
 import { ReaderWebUiAuthModule } from '@awread/reader/web/ui-auth';
 import { ReaderWebUiAuthorModule } from '@awread/reader/web/ui-author';
 import { ReaderWebUiSingleModule } from '@awread/reader/web/ui-single';
@@ -21,7 +21,7 @@ const routes: Routes = [
     children: [
       {
         path: 'not-found',
-        component: NotFoundPage,
+        loadChildren: () => import('@awread/global/packages').then((m) => m.NotFoundModule)
       },
     ],
   },

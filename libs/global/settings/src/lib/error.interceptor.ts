@@ -11,7 +11,11 @@ export class ErrorInterceptor implements HttpInterceptor {
         (event) => {
           if (event instanceof HttpResponse && event.body && event.body.errors) {
             event.body.errors.forEach((error) => {
-              this.snackbarService.showError(error.name ? `${error.name}: ${error.message}` : error.message);
+              if (error.message.includes('Invalid UUID, expected 32 hexadecimal characters')) {
+                console.error('Cannot find this user', error);
+              } else {
+                this.snackbarService.showError(error.name ? `${error.name}: ${error.message}` : error.message);
+              }
             });
           }
         },
