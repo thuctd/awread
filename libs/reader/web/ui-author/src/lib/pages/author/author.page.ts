@@ -14,7 +14,7 @@ export class AuthorPage implements OnInit {
   authorBooks = this.booksFacade.authorBooks$;
   breadcrumbs;
   totalBook$: any;
-
+  notFound = false;
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -35,6 +35,10 @@ export class AuthorPage implements OnInit {
       .subscribe((user) => {
         this.user = user;
         this.breadcrumbs = this.getbreadcrumbs();
+      }, error => {
+        console.warn('error', error);
+        this.notFound = true;
+
       });
   }
 

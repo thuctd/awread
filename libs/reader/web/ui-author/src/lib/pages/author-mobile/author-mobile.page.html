@@ -1,2 +1,8 @@
-<template-rd-author-mb [total]="totalBook$ | async" (navigateBooksByAuthor)="navigateBooksByAuthor()" [books]="authorBooks | async" [user]="user">
-</template-rd-author-mb>
+<ng-template #author>
+    <template-rd-author-mb [total]="totalBook$ | async" (navigateBooksByAuthor)="navigateBooksByAuthor()" [books]="authorBooks | async" [user]="user">
+    </template-rd-author-mb>
+</ng-template>
+
+<ng-container *ngIf="notFound else author">
+    <awread-not-found></awread-not-found>
+</ng-container>
