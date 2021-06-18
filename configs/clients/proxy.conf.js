@@ -20,10 +20,10 @@ switch (true) {
         console.log('local');
         break;
     default:
-        graphql = 'https://backend-graphql.next.awread.vn';
-        api = 'https://backend-api.next.awread.vn';
+        graphql = process.env.GRAPHQL_URL ?? 'https://backend-graphql.next.awread.vn';
+        api = process.env.API_URL ?? 'https://backend-api.next.awread.vn';
         logLevel = 'debug';
-        console.log('default');
+        console.log('default', graphql, api);
         break;
 }
 
