@@ -24,15 +24,8 @@ export class BooksGear {
 
   getCategoryBooks(categoryId: string = '', limit: number = 9) {
     this.categoryBooksStore.setLoading(true);
-    let hasMore, total;
     return this.booksApi.getCategoryBooks(categoryId, limit).pipe(
-      map((res) => {
-        hasMore = res?.['data']?.['allMvBooksLatestChapters']?.['pageInfo']?.hasNextPage;
-        total = res?.['data']?.['allMvBooksLatestChapters']?.totalCount;
-        return res?.['data']?.['allMvBooksLatestChapters']?.['nodes'];
-      }),
       tap((res) => this.categoryBooksStore.set(res)),
-      tap(() => this.categoryBooksStore.updatePage({ hasMore: hasMore, sizePage: limit, total: total })),
       tap(() => this.categoryBooksStore.setLoading(false))
     );
   }
@@ -40,7 +33,7 @@ export class BooksGear {
   getAuthorBooks(authors, limit: number = 12) {
     const isCheck = typeof (authors);
     let authorIds: string[];
-    let hasMore, total;
+    let hasNextPage, totalCount;
     if (isCheck === 'string') {
       authorIds = authors.split();
     } else {
@@ -49,12 +42,12 @@ export class BooksGear {
     this.authorBooksStore.setLoading(true);
     return this.booksApi.getAuthorBooks(authorIds, limit).pipe(
       map((res) => {
-        hasMore = res?.['data']?.['allMvBooksLatestChapters']?.['pageInfo']?.hasNextPage;
-        total = res?.['data']?.['allMvBooksLatestChapters']?.totalCount;
+        hasNextPage = res?.['data']?.['allMvBooksLatestChapters']?.['pageInfo']?.hasNextPage;
+        totalCount = res?.['data']?.['allMvBooksLatestChapters']?.totalCount;
         return res?.['data']?.['allMvBooksLatestChapters']?.['nodes'];
       }),
       tap(books => this.authorBooksStore.set(books)),
-      tap(() => this.authorBooksStore.updatePage({ hasMore: hasMore, sizePage: limit, total: total })),
+      tap(() => this.authorBooksStore.updatePage({ hasNextPage: hasNextPage, totalCount: totalCount, sizePage: limit })),
       tap(() => this.authorBooksStore.setLoading(false))
     );
   }
@@ -75,15 +68,15 @@ export class BooksGear {
   }
 
   getTopBooks(limit: number = 12) {
-    let hasMore, total;
+    let hasNextPage, totalCount;
     this.topBooksStore.setLoading(true);
     return this.booksApi.getTopBooks(limit).pipe(
       map(res => {
-        hasMore = res?.['data']?.['allMvMostViewBooks']?.['pageInfo']?.hasNextPage;
-        total = res?.['data']?.['allMvMostViewBooks']?.totalCount;
+        hasNextPage = res?.['data']?.['allMvMostViewBooks']?.['pageInfo']?.hasNextPage;
+        totalCount = res?.['data']?.['allMvMostViewBooks']?.totalCount;
         this.topBooksStore.add(res?.['data']?.['allMvMostViewBooks']?.['nodes']);
       }),
-      tap(() => this.topBooksStore.updatePage({ hasMore: hasMore, sizePage: limit, total: total })),
+      tap(() => this.topBooksStore.updatePage({ hasNextPage: hasNextPage, sizePage: limit, totalCount: totalCount })),
       tap(() => this.topBooksStore.setLoading(false))
     );
   }

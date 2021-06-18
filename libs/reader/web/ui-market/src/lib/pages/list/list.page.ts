@@ -6,7 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Directive, OnInit, OnDestroy } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { PersistNgFormPlugin } from '@datorama/akita';
-import { BooksFacade } from '@awread/core/books';
+import { BooksFacade, ListBooksFacade } from '@awread/core/books';
 import { GenresFacade } from '@awread/core/genres';
 import { CategoriesFacade } from '@awread/core/categories';
 import { Observable } from 'rxjs';
@@ -24,11 +24,14 @@ export class ListPage implements OnInit, OnDestroy {
   categoryList$ = this.categoriesFacade.categories$;
   topBookList$ = this.booksFacade.topBooks$;
   genreList$ = this.genresFacade.genres$;
-  filteredBooks$ = this.booksFacade.categoryBooks$;
+  books$;
+  hasNextPage$: Observable<boolean>;
   typeBook: 'collected' | 'composed';
+  loading: boolean;
   selectedCategoryId: string;
   titlePage: string;
   constructor(
+    private listBooksFacade: ListBooksFacade,
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
     private cd: ChangeDetectorRef,
@@ -44,7 +47,6 @@ export class ListPage implements OnInit, OnDestroy {
     this.updateForm();
     this.booksFacade.getTopBooks().subscribe();
     this.genresFacade.getAllGenres().subscribe();
-    this.isLoading$ = this.booksFacade.categoryBooksQuery.selectLoading();
     this.watchRouting();
   }
 
@@ -77,9 +79,15 @@ export class ListPage implements OnInit, OnDestroy {
     this.cd.detectChanges();
   }
 
-  //TODO: Anh Hiệp ơi! Hộ trợ em cái này với ạ, kiểu nhưu khi kích chuyển tabs ấy em muốn nó scroll về ban đầu ạ.
   filterItemsByCategory(categoryId: string) {
-    this.booksFacade.getCategoryBooks(categoryId, 0).subscribe();
+    this.loading = true;
+    this.listBooksFacade.getCategoryBookByCursor(categoryId, 'set').pipe(untilDestroyed(this)).subscribe(() => {
+      this.loading = false;
+      this.cd.detectChanges();
+    });
+    this.books$ = this.booksFacade.categoryBooksQuery.selectAll();
+    this.isLoading$ = this.booksFacade.categoryBooksQuery.selectLoading();
+    this.hasNextPage$ = this.booksFacade.categoryBooksQuery.selectHasNextPage();
   }
 
   filterBooks() {
@@ -90,7 +98,7 @@ export class ListPage implements OnInit, OnDestroy {
   }
 
   nativeTopBook() {
-    this.router.navigate(['/top-books']);
+    this.router.navigate(['/index', 'top-books']);
   }
 
   onMoreBooks() {
@@ -98,8 +106,8 @@ export class ListPage implements OnInit, OnDestroy {
   }
 
   private fetchBooks() {
-    if (this.booksFacade.categoryBooksQuery.getHasMore()) {
-      this.booksFacade.getCategoryBooks(this.selectedCategoryId).subscribe();
+    if (this.booksFacade.categoryBooksQuery.getHasNextPage()) {
+      this.listBooksFacade.getCategoryBookByCursor(this.selectedCategoryId, 'add').pipe(untilDestroyed(this)).subscribe();
     }
   }
 

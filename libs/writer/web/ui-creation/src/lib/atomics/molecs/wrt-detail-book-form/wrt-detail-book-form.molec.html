@@ -71,7 +71,7 @@
       <ng-select class="custom" [items]="genres" bindValue="genreId" [multiple]="true" bindLabel="name" formControlName="genreIds" placeholder="Thể loại"
         (add)="addItem($event)" (remove)="removeItem($event)">
       </ng-select>
-      <div *ngIf="bookForm.controls.genreIds.errors" class="invalid-feedback">
+      <div *ngIf="bookForm.controls.genreIds.errors && bookForm.controls.genreIds.touched" class="invalid-feedback">
         <div *ngIf="bookForm.controls.genreIds.errors.required">
           Thể loại không được để trống
         </div>

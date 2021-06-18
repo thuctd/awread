@@ -1,8 +1,9 @@
 <section>
-  <normal-login-btn (btnClicked)="btnClicked.emit()" [active]="active" [name]="text"></normal-login-btn>
-  <div [hidden]="noSocial">
+  <normal-login-btn (btnClicked)="btnClicked.emit()" [active]="true" [name]="text"></normal-login-btn>
+  <div>
     <atom-bar-seperate class="p-3"></atom-bar-seperate>
-    <social-login-btn name="Facebook" (socialBtnClicked)="socialFBBtnClicked.emit()"></social-login-btn>
-    <social-login-btn class="pt-3.5" [isColor]="false" name="Google" (socialBtnClicked)="socialGGBtnClicked.emit()"></social-login-btn>
+    <social-login-btn startText="Đăng ký với " name="Facebook" (socialBtnClicked)="btnClicked.emit('facebook')"></social-login-btn>
+    <social-login-btn startText="Đăng ký với " name="Google" class="pt-3.5" (socialBtnClicked)="btnClicked.emit('google')">
+    </social-login-btn>
   </div>
 </section>

@@ -8,10 +8,7 @@ import { map } from 'rxjs/operators';
 export class CurrentUserApi {
   // user$: Observable<any>;
   // user: any;
-  constructor(
-    private apollo: Apollo,
-    private currentUserQuery: CurrentUserQuery,
-  ) {
+  constructor(private apollo: Apollo, private currentUserQuery: CurrentUserQuery) {
     // setInterval(function () {
     //   this.httpClient
     //     .get(`https://raw.githubusercontent.com/small-cosmos/awread-hq/master/news/index.json`)
@@ -20,143 +17,159 @@ export class CurrentUserApi {
     //       result = result.banner;
     //     });
     //  }, 3000);
-
-
   }
 
-
   getCurrentUser() {
-    return this.apollo.query({
-      query: gql`
-        mutation currentUser {
-          currentUser(input: {}) {
+    return this.apollo
+      .query({
+        query: gql`
+          mutation thisUser {
+            thisUser(input: {}) {
+              results {
+                users {
+                  userId
+                  username
+                  email
+                  phone
+                  name
+                  updatedAt
+                  avatar
+                }
+                personals {
+                  firstname
+                  middlename
+                  lastname
+                  ages
+                  dob
+                  gender
+                  bio
+                  websiteAddress
+                  facebookAddress
+                  genreIds
+                }
+              }
+            }
+          }
+        `,
+      })
+      .pipe(
+        map((res) => ({
+          ...res.data?.['thisUser']?.['results']?.[0]?.['users'],
+          ...res.data?.['thisUser']?.['results']?.[0]?.['personals'],
+        }))
+      );
+  }
+
+  updatePersonal(personal, action: 'create' | 'update' = 'update') {
+    const userId = this.currentUserQuery.getUserId();
+    const mutation = action == 'create' ? 'createPersonal' : 'updatePersonalByUserId';
+    const inputPatch = action == 'create' ? 'personal' : 'personalPatch';
+    return this.apollo.mutate({
+      mutation: gql`
+        mutation ${mutation}(
+          $userId: UUID!
+          $firstname: String
+          $middlename: String
+          $lastname: String
+          $dob: String
+          $bio: String
+          $websiteAddress: String
+          $facebookAddress: String
+          $zaloAddress: String
+          $ages: [BigFloat]
+          $gender: BigFloat
+          $genreIds: [BigFloat]
+        ) {
+          ${mutation}(
+            input: {
+              ${action == 'create' ? '' : 'userId: $userId'}
+              ${inputPatch}: {
+                userId: $userId
+                firstname: $firstname
+                middlename: $middlename
+                lastname: $lastname
+                dob: $dob
+                bio: $bio
+                websiteAddress: $websiteAddress
+                facebookAddress: $facebookAddress
+                zaloAddress: $zaloAddress
+                ages: $ages
+                gender: $gender
+                genreIds: $genreIds
+              }
+            }
+          ) {
+            personal {
+              firstname
+              middlename
+              lastname
+              dob
+              bio
+              websiteAddress
+              facebookAddress
+              zaloAddress
+              ages
+              gender
+              genreIds
+            }
+          }
+        }
+      `,
+      variables: {
+        ...personal,
+        userId,
+      },
+    });
+  }
+
+  updateUser(user) {
+    return this.apollo.mutate({
+      mutation: gql`
+        mutation updateUserByUserId(
+          $userId: UUID!
+          $username: String
+          $email: String
+          $phone: String
+          $name: String
+          $avatar: Boolean
+          $facebook: String
+          $google: String
+          $apple: String
+        ) {
+          updateUserByUserId(
+            input: {
+              userId: $userId
+              userPatch: {
+                username: $username
+                email: $email
+                phone: $phone
+                name: $name
+                avatar: $avatar
+                facebook: $facebook
+                google: $google
+                apple: $apple
+              }
+            }
+          ) {
             user {
-              userId
               username
               email
               phone
               name
-              firstname
-              middlename
-              lastname
-              age
               avatar
-              dob
-              gender
-              bio
-              websiteAddress
-              facebookAddress
-              updatedAt
+              facebook
+              google
+              apple
             }
           }
         }
-      `,
-    }).pipe(
-      map(res => res.data?.['currentUser']?.['user'])
-    )
-  }
-
-  updateName(user) {
-    return this.apollo.mutate({
-      mutation: gql`
-      mutation updateUserByUserId(
-        $userId: UUID!,
-        $firstname: String,
-        $middlename: String,
-        $lastname: String
-        ) {
-        updateUserByUserId(
-          input: {
-            userId: $userId,
-            userPatch: {
-              firstname: $firstname,
-              middlename: $middlename,
-              lastname: $lastname,
-            }
-          }
-        ) {
-          user {
-            firstname
-            middlename
-            lastname
-          }
-        }
-      }
       `,
       variables: {
         ...user,
-        userId: this.currentUserQuery.getUserId()
+        userId: this.currentUserQuery.getUserId(),
       },
-    })
+    });
   }
-
-  update(user) {
-    return this.apollo.mutate({
-      mutation: gql`
-      mutation updateUserByUserId(
-        $userId: UUID!,
-        $age: BigFloat,
-        $gender: BigFloat,
-        $username: String,
-        $email: String,
-        $phone: String,
-        $name: String,
-        $firstname: String,
-        $middlename: String,
-        $lastname: String,
-        $avatar: Boolean,
-        $dob: String,
-        $bio: String,
-        $websiteAddress: String,
-        $facebookAddress: String,
-        ) {
-        updateUserByUserId(
-          input: {
-            userId: $userId,
-            userPatch: {
-              age: $age,
-              gender: $gender,
-              username: $username,
-              email: $email,
-              phone: $phone,
-              name: $name,
-              firstname: $firstname,
-              middlename: $middlename,
-              lastname: $lastname,
-              avatar: $avatar,
-              dob: $dob,
-              bio: $bio,
-              websiteAddress: $websiteAddress,
-              facebookAddress: $facebookAddress,
-            }
-          }
-        ) {
-          user {
-            age
-            gender
-            username
-            email
-            phone
-            name
-            firstname
-            middlename
-            lastname
-            avatar
-            dob
-            bio
-            websiteAddress
-            facebookAddress
-          }
-        }
-      }
-      `,
-      variables: {
-        ...user,
-        userId: this.currentUserQuery.getUserId()
-      },
-    })
-  }
-
 
   linkSocial(credential) {
     return this.apollo.mutate({
@@ -164,9 +177,9 @@ export class CurrentUserApi {
       mutation updateUserByUserId($userId: UUID!, $providerId: String) {
         updateUserByUserId(
           input: {
-            userId: $userId,
+            userId: $userId
             userPatch: {
-              ${credential.provider}: $providerId,
+              ${credential.provider}: $providerId
             }
           }
         ) {
@@ -178,8 +191,8 @@ export class CurrentUserApi {
       `,
       variables: {
         ...credential,
-        userId: this.currentUserQuery.getUserId()
+        userId: this.currentUserQuery.getUserId(),
       },
-    })
+    });
   }
 }

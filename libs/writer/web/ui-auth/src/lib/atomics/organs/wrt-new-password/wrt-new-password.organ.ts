@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'wrt-new-password',
@@ -14,14 +14,24 @@ import { FormBuilder, Validators } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WrtNewPasswordOrgan implements OnInit {
-  form = this.fb.group({
-    password: ['', [Validators.required, Validators.minLength(6)]],
-    confirmpassword: ['', [Validators.required, Validators.minLength(6)]],
-  });
   @Output() submitEvent = new EventEmitter();
+
+  form = this.fb.group(
+    {
+      password: ['', [Validators.required, Validators.minLength(4)]],
+      confirmpassword: ['', [Validators.required, Validators.minLength(4)]],
+    },
+    { validator: this.passwordMatchValidator }
+  );
+
+  passwordMatchValidator(g: FormGroup) {
+    return g.get('password').value === g.get('confirmpassword').value ? null : { missmatch: true };
+  }
   constructor(private fb: FormBuilder) {}
   ngOnInit(): void {}
-  updatePassworEvent() {
+
+  updatePasswordEvent() {
+    // console.log('this.form', this.form);
     const formValue = this.form.value;
     if (formValue.password !== formValue.confirmpassword) {
       return;

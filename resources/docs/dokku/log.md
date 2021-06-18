@@ -15,3 +15,5 @@ echo $NODE_ENV
 
 dokku enter backend-api web echo hi
 dokku enter backend-api web printenv
+
+dokku nginx:access-logs reader-web

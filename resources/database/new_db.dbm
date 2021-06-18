@@ -1,0 +1,1788 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+CAUTION: Do not modify this file unless you know what you are doing.
+         Unexpected results may occur if the code is changed deliberately.
+-->
+<dbmodel pgmodeler-ver="0.9.4-alpha" use-changelog="false" last-position="0,717" last-zoom="1" max-obj-count="32"
+	 default-schema="public" default-owner="postgres"
+	 layers="Default layer"
+	 active-layers="0"
+	 layer-name-colors="#000000"
+	 layer-rect-colors="#b4b4b4"
+	 show-layer-names="false" show-layer-rects="false">
+<role name="public_read"
+      inherit="true">
+</role>
+
+<role name="anonymous"
+      inherit="true">
+</role>
+
+<role name="writer"
+      inherit="true">
+</role>
+
+<role name="reader"
+      inherit="true">
+</role>
+
+<role name="postgraphile"
+      inherit="true">
+</role>
+
+<role name="basic_write"
+      inherit="true">
+</role>
+
+<database name="awread_database" is-template="false" allow-conns="true">
+</database>
+
+<schema name="public" layers="0" fill-color="#e1e1e1" sql-disabled="true">
+</schema>
+
+<schema name="private" layers="0" rect-visible="true" fill-color="#e1e1e1">
+	<role name="postgres"/>
+</schema>
+
+<extension name="pgcrypto">
+	<schema name="public"/>
+</extension>
+
+<extension name="pg_trgm">
+	<schema name="public"/>
+</extension>
+
+<extension name="uuid-ossp">
+	<schema name="public"/>
+</extension>
+
+<usertype name="jwt_token" configuration="composite">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<typeattrib name="userId">
+		<type name="uuid" length="0"/>
+	</typeattrib>
+	<typeattrib name="role">
+		<type name="text" length="0"/>
+	</typeattrib>
+	<typeattrib name="exp">
+		<type name="numeric" length="0"/>
+	</typeattrib>
+</usertype>
+
+<opclass  name="gin_trgm_ops" index-type="gin" default="false" sql-disabled="true">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<type name="smallint" length="0"/>
+	<element type="storage">
+		<type name="smallint" length="0"/>
+	</element>
+</opclass>
+
+<table name="books" layers="0" collapse-mode="2" max-obj-count="18" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<appended-sql><![CDATA[-- create index title_gin_idx on public.books
+	-- using gin (title gin_trgm_ops);]]></appended-sql>
+	<prepended-sql><![CDATA[set timezone='Asia/Ho_Chi_Minh';]]></prepended-sql>
+	<position x="1220" y="720"/>
+	<column name="bookId" not-null="true" default-value="uuid_generate_v4()">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="userId" not-null="true">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="categoryId" not-null="true">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="publisherId">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="title" not-null="true">
+		<type name="text" length="0"/>
+	</column>
+	<column name="updatedAt" not-null="true" default-value="CURRENT_TIMESTAMP">
+		<type name="timestamp with time zone" length="0" with-timezone="true"/>
+	</column>
+	<column name="completed" not-null="true" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="published" not-null="true" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="age" not-null="true" default-value="2">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="description">
+		<type name="text" length="0"/>
+	</column>
+	<column name="cover" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="createdAt">
+		<type name="timestamp with time zone" length="0" with-timezone="true"/>
+	</column>
+	<column name="type" default-value="0">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="isDeleted" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="publishedAt" default-value="now()">
+		<type name="timestamp" length="0"/>
+	</column>
+	<constraint name="books_pk" type="pk-constr" table="public.books">
+		<columns names="bookId" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="genres" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1720" y="1300"/>
+	<column name="genreId" not-null="true">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="name">
+		<type name="text" length="0"/>
+	</column>
+	<column name="description">
+		<type name="text" length="0"/>
+	</column>
+	<constraint name="genres_pk" type="pk-constr" table="public.genres">
+		<columns names="genreId" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="users" layers="0" collapse-mode="2" max-obj-count="14" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="460" y="800"/>
+	<column name="userId" not-null="true" default-value="uuid_generate_v4()">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="username" not-null="true">
+		<type name="text" length="0"/>
+	</column>
+	<column name="email">
+		<type name="text" length="0"/>
+	</column>
+	<column name="name">
+		<type name="text" length="0"/>
+	</column>
+	<column name="role" default-value="'reader'">
+		<type name="text" length="0"/>
+	</column>
+	<column name="createdAt" default-value="now()">
+		<type name="timestamp with time zone" length="0" with-timezone="true"/>
+	</column>
+	<column name="updatedAt" default-value="now()">
+		<type name="timestamp with time zone" length="0" with-timezone="true"/>
+	</column>
+	<column name="avatar" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="facebook">
+		<type name="text" length="0"/>
+	</column>
+	<column name="apple">
+		<type name="text" length="0"/>
+	</column>
+	<column name="google">
+		<type name="text" length="0"/>
+	</column>
+	<column name="phone">
+		<type name="text" length="0"/>
+	</column>
+	<constraint name="users_pk" type="pk-constr" table="public.users">
+		<columns names="userId" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="users" layers="0" collapse-mode="2" max-obj-count="2" z-value="0">
+	<schema name="private"/>
+	<role name="postgres"/>
+	<position x="80" y="820"/>
+	<column name="userId" not-null="true">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="passwordHash">
+		<type name="text" length="0"/>
+	</column>
+	<constraint name="user_pk" type="pk-constr" table="private.users">
+		<columns names="userId" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="chapters" layers="0" collapse-mode="2" max-obj-count="10" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1760" y="660"/>
+	<column name="chapterId" not-null="true" default-value="uuid_generate_v4()">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="published" default-value="true">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="position" default-value="0">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="bookId" not-null="true">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="title">
+		<type name="text" length="0"/>
+	</column>
+	<column name="createdAt" not-null="true" default-value="now()">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="updatedAt" not-null="true" default-value="now()">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="isDeleted" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="publishedAt">
+		<type name="timestamp" length="0"/>
+	</column>
+	<constraint name="chapters_pk" type="pk-constr" table="public.chapters">
+		<columns names="chapterId" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="categories" layers="0" collapse-mode="2" max-obj-count="2" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1400" y="1320"/>
+	<column name="categoryId" not-null="true">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="name">
+		<type name="text" length="0"/>
+	</column>
+	<constraint name="categories_pk" type="pk-constr" table="public.categories">
+		<columns names="categoryId" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="books_genres" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1640" y="1040"/>
+	<column name="bookId" not-null="true">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="genreId" not-null="true">
+		<type name="numeric" length="0"/>
+	</column>
+	<constraint name="books_genres_pk" type="pk-constr" table="public.books_genres">
+		<columns names="bookId,genreId" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="book_visits" layers="0" collapse-mode="2" max-obj-count="8" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="480" y="460"/>
+	<column name="ip" not-null="true">
+		<type name="text" length="0"/>
+	</column>
+	<column name="userId" not-null="true">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="bookId" not-null="true">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="chapterId" not-null="true">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="visitTime" not-null="true" default-value="now()">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="count" not-null="true" default-value="0">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="isMobile" not-null="true" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<constraint name="book_visits_pk" type="pk-constr" table="public.book_visits">
+		<columns names="ip,userId,bookId,chapterId,visitTime" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="authors" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="820" y="780"/>
+	<column name="bookId" not-null="true">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="userId" not-null="true">
+		<type name="uuid" length="0"/>
+	</column>
+	<constraint name="books_by_users_pk" type="pk-constr" table="public.authors">
+		<columns names="bookId,userId" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="books_rank" layers="0" collapse-mode="2" max-obj-count="8" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1740" y="1460"/>
+	<column name="book_id" not-null="true" default-value="uuid_generate_v4()">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="title" not-null="true">
+		<type name="text" length="0"/>
+	</column>
+	<column name="genreIds">
+		<type name="uuid" length="0" dimension="1"/>
+	</column>
+	<column name="categoryId">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="sold" default-value="0">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="rate">
+		<type name="numeric" length="4" precision="2"/>
+	</column>
+	<column name="view" default-value="0">
+		<type name="numeric" length="0"/>
+	</column>
+</table>
+
+<table name="publishers" layers="0" collapse-mode="2" max-obj-count="2" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="2040" y="900"/>
+	<column name="publisherId" not-null="true" default-value="uuid_generate_v4()">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="name" not-null="true">
+		<type name="text" length="0"/>
+	</column>
+	<constraint name="publisher_pk" type="pk-constr" table="public.publishers">
+		<columns names="publisherId" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="personals" layers="0" collapse-mode="2" max-obj-count="15" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="480" y="1180"/>
+	<column name="userId" not-null="true">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="bio">
+		<type name="text" length="0"/>
+	</column>
+	<column name="gender">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="dob">
+		<type name="text" length="0"/>
+	</column>
+	<column name="facebookAddress">
+		<type name="text" length="0"/>
+	</column>
+	<column name="websiteAddress">
+		<type name="text" length="0"/>
+	</column>
+	<column name="zaloAddress">
+		<type name="text" length="0"/>
+	</column>
+	<column name="lastname">
+		<type name="text" length="0"/>
+	</column>
+	<column name="middlename">
+		<type name="text" length="0"/>
+	</column>
+	<column name="firstname">
+		<type name="text" length="0"/>
+	</column>
+	<column name="ages">
+		<type name="numeric" length="0" dimension="1"/>
+	</column>
+	<column name="code" default-value="'+84'">
+		<type name="text" length="0"/>
+	</column>
+	<column name="genreIds">
+		<type name="numeric" length="0" dimension="1"/>
+	</column>
+	<constraint name="personals_pk" type="pk-constr" table="public.personals">
+		<columns names="userId" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<function name="set_updated_at"
+		window-func="false"
+		returns-setof="false"
+		behavior-type="CALLED ON NULL INPUT"
+		function-type="VOLATILE"
+		security-type="SECURITY INVOKER"
+		parallel-type="PARALLEL UNSAFE"
+		execution-cost="1"
+		row-amount="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<language name="plpgsql"/>
+	<return-type>
+	<type name="trigger" length="0"/>
+	</return-type>
+	<definition><![CDATA[begin
+	new."updatedAt" := current_timestamp;
+	return new;
+	end;]]></definition>
+</function>
+
+<index name="chapters_bookId_idx" table="public.chapters"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="false">
+			<column name="&quot;bookId&quot;"/>
+		</idxelement>
+</index>
+
+<table name="contents" layers="0" collapse-mode="2" max-obj-count="2" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1740" y="480"/>
+	<column name="chapterId" not-null="true">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="content">
+		<type name="text" length="0"/>
+	</column>
+	<constraint name="contents_pk" type="pk-constr" table="public.contents">
+		<columns names="chapterId" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="books_title_gin_idx" table="public.books"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="gin" factor="0" sql-disabled="true">
+		<idxelement use-sorting="false">
+			<column name="title"/>
+			<opclass  signature="public.gin_trgm_ops USING gin"/>
+		</idxelement>
+</index>
+
+<view name="mv_books_latest_chapters" layers="0" materialized="true" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1080" y="1320"/>
+	<reference>
+		<expression><![CDATA[	books.*,
+	jsonb_object_agg(x."chapterId", x."newestChapters") as "newestChapters",
+	jsonb_object_agg(k."genreId", k.genres) as "genres",
+	jsonb_object_agg(y."authorId", y.authors) as "authors"]]></expression>
+	</reference>
+	<reference>
+		<expression><![CDATA[
+	books 
+	inner join (
+		select 
+			*
+		from (
+			select 
+				"bookId",
+				"chapterId",
+				to_jsonb(jsonb_build_object(
+				'chapterId', "chapterId",
+				'position', position
+	    		)) as "newestChapters",
+				rank() over (partition by "bookId" order by position desc) as RANK
+			from chapters   where chapters."isDeleted" = false and chapters.published
+		) z
+		where rank <= 2
+	) x using ("bookId")
+	inner join (
+		select 
+		"bookId",
+		"genreId",
+		to_jsonb(jsonb_build_object(
+			'genreId', genres."genreId",
+			'name', genres."name"
+		)) as genres
+		from books_genres natural join genres
+	) k  USING ("bookId")
+	left join (
+		select 
+		  "bookId",
+		  "userId" as "authorId",
+		  to_jsonb(jsonb_build_object(
+			  'userId', users."userId",
+			  'name', users."name"
+		  )) as authors
+		from authors natural join users
+	) y USING ("bookId")]]></expression>
+	</reference>
+	<reference>
+		<expression><![CDATA[group by 1;]]></expression>
+	</reference>
+	<expression type="select-exp">0</expression>
+	<expression type="from-exp">1</expression>
+	<expression type="end-exp">2</expression>
+</view>
+
+<view name="v_random_books" layers="0" collapse-mode="2" pagination="true" attribs-page="0" ext-attribs-page="0" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1080" y="1420"/>
+	<reference>
+		<expression><![CDATA[*]]></expression>
+	</reference>
+	<reference>
+		<expression><![CDATA[public.mv_books_latest_chapters]]></expression>
+	</reference>
+	<reference>
+		<expression><![CDATA[order by random();]]></expression>
+	</reference>
+	<expression type="select-exp">0</expression>
+	<expression type="from-exp">1</expression>
+	<expression type="end-exp">2</expression>
+</view>
+
+<view name="mv_most_view_books" layers="0" materialized="true" collapse-mode="2" max-obj-count="2" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1080" y="1520"/>
+	<reference>
+		<expression><![CDATA[  mv_books_latest_chapters.*,
+	sum(book_visits.count)  over (partition by "bookId") as "views"]]></expression>
+	</reference>
+	<reference>
+		<expression><![CDATA[ mv_books_latest_chapters
+	left join 
+	book_visits using ("bookId")]]></expression>
+	</reference>
+	<expression type="select-exp">0</expression>
+	<expression type="from-exp">1</expression>
+</view>
+
+<function name="new_chapter"
+		window-func="false"
+		returns-setof="false"
+		behavior-type="CALLED ON NULL INPUT"
+		function-type="VOLATILE"
+		security-type="SECURITY INVOKER"
+		parallel-type="PARALLEL UNSAFE"
+		execution-cost="1"
+		row-amount="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<language name="plpgsql"/>
+	<return-type>
+	<type name="uuid" length="0"/>
+	</return-type>
+	<parameter name="title">
+		<type name="text" length="0"/>
+	</parameter>
+	<parameter name="published">
+		<type name="boolean" length="0"/>
+	</parameter>
+	<parameter name="position">
+		<type name="numeric" length="0"/>
+	</parameter>
+	<parameter name="bookId">
+		<type name="uuid" length="0"/>
+	</parameter>
+	<parameter name="content">
+		<type name="text" length="0"/>
+	</parameter>
+	<definition><![CDATA[declare 
+	"newChapterId" uuid;
+	begin
+
+	insert into chapters("bookId", title, position, published)
+	values("bookId", "title", "position", "published") 
+	returning "chapterId"
+	into "newChapterId";
+
+	insert into contents("chapterId", content)
+	values("newChapterId", content);
+
+	return "newChapterId";
+	end;]]></definition>
+</function>
+
+<function name="hello_world"
+		window-func="false"
+		returns-setof="false"
+		behavior-type="CALLED ON NULL INPUT"
+		function-type="VOLATILE"
+		security-type="SECURITY INVOKER"
+		parallel-type="PARALLEL UNSAFE"
+		execution-cost="1"
+		row-amount="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<language name="plpgsql"/>
+	<return-type>
+	<type name="text" length="0"/>
+	</return-type>
+	<definition><![CDATA[begin
+	return 'hello world';
+	end;]]></definition>
+</function>
+
+<function name="search_books"
+		window-func="false"
+		returns-setof="true"
+		behavior-type="CALLED ON NULL INPUT"
+		function-type="VOLATILE"
+		security-type="SECURITY INVOKER"
+		parallel-type="PARALLEL UNSAFE"
+		execution-cost="1"
+		row-amount="10">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<language name="plpgsql"/>
+	<return-type>
+	<type name="public.mv_books_latest_chapters" length="0"/>
+	</return-type>
+	<parameter name="searchTerm">
+		<type name="text" length="0"/>
+	</parameter>
+	<definition><![CDATA[begin 
+   RETURN QUERY SELECT
+		*
+    FROM
+        mv_books_latest_chapters
+    WHERE "searchTerm" % ANY(STRING_TO_ARRAY(title,' ')) 
+    order by SIMILARITY("searchTerm",title) desc;
+	end;]]></definition>
+</function>
+
+<function name="new_user"
+		window-func="false"
+		returns-setof="false"
+		behavior-type="CALLED ON NULL INPUT"
+		function-type="VOLATILE"
+		security-type="SECURITY DEFINER"
+		parallel-type="PARALLEL UNSAFE"
+		execution-cost="1"
+		row-amount="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<language name="plpgsql"/>
+	<return-type>
+	<parameter name="case">
+		<type name="text" length="0"/>
+	</parameter>
+	<parameter name="user">
+		<type name="public.users" length="0"/>
+	</parameter>
+	<parameter name="accessToken">
+		<type name="public.jwt_token" length="0"/>
+	</parameter>
+	</return-type>
+	<parameter name="email">
+		<type name="text" length="0"/>
+	</parameter>
+	<parameter name="password">
+		<type name="text" length="0"/>
+	</parameter>
+	<parameter name="phone">
+		<type name="text" length="0"/>
+	</parameter>
+	<parameter name="username">
+		<type name="text" length="0"/>
+	</parameter>
+	<parameter name="name">
+		<type name="text" length="0"/>
+	</parameter>
+	<parameter name="facebook">
+		<type name="text" length="0"/>
+	</parameter>
+	<parameter name="google">
+		<type name="text" length="0"/>
+	</parameter>
+	<parameter name="apple">
+		<type name="text" length="0"/>
+	</parameter>
+	<definition><![CDATA[declare 
+	account public.users;
+	"inputUsername" text := username;
+	"inputEmail" text := email;
+	"inputPhone" text := phone;
+	"accessToken" public.jwt_token;
+	begin
+
+		select * into account
+		from public.users as u
+		where 
+		(u.username = "inputUsername" and length("inputUsername") > 0) or
+		(u.email = "inputEmail" and length("inputEmail") > 0 ) or
+		(u.phone = "inputPhone" and length("inputPhone") > 0);
+
+		if account IS NULL then 
+
+			insert into public.users(
+				email,
+				phone,			
+				username,
+				name,
+				facebook,
+				google,
+				apple
+			) values (
+				email,
+				phone,			
+				username,
+				name,
+				facebook,
+				google,
+				apple
+			)
+			returning * into account;	
+
+			insert into private.users("userId", "passwordHash") values(
+				account."userId",
+				crypt(password, gen_salt('bf'))
+			);
+
+			"accessToken" := (account."userId", account.role, extract(epoch from (now() + interval '3 months')))::public.jwt_token;
+
+			return query select 'success', account, "accessToken";
+			
+		else
+			return query select 'duplicated', account, "accessToken";
+		end if;
+	end;]]></definition>
+</function>
+
+<function name="authenticate_user"
+		window-func="false"
+		returns-setof="false"
+		behavior-type="CALLED ON NULL INPUT"
+		function-type="VOLATILE"
+		security-type="SECURITY DEFINER"
+		parallel-type="PARALLEL UNSAFE"
+		execution-cost="1"
+		row-amount="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<language name="plpgsql"/>
+	<return-type>
+	<parameter name="accessToken">
+		<type name="public.jwt_token" length="0"/>
+	</parameter>
+	<parameter name="user">
+		<type name="public.users" length="0"/>
+	</parameter>
+	<parameter name="matchPassword">
+		<type name="boolean" length="0"/>
+	</parameter>
+	</return-type>
+	<parameter name="loginname">
+		<type name="text" length="0"/>
+	</parameter>
+	<parameter name="password">
+		<type name="text" length="0"/>
+	</parameter>
+	<definition><![CDATA[declare 
+	"accessToken" public.jwt_token;
+	account public.users;
+	"matchPassword" boolean := false;
+	"accountPasswordHash" text;
+	begin
+	select * into account
+	from public.users
+	where
+		public.users.email = loginname or 
+		public.users.phone = loginname or 
+		public.users.username = loginname;
+
+		select "passwordHash" into "accountPasswordHash"
+		from private.users
+		where account."userId" = "userId";
+
+		"matchPassword"  := "accountPasswordHash" = crypt(password, "accountPasswordHash" );
+
+		if "matchPassword" then
+			"accessToken" := (account."userId", account.role, extract(epoch from (now() + interval '3 months')))::public.jwt_token;
+			return query select "accessToken", account, "matchPassword";
+		elsif account is not null then 
+			return query select "accessToken", account, "matchPassword";
+		else 
+			return query select "accessToken", account, "matchPassword";
+		end if;
+	end;]]></definition>
+</function>
+
+<function name="this_user"
+		window-func="false"
+		returns-setof="false"
+		behavior-type="CALLED ON NULL INPUT"
+		function-type="VOLATILE"
+		security-type="SECURITY INVOKER"
+		parallel-type="PARALLEL UNSAFE"
+		execution-cost="1"
+		row-amount="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<language name="plpgsql"/>
+	<return-type>
+	<parameter name="users">
+		<type name="public.users" length="0"/>
+	</parameter>
+	<parameter name="personals">
+		<type name="public.personals" length="0"/>
+	</parameter>
+	</return-type>
+	<definition><![CDATA[declare 
+	"currentUser" public.users;
+	"currentPersonal" public.personals;
+	begin
+		select * into "currentUser"
+		from public.users
+		where  "userId" = nullif(current_setting('jwt.claims.userId', true), '')::uuid;
+			select * into "currentPersonal"
+		from public.personals
+		where  "userId" = nullif(current_setting('jwt.claims.userId', true), '')::uuid;
+		return query select "currentUser", "currentPersonal";
+	end;
+	]]></definition>
+</function>
+
+<function name="authenticate_social_user"
+		window-func="false"
+		returns-setof="false"
+		behavior-type="CALLED ON NULL INPUT"
+		function-type="VOLATILE"
+		security-type="SECURITY DEFINER"
+		parallel-type="PARALLEL UNSAFE"
+		execution-cost="1"
+		row-amount="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<language name="plpgsql"/>
+	<return-type>
+	<parameter name="accessToken">
+		<type name="public.jwt_token" length="0"/>
+	</parameter>
+	<parameter name="user">
+		<type name="public.users" length="0"/>
+	</parameter>
+	</return-type>
+	<parameter name="provider">
+		<type name="text" length="0"/>
+	</parameter>
+	<parameter name="providerId">
+		<type name="text" length="0"/>
+	</parameter>
+	<definition><![CDATA[declare 
+	"accessToken" public.jwt_token;
+	account public.users;
+	"userProvider" text := provider;
+	"userProviderId" text := "providerId";
+	begin
+	execute format('
+	select *
+	from public.users
+	where
+		public.users.%I = %L; 
+	', "userProvider", "userProviderId") into account;
+
+
+	if account is null  then
+		return query select "accessToken", account;
+	
+	else
+	return query select (account."userId", account.role, extract(epoch from (now() + interval '3 months')))::public.jwt_token, account; 
+	end if;
+	end;]]></definition>
+</function>
+
+<function name="get_author_books"
+		window-func="false"
+		returns-setof="true"
+		behavior-type="CALLED ON NULL INPUT"
+		function-type="VOLATILE"
+		security-type="SECURITY INVOKER"
+		parallel-type="PARALLEL UNSAFE"
+		execution-cost="1"
+		row-amount="1000">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<language name="plpgsql"/>
+	<return-type>
+	<type name="public.mv_books_latest_chapters" length="0"/>
+	</return-type>
+	<parameter name="userId">
+		<type name="uuid" length="0"/>
+	</parameter>
+	<definition><![CDATA[
+	declare 
+		"authorId" uuid := "userId";
+	begin
+		return query select
+		b."bookId",
+		b.title,
+		b."updatedAt",
+		b."categoryId",
+		b."newestChapters"
+		from
+		public.mv_books_latest_chapters as b
+		natural join public.authors as a
+		where 
+			a."userId" = "authorId"
+		order by
+			b."updatedAt" desc;
+	end;]]></definition>
+</function>
+
+<view name="v_show_privileges" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1740" y="1680"/>
+	<reference>
+		<expression><![CDATA[  grantee,
+        string_agg(relname, ', ' ORDER BY relname) AS rel_names,
+        privileges]]></expression>
+	</reference>
+	<reference>
+		<expression><![CDATA[(
+        SELECT 
+            relname,
+            coalesce(nullif(s[1], ''), 'public') grantee, 
+            (SELECT string_agg(privilege, ', ' ORDER BY privilege ASC)
+                FROM (SELECT
+                    CASE ch
+                        WHEN 'r' THEN 'SELECT'
+                        WHEN 'w' THEN 'UPDATE'
+                        WHEN 'a' THEN 'INSERT'
+                        WHEN 'd' THEN 'DELETE'
+                        WHEN 'D' THEN 'TRUNCATE'
+                        WHEN 'x' THEN 'REFERENCES'
+                        WHEN 't' THEN 'TRIGGER'
+                    END AS privilege
+                    FROM regexp_split_to_table(s[2], '') ch
+                ) s
+            ) AS privileges
+        FROM 
+            pg_class
+            JOIN pg_namespace ON pg_namespace.oid = relnamespace
+            JOIN pg_roles ON pg_roles.oid = relowner,
+            unnest(coalesce(relacl::text[], format('{%s=arwdDxt/%s}', rolname, rolname)::text[])) AS acl,
+            regexp_split_to_array(acl, '=|/') AS s
+        WHERE nspname = 'public'
+    ) AS t]]></expression>
+	</reference>
+	<reference>
+		<expression><![CDATA[GROUP BY grantee, privileges
+    ORDER BY grantee, privileges, rel_names]]></expression>
+	</reference>
+	<expression type="select-exp">0</expression>
+	<expression type="from-exp">1</expression>
+	<expression type="end-exp">2</expression>
+</view>
+
+<view name="v_show_role" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1740" y="1760"/>
+	<reference>
+		<expression><![CDATA[
+      r.rolname, 
+      r.rolsuper, 
+      r.rolinherit,
+      r.rolcreaterole,
+      r.rolcreatedb,
+      r.rolcanlogin,
+      r.rolconnlimit, r.rolvaliduntil,
+  ARRAY(SELECT b.rolname
+        FROM pg_catalog.pg_auth_members m
+        JOIN pg_catalog.pg_roles b ON (m.roleid = b.oid)
+        WHERE m.member = r.oid) as memberof
+	, r.rolreplication
+	]]></expression>
+	</reference>
+	<reference>
+		<expression><![CDATA[pg_catalog.pg_roles r
+	]]></expression>
+	</reference>
+	<reference>
+		<expression><![CDATA[ORDER BY 1;]]></expression>
+	</reference>
+	<expression type="select-exp">0</expression>
+	<expression type="from-exp">1</expression>
+	<expression type="end-exp">2</expression>
+</view>
+
+<genericsql name="grant_access">
+	<definition><![CDATA[grant public_read to anonymous, reader, writer, postgraphile;
+	grant basic_write to reader, writer, postgraphile;]]></definition>
+	<object name="public_read" type="role" ref-name="grant_access_public_read"/>
+</genericsql>
+
+<function name="upsert_authors"
+		window-func="false"
+		returns-setof="false"
+		behavior-type="CALLED ON NULL INPUT"
+		function-type="VOLATILE"
+		security-type="SECURITY INVOKER"
+		parallel-type="PARALLEL UNSAFE"
+		execution-cost="1"
+		row-amount="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<language name="plpgsql"/>
+	<return-type>
+	<type name="uuid" length="0"/>
+	</return-type>
+	<parameter name="bookId">
+		<type name="uuid" length="0"/>
+	</parameter>
+	<parameter name="authorIds">
+		<type name="uuid" length="0" dimension="1"/>
+	</parameter>
+	<definition><![CDATA[DECLARE
+  	"varUserId" uuid;
+	"inputBookId" uuid := "bookId";
+	BEGIN
+		DELETE FROM authors b
+		WHERE 
+			b."bookId" = "inputBookId" and  
+			b."userId" <> any ("authorIds");
+			
+		FOREACH "varUserId" IN ARRAY "authorIds"
+		LOOP
+			insert into authors("bookId","userId")
+			values("inputBookId", "varUserId") on conflict do nothing;
+		END LOOP;
+		
+		RETURN "inputBookId";
+	end;]]></definition>
+</function>
+
+<function name="upsert_books_genres"
+		window-func="false"
+		returns-setof="false"
+		behavior-type="CALLED ON NULL INPUT"
+		function-type="VOLATILE"
+		security-type="SECURITY INVOKER"
+		parallel-type="PARALLEL UNSAFE"
+		execution-cost="1"
+		row-amount="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<language name="plpgsql"/>
+	<return-type>
+	<type name="uuid" length="0"/>
+	</return-type>
+	<parameter name="bookId">
+		<type name="uuid" length="0"/>
+	</parameter>
+	<parameter name="genreIds">
+		<type name="numeric" length="0" dimension="1"/>
+	</parameter>
+	<definition><![CDATA[DECLARE
+  	"varGenreId" numeric;
+	"inputBookId" uuid := "bookId";
+	BEGIN
+		DELETE FROM books_genres b
+		WHERE 
+			b."bookId" = "inputBookId" and  
+			b."genreId" <> any ("genreIds");
+			
+		FOREACH "varGenreId" IN ARRAY "genreIds"
+		LOOP
+			insert into books_genres("bookId","genreId")
+			values("inputBookId", "varGenreId") on conflict do nothing;
+		END LOOP;
+		
+		RETURN "inputBookId";
+
+	END;]]></definition>
+</function>
+
+<function name="new_book"
+		window-func="false"
+		returns-setof="false"
+		behavior-type="CALLED ON NULL INPUT"
+		function-type="VOLATILE"
+		security-type="SECURITY INVOKER"
+		parallel-type="PARALLEL UNSAFE"
+		execution-cost="1"
+		row-amount="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<language name="plpgsql"/>
+	<return-type>
+	<type name="uuid" length="0"/>
+	</return-type>
+	<parameter name="bookId">
+		<type name="uuid" length="0"/>
+	</parameter>
+	<parameter name="authorIds">
+		<type name="uuid" length="0" dimension="1"/>
+	</parameter>
+	<parameter name="genreIds">
+		<type name="numeric" length="0" dimension="1"/>
+	</parameter>
+	<parameter name="userId">
+		<type name="uuid" length="0"/>
+	</parameter>
+	<parameter name="categoryId">
+		<type name="numeric" length="0"/>
+	</parameter>
+	<parameter name="publisherId">
+		<type name="uuid" length="0"/>
+	</parameter>
+	<parameter name="title">
+		<type name="text" length="0"/>
+	</parameter>
+	<parameter name="completed">
+		<type name="boolean" length="0"/>
+	</parameter>
+	<parameter name="age">
+		<type name="numeric" length="0"/>
+	</parameter>
+	<parameter name="description">
+		<type name="text" length="0"/>
+	</parameter>
+	<parameter name="cover">
+		<type name="boolean" length="0"/>
+	</parameter>
+	<parameter name="type">
+		<type name="numeric" length="0"/>
+	</parameter>
+	<parameter name="published">
+		<type name="boolean" length="0"/>
+	</parameter>
+	<definition><![CDATA[declare 
+	--"bookId" uuid;
+	result1 uuid;
+	result2 uuid;
+
+	begin
+
+	INSERT INTO books (
+	"bookId",
+	"userId",
+	"categoryId",
+	"publisherId",
+	title,
+	completed,
+	published,
+	age,
+	description,
+	cover,
+	type,
+	"publishedAt"
+	)
+	VALUES (
+	"bookId",
+	"userId",
+	"categoryId",
+	"publisherId",
+	title,
+	completed,
+	published,
+	age,
+	description,
+	cover,
+	type,
+	case 
+	when "published" = true then now()
+		else null
+	end
+	); 
+	--RETURNING "bookId" INTO "bookId";
+
+
+	select * from upsert_books_genres("bookId", "genreIds" ::numeric[]) into result1;
+
+	select * from upsert_authors("bookId", "authorIds" ::uuid[]) into result2;
+
+	return "bookId";
+
+	end;]]></definition>
+</function>
+
+<view name="v_creations" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1080" y="1620"/>
+	<reference>
+		<expression><![CDATA[b.*,
+	count(*) filter (where c.published = true)::numeric as "publishedCount",
+	count(*) filter (where c.published = false)::numeric as "draftCount",
+	sum(v.count)::numeric as "viewCount"]]></expression>
+	</reference>
+	<reference>
+		<expression><![CDATA[books b
+	left join chapters c using ("bookId")
+	left join book_visits v using ("bookId")]]></expression>
+	</reference>
+	<reference>
+		<expression><![CDATA[group by 1]]></expression>
+	</reference>
+	<expression type="select-exp">0</expression>
+	<expression type="from-exp">1</expression>
+	<expression type="end-exp">2</expression>
+</view>
+
+<table name="settings" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1400" y="1600"/>
+	<column name="storage">
+		<type name="text" length="0"/>
+	</column>
+	<column name="version">
+		<type name="text" length="0"/>
+	</column>
+	<column name="settingId" not-null="true" default-value="uuid_generate_v4()">
+		<type name="uuid" length="0"/>
+	</column>
+	<constraint name="settings_pk" type="pk-constr" table="public.settings">
+		<columns names="settingId" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<view name="mv_settings" layers="0" materialized="true" collapse-mode="2" max-obj-count="1" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1080" y="1740"/>
+	<reference table="public.settings"/>
+	<expression type="select-exp">0</expression>
+	<expression type="from-exp">0</expression>
+</view>
+
+<relationship name="rel_mv_settings_settings" type="reltv" layers="0"
+	 src-table="public.mv_settings"
+	 dst-table="public.settings"
+	 src-required="false" dst-required="false">
+	<label ref-type="name-label">
+		<position x="5.00637" y="-0.480037"/>
+	</label>
+</relationship>
+
+<function name="edit_book"
+		window-func="false"
+		returns-setof="false"
+		behavior-type="CALLED ON NULL INPUT"
+		function-type="VOLATILE"
+		security-type="SECURITY INVOKER"
+		parallel-type="PARALLEL UNSAFE"
+		execution-cost="1"
+		row-amount="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<language name="plpgsql"/>
+	<return-type>
+	<type name="uuid" length="0"/>
+	</return-type>
+	<parameter name="bookId">
+		<type name="uuid" length="0"/>
+	</parameter>
+	<parameter name="authorIds">
+		<type name="uuid" length="0" dimension="1"/>
+	</parameter>
+	<parameter name="genreIds">
+		<type name="numeric" length="0" dimension="1"/>
+	</parameter>
+	<parameter name="userId">
+		<type name="uuid" length="0"/>
+	</parameter>
+	<parameter name="categoryId">
+		<type name="numeric" length="0"/>
+	</parameter>
+	<parameter name="publisherId">
+		<type name="uuid" length="0"/>
+	</parameter>
+	<parameter name="title">
+		<type name="text" length="0"/>
+	</parameter>
+	<parameter name="completed">
+		<type name="boolean" length="0"/>
+	</parameter>
+	<parameter name="age">
+		<type name="numeric" length="0"/>
+	</parameter>
+	<parameter name="description">
+		<type name="text" length="0"/>
+	</parameter>
+	<parameter name="type">
+		<type name="numeric" length="0"/>
+	</parameter>
+	<parameter name="published">
+		<type name="boolean" length="0"/>
+	</parameter>
+	<parameter name="cover">
+		<type name="boolean" length="0"/>
+	</parameter>
+	<definition><![CDATA[declare 
+
+	"ibookId" uuid := "bookId";
+	"iuserId" uuid := "userId";
+	"ipublisherId" uuid := "publisherId";
+	"icategoryId" numeric := "categoryId";
+	iage numeric := age;
+	itype numeric := type;
+	ititle text := title;
+	idescription text := description;
+	icompleted boolean := completed;
+	ipublished boolean := published;
+	icover boolean := cover;
+	result1 uuid;
+	result2 uuid;
+	begin
+
+	update public.books
+	set 
+	"userId" = "iuserId",
+	"categoryId" = "icategoryId",
+	"publisherId" = "ipublisherId",
+	age = iage,
+	type = itype,
+	title = ititle,
+	description = idescription,
+	completed = icompleted,
+	published = ipublished ,
+	cover = icover ,
+	"publishedAt" =  case 
+			when "ipublished" = true then now()
+			else null
+			end
+	where books."bookId" = "ibookId";
+
+
+	select * from upsert_books_genres("bookId", "genreIds" ::numeric[]) into result1;
+
+	select * from upsert_authors("bookId", "authorIds" ::uuid[]) into result2;
+
+	return "ibookId";
+
+	end;]]></definition>
+</function>
+
+<function name="generate_book_id"
+		window-func="false"
+		returns-setof="false"
+		behavior-type="CALLED ON NULL INPUT"
+		function-type="VOLATILE"
+		security-type="SECURITY INVOKER"
+		parallel-type="PARALLEL UNSAFE"
+		execution-cost="1"
+		row-amount="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<language name="plpgsql"/>
+	<return-type>
+	<type name="uuid" length="0"/>
+	</return-type>
+	<definition><![CDATA[begin 
+return uuid_generate_v4();
+end;]]></definition>
+</function>
+
+<function name="reset_password"
+		window-func="false"
+		returns-setof="false"
+		behavior-type="CALLED ON NULL INPUT"
+		function-type="VOLATILE"
+		security-type="SECURITY INVOKER"
+		parallel-type="PARALLEL UNSAFE"
+		execution-cost="1"
+		row-amount="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<language name="plpgsql"/>
+	<return-type>
+	<type name="uuid" length="0"/>
+	</return-type>
+	<parameter name="userId">
+		<type name="uuid" length="0"/>
+	</parameter>
+	<parameter name="password">
+		<type name="text" length="0"/>
+	</parameter>
+	<definition><![CDATA[begin
+	insert into private.users("userId", "passwordHash") values(
+				"userId",
+				crypt(password, gen_salt('bf'))
+			)
+	ON CONFLICT ON CONSTRAINT user_pk DO 
+	UPDATE SET "passwordHash" = crypt(password, gen_salt('bf'));
+	
+	return "userId";
+	end;]]></definition>
+</function>
+
+<trigger name="book_updated_trigger" firing-type="BEFORE" per-line="true" constraint="false"
+	 ins-event="true" del-event="false" upd-event="true" trunc-event="false"
+	 table="public.books">
+		<function signature="public.set_updated_at()"/>
+</trigger>
+
+<trigger name="users_update_trigger" firing-type="BEFORE" per-line="true" constraint="false"
+	 ins-event="true" del-event="false" upd-event="true" trunc-event="false"
+	 table="public.users">
+		<function signature="public.set_updated_at()"/>
+</trigger>
+
+<function name="publish_book"
+		window-func="false"
+		returns-setof="false"
+		behavior-type="CALLED ON NULL INPUT"
+		function-type="VOLATILE"
+		security-type="SECURITY INVOKER"
+		parallel-type="PARALLEL UNSAFE"
+		execution-cost="1"
+		row-amount="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<language name="plpgsql"/>
+	<return-type>
+	<type name="uuid" length="0"/>
+	</return-type>
+	<parameter name="bookId">
+		<type name="uuid" length="0"/>
+	</parameter>
+	<definition><![CDATA[declare
+	"ibookId" uuid := "bookId";
+
+	begin
+	update public.books
+	set 
+	published = true ,
+	"publishedAt" =  now()
+	where books."bookId" = "ibookId";
+	return "bookId";
+	end;]]></definition>
+</function>
+
+<function name="refresh_token"
+		window-func="false"
+		returns-setof="false"
+		behavior-type="CALLED ON NULL INPUT"
+		function-type="VOLATILE"
+		security-type="SECURITY INVOKER"
+		parallel-type="PARALLEL UNSAFE"
+		execution-cost="1"
+		row-amount="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<language name="plpgsql"/>
+	<return-type>
+	<parameter name="accessToken">
+		<type name="public.jwt_token" length="0"/>
+	</parameter>
+	<parameter name="user">
+		<type name="public.users" length="0"/>
+	</parameter>
+	</return-type>
+	<definition><![CDATA[declare
+"accessToken" public.jwt_token;
+"account" public.users;
+begin
+
+	select * into "account"
+	from public.users
+	where  "userId" = nullif(current_setting('jwt.claims.userId', true), '')::uuid;
+
+	if "account"  is null then
+		return query select "accessToken", "account";
+		else 
+		"accessToken" := (account."userId", account.role, extract(epoch from (now() + interval '3 months')))::public.jwt_token;
+		return query select "accessToken", "account";
+		end if;
+
+end;]]></definition>
+</function>
+
+<constraint name="books_userId_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="CASCADE" ref-table="public.users" table="public.books">
+	<columns names="userId" ref-type="src-columns"/>
+	<columns names="userId" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="books_category_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="CASCADE" ref-table="public.categories" table="public.books">
+	<columns names="categoryId" ref-type="src-columns"/>
+	<columns names="categoryId" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="books_publisherId_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="CASCADE" ref-table="public.publishers" table="public.books">
+	<columns names="publisherId" ref-type="src-columns"/>
+	<columns names="publisherId" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="public_users_userId_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="CASCADE" ref-table="public.users" table="private.users">
+	<columns names="userId" ref-type="src-columns"/>
+	<columns names="userId" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="chapters_bookId_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="CASCADE" ref-table="public.books" table="public.chapters">
+	<columns names="bookId" ref-type="src-columns"/>
+	<columns names="bookId" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="books_genres_bookId_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="CASCADE" ref-table="public.books" table="public.books_genres">
+	<columns names="bookId" ref-type="src-columns"/>
+	<columns names="bookId" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="books_genres_genreId_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="CASCADE" ref-table="public.genres" table="public.books_genres">
+	<columns names="genreId" ref-type="src-columns"/>
+	<columns names="genreId" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="book_visits_bookId_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="CASCADE" ref-table="public.books" table="public.book_visits">
+	<columns names="bookId" ref-type="src-columns"/>
+	<columns names="bookId" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="book_visits_chapterId_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="CASCADE" ref-table="public.chapters" table="public.book_visits">
+	<columns names="chapterId" ref-type="src-columns"/>
+	<columns names="chapterId" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="books_visits_userId_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="CASCADE" ref-table="public.users" table="public.book_visits">
+	<columns names="userId" ref-type="src-columns"/>
+	<columns names="userId" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="books_by_users_bookId_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="CASCADE" ref-table="public.books" table="public.authors">
+	<columns names="bookId" ref-type="src-columns"/>
+	<columns names="bookId" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="books_by_users_userId_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="CASCADE" ref-table="public.users" table="public.authors">
+	<columns names="userId" ref-type="src-columns"/>
+	<columns names="userId" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="personal_userId_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.users" table="public.personals">
+	<columns names="userId" ref-type="src-columns"/>
+	<columns names="userId" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="contents_chapterId_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="CASCADE" del-action="CASCADE" ref-table="public.chapters" table="public.contents">
+	<columns names="chapterId" ref-type="src-columns"/>
+	<columns names="chapterId" ref-type="dst-columns"/>
+</constraint>
+
+<relationship name="rel_books_users" type="relfk" layers="0"
+	 src-table="public.books"
+	 dst-table="public.users" reference-fk="books_userId_fk"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_books_categories" type="relfk" layers="0"
+	 src-table="public.books"
+	 dst-table="public.categories" reference-fk="books_category_fk"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_books_publishers" type="relfk" layers="0"
+	 src-table="public.books"
+	 dst-table="public.publishers" reference-fk="books_publisherId_fk"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_users_users" type="relfk" layers="0"
+	 src-table="private.users"
+	 dst-table="public.users" reference-fk="public_users_userId_fk"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_chapters_books" type="relfk" layers="0"
+	 src-table="public.chapters"
+	 dst-table="public.books" reference-fk="chapters_bookId_fk"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_books_genres_books" type="relfk" layers="0"
+	 src-table="public.books_genres"
+	 dst-table="public.books" reference-fk="books_genres_bookId_fk"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_books_genres_genres" type="relfk" layers="0"
+	 src-table="public.books_genres"
+	 dst-table="public.genres" reference-fk="books_genres_genreId_fk"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_book_visits_books" type="relfk" layers="0"
+	 src-table="public.book_visits"
+	 dst-table="public.books" reference-fk="book_visits_bookId_fk"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_book_visits_chapters" type="relfk" layers="0"
+	 src-table="public.book_visits"
+	 dst-table="public.chapters" reference-fk="book_visits_chapterId_fk"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_book_visits_users" type="relfk" layers="0"
+	 src-table="public.book_visits"
+	 dst-table="public.users" reference-fk="books_visits_userId_fk"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_authors_books" type="relfk" layers="0"
+	 src-table="public.authors"
+	 dst-table="public.books" reference-fk="books_by_users_bookId_fk"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_authors_users" type="relfk" layers="0"
+	 src-table="public.authors"
+	 dst-table="public.users" reference-fk="books_by_users_userId_fk"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_contents_chapters" type="relfk" layers="0"
+	 src-table="public.contents"
+	 dst-table="public.chapters" reference-fk="contents_chapterId_fk"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_personals_users" type="relfk" layers="0"
+	 src-table="public.personals"
+	 dst-table="public.users" reference-fk="personal_userId_fk"
+	 src-required="false" dst-required="true"/>
+
+<permission>
+	<object name="public.mv_most_view_books" type="view"/>
+	<roles names="public_read"/>
+	<privileges select="grant-op"/>
+</permission>
+<permission>
+	<object name="public.mv_books_latest_chapters" type="view"/>
+	<roles names="public_read"/>
+	<privileges select="grant-op"/>
+</permission>
+<permission>
+	<object name="public.v_random_books" type="view"/>
+	<roles names="public_read"/>
+	<privileges select="grant-op"/>
+</permission>
+<permission>
+	<object name="public.genres" type="table"/>
+	<roles names="public_read"/>
+	<privileges select="grant-op"/>
+</permission>
+<permission>
+	<object name="public.categories" type="table"/>
+	<roles names="public_read"/>
+	<privileges select="grant-op"/>
+</permission>
+<permission>
+	<object name="public.publishers" type="table"/>
+	<roles names="public_read"/>
+	<privileges select="grant-op"/>
+</permission>
+<permission>
+	<object name="public.chapters" type="table"/>
+	<roles names="public_read"/>
+	<privileges select="grant-op"/>
+</permission>
+<permission>
+	<object name="public.contents" type="table"/>
+	<roles names="public_read"/>
+	<privileges select="grant-op"/>
+</permission>
+<permission>
+	<object name="public.authors" type="table"/>
+	<roles names="public_read"/>
+	<privileges select="grant-op"/>
+</permission>
+<permission>
+	<object name="public.book_visits" type="table"/>
+	<roles names="public_read"/>
+	<privileges select="grant-op"/>
+</permission>
+<permission>
+	<object name="public.users" type="table"/>
+	<roles names="reader,writer"/>
+	<privileges update="true"/>
+</permission>
+<permission>
+	<object name="public.books_genres" type="table"/>
+	<roles names="basic_write"/>
+	<privileges delete="true" insert="true" update="true"/>
+</permission>
+<permission>
+	<object name="public.chapters" type="table"/>
+	<roles names="basic_write"/>
+	<privileges delete="true" insert="true" update="true"/>
+</permission>
+<permission>
+	<object name="public.contents" type="table"/>
+	<roles names="basic_write"/>
+	<privileges delete="true" insert="true" update="true"/>
+</permission>
+<permission>
+	<object name="public.authors" type="table"/>
+	<roles names="basic_write"/>
+	<privileges delete="true" insert="true" update="true"/>
+</permission>
+<permission>
+	<object name="private.users" type="table"/>
+	<roles names="public_read"/>
+	<privileges select="true"/>
+</permission>
+<permission>
+	<object name="public.book_visits" type="table"/>
+	<roles names="basic_write"/>
+	<privileges insert="true" update="true"/>
+</permission>
+<permission>
+	<object name="public.v_creations" type="view"/>
+	<roles names="public_read"/>
+	<privileges select="grant-op"/>
+</permission>
+<permission>
+	<object name="public.settings" type="table"/>
+	<roles names="public_read"/>
+	<privileges select="grant-op"/>
+</permission>
+<permission>
+	<object name="public.mv_settings" type="view"/>
+	<roles names="public_read"/>
+	<privileges select="grant-op"/>
+</permission>
+<permission>
+	<object name="public.users" type="table"/>
+	<roles names="basic_write"/>
+	<privileges insert="true" update="true"/>
+</permission>
+<permission>
+	<object name="public.books" type="table"/>
+	<roles names="basic_write"/>
+	<privileges insert="true" update="true"/>
+</permission>
+<permission>
+	<object name="public.books" type="table"/>
+	<roles names="public_read"/>
+	<privileges select="grant-op"/>
+</permission>
+<permission>
+	<object name="public.users" type="table"/>
+	<roles names="public_read"/>
+	<privileges select="grant-op"/>
+</permission>
+<permission>
+	<object name="public.books_genres" type="table"/>
+	<roles names="public_read"/>
+	<privileges select="grant-op"/>
+</permission>
+<permission>
+	<object name="public.personals" type="table"/>
+	<roles names="public_read"/>
+	<privileges select="grant-op"/>
+</permission>
+<permission>
+	<object name="public.personals" type="table"/>
+	<roles names="basic_write"/>
+	<privileges delete="grant-op" insert="grant-op" update="grant-op"/>
+</permission>
+</dbmodel>

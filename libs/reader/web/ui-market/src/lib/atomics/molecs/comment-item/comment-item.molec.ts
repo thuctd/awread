@@ -14,7 +14,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
 })
 export class CommentItemMolec implements OnInit {
   @Input() isMenuOpen = false;
-  @Input() src = '/global-assets/images/avatar-mrmrs.webp';
+  @Input() src = '/global-assets/images/logoAwread.webp';
   @Input() comment = {
     userName: 'Lê Ngọc Quý',
     content: 'Hay quá bạn ơi Hay quá bạn ơi Hay quá bạn ơi Hay quá bạn ơi',

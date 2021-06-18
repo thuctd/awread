@@ -13,21 +13,49 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InformationAppOrgan implements OnInit {
-  @Input() facebook = {
-    title: 'Facebook',
-    line1: 'facebook.com/awreadbook',
-    line2: 'facebook.com/groups/awread',
-    link1: 'https://www.facebook.com/awread.vn',
-    link2: 'https://www.facebook.com/awread.vn',
-  };
+  @Input() info = [
+    {
+      title: 'Email',
+      line1: {
+        text: 'Awread Book',
+        class: 'text-gray-700',
+      },
+      line2: 'info@awread.vn',
+    },
+    {
+      title: 'Facebook',
+      line1: {
+        text: 'https://www.facebook.com/awread.vn',
+        class: '',
+      },
+      line2: '',
+    },
+    {
+      title: 'Địa chỉ',
+      line1: {
+        text: 'Đường Phan Đình Giót, Thị trấn Mộc Châu, Mộc Châu, Sơn La',
+        class: '',
+      },
+      line2: 'Tel: 0349 335 484',
+    },
+  ];
 
-  @Input() address = {
-    title: 'Địa chỉ',
-    line1: 'Số 00, Đường 00, 000',
-    line2: 'Tel: 0326988916',
-  };
+  @Input() social = [
+    {
+      provider: 'facebook',
+      href: 'https://www.facebook.com/awread.vn',
+    },
+    {
+      provider: 'zalo',
+      href: 'http://zalo.me/1839376602979178212?src=qr',
+    },
+    {
+      provider: 'instagram',
+      href: 'https://www.instagram.com/awreadbook/',
+    },
+  ];
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }

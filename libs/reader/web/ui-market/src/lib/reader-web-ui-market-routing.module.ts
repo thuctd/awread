@@ -64,8 +64,12 @@ const routes: Routes = [
             path: 'introduction',
             loadChildren: () =>
               window.innerWidth <= 768 && window?.haveMobile
-                ? import('./pages/introduction-mobile/introduction-mobile.module').then((m) => m.IntroductionMobileModule)
-                : import('./pages/introduction-desktop/introduction-desktop.module').then((m) => m.IntroductionDesktopModule),
+                ? import('./pages/introduction-mobile/introduction-mobile.module').then(
+                  (m) => m.IntroductionMobileModule
+                )
+                : import('./pages/introduction-desktop/introduction-desktop.module').then(
+                  (m) => m.IntroductionDesktopModule
+                ),
           },
 
           {
@@ -88,14 +92,20 @@ const routes: Routes = [
             loadChildren: () =>
               window.innerWidth <= 768 && window?.haveMobile
                 ? import('./pages/news-detail-mobile/news-detail-mobile.module').then((m) => m.NewsDetailMobileModule)
-                : import('./pages/news-detail-desktop/news-detail-desktop.module').then((m) => m.NewsDetailDesktopModule),
+                : import('./pages/news-detail-desktop/news-detail-desktop.module').then(
+                  (m) => m.NewsDetailDesktopModule
+                ),
           },
           {
-            path: 'top-books',
+            path: 'index/:booktype',
             loadChildren: () =>
               window.innerWidth <= 768 && window?.haveMobile
-                ? import('./pages/top-books-mobile/top-books-mobile.module').then((m) => m.TopBooksMobileModule)
-                : import('./pages/top-books-desktop/top-books-desktop.module').then((m) => m.TopBooksDesktopModule),
+                ? import('./pages/latest-books-mobile/latest-books-mobile.module').then(
+                  (m) => m.LatestBooksMobileModule
+                )
+                : import('./pages/latest-books-desktop/latest-books-desktop.module').then(
+                  (m) => m.LatestBooksDesktopModule
+                ),
           },
           {
             path: '',

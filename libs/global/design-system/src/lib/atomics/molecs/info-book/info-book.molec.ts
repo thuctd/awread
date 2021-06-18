@@ -17,6 +17,7 @@ export class InfoBookMolec implements OnInit {
     ui: {
       isAuthor: false,
       isRating: false,
+      isStatus: false,
       isIcon: false,
       isDate: false,
     },
@@ -35,12 +36,12 @@ export class InfoBookMolec implements OnInit {
     },
   ];
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   orderByPosition(a, b) {
     // console.log('a, b', a, b);
-    return b.value.position > a.value.position ? -1 : (a.value.position > b.value.position ? 1 : 0);
+    return b.value.position > a.value.position ? -1 : a.value.position > b.value.position ? 1 : 0;
   }
 }

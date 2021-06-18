@@ -1,6 +1,6 @@
 <div class="bg-white relative w-full shadow-md p-2">
   <wrt-detail-tab-head [tabsHead]="tabsHead">
-    <cr-submit-btn class="mx-2" (btnClicked)="detailBookEvent.emit({ type: 'cancel'})" [active]="false" [submitText]="'Hủy bỏ'"></cr-submit-btn>
+    <cr-submit-btn class="mx-2" (btnClicked)="detailBookEvent.emit({ type: 'cancel'})" [active]="false" [submitText]="'Quay lại'"></cr-submit-btn>
     <cr-submit-btn class="mx-2" (btnClicked)="detailBookEvent.emit({ type: 'save'})" [active]="true" [submitText]="'Lưu'">
     </cr-submit-btn>
   </wrt-detail-tab-head>

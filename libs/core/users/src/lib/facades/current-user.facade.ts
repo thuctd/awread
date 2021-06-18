@@ -1,28 +1,38 @@
 import { Injectable } from '@angular/core';
 import { CurrentUserGear } from '../gears';
-import { CurrentUserQuery } from '../states/current-user';
+import { CurrentUserQuery, CurrentUserStore } from '../states/current-user';
 
 @Injectable({ providedIn: 'root' })
 export class CurrentUserFacade {
   currentUser$ = this.currentUserQuery.select();
-  constructor(
-    private currentUserGear: CurrentUserGear,
-    public currentUserQuery: CurrentUserQuery
-  ) { }
+
+  constructor(private currentUserGear: CurrentUserGear, public currentUserQuery: CurrentUserQuery, private currentUserStore: CurrentUserStore) { }
 
   getCurrentUser() {
     return this.currentUserGear.getCurrentUser();
   }
 
-  updateCurrentUser(user) {
-    return this.currentUserGear.update(user);
+  updateUser(user) {
+    return this.currentUserGear.updateUser(user);
   }
 
-  updateName(user) {
-    return this.currentUserGear.updateName(user);
+  updatePersonal(user) {
+    return this.currentUserGear.updatePersonal(user);
   }
 
   getUserId() {
     return this.currentUserQuery.getUserId();
+  }
+
+  getRegisterCredential() {
+    return this.currentUserQuery.getValue().registerCredential;
+  }
+
+  setSocialCredential(value?) {
+    this.currentUserStore.update({ registerCredential: value })
+  }
+
+  reset() {
+    this.currentUserStore.reset();
   }
 }

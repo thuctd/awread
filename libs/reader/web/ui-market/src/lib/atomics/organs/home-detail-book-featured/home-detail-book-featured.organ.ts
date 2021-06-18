@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'home-detail-book-featured',
@@ -13,7 +13,10 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeDetailBookFeaturedOrgan implements OnInit {
-  @Input() titlePage = 'Truyện nổi bật';
+  @Input() page = {
+    name: 'Truyện nổi bật',
+    href: ['/index', 'feature-books'],
+  };
   @Input() books = [];
   @Input() displayUI = {
     ui: {
@@ -27,8 +30,11 @@ export class HomeDetailBookFeaturedOrgan implements OnInit {
       sizeBtn: true,
     },
   };
+  @Input() totalBook;
+  @Input() loading;
+  @Output() pageChange = new EventEmitter();
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

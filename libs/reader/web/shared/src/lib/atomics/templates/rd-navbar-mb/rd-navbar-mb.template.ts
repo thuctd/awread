@@ -1,5 +1,12 @@
 import { FormControl } from '@angular/forms';
-import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  Input,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 
 @Component({
   selector: 'template-rd-navbar-mb',
@@ -20,18 +27,48 @@ export class RdNavbarMbTemplate implements OnInit {
   @Input() user = {};
   @Input() isLogin;
   @Input() isSearch = false;
+  @Input() isMenuNoti = false;
   @Input() searchControl = new FormControl('');
   @Output() eventSearch = new EventEmitter();
+  @Output() eventSearchMb = new EventEmitter();
   @Output() logoutEvent = new EventEmitter();
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
-  displayMenu() {
+  display(display) {
+    switch (display) {
+      case 'search':
+        this.displaySearch();
+        break;
+      case 'menuNoti':
+        this.displayMenuNoti();
+        break;
+      default:
+        console.warn('', display);
+        break;
+    }
+  }
+
+  displaySearch() {
+    if (this.isMenuNoti == true) {
+      return;
+    }
     this.isSearch = !this.isSearch;
   }
 
-  onClick() {
+  displayMenuNoti() {
+    if (this.isSearch == true) {
+      return;
+    }
+    this.isMenuNoti = !this.isMenuNoti;
+  }
+
+  closeSearch() {
     this.isSearch = false;
+  }
+
+  closeMenuNoti() {
+    this.isMenuNoti = false;
   }
 }

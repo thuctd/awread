@@ -1,4 +1,4 @@
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
 
@@ -27,33 +27,28 @@ export class AuthorApi {
     return this.apollo
       .query({
         query: gql`
-          query AuthorDetail($userId: UUID) {
-            allAuthors(condition: { userId: $userId }) {
-              nodes {
-                userByUserId {
-                  userId
-                  name
-                  age
-                  apple
-                  avatar
-                  bio
-                  code
-                  createdAt
-                  dob
-                  email
-                  facebook
-                  facebookAddress
-                  firstname
-                  gender
-                  lastname
-                  google
-                  middlename
-                  phone
-                  username
-                  websiteAddress
-                }
-                userId
-              }
+          query AuthorDetail($userId: UUID!) {
+            userByUserId(userId: $userId) {
+              username
+              email
+              phone
+              name
+              avatar
+              facebook
+              google
+              apple
+            }
+            personalByUserId(userId: $userId) {
+              firstname
+              middlename
+              lastname
+              dob
+              bio
+              websiteAddress
+              facebookAddress
+              zaloAddress
+              age
+              gender
             }
           }
         `,
@@ -61,6 +56,14 @@ export class AuthorApi {
           userId,
         },
       })
-      .pipe(map((res) => res?.['data']?.['allAuthors']?.['nodes']));
+      .pipe(
+        tap(res => console.log('res', res)),
+        map((res) => ({
+          ...res?.['data']?.['userByUserId'],
+          ...res?.['data']?.['personalByUserId'],
+          userId
+        })),
+        tap(res => console.log('res', res)),
+      );
   }
 }

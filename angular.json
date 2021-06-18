@@ -2261,6 +2261,28 @@
           }
         }
       }
+    },
+    "global-tools": {
+      "projectType": "library",
+      "root": "libs/global/tools",
+      "sourceRoot": "libs/global/tools/src",
+      "prefix": "awread",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/global/tools/src/**/*.ts", "libs/global/tools/src/**/*.html"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/global/tools"],
+          "options": {
+            "jestConfig": "libs/global/tools/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   },
   "cli": {

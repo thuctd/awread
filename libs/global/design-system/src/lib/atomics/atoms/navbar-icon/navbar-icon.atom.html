@@ -1,9 +1,9 @@
-<div [routerLinkActive]="active" class="relative w-32">
-  <div class="w-1.5 bg-green-primary h-full active-block absolute hidden rounded-r-3xl ml003"></div>
-  <div class="flex justify-center cursor-pointer focus:outline-none relative" [routerLink]="linkTo">
-    <img [routerLinkActive]="active" [src]="iconUrl" [alt]="linkName" class=" icon1 focus:outline-none py-10">
-    <div class="image-active absolute inset-0 opacity-0 flex justify-center ">
-      <img [routerLinkActive]="active" [src]="iconUrl2" [alt]="linkName" class="icon2 focus:outline-none py-10 ">
+<a class="block" [routerLinkActiveOptions]="{ exact: linkTo == '/' ? true : false }" routerLinkActive="active" #rla="routerLinkActive">
+  <!-- <pre> {{ rla.isActive }} </pre> -->
+  <div class="relative w-32">
+    <div class="w-1.5 bg-green-primary h-full active-block absolute hidden rounded-r-3xl ml003"></div>
+    <div class="flex justify-center cursor-pointer focus:outline-none relative" [routerLink]="linkTo">
+      <img [src]="rla.isActive ? iconUrl2 : iconUrl" [alt]="linkName" class="icon2 focus:outline-none py-10 ">
     </div>
   </div>
-</div>
+</a>

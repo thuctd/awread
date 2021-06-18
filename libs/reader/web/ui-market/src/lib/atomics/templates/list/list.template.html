@@ -21,10 +21,14 @@
       </div>
     </div>
 
-    <div class="col-span-2 xl:col-span-8 lg:col-span-9 md:pr-8">
+    <div class="col-span-2 xl:col-span-8 lg:col-span-9 md:pr-8 xl:pr-2">
       <div class="grid grid-cols-12 gap-2 lg:gap-4 xl:gap-6 border-b border-gray-300">
+        <div class="col-span-2 md:col-span-3"
+          [ngClass]="selectedTabCategoryId === tabAll.categoryId ? 'border-b-2 border-green-primary text-green-primary' : 'text-gray-text'">
+          <molec-tab-categories (switchTabEvent)="switchTabEvent.emit($event)" [tab]="tabAll"></molec-tab-categories>
+        </div>
         <ng-container *ngFor="let tab of tabsHead">
-          <div class="col-span-2 md:col-span-4"
+          <div class="col-span-2 md:col-span-3"
             [ngClass]="selectedTabCategoryId === tab.categoryId ? 'border-b-2 border-green-primary text-green-primary' : 'text-gray-text'">
             <molec-tab-categories (switchTabEvent)="switchTabEvent.emit($event)" [tab]="tab">
             </molec-tab-categories>
@@ -32,13 +36,18 @@
         </ng-container>
       </div>
       <div [ngClass]="filterbook === false ? 'pt-12' : 'pt-28'">
-        <list-detail-long-book [loading]="loading" (moreEvent)="moreBooks.emit($event)" [longbooks]="categoryBooks" [display]="display" [categoryId]="selectedTabCategoryId">
-        </list-detail-long-book>
+        <div class="flex justify-center items-center pt-48" *ngIf="loading;else loaded">
+          <awread-loading></awread-loading>
+        </div>
+        <ng-template #loaded>
+          <list-detail-long-book (moreEvent)="moreBooks.emit($event)" [longbooks]="categoryBooks" [display]="display" [categoryId]="selectedTabCategoryId">
+          </list-detail-long-book>
+        </ng-template>
       </div>
     </div>
     <div class="lg:hidden xl:block lg:col-span-1"></div>
     <div class="col-span-2 md:col-span-3">
-      <list-detail-top-book (moreEvent)="nativeTopBook.emit($event)" [ngClass]="filterbook === false ? 'pt-12' : 'pt-32'" [books]="topBookList">
+      <list-detail-top-book (moreEvent)="filterTopBooks()" [ngClass]="filterbook === false ? 'pt-12' : 'pt-32'" [books]="topBookList">
       </list-detail-top-book>
     </div>
   </div>

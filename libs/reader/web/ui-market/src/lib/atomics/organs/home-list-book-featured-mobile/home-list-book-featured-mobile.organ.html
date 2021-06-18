@@ -1,20 +1,22 @@
-<section class="w-full mx-auto">
+<section class="w-full mx-auto relative">
   <div class="mb-4 px-2.5">
-    <atom-title [title]="titlePage" class="uppercase"></atom-title>
+    <atom-title-page-link [title]="page.name" [href]="page.href" class="uppercase col-span-6"></atom-title-page-link>
   </div>
-  <div class="w-full leanding-normal tracking-wide px-1 relative flex justify-center">
-    <div class="container w-full overflow-hidden">
-      <owl-carousel-o [options]="customOptions" class="carousel1">
-        <ng-container>
-          <ng-template carouselSlide *ngFor="let book of books">
-            <div class="mx-2 sm:mx-5 mb-4">
-              <atom-img-m [size]="'s'" [bookId]="book.bookId" [srcImg]="book | coverSize: 's'"></atom-img-m>
-              <!-- <molec-home-info-book-update [book]="book"></molec-home-info-book-update> -->
-              <molec-info-book [book]="book" [displayUI]="displayUI"></molec-info-book>
-            </div>
-          </ng-template>
-        </ng-container>
-      </owl-carousel-o>
+  <div class="flex justify-center items-center" *ngIf="loading;else loaded">
+    <awread-loading></awread-loading>
+  </div>
+  <ng-template #loaded>
+    <div *ngIf="currentPage > 1" (click)="onClickPage(currentPage - 1)" class="cursor-pointer absolute top-60 -left-2 z-40">
+      <fa-icon class="text-gray-text text-sm md:text-base" [icon]="arrowLeftIcon"></fa-icon>
     </div>
-  </div>
+    <div class="grid grid-cols-12 place-items-center">
+      <div *ngFor="let book of books" class="col-span-4 mx-auto py-2">
+        <atom-img-m [size]="'s'" [bookId]="book.bookId" [srcImg]="book | coverSize: 's'"></atom-img-m>
+        <molec-info-book class="w-27" [book]="book" [displayUI]="displayUI"></molec-info-book>
+      </div>
+    </div>
+    <div *ngIf="hasNextPage" (click)="onClickPage(currentPage + 1)" class="cursor-pointer absolute top-60 -right-2">
+      <fa-icon class="text-gray-text text-sm md:text-base" [icon]="arrowRightIcon"></fa-icon>
+    </div>
+  </ng-template>
 </section>

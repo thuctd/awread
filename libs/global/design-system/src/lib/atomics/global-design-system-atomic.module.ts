@@ -136,6 +136,12 @@ import { MatSelectModule } from '@angular/material/select';
 import { CoreUsersModule } from '@awread/core/users';
 import { CoreBooksModule } from '@awread/core/books';
 import { RdNewsShareExperienceItemAtom } from './atoms/rd-news-share-experience-item/rd-news-share-experience-item.atom';
+import { StatusBookAtom } from './atoms/status-book/status-book.atom';
+import { ListInfoProseMolec } from './molecs/list-info-prose/list-info-prose.molec';
+import { TitlePageLinkAtom } from './atoms/title-page-link/title-page-link.atom';
+import { WrtRememberForgotMolec } from './molecs/wrt-remember-forgot/wrt-remember-forgot.molec';
+import { SelectProfileAtom } from './atoms/select-profile/select-profile.atom';
+import { SelectMultipleAtom } from './atoms/select-multiple/select-multiple.atom';
 @NgModule({
   imports: [
     CommonModule,
@@ -147,14 +153,14 @@ import { RdNewsShareExperienceItemAtom } from './atoms/rd-news-share-experience-
     MatNativeDateModule,
     MatInputModule,
     NgSelectModule,
-    QuillModule.forRoot(),
+    QuillModule,
     DefaultCoverModule,
     CloseOnOutsideModule,
     NgImageSliderModule,
     ImageCropperModule,
     MatSelectModule,
     CoreUsersModule,
-    CoreBooksModule
+    CoreBooksModule,
   ],
   exports: [
     CoreUsersModule,
@@ -293,6 +299,12 @@ import { RdNewsShareExperienceItemAtom } from './atoms/rd-news-share-experience-
     RdIconTextItemAtom,
     RdTextLinkMenuMbAtom,
     RdNewsShareExperienceItemAtom,
+    StatusBookAtom,
+    ListInfoProseMolec,
+    TitlePageLinkAtom,
+    WrtRememberForgotMolec,
+    SelectProfileAtom,
+    SelectMultipleAtom,
   ],
   declarations: [
     notReadyDirective,
@@ -417,6 +429,12 @@ import { RdNewsShareExperienceItemAtom } from './atoms/rd-news-share-experience-
     RdIconTextItemAtom,
     RdTextLinkMenuMbAtom,
     RdNewsShareExperienceItemAtom,
+    StatusBookAtom,
+    ListInfoProseMolec,
+    TitlePageLinkAtom,
+    WrtRememberForgotMolec,
+    SelectProfileAtom,
+    SelectMultipleAtom,
   ],
 })
-export class GlobalDesignSystemAtomicModule { }
+export class GlobalDesignSystemAtomicModule {}

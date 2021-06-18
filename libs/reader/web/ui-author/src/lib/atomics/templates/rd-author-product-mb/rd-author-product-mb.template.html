@@ -1,4 +1,5 @@
 <section class="px-4">
   <atom-title [isUppercase]="false" [title]="'Tác phẩm'" class="border-b py-1.5 border-gray-400"></atom-title>
-  <molec-rd-author-list-product-mb [books]="books" class="py-4" [class]="'text-sm text-green-primary font-bold'"></molec-rd-author-list-product-mb>
+  <molec-rd-author-list-product-mb (moreBooks)="moreBooks.emit($event)" [books]="books" class="py-4" [class]="'hidden'">
+  </molec-rd-author-list-product-mb>
 </section>

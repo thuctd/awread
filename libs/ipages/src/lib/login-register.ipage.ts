@@ -2,8 +2,9 @@ import { FormGroup, Validators } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { Directive, Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthFacade } from '@awread/core/users';
+import { AuthFacade, CurrentUserFacade } from '@awread/core/users';
 import { SnackbarService } from '@awread/global/packages';
+import { MatDialog } from '@angular/material/dialog';
 
 @Injectable({
   providedIn: 'root',
@@ -20,10 +21,10 @@ export class LoginRegisterIpage {
 
   currentUser$ = this.authFacade.currentUser$;
   constructor(
-    public authFacade: AuthFacade,
-    public activatedRoute: ActivatedRoute,
-    public fb: FormBuilder,
-    public snackbarService: SnackbarService
+    private authFacade: AuthFacade,
+    private activatedRoute: ActivatedRoute,
+    private fb: FormBuilder,
+    private matDialog: MatDialog,
   ) { }
 
   ngOnInit() {
@@ -37,12 +38,10 @@ export class LoginRegisterIpage {
     // this.router.navigate(['register']);
   }
 
-  register() {
-    const { password, confirmPassword } = this.registerForm.value;
-    if (password !== confirmPassword) {
-      return this.snackbarService.showError('Mật khẩu không khớp. Vui lòng thử lại!');
-    }
-    this.authFacade.registerEmail(this.registerForm.value);
+  register(provider) {
+    console.log('register by', provider);
+    this.matDialog.closeAll();
+    this.authFacade.connectProviderAndGoToRegister(provider);
   }
 
   login(provider: 'email' | 'facebook' | 'google' | 'apple') {
@@ -71,7 +70,7 @@ export class LoginRegisterIpage {
       email: ['', []],
       phone: ['', []],
       password: ['', Validators.required],
-      confirmPassword: ['', Validators.required],
+      confirmpassword: ['', Validators.required],
     });
   }
 }

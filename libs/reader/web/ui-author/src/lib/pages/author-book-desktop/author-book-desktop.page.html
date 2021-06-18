@@ -1,1 +1,2 @@
-<template-rd-author-product (emitMoreBooks)="onMoreBooks()" [loading]="isLoading$ | async" class="pt-36" [items]="breadcrumbs" [books]="authorBooks | async"></template-rd-author-product>
+<template-rd-author-product (emitMoreBooks)="moreBooks()" [hasNextPage]="hasNextPage$ | async" [loading]="isLoading$ | async" class="pt-36"
+  [items]="breadcrumbs" [books]="authorBooks$ | async"></template-rd-author-product>

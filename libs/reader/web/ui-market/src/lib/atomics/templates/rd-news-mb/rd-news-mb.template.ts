@@ -15,20 +15,20 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 export class RdNewsMbTemplate implements OnInit {
   @Input() tabs = [
     {
-      name: 'Điểm tin sách',
+      name: 'Góc chia sẻ kinh nghiệm',
       isActive: true,
     },
     {
-      name: 'Tin mới Awread',
+      name: 'Tin mới',
       isActive: false,
     },
   ];
-  @Input() classActive = 'border rounded-xl border-green-primary text-green-primary pt-2';
-  @Input() classNormal = 'border rounded-xl border-gray-text text-green-primary pt-2';
+  @Input() classActive = 'col-span-6 border rounded-xl border-green-primary text-green-primary text-center pt-1.5';
+  @Input() classNormal = 'col-span-6 border rounded-xl border-gray-text text-green-text text-center pt-1.5';
 
   @Input() news = [];
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

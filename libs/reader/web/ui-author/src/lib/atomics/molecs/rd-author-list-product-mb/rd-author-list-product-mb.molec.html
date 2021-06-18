@@ -1,8 +1,15 @@
-<div class="grid grid-cols-12 gap-4 place-items-center">
-  <div *ngFor="let book of books" class="col-span-12">
-    <molec-rd-author-book-item [isText]="false" [isSize]="1" [book]="book" [items]="book.genres"></molec-rd-author-book-item>
-  </div>
-</div>
-<div>
-  <atom-text-link (submitEvent)="moreEvent.emit($event)" [text]="moreBook" [class]="class"></atom-text-link>
-</div>
+<ng-container *ngIf="books?.length; else noData">
+  <infinite-scroll [usingWindowScroll]="true" #infiniteScroll (scrollIsIntersecting)="moreBooks.emit()">
+    <div class="grid grid-cols-12 gap-4">
+      <div *ngFor="let book of books" class="col-span-12">
+        <molec-rd-author-book-item [isText]="false" [isSize]="1" [book]="book" [items]="book.genres"></molec-rd-author-book-item>
+      </div>
+    </div>
+    <div class="mt-2">
+      <atom-text-link (submitEvent)="navigateBooksByAuthor.emit($event)" [text]="moreBook" [class]="class"></atom-text-link>
+    </div>
+  </infinite-scroll>
+</ng-container>
+<ng-template #noData>
+  <div class="pt-4 text-base">Truyện đang được tải, mong các bạn chờ trong giây lát...</div>
+</ng-template>

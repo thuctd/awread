@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 
 @Component({
   selector: 'wrt-navleft',
@@ -12,14 +12,15 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
         border-top-right-radius: 3.25rem;
         border-bottom-right-radius: 3.25rem;
       }
-      :host .h50 {
-        height: 55rem;
+      :host .top-22 {
+        top: 5.5rem;
       }
     `,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WrtNavleftOrgan implements OnInit {
+  @Input() routes = [];
   constructor() {}
 
   ngOnInit(): void {}

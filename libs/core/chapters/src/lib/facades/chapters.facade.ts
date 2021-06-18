@@ -19,8 +19,8 @@ export class ChaptersFacade {
     return this.chaptersGear.fetchLatestChapterPosition(bookId);
   }
 
-  getChapter(chapterId: string, bookId: string) {
-    return this.chaptersGear.getChapter(chapterId, bookId);
+  getChapter(bookId: string, chapterId: string) {
+    return this.chaptersGear.getChapter(bookId, chapterId);
   }
 
   create(chapter, publishThisChapter, publishThisBook) {

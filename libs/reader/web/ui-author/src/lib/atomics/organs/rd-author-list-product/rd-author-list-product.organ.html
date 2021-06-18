@@ -1,5 +1,7 @@
-<div class="grid grid-cols-8 xl:grid-cols-10 gap-x-16 gap-y-10 place-content-center">
-  <div *ngFor="let book of stories" class="col-span-2">
-    <molec-rd-author-book-item [isSize]="2" [book]="book"></molec-rd-author-book-item>
+<infinite-scroll [usingWindowScroll]="true" #infiniteScroll (scrollIsIntersecting)="emitMoreBooks.emit()">
+  <div class="grid grid-cols-8 xl:grid-cols-10 gap-x-16 gap-y-10 place-content-center">
+    <div *ngFor="let book of books" class="col-span-2">
+      <molec-rd-author-book-item [isSize]="2" [book]="book"></molec-rd-author-book-item>
+    </div>
   </div>
-</div>
+</infinite-scroll>

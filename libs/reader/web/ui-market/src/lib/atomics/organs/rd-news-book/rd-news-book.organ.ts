@@ -20,7 +20,7 @@ export class RdNewsBookOrgan implements OnInit {
       updatedAt: '',
       status: '',
       image: '',
-      blogId: '',
+      newsId: '',
     },
   ];
 

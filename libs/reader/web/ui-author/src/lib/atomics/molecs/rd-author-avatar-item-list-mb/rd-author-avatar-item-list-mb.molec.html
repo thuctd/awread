@@ -1,17 +1,17 @@
 <div class="grid grid-cols-12">
   <div class="col-span-4">
-    <atom-circle-image class="w-16"></atom-circle-image>
+    <atom-circle-image [src]="user | avatarSize:'origin'" [size]="'m'"></atom-circle-image>
     <div *ngIf="user?.firstname" class="text-xs mt-3 font-semibold text-gray-text">{{user?.lastname + ' ' + user?.middlename + ' ' + user?.firstname}}</div>
   </div>
   <div class="col-span-6 mt-1">
     <div class="w-full flex justify-between">
       <div class="uppercase mb-2.5 float-left font-bold text-gray-text">{{user?.name}}</div>
-      <div (click)="openDiaLogMenu($event)">
+      <!-- <div (click)="openDiaLogMenu($event)">
         <fa-icon class="cursor-pointer" [icon]="faIcon"></fa-icon>
-      </div>
+      </div> -->
     </div>
     <div class="clear-both"></div>
-    <molec-rd-author-list-btns-mb [isFollow]="isFollow" [isBlock]="isBlock"></molec-rd-author-list-btns-mb>
+    <!-- <molec-rd-author-list-btns-mb [isFollow]="isFollow" [isBlock]="isBlock"></molec-rd-author-list-btns-mb> -->
   </div>
   <div class="col-span-2"></div>
 </div>

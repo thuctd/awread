@@ -1,11 +1,8 @@
 :host {
   display: block;
 }
-.mh-8 {
-  min-height: 2rem;
-}
-.right55{
-  right: 5.5rem;
+.color-border {
+  border-color: #E2E2E2;
 }
 #frist_div:before {
   content: '';
@@ -16,5 +13,5 @@
   border-right: 0.45rem solid transparent;
   border-bottom: 0.9rem solid #48bb78;
   position: absolute;
-  margin: -0.8rem 18.1rem;
+  margin: -0.8rem 15rem;
 }

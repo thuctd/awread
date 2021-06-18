@@ -1,4 +1,11 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  Input,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 
 @Component({
   selector: 'molec-rd-home-list-book-update',
@@ -29,4 +36,8 @@ export class RdHomeListBookUpdateMolec implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+
+  trackByFn(index, item) {
+    return item.key;
+  }
 }

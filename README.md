@@ -1,11 +1,11 @@
 ## Development Environment setup
 
 ```
-npm i -g nx
+npm i -g nx pnpm
 ```
 
 ```
-npm i
+pnpm i
 ```
 
 ## Start development

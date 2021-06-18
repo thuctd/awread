@@ -1,1 +1,5 @@
-<wrt-account-complete (completeEvent)="completeRegister()" (linkSocialEvent)="linkSocialEvent($event)" [formComplete]="formComplete"></wrt-account-complete>
+<!-- <wrt-account-complete (completeEvent)="completeRegister()" (linkSocialEvent)="linkSocialEvent($event)" [formComplete]="formComplete"></wrt-account-complete> -->
+
+<template-register-complete [requireForm]="requireForm" [optionalForm]="optionalForm" [experienceForm]="experienceForm" (completeEvent)="completeEvent()"
+    (linkSocialEvent)="linkSocialEvent($event)" [genres]="genres$ | async">
+</template-register-complete>

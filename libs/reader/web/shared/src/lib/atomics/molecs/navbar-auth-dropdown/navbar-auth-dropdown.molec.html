@@ -2,9 +2,9 @@
     <div class="py-2 px-4 mb-2 bg-white">
         <div class="flex items-center mb-1">
             <span class="text-xs">Thành viên: </span>
-            <span class="text-xs text-yellow-500 ml-3"> {{ user.name ? user.name : user.lastname }} </span>
+            <span class="text-xs text-yellow-500 ml-3"> {{ user.name ? user.name : user.firstname }} </span>
         </div>
-        <div class="flex items-center mb-1">
+        <!-- <div class="flex items-center mb-1">
             <span class="text-xs w-9">Coin: </span>
             <span class="text-xs">0</span>
             <fa-icon class="ml-4 text-green-primary" [icon]="icons.faCoins"></fa-icon>
@@ -13,11 +13,11 @@
             <span class="text-xs w-9">VIP: </span>
             <span class="text-xs">1</span>
             <img class="h-4 ml-4 -mt-1" src="/global-assets/images/crown.png" alt="">
-        </div>
+        </div> -->
     </div>
     <ul class=" bg-white">
         <li *ngFor="let item of menu" class="border-b border-grey-300 py-2 px-4">
-            <atom-link [title]="item.title" [routerLink]="item.href"></atom-link>
+            <atom-link [title]="item.title" [link]="item.href"></atom-link>
         </li>
     </ul>
     <button (click)="logoutEvent.emit()" class="py-2 px-4 bg-white w-full flex items-center focus:outline-none hover:text-green-primary transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110">

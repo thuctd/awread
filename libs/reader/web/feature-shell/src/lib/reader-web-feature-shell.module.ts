@@ -8,13 +8,16 @@ import { ReaderWebUiAuthorModule } from '@awread/reader/web/ui-author';
 import { ReaderWebUiSingleModule } from '@awread/reader/web/ui-single';
 import { ReaderWebUiMarketModule } from '@awread/reader/web/ui-market';
 import { WriterWebUiAuthModule } from '@awread/writer/web/ui-auth';
+import { HttpClientModule } from '@angular/common/http';
+import { PlausibleService } from '@awread/global/packages';
 
 declare const window: Window & { haveMobile: boolean };
 
 const routes: Routes = [
   {
     path: '',
-    component: window.innerWidth <= 768 && window?.haveMobile ? SharedMobileLayout : SharedDesktopLayout,
+    component:
+      window.innerWidth <= 768 && window?.haveMobile ? SharedMobileLayout : SharedDesktopLayout,
     children: [
       {
         path: 'not-found',
@@ -22,23 +25,22 @@ const routes: Routes = [
       },
     ],
   },
-  // { path: '**', pathMatch: 'full', redirectTo: 'not-found' },
+  { path: '**', pathMatch: 'full', redirectTo: 'not-found' },
 ];
 
-import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   imports: [
-
     CommonModule,
     HttpClientModule,
     GlobalSettingsModule,
     ReaderWebSharedModule,
-    ReaderWebUiMarketModule,
-    ReaderWebUiAuthorModule,
     ReaderWebUiAuthModule,
     ReaderWebUiSingleModule,
-    // away be the 2nd last
+    ReaderWebUiMarketModule,
     WriterWebUiAuthModule,
+    //WARNING: away be the 2nd last because it have to have for redirect
+    ReaderWebUiAuthorModule,
     // aways be the last
     RouterModule.forRoot(routes, {
       scrollPositionRestoration: 'enabled',
@@ -48,13 +50,13 @@ import { HttpClientModule } from '@angular/common/http';
       // enableTracing: true  // <-- debugging purposes only
     }),
   ],
-  exports: [
-    RouterModule,
-    GlobalSettingsModule,
-    HttpClientModule
-  ],
-  providers: [
-
-  ]
+  exports: [RouterModule, GlobalSettingsModule, HttpClientModule],
+  providers: [],
 })
-export class ReaderWebFeatureShellModule { }
+export class ReaderWebFeatureShellModule {
+  constructor(
+    private plausibleService: PlausibleService,
+  ) {
+
+  }
+}

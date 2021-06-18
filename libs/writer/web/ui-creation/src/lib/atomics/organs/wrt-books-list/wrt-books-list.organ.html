@@ -1,9 +1,9 @@
 <div class="pt-12">
-  <div class="flex justify-center items-center loading"  *ngIf="loading;else loaded">
+  <div class="flex justify-center items-center loading" *ngIf="loading;else loaded">
     <awread-loading></awread-loading>
   </div>
   <ng-template #loaded>
-    <ng-container *ngIf="books.length;else noData">
+    <ng-container *ngIf="books?.length;else noData">
       <div class="text-right pb-10">
         <cr-submit-btn class="w-full" (btnClicked)="bookEvent.emit({ type: 'create' })" [faIcon]="faIcon" [submitText]="'Đăng truyện'">
         </cr-submit-btn>
@@ -12,7 +12,7 @@
         <molec-wrt-book-list-head></molec-wrt-book-list-head>
       </div>
 
-      <infinite-scroll #infiniteScroll (scrolled)="bookEvent.emit({ type: 'more' })">
+      <infinite-scroll #infiniteScroll (scrollIsIntersecting)="bookEvent.emit({ type: 'more' })">
         <div *ngFor="let book of books ;" class="grid grid-cols-12 gap-6 bg-white pt-4">
           <div class="col-span-2 md:col-span-5 pl-8">
             <molec-wrt-book-list-info (bookEvent)="bookEvent.emit($event)" [book]="book">

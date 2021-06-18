@@ -14,12 +14,12 @@ import { Component, OnInit, ChangeDetectionStrategy, Output, Input, EventEmitter
 })
 export class BaseBtnAtom implements OnInit {
   @Output() submitEvent = new EventEmitter();
-  @Input() chapter = 1;
+  @Input() chapterPosition = 1;
   @Input() isSize = true;
   @Input() bookId = '2zxcqwe213_azre'
   @Input() chapterId = '21345xzcasd32_2sa'
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

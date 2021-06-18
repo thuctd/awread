@@ -19,9 +19,9 @@ export class WrtRegisterOrgan implements OnInit {
     username: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
     password: ['', Validators.required],
-    confirmPassword: ['', Validators.required],
+    confirmpassword: ['', Validators.required],
   });
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }

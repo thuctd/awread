@@ -1,14 +1,21 @@
-<div class="flex justify-center items-center loading" *ngIf="loading;else loaded">
-  <awread-loading></awread-loading>
-</div>
-<ng-template #loaded>
-  <ng-container *ngIf="books?.length; else noData">
+<div class="relative">
+  <!-- <div class="absolute flex justify-center items-center loading  w-full z-10" *ngIf="loading else loaded"> -->
+  <!-- <h1> {{ loading }} </h1> -->
+  <div class="absolute flex justify-center items-center loading  w-full z-10" *ngIf="loading">
+    <awread-loading class="transform -translate-y-2/4"></awread-loading>
+  </div>
+  <!-- <ng-template #loaded> -->
+  <!-- <h1> {{ books.length }} </h1> -->
+  <ng-container>
     <div class="grid md:grid-cols-8 xl:grid-cols-10 sm:gap-x-6 lg:gap-x-10 xl:gap-x-12 place-content-center">
-      <div *ngFor="let book of books;" class="col-span-2 md:col-span-2 py-2">
-        <atom-img-m [bookId]="book.bookId" [srcImg]="book | coverSize"></atom-img-m>
-        <!-- <home-info-book-featured [isInfoNovel]="isInfoNovel" [book]="book" [btns]="book.newestChapters"></home-info-book-featured> -->
-        <molec-info-book [book]="book" [btns]="book.newestChapters" *ngIf="!isNovel"></molec-info-book>
-        <list-info-prose [book]="book" [isBtn]="true" *ngIf="isNovel" [chapters]="book.newestChapters"></list-info-prose>
+      <div *ngFor="let book of books | keyvalue | slice:0:10; trackBy: trackByFn" class="col-span-2 md:col-span-2 py-2">
+        <atom-img-m [bookId]="book.value.bookId" [srcImg]="book.value | coverSize"></atom-img-m>
+        <div *ngIf="book.value.categoryId == 1 || book.value.categoryId == 2">
+          <molec-info-book [book]="book.value" [btns]="book.value.newestChapters"></molec-info-book>
+        </div>
+        <div *ngIf="book.value.categoryId == 3">
+          <list-info-prose [chapters]="book.value.newestChapters" [book]="book.value" [isBtn]="true"></list-info-prose>
+        </div>
       </div>
     </div>
   </ng-container>
@@ -18,4 +25,5 @@
       Truyện đang được tải, mong các bạn chờ trong giây lát...
     </div>
   </ng-template>
-</ng-template>
+  <!-- </ng-template> -->
+</div>

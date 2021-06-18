@@ -2,16 +2,16 @@
   <div class="block md:hidden">
     <atom-title class="border-b border-gray-400 pb-3" [title]="'Tin tức'"></atom-title>
   </div>
-  <organ-rd-news-detail-content (shareClicked)="shareClicked.emit()" [newsDetail]="newsDetail"></organ-rd-news-detail-content>
+  <organ-rd-news-detail-content [content]="content" [newsDetail]="newsDetail" (shareClicked)="shareClicked.emit()"></organ-rd-news-detail-content>
   <atom-title class="border-b border-gray-400 pb-4" [title]="'Tin khác'"></atom-title>
   <div class="w-full sm:w-2/3">
     <div *ngFor="let item of newsOthers | slice:0:6">
-      <atom-rd-news-awread-item (clicked)="clicked.emit()" class="py-4" [blogId]="item.blogId" [title]="item.title" [srcImg]="item.image" [date]="item.updatedAt" [description]="item.description" [mode]="'list'"></atom-rd-news-awread-item>
+      <atom-rd-news-awread-item class="py-4" [newsId]="item.newsId" [title]="item.title" [srcImg]="item.image" [date]="item.updatedAt" [description]="item.description" [mode]="'list'"></atom-rd-news-awread-item>
     </div>
   </div>
 </section>
 
-<pre>{{newsDetail | json}}</pre>
+
 
 
 

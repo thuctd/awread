@@ -1,7 +1,8 @@
 <atom-title [title]="'TÁC PHẨM'" class="border-b py-4 border-gray-400"></atom-title>
 <div class="mt-6">
-  <organ-rd-author-list-product class="px-6 xl:px-16" [stories]="books"></organ-rd-author-list-product>
+  <organ-rd-author-list-product class="px-6 xl:px-16" [books]="books" (moreBooks)="emitMoreBooks.emit()"></organ-rd-author-list-product>
   <div class="ml-2 md:ml-0 mt-2">
-    <atom-text-link *ngIf="isMore" (submitEvent)="emitMoreBooks.emit()" [text]="'Xem thêm...'" [class]="'text-base text-green-primary italic font-bold'"></atom-text-link>
+    <atom-text-link *ngIf="hasNextPage" (submitEvent)="emitMoreBooks.emit()" [text]="'Xem thêm...'" [class]="'text-base text-green-primary italic font-bold'">
+    </atom-text-link>
   </div>
 </div>

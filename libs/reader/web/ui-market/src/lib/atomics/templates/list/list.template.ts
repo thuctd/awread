@@ -41,9 +41,11 @@ export class ListTemplate implements OnInit {
     },
   ];
   @Input() titlePage: string;
-  @Input() tabsHead = [
-    { categoryId: '1', name: 'Truyện dài', type: 'longbook', isActive: true },
-  ];
+  @Input() tabAll = {
+    name: "Tất cả",
+    categoryId: "",
+  };
+  @Input() tabsHead = [];
 
   @Input() selectedTabCategoryId = '1';
   @Output() switchTabEvent = new EventEmitter();
@@ -51,10 +53,10 @@ export class ListTemplate implements OnInit {
   @Output() changeCategoryBooks = new EventEmitter();
   @Output() filterBooksEvent = new EventEmitter();
   @Output() moreBooks = new EventEmitter();
-  @Output() nativeTopBook = new EventEmitter();
+
   constructor(private fb: FormBuilder) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   changeDisplay(mode: string) {
     this.display = mode;
@@ -62,5 +64,11 @@ export class ListTemplate implements OnInit {
 
   changeDisplayFilter() {
     this.filterbook = !this.filterbook;
+  }
+
+  filterTopBooks() {
+    this.filtersForm.controls['criteria'].setValue('1');
+    this.filtersForm.controls['postingDate'].setValue(7);
+    this.filterbook = true;
   }
 }

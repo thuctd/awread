@@ -1,0 +1,4 @@
+<section class="px-4">
+  <atom-title [title]="titlePage" class="border-b border-gray-300"></atom-title>
+  <organ-mb-list-detail-book [books]="books" [hasNextPage]="hasNextPage" (moreEvent)="moreBooks.emit($event)"></organ-mb-list-detail-book>
+</section>

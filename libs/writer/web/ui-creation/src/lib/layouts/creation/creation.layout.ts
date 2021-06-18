@@ -23,16 +23,16 @@ export class CreationLayout implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.currentUserFacade.getCurrentUser().subscribe();
+    this.currentUserFacade.getCurrentUser().subscribe(() => this.checkWriter());
     this.categoriesFacade.getAllCategories().subscribe();
     this.genresFacade.getAllGenres().subscribe();
-    this.getAllBook();
+
   }
 
-  private getAllBook() {
-    // this.booksFacade.setLoading(true);
-    // this.booksFacade.getAllBooks().subscribe(() => {
-    //   this.booksFacade.setLoading(false);
-    // });
+  private checkWriter() {
+    const role = this.currentUserFacade.currentUserQuery.getRole();
+    if (role == 'reader') {
+      console.log('bat material dialog hien dieu khoan cho writer');
+    }
   }
 }

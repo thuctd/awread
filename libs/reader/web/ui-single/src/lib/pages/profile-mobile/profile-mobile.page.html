@@ -1,1 +1,9 @@
-<p>profile-mobile works!</p>
+<template-rd-profile-tab-template class="px-4"
+  [ages]="ages"
+  [genres]="genres$ | async"
+  [currentUser]="currentUser$ | async"
+  [requireForm]="requireForm"
+  [optionalForm]="optionalForm"
+  [experienceForm]="experienceForm"
+  (submitEvent)="submitEvent($event)">
+</template-rd-profile-tab-template>

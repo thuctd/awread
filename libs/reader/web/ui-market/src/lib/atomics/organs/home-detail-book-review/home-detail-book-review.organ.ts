@@ -16,7 +16,10 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeDetailBookReviewOrgan implements OnInit {
-  @Input() titlePage = 'Top truyện được đánh giá tích cực';
+  @Input() page = {
+    name: 'Top truyện được đánh giá tích cực',
+    href: ['/index', 'good-books'],
+  };
   @Input() books = [];
   @Input() book = {
     imgUrl: '',
@@ -36,7 +39,7 @@ export class HomeDetailBookReviewOrgan implements OnInit {
     },
   };
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }
