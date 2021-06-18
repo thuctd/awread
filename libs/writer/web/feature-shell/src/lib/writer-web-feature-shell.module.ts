@@ -2,12 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { GlobalSettingsModule } from '@awread/global/settings';
-import {
-  WriterWebSharedModule,
-  ShellDesktopLayout,
-  ShellMobileLayout,
-  NotFoundPage,
-} from '@awread/writer/web/shared';
+import { WriterWebSharedModule, ShellDesktopLayout, ShellMobileLayout } from '@awread/writer/web/shared';
 import { WriterWebUiAuthModule } from '@awread/writer/web/ui-auth';
 import { WriterWebUiSingleModule } from '@awread/writer/web/ui-single';
 import { WriterWebUiCreationModule } from '@awread/writer/web/ui-creation';
@@ -22,7 +17,7 @@ const routes: Routes = [
     children: [
       {
         path: 'not-found',
-        component: NotFoundPage,
+        loadChildren: () => import('@awread/global/packages').then((m) => m.NotFoundModule)
       },
       { path: '**', pathMatch: 'full', redirectTo: 'not-found' },
     ],
@@ -49,4 +44,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule, GlobalSettingsModule],
 })
-export class WriterWebFeatureShellModule {}
+export class WriterWebFeatureShellModule { }

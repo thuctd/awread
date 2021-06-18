@@ -1,4 +1,11 @@
 <div class="bg-gray-100">
-  <profile [profileForm]="requireForm" (submitEvent)="submitEvent($event)" class="bg-white h-screen w-full">
+  <profile [requireForm]="requireForm"
+    [ages]="ages"
+    [optionalForm]="optionalForm"
+    [experienceForm]="experienceForm"
+    [genres]="genres$ | async"
+    [currentUser]="currentUser$ | async"
+    (submitEvent)="submitEvent($event)"
+    class="bg-white h-screen w-full">
   </profile>
 </div>

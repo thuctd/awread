@@ -28,6 +28,7 @@ export class CurrentUserApi {
               results {
                 users {
                   userId
+                  role
                   username
                   email
                   phone
@@ -45,6 +46,7 @@ export class CurrentUserApi {
                   bio
                   websiteAddress
                   facebookAddress
+                  genreIds
                 }
               }
             }
@@ -75,8 +77,9 @@ export class CurrentUserApi {
           $websiteAddress: String
           $facebookAddress: String
           $zaloAddress: String
-          $ages: BigFloat
+          $ages: [BigFloat]
           $gender: BigFloat
+          $genreIds: [BigFloat]
         ) {
           ${mutation}(
             input: {
@@ -93,6 +96,7 @@ export class CurrentUserApi {
                 zaloAddress: $zaloAddress
                 ages: $ages
                 gender: $gender
+                genreIds: $genreIds
               }
             }
           ) {
@@ -107,6 +111,7 @@ export class CurrentUserApi {
               zaloAddress
               ages
               gender
+              genreIds
             }
           }
         }
@@ -192,7 +197,7 @@ export class CurrentUserApi {
     });
   }
 
-  agreeBecomeWriter() {
+  refreshToken() {
     return this.apollo.mutate({
       mutation: gql`
       mutation refreshToken($clientMutationId: String) {
@@ -206,6 +211,37 @@ export class CurrentUserApi {
       variables: {
         clientMutationId: this.currentUserQuery.getUserId(),
       },
-    });
+    })
+      .pipe(map(result => result?.['data']?.['refreshToken']?.['results']?.[0]?.['accessToken']))
+  }
+
+
+  updateRole(role) {
+    return this.apollo.mutate({
+      mutation: gql`
+        mutation updateUserByUserId(
+          $userId: UUID!
+          $role: String
+        ) {
+          updateUserByUserId(
+            input: {
+              userId: $userId
+              userPatch: {
+                role: $role
+              }
+            }
+          ) {
+            user {
+              role
+            }
+          }
+        }
+      `,
+      variables: {
+        role,
+        userId: this.currentUserQuery.getUserId(),
+      },
+    })
+      .pipe(map(result => result?.['data']?.['updateUserByUserId']?.['user']?.['role']))
   }
 }

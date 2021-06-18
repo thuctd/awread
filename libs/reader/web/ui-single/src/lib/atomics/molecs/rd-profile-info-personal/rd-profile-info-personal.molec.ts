@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'molec-rd-profile-info-personal',
@@ -13,14 +13,8 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RdProfileInfoPersonalMolec implements OnInit {
-  @Input() currentUser = {
-    name: '',
-    username: '',
-    email: '',
-    phone: '',
-    dob: '',
-    gender: '',
-  };
+  @Input() currentUser;
+  @Output() clicked = new EventEmitter();
 
   constructor() { }
 

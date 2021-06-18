@@ -6,30 +6,28 @@
     <atom-title [title]="'Cài đặt'"></atom-title>
   </div>
   <div class="border-b border-gray-400 p-4">
-    <molec-rd-author-tabs [class2]="class2" [classActive]="classActive" [classNormal]="classNormal" class="roboto w-full" [tabs]="tabsMobile"></molec-rd-author-tabs>
+    <molec-rd-author-tabs [class2]="class2" [classActive]="classActive" [classNormal]="classNormal" class="roboto w-full" [tabs]="tabsMobile">
+    </molec-rd-author-tabs>
   </div>
 </div>
 <div class="bg-white pb-4 md:pb-20">
   <div class="grid grid-cols-12 pt-12">
     <div class="col-span-12 md:col-span-5 mx-auto pb-10 md:pb-0">
-      <detail-upload-img [srcImg]="currentUser | avatarSize:'origin'"></detail-upload-img>
-      <atom-btn-rectangle *ngIf="mode !== 'display'" [class]="'w-54 py-1.5 rounded-lg'" [text]="'Chỉnh sửa ảnh bìa'"
+      <detail-upload-img [srcImg]="currentUser | avatarSize"></detail-upload-img>
+      <atom-btn-rectangle *ngIf="mode !== 'display' && mode !== 'editPersonal'" [class]="'w-54 py-1.5 rounded-lg'" [text]="'Chỉnh sửa ảnh hồ sơ'"
         (btnClicked)="submitEvent.emit('change-image')">
       </atom-btn-rectangle>
     </div>
-    <div class="col-span-12 md:col-span-7 relative" *ngIf="mode === 'display';else edit">
-      <molec-rd-profile-info-personal [currentUser]="currentUser" class="pt-6 md:pt-2"></molec-rd-profile-info-personal>
-      <div class="absolute top-0 right-0 md:right-12 flex cursor-pointer">
-        <img class="h-5" src="/global-assets/images/ic_border_color_24px.webp" alt="">
-        <div (click)="changeModeEdit(actions[1])" class="roboto font-medium text-gray-400 ml-2 text-sm md:text-base">Chỉnh sửa hồ sơ</div>
-      </div>
+    <div class="col-span-12 md:col-span-7 relative" *ngIf="mode === 'display'">
+      <molec-rd-profile-info-user (clicked)="changeModeEdit(actions[1])" [currentUser]="currentUser"></molec-rd-profile-info-user>
+      <molec-rd-profile-info-personal (clicked)="changeModeEdit(actions[2])" [currentUser]="currentUser" class="pt-6 md:pt-2"></molec-rd-profile-info-personal>
     </div>
-    <ng-template #edit>
-      <div class="col-span-12 md:col-span-6">
-        <organ-profile-form (submitEvent)="submitEvent.emit($event)" (submitEvent)="updateForm(actions[0])" [profileForm]="profileForm" [submitted]="submitted">
-        </organ-profile-form>
-      </div>
-    </ng-template>
+    <div class="col-span-12 md:col-span-6 relative">
+      <molec-profile-edit-form *ngIf="mode === 'editUser'" (submitEvent)="saveForm(actions[0])" (submitEvent)="submitEvent.emit('save-user')" class="mt-2"
+        [requireForm]="requireForm"></molec-profile-edit-form>
+      <molec-profile-info-form *ngIf="mode === 'editPersonal'" (submitEvent)="saveForm(actions[0])" (submitEvent)="submitEvent.emit($event)" class="mt-2"
+        [ages]="ages" [genres]="genres" [optionalForm]="optionalForm" [experienceForm]="experienceForm"></molec-profile-info-form>
+    </div>
   </div>
 </div>
 

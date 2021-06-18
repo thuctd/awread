@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.4-alpha" use-changelog="false" last-position="0,717" last-zoom="1" max-obj-count="32"
+<dbmodel pgmodeler-ver="0.9.4-alpha" use-changelog="false" last-position="0,708" last-zoom="1" max-obj-count="32"
 	 default-schema="public" default-owner="postgres"
 	 layers="Default layer"
 	 active-layers="0"
@@ -1208,15 +1208,26 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<role name="postgres"/>
 	<position x="1080" y="1620"/>
 	<reference>
-		<expression><![CDATA[b.*,
+		<expression><![CDATA[   b.*,
 	count(*) filter (where c.published = true)::numeric as "publishedCount",
 	count(*) filter (where c.published = false)::numeric as "draftCount",
+	jsonb_object_agg(k."genreId", k.genres) as "genres",
 	sum(v.count)::numeric as "viewCount"]]></expression>
 	</reference>
 	<reference>
 		<expression><![CDATA[books b
-	left join chapters c using ("bookId")
-	left join book_visits v using ("bookId")]]></expression>
+	inner join chapters c using ("bookId")
+	inner join book_visits v using ("bookId")
+	inner join (
+		select 
+		"bookId",
+		"genreId",
+		to_jsonb(jsonb_build_object(
+			'genreId', genres."genreId",
+			'name', genres."name"
+		)) as genres
+		from books_genres natural join genres
+	) k  USING ("bookId")]]></expression>
 	</reference>
 	<reference>
 		<expression><![CDATA[group by 1]]></expression>

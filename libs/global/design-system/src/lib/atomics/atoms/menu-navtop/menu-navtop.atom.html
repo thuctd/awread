@@ -1,14 +1,13 @@
 <section>
   <a (click)="toggleMenu($event)" closeOnOutSide (clickedOutside)="isMenuOpen = false" class="outline-none cursor-pointer ml-56">
-    <img [src]="user | avatarSize:'s'" class="rounded-full h-8 w-8 inline-block" alt="avatar" />
+    <img [src]="user | avatarSize: 'm'" class="rounded-full h-8 w-8 inline-block" alt="avatar" />
     <div class="inline-block pl-2"> {{ user.name ? user.name : user.firstname }} </div>
   </a>
   <div *ngIf="isMenuOpen" class="flex flex-col z-50 right-28 top-20 absolute">
     <div id="frist_div" class="w-72 h-12 bg-green-500 rounded-b-none  rounded-2xl shadow"></div>
     <div class="w-72 h-12 bg-white color-border border-b shadow">
       <a [routerLink]="['/profile']" class="outline-none w-full">
-        <img [src]="user | avatarSize:'s'"
-          class="bg-green-500 p-1 left-5 top-5 rounded-full h-16 w-16 inline-block absolute" alt="IMG_User" />
+        <img [src]="user | avatarSize: 'm'" class="bg-green-500 p-1 left-5 top-5 rounded-full h-16 w-16 inline-block absolute" alt="IMG_User" />
         <div class="text-sm pl-20 ml-3 mt-1 text-gray-700">{{user.name ? user.name : user.firstname }} </div>
         <div class="text-xs pl-20 ml-3 text-gray-text">{{ user.email }}</div>
       </a>

@@ -47,7 +47,6 @@ export class AuthorApi {
               websiteAddress
               facebookAddress
               zaloAddress
-              age
               gender
             }
           }
@@ -57,13 +56,7 @@ export class AuthorApi {
         },
       })
       .pipe(
-        tap(res => console.log('res', res)),
-        map((res) => ({
-          ...res?.['data']?.['userByUserId'],
-          ...res?.['data']?.['personalByUserId'],
-          userId
-        })),
-        tap(res => console.log('res', res)),
+
       );
   }
 }

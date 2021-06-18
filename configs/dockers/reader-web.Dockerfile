@@ -34,10 +34,11 @@ RUN pnpm build $application -- --configuration=${ENVIRONMENT} --no-progress
 FROM nginx:stable-alpine as reader-web
 ARG application
 ARG applicationPath
+ARG ENVIRONMENT
 EXPOSE 80
 WORKDIR /app
 # //INPUT: update this
 COPY --from=build-reader-web /batcave/dist/apps/$applicationPath /app
-COPY /configs/nginx/spa.conf /etc/nginx/conf.d/default.conf
+COPY /configs/nginx/${ENVIRONMENT}.conf /etc/nginx/conf.d/default.conf
 
 CMD ["nginx", "-g", "daemon off;"]
