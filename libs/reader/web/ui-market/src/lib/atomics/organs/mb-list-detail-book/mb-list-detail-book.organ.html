@@ -3,7 +3,7 @@
     <infinite-scroll [usingWindowScroll]="true" #infiniteScroll (scrollIsIntersecting)="moreEvent.emit()">
       <div *ngFor="let book of books;" class="grid grid-cols-12 gap-4 py-2">
         <div class="col-span-4">
-          <atom-img-m [size]="'s'" [bookId]="book.bookId" [srcImg]="book | coverSize: 's'"></atom-img-m>
+          <atom-img-m [size]="'s'" [bookId]="book.bookId" [srcImg]="book | coverSize: 'm'"></atom-img-m>
         </div>
         <div class="col-span-8">
           <div *ngIf="book.categoryId == 1 || book.categoryId == 2">
