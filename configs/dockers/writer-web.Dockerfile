@@ -38,6 +38,6 @@ EXPOSE 80
 WORKDIR /app
 # //INPUT: update this
 COPY --from=build-writer-web /batcave/dist/apps/$applicationPath /app
-COPY /configs/nginx/spa.conf /etc/nginx/conf.d/default.conf
+COPY /configs/nginx/${ENVIRONMENT}.conf /etc/nginx/conf.d/default.conf
 
 CMD ["nginx", "-g", "daemon off;"]
