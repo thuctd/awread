@@ -9,8 +9,5 @@ export const primary = () => ({
   moduleMetadata: {
     imports: [<%=classify(atomicModule)%>Module]
   },
-  component: <%=componentName%>,
-  props: {
-
-  }
+  component: <%=componentName%>}
 })
