@@ -1,3 +1,4 @@
+import { FormControl } from '@angular/forms';
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 
 @Component({
@@ -9,7 +10,8 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 export class CheckBtnAtom implements OnInit {
   @Input() text = '';
   @Input() checked;
-  constructor() {}
+  @Input() control = new FormControl('');
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

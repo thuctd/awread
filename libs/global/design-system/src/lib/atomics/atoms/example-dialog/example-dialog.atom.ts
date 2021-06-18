@@ -9,8 +9,9 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 })
 export class ExampleDialogAtom implements OnInit {
   @Input() faIcon = faTimes;
+  @Input() isHidden: false | true = true;
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

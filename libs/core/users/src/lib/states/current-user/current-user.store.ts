@@ -7,6 +7,7 @@ export interface CurrentUserState {
   userId: string;
   updatedAt: string;
   role: string;
+  terms: boolean;
   registerCredential: {
     provider: string;
     providerId: string;
@@ -19,7 +20,8 @@ export function createInitialState(): CurrentUserState {
     userId: null,
     updatedAt: null,
     registerCredential: null,
-    role: null
+    role: null,
+    terms: false
   };
 }
 

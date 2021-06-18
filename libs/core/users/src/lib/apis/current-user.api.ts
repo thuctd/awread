@@ -39,7 +39,7 @@ export class CurrentUserApi {
                   firstname
                   middlename
                   lastname
-                  age
+                  ages
                   dob
                   gender
                   bio
@@ -75,7 +75,7 @@ export class CurrentUserApi {
           $websiteAddress: String
           $facebookAddress: String
           $zaloAddress: String
-          $age: BigFloat
+          $ages: BigFloat
           $gender: BigFloat
         ) {
           ${mutation}(
@@ -91,7 +91,7 @@ export class CurrentUserApi {
                 websiteAddress: $websiteAddress
                 facebookAddress: $facebookAddress
                 zaloAddress: $zaloAddress
-                age: $age
+                ages: $ages
                 gender: $gender
               }
             }
@@ -105,7 +105,7 @@ export class CurrentUserApi {
               websiteAddress
               facebookAddress
               zaloAddress
-              age
+              ages
               gender
             }
           }
@@ -188,6 +188,23 @@ export class CurrentUserApi {
       variables: {
         ...credential,
         userId: this.currentUserQuery.getUserId(),
+      },
+    });
+  }
+
+  agreeBecomeWriter() {
+    return this.apollo.mutate({
+      mutation: gql`
+      mutation refreshToken($clientMutationId: String) {
+          refreshToken(input: {clientMutationId: $clientMutationId}) {
+            results {
+              accessToken
+            }
+          }
+        }
+      `,
+      variables: {
+        clientMutationId: this.currentUserQuery.getUserId(),
       },
     });
   }

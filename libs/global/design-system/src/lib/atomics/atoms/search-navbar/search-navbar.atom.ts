@@ -19,10 +19,11 @@ export class SearchNavbarAtom implements OnInit {
   @Input() control = new FormControl();
   @Input() id = 'search-navbar';
   @Output() searchEvent = new EventEmitter();
+  @Output() searchEventMb = new EventEmitter();
 
   @Input() faIcon = faSearch;
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }
