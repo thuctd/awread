@@ -1,4 +1,5 @@
-import { switchMap } from 'rxjs/operators';
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { filter, map, switchMap, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { ChangeDetectorRef, Directive, Injectable, OnInit } from '@angular/core';
 import { CreationsFacade } from '@awread/core/creations';
@@ -12,6 +13,7 @@ import { ChaptersFacade } from '@awread/core/chapters';
 })
 @Directive()
 export class ListPage implements OnInit {
+  filtersForm: FormGroup;
   creations$ = this.creationsFacade.creations$;
   loading$ = this.creationsFacade.loading$;
   searchTerm$ = this.creationsFacade.searchCreationsQuery.searchTerm$;
@@ -21,10 +23,12 @@ export class ListPage implements OnInit {
     private matDialog: MatDialog,
     private snackbarService: SnackbarService,
     private chaptersFacade: ChaptersFacade,
-    private cd: ChangeDetectorRef
-  ) {}
+    private cd: ChangeDetectorRef,
+    private fb: FormBuilder
+  ) { }
 
   ngOnInit(): void {
+    this.initForm();
     this.creationsFacade.get().subscribe((value) => {
       console.log('value', value);
     });
@@ -90,5 +94,12 @@ export class ListPage implements OnInit {
       })
     );
     this.cd.detectChanges();
+  }
+
+  private initForm() {
+    this.filtersForm = this.fb.group({
+      categoryId: [''],
+      completed: [''],
+    });
   }
 }

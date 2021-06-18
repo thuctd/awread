@@ -1,5 +1,13 @@
 import { Component, OnInit, ChangeDetectionStrategy, EventEmitter, Output, Input } from '@angular/core';
-import { faChartLine, faShareAlt, faAngleDown, faPlusCircle, faPlusSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import {
+  faChartLine,
+  faShareAlt,
+  faAngleDown,
+  faPlusCircle,
+  faPlusSquare,
+  faTrash,
+} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'template-wrt-books-list',
@@ -14,6 +22,11 @@ import { faChartLine, faShareAlt, faAngleDown, faPlusCircle, faPlusSquare, faTra
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WrtBooksListTemplate implements OnInit {
+  @Input() filters: FormGroup = this.fb.group({
+    categoryId: [''],
+    completed: [''],
+  });
+
   @Input() data = {
     btns: [
       {
@@ -28,7 +41,6 @@ export class WrtBooksListTemplate implements OnInit {
       },
     ],
     actions: [
-
       {
         name: 'Thêm chương',
         type: 'create-chapter',
@@ -44,12 +56,13 @@ export class WrtBooksListTemplate implements OnInit {
         type: 'delete',
         icon: faTrash,
       },
-    ]
+    ],
   };
   @Input() books = [];
   @Input() loading: boolean;
   @Output() bookEvent = new EventEmitter();
-  constructor() { }
+  @Output() filterBooksEvent = new EventEmitter();
+  constructor(private fb: FormBuilder) {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }

@@ -21,6 +21,11 @@ export class NavbarMenuOrgan implements OnInit {
         menu: [
           {
             page: '/composed',
+            categoryId: '',
+            title: 'Tất cả',
+          },
+          {
+            page: '/composed',
             categoryId: '1',
             title: 'Truyện ngắn',
           },
@@ -36,26 +41,26 @@ export class NavbarMenuOrgan implements OnInit {
           },
         ],
       },
-      {
-        title: 'Truyện sưu tầm',
-        menu: [
-          {
-            page: '/collected',
-            categoryId: '1',
-            title: 'Truyện ngắn',
-          },
-          {
-            page: '/collected',
-            categoryId: '2',
-            title: 'Truyện dài',
-          },
-          {
-            page: '/collected',
-            categoryId: '3',
-            title: 'Tản văn',
-          },
-        ],
-      },
+      // {
+      //   title: 'Truyện sưu tầm',
+      //   menu: [
+      //     {
+      //       page: '/collected',
+      //       categoryId: '1',
+      //       title: 'Truyện ngắn',
+      //     },
+      //     {
+      //       page: '/collected',
+      //       categoryId: '2',
+      //       title: 'Truyện dài',
+      //     },
+      //     {
+      //       page: '/collected',
+      //       categoryId: '3',
+      //       title: 'Tản văn',
+      //     },
+      //   ],
+      // },
     ],
   };
 
@@ -82,7 +87,7 @@ export class NavbarMenuOrgan implements OnInit {
     ],
   };
   @Input() color = 'text-white';
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

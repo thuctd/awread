@@ -109,4 +109,11 @@ export class CurrentUserGear {
       }
     });
   }
+
+  agreeBecomeWriter() {
+    return this.currentUserApi
+      .agreeBecomeWriter()
+      .pipe()
+      .subscribe();
+  }
 }

@@ -14,7 +14,7 @@ export class SnackbarService {
   constructor(private toast: HotToastService) { }
 
   showSuccess(message: string, duration?) {
-    if (duration) {
+if (duration) {
       this.toast.success(message, { ...this.options, duration });
     } else {
       this.toast.success(message, this.options);
