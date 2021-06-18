@@ -3,7 +3,7 @@
     <atom-title [title]="titlePage"></atom-title>
   </div>
   <div class="grid grid-cols-12 gap-2 mt-8 relative">
-    <div [ngClass]="filterbook === false ? 'hidden pt-12' : ''" class="bg-white shadow-md py-4 absolute top-16 rounded-sm z-40 w-full">
+    <div [ngClass]="filterbook === false ? 'hidden pt-12' : ''" class="bg-white shadow-md absolute top-16 rounded-sm z-40 w-full">
       <molec-search-form (filterBooksEvent)="filterBooksEvent.emit()" [filters]="filtersForm" [genres]="genres"></molec-search-form>
     </div>
     <div class="absolute top-0 right-0">

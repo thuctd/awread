@@ -73,12 +73,14 @@ export class ProfileInfoFormMolec implements OnInit {
   @Input() selectMultiples = [
     {
       title: 'Gợi ý truyện theo sở thích',
+      placeholder: 'Thể loại',
       formControlName: 'genreIds',
       id: 'genreId',
       name: 'name'
     },
     {
       title: 'Giới hạn nội dung',
+      placeholder: 'Giới hạn nội dung',
       formControlName: 'ages',
       id: 'id',
       name: 'name'
