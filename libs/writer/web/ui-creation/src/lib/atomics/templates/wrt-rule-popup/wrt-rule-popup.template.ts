@@ -20,12 +20,13 @@ export class WrtRulePopupTemplate implements OnInit {
   persistForm: PersistNgFormPlugin;
   form: FormGroup;
   rules = `
-  Quy định nhỏ, trách nhiệm lớn
+  <strong> Quy định nhỏ, trách nhiệm lớn! </strong>
   </br>
-  </br>1. Tác giả cam kết: toàn bộ truyện được đăng tải tại mục tự sáng tác là tác phẩm do chính tác giả sáng tác và chịu toàn bộ trách nhiệm.
+  </br>1. Tác giả cam kết: toàn bộ truyện được đăng tải tại mục tự sáng tác là tác phẩm thuộc quyền sở hữu của tác giả, do chính tác giả sáng tác và chịu toàn bộ trách nhiệm.
   </br>2. Nội dung tác phẩm không bao gồm các nội dung chống phá nhà nước CHXHCN Việt Nam, không truyền bá mê tín dị đoan.
-  </br>3. Awread có quyền cung cấp thông tin của tác giả cho cơ quan công an điều tra nếu có dấu hiệu vi phạm.
-  </br> Vi phạm các quy định ở trên và trong trang điều khoản dịch vụ sẽ bị xóa toàn bộ bài đăng và cấm vĩnh viễn tài khoản.
+  </br>3. Awread có quyền cung cấp thông tin của tác giả cho cơ quan nhà nước có thẩm quyền nếu có dấu hiệu vi phạm.
+  </br>
+  </br> Tác giả vi phạm các quy định trên và các quy định khác của Awread sẽ bị xoá toàn bộ bài đăng và cấm vĩnh viễn tài khoản.
   </br>Awread được miễn trừ trách nhiệm trong mọi trường hợp, tác giả phải chịu mọi trách nhiệm liên quan với bên thứ ba và cơ quan nhà nước có thẩm quyền.`;
 
   constructor(private fb: FormBuilder, public dialogRef: MatDialogRef<WrtRulePopupTemplate>,
