@@ -1,26 +1,65 @@
-<section class="flex flex-col text-sm md:text-base" [formGroup]="profileForm ">
-  <atom-title [class]="'font-medium text-sm text-gray-500'" [title]="'Chỉnh sửa hồ sơ'" [isUppercase]="false"></atom-title>
+<section class="flex flex-col text-sm md:text-base" [formGroup]="requireForm">
+  <atom-title [class]="'font-medium text-sm text-gray-500'" [title]="'Chỉnh sửa tài khoản'" [isUppercase]="false"></atom-title>
 
   <div class="my-4">
-    <input-form-profile [profileForm]="profileForm" [item]="items[0]"></input-form-profile>
+    <input-form-profile [profileForm]="requireForm" [item]="items[0]"></input-form-profile>
 
     <div class="flex">
       <div class="w-2/5"></div>
-      <div *ngIf="profileForm.controls.name.errors && profileForm.controls.name.touched" class="invalid-feedback ml-6 w-3/5">
-        <div *ngIf="profileForm.controls.name.errors.required">
+      <div *ngIf="requireForm.controls.name.errors && requireForm.controls.name.touched" class="invalid-feedback ml-6 w-3/5">
+        <div *ngIf="requireForm.controls.name.errors.required">
           Tên hiển thị không được để trống
         </div>
       </div>
     </div>
   </div>
 
-  <div class="mb-4" *ngFor="let item of items | slice:1">
-    <input-form-profile [profileForm]="profileForm" [item]="item"></input-form-profile>
+  <div class="mb-4">
+    <input-form-profile [profileForm]="requireForm" [item]="items[1]"></input-form-profile>
+
+    <div class="flex">
+      <div class="w-2/5"></div>
+      <div *ngIf="requireForm.controls.username.errors && requireForm.controls.username.touched" class="invalid-feedback ml-6 w-3/5">
+        <div *ngIf="requireForm.controls.username.errors.required">
+          Tên tài khoản không được để trống
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div class="mb-4 flex items-center justify-between">
-    <label class="text-gray-400 w-2/5">Tiểu sử</label>
-    <textarea formControlName="bio" placeholder="Tiểu sử"
-      class="border rounded-xl border-gray-200 text-gray-700 focus:outline-none px-2 md:px-4 py-1 md:py-2 h-20 float-right w-3/5 focus:ring-1 focus:ring-gray-300 focus:border-gray-300"></textarea>
+    <div class="mb-4">
+    <input-form-profile [profileForm]="requireForm" [item]="items[2]"></input-form-profile>
+
+    <div class="flex">
+      <div class="w-2/5"></div>
+      <div *ngIf="requireForm.controls.email.errors && requireForm.controls.email.touched" class="invalid-feedback ml-6 w-3/5">
+        <div *ngIf="profileForm.controls.email.errors.required">
+          Email không được để trống
+        </div>
+      </div>
+    </div>
+
+    <div class="flex">
+      <div class="w-2/5"></div>
+      <div *ngIf="requireForm.controls.email.errors && requireForm.controls.email.touched" class="invalid-feedback ml-6 w-3/5">
+        <div *ngIf="profileForm.controls.email.errors.email">
+          Email không hợp lệ
+        </div>
+      </div>
+    </div>
   </div>
+
+  <div class="mb-4">
+    <input-form-profile [profileForm]="requireForm" [item]="items[3]"></input-form-profile>
+
+  </div>
+
+  <div class="my-4 flex items-center">
+    <div class="w-1/3 hidden md:block"></div>
+    <div class="w-full flex justify-center md:justify-start md:w-2/3 md:pl-10">
+      <atom-btn-rectangle [class]="class" [text]="'Lưu'" (btnClicked)="submitEvent.emit()"></atom-btn-rectangle>
+    </div>
+  </div>
+
+
 </section>

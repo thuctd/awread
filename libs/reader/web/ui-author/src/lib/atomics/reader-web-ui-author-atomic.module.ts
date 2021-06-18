@@ -1,4 +1,4 @@
-import { InfiniteScrollModule, LoaderModule } from '@awread/global/packages';
+import { InfiniteScrollModule, LoaderModule, NotFoundModule } from '@awread/global/packages';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GlobalDesignSystemAtomicModule, StorybookSupportModule } from '@awread/global/design-system';
@@ -128,6 +128,7 @@ import { RdAuthorProductMbTemplate } from './templates/rd-author-product-mb/rd-a
     RdAuthorPopupNotiReportMbTemplate,
     RdAuthorPopupUnfollowMbTemplate,
     RdAuthorProductMbTemplate,
+    NotFoundModule
   ],
 })
 export class ReaderWebUiAuthorAtomicModule { }

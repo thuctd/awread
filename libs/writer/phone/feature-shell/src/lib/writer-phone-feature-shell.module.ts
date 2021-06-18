@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { GlobalSettingsModule } from '@awread/global/settings';
-import { WriterPhoneSharedModule, ShellDesktopLayout, ShellMobileLayout, NotFoundPage } from '@awread/writer/phone/shared';
+import { WriterPhoneSharedModule, ShellDesktopLayout, ShellMobileLayout } from '@awread/writer/phone/shared';
 
 declare const window: Window & { haveMobile: boolean };
 
@@ -13,7 +13,7 @@ const routes: Routes = [
     children: [
       {
         path: 'not-found',
-        component: NotFoundPage,
+        loadChildren: () => import('@awread/global/packages').then(m => m.NotFoundModule)
       },
       { path: '**', pathMatch: 'full', redirectTo: 'not-found' },
     ],

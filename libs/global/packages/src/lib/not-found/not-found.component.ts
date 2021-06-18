@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'awread-not-found',
-  templateUrl: './not-found.page.html',
+  templateUrl: './not-found.component.html',
   styles: [
     `
       :host {
@@ -22,10 +22,13 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
       }
     `,
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class NotFoundPage implements OnInit {
-  constructor() {}
+export class NotFoundComponent implements OnInit {
 
-  ngOnInit(): void {}
+  constructor() { }
+
+  ngOnInit() {
+  }
+
 }

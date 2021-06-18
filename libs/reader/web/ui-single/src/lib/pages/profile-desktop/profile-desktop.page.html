@@ -1,5 +1,14 @@
-<template-rd-profile-tab-template class="pt-40 px-20 xl:px-32" [currentUser]="currentUser$ | async" [profileForm]="requireForm"
-  (submitEvent)="submitEvent($event)"></template-rd-profile-tab-template>
+<template-rd-profile-tab-template class="pt-40 px-20 xl:px-32"
+  [ages]="ages"
+  [genres]="genres$ | async"
+  [currentUser]="currentUser$ | async"
+  [requireForm]="requireForm"
+  [optionalForm]="optionalForm"
+  [experienceForm]="experienceForm"
+  (submitEvent)="submitEvent($event)">
+</template-rd-profile-tab-template>
+<!-- <pre>{{experienceForm.value | json}}</pre>
+<pre>{{requireForm.value | json}}</pre>
+<pre>{{optionalForm.value | json}}</pre> -->
 
 
-<!-- <pre>{{profileForm.value | json}}</pre> -->
