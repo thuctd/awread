@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter, HostListener } from '@angular/core';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -18,6 +18,7 @@ export class ContentBookOrgan implements OnInit {
   @Input() faIcon = faChevronLeft;
   @Output() nextChapterBook = new EventEmitter();
   @Output() backChapterBook = new EventEmitter();
+  @Output() child = new EventEmitter();
   @Input() chapter = {
     position: '',
     chapterId: '',
@@ -29,7 +30,15 @@ export class ContentBookOrgan implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void { 
+  ngOnInit(): void {
     // const element = document.getElementById('content');
+  }
+
+  @HostListener('keydown', ['$event']) triggerEsc(e: KeyboardEvent) {
+    if (e.keyCode === 27) {
+      this.child.emit(false);
+      console.log("global esc");
+      alert("child esc");
+    }
   }
 }

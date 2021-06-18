@@ -17,4 +17,11 @@ export class BlockCopyPasteDirective {
   @HostListener('cut', ['$event']) blockCut(e: KeyboardEvent) {
     e.preventDefault();
   }
+
+  @HostListener('keydown', ['$event'])
+  onKeydownHandler(e: KeyboardEvent): void {
+    if (e.keyCode === 13) {
+      alert("enter")
+    }
+  }
 }

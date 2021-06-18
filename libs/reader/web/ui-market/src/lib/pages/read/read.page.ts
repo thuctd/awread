@@ -1,3 +1,4 @@
+import { HostListener } from '@angular/core';
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { Directive, Injectable, OnInit, ChangeDetectorRef } from '@angular/core';
@@ -20,6 +21,7 @@ export class ReadPage implements OnInit {
   bookChapters$ = this.chaptersFacade.chapters$;
   breadcrumbs;
   loading: boolean;
+  child: boolean;
 
   constructor(
     private router: Router,
@@ -47,6 +49,19 @@ export class ReadPage implements OnInit {
 
 
     this.booksFacade.getTopBooks().subscribe();
+  }
+
+  @HostListener('keydown', ['$event']) triggerEsc(e: KeyboardEvent) {
+    if (e.keyCode === 27 && this.child === true) {
+      console.log("global esc");
+      alert("parent esc");
+    } else {
+      this.child = true;
+    }
+  }
+
+  doSomething(child: any): void {
+    this.child = child;
   }
 
   getbreadcrumbs() {
