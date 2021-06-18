@@ -1,4 +1,4 @@
-<div class="grid grid-cols-10 my-3 text-sm md:text-base">
+<div *ngIf="value" class="grid grid-cols-10 my-3 text-sm md:text-base">
   <div class="col-span-3 nunito font-normal text-gray-400">{{key}}</div>
   <div class="col-span-7 roboto font-medium text-gray-text">{{value}}</div>
 </div>

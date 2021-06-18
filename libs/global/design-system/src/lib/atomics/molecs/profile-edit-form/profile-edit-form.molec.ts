@@ -1,5 +1,5 @@
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'molec-profile-edit-form',
@@ -18,7 +18,15 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfileEditFormMolec implements OnInit {
-  @Input() profileForm: FormGroup = this.fb.group({});
+  @Input() requireForm: FormGroup = this.fb.group({
+    username: ['', [Validators.required]],
+    name: ['', [Validators.required]],
+    email: ['', [Validators.required, Validators.email]],
+    phone: [''],
+    avatar: [false]
+  });
+  class = 'text-sm md:text-base cursor-pointer rounded-full text-white border-green-primary font-semibold py-1 md:py-2 px-6'
+  @Output() submitEvent = new EventEmitter();
   @Input() submitted: boolean;
   @Input() items = [
     {
@@ -30,16 +38,16 @@ export class ProfileEditFormMolec implements OnInit {
       formControlName: 'username',
     },
     {
-      title: 'Liên kết',
-      formControlName: 'websiteAddress',
+      title: 'Email',
+      formControlName: 'email',
     },
     {
-      title: 'Facebook',
-      formControlName: 'facebookAddress',
+      title: 'Số điện thoại',
+      formControlName: 'phone',
     },
   ];
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }
