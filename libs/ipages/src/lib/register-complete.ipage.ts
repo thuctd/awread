@@ -51,13 +51,11 @@ export class RegisterCompleteIpage implements OnInit {
     return g.get('password').value === g.get('confirmpassword').value ? null : { missmatch: true };
   }
 
-  linkSocialEvent(event) { }
-
   private updateForm() {
     const socialCredential = this.currentUserFacade.getRegisterCredential();
-    const socialUser = socialCredential.socialUser;
-    console.log('socialUser', socialUser);
-    if (socialUser) {
+    console.log('socialCredential', socialCredential);
+    if (socialCredential) {
+      const socialUser = socialCredential.socialUser;
       this.requireForm.patchValue({
         name: socialUser.name,
         email: socialUser.email,
@@ -68,16 +66,28 @@ export class RegisterCompleteIpage implements OnInit {
         [socialCredential.provider]: socialCredential.providerId,
       });
     }
+    this.currentUserFacade.setSocialCredential();
+    this.currentUserFacade.reset();
   }
 
-  async connectSocialNewAccount(provider: 'facebook' | 'google' | 'apple') {
+  async linkSocialEvent(provider: 'facebook' | 'google' | 'apple') {
+    // console.log('provider: ', provider);
     const credential = await this.authFacade.connectSocialNewAccount(provider);
     if (credential.providerId) {
-      this.optionalForm.get(credential.provider).patchValue(credential.providerId);
+      const socialUser = credential.socialUser;
+      this.optionalForm.patchValue({
+        firstname: socialUser.firstName ?? '',
+        lastname: socialUser.lastName ?? '',
+        [credential.provider]: credential.providerId,
+      }, { emitEvent: true });
+      this.optionalForm.updateValueAndValidity();
+      // console.log('after update: ', this.optionalForm.value);
     }
+    return;
   }
 
-  completeRegister() {
-    this.authFacade.createNewAccount(this.requireForm, this.optionalForm, this.experienceForm);
+  completeEvent() {
+    console.log('complete', this.requireForm.value, this.optionalForm.value, this.experienceForm.value);
+    this.authFacade.createNewAccount(this.requireForm.value, this.optionalForm.value, this.experienceForm.value);
   }
 }

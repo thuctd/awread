@@ -100,6 +100,7 @@ specifiers:
   passport-facebook: ^3.0.0
   passport-google-oauth: ^2.0.0
   pg: ^8.5.1
+  plausible-tracker: ^0.3.1
   pluralize: ^8.0.0
   postcss: ^8.2.14
   postcss-import: ^14.0.1
@@ -200,6 +201,7 @@ dependencies:
   passport-facebook: 3.0.0
   passport-google-oauth: 2.0.0
   pg: 8.5.1
+  plausible-tracker: 0.3.1
   postcss: 8.2.14
   postcss-import: 14.0.1_postcss@8.2.14
   postcss-loader: 5.2.0_postcss@8.2.14+webpack@4.46.0
@@ -15098,6 +15100,11 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       find-up: 3.0.0
+    dev: false
+
+  /plausible-tracker/0.3.1:
+    resolution: {integrity: sha512-oXnVyfTF2gzkfK3iOZCRZEnf8sH4gBASaJhY+clwWW1orIybfQpfbgg4U5Bwj5dW/4iNstM4tx4jMCVUfMCUbg==}
+    engines: {node: '>=10'}
     dev: false
 
   /please-upgrade-node/3.2.0:

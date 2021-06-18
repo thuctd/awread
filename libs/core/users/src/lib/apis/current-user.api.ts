@@ -39,7 +39,7 @@ export class CurrentUserApi {
                   firstname
                   middlename
                   lastname
-                  age
+                  ages
                   dob
                   gender
                   bio
@@ -59,10 +59,13 @@ export class CurrentUserApi {
       );
   }
 
-  updatePersonal(user) {
+  updatePersonal(personal, action: 'create' | 'update' = 'update') {
+    const userId = this.currentUserQuery.getUserId();
+    const mutation = action == 'create' ? 'createPersonal' : 'updatePersonalByUserId';
+    const inputPatch = action == 'create' ? 'personal' : 'personalPatch';
     return this.apollo.mutate({
       mutation: gql`
-        mutation updatePersonalByUserId(
+        mutation ${mutation}(
           $userId: UUID!
           $firstname: String
           $middlename: String
@@ -72,13 +75,14 @@ export class CurrentUserApi {
           $websiteAddress: String
           $facebookAddress: String
           $zaloAddress: String
-          $age: BigFloat
+          $ages: BigFloat
           $gender: BigFloat
         ) {
-          updatePersonalByUserId(
+          ${mutation}(
             input: {
-              userId: $userId
-              userPatch: {
+              ${action == 'create' ? '' : 'userId: $userId'}
+              ${inputPatch}: {
+                userId: $userId
                 firstname: $firstname
                 middlename: $middlename
                 lastname: $lastname
@@ -87,12 +91,12 @@ export class CurrentUserApi {
                 websiteAddress: $websiteAddress
                 facebookAddress: $facebookAddress
                 zaloAddress: $zaloAddress
-                age: $age
+                ages: $ages
                 gender: $gender
               }
             }
           ) {
-            user {
+            personal {
               firstname
               middlename
               lastname
@@ -101,15 +105,15 @@ export class CurrentUserApi {
               websiteAddress
               facebookAddress
               zaloAddress
-              age
+              ages
               gender
             }
           }
         }
       `,
       variables: {
-        ...user,
-        userId: this.currentUserQuery.getUserId(),
+        ...personal,
+        userId,
       },
     });
   }
@@ -184,6 +188,23 @@ export class CurrentUserApi {
       variables: {
         ...credential,
         userId: this.currentUserQuery.getUserId(),
+      },
+    });
+  }
+
+  agreeBecomeWriter() {
+    return this.apollo.mutate({
+      mutation: gql`
+      mutation refreshToken($clientMutationId: String) {
+          refreshToken(input: {clientMutationId: $clientMutationId}) {
+            results {
+              accessToken
+            }
+          }
+        }
+      `,
+      variables: {
+        clientMutationId: this.currentUserQuery.getUserId(),
       },
     });
   }

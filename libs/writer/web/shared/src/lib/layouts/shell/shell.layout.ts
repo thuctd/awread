@@ -16,12 +16,15 @@ export class ShellLayout implements OnInit {
   currentUser$ = this.currentUserFacade.currentUser$;
   searchControl: FormControl = new FormControl('');
 
+  constructor(
+    private currentUserFacade: CurrentUserFacade,
+    private creationsFacade: CreationsFacade,
+    private authFacade: AuthFacade,
+    private genresFacade: GenresFacade
+
+  ) { }
+
   routes = [
-    // {
-    //   name: 'dashboard',
-    //   iconUrl: '/global-assets/images/Dashboard.webp',
-    //   linkTo: '/dashboard',
-    // },
     {
       name: 'user',
       iconUrl: '/global-assets/images/user.webp',
@@ -34,14 +37,14 @@ export class ShellLayout implements OnInit {
       iconUrl2: '/global-assets/images/books-2.webp',
       linkTo: '/',
     },
+    {
+      name: 'analytic',
+      iconUrl: '/global-assets/images/analytic.webp',
+      iconUrl2: '/global-assets/images/analytic-2.webp',
+      linkTo: '/analytic',
+    },
   ];
 
-  constructor(
-    private currentUserFacade: CurrentUserFacade,
-    private authFacade: AuthFacade,
-    private genresFacade: GenresFacade,
-    private creationsFacade: CreationsFacade
-  ) {}
 
   ngOnInit(): void {
     this.genresFacade.getAllGenres().subscribe();
@@ -51,7 +54,7 @@ export class ShellLayout implements OnInit {
         this.creationsFacade.updateSearchTerm(term);
       });
   }
-  searchEvent(term: string) {}
+  searchEvent(term: string) { }
 
   logout() {
     this.authFacade.logout();

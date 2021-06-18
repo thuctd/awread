@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input, EventEmitter } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { faCheck, faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 @Component({
@@ -44,14 +44,14 @@ export class RegisterCompleteTemplate implements OnInit {
     { validator: this.passwordMatchValidator }
   );
 
-  @Input() social = new EventEmitter();
-  @Input() complete = new EventEmitter();
+  @Output() linkSocialEvent = new EventEmitter();
+  @Output() completeEvent = new EventEmitter();
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) { }
 
   passwordMatchValidator(g) {
     return g.get('password').value === g.get('confirmpassword').value ? null : { missmatch: true };
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 }

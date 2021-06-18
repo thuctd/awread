@@ -1,1 +1,3 @@
-<template-register-complete [isMobile]="true" [genres]="genres$ | async"></template-register-complete>
+<template-register-complete [requireForm]="requireForm" [optionalForm]="optionalForm" [experienceForm]="experienceForm" (completeEvent)="completeEvent()"
+    (linkSocialEvent)="linkSocialEvent($event)" [isMobile]="true" [genres]="genres$ | async">
+</template-register-complete>

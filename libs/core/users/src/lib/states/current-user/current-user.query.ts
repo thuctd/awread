@@ -9,6 +9,10 @@ export class CurrentUserQuery extends Query<CurrentUserState> {
     super(store);
   }
 
+  getTerms() {
+    return this.getValue().terms;
+  }
+
   getRole() {
     return this.getValue().role;
   }

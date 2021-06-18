@@ -16,7 +16,8 @@ export class WrtActionBtnsMolec implements OnInit {
   @Input() formActiveStatus = false;
   @Input() title = 'Đăng nhập với';
   @Output() auth = new EventEmitter();
-  constructor() {}
+  @Input() position = 'justify-center';
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

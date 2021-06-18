@@ -5,7 +5,7 @@ import { map, tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 @Injectable({ providedIn: 'root' })
 export class AuthApi {
-  constructor(private apollo: Apollo, private http: HttpClient) {}
+  constructor(private apollo: Apollo, private http: HttpClient) { }
 
   authenticateUser(variables) {
     return this.apollo
@@ -94,17 +94,18 @@ export class AuthApi {
             $password: String
             $phone: String
             $username: String
+            $name: String
             $facebook: String
             $google: String
             $apple: String
           ) {
             newUser(
               input: {
-                username: $username
                 email: $email
+                password: $password
                 phone: $phone
+                username: $username
                 name: $name
-                avatar: $avatar
                 facebook: $facebook
                 google: $google
                 apple: $apple
@@ -115,11 +116,10 @@ export class AuthApi {
                 accessToken
                 user {
                   userId
-                  username
                   email
                   phone
+                  username
                   name
-                  avatar
                   facebook
                   google
                   apple

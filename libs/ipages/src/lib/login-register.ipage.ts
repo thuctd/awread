@@ -4,6 +4,7 @@ import { Directive, Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthFacade, CurrentUserFacade } from '@awread/core/users';
 import { SnackbarService } from '@awread/global/packages';
+import { MatDialog } from '@angular/material/dialog';
 
 @Injectable({
   providedIn: 'root',
@@ -23,9 +24,8 @@ export class LoginRegisterIpage {
     private authFacade: AuthFacade,
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
-    private snackbarService: SnackbarService,
-    private currentUserFacade: CurrentUserFacade
-  ) {}
+    private matDialog: MatDialog,
+  ) { }
 
   ngOnInit() {
     this.initForm();
@@ -40,6 +40,7 @@ export class LoginRegisterIpage {
 
   register(provider) {
     console.log('register by', provider);
+    this.matDialog.closeAll();
     this.authFacade.connectProviderAndGoToRegister(provider);
   }
 
