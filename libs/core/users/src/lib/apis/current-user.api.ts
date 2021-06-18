@@ -28,6 +28,7 @@ export class CurrentUserApi {
               results {
                 users {
                   userId
+                  role
                   username
                   email
                   phone

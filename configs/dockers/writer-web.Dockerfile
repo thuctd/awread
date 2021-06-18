@@ -34,6 +34,7 @@ RUN pnpm build $application -- --configuration=${ENVIRONMENT} --no-progress
 FROM nginx:stable-alpine as writer-web
 ARG application
 ARG applicationPath
+ARG ENVIRONMENT
 EXPOSE 80
 WORKDIR /app
 # //INPUT: update this
