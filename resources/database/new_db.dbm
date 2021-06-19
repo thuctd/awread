@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.4-alpha" use-changelog="false" last-position="0,708" last-zoom="1" max-obj-count="32"
+<dbmodel pgmodeler-ver="0.9.4-alpha" use-changelog="false" last-position="0,1085" last-zoom="1" max-obj-count="32"
 	 default-schema="public" default-owner="postgres"
 	 layers="Default layer"
 	 active-layers="0"
@@ -1208,29 +1208,47 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<role name="postgres"/>
 	<position x="1080" y="1620"/>
 	<reference>
-		<expression><![CDATA[   b.*,
-	count(*) filter (where c.published = true)::numeric as "publishedCount",
-	count(*) filter (where c.published = false)::numeric as "draftCount",
-	jsonb_object_agg(k."genreId", k.genres) as "genres",
-	sum(v.count)::numeric as "viewCount"]]></expression>
+		<expression><![CDATA[	b.*,
+	c."publishedCount",
+	c."draftCount",
+	k.genres,
+	v."viewCount"]]></expression>
 	</reference>
 	<reference>
-		<expression><![CDATA[books b
-	inner join chapters c using ("bookId")
-	inner join book_visits v using ("bookId")
+		<expression><![CDATA[	books b
+   
+	inner join (
+		select 
+			"bookId",
+			count(*) filter (where chapters.published = true)::numeric as "publishedCount",
+			count(*) filter (where chapters.published = false)::numeric as "draftCount"
+		from chapters
+		where chapters."isDeleted" = false 
+		group by chapters."bookId"
+	) c using ("bookId")
+	
 	inner join (
 		select 
 		"bookId",
-		"genreId",
-		to_jsonb(jsonb_build_object(
+		jsonb_object_agg(books_genres."genreId", jsonb_build_object(
 			'genreId', genres."genreId",
 			'name', genres."name"
-		)) as genres
-		from books_genres natural join genres
-	) k  USING ("bookId")]]></expression>
+		)) as "genres"
+	
+		from books_genres inner join genres using ("genreId") group by books_genres."bookId"
+	) k  USING ("bookId")
+
+	left join (
+		select 
+			"bookId",
+			sum(book_visits.count)::numeric as "viewCount"
+		from book_visits
+		group by book_visits."bookId"
+	) v using ("bookId")
+	]]></expression>
 	</reference>
 	<reference>
-		<expression><![CDATA[group by 1]]></expression>
+		<expression><![CDATA[group by 1, c."publishedCount", c."draftCount", v."viewCount", k.genres]]></expression>
 	</reference>
 	<expression type="select-exp">0</expression>
 	<expression type="from-exp">1</expression>

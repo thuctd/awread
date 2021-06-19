@@ -33,4 +33,8 @@ export class ListBooksFacade {
     return this.listBooksGear.getAuthorBookByCursor(authors, action);
   }
 
+  resetCategoryBookPageInfo() {
+    this.listBooksGear.resetCategoryBookPageInfo();
+  }
+
 }

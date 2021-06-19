@@ -44,7 +44,7 @@ export class PopupChangeCoverOrgan implements OnInit {
   }
 
   submitEvent(croppedImage) {
-    console.log(croppedImage);
+    // console.log(croppedImage);
     this.status = 'loading';
     if (croppedImage) {
       let upload$;
@@ -56,18 +56,26 @@ export class PopupChangeCoverOrgan implements OnInit {
       }
       //save image
       upload$.subscribe(event => {
-        console.log('event', event);
+        // console.log('event', event);
         if (event.type === HttpEventType.DownloadProgress) {
-          console.log("download progress");
-          this.percentLoading = Math.round(event.loaded * 100 / event.total) + '%';
+          // console.log("download progress");
+          this.updatePercent(Math.round(event.loaded * 100 / event.total));
         }
         if (event.type === HttpEventType.Response) {
-          console.log("download completed");
-          this.percentLoading = '100%';
+          // console.log("download completed");
+          this.updatePercent(80);
         }
         if (event instanceof HttpResponse) {
           if (event.ok) {
-            this.matDialogRef.close({ success: event.ok });
+            setTimeout(() => {
+              this.updatePercent(90);
+              setTimeout(() => {
+                this.updatePercent(100);
+                setTimeout(() => {
+                  this.matDialogRef.close({ success: event.ok });
+                }, 500);
+              }, 500);
+            }, 500);
           } else {
             this.snackbarService.showError('Đăng ảnh thất bại');
           }
@@ -77,8 +85,12 @@ export class PopupChangeCoverOrgan implements OnInit {
         this.snackbarService.showError('Đăng ảnh thất bại');
       })
     } else {
-
       this.matDialogRef.close();
     }
+  }
+
+  updatePercent(percent: number) {
+    this.percentLoading = `${percent}%`;
+    this.cd.detectChanges();
   }
 }
