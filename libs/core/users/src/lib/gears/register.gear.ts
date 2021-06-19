@@ -10,6 +10,7 @@ import { SocialAuthService, SocialUser } from 'angularx-social-login';
 import { FacebookLoginProvider, GoogleLoginProvider } from 'angularx-social-login';
 import { Router } from '@angular/router';
 import { mergeMap, tap } from 'rxjs/operators';
+import { TransferTokenAddon } from '../addons/transfer-token.addon';
 @Injectable({ providedIn: 'root' })
 export class RegisterGear {
   constructor(
@@ -18,7 +19,8 @@ export class RegisterGear {
     private snackbarService: SnackbarService,
     private currentUserGear: CurrentUserGear,
     private router: Router,
-    private authRoutingGear: AuthRoutingGear
+    private authRoutingGear: AuthRoutingGear,
+    private transferTokenAddon: TransferTokenAddon,
   ) { }
 
   createNewAccount(requiredForm, optionalForm, experienceForm) {
@@ -50,6 +52,7 @@ export class RegisterGear {
     this.snackbarService.showSuccess(`Tạo tài khoản thành công!`);
     localStorage.setItem('accessToken', result?.accessToken);
     this.currentUserStore.update({ userId: result.userId });
+    this.transferTokenAddon.transfer(result?.accessToken);
   }
 
   registerFail(result) {

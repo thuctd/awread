@@ -4,6 +4,7 @@ import { ApolloAddon } from '../addons';
 import { CurrentUserService } from '../states/current-user';
 import { SnackbarService } from '@awread/global/packages';
 import { SocialAuthService } from 'angularx-social-login';
+import { TransferTokenAddon } from '../addons/transfer-token.addon';
 @Injectable({ providedIn: 'root' })
 export class LogoutGear {
   constructor(
@@ -12,6 +13,7 @@ export class LogoutGear {
     private router: Router,
     private snackbarService: SnackbarService,
     private socialAuthService: SocialAuthService,
+    private transferTokenAddon: TransferTokenAddon,
     @Inject('persistStorage') private persistStorage
   ) { }
 
@@ -36,5 +38,7 @@ export class LogoutGear {
     } catch (error) {
       console.warn('persist state clear failed', error);
     }
+
+    this.transferTokenAddon.transfer('null');
   }
 }

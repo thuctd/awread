@@ -1,4 +1,4 @@
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ChangeDetectorRef, Directive, Injectable, OnInit } from '@angular/core';
 import { MatDialog, MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ForgotPasswordFacade } from '@awread/core/users';
@@ -14,10 +14,23 @@ export class ForgotPage implements OnInit {
     private router: Router,
     private forgotPasswordFacade: ForgotPasswordFacade,
     private snackbarService: SnackbarService,
-    private cd: ChangeDetectorRef
-  ) {}
+    private cd: ChangeDetectorRef,
+    private activatedRoute: ActivatedRoute,
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // update share token
+    this.activatedRoute.queryParams.subscribe((queryParams) => {
+      if (queryParams.accessToken && queryParams.accessToken.length) {
+        if (queryParams.accessToken == 'null') {
+          localStorage.setItem('accessToken', '');
+        } else {
+          localStorage.setItem('accessToken', queryParams.accessToken);
+        }
+      }
+    });
+
+  }
   forgotSubmitEvent(email: string) {
     console.log('email: ', email);
     this.snackbarService.showSuccess('Đang gửi đường dẫn khôi phục mật khẩu...');
