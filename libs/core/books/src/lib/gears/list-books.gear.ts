@@ -10,6 +10,7 @@ import { FeatureBooksQuery, FeatureBooksStore } from '../states/feature-books';
 import { LatestBooksQuery, LatestBooksStore } from '../states/latest-books';
 import { CategoryBooksStore } from '../states/category-books';
 import { AuthorBooksQuery, AuthorBooksStore } from '../states/author-books';
+import { SearchBooksQuery, SearchBooksStore } from '../states/search-books';
 
 @Injectable({ providedIn: 'root' })
 export class ListBooksGear {
@@ -20,6 +21,8 @@ export class ListBooksGear {
     private topBooksQuery: TopBooksQuery,
     private goodBooksStore: GoodBooksStore,
     private goodBooksQuery: GoodBooksQuery,
+    private searchBooksQuery: SearchBooksQuery,
+    private searchBooksStore: SearchBooksStore,
     private authorBooksStore: AuthorBooksStore,
     private authorBooksQuery: AuthorBooksQuery,
     private latestBooksStore: LatestBooksStore,
@@ -70,6 +73,13 @@ export class ListBooksGear {
     return of(this.authorBooksQuery.getEndCursor())
       .pipe(
         pageInfoToAkita(this.authorBooksStore, (cursor) => this.listBooksApi.getAuthorBookByCursor(authors, cursor, first), action)
+      )
+  }
+
+  getFilterBookCategoryByCursor(filters, categoryId, action, first = 20) {
+    return of(this.categoryBooksQuery.getEndCursor())
+      .pipe(
+        pageInfoToAkita(this.categoryBooksStore, (cursor) => this.listBooksApi.getFilterBookCategoryByCursor(filters, categoryId, cursor, first), action)
       )
   }
 }

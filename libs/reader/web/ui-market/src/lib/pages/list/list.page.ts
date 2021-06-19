@@ -91,9 +91,16 @@ export class ListPage implements OnInit, OnDestroy {
   }
 
   filterBooks() {
+    this.loading = true;
     this.activatedRoute.parent.url.subscribe(([urlSegment]) => {
       const categoryId = urlSegment.parameterMap.get('categoryId');
-      this.booksFacade.getFilterBooks(categoryId).subscribe();
+      this.listBooksFacade.getFilterBookCategoryByCursor(categoryId, 'set').subscribe(() => {
+        this.loading = false;
+        this.cd.detectChanges();
+      });
+      this.books$ = this.booksFacade.categoryBooksQuery.selectAll();
+      this.isLoading$ = this.booksFacade.categoryBooksQuery.selectLoading();
+      this.hasNextPage$ = this.booksFacade.categoryBooksQuery.selectHasNextPage();
     })
   }
 
@@ -107,7 +114,7 @@ export class ListPage implements OnInit, OnDestroy {
 
   private fetchBooks() {
     if (this.booksFacade.categoryBooksQuery.getHasNextPage()) {
-      this.listBooksFacade.getCategoryBookByCursor(this.selectedCategoryId, 'add').pipe(untilDestroyed(this)).subscribe();
+      this.listBooksFacade.getFilterBookCategoryByCursor(this.selectedCategoryId, 'add').pipe(untilDestroyed(this)).subscribe();
     }
   }
 
