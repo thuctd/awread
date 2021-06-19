@@ -1,3 +1,3 @@
-<div class="font-medium mb-2 text-xs sm:text-sm">{{ countPublished }}/{{ countTotal }} -
-    {{ countTotal - countPublished }}
-    Drafts</div>
+<div class="font-medium mb-2 text-xs sm:text-sm">
+    {{ book.publishedCount }}/{{ +book.draftCount + +book.publishedCount }} - {{ book.draftCount }} Nháp
+</div>
