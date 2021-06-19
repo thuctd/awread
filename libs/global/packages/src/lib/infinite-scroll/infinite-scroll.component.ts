@@ -43,7 +43,7 @@ export class InfiniteScrollComponent implements OnInit, OnDestroy {
   }
 
   addCustomStyle() {
-    console.log('host', this.host, this.anchor, this.usingWindowScroll);
+    // console.log('host', this.host, this.anchor, this.usingWindowScroll);
     this.renderer.addClass(this.host.nativeElement, this.customClass);
     this.renderer.setAttribute(this.host.nativeElement, 'style', this.customStyle);
     if (this.usingWindowScroll == true) {
@@ -58,7 +58,7 @@ export class InfiniteScrollComponent implements OnInit, OnDestroy {
     };
     this.observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
-        console.log('entry', entry.isIntersecting, entry);
+        // console.log('entry', entry.isIntersecting, entry);
         if (entry.isIntersecting) {
           this.scrollIsIntersecting.emit();
         }

@@ -50,6 +50,10 @@ export class BooksFacade {
     private searchBooksStore: SearchBooksStore
   ) { }
 
+  resetFilter() {
+    this.booksStore.resetFilter();
+  }
+
   setCurrentPageLatestBook(pageNumber) {
     this.latestBooksStore.setCurentPage(pageNumber);
   }

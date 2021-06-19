@@ -19,6 +19,7 @@ export class ListBooksApi {
             allMvMostViewBooks(
               first: $first
               after: $after
+              orderBy: VIEWS_DESC
               condition: {
                 published: true
                 isDeleted: false
