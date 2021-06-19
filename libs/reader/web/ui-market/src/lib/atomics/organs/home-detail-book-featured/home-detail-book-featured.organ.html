@@ -16,7 +16,12 @@
       </div>
     </div>
   </ng-template>
-  <div class="flex justify-center items-center">
-    <pagination [totalRecords]="totalBook - 6" [recordsPerPage]="6" (pageChange)="pageChange.emit($event)"></pagination>
+  <div class="relative">
+    <div class="flex justify-center items-center">
+       <pagination [totalRecords]="totalBook - 6" [recordsPerPage]="6" (pageChange)="pageChange.emit($event)"></pagination>
+    </div>
+    <div class="absolute right-0 top-4">
+      <atom-text-link [routerLink]="page.href" [text]="'Xem thêm...'" [class]="'text-base text-green-primary italic font-bold'"></atom-text-link>
+    </div>
   </div>
 </section>
