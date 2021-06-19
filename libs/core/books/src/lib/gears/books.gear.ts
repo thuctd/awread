@@ -22,7 +22,8 @@ export class BooksGear {
     private booksApi: BooksApi,
   ) { }
 
-  getCategoryBooks(categoryId: string = '', limit: number = 9) {
+  getCategoryBooks(categoryId: string = '', limit: number = 20) {
+    console.log('categoryId gear: ', categoryId);
     this.categoryBooksStore.setLoading(true);
     return this.booksApi.getCategoryBooks(categoryId, limit).pipe(
       tap((res) => this.categoryBooksStore.set(res)),

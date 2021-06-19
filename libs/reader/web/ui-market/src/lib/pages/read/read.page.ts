@@ -1,3 +1,4 @@
+import { HostListener } from '@angular/core';
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { Directive, Injectable, OnInit, ChangeDetectorRef } from '@angular/core';
@@ -20,6 +21,9 @@ export class ReadPage implements OnInit {
   bookChapters$ = this.chaptersFacade.chapters$;
   breadcrumbs;
   loading: boolean;
+  child: boolean;
+
+
 
   constructor(
     private router: Router,
@@ -28,6 +32,8 @@ export class ReadPage implements OnInit {
     private cd: ChangeDetectorRef,
     private booksFacade: BooksFacade
   ) { }
+
+
 
   ngOnInit(): void {
     this.bookId = this.activatedRoute.snapshot.paramMap.get('bookId');
@@ -47,6 +53,10 @@ export class ReadPage implements OnInit {
 
 
     this.booksFacade.getTopBooks().subscribe();
+  }
+
+  doSomething(child: any): void {
+    this.child = child;
   }
 
   getbreadcrumbs() {

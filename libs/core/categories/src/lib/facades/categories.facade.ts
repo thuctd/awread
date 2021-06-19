@@ -8,7 +8,7 @@ export class CategoriesFacade {
 
   constructor(
     private categoriesGear: CategoriesGear,
-    private categoriesQuery: CategoriesQuery
+    public categoriesQuery: CategoriesQuery
   ) {
   }
 

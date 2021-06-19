@@ -1,3 +1,5 @@
 export const domainEnvironment = {
-    afterLoginUrl: '/domain'
+    afterLoginUrl: '/domain',
+    reader: false,
+    writer: false
 }

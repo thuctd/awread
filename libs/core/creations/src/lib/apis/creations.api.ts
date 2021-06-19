@@ -10,6 +10,48 @@ export class CreationsApi {
     private apollo: Apollo
   ) { }
 
+  getFilterBooks(userId, filters) {
+    const categoryId = filters.categoryId;
+    const completed = filters.completed;
+    console.log('filters: ', filters);
+    return this.apollo.query({
+      query: gql`
+        query getAllBooks($userId: UUID! $categoryId: BigFloat$completed: Boolean) {
+          allVCreations(
+            condition: { userId: $userId, isDeleted: false ,categoryId: $categoryId, completed: $completed }
+            orderBy: UPDATED_AT_DESC) {
+            nodes {
+              title
+              bookId
+              categoryId
+              completed
+              publisherId
+              createdAt
+              publishedAt
+              updatedAt
+              description
+              cover
+              published
+              type
+              age
+              userId,
+              publishedCount,
+              draftCount,
+              viewCount
+            }
+          }
+        }
+      `,
+      variables: {
+        userId,
+        categoryId: categoryId === '' ? undefined : categoryId,
+        completed: completed === '' ? undefined : completed === '0' ? false : true
+      },
+    }).pipe(
+      map(result => result?.['data']?.['allVCreations']?.['nodes'])
+    )
+  }
+
   searchCreationByTerm(userId, likeInsensitive: string) {
     likeInsensitive = `%${likeInsensitive}%`;
     return this.apollo.query({
@@ -215,7 +257,7 @@ export class CreationsApi {
               genreIds: $genreIds,
               publisherId: $publisherId,
               type: $type
-            } 
+            }
           )  {
             uuid
           }

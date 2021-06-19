@@ -11,5 +11,4 @@ export class SearchCreationsQuery extends QueryEntity<SearchCreationsState> {
     // this.createUIQuery();
   }
 
-  searchTerm$ = this.select(state => state.searchTerm);
 }

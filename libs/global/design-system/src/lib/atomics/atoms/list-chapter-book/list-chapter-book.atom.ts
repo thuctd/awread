@@ -13,10 +13,12 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListChapterBookAtom implements OnInit {
-  @Input() countTotal = 1000;
-  @Input() countPublished = 50;
+  @Input() book = {
+    publishedCount: 0,
+    draftCount: 0
+  }
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

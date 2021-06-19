@@ -1,9 +1,9 @@
 <section>
-  <normal-login-btn (btnClicked)="btnClicked.emit()" [active]="true" [name]="text"></normal-login-btn>
+  <normal-login-btn (btnClicked)="btnClicked.emit('email')" [active]="true" [name]="text"></normal-login-btn>
   <div>
     <atom-bar-seperate class="p-3"></atom-bar-seperate>
-    <social-login-btn startText="Đăng ký với " name="Facebook" (socialBtnClicked)="btnClicked.emit('facebook')"></social-login-btn>
-    <social-login-btn startText="Đăng ký với " name="Google" class="pt-3.5" (socialBtnClicked)="btnClicked.emit('google')">
+    <social-login-btn [startText]="startText" name="Facebook" (socialBtnClicked)="btnClicked.emit('facebook')"></social-login-btn>
+    <social-login-btn [startText]="startText" name="Google" class="pt-3.5" (socialBtnClicked)="btnClicked.emit('google')">
     </social-login-btn>
   </div>
 </section>

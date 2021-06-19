@@ -28,7 +28,7 @@ export class CategoryBooksStore extends EntityStore<CategoryBooksState> {
     this.update(page);
   }
 
-  setCursor(cursor) {
-    this.update({ cursor });
+  resetPageInfo() {
+    this.update(initialState);
   }
 }

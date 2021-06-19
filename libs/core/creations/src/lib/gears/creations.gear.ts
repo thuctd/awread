@@ -17,7 +17,7 @@ export class CreationsGear {
     private currentUserFacade: CurrentUserFacade,
 
     private SnackbarService: SnackbarService
-  ) {}
+  ) { }
 
   generateUuid() {
     return this.creationsApi.generateUuid();
@@ -32,10 +32,18 @@ export class CreationsGear {
   }
 
   searchCreationByTerm(searchTerm: string) {
-    this.booksFacade.setSearchBookLoading(true);
+    this.creationsStore.setLoading(true);
     return this.creationsApi.searchCreationByTerm(this.currentUserFacade.getUserId(), searchTerm).pipe(
-      tap((value) => this.booksFacade.setSearchBookLoading(false)),
-      tap((value) => this.booksFacade.setSearchBook(value))
+      tap((value) => this.creationsStore.setLoading(false)),
+      tap((value) => this.creationsStore.set(value)),
+    );
+  }
+
+  getFilterBooks(filters) {
+    this.creationsStore.setLoading(true);
+    return this.creationsApi.getFilterBooks(this.currentUserFacade.getUserId(), filters).pipe(
+      tap((value) => this.creationsStore.set(value)),
+      tap((value) => this.creationsStore.setLoading(false)),
     );
   }
 
@@ -44,9 +52,9 @@ export class CreationsGear {
       map((book) => {
         const authors = book?.['authorsByBookId']?.['nodes']
           ? book?.['authorsByBookId']?.['nodes'].map((result) => ({
-              userId: result.userId,
-              name: result.userByUserId.name,
-            }))
+            userId: result.userId,
+            name: result.userByUserId.name,
+          }))
           : [];
         return {
           book,

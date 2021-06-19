@@ -20,11 +20,11 @@ export class ListPage implements OnInit, OnDestroy {
   debugCount$ = this.booksFacade.categoryBooksQuery.selectCount();
   filtersForm: FormGroup;
   persistForm: PersistNgFormPlugin;
-  isLoading$: Observable<boolean>;
   categoryList$ = this.categoriesFacade.categories$;
   topBookList$ = this.booksFacade.topBooks$;
   genreList$ = this.genresFacade.genres$;
   books$;
+  isLoading$: Observable<boolean>;
   hasNextPage$: Observable<boolean>;
   typeBook: 'collected' | 'composed';
   loading: boolean;
@@ -44,7 +44,6 @@ export class ListPage implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.initForm();
-    this.updateForm();
     this.booksFacade.getTopBooks().subscribe();
     this.genresFacade.getAllGenres().subscribe();
     this.watchRouting();
@@ -67,6 +66,9 @@ export class ListPage implements OnInit, OnDestroy {
           this.titlePage = 'Truyện tự sáng tác';
           break;
       }
+      this.filtersForm.patchValue({
+        typeBook: urlSegment.path
+      });
       this.selectedCategoryId = urlSegment.parameterMap.get('categoryId');
       this.switchTab(this.selectedCategoryId);
     })
@@ -75,13 +77,14 @@ export class ListPage implements OnInit, OnDestroy {
   switchTab(categoryId: string) {
     this.selectedCategoryId = categoryId;
     this.router.navigate([this.typeBook, { categoryId: this.selectedCategoryId }]);
-    this.filterItemsByCategory(categoryId);
+    this.filterItemsByCategory(this.selectedCategoryId);
     this.cd.detectChanges();
   }
 
   filterItemsByCategory(categoryId: string) {
     this.loading = true;
-    this.listBooksFacade.getCategoryBookByCursor(categoryId, 'set').pipe(untilDestroyed(this)).subscribe(() => {
+    this.listBooksFacade.resetCategoryBookPageInfo();
+    this.booksFacade.getCategoryBooks(categoryId).pipe(untilDestroyed(this)).subscribe(() => {
       this.loading = false;
       this.cd.detectChanges();
     });
@@ -90,11 +93,13 @@ export class ListPage implements OnInit, OnDestroy {
     this.hasNextPage$ = this.booksFacade.categoryBooksQuery.selectHasNextPage();
   }
 
-  filterBooks() {
-    this.activatedRoute.parent.url.subscribe(([urlSegment]) => {
-      const categoryId = urlSegment.parameterMap.get('categoryId');
-      this.booksFacade.getFilterBooks(categoryId).subscribe();
-    })
+  filterBooksBtnClicked() {
+    this.loading = true;
+    this.booksFacade.getFilterBooks(this.selectedCategoryId).pipe(untilDestroyed(this)).subscribe(() => {
+      this.loading = false;
+      this.cd.detectChanges();
+    });
+    this.hasNextPage$ = this.booksFacade.categoryBooksQuery.selectHasNextPage();
   }
 
   nativeTopBook() {
@@ -109,14 +114,6 @@ export class ListPage implements OnInit, OnDestroy {
     if (this.booksFacade.categoryBooksQuery.getHasNextPage()) {
       this.listBooksFacade.getCategoryBookByCursor(this.selectedCategoryId, 'add').pipe(untilDestroyed(this)).subscribe();
     }
-  }
-
-  private updateForm() {
-    this.activatedRoute.parent.url.subscribe(([urlSegment]) => {
-      this.filtersForm.patchValue({
-        typeBook: urlSegment.path
-      });
-    })
   }
 
   private initForm() {

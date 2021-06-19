@@ -13,9 +13,11 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListUdBookAtom implements OnInit {
-  @Input() updatedAt = '2020-12-19';
+  @Input() book = {
+    updatedAt: '0000-00-00'
+  };
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

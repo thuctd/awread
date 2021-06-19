@@ -1,5 +1,5 @@
 <div class="self-start mt-4">
-  <div class="font-medium mb-2 text-xs sm:text-sm">
+  <!-- <div class="font-medium mb-2 text-xs sm:text-sm">
     {{ book.publishedCount }}/{{ +book.draftCount + +book.publishedCount }} - {{ book.draftCount }} Nháp
   </div>
 
@@ -8,7 +8,7 @@
       Cập nhật {{book.updatedAt ? (book.updatedAt | date :'dd-M-yy, h:mm a') :
       'Unknown Date'}}
     </p>
-  </div>
-  <!-- <list-chapter-book [countTotal]='countTotal' [countPublished]='countPublished'></list-chapter-book> -->
-  <!-- <list-ud-book></list-ud-book> -->
+  </div> -->
+  <list-chapter-book [book]="book"></list-chapter-book>
+  <list-ud-book [book]="book"></list-ud-book>
 </div>

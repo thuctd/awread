@@ -3,6 +3,7 @@ import { PersistNgFormPlugin } from '@datorama/akita';
 import { MatDialogRef } from '@angular/material/dialog';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { SnackbarService } from '@awread/global/packages';
 
 @Component({
   selector: 'template-wrt-rule-popup',
@@ -30,7 +31,7 @@ export class WrtRulePopupTemplate implements OnInit {
   </br>Awread được miễn trừ trách nhiệm trong mọi trường hợp, tác giả phải chịu mọi trách nhiệm liên quan với bên thứ ba và cơ quan nhà nước có thẩm quyền.`;
 
   constructor(private fb: FormBuilder, public dialogRef: MatDialogRef<WrtRulePopupTemplate>,
-    private currentUserFacade: CurrentUserFacade) { }
+    private currentUserFacade: CurrentUserFacade, private snackbarService: SnackbarService) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -38,6 +39,11 @@ export class WrtRulePopupTemplate implements OnInit {
 
   eventSubmit(): void {
     const terms = this.form.get('terms').value;
+    if (!terms) {
+      return this.snackbarService.showWarning('Để trở thành một Writer bạn phải đồng ý các điều khoản từ Awread. Chúng tôi thật sự xin lỗi vì điều này!');
+    } else {
+      this.snackbarService.showSuccess('Chào mừng bạn đến với Writer');
+    }
     this.dialogRef.close(terms);
   }
 

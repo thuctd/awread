@@ -27,6 +27,8 @@ export class WrtBooksListTemplate implements OnInit {
     categoryId: [''],
     completed: [''],
   });
+  @Input() categories;
+  @Input() searchTerm;
 
   @Input() data = {
     btns: [
