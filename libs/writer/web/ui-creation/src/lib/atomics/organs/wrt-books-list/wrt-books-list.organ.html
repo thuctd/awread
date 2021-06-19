@@ -35,10 +35,13 @@
 
     </ng-container>
     <ng-template #noData>
-      <div class="no-data flex flex-col items-center">
+      <div *ngIf="searchTerm === ''" class="no-data flex flex-col items-center">
         <div class="text-center py-8">Bạn chưa có truyện nào, vui lòng ấn nút "Đăng truyện" để thêm truyện mới.</div>
         <cr-submit-btn (btnClicked)="bookEvent.emit({ type: 'create' })" [faIcon]="faIcon" [submitText]="'Đăng truyện'">
         </cr-submit-btn>
+      </div>
+      <div *ngIf="searchTerm !== ''">
+        <div class="text-center py-8">Không tìm thấy truyện nào.</div>
       </div>
     </ng-template>
   </ng-template>

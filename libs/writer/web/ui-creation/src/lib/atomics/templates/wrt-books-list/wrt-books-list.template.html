@@ -1,3 +1,3 @@
 <section class="w-full max-w-screen-xl mx-auto">
-  <organ-wrt-books-list [filters]="filters" (filterBooksEvent)="filterBooksEvent.emit()" [data]="data" class="ml-32" [books]="books" [loading]="loading" (bookEvent)="bookEvent.emit($event)"></organ-wrt-books-list>
+  <organ-wrt-books-list [searchTerm]="searchTerm" [filters]="filters" (filterBooksEvent)="filterBooksEvent.emit()" [data]="data" class="ml-32" [books]="books" [loading]="loading" (bookEvent)="bookEvent.emit($event)"></organ-wrt-books-list>
 </section>

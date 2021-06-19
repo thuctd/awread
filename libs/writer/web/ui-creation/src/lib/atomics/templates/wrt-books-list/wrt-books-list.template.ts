@@ -22,6 +22,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WrtBooksListTemplate implements OnInit {
+  @Input() searchTerm;
   @Input() filters: FormGroup = this.fb.group({
     categoryId: [''],
     completed: [''],
@@ -62,7 +63,7 @@ export class WrtBooksListTemplate implements OnInit {
   @Input() loading: boolean;
   @Output() bookEvent = new EventEmitter();
   @Output() filterBooksEvent = new EventEmitter();
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

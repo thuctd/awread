@@ -30,6 +30,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WrtBooksListOrgan implements OnInit {
+  @Input() searchTerm;
   @Input() isFilter = false;
   @Input() filters: FormGroup = this.fb.group({
     categoryId: [''],
