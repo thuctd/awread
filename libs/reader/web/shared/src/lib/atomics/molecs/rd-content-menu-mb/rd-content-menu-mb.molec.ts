@@ -28,10 +28,10 @@ export class RdContentMenuMbMolec implements OnInit {
         title: 'Truyện tự sáng tác',
         href: ['/composed', { categoryId: '' }],
       },
-      {
-        title: 'Truyện sưu tầm',
-        href: ['/collected', { categoryId: '' }],
-      },
+      // {
+      //   title: 'Truyện sưu tầm',
+      //   href: ['/collected', { categoryId: '' }],
+      // },
     ],
   };
 
@@ -68,7 +68,7 @@ export class RdContentMenuMbMolec implements OnInit {
     href: '/single/profile',
   };
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }
