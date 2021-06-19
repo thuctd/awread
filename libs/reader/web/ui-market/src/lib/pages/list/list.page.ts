@@ -94,13 +94,13 @@ export class ListPage implements OnInit, OnDestroy {
     this.loading = true;
     this.activatedRoute.parent.url.subscribe(([urlSegment]) => {
       const categoryId = urlSegment.parameterMap.get('categoryId');
-      this.listBooksFacade.getFilterBookCategoryByCursor(categoryId, 'set').subscribe(() => {
+      this.listBooksFacade.getFilterBookCategoryByCursor(categoryId, 'set').pipe(untilDestroyed(this)).subscribe(() => {
         this.loading = false;
-        this.cd.detectChanges();
       });
       this.books$ = this.booksFacade.categoryBooksQuery.selectAll();
       this.isLoading$ = this.booksFacade.categoryBooksQuery.selectLoading();
       this.hasNextPage$ = this.booksFacade.categoryBooksQuery.selectHasNextPage();
+      this.cd.detectChanges();
     })
   }
 

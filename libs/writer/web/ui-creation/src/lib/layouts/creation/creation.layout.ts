@@ -43,13 +43,14 @@ export class CreationLayout implements OnInit {
 
   openPreview(): void {
     const dialogRef = this.matDialog.open(WrtRulePopupTemplate, {
+      width: '50%',
+      height: '75%',
+      disableClose: true
     });
 
     dialogRef.afterClosed().subscribe((res) => {
       if (res) {
         this.currentUserFacade.agreeBecomeWriter();
-      } else {
-        this.snackbarService.showSuccess('Chúc bạn một ngày tốt lành!');
       }
     });
   }

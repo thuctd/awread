@@ -285,7 +285,8 @@ export class ListBooksApi {
                   totalCount
                 }
               }`;
-    console.log('asd', queryString);
+    console.log('assd', queryString);
+    console.log('assd', genres);
     return this.apollo.query({
       query: gql`
           ${queryString}
