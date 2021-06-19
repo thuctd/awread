@@ -93,5 +93,4 @@ export class PopupChangeCoverOrgan implements OnInit {
     this.percentLoading = `${percent}%`;
     this.cd.detectChanges();
   }
-
 }
