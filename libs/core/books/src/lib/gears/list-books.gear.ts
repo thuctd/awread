@@ -66,6 +66,10 @@ export class ListBooksGear {
       )
   }
 
+  resetCategoryBookPageInfo() {
+    this.categoryBooksStore.resetPageInfo();
+  }
+
   getAuthorBookByCursor(authors, action, first = 20) {
     return of(this.authorBooksQuery.getEndCursor())
       .pipe(
