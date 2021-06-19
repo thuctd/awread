@@ -17,13 +17,12 @@ export class NavbarMenuOrgan implements OnInit {
     title: 'Truyện',
     dropdown: [
       {
-        title: 'Truyện tự sáng tác',
+        title: {
+          title: 'Truyện tự sáng tác',
+          page: '/composed',
+          categoryId: '',
+        },
         menu: [
-          {
-            page: '/composed',
-            categoryId: '',
-            title: 'Tất cả',
-          },
           {
             page: '/composed',
             categoryId: '1',
