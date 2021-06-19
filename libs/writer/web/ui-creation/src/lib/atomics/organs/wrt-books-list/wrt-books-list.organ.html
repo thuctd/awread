@@ -5,8 +5,8 @@
   <ng-template #loaded>
     <ng-container *ngIf="books?.length;else noData">
       <div class="flex justify-end pb-8">
-        <cr-submit-btn class="pr-8" (btnClicked)="displayFilter()" [submitText]="'Lọc truyện'">
-        </cr-submit-btn>
+        <!-- // NOTE:  CHƯA LÀM XONG NÊN TẠM ẨN -->
+        <!-- <cr-submit-btn class="pr-8" (btnClicked)="displayFilter()" [submitText]="'Lọc truyện'"></cr-submit-btn> -->
         <cr-submit-btn (btnClicked)="bookEvent.emit({ type: 'create' })" [faIcon]="faIcon" [submitText]="'Đăng truyện'">
         </cr-submit-btn>
       </div>
@@ -46,4 +46,3 @@
 
 <!-- <pre>{{ filters.value | json }}</pre>
 <pre>{{ books | json }}</pre> -->
-
