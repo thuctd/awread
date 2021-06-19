@@ -14,7 +14,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BooksTemplate implements OnInit {
-  display = 'grid';
+  display = 'list';
   @Input() titlePage;
   @Input() totalBook;
   @Input() loading;
@@ -22,12 +22,12 @@ export class BooksTemplate implements OnInit {
   @Input() actions = [
     {
       faIcon: faThLarge,
-      display: 'grid',
+      display: 'list',
       class: 'rounded-l-md',
     },
     {
       faIcon: faList,
-      display: 'list',
+      display: 'grid',
       class: 'rounded-r-md',
     },
   ];

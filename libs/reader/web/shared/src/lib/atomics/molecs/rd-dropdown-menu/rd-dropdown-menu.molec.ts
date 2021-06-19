@@ -16,7 +16,11 @@ export class RdDropdownMenuMolec implements OnInit {
   @Input() hidden = true;
   @Input() dropdownData = [
     {
-      title: 'Truyện tự sáng tác',
+      title: {
+        title: 'Truyện sưu tầm',
+        page: '',
+        categoryId: '',
+      },
       menu: [
         {
           page: 'composed',
@@ -56,6 +60,6 @@ export class RdDropdownMenuMolec implements OnInit {
       ],
     },
   ];
-  constructor() {}
-  ngOnInit(): void {}
+  constructor() { }
+  ngOnInit(): void { }
 }
