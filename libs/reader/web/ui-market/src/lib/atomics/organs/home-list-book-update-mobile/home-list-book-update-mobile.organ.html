@@ -28,5 +28,8 @@
     <div *ngIf="hasNextPage" (click)="onClickPage(currentPage + 1)" class="cursor-pointer absolute top-72 -right-2">
       <fa-icon class="text-gray-text text-sm md:text-base" [icon]="arrowRightIcon"></fa-icon>
     </div>
+    <div class="flex justify-end pr-2">
+      <atom-text-link [routerLink]="page.href" [text]="'Xem thêm...'" [class]="'text-sm text-green-primary italic font-bold'"></atom-text-link>
+    </div>
   </ng-template>
 </section>

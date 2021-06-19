@@ -22,12 +22,12 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WrtBooksListTemplate implements OnInit {
+  @Input() searchTerm;
   @Input() filters: FormGroup = this.fb.group({
     categoryId: [''],
     completed: [''],
   });
   @Input() categories;
-  @Input() searchTerm;
 
   @Input() data = {
     btns: [

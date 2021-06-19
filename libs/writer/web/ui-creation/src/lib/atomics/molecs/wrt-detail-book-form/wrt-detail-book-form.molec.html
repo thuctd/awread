@@ -1,4 +1,4 @@
-<form [formGroup]="bookForm" class="px-3" autocomplete="off">
+<form [formGroup]="bookForm" class="px-3 select-book-form" autocomplete="off">
 
   <!-- <pre> form dirty {{ bookForm.value | json  }} </pre>
   <pre> form dirty {{ bookForm.dirty }} </pre>
@@ -68,7 +68,7 @@
 
 
 
-      <ng-select class="custom" [items]="genres" bindValue="genreId" [multiple]="true" bindLabel="name" formControlName="genreIds" placeholder="Thể loại"
+      <ng-select class="custom" [items]="genres" bindValue="genreId" [closeOnSelect]="false" [multiple]="true" bindLabel="name" formControlName="genreIds" placeholder="Thể loại"
         (add)="addItem($event)" (remove)="removeItem($event)">
       </ng-select>
       <div *ngIf="bookForm.controls.genreIds.errors && bookForm.controls.genreIds.touched" class="invalid-feedback">

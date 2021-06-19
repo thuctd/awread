@@ -9,7 +9,12 @@
   </div>
   <!-- <molec-rd-home-list-book-update [loading]="loading" [isNovel]="tabs[0].isNovel" *ngIf="tabHead.currentName === tabs[0].name" [books]="books">
   </molec-rd-home-list-book-update> -->
-  <div class="flex justify-center items-center">
-    <pagination [tabName]="tabHead.currentName" [totalRecords]="totalBook - 10" [recordsPerPage]="10" (pageChange)="pageChange.emit($event)"></pagination>
+  <div class="relative">
+    <div class="flex justify-center items-center">
+      <pagination [tabName]="tabHead.currentName" [totalRecords]="totalBook - 10" [recordsPerPage]="10" (pageChange)="pageChange.emit($event)"></pagination>
+    </div>
+    <div class="absolute right-0 top-4">
+      <atom-text-link [routerLink]="page.href" [text]="'Xem thêm...'" [class]="'text-base text-green-primary italic font-bold'"></atom-text-link>
+    </div>
   </div>
 </section>

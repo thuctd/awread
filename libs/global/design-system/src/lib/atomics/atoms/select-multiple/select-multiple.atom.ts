@@ -9,21 +9,18 @@ import { FormBuilder, FormGroup } from '@angular/forms';
       :host {
         display: block;
       }
-      ::ng-deep .ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-value {
-        background-color: #5ABD8C !important;
+      ::ng-deep .select-multiple .ng-value-container {
+        color: #34d399;
+        .ng-placeholder {
+          color: #34d399;
+        }
       }
-      ::ng-deep .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected {
-        color: #5ABD8C;
-      }
-      ::ng-deep .ng-select.ng-select-focused .ng-select-container .ng-value-container .ng-placeholder {
-        color: #5ABD8C;
-      }
-      ::ng-deep .ng-select.ng-select-focused .ng-select-container:after {
-        border-color: #5ABD8C;
-        border-width: 1px;
-      }
-      ::ng-deep .ng-select.ng-select-focused .ng-select-container .ng-arrow-wrapper .ng-arrow {
-        color: #5ABD8C;
+      ::ng-deep .select-multiple .ng-select .ng-select-container {
+        /* height: 40px; */
+        padding: 0.25rem;
+        border-top: none;
+        border-left: none;
+        border-right: none;
       }
     `
   ],
