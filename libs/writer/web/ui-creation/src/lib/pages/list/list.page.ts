@@ -44,7 +44,7 @@ export class ListPage implements OnInit {
   }
 
   bookEvent(event) {
-    console.log('event', event);
+    // console.log('event', event);
     switch (event.type) {
       case 'create':
         this.router.navigate(['list', 'new', 'detail']);
@@ -71,12 +71,12 @@ export class ListPage implements OnInit {
         break;
       case 'delete':
         this.creationsFacade.delete(event.bookId).subscribe((result) => {
-          console.log('result', result);
+          // console.log('result', result);
         });
         break;
 
       default:
-        console.log('event', event);
+        // console.log('event', event);
         break;
     }
   }
