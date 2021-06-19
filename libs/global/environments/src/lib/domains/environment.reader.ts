@@ -5,5 +5,7 @@ window.haveMobile = true;
 
 
 export const domainEnvironment = {
-    afterLoginUrl: '/'
+    afterLoginUrl: '/',
+    writer: false,
+    reader: true
 };

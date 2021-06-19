@@ -11,7 +11,6 @@
     <wrt-remember-forgot [link]="forgotLink"></wrt-remember-forgot>
   </div>
 
-  <molec-submit class="mt-6" (btnClicked)="auth.emit('email')" (socialFBBtnClicked)="auth.emit('facebook')" (socialGGBtnClicked)="auth.emit('google')"
-    [active]="loginForm.form.valid">
+  <molec-submit class="mt-6" (btnClicked)="auth.emit($event)" [active]="loginForm.form.valid">
   </molec-submit>
 </section>

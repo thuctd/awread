@@ -4,5 +4,7 @@ window.haveMobile = false;
 // console.log("environment writer: have Mobile ?", (window as any).haveMobile);
 
 export const domainEnvironment = {
-    afterLoginUrl: '/list'
+    afterLoginUrl: '/list',
+    writer: true,
+    reader: false
 }

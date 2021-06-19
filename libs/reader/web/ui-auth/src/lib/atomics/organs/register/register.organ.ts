@@ -27,9 +27,9 @@ export class RegisterOrgan implements OnInit {
   });
   @Output() auth = new EventEmitter();
 
-  constructor(private fb: FormBuilder, private matDialog: MatDialog) {}
+  constructor(private fb: FormBuilder, private matDialog: MatDialog) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   openFormLogin($event): void {
     this.matDialog.open(LoginWebTemplate, {

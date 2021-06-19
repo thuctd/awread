@@ -1,4 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { LoginRegisterPage } from '../login-register/login-register.page';
 
 @Component({
   selector: 'page-login-register-mobile',
@@ -12,4 +13,4 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LoginRegisterMobilePage {}
+export class LoginRegisterMobilePage extends LoginRegisterPage { }

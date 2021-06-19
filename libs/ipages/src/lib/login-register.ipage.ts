@@ -29,10 +29,15 @@ export class LoginRegisterIpage {
 
   ngOnInit() {
     this.initForm();
-    this.activatedRoute.queryParams.subscribe((params) => {
-      if (params.tab) {
-        console.log('params: ', params);
-        this.selectedTab = params.tab;
+    this.activatedRoute.queryParams.subscribe((queryParams) => {
+      console.log('params');
+      if (queryParams.accessToken && queryParams.accessToken.length) {
+        localStorage.setItem('accessToken', queryParams.accessToken);
+      }
+
+      if (queryParams.tab) {
+        console.log('params: ', queryParams);
+        this.selectedTab = queryParams.tab;
       }
     });
     // this.router.navigate(['register']);

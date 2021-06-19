@@ -7,6 +7,7 @@ import { SocialAuthService, SocialUser } from "angularx-social-login";
 import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
 import { CurrentUserGear } from './current-user.gear';
 import { MatDialog } from '@angular/material/dialog';
+import { domainEnvironment } from '@awread/global/environments';
 
 @Injectable({ providedIn: 'root' })
 export class LoginGear {
@@ -66,6 +67,26 @@ export class LoginGear {
       this.authRoutingGear.navigateAfterLoginComplete();
     });
     this.matDialog.closeAll();
+
+    if (domainEnvironment.reader) {
+      // open tab: 
+      const iframe = document.createElement('iframe');
+      iframe.setAttribute("id", "iframe-element");
+      iframe.style.display = "none";
+      let origin = window.location.origin.replace('://', '://w.');
+      if (window.location.hostname == "localhost") {
+        origin = 'http://localhost:2200';
+        console.log('open iframe at', origin);
+      }
+
+      iframe.src = `${origin}/login?accessToken=${result?.accessToken}`;
+      document.body.appendChild(iframe);
+      setTimeout(() => {
+        const element = document.getElementById('iframe-element');
+        element.parentNode.removeChild(element);
+      }, 3000);
+
+    }
   }
 
   loginFail() {
