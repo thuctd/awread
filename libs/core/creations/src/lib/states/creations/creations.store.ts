@@ -2,18 +2,22 @@ import { Injectable } from '@angular/core';
 import { EntityState, EntityStore, StoreConfig, ActiveState } from '@datorama/akita';
 import { Creation } from '../../models';
 
-export enum VISIBILITY_FILTER {
-  SHOW_ALL = 'SHOW_ALL'
-}
-
 export interface CreationsState extends EntityState<Creation>, ActiveState {
   ui: {
-    filter: VISIBILITY_FILTER;
-  };
+    filters: {
+      categoryId: string;
+      completed: string;
+    },
+    searchTerm: string;
+  }
 }
 const initialState = {
   ui: {
-    filter: VISIBILITY_FILTER.SHOW_ALL
+    filters: {
+      categoryId: '',
+      completed: '',
+    },
+    searchTerm: '',
   }
 };
 
@@ -27,7 +31,7 @@ const initialState = {
 export class CreationsStore extends EntityStore<CreationsState> {
   // ui: EntityUIStore<CreationUIState>;
   constructor() {
-    super();
+    super(initialState);
     // this.createUIStore().setInitialEntityState();
   }
 

@@ -6,12 +6,12 @@
     <ng-container *ngIf="books?.length;else noData">
       <div class="flex justify-end pb-8">
         <!-- // NOTE:  CHƯA LÀM XONG NÊN TẠM ẨN -->
-        <!-- <cr-submit-btn class="pr-8" (btnClicked)="displayFilter()" [submitText]="'Lọc truyện'"></cr-submit-btn> -->
+        <cr-submit-btn class="pr-8" (btnClicked)="displayFilter()" [submitText]="'Lọc truyện'"></cr-submit-btn>
         <cr-submit-btn (btnClicked)="bookEvent.emit({ type: 'create' })" [faIcon]="faIcon" [submitText]="'Đăng truyện'">
         </cr-submit-btn>
       </div>
       <div *ngIf="isFilter" class="pb-6">
-        <molec-wrt-filter-book-form [filters]="filters" (filterBooksEvent)="filterBooksEvent.emit()"></molec-wrt-filter-book-form>
+        <molec-wrt-filter-book-form [categories]="categories" [filters]="filters" (filterBooksEvent)="filterBooksEvent.emit()"></molec-wrt-filter-book-form>
       </div>
       <div class="mb-4">
         <molec-wrt-book-list-head></molec-wrt-book-list-head>
@@ -35,11 +35,18 @@
 
     </ng-container>
     <ng-template #noData>
-      <div class="no-data flex flex-col items-center">
-        <div class="text-center py-8">Bạn chưa có truyện nào, vui lòng ấn nút "Đăng truyện" để thêm truyện mới.</div>
-        <cr-submit-btn (btnClicked)="bookEvent.emit({ type: 'create' })" [faIcon]="faIcon" [submitText]="'Đăng truyện'">
-        </cr-submit-btn>
-      </div>
+      <ng-container *ngIf="searchTerm?.length > 0;else noSearchTerm">
+        <div class="no-data flex flex-col items-center">
+          <div class="text-center text-base py-8">Không tìm thấy kết quả, Hãy thử một lựa chọn khác...</div>
+        </div>
+      </ng-container>
+      <ng-template #noSearchTerm>
+        <div class="no-data flex flex-col items-center">
+          <div class="text-center py-8">Bạn chưa có truyện nào, vui lòng ấn nút "Đăng truyện" để thêm truyện mới.</div>
+          <cr-submit-btn (btnClicked)="bookEvent.emit({ type: 'create' })" [faIcon]="faIcon" [submitText]="'Đăng truyện'">
+          </cr-submit-btn>
+        </div>
+      </ng-template>
     </ng-template>
   </ng-template>
 </div>

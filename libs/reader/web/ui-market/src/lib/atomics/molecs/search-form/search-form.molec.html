@@ -1,12 +1,6 @@
-<form class="flex justify-center items-center px-2" [formGroup]="filters">
-  <div class="relative pr-3 mt-4c5">
-    <ng-select [items]="genres"
-      [closeOnSelect]="false"
-      bindValue="genreId"
-      bindLabel="name"
-      [multiple]="true"
-      placeholder="Thể loại"
-      formControlName="genres">
+<form class="flex justify-center items-center px-2 mt-4c5" [formGroup]="filters">
+  <div class="relative pr-3">
+    <ng-select [items]="genres" [closeOnSelect]="false" bindValue="genreId" bindLabel="name" [multiple]="true" placeholder="Thể loại" formControlName="genres">
       <ng-template ng-option-tmp let-item="item" let-index="index" let-item$="item$">
         <div class="flex">
           <div class="ml-1.5 mt-0.5">
@@ -20,10 +14,11 @@
       <fa-icon class="text text-gray-text" [icon]="faIcon"></fa-icon>
     </div>
   </div>
-  <atom-select [options]="selectCriteria.options" [inputControl]="filters.get('criteria')" [widthClass]="selectCriteria.widthClass" [titleSellect]="selectCriteria.title" class="px-3">
+  <atom-select [options]="selectCriteria.options" [inputControl]="filters.get('criteria')" [widthClass]="selectCriteria.widthClass"
+    [titleSellect]="selectCriteria.title" class="px-3">
   </atom-select>
-  <atom-select [options]="selectStatus.options" [inputControl]="filters.get('completed')" [widthClass]="selectStatus.widthClass" [titleSellect]="selectStatus.title"
-    class="px-3"></atom-select>
+  <atom-select [options]="selectStatus.options" [inputControl]="filters.get('completed')" [widthClass]="selectStatus.widthClass"
+    [titleSellect]="selectStatus.title" class="px-3"></atom-select>
   <atom-select [options]="postingDate.options" [inputControl]="filters.get('postingDate')" [widthClass]="postingDate.widthClass"
     [titleSellect]="postingDate.title" class="px-3"></atom-select>
   <div class="md:pl-0 xl:pl-5">

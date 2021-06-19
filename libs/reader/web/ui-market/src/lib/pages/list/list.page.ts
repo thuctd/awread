@@ -20,11 +20,11 @@ export class ListPage implements OnInit, OnDestroy {
   debugCount$ = this.booksFacade.categoryBooksQuery.selectCount();
   filtersForm: FormGroup;
   persistForm: PersistNgFormPlugin;
-  isLoading$: Observable<boolean>;
   categoryList$ = this.categoriesFacade.categories$;
   topBookList$ = this.booksFacade.topBooks$;
   genreList$ = this.genresFacade.genres$;
   books$;
+  isLoading$: Observable<boolean>;
   hasNextPage$: Observable<boolean>;
   typeBook: 'collected' | 'composed';
   loading: boolean;
@@ -77,14 +77,14 @@ export class ListPage implements OnInit, OnDestroy {
   switchTab(categoryId: string) {
     this.selectedCategoryId = categoryId;
     this.router.navigate([this.typeBook, { categoryId: this.selectedCategoryId }]);
-    this.filterItemsByCategory(categoryId);
+    this.filterItemsByCategory(this.selectedCategoryId);
     this.cd.detectChanges();
   }
 
   filterItemsByCategory(categoryId: string) {
     this.loading = true;
     this.listBooksFacade.resetCategoryBookPageInfo();
-    this.listBooksFacade.getCategoryBookByCursor(categoryId, 'set').pipe(untilDestroyed(this)).subscribe(() => {
+    this.booksFacade.getCategoryBooks(categoryId).pipe(untilDestroyed(this)).subscribe(() => {
       this.loading = false;
       this.cd.detectChanges();
     });
@@ -94,7 +94,12 @@ export class ListPage implements OnInit, OnDestroy {
   }
 
   filterBooksBtnClicked() {
-    this.booksFacade.getFilterBooks(this.selectedCategoryId).subscribe();
+    this.loading = true;
+    this.booksFacade.getFilterBooks(this.selectedCategoryId).pipe(untilDestroyed(this)).subscribe(() => {
+      this.loading = false;
+      this.cd.detectChanges();
+    });
+    this.hasNextPage$ = this.booksFacade.categoryBooksQuery.selectHasNextPage();
   }
 
   nativeTopBook() {

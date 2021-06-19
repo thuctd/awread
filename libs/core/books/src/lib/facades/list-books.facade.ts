@@ -1,3 +1,4 @@
+import { BooksQuery } from './../states/books/books.query';
 import { Injectable } from '@angular/core';
 import { ListBooksGear } from '../gears';
 
@@ -5,6 +6,7 @@ import { ListBooksGear } from '../gears';
 export class ListBooksFacade {
 
   constructor(
+    public booksQuery: BooksQuery,
     private listBooksGear: ListBooksGear,
   ) {
   }
@@ -26,7 +28,7 @@ export class ListBooksFacade {
   }
 
   getCategoryBookByCursor(categoryId, action?) {
-    return this.listBooksGear.getCategoryBookByCursor(categoryId, action);
+    return this.listBooksGear.getCategoryBookByCursor(this.booksQuery.getCurrentFilter(), categoryId, action);
   }
 
   getAuthorBookByCursor(authors, action?) {

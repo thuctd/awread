@@ -26,6 +26,8 @@ export class WrtBooksListTemplate implements OnInit {
     categoryId: [''],
     completed: [''],
   });
+  @Input() categories;
+  @Input() searchTerm;
 
   @Input() data = {
     btns: [
@@ -62,7 +64,7 @@ export class WrtBooksListTemplate implements OnInit {
   @Input() loading: boolean;
   @Output() bookEvent = new EventEmitter();
   @Output() filterBooksEvent = new EventEmitter();
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

@@ -41,7 +41,7 @@ export class LatestBooksPage implements OnInit {
           this.hasNextPage$ = this.booksFacade.topBooksQuery.selectHasNextPage();
           this.isLoading$ = this.booksFacade.topBooksQuery.selectLoading();
           this.books$ = this.booksFacade.topBooksQuery.selectAll();
-          // this.listBooksFacade.getTopBookByCursor().pipe(untilDestroyed(this)).subscribe();
+          this.listBooksFacade.getTopBookByCursor().pipe(untilDestroyed(this)).subscribe();
           break;
         case 'good-books':
           this.title = "TOP TRUYỆN ĐƯỢC ĐÁNH GIÁ TÍCH CỰC";
@@ -49,7 +49,7 @@ export class LatestBooksPage implements OnInit {
           this.totalBook$ = this.booksFacade.goodBooksQuery.selectTotalBook();
           this.isLoading$ = this.booksFacade.goodBooksQuery.selectLoading();
           this.hasNextPage$ = this.booksFacade.goodBooksQuery.selectHasNextPage();
-          // this.listBooksFacade.getGoodBookByCursor().pipe(untilDestroyed(this)).subscribe();
+          this.listBooksFacade.getGoodBookByCursor().pipe(untilDestroyed(this)).subscribe();
           break;
         case 'feature-books':
           this.title = "TRUYỆN NỔI BẬT"
@@ -57,7 +57,7 @@ export class LatestBooksPage implements OnInit {
           this.totalBook$ = this.booksFacade.featureBooksQuery.selectTotalBook();
           this.isLoading$ = this.booksFacade.featureBooksQuery.selectLoading();
           this.hasNextPage$ = this.booksFacade.featureBooksQuery.selectHasNextPage();
-          // this.listBooksFacade.getFeaturetBookByCursor().pipe(untilDestroyed(this)).subscribe();
+          this.listBooksFacade.getFeaturetBookByCursor().pipe(untilDestroyed(this)).subscribe();
           break;
         case 'latest-books':
           this.title = "TRUYỆN MỚI CẬP NHẬT"
@@ -65,7 +65,7 @@ export class LatestBooksPage implements OnInit {
           this.totalBook$ = this.booksFacade.latestBooksQuery.selectTotalBook();
           this.isLoading$ = this.booksFacade.latestBooksQuery.selectLoading();
           this.hasNextPage$ = this.booksFacade.latestBooksQuery.selectHasNextPage();
-          // this.listBooksFacade.getLatestBookByCursor().pipe(untilDestroyed(this)).subscribe();
+          this.listBooksFacade.getLatestBookByCursor().pipe(untilDestroyed(this)).subscribe();
           break;
         default:
           this.router.navigate(['/not-found']);

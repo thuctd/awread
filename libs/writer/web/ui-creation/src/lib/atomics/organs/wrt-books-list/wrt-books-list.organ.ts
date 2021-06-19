@@ -38,6 +38,8 @@ export class WrtBooksListOrgan implements OnInit {
 
   @Input() books = [];
   @Input() loading: boolean;
+  @Input() categories;
+  @Input() searchTerm;
   @Output() bookEvent = new EventEmitter();
   @Input() data = {
     btns: [

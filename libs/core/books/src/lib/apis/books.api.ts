@@ -1,9 +1,10 @@
+import { TransformDateApi } from './trans-form-date-api';
 import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
 @Injectable({ providedIn: 'root' })
 export class BooksApi {
-  constructor(private apollo: Apollo) { }
+  constructor(private apollo: Apollo, private transformDate: TransformDateApi) { }
 
   searchBookByTerm(searchTerm: string) {
     return this.apollo
@@ -41,6 +42,7 @@ export class BooksApi {
   }
 
   getCategoryBooks(categoryId?: string, first?: number) {
+    console.log('categoryId: ', categoryId);
     return this.apollo
       .query({
         query: gql`
@@ -215,7 +217,7 @@ export class BooksApi {
     const genres = filters.genres;
     const completed = filters.completed === '0' ? false : true;
     const type = filters.typeBook == 'composed' ? 0 : 1;
-    const updatedAt = this.transformDate(filters.postingDate);
+    const updatedAt = this.transformDate.transformDate(filters.postingDate);
     let queryString = '';
     let queryFilter = '';
     let mvBooks = '';
@@ -254,25 +256,11 @@ export class BooksApi {
                   }
                 }
               }`;
-    console.log(queryString)
     return this.apollo.query({
       query: gql`
           ${queryString}
         `,
       variables: { categoryId, type, completed },
     }).pipe(map((res) => res?.['data']?.[mvBooks]?.['nodes']));
-  }
-
-  private transformDate(updatedAt: any) {
-    if (updatedAt === '') {
-      return '';
-    }
-    const date = new Date();
-    date.setDate(date.getDate() - updatedAt);
-    const dd = String(date.getDate()).padStart(2, '0');
-    const MM = String(date.getMonth() + 1).padStart(2, '0');
-    const yyyy = date.getFullYear();
-
-    return yyyy + '-' + MM + '-' + dd;
   }
 }

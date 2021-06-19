@@ -1,2 +1,5 @@
-<template-wrt-books-list [filters]="filtersForm" class="bg-gray-50 h-full" [books]="creations$ | async" [loading]="loading$ | async" (bookEvent)="bookEvent($event)">
+<h1> {{ searchTerm$ | async }} </h1>
+
+<template-wrt-books-list [searchTerm]="searchTerm$ | async" [categories]="categories$ | async" [filters]="filtersForm" class="bg-gray-50 h-full"
+  [books]="creations$ | async" (bookEvent)="bookEvent($event)" (filterBooksEvent)="filterBooksEvent()">
 </template-wrt-books-list>
