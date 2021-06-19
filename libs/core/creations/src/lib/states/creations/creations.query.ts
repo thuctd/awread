@@ -11,4 +11,7 @@ export class CreationsQuery extends QueryEntity<CreationsState> {
     // this.createUIQuery();
   }
 
+  getCurrentFilter() {
+    return this.getValue().ui.filters;
+  }
 }

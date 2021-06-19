@@ -1,2 +1,3 @@
-<template-wrt-books-list [filters]="filtersForm" class="bg-gray-50 h-full" [books]="creations$ | async" [loading]="loading$ | async" (bookEvent)="bookEvent($event)">
+<template-wrt-books-list [categories]="categories$ | async" [filters]="filtersForm" class="bg-gray-50 h-full" [books]="creations$ | async"
+  [loading]="loading$ | async" (bookEvent)="bookEvent($event)" (filterBooksEvent)="filterBooksEvent()">
 </template-wrt-books-list>

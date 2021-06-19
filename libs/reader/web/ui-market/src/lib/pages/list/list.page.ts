@@ -20,11 +20,11 @@ export class ListPage implements OnInit, OnDestroy {
   debugCount$ = this.booksFacade.categoryBooksQuery.selectCount();
   filtersForm: FormGroup;
   persistForm: PersistNgFormPlugin;
-  isLoading$: Observable<boolean>;
   categoryList$ = this.categoriesFacade.categories$;
   topBookList$ = this.booksFacade.topBooks$;
   genreList$ = this.genresFacade.genres$;
   books$;
+  isLoading$: Observable<boolean>;
   hasNextPage$: Observable<boolean>;
   typeBook: 'collected' | 'composed';
   loading: boolean;

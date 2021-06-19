@@ -22,12 +22,11 @@ export class WrtFilterBookFormMolec implements OnInit {
   @Input() selectCategory = {
     title: 'Danh mục',
     widthClass: 'xl:w-60 md:w-48',
-    options: [
-      { id: '1', name: 'Truyện ngắn' },
-      { id: '2', name: 'Truyện dài' },
-      { id: '3', name: 'Tản văn' },
-    ],
   };
+  @Input() categories = [{
+    categoryId: '',
+    name: ''
+  }];
 
   @Input() selectStatus = {
     title: 'Tình trạng',
@@ -41,7 +40,7 @@ export class WrtFilterBookFormMolec implements OnInit {
 
   @Output() filterBooksEvent = new EventEmitter();
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

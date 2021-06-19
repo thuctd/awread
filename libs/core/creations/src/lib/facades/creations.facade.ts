@@ -45,6 +45,10 @@ export class CreationsFacade {
     return this.creationsGear.delete(bookId);
   }
 
+  getFilterBooks() {
+    return this.creationsGear.getFilterBooks(this.creationsQuery.getCurrentFilter());
+  }
+
   searchCreationByTerm(searchTerm: string) {
     if (searchTerm === '') {
       return this.creationsGear.get();
