@@ -28,15 +28,11 @@ export class ListBooksFacade {
   }
 
   getCategoryBookByCursor(categoryId, action?) {
-    return this.listBooksGear.getCategoryBookByCursor(categoryId, action);
+    return this.listBooksGear.getCategoryBookByCursor(this.booksQuery.getCurrentFilter(), categoryId, action);
   }
 
   getAuthorBookByCursor(authors, action?) {
     return this.listBooksGear.getAuthorBookByCursor(authors, action);
-  }
-
-  getFilterBookCategoryByCursor(categoryId, action?) {
-    return this.listBooksGear.getFilterBookCategoryByCursor(this.booksQuery.getCurrentFilter(), categoryId, action);
   }
 
 }

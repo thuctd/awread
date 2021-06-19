@@ -75,13 +75,13 @@ export class ListPage implements OnInit, OnDestroy {
   switchTab(categoryId: string) {
     this.selectedCategoryId = categoryId;
     this.router.navigate([this.typeBook, { categoryId: this.selectedCategoryId }]);
-    this.filterItemsByCategory(categoryId);
+    this.filterItemsByCategory(this.selectedCategoryId);
     this.cd.detectChanges();
   }
 
   filterItemsByCategory(categoryId: string) {
     this.loading = true;
-    this.listBooksFacade.getCategoryBookByCursor(categoryId, 'set').pipe(untilDestroyed(this)).subscribe(() => {
+    this.booksFacade.getCategoryBooks(categoryId).pipe(untilDestroyed(this)).subscribe(() => {
       this.loading = false;
       this.cd.detectChanges();
     });
@@ -92,16 +92,11 @@ export class ListPage implements OnInit, OnDestroy {
 
   filterBooks() {
     this.loading = true;
-    this.activatedRoute.parent.url.subscribe(([urlSegment]) => {
-      const categoryId = urlSegment.parameterMap.get('categoryId');
-      this.listBooksFacade.getFilterBookCategoryByCursor(categoryId, 'set').pipe(untilDestroyed(this)).subscribe(() => {
-        this.loading = false;
-      });
-      this.books$ = this.booksFacade.categoryBooksQuery.selectAll();
-      this.isLoading$ = this.booksFacade.categoryBooksQuery.selectLoading();
-      this.hasNextPage$ = this.booksFacade.categoryBooksQuery.selectHasNextPage();
-      this.cd.detectChanges();
-    })
+    this.booksFacade.getFilterBooks(this.selectedCategoryId).pipe(untilDestroyed(this)).subscribe(() => {
+      this.loading = false;
+    });
+    this.isLoading$ = this.booksFacade.categoryBooksQuery.selectLoading();
+    this.hasNextPage$ = this.booksFacade.categoryBooksQuery.selectHasNextPage();
   }
 
   nativeTopBook() {
@@ -114,7 +109,7 @@ export class ListPage implements OnInit, OnDestroy {
 
   private fetchBooks() {
     if (this.booksFacade.categoryBooksQuery.getHasNextPage()) {
-      this.listBooksFacade.getFilterBookCategoryByCursor(this.selectedCategoryId, 'add').pipe(untilDestroyed(this)).subscribe();
+      this.listBooksFacade.getCategoryBookByCursor(this.selectedCategoryId, 'add').pipe(untilDestroyed(this)).subscribe();
     }
   }
 

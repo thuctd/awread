@@ -62,10 +62,10 @@ export class ListBooksGear {
       )
   }
 
-  getCategoryBookByCursor(categoryId, action, first = 20) {
+  getCategoryBookByCursor(filters, categoryId, action, first = 20) {
     return of(this.categoryBooksQuery.getEndCursor())
       .pipe(
-        pageInfoToAkita(this.categoryBooksStore, (cursor) => this.listBooksApi.getCategoryBookByCursor(categoryId, cursor, first), action)
+        pageInfoToAkita(this.categoryBooksStore, (cursor) => this.listBooksApi.getCategoryBookByCursor(filters, categoryId, cursor, first), action)
       )
   }
 
@@ -73,13 +73,6 @@ export class ListBooksGear {
     return of(this.authorBooksQuery.getEndCursor())
       .pipe(
         pageInfoToAkita(this.authorBooksStore, (cursor) => this.listBooksApi.getAuthorBookByCursor(authors, cursor, first), action)
-      )
-  }
-
-  getFilterBookCategoryByCursor(filters, categoryId, action, first = 20) {
-    return of(this.categoryBooksQuery.getEndCursor())
-      .pipe(
-        pageInfoToAkita(this.categoryBooksStore, (cursor) => this.listBooksApi.getFilterBookCategoryByCursor(filters, categoryId, cursor, first), action)
       )
   }
 }
