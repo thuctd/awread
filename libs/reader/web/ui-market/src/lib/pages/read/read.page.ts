@@ -23,6 +23,8 @@ export class ReadPage implements OnInit {
   loading: boolean;
   child: boolean;
 
+
+
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -30,6 +32,8 @@ export class ReadPage implements OnInit {
     private cd: ChangeDetectorRef,
     private booksFacade: BooksFacade
   ) { }
+
+
 
   ngOnInit(): void {
     this.bookId = this.activatedRoute.snapshot.paramMap.get('bookId');
@@ -49,15 +53,6 @@ export class ReadPage implements OnInit {
 
 
     this.booksFacade.getTopBooks().subscribe();
-  }
-
-  @HostListener('keydown', ['$event']) triggerEsc(e: KeyboardEvent) {
-    if (e.keyCode === 27 && this.child === true) {
-      console.log("global esc");
-      alert("parent esc");
-    } else {
-      this.child = true;
-    }
   }
 
   doSomething(child: any): void {

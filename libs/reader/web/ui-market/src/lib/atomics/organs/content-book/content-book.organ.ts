@@ -33,12 +33,4 @@ export class ContentBookOrgan implements OnInit {
   ngOnInit(): void {
     // const element = document.getElementById('content');
   }
-
-  @HostListener('keydown', ['$event']) triggerEsc(e: KeyboardEvent) {
-    if (e.keyCode === 27) {
-      this.child.emit(false);
-      console.log("global esc");
-      alert("child esc");
-    }
-  }
 }
