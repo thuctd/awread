@@ -6,13 +6,13 @@ import { Apollo, gql } from 'apollo-angular';
 export class BooksApi {
   constructor(private apollo: Apollo, private transformDate: TransformDateApi) { }
 
-  searchBookByTerm(filter: string) {
+  searchBookByTerm(searchTerm: string) {
     return this.apollo
       .mutate({
         mutation: gql`
-          mutation SearchBooks($filter: String) {
-            searchBooks(input: { searchTerm: $filter }) {
-              mvBooksLatestChapters {
+         mutation SearchBooks($searchTerm: String) {
+          searchBooks(input: {searchTerm: $searchTerm}) {
+            mvBooksLatestChapters {
                 title
                 authors
                 newestChapters
@@ -35,7 +35,7 @@ export class BooksApi {
           }
         `,
         variables: {
-          filter,
+          searchTerm,
         },
       })
       .pipe(map((res) => res?.['data']?.['searchBooks']?.['mvBooksLatestChapters']));

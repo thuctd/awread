@@ -44,7 +44,6 @@ export class ListPage implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.initForm();
-    this.updateForm();
     this.booksFacade.getTopBooks().subscribe();
     this.genresFacade.getAllGenres().subscribe();
     this.watchRouting();
@@ -67,6 +66,9 @@ export class ListPage implements OnInit, OnDestroy {
           this.titlePage = 'Truyện tự sáng tác';
           break;
       }
+      this.filtersForm.patchValue({
+        typeBook: urlSegment.path
+      });
       this.selectedCategoryId = urlSegment.parameterMap.get('categoryId');
       this.switchTab(this.selectedCategoryId);
     })
@@ -81,6 +83,7 @@ export class ListPage implements OnInit, OnDestroy {
 
   filterItemsByCategory(categoryId: string) {
     this.loading = true;
+    this.listBooksFacade.resetCategoryBookPageInfo();
     this.booksFacade.getCategoryBooks(categoryId).pipe(untilDestroyed(this)).subscribe(() => {
       this.loading = false;
       this.cd.detectChanges();
@@ -90,12 +93,12 @@ export class ListPage implements OnInit, OnDestroy {
     this.hasNextPage$ = this.booksFacade.categoryBooksQuery.selectHasNextPage();
   }
 
-  filterBooks() {
+  filterBooksBtnClicked() {
     this.loading = true;
     this.booksFacade.getFilterBooks(this.selectedCategoryId).pipe(untilDestroyed(this)).subscribe(() => {
       this.loading = false;
+      this.cd.detectChanges();
     });
-    this.isLoading$ = this.booksFacade.categoryBooksQuery.selectLoading();
     this.hasNextPage$ = this.booksFacade.categoryBooksQuery.selectHasNextPage();
   }
 
@@ -111,14 +114,6 @@ export class ListPage implements OnInit, OnDestroy {
     if (this.booksFacade.categoryBooksQuery.getHasNextPage()) {
       this.listBooksFacade.getCategoryBookByCursor(this.selectedCategoryId, 'add').pipe(untilDestroyed(this)).subscribe();
     }
-  }
-
-  private updateForm() {
-    this.activatedRoute.parent.url.subscribe(([urlSegment]) => {
-      this.filtersForm.patchValue({
-        typeBook: urlSegment.path
-      });
-    })
   }
 
   private initForm() {
