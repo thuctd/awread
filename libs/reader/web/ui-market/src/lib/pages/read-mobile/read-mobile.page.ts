@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, HostListener } from '@angular/core';
 import { ReadPage } from '../read/read.page';
 
 @Component({
@@ -13,4 +13,11 @@ import { ReadPage } from '../read/read.page';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ReadMobilePage extends ReadPage { }
+export class ReadMobilePage extends ReadPage {
+  @HostListener('document:keydown.F12', ['$event']) f12(event: KeyboardEvent) {
+    event.preventDefault();
+  }
+  @HostListener('document:contextmenu', ['$event']) contextmenu(event: KeyboardEvent) {
+    event.preventDefault();
+  }
+}

@@ -1,4 +1,4 @@
-<section class="bg-gray-primary">
+<section class="bg-gray-primary" appBlockCopyPaste>
   <template-navbar-reader [background]="background" [user]="user$ | async" [isLogin]="isLogin$ | async" [items]="results$ | async"
     [searchControl]="searchControl" (eventSearch)="navigateToSearch()" (logoutEvent)="logout()">
   </template-navbar-reader>

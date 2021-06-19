@@ -16,6 +16,7 @@ export class ReadTemplate implements OnInit {
   @Input() loading;
   @Input() chapters = [];
   @Input() breadcrumbs = [];
+  @Output() child = new EventEmitter();
   @Output() nextChapterBook = new EventEmitter();
   @Output() backChapterBook = new EventEmitter();
   @Output() nativeTopBook = new EventEmitter();

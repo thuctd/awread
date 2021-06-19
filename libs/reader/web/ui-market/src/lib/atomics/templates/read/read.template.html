@@ -3,13 +3,13 @@
 </div>
 <ng-template #loaded>
   <section class="px-4 sm:px-6 max-w-screen-xl mx-auto relative">
-    <atom-breadcrumb [items]="breadcrumbs"></atom-breadcrumb>
+    <atom-breadcrumb [items]="breadcrumbs" appBlockCopyPaste></atom-breadcrumb>
     <div class="pt-6">
-      <organ-content-book [chapters]="chapters" [chapter]="chapter" (backChapterBook)="backChapterBook.emit($event)"
-        (nextChapterBook)="nextChapterBook.emit($event)"></organ-content-book>
+      <organ-content-book appBlockCopyPaste (chid)="chid.emit($event)" [chapters]="chapters" [chapter]="chapter"
+        (backChapterBook)="backChapterBook.emit($event)" (nextChapterBook)="nextChapterBook.emit($event)"></organ-content-book>
     </div>
     <div>
-      <atom-btn-back-to-top class="fixed bottom-6 right-6"></atom-btn-back-to-top>
+      <atom-btn-back-to-top appBlockCopyPaste class="fixed bottom-6 right-6"></atom-btn-back-to-top>
     </div>
     <!-- <organ-comment (nativeTopBook)="nativeTopBook.emit($event)" [books]="books" class="pt-16"></organ-comment> -->
   </section>
