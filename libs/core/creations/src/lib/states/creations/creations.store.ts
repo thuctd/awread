@@ -7,7 +7,8 @@ export interface CreationsState extends EntityState<Creation>, ActiveState {
     filters: {
       categoryId: string;
       completed: string;
-    }
+    },
+    searchTerm: string;
   }
 }
 const initialState = {
@@ -15,7 +16,8 @@ const initialState = {
     filters: {
       categoryId: '',
       completed: '',
-    }
+    },
+    searchTerm: '',
   }
 };
 

@@ -1,7 +1,7 @@
 import { SearchCreationsStore, SearchCreationsQuery } from './../states/search-creations';
 import { Injectable } from '@angular/core';
 import { CreationsGear } from '../gears';
-import { CreationsQuery, CreationsService } from '../states/creations';
+import { CreationsQuery, CreationsService, CreationsStore } from '../states/creations';
 
 @Injectable({ providedIn: 'root' })
 export class CreationsFacade {
@@ -11,7 +11,7 @@ export class CreationsFacade {
     private creationsGear: CreationsGear,
     public creationsQuery: CreationsQuery,
     public searchCreationsQuery: SearchCreationsQuery,
-    private searchCreationsStore: SearchCreationsStore,
+    private creationsStore: CreationsStore,
     private creationsService: CreationsService,
   ) {
   }
@@ -58,6 +58,14 @@ export class CreationsFacade {
   }
 
   updateSearchTerm(searchTerm: string) {
-    this.searchCreationsStore.update({ searchTerm });
+    this.creationsStore.update(state => {
+      return {
+        ...state,
+        ui: {
+          ...state.ui,
+          searchTerm
+        }
+      }
+    });
   }
 }

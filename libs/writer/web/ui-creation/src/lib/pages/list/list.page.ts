@@ -20,12 +20,12 @@ import { Observable } from 'rxjs';
 export class ListPage implements OnInit {
   filtersForm: FormGroup;
   persistForm: PersistNgFormPlugin;
-  isLoading$: Observable<boolean>;
+  isLoading$ = this.creationsFacade.creationsQuery.selectLoading();
   hasNextPage$: Observable<boolean>;
   creations$ = this.creationsFacade.creations$;
   categories$ = this.categoriesFacade.categories$;
   loading$ = this.creationsFacade.loading$;
-  searchTerm$ = this.creationsFacade.searchCreationsQuery.searchTerm$;
+  searchTerm$ = this.creationsFacade.creationsQuery.selectSearchTerm();
   constructor(
     private router: Router,
     private creationsFacade: CreationsFacade,
@@ -39,7 +39,7 @@ export class ListPage implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
-    // this.watchingSearchTerm();
+    this.watchingSearchTerm();
     this.creationsFacade.get().subscribe(() => { });
   }
 
@@ -97,19 +97,17 @@ export class ListPage implements OnInit {
 
   filterBooksEvent() {
     this.creationsFacade.getFilterBooks().pipe(untilDestroyed(this)).subscribe(() => { });
-    this.isLoading$ = this.creationsFacade.creationsQuery.selectLoading();
   }
 
   watchingSearchTerm() {
-    this.creations$ = this.searchTerm$.pipe(
+    this.searchTerm$.pipe(
       untilDestroyed(this),
       debounceTime(300),
       distinctUntilChanged(),
       switchMap((value) => {
         return this.creationsFacade.searchCreationByTerm(value);
       })
-    );
-    this.cd.detectChanges();
+    ).subscribe();
   }
 
   private initForm() {

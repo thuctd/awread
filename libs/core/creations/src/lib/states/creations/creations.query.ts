@@ -14,4 +14,8 @@ export class CreationsQuery extends QueryEntity<CreationsState> {
   getCurrentFilter() {
     return this.getValue().ui.filters;
   }
+
+  selectSearchTerm() {
+    return this.select(state => state.ui.searchTerm)
+  }
 }

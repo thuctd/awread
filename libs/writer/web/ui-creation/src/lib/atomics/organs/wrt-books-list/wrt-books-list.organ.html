@@ -35,11 +35,18 @@
 
     </ng-container>
     <ng-template #noData>
-      <div class="no-data flex flex-col items-center">
-        <div class="text-center py-8">Bạn chưa có truyện nào, vui lòng ấn nút "Đăng truyện" để thêm truyện mới.</div>
-        <cr-submit-btn (btnClicked)="bookEvent.emit({ type: 'create' })" [faIcon]="faIcon" [submitText]="'Đăng truyện'">
-        </cr-submit-btn>
-      </div>
+      <ng-container *ngIf="searchTerm?.length > 0;else noSearchTerm">
+        <div class="no-data flex flex-col items-center">
+          <div class="text-center text-base py-8">Không tìm thấy kết quả, Hãy thử một lựa chọn khác...</div>
+        </div>
+      </ng-container>
+      <ng-template #noSearchTerm>
+        <div class="no-data flex flex-col items-center">
+          <div class="text-center py-8">Bạn chưa có truyện nào, vui lòng ấn nút "Đăng truyện" để thêm truyện mới.</div>
+          <cr-submit-btn (btnClicked)="bookEvent.emit({ type: 'create' })" [faIcon]="faIcon" [submitText]="'Đăng truyện'">
+          </cr-submit-btn>
+        </div>
+      </ng-template>
     </ng-template>
   </ng-template>
 </div>
