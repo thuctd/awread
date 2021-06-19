@@ -35,4 +35,8 @@ export class BooksStore extends EntityStore<BooksState> {
     // this.createUIStore().setInitialEntityState();
   }
 
+  resetFilter() {
+    this.update(initialState);
+  }
+
 }

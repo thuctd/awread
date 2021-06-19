@@ -1,5 +1,6 @@
 <section>
   <template-list [loading]="loading" (moreBooks)="onMoreBooks()" [titlePage]="titlePage" (filterBooksEvent)="filterBooksBtnClicked()"
     [filtersForm]="filtersForm" [genres]="genreList$ | async" [topBookList]="topBookList$ | async" [tabsHead]="categoryList$ | async"
-    [selectedTabCategoryId]="selectedCategoryId" (switchTabEvent)="switchTab($event)" [categoryBooks]="books$ | async"></template-list>
+    [selectedTabCategoryId]="selectedCategoryId" (switchTabEvent)="switchTab($event)" (toggleFilterEvent)="toggleFilterEvent($event)"
+    [categoryBooks]="books$ | async"></template-list>
 </section>

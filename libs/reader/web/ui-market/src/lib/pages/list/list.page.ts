@@ -131,4 +131,10 @@ export class ListPage implements OnInit, OnDestroy {
       .setForm(this.filtersForm);
   }
 
+  toggleFilterEvent(isFilter) {
+    if (isFilter == false) {
+      this.booksFacade.resetFilter();
+    }
+  }
+
 }

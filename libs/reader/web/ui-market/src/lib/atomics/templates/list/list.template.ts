@@ -18,13 +18,7 @@ export class ListTemplate implements OnInit {
   display = 'grid';
   filterbook = false;
   @Input() loading;
-  @Input() filtersForm: FormGroup = this.fb.group({
-    typeBook: [''],
-    genres: [''],
-    criteria: [''],
-    status: [''],
-    postingDate: [''],
-  });
+  @Input() filtersForm: FormGroup;
   @Input() topBookList = [];
   @Input() categoryBooks = [];
   @Input() genres = [];
@@ -53,10 +47,12 @@ export class ListTemplate implements OnInit {
   @Output() changeCategoryBooks = new EventEmitter();
   @Output() filterBooksEvent = new EventEmitter();
   @Output() moreBooks = new EventEmitter();
-
+  @Output() toggleFilterEvent = new EventEmitter();
   constructor(private fb: FormBuilder) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.initForm();
+  }
 
   changeDisplay(mode: string) {
     this.display = mode;
@@ -64,6 +60,18 @@ export class ListTemplate implements OnInit {
 
   changeDisplayFilter() {
     this.filterbook = !this.filterbook;
+    this.toggleFilterEvent.emit(this.filterbook);
+    this.initForm();
+  }
+
+  initForm() {
+    this.filtersForm = this.fb.group({
+      typeBook: [''],
+      genres: [''],
+      criteria: [''],
+      status: [''],
+      postingDate: [''],
+    });
   }
 
   filterTopBooks() {
