@@ -2,6 +2,7 @@ import { SearchCreationsStore, SearchCreationsQuery } from './../states/search-c
 import { Injectable } from '@angular/core';
 import { CreationsGear } from '../gears';
 import { CreationsQuery, CreationsService, CreationsStore } from '../states/creations';
+import { CreationsRoutingGear } from '../gears/creations-routing.gear';
 
 @Injectable({ providedIn: 'root' })
 export class CreationsFacade {
@@ -13,6 +14,7 @@ export class CreationsFacade {
     public searchCreationsQuery: SearchCreationsQuery,
     private creationsStore: CreationsStore,
     private creationsService: CreationsService,
+    public creationsRoutingGear: CreationsRoutingGear,
   ) {
   }
 

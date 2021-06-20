@@ -39,7 +39,7 @@ const routes: Routes = [
       scrollOffset: [0, 0],
       anchorScrolling: 'enabled',
       onSameUrlNavigation: 'reload',
-      // enableTracing: true  // <-- debugging purposes only
+      enableTracing: true  // <-- debugging purposes only
     }),
   ],
   exports: [RouterModule, GlobalSettingsModule],

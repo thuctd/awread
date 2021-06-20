@@ -3,7 +3,6 @@ import { untilDestroyed, UntilDestroy } from '@ngneat/until-destroy';
 import { CategoriesFacade } from '@awread/core/categories';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { filter, map, switchMap, tap, distinctUntilChanged, debounceTime } from 'rxjs/operators';
-import { Router } from '@angular/router';
 import { ChangeDetectorRef, Directive, Injectable, OnInit } from '@angular/core';
 import { CreationsFacade } from '@awread/core/creations';
 import { MatDialog } from '@angular/material/dialog';
@@ -27,13 +26,11 @@ export class ListPage implements OnInit {
   loading$ = this.creationsFacade.loading$;
   searchTerm$ = this.creationsFacade.creationsQuery.selectSearchTerm();
   constructor(
-    private router: Router,
     private creationsFacade: CreationsFacade,
     private categoriesFacade: CategoriesFacade,
     private matDialog: MatDialog,
     private snackbarService: SnackbarService,
     private chaptersFacade: ChaptersFacade,
-    private cd: ChangeDetectorRef,
     private fb: FormBuilder
   ) { }
 
@@ -47,10 +44,10 @@ export class ListPage implements OnInit {
     // console.log('event', event);
     switch (event.type) {
       case 'create':
-        this.router.navigate(['list', 'new', 'detail']);
+        this.creationsFacade.creationsRoutingGear.createBook();
         break;
       case 'detail':
-        this.router.navigate(['list', event.bookId, 'toc']);
+        this.creationsFacade.creationsRoutingGear.bookToc(event.bookId);
         break;
       case 'preview':
         this.openPreview(event.bookId);
@@ -63,11 +60,11 @@ export class ListPage implements OnInit {
         break;
       case 'create-chapter':
         this.chaptersFacade.fetchLatestChapterPosition(event.bookId).subscribe((position) => {
-          this.router.navigate(['list', event.bookId, 'toc', 'new', 'writing', { position: position }]);
+          this.creationsFacade.creationsRoutingGear.createChapter(event.bookId, position);
         });
         break;
       case 'edit':
-        this.router.navigate(['list', event.bookId, 'detail']);
+        this.creationsFacade.creationsRoutingGear.editBook(event.bookId);
         break;
       case 'delete':
         this.creationsFacade.delete(event.bookId).subscribe((result) => {

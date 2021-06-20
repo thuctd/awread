@@ -1,5 +1,4 @@
 import { map, startWith, switchMap, takeUntil } from 'rxjs/operators';
-import { CurrentUserFacade } from '@awread/core/users';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Directive, Injectable, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { combineLatest, of, Subject } from 'rxjs';
@@ -22,8 +21,6 @@ export class DetailTocPage implements OnInit {
     private activatedRoute: ActivatedRoute,
     private creationsFacade: CreationsFacade,
     private chaptersFacade: ChaptersFacade,
-    private router: Router,
-    private location: Location,
   ) { }
 
   ngOnInit(): void {
@@ -47,14 +44,14 @@ export class DetailTocPage implements OnInit {
         this.delete(data.chapter);
         return;
       default:
-        this.router.navigate(['list'])
+        this.creationsFacade.creationsRoutingGear.list();
         return;
     }
   }
 
   private createChapter() {
     const position = this.chaptersFacade.getLatestPosition();
-    this.router.navigate(['list', this.bookId, 'toc', 'new', 'writing', { position: position }]);
+    this.creationsFacade.creationsRoutingGear.createChapter(this.bookId, position);
   }
 
   private getAllChapters() {
@@ -77,7 +74,7 @@ export class DetailTocPage implements OnInit {
   }
 
   private editChapter(chapter) {
-    this.router.navigate(['list', chapter.bookId, 'toc', chapter.chapterId]);
+    this.creationsFacade.creationsRoutingGear.editChapter(chapter);
   }
 
   private delete(chapter) {

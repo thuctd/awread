@@ -7,15 +7,15 @@ import { CurrentUserFacade } from '@awread/core/users';
 import { SnackbarService } from '@awread/global/packages';
 import { of } from 'rxjs';
 import { Location } from '@angular/common';
+import { CreationsRoutingGear } from './creations-routing.gear';
 
 @Injectable({ providedIn: 'root' })
 export class CreationsGear {
   constructor(
     private creationsApi: CreationsApi,
     private creationsStore: CreationsStore,
-    private booksFacade: BooksFacade,
+    private creationsRoutingGear: CreationsRoutingGear,
     private currentUserFacade: CurrentUserFacade,
-
     private SnackbarService: SnackbarService
   ) { }
 
@@ -81,6 +81,7 @@ export class CreationsGear {
             result.errors.forEach((error) => this.SnackbarService.showError(error.message));
           } else {
             this.SnackbarService.showSuccess('Tạo truyện mới thành công');
+            this.creationsRoutingGear.bookToc(book.bookId, true);
           }
         })
       );

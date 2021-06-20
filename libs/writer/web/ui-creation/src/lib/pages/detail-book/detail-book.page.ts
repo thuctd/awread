@@ -36,9 +36,8 @@ export class DetailBookPage implements OnInit {
     private categoriesFacade: CategoriesFacade,
     private genresFacade: GenresFacade,
     private snackbarService: SnackbarService,
-    private router: Router,
     public matDialog: MatDialog
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -70,7 +69,7 @@ export class DetailBookPage implements OnInit {
   detailBookAction(event) {
     switch (event.type) {
       case 'cancel':
-        this.router.navigate(['list']);
+        this.creationsFacade.creationsRoutingGear.list();
         break;
       case 'upload-image':
         this.uploadCover(event.data);
@@ -120,7 +119,6 @@ export class DetailBookPage implements OnInit {
 
       this.creationsFacade.create(this.bookForm.value).subscribe((value) => {
         console.log('value', value, this.bookId);
-        this.router.navigate(['/list', this.bookForm.value.bookId, 'toc'], { replaceUrl: true });
       });
     } else {
       this.creationsFacade.update(this.bookForm.value).subscribe((value) => {

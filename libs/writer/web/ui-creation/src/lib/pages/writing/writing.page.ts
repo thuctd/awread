@@ -22,7 +22,6 @@ export class WritingPage implements OnInit {
     private chaptersFacade: ChaptersFacade,
     private creationsFacade: CreationsFacade,
     private matDialog: MatDialog,
-    private router: Router,
     private cd: ChangeDetectorRef,
     private location: Location
   ) { }
@@ -115,7 +114,6 @@ export class WritingPage implements OnInit {
       this.chaptersFacade.create(this.chapterForm.value, publishThisChapter, publishThisBook).subscribe(uuid => {
         this.chapterForm.patchValue({ publishing: false });
         this.chapterId = uuid;
-        this.router.navigate(['/list', this.chapterForm.value.bookId, 'toc', this.chapterId, 'writing'], { replaceUrl: true });
       })
     } else {
       this.chaptersFacade.update(this.chapterForm.value, publishThisBook).subscribe(value => {

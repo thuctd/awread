@@ -14,6 +14,7 @@ import { GoodBooksQuery } from '../states/good-books';
 import { LatestBooksQuery } from '../states/latest-books';
 import { TopBooksQuery } from '../states/top-books';
 import { SearchBooksStore } from '../states/search-books';
+import { BooksRoutingGear } from '../gears';
 
 @Injectable({ providedIn: 'root' })
 export class BooksFacade {
@@ -47,8 +48,11 @@ export class BooksFacade {
     public latestBooksStore: LatestBooksStore,
     public featureBooksStore: FeatureBooksStore,
     public genreBooksStore: GenreBooksStore,
-    private searchBooksStore: SearchBooksStore
+    private searchBooksStore: SearchBooksStore,
+    public booksRoutingGear: BooksRoutingGear,
   ) { }
+
+
 
   resetFilter() {
     this.booksStore.resetFilter();

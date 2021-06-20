@@ -15,8 +15,7 @@ export class ChaptersGear {
     private SnackbarService: SnackbarService,
     private chaptersQuery: ChaptersQuery,
     private creationsFacade: CreationsFacade,
-    private location: Location
-  ) {}
+  ) { }
 
   getLatestPosition() {
     const [latestChapter] = this.chaptersQuery.getAll({ sortBy: 'position', sortByOrder: Order.DESC, limitTo: 1 });
@@ -121,11 +120,13 @@ export class ChaptersGear {
         if (result.errors) {
           result.errors.forEach((error) => this.SnackbarService.showError(error.message));
         } else {
+          const newChapterId = result?.['data']?.['newChapter']?.uuid;
           if (publishThisChapter) {
             this.SnackbarService.showSuccess('Đã xuất bản chương mới');
-            this.location.back();
+            this.creationsFacade.creationsRoutingGear.bookToc(chapter.bookId, true);
           } else {
             this.SnackbarService.showSuccess('Tạo chương mới thành công');
+            this.creationsFacade.creationsRoutingGear.saveNewChapter(chapter.bookId, newChapterId, true);
           }
         }
       }),
