@@ -32,9 +32,9 @@ export class HomePage implements OnInit, OnDestroy {
   totalBookLatest$ = this.booksFacade.latestBooksQuery.selectTotalBook();
   totalBookFeature$ = this.booksFacade.featureBooksQuery.selectTotalBook();
   currentPageLatest$ = this.booksFacade.latestBooksQuery.select((state) => state.currentPage);
-  hasNextPageLatest$ = this.booksFacade.latestBooksQuery.select((state) => state.hasNextPage);
+  hasNextPageLatest$ = this.booksFacade.latestBooksQuery.select((state) => state.pageInfo.hasNextPage);
   currentPageFeature$ = this.booksFacade.featureBooksQuery.select((state) => state.currentPage);
-  hasNextPageFeature$ = this.booksFacade.featureBooksQuery.select((state) => state.hasNextPage);
+  hasNextPageFeature$ = this.booksFacade.featureBooksQuery.select((state) => state.pageInfo.hasNextPage);
 
   constructor(
     private booksFacade: BooksFacade,

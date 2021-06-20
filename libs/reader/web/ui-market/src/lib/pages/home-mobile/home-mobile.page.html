@@ -1,6 +1,6 @@
 <template-home-mobile [totalBookLatest]="totalBookLatest$ | async" [currentPageLatest]="currentPageLatest$ | async"
   [currentPageFeature]="currentPageFeature$ | async" (pageChangeLatest)="pageChangeLatest($event)" [loading]="isLoadingLatest$"
-  [hasNextPageFeature]="currentPageFeature$ | async" [hasNextPageLatest]="currentPageLatest$ | async" [isLoadingFeature]="isLoadingFeature$ | async"
+  [hasNextPageFeature]="hasNextPageFeature$ | async" [hasNextPageLatest]="hasNextPageLatest$ | async" [isLoadingFeature]="isLoadingFeature$ | async"
   [totalBookFeatured]="totalBookFeature$ | async" (displayActivePageFeature)="pageChangeFeature($event)" [getGoodBooks]="goodBookList$ | async"
   [getLatestBooks]="latestBooks$ | async" [getFeatureBooks]="featureBookList$ | async" [sliders]="imageObject$ | async" [genres]="genres$ | async"
   (filterItemsByGenre)="filterItemsByGenre($event)" [bookByGenre]="genreBooks$ | async" [categories]="categories$ | async"
