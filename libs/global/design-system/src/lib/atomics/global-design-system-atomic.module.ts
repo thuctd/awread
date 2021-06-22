@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StorybookSupportModule } from '../storybook-support.module';
 import { MatDialogModule } from '@angular/material/dialog';
+import { CarouselModule } from 'ngx-owl-carousel-o';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -158,6 +159,7 @@ import { SelectMultipleAtom } from './atoms/select-multiple/select-multiple.atom
     DefaultCoverModule,
     CloseOnOutsideModule,
     NgImageSliderModule,
+    CarouselModule,
     ImageCropperModule,
     MatSelectModule,
     CoreUsersModule,
@@ -165,6 +167,7 @@ import { SelectMultipleAtom } from './atoms/select-multiple/select-multiple.atom
   ],
   exports: [
     CoreUsersModule,
+    CarouselModule,
     CoreBooksModule,
     MatSelectModule,
     MatDialogModule,

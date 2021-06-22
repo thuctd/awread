@@ -1,0 +1,97 @@
+:host {
+  display: block;
+}
+
+.height-slider {
+  height: 400px;
+}
+
+::ng-deep {
+  .slider .owl-stage {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .slider .owl-next {
+    border-radius: 50px;
+    position: absolute;
+    right: 0.5rem;
+    width: 32px;
+    top: 11.5rem;
+    z-index: 40;
+    cursor: pointer;
+    background-color: white;
+  }
+
+  .slider .owl-prev {
+    border-radius: 50px;
+    position: absolute;
+    left: 0.5rem;
+    width: 32px;
+    top: 11.5rem;
+    z-index: 40;
+    cursor: pointer;
+    background-color: white;
+  }
+
+  .owl-theme .owl-dots {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    bottom: 1rem;
+  }
+
+  .owl-theme .owl-dots .owl-dot {
+    padding: 0 0.75rem;
+  }
+
+  .owl-theme .owl-dots .owl-dot span {
+    width: 12px;
+    height: 12px;
+    background: rgba(255, 255, 255, .5) !important;
+    display: block;
+    -webkit-backface-visibility: visible;
+    transition: opacity 200ms ease;
+    border-radius: 30px;
+    cursor: pointer;
+  }
+
+  .owl-theme .owl-dots .owl-dot.active span {
+    background: #fff !important;
+  }
+}
+
+@media only screen and (max-width: 640px) {
+  .height-slider {
+    height: 200px;
+  }
+
+  ::ng-deep {
+      .slider .owl-next {
+        border-radius: 50px;
+        position: absolute;
+        right: 0.5rem;
+        width: 28px;
+        top: 5.5rem;
+        z-index: 40;
+        cursor: pointer;
+        background-color: white;
+      }
+
+      .slider .owl-prev {
+        border-radius: 50px;
+        position: absolute;
+        left: 0.5rem;
+        width: 28px;
+        top: 5.5rem;
+        z-index: 40;
+        cursor: pointer;
+        background-color: white;
+      }
+  }
+}

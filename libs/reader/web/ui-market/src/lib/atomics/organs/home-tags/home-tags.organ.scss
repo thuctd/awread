@@ -58,11 +58,11 @@
   transform: scale(1.06);
 }
 ::ng-deep {
-  .owl-stage {
+  .home-tags .owl-stage {
     display: flex;
     flex-direction: row;
   }
-  .owl-next {
+  .home-tags .owl-next {
     width: 30px;
     border-radius: 50px;
     background-color: white;
@@ -73,7 +73,7 @@
     cursor: pointer;
   }
 
-  .owl-prev {
+  .home-tags .owl-prev {
     border-radius: 50px;
     position: absolute;
     left: 0.5rem;
@@ -87,12 +87,12 @@
 
 @media only screen and (max-width: 640px) {
 
-  ::ng-deep .owl-next {
+  ::ng-deep .home-tags .owl-next {
     right: 0rem;
     top: 3.6rem;
   }
 
-  ::ng-deep .owl-prev {
+  ::ng-deep .home-tags .owl-prev {
       left: 0rem;
       top: 3.6rem;
     }

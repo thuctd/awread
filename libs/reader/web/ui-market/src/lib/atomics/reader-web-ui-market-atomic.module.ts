@@ -28,7 +28,7 @@ import { DetailBookReviewsOrgan } from './organs/detail-book-reviews/detail-book
 import { DetailBookTemplate } from './templates/detail-book/detail-book.template';
 import { SearchFormMolec } from './molecs/search-form/search-form.molec';
 import { DetailBookSidebarOrgan } from './organs/detail-book-sidebar/detail-book-sidebar.organ';
-import { CarouselModule } from 'ngx-owl-carousel-o';
+
 import { HeadReadBookMolec } from './molecs/head-read-book/head-read-book.molec';
 import { FormCommentBookReadMolec } from './molecs/form-comment-book-read/form-comment-book-read.molec';
 import { CommentBookReadOrgan } from './organs/comment-book-read/comment-book-read.organ';
@@ -92,7 +92,6 @@ import { BooksMbTemplate } from './templates/books-mb/books-mb.template';
     CommonModule,
     StorybookSupportModule,
     GlobalDesignSystemAtomicModule,
-    CarouselModule,
     ReaderWebUiAuthorAtomicModule,
     CoreCategoriesModule,
     InfiniteScrollModule,
@@ -264,4 +263,4 @@ import { BooksMbTemplate } from './templates/books-mb/books-mb.template';
     BooksMbTemplate,
   ],
 })
-export class ReaderWebUiMarketAtomicModule {}
+export class ReaderWebUiMarketAtomicModule { }

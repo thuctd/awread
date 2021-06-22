@@ -1,6 +1,6 @@
 <section>
-  <section>
-    <atom-slider [imageObject]="sliders"></atom-slider>
+  <section class="pb-6">
+    <atom-slider [items]="sliders"></atom-slider>
   </section>
   <section class="">
     <organ-home-list-book-update-mobile [hasNextPage]="hasNextPageLatest" [currentPage]="currentPageLatest" (pageChange)="pageChangeLatest.emit($event)"

@@ -1,6 +1,6 @@
 <section>
-  <section class="pt-40">
-    <atom-slider [imageObject]="sliders"></atom-slider>
+  <section class="mb-4 lg:mb-12 w-full max-w-screen-2xl mx-auto pt-40">
+    <atom-slider [items]="sliders"></atom-slider>
   </section>
   <section>
     <home-detail-book-update [totalBook]="totalBookLatest" [loading]="isLoadingLatest" [currentPage]="currentPage" (pageChange)="pageChange.emit($event)"

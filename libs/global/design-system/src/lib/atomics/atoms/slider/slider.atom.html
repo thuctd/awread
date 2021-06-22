@@ -1,4 +1,11 @@
-<div class="mb-4 lg:mb-12 max-w-screen-2xl mx-auto">
-  <ng-image-slider #nav [showArrow]="showArrow" [images]="imageObject" slideImage="1" [imageSize]="imageSize" [animationSpeed]="1" [imagePopup]="false">
-  </ng-image-slider>
+<div class="w-full max-w-screen-xl mx-auto overflow-hidden relative">
+  <owl-carousel-o [options]="customOptions" class="slider">
+    <ng-container *ngFor="let item of items">
+      <ng-template carouselSlide>
+        <a [routerLink]="item.href" class="cursor-pointer outline-none w-full">
+          <img class="w-full height-slider" [src]="item.src" [alt]="item.alt">
+        </a>
+      </ng-template>
+    </ng-container>
+  </owl-carousel-o>
 </div>

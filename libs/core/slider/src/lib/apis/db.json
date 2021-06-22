@@ -1,22 +1,22 @@
 {
   "events": [
-    {
-      "image": "/global-assets/images/banner1.webp",
-      "thumbImage": "/global-assets/images/banner1.webp",
-      "alt": "Event One",
-      "id": "1"
+     {
+      "id": "1",
+      "href": "/register",
+      "src": "/global-assets/images/banner1.webp",
+      "alt": "awread"
     },
-    {
-      "image": "/global-assets/images/banner2.webp",
-      "thumbImage": "/global-assets/images/banner2.webp",
-      "alt": "Event Two",
-      "id": "2"
+     {
+      "id": "2",
+      "href": "/register",
+      "src": "/global-assets/images/banner2.webp",
+      "alt": "awread"
     },
-    {
-      "image": "/global-assets/images/banner3.webp",
-      "thumbImage": "/global-assets/images/banner3.webp",
-      "alt": "Event Three",
-      "id": "3"
+     {
+      "id": "3",
+      "href": "/register",
+      "src": "/global-assets/images/banner3.webp",
+      "alt": "awread"
     }
   ]
 }
