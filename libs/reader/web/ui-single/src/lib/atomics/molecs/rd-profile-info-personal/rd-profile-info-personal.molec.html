@@ -1,7 +1,7 @@
 <div class="relative">
-  <div class="absolute -top-8 md:-top-4 right-0 md:right-12 flex cursor-pointer">
+  <div (click)="clicked.emit()" class="absolute -top-8 md:-top-4 right-0 md:right-12 flex cursor-pointer">
     <img class="h-5" src="/global-assets/images/ic_border_color_24px.webp" alt="">
-    <div (click)="clicked.emit()" class="font-semibold text-gray-400 ml-2 text-sm md:text-base">Chỉnh sửa thông tin cá nhân</div>
+    <div class="font-semibold text-gray-400 ml-2 text-sm md:text-base">Chỉnh sửa thông tin cá nhân</div>
   </div>
   <atom-rd-profile-info-personal-item [key]="'Tên'" [value]="currentUser.firstname"></atom-rd-profile-info-personal-item>
   <atom-rd-profile-info-personal-item [key]="'Tên đệm'" [value]="currentUser.middlename"></atom-rd-profile-info-personal-item>
