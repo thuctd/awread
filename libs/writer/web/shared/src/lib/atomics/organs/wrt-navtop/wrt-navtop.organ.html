@@ -1,6 +1,9 @@
 <section class="w-full bg-white  flex items-center flex-row lg:pr-24 pl-4 py-2 h-20 shadow-md z-50 mb-1">
   <div class="flex justify-start items-center w-2/6 xl:ml-0 ml-32">
-    <logo [isLogged]="'true'"></logo>
+    <!-- <logo [isLogged]="'true'"></logo> -->
+    <a href="https://awread.vn" class="outline-none">
+      <img src="/global-assets/images/newlogo.webp" class="w-20 h-auto" alt="Awread"/>
+    </a>
   </div>
   <div class="flex justify-end items-center w-4/6">
     <wrt-topnav-right [user]="user" [searchControl]="searchControl" (signoutEvent)="signoutEvent.emit()"></wrt-topnav-right>
