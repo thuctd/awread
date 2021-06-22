@@ -17,6 +17,7 @@ export class RdHeadMenuMbMolec implements OnInit {
   @Input() user = {
     name: '',
     firstname: '',
+    userId: ''
   };
   @Input() vip = {
     srcImg: '/global-assets/images/Group-868.webp',
@@ -29,7 +30,7 @@ export class RdHeadMenuMbMolec implements OnInit {
     value: '0',
   };
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

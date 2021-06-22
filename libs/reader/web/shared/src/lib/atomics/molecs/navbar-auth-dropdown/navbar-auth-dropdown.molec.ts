@@ -18,6 +18,7 @@ export class NavbarAuthDropdownMolec implements OnInit {
   @Input() user = {
     name: 'BlackCu',
     firstname: 'BlackCu',
+    userId: '',
   };
   menu = [
     // {
@@ -42,7 +43,7 @@ export class NavbarAuthDropdownMolec implements OnInit {
     },
   ];
   icons = { faCoins, faArrowRight };
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

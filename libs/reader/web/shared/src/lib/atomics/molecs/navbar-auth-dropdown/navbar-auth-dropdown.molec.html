@@ -2,7 +2,7 @@
     <div class="py-2 px-4 mb-2 bg-white">
         <div class="flex items-center mb-1">
             <span class="text-xs">Thành viên: </span>
-            <span class="text-xs text-yellow-500 ml-3"> {{ user.name ? user.name : user.firstname }} </span>
+            <a [routerLink]="['/', user.userId]" class="transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 text-xs text-yellow-500 ml-3 outline-none"> {{ user.name ? user.name : user.firstname }} </a>
         </div>
         <!-- <div class="flex items-center mb-1">
             <span class="text-xs w-9">Coin: </span>
